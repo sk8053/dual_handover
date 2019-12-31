@@ -1,0 +1,401 @@
+\hypertarget{classns3_1_1Histogram}{}\section{ns3\+:\+:Histogram Class Reference}
+\label{classns3_1_1Histogram}\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+
+
+Class used to store data and make an histogram of the data frequency.  
+
+
+
+
+{\ttfamily \#include $<$histogram.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Histogram\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Histogram_ac05aafde16936be7156168fef389ff2d}{Histogram} (double bin\+Width)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Histogram_ad1338f0d4e5873b5d27a695bc5a182a0}{Histogram} ()
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Histogram_a1b4fbd85680143421ca221e4529dfcb6}{Get\+N\+Bins} () const 
+\begin{DoxyCompactList}\small\item\em Returns the number of bins in the histogram. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1Histogram_aa3ae3b4a7ee87cc598d54cdc33e55ee8}{Get\+Bin\+Start} (uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Returns the bin start, i.\+e., index$\ast$bin\+Width. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1Histogram_ab70de1f4ad970dc8680ed24c612a3fdd}{Get\+Bin\+End} (uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Returns the bin end, i.\+e., (index+1)$\ast$bin\+Width. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1Histogram_a4561599d653c8c09703db0a17dbd5dfc}{Get\+Bin\+Width} (uint32\+\_\+t index) const 
+\begin{DoxyCompactList}\small\item\em Returns the bin width. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1Histogram_a58d457fa4babedaed2aa64ca3a1bf302}{Set\+Default\+Bin\+Width} (double bin\+Width)
+\begin{DoxyCompactList}\small\item\em Set the bin width. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Histogram_a176ac6caa17e6eeec25e4f9f80de14d1}{Get\+Bin\+Count} (uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Get the number of data added to the bin. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1Histogram_a918f0b67189617814abf42fd59e34de4}{Add\+Value} (double value)
+\begin{DoxyCompactList}\small\item\em Add a value to the histogram. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1Histogram_a343b3cbbe2f1e7d2066d236de1d1a0a2}{Serialize\+To\+Xml\+Stream} (std\+::ostream \&os, uint16\+\_\+t indent, std\+::string element\+Name) const 
+\begin{DoxyCompactList}\small\item\em Serializes the results to an std\+::ostream in X\+ML format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ uint32\+\_\+t $>$ \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\+\_\+histogram}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1Histogram}{Histogram} data. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1Histogram_a6c8752ed3fce033a0d5d96eb52944c6f}{m\+\_\+bin\+Width}
+\begin{DoxyCompactList}\small\item\em Bin width. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class used to store data and make an histogram of the data frequency. 
+
+Data are grouped in \char`\"{}bins\char`\"{}, i.\+e., intervals. Each value is assigned to the bin according to the following formula\+: floor(value/bin\+Width). Hence, bin {\itshape i} groups the data from \mbox{[}i$\ast$bin\+Width, (i+1)bin\+Width).
+
+This class only handles {\itshape positive} bins, i.\+e., it does {\itshape not} handles negative data.
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000033}{Todo}]Add support for negative data.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000034}{Todo}]Add method(s) to estimate parameters from the histogram, see \href{http://www.dspguide.com/ch2/4.htm}{\tt http\+://www.\+dspguide.\+com/ch2/4.\+htm}\end{DoxyRefDesc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}!Histogram@{Histogram}}
+\index{Histogram@{Histogram}!ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+\subsubsection[{\texorpdfstring{Histogram(double bin\+Width)}{Histogram(double binWidth)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Histogram\+::\+Histogram (
+\begin{DoxyParamCaption}
+\item[{double}]{bin\+Width}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Histogram_ac05aafde16936be7156168fef389ff2d}{}\label{classns3_1_1Histogram_ac05aafde16936be7156168fef389ff2d}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bin\+Width} & width of the histogram \char`\"{}bin\char`\"{}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+95 \{
+96   \hyperlink{classns3_1_1Histogram_a6c8752ed3fce033a0d5d96eb52944c6f}{m\_binWidth} = binWidth;
+97 \}
+\end{DoxyCode}
+\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}!Histogram@{Histogram}}
+\index{Histogram@{Histogram}!ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+\subsubsection[{\texorpdfstring{Histogram()}{Histogram()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Histogram\+::\+Histogram (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Histogram_ad1338f0d4e5873b5d27a695bc5a182a0}{}\label{classns3_1_1Histogram_ad1338f0d4e5873b5d27a695bc5a182a0}
+
+\begin{DoxyCode}
+100 \{
+101   \hyperlink{classns3_1_1Histogram_a6c8752ed3fce033a0d5d96eb52944c6f}{m\_binWidth} = \hyperlink{histogram_8cc_abfa713d7e820c70b3922c36965188fde}{DEFAULT\_BIN\_WIDTH};
+102 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}!Add\+Value@{Add\+Value}}
+\index{Add\+Value@{Add\+Value}!ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+\subsubsection[{\texorpdfstring{Add\+Value(double value)}{AddValue(double value)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Histogram\+::\+Add\+Value (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Histogram_a918f0b67189617814abf42fd59e34de4}{}\label{classns3_1_1Histogram_a918f0b67189617814abf42fd59e34de4}
+
+
+Add a value to the histogram. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & the value to add \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+81 \{
+82   uint32\_t index = (uint32\_t)std::floor (value/\hyperlink{classns3_1_1Histogram_a6c8752ed3fce033a0d5d96eb52944c6f}{m\_binWidth});
+83 
+84   \textcolor{comment}{//check if we need to resize the vector}
+85   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"AddValue: index="} << index << \textcolor{stringliteral}{", m\_histogram.size()="} << 
+      \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}.size ());
+86 
+87   \textcolor{keywordflow}{if} (index >= \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}.size ())
+88     \{
+89       \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}.resize (index + 1, 0);
+90     \}
+91   \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}[index]++;
+92 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}!Get\+Bin\+Count@{Get\+Bin\+Count}}
+\index{Get\+Bin\+Count@{Get\+Bin\+Count}!ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+\subsubsection[{\texorpdfstring{Get\+Bin\+Count(uint32\+\_\+t index)}{GetBinCount(uint32_t index)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Histogram\+::\+Get\+Bin\+Count (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Histogram_a176ac6caa17e6eeec25e4f9f80de14d1}{}\label{classns3_1_1Histogram_a176ac6caa17e6eeec25e4f9f80de14d1}
+
+
+Get the number of data added to the bin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & the bin index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of data added to the bin 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+74 \{
+75   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (index < \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}.size ());
+76   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}[index];
+77 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}!Get\+Bin\+End@{Get\+Bin\+End}}
+\index{Get\+Bin\+End@{Get\+Bin\+End}!ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+\subsubsection[{\texorpdfstring{Get\+Bin\+End(uint32\+\_\+t index)}{GetBinEnd(uint32_t index)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Histogram\+::\+Get\+Bin\+End (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Histogram_ab70de1f4ad970dc8680ed24c612a3fdd}{}\label{classns3_1_1Histogram_ab70de1f4ad970dc8680ed24c612a3fdd}
+
+
+Returns the bin end, i.\+e., (index+1)$\ast$bin\+Width. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & the bin index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the bin start 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+55 \{
+56   \textcolor{keywordflow}{return} (index + 1) * \hyperlink{classns3_1_1Histogram_a6c8752ed3fce033a0d5d96eb52944c6f}{m\_binWidth};
+57 \}
+\end{DoxyCode}
+\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}!Get\+Bin\+Start@{Get\+Bin\+Start}}
+\index{Get\+Bin\+Start@{Get\+Bin\+Start}!ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+\subsubsection[{\texorpdfstring{Get\+Bin\+Start(uint32\+\_\+t index)}{GetBinStart(uint32_t index)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Histogram\+::\+Get\+Bin\+Start (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Histogram_aa3ae3b4a7ee87cc598d54cdc33e55ee8}{}\label{classns3_1_1Histogram_aa3ae3b4a7ee87cc598d54cdc33e55ee8}
+
+
+Returns the bin start, i.\+e., index$\ast$bin\+Width. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & the bin index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the bin start 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+49 \{
+50   \textcolor{keywordflow}{return} index*\hyperlink{classns3_1_1Histogram_a6c8752ed3fce033a0d5d96eb52944c6f}{m\_binWidth};
+51 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}!Get\+Bin\+Width@{Get\+Bin\+Width}}
+\index{Get\+Bin\+Width@{Get\+Bin\+Width}!ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+\subsubsection[{\texorpdfstring{Get\+Bin\+Width(uint32\+\_\+t index) const }{GetBinWidth(uint32_t index) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Histogram\+::\+Get\+Bin\+Width (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{index}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1Histogram_a4561599d653c8c09703db0a17dbd5dfc}{}\label{classns3_1_1Histogram_a4561599d653c8c09703db0a17dbd5dfc}
+
+
+Returns the bin width. 
+
+Note that all the bins have the same width.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & the bin index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the bin width 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+61 \{
+62   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Histogram_a6c8752ed3fce033a0d5d96eb52944c6f}{m\_binWidth};
+63 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}!Get\+N\+Bins@{Get\+N\+Bins}}
+\index{Get\+N\+Bins@{Get\+N\+Bins}!ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+\subsubsection[{\texorpdfstring{Get\+N\+Bins() const }{GetNBins() const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Histogram\+::\+Get\+N\+Bins (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1Histogram_a1b4fbd85680143421ca221e4529dfcb6}{}\label{classns3_1_1Histogram_a1b4fbd85680143421ca221e4529dfcb6}
+
+
+Returns the number of bins in the histogram. 
+
+\begin{DoxyReturn}{Returns}
+the number of bins in the histogram 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+43 \{
+44   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}.size ();
+45 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}!Serialize\+To\+Xml\+Stream@{Serialize\+To\+Xml\+Stream}}
+\index{Serialize\+To\+Xml\+Stream@{Serialize\+To\+Xml\+Stream}!ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+\subsubsection[{\texorpdfstring{Serialize\+To\+Xml\+Stream(std\+::ostream \&os, uint16\+\_\+t indent, std\+::string element\+Name) const }{SerializeToXmlStream(std::ostream &os, uint16_t indent, std::string elementName) const }}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Histogram\+::\+Serialize\+To\+Xml\+Stream (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os, }
+\item[{uint16\+\_\+t}]{indent, }
+\item[{std\+::string}]{element\+Name}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1Histogram_a343b3cbbe2f1e7d2066d236de1d1a0a2}{}\label{classns3_1_1Histogram_a343b3cbbe2f1e7d2066d236de1d1a0a2}
+
+
+Serializes the results to an std\+::ostream in X\+ML format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & the output stream \\
+\hline
+{\em indent} & number of spaces to use as base indentation level \\
+\hline
+{\em element\+Name} & name of the element to serialize. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+106 \{
+107   os << std::string ( indent, \textcolor{charliteral}{' '} ) << \textcolor{stringliteral}{"<"} << elementName \textcolor{comment}{// << " binWidth=\(\backslash\)"" << m\_binWidth << "\(\backslash\)""}
+108      << \textcolor{stringliteral}{" nBins=\(\backslash\)""} << \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}.size () << \textcolor{stringliteral}{"\(\backslash\)""}
+109      << \textcolor{stringliteral}{" >\(\backslash\)n"};
+110   indent += 2;
+111 
+112 \textcolor{preprocessor}{#if 1 // two alternative forms of representing bin data, one more verbose than the other one}
+113   \textcolor{keywordflow}{for} (uint32\_t index = 0; index < \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}.size (); index++)
+114     \{
+115       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}[index])
+116         \{
+117           os << std::string ( indent, \textcolor{charliteral}{' '} );
+118           os << \textcolor{stringliteral}{"<bin"}
+119              << \textcolor{stringliteral}{" index=\(\backslash\)""} << (index) << \textcolor{stringliteral}{"\(\backslash\)""}
+120              << \textcolor{stringliteral}{" start=\(\backslash\)""} << (index*\hyperlink{classns3_1_1Histogram_a6c8752ed3fce033a0d5d96eb52944c6f}{m\_binWidth}) << \textcolor{stringliteral}{"\(\backslash\)""}
+121              << \textcolor{stringliteral}{" width=\(\backslash\)""} << \hyperlink{classns3_1_1Histogram_a6c8752ed3fce033a0d5d96eb52944c6f}{m\_binWidth} << \textcolor{stringliteral}{"\(\backslash\)""}
+122              << \textcolor{stringliteral}{" count=\(\backslash\)""} << \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}[index] << \textcolor{stringliteral}{"\(\backslash\)""}
+123              << \textcolor{stringliteral}{" />\(\backslash\)n"};
+124         \}
+125     \}
+126 \textcolor{preprocessor}{#else}
+127   os << std::string ( indent+2, \textcolor{charliteral}{' '} );
+128   \textcolor{keywordflow}{for} (uint32\_t index = 0; index < \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}.size (); index++)
+129     \{
+130       \textcolor{keywordflow}{if} (index > 0)
+131         \{
+132           os << \textcolor{stringliteral}{" "};
+133         \}
+134       os << \hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}[index];
+135     \}
+136   os << \textcolor{stringliteral}{"\(\backslash\)n"};
+137 \textcolor{preprocessor}{#endif}
+138   indent -= 2;
+139   os << std::string ( indent, \textcolor{charliteral}{' '} ) << \textcolor{stringliteral}{"</"} << elementName << \textcolor{stringliteral}{">\(\backslash\)n"};
+140 \}
+\end{DoxyCode}
+\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}!Set\+Default\+Bin\+Width@{Set\+Default\+Bin\+Width}}
+\index{Set\+Default\+Bin\+Width@{Set\+Default\+Bin\+Width}!ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+\subsubsection[{\texorpdfstring{Set\+Default\+Bin\+Width(double bin\+Width)}{SetDefaultBinWidth(double binWidth)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Histogram\+::\+Set\+Default\+Bin\+Width (
+\begin{DoxyParamCaption}
+\item[{double}]{bin\+Width}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Histogram_a58d457fa4babedaed2aa64ca3a1bf302}{}\label{classns3_1_1Histogram_a58d457fa4babedaed2aa64ca3a1bf302}
+
+
+Set the bin width. 
+
+Note that you can change the bin width only if the histogram is empty.
+
+
+\begin{DoxyParams}{Parameters}
+{\em bin\+Width} & the bin width \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+67 \{
+68   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{m\_histogram}.size () == 0); \textcolor{comment}{//we can only change the bin width if no values
+       were added}
+69   \hyperlink{classns3_1_1Histogram_a6c8752ed3fce033a0d5d96eb52944c6f}{m\_binWidth} = binWidth;
+70 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}!m\+\_\+bin\+Width@{m\+\_\+bin\+Width}}
+\index{m\+\_\+bin\+Width@{m\+\_\+bin\+Width}!ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+\subsubsection[{\texorpdfstring{m\+\_\+bin\+Width}{m_binWidth}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Histogram\+::m\+\_\+bin\+Width\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Histogram_a6c8752ed3fce033a0d5d96eb52944c6f}{}\label{classns3_1_1Histogram_a6c8752ed3fce033a0d5d96eb52944c6f}
+
+
+Bin width. 
+
+\index{ns3\+::\+Histogram@{ns3\+::\+Histogram}!m\+\_\+histogram@{m\+\_\+histogram}}
+\index{m\+\_\+histogram@{m\+\_\+histogram}!ns3\+::\+Histogram@{ns3\+::\+Histogram}}
+\subsubsection[{\texorpdfstring{m\+\_\+histogram}{m_histogram}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$uint32\+\_\+t$>$ ns3\+::\+Histogram\+::m\+\_\+histogram\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}{}\label{classns3_1_1Histogram_a4e84e8b2f18d8dd6c23bc55ea8c18c4a}
+
+
+\hyperlink{classns3_1_1Histogram}{Histogram} data. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+flow-\/monitor/model/\hyperlink{histogram_8h}{histogram.\+h}\item 
+flow-\/monitor/model/\hyperlink{histogram_8cc}{histogram.\+cc}\end{DoxyCompactItemize}

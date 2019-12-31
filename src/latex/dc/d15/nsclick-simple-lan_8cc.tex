@@ -1,0 +1,120 @@
+\hypertarget{nsclick-simple-lan_8cc}{}\section{click/examples/nsclick-\/simple-\/lan.cc File Reference}
+\label{nsclick-simple-lan_8cc}\index{click/examples/nsclick-\/simple-\/lan.\+cc@{click/examples/nsclick-\/simple-\/lan.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/click-\/internet-\/stack-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+Include dependency graph for nsclick-\/simple-\/lan.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{nsclick-simple-lan_8cc_a80dc0d980be124d8d5c4ee0b7943bfae}{Receive\+Packet} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\item 
+int \hyperlink{nsclick-simple-lan_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{nsclick-\/simple-\/lan.\+cc@{nsclick-\/simple-\/lan.\+cc}!main@{main}}
+\index{main@{main}!nsclick-\/simple-\/lan.\+cc@{nsclick-\/simple-\/lan.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{nsclick-simple-lan_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{nsclick-simple-lan_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+44 \{
+45 \textcolor{preprocessor}{#ifdef NS3\_CLICK}
+46   std::string clickConfigFolder = \textcolor{stringliteral}{"src/click/examples"};
+47 
+48   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+49   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"clickConfigFolder"}, \textcolor{stringliteral}{"Base folder for click configuration files"}, clickConfigFolder
+      );
+50   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+51 
+52   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} csmaNodes;
+53   csmaNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+54 
+55   \textcolor{comment}{// Setup CSMA channel between the nodes}
+56   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+57   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (
+      \hyperlink{classns3_1_1DataRate}{DataRate} (5000000)));
+58   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+59   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} csmaDevices = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (csmaNodes);
+60 
+61   \textcolor{comment}{// Install normal internet stack on node B}
+62   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+63   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (csmaNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+64 
+65   \textcolor{comment}{// Install Click on node A}
+66   ClickInternetStackHelper clickinternet;
+67   clickinternet.SetClickFile (csmaNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), clickConfigFolder + \textcolor{stringliteral}{"
+      /nsclick-lan-single-interface.click"});
+68   clickinternet.SetRoutingTableElement (csmaNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), \textcolor{stringliteral}{"rt"});
+69   clickinternet.Install (csmaNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+70 
+71   \textcolor{comment}{// Configure IP addresses for the nodes}
+72   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+73   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"172.16.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+74   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (csmaDevices);
+75 
+76   \textcolor{comment}{// Configure traffic application and sockets}
+77   \hyperlink{classns3_1_1Address}{Address} LocalAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 50000));
+78   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} packetSinkHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, LocalAddress);
+79   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} recvapp = packetSinkHelper.Install (csmaNodes.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+80   recvapp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5.0));
+81   recvapp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+82 
+83   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onOffHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+84   onOffHelper.SetAttribute (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}));
+85   onOffHelper.SetAttribute (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=0]"}));
+86 
+87   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} appcont;
+88 
+89   AddressValue remoteAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"172.16.1.2"}), 50
+      000));
+90   onOffHelper.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+91   appcont.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (onOffHelper.Install (csmaNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)));
+92 
+93   appcont.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5.0));
+94   appcont.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+95 
+96   \textcolor{comment}{// For tracing}
+97   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"nsclick-simple-lan"}, csmaDevices, \textcolor{keyword}{false});
+98 
+99   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (20.0));
+100   Simulator::Run ();
+101 
+102   Simulator::Destroy ();
+103   \textcolor{keywordflow}{return} 0;
+104 \textcolor{preprocessor}{#else}
+105   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Can't use ns-3-click without NSCLICK compiled in"});
+106 \textcolor{preprocessor}{#endif}
+107 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{nsclick-\/simple-\/lan.\+cc@{nsclick-\/simple-\/lan.\+cc}!Receive\+Packet@{Receive\+Packet}}
+\index{Receive\+Packet@{Receive\+Packet}!nsclick-\/simple-\/lan.\+cc@{nsclick-\/simple-\/lan.\+cc}}
+\subsubsection[{\texorpdfstring{Receive\+Packet(\+Ptr$<$ Socket $>$ socket)}{ReceivePacket(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Receive\+Packet (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)}\hypertarget{nsclick-simple-lan_8cc_a80dc0d980be124d8d5c4ee0b7943bfae}{}\label{nsclick-simple-lan_8cc_a80dc0d980be124d8d5c4ee0b7943bfae}
+
+\begin{DoxyCode}
+39 \{
+40   \hyperlink{log-macros-disabled_8h_a0b36e5e182b37194f85ef1c5e979fb2e}{NS\_LOG\_UNCOND} (\textcolor{stringliteral}{"Received one packet!"});
+41 \}
+\end{DoxyCode}

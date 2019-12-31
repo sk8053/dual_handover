@@ -1,0 +1,34 @@
+\hypertarget{group__bridge}{}\section{Bridge Network Device}
+\label{group__bridge}\index{Bridge Network Device@{Bridge Network Device}}
+
+
+a virtual net device that bridges multiple L\+AN segments  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1BridgeHelper}{ns3\+::\+Bridge\+Helper}
+\begin{DoxyCompactList}\small\item\em Add capability to bridge multiple L\+AN segments (I\+E\+EE 802.\+1D bridging) \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1BridgeChannel}{ns3\+::\+Bridge\+Channel}
+\begin{DoxyCompactList}\small\item\em Virtual channel implementation for bridges (\hyperlink{classns3_1_1BridgeNetDevice}{Bridge\+Net\+Device}). \end{DoxyCompactList}\item 
+struct \hyperlink{structns3_1_1BridgeNetDevice_1_1LearnedState}{ns3\+::\+Bridge\+Net\+Device\+::\+Learned\+State}
+\item 
+class \hyperlink{classns3_1_1BridgeNetDevice}{ns3\+::\+Bridge\+Net\+Device}
+\begin{DoxyCompactList}\small\item\em a virtual net device that bridges multiple L\+AN segments \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+a virtual net device that bridges multiple L\+AN segments 
+
+The \hyperlink{classns3_1_1BridgeNetDevice}{Bridge\+Net\+Device} object is a \char`\"{}virtual\char`\"{} netdevice that aggregates multiple \char`\"{}real\char`\"{} netdevices and implements the data plane forwarding part of I\+E\+EE 802.\+1D. By adding a \hyperlink{classns3_1_1BridgeNetDevice}{Bridge\+Net\+Device} to a \hyperlink{classns3_1_1Node}{Node}, it will act as a \char`\"{}bridge\char`\"{}, or \char`\"{}switch\char`\"{}, to multiple L\+AN segments.
+
+By default the bridge netdevice implements a \char`\"{}learning bridge\char`\"{} algorithm (see 802.\+1D), where incoming unicast frames from one port may occasionally be forwarded throughout all other ports, but usually they are forwarded only to a single correct output port.
+
+\begin{DoxyAttention}{Attention}
+The Spanning Tree Protocol part of 802.\+1D is not implemented. Therefore, you have to be careful not to create bridging loops, or else the network will collapse.
+
+Bridging is designed to work only with Net\+Devices modelling I\+E\+EE 802-\/style technologies, such as \hyperlink{classns3_1_1CsmaNetDevice}{Csma\+Net\+Device} and \hyperlink{classns3_1_1WifiNetDevice}{Wifi\+Net\+Device}.
+
+If including a \hyperlink{classns3_1_1WifiNetDevice}{Wifi\+Net\+Device} in a bridge, the wifi device must be in Access Point mode. Adhoc mode is not supported with bridging. 
+\end{DoxyAttention}

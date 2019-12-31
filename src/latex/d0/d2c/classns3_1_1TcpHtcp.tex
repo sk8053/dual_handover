@@ -1,0 +1,604 @@
+\hypertarget{classns3_1_1TcpHtcp}{}\section{ns3\+:\+:Tcp\+Htcp Class Reference}
+\label{classns3_1_1TcpHtcp}\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+
+
+An implementation of the H-\/\+T\+CP variant of T\+CP.  
+
+
+
+
+{\ttfamily \#include $<$tcp-\/htcp.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Tcp\+Htcp\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Tcp\+Htcp\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1TcpHtcp_ab7b381b89c4a15077fe861adb48b9cea}{Tcp\+Htcp} (void)
+\item 
+\hyperlink{classns3_1_1TcpHtcp_af53e5e2908e213b39712c11ffa6d412b}{Tcp\+Htcp} (const \hyperlink{classns3_1_1TcpHtcp}{Tcp\+Htcp} \&sock)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1TcpHtcp_afac94f9cd5ff2a749a5c563f12c4f6ee}{$\sim$\+Tcp\+Htcp} (void)
+\item 
+virtual std\+::string \hyperlink{classns3_1_1TcpHtcp_ad59318c863c81cba937ca8e677a9b07e}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the name of the congestion control algorithm. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} $>$ \hyperlink{classns3_1_1TcpHtcp_ac43b14656621c83a4f229e97052c633c}{Fork} ()
+\begin{DoxyCompactList}\small\item\em Copy the congestion control algorithm across socket. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1TcpHtcp_add36278610893b4eba23cf688f7779d8}{Get\+Ss\+Thresh} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)
+\begin{DoxyCompactList}\small\item\em Get the slow start threshold after a loss event. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpHtcp_ad09157c644632f904b019423e0bf555b}{Pkts\+Acked} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked, const \hyperlink{classns3_1_1Time}{Time} \&rtt)
+\begin{DoxyCompactList}\small\item\em Timing information on received A\+CK. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1TcpHtcp_a5c56fbdce06774bbe720b02528c2400f}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classns3_1_1TcpHtcp_a5eb471eacd7966cf548024c3870cc3bf}{Congestion\+Avoidance} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked)
+\begin{DoxyCompactList}\small\item\em New\+Reno congestion avoidance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1TcpHtcp_a2eefc9a29bf9747095c705066de9c7a3}{Update\+Alpha} (void)
+\begin{DoxyCompactList}\small\item\em Updates the additive increase parameter for H-\/\+T\+CP. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1TcpHtcp_a839688dcc8178d960f750d62ca375602}{Update\+Beta} (void)
+\begin{DoxyCompactList}\small\item\em Updates the multiplicative decrease factor beta for H-\/\+T\+CP. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}{m\+\_\+alpha}
+\begin{DoxyCompactList}\small\item\em A\+I\+MD additive increase parameter. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpHtcp_a76d41b0e13e42f6aa9b98a4a0cb06400}{m\+\_\+beta}
+\begin{DoxyCompactList}\small\item\em A\+I\+MD multiplicative decrease factor. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpHtcp_a1aa22561875c042fe0bd39ca66544587}{m\+\_\+default\+Backoff}
+\begin{DoxyCompactList}\small\item\em default value when throughput ratio less than default \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpHtcp_a3ff9db9a1e69710b1e14516d55dc0357}{m\+\_\+throughput\+Ratio}
+\begin{DoxyCompactList}\small\item\em ratio of two consequence throughput \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpHtcp_a4642b12b72c7388148dd364d9117a129}{m\+\_\+delta}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1Time}{Time} in second that has elapsed since the. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpHtcp_a7e13ad28ae35566e894b5e7ae279dae5}{m\+\_\+deltaL}
+\begin{DoxyCompactList}\small\item\em Threshold for switching between standard and new increase function. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpHtcp_a108362f874fef6c8a2ecb3941c74e340}{m\+\_\+last\+Con}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1Time}{Time} of the last congestion for the flow. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpHtcp_a0cfba062b9ea4dddf100bde861e2265b}{m\+\_\+min\+Rtt}
+\begin{DoxyCompactList}\small\item\em Minimum R\+TT in each congestion period. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpHtcp_a91edf7c0c42f5996d3d066ce98551c31}{m\+\_\+max\+Rtt}
+\begin{DoxyCompactList}\small\item\em Maximum R\+TT in each congestion period. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpHtcp_aff553c6ce4a85bf1fcdc441dd5f7245d}{m\+\_\+throughput}
+\begin{DoxyCompactList}\small\item\em Current throughput since last congestion. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpHtcp_a5961ae9da66b8f4b0af86a83ba7c0481}{m\+\_\+last\+Throughput}
+\begin{DoxyCompactList}\small\item\em Throughput in last congestion period. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpHtcp_a263e88a7986de6a76ff85ac7d6d25ab5}{m\+\_\+data\+Sent}
+\begin{DoxyCompactList}\small\item\em Current amount of data sent since last congestion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An implementation of the H-\/\+T\+CP variant of T\+CP. 
+
+This class contains the H-\/\+T\+CP implementation of T\+CP, according to Internet-\/\+Draft draft-\/leith-\/tcp-\/htcp-\/03 and its related paper, \char`\"{}\+H-\/\+T\+C\+P\+: T\+C\+P for high-\/speed and long-\/distance networks\char`\"{} H-\/\+T\+CP is a congestion control protocol suitable for high bandwidth-\/delay product networks. It is fair to similar flows present in the network and also friendly with conventional T\+CP. It also makes use of free bandwidth when it is available. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!Tcp\+Htcp@{Tcp\+Htcp}}
+\index{Tcp\+Htcp@{Tcp\+Htcp}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{Tcp\+Htcp(void)}{TcpHtcp(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Htcp\+::\+Tcp\+Htcp (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpHtcp_ab7b381b89c4a15077fe861adb48b9cea}{}\label{classns3_1_1TcpHtcp_ab7b381b89c4a15077fe861adb48b9cea}
+Create an unbound tcp socket. 
+\begin{DoxyCode}
+77   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (),
+78     \hyperlink{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}{m\_alpha} (0),
+79     \hyperlink{classns3_1_1TcpHtcp_a76d41b0e13e42f6aa9b98a4a0cb06400}{m\_beta} (0),
+80     \hyperlink{classns3_1_1TcpHtcp_a4642b12b72c7388148dd364d9117a129}{m\_delta} (0),
+81     \hyperlink{classns3_1_1TcpHtcp_a108362f874fef6c8a2ecb3941c74e340}{m\_lastCon} (0),
+82     \hyperlink{classns3_1_1TcpHtcp_a0cfba062b9ea4dddf100bde861e2265b}{m\_minRtt} (\hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ()),
+83     \hyperlink{classns3_1_1TcpHtcp_a91edf7c0c42f5996d3d066ce98551c31}{m\_maxRtt} (\hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ()),
+84     \hyperlink{classns3_1_1TcpHtcp_aff553c6ce4a85bf1fcdc441dd5f7245d}{m\_throughput} (0),
+85     \hyperlink{classns3_1_1TcpHtcp_a5961ae9da66b8f4b0af86a83ba7c0481}{m\_lastThroughput} (0),
+86     \hyperlink{classns3_1_1TcpHtcp_a263e88a7986de6a76ff85ac7d6d25ab5}{m\_dataSent} (0)
+87 \{
+88   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+89 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!Tcp\+Htcp@{Tcp\+Htcp}}
+\index{Tcp\+Htcp@{Tcp\+Htcp}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{Tcp\+Htcp(const Tcp\+Htcp \&sock)}{TcpHtcp(const TcpHtcp &sock)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Htcp\+::\+Tcp\+Htcp (
+\begin{DoxyParamCaption}
+\item[{const {\bf Tcp\+Htcp} \&}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpHtcp_af53e5e2908e213b39712c11ffa6d412b}{}\label{classns3_1_1TcpHtcp_af53e5e2908e213b39712c11ffa6d412b}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & the object to copy \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+92   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (sock),
+93     \hyperlink{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}{m\_alpha} (sock.m\_alpha),
+94     \hyperlink{classns3_1_1TcpHtcp_a76d41b0e13e42f6aa9b98a4a0cb06400}{m\_beta} (sock.m\_beta),
+95     \hyperlink{classns3_1_1TcpHtcp_a1aa22561875c042fe0bd39ca66544587}{m\_defaultBackoff} (sock.m\_defaultBackoff),
+96     \hyperlink{classns3_1_1TcpHtcp_a3ff9db9a1e69710b1e14516d55dc0357}{m\_throughputRatio} (sock.m\_throughputRatio),
+97     \hyperlink{classns3_1_1TcpHtcp_a4642b12b72c7388148dd364d9117a129}{m\_delta} (sock.m\_delta),
+98     \hyperlink{classns3_1_1TcpHtcp_a7e13ad28ae35566e894b5e7ae279dae5}{m\_deltaL} (sock.m\_deltaL),
+99     \hyperlink{classns3_1_1TcpHtcp_a108362f874fef6c8a2ecb3941c74e340}{m\_lastCon} (sock.m\_lastCon),
+100     \hyperlink{classns3_1_1TcpHtcp_a0cfba062b9ea4dddf100bde861e2265b}{m\_minRtt} (sock.m\_minRtt),
+101     \hyperlink{classns3_1_1TcpHtcp_a91edf7c0c42f5996d3d066ce98551c31}{m\_maxRtt} (sock.m\_maxRtt),
+102     \hyperlink{classns3_1_1TcpHtcp_aff553c6ce4a85bf1fcdc441dd5f7245d}{m\_throughput} (sock.m\_throughput),
+103     \hyperlink{classns3_1_1TcpHtcp_a5961ae9da66b8f4b0af86a83ba7c0481}{m\_lastThroughput} (sock.m\_lastThroughput),
+104     \hyperlink{classns3_1_1TcpHtcp_a263e88a7986de6a76ff85ac7d6d25ab5}{m\_dataSent} (sock.m\_dataSent)
+105 \{
+106   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+107 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!````~Tcp\+Htcp@{$\sim$\+Tcp\+Htcp}}
+\index{````~Tcp\+Htcp@{$\sim$\+Tcp\+Htcp}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{$\sim$\+Tcp\+Htcp(void)}{~TcpHtcp(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Htcp\+::$\sim$\+Tcp\+Htcp (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpHtcp_afac94f9cd5ff2a749a5c563f12c4f6ee}{}\label{classns3_1_1TcpHtcp_afac94f9cd5ff2a749a5c563f12c4f6ee}
+
+\begin{DoxyCode}
+110 \{
+111   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+112 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!Congestion\+Avoidance@{Congestion\+Avoidance}}
+\index{Congestion\+Avoidance@{Congestion\+Avoidance}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{Congestion\+Avoidance(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked)}{CongestionAvoidance(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Htcp\+::\+Congestion\+Avoidance (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpHtcp_a5eb471eacd7966cf548024c3870cc3bf}{}\label{classns3_1_1TcpHtcp_a5eb471eacd7966cf548024c3870cc3bf}
+
+
+New\+Reno congestion avoidance. 
+
+During congestion avoidance, cwnd is incremented by roughly 1 full-\/sized segment per round-\/trip time (R\+TT).
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments acked \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a34a5eec0649a7b485852c74c825e14ba}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+122 \{
+123   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked);
+124   \textcolor{keywordflow}{if} (segmentsAcked > 0)
+125     \{
+126       \textcolor{keywordtype}{double} adder = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>} (((tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize}
+127                                             * tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize}) + (tcb->
+      \hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} * \hyperlink{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}{m\_alpha})) / tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd});
+128       adder = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (1.0, adder);
+129       tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} += \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>} (adder);
+130       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"In CongAvoid, updated to cwnd "} << tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd}
+131                                                     << \textcolor{stringliteral}{" ssthresh "} << tcb->
+      \hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+132     \}
+133 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!Fork@{Fork}}
+\index{Fork@{Fork}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{Fork()}{Fork()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Congestion\+Ops} $>$ ns3\+::\+Tcp\+Htcp\+::\+Fork (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpHtcp_ac43b14656621c83a4f229e97052c633c}{}\label{classns3_1_1TcpHtcp_ac43b14656621c83a4f229e97052c633c}
+
+
+Copy the congestion control algorithm across socket. 
+
+\begin{DoxyReturn}{Returns}
+a pointer of the copied object 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a2606d5fcd01a1eb4d5f4e6beb7a33192}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+115 \{
+116   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+117   \textcolor{keywordflow}{return} CopyObject<TcpHtcp> (\textcolor{keyword}{this});
+118 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Tcp\+Htcp\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpHtcp_ad59318c863c81cba937ca8e677a9b07e}{}\label{classns3_1_1TcpHtcp_ad59318c863c81cba937ca8e677a9b07e}
+
+
+Get the name of the congestion control algorithm. 
+
+\begin{DoxyReturn}{Returns}
+A string identifying the name 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a0ecf92cb36c236c70e0ecaedfff6609e}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+72 \{
+73   \textcolor{keywordflow}{return} \textcolor{stringliteral}{"TcpHtcp"};
+74 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!Get\+Ss\+Thresh@{Get\+Ss\+Thresh}}
+\index{Get\+Ss\+Thresh@{Get\+Ss\+Thresh}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{Get\+Ss\+Thresh(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)}{GetSsThresh(Ptr< const TcpSocketState > tcb, uint32_t bytesInFlight)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Htcp\+::\+Get\+Ss\+Thresh (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{bytes\+In\+Flight}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpHtcp_add36278610893b4eba23cf688f7779d8}{}\label{classns3_1_1TcpHtcp_add36278610893b4eba23cf688f7779d8}
+
+
+Get the slow start threshold after a loss event. 
+
+Is guaranteed that the congestion control state (Tcp\+Ack\+State\+\_\+t) is changed B\+E\+F\+O\+RE the invocation of this method. The implementator should return the slow start threshold (and not change it directly) because, in the future, the T\+CP implementation may require to instantly recover from a loss event (e.\+g. when there is a network with an high reordering factor).
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em bytes\+In\+Flight} & total bytes in flight \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Slow start threshold 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a1cb467aaa4960dfe10b963ed9f3d5aa2}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+180 \{
+181   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << bytesInFlight);
+182 
+183   \hyperlink{classns3_1_1TcpHtcp_a108362f874fef6c8a2ecb3941c74e340}{m\_lastCon} = \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} ();
+184 
+185   \hyperlink{classns3_1_1TcpHtcp_a839688dcc8178d960f750d62ca375602}{UpdateBeta} ();
+186   \hyperlink{classns3_1_1TcpHtcp_a2eefc9a29bf9747095c705066de9c7a3}{UpdateAlpha} ();
+187 
+188   uint32\_t segWin = 2 * tcb->m\_segmentSize;
+189   uint32\_t bFlight = bytesInFlight * \hyperlink{classns3_1_1TcpHtcp_a76d41b0e13e42f6aa9b98a4a0cb06400}{m\_beta};
+190   uint32\_t ssThresh = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (segWin, bFlight);
+191   \hyperlink{classns3_1_1TcpHtcp_a0cfba062b9ea4dddf100bde861e2265b}{m\_minRtt} = \hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ();
+192   \hyperlink{classns3_1_1TcpHtcp_a91edf7c0c42f5996d3d066ce98551c31}{m\_maxRtt} = \hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ();
+193   \hyperlink{classns3_1_1TcpHtcp_a5961ae9da66b8f4b0af86a83ba7c0481}{m\_lastThroughput} = \hyperlink{classns3_1_1TcpHtcp_aff553c6ce4a85bf1fcdc441dd5f7245d}{m\_throughput};
+194   \hyperlink{classns3_1_1TcpHtcp_aff553c6ce4a85bf1fcdc441dd5f7245d}{m\_throughput} = 0;
+195   \hyperlink{classns3_1_1TcpHtcp_a263e88a7986de6a76ff85ac7d6d25ab5}{m\_dataSent} = 0;
+196   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{keyword}{this} << \textcolor{stringliteral}{" ssThresh: "} << ssThresh << \textcolor{stringliteral}{" m\_beta: "}  << m\_beta);
+197   \textcolor{keywordflow}{return} ssThresh;
+198 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Tcp\+Htcp\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpHtcp_a5c56fbdce06774bbe720b02528c2400f}{}\label{classns3_1_1TcpHtcp_a5c56fbdce06774bbe720b02528c2400f}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+47 \{
+48   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::TcpHtcp"})
+49     .SetParent<\hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno}> ()
+50     .AddConstructor<TcpHtcp> ()
+51     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+52     .AddAttribute (\textcolor{stringliteral}{"DefaultBackoff"},
+53                    \textcolor{stringliteral}{"The default AIMD backoff factor"},
+54                    DoubleValue (0.5),
+55                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpHtcp_a1aa22561875c042fe0bd39ca66544587}{TcpHtcp::m\_defaultBackoff}),
+56                    MakeDoubleChecker<double> (0,1))
+57     .AddAttribute (\textcolor{stringliteral}{"ThroughputRatio"},
+58                    \textcolor{stringliteral}{"Threshold value for updating beta"},
+59                    DoubleValue (0.2),
+60                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpHtcp_a3ff9db9a1e69710b1e14516d55dc0357}{TcpHtcp::m\_throughputRatio}),
+61                    MakeDoubleChecker<double> ())
+62     .AddAttribute (\textcolor{stringliteral}{"DeltaL"},
+63                    \textcolor{stringliteral}{"Delta\_L parameter in increase function"},
+64                    TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1)),
+65                    MakeTimeAccessor (&\hyperlink{classns3_1_1TcpHtcp_a7e13ad28ae35566e894b5e7ae279dae5}{TcpHtcp::m\_deltaL}),
+66                    \hyperlink{group__time_ga7032965bd4afa578691d88c09e4481c1}{MakeTimeChecker} ())
+67   ;
+68   \textcolor{keywordflow}{return} tid;
+69 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!Pkts\+Acked@{Pkts\+Acked}}
+\index{Pkts\+Acked@{Pkts\+Acked}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{Pkts\+Acked(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked, const Time \&rtt)}{PktsAcked(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked, const Time &rtt)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Htcp\+::\+Pkts\+Acked (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked, }
+\item[{const {\bf Time} \&}]{rtt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpHtcp_ad09157c644632f904b019423e0bf555b}{}\label{classns3_1_1TcpHtcp_ad09157c644632f904b019423e0bf555b}
+
+
+Timing information on received A\+CK. 
+
+The function is called every time an A\+CK is received (only one time also for cumulative A\+C\+Ks) and contains timing information. It is optional (congestion controls can not implement it) and the default implementation does nothing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments acked \\
+\hline
+{\em rtt} & last rtt \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpCongestionOps_a76d3ffb7b1a7ba761026e3f94c1f50fa}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+202 \{
+203 
+204   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked << rtt);
+205   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"TcpSocketState: "} << tcb->\hyperlink{classns3_1_1TcpSocketState_a4053e1eb120c572d0881b04620b52c30}{m\_congState});
+206   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a4053e1eb120c572d0881b04620b52c30}{m\_congState} == \hyperlink{classns3_1_1TcpSocketState_a6fc313945a33d48fd60cbffe0c787b19af2d22f02a77b603394c34d4968bad142}{TcpSocketState::CA\_OPEN})
+207     \{
+208       \hyperlink{classns3_1_1TcpHtcp_a263e88a7986de6a76ff85ac7d6d25ab5}{m\_dataSent} += segmentsAcked * tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+209     \}
+210 
+211   \hyperlink{classns3_1_1TcpHtcp_aff553c6ce4a85bf1fcdc441dd5f7245d}{m\_throughput} = \hyperlink{classns3_1_1TcpHtcp_a263e88a7986de6a76ff85ac7d6d25ab5}{m\_dataSent}
+212     / (\hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () - \hyperlink{classns3_1_1TcpHtcp_a108362f874fef6c8a2ecb3941c74e340}{m\_lastCon}.
+      \hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} ());
+213 
+214   \hyperlink{classns3_1_1TcpHtcp_a2eefc9a29bf9747095c705066de9c7a3}{UpdateAlpha} ();
+215   \textcolor{keywordflow}{if} (rtt < \hyperlink{classns3_1_1TcpHtcp_a0cfba062b9ea4dddf100bde861e2265b}{m\_minRtt})
+216     \{
+217       \hyperlink{classns3_1_1TcpHtcp_a0cfba062b9ea4dddf100bde861e2265b}{m\_minRtt} = rtt;
+218       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_minRtt="} << \hyperlink{classns3_1_1TcpHtcp_a0cfba062b9ea4dddf100bde861e2265b}{m\_minRtt});
+219     \}
+220   \textcolor{keywordflow}{if} (rtt > \hyperlink{classns3_1_1TcpHtcp_a91edf7c0c42f5996d3d066ce98551c31}{m\_maxRtt})
+221     \{
+222       \hyperlink{classns3_1_1TcpHtcp_a91edf7c0c42f5996d3d066ce98551c31}{m\_maxRtt} = rtt;
+223       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_maxRtt="} << \hyperlink{classns3_1_1TcpHtcp_a91edf7c0c42f5996d3d066ce98551c31}{m\_maxRtt});
+224     \}
+225 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!Update\+Alpha@{Update\+Alpha}}
+\index{Update\+Alpha@{Update\+Alpha}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{Update\+Alpha(void)}{UpdateAlpha(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Htcp\+::\+Update\+Alpha (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a2eefc9a29bf9747095c705066de9c7a3}{}\label{classns3_1_1TcpHtcp_a2eefc9a29bf9747095c705066de9c7a3}
+
+
+Updates the additive increase parameter for H-\/\+T\+CP. 
+
+
+\begin{DoxyCode}
+136 \{
+137   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+138 
+139   \hyperlink{classns3_1_1TcpHtcp_a4642b12b72c7388148dd364d9117a129}{m\_delta} = (\hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} () - \hyperlink{classns3_1_1TcpHtcp_a108362f874fef6c8a2ecb3941c74e340}{m\_lastCon});
+140   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpHtcp_a4642b12b72c7388148dd364d9117a129}{m\_delta} <= \hyperlink{classns3_1_1TcpHtcp_a7e13ad28ae35566e894b5e7ae279dae5}{m\_deltaL})
+141     \{
+142       \hyperlink{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}{m\_alpha} = 1;
+143     \}
+144   \textcolor{keywordflow}{else}
+145     \{
+146       \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} diff = \hyperlink{classns3_1_1TcpHtcp_a4642b12b72c7388148dd364d9117a129}{m\_delta} - \hyperlink{classns3_1_1TcpHtcp_a7e13ad28ae35566e894b5e7ae279dae5}{m\_deltaL};
+147       \textcolor{keywordtype}{double} diffSec = diff.\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} ();
+148       \textcolor{comment}{// alpha=1+10(Delta-Delta\_L)+[0.5(Delta-Delta\_L)]^2  (seconds)}
+149       \textcolor{comment}{// from Leith and Shorten H-TCP paper}
+150       \hyperlink{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}{m\_alpha} = (1 + 10 * diffSec + 0.25 * (diffSec * diffSec));
+151     \}
+152   \hyperlink{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}{m\_alpha} = 2 * (1 - \hyperlink{classns3_1_1TcpHtcp_a76d41b0e13e42f6aa9b98a4a0cb06400}{m\_beta}) * \hyperlink{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}{m\_alpha};
+153   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}{m\_alpha} < 1)
+154     \{
+155       \hyperlink{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}{m\_alpha} = 1;
+156     \}
+157   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_alpha: "} << \hyperlink{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}{m\_alpha});
+158 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!Update\+Beta@{Update\+Beta}}
+\index{Update\+Beta@{Update\+Beta}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{Update\+Beta(void)}{UpdateBeta(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Htcp\+::\+Update\+Beta (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a839688dcc8178d960f750d62ca375602}{}\label{classns3_1_1TcpHtcp_a839688dcc8178d960f750d62ca375602}
+
+
+Updates the multiplicative decrease factor beta for H-\/\+T\+CP. 
+
+
+\begin{DoxyCode}
+161 \{
+162   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+163 
+164   \textcolor{comment}{// Default value for m\_beta}
+165   \hyperlink{classns3_1_1TcpHtcp_a76d41b0e13e42f6aa9b98a4a0cb06400}{m\_beta} = \hyperlink{classns3_1_1TcpHtcp_a1aa22561875c042fe0bd39ca66544587}{m\_defaultBackoff};
+166 
+167   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpHtcp_aff553c6ce4a85bf1fcdc441dd5f7245d}{m\_throughput} > \hyperlink{classns3_1_1TcpHtcp_a5961ae9da66b8f4b0af86a83ba7c0481}{m\_lastThroughput} && 
+      \hyperlink{classns3_1_1TcpHtcp_a5961ae9da66b8f4b0af86a83ba7c0481}{m\_lastThroughput} > 0)
+168     \{
+169       uint32\_t diff = \hyperlink{classns3_1_1TcpHtcp_aff553c6ce4a85bf1fcdc441dd5f7245d}{m\_throughput} - \hyperlink{classns3_1_1TcpHtcp_a5961ae9da66b8f4b0af86a83ba7c0481}{m\_lastThroughput};
+170       \textcolor{keywordflow}{if} (diff / m\_lastThroughput <= \hyperlink{classns3_1_1TcpHtcp_a3ff9db9a1e69710b1e14516d55dc0357}{m\_throughputRatio})
+171         \{
+172           \hyperlink{classns3_1_1TcpHtcp_a76d41b0e13e42f6aa9b98a4a0cb06400}{m\_beta} = \hyperlink{classns3_1_1TcpHtcp_a0cfba062b9ea4dddf100bde861e2265b}{m\_minRtt}.\hyperlink{classns3_1_1Time_a303bcdd30438760a958b4eee799c83e8}{GetDouble} () / \hyperlink{classns3_1_1TcpHtcp_a91edf7c0c42f5996d3d066ce98551c31}{m\_maxRtt}.
+      \hyperlink{classns3_1_1Time_a303bcdd30438760a958b4eee799c83e8}{GetDouble} ();
+173         \}
+174     \}
+175   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_beta: "} << \hyperlink{classns3_1_1TcpHtcp_a76d41b0e13e42f6aa9b98a4a0cb06400}{m\_beta});
+176 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!m\+\_\+alpha@{m\+\_\+alpha}}
+\index{m\+\_\+alpha@{m\+\_\+alpha}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{m\+\_\+alpha}{m_alpha}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Htcp\+::m\+\_\+alpha\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}{}\label{classns3_1_1TcpHtcp_a5cc68a58825c8ed19b2666da91e7e4d0}
+
+
+A\+I\+MD additive increase parameter. 
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!m\+\_\+beta@{m\+\_\+beta}}
+\index{m\+\_\+beta@{m\+\_\+beta}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{m\+\_\+beta}{m_beta}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Htcp\+::m\+\_\+beta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a76d41b0e13e42f6aa9b98a4a0cb06400}{}\label{classns3_1_1TcpHtcp_a76d41b0e13e42f6aa9b98a4a0cb06400}
+
+
+A\+I\+MD multiplicative decrease factor. 
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!m\+\_\+data\+Sent@{m\+\_\+data\+Sent}}
+\index{m\+\_\+data\+Sent@{m\+\_\+data\+Sent}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{m\+\_\+data\+Sent}{m_dataSent}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Htcp\+::m\+\_\+data\+Sent\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a263e88a7986de6a76ff85ac7d6d25ab5}{}\label{classns3_1_1TcpHtcp_a263e88a7986de6a76ff85ac7d6d25ab5}
+
+
+Current amount of data sent since last congestion. 
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!m\+\_\+default\+Backoff@{m\+\_\+default\+Backoff}}
+\index{m\+\_\+default\+Backoff@{m\+\_\+default\+Backoff}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{m\+\_\+default\+Backoff}{m_defaultBackoff}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Htcp\+::m\+\_\+default\+Backoff\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a1aa22561875c042fe0bd39ca66544587}{}\label{classns3_1_1TcpHtcp_a1aa22561875c042fe0bd39ca66544587}
+
+
+default value when throughput ratio less than default 
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!m\+\_\+delta@{m\+\_\+delta}}
+\index{m\+\_\+delta@{m\+\_\+delta}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{m\+\_\+delta}{m_delta}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Htcp\+::m\+\_\+delta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a4642b12b72c7388148dd364d9117a129}{}\label{classns3_1_1TcpHtcp_a4642b12b72c7388148dd364d9117a129}
+
+
+\hyperlink{classns3_1_1Time}{Time} in second that has elapsed since the. 
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!m\+\_\+deltaL@{m\+\_\+deltaL}}
+\index{m\+\_\+deltaL@{m\+\_\+deltaL}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{m\+\_\+deltaL}{m_deltaL}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Htcp\+::m\+\_\+deltaL\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a7e13ad28ae35566e894b5e7ae279dae5}{}\label{classns3_1_1TcpHtcp_a7e13ad28ae35566e894b5e7ae279dae5}
+
+
+Threshold for switching between standard and new increase function. 
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!m\+\_\+last\+Con@{m\+\_\+last\+Con}}
+\index{m\+\_\+last\+Con@{m\+\_\+last\+Con}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{m\+\_\+last\+Con}{m_lastCon}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Htcp\+::m\+\_\+last\+Con\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a108362f874fef6c8a2ecb3941c74e340}{}\label{classns3_1_1TcpHtcp_a108362f874fef6c8a2ecb3941c74e340}
+
+
+\hyperlink{classns3_1_1Time}{Time} of the last congestion for the flow. 
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!m\+\_\+last\+Throughput@{m\+\_\+last\+Throughput}}
+\index{m\+\_\+last\+Throughput@{m\+\_\+last\+Throughput}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{m\+\_\+last\+Throughput}{m_lastThroughput}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Htcp\+::m\+\_\+last\+Throughput\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a5961ae9da66b8f4b0af86a83ba7c0481}{}\label{classns3_1_1TcpHtcp_a5961ae9da66b8f4b0af86a83ba7c0481}
+
+
+Throughput in last congestion period. 
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!m\+\_\+max\+Rtt@{m\+\_\+max\+Rtt}}
+\index{m\+\_\+max\+Rtt@{m\+\_\+max\+Rtt}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{m\+\_\+max\+Rtt}{m_maxRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Htcp\+::m\+\_\+max\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a91edf7c0c42f5996d3d066ce98551c31}{}\label{classns3_1_1TcpHtcp_a91edf7c0c42f5996d3d066ce98551c31}
+
+
+Maximum R\+TT in each congestion period. 
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!m\+\_\+min\+Rtt@{m\+\_\+min\+Rtt}}
+\index{m\+\_\+min\+Rtt@{m\+\_\+min\+Rtt}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{m\+\_\+min\+Rtt}{m_minRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Htcp\+::m\+\_\+min\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a0cfba062b9ea4dddf100bde861e2265b}{}\label{classns3_1_1TcpHtcp_a0cfba062b9ea4dddf100bde861e2265b}
+
+
+Minimum R\+TT in each congestion period. 
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!m\+\_\+throughput@{m\+\_\+throughput}}
+\index{m\+\_\+throughput@{m\+\_\+throughput}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{m\+\_\+throughput}{m_throughput}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Htcp\+::m\+\_\+throughput\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_aff553c6ce4a85bf1fcdc441dd5f7245d}{}\label{classns3_1_1TcpHtcp_aff553c6ce4a85bf1fcdc441dd5f7245d}
+
+
+Current throughput since last congestion. 
+
+\index{ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}!m\+\_\+throughput\+Ratio@{m\+\_\+throughput\+Ratio}}
+\index{m\+\_\+throughput\+Ratio@{m\+\_\+throughput\+Ratio}!ns3\+::\+Tcp\+Htcp@{ns3\+::\+Tcp\+Htcp}}
+\subsubsection[{\texorpdfstring{m\+\_\+throughput\+Ratio}{m_throughputRatio}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Htcp\+::m\+\_\+throughput\+Ratio\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHtcp_a3ff9db9a1e69710b1e14516d55dc0357}{}\label{classns3_1_1TcpHtcp_a3ff9db9a1e69710b1e14516d55dc0357}
+
+
+ratio of two consequence throughput 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{tcp-htcp_8h}{tcp-\/htcp.\+h}\item 
+internet/model/\hyperlink{tcp-htcp_8cc}{tcp-\/htcp.\+cc}\end{DoxyCompactItemize}

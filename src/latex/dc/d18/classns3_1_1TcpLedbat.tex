@@ -1,0 +1,968 @@
+\hypertarget{classns3_1_1TcpLedbat}{}\section{ns3\+:\+:Tcp\+Ledbat Class Reference}
+\label{classns3_1_1TcpLedbat}\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+
+
+An implementation of L\+E\+D\+B\+AT.  
+
+
+
+
+{\ttfamily \#include $<$tcp-\/ledbat.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Tcp\+Ledbat\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Tcp\+Ledbat\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf}{Owd\+Circ\+Buf}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1Buffer}{Buffer} structure to store delays. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1TcpLedbat_a8ce24fa585b0a39bd74faec66d6ae3d8}{Tcp\+Ledbat} (void)
+\item 
+\hyperlink{classns3_1_1TcpLedbat_ab3698a5f05e1d0d8e7b7272d84b9ac50}{Tcp\+Ledbat} (const \hyperlink{classns3_1_1TcpLedbat}{Tcp\+Ledbat} \&sock)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1TcpLedbat_acc17bdda2a04514dff34706b18692d1b}{$\sim$\+Tcp\+Ledbat} (void)
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{classns3_1_1TcpLedbat_af3706fd2c991966e5a4e7f97e799395a}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the name of the T\+CP flavour. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpLedbat_adc44a91826f2080c5551a313648d3848}{Pkts\+Acked} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked, const \hyperlink{classns3_1_1Time}{Time} \&rtt)
+\begin{DoxyCompactList}\small\item\em Get information from the acked packet. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1TcpLedbat_a8d228eff64ff4a9d8d64e939ee19d016}{Get\+Ss\+Thresh} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)
+\begin{DoxyCompactList}\small\item\em Get the slow start threshold. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} $>$ \hyperlink{classns3_1_1TcpLedbat_a76866fc3f6e142e996465e2c987e2629}{Fork} ()
+\begin{DoxyCompactList}\small\item\em Copy the congestion control algorithm across socket. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpLedbat_a9baf3c7c8d5572c3cf7c4249a2833748}{Increase\+Window} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked)
+\begin{DoxyCompactList}\small\item\em Adjust cwnd following L\+E\+D\+B\+AT algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1TcpLedbat_a3d0596a0f90e3b199451a36f310ef71d}{Set\+Do\+Ss} (\hyperlink{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620}{Slow\+Start\+Type} do\+SS)
+\begin{DoxyCompactList}\small\item\em Change the Slow Start Capability. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1TcpLedbat_a3b7785bb378bd0af12ac9d2f9af330db}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classns3_1_1TcpLedbat_a592b6df30581c978ddabf095eb0300c6}{Congestion\+Avoidance} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked)
+\begin{DoxyCompactList}\small\item\em Reduce Congestion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620}{Slow\+Start\+Type} \{ \hyperlink{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620ac4ed97ba794665876b847c01dd9c84e9}{D\+O\+\_\+\+N\+O\+T\+\_\+\+S\+L\+O\+W\+S\+T\+A\+RT}, 
+\hyperlink{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620aff8b53c555fefc60284c7bd4301c002f}{D\+O\+\_\+\+S\+L\+O\+W\+S\+T\+A\+RT}
+ \}\begin{DoxyCompactList}\small\item\em The slowstart types. \end{DoxyCompactList}
+\item 
+enum \hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44}{State} \{ \hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a5465ff5c06920abd88c4c63e0e566039}{L\+E\+D\+B\+A\+T\+\_\+\+V\+A\+L\+I\+D\+\_\+\+O\+WD} = (1 $<$$<$ 1), 
+\hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a3d2d6232f71c96ec1bd4b0fb41080bd5}{L\+E\+D\+B\+A\+T\+\_\+\+C\+A\+N\+\_\+\+SS} = (1 $<$$<$ 3)
+ \}\begin{DoxyCompactList}\small\item\em The state of L\+E\+D\+B\+AT. If L\+E\+D\+B\+AT is not in V\+A\+L\+I\+D\+\_\+\+O\+WD state, it falls to default congestion ops. \end{DoxyCompactList}
+\item 
+typedef uint32\+\_\+t($\ast$ \hyperlink{classns3_1_1TcpLedbat_a44a96f49fc459cec6e691e2d04f56a03}{Filter\+Function}) (struct \hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf}{Owd\+Circ\+Buf} \&)
+\begin{DoxyCompactList}\small\item\em Filter function used by L\+E\+D\+B\+AT for current delay. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1TcpLedbat_a24b91b1f4884b2c3ac7aa2e69d8f6bf2}{Init\+Circ\+Buf} (struct \hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf}{Owd\+Circ\+Buf} \&buffer)
+\begin{DoxyCompactList}\small\item\em Initialise a new buffer. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpLedbat_af8d5dbf7a101ed4c1134132724094bde}{Current\+Delay} (\hyperlink{classns3_1_1TcpLedbat_a44a96f49fc459cec6e691e2d04f56a03}{Filter\+Function} filter)
+\begin{DoxyCompactList}\small\item\em Return the value of current delay. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpLedbat_a376576d38e2467910d33ce0f0ea6d4ec}{Base\+Delay} ()
+\begin{DoxyCompactList}\small\item\em Return the value of base delay. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1TcpLedbat_a0d55108658f4ca868e1265ae1a5682c1}{Add\+Delay} (struct \hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf}{Owd\+Circ\+Buf} \&cb, uint32\+\_\+t owd, uint32\+\_\+t maxlen)
+\begin{DoxyCompactList}\small\item\em Add new delay to the buffers. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1TcpLedbat_a1a29435e96f584de98c293b4d640c9f0}{Update\+Base\+Delay} (uint32\+\_\+t owd)
+\begin{DoxyCompactList}\small\item\em Update the base delay buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static uint32\+\_\+t \hyperlink{classns3_1_1TcpLedbat_a5ee6ecafab7d35aa17569d75ddb513c8}{Min\+Circ\+Buf} (struct \hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf}{Owd\+Circ\+Buf} \&\hyperlink{lte__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b})
+\begin{DoxyCompactList}\small\item\em Return the minimum delay of the buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpLedbat_a93ab2886c4bbbcec5a6efd192c437fb7}{m\+\_\+target}
+\begin{DoxyCompactList}\small\item\em Target \hyperlink{classns3_1_1Queue}{Queue} Delay. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpLedbat_a41255ef3e04f7cc54c4634c3729da506}{m\+\_\+gain}
+\begin{DoxyCompactList}\small\item\em G\+A\+IN value from R\+FC. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620}{Slow\+Start\+Type} \hyperlink{classns3_1_1TcpLedbat_a0514fe7772b42629f333f96e636d9a8d}{m\+\_\+do\+Ss}
+\begin{DoxyCompactList}\small\item\em Permissible Slow Start State. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpLedbat_ab72482ecda86d4f7f54c75dfeaa39eb2}{m\+\_\+base\+Histo\+Len}
+\begin{DoxyCompactList}\small\item\em Length of base delay history buffer. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpLedbat_abbc074450211a63831a0bf5313252310}{m\+\_\+noise\+Filter\+Len}
+\begin{DoxyCompactList}\small\item\em Length of current delay buffer. \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{classns3_1_1TcpLedbat_acb19a27ad644fa5d72098330e1c55686}{m\+\_\+last\+Rollover}
+\begin{DoxyCompactList}\small\item\em Timestamp of last added delay. \end{DoxyCompactList}\item 
+int32\+\_\+t \hyperlink{classns3_1_1TcpLedbat_aad785b326c9667e16056ef4f23c12299}{m\+\_\+snd\+Cwnd\+Cnt}
+\begin{DoxyCompactList}\small\item\em The congestion window addition parameter. \end{DoxyCompactList}\item 
+struct \hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf}{Owd\+Circ\+Buf} \hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\+\_\+base\+History}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1Buffer}{Buffer} to store the base delay. \end{DoxyCompactList}\item 
+struct \hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf}{Owd\+Circ\+Buf} \hyperlink{classns3_1_1TcpLedbat_a03ed887c2d0b9b02d50246759e31fe14}{m\+\_\+noise\+Filter}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1Buffer}{Buffer} to store the current delay. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}{m\+\_\+flag}
+\begin{DoxyCompactList}\small\item\em L\+E\+D\+B\+AT Flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An implementation of L\+E\+D\+B\+AT. 
+
+\subsection{Member Typedef Documentation}
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Filter\+Function@{Filter\+Function}}
+\index{Filter\+Function@{Filter\+Function}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Filter\+Function}{FilterFunction}}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint32\+\_\+t($\ast$ ns3\+::\+Tcp\+Ledbat\+::\+Filter\+Function) (struct {\bf Owd\+Circ\+Buf} \&)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a44a96f49fc459cec6e691e2d04f56a03}{}\label{classns3_1_1TcpLedbat_a44a96f49fc459cec6e691e2d04f56a03}
+
+
+Filter function used by L\+E\+D\+B\+AT for current delay. 
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Slow\+Start\+Type@{Slow\+Start\+Type}}
+\index{Slow\+Start\+Type@{Slow\+Start\+Type}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Slow\+Start\+Type}{SlowStartType}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ns3\+::\+Tcp\+Ledbat\+::\+Slow\+Start\+Type}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620}{}\label{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620}
+
+
+The slowstart types. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{D\+O\+\_\+\+N\+O\+T\+\_\+\+S\+L\+O\+W\+S\+T\+A\+RT@{D\+O\+\_\+\+N\+O\+T\+\_\+\+S\+L\+O\+W\+S\+T\+A\+RT}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!D\+O\+\_\+\+N\+O\+T\+\_\+\+S\+L\+O\+W\+S\+T\+A\+RT@{D\+O\+\_\+\+N\+O\+T\+\_\+\+S\+L\+O\+W\+S\+T\+A\+RT}}\item[{\em 
+D\+O\+\_\+\+N\+O\+T\+\_\+\+S\+L\+O\+W\+S\+T\+A\+RT\hypertarget{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620ac4ed97ba794665876b847c01dd9c84e9}{}\label{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620ac4ed97ba794665876b847c01dd9c84e9}
+}]Do not Slow Start. \index{D\+O\+\_\+\+S\+L\+O\+W\+S\+T\+A\+RT@{D\+O\+\_\+\+S\+L\+O\+W\+S\+T\+A\+RT}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!D\+O\+\_\+\+S\+L\+O\+W\+S\+T\+A\+RT@{D\+O\+\_\+\+S\+L\+O\+W\+S\+T\+A\+RT}}\item[{\em 
+D\+O\+\_\+\+S\+L\+O\+W\+S\+T\+A\+RT\hypertarget{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620aff8b53c555fefc60284c7bd4301c002f}{}\label{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620aff8b53c555fefc60284c7bd4301c002f}
+}]Do New\+Reno Slow Start. \end{description}
+\end{Desc}
+
+\begin{DoxyCode}
+44   \{
+45     \hyperlink{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620ac4ed97ba794665876b847c01dd9c84e9}{DO\_NOT\_SLOWSTART},           
+46     \hyperlink{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620aff8b53c555fefc60284c7bd4301c002f}{DO\_SLOWSTART},               
+47   \};
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!State@{State}}
+\index{State@{State}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{State}{State}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ns3\+::\+Tcp\+Ledbat\+::\+State}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44}{}\label{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44}
+
+
+The state of L\+E\+D\+B\+AT. If L\+E\+D\+B\+AT is not in V\+A\+L\+I\+D\+\_\+\+O\+WD state, it falls to default congestion ops. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{L\+E\+D\+B\+A\+T\+\_\+\+V\+A\+L\+I\+D\+\_\+\+O\+WD@{L\+E\+D\+B\+A\+T\+\_\+\+V\+A\+L\+I\+D\+\_\+\+O\+WD}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!L\+E\+D\+B\+A\+T\+\_\+\+V\+A\+L\+I\+D\+\_\+\+O\+WD@{L\+E\+D\+B\+A\+T\+\_\+\+V\+A\+L\+I\+D\+\_\+\+O\+WD}}\item[{\em 
+L\+E\+D\+B\+A\+T\+\_\+\+V\+A\+L\+I\+D\+\_\+\+O\+WD\hypertarget{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a5465ff5c06920abd88c4c63e0e566039}{}\label{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a5465ff5c06920abd88c4c63e0e566039}
+}]If valid timestamps are present. \index{L\+E\+D\+B\+A\+T\+\_\+\+C\+A\+N\+\_\+\+SS@{L\+E\+D\+B\+A\+T\+\_\+\+C\+A\+N\+\_\+\+SS}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!L\+E\+D\+B\+A\+T\+\_\+\+C\+A\+N\+\_\+\+SS@{L\+E\+D\+B\+A\+T\+\_\+\+C\+A\+N\+\_\+\+SS}}\item[{\em 
+L\+E\+D\+B\+A\+T\+\_\+\+C\+A\+N\+\_\+\+SS\hypertarget{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a3d2d6232f71c96ec1bd4b0fb41080bd5}{}\label{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a3d2d6232f71c96ec1bd4b0fb41080bd5}
+}]If L\+E\+D\+B\+AT allows Slow Start. \end{description}
+\end{Desc}
+
+\begin{DoxyCode}
+54   \{
+55     \hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a5465ff5c06920abd88c4c63e0e566039}{LEDBAT\_VALID\_OWD}  = (1 << 1),  
+56     \hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a3d2d6232f71c96ec1bd4b0fb41080bd5}{LEDBAT\_CAN\_SS}     = (1 << 3)   
+57   \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Tcp\+Ledbat@{Tcp\+Ledbat}}
+\index{Tcp\+Ledbat@{Tcp\+Ledbat}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Tcp\+Ledbat(void)}{TcpLedbat(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Ledbat\+::\+Tcp\+Ledbat (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpLedbat_a8ce24fa585b0a39bd74faec66d6ae3d8}{}\label{classns3_1_1TcpLedbat_a8ce24fa585b0a39bd74faec66d6ae3d8}
+Create an unbound tcp socket. 
+\begin{DoxyCode}
+83   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} ()
+84 \{
+85   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+86   \hyperlink{classns3_1_1TcpLedbat_a93ab2886c4bbbcec5a6efd192c437fb7}{m\_target} = \hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (100);
+87   \hyperlink{classns3_1_1TcpLedbat_a41255ef3e04f7cc54c4634c3729da506}{m\_gain} = 1;
+88   \hyperlink{classns3_1_1TcpLedbat_a0514fe7772b42629f333f96e636d9a8d}{m\_doSs} = \hyperlink{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620aff8b53c555fefc60284c7bd4301c002f}{DO\_SLOWSTART};
+89   \hyperlink{classns3_1_1TcpLedbat_ab72482ecda86d4f7f54c75dfeaa39eb2}{m\_baseHistoLen} = 10;
+90   \hyperlink{classns3_1_1TcpLedbat_abbc074450211a63831a0bf5313252310}{m\_noiseFilterLen} = 4;
+91   \hyperlink{classns3_1_1TcpLedbat_a24b91b1f4884b2c3ac7aa2e69d8f6bf2}{InitCircBuf} (\hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\_baseHistory});
+92   \hyperlink{classns3_1_1TcpLedbat_a24b91b1f4884b2c3ac7aa2e69d8f6bf2}{InitCircBuf} (\hyperlink{classns3_1_1TcpLedbat_a03ed887c2d0b9b02d50246759e31fe14}{m\_noiseFilter});
+93   \hyperlink{classns3_1_1TcpLedbat_acb19a27ad644fa5d72098330e1c55686}{m\_lastRollover} = 0;
+94   \hyperlink{classns3_1_1TcpLedbat_aad785b326c9667e16056ef4f23c12299}{m\_sndCwndCnt} = 0;
+95   \hyperlink{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}{m\_flag} = \hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a3d2d6232f71c96ec1bd4b0fb41080bd5}{LEDBAT\_CAN\_SS};
+96 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Tcp\+Ledbat@{Tcp\+Ledbat}}
+\index{Tcp\+Ledbat@{Tcp\+Ledbat}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Tcp\+Ledbat(const Tcp\+Ledbat \&sock)}{TcpLedbat(const TcpLedbat &sock)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Ledbat\+::\+Tcp\+Ledbat (
+\begin{DoxyParamCaption}
+\item[{const {\bf Tcp\+Ledbat} \&}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpLedbat_ab3698a5f05e1d0d8e7b7272d84b9ac50}{}\label{classns3_1_1TcpLedbat_ab3698a5f05e1d0d8e7b7272d84b9ac50}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & the object to copy \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+106   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (sock)
+107 \{
+108   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+109   \hyperlink{classns3_1_1TcpLedbat_a93ab2886c4bbbcec5a6efd192c437fb7}{m\_target} = sock.m\_target;
+110   \hyperlink{classns3_1_1TcpLedbat_a41255ef3e04f7cc54c4634c3729da506}{m\_gain} = sock.m\_gain;
+111   \hyperlink{classns3_1_1TcpLedbat_a0514fe7772b42629f333f96e636d9a8d}{m\_doSs} = sock.m\_doSs;
+112   \hyperlink{classns3_1_1TcpLedbat_ab72482ecda86d4f7f54c75dfeaa39eb2}{m\_baseHistoLen} = sock.m\_baseHistoLen;
+113   \hyperlink{classns3_1_1TcpLedbat_abbc074450211a63831a0bf5313252310}{m\_noiseFilterLen} = sock.m\_noiseFilterLen;
+114   \hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\_baseHistory} = sock.m\_baseHistory;
+115   \hyperlink{classns3_1_1TcpLedbat_a03ed887c2d0b9b02d50246759e31fe14}{m\_noiseFilter} = sock.m\_noiseFilter;
+116   \hyperlink{classns3_1_1TcpLedbat_acb19a27ad644fa5d72098330e1c55686}{m\_lastRollover} = sock.m\_lastRollover;
+117   \hyperlink{classns3_1_1TcpLedbat_aad785b326c9667e16056ef4f23c12299}{m\_sndCwndCnt} = sock.m\_sndCwndCnt;
+118   \hyperlink{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}{m\_flag} = sock.m\_flag;
+119 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!````~Tcp\+Ledbat@{$\sim$\+Tcp\+Ledbat}}
+\index{````~Tcp\+Ledbat@{$\sim$\+Tcp\+Ledbat}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{$\sim$\+Tcp\+Ledbat(void)}{~TcpLedbat(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Ledbat\+::$\sim$\+Tcp\+Ledbat (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpLedbat_acc17bdda2a04514dff34706b18692d1b}{}\label{classns3_1_1TcpLedbat_acc17bdda2a04514dff34706b18692d1b}
+
+
+Destructor. 
+
+
+\begin{DoxyCode}
+122 \{
+123   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+124 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Add\+Delay@{Add\+Delay}}
+\index{Add\+Delay@{Add\+Delay}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Add\+Delay(struct Owd\+Circ\+Buf \&cb, uint32\+\_\+t owd, uint32\+\_\+t maxlen)}{AddDelay(struct OwdCircBuf &cb, uint32_t owd, uint32_t maxlen)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Ledbat\+::\+Add\+Delay (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Owd\+Circ\+Buf} \&}]{cb, }
+\item[{uint32\+\_\+t}]{owd, }
+\item[{uint32\+\_\+t}]{maxlen}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a0d55108658f4ca868e1265ae1a5682c1}{}\label{classns3_1_1TcpLedbat_a0d55108658f4ca868e1265ae1a5682c1}
+
+
+Add new delay to the buffers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cb} & The buffer \\
+\hline
+{\em owd} & The new delay \\
+\hline
+{\em maxlen} & The maximum permitted length \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+232 \{
+233   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << owd << maxlen << cb.buffer.size ());
+234   \textcolor{keywordflow}{if} (cb.buffer.size () == 0)
+235     \{
+236       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"First Value for queue"});
+237       cb.buffer.push\_back (owd);
+238       cb.min = 0;
+239       \textcolor{keywordflow}{return};
+240     \}
+241   cb.buffer.push\_back (owd);
+242   \textcolor{keywordflow}{if} (cb.buffer[cb.min] > owd)
+243     \{
+244       cb.min = cb.buffer.size () - 1;
+245     \}
+246   \textcolor{keywordflow}{if} (cb.buffer.size () >= maxlen)
+247     \{
+248       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Queue full"} << maxlen);
+249       cb.buffer.erase (cb.buffer.begin ());
+250       cb.min = 0;
+251       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Current min element"} << cb.buffer[cb.min]);
+252       \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 1; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < maxlen - 1; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+253         \{
+254           \textcolor{keywordflow}{if} (cb.buffer[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] < cb.buffer[cb.min])
+255             \{
+256               cb.min = \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+257             \}
+258         \}
+259     \}
+260 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Base\+Delay@{Base\+Delay}}
+\index{Base\+Delay@{Base\+Delay}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Base\+Delay()}{BaseDelay()}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Ledbat\+::\+Base\+Delay (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a376576d38e2467910d33ce0f0ea6d4ec}{}\label{classns3_1_1TcpLedbat_a376576d38e2467910d33ce0f0ea6d4ec}
+
+
+Return the value of base delay. 
+
+\begin{DoxyReturn}{Returns}
+The base delay 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+158 \{
+159   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+160   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1TcpLedbat_a5ee6ecafab7d35aa17569d75ddb513c8}{MinCircBuf} (\hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\_baseHistory});
+161 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Congestion\+Avoidance@{Congestion\+Avoidance}}
+\index{Congestion\+Avoidance@{Congestion\+Avoidance}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Congestion\+Avoidance(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked)}{CongestionAvoidance(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Ledbat\+::\+Congestion\+Avoidance (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpLedbat_a592b6df30581c978ddabf095eb0300c6}{}\label{classns3_1_1TcpLedbat_a592b6df30581c978ddabf095eb0300c6}
+
+
+Reduce Congestion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments A\+C\+Ked \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a34a5eec0649a7b485852c74c825e14ba}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+191 \{
+192   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked);
+193   \textcolor{keywordflow}{if} ((\hyperlink{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}{m\_flag} & \hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a5465ff5c06920abd88c4c63e0e566039}{LEDBAT\_VALID\_OWD}) == 0)
+194     \{
+195       \hyperlink{classns3_1_1TcpNewReno_a34a5eec0649a7b485852c74c825e14ba}{TcpNewReno::CongestionAvoidance} (tcb, segmentsAcked); \textcolor{comment}{//letting it
+       fall to TCP behaviour if no timestamps}
+196       \textcolor{keywordflow}{return};
+197     \}
+198   int64\_t queue\_delay;
+199   \textcolor{keywordtype}{double} offset;
+200   uint32\_t cwnd = (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd}.\hyperlink{classns3_1_1TracedValue_a10fddd1de961ac65acfbeb440a1e8551}{Get} ());
+201   uint32\_t max\_cwnd;
+202   uint64\_t current\_delay = \hyperlink{classns3_1_1TcpLedbat_af8d5dbf7a101ed4c1134132724094bde}{CurrentDelay} (&\hyperlink{classns3_1_1TcpLedbat_a5ee6ecafab7d35aa17569d75ddb513c8}{TcpLedbat::MinCircBuf});
+203   uint64\_t base\_delay = \hyperlink{classns3_1_1TcpLedbat_a376576d38e2467910d33ce0f0ea6d4ec}{BaseDelay} ();
+204 
+205   \textcolor{keywordflow}{if} (current\_delay > base\_delay)
+206     \{
+207       queue\_delay = current\_delay - base\_delay;
+208       offset = \hyperlink{classns3_1_1TcpLedbat_a93ab2886c4bbbcec5a6efd192c437fb7}{m\_target}.\hyperlink{classns3_1_1Time_aba3428a8b6c4c8d9014ce44145081f34}{GetMilliSeconds} () - queue\_delay;
+209     \}
+210   \textcolor{keywordflow}{else}
+211     \{
+212       queue\_delay = base\_delay - current\_delay;
+213       offset = \hyperlink{classns3_1_1TcpLedbat_a93ab2886c4bbbcec5a6efd192c437fb7}{m\_target}.\hyperlink{classns3_1_1Time_aba3428a8b6c4c8d9014ce44145081f34}{GetMilliSeconds} () + queue\_delay;
+214     \}
+215   offset *= \hyperlink{classns3_1_1TcpLedbat_a41255ef3e04f7cc54c4634c3729da506}{m\_gain};
+216   \hyperlink{classns3_1_1TcpLedbat_aad785b326c9667e16056ef4f23c12299}{m\_sndCwndCnt} = offset * segmentsAcked * tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+217   \textcolor{keywordtype}{double} inc =  (\hyperlink{classns3_1_1TcpLedbat_aad785b326c9667e16056ef4f23c12299}{m\_sndCwndCnt} * 1.0) / (\hyperlink{classns3_1_1TcpLedbat_a93ab2886c4bbbcec5a6efd192c437fb7}{m\_target}.
+      \hyperlink{classns3_1_1Time_aba3428a8b6c4c8d9014ce44145081f34}{GetMilliSeconds} () * tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd}.\hyperlink{classns3_1_1TracedValue_a10fddd1de961ac65acfbeb440a1e8551}{Get} ());
+218   cwnd += (inc * tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize});
+219 
+220   max\_cwnd = (tcb->\hyperlink{classns3_1_1TcpSocketState_a2c46f51fd8e2bf43b564ea838b43b8bb}{m\_highTxMark}.\hyperlink{classns3_1_1TracedValue_a10fddd1de961ac65acfbeb440a1e8551}{Get} () - tcb->\hyperlink{classns3_1_1TcpSocketState_a7a30ba2b675238429c7fe2f0c8d1ce94}{m\_lastAckedSeq}) + segmentsAcked 
+      * tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+221   cwnd = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (cwnd, max\_cwnd);
+222   cwnd = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (cwnd, tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize});
+223   tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} = cwnd;
+224 
+225   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <= tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh})
+226     \{
+227       tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh} = tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} - 1;
+228     \}
+229 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Current\+Delay@{Current\+Delay}}
+\index{Current\+Delay@{Current\+Delay}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Current\+Delay(\+Filter\+Function filter)}{CurrentDelay(FilterFunction filter)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Ledbat\+::\+Current\+Delay (
+\begin{DoxyParamCaption}
+\item[{{\bf Filter\+Function}}]{filter}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_af8d5dbf7a101ed4c1134132724094bde}{}\label{classns3_1_1TcpLedbat_af8d5dbf7a101ed4c1134132724094bde}
+
+
+Return the value of current delay. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filter} & The filter function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The current delay 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+152 \{
+153   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+154   \textcolor{keywordflow}{return} filter (\hyperlink{classns3_1_1TcpLedbat_a03ed887c2d0b9b02d50246759e31fe14}{m\_noiseFilter});
+155 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Fork@{Fork}}
+\index{Fork@{Fork}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Fork()}{Fork()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Congestion\+Ops} $>$ ns3\+::\+Tcp\+Ledbat\+::\+Fork (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpLedbat_a76866fc3f6e142e996465e2c987e2629}{}\label{classns3_1_1TcpLedbat_a76866fc3f6e142e996465e2c987e2629}
+
+
+Copy the congestion control algorithm across socket. 
+
+\begin{DoxyReturn}{Returns}
+a pointer of the copied object 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a2606d5fcd01a1eb4d5f4e6beb7a33192}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+128 \{
+129   \textcolor{keywordflow}{return} CopyObject<TcpLedbat> (\textcolor{keyword}{this});
+130 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Tcp\+Ledbat\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpLedbat_af3706fd2c991966e5a4e7f97e799395a}{}\label{classns3_1_1TcpLedbat_af3706fd2c991966e5a4e7f97e799395a}
+
+
+Get the name of the T\+CP flavour. 
+
+\begin{DoxyReturn}{Returns}
+The name of the T\+CP 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a0ecf92cb36c236c70e0ecaedfff6609e}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+134 \{
+135   \textcolor{keywordflow}{return} \textcolor{stringliteral}{"TcpLedbat"};
+136 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Get\+Ss\+Thresh@{Get\+Ss\+Thresh}}
+\index{Get\+Ss\+Thresh@{Get\+Ss\+Thresh}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Get\+Ss\+Thresh(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)}{GetSsThresh(Ptr< const TcpSocketState > tcb, uint32_t bytesInFlight)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Ledbat\+::\+Get\+Ss\+Thresh (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{bytes\+In\+Flight}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpLedbat_a8d228eff64ff4a9d8d64e939ee19d016}{}\label{classns3_1_1TcpLedbat_a8d228eff64ff4a9d8d64e939ee19d016}
+
+
+Get the slow start threshold. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em bytes\+In\+Flight} & bytes in flight\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The slow start threshold 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a1cb467aaa4960dfe10b963ed9f3d5aa2}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+165 \{
+166   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << bytesInFlight);
+167   uint32\_t res;
+168   res = \hyperlink{classns3_1_1TcpNewReno_a1cb467aaa4960dfe10b963ed9f3d5aa2}{TcpNewReno::GetSsThresh} (tcb, bytesInFlight);
+169   \textcolor{keywordflow}{return} res;
+170 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Tcp\+Ledbat\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpLedbat_a3b7785bb378bd0af12ac9d2f9af330db}{}\label{classns3_1_1TcpLedbat_a3b7785bb378bd0af12ac9d2f9af330db}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+33 \{
+34   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::TcpLedbat"})
+35     .SetParent<\hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno}> ()
+36     .AddConstructor<TcpLedbat> ()
+37     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+38     .AddAttribute (\textcolor{stringliteral}{"TargetDelay"},
+39                    \textcolor{stringliteral}{"Targeted Queue Delay"},
+40                    TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (100)),
+41                    MakeTimeAccessor (&\hyperlink{classns3_1_1TcpLedbat_a93ab2886c4bbbcec5a6efd192c437fb7}{TcpLedbat::m\_target}),
+42                    \hyperlink{group__time_ga7032965bd4afa578691d88c09e4481c1}{MakeTimeChecker} ())
+43     .AddAttribute (\textcolor{stringliteral}{"BaseHistoryLen"},
+44                    \textcolor{stringliteral}{"Number of Base delay samples"},
+45                    UintegerValue (10),
+46                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpLedbat_ab72482ecda86d4f7f54c75dfeaa39eb2}{TcpLedbat::m\_baseHistoLen}),
+47                    MakeUintegerChecker<uint32\_t> ())
+48     .AddAttribute (\textcolor{stringliteral}{"NoiseFilterLen"},
+49                    \textcolor{stringliteral}{"Number of Current delay samples"},
+50                    UintegerValue (4),
+51                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpLedbat_abbc074450211a63831a0bf5313252310}{TcpLedbat::m\_noiseFilterLen}),
+52                    MakeUintegerChecker<uint32\_t> ())
+53     .AddAttribute (\textcolor{stringliteral}{"Gain"},
+54                    \textcolor{stringliteral}{"Offset Gain"},
+55                    DoubleValue (1.0),
+56                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpLedbat_a41255ef3e04f7cc54c4634c3729da506}{TcpLedbat::m\_gain}),
+57                    MakeDoubleChecker<double> ())
+58     .AddAttribute (\textcolor{stringliteral}{"SSParam"},
+59                    \textcolor{stringliteral}{"Possibility of Slow Start"},
+60                    EnumValue (\hyperlink{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620aff8b53c555fefc60284c7bd4301c002f}{DO\_SLOWSTART}),
+61                    \hyperlink{namespacens3_af5050739867ce63896dec011e332c8ec}{MakeEnumAccessor} (&\hyperlink{classns3_1_1TcpLedbat_a3d0596a0f90e3b199451a36f310ef71d}{TcpLedbat::SetDoSs}),
+62                    \hyperlink{namespacens3_a48832781a2b521d3d0091e05ece30615}{MakeEnumChecker} (\hyperlink{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620aff8b53c555fefc60284c7bd4301c002f}{DO\_SLOWSTART}, \textcolor{stringliteral}{"yes"},
+63                                     \hyperlink{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620ac4ed97ba794665876b847c01dd9c84e9}{DO\_NOT\_SLOWSTART}, \textcolor{stringliteral}{"no"}))
+64   ;
+65   \textcolor{keywordflow}{return} tid;
+66 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Increase\+Window@{Increase\+Window}}
+\index{Increase\+Window@{Increase\+Window}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Increase\+Window(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked)}{IncreaseWindow(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Ledbat\+::\+Increase\+Window (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpLedbat_a9baf3c7c8d5572c3cf7c4249a2833748}{}\label{classns3_1_1TcpLedbat_a9baf3c7c8d5572c3cf7c4249a2833748}
+
+
+Adjust cwnd following L\+E\+D\+B\+AT algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments A\+C\+Ked \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a11db8ae90f4cebacc15524a793b0741a}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+173 \{
+174   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked);
+175   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd}.\hyperlink{classns3_1_1TracedValue_a10fddd1de961ac65acfbeb440a1e8551}{Get} () <= tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize})
+176     \{
+177       \hyperlink{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}{m\_flag} |= \hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a3d2d6232f71c96ec1bd4b0fb41080bd5}{LEDBAT\_CAN\_SS};
+178     \}
+179   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpLedbat_a0514fe7772b42629f333f96e636d9a8d}{m\_doSs} == \hyperlink{classns3_1_1TcpLedbat_a7099bb59b406b311fab27960df7c8620aff8b53c555fefc60284c7bd4301c002f}{DO\_SLOWSTART} && tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <= tcb->
+      \hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh} && (\hyperlink{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}{m\_flag} & \hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a3d2d6232f71c96ec1bd4b0fb41080bd5}{LEDBAT\_CAN\_SS}))
+180     \{
+181       \hyperlink{classns3_1_1TcpNewReno_a1cf5fd9585eb3b745727f4f5beae0706}{SlowStart} (tcb, segmentsAcked);
+182     \}
+183   \textcolor{keywordflow}{else}
+184     \{
+185       \hyperlink{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}{m\_flag} &= ~LEDBAT\_CAN\_SS;
+186       \hyperlink{classns3_1_1TcpLedbat_a592b6df30581c978ddabf095eb0300c6}{CongestionAvoidance} (tcb, segmentsAcked);
+187     \}
+188 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 12
+
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Init\+Circ\+Buf@{Init\+Circ\+Buf}}
+\index{Init\+Circ\+Buf@{Init\+Circ\+Buf}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Init\+Circ\+Buf(struct Owd\+Circ\+Buf \&buffer)}{InitCircBuf(struct OwdCircBuf &buffer)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Ledbat\+::\+Init\+Circ\+Buf (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Owd\+Circ\+Buf} \&}]{buffer}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a24b91b1f4884b2c3ac7aa2e69d8f6bf2}{}\label{classns3_1_1TcpLedbat_a24b91b1f4884b2c3ac7aa2e69d8f6bf2}
+
+
+Initialise a new buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer to be initialised \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+99 \{
+100   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+101   buffer.buffer.clear ();
+102   buffer.min = 0;
+103 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 13
+
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Min\+Circ\+Buf@{Min\+Circ\+Buf}}
+\index{Min\+Circ\+Buf@{Min\+Circ\+Buf}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Min\+Circ\+Buf(struct Owd\+Circ\+Buf \&b)}{MinCircBuf(struct OwdCircBuf &b)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Ledbat\+::\+Min\+Circ\+Buf (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Owd\+Circ\+Buf} \&}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a5ee6ecafab7d35aa17569d75ddb513c8}{}\label{classns3_1_1TcpLedbat_a5ee6ecafab7d35aa17569d75ddb513c8}
+
+
+Return the minimum delay of the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & The buffer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The minimum delay 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+139 \{
+140   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+141   \textcolor{keywordflow}{if} (\hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b}.buffer.size () == 0)
+142     \{
+143       \textcolor{keywordflow}{return} ~0;
+144     \}
+145   \textcolor{keywordflow}{else}
+146     \{
+147       \textcolor{keywordflow}{return} \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b}.buffer[\hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b}.min];
+148     \}
+149 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 14
+
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Pkts\+Acked@{Pkts\+Acked}}
+\index{Pkts\+Acked@{Pkts\+Acked}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Pkts\+Acked(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked, const Time \&rtt)}{PktsAcked(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked, const Time &rtt)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Ledbat\+::\+Pkts\+Acked (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked, }
+\item[{const {\bf Time} \&}]{rtt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpLedbat_adc44a91826f2080c5551a313648d3848}{}\label{classns3_1_1TcpLedbat_adc44a91826f2080c5551a313648d3848}
+
+
+Get information from the acked packet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments A\+C\+Ked \\
+\hline
+{\em rtt} & The estimated rtt \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpCongestionOps_a76d3ffb7b1a7ba761026e3f94c1f50fa}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+293 \{
+294   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked << rtt);
+295   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_af590aa7004c1b09e4e20defd75a7e84a}{m\_rcvTimestampValue} == 0 || tcb->
+      \hyperlink{classns3_1_1TcpSocketState_a930be195736a97e37b7a1f92360b6261}{m\_rcvTimestampEchoReply} == 0)
+296     \{
+297       \hyperlink{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}{m\_flag} &= ~\hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a5465ff5c06920abd88c4c63e0e566039}{LEDBAT\_VALID\_OWD};
+298     \}
+299   \textcolor{keywordflow}{else}
+300     \{
+301       \hyperlink{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}{m\_flag} |= \hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a5465ff5c06920abd88c4c63e0e566039}{LEDBAT\_VALID\_OWD};
+302     \}
+303   \textcolor{keywordflow}{if} (rtt.IsPositive ())
+304     \{
+305       \hyperlink{classns3_1_1TcpLedbat_a0d55108658f4ca868e1265ae1a5682c1}{AddDelay} (\hyperlink{classns3_1_1TcpLedbat_a03ed887c2d0b9b02d50246759e31fe14}{m\_noiseFilter}, tcb->\hyperlink{classns3_1_1TcpSocketState_af590aa7004c1b09e4e20defd75a7e84a}{m\_rcvTimestampValue} - tcb->
+      \hyperlink{classns3_1_1TcpSocketState_a930be195736a97e37b7a1f92360b6261}{m\_rcvTimestampEchoReply}, \hyperlink{classns3_1_1TcpLedbat_abbc074450211a63831a0bf5313252310}{m\_noiseFilterLen});
+306       \hyperlink{classns3_1_1TcpLedbat_a1a29435e96f584de98c293b4d640c9f0}{UpdateBaseDelay} (tcb->\hyperlink{classns3_1_1TcpSocketState_af590aa7004c1b09e4e20defd75a7e84a}{m\_rcvTimestampValue} - tcb->
+      \hyperlink{classns3_1_1TcpSocketState_a930be195736a97e37b7a1f92360b6261}{m\_rcvTimestampEchoReply});
+307     \}
+308 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 15
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 16
+
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Set\+Do\+Ss@{Set\+Do\+Ss}}
+\index{Set\+Do\+Ss@{Set\+Do\+Ss}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Set\+Do\+Ss(\+Slow\+Start\+Type do\+S\+S)}{SetDoSs(SlowStartType doSS)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Ledbat\+::\+Set\+Do\+Ss (
+\begin{DoxyParamCaption}
+\item[{{\bf Slow\+Start\+Type}}]{do\+SS}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpLedbat_a3d0596a0f90e3b199451a36f310ef71d}{}\label{classns3_1_1TcpLedbat_a3d0596a0f90e3b199451a36f310ef71d}
+
+
+Change the Slow Start Capability. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em do\+SS} & Slow Start Option \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+69 \{
+70   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << doSS);
+71   \hyperlink{classns3_1_1TcpLedbat_a0514fe7772b42629f333f96e636d9a8d}{m\_doSs} = doSS;
+72   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpLedbat_a0514fe7772b42629f333f96e636d9a8d}{m\_doSs})
+73     \{
+74       \hyperlink{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}{m\_flag} |= \hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a3d2d6232f71c96ec1bd4b0fb41080bd5}{LEDBAT\_CAN\_SS};
+75     \}
+76   \textcolor{keywordflow}{else}
+77     \{
+78       \hyperlink{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}{m\_flag} &= ~\hyperlink{classns3_1_1TcpLedbat_a03558d477638e07ba730413988f12d44a3d2d6232f71c96ec1bd4b0fb41080bd5}{LEDBAT\_CAN\_SS};
+79     \}
+80 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 17
+
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!Update\+Base\+Delay@{Update\+Base\+Delay}}
+\index{Update\+Base\+Delay@{Update\+Base\+Delay}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{Update\+Base\+Delay(uint32\+\_\+t owd)}{UpdateBaseDelay(uint32_t owd)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Ledbat\+::\+Update\+Base\+Delay (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{owd}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a1a29435e96f584de98c293b4d640c9f0}{}\label{classns3_1_1TcpLedbat_a1a29435e96f584de98c293b4d640c9f0}
+
+
+Update the base delay buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em owd} & The delay \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+263 \{
+264   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << owd );
+265   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\_baseHistory}.\hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf_aa47cb47a908dc8c38286d7b6dea286af}{buffer}.size () == 0)
+266     \{
+267       \hyperlink{classns3_1_1TcpLedbat_a0d55108658f4ca868e1265ae1a5682c1}{AddDelay} (\hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\_baseHistory}, owd, \hyperlink{classns3_1_1TcpLedbat_ab72482ecda86d4f7f54c75dfeaa39eb2}{m\_baseHistoLen});
+268       \textcolor{keywordflow}{return};
+269     \}
+270   uint64\_t timestamp = (uint64\_t) \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} ();
+271 
+272   \textcolor{keywordflow}{if} (timestamp - \hyperlink{classns3_1_1TcpLedbat_acb19a27ad644fa5d72098330e1c55686}{m\_lastRollover} > 60)
+273     \{
+274       \hyperlink{classns3_1_1TcpLedbat_acb19a27ad644fa5d72098330e1c55686}{m\_lastRollover} = timestamp;
+275       \hyperlink{classns3_1_1TcpLedbat_a0d55108658f4ca868e1265ae1a5682c1}{AddDelay} (\hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\_baseHistory}, owd, \hyperlink{classns3_1_1TcpLedbat_ab72482ecda86d4f7f54c75dfeaa39eb2}{m\_baseHistoLen});
+276     \}
+277   \textcolor{keywordflow}{else}
+278     \{
+279       uint32\_t last = \hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\_baseHistory}.\hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf_aa47cb47a908dc8c38286d7b6dea286af}{buffer}.size () - 1;
+280       \textcolor{keywordflow}{if} (owd < \hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\_baseHistory}.\hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf_aa47cb47a908dc8c38286d7b6dea286af}{buffer}[last])
+281         \{
+282           \hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\_baseHistory}.\hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf_aa47cb47a908dc8c38286d7b6dea286af}{buffer}[last] = owd;
+283           \textcolor{keywordflow}{if} (owd < \hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\_baseHistory}.\hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf_aa47cb47a908dc8c38286d7b6dea286af}{buffer}[\hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\_baseHistory}.
+      \hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf_a2ca25f4c2bd8afb4cf7ec19f3e74e14d}{min}])
+284             \{
+285               \hyperlink{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{m\_baseHistory}.\hyperlink{structns3_1_1TcpLedbat_1_1OwdCircBuf_a2ca25f4c2bd8afb4cf7ec19f3e74e14d}{min} = last;
+286             \}
+287         \}
+288     \}
+289 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 18
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 19
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!m\+\_\+base\+Histo\+Len@{m\+\_\+base\+Histo\+Len}}
+\index{m\+\_\+base\+Histo\+Len@{m\+\_\+base\+Histo\+Len}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{m\+\_\+base\+Histo\+Len}{m_baseHistoLen}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Ledbat\+::m\+\_\+base\+Histo\+Len\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_ab72482ecda86d4f7f54c75dfeaa39eb2}{}\label{classns3_1_1TcpLedbat_ab72482ecda86d4f7f54c75dfeaa39eb2}
+
+
+Length of base delay history buffer. 
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!m\+\_\+base\+History@{m\+\_\+base\+History}}
+\index{m\+\_\+base\+History@{m\+\_\+base\+History}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{m\+\_\+base\+History}{m_baseHistory}}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Owd\+Circ\+Buf} ns3\+::\+Tcp\+Ledbat\+::m\+\_\+base\+History\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}{}\label{classns3_1_1TcpLedbat_a26c9974e30e4cacc5e57613c2014445f}
+
+
+\hyperlink{classns3_1_1Buffer}{Buffer} to store the base delay. 
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!m\+\_\+do\+Ss@{m\+\_\+do\+Ss}}
+\index{m\+\_\+do\+Ss@{m\+\_\+do\+Ss}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{m\+\_\+do\+Ss}{m_doSs}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Slow\+Start\+Type} ns3\+::\+Tcp\+Ledbat\+::m\+\_\+do\+Ss\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a0514fe7772b42629f333f96e636d9a8d}{}\label{classns3_1_1TcpLedbat_a0514fe7772b42629f333f96e636d9a8d}
+
+
+Permissible Slow Start State. 
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!m\+\_\+flag@{m\+\_\+flag}}
+\index{m\+\_\+flag@{m\+\_\+flag}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{m\+\_\+flag}{m_flag}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Ledbat\+::m\+\_\+flag\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}{}\label{classns3_1_1TcpLedbat_a2ff0d8e9f3fe47a1a589738f770ab00d}
+
+
+L\+E\+D\+B\+AT Flag. 
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!m\+\_\+gain@{m\+\_\+gain}}
+\index{m\+\_\+gain@{m\+\_\+gain}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{m\+\_\+gain}{m_gain}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Ledbat\+::m\+\_\+gain\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a41255ef3e04f7cc54c4634c3729da506}{}\label{classns3_1_1TcpLedbat_a41255ef3e04f7cc54c4634c3729da506}
+
+
+G\+A\+IN value from R\+FC. 
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!m\+\_\+last\+Rollover@{m\+\_\+last\+Rollover}}
+\index{m\+\_\+last\+Rollover@{m\+\_\+last\+Rollover}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{m\+\_\+last\+Rollover}{m_lastRollover}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Tcp\+Ledbat\+::m\+\_\+last\+Rollover\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_acb19a27ad644fa5d72098330e1c55686}{}\label{classns3_1_1TcpLedbat_acb19a27ad644fa5d72098330e1c55686}
+
+
+Timestamp of last added delay. 
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!m\+\_\+noise\+Filter@{m\+\_\+noise\+Filter}}
+\index{m\+\_\+noise\+Filter@{m\+\_\+noise\+Filter}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{m\+\_\+noise\+Filter}{m_noiseFilter}}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Owd\+Circ\+Buf} ns3\+::\+Tcp\+Ledbat\+::m\+\_\+noise\+Filter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a03ed887c2d0b9b02d50246759e31fe14}{}\label{classns3_1_1TcpLedbat_a03ed887c2d0b9b02d50246759e31fe14}
+
+
+\hyperlink{classns3_1_1Buffer}{Buffer} to store the current delay. 
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!m\+\_\+noise\+Filter\+Len@{m\+\_\+noise\+Filter\+Len}}
+\index{m\+\_\+noise\+Filter\+Len@{m\+\_\+noise\+Filter\+Len}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{m\+\_\+noise\+Filter\+Len}{m_noiseFilterLen}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Ledbat\+::m\+\_\+noise\+Filter\+Len\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_abbc074450211a63831a0bf5313252310}{}\label{classns3_1_1TcpLedbat_abbc074450211a63831a0bf5313252310}
+
+
+Length of current delay buffer. 
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!m\+\_\+snd\+Cwnd\+Cnt@{m\+\_\+snd\+Cwnd\+Cnt}}
+\index{m\+\_\+snd\+Cwnd\+Cnt@{m\+\_\+snd\+Cwnd\+Cnt}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{m\+\_\+snd\+Cwnd\+Cnt}{m_sndCwndCnt}}]{\setlength{\rightskip}{0pt plus 5cm}int32\+\_\+t ns3\+::\+Tcp\+Ledbat\+::m\+\_\+snd\+Cwnd\+Cnt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_aad785b326c9667e16056ef4f23c12299}{}\label{classns3_1_1TcpLedbat_aad785b326c9667e16056ef4f23c12299}
+
+
+The congestion window addition parameter. 
+
+\index{ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}!m\+\_\+target@{m\+\_\+target}}
+\index{m\+\_\+target@{m\+\_\+target}!ns3\+::\+Tcp\+Ledbat@{ns3\+::\+Tcp\+Ledbat}}
+\subsubsection[{\texorpdfstring{m\+\_\+target}{m_target}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Ledbat\+::m\+\_\+target\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpLedbat_a93ab2886c4bbbcec5a6efd192c437fb7}{}\label{classns3_1_1TcpLedbat_a93ab2886c4bbbcec5a6efd192c437fb7}
+
+
+Target \hyperlink{classns3_1_1Queue}{Queue} Delay. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{tcp-ledbat_8h}{tcp-\/ledbat.\+h}\item 
+internet/model/\hyperlink{tcp-ledbat_8cc}{tcp-\/ledbat.\+cc}\end{DoxyCompactItemize}

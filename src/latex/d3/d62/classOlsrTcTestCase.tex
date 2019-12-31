@@ -1,0 +1,91 @@
+\hypertarget{classOlsrTcTestCase}{}\section{Olsr\+Tc\+Test\+Case Class Reference}
+\label{classOlsrTcTestCase}\index{Olsr\+Tc\+Test\+Case@{Olsr\+Tc\+Test\+Case}}
+
+
+Inheritance diagram for Olsr\+Tc\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Olsr\+Tc\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classOlsrTcTestCase_a0f2ac3f966e737c4f2f7e02adb8f8e35}{Olsr\+Tc\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classOlsrTcTestCase_aa0c0da128b93313b7d78751b6e793441}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Olsr\+Tc\+Test\+Case@{Olsr\+Tc\+Test\+Case}!Olsr\+Tc\+Test\+Case@{Olsr\+Tc\+Test\+Case}}
+\index{Olsr\+Tc\+Test\+Case@{Olsr\+Tc\+Test\+Case}!Olsr\+Tc\+Test\+Case@{Olsr\+Tc\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Olsr\+Tc\+Test\+Case()}{OlsrTcTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Olsr\+Tc\+Test\+Case\+::\+Olsr\+Tc\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classOlsrTcTestCase_a0f2ac3f966e737c4f2f7e02adb8f8e35}{}\label{classOlsrTcTestCase_a0f2ac3f966e737c4f2f7e02adb8f8e35}
+
+\begin{DoxyCode}
+227   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check Tc olsr messages"})
+228 \{
+229 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Olsr\+Tc\+Test\+Case@{Olsr\+Tc\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Olsr\+Tc\+Test\+Case@{Olsr\+Tc\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Olsr\+Tc\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOlsrTcTestCase_aa0c0da128b93313b7d78751b6e793441}{}\label{classOlsrTcTestCase_aa0c0da128b93313b7d78751b6e793441}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+232 \{
+233   \hyperlink{classns3_1_1Packet}{Packet} packet;
+234   olsr::MessageHeader msgIn;
+235   \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Tc}{olsr::MessageHeader::Tc} &tcIn = msgIn.GetTc ();
+236 
+237   tcIn.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Tc_a0f74e45f855b1b500fb950336ef4aa63}{ansn} = 0x1234;
+238   tcIn.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Tc_a236424f611929db7d7f154f8c31c970e}{neighborAddresses}.push\_back (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.2.3.4"}));
+239   tcIn.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Tc_a236424f611929db7d7f154f8c31c970e}{neighborAddresses}.push\_back (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.2.3.5"}));
+240   packet.\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (msgIn);
+241 
+242   olsr::MessageHeader msgOut;
+243   packet.\hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{RemoveHeader} (msgOut);
+244   \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Tc}{olsr::MessageHeader::Tc} &tcOut = msgOut.GetTc ();
+245 
+246   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (tcOut.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Tc_a0f74e45f855b1b500fb950336ef4aa63}{ansn}, 0x1234, \textcolor{stringliteral}{"400"});
+247   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (tcOut.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Tc_a236424f611929db7d7f154f8c31c970e}{neighborAddresses}.size (), 2, \textcolor{stringliteral}{"401"});
+248 
+249   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (tcOut.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Tc_a236424f611929db7d7f154f8c31c970e}{neighborAddresses}[0],
+250                          \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.2.3.4"}), \textcolor{stringliteral}{"402"});
+251   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (tcOut.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Tc_a236424f611929db7d7f154f8c31c970e}{neighborAddresses}[1],
+252                          \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.2.3.5"}), \textcolor{stringliteral}{"403"});
+253 
+254   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (packet.\hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} (), 0, \textcolor{stringliteral}{"404"});
+255 
+256 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+olsr/test/\hyperlink{olsr-header-test-suite_8cc}{olsr-\/header-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

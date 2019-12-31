@@ -1,0 +1,234 @@
+\hypertarget{classLenaTestFdTbfqFfMacSchedulerSuite}{}\section{Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite Class Reference}
+\label{classLenaTestFdTbfqFfMacSchedulerSuite}\index{Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite@{Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite}}
+
+
+{\ttfamily \#include $<$lte-\/test-\/fdtbfq-\/ff-\/mac-\/scheduler.\+h$>$}
+
+
+
+Inheritance diagram for Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite\+:
+% FIG 0
+
+
+Collaboration diagram for Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLenaTestFdTbfqFfMacSchedulerSuite_a82e62cf14128d3969fd5a26b1829304b}{Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite@{Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite}!Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite@{Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite}}
+\index{Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite@{Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite}!Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite@{Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite}}
+\subsubsection[{\texorpdfstring{Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite()}{LenaTestFdTbfqFfMacSchedulerSuite()}}]{\setlength{\rightskip}{0pt plus 5cm}Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite\+::\+Lena\+Test\+Fd\+Tbfq\+Ff\+Mac\+Scheduler\+Suite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLenaTestFdTbfqFfMacSchedulerSuite_a82e62cf14128d3969fd5a26b1829304b}{}\label{classLenaTestFdTbfqFfMacSchedulerSuite_a82e62cf14128d3969fd5a26b1829304b}
+
+\begin{DoxyCode}
+66   : \hyperlink{classns3_1_1TestSuite_a904b0c40583b744d30908aeb94636d1a}{TestSuite} (\textcolor{stringliteral}{"lte-fdtbfq-ff-mac-scheduler"}, \hyperlink{classns3_1_1TestSuite_a1ebfcab34ec8161e085e8e3a1855eae0a90c5529a26ab3a5ffcc6e57040dbd82e}{SYSTEM})
+67 \{
+68   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"creating LenaTestFdTbfqFfMacSchedulerSuite"});
+69 
+70   \textcolor{keywordtype}{bool} errorModel = \textcolor{keyword}{false};
+71 
+72   \textcolor{comment}{// General config}
+73   \textcolor{comment}{// Traffic: UDP traffic with fixed rate}
+74   \textcolor{comment}{// Token generation rate = traffic rate}
+75   \textcolor{comment}{// RLC header length = 2 bytes, PDCP header = 2 bytes}
+76   \textcolor{comment}{// Simulation time = 1.0 sec}
+77   \textcolor{comment}{// Throughput in this file is calculated in RLC layer}
+78 
+79   \textcolor{comment}{//Test Case 1: homogeneous flow test in FDTBFQ (same distance)}
+80   \textcolor{comment}{// DOWNLINK -> DISTANCE 0 -> MCS 28 -> Itbs 26 (from table 7.1.7.2.1-1 of 36.2    13)}
+81   \textcolor{comment}{// Traffic info}
+82   \textcolor{comment}{//   UDP traffic: payload size = 200 bytes, interval = 1 ms}
+83   \textcolor{comment}{//   UDP rate in scheduler: (payload + RLC header + PDCP header + IP header + UDP header) * 1000 byte/sec
+       -> 232000 byte/rate }
+84   \textcolor{comment}{// Totol bandwidth: 24 PRB at Itbs 26 -> 2196 -> 2196000 byte/sec}
+85   \textcolor{comment}{// 1 user -> 232000 * 1 = 232000 < 2196000 -> throughput = 232000 byte/sec}
+86   \textcolor{comment}{// 3 user -> 232000 * 3 = 696000 < 2196000 -> througphut = 232000 byte/sec}
+87   \textcolor{comment}{// 6 user -> 232000 * 6 = 139200 < 2196000 -> throughput = 232000 byte/sec}
+88   \textcolor{comment}{// 12 user -> 232000 * 12 = 2784000 > 2196000 -> throughput = 2196000 / 12 = 183000 byte/sec}
+89   \textcolor{comment}{// UPLINK -> DISTANCE 0 -> MCS 28 -> Itbs 26 (from table 7.1.7.2.1-1 of 36.2    13)}
+90   \textcolor{comment}{// 1 user -> 25 PRB at Itbs 26 -> 2292 -> 2292000 > 232000 -> throughput = 232000 bytes/sec}
+91   \textcolor{comment}{// 3 users -> 8 PRB at Itbs 26 -> 749 -> 749000 > 232000 -> throughput = 232000 bytes/sec }
+92   \textcolor{comment}{// 6 users -> 4 PRB at Itbs 26 -> 373 -> 373000 > 232000 -> throughput = 232000 bytes/sec}
+93   \textcolor{comment}{// 12 users -> 2 PRB at Itbs 26 -> 185 -> 185000 < 232000 -> throughput = 185000 bytes/sec}
+94   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase1}{LenaFdTbfqFfMacSchedulerTestCase1} (1,0,23200
+      0,232000,200,1,errorModel), TestCase::EXTENSIVE);
+95   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase1}{LenaFdTbfqFfMacSchedulerTestCase1} (3,0,23200
+      0,232000,200,1,errorModel), TestCase::EXTENSIVE);
+96   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase1}{LenaFdTbfqFfMacSchedulerTestCase1} (6,0,23200
+      0,232000,200,1,errorModel), TestCase::EXTENSIVE);
+97   \textcolor{comment}{//AddTestCase (new LenaFdTbfqFfMacSchedulerTestCase1 (12,0,183000,185000,200,1,errorModel));// simulation
+       time = 1.5, otherwise, ul test will fail}
+98 
+99   \textcolor{comment}{// DOWNLINK - DISTANCE 4800 -> MCS 22 -> Itbs 20 (from table 7.1.7.2.1-1 of 36.213)}
+100   \textcolor{comment}{// Traffic info}
+101   \textcolor{comment}{//   UDP traffic: payload size = 200 bytes, interval = 1 ms}
+102   \textcolor{comment}{//   UDP rate in scheduler: (payload + RLC header + PDCP header + IP header + UDP header) * 1000 byte/sec
+       -> 232000 byte/rate }
+103   \textcolor{comment}{// Totol bandwidth: 24 PRB at Itbs 20 -> 1383 -> 1383000 byte/sec}
+104   \textcolor{comment}{// 1 user -> 903000 * 1 = 232000 < 1383000 -> throughput = 232000 byte/sec}
+105   \textcolor{comment}{// 3 user -> 232000 * 3 = 696000 < 1383000 -> througphut = 232000 byte/sec}
+106   \textcolor{comment}{// 6 user -> 232000 * 6 = 139200 > 1383000 -> throughput = 1383000 / 6 = 230500 byte/sec}
+107   \textcolor{comment}{// 12 user -> 232000 * 12 = 2784000 > 1383000 -> throughput =  1383000 / 12 = 115250 byte/sec}
+108   \textcolor{comment}{// UPLINK - DISTANCE 4800 -> MCS 14 -> Itbs 13 (from table 7.1.7.2.1-1 of 36.213)}
+109   \textcolor{comment}{// 1 user -> 25 PRB at Itbs 13 -> 807 -> 807000 > 232000 -> throughput = 232000 bytes/sec}
+110   \textcolor{comment}{// 3 users -> 8 PRB at Itbs 13 -> 253 -> 253000 > 232000 -> throughput = 232000 bytes/sec}
+111   \textcolor{comment}{// 6 users -> 4 PRB at Itbs 13 -> 125 -> 125000 < 232000 -> throughput = 125000 bytes/sec}
+112   \textcolor{comment}{// after the patch enforcing min 3 PRBs per UE:}
+113   \textcolor{comment}{// 12 users -> 3 PRB at Itbs 13 -> 93  bytes * 8/12 UE/TTI  -> 62000 < 232000 -> throughput = 62000 
+       bytes/sec}
+114   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase1}{LenaFdTbfqFfMacSchedulerTestCase1} (1,4800,23
+      2000,232000,200,1,errorModel), TestCase::EXTENSIVE);
+115   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase1}{LenaFdTbfqFfMacSchedulerTestCase1} (3,4800,23
+      2000,232000,200,1,errorModel), TestCase::EXTENSIVE);
+116   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase1}{LenaFdTbfqFfMacSchedulerTestCase1} (6,4800,23
+      0500,125000,200,1,errorModel), TestCase::EXTENSIVE);
+117   \textcolor{comment}{//AddTestCase (new LenaFdTbfqFfMacSchedulerTestCase1 (12,4800,75250,62000,200,1,errorModel)); //
+       simulation time = 1.5, otherwise, ul test will fail}
+118 
+119   \textcolor{comment}{// DOWNLINK - DISTANCE 6000 -> MCS 20 -> Itbs 18 (from table 7.1.7.2.1-1 of 36.213)}
+120   \textcolor{comment}{// Traffic info}
+121   \textcolor{comment}{//   UDP traffic: payload size = 200 bytes, interval = 1 ms}
+122   \textcolor{comment}{//   UDP rate in scheduler: (payload + RLC header + PDCP header + IP header + UDP header) * 1000 byte/sec
+       -> 232000 byte/rate }
+123   \textcolor{comment}{// Totol bandwidth: 24 PRB at Itbs 18 -> 1191 -> 1191000 byte/sec}
+124   \textcolor{comment}{// 1 user -> 903000 * 1 = 232000 < 1191000 -> throughput = 232000 byte/sec}
+125   \textcolor{comment}{// 3 user -> 232000 * 3 = 696000 < 1191000 -> througphut = 232000 byte/sec}
+126   \textcolor{comment}{// 6 user -> 232000 * 6 = 1392000 > 1191000 -> throughput = 1191000 / 6 = 198500 byte/sec}
+127   \textcolor{comment}{// 12 user -> 232000 * 12 = 2784000 > 1191000 -> throughput =  1191000 / 12 = 99250 byte/sec}
+128 
+129   \textcolor{comment}{// UPLINK - DISTANCE 6000 -> MCS 12 -> Itbs 11 (from table 7.1.7.2.1-1 of 36.213)}
+130   \textcolor{comment}{// 1 user -> 25 PRB at Itbs 11 -> 621 -> 621000 > 232000 -> throughput = 232000 bytes/sec}
+131   \textcolor{comment}{// 3 users -> 8 PRB at Itbs 11 -> 201 -> 201000 < 232000 -> throughput = 201000  bytes/sec}
+132   \textcolor{comment}{// 6 users -> 4 PRB at Itbs 11 -> 97 -> 97000 < 232000 -> throughput = 97000 bytes/sec}
+133   \textcolor{comment}{// after the patch enforcing min 3 PRBs per UE:}
+134   \textcolor{comment}{// 12 users -> 3 PRB at Itbs 11 -> 73 bytes * 8/12 UE/TTI -> 48667 < 232000 -> throughput = 48667
+       bytes/sec}
+135   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase1}{LenaFdTbfqFfMacSchedulerTestCase1} (1,6000,23
+      2000,232000,200,1,errorModel), TestCase::EXTENSIVE);
+136   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase1}{LenaFdTbfqFfMacSchedulerTestCase1} (3,6000,23
+      2000,201000,200,1,errorModel), TestCase::EXTENSIVE);
+137   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase1}{LenaFdTbfqFfMacSchedulerTestCase1} (6,6000,19
+      8500,97000,200,1,errorModel), TestCase::EXTENSIVE);
+138   \textcolor{comment}{//AddTestCase (new LenaFdTbfqFfMacSchedulerTestCase1 (12,6000,99250,48667,200,1, errorModel)); //
+       simulation time = 1.5, otherwise, ul test will fail}
+139 
+140   \textcolor{comment}{// DOWNLINK - DISTANCE 10000 -> MCS 14 -> Itbs 13 (from table 7.1.7.2.1-1 of 36.213)}
+141   \textcolor{comment}{// Traffic info}
+142   \textcolor{comment}{//   UDP traffic: payload size = 200 bytes, interval = 1 ms}
+143   \textcolor{comment}{//   UDP rate in scheduler: (payload + RLC header + PDCP header + IP header + UDP header) * 1000 byte/sec
+       -> 232000 byte/rate }
+144   \textcolor{comment}{// Totol bandwidth: 24 PRB at Itbs 13 -> 775 -> 775000 byte/sec}
+145   \textcolor{comment}{// 1 user -> 903000 * 1 = 232000 < 775000 -> throughput = 232000 byte/sec}
+146   \textcolor{comment}{// 3 user -> 232000 * 3 = 696000 < 775000 -> througphut = 232000 byte/sec}
+147   \textcolor{comment}{// 6 user -> 232000 * 6 = 139200 > 775000 -> throughput = 775000 / 6 = 129166 byte/sec}
+148   \textcolor{comment}{// 12 user -> 232000 * 12 = 2784000 > 775000 -> throughput =  775000 / 12 = 64583 byte/sec}
+149   \textcolor{comment}{// UPLINK - DISTANCE 10000 -> MCS 8 -> Itbs 8 (from table 7.1.7.2.1-1 of 36.213)}
+150   \textcolor{comment}{// 1 user -> 24 PRB at Itbs 8 -> 437 -> 437000 > 232000 -> throughput = 232000 bytes/sec}
+151   \textcolor{comment}{// 3 users -> 8 PRB at Itbs 8 -> 137 -> 137000 < 232000 -> throughput = 137000 bytes/sec}
+152   \textcolor{comment}{// 6 users -> 4 PRB at Itbs 8 -> 67 -> 67000 < 232000 -> throughput = 67000 bytes/sec}
+153   \textcolor{comment}{// after the patch enforcing min 3 PRBs per UE:}
+154   \textcolor{comment}{// 12 users -> 3 PRB at Itbs 8 -> 49 bytes * 8/12 UE/TTI -> 32667 < 232000 -> throughput = 32667 
+       bytes/sec}
+155   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase1}{LenaFdTbfqFfMacSchedulerTestCase1} (1,10000,2
+      32000,232000,200,1,errorModel), TestCase::EXTENSIVE);
+156   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase1}{LenaFdTbfqFfMacSchedulerTestCase1} (3,10000,2
+      32000,137000,200,1,errorModel), TestCase::EXTENSIVE);
+157   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase1}{LenaFdTbfqFfMacSchedulerTestCase1} (6,10000,1
+      29166,67000,200,1,errorModel), TestCase::EXTENSIVE);
+158   \textcolor{comment}{//AddTestCase (new LenaFdTbfqFfMacSchedulerTestCase1 (12,10000,64583,32667,200,1,errorModel));//
+       simulation time = 1.5, otherwise, ul test will fail}
+159 
+160   \textcolor{comment}{// Test Case 2: homogeneous flow test in FDTBFQ (different distance)}
+161   \textcolor{comment}{// Traffic1 info}
+162   \textcolor{comment}{//   UDP traffic: payload size = 100 bytes, interval = 1 ms}
+163   \textcolor{comment}{//   UDP rate in scheduler: (payload + RLC header + PDCP header + IP header + UDP header) * 1000 byte/sec
+       -> 132000 byte/rate }
+164   \textcolor{comment}{// Maximum throughput = 4 / ( 1/2196000 + 1/1191000 + 1/1383000 + 1/775000 ) = 1209046 byte/s}
+165   \textcolor{comment}{// 132000 * 4 = 528000 < 1209046 -> estimated throughput in downlink = 132000 byte/sec}
+166   std::vector<uint16\_t> dist1;
+167   dist1.push\_back (0);       \textcolor{comment}{// User 0 distance --> MCS 28}
+168   dist1.push\_back (4800);    \textcolor{comment}{// User 1 distance --> MCS 22}
+169   dist1.push\_back (6000);    \textcolor{comment}{// User 2 distance --> MCS 20}
+170   dist1.push\_back (10000);   \textcolor{comment}{// User 3 distance --> MCS 14}
+171   std::vector<uint16\_t> packetSize1;
+172   packetSize1.push\_back (100);
+173   packetSize1.push\_back (100);
+174   packetSize1.push\_back (100);
+175   packetSize1.push\_back (100);
+176   std::vector<uint32\_t> estThrFdTbfqDl1;
+177   estThrFdTbfqDl1.push\_back (132000); \textcolor{comment}{// User 0 estimated TTI throughput from FDTBFQ}
+178   estThrFdTbfqDl1.push\_back (132000); \textcolor{comment}{// User 1 estimated TTI throughput from FDTBFQ}
+179   estThrFdTbfqDl1.push\_back (132000); \textcolor{comment}{// User 2 estimated TTI throughput from FDTBFQ}
+180   estThrFdTbfqDl1.push\_back (132000); \textcolor{comment}{// User 3 estimated TTI throughput from FDTBFQ}
+181   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase2}{LenaFdTbfqFfMacSchedulerTestCase2} (dist1,
+      estThrFdTbfqDl1,packetSize1,1,errorModel), TestCase::EXTENSIVE);
+182 
+183   \textcolor{comment}{// Traffic2 info}
+184   \textcolor{comment}{//   UDP traffic: payload size = 300 bytes, interval = 1 ms}
+185   \textcolor{comment}{//   UDP rate in scheduler: (payload + RLC header + PDCP header + IP header + UDP header) * 1000 byte/sec
+       -> 332000 byte/rate}
+186   \textcolor{comment}{// Maximum throughput = 4 / ( 1/2196000 + 1/1191000 + 1/1383000 + 1/775000 ) = 1209046 byte/s}
+187   \textcolor{comment}{// 232000 * 4 = 1328000 > 1209046 -> estimated throughput in downlink = 1209046 / 4 = 302266 byte/sec}
+188   std::vector<uint16\_t> dist2;
+189   dist2.push\_back (0);       \textcolor{comment}{// User 0 distance --> MCS 28}
+190   dist2.push\_back (4800);    \textcolor{comment}{// User 1 distance --> MCS 22}
+191   dist2.push\_back (6000);    \textcolor{comment}{// User 2 distance --> MCS 20}
+192   dist2.push\_back (10000);   \textcolor{comment}{// User 3 distance --> MCS 14}
+193   std::vector<uint16\_t> packetSize2;
+194   packetSize2.push\_back (300);
+195   packetSize2.push\_back (300);
+196   packetSize2.push\_back (300);
+197   packetSize2.push\_back (300);
+198   std::vector<uint32\_t> estThrFdTbfqDl2;
+199   estThrFdTbfqDl2.push\_back (302266); \textcolor{comment}{// User 0 estimated TTI throughput from FDTBFQ}
+200   estThrFdTbfqDl2.push\_back (302266); \textcolor{comment}{// User 1 estimated TTI throughput from FDTBFQ}
+201   estThrFdTbfqDl2.push\_back (302266); \textcolor{comment}{// User 2 estimated TTI throughput from FDTBFQ}
+202   estThrFdTbfqDl2.push\_back (302266); \textcolor{comment}{// User 3 estimated TTI throughput from FDTBFQ}
+203   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase2}{LenaFdTbfqFfMacSchedulerTestCase2} (dist2,
+      estThrFdTbfqDl2,packetSize2,1,errorModel), TestCase::EXTENSIVE);
+204 
+205   \textcolor{comment}{// Test Case 3: heterogeneous flow test in FDTBFQ}
+206   \textcolor{comment}{//   UDP traffic: payload size = [100,200,300] bytes, interval = 1 ms}
+207   \textcolor{comment}{//   UDP rate in scheduler: (payload + RLC header + PDCP header + IP header + UDP header) * 1000 byte/sec
+       -> [132000, 232000, 332000] byte/rate }
+208   \textcolor{comment}{// Maximum throughput = 3 / ( 1/2196000 + 1/1191000 + 1/1383000) = 1486569 byte/s}
+209   \textcolor{comment}{// 132000 + 232000 + 332000 = 696000 < 1486569 -> estimated throughput in downlink = [132000, 232000,
+       332000] byte/sec}
+210   std::vector<uint16\_t> dist3;
+211   dist3.push\_back (0);    \textcolor{comment}{// User 0 distance --> MCS 28}
+212   dist3.push\_back (4800);    \textcolor{comment}{// User 1 distance --> MCS 22}
+213   dist3.push\_back (6000);    \textcolor{comment}{// User 2 distance --> MCS 20}
+214   std::vector<uint16\_t> packetSize3;
+215   packetSize3.push\_back (100);
+216   packetSize3.push\_back (200);
+217   packetSize3.push\_back (300);
+218   std::vector<uint32\_t> estThrFdTbfqDl3;
+219   estThrFdTbfqDl3.push\_back (132000); \textcolor{comment}{// User 0 estimated TTI throughput from FDTBFQ}
+220   estThrFdTbfqDl3.push\_back (232000); \textcolor{comment}{// User 1 estimated TTI throughput from FDTBFQ}
+221   estThrFdTbfqDl3.push\_back (332000); \textcolor{comment}{// User 2 estimated TTI throughput from FDTBFQ}
+222   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaFdTbfqFfMacSchedulerTestCase2}{LenaFdTbfqFfMacSchedulerTestCase2} (dist3,
+      estThrFdTbfqDl3,packetSize3,1,errorModel), TestCase::QUICK);
+223 
+224 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lte/test/\hyperlink{lte-test-fdtbfq-ff-mac-scheduler_8h}{lte-\/test-\/fdtbfq-\/ff-\/mac-\/scheduler.\+h}\item 
+lte/test/\hyperlink{lte-test-fdtbfq-ff-mac-scheduler_8cc}{lte-\/test-\/fdtbfq-\/ff-\/mac-\/scheduler.\+cc}\end{DoxyCompactItemize}

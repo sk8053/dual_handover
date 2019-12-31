@@ -1,0 +1,254 @@
+\hypertarget{classns3_1_1Ns3NscStack}{}\section{ns3\+:\+:Ns3\+Nsc\+Stack Class Reference}
+\label{classns3_1_1Ns3NscStack}\index{ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}}
+
+
+{\ttfamily \#include $<$nsc-\/sysctl.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Ns3\+Nsc\+Stack\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Ns3\+Nsc\+Stack\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1Ns3NscStack_a3c33d8156d2b653b809a39f6590d509b}{Get\+Instance\+Type\+Id} (void) const 
+\item 
+void \hyperlink{classns3_1_1Ns3NscStack_a771e25aab7b58bdea6230c8f3b0c6800}{Set\+Stack} (\hyperlink{structINetStack}{I\+Net\+Stack} $\ast$stack)
+\begin{DoxyCompactList}\small\item\em Set the underlying stack. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1Ns3NscStack_af7d0429052e042008d96c5b3fca3193d}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1Ns3NscStack_a92ed688d99915ddd299ad15c424140a9}{Set} (std\+::string \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name}, std\+::string value)
+\begin{DoxyCompactList}\small\item\em Set an attribute. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classns3_1_1Ns3NscStack_ad668e0c95e2ca6a38ef85b70c072d296}{Get} (std\+::string \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name}) const 
+\begin{DoxyCompactList}\small\item\em Get an attribute. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structINetStack}{I\+Net\+Stack} $\ast$ \hyperlink{classns3_1_1Ns3NscStack_a2de1abd9c5f7bca7321570353649ef93}{m\+\_\+stack}
+\begin{DoxyCompactList}\small\item\em the underlying stack \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1Ns3NscStack_a65574a3a244d1d85dbf907e4a6a9f639}{Nsc\+Stack\+String\+Accessor}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1NscStackStringAccessor}{Nsc\+Stack\+String\+Accessor} friend class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This object represents the underlying nsc stack, which is aggregated to a \hyperlink{classns3_1_1Node}{Node} object, and which provides access to the sysctls of the nsc stack through attributes. 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}!Get@{Get}}
+\index{Get@{Get}!ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}}
+\subsubsection[{\texorpdfstring{Get(std\+::string name) const }{Get(std::string name) const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Ns3\+Nsc\+Stack\+::\+Get (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ns3NscStack_ad668e0c95e2ca6a38ef85b70c072d296}{}\label{classns3_1_1Ns3NscStack_ad668e0c95e2ca6a38ef85b70c072d296}
+
+
+Get an attribute. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the attribute name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the attribute value 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+136 \{
+137   \textcolor{keywordtype}{char} buf[512];
+138   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Ns3NscStack_a2de1abd9c5f7bca7321570353649ef93}{m\_stack}->\hyperlink{structINetStack_a396b535a199299a904f52e00d0dbf590}{sysctl\_get} (\hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name}.c\_str (), buf, \textcolor{keyword}{sizeof}(buf)) <= 0)
+139     \{ \textcolor{comment}{// name.c\_str () is not a valid sysctl name, or internal NSC error (eg. error converting value)}
+140       \textcolor{keywordflow}{return} NULL;
+141     \}
+142   \textcolor{keywordflow}{return} std::string (buf);
+143 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}!Get\+Instance\+Type\+Id@{Get\+Instance\+Type\+Id}}
+\index{Get\+Instance\+Type\+Id@{Get\+Instance\+Type\+Id}!ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}}
+\subsubsection[{\texorpdfstring{Get\+Instance\+Type\+Id(void) const }{GetInstanceTypeId(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Ns3\+Nsc\+Stack\+::\+Get\+Instance\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1Ns3NscStack_a3c33d8156d2b653b809a39f6590d509b}{}\label{classns3_1_1Ns3NscStack_a3c33d8156d2b653b809a39f6590d509b}
+Get the most derived \hyperlink{classns3_1_1TypeId}{Type\+Id} for this \hyperlink{classns3_1_1Object}{Object}.
+
+This method is typically implemented by \hyperlink{classns3_1_1Object_a51e5994fa4b6eae32d719ad69f8fcbf5}{ns3\+::\+Object\+::\+Get\+Instance\+Type\+Id} but some classes which derive from \hyperlink{classns3_1_1ObjectBase}{ns3\+::\+Object\+Base} directly have to implement it themselves.
+
+\begin{DoxyReturn}{Returns}
+The \hyperlink{classns3_1_1TypeId}{Type\+Id} associated to the most-\/derived type of this instance. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1Object_a51e5994fa4b6eae32d719ad69f8fcbf5}{ns3\+::\+Object}.
+
+
+\begin{DoxyCode}
+95 \{
+96   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Ns3NscStack_a2de1abd9c5f7bca7321570353649ef93}{m\_stack} == 0)
+97     \{
+98       \textcolor{comment}{// if we have no stack, we are a normal NscStack without any attributes.}
+99       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Ns3NscStack_af7d0429052e042008d96c5b3fca3193d}{GetTypeId} ();
+100     \}
+101   std::string \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name} = \textcolor{stringliteral}{"ns3::Ns3NscStack<"};
+102   name += \hyperlink{classns3_1_1Ns3NscStack_a2de1abd9c5f7bca7321570353649ef93}{m\_stack}->\hyperlink{structINetStack_a665ce57b538c87f2ba7b0f03ca5f89be}{get\_name} ();
+103   name += \textcolor{stringliteral}{">"};
+104   TypeId tid;
+105   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TypeId_acceab1f57bfe3c3af02130277d409f14}{TypeId::LookupByNameFailSafe} (name, &tid))
+106     \{
+107       \textcolor{comment}{// if the relevant TypeId has already been registered, no need to do it again.}
+108       \textcolor{keywordflow}{return} tid;
+109     \}
+110   \textcolor{keywordflow}{else}
+111     \{
+112       \textcolor{comment}{// Now, we register a new TypeId for this stack which will look}
+113       \textcolor{comment}{// like a subclass of the Ns3NscStack. The class Ns3NscStack is effectively}
+114       \textcolor{comment}{// mutating into a subclass of itself from the point of view of the TypeId}
+115       \textcolor{comment}{// system \_here\_}
+116       tid = TypeId (name.c\_str ());
+117       tid.SetParent<Ns3NscStack> ();
+118       \textcolor{keywordtype}{char} buf[256];
+119       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}=0; \hyperlink{classns3_1_1Ns3NscStack_a2de1abd9c5f7bca7321570353649ef93}{m\_stack}->\hyperlink{structINetStack_a102073dbedc3c2f290658795ede66aa0}{sysctl\_getnum} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}, buf, \textcolor{keyword}{sizeof}(buf)) > 0; 
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+120         \{
+121           \textcolor{keywordtype}{char} value[256];
+122           \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Ns3NscStack_a2de1abd9c5f7bca7321570353649ef93}{m\_stack}->\hyperlink{structINetStack_a396b535a199299a904f52e00d0dbf590}{sysctl\_get} (buf, value, \textcolor{keyword}{sizeof}(value)) > 0)
+123             \{
+124               tid.AddAttribute (buf, \textcolor{stringliteral}{"Help text"},
+125                                 StringValue (value),
+126                                 Create<NscStackStringAccessor> (buf),
+127                                 MakeStringChecker ());
+128             \}
+129         \}
+130       \textcolor{keywordflow}{return} tid;
+131     \}
+132 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Type\+Id} ns3\+::\+Ns3\+Nsc\+Stack\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Ns3NscStack_af7d0429052e042008d96c5b3fca3193d}{}\label{classns3_1_1Ns3NscStack_af7d0429052e042008d96c5b3fca3193d}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+\index{ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}!Set@{Set}}
+\index{Set@{Set}!ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}}
+\subsubsection[{\texorpdfstring{Set(std\+::string name, std\+::string value)}{Set(std::string name, std::string value)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ns3\+Nsc\+Stack\+::\+Set (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name, }
+\item[{std\+::string}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ns3NscStack_a92ed688d99915ddd299ad15c424140a9}{}\label{classns3_1_1Ns3NscStack_a92ed688d99915ddd299ad15c424140a9}
+
+
+Set an attribute. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the attribute name \\
+\hline
+{\em value} & the attribute value \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+147 \{
+148   \textcolor{keywordtype}{int} ret = \hyperlink{classns3_1_1Ns3NscStack_a2de1abd9c5f7bca7321570353649ef93}{m\_stack}->\hyperlink{structINetStack_ad237b6c2a8d492e07fbb6db85feabdda}{sysctl\_set} (\hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name}.c\_str (), value.c\_str ());
+149   \textcolor{keywordflow}{if} (ret < 0)
+150     \{
+151       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"setting "} << \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name} << \textcolor{stringliteral}{" to "} << value << \textcolor{stringliteral}{"failed (retval "} << ret 
+      << \textcolor{stringliteral}{")"});
+152     \}
+153 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}!Set\+Stack@{Set\+Stack}}
+\index{Set\+Stack@{Set\+Stack}!ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}}
+\subsubsection[{\texorpdfstring{Set\+Stack(\+I\+Net\+Stack $\ast$stack)}{SetStack(INetStack *stack)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ns3\+Nsc\+Stack\+::\+Set\+Stack (
+\begin{DoxyParamCaption}
+\item[{{\bf I\+Net\+Stack} $\ast$}]{stack}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1Ns3NscStack_a771e25aab7b58bdea6230c8f3b0c6800}{}\label{classns3_1_1Ns3NscStack_a771e25aab7b58bdea6230c8f3b0c6800}
+
+
+Set the underlying stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stack} & the stack \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+48 \{ \hyperlink{classns3_1_1Ns3NscStack_a2de1abd9c5f7bca7321570353649ef93}{m\_stack} = stack; \}
+\end{DoxyCode}
+
+
+\subsection{Friends And Related Function Documentation}
+\index{ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}!Nsc\+Stack\+String\+Accessor@{Nsc\+Stack\+String\+Accessor}}
+\index{Nsc\+Stack\+String\+Accessor@{Nsc\+Stack\+String\+Accessor}!ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}}
+\subsubsection[{\texorpdfstring{Nsc\+Stack\+String\+Accessor}{NscStackStringAccessor}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Nsc\+Stack\+String\+Accessor}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classns3_1_1Ns3NscStack_a65574a3a244d1d85dbf907e4a6a9f639}{}\label{classns3_1_1Ns3NscStack_a65574a3a244d1d85dbf907e4a6a9f639}
+
+
+\hyperlink{classns3_1_1NscStackStringAccessor}{Nsc\+Stack\+String\+Accessor} friend class. 
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}!m\+\_\+stack@{m\+\_\+stack}}
+\index{m\+\_\+stack@{m\+\_\+stack}!ns3\+::\+Ns3\+Nsc\+Stack@{ns3\+::\+Ns3\+Nsc\+Stack}}
+\subsubsection[{\texorpdfstring{m\+\_\+stack}{m_stack}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\+Net\+Stack}$\ast$ ns3\+::\+Ns3\+Nsc\+Stack\+::m\+\_\+stack\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ns3NscStack_a2de1abd9c5f7bca7321570353649ef93}{}\label{classns3_1_1Ns3NscStack_a2de1abd9c5f7bca7321570353649ef93}
+
+
+the underlying stack 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{nsc-sysctl_8h}{nsc-\/sysctl.\+h}\item 
+internet/model/\hyperlink{nsc-sysctl_8cc}{nsc-\/sysctl.\+cc}\end{DoxyCompactItemize}

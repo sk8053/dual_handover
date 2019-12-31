@@ -1,0 +1,398 @@
+\hypertarget{classns3_1_1CidFactory}{}\section{ns3\+:\+:Cid\+Factory Class Reference}
+\label{classns3_1_1CidFactory}\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+
+
+{\ttfamily \#include $<$cid-\/factory.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Cid\+Factory\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1CidFactory_a5814c04295a0c0b107a38a6039289882}{Cid\+Factory} (void)
+\item 
+\hyperlink{classns3_1_1Cid}{Cid} \hyperlink{classns3_1_1CidFactory_aac9c1964a20ab7218f0be613a3bea9a0}{Allocate\+Basic} (void)
+\begin{DoxyCompactList}\small\item\em This function returns the next basic C\+ID. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Cid}{Cid} \hyperlink{classns3_1_1CidFactory_a97a554509278a2aea02cc57ad42e633d}{Allocate\+Primary} (void)
+\begin{DoxyCompactList}\small\item\em This function returns the next primary basic C\+ID. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Cid}{Cid} \hyperlink{classns3_1_1CidFactory_a8d78cf5c65467740cde02b94f70c4bab}{Allocate\+Transport\+Or\+Secondary} (void)
+\begin{DoxyCompactList}\small\item\em This function returns the next Transport (or Secondary) C\+ID. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Cid}{Cid} \hyperlink{classns3_1_1CidFactory_aafc0b7e9d509b683c2fecfed8e799cdd}{Allocate\+Multicast} (void)
+\begin{DoxyCompactList}\small\item\em This function returns the next Multicast C\+ID. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Cid}{Cid} \hyperlink{classns3_1_1CidFactory_a59d1440e0e9018066f91dce413db209c}{Allocate} (enum \hyperlink{classns3_1_1Cid_a10b8f92080ca5790e65a0bfa2f557e0a}{Cid\+::\+Type} \hyperlink{visualizer-ideas_8txt_add98db9e15e2a58cf2b57623e7aa893a}{type})
+\begin{DoxyCompactList}\small\item\em This function returns the next C\+ID for the specified type. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1CidFactory_a0963e7b59774db4fb70956414f1a08f4}{Is\+Transport} (\hyperlink{classns3_1_1Cid}{Cid} cid) const 
+\begin{DoxyCompactList}\small\item\em This function determines if the C\+ID is a transport. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1CidFactory_a9ce2f9de01ae4bf9d782e043eef025db}{Is\+Primary} (\hyperlink{classns3_1_1Cid}{Cid} cid) const 
+\begin{DoxyCompactList}\small\item\em This function determines if the C\+ID is primary. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1CidFactory_a7d70ebd7630a8414ce3eefb7580bdc57}{Is\+Basic} (\hyperlink{classns3_1_1Cid}{Cid} cid) const 
+\begin{DoxyCompactList}\small\item\em This function determines if the C\+ID is basic. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1CidFactory_af6d359632ff2bf72d15ace0d8a94b478}{Free\+Cid} (\hyperlink{classns3_1_1Cid}{Cid} cid)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{classns3_1_1CidFactory_a109a5eb2a8113c30f0f1446017a88578}{m\+\_\+m}
+\begin{DoxyCompactList}\small\item\em m \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classns3_1_1CidFactory_a3d676e4dc7047b682875b547dbcb6a0c}{m\+\_\+basic\+Identifier}
+\begin{DoxyCompactList}\small\item\em basic identifier \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classns3_1_1CidFactory_ae4ec7553ff7332a56fccd2ecb740fc87}{m\+\_\+primary\+Identifier}
+\begin{DoxyCompactList}\small\item\em primary identifier \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classns3_1_1CidFactory_a77d828478ef29d8c0eeede6e9406401b}{m\+\_\+transport\+Or\+Secondary\+Identifier}
+\begin{DoxyCompactList}\small\item\em transport or secondary identifier \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classns3_1_1CidFactory_aa942d62831ffb00fddea228df435a303}{m\+\_\+multicast\+Polling\+Identifier}
+\begin{DoxyCompactList}\small\item\em multicast polling identifier \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class is used exclusively by the BS to allocate C\+I\+Ds to new connections. This class uses the definitions from Table 345 in ieee-\/802.\+16-\/2004 to allocate cids in different integer ranges according to their type. The relative allocation of the ranges is controlled by the parameter \textquotesingle{}m\textquotesingle{} introduced in the above-\/mentionned table.
+
+Note\+: The current implementation merely allocates cids sequentially from the start of the allowed range. A proper implementation would be able to recycle cids from previous dead connections and should instead look at a bitmap of free cids. Some other day \+:) 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!Cid\+Factory@{Cid\+Factory}}
+\index{Cid\+Factory@{Cid\+Factory}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{Cid\+Factory(void)}{CidFactory(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Cid\+Factory\+::\+Cid\+Factory (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1CidFactory_a5814c04295a0c0b107a38a6039289882}{}\label{classns3_1_1CidFactory_a5814c04295a0c0b107a38a6039289882}
+Create a cid factory with a default value for m of 0x5500. 
+\begin{DoxyCode}
+31   : \hyperlink{classns3_1_1CidFactory_a109a5eb2a8113c30f0f1446017a88578}{m\_m} (0x5500),
+32     \textcolor{comment}{// this is an arbitrary default}
+33     \hyperlink{classns3_1_1CidFactory_a3d676e4dc7047b682875b547dbcb6a0c}{m\_basicIdentifier} (1),
+34     \hyperlink{classns3_1_1CidFactory_ae4ec7553ff7332a56fccd2ecb740fc87}{m\_primaryIdentifier} (\hyperlink{classns3_1_1CidFactory_a109a5eb2a8113c30f0f1446017a88578}{m\_m} + 1),
+35     \hyperlink{classns3_1_1CidFactory_a77d828478ef29d8c0eeede6e9406401b}{m\_transportOrSecondaryIdentifier} (2 * \hyperlink{classns3_1_1CidFactory_a109a5eb2a8113c30f0f1446017a88578}{m\_m} + 1),
+36     \hyperlink{classns3_1_1CidFactory_aa942d62831ffb00fddea228df435a303}{m\_multicastPollingIdentifier} (0xff00)
+37 \{
+38 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!Allocate@{Allocate}}
+\index{Allocate@{Allocate}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{Allocate(enum Cid\+::\+Type type)}{Allocate(enum Cid::Type type)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cid} ns3\+::\+Cid\+Factory\+::\+Allocate (
+\begin{DoxyParamCaption}
+\item[{enum {\bf Cid\+::\+Type}}]{type}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1CidFactory_a59d1440e0e9018066f91dce413db209c}{}\label{classns3_1_1CidFactory_a59d1440e0e9018066f91dce413db209c}
+
+
+This function returns the next C\+ID for the specified type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & C\+ID type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the next C\+ID. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+75 \{
+76   \textcolor{keywordflow}{switch} (\hyperlink{visualizer-ideas_8txt_add98db9e15e2a58cf2b57623e7aa893a}{type})
+77     \{
+78     \textcolor{keywordflow}{case} \hyperlink{classns3_1_1Cid_a10b8f92080ca5790e65a0bfa2f557e0aa1ced0953e087f23571111ae36699415a}{Cid::BROADCAST}:
+79       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Cid_ad0eba402a114ef864b4109a3b58c0aec}{Cid::Broadcast} ();
+80     \textcolor{keywordflow}{case} \hyperlink{classns3_1_1Cid_a10b8f92080ca5790e65a0bfa2f557e0aac5353b87e0d0f5ce62535441b7554436}{Cid::INITIAL\_RANGING}:
+81       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Cid_a5c204ab0df783c7594c764bae1611436}{Cid::InitialRanging} ();
+82     \textcolor{keywordflow}{case} \hyperlink{classns3_1_1Cid_a10b8f92080ca5790e65a0bfa2f557e0aa68b82b5b38abe3f2b40e5e3d950ac746}{Cid::BASIC}:
+83       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1CidFactory_aac9c1964a20ab7218f0be613a3bea9a0}{AllocateBasic} ();
+84     \textcolor{keywordflow}{case} \hyperlink{classns3_1_1Cid_a10b8f92080ca5790e65a0bfa2f557e0aa0ffb28b79686aa37c614c868e330418b}{Cid::PRIMARY}:
+85       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1CidFactory_a97a554509278a2aea02cc57ad42e633d}{AllocatePrimary} ();
+86     \textcolor{keywordflow}{case} \hyperlink{classns3_1_1Cid_a10b8f92080ca5790e65a0bfa2f557e0aa46fbed56841c3bf471aa84de022edf87}{Cid::TRANSPORT}:
+87       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1CidFactory_a8d78cf5c65467740cde02b94f70c4bab}{AllocateTransportOrSecondary} ();
+88     \textcolor{keywordflow}{case} \hyperlink{classns3_1_1Cid_a10b8f92080ca5790e65a0bfa2f557e0aa4d3bf31623ed09b9755d86bdfa345a4a}{Cid::MULTICAST}:
+89       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1CidFactory_aafc0b7e9d509b683c2fecfed8e799cdd}{AllocateMulticast} ();
+90     \textcolor{keywordflow}{case} \hyperlink{classns3_1_1Cid_a10b8f92080ca5790e65a0bfa2f557e0aaba9176e59d85e674eb4035dd134211c5}{Cid::PADDING}:
+91       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Cid_ad04fb2b950d3de75e55111082a72419b}{Cid::Padding} ();
+92     \textcolor{keywordflow}{default}:
+93       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Cannot be reached"});
+94       \textcolor{keywordflow}{return} 0; \textcolor{comment}{// quiet compiler}
+95     \}
+96 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!Allocate\+Basic@{Allocate\+Basic}}
+\index{Allocate\+Basic@{Allocate\+Basic}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{Allocate\+Basic(void)}{AllocateBasic(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cid} ns3\+::\+Cid\+Factory\+::\+Allocate\+Basic (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1CidFactory_aac9c1964a20ab7218f0be613a3bea9a0}{}\label{classns3_1_1CidFactory_aac9c1964a20ab7218f0be613a3bea9a0}
+
+
+This function returns the next basic C\+ID. 
+
+\begin{DoxyReturn}{Returns}
+the next basic C\+ID. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+42 \{
+43   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1CidFactory_a3d676e4dc7047b682875b547dbcb6a0c}{m\_basicIdentifier} < \hyperlink{classns3_1_1CidFactory_a109a5eb2a8113c30f0f1446017a88578}{m\_m});
+44   \hyperlink{classns3_1_1CidFactory_a3d676e4dc7047b682875b547dbcb6a0c}{m\_basicIdentifier}++;
+45   \textcolor{keywordflow}{return} Cid (\hyperlink{classns3_1_1CidFactory_a3d676e4dc7047b682875b547dbcb6a0c}{m\_basicIdentifier});
+46 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!Allocate\+Multicast@{Allocate\+Multicast}}
+\index{Allocate\+Multicast@{Allocate\+Multicast}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{Allocate\+Multicast(void)}{AllocateMulticast(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cid} ns3\+::\+Cid\+Factory\+::\+Allocate\+Multicast (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1CidFactory_aafc0b7e9d509b683c2fecfed8e799cdd}{}\label{classns3_1_1CidFactory_aafc0b7e9d509b683c2fecfed8e799cdd}
+
+
+This function returns the next Multicast C\+ID. 
+
+\begin{DoxyReturn}{Returns}
+the next Multicast C\+ID. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+66 \{
+67   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1CidFactory_aa942d62831ffb00fddea228df435a303}{m\_multicastPollingIdentifier} < 0xfffd);
+68   \hyperlink{classns3_1_1CidFactory_aa942d62831ffb00fddea228df435a303}{m\_multicastPollingIdentifier}++;
+69   \textcolor{keywordflow}{return} Cid (\hyperlink{classns3_1_1CidFactory_aa942d62831ffb00fddea228df435a303}{m\_multicastPollingIdentifier});
+70 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!Allocate\+Primary@{Allocate\+Primary}}
+\index{Allocate\+Primary@{Allocate\+Primary}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{Allocate\+Primary(void)}{AllocatePrimary(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cid} ns3\+::\+Cid\+Factory\+::\+Allocate\+Primary (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1CidFactory_a97a554509278a2aea02cc57ad42e633d}{}\label{classns3_1_1CidFactory_a97a554509278a2aea02cc57ad42e633d}
+
+
+This function returns the next primary basic C\+ID. 
+
+\begin{DoxyReturn}{Returns}
+the next primary C\+ID. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+50 \{
+51   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1CidFactory_ae4ec7553ff7332a56fccd2ecb740fc87}{m\_primaryIdentifier} < 2 * \hyperlink{classns3_1_1CidFactory_a109a5eb2a8113c30f0f1446017a88578}{m\_m});
+52   \hyperlink{classns3_1_1CidFactory_ae4ec7553ff7332a56fccd2ecb740fc87}{m\_primaryIdentifier}++;
+53   \textcolor{keywordflow}{return} Cid (\hyperlink{classns3_1_1CidFactory_ae4ec7553ff7332a56fccd2ecb740fc87}{m\_primaryIdentifier});
+54 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!Allocate\+Transport\+Or\+Secondary@{Allocate\+Transport\+Or\+Secondary}}
+\index{Allocate\+Transport\+Or\+Secondary@{Allocate\+Transport\+Or\+Secondary}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{Allocate\+Transport\+Or\+Secondary(void)}{AllocateTransportOrSecondary(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cid} ns3\+::\+Cid\+Factory\+::\+Allocate\+Transport\+Or\+Secondary (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1CidFactory_a8d78cf5c65467740cde02b94f70c4bab}{}\label{classns3_1_1CidFactory_a8d78cf5c65467740cde02b94f70c4bab}
+
+
+This function returns the next Transport (or Secondary) C\+ID. 
+
+\begin{DoxyReturn}{Returns}
+the next Transport (or Secondary) C\+ID. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+58 \{
+59   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1CidFactory_a77d828478ef29d8c0eeede6e9406401b}{m\_transportOrSecondaryIdentifier} < 0xfefe);
+60   \hyperlink{classns3_1_1CidFactory_a77d828478ef29d8c0eeede6e9406401b}{m\_transportOrSecondaryIdentifier}++;
+61   \textcolor{keywordflow}{return} Cid (\hyperlink{classns3_1_1CidFactory_a77d828478ef29d8c0eeede6e9406401b}{m\_transportOrSecondaryIdentifier});
+62 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!Free\+Cid@{Free\+Cid}}
+\index{Free\+Cid@{Free\+Cid}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{Free\+Cid(\+Cid cid)}{FreeCid(Cid cid)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Cid\+Factory\+::\+Free\+Cid (
+\begin{DoxyParamCaption}
+\item[{{\bf Cid}}]{cid}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1CidFactory_af6d359632ff2bf72d15ace0d8a94b478}{}\label{classns3_1_1CidFactory_af6d359632ff2bf72d15ace0d8a94b478}
+Notify the factory that the connection associated to this cid has been killed and that this cid can be reused. 
+\begin{DoxyParams}{Parameters}
+{\em cid} & C\+ID type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000182}{Todo}]We need to update the cid bitmap properly here. \end{DoxyRefDesc}
+
+\begin{DoxyCode}
+120 \{
+122   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"TODO: Update the cid bitmap properly here-- please implement and
+       contribute a patch"});
+123 \}
+\end{DoxyCode}
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!Is\+Basic@{Is\+Basic}}
+\index{Is\+Basic@{Is\+Basic}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{Is\+Basic(\+Cid cid) const }{IsBasic(Cid cid) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Cid\+Factory\+::\+Is\+Basic (
+\begin{DoxyParamCaption}
+\item[{{\bf Cid}}]{cid}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1CidFactory_a7d70ebd7630a8414ce3eefb7580bdc57}{}\label{classns3_1_1CidFactory_a7d70ebd7630a8414ce3eefb7580bdc57}
+
+
+This function determines if the C\+ID is basic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cid} & C\+ID type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the C\+ID is basic. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+112 \{
+113   uint16\_t \textcolor{keywordtype}{id} = cid.m\_identifier;
+114   \textcolor{keywordflow}{return} \textcolor{keywordtype}{id} >= 1 && \textcolor{keywordtype}{id} <= \hyperlink{classns3_1_1CidFactory_a109a5eb2a8113c30f0f1446017a88578}{m\_m};
+115 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!Is\+Primary@{Is\+Primary}}
+\index{Is\+Primary@{Is\+Primary}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{Is\+Primary(\+Cid cid) const }{IsPrimary(Cid cid) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Cid\+Factory\+::\+Is\+Primary (
+\begin{DoxyParamCaption}
+\item[{{\bf Cid}}]{cid}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1CidFactory_a9ce2f9de01ae4bf9d782e043eef025db}{}\label{classns3_1_1CidFactory_a9ce2f9de01ae4bf9d782e043eef025db}
+
+
+This function determines if the C\+ID is primary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cid} & C\+ID type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the C\+ID is primary. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+106 \{
+107   \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = cid.m\_identifier;
+108   \textcolor{keywordflow}{return} (\textcolor{keywordtype}{id} - \hyperlink{classns3_1_1CidFactory_a109a5eb2a8113c30f0f1446017a88578}{m\_m} > 0) && (\textcolor{keywordtype}{id} <= 2 * \hyperlink{classns3_1_1CidFactory_a109a5eb2a8113c30f0f1446017a88578}{m\_m});
+109 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!Is\+Transport@{Is\+Transport}}
+\index{Is\+Transport@{Is\+Transport}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{Is\+Transport(\+Cid cid) const }{IsTransport(Cid cid) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Cid\+Factory\+::\+Is\+Transport (
+\begin{DoxyParamCaption}
+\item[{{\bf Cid}}]{cid}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1CidFactory_a0963e7b59774db4fb70956414f1a08f4}{}\label{classns3_1_1CidFactory_a0963e7b59774db4fb70956414f1a08f4}
+
+
+This function determines if the C\+ID is a transport. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cid} & C\+ID type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the C\+ID is a transport. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+100 \{
+101   \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = cid.m\_identifier;
+102   \textcolor{keywordflow}{return} (\textcolor{keywordtype}{id} - 2 * \hyperlink{classns3_1_1CidFactory_a109a5eb2a8113c30f0f1446017a88578}{m\_m} > 0) && (\textcolor{keywordtype}{id} <= 0xfefe);
+103 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!m\+\_\+basic\+Identifier@{m\+\_\+basic\+Identifier}}
+\index{m\+\_\+basic\+Identifier@{m\+\_\+basic\+Identifier}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{m\+\_\+basic\+Identifier}{m_basicIdentifier}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Cid\+Factory\+::m\+\_\+basic\+Identifier\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1CidFactory_a3d676e4dc7047b682875b547dbcb6a0c}{}\label{classns3_1_1CidFactory_a3d676e4dc7047b682875b547dbcb6a0c}
+
+
+basic identifier 
+
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!m\+\_\+m@{m\+\_\+m}}
+\index{m\+\_\+m@{m\+\_\+m}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{m\+\_\+m}{m_m}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Cid\+Factory\+::m\+\_\+m\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1CidFactory_a109a5eb2a8113c30f0f1446017a88578}{}\label{classns3_1_1CidFactory_a109a5eb2a8113c30f0f1446017a88578}
+
+
+m 
+
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!m\+\_\+multicast\+Polling\+Identifier@{m\+\_\+multicast\+Polling\+Identifier}}
+\index{m\+\_\+multicast\+Polling\+Identifier@{m\+\_\+multicast\+Polling\+Identifier}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{m\+\_\+multicast\+Polling\+Identifier}{m_multicastPollingIdentifier}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Cid\+Factory\+::m\+\_\+multicast\+Polling\+Identifier\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1CidFactory_aa942d62831ffb00fddea228df435a303}{}\label{classns3_1_1CidFactory_aa942d62831ffb00fddea228df435a303}
+
+
+multicast polling identifier 
+
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!m\+\_\+primary\+Identifier@{m\+\_\+primary\+Identifier}}
+\index{m\+\_\+primary\+Identifier@{m\+\_\+primary\+Identifier}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{m\+\_\+primary\+Identifier}{m_primaryIdentifier}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Cid\+Factory\+::m\+\_\+primary\+Identifier\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1CidFactory_ae4ec7553ff7332a56fccd2ecb740fc87}{}\label{classns3_1_1CidFactory_ae4ec7553ff7332a56fccd2ecb740fc87}
+
+
+primary identifier 
+
+\index{ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}!m\+\_\+transport\+Or\+Secondary\+Identifier@{m\+\_\+transport\+Or\+Secondary\+Identifier}}
+\index{m\+\_\+transport\+Or\+Secondary\+Identifier@{m\+\_\+transport\+Or\+Secondary\+Identifier}!ns3\+::\+Cid\+Factory@{ns3\+::\+Cid\+Factory}}
+\subsubsection[{\texorpdfstring{m\+\_\+transport\+Or\+Secondary\+Identifier}{m_transportOrSecondaryIdentifier}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Cid\+Factory\+::m\+\_\+transport\+Or\+Secondary\+Identifier\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1CidFactory_a77d828478ef29d8c0eeede6e9406401b}{}\label{classns3_1_1CidFactory_a77d828478ef29d8c0eeede6e9406401b}
+
+
+transport or secondary identifier 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+wimax/model/\hyperlink{cid-factory_8h}{cid-\/factory.\+h}\item 
+wimax/model/\hyperlink{cid-factory_8cc}{cid-\/factory.\+cc}\end{DoxyCompactItemize}

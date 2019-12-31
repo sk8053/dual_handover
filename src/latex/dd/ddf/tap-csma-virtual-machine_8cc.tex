@@ -1,0 +1,100 @@
+\hypertarget{tap-csma-virtual-machine_8cc}{}\section{tap-\/bridge/examples/tap-\/csma-\/virtual-\/machine.cc File Reference}
+\label{tap-csma-virtual-machine_8cc}\index{tap-\/bridge/examples/tap-\/csma-\/virtual-\/machine.\+cc@{tap-\/bridge/examples/tap-\/csma-\/virtual-\/machine.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/tap-\/bridge-\/module.\+h\char`\"{}}\\*
+Include dependency graph for tap-\/csma-\/virtual-\/machine.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{tap-csma-virtual-machine_8cc_a4db142c1e05c91ca2ef7050ed3de4439}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Tap\+Csma\+Virtual\+Machine\+Example\char`\"{})
+\item 
+int \hyperlink{tap-csma-virtual-machine_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{tap-\/csma-\/virtual-\/machine.\+cc@{tap-\/csma-\/virtual-\/machine.\+cc}!main@{main}}
+\index{main@{main}!tap-\/csma-\/virtual-\/machine.\+cc@{tap-\/csma-\/virtual-\/machine.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-csma-virtual-machine_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{tap-csma-virtual-machine_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+75 \{
+76   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+77   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+78 
+79   \textcolor{comment}{//}
+80   \textcolor{comment}{// We are interacting with the outside, real, world.  This means we have to }
+81   \textcolor{comment}{// interact in real-time and therefore means we have to use the real-time}
+82   \textcolor{comment}{// simulator and take the time to calculate checksums.}
+83   \textcolor{comment}{//}
+84   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"}, StringValue (\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl"}));
+85   GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+86 
+87   \textcolor{comment}{//}
+88   \textcolor{comment}{// Create two ghost nodes.  The first will represent the virtual machine host}
+89   \textcolor{comment}{// on the left side of the network; and the second will represent the VM on }
+90   \textcolor{comment}{// the right side.}
+91   \textcolor{comment}{//}
+92   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+93   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+94 
+95   \textcolor{comment}{//}
+96   \textcolor{comment}{// Use a CsmaHelper to get a CSMA channel created, and the needed net }
+97   \textcolor{comment}{// devices installed on both of the nodes.  The data rate and delay for the}
+98   \textcolor{comment}{// channel can be set through the command-line parser.  For example,}
+99   \textcolor{comment}{//}
+100   \textcolor{comment}{// ./waf --run "tap=csma-virtual-machine --ns3::CsmaChannel::DataRate=10000000"}
+101   \textcolor{comment}{//}
+102   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+103   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (nodes);
+104 
+105   \textcolor{comment}{//}
+106   \textcolor{comment}{// Use the TapBridgeHelper to connect to the pre-configured tap devices for }
+107   \textcolor{comment}{// the left side.  We go with "UseBridge" mode since the CSMA devices support}
+108   \textcolor{comment}{// promiscuous mode and can therefore make it appear that the bridge is }
+109   \textcolor{comment}{// extended into ns-3.  The install method essentially bridges the specified}
+110   \textcolor{comment}{// tap to the specified CSMA device.}
+111   \textcolor{comment}{//}
+112   \hyperlink{classns3_1_1TapBridgeHelper}{TapBridgeHelper} tapBridge;
+113   tapBridge.\hyperlink{classns3_1_1TapBridgeHelper_ac13f757f82c0ee66504693ede7230397}{SetAttribute} (\textcolor{stringliteral}{"Mode"}, StringValue (\textcolor{stringliteral}{"UseBridge"}));
+114   tapBridge.\hyperlink{classns3_1_1TapBridgeHelper_ac13f757f82c0ee66504693ede7230397}{SetAttribute} (\textcolor{stringliteral}{"DeviceName"}, StringValue (\textcolor{stringliteral}{"tap-left"}));
+115   tapBridge.\hyperlink{classns3_1_1TapBridgeHelper_a3bc88e67e28990845ce6cab3e7cafd6e}{Install} (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+116 
+117   \textcolor{comment}{//}
+118   \textcolor{comment}{// Connect the right side tap to the right side CSMA device on the right-side}
+119   \textcolor{comment}{// ghost node.}
+120   \textcolor{comment}{//}
+121   tapBridge.\hyperlink{classns3_1_1TapBridgeHelper_ac13f757f82c0ee66504693ede7230397}{SetAttribute} (\textcolor{stringliteral}{"DeviceName"}, StringValue (\textcolor{stringliteral}{"tap-right"}));
+122   tapBridge.\hyperlink{classns3_1_1TapBridgeHelper_a3bc88e67e28990845ce6cab3e7cafd6e}{Install} (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+123 
+124   \textcolor{comment}{//}
+125   \textcolor{comment}{// Run the simulation for ten minutes to give the user time to play around}
+126   \textcolor{comment}{//}
+127   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (600.));
+128   Simulator::Run ();
+129   Simulator::Destroy ();
+130 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{tap-\/csma-\/virtual-\/machine.\+cc@{tap-\/csma-\/virtual-\/machine.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!tap-\/csma-\/virtual-\/machine.\+cc@{tap-\/csma-\/virtual-\/machine.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Tap\+Csma\+Virtual\+Machine\+Example"")}{NS_LOG_COMPONENT_DEFINE("TapCsmaVirtualMachineExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Tap\+Csma\+Virtual\+Machine\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-csma-virtual-machine_8cc_a4db142c1e05c91ca2ef7050ed3de4439}{}\label{tap-csma-virtual-machine_8cc_a4db142c1e05c91ca2ef7050ed3de4439}

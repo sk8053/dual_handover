@@ -1,0 +1,85 @@
+\hypertarget{classTestEmptyOptionField}{}\section{Test\+Empty\+Option\+Field Class Reference}
+\label{classTestEmptyOptionField}\index{Test\+Empty\+Option\+Field@{Test\+Empty\+Option\+Field}}
+
+
+I\+Pv6 extensions Test\+: Empty option field.  
+
+
+
+
+Inheritance diagram for Test\+Empty\+Option\+Field\+:
+% FIG 0
+
+
+Collaboration diagram for Test\+Empty\+Option\+Field\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTestEmptyOptionField_a3ada466300a34f83f8de6a5a61b1c14c}{Test\+Empty\+Option\+Field} ()
+\item 
+virtual void \hyperlink{classTestEmptyOptionField_a5fdbca025c0d3629d42cd00050de73fb}{Do\+Run} ()
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+I\+Pv6 extensions Test\+: Empty option field. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Test\+Empty\+Option\+Field@{Test\+Empty\+Option\+Field}!Test\+Empty\+Option\+Field@{Test\+Empty\+Option\+Field}}
+\index{Test\+Empty\+Option\+Field@{Test\+Empty\+Option\+Field}!Test\+Empty\+Option\+Field@{Test\+Empty\+Option\+Field}}
+\subsubsection[{\texorpdfstring{Test\+Empty\+Option\+Field()}{TestEmptyOptionField()}}]{\setlength{\rightskip}{0pt plus 5cm}Test\+Empty\+Option\+Field\+::\+Test\+Empty\+Option\+Field (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classTestEmptyOptionField_a3ada466300a34f83f8de6a5a61b1c14c}{}\label{classTestEmptyOptionField_a3ada466300a34f83f8de6a5a61b1c14c}
+
+\begin{DoxyCode}
+46 : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"TestEmptyOptionField"}) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Empty\+Option\+Field@{Test\+Empty\+Option\+Field}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Test\+Empty\+Option\+Field@{Test\+Empty\+Option\+Field}}
+\subsubsection[{\texorpdfstring{Do\+Run()}{DoRun()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Test\+Empty\+Option\+Field\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classTestEmptyOptionField_a5fdbca025c0d3629d42cd00050de73fb}{}\label{classTestEmptyOptionField_a5fdbca025c0d3629d42cd00050de73fb}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+49   \{
+50     \hyperlink{classns3_1_1Ipv6ExtensionDestinationHeader}{Ipv6ExtensionDestinationHeader} header;
+51     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (header.\hyperlink{classns3_1_1Ipv6ExtensionDestinationHeader_a4a43146a75ea4259b984df145c573146}{GetSerializedSize} () % 8, 0, \textcolor{stringliteral}{"
+      length of extension header is not a multiple of 8"});
+52 
+53     \hyperlink{classns3_1_1Buffer}{Buffer} buf;
+54     buf.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (header.\hyperlink{classns3_1_1Ipv6ExtensionDestinationHeader_a4a43146a75ea4259b984df145c573146}{GetSerializedSize} ());
+55     header.\hyperlink{classns3_1_1Ipv6ExtensionDestinationHeader_a13d3b01676de81cbcdd3fcebaf2fdd6b}{Serialize} (buf.Begin ());
+56 
+57     \textcolor{keyword}{const} uint8\_t* \hyperlink{topology-example-sim_8cc_a26c65296e316af77b787dc77469bb2a4}{data} = buf.PeekData ();
+58     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (*(data+2), 1, \textcolor{stringliteral}{"padding is missing"}); \textcolor{comment}{//expecting a padN
+       header}
+59   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{ipv6-extension-header-test-suite_8cc}{ipv6-\/extension-\/header-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,842 @@
+\hypertarget{classns3_1_1Synchronizer}{}\section{ns3\+:\+:Synchronizer Class Reference}
+\label{classns3_1_1Synchronizer}\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+
+
+Base class used for synchronizing the simulation events to some real time \char`\"{}wall clock.\char`\"{}.  
+
+
+
+
+{\ttfamily \#include $<$synchronizer.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Synchronizer\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Synchronizer\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Synchronizer_af46994e83dabd4e0ccba2fd6bd9e103e}{Synchronizer} ()
+\item 
+virtual \hyperlink{classns3_1_1Synchronizer_afa65e36404a996f73105effd9b0e6854}{$\sim$\+Synchronizer} ()
+\item 
+bool \hyperlink{classns3_1_1Synchronizer_a081d3415c6fb711cbea2feb37862428c}{Realtime} (void)
+\begin{DoxyCompactList}\small\item\em Return true if this synchronizer is actually synchronizing to a realtime clock. \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{classns3_1_1Synchronizer_a9199c28473a6298009ef8210b02c23c5}{Get\+Current\+Realtime} (void)
+\begin{DoxyCompactList}\small\item\em Retrieve the value of the origin of the underlying normalized wall clock time in simulator timestep units. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1Synchronizer_a28e1732f6db4e918491cc58a3236e544}{Set\+Origin} (uint64\+\_\+t \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts})
+\begin{DoxyCompactList}\small\item\em Establish a correspondence between a simulation time and the synchronizer real time. \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{classns3_1_1Synchronizer_a59bfe6d62f571698c23c639950169a73}{Get\+Origin} (void)
+\begin{DoxyCompactList}\small\item\em Retrieve the value of the origin of the simulation time in Time.\+resolution units. \end{DoxyCompactList}\item 
+int64\+\_\+t \hyperlink{classns3_1_1Synchronizer_abcd1705e4558427df5db87fcee62a015}{Get\+Drift} (uint64\+\_\+t \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts})
+\begin{DoxyCompactList}\small\item\em Retrieve the difference between the real time clock used to synchronize the simulation and the simulation time (in \hyperlink{classns3_1_1Time}{Time} resolution units). \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1Synchronizer_ae2884d39fd94ac636484d1a119cabab9}{Synchronize} (uint64\+\_\+t ts\+Current, uint64\+\_\+t ts\+Delay)
+\begin{DoxyCompactList}\small\item\em Wait until the real time is in sync with the specified simulation time or until the synchronizer is Sigalled. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1Synchronizer_aab6e196cea48f4c7c0b424a1d6b8e12c}{Signal} (void)
+\begin{DoxyCompactList}\small\item\em Tell a possible simulator thread waiting in the Synchronize method that an event has happened which demands a reevaluation of the wait time. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1Synchronizer_a6a3799d58f2f3a966fc4c802fcfe8082}{Set\+Condition} (bool)
+\begin{DoxyCompactList}\small\item\em Set the condition variable that tells a possible simulator thread waiting in the Synchronize method that an event has happened which demands a reevaluation of the wait time. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1Synchronizer_a2f2a24e95fe00fe08a2686467c2fdd66}{Event\+Start} (void)
+\begin{DoxyCompactList}\small\item\em Ask the synchronizer to remember what time it is. \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{classns3_1_1Synchronizer_a2260b7a21248f210e9e99bfbc37ca255}{Event\+End} (void)
+\begin{DoxyCompactList}\small\item\em Ask the synchronizer to return the time step between the instant remembered during Event\+Start and now. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1Synchronizer_ab73b383bf8b6a00e0df1da6689a8fb5b}{Get\+Type\+Id} (void)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classns3_1_1Synchronizer_aee90af19ede115e7706db3861d53660d}{Do\+Set\+Origin} (uint64\+\_\+t ns)=0
+\begin{DoxyCompactList}\small\item\em Establish a correspondence between a simulation time and a wall-\/clock (real) time. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classns3_1_1Synchronizer_a328ba5b729875de0875d9a8839e3cfd4}{Do\+Realtime} (void)=0
+\begin{DoxyCompactList}\small\item\em Return {\ttfamily true} if this synchronizer is actually synchronizing to a realtime clock. \end{DoxyCompactList}\item 
+virtual uint64\+\_\+t \hyperlink{classns3_1_1Synchronizer_ac4f7965fa06c3131314a3aa1a1c0b37f}{Do\+Get\+Current\+Realtime} (void)=0
+\begin{DoxyCompactList}\small\item\em Retrieve the value of the origin of the underlying normalized wall clock time in \hyperlink{classns3_1_1Time}{Time} resolution units. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classns3_1_1Synchronizer_a62f413ac3bb8335ecfa79ba899673055}{Do\+Synchronize} (uint64\+\_\+t ns\+Current, uint64\+\_\+t ns\+Delay)=0
+\begin{DoxyCompactList}\small\item\em Wait until the real time is in sync with the specified simulation time. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1Synchronizer_ac6043fc40824c6b290ef815fb11c1385}{Do\+Signal} (void)=0
+\begin{DoxyCompactList}\small\item\em Tell a possible simulator thread waiting in the Do\+Synchronize method that an event has happened which demands a reevaluation of the wait time. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1Synchronizer_a46ef375cfe8313c47df564e6b8e933e5}{Do\+Set\+Condition} (bool)=0
+\begin{DoxyCompactList}\small\item\em Set the condition variable to tell a possible simulator thread waiting in the Synchronize method that an event has happened which demands a reevaluation of the wait time. \end{DoxyCompactList}\item 
+virtual int64\+\_\+t \hyperlink{classns3_1_1Synchronizer_a932323ccabc78704ecf4f9846863b5d8}{Do\+Get\+Drift} (uint64\+\_\+t ns)=0
+\begin{DoxyCompactList}\small\item\em Get the drift between the real time clock used to synchronize the simulation and the current simulation time. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1Synchronizer_aeecd7590ac6320fdc346eb1d1fee85c3}{Do\+Event\+Start} (void)=0
+\begin{DoxyCompactList}\small\item\em Record the normalized real time at which the current event is starting execution. \end{DoxyCompactList}\item 
+virtual uint64\+\_\+t \hyperlink{classns3_1_1Synchronizer_a2c5aa545296acd0e5e4c5ccdbce8b834}{Do\+Event\+End} (void)=0
+\begin{DoxyCompactList}\small\item\em Return the amount of real time elapsed since the last call to Event\+Start. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \hyperlink{classns3_1_1Synchronizer_a8156cd6893af54e80108f5630c63c2ab}{m\+\_\+realtime\+Origin\+Nano}
+\item 
+uint64\+\_\+t \hyperlink{classns3_1_1Synchronizer_ad942aa4d448de68f9c3ca022ba6408b5}{m\+\_\+sim\+Origin\+Nano}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \hyperlink{classns3_1_1Synchronizer_a6450d12c1de452d0d7cab179e50e6ea5}{Time\+Step\+To\+Nanosecond} (uint64\+\_\+t \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts})
+\begin{DoxyCompactList}\small\item\em Convert a simulator time step (in \hyperlink{classns3_1_1Time}{Time} resolution units) to a normalized time step in nanosecond units. \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{classns3_1_1Synchronizer_a840950d82ffdeb0f42ad085ee9268e2b}{Nanosecond\+To\+Time\+Step} (uint64\+\_\+t ns)
+\begin{DoxyCompactList}\small\item\em Convert a normalized nanosecond time step into a simulator time step (in \hyperlink{classns3_1_1Time}{Time} resolution units). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Base class used for synchronizing the simulation events to some real time \char`\"{}wall clock.\char`\"{}. 
+
+The simulation clock is maintained as a 64-\/bit integer in a unit specified by the user through the \hyperlink{classns3_1_1Time_ac89165ba7715b66017a49c718f4aef09}{Time\+::\+Set\+Resolution} function. This means that it is not possible to specify event expiration times with anything better than this user-\/specified accuracy. We use this clock for the simulation time.
+
+The real-\/time clock is maintained as a 64-\/bit integer count of nanoseconds.
+
+The synchronization between the simulation clock and the real-\/time clock is maintained using a combination of sleep-\/waiting, busy-\/waiting and a feedback loop. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Synchronizer@{Synchronizer}}
+\index{Synchronizer@{Synchronizer}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Synchronizer()}{Synchronizer()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Synchronizer\+::\+Synchronizer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Synchronizer_af46994e83dabd4e0ccba2fd6bd9e103e}{}\label{classns3_1_1Synchronizer_af46994e83dabd4e0ccba2fd6bd9e103e}
+Constructor. 
+\begin{DoxyCode}
+45   : \hyperlink{classns3_1_1Synchronizer_a8156cd6893af54e80108f5630c63c2ab}{m\_realtimeOriginNano} (0),
+46     \hyperlink{classns3_1_1Synchronizer_ad942aa4d448de68f9c3ca022ba6408b5}{m\_simOriginNano} (0)
+47 \{
+48   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+49 \}
+\end{DoxyCode}
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!````~Synchronizer@{$\sim$\+Synchronizer}}
+\index{````~Synchronizer@{$\sim$\+Synchronizer}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{$\sim$\+Synchronizer()}{~Synchronizer()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Synchronizer\+::$\sim$\+Synchronizer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1Synchronizer_afa65e36404a996f73105effd9b0e6854}{}\label{classns3_1_1Synchronizer_afa65e36404a996f73105effd9b0e6854}
+Destructor. 
+\begin{DoxyCode}
+52 \{
+53   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+54 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Do\+Event\+End@{Do\+Event\+End}}
+\index{Do\+Event\+End@{Do\+Event\+End}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Do\+Event\+End(void)=0}{DoEventEnd(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint64\+\_\+t ns3\+::\+Synchronizer\+::\+Do\+Event\+End (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Synchronizer_a2c5aa545296acd0e5e4c5ccdbce8b834}{}\label{classns3_1_1Synchronizer_a2c5aa545296acd0e5e4c5ccdbce8b834}
+
+
+Return the amount of real time elapsed since the last call to Event\+Start. 
+
+\begin{DoxyReturn}{Returns}
+The elapsed real time, in ns. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1WallClockSynchronizer_adcd280b6ae11a7a1e3f9c4ee6a99aff3}{ns3\+::\+Wall\+Clock\+Synchronizer}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Do\+Event\+Start@{Do\+Event\+Start}}
+\index{Do\+Event\+Start@{Do\+Event\+Start}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Do\+Event\+Start(void)=0}{DoEventStart(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Synchronizer\+::\+Do\+Event\+Start (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Synchronizer_aeecd7590ac6320fdc346eb1d1fee85c3}{}\label{classns3_1_1Synchronizer_aeecd7590ac6320fdc346eb1d1fee85c3}
+
+
+Record the normalized real time at which the current event is starting execution. 
+
+
+
+Implemented in \hyperlink{classns3_1_1WallClockSynchronizer_ac38fdef4f4c95aff0db1a5873415eadf}{ns3\+::\+Wall\+Clock\+Synchronizer}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Do\+Get\+Current\+Realtime@{Do\+Get\+Current\+Realtime}}
+\index{Do\+Get\+Current\+Realtime@{Do\+Get\+Current\+Realtime}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Do\+Get\+Current\+Realtime(void)=0}{DoGetCurrentRealtime(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint64\+\_\+t ns3\+::\+Synchronizer\+::\+Do\+Get\+Current\+Realtime (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Synchronizer_ac4f7965fa06c3131314a3aa1a1c0b37f}{}\label{classns3_1_1Synchronizer_ac4f7965fa06c3131314a3aa1a1c0b37f}
+
+
+Retrieve the value of the origin of the underlying normalized wall clock time in \hyperlink{classns3_1_1Time}{Time} resolution units. 
+
+Subclasses are expected to implement this method to do the actual real-\/time-\/clock-\/specific work of getting the current time.
+
+\begin{DoxyReturn}{Returns}
+The normalized wall clock time (in nanosecond units). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_a28e1732f6db4e918491cc58a3236e544}{Set\+Origin} 
+\end{DoxySeeAlso}
+
+
+Implemented in \hyperlink{classns3_1_1WallClockSynchronizer_a8cf87080dc50fa9713ae182bfdd3155e}{ns3\+::\+Wall\+Clock\+Synchronizer}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Do\+Get\+Drift@{Do\+Get\+Drift}}
+\index{Do\+Get\+Drift@{Do\+Get\+Drift}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Do\+Get\+Drift(uint64\+\_\+t ns)=0}{DoGetDrift(uint64_t ns)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual int64\+\_\+t ns3\+::\+Synchronizer\+::\+Do\+Get\+Drift (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{ns}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Synchronizer_a932323ccabc78704ecf4f9846863b5d8}{}\label{classns3_1_1Synchronizer_a932323ccabc78704ecf4f9846863b5d8}
+
+
+Get the drift between the real time clock used to synchronize the simulation and the current simulation time. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ns} & Simulation time in ns. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Drift in ns units. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_a28e1732f6db4e918491cc58a3236e544}{Set\+Origin} 
+
+\hyperlink{classns3_1_1Synchronizer_abcd1705e4558427df5db87fcee62a015}{Get\+Drift} 
+\end{DoxySeeAlso}
+
+
+Implemented in \hyperlink{classns3_1_1WallClockSynchronizer_a8f7eb1d2c3fd95183d566f8aa67a4282}{ns3\+::\+Wall\+Clock\+Synchronizer}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Do\+Realtime@{Do\+Realtime}}
+\index{Do\+Realtime@{Do\+Realtime}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Do\+Realtime(void)=0}{DoRealtime(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool ns3\+::\+Synchronizer\+::\+Do\+Realtime (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Synchronizer_a328ba5b729875de0875d9a8839e3cfd4}{}\label{classns3_1_1Synchronizer_a328ba5b729875de0875d9a8839e3cfd4}
+
+
+Return {\ttfamily true} if this synchronizer is actually synchronizing to a realtime clock. 
+
+The simulator sometimes needs to know this.
+
+Subclasses are expected to implement this method to tell the outside world whether or not they are synchronizing to a realtime clock.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if locked with realtime, {\ttfamily false} if not. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1WallClockSynchronizer_a4a75644fa029e990a955d2e681fc9784}{ns3\+::\+Wall\+Clock\+Synchronizer}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Do\+Set\+Condition@{Do\+Set\+Condition}}
+\index{Do\+Set\+Condition@{Do\+Set\+Condition}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Do\+Set\+Condition(bool)=0}{DoSetCondition(bool)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Synchronizer\+::\+Do\+Set\+Condition (
+\begin{DoxyParamCaption}
+\item[{bool}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Synchronizer_a46ef375cfe8313c47df564e6b8e933e5}{}\label{classns3_1_1Synchronizer_a46ef375cfe8313c47df564e6b8e933e5}
+
+
+Set the condition variable to tell a possible simulator thread waiting in the Synchronize method that an event has happened which demands a reevaluation of the wait time. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_a6a3799d58f2f3a966fc4c802fcfe8082}{Set\+Condition} 
+\end{DoxySeeAlso}
+
+
+Implemented in \hyperlink{classns3_1_1WallClockSynchronizer_ac909b54b5894485f86d8a972b2dd5dcb}{ns3\+::\+Wall\+Clock\+Synchronizer}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Do\+Set\+Origin@{Do\+Set\+Origin}}
+\index{Do\+Set\+Origin@{Do\+Set\+Origin}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Do\+Set\+Origin(uint64\+\_\+t ns)=0}{DoSetOrigin(uint64_t ns)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Synchronizer\+::\+Do\+Set\+Origin (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{ns}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Synchronizer_aee90af19ede115e7706db3861d53660d}{}\label{classns3_1_1Synchronizer_aee90af19ede115e7706db3861d53660d}
+
+
+Establish a correspondence between a simulation time and a wall-\/clock (real) time. 
+
+There are three timelines involved here\+: the simulation (virtual) time, the (absolute) wall-\/clock time and the (relative) synchronizer real time. Calling this method makes a correspondence between the origin of the synchronizer time and the current wall-\/clock time.
+
+This method is expected to be called at the \char`\"{}instant\char`\"{} before simulation begins. At this point, simulation time = 0, and synchronizer time is set = 0 in this method. We then associate this time with the current value of the real time clock that will be used to actually perform the synchronization.
+
+Subclasses are expected to implement this method to do the actual real-\/time-\/clock-\/specific work of making the correspondence mentioned above. for example, this is where the differences between \hyperlink{classns3_1_1Time}{Time} parameters and parameters to clock\+\_\+nanosleep would be dealt with.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ns} & The simulation time we need to use as the origin (normalized to nanosecond units). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_a28e1732f6db4e918491cc58a3236e544}{Set\+Origin} 
+\end{DoxySeeAlso}
+
+
+Implemented in \hyperlink{classns3_1_1WallClockSynchronizer_a02506cfe3b04fc38adf900dde5785d49}{ns3\+::\+Wall\+Clock\+Synchronizer}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Do\+Signal@{Do\+Signal}}
+\index{Do\+Signal@{Do\+Signal}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Do\+Signal(void)=0}{DoSignal(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Synchronizer\+::\+Do\+Signal (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Synchronizer_ac6043fc40824c6b290ef815fb11c1385}{}\label{classns3_1_1Synchronizer_ac6043fc40824c6b290ef815fb11c1385}
+
+
+Tell a possible simulator thread waiting in the Do\+Synchronize method that an event has happened which demands a reevaluation of the wait time. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_aab6e196cea48f4c7c0b424a1d6b8e12c}{Signal} 
+\end{DoxySeeAlso}
+
+
+Implemented in \hyperlink{classns3_1_1WallClockSynchronizer_a8268eaa9a5ad9e633da5cab6e156f05b}{ns3\+::\+Wall\+Clock\+Synchronizer}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Do\+Synchronize@{Do\+Synchronize}}
+\index{Do\+Synchronize@{Do\+Synchronize}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Do\+Synchronize(uint64\+\_\+t ns\+Current, uint64\+\_\+t ns\+Delay)=0}{DoSynchronize(uint64_t nsCurrent, uint64_t nsDelay)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool ns3\+::\+Synchronizer\+::\+Do\+Synchronize (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{ns\+Current, }
+\item[{uint64\+\_\+t}]{ns\+Delay}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Synchronizer_a62f413ac3bb8335ecfa79ba899673055}{}\label{classns3_1_1Synchronizer_a62f413ac3bb8335ecfa79ba899673055}
+
+
+Wait until the real time is in sync with the specified simulation time. 
+
+This is where the real work of synchronization is done. The {\ttfamily ns\+Current} argument is the simulation time (in ns). The job of Do\+Synchronize is to translate from simulation time to synchronizer time (in a perfect world these are the same time) and then figure out how long in real-\/time it needs to wait until that synchronizer / simulation time comes around.
+
+Subclasses are expected to implement this method to do the actual real-\/time-\/clock-\/specific work of waiting (either busy-\/waiting or sleeping, or some combination) until the requested simulation time.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ns\+Current} & The current simulation time (in nanosecond units). \\
+\hline
+\mbox{\tt in}  & {\em ns\+Delay} & The simulation time we need to wait for (normalized to nanosecond units). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the function ran to completion, {\ttfamily false} if it was interrupted by a Signal. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_ae2884d39fd94ac636484d1a119cabab9}{Synchronize} 
+
+\hyperlink{classns3_1_1Synchronizer_aab6e196cea48f4c7c0b424a1d6b8e12c}{Signal} 
+\end{DoxySeeAlso}
+
+
+Implemented in \hyperlink{classns3_1_1WallClockSynchronizer_a2239c8d81f229d97bf4a3585031fb5ea}{ns3\+::\+Wall\+Clock\+Synchronizer}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Event\+End@{Event\+End}}
+\index{Event\+End@{Event\+End}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Event\+End(void)}{EventEnd(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Synchronizer\+::\+Event\+End (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Synchronizer_a2260b7a21248f210e9e99bfbc37ca255}{}\label{classns3_1_1Synchronizer_a2260b7a21248f210e9e99bfbc37ca255}
+
+
+Ask the synchronizer to return the time step between the instant remembered during Event\+Start and now. 
+
+Used in conjunction with Event\+Start to determine the real execution time of a simulation event.
+
+\begin{DoxyReturn}{Returns}
+The elapsed real time, in ns. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_a2f2a24e95fe00fe08a2686467c2fdd66}{Event\+Start} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+130 \{
+131   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+132   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Synchronizer_a840950d82ffdeb0f42ad085ee9268e2b}{NanosecondToTimeStep} (\hyperlink{classns3_1_1Synchronizer_a2c5aa545296acd0e5e4c5ccdbce8b834}{DoEventEnd} ());
+133 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Event\+Start@{Event\+Start}}
+\index{Event\+Start@{Event\+Start}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Event\+Start(void)}{EventStart(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Synchronizer\+::\+Event\+Start (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Synchronizer_a2f2a24e95fe00fe08a2686467c2fdd66}{}\label{classns3_1_1Synchronizer_a2f2a24e95fe00fe08a2686467c2fdd66}
+
+
+Ask the synchronizer to remember what time it is. 
+
+Typically used with Event\+End to determine the real execution time of a simulation event.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_a2260b7a21248f210e9e99bfbc37ca255}{Event\+End} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+123 \{
+124   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+125   \hyperlink{classns3_1_1Synchronizer_aeecd7590ac6320fdc346eb1d1fee85c3}{DoEventStart} ();
+126 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Get\+Current\+Realtime@{Get\+Current\+Realtime}}
+\index{Get\+Current\+Realtime@{Get\+Current\+Realtime}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Get\+Current\+Realtime(void)}{GetCurrentRealtime(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Synchronizer\+::\+Get\+Current\+Realtime (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Synchronizer_a9199c28473a6298009ef8210b02c23c5}{}\label{classns3_1_1Synchronizer_a9199c28473a6298009ef8210b02c23c5}
+
+
+Retrieve the value of the origin of the underlying normalized wall clock time in simulator timestep units. 
+
+\begin{DoxyReturn}{Returns}
+The normalized wall clock time (in \hyperlink{classns3_1_1Time}{Time} resolution units). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_a28e1732f6db4e918491cc58a3236e544}{Set\+Origin} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+65 \{
+66   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+67   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Synchronizer_a840950d82ffdeb0f42ad085ee9268e2b}{NanosecondToTimeStep} (\hyperlink{classns3_1_1Synchronizer_ac4f7965fa06c3131314a3aa1a1c0b37f}{DoGetCurrentRealtime} ());
+68 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 13
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Get\+Drift@{Get\+Drift}}
+\index{Get\+Drift@{Get\+Drift}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Get\+Drift(uint64\+\_\+t ts)}{GetDrift(uint64_t ts)}}]{\setlength{\rightskip}{0pt plus 5cm}int64\+\_\+t ns3\+::\+Synchronizer\+::\+Get\+Drift (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{ts}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Synchronizer_abcd1705e4558427df5db87fcee62a015}{}\label{classns3_1_1Synchronizer_abcd1705e4558427df5db87fcee62a015}
+
+
+Retrieve the difference between the real time clock used to synchronize the simulation and the simulation time (in \hyperlink{classns3_1_1Time}{Time} resolution units). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ts} & Simulation time in \hyperlink{classns3_1_1Time}{Time} resolution units. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Simulation \hyperlink{classns3_1_1Time}{Time} (in \hyperlink{classns3_1_1Time}{Time} resolution units) minus the origin time (stored internally in nanosecond units). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_a28e1732f6db4e918491cc58a3236e544}{Set\+Origin} 
+
+\hyperlink{classns3_1_1Synchronizer_a932323ccabc78704ecf4f9846863b5d8}{Do\+Get\+Drift} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+87 \{
+88   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts});
+89   int64\_t tDrift = \hyperlink{classns3_1_1Synchronizer_a932323ccabc78704ecf4f9846863b5d8}{DoGetDrift} (\hyperlink{classns3_1_1Synchronizer_a6450d12c1de452d0d7cab179e50e6ea5}{TimeStepToNanosecond} (
+      \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts}));
+90 
+91   \textcolor{keywordflow}{if} (tDrift < 0) 
+92     \{
+93       \textcolor{keywordflow}{return} -\hyperlink{classns3_1_1Synchronizer_a840950d82ffdeb0f42ad085ee9268e2b}{NanosecondToTimeStep} (-tDrift);
+94     \} \textcolor{keywordflow}{else} \{
+95       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Synchronizer_a840950d82ffdeb0f42ad085ee9268e2b}{NanosecondToTimeStep} (tDrift);
+96     \}
+97 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 14
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Get\+Origin@{Get\+Origin}}
+\index{Get\+Origin@{Get\+Origin}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Get\+Origin(void)}{GetOrigin(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Synchronizer\+::\+Get\+Origin (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Synchronizer_a59bfe6d62f571698c23c639950169a73}{}\label{classns3_1_1Synchronizer_a59bfe6d62f571698c23c639950169a73}
+
+
+Retrieve the value of the origin of the simulation time in Time.\+resolution units. 
+
+\begin{DoxyReturn}{Returns}
+The simulation time used as the origin (in \hyperlink{classns3_1_1Time}{Time} resolution units). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_a28e1732f6db4e918491cc58a3236e544}{Set\+Origin} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+80 \{
+81   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+82   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Synchronizer_a840950d82ffdeb0f42ad085ee9268e2b}{NanosecondToTimeStep} (\hyperlink{classns3_1_1Synchronizer_ad942aa4d448de68f9c3ca022ba6408b5}{m\_simOriginNano});
+83 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 15
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Synchronizer\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Synchronizer_ab73b383bf8b6a00e0df1da6689a8fb5b}{}\label{classns3_1_1Synchronizer_ab73b383bf8b6a00e0df1da6689a8fb5b}
+Get the registered \hyperlink{classns3_1_1TypeId}{Type\+Id} for this class. \begin{DoxyReturn}{Returns}
+The \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+36 \{
+37   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::Synchronizer"})
+38     .SetParent<\hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object}> ()
+39     .SetGroupName (\textcolor{stringliteral}{"Core"})
+40   ;
+41   \textcolor{keywordflow}{return} tid;
+42 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 16
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Nanosecond\+To\+Time\+Step@{Nanosecond\+To\+Time\+Step}}
+\index{Nanosecond\+To\+Time\+Step@{Nanosecond\+To\+Time\+Step}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Nanosecond\+To\+Time\+Step(uint64\+\_\+t ns)}{NanosecondToTimeStep(uint64_t ns)}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Synchronizer\+::\+Nanosecond\+To\+Time\+Step (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{ns}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Synchronizer_a840950d82ffdeb0f42ad085ee9268e2b}{}\label{classns3_1_1Synchronizer_a840950d82ffdeb0f42ad085ee9268e2b}
+
+
+Convert a normalized nanosecond time step into a simulator time step (in \hyperlink{classns3_1_1Time}{Time} resolution units). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ns} & The nanosecond count step to be converted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The simulation time step to be interpreted in appropriate units. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+144 \{
+145   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << ns);
+146   \textcolor{keywordflow}{return} \hyperlink{group__timecivil_ga281d64bcb4dad96267d83c7688ec433f}{NanoSeconds} (ns).\hyperlink{classns3_1_1Time_a40a7025b73dac7d02f8a4e1e54eaa5b5}{GetTimeStep} ();
+147 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 17
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 18
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Realtime@{Realtime}}
+\index{Realtime@{Realtime}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Realtime(void)}{Realtime(void)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Synchronizer\+::\+Realtime (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Synchronizer_a081d3415c6fb711cbea2feb37862428c}{}\label{classns3_1_1Synchronizer_a081d3415c6fb711cbea2feb37862428c}
+
+
+Return true if this synchronizer is actually synchronizing to a realtime clock. 
+
+The simulator sometimes needs to know this.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if locked with realtime, {\ttfamily false} if not. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+58 \{
+59   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+60   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Synchronizer_a328ba5b729875de0875d9a8839e3cfd4}{DoRealtime} ();
+61 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 19
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Set\+Condition@{Set\+Condition}}
+\index{Set\+Condition@{Set\+Condition}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Set\+Condition(bool)}{SetCondition(bool)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Synchronizer\+::\+Set\+Condition (
+\begin{DoxyParamCaption}
+\item[{bool}]{cond}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Synchronizer_a6a3799d58f2f3a966fc4c802fcfe8082}{}\label{classns3_1_1Synchronizer_a6a3799d58f2f3a966fc4c802fcfe8082}
+
+
+Set the condition variable that tells a possible simulator thread waiting in the Synchronize method that an event has happened which demands a reevaluation of the wait time. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_aab6e196cea48f4c7c0b424a1d6b8e12c}{Signal} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+116 \{
+117   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << cond);
+118   \hyperlink{classns3_1_1Synchronizer_a46ef375cfe8313c47df564e6b8e933e5}{DoSetCondition} (cond);
+119 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 20
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Set\+Origin@{Set\+Origin}}
+\index{Set\+Origin@{Set\+Origin}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Set\+Origin(uint64\+\_\+t ts)}{SetOrigin(uint64_t ts)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Synchronizer\+::\+Set\+Origin (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{ts}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Synchronizer_a28e1732f6db4e918491cc58a3236e544}{}\label{classns3_1_1Synchronizer_a28e1732f6db4e918491cc58a3236e544}
+
+
+Establish a correspondence between a simulation time and the synchronizer real time. 
+
+This method is expected to be called at the \char`\"{}instant\char`\"{} before simulation begins. At this point, simulation time = 0, and a set = 0 in this method. We then associate this time with the current value of the real time clock that will be used to actually perform the synchronization.
+
+Subclasses are expected to implement the corresponding Do\+Set\+Origin pure virtual method to do the actual real-\/time-\/clock-\/specific work of making the correspondence mentioned above.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ts} & The simulation time we should use as the origin (in \hyperlink{classns3_1_1Time}{Time} resolution units). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_aee90af19ede115e7706db3861d53660d}{Do\+Set\+Origin} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+72 \{
+73   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts});
+74   \hyperlink{classns3_1_1Synchronizer_ad942aa4d448de68f9c3ca022ba6408b5}{m\_simOriginNano} = \hyperlink{classns3_1_1Synchronizer_a6450d12c1de452d0d7cab179e50e6ea5}{TimeStepToNanosecond} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts});
+75   \hyperlink{classns3_1_1Synchronizer_aee90af19ede115e7706db3861d53660d}{DoSetOrigin} (\hyperlink{classns3_1_1Synchronizer_ad942aa4d448de68f9c3ca022ba6408b5}{m\_simOriginNano});
+76 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 21
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Signal@{Signal}}
+\index{Signal@{Signal}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Signal(void)}{Signal(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Synchronizer\+::\+Signal (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Synchronizer_aab6e196cea48f4c7c0b424a1d6b8e12c}{}\label{classns3_1_1Synchronizer_aab6e196cea48f4c7c0b424a1d6b8e12c}
+
+
+Tell a possible simulator thread waiting in the Synchronize method that an event has happened which demands a reevaluation of the wait time. 
+
+This will cause the thread to wake and return to the simulator proper where it can get its bearings.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_ae2884d39fd94ac636484d1a119cabab9}{Synchronize} 
+
+\hyperlink{classns3_1_1Synchronizer_ac6043fc40824c6b290ef815fb11c1385}{Do\+Signal} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+109 \{
+110   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+111   \hyperlink{classns3_1_1Synchronizer_ac6043fc40824c6b290ef815fb11c1385}{DoSignal} ();
+112 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 22
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Synchronize@{Synchronize}}
+\index{Synchronize@{Synchronize}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Synchronize(uint64\+\_\+t ts\+Current, uint64\+\_\+t ts\+Delay)}{Synchronize(uint64_t tsCurrent, uint64_t tsDelay)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Synchronizer\+::\+Synchronize (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{ts\+Current, }
+\item[{uint64\+\_\+t}]{ts\+Delay}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Synchronizer_ae2884d39fd94ac636484d1a119cabab9}{}\label{classns3_1_1Synchronizer_ae2884d39fd94ac636484d1a119cabab9}
+
+
+Wait until the real time is in sync with the specified simulation time or until the synchronizer is Sigalled. 
+
+This is where the real work of synchronization is done. The {\ttfamily ts\+Current} argument is the simulation time. The job of Synchronize is to translate from simulation time to synchronizer time (in a perfect world this is the same time) and then figure out how long in real-\/time it needs to wait until that synchronizer / simulation time comes around.
+
+Subclasses are expected to implement the corresponding Do\+Synchronize pure virtual method to do the actual real-\/time-\/clock-\/specific work of waiting (either busy-\/waiting or sleeping, or some combination thereof) until the requested simulation time.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ts\+Current} & The current simulation time (in \hyperlink{classns3_1_1Time}{Time} resolution units). \\
+\hline
+\mbox{\tt in}  & {\em ts\+Delay} & The simulation time we need to wait for (in \hyperlink{classns3_1_1Time}{Time} resolution units). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the function ran to completion, {\ttfamily false} if it was interrupted by a Signal. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Synchronizer_a62f413ac3bb8335ecfa79ba899673055}{Do\+Synchronize} 
+
+\hyperlink{classns3_1_1Synchronizer_aab6e196cea48f4c7c0b424a1d6b8e12c}{Signal} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+101 \{
+102   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tsCurrent << tsDelay);
+103   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Synchronizer_a62f413ac3bb8335ecfa79ba899673055}{DoSynchronize} (\hyperlink{classns3_1_1Synchronizer_a6450d12c1de452d0d7cab179e50e6ea5}{TimeStepToNanosecond} (tsCurrent), 
+104                         \hyperlink{classns3_1_1Synchronizer_a6450d12c1de452d0d7cab179e50e6ea5}{TimeStepToNanosecond} (tsDelay));
+105 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 23
+
+
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!Time\+Step\+To\+Nanosecond@{Time\+Step\+To\+Nanosecond}}
+\index{Time\+Step\+To\+Nanosecond@{Time\+Step\+To\+Nanosecond}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{Time\+Step\+To\+Nanosecond(uint64\+\_\+t ts)}{TimeStepToNanosecond(uint64_t ts)}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Synchronizer\+::\+Time\+Step\+To\+Nanosecond (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{ts}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Synchronizer_a6450d12c1de452d0d7cab179e50e6ea5}{}\label{classns3_1_1Synchronizer_a6450d12c1de452d0d7cab179e50e6ea5}
+
+
+Convert a simulator time step (in \hyperlink{classns3_1_1Time}{Time} resolution units) to a normalized time step in nanosecond units. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ts} & The simulation time step to be normalized. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The simulation time step normalized to nanosecond units. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+137 \{
+138   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts});
+139   \textcolor{keywordflow}{return} \hyperlink{group__time_ga464a3c1cbb458c6c3ed3bd5ce9506758}{TimeStep} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts}).\hyperlink{classns3_1_1Time_a2fdb7bf0e1f5cd93b6149cb37bbb7f08}{GetNanoSeconds} ();
+140 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 24
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 25
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!m\+\_\+realtime\+Origin\+Nano@{m\+\_\+realtime\+Origin\+Nano}}
+\index{m\+\_\+realtime\+Origin\+Nano@{m\+\_\+realtime\+Origin\+Nano}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{m\+\_\+realtime\+Origin\+Nano}{m_realtimeOriginNano}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Synchronizer\+::m\+\_\+realtime\+Origin\+Nano\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classns3_1_1Synchronizer_a8156cd6893af54e80108f5630c63c2ab}{}\label{classns3_1_1Synchronizer_a8156cd6893af54e80108f5630c63c2ab}
+The real time, in ns, when Set\+Origin was called. \index{ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}!m\+\_\+sim\+Origin\+Nano@{m\+\_\+sim\+Origin\+Nano}}
+\index{m\+\_\+sim\+Origin\+Nano@{m\+\_\+sim\+Origin\+Nano}!ns3\+::\+Synchronizer@{ns3\+::\+Synchronizer}}
+\subsubsection[{\texorpdfstring{m\+\_\+sim\+Origin\+Nano}{m_simOriginNano}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Synchronizer\+::m\+\_\+sim\+Origin\+Nano\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classns3_1_1Synchronizer_ad942aa4d448de68f9c3ca022ba6408b5}{}\label{classns3_1_1Synchronizer_ad942aa4d448de68f9c3ca022ba6408b5}
+The simulation time, in ns, when Set\+Origin was called. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{synchronizer_8h}{synchronizer.\+h}\item 
+core/model/\hyperlink{synchronizer_8cc}{synchronizer.\+cc}\end{DoxyCompactItemize}

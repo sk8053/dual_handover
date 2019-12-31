@@ -1,0 +1,198 @@
+\hypertarget{nsclick-udp-client-server-wifi_8cc}{}\section{click/examples/nsclick-\/udp-\/client-\/server-\/wifi.cc File Reference}
+\label{nsclick-udp-client-server-wifi_8cc}\index{click/examples/nsclick-\/udp-\/client-\/server-\/wifi.\+cc@{click/examples/nsclick-\/udp-\/client-\/server-\/wifi.\+cc}}
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wifi-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/click-\/routing.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/click-\/internet-\/stack-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for nsclick-\/udp-\/client-\/server-\/wifi.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{nsclick-udp-client-server-wifi_8cc_a552a8f515fb87296a598c33f5cf6a845}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Nsclick\+Udp\+Client\+Server\+Wifi\char`\"{})
+\item 
+int \hyperlink{nsclick-udp-client-server-wifi_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{nsclick-\/udp-\/client-\/server-\/wifi.\+cc@{nsclick-\/udp-\/client-\/server-\/wifi.\+cc}!main@{main}}
+\index{main@{main}!nsclick-\/udp-\/client-\/server-\/wifi.\+cc@{nsclick-\/udp-\/client-\/server-\/wifi.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{nsclick-udp-client-server-wifi_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{nsclick-udp-client-server-wifi_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+72 \{
+73 \textcolor{preprocessor}{#ifdef NS3\_CLICK}
+74   std::string clickConfigFolder = \textcolor{stringliteral}{"src/click/examples"};
+75 
+76   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+77   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"clickConfigFolder"}, \textcolor{stringliteral}{"Base folder for click configuration files"}, clickConfigFolder
+      );
+78   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+79 
+80   \textcolor{comment}{//}
+81   \textcolor{comment}{// Enable logging}
+82   \textcolor{comment}{//}
+83   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"NsclickUdpClientServerWifi"}, 
+      \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+84 
+85   \textcolor{comment}{//}
+86   \textcolor{comment}{// Explicitly create the nodes required by the topology (shown above).}
+87   \textcolor{comment}{//}
+88   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes."});
+89   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n};
+90   n.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (4);
+91 
+92   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create channels."});
+93   \textcolor{comment}{//}
+94   \textcolor{comment}{// Explicitly create the channels required by the topology (shown above).}
+95   \textcolor{comment}{//}
+96   std::string phyMode (\textcolor{stringliteral}{"DsssRate1Mbps"});
+97 
+98   \textcolor{comment}{// disable fragmentation for frames below 2200 bytes}
+99   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::WifiRemoteStationManager::FragmentationThreshold"}, 
+      StringValue (\textcolor{stringliteral}{"2200"}));
+100   \textcolor{comment}{// turn off RTS/CTS for frames below 2200 bytes}
+101   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::WifiRemoteStationManager::RtsCtsThreshold"}, StringValue (\textcolor{stringliteral}{"
+      2200"}));
+102   \textcolor{comment}{// Fix non-unicast data rate to be the same as that of unicast}
+103   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::WifiRemoteStationManager::NonUnicastMode"},
+104                       StringValue (phyMode));
+105 
+106   \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+107   wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a77e1cc9f77a0bce8e2bc82cbef437b5a}{WIFI\_PHY\_STANDARD\_80211b});
+108 
+109   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} wifiPhy =  YansWifiPhyHelper::Default ();
+110   \textcolor{comment}{// This is one parameter that matters when using FixedRssLossModel}
+111   \textcolor{comment}{// set it to zero; otherwise, gain will be added}
+112   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_a2527d6d7b29f717fd7436166c5f05f1a}{Set} (\textcolor{stringliteral}{"RxGain"}, DoubleValue (0) );
+113   \textcolor{comment}{// ns-3 supports RadioTap and Prism tracing extensions for 802.11b}
+114   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_ae4b90e90f6e78a19c1b7fdf08b270218}{SetPcapDataLinkType} (YansWifiPhyHelper::DLT\_IEEE802\_11\_RADIO);
+115 
+116   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} wifiChannel;
+117   wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a6b452ba53ccaee6ca000cc72ed9ea0fa}{SetPropagationDelay} (\textcolor{stringliteral}{"ns3::ConstantSpeedPropagationDelayModel"});
+118   \textcolor{comment}{// The below FixedRssLossModel will cause the rss to be fixed regardless}
+119   \textcolor{comment}{// of the distance between the two stations, and the transmit power}
+120   wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a71c64d54e148b43698c65736e1c77156}{AddPropagationLoss} (\textcolor{stringliteral}{"ns3::FixedRssLossModel"},\textcolor{stringliteral}{"Rss"},DoubleValue (-80));
+121   wifiPhy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ());
+122 
+123   \textcolor{comment}{// Add an upper mac and disable rate control}
+124   \hyperlink{classns3_1_1WifiMacHelper}{WifiMacHelper} wifiMac;
+125   wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::ConstantRateWifiManager"},
+126                                 \textcolor{stringliteral}{"DataMode"},StringValue (phyMode),
+127                                 \textcolor{stringliteral}{"ControlMode"},StringValue (phyMode));
+128   \textcolor{comment}{// Set it to adhoc mode}
+129   wifiMac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::AdhocWifiMac"});
+130   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d} = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (wifiPhy, wifiMac, n);
+131 
+132   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+133   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} positionAlloc = CreateObject<ListPositionAllocator> 
+      ();
+134   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));
+135   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (10.0, 0.0, 0.0));
+136   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (20.0, 0.0, 0.0));
+137   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 10.0, 0.0));
+138   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+139   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+140   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (n);
+141 
+142   \textcolor{comment}{//}
+143   \textcolor{comment}{// Install Click on the nodes}
+144   \textcolor{comment}{//}
+145   ClickInternetStackHelper clickinternet;
+146   clickinternet.SetClickFile (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), clickConfigFolder + \textcolor{stringliteral}{"/nsclick-wifi-single-interface.click"});
+147   clickinternet.SetClickFile (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), clickConfigFolder + \textcolor{stringliteral}{"/nsclick-wifi-single-interface.click"});
+148   clickinternet.SetClickFile (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2), clickConfigFolder + \textcolor{stringliteral}{"/nsclick-wifi-single-interface.click"});
+149 
+150   \textcolor{comment}{// Node 4 is to run in promiscuous mode. This can be verified}
+151   \textcolor{comment}{// from the pcap trace Node4\_in\_eth0.pcap generated after running}
+152   \textcolor{comment}{// this script.}
+153   clickinternet.SetClickFile (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3), clickConfigFolder + \textcolor{stringliteral}{"
+      /nsclick-wifi-single-interface-promisc.click"});
+154   clickinternet.SetRoutingTableElement (n, \textcolor{stringliteral}{"rt"});
+155   clickinternet.Install (n);
+156   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+157   \textcolor{comment}{//}
+158   \textcolor{comment}{// We've got the "hardware" in place.  Now we need to add IP addresses.}
+159   \textcolor{comment}{//}
+160   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+161   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"172.16.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+162   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (d);
+163 
+164   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Applications."});
+165   \textcolor{comment}{//}
+166   \textcolor{comment}{// Create one udpServer applications on node one.}
+167   \textcolor{comment}{//}
+168   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 4000;
+169   \hyperlink{classns3_1_1UdpServerHelper}{UdpServerHelper} server (port);
+170   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} apps = server.Install (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+171   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+172   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+173 
+174   \textcolor{comment}{//}
+175   \textcolor{comment}{// Create one UdpClient application to send UDP datagrams from node zero to}
+176   \textcolor{comment}{// node one.}
+177   \textcolor{comment}{//}
+178   uint32\_t MaxPacketSize = 1024;
+179   \hyperlink{classns3_1_1Time}{Time} interPacketInterval = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.5);
+180   uint32\_t maxPacketCount = 320;
+181   \hyperlink{classns3_1_1UdpClientHelper}{UdpClientHelper} client (i.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1), \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port});
+182   client.\hyperlink{classns3_1_1UdpClientHelper_a8bbae16a28f85ab3f3b5aa4642edfeae}{SetAttribute} (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (maxPacketCount));
+183   client.SetAttribute (\textcolor{stringliteral}{"Interval"}, TimeValue (interPacketInterval));
+184   client.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (MaxPacketSize));
+185   apps = client.Install (\hyperlink{classns3_1_1NodeContainer}{NodeContainer} (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2)));
+186   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0));
+187   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+188 
+189   wifiPhy.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"nsclick-udp-client-server-wifi"}, d);
+190 
+191   \textcolor{comment}{// Force the MAC address of the second node: The current ARP}
+192   \textcolor{comment}{// implementation of Click sends only one ARP request per incoming}
+193   \textcolor{comment}{// packet for an unknown destination and does not retransmit if no}
+194   \textcolor{comment}{// response is received. With the scenario of this example, all ARP}
+195   \textcolor{comment}{// requests of node 3 are lost due to interference from node}
+196   \textcolor{comment}{// 1. Hence, we fill in the ARP table of node 2 before at the}
+197   \textcolor{comment}{// beginning of the simulation}
+198   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.5), &ReadArp, n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2)->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1Ipv4ClickRouting}{Ipv4ClickRouting}> ());
+199   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.6), &WriteArp, n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2)->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1Ipv4ClickRouting}{Ipv4ClickRouting}> ());
+200   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.7), &ReadArp, n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2)->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1Ipv4ClickRouting}{Ipv4ClickRouting}> ());
+201 
+202   \textcolor{comment}{//}
+203   \textcolor{comment}{// Now, do the actual simulation.}
+204   \textcolor{comment}{//}
+205   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+206   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (20.0));
+207   Simulator::Run ();
+208   Simulator::Destroy ();
+209   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+210 \textcolor{preprocessor}{#else}
+211   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Can't use ns-3-click without NSCLICK compiled in"});
+212 \textcolor{preprocessor}{#endif}
+213 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{nsclick-\/udp-\/client-\/server-\/wifi.\+cc@{nsclick-\/udp-\/client-\/server-\/wifi.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!nsclick-\/udp-\/client-\/server-\/wifi.\+cc@{nsclick-\/udp-\/client-\/server-\/wifi.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Nsclick\+Udp\+Client\+Server\+Wifi"")}{NS_LOG_COMPONENT_DEFINE("NsclickUdpClientServerWifi")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Nsclick\+Udp\+Client\+Server\+Wifi\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{nsclick-udp-client-server-wifi_8cc_a552a8f515fb87296a598c33f5cf6a845}{}\label{nsclick-udp-client-server-wifi_8cc_a552a8f515fb87296a598c33f5cf6a845}

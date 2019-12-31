@@ -1,0 +1,86 @@
+\hypertarget{group__configstore}{}\section{Configuration Store/\+Load}
+\label{group__configstore}\index{Configuration Store/\+Load@{Configuration Store/\+Load}}
+
+
+Store and load simulation attribute configuration.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1AttributeIterator}{ns3\+::\+Attribute\+Iterator}
+\item 
+class \hyperlink{classns3_1_1ConfigStore}{ns3\+::\+Config\+Store}
+\item 
+class \hyperlink{classns3_1_1FileConfig}{ns3\+::\+File\+Config}
+\item 
+class \hyperlink{classns3_1_1NoneFileConfig}{ns3\+::\+None\+File\+Config}
+\item 
+class \hyperlink{classns3_1_1GtkConfigStore}{ns3\+::\+Gtk\+Config\+Store}
+\begin{DoxyCompactList}\small\item\em A class that provides a G\+T\+K-\/based front end to \hyperlink{classns3_1_1ConfigStore}{ns3\+::\+Config\+Store}. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1ModelCreator}{ns3\+::\+Model\+Creator}
+\item 
+class \hyperlink{classns3_1_1RawTextConfigSave}{ns3\+::\+Raw\+Text\+Config\+Save}
+\item 
+class \hyperlink{classns3_1_1RawTextConfigLoad}{ns3\+::\+Raw\+Text\+Config\+Load}
+\item 
+class \hyperlink{classns3_1_1XmlConfigSave}{ns3\+::\+Xml\+Config\+Save}
+\item 
+class \hyperlink{classns3_1_1XmlConfigLoad}{ns3\+::\+Xml\+Config\+Load}
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \hyperlink{group__configstore_ga289c47e33b83129aced7736ba7c7960a}{ns3\+::operator$<$$<$} (std\+::ostream \&os, \hyperlink{lte__uplink__power__control_8m_a21de820aff859dc731034b432a16fa96}{Config\+Store\+::\+Mode} \&mode)
+\item 
+std\+::ostream \& \hyperlink{group__configstore_ga54d3ccba7f4a9b747b2d0c61b4e3db95}{ns3\+::operator$<$$<$} (std\+::ostream \&os, Config\+Store\+::\+File\+Format \&format)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Store and load simulation attribute configuration. 
+
+While it is possible to generate a sample config file and lightly edit it to change a couple of values, there are cases where this process will not work because the same value on the same object can appear multiple times in the same automatically-\/generated configuration file under different configuration paths.
+
+As such, the best way to use this class is to use it to generate an initial configuration file, extract from that configuration file only the strictly necessary elements, and move these minimal elements to a new configuration file which can then safely be edited. Another option is to use the \hyperlink{classns3_1_1GtkConfigStore}{ns3\+::\+Gtk\+Config\+Store} class which will allow you to edit the parameters and will generate configuration files where all the instances of the same parameter are changed. 
+
+\subsection{Function Documentation}
+\index{Configuration Store/\+Load@{Configuration Store/\+Load}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Configuration Store/\+Load@{Configuration Store/\+Load}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(std\+::ostream \&os, Config\+Store\+::\+Mode \&mode)}{operator<<(std::ostream &os, ConfigStore::Mode &mode)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream \& ns3\+::operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os, }
+\item[{{\bf Config\+Store\+::\+Mode} \&}]{mode}
+\end{DoxyParamCaption}
+)}\hypertarget{group__configstore_ga289c47e33b83129aced7736ba7c7960a}{}\label{group__configstore_ga289c47e33b83129aced7736ba7c7960a}
+
+\begin{DoxyCode}
+180 \{
+181   \textcolor{keywordflow}{switch} (mode)
+182     \{
+183     \textcolor{keywordflow}{case} ConfigStore::LOAD:      os << \textcolor{stringliteral}{"LOAD"};      \textcolor{keywordflow}{break};
+184     \textcolor{keywordflow}{case} ConfigStore::SAVE:      os << \textcolor{stringliteral}{"SAVE"};      \textcolor{keywordflow}{break};
+185     \textcolor{keywordflow}{case} ConfigStore::NONE:      os << \textcolor{stringliteral}{"NONE"};      \textcolor{keywordflow}{break};
+186     \textcolor{keywordflow}{default}:                     os << \textcolor{stringliteral}{"UNKNOWN"};
+187     \}
+188   \textcolor{keywordflow}{return} os;
+189 \}
+\end{DoxyCode}
+\index{Configuration Store/\+Load@{Configuration Store/\+Load}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Configuration Store/\+Load@{Configuration Store/\+Load}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(std\+::ostream \&os, Config\+Store\+::\+File\+Format \&format)}{operator<<(std::ostream &os, ConfigStore::FileFormat &format)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream \& ns3\+::operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os, }
+\item[{{\bf Config\+Store\+::\+File\+Format} \&}]{format}
+\end{DoxyParamCaption}
+)}\hypertarget{group__configstore_ga54d3ccba7f4a9b747b2d0c61b4e3db95}{}\label{group__configstore_ga54d3ccba7f4a9b747b2d0c61b4e3db95}
+
+\begin{DoxyCode}
+193 \{
+194   \textcolor{keywordflow}{switch} (format)
+195     \{
+196     \textcolor{keywordflow}{case} ConfigStore::XML:       os << \textcolor{stringliteral}{"XML"};       \textcolor{keywordflow}{break};
+197     \textcolor{keywordflow}{case} ConfigStore::RAW\_TEXT:  os << \textcolor{stringliteral}{"RAW\_TEXT"};  \textcolor{keywordflow}{break};
+198     \}
+199   \textcolor{keywordflow}{return} os;
+200 \}
+\end{DoxyCode}

@@ -1,0 +1,256 @@
+\hypertarget{classns3_1_1EventGarbageCollector}{}\section{ns3\+:\+:Event\+Garbage\+Collector Class Reference}
+\label{classns3_1_1EventGarbageCollector}\index{ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}}
+
+
+An object that tracks scheduled events and automatically cancels them when it is destroyed. It is useful in situations where multiple instances of the same type of event can simultaneously be scheduled, and when the events should be limited to the lifetime of a container object.  
+
+
+
+
+{\ttfamily \#include $<$event-\/garbage-\/collector.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Event\+Garbage\+Collector\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structns3_1_1EventGarbageCollector_1_1EventIdLessThanTs}{Event\+Id\+Less\+Than\+Ts}
+\begin{DoxyCompactList}\small\item\em comparison operator for std\+::multiset \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1EventGarbageCollector_aec55283c72c2c759481098de4c9d728f}{Event\+Garbage\+Collector} ()
+\item 
+void \hyperlink{classns3_1_1EventGarbageCollector_a4f26a1f6e9a09e648eb31b46acd85144}{Track} (\hyperlink{classns3_1_1EventId}{Event\+Id} event)
+\begin{DoxyCompactList}\small\item\em Tracks a new event. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1EventGarbageCollector_ad77d417d7db0bf411456bc8f94bd2b90}{$\sim$\+Event\+Garbage\+Collector} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::multiset$<$ \hyperlink{classns3_1_1EventId}{Event\+Id}, \hyperlink{structns3_1_1EventGarbageCollector_1_1EventIdLessThanTs}{Event\+Id\+Less\+Than\+Ts} $>$ \hyperlink{classns3_1_1EventGarbageCollector_a8f6e21ebc2783ecc5f82fa657a912632}{Event\+List}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1EventGarbageCollector_a960061b6d79529f856015d723ebef46e}{Cleanup} ()
+\begin{DoxyCompactList}\small\item\em called when a new event was added and the cleanup limit was exceeded in consequence. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1EventGarbageCollector_ac640851cdfce5f4d8eb3a2c81da04f4f}{Grow} ()
+\begin{DoxyCompactList}\small\item\em grow the cleanup limit \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1EventGarbageCollector_ae99cf72d153cc5dfbab1ba9326baab05}{Shrink} ()
+\begin{DoxyCompactList}\small\item\em shrink the cleanup limit \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Event\+List\+::size\+\_\+type \hyperlink{classns3_1_1EventGarbageCollector_aaa004410658c6a7150930651c7365185}{m\+\_\+next\+Cleanup\+Size}
+\begin{DoxyCompactList}\small\item\em batch size for cleanup \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1EventGarbageCollector_a8f6e21ebc2783ecc5f82fa657a912632}{Event\+List} \hyperlink{classns3_1_1EventGarbageCollector_a890e5516cc3222b941336e061f261baf}{m\+\_\+events}
+\begin{DoxyCompactList}\small\item\em the tracked event list \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An object that tracks scheduled events and automatically cancels them when it is destroyed. It is useful in situations where multiple instances of the same type of event can simultaneously be scheduled, and when the events should be limited to the lifetime of a container object. 
+
+\subsection{Member Typedef Documentation}
+\index{ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}!Event\+List@{Event\+List}}
+\index{Event\+List@{Event\+List}!ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}}
+\subsubsection[{\texorpdfstring{Event\+List}{EventList}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::multiset$<${\bf Event\+Id}, {\bf Event\+Id\+Less\+Than\+Ts}$>$ {\bf ns3\+::\+Event\+Garbage\+Collector\+::\+Event\+List}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EventGarbageCollector_a8f6e21ebc2783ecc5f82fa657a912632}{}\label{classns3_1_1EventGarbageCollector_a8f6e21ebc2783ecc5f82fa657a912632}
+Event list container 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}!Event\+Garbage\+Collector@{Event\+Garbage\+Collector}}
+\index{Event\+Garbage\+Collector@{Event\+Garbage\+Collector}!ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}}
+\subsubsection[{\texorpdfstring{Event\+Garbage\+Collector()}{EventGarbageCollector()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Event\+Garbage\+Collector\+::\+Event\+Garbage\+Collector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EventGarbageCollector_aec55283c72c2c759481098de4c9d728f}{}\label{classns3_1_1EventGarbageCollector_aec55283c72c2c759481098de4c9d728f}
+
+\begin{DoxyCode}
+29                                               :
+30   \hyperlink{classns3_1_1EventGarbageCollector_aaa004410658c6a7150930651c7365185}{m\_nextCleanupSize} (\hyperlink{event-garbage-collector_8cc_a2123daf9d44155d01f73117618fa56b5}{CLEANUP\_CHUNK\_MIN\_SIZE})
+31 \{
+32 \}
+\end{DoxyCode}
+\index{ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}!````~Event\+Garbage\+Collector@{$\sim$\+Event\+Garbage\+Collector}}
+\index{````~Event\+Garbage\+Collector@{$\sim$\+Event\+Garbage\+Collector}!ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}}
+\subsubsection[{\texorpdfstring{$\sim$\+Event\+Garbage\+Collector()}{~EventGarbageCollector()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Event\+Garbage\+Collector\+::$\sim$\+Event\+Garbage\+Collector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EventGarbageCollector_ad77d417d7db0bf411456bc8f94bd2b90}{}\label{classns3_1_1EventGarbageCollector_ad77d417d7db0bf411456bc8f94bd2b90}
+
+\begin{DoxyCode}
+80 \{
+81   \textcolor{keywordflow}{for} (EventList::iterator event = \hyperlink{classns3_1_1EventGarbageCollector_a890e5516cc3222b941336e061f261baf}{m\_events}.begin ();
+82        \textcolor{keyword}{event} != \hyperlink{classns3_1_1EventGarbageCollector_a890e5516cc3222b941336e061f261baf}{m\_events}.end (); \textcolor{keyword}{event}++)
+83     \{
+84       \hyperlink{classns3_1_1Simulator_a1b903a62d6117ef28f7ba3c6500689bf}{Simulator::Cancel} (*event);
+85     \}
+86 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}!Cleanup@{Cleanup}}
+\index{Cleanup@{Cleanup}!ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}}
+\subsubsection[{\texorpdfstring{Cleanup()}{Cleanup()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Event\+Garbage\+Collector\+::\+Cleanup (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EventGarbageCollector_a960061b6d79529f856015d723ebef46e}{}\label{classns3_1_1EventGarbageCollector_a960061b6d79529f856015d723ebef46e}
+
+
+called when a new event was added and the cleanup limit was exceeded in consequence. 
+
+
+\begin{DoxyCode}
+60 \{
+61   \textcolor{keywordflow}{for} (EventList::iterator iter = \hyperlink{classns3_1_1EventGarbageCollector_a890e5516cc3222b941336e061f261baf}{m\_events}.begin (); iter != \hyperlink{classns3_1_1EventGarbageCollector_a890e5516cc3222b941336e061f261baf}{m\_events}.end ();)
+62     \{
+63       \textcolor{keywordflow}{if} ((*iter).IsExpired ())
+64         \{
+65           \hyperlink{classns3_1_1EventGarbageCollector_a890e5516cc3222b941336e061f261baf}{m\_events}.erase (iter++);
+66         \}
+67       \textcolor{keywordflow}{else}
+68         \textcolor{keywordflow}{break};  \textcolor{comment}{// EventIds are sorted by timestamp => further events are not expired for sure}
+69     \}
+70 
+71   \textcolor{comment}{// If after cleanup we are still over the limit, increase the limit.}
+72   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1EventGarbageCollector_a890e5516cc3222b941336e061f261baf}{m\_events}.size () >= \hyperlink{classns3_1_1EventGarbageCollector_aaa004410658c6a7150930651c7365185}{m\_nextCleanupSize})
+73     \hyperlink{classns3_1_1EventGarbageCollector_ac640851cdfce5f4d8eb3a2c81da04f4f}{Grow} ();
+74   \textcolor{keywordflow}{else}
+75     \hyperlink{classns3_1_1EventGarbageCollector_ae99cf72d153cc5dfbab1ba9326baab05}{Shrink} ();
+76 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}!Grow@{Grow}}
+\index{Grow@{Grow}!ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}}
+\subsubsection[{\texorpdfstring{Grow()}{Grow()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Event\+Garbage\+Collector\+::\+Grow (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EventGarbageCollector_ac640851cdfce5f4d8eb3a2c81da04f4f}{}\label{classns3_1_1EventGarbageCollector_ac640851cdfce5f4d8eb3a2c81da04f4f}
+
+
+grow the cleanup limit 
+
+
+\begin{DoxyCode}
+44 \{
+45   \hyperlink{classns3_1_1EventGarbageCollector_aaa004410658c6a7150930651c7365185}{m\_nextCleanupSize} += (\hyperlink{classns3_1_1EventGarbageCollector_aaa004410658c6a7150930651c7365185}{m\_nextCleanupSize} < 
+      \hyperlink{event-garbage-collector_8cc_a3ac506aedf612f30bca65b7dfd0288f0}{CLEANUP\_CHUNK\_MAX\_SIZE} ?
+46                         \hyperlink{classns3_1_1EventGarbageCollector_aaa004410658c6a7150930651c7365185}{m\_nextCleanupSize} : 
+      \hyperlink{event-garbage-collector_8cc_a3ac506aedf612f30bca65b7dfd0288f0}{CLEANUP\_CHUNK\_MAX\_SIZE});
+47 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}!Shrink@{Shrink}}
+\index{Shrink@{Shrink}!ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}}
+\subsubsection[{\texorpdfstring{Shrink()}{Shrink()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Event\+Garbage\+Collector\+::\+Shrink (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EventGarbageCollector_ae99cf72d153cc5dfbab1ba9326baab05}{}\label{classns3_1_1EventGarbageCollector_ae99cf72d153cc5dfbab1ba9326baab05}
+
+
+shrink the cleanup limit 
+
+
+\begin{DoxyCode}
+51 \{
+52   \textcolor{keywordflow}{while} (\hyperlink{classns3_1_1EventGarbageCollector_aaa004410658c6a7150930651c7365185}{m\_nextCleanupSize} > \hyperlink{classns3_1_1EventGarbageCollector_a890e5516cc3222b941336e061f261baf}{m\_events}.size ())
+53     \hyperlink{classns3_1_1EventGarbageCollector_aaa004410658c6a7150930651c7365185}{m\_nextCleanupSize} >>= 1;
+54   \hyperlink{classns3_1_1EventGarbageCollector_ac640851cdfce5f4d8eb3a2c81da04f4f}{Grow} ();
+55 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}!Track@{Track}}
+\index{Track@{Track}!ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}}
+\subsubsection[{\texorpdfstring{Track(\+Event\+Id event)}{Track(EventId event)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Event\+Garbage\+Collector\+::\+Track (
+\begin{DoxyParamCaption}
+\item[{{\bf Event\+Id}}]{event}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EventGarbageCollector_a4f26a1f6e9a09e648eb31b46acd85144}{}\label{classns3_1_1EventGarbageCollector_a4f26a1f6e9a09e648eb31b46acd85144}
+
+
+Tracks a new event. 
+
+
+\begin{DoxyCode}
+36 \{
+37   \hyperlink{classns3_1_1EventGarbageCollector_a890e5516cc3222b941336e061f261baf}{m\_events}.insert (event);
+38   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1EventGarbageCollector_a890e5516cc3222b941336e061f261baf}{m\_events}.size () >= \hyperlink{classns3_1_1EventGarbageCollector_aaa004410658c6a7150930651c7365185}{m\_nextCleanupSize})
+39     \hyperlink{classns3_1_1EventGarbageCollector_a960061b6d79529f856015d723ebef46e}{Cleanup} ();
+40 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}!m\+\_\+events@{m\+\_\+events}}
+\index{m\+\_\+events@{m\+\_\+events}!ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}}
+\subsubsection[{\texorpdfstring{m\+\_\+events}{m_events}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Event\+List} ns3\+::\+Event\+Garbage\+Collector\+::m\+\_\+events\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EventGarbageCollector_a890e5516cc3222b941336e061f261baf}{}\label{classns3_1_1EventGarbageCollector_a890e5516cc3222b941336e061f261baf}
+
+
+the tracked event list 
+
+\index{ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}!m\+\_\+next\+Cleanup\+Size@{m\+\_\+next\+Cleanup\+Size}}
+\index{m\+\_\+next\+Cleanup\+Size@{m\+\_\+next\+Cleanup\+Size}!ns3\+::\+Event\+Garbage\+Collector@{ns3\+::\+Event\+Garbage\+Collector}}
+\subsubsection[{\texorpdfstring{m\+\_\+next\+Cleanup\+Size}{m_nextCleanupSize}}]{\setlength{\rightskip}{0pt plus 5cm}Event\+List\+::size\+\_\+type ns3\+::\+Event\+Garbage\+Collector\+::m\+\_\+next\+Cleanup\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EventGarbageCollector_aaa004410658c6a7150930651c7365185}{}\label{classns3_1_1EventGarbageCollector_aaa004410658c6a7150930651c7365185}
+
+
+batch size for cleanup 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/helper/\hyperlink{event-garbage-collector_8h}{event-\/garbage-\/collector.\+h}\item 
+core/helper/\hyperlink{event-garbage-collector_8cc}{event-\/garbage-\/collector.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,93 @@
+\hypertarget{realtime-dummy-network_8cc}{}\section{fd-\/net-\/device/examples/realtime-\/dummy-\/network.cc File Reference}
+\label{realtime-dummy-network_8cc}\index{fd-\/net-\/device/examples/realtime-\/dummy-\/network.\+cc@{fd-\/net-\/device/examples/realtime-\/dummy-\/network.\+cc}}
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/fd-\/net-\/device-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/apps-\/module.\+h\char`\"{}}\\*
+Include dependency graph for realtime-\/dummy-\/network.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{realtime-dummy-network_8cc_a1dc7ebd937ec79f6694cd446ba1a2d16}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Realtime\+Dummy\+Network\+Example\char`\"{})
+\item 
+int \hyperlink{realtime-dummy-network_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{realtime-\/dummy-\/network.\+cc@{realtime-\/dummy-\/network.\+cc}!main@{main}}
+\index{main@{main}!realtime-\/dummy-\/network.\+cc@{realtime-\/dummy-\/network.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{realtime-dummy-network_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{realtime-dummy-network_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+37 \{
+38   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+39   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+40 
+41   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"}, StringValue (\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl"}));
+42   GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+43 
+44   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+45   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+46 
+47   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+48   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodes);
+49 
+50   \hyperlink{classns3_1_1FdNetDeviceHelper}{FdNetDeviceHelper} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd};
+51   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = fd.\hyperlink{classns3_1_1FdNetDeviceHelper_af70d55cbb4f6411c33cacb84eb651ad5}{Install} (nodes);
+52 
+53   \textcolor{keywordtype}{int} sv[2];
+54   \textcolor{keywordflow}{if} (socketpair (AF\_UNIX, SOCK\_DGRAM, 0, sv) < 0)
+55     \{
+56       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Error creating pipe="} << strerror (errno));
+57     \}
+58 
+59   \hyperlink{classns3_1_1Ptr}{Ptr<NetDevice>} \hyperlink{lte__link__budget__interference_8m_ab5ca0c44c6f0a063a5219b3749db661f}{d1} = devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0);
+60   \hyperlink{classns3_1_1Ptr}{Ptr<FdNetDevice>} device1 = d1->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1FdNetDevice}{FdNetDevice}> ();
+61   device1->\hyperlink{classns3_1_1FdNetDevice_ac72fff1b3d44824245645a9bcb37c709}{SetFileDescriptor} (sv[0]);
+62 
+63   \hyperlink{classns3_1_1Ptr}{Ptr<NetDevice>} \hyperlink{lte__cqi__generation_8m_a479b78c01efbe4664b402a300da492f7}{d2} = devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1);
+64   \hyperlink{classns3_1_1Ptr}{Ptr<FdNetDevice>} device2 = d2->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1FdNetDevice}{FdNetDevice}> ();
+65   device2->\hyperlink{classns3_1_1FdNetDevice_ac72fff1b3d44824245645a9bcb37c709}{SetFileDescriptor} (sv[1]);
+66 
+67   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} addresses;
+68   addresses.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.0.0.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+69   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} interfaces = addresses.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devices);
+70 
+71   \hyperlink{classns3_1_1Ptr}{Ptr<V4Ping>} app = CreateObject<V4Ping> ();
+72   app->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Remote"}, Ipv4AddressValue (interfaces.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (0)));
+73   app->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Verbose"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+74   nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1)->\hyperlink{classns3_1_1Node_ab98b4fdc4aadc86366b80e8a79a53f47}{AddApplication} (app);
+75   app->\hyperlink{classns3_1_1Application_a8360a49748e30c52ffdcc7a305c3cd48}{SetStartTime} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+76   app->\hyperlink{classns3_1_1Application_a732c1fdadf0be176c753a2ce6e27dff9}{SetStopTime} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (4.0));
+77 
+78   fd.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"realtime-dummy-network"}, \textcolor{keyword}{false});
+79 
+80   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5.));
+81   Simulator::Run ();
+82   Simulator::Destroy ();
+83 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{realtime-\/dummy-\/network.\+cc@{realtime-\/dummy-\/network.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!realtime-\/dummy-\/network.\+cc@{realtime-\/dummy-\/network.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Realtime\+Dummy\+Network\+Example"")}{NS_LOG_COMPONENT_DEFINE("RealtimeDummyNetworkExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Realtime\+Dummy\+Network\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{realtime-dummy-network_8cc_a1dc7ebd937ec79f6694cd446ba1a2d16}{}\label{realtime-dummy-network_8cc_a1dc7ebd937ec79f6694cd446ba1a2d16}

@@ -1,0 +1,125 @@
+\hypertarget{classLenaTestPhyErrorModelSuite}{}\section{Lena\+Test\+Phy\+Error\+Model\+Suite Class Reference}
+\label{classLenaTestPhyErrorModelSuite}\index{Lena\+Test\+Phy\+Error\+Model\+Suite@{Lena\+Test\+Phy\+Error\+Model\+Suite}}
+
+
+{\ttfamily \#include $<$lte-\/test-\/phy-\/error-\/model.\+h$>$}
+
+
+
+Inheritance diagram for Lena\+Test\+Phy\+Error\+Model\+Suite\+:
+% FIG 0
+
+
+Collaboration diagram for Lena\+Test\+Phy\+Error\+Model\+Suite\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLenaTestPhyErrorModelSuite_a980618826e7f097334ce077f2c2f696c}{Lena\+Test\+Phy\+Error\+Model\+Suite} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Lena\+Test\+Phy\+Error\+Model\+Suite@{Lena\+Test\+Phy\+Error\+Model\+Suite}!Lena\+Test\+Phy\+Error\+Model\+Suite@{Lena\+Test\+Phy\+Error\+Model\+Suite}}
+\index{Lena\+Test\+Phy\+Error\+Model\+Suite@{Lena\+Test\+Phy\+Error\+Model\+Suite}!Lena\+Test\+Phy\+Error\+Model\+Suite@{Lena\+Test\+Phy\+Error\+Model\+Suite}}
+\subsubsection[{\texorpdfstring{Lena\+Test\+Phy\+Error\+Model\+Suite()}{LenaTestPhyErrorModelSuite()}}]{\setlength{\rightskip}{0pt plus 5cm}Lena\+Test\+Phy\+Error\+Model\+Suite\+::\+Lena\+Test\+Phy\+Error\+Model\+Suite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLenaTestPhyErrorModelSuite_a980618826e7f097334ce077f2c2f696c}{}\label{classLenaTestPhyErrorModelSuite_a980618826e7f097334ce077f2c2f696c}
+
+\begin{DoxyCode}
+61   : \hyperlink{classns3_1_1TestSuite_a904b0c40583b744d30908aeb94636d1a}{TestSuite} (\textcolor{stringliteral}{"lte-phy-error-model"}, \hyperlink{classns3_1_1TestSuite_a1ebfcab34ec8161e085e8e3a1855eae0a90c5529a26ab3a5ffcc6e57040dbd82e}{SYSTEM})
+62 \{
+63   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"creating LenaTestPhyErrorModelTestCase"});
+64   
+65   
+66   \textcolor{keywordflow}{for} (uint32\_t rngRun = 1; rngRun <= 3; ++rngRun)
+67     \{
+68 
+69       \textcolor{comment}{// Tests on DL Control Channels (PCFICH+PDCCH)}
+70       \textcolor{comment}{// the tolerance is calculated with the following octave code:}
+71       \textcolor{comment}{//}
+72       \textcolor{comment}{// n =  1000; # TX packets}
+73       \textcolor{comment}{// for p=1-[0.007 0.045 0.206 0.343]}
+74       \textcolor{comment}{//    tol = n*p - binoinv(0.001, n, p)}
+75       \textcolor{comment}{// endfor}
+76 
+77       \textcolor{comment}{// 1 interfering eNB SINR -2.0 BLER 0.007 TB size 217}
+78       \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaDlCtrlPhyErrorModelTestCase}{LenaDlCtrlPhyErrorModelTestCase} (2, 1078, 
+      0.007, 9,
+79                                                         \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.04), rngRun),
+80                    (rngRun == 1) ? TestCase::QUICK : TestCase::TAKES\_FOREVER);
+81       \textcolor{comment}{// 2 interfering eNBs SINR -4.0 BLER 0.037 TB size 217}
+82       \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaDlCtrlPhyErrorModelTestCase}{LenaDlCtrlPhyErrorModelTestCase} (3, 1040, 
+      0.045, 21,
+83                                                         \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.04), rngRun),
+84                    (rngRun == 1) ? TestCase::EXTENSIVE : TestCase::TAKES\_FOREVER);
+85       \textcolor{comment}{// 3 interfering eNBs SINR -6.0 BLER 0.21 TB size 133}
+86       \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaDlCtrlPhyErrorModelTestCase}{LenaDlCtrlPhyErrorModelTestCase} (4, 1250, 
+      0.206, 40,
+87                                                         \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.12), rngRun),
+88                    (rngRun == 1) ? TestCase::EXTENSIVE : TestCase::TAKES\_FOREVER);
+89       \textcolor{comment}{// 4 interfering eNBs SINR -7.0 BLER 0.34 TB size 133}
+90       \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaDlCtrlPhyErrorModelTestCase}{LenaDlCtrlPhyErrorModelTestCase} (5, 1260, 
+      0.343, 47,
+91                                                         \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.12), rngRun),
+92                    (rngRun == 1) ? TestCase::EXTENSIVE : TestCase::TAKES\_FOREVER);
+93 
+94       \textcolor{comment}{// Tests on DL Data channels (PDSCH)}
+95       \textcolor{comment}{// the tolerance is calculated with the following octave code:}
+96       \textcolor{comment}{//}
+97       \textcolor{comment}{// n =  1000; # TX packets}
+98       \textcolor{comment}{// for p=1-[0.33 0.11 0.2 0.3 0.55 0.14]}
+99       \textcolor{comment}{//    tol = n*p - binoinv(0.005, n, p)}
+100       \textcolor{comment}{// endfor}
+101 
+102       \textcolor{comment}{// MCS 2 TB size of 256 bits BLER 0.33 SINR -5.51}
+103       \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaDataPhyErrorModelTestCase}{LenaDataPhyErrorModelTestCase} (4, 1800, 0.33
+      , 39,
+104                                                       \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.04), rngRun),
+105                    (rngRun == 1) ? TestCase::QUICK : TestCase::TAKES\_FOREVER);
+106       \textcolor{comment}{// MCS 2 TB size of 528 bits BLER 0.11 SINR -5.51}
+107       \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaDataPhyErrorModelTestCase}{LenaDataPhyErrorModelTestCase} (2, 1800, 0.11
+      , 26,
+108                                                       \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.04), rngRun),
+109                    (rngRun == 1) ? TestCase::EXTENSIVE : TestCase::TAKES\_FOREVER);
+110       \textcolor{comment}{// MCS 2 TB size of 1088 bits BLER 0.02 SINR -5.51}
+111       \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaDataPhyErrorModelTestCase}{LenaDataPhyErrorModelTestCase} (1, 1800, 0.02
+      , 33,
+112                                                       \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.04), rngRun),
+113                    (rngRun == 1) ? TestCase::EXTENSIVE : TestCase::TAKES\_FOREVER);
+114       \textcolor{comment}{// MCS 12 TB size of 4800 bits  BLER 0.3  SINR 4.43}
+115       \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaDataPhyErrorModelTestCase}{LenaDataPhyErrorModelTestCase} (1, 600, 0.3, 
+      38,
+116                                                       \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.04), rngRun),
+117                    (rngRun == 1) ? TestCase::EXTENSIVE : TestCase::TAKES\_FOREVER);
+118       \textcolor{comment}{// MCS 12 TB size of 1632 bits  BLER 0.55  SINR 4.43}
+119       \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaDataPhyErrorModelTestCase}{LenaDataPhyErrorModelTestCase} (3, 600, 0.55,
+       40,
+120                                                       \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.04), rngRun),
+121                    (rngRun == 1) ? TestCase::EXTENSIVE : TestCase::TAKES\_FOREVER);
+122       \textcolor{comment}{// MCS 16 TB size of 7272 bits (3648 x 3584) BLER 0.14 SINR 8.48}
+123       \textcolor{comment}{// BLER 0.14 = 1 - ((1-0.075)*(1-0.075))}
+124       \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLenaDataPhyErrorModelTestCase}{LenaDataPhyErrorModelTestCase} (1, 470, 0.14,
+       29,
+125                                                       \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.04), rngRun),
+126                    (rngRun == 1) ? TestCase::EXTENSIVE : TestCase::TAKES\_FOREVER);
+127 
+128     \}
+129 
+130 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lte/test/\hyperlink{lte-test-phy-error-model_8h}{lte-\/test-\/phy-\/error-\/model.\+h}\item 
+lte/test/\hyperlink{lte-test-phy-error-model_8cc}{lte-\/test-\/phy-\/error-\/model.\+cc}\end{DoxyCompactItemize}

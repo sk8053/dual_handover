@@ -1,0 +1,42 @@
+\hypertarget{group__globalrouting}{}\section{Global Routing.}
+\label{group__globalrouting}\index{Global Routing.@{Global Routing.}}
+Collaboration diagram for Global Routing.\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1CandidateQueue}{ns3\+::\+Candidate\+Queue}
+\begin{DoxyCompactList}\small\item\em A Candidate \hyperlink{classns3_1_1Queue}{Queue} used in routing calculations. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1SPFVertex}{ns3\+::\+S\+P\+F\+Vertex}
+\begin{DoxyCompactList}\small\item\em Vertex used in shortest path first (S\+PF) computations. See \{2328\}, Section 16. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1GlobalRouteManager}{ns3\+::\+Global\+Route\+Manager}
+\begin{DoxyCompactList}\small\item\em A global global router. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1GlobalRoutingLinkRecord}{ns3\+::\+Global\+Routing\+Link\+Record}
+\begin{DoxyCompactList}\small\item\em A single link record for a link state advertisement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Performs pre-\/simulation static route computation on a layer-\/3 I\+Pv4 topology.\hypertarget{group__nix-vector-routing_model}{}\subsection{Model}\label{group__nix-vector-routing_model}
+ns-\/3 global routing performs pre-\/simulation static route computation on a layer-\/3 I\+Pv4 topology. The user A\+PI from the script level is fairly minimal; once a topology has been constructed and addresses assigned, the user may call ns3\+::\+Global\+Route\+Manager\+::\+Populate\+Routing\+Tables() and the simulator will initialize the routing database and set up static unicast forwarding tables for each node.
+
+The model assumes that all nodes on an ns-\/3 channel are reachable to one another, regardless of whether the nodes can use the channel successfully (in the case of wireless). Therefore, this model should typically be used only on wired topologies. Layer-\/2 bridge devices are supported. A\+PI does not yet exist to control the subset of a topology to which this global static routing is applied.
+
+If the topology changes during the simulation, by default, routing will not adjust. There are two ways to make it adjust.
+\begin{DoxyItemize}
+\item Set the attribute Ipv4\+Global\+Routing\+::\+Respond\+To\+Interface\+Events to true
+\item Manually call the sequence of Global\+Route\+Manager methods to delte global routes, build global routing database, and initialize routes. There is a helper method that encapsulates this (Ipv4\+Global\+Routing\+Helper\+::\+Recompute\+Routing\+Tables())
+\end{DoxyItemize}\hypertarget{group__globalrouting_api}{}\subsection{A\+P\+I and Usage}\label{group__globalrouting_api}
+Users must include ns3/global-\/route-\/manager.\+h header file. After the I\+Pv4 topology has been built and addresses assigned, users call ns3\+::\+Global\+Route\+Manager\+::\+Populate\+Routing\+Tables (), prior to the \hyperlink{classns3_1_1Simulator_a84be982e6d03b62c3dc3303c75a9b909}{ns3\+::\+Simulator\+::\+Run()} call.
+
+There are two attributes of Ipv4\+Global\+Routing that govern behavior.
+\begin{DoxyItemize}
+\item Ipv4\+Global\+Routing\+::\+Random\+Ecmp\+Routing
+\item Ipv4\+Global\+Routing\+::\+Respond\+To\+Interface\+Events
+\end{DoxyItemize}\hypertarget{group__nix-vector-routing_impl}{}\subsection{Implementation}\label{group__nix-vector-routing_impl}
+A singleton object, \hyperlink{classns3_1_1GlobalRouteManager}{ns3\+::\+Global\+Route\+Manager}, builds a global routing database of information about the topology, and executes a Dijkstra Shortest Path First (S\+PF) algorithm on the topology for each node, and stores the computed routes in each node\textquotesingle{}s I\+Pv4 forwarding table by making use of the routing A\+PI in class \hyperlink{classns3_1_1Ipv4}{ns3\+::\+Ipv4}.
+
+The nodes that export data are those that have had an \hyperlink{classns3_1_1GlobalRouter}{ns3\+::\+Global\+Router} object aggregated to them. The \hyperlink{classns3_1_1GlobalRouter}{ns3\+::\+Global\+Router} can be thought of as a per-\/node agent that exports topology information to the \hyperlink{classns3_1_1GlobalRouteManager}{ns3\+::\+Global\+Route\+Manager}. When it comes time to build the global routing database, the list of nodes is iterated and each node with an \hyperlink{classns3_1_1GlobalRouter}{ns3\+::\+Global\+Router} object is asked to export routing information concerning the links to which it is attached.
+
+The format of the data exported conforms to the O\+S\+P\+Fv2 standard \{2328\}. In particular, the information is exported in the form of ns3\+::\+Global\+L\+SA objects that semantically match the Link State Advertisements of O\+S\+PF.
+
+By using a standard data format for reporting topology, existing O\+S\+PF route computation code can be reused, and that is what is done by the \hyperlink{classns3_1_1GlobalRouteManager}{ns3\+::\+Global\+Route\+Manager}. The main computation functions are ported from the quagga routing suite (\href{http://www.quagga.net}{\tt http\+://www.\+quagga.\+net}). 

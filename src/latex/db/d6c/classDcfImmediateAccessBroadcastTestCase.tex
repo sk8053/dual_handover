@@ -1,0 +1,301 @@
+\hypertarget{classDcfImmediateAccessBroadcastTestCase}{}\section{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case Class Reference}
+\label{classDcfImmediateAccessBroadcastTestCase}\index{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}}
+
+
+Inheritance diagram for Dcf\+Immediate\+Access\+Broadcast\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Dcf\+Immediate\+Access\+Broadcast\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDcfImmediateAccessBroadcastTestCase_a8546a12478615efc1f8fad33ead2c054}{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classDcfImmediateAccessBroadcastTestCase_a60a5b36d456c0c144d85a9be722c1663}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classDcfImmediateAccessBroadcastTestCase_ac1f6f4b2af66dda401e082762cee8adb}{Send\+One\+Packet} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1WifiNetDevice}{Wifi\+Net\+Device} $>$ dev)
+\item 
+void \hyperlink{classDcfImmediateAccessBroadcastTestCase_aea9ca6e51a5ef1b43729b86e4ac209d2}{Notify\+Phy\+Tx\+Begin} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1ObjectFactory}{Object\+Factory} \hyperlink{classDcfImmediateAccessBroadcastTestCase_ab8f20ef6ae6e7c13de2d3e5cb95bc052}{m\+\_\+manager}
+\begin{DoxyCompactList}\small\item\em manager \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1ObjectFactory}{Object\+Factory} \hyperlink{classDcfImmediateAccessBroadcastTestCase_ab0a0eb92216037ec211e0fa87ac11d1c}{m\+\_\+mac}
+\begin{DoxyCompactList}\small\item\em M\+AC. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1ObjectFactory}{Object\+Factory} \hyperlink{classDcfImmediateAccessBroadcastTestCase_a6fceb2537384282ce7ee4cdc47d5feef}{m\+\_\+prop\+Delay}
+\begin{DoxyCompactList}\small\item\em propagation delay \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classDcfImmediateAccessBroadcastTestCase_a90fe73456a50aa8d866a4488a636da18}{m\+\_\+first\+Transmission\+Time}
+\begin{DoxyCompactList}\small\item\em first transmission time \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classDcfImmediateAccessBroadcastTestCase_a89eee6c68fefdc0af43f7b610a3ec686}{m\+\_\+second\+Transmission\+Time}
+\begin{DoxyCompactList}\small\item\em second transmission time \end{DoxyCompactList}\item 
+unsigned int \hyperlink{classDcfImmediateAccessBroadcastTestCase_a8934bfdda7efae56e84c18a799379780}{m\+\_\+num\+Sent\+Packets}
+\begin{DoxyCompactList}\small\item\em number of sent packets \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Make sure that when multiple broadcast packets are queued on the same device in a short succession, that\+: 1) no backoff occurs if the frame arrives and the idle time $>$= D\+I\+FS or A\+I\+F\+Sn (this is \textquotesingle{}D\+CF immediate access\textquotesingle{}, Figure 9-\/3 of I\+E\+EE 802.\+11-\/2012) 2) a backoff occurs for the second frame that arrives (this is clearly stated in Sec. 9.\+3.\+4.\+2 of I\+E\+EE 802.\+11-\/2012, (basic access, which applies to group-\/addressed frames) where it states "If, under these conditions, the medium is determined by the CS mechanism to be busy when a S\+TA desires to initiate the initial frame of a frame exchange sequence (described in Annex G), exclusive of the CF period, the random backoff procedure described in 9.\+3.\+4.\+3 shall be followed." and from 9.\+3.\+4.\+3 \char`\"{}\+The result of this procedure is that transmitted
+   frames from a S\+T\+A are always separated by at least one backoff interval.\char`\"{}
+
+The observed behavior is that the first frame will be sent immediately, and the frames are spaced by (backoff + D\+I\+FS) time intervals (where backoff is a random number of slot sizes up to maximum CW)
+
+The following test case should {\itshape not} generate virtual collision for the second frame. The seed and run numbers were pick such that the second frame gets backoff = 1 slot. \begin{DoxyVerb}                 frame 1, frame 2
+                 arrive                DIFS = 2 x slot + SIFS
+                 |                          = 2 x 9us + 16us for 11a
+                 |                    <----------->
+                 V                                 <-backoff->
+\end{DoxyVerb}
+ time $\vert$-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---$\vert$-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---$\vert$-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---$\vert$-\/-\/-\/-\/-\/-\/-\/-\/---$>$ 0 1s 1.\+001408s 1.\+001442s $\vert$1.001451s $^\wedge$ $^\wedge$ $^\wedge$ start TX finish TX start TX frame 1 frame 1 frame 2 $^\wedge$ frame 2 backoff = 1 slot
+
+The buggy behavior observed in prior versions was shown by picking Rng\+Seed\+Manager\+::\+Set\+Run (17); which generated a 0 slot backoff for frame 2. Then, frame 2 experiences a virtual collision and re-\/selects the backoff again. As a result, the {\itshape actual} backoff experience by frame 2 is less likely to be 0 since that would require two successions of 0 backoff (one that generates the virtual collision and one after the virtual collision).
+
+See \{555\} for past behavior. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}!Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}}
+\index{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}!Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case()}{DcfImmediateAccessBroadcastTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Dcf\+Immediate\+Access\+Broadcast\+Test\+Case\+::\+Dcf\+Immediate\+Access\+Broadcast\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classDcfImmediateAccessBroadcastTestCase_a8546a12478615efc1f8fad33ead2c054}{}\label{classDcfImmediateAccessBroadcastTestCase_a8546a12478615efc1f8fad33ead2c054}
+
+\begin{DoxyCode}
+442   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Test case for DCF immediate access with broadcast frames"})
+443 \{
+444 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Dcf\+Immediate\+Access\+Broadcast\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classDcfImmediateAccessBroadcastTestCase_a60a5b36d456c0c144d85a9be722c1663}{}\label{classDcfImmediateAccessBroadcastTestCase_a60a5b36d456c0c144d85a9be722c1663}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+470 \{
+471   \hyperlink{classDcfImmediateAccessBroadcastTestCase_ab0a0eb92216037ec211e0fa87ac11d1c}{m\_mac}.\hyperlink{classns3_1_1ObjectFactory_a77dcd099064038a1eb7a6b8251229ec3}{SetTypeId} (\textcolor{stringliteral}{"ns3::AdhocWifiMac"});
+472   \hyperlink{classDcfImmediateAccessBroadcastTestCase_a6fceb2537384282ce7ee4cdc47d5feef}{m\_propDelay}.\hyperlink{classns3_1_1ObjectFactory_a77dcd099064038a1eb7a6b8251229ec3}{SetTypeId} (\textcolor{stringliteral}{"ns3::ConstantSpeedPropagationDelayModel"});
+473   \hyperlink{classDcfImmediateAccessBroadcastTestCase_ab8f20ef6ae6e7c13de2d3e5cb95bc052}{m\_manager}.\hyperlink{classns3_1_1ObjectFactory_a77dcd099064038a1eb7a6b8251229ec3}{SetTypeId} (\textcolor{stringliteral}{"ns3::ConstantRateWifiManager"});
+474 
+475   \textcolor{comment}{//Assign a seed and run number, and later fix the assignment of streams to}
+476   \textcolor{comment}{//WiFi random variables, so that the first backoff used is one slot}
+477   RngSeedManager::SetSeed (1);
+478   RngSeedManager::SetRun (40);  \textcolor{comment}{// a value of 17 will result in zero slots}
+479 
+480   \hyperlink{classns3_1_1Ptr}{Ptr<YansWifiChannel>} channel = CreateObject<YansWifiChannel> ();
+481   \hyperlink{classns3_1_1Ptr}{Ptr<PropagationDelayModel>} propDelay = \hyperlink{classDcfImmediateAccessBroadcastTestCase_a6fceb2537384282ce7ee4cdc47d5feef}{m\_propDelay}.
+      \hyperlink{classns3_1_1ObjectFactory_a18152e93f0a6fe184ed7300cb31e9896}{Create}<\hyperlink{classns3_1_1PropagationDelayModel}{PropagationDelayModel}> ();
+482   \hyperlink{classns3_1_1Ptr}{Ptr<PropagationLossModel>} propLoss = CreateObject<RandomPropagationLossModel> ()
+      ;
+483   channel->\hyperlink{classns3_1_1YansWifiChannel_a51ebdd5a1d897dc46cf9783ac2879b98}{SetPropagationDelayModel} (propDelay);
+484   channel->\hyperlink{classns3_1_1YansWifiChannel_ad2f92be1fb34be0075141cbb4f779191}{SetPropagationLossModel} (propLoss);
+485 
+486   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} txNode = CreateObject<Node> ();
+487   \hyperlink{classns3_1_1Ptr}{Ptr<WifiNetDevice>} txDev = CreateObject<WifiNetDevice> ();
+488   \hyperlink{classns3_1_1Ptr}{Ptr<WifiMac>} txMac = \hyperlink{classDcfImmediateAccessBroadcastTestCase_ab0a0eb92216037ec211e0fa87ac11d1c}{m\_mac}.\hyperlink{classns3_1_1ObjectFactory_a18152e93f0a6fe184ed7300cb31e9896}{Create}<\hyperlink{classns3_1_1WifiMac}{WifiMac}> ();
+489   txMac->\hyperlink{classns3_1_1WifiMac_a16ec5352c804df83e42159ab4e2e73d8}{ConfigureStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a22db1e8022db2c3450414b86c77b11e4}{WIFI\_PHY\_STANDARD\_80211a});
+490   \textcolor{comment}{//Fix the stream assignment to the Dcf Txop objects (backoffs)}
+491   \textcolor{comment}{//The below stream assignment will result in the DcaTxop object}
+492   \textcolor{comment}{//using a backoff value of zero for this test when the}
+493   \textcolor{comment}{//DcaTxop::EndTxNoAck() calls to StartBackoffNow()}
+494   \hyperlink{wifi-test_8cc_a27e1dfc9840ff9d220527fa04cbd65de}{AssignWifiRandomStreams} (txMac, 23);
+495 
+496   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} txMobility = 
+      CreateObject<ConstantPositionMobilityModel> ();
+497   \hyperlink{classns3_1_1Ptr}{Ptr<YansWifiPhy>} txPhy = CreateObject<YansWifiPhy> ();
+498   \hyperlink{classns3_1_1Ptr}{Ptr<ErrorRateModel>} txError = CreateObject<YansErrorRateModel> ();
+499   txPhy->SetErrorRateModel (txError);
+500   txPhy->SetChannel (channel);
+501   txPhy->SetDevice (txDev);
+502   txPhy->SetMobility (txMobility);
+503   txPhy->ConfigureStandard (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a22db1e8022db2c3450414b86c77b11e4}{WIFI\_PHY\_STANDARD\_80211a});
+504 
+505   txPhy->TraceConnectWithoutContext (\textcolor{stringliteral}{"PhyTxBegin"}, \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classDcfImmediateAccessBroadcastTestCase_aea9ca6e51a5ef1b43729b86e4ac209d2}{DcfImmediateAccessBroadcastTestCase::NotifyPhyTxBegin},
+       \textcolor{keyword}{this}));
+506 
+507   txMobility->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (Vector (0.0, 0.0, 0.0));
+508   txNode->\hyperlink{classns3_1_1Object_a79dd435d300f3deca814553f561a2922}{AggregateObject} (txMobility);
+509   txMac->SetAddress (Mac48Address::Allocate ());
+510   txDev->SetMac (txMac);
+511   txDev->SetPhy (txPhy);
+512   txDev->SetRemoteStationManager (\hyperlink{classDcfImmediateAccessBroadcastTestCase_ab8f20ef6ae6e7c13de2d3e5cb95bc052}{m\_manager}.\hyperlink{classns3_1_1ObjectFactory_a18152e93f0a6fe184ed7300cb31e9896}{Create}<
+      \hyperlink{classns3_1_1WifiRemoteStationManager}{WifiRemoteStationManager}> ());
+513   txNode->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (txDev);
+514 
+515   \hyperlink{classDcfImmediateAccessBroadcastTestCase_a90fe73456a50aa8d866a4488a636da18}{m\_firstTransmissionTime} = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0);
+516   \hyperlink{classDcfImmediateAccessBroadcastTestCase_a89eee6c68fefdc0af43f7b610a3ec686}{m\_secondTransmissionTime} = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0);
+517   \hyperlink{classDcfImmediateAccessBroadcastTestCase_a8934bfdda7efae56e84c18a799379780}{m\_numSentPackets} = 0;
+518 
+519   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0), &
+      \hyperlink{classDcfImmediateAccessBroadcastTestCase_ac1f6f4b2af66dda401e082762cee8adb}{DcfImmediateAccessBroadcastTestCase::SendOnePacket}, \textcolor{keyword}{this},
+       txDev);
+520   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0) + \hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (1), &
+      \hyperlink{classDcfImmediateAccessBroadcastTestCase_ac1f6f4b2af66dda401e082762cee8adb}{DcfImmediateAccessBroadcastTestCase::SendOnePacket}, \textcolor{keyword}{this},
+       txDev);
+521 
+522   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0));
+523   Simulator::Run ();
+524   Simulator::Destroy ();
+525 
+526   \textcolor{comment}{//First packet has 1408 us of transmit time.   Slot time is 9 us.}
+527   \textcolor{comment}{//Backoff is 1 slots.  SIFS is 16 us.  DIFS is 2 slots = 18 us.}
+528   \textcolor{comment}{//Should send next packet at 1408 us + (1 * 9 us) + 16 us + (2 * 9) us}
+529   \textcolor{comment}{//1451 us after the first one.}
+530   uint32\_t expectedWait1 = 1408 + (1 * 9) + 16 + (2 * 9);
+531   \hyperlink{classns3_1_1Time}{Time} expectedSecondTransmissionTime = \hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (expectedWait1) + 
+      \hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (1000);
+532   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{classDcfImmediateAccessBroadcastTestCase_a90fe73456a50aa8d866a4488a636da18}{m\_firstTransmissionTime}, 
+      \hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (1000), \textcolor{stringliteral}{"The first transmission time not correct!"});
+533 
+534   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{classDcfImmediateAccessBroadcastTestCase_a89eee6c68fefdc0af43f7b610a3ec686}{m\_secondTransmissionTime}, 
+      expectedSecondTransmissionTime, \textcolor{stringliteral}{"The second transmission time not correct!"});
+535 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}!Notify\+Phy\+Tx\+Begin@{Notify\+Phy\+Tx\+Begin}}
+\index{Notify\+Phy\+Tx\+Begin@{Notify\+Phy\+Tx\+Begin}!Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Notify\+Phy\+Tx\+Begin(\+Ptr$<$ const Packet $>$ p)}{NotifyPhyTxBegin(Ptr< const Packet > p)}}]{\setlength{\rightskip}{0pt plus 5cm}void Dcf\+Immediate\+Access\+Broadcast\+Test\+Case\+::\+Notify\+Phy\+Tx\+Begin (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Packet} $>$}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classDcfImmediateAccessBroadcastTestCase_aea9ca6e51a5ef1b43729b86e4ac209d2}{}\label{classDcfImmediateAccessBroadcastTestCase_aea9ca6e51a5ef1b43729b86e4ac209d2}
+Notify Phy transmit begin 
+\begin{DoxyParams}{Parameters}
+{\em p} & the packet \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+448 \{
+449   \textcolor{keywordflow}{if} (\hyperlink{classDcfImmediateAccessBroadcastTestCase_a8934bfdda7efae56e84c18a799379780}{m\_numSentPackets} == 0)
+450     \{
+451       \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} () == \hyperlink{classns3_1_1Time}{Time} (
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1)), \textcolor{stringliteral}{"Packet 0 not transmitted at 1 second"});
+452       \hyperlink{classDcfImmediateAccessBroadcastTestCase_a8934bfdda7efae56e84c18a799379780}{m\_numSentPackets}++;
+453       \hyperlink{classDcfImmediateAccessBroadcastTestCase_a90fe73456a50aa8d866a4488a636da18}{m\_firstTransmissionTime} = \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ();
+454     \}
+455   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classDcfImmediateAccessBroadcastTestCase_a8934bfdda7efae56e84c18a799379780}{m\_numSentPackets} == 1)
+456     \{
+457       \hyperlink{classDcfImmediateAccessBroadcastTestCase_a89eee6c68fefdc0af43f7b610a3ec686}{m\_secondTransmissionTime} = \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ();
+458     \}
+459 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}!Send\+One\+Packet@{Send\+One\+Packet}}
+\index{Send\+One\+Packet@{Send\+One\+Packet}!Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Send\+One\+Packet(\+Ptr$<$ Wifi\+Net\+Device $>$ dev)}{SendOnePacket(Ptr< WifiNetDevice > dev)}}]{\setlength{\rightskip}{0pt plus 5cm}void Dcf\+Immediate\+Access\+Broadcast\+Test\+Case\+::\+Send\+One\+Packet (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Wifi\+Net\+Device} $>$}]{dev}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classDcfImmediateAccessBroadcastTestCase_ac1f6f4b2af66dda401e082762cee8adb}{}\label{classDcfImmediateAccessBroadcastTestCase_ac1f6f4b2af66dda401e082762cee8adb}
+Send one packet function 
+\begin{DoxyParams}{Parameters}
+{\em dev} & the device \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+463 \{
+464   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = Create<Packet> (1000);
+465   dev->\hyperlink{classns3_1_1WifiNetDevice_a14b6919a10da25e74e1c92554106b2c6}{Send} (p, dev->\hyperlink{classns3_1_1WifiNetDevice_a1f57fa65d2e877ab6ea7739d34de2abb}{GetBroadcast} (), 1);
+466 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}!m\+\_\+first\+Transmission\+Time@{m\+\_\+first\+Transmission\+Time}}
+\index{m\+\_\+first\+Transmission\+Time@{m\+\_\+first\+Transmission\+Time}!Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}}
+\subsubsection[{\texorpdfstring{m\+\_\+first\+Transmission\+Time}{m_firstTransmissionTime}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} Dcf\+Immediate\+Access\+Broadcast\+Test\+Case\+::m\+\_\+first\+Transmission\+Time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classDcfImmediateAccessBroadcastTestCase_a90fe73456a50aa8d866a4488a636da18}{}\label{classDcfImmediateAccessBroadcastTestCase_a90fe73456a50aa8d866a4488a636da18}
+
+
+first transmission time 
+
+\index{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}!m\+\_\+mac@{m\+\_\+mac}}
+\index{m\+\_\+mac@{m\+\_\+mac}!Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}}
+\subsubsection[{\texorpdfstring{m\+\_\+mac}{m_mac}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object\+Factory} Dcf\+Immediate\+Access\+Broadcast\+Test\+Case\+::m\+\_\+mac\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classDcfImmediateAccessBroadcastTestCase_ab0a0eb92216037ec211e0fa87ac11d1c}{}\label{classDcfImmediateAccessBroadcastTestCase_ab0a0eb92216037ec211e0fa87ac11d1c}
+
+
+M\+AC. 
+
+\index{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}!m\+\_\+manager@{m\+\_\+manager}}
+\index{m\+\_\+manager@{m\+\_\+manager}!Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}}
+\subsubsection[{\texorpdfstring{m\+\_\+manager}{m_manager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object\+Factory} Dcf\+Immediate\+Access\+Broadcast\+Test\+Case\+::m\+\_\+manager\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classDcfImmediateAccessBroadcastTestCase_ab8f20ef6ae6e7c13de2d3e5cb95bc052}{}\label{classDcfImmediateAccessBroadcastTestCase_ab8f20ef6ae6e7c13de2d3e5cb95bc052}
+
+
+manager 
+
+\index{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}!m\+\_\+num\+Sent\+Packets@{m\+\_\+num\+Sent\+Packets}}
+\index{m\+\_\+num\+Sent\+Packets@{m\+\_\+num\+Sent\+Packets}!Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}}
+\subsubsection[{\texorpdfstring{m\+\_\+num\+Sent\+Packets}{m_numSentPackets}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Dcf\+Immediate\+Access\+Broadcast\+Test\+Case\+::m\+\_\+num\+Sent\+Packets\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classDcfImmediateAccessBroadcastTestCase_a8934bfdda7efae56e84c18a799379780}{}\label{classDcfImmediateAccessBroadcastTestCase_a8934bfdda7efae56e84c18a799379780}
+
+
+number of sent packets 
+
+\index{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}!m\+\_\+prop\+Delay@{m\+\_\+prop\+Delay}}
+\index{m\+\_\+prop\+Delay@{m\+\_\+prop\+Delay}!Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}}
+\subsubsection[{\texorpdfstring{m\+\_\+prop\+Delay}{m_propDelay}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object\+Factory} Dcf\+Immediate\+Access\+Broadcast\+Test\+Case\+::m\+\_\+prop\+Delay\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classDcfImmediateAccessBroadcastTestCase_a6fceb2537384282ce7ee4cdc47d5feef}{}\label{classDcfImmediateAccessBroadcastTestCase_a6fceb2537384282ce7ee4cdc47d5feef}
+
+
+propagation delay 
+
+\index{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}!m\+\_\+second\+Transmission\+Time@{m\+\_\+second\+Transmission\+Time}}
+\index{m\+\_\+second\+Transmission\+Time@{m\+\_\+second\+Transmission\+Time}!Dcf\+Immediate\+Access\+Broadcast\+Test\+Case@{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}}
+\subsubsection[{\texorpdfstring{m\+\_\+second\+Transmission\+Time}{m_secondTransmissionTime}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} Dcf\+Immediate\+Access\+Broadcast\+Test\+Case\+::m\+\_\+second\+Transmission\+Time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classDcfImmediateAccessBroadcastTestCase_a89eee6c68fefdc0af43f7b610a3ec686}{}\label{classDcfImmediateAccessBroadcastTestCase_a89eee6c68fefdc0af43f7b610a3ec686}
+
+
+second transmission time 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+wifi/test/\hyperlink{wifi-test_8cc}{wifi-\/test.\+cc}\end{DoxyCompactItemize}

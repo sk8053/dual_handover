@@ -1,0 +1,213 @@
+\hypertarget{group__simulator}{}\section{Simulator}
+\label{group__simulator}\index{Simulator@{Simulator}}
+
+
+Control the virtual time and the execution of simulation events.  
+
+
+Collaboration diagram for Simulator\+:
+% FIG 0
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__realtime}{Realtime Simulator}
+\end{DoxyCompactItemize}
+\subsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \hyperlink{sample-simulator_8cc}{sample-\/simulator.\+cc}
+\item 
+file \hyperlink{default-simulator-impl_8cc}{default-\/simulator-\/impl.\+cc}
+\item 
+file \hyperlink{default-simulator-impl_8h}{default-\/simulator-\/impl.\+h}
+\item 
+file \hyperlink{des-metrics_8cc}{des-\/metrics.\+cc}
+\item 
+file \hyperlink{des-metrics_8h}{des-\/metrics.\+h}
+\item 
+file \hyperlink{simulator-impl_8cc}{simulator-\/impl.\+cc}
+\item 
+file \hyperlink{simulator-impl_8h}{simulator-\/impl.\+h}
+\item 
+file \hyperlink{simulator_8cc}{simulator.\+cc}
+\item 
+file \hyperlink{simulator_8h}{simulator.\+h}
+\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1DefaultSimulatorImpl}{ns3\+::\+Default\+Simulator\+Impl}
+\item 
+class \hyperlink{classns3_1_1DesMetrics}{ns3\+::\+Des\+Metrics}
+\begin{DoxyCompactList}\small\item\em Event trace data collector for the D\+ES Metrics project. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1SimulatorImpl}{ns3\+::\+Simulator\+Impl}
+\item 
+class \hyperlink{classns3_1_1Simulator}{ns3\+::\+Simulator}
+\begin{DoxyCompactList}\small\item\em Control the scheduling of simulation events. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1DistributedSimulatorImpl}{ns3\+::\+Distributed\+Simulator\+Impl}
+\begin{DoxyCompactList}\small\item\em Distributed simulator implementation using lookahead. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1VisualSimulatorImpl}{ns3\+::\+Visual\+Simulator\+Impl}
+\begin{DoxyCompactList}\small\item\em A replacement simulator that starts the visualizer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Simulator\+Impl $\ast$$\ast$ \hyperlink{group__simulator_ga233c5c38de117e4e4a5a9cd168694792}{ns3\+::\+Peek\+Impl} (void)
+\begin{DoxyCompactList}\small\item\em Get the static \hyperlink{classns3_1_1SimulatorImpl}{Simulator\+Impl} instance. \end{DoxyCompactList}\item 
+static Simulator\+Impl $\ast$ \hyperlink{group__simulator_ga42eb4eddad41528d4d99794a3dae3fd0}{ns3\+::\+Get\+Impl} (void)
+\begin{DoxyCompactList}\small\item\em Get the \hyperlink{classns3_1_1SimulatorImpl}{Simulator\+Impl} singleton. \end{DoxyCompactList}\item 
+Time \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{ns3\+::\+Now} (void)
+\begin{DoxyCompactList}\small\item\em create an \hyperlink{classns3_1_1Time}{ns3\+::\+Time} instance which contains the current simulation time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static Global\+Value \hyperlink{group__simulator_ga590f49e0f2b8bb103fb0415beae2245a}{ns3\+::g\+\_\+sim\+Type\+Impl}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Control the virtual time and the execution of simulation events. 
+
+
+
+\subsection{Function Documentation}
+\index{Simulator@{Simulator}!Get\+Impl@{Get\+Impl}}
+\index{Get\+Impl@{Get\+Impl}!Simulator@{Simulator}}
+\subsubsection[{\texorpdfstring{Get\+Impl(void)}{GetImpl(void)}}]{\setlength{\rightskip}{0pt plus 5cm}static Simulator\+Impl$\ast$ ns3\+::\+Get\+Impl (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{group__simulator_ga42eb4eddad41528d4d99794a3dae3fd0}{}\label{group__simulator_ga42eb4eddad41528d4d99794a3dae3fd0}
+
+
+Get the \hyperlink{classns3_1_1SimulatorImpl}{Simulator\+Impl} singleton. 
+
+\begin{DoxyReturn}{Returns}
+The singleton pointer. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Simulator_afdbe7c7695132b3fae7cb0b5d67c04e3}{Simulator\+::\+Get\+Implementation()} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+153 \{
+154   SimulatorImpl **pimpl = \hyperlink{group__simulator_ga233c5c38de117e4e4a5a9cd168694792}{PeekImpl} ();
+155   \textcolor{comment}{/* Please, don't include any calls to logging macros in this function}
+156 \textcolor{comment}{   * or pay the price, that is, stack explosions.}
+157 \textcolor{comment}{   */}
+158   \textcolor{keywordflow}{if} (*pimpl == 0)
+159     \{
+160       \{
+161         ObjectFactory factory;
+162         StringValue \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s};
+163 
+164         \hyperlink{group__simulator_ga590f49e0f2b8bb103fb0415beae2245a}{g\_simTypeImpl}.\hyperlink{classns3_1_1GlobalValue_aa33773cb952ba3c285a03ae2c4769b84}{GetValue} (s);
+165         factory.SetTypeId (s.Get ());
+166         *pimpl = \hyperlink{namespacens3_ab4e173cdfd43d17c1a40d5348510a670}{GetPointer} (factory.Create<SimulatorImpl> ());
+167       \}
+168       \{
+169         ObjectFactory factory;
+170         StringValue \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s};
+171         \hyperlink{group__scheduler_ga8af85a17944949f1274576b38863d8f0}{g\_schedTypeImpl}.\hyperlink{classns3_1_1GlobalValue_aa33773cb952ba3c285a03ae2c4769b84}{GetValue} (s);
+172         factory.SetTypeId (s.Get ());
+173         (*pimpl)->SetScheduler (factory);
+174       \}
+175 
+176 \textcolor{comment}{//}
+177 \textcolor{comment}{// Note: we call LogSetTimePrinter \_after\_ creating the implementation}
+178 \textcolor{comment}{// object because the act of creation can trigger calls to the logging }
+179 \textcolor{comment}{// framework which would call the TimePrinter function which would call }
+180 \textcolor{comment}{// Simulator::Now which would call Simulator::GetImpl, and, thus, get us }
+181 \textcolor{comment}{// in an infinite recursion until the stack explodes.}
+182 \textcolor{comment}{//}
+183       \hyperlink{namespacens3_acf6a1749b3febc5a6a5b2b8620138d80}{LogSetTimePrinter} (&\hyperlink{group__logging_gaaad3642e8247a056cd83001d805b0812}{TimePrinter});
+184       \hyperlink{namespacens3_aa6e659ca357c8309352fa0f146793810}{LogSetNodePrinter} (&\hyperlink{group__logging_gaaffbf70ff3766cd62b8bbd9b140d2a1b}{NodePrinter});
+185     \}
+186   \textcolor{keywordflow}{return} *pimpl;
+187 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{Simulator@{Simulator}!Now@{Now}}
+\index{Now@{Now}!Simulator@{Simulator}}
+\subsubsection[{\texorpdfstring{Now(void)}{Now(void)}}]{\setlength{\rightskip}{0pt plus 5cm}Time ns3\+::\+Now (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{}\label{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}
+
+
+create an \hyperlink{classns3_1_1Time}{ns3\+::\+Time} instance which contains the current simulation time. 
+
+This is really a shortcut for the \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{ns3\+::\+Simulator\+::\+Now} method. It is typically used as shown below to schedule an event which expires at the absolute time \char`\"{}2 seconds\char`\"{}\+: 
+\begin{DoxyCode}
+\hyperlink{classns3_1_1Simulator_a671882c894a08af4a5e91181bf1eec13}{Simulator::Schedule} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0) - \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Now} (), &my\_function);
+\end{DoxyCode}
+ \begin{DoxyReturn}{Returns}
+The current simulation time. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+366 \{
+367   \textcolor{keywordflow}{return} \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} (\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ());
+368 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{Simulator@{Simulator}!Peek\+Impl@{Peek\+Impl}}
+\index{Peek\+Impl@{Peek\+Impl}!Simulator@{Simulator}}
+\subsubsection[{\texorpdfstring{Peek\+Impl(void)}{PeekImpl(void)}}]{\setlength{\rightskip}{0pt plus 5cm}static Simulator\+Impl$\ast$$\ast$ ns3\+::\+Peek\+Impl (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{group__simulator_ga233c5c38de117e4e4a5a9cd168694792}{}\label{group__simulator_ga233c5c38de117e4e4a5a9cd168694792}
+
+
+Get the static \hyperlink{classns3_1_1SimulatorImpl}{Simulator\+Impl} instance. 
+
+\begin{DoxyReturn}{Returns}
+The \hyperlink{classns3_1_1SimulatorImpl}{Simulator\+Impl} instance pointer. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+141 \{
+142   \textcolor{keyword}{static} SimulatorImpl *impl = 0;
+143   \textcolor{keywordflow}{return} &impl;
+144 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+\subsection{Variable Documentation}
+\index{Simulator@{Simulator}!g\+\_\+sim\+Type\+Impl@{g\+\_\+sim\+Type\+Impl}}
+\index{g\+\_\+sim\+Type\+Impl@{g\+\_\+sim\+Type\+Impl}!Simulator@{Simulator}}
+\subsubsection[{\texorpdfstring{g\+\_\+sim\+Type\+Impl}{g_simTypeImpl}}]{\setlength{\rightskip}{0pt plus 5cm}Global\+Value ns3\+::g\+\_\+sim\+Type\+Impl\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{group__simulator_ga590f49e0f2b8bb103fb0415beae2245a}{}\label{group__simulator_ga590f49e0f2b8bb103fb0415beae2245a}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= GlobalValue
+  (\textcolor{stringliteral}{"SimulatorImplementationType"},
+   \textcolor{stringliteral}{"The object class to use as the simulator implementation"},
+   StringValue (\textcolor{stringliteral}{"ns3::DefaultSimulatorImpl"}),
+   MakeStringChecker ())
+\end{DoxyCode}
+The specific simulator implementation to use.
+
+Must be derived from \hyperlink{classns3_1_1SimulatorImpl}{Simulator\+Impl}. 

@@ -1,0 +1,185 @@
+\hypertarget{classPacketBufferingCaseB}{}\section{Packet\+Buffering\+CaseB Class Reference}
+\label{classPacketBufferingCaseB}\index{Packet\+Buffering\+CaseB@{Packet\+Buffering\+CaseB}}
+
+
+Packet Buffering Case B.  
+
+
+
+
+Inheritance diagram for Packet\+Buffering\+CaseB\+:
+% FIG 0
+
+
+Collaboration diagram for Packet\+Buffering\+CaseB\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPacketBufferingCaseB_a5b2eb92032030ad9f15d8c9ab1d0fc6a}{Packet\+Buffering\+CaseB} ()
+\item 
+virtual \hyperlink{classPacketBufferingCaseB_ae9639bf65aaca822ba27f4432d23d758}{$\sim$\+Packet\+Buffering\+CaseB} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classPacketBufferingCaseB_a2a2db05c6e3596bc03521579e1e0c34a}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{std\+::list}$<$ uint16\+\_\+t $>$ \hyperlink{classPacketBufferingCaseB_a7ce5b33bdce1f08d8996fed97295f138}{m\+\_\+expected\+Buffer}
+\begin{DoxyCompactList}\small\item\em expected test buffer \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Packet Buffering Case B. 
+
+-\/-\/--- = old packets +++++ = new packets
+
+C\+A\+SE B\+: start\+Seq $>$ end\+Seq
+\begin{DoxyItemize}
+\item + + initial buffer state\+: 256 64000 16
+\end{DoxyItemize}
+
+0 4095 $\vert$++++++$\vert$-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---$\vert$++++++$\vert$ $^\wedge$ $^\wedge$ $\vert$ end\+Seq = 10 $\vert$ start\+Seq
+
+first received packet\textquotesingle{}s sequence control = 240 (seq\+Num = 15, frag\+Num = 0) -\/ second received packet\textquotesingle{}s sequence control = 241 (seq\+Num = 15, frag\+Num = 1) -\/ third received packet\textquotesingle{}s sequence control = 64800 (seq\+Num = 4050, frag\+Num = 0) + 240 is an old packet should be inserted at the buffer\textquotesingle{}s begin. 241 is an old packet\+: second segment of the above packet. 4050 is a new packet\+: it should be inserted between 64000 and 16.
+
+expected buffer state\+: 240 241 256 64000 64800 16 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Packet\+Buffering\+CaseB@{Packet\+Buffering\+CaseB}!Packet\+Buffering\+CaseB@{Packet\+Buffering\+CaseB}}
+\index{Packet\+Buffering\+CaseB@{Packet\+Buffering\+CaseB}!Packet\+Buffering\+CaseB@{Packet\+Buffering\+CaseB}}
+\subsubsection[{\texorpdfstring{Packet\+Buffering\+Case\+B()}{PacketBufferingCaseB()}}]{\setlength{\rightskip}{0pt plus 5cm}Packet\+Buffering\+Case\+B\+::\+Packet\+Buffering\+CaseB (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPacketBufferingCaseB_a5b2eb92032030ad9f15d8c9ab1d0fc6a}{}\label{classPacketBufferingCaseB_a5b2eb92032030ad9f15d8c9ab1d0fc6a}
+
+\begin{DoxyCode}
+175   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check correct order of buffering when startSequence > endSeq"})
+176 \{
+177   \hyperlink{classPacketBufferingCaseB_a7ce5b33bdce1f08d8996fed97295f138}{m\_expectedBuffer}.push\_back (240);
+178   \hyperlink{classPacketBufferingCaseB_a7ce5b33bdce1f08d8996fed97295f138}{m\_expectedBuffer}.push\_back (241);
+179   \hyperlink{classPacketBufferingCaseB_a7ce5b33bdce1f08d8996fed97295f138}{m\_expectedBuffer}.push\_back (256);
+180   \hyperlink{classPacketBufferingCaseB_a7ce5b33bdce1f08d8996fed97295f138}{m\_expectedBuffer}.push\_back (64000);
+181   \hyperlink{classPacketBufferingCaseB_a7ce5b33bdce1f08d8996fed97295f138}{m\_expectedBuffer}.push\_back (64800);
+182   \hyperlink{classPacketBufferingCaseB_a7ce5b33bdce1f08d8996fed97295f138}{m\_expectedBuffer}.push\_back (16);
+183 \}
+\end{DoxyCode}
+\index{Packet\+Buffering\+CaseB@{Packet\+Buffering\+CaseB}!````~Packet\+Buffering\+CaseB@{$\sim$\+Packet\+Buffering\+CaseB}}
+\index{````~Packet\+Buffering\+CaseB@{$\sim$\+Packet\+Buffering\+CaseB}!Packet\+Buffering\+CaseB@{Packet\+Buffering\+CaseB}}
+\subsubsection[{\texorpdfstring{$\sim$\+Packet\+Buffering\+Case\+B()}{~PacketBufferingCaseB()}}]{\setlength{\rightskip}{0pt plus 5cm}Packet\+Buffering\+Case\+B\+::$\sim$\+Packet\+Buffering\+CaseB (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPacketBufferingCaseB_ae9639bf65aaca822ba27f4432d23d758}{}\label{classPacketBufferingCaseB_ae9639bf65aaca822ba27f4432d23d758}
+
+\begin{DoxyCode}
+186 \{
+187 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Packet\+Buffering\+CaseB@{Packet\+Buffering\+CaseB}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Packet\+Buffering\+CaseB@{Packet\+Buffering\+CaseB}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Packet\+Buffering\+Case\+B\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classPacketBufferingCaseB_a2a2db05c6e3596bc03521579e1e0c34a}{}\label{classPacketBufferingCaseB_a2a2db05c6e3596bc03521579e1e0c34a}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+191 \{
+192   std::list<uint16\_t> m\_buffer;
+193   std::list<uint16\_t>::iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i},j;
+194   m\_buffer.push\_back (256);
+195   m\_buffer.push\_back (64000);
+196   m\_buffer.push\_back (16);
+197 
+198   uint16\_t endSeq = 10;
+199 
+200   uint16\_t receivedSeq = 15 * 16;
+201   uint32\_t mappedSeq = \hyperlink{group__wifi_ga841296fae895cac77a0e14183b8134e0}{QosUtilsMapSeqControlToUniqueInteger} (
+      receivedSeq, endSeq);
+202   \textcolor{comment}{/* cycle to right position for this packet */}
+203   \textcolor{keywordflow}{for} (i = m\_buffer.begin (); i != m\_buffer.end (); i++)
+204     \{
+205       \textcolor{keywordflow}{if} (\hyperlink{group__wifi_ga841296fae895cac77a0e14183b8134e0}{QosUtilsMapSeqControlToUniqueInteger} ((*i), endSeq) >= 
+      mappedSeq)
+206         \{
+207           \textcolor{comment}{//position found}
+208           \textcolor{keywordflow}{break};
+209         \}
+210     \}
+211   m\_buffer.insert (i, receivedSeq);
+212 
+213   receivedSeq = 15 * 16 + 1;
+214   mappedSeq = \hyperlink{group__wifi_ga841296fae895cac77a0e14183b8134e0}{QosUtilsMapSeqControlToUniqueInteger} (receivedSeq, endSeq
+      );
+215   \textcolor{comment}{/* cycle to right position for this packet */}
+216   \textcolor{keywordflow}{for} (i = m\_buffer.begin (); i != m\_buffer.end (); i++)
+217     \{
+218       \textcolor{keywordflow}{if} (\hyperlink{group__wifi_ga841296fae895cac77a0e14183b8134e0}{QosUtilsMapSeqControlToUniqueInteger} ((*i), endSeq) >= 
+      mappedSeq)
+219         \{
+220           \textcolor{comment}{//position found}
+221           \textcolor{keywordflow}{break};
+222         \}
+223     \}
+224   m\_buffer.insert (i, receivedSeq);
+225 
+226   receivedSeq = 4050 * 16;
+227   mappedSeq = \hyperlink{group__wifi_ga841296fae895cac77a0e14183b8134e0}{QosUtilsMapSeqControlToUniqueInteger} (receivedSeq, endSeq
+      );
+228   \textcolor{comment}{/* cycle to right position for this packet */}
+229   \textcolor{keywordflow}{for} (i = m\_buffer.begin (); i != m\_buffer.end (); i++)
+230     \{
+231       \textcolor{keywordflow}{if} (\hyperlink{group__wifi_ga841296fae895cac77a0e14183b8134e0}{QosUtilsMapSeqControlToUniqueInteger} ((*i), endSeq) >= 
+      mappedSeq)
+232         \{
+233           \textcolor{comment}{//position found}
+234           \textcolor{keywordflow}{break};
+235         \}
+236     \}
+237   m\_buffer.insert (i, receivedSeq);
+238 
+239   \textcolor{keywordflow}{for} (i = m\_buffer.begin (), j = \hyperlink{classPacketBufferingCaseB_a7ce5b33bdce1f08d8996fed97295f138}{m\_expectedBuffer}.begin (); i != m\_buffer.end (); i++, j++
+      )
+240     \{
+241       \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (*i, *j, \textcolor{stringliteral}{"error in buffer order"});
+242     \}
+243 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Packet\+Buffering\+CaseB@{Packet\+Buffering\+CaseB}!m\+\_\+expected\+Buffer@{m\+\_\+expected\+Buffer}}
+\index{m\+\_\+expected\+Buffer@{m\+\_\+expected\+Buffer}!Packet\+Buffering\+CaseB@{Packet\+Buffering\+CaseB}}
+\subsubsection[{\texorpdfstring{m\+\_\+expected\+Buffer}{m_expectedBuffer}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+::list}$<$uint16\+\_\+t$>$ Packet\+Buffering\+Case\+B\+::m\+\_\+expected\+Buffer\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPacketBufferingCaseB_a7ce5b33bdce1f08d8996fed97295f138}{}\label{classPacketBufferingCaseB_a7ce5b33bdce1f08d8996fed97295f138}
+
+
+expected test buffer 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+wifi/test/\hyperlink{block-ack-test-suite_8cc}{block-\/ack-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

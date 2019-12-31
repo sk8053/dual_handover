@@ -1,0 +1,145 @@
+\hypertarget{classBuildingsPathlossTestSuite}{}\section{Buildings\+Pathloss\+Test\+Suite Class Reference}
+\label{classBuildingsPathlossTestSuite}\index{Buildings\+Pathloss\+Test\+Suite@{Buildings\+Pathloss\+Test\+Suite}}
+
+
+{\ttfamily \#include $<$buildings-\/pathloss-\/test.\+h$>$}
+
+
+
+Inheritance diagram for Buildings\+Pathloss\+Test\+Suite\+:
+% FIG 0
+
+
+Collaboration diagram for Buildings\+Pathloss\+Test\+Suite\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classBuildingsPathlossTestSuite_a0fa7d83d42949e53a1c5833467f994cd}{Buildings\+Pathloss\+Test\+Suite} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Test 1.\+1 pathloss calculation 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Buildings\+Pathloss\+Test\+Suite@{Buildings\+Pathloss\+Test\+Suite}!Buildings\+Pathloss\+Test\+Suite@{Buildings\+Pathloss\+Test\+Suite}}
+\index{Buildings\+Pathloss\+Test\+Suite@{Buildings\+Pathloss\+Test\+Suite}!Buildings\+Pathloss\+Test\+Suite@{Buildings\+Pathloss\+Test\+Suite}}
+\subsubsection[{\texorpdfstring{Buildings\+Pathloss\+Test\+Suite()}{BuildingsPathlossTestSuite()}}]{\setlength{\rightskip}{0pt plus 5cm}Buildings\+Pathloss\+Test\+Suite\+::\+Buildings\+Pathloss\+Test\+Suite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBuildingsPathlossTestSuite_a0fa7d83d42949e53a1c5833467f994cd}{}\label{classBuildingsPathlossTestSuite_a0fa7d83d42949e53a1c5833467f994cd}
+Test 1.\+1 Buildings\+Pathloss\+Model Pathloss compound test This Test\+Suite tests the Building\+Pathloss\+Model by reproducing several communication scenarios 
+\begin{DoxyCode}
+52   : \hyperlink{classns3_1_1TestSuite_a904b0c40583b744d30908aeb94636d1a}{TestSuite} (\textcolor{stringliteral}{"buildings-pathloss-test"}, \hyperlink{classns3_1_1TestSuite_a1ebfcab34ec8161e085e8e3a1855eae0a90c5529a26ab3a5ffcc6e57040dbd82e}{SYSTEM})
+53 \{
+54 
+55   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"BuildingsPathlossTest"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+56 
+57   \textcolor{keywordtype}{double} freq = 869e6;  \textcolor{comment}{// E\_UTRA BAND #5 see table 5.5-1 of 36.101}
+58 
+59   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 1, 2, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aad575d1b07ccac0218783bbd0f523784c}{UrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574da017d6be2af0a102a6147e6519d63f54c}{LargeCity}, 137.93, \textcolor{stringliteral}{"OH Urban Large city"}), TestCase::QUICK);
+60 
+61   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 1, 2, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aad575d1b07ccac0218783bbd0f523784c}{UrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574dad3f856f2f166ae12798befabfbd2c99e}{SmallCity}, 137.88, \textcolor{stringliteral}{"OH Urban small city"}), TestCase::QUICK);
+62 
+63   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 1, 2, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aa06cbfe108cde1eb2070702b2ed4fb189}{SubUrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574da017d6be2af0a102a6147e6519d63f54c}{LargeCity}, 128.03, \textcolor{stringliteral}{"loss OH SubUrban"}), TestCase::QUICK);
+64 
+65   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 1, 2, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aa51f78effebc3753d7cd2ee9b5924c028}{OpenAreasEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574da017d6be2af0a102a6147e6519d63f54c}{LargeCity}, 110.21, \textcolor{stringliteral}{"loss OH OpenAreas"}), TestCase::QUICK
+      );
+66 
+67   \textcolor{comment}{// Test #2 COST231 Model (1500 < freq < 2000~2170 MHz) (Macro<->UE)}
+68 
+69   freq = 2.1140e9; \textcolor{comment}{// E\_UTRA BAND #1 see table 5.5-1 of 36.101}
+70 
+71   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 1, 2, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aad575d1b07ccac0218783bbd0f523784c}{UrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574da017d6be2af0a102a6147e6519d63f54c}{LargeCity}, 148.55, \textcolor{stringliteral}{"COST231 Urban Large city"}), TestCase::QUICK)
+      ;
+72 
+73   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 1, 2, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aad575d1b07ccac0218783bbd0f523784c}{UrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574dad3f856f2f166ae12798befabfbd2c99e}{SmallCity}, 150.64, \textcolor{stringliteral}{"COST231 Urban small city and suburban"}), 
+      TestCase::QUICK);
+74 
+75   \textcolor{comment}{// Test #3 2.6 GHz model (Macro<->UE)}
+76 
+77   freq = 2.620e9; \textcolor{comment}{// E\_UTRA BAND #7 see table 5.5-1 of 36.101}
+78 
+79   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 1, 2, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aad575d1b07ccac0218783bbd0f523784c}{UrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574dad3f856f2f166ae12798befabfbd2c99e}{SmallCity}, 121.83, \textcolor{stringliteral}{"2.6GHz model"}), TestCase::QUICK);
+80 
+81   \textcolor{comment}{// Test #4 ITU1411 LOS model (Macro<->UE)}
+82 
+83   freq = 2.1140e9; \textcolor{comment}{// E\_UTRA BAND #1 see table 5.5-1 of 36.101}
+84   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 1, 3, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aad575d1b07ccac0218783bbd0f523784c}{UrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574da017d6be2af0a102a6147e6519d63f54c}{LargeCity}, 81.00, \textcolor{stringliteral}{"ITU1411 LOS"}), TestCase::QUICK);
+85 
+86   \textcolor{comment}{// Test #5 ITU1411 NLOS model (Macro<->UE)}
+87 
+88   freq = 2.1140e9; \textcolor{comment}{// E\_UTRA BAND #1 see table 5.5-1 of 36.101}
+89 
+90   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 1, 4, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aad575d1b07ccac0218783bbd0f523784c}{UrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574da017d6be2af0a102a6147e6519d63f54c}{LargeCity}, 143.69, \textcolor{stringliteral}{"ITU1411 NLOS"}), TestCase::QUICK);
+91 
+92   \textcolor{comment}{// Test #6 ITUP1238 (HeNB <-> UE)}
+93 
+94   freq = 2.1140e9; \textcolor{comment}{// E\_UTRA BAND #1 see table 5.5-1 of 36.101}
+95   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 5, 6, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aad575d1b07ccac0218783bbd0f523784c}{UrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574da017d6be2af0a102a6147e6519d63f54c}{LargeCity}, 88.3855, \textcolor{stringliteral}{"ITUP1238"}), TestCase::QUICK);
+96 
+97   \textcolor{comment}{// Test #7 Outdoor -> Indoor OkumuraHata (Macro<->UE)}
+98 
+99   freq = 2.1140e9; \textcolor{comment}{// E\_UTRA BAND #1 see table 5.5-1 of 36.101}
+100   \textcolor{comment}{// The loss is as in test #2 (large city) plus the building penetration loss}
+101   \textcolor{comment}{// which for ConcreteWithWindows is equal to 7 dB -> 148.55 + 7 = 155.55}
+102   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 1, 7, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aad575d1b07ccac0218783bbd0f523784c}{UrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574da017d6be2af0a102a6147e6519d63f54c}{LargeCity}, 155.55, \textcolor{stringliteral}{"Okumura Hata Outdoor -> Indoor"}), 
+      TestCase::QUICK);
+103 
+104   \textcolor{comment}{// Test #8 Outdoor -> Indoor ITU1411 (Macro<->UE)}
+105   freq = 2.1140e9; \textcolor{comment}{// E\_UTRA BAND #1 see table 5.5-1 of 36.101}
+106   \textcolor{comment}{// The loss is as in test #4 plus the building penetration loss}
+107   \textcolor{comment}{// which for ConcreteWithWindows is equal to 7 dB -> 81.000 + 7 = 88.000}
+108   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 1, 8, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aad575d1b07ccac0218783bbd0f523784c}{UrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574da017d6be2af0a102a6147e6519d63f54c}{LargeCity}, 88.000, \textcolor{stringliteral}{"ITU1411 LOS Outdoor -> Indoor"}), 
+      TestCase::QUICK);
+109 
+110   \textcolor{comment}{// Test #9 Indoor -> Outdoor LOS (HeNB <-> UE)}
+111 
+112   freq = 2.1140e9; \textcolor{comment}{// E\_UTRA BAND #1 see table 5.5-1 of 36.101}
+113   \textcolor{comment}{// The loss is similar of test #4 plus the building penetration loss}
+114   \textcolor{comment}{// which for ConcreteWithWindows is equal to 7 dB and the height gain}
+115   \textcolor{comment}{// (2 floors x 2 dB/floor = 4) -> 81.838 + 7 - 4 = 84.838}
+116   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 9, 10, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aad575d1b07ccac0218783bbd0f523784c}{UrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574da017d6be2af0a102a6147e6519d63f54c}{LargeCity}, 84.838, \textcolor{stringliteral}{"ITU1411 LOS Indoor -> Outdoor"}), 
+      TestCase::QUICK);
+117 
+118   \textcolor{comment}{// Test #10 Indoor -> Outdoor NLOS (HeNB <-> UE)}
+119 
+120   freq = 2.1140e9; \textcolor{comment}{// E\_UTRA BAND #1 see table 5.5-1 of 36.101}
+121   \textcolor{comment}{// The loss is similar as in test #4 plus the building penetration loss}
+122   \textcolor{comment}{// which for ConcreteWithWindows is equal to 7 dB and the height gain}
+123   \textcolor{comment}{// (2 floors x 2 dB/floor = 4) -> 180.90 + 7 - 4 = 183.90}
+124   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classBuildingsPathlossTestCase}{BuildingsPathlossTestCase} (freq, 9, 11, 
+      \hyperlink{group__propagation_gga0e392ed771a28c92112047e63308a53aad575d1b07ccac0218783bbd0f523784c}{UrbanEnvironment}, \hyperlink{group__propagation_gga29c9a1b1a58b6a56054ff5ea4c5a574da017d6be2af0a102a6147e6519d63f54c}{LargeCity}, 183.90, \textcolor{stringliteral}{"ITU1411 NLOS Indoor -> Outdoor"}), 
+      TestCase::QUICK);
+125 
+126 
+127 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+buildings/test/\hyperlink{buildings-pathloss-test_8h}{buildings-\/pathloss-\/test.\+h}\item 
+buildings/test/\hyperlink{buildings-pathloss-test_8cc}{buildings-\/pathloss-\/test.\+cc}\end{DoxyCompactItemize}

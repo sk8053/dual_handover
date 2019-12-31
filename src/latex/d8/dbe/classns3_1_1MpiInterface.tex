@@ -1,0 +1,324 @@
+\hypertarget{classns3_1_1MpiInterface}{}\section{ns3\+:\+:Mpi\+Interface Class Reference}
+\label{classns3_1_1MpiInterface}\index{ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}}
+
+
+\hyperlink{classns3_1_1Singleton}{Singleton} used to interface to the communications infrastructure when running N\+S3 in parallel.  
+
+
+
+
+{\ttfamily \#include $<$mpi-\/interface.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Mpi\+Interface\+:
+% FIG 0
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classns3_1_1MpiInterface_a6cc83aa90c7e203219f8aa3889ae44f7}{Destroy} ()
+\item 
+static uint32\+\_\+t \hyperlink{classns3_1_1MpiInterface_a7f1f671b55948fb1c8f7eb54f22a9619}{Get\+System\+Id} ()
+\item 
+static uint32\+\_\+t \hyperlink{classns3_1_1MpiInterface_ab35c742e7e7ad3fa07cf0dbb92413c82}{Get\+Size} ()
+\item 
+static bool \hyperlink{classns3_1_1MpiInterface_a5964beea2f60d6110bed18b14012e583}{Is\+Enabled} ()
+\item 
+static void \hyperlink{classns3_1_1MpiInterface_ae4512e9386ba0c1cd0857b8ec4620a8b}{Enable} (int $\ast$pargc, char $\ast$$\ast$$\ast$pargv)
+\begin{DoxyCompactList}\small\item\em Sets up parallel communication interface. \end{DoxyCompactList}\item 
+static void \hyperlink{classns3_1_1MpiInterface_ab5c2688cd009d8eaebd49af26beaa04e}{Disable} ()
+\item 
+static void \hyperlink{classns3_1_1MpiInterface_a4e8c1510f211948683038e6ee12e692a}{Send\+Packet} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p}, const \hyperlink{classns3_1_1Time}{Time} \&rx\+Time, uint32\+\_\+t node, uint32\+\_\+t dev)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1ParallelCommunicationInterface}{Parallel\+Communication\+Interface} $\ast$ \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\+\_\+parallel\+Communication\+Interface} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classns3_1_1Singleton}{Singleton} used to interface to the communications infrastructure when running N\+S3 in parallel. 
+
+Delegates the implementation to the specific parallel infrastructure being used. Implementation is defined in the \hyperlink{classns3_1_1ParallelCommunicationInterface}{Parallel\+Communication\+Interface} virtual base class; this A\+PI mirrors that interface. This singleton is responsible for instantiating an instance of the communication interface based on Simulator\+Implementation\+Type attribute in ns3\+::\+Global\+Values. The attribute must be set before Enable is invoked. 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}}
+\subsubsection[{\texorpdfstring{Destroy()}{Destroy()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Mpi\+Interface\+::\+Destroy (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MpiInterface_a6cc83aa90c7e203219f8aa3889ae44f7}{}\label{classns3_1_1MpiInterface_a6cc83aa90c7e203219f8aa3889ae44f7}
+Deletes storage used by the parallel environment. 
+\begin{DoxyCode}
+39 \{
+40   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface});
+41   \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface}->\hyperlink{classns3_1_1ParallelCommunicationInterface_ab647bad738a7ae91d8a993880c7ece10}{Destroy} ();
+42 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}!Disable@{Disable}}
+\index{Disable@{Disable}!ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}}
+\subsubsection[{\texorpdfstring{Disable()}{Disable()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Mpi\+Interface\+::\+Disable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MpiInterface_ab5c2688cd009d8eaebd49af26beaa04e}{}\label{classns3_1_1MpiInterface_ab5c2688cd009d8eaebd49af26beaa04e}
+Terminates the parallel environment. This function must be called after Destroy () 
+\begin{DoxyCode}
+121 \{
+122   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface});
+123   \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface}->\hyperlink{classns3_1_1ParallelCommunicationInterface_adeb1416b3a2e0185b376bbbf0d341fe4}{Disable} ();
+124   \textcolor{keyword}{delete} \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface};
+125   \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface} = 0;
+126 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}!Enable@{Enable}}
+\index{Enable@{Enable}!ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}}
+\subsubsection[{\texorpdfstring{Enable(int $\ast$pargc, char $\ast$$\ast$$\ast$pargv)}{Enable(int *pargc, char ***pargv)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Mpi\+Interface\+::\+Enable (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{pargc, }
+\item[{char $\ast$$\ast$$\ast$}]{pargv}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MpiInterface_ae4512e9386ba0c1cd0857b8ec4620a8b}{}\label{classns3_1_1MpiInterface_ae4512e9386ba0c1cd0857b8ec4620a8b}
+
+
+Sets up parallel communication interface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pargc} & number of command line arguments \\
+\hline
+{\em pargv} & command line arguments\\
+\hline
+\end{DoxyParams}
+Simulator\+Implementation\+Type attribute in ns3\+::\+Global\+Values must be set before Enable is invoked. 
+\begin{DoxyCode}
+77 \{
+78   StringValue simulationTypeValue;
+79   \textcolor{keywordtype}{bool} useDefault = \textcolor{keyword}{true};
+80 
+81   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1GlobalValue_a5ca71172f85db4c2f8c4357e637bb758}{GlobalValue::GetValueByNameFailSafe} (\textcolor{stringliteral}{"SimulatorImplementationType"}
+      , simulationTypeValue))
+82     \{
+83       std::string simulationType = simulationTypeValue.Get ();
+84 
+85       \textcolor{comment}{// Set communication interface based on the simulation type being used.}
+86       \textcolor{comment}{// Defaults to synchronous.}
+87       \textcolor{keywordflow}{if} (simulationType.compare (\textcolor{stringliteral}{"ns3::NullMessageSimulatorImpl"}) == 0)
+88         \{
+89           \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface} = \textcolor{keyword}{new} NullMessageMpiInterface ()
+      ;
+90           useDefault = \textcolor{keyword}{false};
+91         \}
+92       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (simulationType.compare (\textcolor{stringliteral}{"ns3::DistributedSimulatorImpl"}) == 0)
+93         \{
+94           \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface} = \textcolor{keyword}{new} 
+      GrantedTimeWindowMpiInterface ();
+95           useDefault = \textcolor{keyword}{false};
+96         \}
+97     \}
+98 
+99   \textcolor{comment}{// User did not specify a valid parallel simulator; use the default.}
+100   \textcolor{keywordflow}{if} (useDefault)
+101     \{
+102       \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface} = \textcolor{keyword}{new} GrantedTimeWindowMpiInterface 
+      ();
+103       \hyperlink{classns3_1_1GlobalValue_a4fe56773b98d1047cd50e974256fd14a}{GlobalValue::Bind} (\textcolor{stringliteral}{"SimulatorImplementationType"},
+104                          StringValue (\textcolor{stringliteral}{"ns3::DistributedSimulatorImpl"}));
+105       \hyperlink{group__logging_gade7208b4009cdf0e25783cd26766f559}{NS\_LOG\_WARN} (\textcolor{stringliteral}{"SimulatorImplementationType was set to non-parallel simulator; setting type
+       to ns3::DistributedSimulatorImp"});
+106     \}
+107 
+108   \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface}->\hyperlink{classns3_1_1ParallelCommunicationInterface_a0f73feee4076f27f3d80166656bdfdae}{Enable} (pargc, pargv);
+109 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}!Get\+Size@{Get\+Size}}
+\index{Get\+Size@{Get\+Size}!ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}}
+\subsubsection[{\texorpdfstring{Get\+Size()}{GetSize()}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Mpi\+Interface\+::\+Get\+Size (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MpiInterface_ab35c742e7e7ad3fa07cf0dbb92413c82}{}\label{classns3_1_1MpiInterface_ab35c742e7e7ad3fa07cf0dbb92413c82}
+\begin{DoxyReturn}{Returns}
+number of parallel tasks
+\end{DoxyReturn}
+When running a sequential simulation this will return a size of 1. 
+\begin{DoxyCode}
+55 \{
+56   \textcolor{keywordflow}{if} ( \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface} )
+57     \textcolor{keywordflow}{return} \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface}->
+      \hyperlink{classns3_1_1ParallelCommunicationInterface_ab9700002497437a15959e9009eedfcdb}{GetSize} ();
+58   \textcolor{keywordflow}{else}
+59     \textcolor{keywordflow}{return} 1;
+60 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}!Get\+System\+Id@{Get\+System\+Id}}
+\index{Get\+System\+Id@{Get\+System\+Id}!ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}}
+\subsubsection[{\texorpdfstring{Get\+System\+Id()}{GetSystemId()}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Mpi\+Interface\+::\+Get\+System\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MpiInterface_a7f1f671b55948fb1c8f7eb54f22a9619}{}\label{classns3_1_1MpiInterface_a7f1f671b55948fb1c8f7eb54f22a9619}
+\begin{DoxyReturn}{Returns}
+system identification
+\end{DoxyReturn}
+When running a sequential simulation this will return a system\+ID of 0. 
+\begin{DoxyCode}
+46 \{
+47   \textcolor{keywordflow}{if} ( \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface} )
+48     \textcolor{keywordflow}{return} \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface}->
+      \hyperlink{classns3_1_1ParallelCommunicationInterface_a9070c6c68ffa2223d422f132ec8e27b9}{GetSystemId} ();
+49   \textcolor{keywordflow}{else}
+50     \textcolor{keywordflow}{return} 0;
+51 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}!Is\+Enabled@{Is\+Enabled}}
+\index{Is\+Enabled@{Is\+Enabled}!ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}}
+\subsubsection[{\texorpdfstring{Is\+Enabled()}{IsEnabled()}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Mpi\+Interface\+::\+Is\+Enabled (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MpiInterface_a5964beea2f60d6110bed18b14012e583}{}\label{classns3_1_1MpiInterface_a5964beea2f60d6110bed18b14012e583}
+\begin{DoxyReturn}{Returns}
+true if parallel communication is enabled 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+64 \{
+65   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface})
+66     \{
+67       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface}->
+      \hyperlink{classns3_1_1ParallelCommunicationInterface_a5f7c1f671a8364f12e238c368ed4ad72}{IsEnabled} ();
+68     \}
+69   \textcolor{keywordflow}{else}
+70     \{
+71       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+72     \}
+73 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 12
+
+
+\index{ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}!Send\+Packet@{Send\+Packet}}
+\index{Send\+Packet@{Send\+Packet}!ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}}
+\subsubsection[{\texorpdfstring{Send\+Packet(\+Ptr$<$ Packet $>$ p, const Time \&rx\+Time, uint32\+\_\+t node, uint32\+\_\+t dev)}{SendPacket(Ptr< Packet > p, const Time &rxTime, uint32_t node, uint32_t dev)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Mpi\+Interface\+::\+Send\+Packet (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Packet} $>$}]{p, }
+\item[{const {\bf Time} \&}]{rx\+Time, }
+\item[{uint32\+\_\+t}]{node, }
+\item[{uint32\+\_\+t}]{dev}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MpiInterface_a4e8c1510f211948683038e6ee12e692a}{}\label{classns3_1_1MpiInterface_a4e8c1510f211948683038e6ee12e692a}
+
+\begin{DoxyParams}{Parameters}
+{\em p} & packet to send \\
+\hline
+{\em rx\+Time} & received time at destination node \\
+\hline
+{\em node} & destination node \\
+\hline
+{\em dev} & destination device\\
+\hline
+\end{DoxyParams}
+Serialize and send a packet to the specified node and net device 
+\begin{DoxyCode}
+113 \{
+114   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface});
+115   \hyperlink{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{g\_parallelCommunicationInterface}->\hyperlink{classns3_1_1ParallelCommunicationInterface_a0a95966814596b4e668825fb00756639}{SendPacket} (p, rxTime, node, 
+      dev);
+116 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 13
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 14
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}!g\+\_\+parallel\+Communication\+Interface@{g\+\_\+parallel\+Communication\+Interface}}
+\index{g\+\_\+parallel\+Communication\+Interface@{g\+\_\+parallel\+Communication\+Interface}!ns3\+::\+Mpi\+Interface@{ns3\+::\+Mpi\+Interface}}
+\subsubsection[{\texorpdfstring{g\+\_\+parallel\+Communication\+Interface}{g_parallelCommunicationInterface}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Parallel\+Communication\+Interface} $\ast$ ns3\+::\+Mpi\+Interface\+::g\+\_\+parallel\+Communication\+Interface = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}{}\label{classns3_1_1MpiInterface_a271d0de418ec6c13f332ae26995c072f}
+Static instance of the instantiated parallel controller. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mpi/model/\hyperlink{mpi-interface_8h}{mpi-\/interface.\+h}\item 
+mpi/model/\hyperlink{mpi-interface_8cc}{mpi-\/interface.\+cc}\end{DoxyCompactItemize}

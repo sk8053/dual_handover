@@ -1,0 +1,235 @@
+\hypertarget{classns3_1_1internal_1_1PointerChecker}{}\section{ns3\+:\+:internal\+:\+:Pointer\+Checker$<$ T $>$ Class Template Reference}
+\label{classns3_1_1internal_1_1PointerChecker}\index{ns3\+::internal\+::\+Pointer\+Checker$<$ T $>$@{ns3\+::internal\+::\+Pointer\+Checker$<$ T $>$}}
+
+
+{\ttfamily \#include $<$pointer.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:internal\+:\+:Pointer\+Checker$<$ T $>$\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:internal\+:\+:Pointer\+Checker$<$ T $>$\+:
+% FIG 1
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{classns3_1_1internal_1_1PointerChecker_acad8471435d5cd6c237eca9b27fc1faf}{Check} (const \hyperlink{classns3_1_1AttributeValue}{Attribute\+Value} \&val) const 
+\item 
+virtual std\+::string \hyperlink{classns3_1_1internal_1_1PointerChecker_a1de6eead99ff22a4aa27e2d936850984}{Get\+Value\+Type\+Name} (void) const 
+\item 
+virtual bool \hyperlink{classns3_1_1internal_1_1PointerChecker_aefcd4fb409f5c139145c083d8f576c6b}{Has\+Underlying\+Type\+Information} (void) const 
+\item 
+virtual std\+::string \hyperlink{classns3_1_1internal_1_1PointerChecker_a44c1b1b1330bd49b320c9e74da55cda4}{Get\+Underlying\+Type\+Information} (void) const 
+\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1AttributeValue}{Attribute\+Value} $>$ \hyperlink{classns3_1_1internal_1_1PointerChecker_a5aefb1bc399b7d30f4272b5bdfe64c4a}{Create} (void) const 
+\item 
+virtual bool \hyperlink{classns3_1_1internal_1_1PointerChecker_ae2e9cb5a3b02ab291b2582ffd11ec66f}{Copy} (const \hyperlink{classns3_1_1AttributeValue}{Attribute\+Value} \&source, \hyperlink{classns3_1_1AttributeValue}{Attribute\+Value} \&destination) const 
+\item 
+virtual \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1internal_1_1PointerChecker_a31af4cef7de16fb123c6489b0a759111}{Get\+Pointee\+Type\+Id} (void) const 
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\\*
+class ns3\+::internal\+::\+Pointer\+Checker$<$ T $>$}
+
+\hyperlink{classns3_1_1internal_1_1PointerChecker}{Pointer\+Checker} implementation. 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}!Check@{Check}}
+\index{Check@{Check}!ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}}
+\subsubsection[{\texorpdfstring{Check(const Attribute\+Value \&val) const }{Check(const AttributeValue &val) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ virtual bool {\bf ns3\+::internal\+::\+Pointer\+Checker}$<$ T $>$\+::Check (
+\begin{DoxyParamCaption}
+\item[{const {\bf Attribute\+Value} \&}]{value}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1internal_1_1PointerChecker_acad8471435d5cd6c237eca9b27fc1faf}{}\label{classns3_1_1internal_1_1PointerChecker_acad8471435d5cd6c237eca9b27fc1faf}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em value} & A pointer to the value to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the input value is both of the right type and if its value is within the requested range. Returns false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1AttributeChecker_a3b0cdc0ac70282a7762605181439dfe4}{ns3\+::\+Attribute\+Checker}.
+
+
+\begin{DoxyCode}
+132                                                        \{
+133     \textcolor{keyword}{const} PointerValue *value = \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const }PointerValue *\textcolor{keyword}{>} (&val);
+134     \textcolor{keywordflow}{if} (value == 0)
+135       \{
+136         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+137       \}
+138     \textcolor{keywordflow}{if} (value->GetObject () == 0)
+139       \{
+140         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+141       \}
+142     T *ptr = \textcolor{keyword}{dynamic\_cast<}T*\textcolor{keyword}{>} (\hyperlink{namespacens3_af2a7557fe9afdd98d8f6f8f6e412cf5a}{PeekPointer} (value->GetObject ()));
+143     \textcolor{keywordflow}{if} (ptr == 0)
+144       \{
+145         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+146       \}
+147     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+148   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}!Copy@{Copy}}
+\index{Copy@{Copy}!ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}}
+\subsubsection[{\texorpdfstring{Copy(const Attribute\+Value \&source, Attribute\+Value \&destination) const }{Copy(const AttributeValue &source, AttributeValue &destination) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ virtual bool {\bf ns3\+::internal\+::\+Pointer\+Checker}$<$ T $>$\+::Copy (
+\begin{DoxyParamCaption}
+\item[{const {\bf Attribute\+Value} \&}]{source, }
+\item[{{\bf Attribute\+Value} \&}]{destination}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1internal_1_1PointerChecker_ae2e9cb5a3b02ab291b2582ffd11ec66f}{}\label{classns3_1_1internal_1_1PointerChecker_ae2e9cb5a3b02ab291b2582ffd11ec66f}
+Copy the source to the destination
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em source} & Source \hyperlink{classns3_1_1AttributeValue}{Attribute\+Value} \\
+\hline
+\mbox{\tt out}  & {\em destination} & Destination \hyperlink{classns3_1_1AttributeValue}{Attribute\+Value} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if copy was successful 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1AttributeChecker_a6958892aff107ac5ad9feb1d0c2728dd}{ns3\+::\+Attribute\+Checker}.
+
+
+\begin{DoxyCode}
+162                                                                                       \{
+163     \textcolor{keyword}{const} PointerValue *src = \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const }PointerValue *\textcolor{keyword}{>} (&source);
+164     PointerValue *dst = \textcolor{keyword}{dynamic\_cast<}PointerValue *\textcolor{keyword}{>} (&destination);
+165     \textcolor{keywordflow}{if} (src == 0 || dst == 0)
+166       \{
+167         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+168       \}
+169     *dst = *src;
+170     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+171   \}
+\end{DoxyCode}
+\index{ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}!Create@{Create}}
+\index{Create@{Create}!ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}}
+\subsubsection[{\texorpdfstring{Create(void) const }{Create(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ virtual {\bf Ptr}$<${\bf Attribute\+Value}$>$ {\bf ns3\+::internal\+::\+Pointer\+Checker}$<$ T $>$\+::Create (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1internal_1_1PointerChecker_a5aefb1bc399b7d30f4272b5bdfe64c4a}{}\label{classns3_1_1internal_1_1PointerChecker_a5aefb1bc399b7d30f4272b5bdfe64c4a}
+\begin{DoxyReturn}{Returns}
+a new instance of an \hyperlink{classns3_1_1AttributeValue}{Attribute\+Value} (wrapper in an Attribute instance) which matches the type of the underlying attribute.
+\end{DoxyReturn}
+This method is typically used to create a temporary variable prior to calling Attribute\+::\+Deserialize\+From\+String. 
+
+Implements \hyperlink{classns3_1_1AttributeChecker_a034af3ccac738b21e0d62e4191c241de}{ns3\+::\+Attribute\+Checker}.
+
+
+\begin{DoxyCode}
+159                                                   \{
+160     \textcolor{keywordflow}{return} ns3::Create<PointerValue> ();
+161   \}
+\end{DoxyCode}
+\index{ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}!Get\+Pointee\+Type\+Id@{Get\+Pointee\+Type\+Id}}
+\index{Get\+Pointee\+Type\+Id@{Get\+Pointee\+Type\+Id}!ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}}
+\subsubsection[{\texorpdfstring{Get\+Pointee\+Type\+Id(void) const }{GetPointeeTypeId(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ virtual {\bf Type\+Id} {\bf ns3\+::internal\+::\+Pointer\+Checker}$<$ T $>$\+::Get\+Pointee\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1internal_1_1PointerChecker_a31af4cef7de16fb123c6489b0a759111}{}\label{classns3_1_1internal_1_1PointerChecker_a31af4cef7de16fb123c6489b0a759111}
+Get the \hyperlink{classns3_1_1TypeId}{Type\+Id} of the base type. \begin{DoxyReturn}{Returns}
+The base \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1PointerChecker_a2026d41907a72b6eb1f698b2c93b4436}{ns3\+::\+Pointer\+Checker}.
+
+
+\begin{DoxyCode}
+172                                                \{
+173     \textcolor{keywordflow}{return} T::GetTypeId ();
+174   \}
+\end{DoxyCode}
+\index{ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}!Get\+Underlying\+Type\+Information@{Get\+Underlying\+Type\+Information}}
+\index{Get\+Underlying\+Type\+Information@{Get\+Underlying\+Type\+Information}!ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}}
+\subsubsection[{\texorpdfstring{Get\+Underlying\+Type\+Information(void) const }{GetUnderlyingTypeInformation(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ virtual std\+::string {\bf ns3\+::internal\+::\+Pointer\+Checker}$<$ T $>$\+::Get\+Underlying\+Type\+Information (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1internal_1_1PointerChecker_a44c1b1b1330bd49b320c9e74da55cda4}{}\label{classns3_1_1internal_1_1PointerChecker_a44c1b1b1330bd49b320c9e74da55cda4}
+\begin{DoxyReturn}{Returns}
+a human-\/readable representation of information about the underlying C++ type. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1AttributeChecker_a1a96c171455980fb9ec4402c44923a18}{ns3\+::\+Attribute\+Checker}.
+
+
+\begin{DoxyCode}
+155                                                               \{
+156     TypeId tid = T::GetTypeId ();
+157     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"ns3::Ptr< "} + tid.GetName () + \textcolor{stringliteral}{" >"};
+158   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}!Get\+Value\+Type\+Name@{Get\+Value\+Type\+Name}}
+\index{Get\+Value\+Type\+Name@{Get\+Value\+Type\+Name}!ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}}
+\subsubsection[{\texorpdfstring{Get\+Value\+Type\+Name(void) const }{GetValueTypeName(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ virtual std\+::string {\bf ns3\+::internal\+::\+Pointer\+Checker}$<$ T $>$\+::Get\+Value\+Type\+Name (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1internal_1_1PointerChecker_a1de6eead99ff22a4aa27e2d936850984}{}\label{classns3_1_1internal_1_1PointerChecker_a1de6eead99ff22a4aa27e2d936850984}
+\begin{DoxyReturn}{Returns}
+the c++ fully-\/qualified typename of the subclass of the \hyperlink{classns3_1_1AttributeValue}{ns3\+::\+Attribute\+Value} base class which is associated to this checker.
+\end{DoxyReturn}
+A typical return value here is Foo\+Value where Foo is the name of the type being wrapped. 
+
+Implements \hyperlink{classns3_1_1AttributeChecker_ae2a0d51af0c8ac143b7c8e942d6a2951}{ns3\+::\+Attribute\+Checker}.
+
+
+\begin{DoxyCode}
+149                                                   \{
+150     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"ns3::PointerValue"};
+151   \}
+\end{DoxyCode}
+\index{ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}!Has\+Underlying\+Type\+Information@{Has\+Underlying\+Type\+Information}}
+\index{Has\+Underlying\+Type\+Information@{Has\+Underlying\+Type\+Information}!ns3\+::internal\+::\+Pointer\+Checker@{ns3\+::internal\+::\+Pointer\+Checker}}
+\subsubsection[{\texorpdfstring{Has\+Underlying\+Type\+Information(void) const }{HasUnderlyingTypeInformation(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ virtual bool {\bf ns3\+::internal\+::\+Pointer\+Checker}$<$ T $>$\+::Has\+Underlying\+Type\+Information (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1internal_1_1PointerChecker_aefcd4fb409f5c139145c083d8f576c6b}{}\label{classns3_1_1internal_1_1PointerChecker_aefcd4fb409f5c139145c083d8f576c6b}
+\begin{DoxyReturn}{Returns}
+true if this checker has information about the underlying C++ type, false otherwise.
+\end{DoxyReturn}
+If this method returns false, the return value of the Get\+Underlying\+Type\+Information method cannot be relied upon. 
+
+Implements \hyperlink{classns3_1_1AttributeChecker_a6e8d7ecc2e7d133904a537216a33ab4c}{ns3\+::\+Attribute\+Checker}.
+
+
+\begin{DoxyCode}
+152                                                          \{
+153     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+154   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{pointer_8h}{pointer.\+h}\end{DoxyCompactItemize}

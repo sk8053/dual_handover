@@ -1,0 +1,696 @@
+\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl}{}\section{ns3\+:\+:Ipv4\+Address\+Generator\+Impl Class Reference}
+\label{classns3_1_1Ipv4AddressGeneratorImpl}\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+
+
+Implementation class of \hyperlink{classns3_1_1Ipv4AddressGenerator}{Ipv4\+Address\+Generator} This generator assigns addresses sequentially from a provided network address; used in topology code. It also keeps track of all addresses assigned to perform duplicate detection.  
+
+
+
+
+Collaboration diagram for ns3\+:\+:Ipv4\+Address\+Generator\+Impl\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1Entry}{Entry}
+\begin{DoxyCompactList}\small\item\em This class holds the allocated addresses. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState}{Network\+State}
+\begin{DoxyCompactList}\small\item\em This class holds the state for a given network. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a1ad727aeda89c70411bd51f48a8eb4bc}{Ipv4\+Address\+Generator\+Impl} ()
+\item 
+virtual \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a1905af6c2edd54ef081ee69cf9be054d}{$\sim$\+Ipv4\+Address\+Generator\+Impl} ()
+\item 
+void \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a48561b86bd2a9e03b4b057fd08074ac0}{Init} (const \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} net, const \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} mask, const \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} addr)
+\begin{DoxyCompactList}\small\item\em Initialise the base network, mask and address for the generator. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_ace2fa2da17d73a800ffac8bef444cb51}{Get\+Network} (const \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} mask) const 
+\begin{DoxyCompactList}\small\item\em Get the current network of the given \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask}. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_aff19f7b39bbc6801b7ff31c56c45a9f2}{Next\+Network} (const \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} mask)
+\begin{DoxyCompactList}\small\item\em Get the next network according to the given \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask}. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a8101796261db946932e55274a623cfb9}{Init\+Address} (const \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} addr, const \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} mask)
+\begin{DoxyCompactList}\small\item\em Set the address for the given mask. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_afd9029e16d648beea57a7b0b960e0264}{Next\+Address} (const \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} mask)
+\begin{DoxyCompactList}\small\item\em Allocate the next \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} for the configured network and mask. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a28522cc11a2ef89ff14f8ffa2b950548}{Get\+Address} (const \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} mask) const 
+\begin{DoxyCompactList}\small\item\em Get the \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} that will be allocated upon Next\+Address () \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9c052edcb5b32990e7b33e5fc064af7d}{Reset} (void)
+\begin{DoxyCompactList}\small\item\em Reset the networks and \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} to zero. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a62767f63770e87118f36e702de8bd26c}{Add\+Allocated} (const \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} addr)
+\begin{DoxyCompactList}\small\item\em Add the \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} to the list of I\+Pv4 entries. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a0c2908ba8c232734e5aef5f8d84f9e78}{Test\+Mode} (void)
+\begin{DoxyCompactList}\small\item\em Used to turn off fatal errors and assertions, for testing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a5049d4c03ccdeb1fcce7ab50baf23a86}{Mask\+To\+Index} (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} mask) const 
+\begin{DoxyCompactList}\small\item\em Create an index number for the network mask. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState}{Network\+State} \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\+\_\+net\+Table} \mbox{[}\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a76a2bff7838831dc3d1027f12e4fac85}{N\+\_\+\+B\+I\+TS}\mbox{]}
+\begin{DoxyCompactList}\small\item\em the available networks \end{DoxyCompactList}\item 
+\hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{std\+::list}$<$ \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1Entry}{Entry} $>$ \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_aa038cfd5736c3d67f5433c3a2aa20cbf}{m\+\_\+entries}
+\begin{DoxyCompactList}\small\item\em contained of allocated addresses \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_ae80732b27ea2032ba783dce3f92d264b}{m\+\_\+test}
+\begin{DoxyCompactList}\small\item\em test mode (if true) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const uint32\+\_\+t \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a76a2bff7838831dc3d1027f12e4fac85}{N\+\_\+\+B\+I\+TS} = 32
+\begin{DoxyCompactList}\small\item\em the number of bits in the address \end{DoxyCompactList}\item 
+static const uint32\+\_\+t \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_ad39d68d2d28c578b8c90be437c853c35}{M\+O\+S\+T\+\_\+\+S\+I\+G\+N\+I\+F\+I\+C\+A\+N\+T\+\_\+\+B\+IT} = 0x80000000
+\begin{DoxyCompactList}\small\item\em M\+SB set to 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation class of \hyperlink{classns3_1_1Ipv4AddressGenerator}{Ipv4\+Address\+Generator} This generator assigns addresses sequentially from a provided network address; used in topology code. It also keeps track of all addresses assigned to perform duplicate detection. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!Ipv4\+Address\+Generator\+Impl@{Ipv4\+Address\+Generator\+Impl}}
+\index{Ipv4\+Address\+Generator\+Impl@{Ipv4\+Address\+Generator\+Impl}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{Ipv4\+Address\+Generator\+Impl()}{Ipv4AddressGeneratorImpl()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+Ipv4\+Address\+Generator\+Impl (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_a1ad727aeda89c70411bd51f48a8eb4bc}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_a1ad727aeda89c70411bd51f48a8eb4bc}
+
+\begin{DoxyCode}
+174   : \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_aa038cfd5736c3d67f5433c3a2aa20cbf}{m\_entries} (), \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_ae80732b27ea2032ba783dce3f92d264b}{m\_test} (\textcolor{keyword}{false})
+175 \{
+176   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+177   \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9c052edcb5b32990e7b33e5fc064af7d}{Reset} ();
+178 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!````~Ipv4\+Address\+Generator\+Impl@{$\sim$\+Ipv4\+Address\+Generator\+Impl}}
+\index{````~Ipv4\+Address\+Generator\+Impl@{$\sim$\+Ipv4\+Address\+Generator\+Impl}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{$\sim$\+Ipv4\+Address\+Generator\+Impl()}{~Ipv4AddressGeneratorImpl()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::$\sim$\+Ipv4\+Address\+Generator\+Impl (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_a1905af6c2edd54ef081ee69cf9be054d}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_a1905af6c2edd54ef081ee69cf9be054d}
+
+\begin{DoxyCode}
+220 \{
+221   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+222 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!Add\+Allocated@{Add\+Allocated}}
+\index{Add\+Allocated@{Add\+Allocated}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{Add\+Allocated(const Ipv4\+Address addr)}{AddAllocated(const Ipv4Address addr)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+Add\+Allocated (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv4\+Address}}]{addr}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_a62767f63770e87118f36e702de8bd26c}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_a62767f63770e87118f36e702de8bd26c}
+
+
+Add the \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} to the list of I\+Pv4 entries. 
+
+Typically, this is used by external address allocators that want to make use of this class\textquotesingle{}s ability to track duplicates. Add\+Allocated is always called internally for any address generated by Next\+Address ()
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & The \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} to be added to the list of \hyperlink{classns3_1_1Ipv4}{Ipv4} entries \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+345 \{
+346   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << address);
+347 
+348   uint32\_t addr = address.Get ();
+349 
+350   \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} (addr, \textcolor{stringliteral}{"Ipv4AddressGeneratorImpl::Add(): Allocating the broadcast
+       address is not a good idea"}); 
+351  
+352   std::list<Entry>::iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+353 
+354   \textcolor{keywordflow}{for} (i = \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_aa038cfd5736c3d67f5433c3a2aa20cbf}{m\_entries}.begin (); i != \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_aa038cfd5736c3d67f5433c3a2aa20cbf}{m\_entries}.end (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+355     \{
+356       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"examine entry: "} << Ipv4Address ((*i).addrLow) << 
+357                     \textcolor{stringliteral}{" to "} << Ipv4Address ((*i).addrHigh));
+358 \textcolor{comment}{//}
+359 \textcolor{comment}{// First things first.  Is there an address collision -- that is, does the}
+360 \textcolor{comment}{// new address fall in a previously allocated block of addresses.}
+361 \textcolor{comment}{//}
+362       \textcolor{keywordflow}{if} (addr >= (*i).addrLow && addr <= (*i).addrHigh)
+363         \{
+364           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Ipv4AddressGeneratorImpl::Add(): Address Collision: "} << Ipv4Address (
+      addr)); 
+365           \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_ae80732b27ea2032ba783dce3f92d264b}{m\_test}) 
+366             \{
+367               \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Ipv4AddressGeneratorImpl::Add(): Address Collision: "} << 
+      Ipv4Address (addr));
+368             \}
+369           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+370         \}
+371 \textcolor{comment}{//}
+372 \textcolor{comment}{// If the new address is less than the lowest address in the current block,}
+373 \textcolor{comment}{// and can't be merged into to the current block, then insert it as a new}
+374 \textcolor{comment}{// block before the current block.}
+375 \textcolor{comment}{//}
+376       \textcolor{keywordflow}{if} (addr < (*i).addrLow - 1)
+377         \{
+378           \textcolor{keywordflow}{break};
+379         \}
+380 \textcolor{comment}{//}
+381 \textcolor{comment}{// If the new address fits at the end of the block, look ahead to the next }
+382 \textcolor{comment}{// block and make sure it's not a collision there.  If we won't overlap, then}
+383 \textcolor{comment}{// just extend the current block by one address.  We expect that completely}
+384 \textcolor{comment}{// filled network ranges will be a fairly rare occurrence, so we don't worry}
+385 \textcolor{comment}{// about collapsing address range blocks.}
+386 \textcolor{comment}{// }
+387       \textcolor{keywordflow}{if} (addr == (*i).addrHigh + 1)
+388         \{
+389           std::list<Entry>::iterator j = \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+390           ++j;
+391 
+392           \textcolor{keywordflow}{if} (j != \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_aa038cfd5736c3d67f5433c3a2aa20cbf}{m\_entries}.end ())
+393             \{
+394               \textcolor{keywordflow}{if} (addr == (*j).addrLow)
+395                 \{
+396                   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Ipv4AddressGeneratorImpl::Add(): "}
+397                                 \textcolor{stringliteral}{"Address Collision: "} << Ipv4Address (addr));
+398                   \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_ae80732b27ea2032ba783dce3f92d264b}{m\_test})
+399                     \{
+400                       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Ipv4AddressGeneratorImpl::Add(): Address Collision: "} 
+      << Ipv4Address (addr));
+401                     \}
+402                   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+403                 \}
+404             \}
+405 
+406           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"New addrHigh = "} << Ipv4Address (addr));
+407           (*i).addrHigh = addr;
+408           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+409         \}
+410 \textcolor{comment}{//}
+411 \textcolor{comment}{// If we get here, we know that the next lower block of addresses couldn't }
+412 \textcolor{comment}{// have been extended to include this new address since the code immediately }
+413 \textcolor{comment}{// above would have been executed and that next lower block extended upward.}
+414 \textcolor{comment}{// So we know it's safe to extend the current block down to includ the new}
+415 \textcolor{comment}{// address.}
+416 \textcolor{comment}{//}
+417       \textcolor{keywordflow}{if} (addr == (*i).addrLow - 1)
+418         \{
+419           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"New addrLow = "} << Ipv4Address (addr));
+420           (*i).addrLow = addr;
+421           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+422         \}
+423     \}
+424 
+425   Entry entry;
+426   entry.addrLow = entry.addrHigh = addr;
+427   \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_aa038cfd5736c3d67f5433c3a2aa20cbf}{m\_entries}.insert (i, entry);
+428   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+429 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!Get\+Address@{Get\+Address}}
+\index{Get\+Address@{Get\+Address}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{Get\+Address(const Ipv4\+Mask mask) const }{GetAddress(const Ipv4Mask mask) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Address} ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+Get\+Address (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv4\+Mask}}]{mask}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_a28522cc11a2ef89ff14f8ffa2b950548}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_a28522cc11a2ef89ff14f8ffa2b950548}
+
+
+Get the \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} that will be allocated upon Next\+Address () 
+
+Does not change the internal state; just is used to peek the next address that will be allocated upon Next\+Address ()
+
+
+\begin{DoxyParams}{Parameters}
+{\em mask} & The \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} for the current network \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the I\+Pv4 address 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+304 \{
+305   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mask);
+306 
+307   uint32\_t index = \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a5049d4c03ccdeb1fcce7ab50baf23a86}{MaskToIndex} (mask);
+308 
+309   \textcolor{keywordflow}{return} Ipv4Address (
+310            (\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].network << \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].shift) |
+311            \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].addr);
+312 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!Get\+Network@{Get\+Network}}
+\index{Get\+Network@{Get\+Network}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{Get\+Network(const Ipv4\+Mask mask) const }{GetNetwork(const Ipv4Mask mask) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Address} ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+Get\+Network (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv4\+Mask}}]{mask}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_ace2fa2da17d73a800ffac8bef444cb51}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_ace2fa2da17d73a800ffac8bef444cb51}
+
+
+Get the current network of the given \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask}. 
+
+Does not change the internal state; this just peeks at the current network
+
+
+\begin{DoxyParams}{Parameters}
+{\em mask} & The \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} for the current network \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the I\+Pv4 address of the current network 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+261 \{
+262   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mask);
+263 
+264   uint32\_t index = \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a5049d4c03ccdeb1fcce7ab50baf23a86}{MaskToIndex} (mask);
+265   \textcolor{keywordflow}{return} Ipv4Address (\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].network << \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].shift);
+266 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!Init@{Init}}
+\index{Init@{Init}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{Init(const Ipv4\+Address net, const Ipv4\+Mask mask, const Ipv4\+Address addr)}{Init(const Ipv4Address net, const Ipv4Mask mask, const Ipv4Address addr)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+Init (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv4\+Address}}]{net, }
+\item[{const {\bf Ipv4\+Mask}}]{mask, }
+\item[{const {\bf Ipv4\+Address}}]{addr}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_a48561b86bd2a9e03b4b057fd08074ac0}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_a48561b86bd2a9e03b4b057fd08074ac0}
+
+
+Initialise the base network, mask and address for the generator. 
+
+The first call to \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_afd9029e16d648beea57a7b0b960e0264}{Next\+Address()} or \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a28522cc11a2ef89ff14f8ffa2b950548}{Get\+Address()} will return the value passed in.
+
+
+\begin{DoxyParams}{Parameters}
+{\em net} & The network for the base \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} \\
+\hline
+{\em mask} & The network mask of the base \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} \\
+\hline
+{\em addr} & The base address used for initialization \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+229 \{
+230   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << net << mask << addr);
+231 \textcolor{comment}{//}
+232 \textcolor{comment}{// We're going to be playing with the actual bits in the network and mask so}
+233 \textcolor{comment}{// pull them out into ints.}
+234 \textcolor{comment}{//}
+235   uint32\_t maskBits = mask.Get ();
+236   uint32\_t netBits = net.Get ();
+237   uint32\_t addrBits = addr.Get ();
+238 \textcolor{comment}{//}
+239 \textcolor{comment}{// Some quick reasonableness testing.}
+240 \textcolor{comment}{//}
+241   \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} ((netBits & ~maskBits) == 0, \textcolor{stringliteral}{"Ipv4AddressGeneratorImpl::Init ():
+       Inconsistent network and mask"});
+242   \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} ((addrBits & maskBits) == 0, \textcolor{stringliteral}{"Ipv4AddressGeneratorImpl::Init ():
+       Inconsistent address and mask"});
+243 
+244 \textcolor{comment}{//}
+245 \textcolor{comment}{// Convert the network mask into an index into the network number table.}
+246 \textcolor{comment}{// The network number comes in to us properly aligned for the mask and so}
+247 \textcolor{comment}{// needs to be shifted right into the normalized position (lowest bit of the}
+248 \textcolor{comment}{// network number at bit zero of the int that holds it).}
+249 \textcolor{comment}{//}
+250   uint32\_t index = \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a5049d4c03ccdeb1fcce7ab50baf23a86}{MaskToIndex} (mask);
+251 
+252   \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState_afe15739547ef60d7ba74c3ab6b83e6f8}{network} = netBits >> \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].
+      \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState_a2cc2b6173f3cb653762ea92dc986cf2c}{shift};
+253   \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} (addrBits <= \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].addrMax, \textcolor{stringliteral}{"
+      Ipv4AddressGeneratorImpl::Init(): Address overflow"});
+254   \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState_a9ef9d11050694760071d58b72659a7a3}{addr} = addrBits;
+255   \textcolor{keywordflow}{return};
+256 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!Init\+Address@{Init\+Address}}
+\index{Init\+Address@{Init\+Address}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{Init\+Address(const Ipv4\+Address addr, const Ipv4\+Mask mask)}{InitAddress(const Ipv4Address addr, const Ipv4Mask mask)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+Init\+Address (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv4\+Address}}]{addr, }
+\item[{const {\bf Ipv4\+Mask}}]{mask}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_a8101796261db946932e55274a623cfb9}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_a8101796261db946932e55274a623cfb9}
+
+
+Set the address for the given mask. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & The address to set for the current mask \\
+\hline
+{\em mask} & The \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} whose address is to be set \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+291 \{
+292   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << addr << mask);
+293 
+294   uint32\_t index = \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a5049d4c03ccdeb1fcce7ab50baf23a86}{MaskToIndex} (mask);
+295   uint32\_t addrBits = addr.Get ();
+296 
+297   \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} (addrBits <= \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].addrMax, \textcolor{stringliteral}{"
+      Ipv4AddressGeneratorImpl::InitAddress(): Address overflow"});
+298   \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState_a9ef9d11050694760071d58b72659a7a3}{addr} = addrBits;
+299 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!Mask\+To\+Index@{Mask\+To\+Index}}
+\index{Mask\+To\+Index@{Mask\+To\+Index}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{Mask\+To\+Index(\+Ipv4\+Mask mask) const }{MaskToIndex(Ipv4Mask mask) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+Mask\+To\+Index (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Mask}}]{mask}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_a5049d4c03ccdeb1fcce7ab50baf23a86}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_a5049d4c03ccdeb1fcce7ab50baf23a86}
+
+
+Create an index number for the network mask. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mask} & the mask to index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an index 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+440 \{
+441   
+442   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mask);
+443   
+444 \textcolor{comment}{//}
+445 \textcolor{comment}{// We've been given a mask that has a higher order bit set for each bit of the}
+446 \textcolor{comment}{// network number.  In order to translate this mask into an index, we just need}
+447 \textcolor{comment}{// to count the number of zero bits in the mask.  We do this in a loop in which}
+448 \textcolor{comment}{// we shift the mask right until we find the first nonzero bit.  This tells us}
+449 \textcolor{comment}{// the number of zero bits, and from this we infer the number of nonzero bits}
+450 \textcolor{comment}{// which is the number of bits in the mask.}
+451 \textcolor{comment}{//}
+452 \textcolor{comment}{// We use the number of bits in the mask as the number of bits in the network}
+453 \textcolor{comment}{// number and as the index into the network number state table.}
+454 \textcolor{comment}{//}
+455   uint32\_t maskBits = mask.Get ();
+456 
+457   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a76a2bff7838831dc3d1027f12e4fac85}{N\_BITS}; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+458     \{
+459       \textcolor{keywordflow}{if} (maskBits & 1)
+460         \{
+461           uint32\_t index = N\_BITS - \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+462           \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} (index > 0 && index < N\_BITS, \textcolor{stringliteral}{"
+      Ipv4AddressGenerator::MaskToIndex(): Illegal Mask"});
+463           \textcolor{keywordflow}{return} index;
+464         \}
+465       maskBits >>= 1;
+466     \}
+467   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (\textcolor{keyword}{false}, \textcolor{stringliteral}{"Ipv4AddressGenerator::MaskToIndex(): Impossible"});
+468   \textcolor{keywordflow}{return} 0;
+469 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!Next\+Address@{Next\+Address}}
+\index{Next\+Address@{Next\+Address}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{Next\+Address(const Ipv4\+Mask mask)}{NextAddress(const Ipv4Mask mask)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Address} ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+Next\+Address (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv4\+Mask}}]{mask}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_afd9029e16d648beea57a7b0b960e0264}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_afd9029e16d648beea57a7b0b960e0264}
+
+
+Allocate the next \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} for the configured network and mask. 
+
+This operation is a post-\/increment, meaning that the first address allocated will be the one that was initially configured.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mask} & The \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} for the current network \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the I\+Pv4 address 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+316 \{
+317   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mask);
+318 \textcolor{comment}{//}
+319 \textcolor{comment}{// The way this is expected to be used is that an address and network prefix}
+320 \textcolor{comment}{// are initialized, and then NextAddress() is called repeatedly to set the}
+321 \textcolor{comment}{// addresses on a given subnet.  The client will expect that the first address}
+322 \textcolor{comment}{// she gets back is the one she used to initialize the generator with.  This}
+323 \textcolor{comment}{// implies that this operation is a post-increment.}
+324 \textcolor{comment}{//}
+325   uint32\_t index = \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a5049d4c03ccdeb1fcce7ab50baf23a86}{MaskToIndex} (mask);
+326 
+327   \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} (\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].addr <= 
+      \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].addrMax,
+328                        \textcolor{stringliteral}{"Ipv4AddressGeneratorImpl::NextAddress(): Address overflow"});
+329 
+330   Ipv4Address addr = Ipv4Address (
+331       (\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].network << \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].shift) |
+332       \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].addr);
+333 
+334   ++\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState_a9ef9d11050694760071d58b72659a7a3}{addr};
+335 \textcolor{comment}{//}
+336 \textcolor{comment}{// Make a note that we've allocated this address -- used for address collision}
+337 \textcolor{comment}{// detection.}
+338 \textcolor{comment}{//}
+339   \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a62767f63770e87118f36e702de8bd26c}{AddAllocated} (addr);
+340   \textcolor{keywordflow}{return} addr;
+341 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!Next\+Network@{Next\+Network}}
+\index{Next\+Network@{Next\+Network}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{Next\+Network(const Ipv4\+Mask mask)}{NextNetwork(const Ipv4Mask mask)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Address} ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+Next\+Network (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv4\+Mask}}]{mask}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_aff19f7b39bbc6801b7ff31c56c45a9f2}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_aff19f7b39bbc6801b7ff31c56c45a9f2}
+
+
+Get the next network according to the given \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask}. 
+
+This operation is a pre-\/increment, meaning that the internal state is changed before returning the new network address.
+
+This also resets the address to the base address that was used for initialization.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mask} & The \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} used to set the next network \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the I\+Pv4 address of the next network 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+271 \{
+272   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mask);
+273 \textcolor{comment}{//}
+274 \textcolor{comment}{// The way this is expected to be used is that an address and network prefix}
+275 \textcolor{comment}{// are initialized, and then NextAddress() is called repeatedly to set the}
+276 \textcolor{comment}{// addresses on a given subnet.  The client will expect that the first }
+277 \textcolor{comment}{// addresses will use the network prefix she used to initialize the generator}
+278 \textcolor{comment}{// with.  After a subnet is assigned, the client will call NextNetwork to }
+279 \textcolor{comment}{// get the network number of the next subnet.  This implies that that this}
+280 \textcolor{comment}{// operation is a pre-increment.}
+281 \textcolor{comment}{//}
+282   uint32\_t index = \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a5049d4c03ccdeb1fcce7ab50baf23a86}{MaskToIndex} (mask);
+283   ++\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState_afe15739547ef60d7ba74c3ab6b83e6f8}{network};
+284   \textcolor{keywordflow}{return} Ipv4Address (\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].network << \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[index].shift);
+285 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!Reset@{Reset}}
+\index{Reset@{Reset}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{Reset(void)}{Reset(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+Reset (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_a9c052edcb5b32990e7b33e5fc064af7d}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_a9c052edcb5b32990e7b33e5fc064af7d}
+
+
+Reset the networks and \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} to zero. 
+
+
+\begin{DoxyCode}
+182 \{
+183   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+184 
+185   uint32\_t mask = 0;
+186 \textcolor{comment}{//}
+187 \textcolor{comment}{// There are 32 possible masks in a 32-bit integer.  Two of these are illegal}
+188 \textcolor{comment}{// for a network mask (0x00000000 and 0xffffffff).  Valid network masks}
+189 \textcolor{comment}{// correspond to some nonzero number of high order bits set to one followed by }
+190 \textcolor{comment}{// some nonzero number of lower order bits set to zero.}
+191 \textcolor{comment}{//}
+192 \textcolor{comment}{// We look at a network number as an n-bit number where n is defined as the }
+193 \textcolor{comment}{// number of bits in each mask.  Allocating a new network number is simply }
+194 \textcolor{comment}{// incrementing this number.}
+195 \textcolor{comment}{//}
+196 \textcolor{comment}{// In order to combine an allocated network number with an IP address, we have}
+197 \textcolor{comment}{// to shift the network into the correct alignment with respect to its mask.}
+198 \textcolor{comment}{// For example, a network mask of 0xff000000 admits the possibility of 256}
+199 \textcolor{comment}{// different network numbers since there are eight bits available.  To create}
+200 \textcolor{comment}{// IP addresses, we need to shift the network number counter left by 24 bits}
+201 \textcolor{comment}{// to put it in correct alignment.  This leaves 24 bits left for addresses.}
+202 \textcolor{comment}{// We make sure we don't overflow by saving a maximum address number which is}
+203 \textcolor{comment}{// just the inverse of the mask (~mask).}
+204 \textcolor{comment}{//}
+205   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a76a2bff7838831dc3d1027f12e4fac85}{N\_BITS}; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+206     \{
+207       \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState_af72c61673bc535c22b2dedd6afd21b4d}{mask} = mask;
+208       mask >>= 1;
+209       mask |= \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_ad39d68d2d28c578b8c90be437c853c35}{MOST\_SIGNIFICANT\_BIT};
+210       \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState_afe15739547ef60d7ba74c3ab6b83e6f8}{network} = 1;
+211       \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState_a9ef9d11050694760071d58b72659a7a3}{addr} = 1;
+212       \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState_adab2718b8dd6b5236d57199c3e60e5f2}{addrMax} = ~mask;
+213       \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{m\_netTable}[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].\hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_1_1NetworkState_a2cc2b6173f3cb653762ea92dc986cf2c}{shift} = N\_BITS - \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+214     \}
+215   \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_aa038cfd5736c3d67f5433c3a2aa20cbf}{m\_entries}.clear ();
+216   \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_ae80732b27ea2032ba783dce3f92d264b}{m\_test} = \textcolor{keyword}{false};
+217 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 12
+
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!Test\+Mode@{Test\+Mode}}
+\index{Test\+Mode@{Test\+Mode}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{Test\+Mode(void)}{TestMode(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+Test\+Mode (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_a0c2908ba8c232734e5aef5f8d84f9e78}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_a0c2908ba8c232734e5aef5f8d84f9e78}
+
+
+Used to turn off fatal errors and assertions, for testing. 
+
+
+\begin{DoxyCode}
+433 \{
+434   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+435   \hyperlink{classns3_1_1Ipv4AddressGeneratorImpl_ae80732b27ea2032ba783dce3f92d264b}{m\_test} = \textcolor{keyword}{true};
+436 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!m\+\_\+entries@{m\+\_\+entries}}
+\index{m\+\_\+entries@{m\+\_\+entries}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{m\+\_\+entries}{m_entries}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+::list}$<${\bf Entry}$>$ ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::m\+\_\+entries\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_aa038cfd5736c3d67f5433c3a2aa20cbf}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_aa038cfd5736c3d67f5433c3a2aa20cbf}
+
+
+contained of allocated addresses 
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!m\+\_\+net\+Table@{m\+\_\+net\+Table}}
+\index{m\+\_\+net\+Table@{m\+\_\+net\+Table}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{m\+\_\+net\+Table}{m_netTable}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Network\+State} ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::m\+\_\+net\+Table\mbox{[}{\bf N\+\_\+\+B\+I\+TS}\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_a9cdf3f8008d6e9d7ce32272db4d6dcc9}
+
+
+the available networks 
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!m\+\_\+test@{m\+\_\+test}}
+\index{m\+\_\+test@{m\+\_\+test}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{m\+\_\+test}{m_test}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::m\+\_\+test\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_ae80732b27ea2032ba783dce3f92d264b}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_ae80732b27ea2032ba783dce3f92d264b}
+
+
+test mode (if true) 
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!M\+O\+S\+T\+\_\+\+S\+I\+G\+N\+I\+F\+I\+C\+A\+N\+T\+\_\+\+B\+IT@{M\+O\+S\+T\+\_\+\+S\+I\+G\+N\+I\+F\+I\+C\+A\+N\+T\+\_\+\+B\+IT}}
+\index{M\+O\+S\+T\+\_\+\+S\+I\+G\+N\+I\+F\+I\+C\+A\+N\+T\+\_\+\+B\+IT@{M\+O\+S\+T\+\_\+\+S\+I\+G\+N\+I\+F\+I\+C\+A\+N\+T\+\_\+\+B\+IT}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{M\+O\+S\+T\+\_\+\+S\+I\+G\+N\+I\+F\+I\+C\+A\+N\+T\+\_\+\+B\+IT}{MOST_SIGNIFICANT_BIT}}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+M\+O\+S\+T\+\_\+\+S\+I\+G\+N\+I\+F\+I\+C\+A\+N\+T\+\_\+\+B\+IT = 0x80000000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_ad39d68d2d28c578b8c90be437c853c35}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_ad39d68d2d28c578b8c90be437c853c35}
+
+
+M\+SB set to 1. 
+
+\index{ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}!N\+\_\+\+B\+I\+TS@{N\+\_\+\+B\+I\+TS}}
+\index{N\+\_\+\+B\+I\+TS@{N\+\_\+\+B\+I\+TS}!ns3\+::\+Ipv4\+Address\+Generator\+Impl@{ns3\+::\+Ipv4\+Address\+Generator\+Impl}}
+\subsubsection[{\texorpdfstring{N\+\_\+\+B\+I\+TS}{N_BITS}}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t ns3\+::\+Ipv4\+Address\+Generator\+Impl\+::\+N\+\_\+\+B\+I\+TS = 32\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressGeneratorImpl_a76a2bff7838831dc3d1027f12e4fac85}{}\label{classns3_1_1Ipv4AddressGeneratorImpl_a76a2bff7838831dc3d1027f12e4fac85}
+
+
+the number of bits in the address 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{ipv4-address-generator_8cc}{ipv4-\/address-\/generator.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,492 @@
+\hypertarget{lena-frequency-reuse_8cc}{}\section{lte/examples/lena-\/frequency-\/reuse.cc File Reference}
+\label{lena-frequency-reuse_8cc}\index{lte/examples/lena-\/frequency-\/reuse.\+cc@{lte/examples/lena-\/frequency-\/reuse.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/lte-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$ns3/buildings-\/helper.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/spectrum-\/module.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/log.\+h$>$}\\*
+Include dependency graph for lena-\/frequency-\/reuse.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{lena-frequency-reuse_8cc_adab596ccde2673537a20e5b2e1f7826d}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Lena\+Frequency\+Reuse\char`\"{})
+\item 
+void \hyperlink{lena-frequency-reuse_8cc_ad818a3dd4c090b8ecaba926e5272c409}{Print\+Gnuplottable\+Ue\+List\+To\+File} (std\+::string filename)
+\item 
+void \hyperlink{lena-frequency-reuse_8cc_a7e3aa5272ba032faa7717e0f3ba2f73d}{Print\+Gnuplottable\+Enb\+List\+To\+File} (std\+::string filename)
+\item 
+int \hyperlink{lena-frequency-reuse_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{lena-\/frequency-\/reuse.\+cc@{lena-\/frequency-\/reuse.\+cc}!main@{main}}
+\index{main@{main}!lena-\/frequency-\/reuse.\+cc@{lena-\/frequency-\/reuse.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-frequency-reuse_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{lena-frequency-reuse_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+93 \{
+94   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteSpectrumPhy::CtrlErrorModelEnabled"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+95   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteSpectrumPhy::DataErrorModelEnabled"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+96   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteHelper::UseIdealRrc"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+97   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteHelper::UsePdschForCqiGeneration"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+98 
+99   \textcolor{comment}{//Uplink Power Control}
+100   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteUePhy::EnableUplinkPowerControl"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+101   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteUePowerControl::ClosedLoop"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+102   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteUePowerControl::AccumulationEnabled"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+103 
+104   uint32\_t runId = 3;
+105   uint16\_t numberOfRandomUes = 0;
+106   \textcolor{keywordtype}{double} simTime = 2.500;
+107   \textcolor{keywordtype}{bool} generateSpectrumTrace = \textcolor{keyword}{false};
+108   \textcolor{keywordtype}{bool} generateRem = \textcolor{keyword}{false};
+109   int32\_t remRbId = -1;
+110   uint8\_t bandwidth = 25;
+111   \textcolor{keywordtype}{double} distance = 1000;
+112   \hyperlink{classns3_1_1Box}{Box} macroUeBox = \hyperlink{classns3_1_1Box}{Box} (-distance * 0.5, distance * 1.5, -distance * 0.5, distance * 1.5, 1.5, 1.5);
+113 
+114   \textcolor{comment}{// Command line arguments}
+115   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+116   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"numberOfUes"}, \textcolor{stringliteral}{"Number of random UEs"}, numberOfRandomUes);
+117   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"simTime"}, \textcolor{stringliteral}{"Total duration of the simulation (in seconds)"}, simTime);
+118   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"generateSpectrumTrace"}, \textcolor{stringliteral}{"if true, will generate a Spectrum Analyzer trace"}, 
+      generateSpectrumTrace);
+119   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"generateRem"}, \textcolor{stringliteral}{"if true, will generate a REM and then abort the simulation"}, 
+      generateRem);
+120   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"remRbId"}, \textcolor{stringliteral}{"Resource Block Id, for which REM will be generated,"}
+121                 \textcolor{stringliteral}{"default value is -1, what means REM will be averaged from all RBs"}, remRbId);
+122   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"runId"}, \textcolor{stringliteral}{"runId"}, runId);
+123   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+124 
+125   RngSeedManager::SetSeed (1);
+126   RngSeedManager::SetRun (runId);
+127 
+128   \hyperlink{classns3_1_1Ptr}{Ptr<LteHelper>} lteHelper = CreateObject<LteHelper> ();
+129 
+130   \textcolor{comment}{// Create Nodes: eNodeB and UE}
+131   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+132   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} centerUeNodes;
+133   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} edgeUeNodes;
+134   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} randomUeNodes;
+135   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (3);
+136   centerUeNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (3);
+137   edgeUeNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (3);
+138   randomUeNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (numberOfRandomUes);
+139 
+140 
+141 \textcolor{comment}{/*   the topology is the following:}
+142 \textcolor{comment}{ *                 eNB3}
+143 \textcolor{comment}{ *                /     \(\backslash\)}
+144 \textcolor{comment}{ *               /       \(\backslash\)}
+145 \textcolor{comment}{ *              /         \(\backslash\)}
+146 \textcolor{comment}{ *             /           \(\backslash\)}
+147 \textcolor{comment}{ *   distance /             \(\backslash\) distance}
+148 \textcolor{comment}{ *           /      UEs      \(\backslash\)}
+149 \textcolor{comment}{ *          /                 \(\backslash\)}
+150 \textcolor{comment}{ *         /                   \(\backslash\)}
+151 \textcolor{comment}{ *        /                     \(\backslash\)}
+152 \textcolor{comment}{ *       /                       \(\backslash\)}
+153 \textcolor{comment}{ *   eNB1-------------------------eNB2}
+154 \textcolor{comment}{ *                  distance}
+155 \textcolor{comment}{ */}
+156 
+157   \textcolor{comment}{// Install Mobility Model}
+158   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} enbPositionAlloc = 
+      CreateObject<ListPositionAllocator> ();
+159   enbPositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));                       \textcolor{comment}{// eNB1}
+160   enbPositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (distance,  0.0, 0.0));                 \textcolor{comment}{// eNB2}
+161   enbPositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (distance * 0.5, distance * 0.866, 0.0));   \textcolor{comment}{// eNB3}
+162   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+163   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+164   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (enbPositionAlloc);
+165   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+166 
+167 
+168   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} edgeUePositionAlloc = 
+      CreateObject<ListPositionAllocator> ();
+169   edgeUePositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (distance * 0.5, distance * 0.28867, 0.0));  \textcolor{comment}{// edgeUE1}
+170   edgeUePositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (distance * 0.5, distance * 0.28867, 0.0));  \textcolor{comment}{// edgeUE2}
+171   edgeUePositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (distance * 0.5, distance * 0.28867, 0.0));  \textcolor{comment}{// edgeUE3}
+172   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (edgeUePositionAlloc);
+173   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (edgeUeNodes);
+174 
+175 
+176   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} centerUePositionAlloc = 
+      CreateObject<ListPositionAllocator> ();
+177   centerUePositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));                                      \textcolor{comment}{//
+       centerUE1}
+178   centerUePositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (distance,  0.0, 0.0));                            \textcolor{comment}{//
+       centerUE2}
+179   centerUePositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (distance * 0.5, distance * 0.866, 0.0));      \textcolor{comment}{// centerUE3}
+180   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (centerUePositionAlloc);
+181   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (centerUeNodes);
+182 
+183 
+184   \hyperlink{classns3_1_1Ptr}{Ptr<RandomBoxPositionAllocator>} randomUePositionAlloc = 
+      CreateObject<RandomBoxPositionAllocator> ();
+185   \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} xVal = CreateObject<UniformRandomVariable> ();
+186   xVal->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (macroUeBox.\hyperlink{classns3_1_1Box_a1fd6a43d53258323331d34da600ff1c5}{xMin}));
+187   xVal->SetAttribute (\textcolor{stringliteral}{"Max"}, DoubleValue (macroUeBox.\hyperlink{classns3_1_1Box_a50021049c756e770329145b25d9533a2}{xMax}));
+188   randomUePositionAlloc->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"X"}, \hyperlink{classns3_1_1PointerValue}{PointerValue} (xVal));
+189   \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} yVal = CreateObject<UniformRandomVariable> ();
+190   yVal->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (macroUeBox.\hyperlink{classns3_1_1Box_a3865ed092f941186823539c9979002f8}{yMin}));
+191   yVal->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (macroUeBox.\hyperlink{classns3_1_1Box_a001fd430a14b19efe925c818a332e392}{yMax}));
+192   randomUePositionAlloc->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Y"}, \hyperlink{classns3_1_1PointerValue}{PointerValue} (yVal));
+193   \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} zVal = CreateObject<UniformRandomVariable> ();
+194   zVal->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (macroUeBox.\hyperlink{classns3_1_1Box_a9ab297b877a5c31dbfb344bd6f027e91}{zMin}));
+195   zVal->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (macroUeBox.\hyperlink{classns3_1_1Box_ae4d135764bbc8421fe82ec91e4693b59}{zMax}));
+196   randomUePositionAlloc->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Z"}, \hyperlink{classns3_1_1PointerValue}{PointerValue} (zVal));
+197   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (randomUePositionAlloc);
+198   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (randomUeNodes);
+199 
+200   \textcolor{comment}{// Create Devices and install them in the Nodes (eNB and UE)}
+201   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbDevs;
+202   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} edgeUeDevs;
+203   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} centerUeDevs;
+204   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} randomUeDevs;
+205   lteHelper->\hyperlink{classns3_1_1LteHelper_a8f86e55b8b80a81732c4b2df00fb25d5}{SetSchedulerType} (\textcolor{stringliteral}{"ns3::PfFfMacScheduler"});
+206   lteHelper->\hyperlink{classns3_1_1LteHelper_a38f8c7f4592b31c0f3dedb53e7909742}{SetSchedulerAttribute} (\textcolor{stringliteral}{"UlCqiFilter"}, 
+      \hyperlink{classns3_1_1EnumValue}{EnumValue} (FfMacScheduler::PUSCH\_UL\_CQI));
+207   lteHelper->\hyperlink{classns3_1_1LteHelper_ac42f0f3d6cd8473d810bfbbeb5d592e0}{SetEnbDeviceAttribute} (\textcolor{stringliteral}{"DlBandwidth"}, UintegerValue (bandwidth));
+208   lteHelper->\hyperlink{classns3_1_1LteHelper_ac42f0f3d6cd8473d810bfbbeb5d592e0}{SetEnbDeviceAttribute} (\textcolor{stringliteral}{"UlBandwidth"}, UintegerValue (bandwidth));
+209 
+210   std::string frAlgorithmType = lteHelper->\hyperlink{classns3_1_1LteHelper_a4512795e75ecff30e9eeca0d26589614}{GetFfrAlgorithmType} ();
+211   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"FrAlgorithmType: "} << frAlgorithmType);
+212 
+213   \textcolor{keywordflow}{if} (frAlgorithmType == \textcolor{stringliteral}{"ns3::LteFrHardAlgorithm"})
+214     \{
+215 
+216       \textcolor{comment}{//Nothing to configure here in automatic mode}
+217 
+218     \}
+219   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (frAlgorithmType == \textcolor{stringliteral}{"ns3::LteFrStrictAlgorithm"})
+220     \{
+221 
+222       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"RsrqThreshold"}, UintegerValue (32));
+223       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"CenterPowerOffset"},
+224                                            UintegerValue (LteRrcSap::PdschConfigDedicated::dB\_6));
+225       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"EdgePowerOffset"},
+226                                            UintegerValue (LteRrcSap::PdschConfigDedicated::dB3));
+227       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"CenterAreaTpc"}, UintegerValue (0));
+228       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"EdgeAreaTpc"}, UintegerValue (3));
+229 
+230       \textcolor{comment}{//ns3::LteFrStrictAlgorithm works with Absolute Mode Uplink Power Control}
+231       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteUePowerControl::AccumulationEnabled"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+232 
+233     \}
+234   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (frAlgorithmType == \textcolor{stringliteral}{"ns3::LteFrSoftAlgorithm"})
+235     \{
+236 
+237       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"AllowCenterUeUseEdgeSubBand"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+238       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"RsrqThreshold"}, UintegerValue (25));
+239       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"CenterPowerOffset"},
+240                                            UintegerValue (LteRrcSap::PdschConfigDedicated::dB\_6));
+241       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"EdgePowerOffset"},
+242                                            UintegerValue (LteRrcSap::PdschConfigDedicated::dB3));
+243       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"CenterAreaTpc"}, UintegerValue (0));
+244       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"EdgeAreaTpc"}, UintegerValue (3));
+245 
+246       \textcolor{comment}{//ns3::LteFrSoftAlgorithm works with Absolute Mode Uplink Power Control}
+247       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteUePowerControl::AccumulationEnabled"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+248 
+249     \}
+250   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (frAlgorithmType == \textcolor{stringliteral}{"ns3::LteFfrSoftAlgorithm"})
+251     \{
+252 
+253       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"CenterRsrqThreshold"}, UintegerValue (30
+      ));
+254       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"EdgeRsrqThreshold"}, UintegerValue (25))
+      ;
+255       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"CenterAreaPowerOffset"},
+256                                            UintegerValue (LteRrcSap::PdschConfigDedicated::dB\_6));
+257       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"MediumAreaPowerOffset"},
+258                                            UintegerValue (LteRrcSap::PdschConfigDedicated::dB\_1dot77));
+259       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"EdgeAreaPowerOffset"},
+260                                            UintegerValue (LteRrcSap::PdschConfigDedicated::dB3));
+261       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"CenterAreaTpc"}, UintegerValue (1));
+262       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"MediumAreaTpc"}, UintegerValue (2));
+263       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"EdgeAreaTpc"}, UintegerValue (3));
+264 
+265       \textcolor{comment}{//ns3::LteFfrSoftAlgorithm works with Absolute Mode Uplink Power Control}
+266       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteUePowerControl::AccumulationEnabled"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+267 
+268     \}
+269   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (frAlgorithmType == \textcolor{stringliteral}{"ns3::LteFfrEnhancedAlgorithm"})
+270     \{
+271 
+272       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"RsrqThreshold"}, UintegerValue (25));
+273       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"DlCqiThreshold"}, UintegerValue (10));
+274       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"UlCqiThreshold"}, UintegerValue (10));
+275       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"CenterAreaPowerOffset"},
+276                                            UintegerValue (LteRrcSap::PdschConfigDedicated::dB\_6));
+277       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"EdgeAreaPowerOffset"},
+278                                            UintegerValue (LteRrcSap::PdschConfigDedicated::dB3));
+279       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"CenterAreaTpc"}, UintegerValue (0));
+280       lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"EdgeAreaTpc"}, UintegerValue (3));
+281 
+282       \textcolor{comment}{//ns3::LteFfrEnhancedAlgorithm works with Absolute Mode Uplink Power Control}
+283       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteUePowerControl::AccumulationEnabled"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+284 
+285     \}
+286   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (frAlgorithmType == \textcolor{stringliteral}{"ns3::LteFfrDistributedAlgorithm"})
+287     \{
+288 
+289       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"ns3::LteFfrDistributedAlgorithm not supported in this example. Please
+       run lena-distributed-ffr"});
+290 
+291     \}
+292   \textcolor{keywordflow}{else}
+293     \{
+294       lteHelper->\hyperlink{classns3_1_1LteHelper_a035c6b03305c1511975362f80425b5fc}{SetFfrAlgorithmType} (\textcolor{stringliteral}{"ns3::LteFrNoOpAlgorithm"});
+295     \}
+296 
+297   lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"FrCellTypeId"}, UintegerValue (1));
+298   enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (enbNodes.Get (0)));
+299 
+300   lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"FrCellTypeId"}, UintegerValue (2));
+301   enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (enbNodes.Get (1)));
+302 
+303   lteHelper->\hyperlink{classns3_1_1LteHelper_a793d56e843a844428851e90752c5f130}{SetFfrAlgorithmAttribute} (\textcolor{stringliteral}{"FrCellTypeId"}, UintegerValue (3));
+304   enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (enbNodes.Get (2)));
+305 
+306   \textcolor{comment}{//FR algorithm reconfiguration if needed}
+307   \hyperlink{classns3_1_1PointerValue}{PointerValue} tmp;
+308   enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0)->GetAttribute (\textcolor{stringliteral}{"LteFfrAlgorithm"}, tmp);
+309   \hyperlink{classns3_1_1Ptr}{Ptr<LteFfrAlgorithm>} ffrAlgorithm = DynamicCast<LteFfrAlgorithm> (tmp.
+      \hyperlink{classns3_1_1PointerValue_a53d0f9f5c538ea6120c96a1ecb1344a8}{GetObject} ());
+310   ffrAlgorithm->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"FrCellTypeId"}, UintegerValue (1));
+311 
+312 
+313   \textcolor{comment}{//Install Ue Device}
+314   edgeUeDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (edgeUeNodes);
+315   centerUeDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (centerUeNodes);
+316   randomUeDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (randomUeNodes);
+317 
+318   \textcolor{comment}{// Attach edge UEs to eNbs}
+319   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < edgeUeDevs.\hyperlink{classns3_1_1NetDeviceContainer_a74cafc212479bc38976bebd118e856b9}{GetN} (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+320     \{
+321       lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (edgeUeDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+322     \}
+323   \textcolor{comment}{// Attach center UEs to eNbs}
+324   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < centerUeDevs.\hyperlink{classns3_1_1NetDeviceContainer_a74cafc212479bc38976bebd118e856b9}{GetN} (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+325     \{
+326       lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (centerUeDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+327     \}
+328 
+329   \textcolor{comment}{// Attach UE to a eNB}
+330   lteHelper->\hyperlink{classns3_1_1LteHelper_af1e68c53f22b705f1c41753558240999}{AttachToClosestEnb} (randomUeDevs, enbDevs);
+331 
+332   \textcolor{comment}{// Activate a data radio bearer}
+333   \textcolor{keyword}{enum} \hyperlink{structns3_1_1EpsBearer_aecf0c67109c5eb4ec0b07226fff5885e}{EpsBearer::Qci} q = EpsBearer::GBR\_CONV\_VOICE;
+334   \hyperlink{structns3_1_1EpsBearer}{EpsBearer} bearer (q);
+335   lteHelper->\hyperlink{classns3_1_1LteHelper_ac896e16cf162e4beeaa292d39ab1b700}{ActivateDataRadioBearer} (edgeUeDevs, bearer);
+336   lteHelper->\hyperlink{classns3_1_1LteHelper_ac896e16cf162e4beeaa292d39ab1b700}{ActivateDataRadioBearer} (centerUeDevs, bearer);
+337   lteHelper->\hyperlink{classns3_1_1LteHelper_ac896e16cf162e4beeaa292d39ab1b700}{ActivateDataRadioBearer} (randomUeDevs, bearer);
+338 
+339   \textcolor{comment}{//Spectrum analyzer}
+340   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} spectrumAnalyzerNodes;
+341   spectrumAnalyzerNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+342   \hyperlink{classns3_1_1SpectrumAnalyzerHelper}{SpectrumAnalyzerHelper} spectrumAnalyzerHelper;
+343 
+344   \textcolor{keywordflow}{if} (generateSpectrumTrace)
+345     \{
+346       \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} positionAlloc = 
+      CreateObject<ListPositionAllocator> ();
+347       \textcolor{comment}{//position of Spectrum Analyzer}
+348 \textcolor{comment}{//        positionAlloc->Add (Vector (0.0, 0.0, 0.0));                              // eNB1}
+349 \textcolor{comment}{//        positionAlloc->Add (Vector (distance,  0.0, 0.0));                        // eNB2}
+350       positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (distance * 0.5, distance * 0.866, 0.0));          \textcolor{comment}{// eNB3}
+351 
+352       \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+353       mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+354       mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+355       mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (spectrumAnalyzerNodes);
+356 
+357       \hyperlink{classns3_1_1Ptr}{Ptr<LteSpectrumPhy>} enbDlSpectrumPhy = enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0)->GetObject<
+      \hyperlink{classns3_1_1LteEnbNetDevice}{LteEnbNetDevice}> ()->GetPhy ()->GetDownlinkSpectrumPhy ()->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1LteSpectrumPhy}{LteSpectrumPhy}> ();
+358       \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumChannel>} dlChannel = enbDlSpectrumPhy->
+      \hyperlink{classns3_1_1LteSpectrumPhy_a50f13e43568687ee32c5d63e5bf639c2}{GetChannel} ();
+359 
+360       spectrumAnalyzerHelper.\hyperlink{classns3_1_1SpectrumAnalyzerHelper_a7fb7b79c0706c9aecd427af6c4148031}{SetChannel} (dlChannel);
+361       \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumModel>} sm = LteSpectrumValueHelper::GetSpectrumModel (100, bandwidth);
+362       spectrumAnalyzerHelper.\hyperlink{classns3_1_1SpectrumAnalyzerHelper_afcfa897fb4c298b02e39ec87717b0b54}{SetRxSpectrumModel} (sm);
+363       spectrumAnalyzerHelper.\hyperlink{classns3_1_1SpectrumAnalyzerHelper_a535a79dd9e2fb4293eb9e9e5fcb111ae}{SetPhyAttribute} (\textcolor{stringliteral}{"Resolution"}, TimeValue (
+      \hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (10)));
+364       spectrumAnalyzerHelper.\hyperlink{classns3_1_1SpectrumAnalyzerHelper_a535a79dd9e2fb4293eb9e9e5fcb111ae}{SetPhyAttribute} (\textcolor{stringliteral}{"NoisePowerSpectralDensity"}, DoubleValue (1e-1
+      5));     \textcolor{comment}{// -120 dBm/Hz}
+365       spectrumAnalyzerHelper.\hyperlink{classns3_1_1SpectrumAnalyzerHelper_ad1bb3c14843583ce1227e00758d8ba51}{EnableAsciiAll} (\textcolor{stringliteral}{"spectrum-analyzer-output"});
+366       spectrumAnalyzerHelper.\hyperlink{classns3_1_1SpectrumAnalyzerHelper_a64479eb63eb6b5ad5536ee8ecf2c717a}{Install} (spectrumAnalyzerNodes);
+367     \}
+368 
+369   \hyperlink{classns3_1_1Ptr}{Ptr<RadioEnvironmentMapHelper>} remHelper;
+370   \textcolor{keywordflow}{if} (generateRem)
+371     \{
+372       \hyperlink{lena-frequency-reuse_8cc_a7e3aa5272ba032faa7717e0f3ba2f73d}{PrintGnuplottableEnbListToFile} (\textcolor{stringliteral}{"enbs.txt"});
+373       \hyperlink{lena-frequency-reuse_8cc_ad818a3dd4c090b8ecaba926e5272c409}{PrintGnuplottableUeListToFile} (\textcolor{stringliteral}{"ues.txt"});
+374 
+375       remHelper = CreateObject<RadioEnvironmentMapHelper> ();
+376       remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ChannelPath"}, StringValue (\textcolor{stringliteral}{"/ChannelList/0"}));
+377       remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"OutputFile"}, StringValue (\textcolor{stringliteral}{"lena-frequency-reuse.rem"}));
+378       remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"XMin"}, DoubleValue (macroUeBox.\hyperlink{classns3_1_1Box_a1fd6a43d53258323331d34da600ff1c5}{xMin}));
+379       remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"XMax"}, DoubleValue (macroUeBox.\hyperlink{classns3_1_1Box_a50021049c756e770329145b25d9533a2}{xMax}));
+380       remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"YMin"}, DoubleValue (macroUeBox.\hyperlink{classns3_1_1Box_a3865ed092f941186823539c9979002f8}{yMin}));
+381       remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"YMax"}, DoubleValue (macroUeBox.\hyperlink{classns3_1_1Box_a001fd430a14b19efe925c818a332e392}{yMax}));
+382       remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Z"}, DoubleValue (1.5));
+383       remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"XRes"}, UintegerValue (500));
+384       remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"YRes"}, UintegerValue (500));
+385       \textcolor{keywordflow}{if} (remRbId >= 0)
+386         \{
+387           remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"UseDataChannel"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+388           remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"RbId"}, IntegerValue (remRbId));
+389         \}
+390 
+391       remHelper->\hyperlink{classns3_1_1RadioEnvironmentMapHelper_a0b15c982ea80037f9409d73654b48548}{Install} ();
+392       \textcolor{comment}{// simulation will stop right after the REM has been generated}
+393     \}
+394   \textcolor{keywordflow}{else}
+395     \{
+396       Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (simTime));
+397     \}
+398 
+399   Simulator::Run ();
+400   Simulator::Destroy ();
+401   \textcolor{keywordflow}{return} 0;
+402 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{lena-\/frequency-\/reuse.\+cc@{lena-\/frequency-\/reuse.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!lena-\/frequency-\/reuse.\+cc@{lena-\/frequency-\/reuse.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Lena\+Frequency\+Reuse"")}{NS_LOG_COMPONENT_DEFINE("LenaFrequencyReuse")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Lena\+Frequency\+Reuse\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-frequency-reuse_8cc_adab596ccde2673537a20e5b2e1f7826d}{}\label{lena-frequency-reuse_8cc_adab596ccde2673537a20e5b2e1f7826d}
+\index{lena-\/frequency-\/reuse.\+cc@{lena-\/frequency-\/reuse.\+cc}!Print\+Gnuplottable\+Enb\+List\+To\+File@{Print\+Gnuplottable\+Enb\+List\+To\+File}}
+\index{Print\+Gnuplottable\+Enb\+List\+To\+File@{Print\+Gnuplottable\+Enb\+List\+To\+File}!lena-\/frequency-\/reuse.\+cc@{lena-\/frequency-\/reuse.\+cc}}
+\subsubsection[{\texorpdfstring{Print\+Gnuplottable\+Enb\+List\+To\+File(std\+::string filename)}{PrintGnuplottableEnbListToFile(std::string filename)}}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Gnuplottable\+Enb\+List\+To\+File (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{filename}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-frequency-reuse_8cc_a7e3aa5272ba032faa7717e0f3ba2f73d}{}\label{lena-frequency-reuse_8cc_a7e3aa5272ba032faa7717e0f3ba2f73d}
+
+\begin{DoxyCode}
+65 \{
+66   std::ofstream outFile;
+67   outFile.open (filename.c\_str (), std::ios\_base::out | std::ios\_base::trunc);
+68   \textcolor{keywordflow}{if} (!outFile.is\_open ())
+69     \{
+70       \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"Can't open file "} << filename);
+71       \textcolor{keywordflow}{return};
+72     \}
+73   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} it = NodeList::Begin (); it != NodeList::End (); ++it)
+74     \{
+75       \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = *it;
+76       \textcolor{keywordtype}{int} nDevs = node->\hyperlink{classns3_1_1Node_a531554d2241ba4fa1cd74e3360be6bce}{GetNDevices} ();
+77       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < nDevs; j++)
+78         \{
+79           \hyperlink{classns3_1_1Ptr}{Ptr<LteEnbNetDevice>} enbdev = node->\hyperlink{classns3_1_1Node_a5918dfd24ef632efc9a83a5f6561c76e}{GetDevice} (j)->GetObject <
+      \hyperlink{classns3_1_1LteEnbNetDevice}{LteEnbNetDevice}> ();
+80           \textcolor{keywordflow}{if} (enbdev)
+81             \{
+82               \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} pos = node->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ()->
+      \hyperlink{lena-cqi-threshold_8cc_acebf763e1a0478cec225f9547941ae54}{GetPosition} ();
+83               outFile << \textcolor{stringliteral}{"set label \(\backslash\)""} << enbdev->\hyperlink{classns3_1_1LteEnbNetDevice_a6945c929a037e7a582e9e4a849dec337}{GetCellId} ()
+84                       << \textcolor{stringliteral}{"\(\backslash\)" at "} << pos.x << \textcolor{stringliteral}{","} << pos.y
+85                       << \textcolor{stringliteral}{" left font \(\backslash\)"Helvetica,4\(\backslash\)" textcolor rgb \(\backslash\)"white\(\backslash\)" front  point pt 2 ps 0.3 lc
+       rgb \(\backslash\)"white\(\backslash\)" offset 0,0"}
+86                       << std::endl;
+87             \}
+88         \}
+89     \}
+90 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{lena-\/frequency-\/reuse.\+cc@{lena-\/frequency-\/reuse.\+cc}!Print\+Gnuplottable\+Ue\+List\+To\+File@{Print\+Gnuplottable\+Ue\+List\+To\+File}}
+\index{Print\+Gnuplottable\+Ue\+List\+To\+File@{Print\+Gnuplottable\+Ue\+List\+To\+File}!lena-\/frequency-\/reuse.\+cc@{lena-\/frequency-\/reuse.\+cc}}
+\subsubsection[{\texorpdfstring{Print\+Gnuplottable\+Ue\+List\+To\+File(std\+::string filename)}{PrintGnuplottableUeListToFile(std::string filename)}}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Gnuplottable\+Ue\+List\+To\+File (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{filename}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-frequency-reuse_8cc_ad818a3dd4c090b8ecaba926e5272c409}{}\label{lena-frequency-reuse_8cc_ad818a3dd4c090b8ecaba926e5272c409}
+
+\begin{DoxyCode}
+37 \{
+38   std::ofstream outFile;
+39   outFile.open (filename.c\_str (), std::ios\_base::out | std::ios\_base::trunc);
+40   \textcolor{keywordflow}{if} (!outFile.is\_open ())
+41     \{
+42       \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"Can't open file "} << filename);
+43       \textcolor{keywordflow}{return};
+44     \}
+45   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} it = NodeList::Begin (); it != NodeList::End (); ++it)
+46     \{
+47       \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = *it;
+48       \textcolor{keywordtype}{int} nDevs = node->\hyperlink{classns3_1_1Node_a531554d2241ba4fa1cd74e3360be6bce}{GetNDevices} ();
+49       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < nDevs; j++)
+50         \{
+51           \hyperlink{classns3_1_1Ptr}{Ptr<LteUeNetDevice>} uedev = node->\hyperlink{classns3_1_1Node_a5918dfd24ef632efc9a83a5f6561c76e}{GetDevice} (j)->GetObject <
+      \hyperlink{classns3_1_1LteUeNetDevice}{LteUeNetDevice}> ();
+52           \textcolor{keywordflow}{if} (uedev)
+53             \{
+54               \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} pos = node->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ()->
+      \hyperlink{lena-cqi-threshold_8cc_acebf763e1a0478cec225f9547941ae54}{GetPosition} ();
+55               outFile << \textcolor{stringliteral}{"set label \(\backslash\)""} << uedev->\hyperlink{classns3_1_1LteUeNetDevice_a673405bfed4b45c5714f17b0c3bad334}{GetImsi} ()
+56                       << \textcolor{stringliteral}{"\(\backslash\)" at "} << pos.x << \textcolor{stringliteral}{","} << pos.y << \textcolor{stringliteral}{" left font \(\backslash\)"Helvetica,4\(\backslash\)" textcolor rgb \(\backslash\)"
+      grey\(\backslash\)" front point pt 1 ps 0.3 lc rgb \(\backslash\)"grey\(\backslash\)" offset 0,0"}
+57                       << std::endl;
+58             \}
+59         \}
+60     \}
+61 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+

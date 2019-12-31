@@ -1,0 +1,672 @@
+\hypertarget{group__testingimpl}{}\section{Testing Implementation}
+\label{group__testingimpl}\index{Testing Implementation@{Testing Implementation}}
+
+
+Internal implementation of the Testing system.  
+
+
+Collaboration diagram for Testing Implementation\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structns3_1_1TestCaseFailure}{ns3\+::\+Test\+Case\+Failure}
+\item 
+struct \hyperlink{structns3_1_1TestCase_1_1Result}{ns3\+::\+Test\+Case\+::\+Result}
+\item 
+class \hyperlink{classns3_1_1TestRunnerImpl}{ns3\+::\+Test\+Runner\+Impl}
+\item 
+class \hyperlink{classns3_1_1TestRunner}{ns3\+::\+Test\+Runner}
+\begin{DoxyCompactList}\small\item\em A runner to execute tests. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{group__testingimpl_gaa9d54a0bd3ffaa7f4db82c4a6c1fb83b}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual and expected (limit) value are equal and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_gaa154d45ddff16a28ea0a9f3fe890591d}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual and expected (limit) value are equal and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_gaf35a8f7e8a9a1eb011fa6fb33ea721a3}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual and expected (limit) value are equal and report if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_ga48c926819b2c033fb5a4c97177efbed7}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  tol,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that actual and expected (limit) values are equal to plus or minus some tolerance and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_ga1fd0b56967248280afec4b3ea83199b3}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  tol,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that actual and expected (limit) values are equal to plus or minus some tolerance and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_ga831cf7f3b988d2759f9c1b72f0a1bd5c}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  tol,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that actual and expected (limit) values are equal to plus or minus some tolerance and report if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_ga2eea3c446afc92efe1d3c3bcf3fcf2b8}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual and expected (limit) value are not equal and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_ga3c64f96a4a23d84a1212da8cbbf4b326}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual and expected (limit) value are not equal and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_gad5555f4342248139af34e13a31ce7827}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual and expected (limit) value are not equal and report if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_ga82db873e1b99e6311ba0f9dbff7c758d}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is less than a limit and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_ga7f276bcecced206bfd26813ac5c9a967}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is less than or equal to a limit and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_ga73d8db2f2a288409abbd267fc31b2e00}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is less than a limit and report if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_ga249245c784a56a7dbd704bc1d98b6873}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is less than or equal to a limit and report if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_gac0702d4efc2f4d35963c5da2d6fa2c98}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is greater than a limit and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_gaf962c2cdf0c9e474ac74427146594e59}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is greater than or equal to a limit and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_ga37eb592b062b1d8ff5086dbbc2668994}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is greater than a limit and report if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testingimpl_ga63a10e334a06ab384256d1fbc4b7eb29}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}(actual,  limit,  msg,  file,  line)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is greater than or equal to limit and report if not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Internal implementation of the Testing system. 
+
+
+
+\subsection{Macro Definition Documentation}
+\index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_ASSERT_MSG_EQ_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_gaa9d54a0bd3ffaa7f4db82c4a6c1fb83b}{}\label{group__testingimpl_gaa9d54a0bd3ffaa7f4db82c4a6c1fb83b}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) == (limit)))                                         \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) == "} +    \(\backslash\)
+                           std::string (#limit) + \textcolor{stringliteral}{" (limit)"},           \(\backslash\)
+                           actualStream.str (), limitStream.str (),     \(\backslash\)
+                           msgStream.str (), file, line);               \hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{\(\backslash\)}
+\hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{        CONTINUE\_ON\_FAILURE};                                            \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual and expected (limit) value are equal and report and abort if not. 
+
+\index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_ASSERT_MSG_EQ_RETURNS_BOOL_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_gaa154d45ddff16a28ea0a9f3fe890591d}{}\label{group__testingimpl_gaa154d45ddff16a28ea0a9f3fe890591d}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) == (limit)))                                         \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) == "} +    \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \hyperlink{group__testing_gac69c0f4943a60d1dcecdcd793f905449}{\(\backslash\)}
+\hyperlink{group__testing_gac69c0f4943a60d1dcecdcd793f905449}{        CONTINUE\_ON\_FAILURE\_RETURNS\_BOOL};                          
+           \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual and expected (limit) value are equal and report and abort if not. 
+
+\index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_ASSERT_MSG_EQ_TOL_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{tol, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_ga48c926819b2c033fb5a4c97177efbed7}{}\label{group__testingimpl_ga48c926819b2c033fb5a4c97177efbed7}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} ((actual) > (limit) + (tol) || (actual) < (limit) - (tol))       \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit << \textcolor{stringliteral}{" +- "} << tol;                          \(\backslash\)
+        std::ostringstream condStream;                                  \(\backslash\)
+        condStream << #actual << \textcolor{stringliteral}{" (actual) < "} << #limit               \(\backslash\)
+                   << \textcolor{stringliteral}{" (limit) + "} << #tol << \textcolor{stringliteral}{" (tol) && "}             \(\backslash\)
+                   << #actual << \textcolor{stringliteral}{" (actual) > "} << #limit               \(\backslash\)
+                   << \textcolor{stringliteral}{" (limit) - "} << #tol << \textcolor{stringliteral}{" (tol)"};                \(\backslash\)
+        ReportTestFailure (condStream.str (), actualStream.str (),      \(\backslash\)
+                       limitStream.str (), msgStream.str (),            \(\backslash\)
+                       file, line);                                     \hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{\(\backslash\)}
+\hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{        CONTINUE\_ON\_FAILURE};                                            \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that actual and expected (limit) values are equal to plus or minus some tolerance and report and abort if not. 
+
+\index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_ASSERT_MSG_EQ_TOL_RETURNS_BOOL_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{tol, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_ga1fd0b56967248280afec4b3ea83199b3}{}\label{group__testingimpl_ga1fd0b56967248280afec4b3ea83199b3}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} ((actual) > (limit) + (tol) || (actual) < (limit) - (tol))       \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit << \textcolor{stringliteral}{" +- "} << tol;                          \(\backslash\)
+        std::ostringstream condStream;                                  \(\backslash\)
+        condStream << #actual << \textcolor{stringliteral}{" (actual) < "} << #limit               \(\backslash\)
+                   << \textcolor{stringliteral}{" (limit) + "} << #tol << \textcolor{stringliteral}{" (tol) && "}             \(\backslash\)
+                   << #actual << \textcolor{stringliteral}{" (actual) > "} << #limit               \(\backslash\)
+                   << \textcolor{stringliteral}{" (limit) - "} << #tol << \textcolor{stringliteral}{" (tol)"};                \(\backslash\)
+        ReportTestFailure (condStream.str (), actualStream.str (),      \(\backslash\)
+                       limitStream.str (), msgStream.str (),            \(\backslash\)
+                       file, line);                                     \hyperlink{group__testing_gac69c0f4943a60d1dcecdcd793f905449}{\(\backslash\)}
+\hyperlink{group__testing_gac69c0f4943a60d1dcecdcd793f905449}{        CONTINUE\_ON\_FAILURE\_RETURNS\_BOOL};                          
+           \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that actual and expected (limit) values are equal to plus or minus some tolerance and report and abort if not. 
+
+\index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_ASSERT_MSG_GT_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_gac0702d4efc2f4d35963c5da2d6fa2c98}{}\label{group__testingimpl_gac0702d4efc2f4d35963c5da2d6fa2c98}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) > (limit)))                                          \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) > "} +     \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{\(\backslash\)}
+\hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{        CONTINUE\_ON\_FAILURE};                                            \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual value is greater than a limit and report and abort if not. 
+
+\index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_ASSERT_MSG_GT_OR_EQ_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_gaf962c2cdf0c9e474ac74427146594e59}{}\label{group__testingimpl_gaf962c2cdf0c9e474ac74427146594e59}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) >= (limit)))                                         \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) > "} +     \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{\(\backslash\)}
+\hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{        CONTINUE\_ON\_FAILURE};                                            \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual value is greater than or equal to a limit and report and abort if not. 
+
+\index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_ASSERT_MSG_LT_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_ga82db873e1b99e6311ba0f9dbff7c758d}{}\label{group__testingimpl_ga82db873e1b99e6311ba0f9dbff7c758d}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) < (limit)))                                          \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) < "} +     \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{\(\backslash\)}
+\hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{        CONTINUE\_ON\_FAILURE};                                            \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual value is less than a limit and report and abort if not. 
+
+\index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_ASSERT_MSG_LT_OR_EQ_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_ga7f276bcecced206bfd26813ac5c9a967}{}\label{group__testingimpl_ga7f276bcecced206bfd26813ac5c9a967}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) <= (limit)))                                         \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) < "} +     \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{\(\backslash\)}
+\hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{        CONTINUE\_ON\_FAILURE};                                            \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual value is less than or equal to a limit and report and abort if not. 
+
+\index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_ASSERT_MSG_NE_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_ga2eea3c446afc92efe1d3c3bcf3fcf2b8}{}\label{group__testingimpl_ga2eea3c446afc92efe1d3c3bcf3fcf2b8}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) != (limit)))                                         \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) != "} +    \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{\(\backslash\)}
+\hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{        CONTINUE\_ON\_FAILURE};                                            \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual and expected (limit) value are not equal and report and abort if not. 
+
+\index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_ASSERT_MSG_NE_RETURNS_BOOL_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_ga3c64f96a4a23d84a1212da8cbbf4b326}{}\label{group__testingimpl_ga3c64f96a4a23d84a1212da8cbbf4b326}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) != (limit)))                                         \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) != "} +    \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \hyperlink{group__testing_gac69c0f4943a60d1dcecdcd793f905449}{\(\backslash\)}
+\hyperlink{group__testing_gac69c0f4943a60d1dcecdcd793f905449}{        CONTINUE\_ON\_FAILURE\_RETURNS\_BOOL};                          
+           \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual and expected (limit) value are not equal and report and abort if not. 
+
+\index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_EXPECT_MSG_EQ_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_gaf35a8f7e8a9a1eb011fa6fb33ea721a3}{}\label{group__testingimpl_gaf35a8f7e8a9a1eb011fa6fb33ea721a3}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) == (limit)))                                         \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) == "} +    \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual and expected (limit) value are equal and report if not. 
+
+Required to avoid use of return statement which allows use in methods (esp. callbacks) returning void. \index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_EXPECT_MSG_EQ_TOL_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{tol, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_ga831cf7f3b988d2759f9c1b72f0a1bd5c}{}\label{group__testingimpl_ga831cf7f3b988d2759f9c1b72f0a1bd5c}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} ((actual) > (limit) + (tol) || (actual) < (limit) - (tol))       \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit << \textcolor{stringliteral}{" +- "} << tol;                          \(\backslash\)
+        std::ostringstream condStream;                                  \(\backslash\)
+        condStream << #actual << \textcolor{stringliteral}{" (actual) < "} << #limit               \(\backslash\)
+                   << \textcolor{stringliteral}{" (limit) + "} << #tol << \textcolor{stringliteral}{" (tol) && "}             \(\backslash\)
+                   << #actual << \textcolor{stringliteral}{" (actual) > "} << #limit               \(\backslash\)
+                   << \textcolor{stringliteral}{" (limit) - "} << #tol << \textcolor{stringliteral}{" (tol)"};                \(\backslash\)
+        ReportTestFailure (condStream.str (), actualStream.str (),      \(\backslash\)
+                       limitStream.str (), msgStream.str (),            \(\backslash\)
+                       file, line);                                     \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that actual and expected (limit) values are equal to plus or minus some tolerance and report if not. 
+
+Required to avoid use of return statement which allows use in methods (esp. callbacks) returning void. \index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_EXPECT_MSG_GT_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_ga37eb592b062b1d8ff5086dbbc2668994}{}\label{group__testingimpl_ga37eb592b062b1d8ff5086dbbc2668994}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) > (limit)))                                          \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) > "} +     \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual value is greater than a limit and report if not. 
+
+Required to avoid use of return statement which allows use in methods (callbacks) returning void. \index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_EXPECT_MSG_GT_OR_EQ_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_ga63a10e334a06ab384256d1fbc4b7eb29}{}\label{group__testingimpl_ga63a10e334a06ab384256d1fbc4b7eb29}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) >= (limit)))                                         \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) > "} +     \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual value is greater than or equal to limit and report if not. 
+
+Required to avoid use of return statement which allows use in methods (callbacks) returning void. \index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_EXPECT_MSG_LT_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_ga73d8db2f2a288409abbd267fc31b2e00}{}\label{group__testingimpl_ga73d8db2f2a288409abbd267fc31b2e00}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) < (limit)))                                          \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) < "} +     \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual value is less than a limit and report if not. 
+
+Required to avoid use of return statement which allows use in methods (callbacks) returning void. \index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_EXPECT_MSG_LT_OR_EQ_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_ga249245c784a56a7dbd704bc1d98b6873}{}\label{group__testingimpl_ga249245c784a56a7dbd704bc1d98b6873}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) <= (limit)))                                         \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) < "} +     \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual value is less than or equal to a limit and report if not. 
+
+Required to avoid use of return statement which allows use in methods (callbacks) returning void. \index{Testing Implementation@{Testing Implementation}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL}!Testing Implementation@{Testing Implementation}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL}{NS_TEST_EXPECT_MSG_NE_INTERNAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg, }
+\item[{}]{file, }
+\item[{}]{line}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testingimpl_gad5555f4342248139af34e13a31ce7827}{}\label{group__testingimpl_gad5555f4342248139af34e13a31ce7827}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!((actual) != (limit)))                                         \(\backslash\)
+      \{                                                                 \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{\(\backslash\)}
+\hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{        ASSERT\_ON\_FAILURE};                                              \(\backslash\)
+        std::ostringstream msgStream;                                   \(\backslash\)
+        msgStream << msg;                                               \(\backslash\)
+        std::ostringstream actualStream;                                \(\backslash\)
+        actualStream << actual;                                         \(\backslash\)
+        std::ostringstream limitStream;                                 \(\backslash\)
+        limitStream << limit;                                           \(\backslash\)
+        ReportTestFailure (std::string (#actual) + \textcolor{stringliteral}{" (actual) != "} +    \(\backslash\)
+                       std::string (#limit) + \textcolor{stringliteral}{" (limit)"},               \(\backslash\)
+                       actualStream.str (), limitStream.str (),         \(\backslash\)
+                       msgStream.str (), file, line);                   \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that an actual and expected (limit) value are not equal and report if not. 
+
+Required to avoid use of return statement which allows use in methods (callbacks) returning void. 

@@ -1,0 +1,211 @@
+\hypertarget{fd-tap-ping_8cc}{}\section{fd-\/net-\/device/examples/fd-\/tap-\/ping.cc File Reference}
+\label{fd-tap-ping_8cc}\index{fd-\/net-\/device/examples/fd-\/tap-\/ping.\+cc@{fd-\/net-\/device/examples/fd-\/tap-\/ping.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/abort.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/fd-\/net-\/device-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/apps-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/static-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/list-\/routing-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for fd-\/tap-\/ping.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{fd-tap-ping_8cc_a9edfb221550981d9b4bc5581ac5f9f8d}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}T\+A\+P\+Ping\+Example\char`\"{})
+\item 
+static void \hyperlink{fd-tap-ping_8cc_a1a49f760c7e3da367b3406515d2a3ef9}{Ping\+Rtt} (std\+::string context, \hyperlink{classns3_1_1Time}{Time} rtt)
+\item 
+int \hyperlink{fd-tap-ping_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{fd-\/tap-\/ping.\+cc@{fd-\/tap-\/ping.\+cc}!main@{main}}
+\index{main@{main}!fd-\/tap-\/ping.\+cc@{fd-\/tap-\/ping.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{fd-tap-ping_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{fd-tap-ping_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+93 \{
+94   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Ping Emulation Example with TAP"});
+95 
+96   std::string deviceName (\textcolor{stringliteral}{"tap0"});
+97   std::string remote (\textcolor{stringliteral}{"192.0.43.10"}); \textcolor{comment}{// example.com}
+98   std::string network (\textcolor{stringliteral}{"1.2.3.4"});
+99   std::string mask (\textcolor{stringliteral}{"255.255.255.0"});
+100   std::string pi (\textcolor{stringliteral}{"no"});
+101 
+102   \textcolor{comment}{//}
+103   \textcolor{comment}{// Allow the user to override any of the defaults at run-time, via}
+104   \textcolor{comment}{// command-line arguments}
+105   \textcolor{comment}{//}
+106   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+107   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"deviceName"}, \textcolor{stringliteral}{"Device name"}, deviceName);
+108   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"remote"}, \textcolor{stringliteral}{"Remote IP address (dotted decimal only please)"}, remote);
+109   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"tapNetwork"}, \textcolor{stringliteral}{"Network address to assign the TAP device IP address (dotted decimal
+       only please)"}, network);
+110   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"tapMask"}, \textcolor{stringliteral}{"Network mask for configure the TAP device (dotted decimal only please)"}
+      , mask);
+111   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"modePi"}, \textcolor{stringliteral}{"If 'yes' a PI header will be added to the traffic traversing the
+       device(flag IFF\_NOPI will be unset)."}, pi);
+112   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+113 
+114   \hyperlink{group__fatal_ga6653324225bc139e46deea177614ceee}{NS\_ABORT\_MSG\_IF} (network == \textcolor{stringliteral}{"1.2.3.4"}, \textcolor{stringliteral}{"You must change the local IP address before
+       running this example"});
+115 
+116   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} remoteIp (remote.c\_str ());
+117   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} tapNetwork (network.c\_str ());
+118   \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} tapMask (mask.c\_str ());
+119 
+120   \textcolor{keywordtype}{bool} modePi = ( pi == \textcolor{stringliteral}{"yes"} ? \textcolor{keyword}{true} : \textcolor{keyword}{false});
+121 
+122   \textcolor{comment}{//}
+123   \textcolor{comment}{// Since we are using a real piece of hardware we need to use the realtime}
+124   \textcolor{comment}{// simulator.}
+125   \textcolor{comment}{//}
+126   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"}, StringValue (\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl"}));
+127 
+128   \textcolor{comment}{//}
+129   \textcolor{comment}{// Since we are going to be talking to real-world machines, we need to enable}
+130   \textcolor{comment}{// calculation of checksums in our protocols.}
+131   \textcolor{comment}{//}
+132   GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+133 
+134   \textcolor{comment}{//}
+135   \textcolor{comment}{// In such a simple topology, the use of the helper API can be a hindrance}
+136   \textcolor{comment}{// so we drop down into the low level API and do it manually.}
+137   \textcolor{comment}{//}
+138   \textcolor{comment}{// First we need a single node.}
+139   \textcolor{comment}{//}
+140   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Node"});
+141   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = CreateObject<Node> ();
+142 
+143   \textcolor{comment}{// Create an fd device, set a MAC address and point the device to the}
+144   \textcolor{comment}{// Linux device name.  The device needs a transmit queueing discipline so}
+145   \textcolor{comment}{// create a droptail queue and give it to the device.  Finally, "install"}
+146   \textcolor{comment}{// the device into the node.}
+147   \textcolor{comment}{//}
+148   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} addresses;
+149   addresses.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (tapNetwork, tapMask);
+150   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} tapIp = addresses.NewAddress ();
+151 
+152   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Device"});
+153   \hyperlink{classns3_1_1TapFdNetDeviceHelper}{TapFdNetDeviceHelper} helper;
+154   helper.\hyperlink{classns3_1_1EmuFdNetDeviceHelper_aa5c26a78442e507ba969f28ffa5f748e}{SetDeviceName} (deviceName);
+155   helper.\hyperlink{classns3_1_1TapFdNetDeviceHelper_aa514fd85b9be3d13b2402c2dc0ac8a6d}{SetModePi} (modePi);
+156   helper.\hyperlink{classns3_1_1TapFdNetDeviceHelper_aa1283be36ca8f45294ff480566994f97}{SetTapIpv4Address} (tapIp);
+157   helper.\hyperlink{classns3_1_1TapFdNetDeviceHelper_a727c7402978ea7425cf4d4d16cb73783}{SetTapIpv4Mask} (tapMask);
+158 
+159   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = helper.\hyperlink{classns3_1_1FdNetDeviceHelper_af70d55cbb4f6411c33cacb84eb651ad5}{Install} (node);
+160   \hyperlink{classns3_1_1Ptr}{Ptr<NetDevice>} device = devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0);
+161 
+162   \textcolor{comment}{//}
+163   \textcolor{comment}{// Add a default internet stack to the node (ARP, IPv4, ICMP, UDP and TCP).}
+164   \textcolor{comment}{//}
+165   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Add Internet Stack"});
+166   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internetStackHelper;
+167   internetStackHelper.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (node);
+168 
+169   \textcolor{comment}{//}
+170   \textcolor{comment}{// Add an address to the ns-3 device in the same network than one}
+171   \textcolor{comment}{// assigned to the TAP.}
+172   \textcolor{comment}{//}
+173   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create IPv4 Interface"});
+174   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4>} ipv4 = node->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ();
+175   uint32\_t \textcolor{keyword}{interface }= ipv4->AddInterface (device);
+176   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} devIp = addresses.NewAddress ();
+177   \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} address = \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} (devIp, 
+      tapMask);
+178   ipv4->\hyperlink{classns3_1_1Ipv4_ad203526cae6a4b86f1bb89e44d2b62f7}{AddAddress} (interface, address);
+179   ipv4->\hyperlink{classns3_1_1Ipv4_a2b5632573b67957fabe2dfea248a57a3}{SetMetric} (interface, 1);
+180   ipv4->\hyperlink{classns3_1_1Ipv4_a71b2f8acca4923aef907b50b3196bf23}{SetUp} (interface);
+181 
+182   \textcolor{comment}{//}
+183   \textcolor{comment}{// Add a route to the ns-3 device so it can reach the outside world though the}
+184   \textcolor{comment}{// TAP.}
+185   \textcolor{comment}{//}
+186   \hyperlink{classns3_1_1Ipv4StaticRoutingHelper}{Ipv4StaticRoutingHelper} ipv4RoutingHelper;
+187   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4StaticRouting>} staticRouting = ipv4RoutingHelper.
+      \hyperlink{classns3_1_1Ipv4StaticRoutingHelper_a731206e50d305695dac7fb2ef963a4bb}{GetStaticRouting} (ipv4);
+188   staticRouting->\hyperlink{classns3_1_1Ipv4StaticRouting_aee30fa3246c2b42f122dabdff2725331}{SetDefaultRoute} (tapIp, interface);
+189 
+190   \textcolor{comment}{//}
+191   \textcolor{comment}{// Create the ping application.  This application knows how to send}
+192   \textcolor{comment}{// ICMP echo requests.  Setting up the packet sink manually is a bit}
+193   \textcolor{comment}{// of a hassle and since there is no law that says we cannot mix the}
+194   \textcolor{comment}{// helper API with the low level API, let's just use the helper.}
+195   \textcolor{comment}{//}
+196   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create V4Ping Appliation"});
+197   \hyperlink{classns3_1_1Ptr}{Ptr<V4Ping>} app = CreateObject<V4Ping> ();
+198   app->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Remote"}, Ipv4AddressValue (remoteIp));
+199   app->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Verbose"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}) );
+200   node->\hyperlink{classns3_1_1Node_ab98b4fdc4aadc86366b80e8a79a53f47}{AddApplication} (app);
+201   app->\hyperlink{classns3_1_1Application_a8360a49748e30c52ffdcc7a305c3cd48}{SetStartTime} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+202   app->\hyperlink{classns3_1_1Application_a732c1fdadf0be176c753a2ce6e27dff9}{SetStopTime} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (21.0));
+203 
+204   \textcolor{comment}{//}
+205   \textcolor{comment}{// Give the application a name.  This makes life much easier when constructing}
+206   \textcolor{comment}{// config paths.}
+207   \textcolor{comment}{//}
+208   Names::Add (\textcolor{stringliteral}{"app"}, app);
+209 
+210   \textcolor{comment}{//}
+211   \textcolor{comment}{// Hook a trace to print something when the response comes back.}
+212   \textcolor{comment}{//}
+213   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/Names/app/Rtt"}, \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{fd-tap-ping_8cc_a1a49f760c7e3da367b3406515d2a3ef9}{PingRtt}));
+214 
+215   \textcolor{comment}{//}
+216   \textcolor{comment}{// Enable a promiscuous pcap trace to see what is coming and going on our device.}
+217   \textcolor{comment}{//}
+218   helper.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"fd-tap-ping"}, device, \textcolor{keyword}{true});
+219 
+220   \textcolor{comment}{//}
+221   \textcolor{comment}{// Now, do the actual emulation.}
+222   \textcolor{comment}{//}
+223   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Emulation."});
+224   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (25.0));
+225   Simulator::Run ();
+226   Simulator::Destroy ();
+227   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+228 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{fd-\/tap-\/ping.\+cc@{fd-\/tap-\/ping.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!fd-\/tap-\/ping.\+cc@{fd-\/tap-\/ping.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""T\+A\+P\+Ping\+Example"")}{NS_LOG_COMPONENT_DEFINE("TAPPingExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}T\+A\+P\+Ping\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{fd-tap-ping_8cc_a9edfb221550981d9b4bc5581ac5f9f8d}{}\label{fd-tap-ping_8cc_a9edfb221550981d9b4bc5581ac5f9f8d}
+\index{fd-\/tap-\/ping.\+cc@{fd-\/tap-\/ping.\+cc}!Ping\+Rtt@{Ping\+Rtt}}
+\index{Ping\+Rtt@{Ping\+Rtt}!fd-\/tap-\/ping.\+cc@{fd-\/tap-\/ping.\+cc}}
+\subsubsection[{\texorpdfstring{Ping\+Rtt(std\+::string context, Time rtt)}{PingRtt(std::string context, Time rtt)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Ping\+Rtt (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{{\bf Time}}]{rtt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{fd-tap-ping_8cc_a1a49f760c7e3da367b3406515d2a3ef9}{}\label{fd-tap-ping_8cc_a1a49f760c7e3da367b3406515d2a3ef9}
+
+\begin{DoxyCode}
+87 \{
+88   \hyperlink{log-macros-disabled_8h_a0b36e5e182b37194f85ef1c5e979fb2e}{NS\_LOG\_UNCOND} (\textcolor{stringliteral}{"Received Response with RTT = "} << rtt);
+89 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+

@@ -1,0 +1,86 @@
+\hypertarget{classns3_1_1Ipv6RawSocketFactory}{}\section{ns3\+:\+:Ipv6\+Raw\+Socket\+Factory Class Reference}
+\label{classns3_1_1Ipv6RawSocketFactory}\index{ns3\+::\+Ipv6\+Raw\+Socket\+Factory@{ns3\+::\+Ipv6\+Raw\+Socket\+Factory}}
+
+
+A\+PI to create I\+Pv6 R\+AW socket instances.  
+
+
+
+
+{\ttfamily \#include $<$ipv6-\/raw-\/socket-\/factory.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Ipv6\+Raw\+Socket\+Factory\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Ipv6\+Raw\+Socket\+Factory\+:
+% FIG 1
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1Ipv6RawSocketFactory_a0f049b745123befc2efaf4c5f5141f90}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID of this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A\+PI to create I\+Pv6 R\+AW socket instances. 
+
+This abstract class defines the A\+PI for I\+Pv6 R\+AW socket factory.
+
+A R\+AW \hyperlink{classns3_1_1Socket}{Socket} typically is used to access specific IP layers not usually available through L4 sockets, e.\+g., I\+C\+MP. The implementer should take particular care to define the \hyperlink{classns3_1_1Ipv6RawSocketImpl}{Ipv6\+Raw\+Socket\+Impl} Attributes, and in particular the Protocol attribute. Not setting it will result in a zero protocol at IP level (corresponding to the Hop\+By\+Hop I\+Pv6 Extension header, i.\+e., \hyperlink{classns3_1_1Ipv6ExtensionHopByHopHeader}{Ipv6\+Extension\+Hop\+By\+Hop\+Header}) when sending data through the socket, which is probably not the intended behavior.
+
+A correct example is (from src/applications/model/radvd.\+cc)\+: 
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (!m\_socket)
+  \{
+    TypeId tid = \hyperlink{classns3_1_1TypeId_a119cf99c20931fdc294602cd360b180e}{TypeId::LookupByName} (\textcolor{stringliteral}{"ns3::Ipv6RawSocketFactory"});
+    m\_socket = \hyperlink{classns3_1_1Socket_ad448a62bb50ad3dbac59c879a885a8d2}{Socket::CreateSocket} (GetNode (), tid);
+
+    \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (m\_socket);
+
+    m\_socket->SetAttribute (\textcolor{stringliteral}{"Protocol"}, UintegerValue(\hyperlink{classns3_1_1Ipv6Header_a226429221a066c5e3b1f260caf27d1e9a5a1ba2c977ece2a8089761a3bd2e5478}{Ipv6Header::IPV6\_ICMPV6}));
+    m\_socket->SetRecvCallback (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{classns3_1_1Radvd_a75cc828bc07117551ab886d986590045}{Radvd::HandleRead}, \textcolor{keyword}{this}));
+  \}
+\end{DoxyCode}
+ 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Ipv6\+Raw\+Socket\+Factory@{ns3\+::\+Ipv6\+Raw\+Socket\+Factory}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Ipv6\+Raw\+Socket\+Factory@{ns3\+::\+Ipv6\+Raw\+Socket\+Factory}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Ipv6\+Raw\+Socket\+Factory\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Ipv6RawSocketFactory_a0f049b745123befc2efaf4c5f5141f90}{}\label{classns3_1_1Ipv6RawSocketFactory_a0f049b745123befc2efaf4c5f5141f90}
+
+
+Get the type ID of this class. 
+
+\begin{DoxyReturn}{Returns}
+type ID 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+30 \{
+31   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::Ipv6RawSocketFactory"})
+32     .SetParent<\hyperlink{classns3_1_1SocketFactory_a98a41212740c38fb7db9ea698800f8cf}{SocketFactory}> ()
+33     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+34   ;
+35   \textcolor{keywordflow}{return} tid;
+36 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{ipv6-raw-socket-factory_8h}{ipv6-\/raw-\/socket-\/factory.\+h}\item 
+internet/model/\hyperlink{ipv6-raw-socket-factory_8cc}{ipv6-\/raw-\/socket-\/factory.\+cc}\end{DoxyCompactItemize}

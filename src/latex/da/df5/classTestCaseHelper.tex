@@ -1,0 +1,86 @@
+\hypertarget{classTestCaseHelper}{}\section{Test\+Case\+Helper Class Reference}
+\label{classTestCaseHelper}\index{Test\+Case\+Helper@{Test\+Case\+Helper}}
+
+
+Test Case Helper.  
+
+
+
+
+Collaboration diagram for Test\+Case\+Helper\+:
+% FIG 0
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1NetDeviceContainer}{Net\+Device\+Container} \hyperlink{classTestCaseHelper_a24337801fa036883111fa1968606b57e}{Creat\+Wave\+Device} (uint32\+\_\+t nodes\+Number=2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Test Case Helper. 
+
+\subsection{Member Function Documentation}
+\index{Test\+Case\+Helper@{Test\+Case\+Helper}!Creat\+Wave\+Device@{Creat\+Wave\+Device}}
+\index{Creat\+Wave\+Device@{Creat\+Wave\+Device}!Test\+Case\+Helper@{Test\+Case\+Helper}}
+\subsubsection[{\texorpdfstring{Creat\+Wave\+Device(uint32\+\_\+t nodes\+Number=2)}{CreatWaveDevice(uint32_t nodesNumber=2)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Net\+Device\+Container} Test\+Case\+Helper\+::\+Creat\+Wave\+Device (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{nodes\+Number = {\ttfamily 2}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classTestCaseHelper_a24337801fa036883111fa1968606b57e}{}\label{classTestCaseHelper_a24337801fa036883111fa1968606b57e}
+Create W\+A\+VE device function 
+\begin{DoxyParams}{Parameters}
+{\em nodes\+Number} & the number of nodes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the collection of nodes 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+280 \{
+281   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+282   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (nodesNumber);
+283 
+284   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+285   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+286   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (nodes);
+287   \textcolor{comment}{// this is a circle with radius 10}
+288   \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} model = NodeList::GetNode (0)->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+289   model->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (Vector (0, 0, 0));
+290   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n} = 1; \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n} != nodesNumber; ++\hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n})
+291     \{
+292       \textcolor{keywordtype}{double} angle = (\hyperlink{mac-extension-test-suite_8cc_a598a3330b3c21701223ee0ca14316eca}{PI} / 180) * (360 / (nodesNumber - 1) * \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n});
+293       \textcolor{keywordtype}{double} \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x} = cos (angle) * 10;
+294       \textcolor{keywordtype}{double} y = sin (angle) * 10;
+295       \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} model = NodeList::GetNode (\hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n})->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+296       model->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (Vector (x, y,0));
+297     \}
+298 
+299   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} wifiChannel = YansWifiChannelHelper::Default ();
+300   \hyperlink{classns3_1_1YansWavePhyHelper}{YansWavePhyHelper} wifiPhy =  YansWavePhyHelper::Default ();
+301   wifiPhy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ());
+302   \hyperlink{classns3_1_1QosWaveMacHelper}{QosWaveMacHelper} waveMac = QosWaveMacHelper::Default ();
+303   \hyperlink{classns3_1_1WaveHelper}{WaveHelper} waveHelper = WaveHelper::Default ();
+304   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = waveHelper.\hyperlink{classns3_1_1WaveHelper_aed0008e7f56ba14868356b45dd4eab81}{Install} (wifiPhy, waveMac, nodes);
+305   \textcolor{keywordflow}{return} devices;
+306 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+wave/test/\hyperlink{mac-extension-test-suite_8cc}{mac-\/extension-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

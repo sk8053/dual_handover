@@ -1,0 +1,115 @@
+\hypertarget{classSpectrumConverterTestSuite}{}\section{Spectrum\+Converter\+Test\+Suite Class Reference}
+\label{classSpectrumConverterTestSuite}\index{Spectrum\+Converter\+Test\+Suite@{Spectrum\+Converter\+Test\+Suite}}
+
+
+Inheritance diagram for Spectrum\+Converter\+Test\+Suite\+:
+% FIG 0
+
+
+Collaboration diagram for Spectrum\+Converter\+Test\+Suite\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpectrumConverterTestSuite_ad24f0ed5de900cd4fd813e3578d94dac}{Spectrum\+Converter\+Test\+Suite} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Spectrum\+Converter\+Test\+Suite@{Spectrum\+Converter\+Test\+Suite}!Spectrum\+Converter\+Test\+Suite@{Spectrum\+Converter\+Test\+Suite}}
+\index{Spectrum\+Converter\+Test\+Suite@{Spectrum\+Converter\+Test\+Suite}!Spectrum\+Converter\+Test\+Suite@{Spectrum\+Converter\+Test\+Suite}}
+\subsubsection[{\texorpdfstring{Spectrum\+Converter\+Test\+Suite()}{SpectrumConverterTestSuite()}}]{\setlength{\rightskip}{0pt plus 5cm}Spectrum\+Converter\+Test\+Suite\+::\+Spectrum\+Converter\+Test\+Suite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSpectrumConverterTestSuite_ad24f0ed5de900cd4fd813e3578d94dac}{}\label{classSpectrumConverterTestSuite_ad24f0ed5de900cd4fd813e3578d94dac}
+
+\begin{DoxyCode}
+260   : \hyperlink{classns3_1_1TestSuite_a904b0c40583b744d30908aeb94636d1a}{TestSuite} (\textcolor{stringliteral}{"spectrum-converter"}, \hyperlink{classns3_1_1TestSuite_a1ebfcab34ec8161e085e8e3a1855eae0a3885375a3787abf60431f8454b3cadbd}{UNIT})
+261 \{
+262   \textcolor{keywordtype}{double} \hyperlink{buildings__pathloss_8m_aa52d3a6e3de5a80a97c12364caeaa125}{f};
+263 
+264 
+265   std::vector<double> f1;
+266   \textcolor{keywordflow}{for} (f = 3; f <= 7; f += 2)
+267     \{
+268       f1.push\_back (f);
+269     \}
+270   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumModel>} sof1 = Create<SpectrumModel> (f1);
+271 
+272 
+273 
+274   std::vector<double> f2;
+275   \textcolor{keywordflow}{for} (f = 2; f <= 8; f += 1)
+276     \{
+277       f2.push\_back (f);
+278     \}
+279   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumModel>} sof2 = Create<SpectrumModel> (f2);
+280 
+281 
+282 
+283   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} res;
+284 
+285 
+286   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} v1 = Create<SpectrumValue> (sof1);
+287   *v1 = 4;
+288   \hyperlink{classns3_1_1SpectrumConverter}{SpectrumConverter} c12 (sof1, sof2);
+289   res = c12.Convert (v1);
+290   \hyperlink{classns3_1_1SpectrumValue}{SpectrumValue} t12 (sof2);
+291   t12 = 4;
+292   t12[0] = 2;
+293   t12[6] = 2;
+294 \textcolor{comment}{//   NS\_LOG\_LOGIC(*v1);}
+295 \textcolor{comment}{//   NS\_LOG\_LOGIC(t12);}
+296 \textcolor{comment}{//   NS\_LOG\_LOGIC(*res);}
+297 
+298   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumValueTestCase}{SpectrumValueTestCase} (t12, *res, \textcolor{stringliteral}{""}), TestCase::QUICK);
+299   \textcolor{comment}{// TEST\_ASSERT(MoreOrLessEqual(t12, *res));}
+300 
+301   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} v2a = Create<SpectrumValue> (sof2);
+302   *v2a = -2;
+303   \hyperlink{classns3_1_1SpectrumConverter}{SpectrumConverter} c21 (sof2, sof1);
+304   res = c21.Convert (v2a);
+305   \hyperlink{classns3_1_1SpectrumValue}{SpectrumValue} t21a (sof1);
+306   t21a = -2;
+307 \textcolor{comment}{//   NS\_LOG\_LOGIC(*v2a);}
+308 \textcolor{comment}{//   NS\_LOG\_LOGIC(t21a);}
+309 \textcolor{comment}{//   NS\_LOG\_LOGIC(*res);}
+310   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumValueTestCase}{SpectrumValueTestCase} (t21a, *res, \textcolor{stringliteral}{""}), TestCase::QUICK)
+      ;
+311   \textcolor{comment}{// TEST\_ASSERT(MoreOrLessEqual(t21a, *res));}
+312 
+313   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} v2b = Create<SpectrumValue> (sof2);
+314   (*v2b)[0] = 3;
+315   (*v2b)[1] = 5;
+316   (*v2b)[2] = 1;
+317   (*v2b)[3] = 2;
+318   (*v2b)[4] = 4;
+319   (*v2b)[5] = 6;
+320   (*v2b)[6] = 3;
+321   res = c21.Convert (v2b);
+322   \hyperlink{classns3_1_1SpectrumValue}{SpectrumValue} t21b (sof1);
+323   t21b[0] = 3 * 0.25 + 5 * 0.5 + 1 * 0.25;
+324   t21b[1] = 1 * 0.25 + 2 * 0.5 + 4 * 0.25;
+325   t21b[2] = 4 * 0.25 + 6 * 0.5 + 3 * 0.25;
+326 \textcolor{comment}{//   NS\_LOG\_LOGIC(*v2b);}
+327 \textcolor{comment}{//   NS\_LOG\_LOGIC(t21b);}
+328 \textcolor{comment}{//   NS\_LOG\_LOGIC(*res);}
+329   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumValueTestCase}{SpectrumValueTestCase} (t21b, *res, \textcolor{stringliteral}{""}), TestCase::QUICK)
+      ;
+330 
+331 
+332 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+spectrum/test/\hyperlink{spectrum-value-test_8cc}{spectrum-\/value-\/test.\+cc}\end{DoxyCompactItemize}

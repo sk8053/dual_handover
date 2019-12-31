@@ -1,0 +1,392 @@
+\hypertarget{classns3_1_1DesMetrics}{}\section{ns3\+:\+:Des\+Metrics Class Reference}
+\label{classns3_1_1DesMetrics}\index{ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}}
+
+
+Event trace data collector for the D\+ES Metrics project.  
+
+
+
+
+{\ttfamily \#include $<$des-\/metrics.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Des\+Metrics\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Des\+Metrics\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1DesMetrics_a63bf3891d9fd2cf8c76b375b3db67756}{Initialize} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}, std\+::string out\+Dir=\char`\"{}\char`\"{})
+\item 
+void \hyperlink{classns3_1_1DesMetrics_ab7c6c097412d0398affbc9f8d2643160}{Trace} (const \hyperlink{classns3_1_1Time}{Time} \&now, const \hyperlink{classns3_1_1Time}{Time} \&\hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_a7964e6aa8f61a9d28973c8267a606ad8}{delay})
+\item 
+void \hyperlink{classns3_1_1DesMetrics_abc404d9eee92f4e8fd67f5d200490ed6}{Trace\+With\+Context} (uint32\+\_\+t context, const \hyperlink{classns3_1_1Time}{Time} \&now, const \hyperlink{classns3_1_1Time}{Time} \&\hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_a7964e6aa8f61a9d28973c8267a606ad8}{delay})
+\item 
+\hyperlink{classns3_1_1DesMetrics_afcb9062eb72bbad4a2b91cf6d8604ac3}{$\sim$\+Des\+Metrics} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1DesMetrics_a17b52dbb23cd230d64404f57f59029c5}{Close} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classns3_1_1DesMetrics_a229b920334708658e4d3b5ebf5e24c4c}{m\+\_\+initialized}
+\begin{DoxyCompactList}\small\item\em Have we been initialized. \end{DoxyCompactList}\item 
+std\+::ofstream \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\+\_\+os}
+\begin{DoxyCompactList}\small\item\em The output json trace file stream. \end{DoxyCompactList}\item 
+char \hyperlink{classns3_1_1DesMetrics_ab4a6d1bac1d7bae3db17cf362d4afaa8}{m\+\_\+separator}
+\begin{DoxyCompactList}\small\item\em The separator between event records. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1SystemMutex}{System\+Mutex} \hyperlink{classns3_1_1DesMetrics_a05ad210056128f0154901516cbb884dc}{m\+\_\+mutex}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{classns3_1_1DesMetrics_affd6e3b6d411b401491d711506734d75}{m\+\_\+output\+Dir}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Event trace data collector for the D\+ES Metrics project. 
+
+This feature generates a J\+S\+ON file with event trace data, including the source and destination context for each event, and the (virtual) times when the event was scheduled and when it will execute.
+
+See the D\+ES Metrics Project page\+: \href{https://wilseypa.github.io/desMetrics/}{\tt https\+://wilseypa.\+github.\+io/des\+Metrics/} for more information and analysis tools.
+
+If enabled (see below), ns-\/3 scripts should use \hyperlink{classns3_1_1CommandLine}{Command\+Line} to parse arguments, which will open the J\+S\+ON file with the same name as the script, and write the J\+S\+ON header. Failure to use \hyperlink{classns3_1_1CommandLine}{Command\+Line} when D\+ES Metrics is enabled will put the trace data in the file {\ttfamily des\+Trace\+File.\+json} instead. All examples accessible from {\ttfamily test.\+py} use \hyperlink{classns3_1_1CommandLine}{Command\+Line}, and so generate J\+S\+ON files.
+
+Output from scripts ends up in the current working directory (normally the top level directory). When {\ttfamily test.\+py} is used to run tests or examples the trace files are generated in a time-\/stamped subdirectory of {\ttfamily testpy-\/output/}, which {\ttfamily test.\+py} normally deletes. To keep the output of examples, use the {\ttfamily --retain} argument to {\ttfamily test.\+py}.
+
+The output file has the following form\+: \begin{DoxyVerb}{
+ "simulator_name" : "ns-3",
+ "model_name" : "ipv4-raw",
+ "capture_date" : "Fri May 27 00:34:27 2016",
+ "command_line_arguments" : "ipv4-raw [ns3-dev-test-runner-debug] --test-name=ipv4-raw --stop-on-failure --fullness=QUICK --xml --tempdir=testpy-output/2016-05-27-04-33-35-CUT --out=testpy-output/2016-05-27-04-33-35-CUT/ipv4-raw.xml",
+ "events" : [
+  ["0",0,"0",0],
+  ["1",0,"0",0],
+  ["0",0,"0",0],
+  ...
+  ["0",0,"0",0]
+ ]
+} \end{DoxyVerb}
+ The first few fields are self-\/explanatory. The {\ttfamily event} record consists of the source context, the event send time, the destination context, and the event execution time. Times are given in the current \hyperlink{classns3_1_1Time}{Time} resolution.
+
+{\bfseries  Enabling D\+ES Metrics }
+
+Enable D\+ES Metrics at configure time with \begin{DoxyVerb}   $ waf configure ... --enable-des-metrics \end{DoxyVerb}
+
+
+{\bfseries  Working with D\+ES Metrics }
+
+Some useful shell pipelines\+:
+
+\begin{DoxyItemize}
+\item Run everything, retaining the results directory\+: ~\newline
+ 
+\begin{DoxyCode}
+./\hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test}.py --nowaf --retain 
+\end{DoxyCode}
+ \item Example traces end up in {\ttfamily testpy-\/output/}, so move there\+: ~\newline
+ 
+\begin{DoxyCode}
+cd testpy-output/$(date +\textcolor{stringliteral}{"%F"})*\_/  
+\end{DoxyCode}
+ (Remove the `\+\_\+\textquotesingle{}, which is to work around a Doxygen limitation.) \item Remove the traces with less than 10 events\+: ~\newline
+ 
+\begin{DoxyCode}
+wc -\hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l} *.json | sort -nr | grep \textcolor{stringliteral}{"^ *[789] "} | cut -\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d} \textcolor{charliteral}{' '} -\hyperlink{buildings__pathloss_8m_aa52d3a6e3de5a80a97c12364caeaa125}{f} 9 | xargs rm -\hyperlink{buildings__pathloss_8m_aa52d3a6e3de5a80a97c12364caeaa125}{f} 
+\end{DoxyCode}
+ \item Show the largest file, and total number of trace files\+: ~\newline
+ 
+\begin{DoxyCode}
+wc -\hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l} *.json | sort -\hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n} | tail -2 
+\end{DoxyCode}
+ \end{DoxyItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}!````~Des\+Metrics@{$\sim$\+Des\+Metrics}}
+\index{````~Des\+Metrics@{$\sim$\+Des\+Metrics}!ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}}
+\subsubsection[{\texorpdfstring{$\sim$\+Des\+Metrics(void)}{~DesMetrics(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Des\+Metrics\+::$\sim$\+Des\+Metrics (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1DesMetrics_afcb9062eb72bbad4a2b91cf6d8604ac3}{}\label{classns3_1_1DesMetrics_afcb9062eb72bbad4a2b91cf6d8604ac3}
+Destructor, closes the trace file. 
+\begin{DoxyCode}
+138 \{
+139   \hyperlink{classns3_1_1DesMetrics_a17b52dbb23cd230d64404f57f59029c5}{Close} ();
+140 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}!Close@{Close}}
+\index{Close@{Close}!ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}}
+\subsubsection[{\texorpdfstring{Close(void)}{Close(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Des\+Metrics\+::\+Close (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1DesMetrics_a17b52dbb23cd230d64404f57f59029c5}{}\label{classns3_1_1DesMetrics_a17b52dbb23cd230d64404f57f59029c5}
+Close the output file. 
+\begin{DoxyCode}
+144 \{
+145   \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << std::endl;    \textcolor{comment}{// Finish the last event line}
+146   
+147   \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << \textcolor{stringliteral}{" ]"} << std::endl;
+148   \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << \textcolor{stringliteral}{"\}"} << std::endl;
+149   \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os}.close ();
+150 
+151   \hyperlink{classns3_1_1DesMetrics_a229b920334708658e4d3b5ebf5e24c4c}{m\_initialized} = \textcolor{keyword}{false};
+152 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}}
+\subsubsection[{\texorpdfstring{Initialize(int argc, char $\ast$argv[], std\+::string out\+Dir="""")}{Initialize(int argc, char *argv[], std::string outDir="")}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Des\+Metrics\+::\+Initialize (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}, }
+\item[{std\+::string}]{out\+Dir = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1DesMetrics_a63bf3891d9fd2cf8c76b375b3db67756}{}\label{classns3_1_1DesMetrics_a63bf3891d9fd2cf8c76b375b3db67756}
+Open the \hyperlink{classns3_1_1DesMetrics}{Des\+Metrics} trace file and print the header.
+
+The trace file will have the same base name as the main program, \textquotesingle{}.json\textquotesingle{} as the extension.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & \mbox{[}in\mbox{]} Command line argument count. \\
+\hline
+{\em argv} & \mbox{[}in\mbox{]} Command line arguments. \\
+\hline
+{\em out\+Dir} & \mbox{[}in\mbox{]} Directory where the trace file should be written. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+43 \{
+44   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1DesMetrics_a229b920334708658e4d3b5ebf5e24c4c}{m\_initialized})
+45     \{
+46       \textcolor{comment}{// Running multiple tests, so close the previous output file}
+47       \hyperlink{classns3_1_1DesMetrics_a17b52dbb23cd230d64404f57f59029c5}{Close} ();
+48     \}
+49 
+50   \hyperlink{classns3_1_1DesMetrics_a229b920334708658e4d3b5ebf5e24c4c}{m\_initialized} = \textcolor{keyword}{true};
+51 
+52   std::string model\_name (\textcolor{stringliteral}{"desTraceFile"});
+53   \textcolor{keywordflow}{if} (argc)
+54     \{
+55       std::string arg0 = argv[0];
+56       model\_name = \hyperlink{group__systempath_ga523072e05da63b63113d1bea840edf1a}{SystemPath::Split} (arg0).back ();
+57     \}
+58   std::string jsonFile = model\_name + \textcolor{stringliteral}{".json"};
+59   \textcolor{keywordflow}{if} (outDir != \textcolor{stringliteral}{""})
+60     \{
+61       \hyperlink{classns3_1_1DesMetrics_affd6e3b6d411b401491d711506734d75}{DesMetrics::m\_outputDir} = outDir;
+62     \}
+63   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1DesMetrics_affd6e3b6d411b401491d711506734d75}{DesMetrics::m\_outputDir} != \textcolor{stringliteral}{""})
+64     \{
+65       jsonFile = \hyperlink{group__systempath_gaaa5a530cee42c8eda7e4f4523ef7e1cd}{SystemPath::Append} (\hyperlink{classns3_1_1DesMetrics_affd6e3b6d411b401491d711506734d75}{DesMetrics::m\_outputDir}, 
+      jsonFile);
+66     \}
+67 
+68   time\_t current\_time;
+69   time (&current\_time);
+70   \textcolor{keyword}{const} \textcolor{keywordtype}{char} * date = ctime (&current\_time);
+71   std::string capture\_date (date, 24);  \textcolor{comment}{// discard trailing newline from ctime}
+72 
+73   \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os}.open (jsonFile.c\_str ());
+74   \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << \textcolor{stringliteral}{"\{"} << std::endl;
+75   \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << \textcolor{stringliteral}{" \(\backslash\)"simulator\_name\(\backslash\)" : \(\backslash\)"ns-3\(\backslash\)","} << std::endl;
+76   \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << \textcolor{stringliteral}{" \(\backslash\)"model\_name\(\backslash\)" : \(\backslash\)""} << model\_name << \textcolor{stringliteral}{"\(\backslash\)","} << std::endl;
+77   \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << \textcolor{stringliteral}{" \(\backslash\)"capture\_date\(\backslash\)" : \(\backslash\)""} << capture\_date << \textcolor{stringliteral}{"\(\backslash\)","} << std::endl;
+78   \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << \textcolor{stringliteral}{" \(\backslash\)"command\_line\_arguments\(\backslash\)" : \(\backslash\)""};
+79   \textcolor{keywordflow}{if} (argc)
+80     \{
+81       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < argc; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}) 
+82         \{
+83           \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} > 0) \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << \textcolor{stringliteral}{" "};
+84           \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << argv[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}];
+85         \}
+86     \}
+87   \textcolor{keywordflow}{else}
+88     \{
+89       \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << \textcolor{stringliteral}{"[argv empty or not available]"};
+90     \}
+91   \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << \textcolor{stringliteral}{"\(\backslash\)","} << std::endl;
+92   \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << \textcolor{stringliteral}{" \(\backslash\)"events\(\backslash\)" : ["} << std::endl;
+93 
+94   \hyperlink{classns3_1_1DesMetrics_ab4a6d1bac1d7bae3db17cf362d4afaa8}{m\_separator} = \textcolor{charliteral}{' '};
+95  
+96 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}!Trace@{Trace}}
+\index{Trace@{Trace}!ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}}
+\subsubsection[{\texorpdfstring{Trace(const Time \&now, const Time \&delay)}{Trace(const Time &now, const Time &delay)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Des\+Metrics\+::\+Trace (
+\begin{DoxyParamCaption}
+\item[{const {\bf Time} \&}]{now, }
+\item[{const {\bf Time} \&}]{delay}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1DesMetrics_ab7c6c097412d0398affbc9f8d2643160}{}\label{classns3_1_1DesMetrics_ab7c6c097412d0398affbc9f8d2643160}
+Trace an event to self at the time it is scheduled.
+
+
+\begin{DoxyParams}{Parameters}
+{\em now} & \mbox{[}in\mbox{]} The local simulation time. \\
+\hline
+{\em delay} & \mbox{[}in\mbox{]} The delay to the event. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+100 \{
+101   \hyperlink{classns3_1_1DesMetrics_abc404d9eee92f4e8fd67f5d200490ed6}{TraceWithContext} (\hyperlink{classns3_1_1Simulator_a8514b74ee2c42916b351b33c4a963bb0}{Simulator::GetContext} (), now, 
+      \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a7964e6aa8f61a9d28973c8267a606ad8}{delay});
+102 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}!Trace\+With\+Context@{Trace\+With\+Context}}
+\index{Trace\+With\+Context@{Trace\+With\+Context}!ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}}
+\subsubsection[{\texorpdfstring{Trace\+With\+Context(uint32\+\_\+t context, const Time \&now, const Time \&delay)}{TraceWithContext(uint32_t context, const Time &now, const Time &delay)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Des\+Metrics\+::\+Trace\+With\+Context (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{context, }
+\item[{const {\bf Time} \&}]{now, }
+\item[{const {\bf Time} \&}]{delay}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1DesMetrics_abc404d9eee92f4e8fd67f5d200490ed6}{}\label{classns3_1_1DesMetrics_abc404d9eee92f4e8fd67f5d200490ed6}
+Trace an event (with context) at the time it is scheduled.
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & \mbox{[}in\mbox{]} The context (Node\+Id) which will receive the event. \\
+\hline
+{\em now} & \mbox{[}in\mbox{]} The local simulation time. \\
+\hline
+{\em delay} & \mbox{[}in\mbox{]} The delay to the event. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+106 \{
+107   \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1DesMetrics_a229b920334708658e4d3b5ebf5e24c4c}{m\_initialized})
+108     \{
+109       \hyperlink{classns3_1_1DesMetrics_a63bf3891d9fd2cf8c76b375b3db67756}{Initialize} (0, 0);
+110     \}
+111 
+112   std::ostringstream ss;
+113   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1DesMetrics_ab4a6d1bac1d7bae3db17cf362d4afaa8}{m\_separator} == \textcolor{charliteral}{','})
+114     \{
+115       ss << \hyperlink{classns3_1_1DesMetrics_ab4a6d1bac1d7bae3db17cf362d4afaa8}{m\_separator} << std::endl;
+116     \}
+117 
+118   uint32\_t sendCtx = \hyperlink{classns3_1_1Simulator_a8514b74ee2c42916b351b33c4a963bb0}{Simulator::GetContext} ();
+119   \textcolor{comment}{// Force to signed so we can show NoContext as '-1'}
+120   int32\_t send = (sendCtx != \hyperlink{classns3_1_1Simulator_ab25cc4cd782af44b5843ce7258ecde10abaefe68ccc9945956c166aaeea2e986e}{Simulator::NO\_CONTEXT}) ? (int32\_t)sendCtx : -1;
+121   int32\_t recv = (context != \hyperlink{classns3_1_1Simulator_ab25cc4cd782af44b5843ce7258ecde10abaefe68ccc9945956c166aaeea2e986e}{Simulator::NO\_CONTEXT}) ? (int32\_t)context : -1;
+122   
+123   ss <<                                 \textcolor{stringliteral}{"  [\(\backslash\)""}
+124      << send                         << \textcolor{stringliteral}{"\(\backslash\)",\(\backslash\)""}
+125      << now.GetTimeStep ()           << \textcolor{stringliteral}{"\(\backslash\)",\(\backslash\)""}
+126      << recv                         << \textcolor{stringliteral}{"\(\backslash\)",\(\backslash\)""}
+127      << (now + \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a7964e6aa8f61a9d28973c8267a606ad8}{delay}).GetTimeStep () << \textcolor{stringliteral}{"\(\backslash\)"]"};
+128 
+129   \{
+130     CriticalSection cs (\hyperlink{classns3_1_1DesMetrics_a05ad210056128f0154901516cbb884dc}{m\_mutex});
+131     \hyperlink{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{m\_os} << ss.str ();
+132   \}
+133 
+134   \hyperlink{classns3_1_1DesMetrics_ab4a6d1bac1d7bae3db17cf362d4afaa8}{m\_separator} = \textcolor{charliteral}{','};
+135 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}!m\+\_\+initialized@{m\+\_\+initialized}}
+\index{m\+\_\+initialized@{m\+\_\+initialized}!ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}}
+\subsubsection[{\texorpdfstring{m\+\_\+initialized}{m_initialized}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Des\+Metrics\+::m\+\_\+initialized\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1DesMetrics_a229b920334708658e4d3b5ebf5e24c4c}{}\label{classns3_1_1DesMetrics_a229b920334708658e4d3b5ebf5e24c4c}
+
+
+Have we been initialized. 
+
+\index{ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}!m\+\_\+mutex@{m\+\_\+mutex}}
+\index{m\+\_\+mutex@{m\+\_\+mutex}!ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}}
+\subsubsection[{\texorpdfstring{m\+\_\+mutex}{m_mutex}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf System\+Mutex} ns3\+::\+Des\+Metrics\+::m\+\_\+mutex\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1DesMetrics_a05ad210056128f0154901516cbb884dc}{}\label{classns3_1_1DesMetrics_a05ad210056128f0154901516cbb884dc}
+Mutex to control access to the output file. \index{ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}!m\+\_\+os@{m\+\_\+os}}
+\index{m\+\_\+os@{m\+\_\+os}!ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}}
+\subsubsection[{\texorpdfstring{m\+\_\+os}{m_os}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ofstream ns3\+::\+Des\+Metrics\+::m\+\_\+os\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}{}\label{classns3_1_1DesMetrics_ae84cea9d7b1c24d810e741bd8c46b430}
+
+
+The output json trace file stream. 
+
+\index{ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}!m\+\_\+output\+Dir@{m\+\_\+output\+Dir}}
+\index{m\+\_\+output\+Dir@{m\+\_\+output\+Dir}!ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}}
+\subsubsection[{\texorpdfstring{m\+\_\+output\+Dir}{m_outputDir}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Des\+Metrics\+::m\+\_\+output\+Dir\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classns3_1_1DesMetrics_affd6e3b6d411b401491d711506734d75}{}\label{classns3_1_1DesMetrics_affd6e3b6d411b401491d711506734d75}
+Cache the last-\/used output directory.
+
+This is enables repeated/re-\/entrant use of \hyperlink{classns3_1_1CommandLine}{Command\+Line}, for example in {\ttfamily \hyperlink{command-line-test-suite_8cc}{command-\/line-\/test-\/suite.\+cc}} \index{ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}!m\+\_\+separator@{m\+\_\+separator}}
+\index{m\+\_\+separator@{m\+\_\+separator}!ns3\+::\+Des\+Metrics@{ns3\+::\+Des\+Metrics}}
+\subsubsection[{\texorpdfstring{m\+\_\+separator}{m_separator}}]{\setlength{\rightskip}{0pt plus 5cm}char ns3\+::\+Des\+Metrics\+::m\+\_\+separator\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1DesMetrics_ab4a6d1bac1d7bae3db17cf362d4afaa8}{}\label{classns3_1_1DesMetrics_ab4a6d1bac1d7bae3db17cf362d4afaa8}
+
+
+The separator between event records. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{des-metrics_8h}{des-\/metrics.\+h}\item 
+core/model/\hyperlink{des-metrics_8cc}{des-\/metrics.\+cc}\end{DoxyCompactItemize}

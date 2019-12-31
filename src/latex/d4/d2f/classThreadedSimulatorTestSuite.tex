@@ -1,0 +1,76 @@
+\hypertarget{classThreadedSimulatorTestSuite}{}\section{Threaded\+Simulator\+Test\+Suite Class Reference}
+\label{classThreadedSimulatorTestSuite}\index{Threaded\+Simulator\+Test\+Suite@{Threaded\+Simulator\+Test\+Suite}}
+
+
+Inheritance diagram for Threaded\+Simulator\+Test\+Suite\+:
+% FIG 0
+
+
+Collaboration diagram for Threaded\+Simulator\+Test\+Suite\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classThreadedSimulatorTestSuite_afe8888920059fc832d9ffd352db08dab}{Threaded\+Simulator\+Test\+Suite} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Threaded\+Simulator\+Test\+Suite@{Threaded\+Simulator\+Test\+Suite}!Threaded\+Simulator\+Test\+Suite@{Threaded\+Simulator\+Test\+Suite}}
+\index{Threaded\+Simulator\+Test\+Suite@{Threaded\+Simulator\+Test\+Suite}!Threaded\+Simulator\+Test\+Suite@{Threaded\+Simulator\+Test\+Suite}}
+\subsubsection[{\texorpdfstring{Threaded\+Simulator\+Test\+Suite()}{ThreadedSimulatorTestSuite()}}]{\setlength{\rightskip}{0pt plus 5cm}Threaded\+Simulator\+Test\+Suite\+::\+Threaded\+Simulator\+Test\+Suite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classThreadedSimulatorTestSuite_afe8888920059fc832d9ffd352db08dab}{}\label{classThreadedSimulatorTestSuite_afe8888920059fc832d9ffd352db08dab}
+
+\begin{DoxyCode}
+232     : \hyperlink{classns3_1_1TestSuite_a904b0c40583b744d30908aeb94636d1a}{TestSuite} (\textcolor{stringliteral}{"threaded-simulator"})
+233   \{
+234     std::string simulatorTypes[] = \{
+235 \textcolor{preprocessor}{#ifdef HAVE\_RT}
+236       \textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl"},
+237 \textcolor{preprocessor}{#endif}
+238       \textcolor{stringliteral}{"ns3::DefaultSimulatorImpl"}
+239     \};
+240     std::string schedulerTypes[] = \{
+241       \textcolor{stringliteral}{"ns3::ListScheduler"},
+242       \textcolor{stringliteral}{"ns3::HeapScheduler"},
+243       \textcolor{stringliteral}{"ns3::MapScheduler"},
+244       \textcolor{stringliteral}{"ns3::CalendarScheduler"}
+245     \};
+246     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} threadcounts[] = \{
+247       0,
+248       2,
+249       10, 
+250       20
+251     \};
+252     \hyperlink{classns3_1_1ObjectFactory}{ObjectFactory} factory;
+253     
+254     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}=0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < (\textcolor{keyword}{sizeof}(simulatorTypes) / \textcolor{keyword}{sizeof}(simulatorTypes[0])); ++
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}) 
+255       \{
+256         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} j=0; j < (\textcolor{keyword}{sizeof}(threadcounts) / \textcolor{keyword}{sizeof}(threadcounts[0])); ++j)
+257           \{
+258             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} k=0; k < (\textcolor{keyword}{sizeof}(schedulerTypes) / \textcolor{keyword}{sizeof}(schedulerTypes[0])); ++k) 
+259               \{
+260                 factory.\hyperlink{classns3_1_1ObjectFactory_a77dcd099064038a1eb7a6b8251229ec3}{SetTypeId}(schedulerTypes[k]);
+261                 \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classThreadedSimulatorEventsTestCase}{ThreadedSimulatorEventsTestCase} 
+      (factory, simulatorTypes[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}], threadcounts[j]), TestCase::QUICK);
+262               \}
+263           \}
+264       \}
+265   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/test/\hyperlink{threaded-test-suite_8cc}{threaded-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

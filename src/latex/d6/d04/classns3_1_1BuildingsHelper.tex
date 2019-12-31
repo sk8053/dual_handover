@@ -1,0 +1,197 @@
+\hypertarget{classns3_1_1BuildingsHelper}{}\section{ns3\+:\+:Buildings\+Helper Class Reference}
+\label{classns3_1_1BuildingsHelper}\index{ns3\+::\+Buildings\+Helper@{ns3\+::\+Buildings\+Helper}}
+
+
+{\ttfamily \#include $<$buildings-\/helper.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Buildings\+Helper\+:
+% FIG 0
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classns3_1_1BuildingsHelper_a1f8163c577bf4fbadd091327e0f15f9a}{Install} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Node}{Node} $>$ node)
+\item 
+static void \hyperlink{classns3_1_1BuildingsHelper_a4d13fa12e7a91c7f9725616da184ab79}{Install} (\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c})
+\item 
+static void \hyperlink{classns3_1_1BuildingsHelper_a1ba0e6a41145c830b79105bef420b883}{Make\+Mobility\+Model\+Consistent} ()
+\item 
+static void \hyperlink{classns3_1_1BuildingsHelper_a355b3ae0c0f772746e66fb712c0bc0b0}{Make\+Consistent} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ bmm)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Buildings\+Helper@{ns3\+::\+Buildings\+Helper}!Install@{Install}}
+\index{Install@{Install}!ns3\+::\+Buildings\+Helper@{ns3\+::\+Buildings\+Helper}}
+\subsubsection[{\texorpdfstring{Install(\+Ptr$<$ Node $>$ node)}{Install(Ptr< Node > node)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Buildings\+Helper\+::\+Install (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Node} $>$}]{node}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1BuildingsHelper_a1f8163c577bf4fbadd091327e0f15f9a}{}\label{classns3_1_1BuildingsHelper_a1f8163c577bf4fbadd091327e0f15f9a}
+Install the \hyperlink{classns3_1_1MobilityBuildingInfo}{Mobility\+Building\+Info} to a node
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & the mobility model of the node to be updated \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+48 \{
+49   Ptr<Object> \textcolor{keywordtype}{object} = node;
+50   Ptr<MobilityModel> model = \textcolor{keywordtype}{object}->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<MobilityModel> ();
+51   \textcolor{keywordflow}{if} (model == 0)
+52     \{
+53       \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} (0 != model, \textcolor{stringliteral}{"node "} << node->\hyperlink{classns3_1_1Node_aaf49b64a843565ce3812326313b370ac}{GetId} () << \textcolor{stringliteral}{" does not have
+       a MobilityModel"});
+54 
+55     \}
+56   Ptr<MobilityBuildingInfo> buildingInfo = CreateObject<MobilityBuildingInfo> ();
+57   model->AggregateObject (buildingInfo);
+58 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Buildings\+Helper@{ns3\+::\+Buildings\+Helper}!Install@{Install}}
+\index{Install@{Install}!ns3\+::\+Buildings\+Helper@{ns3\+::\+Buildings\+Helper}}
+\subsubsection[{\texorpdfstring{Install(\+Node\+Container c)}{Install(NodeContainer c)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Buildings\+Helper\+::\+Install (
+\begin{DoxyParamCaption}
+\item[{{\bf Node\+Container}}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1BuildingsHelper_a4d13fa12e7a91c7f9725616da184ab79}{}\label{classns3_1_1BuildingsHelper_a4d13fa12e7a91c7f9725616da184ab79}
+Install the \hyperlink{classns3_1_1MobilityBuildingInfo}{Mobility\+Building\+Info} to the set of nodes in a \hyperlink{classns3_1_1NodeContainer}{Node\+Container}
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & the \hyperlink{classns3_1_1NodeContainer}{Node\+Container} including the nodes to be updated \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+38 \{
+39   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1NodeContainer_aa1a9f2d2b09bfef7d066d3974bca2cc4}{NodeContainer::Iterator} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}.Begin (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}.End (); ++
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+40     \{
+41       \hyperlink{classns3_1_1BuildingsHelper_a1f8163c577bf4fbadd091327e0f15f9a}{Install} (*\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+42     \}
+43 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Buildings\+Helper@{ns3\+::\+Buildings\+Helper}!Make\+Consistent@{Make\+Consistent}}
+\index{Make\+Consistent@{Make\+Consistent}!ns3\+::\+Buildings\+Helper@{ns3\+::\+Buildings\+Helper}}
+\subsubsection[{\texorpdfstring{Make\+Consistent(\+Ptr$<$ Mobility\+Model $>$ bmm)}{MakeConsistent(Ptr< MobilityModel > bmm)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Buildings\+Helper\+::\+Make\+Consistent (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Mobility\+Model} $>$}]{bmm}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1BuildingsHelper_a355b3ae0c0f772746e66fb712c0bc0b0}{}\label{classns3_1_1BuildingsHelper_a355b3ae0c0f772746e66fb712c0bc0b0}
+Make the given mobility model consistent, by determining whether its position falls inside any of the building in \hyperlink{classns3_1_1BuildingList}{Building\+List}, and updating accordingly the Building\+Info aggregated with the \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em bmm} & the mobility model to be made consistent \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+80 \{
+81   Ptr<MobilityBuildingInfo> bmm = mm->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<MobilityBuildingInfo> ();
+82   \textcolor{keywordtype}{bool} found = \textcolor{keyword}{false};
+83   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1BuildingList_a84957ecea4b4343f676da0e96f2c8130}{BuildingList::Iterator} bit = \hyperlink{classns3_1_1BuildingList_adbb122872e11541e930f0a3afa70a479}{BuildingList::Begin} (); bit !=
+       \hyperlink{classns3_1_1BuildingList_abc6b941dbb194efb9f00352cc6b3db65}{BuildingList::End} (); ++bit)
+84     \{
+85       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"checking building "} << (*bit)->GetId () << \textcolor{stringliteral}{" with boundaries "} << (*bit)->
+      GetBoundaries ());
+86       Vector pos = mm->GetPosition ();
+87       \textcolor{keywordflow}{if} ((*bit)->IsInside (pos))
+88         \{
+89           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"MobilityBuildingInfo "} << bmm << \textcolor{stringliteral}{" pos "} << mm->GetPosition () << \textcolor{stringliteral}{"
+       falls inside building "} << (*bit)->GetId ());
+90           \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} (found == \textcolor{keyword}{false}, \textcolor{stringliteral}{" MobilityBuildingInfo already inside
+       another building!"});                
+91           found = \textcolor{keyword}{true};
+92           uint16\_t floor = (*bit)->GetFloor (pos);
+93           uint16\_t roomX = (*bit)->GetRoomX (pos);
+94           uint16\_t roomY = (*bit)->GetRoomY (pos);         
+95           bmm->SetIndoor (*bit, floor, roomX, roomY);         
+96         \}                         
+97     \}
+98   \textcolor{keywordflow}{if} (!found)
+99     \{
+100       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"MobilityBuildingInfo "} << bmm << \textcolor{stringliteral}{" pos "} << mm->GetPosition ()  << \textcolor{stringliteral}{" is
+       outdoor"});
+101       bmm->SetOutdoor ();
+102     \}
+103 
+104 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Buildings\+Helper@{ns3\+::\+Buildings\+Helper}!Make\+Mobility\+Model\+Consistent@{Make\+Mobility\+Model\+Consistent}}
+\index{Make\+Mobility\+Model\+Consistent@{Make\+Mobility\+Model\+Consistent}!ns3\+::\+Buildings\+Helper@{ns3\+::\+Buildings\+Helper}}
+\subsubsection[{\texorpdfstring{Make\+Mobility\+Model\+Consistent()}{MakeMobilityModelConsistent()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Buildings\+Helper\+::\+Make\+Mobility\+Model\+Consistent (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1BuildingsHelper_a1ba0e6a41145c830b79105bef420b883}{}\label{classns3_1_1BuildingsHelper_a1ba0e6a41145c830b79105bef420b883}
+This method goes through the whole \hyperlink{classns3_1_1NodeList}{Node\+List} and, for each node in the list, calls \hyperlink{classns3_1_1BuildingsHelper_a355b3ae0c0f772746e66fb712c0bc0b0}{Buildings\+Helper\+::\+Make\+Consistent()} passing to it the \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} of that node. 
+\begin{DoxyCode}
+63 \{
+64   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+65   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} nit = \hyperlink{classns3_1_1NodeList_a93d2211831f5cb71d1dbb721e2721d7f}{NodeList::Begin} (); nit != 
+      \hyperlink{classns3_1_1NodeList_a027a558c16e6078e25c7ffc67becb559}{NodeList::End} (); ++nit)
+66     \{
+67       Ptr<MobilityModel> mm = (*nit)->GetObject<MobilityModel> ();
+68       \textcolor{keywordflow}{if} (mm != 0)
+69         \{
+70           \hyperlink{classns3_1_1BuildingsHelper_a355b3ae0c0f772746e66fb712c0bc0b0}{MakeConsistent} (mm);
+71           Ptr<MobilityBuildingInfo> bmm = mm->GetObject<MobilityBuildingInfo> ();
+72           \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} (0 != bmm, \textcolor{stringliteral}{"node "} << (*nit)->GetId () << \textcolor{stringliteral}{" has a
+       MobilityModel that does not have a MobilityBuildingInfo"});
+73         \}
+74     \}
+75 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+buildings/helper/\hyperlink{buildings-helper_8h}{buildings-\/helper.\+h}\item 
+buildings/helper/\hyperlink{buildings-helper_8cc}{buildings-\/helper.\+cc}\end{DoxyCompactItemize}

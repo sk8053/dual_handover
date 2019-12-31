@@ -1,0 +1,138 @@
+\hypertarget{classWatchdogTestCase}{}\section{Watchdog\+Test\+Case Class Reference}
+\label{classWatchdogTestCase}\index{Watchdog\+Test\+Case@{Watchdog\+Test\+Case}}
+
+
+Inheritance diagram for Watchdog\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Watchdog\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classWatchdogTestCase_ae170b8c0e016c6b098eb66c0907db9ea}{Watchdog\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classWatchdogTestCase_a81f76aedff6228054266a36c6718b81e}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+void \hyperlink{classWatchdogTestCase_a8abf7595fc58ed3f826fbeb287d65a23}{Expire} (\hyperlink{classns3_1_1Time}{Time} expected)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classWatchdogTestCase_a8a5a1d467f0b228d70410e8c6c4d25a8}{m\+\_\+expired}
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classWatchdogTestCase_aa0f2805ce13495f45652eb98ce374f9c}{m\+\_\+expired\+Time}
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classWatchdogTestCase_a4547198b5406633de3fc3bf1761359f4}{m\+\_\+expired\+Argument}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Watchdog\+Test\+Case@{Watchdog\+Test\+Case}!Watchdog\+Test\+Case@{Watchdog\+Test\+Case}}
+\index{Watchdog\+Test\+Case@{Watchdog\+Test\+Case}!Watchdog\+Test\+Case@{Watchdog\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Watchdog\+Test\+Case()}{WatchdogTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Watchdog\+Test\+Case\+::\+Watchdog\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classWatchdogTestCase_ae170b8c0e016c6b098eb66c0907db9ea}{}\label{classWatchdogTestCase_ae170b8c0e016c6b098eb66c0907db9ea}
+
+\begin{DoxyCode}
+37   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check that we can keepalive a watchdog"})
+38 \{
+39 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Watchdog\+Test\+Case@{Watchdog\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Watchdog\+Test\+Case@{Watchdog\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Watchdog\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classWatchdogTestCase_a81f76aedff6228054266a36c6718b81e}{}\label{classWatchdogTestCase_a81f76aedff6228054266a36c6718b81e}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+51 \{
+52   \hyperlink{classWatchdogTestCase_a8a5a1d467f0b228d70410e8c6c4d25a8}{m\_expired} = \textcolor{keyword}{false};
+53   \hyperlink{classWatchdogTestCase_a4547198b5406633de3fc3bf1761359f4}{m\_expiredArgument} = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0);
+54   \hyperlink{classWatchdogTestCase_aa0f2805ce13495f45652eb98ce374f9c}{m\_expiredTime} = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0);
+55   \hyperlink{classns3_1_1Watchdog}{Watchdog} watchdog;
+56   watchdog.\hyperlink{classns3_1_1Watchdog_a9b61e573ae12c4604131a595fd474c3b}{SetFunction} (&\hyperlink{classWatchdogTestCase_a8abf7595fc58ed3f826fbeb287d65a23}{WatchdogTestCase::Expire}, \textcolor{keyword}{this});
+57   watchdog.\hyperlink{classns3_1_1Watchdog_a925bc97bcf93e6a312f45f0c03f9cbf8}{SetArguments} (\hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (40));
+58   watchdog.\hyperlink{classns3_1_1Watchdog_a979e51daa6b92c872a78857cfe54c41a}{Ping} (\hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (10));
+59   Simulator::Schedule (\hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (5), &Watchdog::Ping, &watchdog, 
+      \hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (20));
+60   Simulator::Schedule (\hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (20), &Watchdog::Ping, &watchdog, 
+      \hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (2));
+61   Simulator::Schedule (\hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (23), &Watchdog::Ping, &watchdog, 
+      \hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (17));
+62   Simulator::Run ();
+63   Simulator::Destroy ();
+64   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{classWatchdogTestCase_a8a5a1d467f0b228d70410e8c6c4d25a8}{m\_expired}, \textcolor{keyword}{true}, \textcolor{stringliteral}{"The timer did not expire ??"});
+65   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{classWatchdogTestCase_aa0f2805ce13495f45652eb98ce374f9c}{m\_expiredTime}, 
+      \hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (40), \textcolor{stringliteral}{"The timer did not expire at the expected time ?"});
+66   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{classWatchdogTestCase_a4547198b5406633de3fc3bf1761359f4}{m\_expiredArgument}, 
+      \hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (40), \textcolor{stringliteral}{"We did not get the right argument"});
+67 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Watchdog\+Test\+Case@{Watchdog\+Test\+Case}!Expire@{Expire}}
+\index{Expire@{Expire}!Watchdog\+Test\+Case@{Watchdog\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Expire(\+Time expected)}{Expire(Time expected)}}]{\setlength{\rightskip}{0pt plus 5cm}void Watchdog\+Test\+Case\+::\+Expire (
+\begin{DoxyParamCaption}
+\item[{{\bf Time}}]{expected}
+\end{DoxyParamCaption}
+)}\hypertarget{classWatchdogTestCase_a8abf7595fc58ed3f826fbeb287d65a23}{}\label{classWatchdogTestCase_a8abf7595fc58ed3f826fbeb287d65a23}
+
+\begin{DoxyCode}
+43 \{
+44   \hyperlink{classWatchdogTestCase_a8a5a1d467f0b228d70410e8c6c4d25a8}{m\_expired} = \textcolor{keyword}{true};
+45   \hyperlink{classWatchdogTestCase_aa0f2805ce13495f45652eb98ce374f9c}{m\_expiredTime} = \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ();
+46   \hyperlink{classWatchdogTestCase_a4547198b5406633de3fc3bf1761359f4}{m\_expiredArgument} = expected;
+47 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Watchdog\+Test\+Case@{Watchdog\+Test\+Case}!m\+\_\+expired@{m\+\_\+expired}}
+\index{m\+\_\+expired@{m\+\_\+expired}!Watchdog\+Test\+Case@{Watchdog\+Test\+Case}}
+\subsubsection[{\texorpdfstring{m\+\_\+expired}{m_expired}}]{\setlength{\rightskip}{0pt plus 5cm}bool Watchdog\+Test\+Case\+::m\+\_\+expired}\hypertarget{classWatchdogTestCase_a8a5a1d467f0b228d70410e8c6c4d25a8}{}\label{classWatchdogTestCase_a8a5a1d467f0b228d70410e8c6c4d25a8}
+\index{Watchdog\+Test\+Case@{Watchdog\+Test\+Case}!m\+\_\+expired\+Argument@{m\+\_\+expired\+Argument}}
+\index{m\+\_\+expired\+Argument@{m\+\_\+expired\+Argument}!Watchdog\+Test\+Case@{Watchdog\+Test\+Case}}
+\subsubsection[{\texorpdfstring{m\+\_\+expired\+Argument}{m_expiredArgument}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} Watchdog\+Test\+Case\+::m\+\_\+expired\+Argument}\hypertarget{classWatchdogTestCase_a4547198b5406633de3fc3bf1761359f4}{}\label{classWatchdogTestCase_a4547198b5406633de3fc3bf1761359f4}
+\index{Watchdog\+Test\+Case@{Watchdog\+Test\+Case}!m\+\_\+expired\+Time@{m\+\_\+expired\+Time}}
+\index{m\+\_\+expired\+Time@{m\+\_\+expired\+Time}!Watchdog\+Test\+Case@{Watchdog\+Test\+Case}}
+\subsubsection[{\texorpdfstring{m\+\_\+expired\+Time}{m_expiredTime}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} Watchdog\+Test\+Case\+::m\+\_\+expired\+Time}\hypertarget{classWatchdogTestCase_aa0f2805ce13495f45652eb98ce374f9c}{}\label{classWatchdogTestCase_aa0f2805ce13495f45652eb98ce374f9c}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/test/\hyperlink{watchdog-test-suite_8cc}{watchdog-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

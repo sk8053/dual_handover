@@ -1,0 +1,207 @@
+\hypertarget{classWifiMsduAggregatorThroughputTest}{}\section{Wifi\+Msdu\+Aggregator\+Throughput\+Test Class Reference}
+\label{classWifiMsduAggregatorThroughputTest}\index{Wifi\+Msdu\+Aggregator\+Throughput\+Test@{Wifi\+Msdu\+Aggregator\+Throughput\+Test}}
+
+
+Inheritance diagram for Wifi\+Msdu\+Aggregator\+Throughput\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Wifi\+Msdu\+Aggregator\+Throughput\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classWifiMsduAggregatorThroughputTest_a325b61f476ea51fc33a989aac4507eb5}{Wifi\+Msdu\+Aggregator\+Throughput\+Test} ()
+\item 
+virtual void \hyperlink{classWifiMsduAggregatorThroughputTest_a7c7ee21528f8d3c13238b6e9455b03f4}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classWifiMsduAggregatorThroughputTest_a89cd7fa2be793060e380600808fff076}{m\+\_\+write\+Results}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Wifi\+Msdu\+Aggregator\+Throughput\+Test@{Wifi\+Msdu\+Aggregator\+Throughput\+Test}!Wifi\+Msdu\+Aggregator\+Throughput\+Test@{Wifi\+Msdu\+Aggregator\+Throughput\+Test}}
+\index{Wifi\+Msdu\+Aggregator\+Throughput\+Test@{Wifi\+Msdu\+Aggregator\+Throughput\+Test}!Wifi\+Msdu\+Aggregator\+Throughput\+Test@{Wifi\+Msdu\+Aggregator\+Throughput\+Test}}
+\subsubsection[{\texorpdfstring{Wifi\+Msdu\+Aggregator\+Throughput\+Test()}{WifiMsduAggregatorThroughputTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Wifi\+Msdu\+Aggregator\+Throughput\+Test\+::\+Wifi\+Msdu\+Aggregator\+Throughput\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classWifiMsduAggregatorThroughputTest_a325b61f476ea51fc33a989aac4507eb5}{}\label{classWifiMsduAggregatorThroughputTest_a325b61f476ea51fc33a989aac4507eb5}
+
+\begin{DoxyCode}
+55   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"MsduAggregator throughput test"}),
+56     \hyperlink{classWifiMsduAggregatorThroughputTest_a89cd7fa2be793060e380600808fff076}{m\_writeResults} (\textcolor{keyword}{false})
+57 \{
+58 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Wifi\+Msdu\+Aggregator\+Throughput\+Test@{Wifi\+Msdu\+Aggregator\+Throughput\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Wifi\+Msdu\+Aggregator\+Throughput\+Test@{Wifi\+Msdu\+Aggregator\+Throughput\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Wifi\+Msdu\+Aggregator\+Throughput\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classWifiMsduAggregatorThroughputTest_a7c7ee21528f8d3c13238b6e9455b03f4}{}\label{classWifiMsduAggregatorThroughputTest_a7c7ee21528f8d3c13238b6e9455b03f4}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+62 \{
+63   \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+64   \hyperlink{classns3_1_1WifiMacHelper}{WifiMacHelper} wifiMac;
+65   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} wifiPhy = YansWifiPhyHelper::Default ();
+66   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} wifiChannel = YansWifiChannelHelper::Default ();
+67   wifiPhy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ());
+68 
+69   \hyperlink{classns3_1_1Ssid}{Ssid} ssid = \hyperlink{classns3_1_1Ssid}{Ssid} (\textcolor{stringliteral}{"wifi-amsdu-throughput"});
+70   \textcolor{comment}{// It may seem a little farcical running an 802.11n aggregation}
+71   \textcolor{comment}{// scenario with 802.11b rates (transmit rate fixed to 1 Mbps, no}
+72   \textcolor{comment}{// less), but this approach tests the bit we need to without unduly}
+73   \textcolor{comment}{// increasing the complexity of the simulation.}
+74   std::string phyMode (\textcolor{stringliteral}{"DsssRate1Mbps"});
+75   wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a77e1cc9f77a0bce8e2bc82cbef437b5a}{WIFI\_PHY\_STANDARD\_80211b});
+76   wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::ConstantRateWifiManager"},
+77                                 \textcolor{stringliteral}{"DataMode"}, StringValue (phyMode),
+78                                 \textcolor{stringliteral}{"ControlMode"}, StringValue (phyMode));
+79 
+80   \textcolor{comment}{// Setup the AP, which will be the source of traffic for this test}
+81   \textcolor{comment}{// and thus has an aggregator on AC\_BE.}
+82   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ap;
+83   ap.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+84   wifiMac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::ApWifiMac"},
+85                    \textcolor{stringliteral}{"QosSupported"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}),
+86                    \textcolor{stringliteral}{"Ssid"}, SsidValue (ssid),
+87                    \textcolor{stringliteral}{"BeaconGeneration"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}),
+88                    \textcolor{stringliteral}{"BeaconInterval"}, TimeValue (\hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (102400)),
+89                    \textcolor{stringliteral}{"BE\_MaxAmsduSize"}, UintegerValue (4000));
+90 
+91   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} apDev = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (wifiPhy, wifiMac, ap);
+92 
+93   \textcolor{comment}{// Setup one STA, which will be the sink for traffic in this test.}
+94   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} sta;
+95   sta.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+96   wifiMac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::StaWifiMac"},
+97                    \textcolor{stringliteral}{"QosSupported"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}),
+98                    \textcolor{stringliteral}{"Ssid"}, SsidValue (ssid),
+99                    \textcolor{stringliteral}{"ActiveProbing"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+100   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} staDev = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (wifiPhy, wifiMac, sta);
+101 
+102   \textcolor{comment}{// Our devices will have fixed positions}
+103   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+104   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+105   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (\textcolor{stringliteral}{"ns3::GridPositionAllocator"},
+106                                  \textcolor{stringliteral}{"MinX"}, DoubleValue (0.0),
+107                                  \textcolor{stringliteral}{"MinY"}, DoubleValue (0.0),
+108                                  \textcolor{stringliteral}{"DeltaX"}, DoubleValue (5.0),
+109                                  \textcolor{stringliteral}{"DeltaY"}, DoubleValue (10.0),
+110                                  \textcolor{stringliteral}{"GridWidth"}, UintegerValue (2),
+111                                  \textcolor{stringliteral}{"LayoutType"}, StringValue (\textcolor{stringliteral}{"RowFirst"}));
+112   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (sta);
+113   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ap);
+114 
+115   \textcolor{comment}{// Now we install internet stacks on our devices}
+116   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+117   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (ap);
+118   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (sta);
+119 
+120   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+121   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"192.168.0.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+122   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} staNodeInterface, apNodeInterface;
+123   staNodeInterface = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (staDev);
+124   apNodeInterface = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (apDev);
+125 
+126   \textcolor{comment}{// The applications for this test will see a unidirectional UDP}
+127   \textcolor{comment}{// stream from the AP to the STA. The following UDP port will be}
+128   \textcolor{comment}{// used (arbitrary choice).}
+129   uint16\_t udpPort = 50000;
+130 
+131   \textcolor{comment}{// The packet sink application is on the STA device, and is running}
+132   \textcolor{comment}{// right from the start. The traffic source will turn on at 1 second}
+133   \textcolor{comment}{// and then off at 9 seconds, so we turn the sink off at 9 seconds}
+134   \textcolor{comment}{// too in order to measure throughput in a fixed window.}
+135   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} packetSink (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+136                                \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (),
+137                                                   udpPort));
+138   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp = packetSink.Install (sta.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+139   sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0));
+140   sinkApp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (9.0));
+141 
+142   \textcolor{comment}{// The packet source is an on-off application on the AP}
+143   \textcolor{comment}{// device. Given that we have fixed the transmit rate at 1 Mbps}
+144   \textcolor{comment}{// above, a 1 Mbps stream at the transport layer should be sufficent}
+145   \textcolor{comment}{// to determine whether aggregation is working or not.}
+146   \textcolor{comment}{//}
+147   \textcolor{comment}{// We configure this traffic stream to operate between 1 and 9 seconds.}
+148   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+149                      \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (staNodeInterface.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (0),
+150                                         udpPort));
+151   onoff.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (100));
+152   onoff.SetConstantRate (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"1Mbps"}));
+153   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sourceApp = onoff.Install (ap.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+154   sourceApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+155   sourceApp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (9.0));
+156 
+157   \textcolor{comment}{// Enable tracing at the AP}
+158   \textcolor{keywordflow}{if} (\hyperlink{classWifiMsduAggregatorThroughputTest_a89cd7fa2be793060e380600808fff076}{m\_writeResults})
+159     \{
+160       wifiPhy.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"wifi-amsdu-throughput"}, sta.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->
+      \hyperlink{classns3_1_1Node_aaf49b64a843565ce3812326313b370ac}{GetId} (), 0);
+161     \}
+162 
+163   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+164   Simulator::Run ();
+165   Simulator::Destroy ();
+166 
+167   \textcolor{comment}{// Now the simulation is complete we note the total number of octets}
+168   \textcolor{comment}{// receive at the packet sink so that we can shortly test that this}
+169   \textcolor{comment}{// is plausible.}
+170   uint32\_t totalOctetsThrough =
+171     DynamicCast<PacketSink>(sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a9e565807abd4213a56566a7ccd8d7509}{Get} (0))->GetTotalRx ();
+172 
+173   \textcolor{comment}{// Check that throughput was acceptable. This threshold is set based}
+174   \textcolor{comment}{// on inspection of a trace where things are working. Basically, we}
+175   \textcolor{comment}{// there get 26 UDP packets (of size 100, as specified above)}
+176   \textcolor{comment}{// aggregated per A-MSDU, for which the complete frame exchange}
+177   \textcolor{comment}{// (including RTS/CTS and plus medium access) takes around 32}
+178   \textcolor{comment}{// ms. Over the eight seconds of the test this means we expect about}
+179   \textcolor{comment}{// 650 kilobytes, so a pass threshold of 600000 seems to provide a}
+180   \textcolor{comment}{// fair amount of margin to account for reduced utilisation around}
+181   \textcolor{comment}{// stream startup, and contention around AP beacon transmission.}
+182   \textcolor{comment}{//}
+183   \textcolor{comment}{// If aggregation is turned off, then we get about 350 kilobytes in}
+184   \textcolor{comment}{// the same test, so we'll definitely catch the major failures.}
+185   \hyperlink{group__testing_ga868cfb773df312b867a506bdd2e3cbef}{NS\_TEST\_ASSERT\_MSG\_GT} (totalOctetsThrough, 600000,
+186                          \textcolor{stringliteral}{"A-MSDU test fails for low throughput of "}
+187                          << totalOctetsThrough << \textcolor{stringliteral}{" octets"});
+188 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Wifi\+Msdu\+Aggregator\+Throughput\+Test@{Wifi\+Msdu\+Aggregator\+Throughput\+Test}!m\+\_\+write\+Results@{m\+\_\+write\+Results}}
+\index{m\+\_\+write\+Results@{m\+\_\+write\+Results}!Wifi\+Msdu\+Aggregator\+Throughput\+Test@{Wifi\+Msdu\+Aggregator\+Throughput\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+write\+Results}{m_writeResults}}]{\setlength{\rightskip}{0pt plus 5cm}bool Wifi\+Msdu\+Aggregator\+Throughput\+Test\+::m\+\_\+write\+Results\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classWifiMsduAggregatorThroughputTest_a89cd7fa2be793060e380600808fff076}{}\label{classWifiMsduAggregatorThroughputTest_a89cd7fa2be793060e380600808fff076}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+test/ns3wifi/\hyperlink{wifi-msdu-aggregator-test-suite_8cc}{wifi-\/msdu-\/aggregator-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

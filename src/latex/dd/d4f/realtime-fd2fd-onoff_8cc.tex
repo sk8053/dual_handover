@@ -1,0 +1,119 @@
+\hypertarget{realtime-fd2fd-onoff_8cc}{}\section{fd-\/net-\/device/examples/realtime-\/fd2fd-\/onoff.cc File Reference}
+\label{realtime-fd2fd-onoff_8cc}\index{fd-\/net-\/device/examples/realtime-\/fd2fd-\/onoff.\+cc@{fd-\/net-\/device/examples/realtime-\/fd2fd-\/onoff.\+cc}}
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/fd-\/net-\/device-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+Include dependency graph for realtime-\/fd2fd-\/onoff.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{realtime-fd2fd-onoff_8cc_a771798144eac362099f8d5336496b976}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Realtime\+Fd\+Net\+Device\+Saturation\+Example\char`\"{})
+\item 
+int \hyperlink{realtime-fd2fd-onoff_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{realtime-\/fd2fd-\/onoff.\+cc@{realtime-\/fd2fd-\/onoff.\+cc}!main@{main}}
+\index{main@{main}!realtime-\/fd2fd-\/onoff.\+cc@{realtime-\/fd2fd-\/onoff.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{realtime-fd2fd-onoff_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{realtime-fd2fd-onoff_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+58 \{
+59   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+60   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+61   
+62   uint16\_t sinkPort = 8000;
+63   uint32\_t packetSize = 10000; \textcolor{comment}{// bytes}
+64   std::string dataRate(\textcolor{stringliteral}{"1000Mb/s"});
+65 
+66   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"}, StringValue (\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl"}));
+67   GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+68 
+69   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Node"});
+70   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+71   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+72 
+73   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Device"});
+74   \hyperlink{classns3_1_1FdNetDeviceHelper}{FdNetDeviceHelper} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd};
+75   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = fd.\hyperlink{classns3_1_1FdNetDeviceHelper_af70d55cbb4f6411c33cacb84eb651ad5}{Install} (nodes);
+76 
+77   \textcolor{keywordtype}{int} sv[2];
+78   \textcolor{keywordflow}{if} (socketpair (AF\_UNIX, SOCK\_DGRAM, 0, sv) < 0)
+79     \{
+80       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Error creating pipe="} << strerror (errno));
+81     \}
+82 
+83   \hyperlink{classns3_1_1Ptr}{Ptr<NetDevice>} \hyperlink{lte__link__budget__interference_8m_ab5ca0c44c6f0a063a5219b3749db661f}{d1} = devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0);
+84   \hyperlink{classns3_1_1Ptr}{Ptr<FdNetDevice>} clientDevice = d1->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1FdNetDevice}{FdNetDevice}> ();
+85   clientDevice->\hyperlink{classns3_1_1FdNetDevice_ac72fff1b3d44824245645a9bcb37c709}{SetFileDescriptor} (sv[0]);
+86 
+87   \hyperlink{classns3_1_1Ptr}{Ptr<NetDevice>} \hyperlink{lte__cqi__generation_8m_a479b78c01efbe4664b402a300da492f7}{d2} = devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1);
+88   \hyperlink{classns3_1_1Ptr}{Ptr<FdNetDevice>} serverDevice = d2->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1FdNetDevice}{FdNetDevice}> ();
+89   serverDevice->\hyperlink{classns3_1_1FdNetDevice_ac72fff1b3d44824245645a9bcb37c709}{SetFileDescriptor} (sv[1]);
+90 
+91   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Add Internet Stack"});
+92   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internetStackHelper;
+93   internetStackHelper.\hyperlink{classns3_1_1InternetStackHelper_a10e2a35f410d0d1c90d979542c8bfd6e}{SetIpv4StackInstall}(\textcolor{keyword}{true});
+94   internetStackHelper.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodes);
+95 
+96   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create IPv4 Interface"});
+97   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} addresses;
+98   addresses.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.0.0.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+99   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} interfaces = addresses.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devices);
+100 
+101   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} clientNode = nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0);
+102   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} serverIp = interfaces.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1);
+103   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} serverNode = nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1);
+104 
+105   \textcolor{comment}{// server}
+106   \hyperlink{classns3_1_1Address}{Address} sinkLocalAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (serverIp, sinkPort));
+107   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, sinkLocalAddress);
+108   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp = sinkHelper.Install (serverNode);
+109   sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+110   sinkApp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (40.0));
+111   fd.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"rt-fd2fd-onoff-server"}, serverDevice);
+112 
+113   \textcolor{comment}{// client}
+114   AddressValue serverAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (serverIp, sinkPort));
+115   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+116   onoff.SetAttribute (\textcolor{stringliteral}{"Remote"}, serverAddress);
+117   onoff.SetAttribute (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}));
+118   onoff.SetAttribute (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=0]"}));
+119   onoff.SetAttribute (\textcolor{stringliteral}{"DataRate"}, DataRateValue (dataRate));
+120   onoff.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (packetSize));
+121   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps = onoff.Install (clientNode);
+122   clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+123   clientApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (39.0));
+124   fd.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"rt-fd2fd-onoff-client"}, clientDevice);
+125 
+126   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (40.0));
+127   Simulator::Run ();
+128   Simulator::Destroy ();
+129 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{realtime-\/fd2fd-\/onoff.\+cc@{realtime-\/fd2fd-\/onoff.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!realtime-\/fd2fd-\/onoff.\+cc@{realtime-\/fd2fd-\/onoff.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Realtime\+Fd\+Net\+Device\+Saturation\+Example"")}{NS_LOG_COMPONENT_DEFINE("RealtimeFdNetDeviceSaturationExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Realtime\+Fd\+Net\+Device\+Saturation\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{realtime-fd2fd-onoff_8cc_a771798144eac362099f8d5336496b976}{}\label{realtime-fd2fd-onoff_8cc_a771798144eac362099f8d5336496b976}

@@ -1,0 +1,295 @@
+\hypertarget{namespacens3_1_1internal}{}\section{ns3\+:\+:internal Namespace Reference}
+\label{namespacens3_1_1internal}\index{ns3\+::internal@{ns3\+::internal}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1internal_1_1ObjectPtrContainerChecker}{Object\+Ptr\+Container\+Checker}
+\item 
+class \hyperlink{classns3_1_1internal_1_1PointerChecker}{Pointer\+Checker}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1AttributeChecker}{Attribute\+Checker} $>$ \hyperlink{namespacens3_1_1internal_ace03ae9f889a7a79d87e3a4352a37099}{Make\+Double\+Checker} (double \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min}, double \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max}, std\+::string \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name})
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1AttributeChecker}{Attribute\+Checker} $>$ \hyperlink{namespacens3_1_1internal_ad16c6dd4fd0319992767b9ac2a17b19b}{Make\+Integer\+Checker} (int64\+\_\+t \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min}, int64\+\_\+t \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max}, std\+::string \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name})
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1AttributeChecker}{Attribute\+Checker} $>$ \hyperlink{namespacens3_1_1internal_a4b15bd1dbc7f165db34704f333c6b005}{Make\+Uinteger\+Checker} (uint64\+\_\+t \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min}, uint64\+\_\+t \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max}, std\+::string \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Namespace for implementation details. 
+
+\subsection{Function Documentation}
+\index{ns3\+::internal@{ns3\+::internal}!Make\+Double\+Checker@{Make\+Double\+Checker}}
+\index{Make\+Double\+Checker@{Make\+Double\+Checker}!ns3\+::internal@{ns3\+::internal}}
+\subsubsection[{\texorpdfstring{Make\+Double\+Checker(double min, double max, std\+::string name)}{MakeDoubleChecker(double min, double max, std::string name)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ const {\bf Attribute\+Checker} $>$ ns3\+::internal\+::\+Make\+Double\+Checker (
+\begin{DoxyParamCaption}
+\item[{double}]{min, }
+\item[{double}]{max, }
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacens3_1_1internal_ace03ae9f889a7a79d87e3a4352a37099}{}\label{namespacens3_1_1internal_ace03ae9f889a7a79d87e3a4352a37099}
+Make a Double attribute checker with embedded numeric type name.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em min} & The minimum allowed value. \\
+\hline
+\mbox{\tt in}  & {\em max} & The maximum allowed value. \\
+\hline
+\mbox{\tt in}  & {\em name} & The original type name (\char`\"{}float\char`\"{}, \char`\"{}double\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \hyperlink{classns3_1_1AttributeChecker}{Attribute\+Checker}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+50 \{
+51   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min} << \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max} << \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name});
+52 
+53   \textcolor{keyword}{struct }Checker : \textcolor{keyword}{public} AttributeChecker
+54   \{
+55     Checker (\textcolor{keywordtype}{double} minValue, \textcolor{keywordtype}{double} maxValue, std::string \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name})
+56       : m\_minValue (minValue),
+57         m\_maxValue (maxValue),
+58         m\_name (name) \{\}
+59     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} Check (\textcolor{keyword}{const} AttributeValue &value)\textcolor{keyword}{ const }\{
+60       \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (&value);
+61       \textcolor{keyword}{const} DoubleValue *v = \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const }DoubleValue *\textcolor{keyword}{>} (&value);
+62       \textcolor{keywordflow}{if} (v == 0)
+63         \{
+64           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+65         \}
+66       \textcolor{keywordflow}{return} v->Get () >= m\_minValue && v->Get () <= m\_maxValue;
+67     \}
+68     \textcolor{keyword}{virtual} std::string GetValueTypeName (\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{
+69       \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+70       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"ns3::DoubleValue"};
+71     \}
+72     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} HasUnderlyingTypeInformation (\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{
+73       \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+74       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+75     \}
+76     \textcolor{keyword}{virtual} std::string GetUnderlyingTypeInformation (\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{
+77       \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+78       std::ostringstream oss;
+79       oss << m\_name << \textcolor{stringliteral}{" "} << m\_minValue << \textcolor{stringliteral}{":"} << m\_maxValue;
+80       \textcolor{keywordflow}{return} oss.str ();
+81     \}
+82     \textcolor{keyword}{virtual} Ptr<AttributeValue> \hyperlink{group__ptr_ga0406dd2d929ceac05ce39d4579fa3e4b}{Create} (\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{
+83       \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+84       \textcolor{keywordflow}{return} ns3::Create<DoubleValue> ();
+85     \}
+86     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{namespacens3_a952d99f6d759fee74dda19f308451bc1}{Copy} (\textcolor{keyword}{const} AttributeValue &source, AttributeValue &destination)\textcolor{keyword}{ const }\{
+87       \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (&source << &destination);
+88       \textcolor{keyword}{const} DoubleValue *src = \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const }DoubleValue *\textcolor{keyword}{>} (&source);
+89       DoubleValue *dst = \textcolor{keyword}{dynamic\_cast<}DoubleValue *\textcolor{keyword}{>} (&destination);
+90       \textcolor{keywordflow}{if} (src == 0 || dst == 0)
+91         \{
+92           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+93         \}
+94       *dst = *src;
+95       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+96     \}
+97     \textcolor{keywordtype}{double} m\_minValue;
+98     \textcolor{keywordtype}{double} m\_maxValue;
+99     std::string m\_name;
+100   \} *checker = \textcolor{keyword}{new} Checker (\hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min}, \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max}, \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name});
+101   \textcolor{keywordflow}{return} Ptr<const AttributeChecker> (checker, \textcolor{keyword}{false});
+102 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 0
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::internal@{ns3\+::internal}!Make\+Integer\+Checker@{Make\+Integer\+Checker}}
+\index{Make\+Integer\+Checker@{Make\+Integer\+Checker}!ns3\+::internal@{ns3\+::internal}}
+\subsubsection[{\texorpdfstring{Make\+Integer\+Checker(int64\+\_\+t min, int64\+\_\+t max, std\+::string name)}{MakeIntegerChecker(int64_t min, int64_t max, std::string name)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ const {\bf Attribute\+Checker} $>$ ns3\+::internal\+::\+Make\+Integer\+Checker (
+\begin{DoxyParamCaption}
+\item[{int64\+\_\+t}]{min, }
+\item[{int64\+\_\+t}]{max, }
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacens3_1_1internal_ad16c6dd4fd0319992767b9ac2a17b19b}{}\label{namespacens3_1_1internal_ad16c6dd4fd0319992767b9ac2a17b19b}
+Make an Integer attribute checker with embedded numeric type name.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em min} & The minimum allowed value. \\
+\hline
+\mbox{\tt in}  & {\em max} & The maximum allowed value. \\
+\hline
+\mbox{\tt in}  & {\em name} & The original type name (\char`\"{}int8\+\_\+t\char`\"{}, \char`\"{}int16\+\_\+t\char`\"{}, {\itshape etc}.). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \hyperlink{classns3_1_1AttributeChecker}{Attribute\+Checker}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+50 \{
+51   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min} << \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max} << \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name});
+52   \textcolor{keyword}{struct }IntegerChecker : \textcolor{keyword}{public} AttributeChecker
+53   \{
+54     IntegerChecker (int64\_t minValue, int64\_t maxValue, std::string \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name})
+55       : m\_minValue (minValue),
+56         m\_maxValue (maxValue),
+57         m\_name (name) \{\}
+58     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} Check (\textcolor{keyword}{const} AttributeValue &value)\textcolor{keyword}{ const }\{
+59       \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (&value);
+60       \textcolor{keyword}{const} IntegerValue *v = \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const }IntegerValue *\textcolor{keyword}{>} (&value);
+61       \textcolor{keywordflow}{if} (v == 0)
+62         \{
+63           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+64         \}
+65       \textcolor{keywordflow}{return} v->Get () >= m\_minValue && v->Get () <= m\_maxValue;
+66     \}
+67     \textcolor{keyword}{virtual} std::string GetValueTypeName (\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{
+68       \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+69       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"ns3::IntegerValue"};
+70     \}
+71     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} HasUnderlyingTypeInformation (\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{
+72       \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+73       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+74     \}
+75     \textcolor{keyword}{virtual} std::string GetUnderlyingTypeInformation (\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{
+76       \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+77       std::ostringstream oss;
+78       oss << m\_name << \textcolor{stringliteral}{" "} << m\_minValue << \textcolor{stringliteral}{":"} << m\_maxValue;
+79       \textcolor{keywordflow}{return} oss.str ();
+80     \}
+81     \textcolor{keyword}{virtual} Ptr<AttributeValue> \hyperlink{group__ptr_ga0406dd2d929ceac05ce39d4579fa3e4b}{Create} (\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{
+82       \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+83       \textcolor{keywordflow}{return} ns3::Create<IntegerValue> ();
+84     \}
+85     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{namespacens3_a952d99f6d759fee74dda19f308451bc1}{Copy} (\textcolor{keyword}{const} AttributeValue &src, AttributeValue &dst)\textcolor{keyword}{ const }\{
+86       \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (&src << &dst);
+87       \textcolor{keyword}{const} IntegerValue *source = \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const }IntegerValue *\textcolor{keyword}{>} (&src);
+88       IntegerValue *destination = \textcolor{keyword}{dynamic\_cast<}IntegerValue *\textcolor{keyword}{>} (&dst);
+89       \textcolor{keywordflow}{if} (source == 0 || destination == 0)
+90         \{
+91           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+92         \}
+93       *destination = *source;
+94       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+95     \}
+96     int64\_t m\_minValue;
+97     int64\_t m\_maxValue;
+98     std::string m\_name;
+99   \} *checker = \textcolor{keyword}{new} IntegerChecker (\hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min}, \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max}, \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name});
+100   \textcolor{keywordflow}{return} Ptr<AttributeChecker> (checker, \textcolor{keyword}{false});
+101 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::internal@{ns3\+::internal}!Make\+Uinteger\+Checker@{Make\+Uinteger\+Checker}}
+\index{Make\+Uinteger\+Checker@{Make\+Uinteger\+Checker}!ns3\+::internal@{ns3\+::internal}}
+\subsubsection[{\texorpdfstring{Make\+Uinteger\+Checker(uint64\+\_\+t min, uint64\+\_\+t max, std\+::string name)}{MakeUintegerChecker(uint64_t min, uint64_t max, std::string name)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ const {\bf Attribute\+Checker} $>$ ns3\+::internal\+::\+Make\+Uinteger\+Checker (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{min, }
+\item[{uint64\+\_\+t}]{max, }
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacens3_1_1internal_a4b15bd1dbc7f165db34704f333c6b005}{}\label{namespacens3_1_1internal_a4b15bd1dbc7f165db34704f333c6b005}
+Make an Uinteger attribute checker with embedded numeric type name.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em min} & The minimum allowed value. \\
+\hline
+\mbox{\tt in}  & {\em max} & The maximum allowed value. \\
+\hline
+\mbox{\tt in}  & {\em name} & The original type name (\char`\"{}uint8\+\_\+t\char`\"{}, \char`\"{}uint16\+\_\+t\char`\"{}, {\itshape etc}.). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \hyperlink{classns3_1_1AttributeChecker}{Attribute\+Checker}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+49 \{
+50   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min} << \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max} << \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name});
+51   \textcolor{keyword}{struct }Checker : \textcolor{keyword}{public} AttributeChecker
+52   \{
+53     Checker (uint64\_t minValue, uint64\_t maxValue, std::string \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name})
+54       : m\_minValue (minValue),
+55         m\_maxValue (maxValue),
+56         m\_name (name) \{\}
+57     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} Check (\textcolor{keyword}{const} AttributeValue &value)\textcolor{keyword}{ const }\{
+58       \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (&value);
+59       \textcolor{keyword}{const} UintegerValue *v = \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const }UintegerValue *\textcolor{keyword}{>} (&value);
+60       \textcolor{keywordflow}{if} (v == 0)
+61         \{
+62           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+63         \}
+64       \textcolor{keywordflow}{return} v->Get () >= m\_minValue && v->Get () <= m\_maxValue;
+65     \}
+66     \textcolor{keyword}{virtual} std::string GetValueTypeName (\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{
+67       \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+68       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"ns3::UintegerValue"};
+69     \}
+70     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} HasUnderlyingTypeInformation (\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{
+71       \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+72       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+73     \}
+74     \textcolor{keyword}{virtual} std::string GetUnderlyingTypeInformation (\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{
+75       \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+76       std::ostringstream oss;
+77       oss << m\_name << \textcolor{stringliteral}{" "} << m\_minValue << \textcolor{stringliteral}{":"} << m\_maxValue;
+78       \textcolor{keywordflow}{return} oss.str ();
+79     \}
+80     \textcolor{keyword}{virtual} Ptr<AttributeValue> \hyperlink{group__ptr_ga0406dd2d929ceac05ce39d4579fa3e4b}{Create} (\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{
+81       \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+82       \textcolor{keywordflow}{return} ns3::Create<UintegerValue> ();
+83     \}
+84     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{namespacens3_a952d99f6d759fee74dda19f308451bc1}{Copy} (\textcolor{keyword}{const} AttributeValue &source, AttributeValue &destination)\textcolor{keyword}{ const }\{
+85       \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (&source << &destination);
+86       \textcolor{keyword}{const} UintegerValue *src = \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const }UintegerValue *\textcolor{keyword}{>} (&source);
+87       UintegerValue *dst = \textcolor{keyword}{dynamic\_cast<}UintegerValue *\textcolor{keyword}{>} (&destination);
+88       \textcolor{keywordflow}{if} (src == 0 || dst == 0)
+89         \{
+90           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+91         \}
+92       *dst = *src;
+93       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+94     \}
+95     uint64\_t m\_minValue;
+96     uint64\_t m\_maxValue;
+97     std::string m\_name;
+98   \} *checker = \textcolor{keyword}{new} Checker (\hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min}, \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max}, \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name});
+99   \textcolor{keywordflow}{return} Ptr<const AttributeChecker> (checker, \textcolor{keyword}{false});
+100 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+

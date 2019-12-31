@@ -1,0 +1,337 @@
+\hypertarget{classns3_1_1ZetaRandomVariable}{}\section{ns3\+:\+:Zeta\+Random\+Variable Class Reference}
+\label{classns3_1_1ZetaRandomVariable}\index{ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}}
+
+
+The zeta distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically.  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Zeta\+Random\+Variable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Zeta\+Random\+Variable\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1ZetaRandomVariable_aa8c68cfbbb24a0afc00b5aca373dca5d}{Zeta\+Random\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Creates a zeta distribution R\+NG with the default value for alpha. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ZetaRandomVariable_a8cc1963b49d0fc26ed7a4589cb55c813}{Get\+Alpha} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the alpha value for the zeta distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ZetaRandomVariable_a8ab47b42912943fe4eea82bdd250d42a}{Get\+Value} (double \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha})
+\begin{DoxyCompactList}\small\item\em Returns a random double from a zeta distribution with the specified alpha. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1ZetaRandomVariable_acd5c516f3f7abe8775675b67abda3a65}{Get\+Integer} (uint32\+\_\+t \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha})
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a zeta distribution with the specified alpha. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1ZetaRandomVariable_aaebcf45aaadc58780727287d98779d2f}{Get\+Value} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random double from a zeta distribution with the current alpha. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1ZetaRandomVariable_a7355f32a91c2aa7567f815cce60b84be}{Get\+Integer} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a zeta distribution with the current alpha. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1ZetaRandomVariable_a54d5a7d6a24c100e4ed9207d9533fdcc}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1ZetaRandomVariable_a48ec2fea5e04864918b734f5ca4e5e07}{m\+\_\+alpha}
+\item 
+double \hyperlink{classns3_1_1ZetaRandomVariable_af07c02d30a8e7ffd8386b8776ef7b3ec}{m\+\_\+b}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The zeta distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically. 
+
+This class supports the creation of objects that return random numbers from a fixed zeta distribution. It also supports the generation of single random numbers from various zeta distributions.
+
+The Zeta distribution is closely related to Zipf distribution when N goes to infinity.
+
+Zeta distribution has one parameter, alpha, $ \alpha > 1 $ (real). Probability Mass Function is $ f(k; \alpha) = k^{-\alpha}/\zeta(\alpha) $ where $ \zeta(\alpha) $ is the Riemann zeta function ( $ \sum_{n=1}^\infty n^{-\alpha} ) $
+
+Here is an example of how to use this class\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{double} \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha} = 2.0;
+
+Ptr<ZetaRandomVariable> \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x} = CreateObject<ZetaRandomVariable> ();
+x->SetAttribute (\textcolor{stringliteral}{"Alpha"}, DoubleValue (alpha));
+
+\textcolor{comment}{// The expected value for the mean of the values returned by a}
+\textcolor{comment}{// zetaly distributed random variable is equal to }
+\textcolor{comment}{//}
+\textcolor{comment}{//                   zeta(alpha - 1)}
+\textcolor{comment}{//     E[value]  =  ---------------   for alpha > 2 ,}
+\textcolor{comment}{//                     zeta(alpha)}
+\textcolor{comment}{//                          }
+\textcolor{comment}{// where zeta(alpha) is the Riemann zeta function.}
+\textcolor{comment}{//                 }
+\textcolor{comment}{// There are no simple analytic forms for the Riemann zeta}
+\textcolor{comment}{// function, which is the reason the known mean of the values}
+\textcolor{comment}{// cannot be calculated in this example.}
+\textcolor{comment}{//               }
+\textcolor{keywordtype}{double} value = x->GetValue ();
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}!Zeta\+Random\+Variable@{Zeta\+Random\+Variable}}
+\index{Zeta\+Random\+Variable@{Zeta\+Random\+Variable}!ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Zeta\+Random\+Variable()}{ZetaRandomVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Zeta\+Random\+Variable\+::\+Zeta\+Random\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ZetaRandomVariable_aa8c68cfbbb24a0afc00b5aca373dca5d}{}\label{classns3_1_1ZetaRandomVariable_aa8c68cfbbb24a0afc00b5aca373dca5d}
+
+
+Creates a zeta distribution R\+NG with the default value for alpha. 
+
+
+\begin{DoxyCode}
+1393 \{
+1394   \textcolor{comment}{// m\_alpha is initialized after constructor by attributes}
+1395   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1396 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}!Get\+Alpha@{Get\+Alpha}}
+\index{Get\+Alpha@{Get\+Alpha}!ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Alpha(void) const }{GetAlpha(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Zeta\+Random\+Variable\+::\+Get\+Alpha (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ZetaRandomVariable_a8cc1963b49d0fc26ed7a4589cb55c813}{}\label{classns3_1_1ZetaRandomVariable_a8cc1963b49d0fc26ed7a4589cb55c813}
+
+
+Returns the alpha value for the zeta distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The alpha value for the zeta distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1400 \{
+1401   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1402   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ZetaRandomVariable_a48ec2fea5e04864918b734f5ca4e5e07}{m\_alpha};
+1403 \}
+\end{DoxyCode}
+\index{ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(uint32\+\_\+t alpha)}{GetInteger(uint32_t alpha)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Zeta\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{alpha}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ZetaRandomVariable_acd5c516f3f7abe8775675b67abda3a65}{}\label{classns3_1_1ZetaRandomVariable_acd5c516f3f7abe8775675b67abda3a65}
+
+
+Returns a random unsigned integer from a zeta distribution with the specified alpha. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em alpha} & Alpha value for the zeta distribution. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+\begin{DoxyCode}
+1442 \{
+1443   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha});
+1444   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>} ( \hyperlink{classns3_1_1ZetaRandomVariable_aaebcf45aaadc58780727287d98779d2f}{GetValue} (\hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha}));
+1445 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(void)}{GetInteger(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Zeta\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1ZetaRandomVariable_a7355f32a91c2aa7567f815cce60b84be}{}\label{classns3_1_1ZetaRandomVariable_a7355f32a91c2aa7567f815cce60b84be}
+
+
+Returns a random unsigned integer from a zeta distribution with the current alpha. 
+
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+1455 \{
+1456   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1457   \textcolor{keywordflow}{return} (uint32\_t)\hyperlink{classns3_1_1ZetaRandomVariable_aaebcf45aaadc58780727287d98779d2f}{GetValue} (\hyperlink{classns3_1_1ZetaRandomVariable_a48ec2fea5e04864918b734f5ca4e5e07}{m\_alpha});
+1458 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Zeta\+Random\+Variable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1ZetaRandomVariable_a54d5a7d6a24c100e4ed9207d9533fdcc}{}\label{classns3_1_1ZetaRandomVariable_a54d5a7d6a24c100e4ed9207d9533fdcc}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1380 \{
+1381   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::ZetaRandomVariable"})
+1382     .SetParent<\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{RandomVariableStream}>()
+1383     .SetGroupName (\textcolor{stringliteral}{"Core"})
+1384     .AddConstructor<\hyperlink{classns3_1_1ZetaRandomVariable_aa8c68cfbbb24a0afc00b5aca373dca5d}{ZetaRandomVariable}> ()
+1385     .AddAttribute(\textcolor{stringliteral}{"Alpha"}, \textcolor{stringliteral}{"The alpha value for the zeta distribution returned by this RNG stream."},
+1386                   DoubleValue(3.14),
+1387                   MakeDoubleAccessor(&\hyperlink{classns3_1_1ZetaRandomVariable_a48ec2fea5e04864918b734f5ca4e5e07}{ZetaRandomVariable::m\_alpha}),
+1388                   MakeDoubleChecker<double>())
+1389     ;
+1390   \textcolor{keywordflow}{return} tid;
+1391 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(double alpha)}{GetValue(double alpha)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Zeta\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{double}]{alpha}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ZetaRandomVariable_a8ab47b42912943fe4eea82bdd250d42a}{}\label{classns3_1_1ZetaRandomVariable_a8ab47b42912943fe4eea82bdd250d42a}
+
+
+Returns a random double from a zeta distribution with the specified alpha. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em alpha} & Alpha value for the zeta distribution. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+\begin{DoxyCode}
+1407 \{
+1408   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha});
+1409   \hyperlink{classns3_1_1ZetaRandomVariable_af07c02d30a8e7ffd8386b8776ef7b3ec}{m\_b} = std::pow (2.0, \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha} - 1.0);
+1410 
+1411   \textcolor{keywordtype}{double} u, v;
+1412   \textcolor{keywordtype}{double} X, T;
+1413   \textcolor{keywordtype}{double} \hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test};
+1414 
+1415   \textcolor{keywordflow}{do}
+1416     \{
+1417       \textcolor{comment}{// Get a uniform random variable in [0,1].}
+1418       u = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+1419       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+1420         \{
+1421           u = (1 - u);
+1422         \}
+1423 
+1424       \textcolor{comment}{// Get a uniform random variable in [0,1].}
+1425       v = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+1426       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+1427         \{
+1428           v = (1 - v);
+1429         \}
+1430 
+1431       X = std::floor (std::pow (u, -1.0 / (\hyperlink{classns3_1_1ZetaRandomVariable_a48ec2fea5e04864918b734f5ca4e5e07}{m\_alpha} - 1.0)));
+1432       T = std::pow (1.0 + 1.0 / X, \hyperlink{classns3_1_1ZetaRandomVariable_a48ec2fea5e04864918b734f5ca4e5e07}{m\_alpha} - 1.0);
+1433       test = v * X * (T - 1.0) / (\hyperlink{classns3_1_1ZetaRandomVariable_af07c02d30a8e7ffd8386b8776ef7b3ec}{m\_b} - 1.0);
+1434     \}
+1435   \textcolor{keywordflow}{while} ( test > (T / \hyperlink{classns3_1_1ZetaRandomVariable_af07c02d30a8e7ffd8386b8776ef7b3ec}{m\_b}) );
+1436 
+1437   \textcolor{keywordflow}{return} X;
+1438 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(void)}{GetValue(void)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Zeta\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1ZetaRandomVariable_aaebcf45aaadc58780727287d98779d2f}{}\label{classns3_1_1ZetaRandomVariable_aaebcf45aaadc58780727287d98779d2f}
+
+
+Returns a random double from a zeta distribution with the current alpha. 
+
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1.
+
+Note that we have to re-\/implement this method here because the method is overloaded above for the two-\/argument variant and the c++ name resolution rules don\textquotesingle{}t work well with overloads split between parent and child classes. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+1449 \{
+1450   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1451   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ZetaRandomVariable_aaebcf45aaadc58780727287d98779d2f}{GetValue} (\hyperlink{classns3_1_1ZetaRandomVariable_a48ec2fea5e04864918b734f5ca4e5e07}{m\_alpha});
+1452 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}!m\+\_\+alpha@{m\+\_\+alpha}}
+\index{m\+\_\+alpha@{m\+\_\+alpha}!ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+alpha}{m_alpha}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Zeta\+Random\+Variable\+::m\+\_\+alpha\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ZetaRandomVariable_a48ec2fea5e04864918b734f5ca4e5e07}{}\label{classns3_1_1ZetaRandomVariable_a48ec2fea5e04864918b734f5ca4e5e07}
+The alpha value for the zeta distribution returned by this R\+NG stream. \index{ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}!m\+\_\+b@{m\+\_\+b}}
+\index{m\+\_\+b@{m\+\_\+b}!ns3\+::\+Zeta\+Random\+Variable@{ns3\+::\+Zeta\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+b}{m_b}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Zeta\+Random\+Variable\+::m\+\_\+b\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ZetaRandomVariable_af07c02d30a8e7ffd8386b8776ef7b3ec}{}\label{classns3_1_1ZetaRandomVariable_af07c02d30a8e7ffd8386b8776ef7b3ec}
+Just for calculus simplifications. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

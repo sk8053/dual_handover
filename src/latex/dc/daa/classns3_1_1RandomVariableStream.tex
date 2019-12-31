@@ -1,0 +1,432 @@
+\hypertarget{classns3_1_1RandomVariableStream}{}\section{ns3\+:\+:Random\+Variable\+Stream Class Reference}
+\label{classns3_1_1RandomVariableStream}\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+
+
+The basic uniform Random Number Generator (R\+NG).  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Random\+Variable\+Stream\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Random\+Variable\+Stream\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{Random\+Variable\+Stream} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1RandomVariableStream_a2786aa6615f53202dfc8a0c1fad62250}{$\sim$\+Random\+Variable\+Stream} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1RandomVariableStream_add11aaf975607746b7e271d300659a94}{Set\+Stream} (int64\+\_\+t stream)
+\begin{DoxyCompactList}\small\item\em Specifies the stream number for this R\+NG stream. \end{DoxyCompactList}\item 
+int64\+\_\+t \hyperlink{classns3_1_1RandomVariableStream_a05b8b4ffd88d402156fed980018e7a56}{Get\+Stream} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the stream number for this R\+NG stream. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1RandomVariableStream_ab27522a091c67b9e38c9b4716a1c1c5c}{Set\+Antithetic} (bool is\+Antithetic)
+\begin{DoxyCompactList}\small\item\em Specify whether antithetic values should be generated. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{Is\+Antithetic} (void) const 
+\begin{DoxyCompactList}\small\item\em Check if antithetic values will be generated. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{Get\+Value} (void)=0
+\begin{DoxyCompactList}\small\item\em Get the next random value as a double drawn from the distribution. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{Get\+Integer} (void)=0
+\begin{DoxyCompactList}\small\item\em Get the next random value as an integer drawn from the distribution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1RandomVariableStream_a0b11fa19bc54cca33458c4e1fe7226d5}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1RngStream}{Rng\+Stream} $\ast$ \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the pointer to the underlying R\+NG stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1RandomVariableStream_a66e43b9850d3b5911ccd53e497bce8fb}{Random\+Variable\+Stream} (const \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} \&o)
+\item 
+\hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} \& \hyperlink{classns3_1_1RandomVariableStream_a744eca4c0c6657311eb25d441052fe4d}{operator=} (const \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} \&o)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1RngStream}{Rng\+Stream} $\ast$ \hyperlink{classns3_1_1RandomVariableStream_ad944ab349eeee833c43ddcc7c749d1fe}{m\+\_\+rng}
+\item 
+bool \hyperlink{classns3_1_1RandomVariableStream_a91017ccb003344625d469b3f5caf5c0e}{m\+\_\+is\+Antithetic}
+\item 
+int64\+\_\+t \hyperlink{classns3_1_1RandomVariableStream_ab494eafbd56af49c75b504cf5b712ae7}{m\+\_\+stream}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The basic uniform Random Number Generator (R\+NG). 
+
+\begin{DoxyNote}{Note}
+The underlying random number generation method used by ns-\/3 is the \hyperlink{classns3_1_1RngStream}{Rng\+Stream} code by Pierre L\textquotesingle{}Ecuyer at the University of Montreal.
+\end{DoxyNote}
+ns-\/3 has a rich set of random number generators that allow stream numbers to be set deterministically if desired. Class \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} defines the base class functionalty required for all such random number generators.
+
+By default, the underlying generator is seeded all the time with the same seed value and run number coming from the \hyperlink{classns3_1_1GlobalValue}{ns3\+::\+Global\+Value} Rng\+Seed and Rng\+Run. Also by default, the stream number value for this R\+NG stream is automatically allocated.
+
+Instances can be configured to return \char`\"{}antithetic\char`\"{} values. See the documentation for the specific distributions to see how this modifies the returned values. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!Random\+Variable\+Stream@{Random\+Variable\+Stream}}
+\index{Random\+Variable\+Stream@{Random\+Variable\+Stream}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{Random\+Variable\+Stream()}{RandomVariableStream()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Random\+Variable\+Stream\+::\+Random\+Variable\+Stream (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{}\label{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}
+
+
+Default constructor. 
+
+
+\begin{DoxyCode}
+76   : \hyperlink{classns3_1_1RandomVariableStream_ad944ab349eeee833c43ddcc7c749d1fe}{m\_rng} (0)
+77 \{
+78   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+79 \}
+\end{DoxyCode}
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!````~Random\+Variable\+Stream@{$\sim$\+Random\+Variable\+Stream}}
+\index{````~Random\+Variable\+Stream@{$\sim$\+Random\+Variable\+Stream}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{$\sim$\+Random\+Variable\+Stream()}{~RandomVariableStream()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Random\+Variable\+Stream\+::$\sim$\+Random\+Variable\+Stream (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1RandomVariableStream_a2786aa6615f53202dfc8a0c1fad62250}{}\label{classns3_1_1RandomVariableStream_a2786aa6615f53202dfc8a0c1fad62250}
+
+
+Destructor. 
+
+
+\begin{DoxyCode}
+81 \{
+82   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+83   \textcolor{keyword}{delete} \hyperlink{classns3_1_1RandomVariableStream_ad944ab349eeee833c43ddcc7c749d1fe}{m\_rng};
+84 \}
+\end{DoxyCode}
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!Random\+Variable\+Stream@{Random\+Variable\+Stream}}
+\index{Random\+Variable\+Stream@{Random\+Variable\+Stream}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{Random\+Variable\+Stream(const Random\+Variable\+Stream \&o)}{RandomVariableStream(const RandomVariableStream &o)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Random\+Variable\+Stream\+::\+Random\+Variable\+Stream (
+\begin{DoxyParamCaption}
+\item[{const {\bf Random\+Variable\+Stream} \&}]{o}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RandomVariableStream_a66e43b9850d3b5911ccd53e497bce8fb}{}\label{classns3_1_1RandomVariableStream_a66e43b9850d3b5911ccd53e497bce8fb}
+Copy constructor. These objects are not copyable.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em o} & The \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} to copy in construction. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{Get\+Integer(void)=0}{GetInteger(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint32\+\_\+t ns3\+::\+Random\+Variable\+Stream\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{}\label{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}
+
+
+Get the next random value as an integer drawn from the distribution. 
+
+\begin{DoxyReturn}{Returns}
+An integer random value. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1EmpiricalRandomVariable_a4612a2e68540ffa6393d418f8edccbf3}{ns3\+::\+Empirical\+Random\+Variable}, \hyperlink{classns3_1_1DeterministicRandomVariable_ae6a856a94af0f8ee7e6713806b6f9ef9}{ns3\+::\+Deterministic\+Random\+Variable}, \hyperlink{classns3_1_1ZetaRandomVariable_a7355f32a91c2aa7567f815cce60b84be}{ns3\+::\+Zeta\+Random\+Variable}, \hyperlink{classns3_1_1ZipfRandomVariable_adda8cb5e7c55aad89f0d704b5d4cb9bc}{ns3\+::\+Zipf\+Random\+Variable}, \hyperlink{classns3_1_1TriangularRandomVariable_a7fae1b83f504385c69fd8102ef303d74}{ns3\+::\+Triangular\+Random\+Variable}, \hyperlink{classns3_1_1ErlangRandomVariable_aa8ee11ddf2b88ccc7b8eb098ade5712a}{ns3\+::\+Erlang\+Random\+Variable}, \hyperlink{classns3_1_1GammaRandomVariable_a2a7c359ab7961fafd4785a0dfc14ab67}{ns3\+::\+Gamma\+Random\+Variable}, \hyperlink{classns3_1_1LogNormalRandomVariable_addd3b764b837aba256b3d1873c8b1ce6}{ns3\+::\+Log\+Normal\+Random\+Variable}, \hyperlink{classns3_1_1NormalRandomVariable_a3e23038dcec647c9ae4f4bd457384040}{ns3\+::\+Normal\+Random\+Variable}, \hyperlink{classns3_1_1WeibullRandomVariable_a44967586ae8623eba6a0855f93abb1f2}{ns3\+::\+Weibull\+Random\+Variable}, \hyperlink{classns3_1_1ParetoRandomVariable_a5606df53e01a0254b5bfb3af14929acc}{ns3\+::\+Pareto\+Random\+Variable}, \hyperlink{classns3_1_1ExponentialRandomVariable_afcc9f25011bd3fbe0b69c4e31cf212fc}{ns3\+::\+Exponential\+Random\+Variable}, \hyperlink{classns3_1_1SequentialRandomVariable_ab93ac4c689c25c3b727881925f476401}{ns3\+::\+Sequential\+Random\+Variable}, and \hyperlink{classns3_1_1ConstantRandomVariable_ab005a045840284f0cd14e1f0c30823d9}{ns3\+::\+Constant\+Random\+Variable}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!Get\+Stream@{Get\+Stream}}
+\index{Get\+Stream@{Get\+Stream}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{Get\+Stream(void) const }{GetStream(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}int64\+\_\+t ns3\+::\+Random\+Variable\+Stream\+::\+Get\+Stream (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1RandomVariableStream_a05b8b4ffd88d402156fed980018e7a56}{}\label{classns3_1_1RandomVariableStream_a05b8b4ffd88d402156fed980018e7a56}
+
+
+Returns the stream number for this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The stream number for this R\+NG stream. -\/1 means this stream was allocated automatically. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+129 \{
+130   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+131   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1RandomVariableStream_ab494eafbd56af49c75b504cf5b712ae7}{m\_stream};
+132 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Random\+Variable\+Stream\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1RandomVariableStream_a0b11fa19bc54cca33458c4e1fe7226d5}{}\label{classns3_1_1RandomVariableStream_a0b11fa19bc54cca33458c4e1fe7226d5}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+54 \{
+55   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::RandomVariableStream"})
+56     .SetParent<\hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object}> ()
+57     .SetGroupName (\textcolor{stringliteral}{"Core"})
+58     .AddAttribute(\textcolor{stringliteral}{"Stream"},
+59                   \textcolor{stringliteral}{"The stream number for this RNG stream. -1 means \(\backslash\)"allocate a stream automatically\(\backslash\)". "}
+60                   \textcolor{stringliteral}{"Note that if -1 is set, Get will return -1 so that it is not possible to know which "}
+61                   \textcolor{stringliteral}{"value was automatically allocated."},
+62                   IntegerValue(-1),
+63                   MakeIntegerAccessor(&\hyperlink{classns3_1_1RandomVariableStream_add11aaf975607746b7e271d300659a94}{RandomVariableStream::SetStream},
+64                                       &\hyperlink{classns3_1_1RandomVariableStream_a05b8b4ffd88d402156fed980018e7a56}{RandomVariableStream::GetStream}),
+65                   MakeIntegerChecker<int64\_t>())
+66     .AddAttribute(\textcolor{stringliteral}{"Antithetic"}, \textcolor{stringliteral}{"Set this RNG stream to generate antithetic values"},
+67                   BooleanValue (\textcolor{keyword}{false}),
+68                   MakeBooleanAccessor(&\hyperlink{classns3_1_1RandomVariableStream_ab27522a091c67b9e38c9b4716a1c1c5c}{RandomVariableStream::SetAntithetic}
+      ,
+69                                       &\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{RandomVariableStream::IsAntithetic}
+      ),
+70                   MakeBooleanChecker())
+71     ;
+72   \textcolor{keywordflow}{return} tid;
+73 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{Get\+Value(void)=0}{GetValue(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual double ns3\+::\+Random\+Variable\+Stream\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{}\label{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}
+
+
+Get the next random value as a double drawn from the distribution. 
+
+\begin{DoxyReturn}{Returns}
+A floating point random value. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1EmpiricalRandomVariable_a1a2d5b20db4509d1518727eb725672f7}{ns3\+::\+Empirical\+Random\+Variable}, \hyperlink{classns3_1_1DeterministicRandomVariable_aad908286981f00bc2f335c34c41b6f55}{ns3\+::\+Deterministic\+Random\+Variable}, \hyperlink{classns3_1_1ZetaRandomVariable_aaebcf45aaadc58780727287d98779d2f}{ns3\+::\+Zeta\+Random\+Variable}, \hyperlink{classns3_1_1ZipfRandomVariable_a3a1a48eed27e3d693bf28c2800d7eab1}{ns3\+::\+Zipf\+Random\+Variable}, \hyperlink{classns3_1_1TriangularRandomVariable_a2d61dfce4b5be840c57aa1aea655e3c1}{ns3\+::\+Triangular\+Random\+Variable}, \hyperlink{classns3_1_1ErlangRandomVariable_a73f65efeea94a22bb0212eeb85f949a4}{ns3\+::\+Erlang\+Random\+Variable}, \hyperlink{classns3_1_1GammaRandomVariable_a65261ad340fa57dbaa5802a7bea354db}{ns3\+::\+Gamma\+Random\+Variable}, \hyperlink{classns3_1_1LogNormalRandomVariable_a032ddb20a74ff98a35a76a2e43d12a0b}{ns3\+::\+Log\+Normal\+Random\+Variable}, \hyperlink{classns3_1_1NormalRandomVariable_ab2a04ca1bd9177ecdc7530e525c216e3}{ns3\+::\+Normal\+Random\+Variable}, \hyperlink{classns3_1_1WeibullRandomVariable_a2575524b816f29677d0ad6e0a57a3833}{ns3\+::\+Weibull\+Random\+Variable}, \hyperlink{classns3_1_1ParetoRandomVariable_af5588dd7354a1de1a3926fbf8c6edd74}{ns3\+::\+Pareto\+Random\+Variable}, \hyperlink{classns3_1_1ExponentialRandomVariable_acac3b8014e1ae17e009ceb876d733c5f}{ns3\+::\+Exponential\+Random\+Variable}, \hyperlink{classns3_1_1SequentialRandomVariable_a78f36ee1a8102df7d7d40c4490ddf250}{ns3\+::\+Sequential\+Random\+Variable}, and \hyperlink{classns3_1_1ConstantRandomVariable_a7b2aa5c0e2e39cadb73756c8672eac07}{ns3\+::\+Constant\+Random\+Variable}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!Is\+Antithetic@{Is\+Antithetic}}
+\index{Is\+Antithetic@{Is\+Antithetic}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{Is\+Antithetic(void) const }{IsAntithetic(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Random\+Variable\+Stream\+::\+Is\+Antithetic (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{}\label{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}
+
+
+Check if antithetic values will be generated. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if antithetic values will be generated. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+94 \{
+95   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+96   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1RandomVariableStream_a91017ccb003344625d469b3f5caf5c0e}{m\_isAntithetic};
+97 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!operator=@{operator=}}
+\index{operator=@{operator=}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{operator=(const Random\+Variable\+Stream \&o)}{operator=(const RandomVariableStream &o)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Random\+Variable\+Stream}\& ns3\+::\+Random\+Variable\+Stream\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Random\+Variable\+Stream} \&}]{o}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RandomVariableStream_a744eca4c0c6657311eb25d441052fe4d}{}\label{classns3_1_1RandomVariableStream_a744eca4c0c6657311eb25d441052fe4d}
+Assignment operator. These objects can\textquotesingle{}t be copied by assignement.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em o} & The \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} to copy. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lvalue \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream}. 
+\end{DoxyReturn}
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!Peek@{Peek}}
+\index{Peek@{Peek}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{Peek(void) const }{Peek(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Rng\+Stream} $\ast$ ns3\+::\+Random\+Variable\+Stream\+::\+Peek (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{}\label{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}
+
+
+Get the pointer to the underlying R\+NG stream. 
+
+
+\begin{DoxyCode}
+136 \{
+137   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+138   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1RandomVariableStream_ad944ab349eeee833c43ddcc7c749d1fe}{m\_rng};
+139 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!Set\+Antithetic@{Set\+Antithetic}}
+\index{Set\+Antithetic@{Set\+Antithetic}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{Set\+Antithetic(bool is\+Antithetic)}{SetAntithetic(bool isAntithetic)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Random\+Variable\+Stream\+::\+Set\+Antithetic (
+\begin{DoxyParamCaption}
+\item[{bool}]{is\+Antithetic}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1RandomVariableStream_ab27522a091c67b9e38c9b4716a1c1c5c}{}\label{classns3_1_1RandomVariableStream_ab27522a091c67b9e38c9b4716a1c1c5c}
+
+
+Specify whether antithetic values should be generated. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em is\+Antithetic} & If {\ttfamily true} antithetic value will be generated. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+88 \{
+89   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << isAntithetic);
+90   \hyperlink{classns3_1_1RandomVariableStream_a91017ccb003344625d469b3f5caf5c0e}{m\_isAntithetic} = isAntithetic;
+91 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!Set\+Stream@{Set\+Stream}}
+\index{Set\+Stream@{Set\+Stream}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{Set\+Stream(int64\+\_\+t stream)}{SetStream(int64_t stream)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Random\+Variable\+Stream\+::\+Set\+Stream (
+\begin{DoxyParamCaption}
+\item[{int64\+\_\+t}]{stream}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1RandomVariableStream_add11aaf975607746b7e271d300659a94}{}\label{classns3_1_1RandomVariableStream_add11aaf975607746b7e271d300659a94}
+
+
+Specifies the stream number for this R\+NG stream. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em stream} & The stream number for this R\+NG stream. -\/1 means \char`\"{}allocate a stream number automatically\char`\"{}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+100 \{
+101   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << stream);
+102   \textcolor{comment}{// negative values are not legal.}
+103   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (stream >= -1);
+104   \textcolor{keyword}{delete} \hyperlink{classns3_1_1RandomVariableStream_ad944ab349eeee833c43ddcc7c749d1fe}{m\_rng};
+105   \textcolor{keywordflow}{if} (stream == -1)
+106     \{
+107       \textcolor{comment}{// The first 2^63 streams are reserved for automatic stream}
+108       \textcolor{comment}{// number assignment.}
+109       uint64\_t nextStream = \hyperlink{classns3_1_1RngSeedManager_ac109366285260eb4c1e124862d2fd4ad}{RngSeedManager::GetNextStreamIndex} ();
+110       \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT}(nextStream <= ((1ULL)<<63));
+111       \hyperlink{classns3_1_1RandomVariableStream_ad944ab349eeee833c43ddcc7c749d1fe}{m\_rng} = \textcolor{keyword}{new} RngStream (\hyperlink{classns3_1_1RngSeedManager_a09f2d185f02aac599cd5a244c4b73ba5}{RngSeedManager::GetSeed} (),
+112                              nextStream,
+113                              \hyperlink{classns3_1_1RngSeedManager_afaf1b845d2523df05ca341a930de24b3}{RngSeedManager::GetRun} ());
+114     \}
+115   \textcolor{keywordflow}{else}
+116     \{
+117       \textcolor{comment}{// The last 2^63 streams are reserved for deterministic stream}
+118       \textcolor{comment}{// number assignment.}
+119       uint64\_t base = ((1ULL)<<63);
+120       uint64\_t target = base + stream;
+121       \hyperlink{classns3_1_1RandomVariableStream_ad944ab349eeee833c43ddcc7c749d1fe}{m\_rng} = \textcolor{keyword}{new} RngStream (\hyperlink{classns3_1_1RngSeedManager_a09f2d185f02aac599cd5a244c4b73ba5}{RngSeedManager::GetSeed} (),
+122                              target,
+123                              \hyperlink{classns3_1_1RngSeedManager_afaf1b845d2523df05ca341a930de24b3}{RngSeedManager::GetRun} ());
+124     \}
+125   \hyperlink{classns3_1_1RandomVariableStream_ab494eafbd56af49c75b504cf5b712ae7}{m\_stream} = stream;
+126 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!m\+\_\+is\+Antithetic@{m\+\_\+is\+Antithetic}}
+\index{m\+\_\+is\+Antithetic@{m\+\_\+is\+Antithetic}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{m\+\_\+is\+Antithetic}{m_isAntithetic}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Random\+Variable\+Stream\+::m\+\_\+is\+Antithetic\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RandomVariableStream_a91017ccb003344625d469b3f5caf5c0e}{}\label{classns3_1_1RandomVariableStream_a91017ccb003344625d469b3f5caf5c0e}
+Indicates if antithetic values should be generated by this R\+NG stream. \index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!m\+\_\+rng@{m\+\_\+rng}}
+\index{m\+\_\+rng@{m\+\_\+rng}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{m\+\_\+rng}{m_rng}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Rng\+Stream}$\ast$ ns3\+::\+Random\+Variable\+Stream\+::m\+\_\+rng\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RandomVariableStream_ad944ab349eeee833c43ddcc7c749d1fe}{}\label{classns3_1_1RandomVariableStream_ad944ab349eeee833c43ddcc7c749d1fe}
+Pointer to the underlying R\+NG stream. \index{ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}!m\+\_\+stream@{m\+\_\+stream}}
+\index{m\+\_\+stream@{m\+\_\+stream}!ns3\+::\+Random\+Variable\+Stream@{ns3\+::\+Random\+Variable\+Stream}}
+\subsubsection[{\texorpdfstring{m\+\_\+stream}{m_stream}}]{\setlength{\rightskip}{0pt plus 5cm}int64\+\_\+t ns3\+::\+Random\+Variable\+Stream\+::m\+\_\+stream\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RandomVariableStream_ab494eafbd56af49c75b504cf5b712ae7}{}\label{classns3_1_1RandomVariableStream_ab494eafbd56af49c75b504cf5b712ae7}
+The stream number for this R\+NG stream. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

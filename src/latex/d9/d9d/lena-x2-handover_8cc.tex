@@ -1,0 +1,490 @@
+\hypertarget{lena-x2-handover_8cc}{}\section{lte/examples/lena-\/x2-\/handover.cc File Reference}
+\label{lena-x2-handover_8cc}\index{lte/examples/lena-\/x2-\/handover.\+cc@{lte/examples/lena-\/x2-\/handover.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/lte-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store-\/module.\+h\char`\"{}}\\*
+Include dependency graph for lena-\/x2-\/handover.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{lena-x2-handover_8cc_a288ceedc37d4c3a1bb3b79f471f64441}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Lena\+X2\+Handover\+Example\char`\"{})
+\item 
+void \hyperlink{lena-x2-handover_8cc_a7b068dcdfdae75954b1d6a533108413e}{Notify\+Connection\+Established\+Ue} (std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cellid, uint16\+\_\+t rnti)
+\item 
+void \hyperlink{lena-x2-handover_8cc_a86f5a4f1ce25b40b625682a16b714f03}{Notify\+Handover\+Start\+Ue} (std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cellid, uint16\+\_\+t rnti, uint16\+\_\+t target\+Cell\+Id)
+\item 
+void \hyperlink{lena-x2-handover_8cc_a62f1fe4dd47681ddfbff0249874e5653}{Notify\+Handover\+End\+Ok\+Ue} (std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cellid, uint16\+\_\+t rnti)
+\item 
+void \hyperlink{lena-x2-handover_8cc_a9ebcea277a72efa6dbfd310068addf75}{Notify\+Connection\+Established\+Enb} (std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cellid, uint16\+\_\+t rnti)
+\item 
+void \hyperlink{lena-x2-handover_8cc_a98a48f4218409f1681fc99d3d070d8ee}{Notify\+Handover\+Start\+Enb} (std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cellid, uint16\+\_\+t rnti, uint16\+\_\+t target\+Cell\+Id)
+\item 
+void \hyperlink{lena-x2-handover_8cc_aef8eb0154877f4690ac5062d7875d5f1}{Notify\+Handover\+End\+Ok\+Enb} (std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cellid, uint16\+\_\+t rnti)
+\item 
+int \hyperlink{lena-x2-handover_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}!main@{main}}
+\index{main@{main}!lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-x2-handover_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{lena-x2-handover_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+Sample simulation script for a X2-\/based handover. It instantiates two e\+NodeB, attaches one UE to the \textquotesingle{}source\textquotesingle{} e\+NB and triggers a handover of the UE towards the \textquotesingle{}target\textquotesingle{} e\+NB. 
+\begin{DoxyCode}
+124 \{
+125   \textcolor{comment}{// LogLevel logLevel = (LogLevel)(LOG\_PREFIX\_FUNC | LOG\_PREFIX\_TIME | LOG\_LEVEL\_ALL);}
+126 
+127   \textcolor{comment}{// LogComponentEnable ("LteHelper", logLevel);}
+128   \textcolor{comment}{// LogComponentEnable ("EpcHelper", logLevel);}
+129   \textcolor{comment}{// LogComponentEnable ("EpcEnbApplication", logLevel);}
+130   \textcolor{comment}{// LogComponentEnable ("EpcX2", logLevel);}
+131   \textcolor{comment}{// LogComponentEnable ("EpcSgwPgwApplication", logLevel);}
+132 
+133   \textcolor{comment}{// LogComponentEnable ("LteEnbRrc", logLevel);}
+134   \textcolor{comment}{// LogComponentEnable ("LteEnbNetDevice", logLevel);}
+135   \textcolor{comment}{// LogComponentEnable ("LteUeRrc", logLevel);}
+136   \textcolor{comment}{// LogComponentEnable ("LteUeNetDevice", logLevel);}
+137 
+138   uint16\_t numberOfUes = 1;
+139   uint16\_t numberOfEnbs = 2;
+140   uint16\_t numBearersPerUe = 2;
+141   \textcolor{keywordtype}{double} simTime = 0.300;
+142   \textcolor{keywordtype}{double} distance = 100.0;
+143 
+144   \textcolor{comment}{// change some default attributes so that they are reasonable for}
+145   \textcolor{comment}{// this scenario, but do this before processing command line}
+146   \textcolor{comment}{// arguments, so that the user is allowed to override these settings}
+147   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::UdpClient::Interval"}, TimeValue (
+      \hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (10)));
+148   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::UdpClient::MaxPackets"}, UintegerValue (1000000));
+149   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteHelper::UseIdealRrc"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+150 
+151   \textcolor{comment}{// Command line arguments}
+152   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+153   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"numberOfUes"}, \textcolor{stringliteral}{"Number of UEs"}, numberOfUes);
+154   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"numberOfEnbs"}, \textcolor{stringliteral}{"Number of eNodeBs"}, numberOfEnbs);
+155   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"simTime"}, \textcolor{stringliteral}{"Total duration of the simulation (in seconds)"}, simTime);
+156   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+157 
+158 
+159   \hyperlink{classns3_1_1Ptr}{Ptr<LteHelper>} lteHelper = CreateObject<LteHelper> ();
+160   \hyperlink{classns3_1_1Ptr}{Ptr<PointToPointEpcHelper>} epcHelper = CreateObject<PointToPointEpcHelper> ();
+161   lteHelper->\hyperlink{classns3_1_1LteHelper_a324079a1ccd54ce949786b83d6b95915}{SetEpcHelper} (epcHelper);
+162   lteHelper->\hyperlink{classns3_1_1LteHelper_a8f86e55b8b80a81732c4b2df00fb25d5}{SetSchedulerType} (\textcolor{stringliteral}{"ns3::RrFfMacScheduler"});
+163   lteHelper->\hyperlink{classns3_1_1LteHelper_a6301630b8a7082043efff2a7aaaa1d20}{SetHandoverAlgorithmType} (\textcolor{stringliteral}{"ns3::NoOpHandoverAlgorithm"}); \textcolor{comment}{// disable
+       automatic handover}
+164 
+165   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} pgw = epcHelper->GetPgwNode ();
+166 
+167   \textcolor{comment}{// Create a single RemoteHost}
+168   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} remoteHostContainer;
+169   remoteHostContainer.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+170   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} remoteHost = remoteHostContainer.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0);
+171   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+172   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (remoteHostContainer);
+173 
+174   \textcolor{comment}{// Create the Internet}
+175   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} p2ph;
+176   p2ph.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"100Gb/s"})));
+177   p2ph.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"Mtu"}, UintegerValue (1500));
+178   p2ph.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.010)));
+179   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} internetDevices = p2ph.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (pgw, remoteHost);
+180   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4h;
+181   ipv4h.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"1.0.0.0"}, \textcolor{stringliteral}{"255.0.0.0"});
+182   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} internetIpIfaces = ipv4h.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (internetDevices);
+183   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} remoteHostAddr = internetIpIfaces.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1);
+184 
+185 
+186   \textcolor{comment}{// Routing of the Internet Host (towards the LTE network)}
+187   \hyperlink{classns3_1_1Ipv4StaticRoutingHelper}{Ipv4StaticRoutingHelper} ipv4RoutingHelper;
+188   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4StaticRouting>} remoteHostStaticRouting = ipv4RoutingHelper.
+      \hyperlink{classns3_1_1Ipv4StaticRoutingHelper_a731206e50d305695dac7fb2ef963a4bb}{GetStaticRouting} (remoteHost->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ());
+189   \textcolor{comment}{// interface 0 is localhost, 1 is the p2p device}
+190   remoteHostStaticRouting->\hyperlink{classns3_1_1Ipv4StaticRouting_a8bf5eaa7ba49fe33c78c70d5560b6c39}{AddNetworkRouteTo} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"7.0.0.0"}), 
+      \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.0.0.0"}), 1);
+191 
+192   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNodes;
+193   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+194   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (numberOfEnbs);
+195   ueNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (numberOfUes);
+196 
+197   \textcolor{comment}{// Install Mobility Model}
+198   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} positionAlloc = CreateObject<ListPositionAllocator> 
+      ();
+199   \textcolor{keywordflow}{for} (uint16\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < numberOfEnbs; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+200     \{
+201       positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (distance * 2 * \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} - distance, 0, 0));
+202     \}
+203   \textcolor{keywordflow}{for} (uint16\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < numberOfUes; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+204     \{
+205       positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0, 0, 0));
+206     \}
+207   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+208   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+209   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+210   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+211   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes);
+212 
+213   \textcolor{comment}{// Install LTE Devices in eNB and UEs}
+214   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbLteDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (enbNodes);
+215   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueLteDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (ueNodes);
+216 
+217   \textcolor{comment}{// Install the IP stack on the UEs}
+218   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (ueNodes);
+219   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} ueIpIfaces;
+220   ueIpIfaces = epcHelper->AssignUeIpv4Address (\hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} (ueLteDevs));
+221   \textcolor{comment}{// Assign IP address to UEs, and install applications}
+222   \textcolor{keywordflow}{for} (uint32\_t u = 0; u < ueNodes.\hyperlink{classns3_1_1NodeContainer_aed647ac56d0407a7706aba02eb44b951}{GetN} (); ++u)
+223     \{
+224       \hyperlink{classns3_1_1Ptr}{Ptr<Node>} ueNode = ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (u);
+225       \textcolor{comment}{// Set the default gateway for the UE}
+226       \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4StaticRouting>} ueStaticRouting = ipv4RoutingHelper.
+      \hyperlink{classns3_1_1Ipv4StaticRoutingHelper_a731206e50d305695dac7fb2ef963a4bb}{GetStaticRouting} (ueNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ());
+227       ueStaticRouting->\hyperlink{classns3_1_1Ipv4StaticRouting_aee30fa3246c2b42f122dabdff2725331}{SetDefaultRoute} (epcHelper->GetUeDefaultGatewayAddress (), 1);
+228     \}
+229 
+230 
+231   \textcolor{comment}{// Attach all UEs to the first eNodeB}
+232   \textcolor{keywordflow}{for} (uint16\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < numberOfUes; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+233     \{
+234       lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (ueLteDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), enbLteDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+235     \}
+236 
+237 
+238   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"setting up applications"});
+239 
+240   \textcolor{comment}{// Install and start applications on UEs and remote host}
+241   uint16\_t dlPort = 10000;
+242   uint16\_t ulPort = 20000;
+243 
+244   \textcolor{comment}{// randomize a bit start times to avoid simulation artifacts}
+245   \textcolor{comment}{// (e.g., buffer overflows due to packet transmissions happening}
+246   \textcolor{comment}{// exactly at the same time)}
+247   \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} startTimeSeconds = 
+      CreateObject<UniformRandomVariable> ();
+248   startTimeSeconds->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (0));
+249   startTimeSeconds->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (0.010));
+250 
+251   \textcolor{keywordflow}{for} (uint32\_t u = 0; u < numberOfUes; ++u)
+252     \{
+253       \hyperlink{classns3_1_1Ptr}{Ptr<Node>} ue = ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (u);
+254       \textcolor{comment}{// Set the default gateway for the UE}
+255       \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4StaticRouting>} ueStaticRouting = ipv4RoutingHelper.
+      \hyperlink{classns3_1_1Ipv4StaticRoutingHelper_a731206e50d305695dac7fb2ef963a4bb}{GetStaticRouting} (ue->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ());
+256       ueStaticRouting->\hyperlink{classns3_1_1Ipv4StaticRouting_aee30fa3246c2b42f122dabdff2725331}{SetDefaultRoute} (epcHelper->GetUeDefaultGatewayAddress (), 1);
+257 
+258       \textcolor{keywordflow}{for} (uint32\_t \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b} = 0; \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b} < numBearersPerUe; ++\hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b})
+259         \{
+260           ++dlPort;
+261           ++ulPort;
+262 
+263           \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps;
+264           \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} serverApps;
+265 
+266           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"installing UDP DL app for UE "} << u);
+267           \hyperlink{classns3_1_1UdpClientHelper}{UdpClientHelper} dlClientHelper (ueIpIfaces.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (u), dlPort);
+268           clientApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (dlClientHelper.Install (remoteHost));
+269           \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} dlPacketSinkHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+270                                                \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 
+      dlPort));
+271           serverApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (dlPacketSinkHelper.Install (ue));
+272 
+273           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"installing UDP UL app for UE "} << u);
+274           \hyperlink{classns3_1_1UdpClientHelper}{UdpClientHelper} ulClientHelper (remoteHostAddr, ulPort);
+275           clientApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (ulClientHelper.Install (ue));
+276           \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} ulPacketSinkHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+277                                                \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 
+      ulPort));
+278           serverApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (ulPacketSinkHelper.Install (remoteHost));
+279 
+280           \hyperlink{classns3_1_1Ptr}{Ptr<EpcTft>} tft = Create<EpcTft> ();
+281           \hyperlink{structns3_1_1EpcTft_1_1PacketFilter}{EpcTft::PacketFilter} dlpf;
+282           dlpf.\hyperlink{structns3_1_1EpcTft_1_1PacketFilter_afd505cda437b1687abc4432a8bcefbaf}{localPortStart} = dlPort;
+283           dlpf.localPortEnd = dlPort;
+284           tft->\hyperlink{classns3_1_1EpcTft_a1228456a8abbe48cbc89bbe2d2e9af48}{Add} (dlpf);
+285           \hyperlink{structns3_1_1EpcTft_1_1PacketFilter}{EpcTft::PacketFilter} ulpf;
+286           ulpf.\hyperlink{structns3_1_1EpcTft_1_1PacketFilter_aa96ab9356c91b14059220d00155c32b5}{remotePortStart} = ulPort;
+287           ulpf.\hyperlink{structns3_1_1EpcTft_1_1PacketFilter_a4bcdd15a9526e27eabd474276f691cf1}{remotePortEnd} = ulPort;
+288           tft->\hyperlink{classns3_1_1EpcTft_a1228456a8abbe48cbc89bbe2d2e9af48}{Add} (ulpf);
+289           \hyperlink{structns3_1_1EpsBearer}{EpsBearer} bearer (EpsBearer::NGBR\_VIDEO\_TCP\_DEFAULT);
+290           lteHelper->\hyperlink{classns3_1_1LteHelper_af28041edd4c96bde1a2e07c90e363dcc}{ActivateDedicatedEpsBearer} (ueLteDevs.
+      \hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (u), bearer, tft);
+291 
+292           \hyperlink{classns3_1_1Time}{Time} startTime = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (startTimeSeconds->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ());
+293           serverApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (startTime);
+294           clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (startTime);
+295 
+296         \} \textcolor{comment}{// end for b}
+297     \}
+298 
+299 
+300   \textcolor{comment}{// Add X2 inteface}
+301   lteHelper->\hyperlink{classns3_1_1LteHelper_adbbd435f439200097e88a2965668bc26}{AddX2Interface} (enbNodes);
+302 
+303   \textcolor{comment}{// X2-based Handover}
+304   lteHelper->\hyperlink{classns3_1_1LteHelper_a5b612c3b8d529e68b848cdca95838087}{HandoverRequest} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.100), ueLteDevs.
+      \hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0), enbLteDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0), enbLteDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+305 
+306   \textcolor{comment}{// Uncomment to enable PCAP tracing}
+307   \textcolor{comment}{//p2ph.EnablePcapAll("lena-x2-handover");}
+308 
+309   lteHelper->\hyperlink{classns3_1_1LteHelper_ad6d7edf234d29f7b8363e9ebf73fe32e}{EnablePhyTraces} ();
+310   lteHelper->\hyperlink{classns3_1_1LteHelper_affa3a12841520407d3662417fe41863d}{EnableMacTraces} ();
+311   lteHelper->\hyperlink{classns3_1_1LteHelper_abadfdd04d30b261e9b6f0846b4784928}{EnableRlcTraces} ();
+312   lteHelper->\hyperlink{classns3_1_1LteHelper_adc62a53efe0437cf09062c9d6a95af3d}{EnablePdcpTraces} ();
+313   \hyperlink{classns3_1_1Ptr}{Ptr<RadioBearerStatsCalculator>} rlcStats = lteHelper->
+      \hyperlink{classns3_1_1LteHelper_a6eb438ccf69642e3863adea4991fa2ca}{GetRlcStats} ();
+314   rlcStats->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"EpochDuration"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.05)));
+315   \hyperlink{classns3_1_1Ptr}{Ptr<RadioBearerStatsCalculator>} pdcpStats = lteHelper->
+      \hyperlink{classns3_1_1LteHelper_a1017c1f2ee9f5a640c50c25161a57758}{GetPdcpStats} ();
+316   pdcpStats->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"EpochDuration"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.05)));
+317 
+318 
+319   \textcolor{comment}{// connect custom trace sinks for RRC connection establishment and handover notification}
+320   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/NodeList/*/DeviceList/*/LteEnbRrc/ConnectionEstablished"},
+321                    \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{lena-x2-handover_8cc_a9ebcea277a72efa6dbfd310068addf75}{NotifyConnectionEstablishedEnb})
+      );
+322   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/NodeList/*/DeviceList/*/LteUeRrc/ConnectionEstablished"},
+323                    \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{lena-x2-handover_8cc_a7b068dcdfdae75954b1d6a533108413e}{NotifyConnectionEstablishedUe}));
+324   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/NodeList/*/DeviceList/*/LteEnbRrc/HandoverStart"},
+325                    \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{lena-x2-handover_8cc_a98a48f4218409f1681fc99d3d070d8ee}{NotifyHandoverStartEnb}));
+326   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/NodeList/*/DeviceList/*/LteUeRrc/HandoverStart"},
+327                    \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{lena-x2-handover_8cc_a86f5a4f1ce25b40b625682a16b714f03}{NotifyHandoverStartUe}));
+328   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/NodeList/*/DeviceList/*/LteEnbRrc/HandoverEndOk"},
+329                    \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{lena-x2-handover_8cc_aef8eb0154877f4690ac5062d7875d5f1}{NotifyHandoverEndOkEnb}));
+330   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/NodeList/*/DeviceList/*/LteUeRrc/HandoverEndOk"},
+331                    \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{lena-x2-handover_8cc_a62f1fe4dd47681ddfbff0249874e5653}{NotifyHandoverEndOkUe}));
+332 
+333 
+334   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (simTime));
+335   Simulator::Run ();
+336 
+337   \textcolor{comment}{// GtkConfigStore config;}
+338   \textcolor{comment}{// config.ConfigureAttributes ();}
+339 
+340   Simulator::Destroy ();
+341   \textcolor{keywordflow}{return} 0;
+342 
+343 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}!Notify\+Connection\+Established\+Enb@{Notify\+Connection\+Established\+Enb}}
+\index{Notify\+Connection\+Established\+Enb@{Notify\+Connection\+Established\+Enb}!lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}}
+\subsubsection[{\texorpdfstring{Notify\+Connection\+Established\+Enb(std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cellid, uint16\+\_\+t rnti)}{NotifyConnectionEstablishedEnb(std::string context, uint64_t imsi, uint16_t cellid, uint16_t rnti)}}]{\setlength{\rightskip}{0pt plus 5cm}void Notify\+Connection\+Established\+Enb (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{uint64\+\_\+t}]{imsi, }
+\item[{uint16\+\_\+t}]{cellid, }
+\item[{uint16\+\_\+t}]{rnti}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-x2-handover_8cc_a9ebcea277a72efa6dbfd310068addf75}{}\label{lena-x2-handover_8cc_a9ebcea277a72efa6dbfd310068addf75}
+
+\begin{DoxyCode}
+80 \{
+81   std::cout << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" "} << context
+82             << \textcolor{stringliteral}{" eNB CellId "} << cellid
+83             << \textcolor{stringliteral}{": successful connection of UE with IMSI "} << imsi
+84             << \textcolor{stringliteral}{" RNTI "} << rnti
+85             << std::endl;
+86 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}!Notify\+Connection\+Established\+Ue@{Notify\+Connection\+Established\+Ue}}
+\index{Notify\+Connection\+Established\+Ue@{Notify\+Connection\+Established\+Ue}!lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}}
+\subsubsection[{\texorpdfstring{Notify\+Connection\+Established\+Ue(std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cellid, uint16\+\_\+t rnti)}{NotifyConnectionEstablishedUe(std::string context, uint64_t imsi, uint16_t cellid, uint16_t rnti)}}]{\setlength{\rightskip}{0pt plus 5cm}void Notify\+Connection\+Established\+Ue (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{uint64\+\_\+t}]{imsi, }
+\item[{uint16\+\_\+t}]{cellid, }
+\item[{uint16\+\_\+t}]{rnti}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-x2-handover_8cc_a7b068dcdfdae75954b1d6a533108413e}{}\label{lena-x2-handover_8cc_a7b068dcdfdae75954b1d6a533108413e}
+
+\begin{DoxyCode}
+39 \{
+40   std::cout << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" "} << context
+41             << \textcolor{stringliteral}{" UE IMSI "} << imsi
+42             << \textcolor{stringliteral}{": connected to CellId "} << cellid
+43             << \textcolor{stringliteral}{" with RNTI "} << rnti
+44             << std::endl;
+45 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}!Notify\+Handover\+End\+Ok\+Enb@{Notify\+Handover\+End\+Ok\+Enb}}
+\index{Notify\+Handover\+End\+Ok\+Enb@{Notify\+Handover\+End\+Ok\+Enb}!lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}}
+\subsubsection[{\texorpdfstring{Notify\+Handover\+End\+Ok\+Enb(std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cellid, uint16\+\_\+t rnti)}{NotifyHandoverEndOkEnb(std::string context, uint64_t imsi, uint16_t cellid, uint16_t rnti)}}]{\setlength{\rightskip}{0pt plus 5cm}void Notify\+Handover\+End\+Ok\+Enb (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{uint64\+\_\+t}]{imsi, }
+\item[{uint16\+\_\+t}]{cellid, }
+\item[{uint16\+\_\+t}]{rnti}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-x2-handover_8cc_aef8eb0154877f4690ac5062d7875d5f1}{}\label{lena-x2-handover_8cc_aef8eb0154877f4690ac5062d7875d5f1}
+
+\begin{DoxyCode}
+108 \{
+109   std::cout << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" "} << context
+110             << \textcolor{stringliteral}{" eNB CellId "} << cellid
+111             << \textcolor{stringliteral}{": completed handover of UE with IMSI "} << imsi
+112             << \textcolor{stringliteral}{" RNTI "} << rnti
+113             << std::endl;
+114 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}!Notify\+Handover\+End\+Ok\+Ue@{Notify\+Handover\+End\+Ok\+Ue}}
+\index{Notify\+Handover\+End\+Ok\+Ue@{Notify\+Handover\+End\+Ok\+Ue}!lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}}
+\subsubsection[{\texorpdfstring{Notify\+Handover\+End\+Ok\+Ue(std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cellid, uint16\+\_\+t rnti)}{NotifyHandoverEndOkUe(std::string context, uint64_t imsi, uint16_t cellid, uint16_t rnti)}}]{\setlength{\rightskip}{0pt plus 5cm}void Notify\+Handover\+End\+Ok\+Ue (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{uint64\+\_\+t}]{imsi, }
+\item[{uint16\+\_\+t}]{cellid, }
+\item[{uint16\+\_\+t}]{rnti}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-x2-handover_8cc_a62f1fe4dd47681ddfbff0249874e5653}{}\label{lena-x2-handover_8cc_a62f1fe4dd47681ddfbff0249874e5653}
+
+\begin{DoxyCode}
+67 \{
+68   std::cout << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" "} << context
+69             << \textcolor{stringliteral}{" UE IMSI "} << imsi
+70             << \textcolor{stringliteral}{": successful handover to CellId "} << cellid
+71             << \textcolor{stringliteral}{" with RNTI "} << rnti
+72             << std::endl;
+73 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}!Notify\+Handover\+Start\+Enb@{Notify\+Handover\+Start\+Enb}}
+\index{Notify\+Handover\+Start\+Enb@{Notify\+Handover\+Start\+Enb}!lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}}
+\subsubsection[{\texorpdfstring{Notify\+Handover\+Start\+Enb(std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cellid, uint16\+\_\+t rnti, uint16\+\_\+t target\+Cell\+Id)}{NotifyHandoverStartEnb(std::string context, uint64_t imsi, uint16_t cellid, uint16_t rnti, uint16_t targetCellId)}}]{\setlength{\rightskip}{0pt plus 5cm}void Notify\+Handover\+Start\+Enb (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{uint64\+\_\+t}]{imsi, }
+\item[{uint16\+\_\+t}]{cellid, }
+\item[{uint16\+\_\+t}]{rnti, }
+\item[{uint16\+\_\+t}]{target\+Cell\+Id}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-x2-handover_8cc_a98a48f4218409f1681fc99d3d070d8ee}{}\label{lena-x2-handover_8cc_a98a48f4218409f1681fc99d3d070d8ee}
+
+\begin{DoxyCode}
+94 \{
+95   std::cout << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" "} << context
+96             << \textcolor{stringliteral}{" eNB CellId "} << cellid
+97             << \textcolor{stringliteral}{": start handover of UE with IMSI "} << imsi
+98             << \textcolor{stringliteral}{" RNTI "} << rnti
+99             << \textcolor{stringliteral}{" to CellId "} << targetCellId
+100             << std::endl;
+101 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+\index{lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}!Notify\+Handover\+Start\+Ue@{Notify\+Handover\+Start\+Ue}}
+\index{Notify\+Handover\+Start\+Ue@{Notify\+Handover\+Start\+Ue}!lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}}
+\subsubsection[{\texorpdfstring{Notify\+Handover\+Start\+Ue(std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cellid, uint16\+\_\+t rnti, uint16\+\_\+t target\+Cell\+Id)}{NotifyHandoverStartUe(std::string context, uint64_t imsi, uint16_t cellid, uint16_t rnti, uint16_t targetCellId)}}]{\setlength{\rightskip}{0pt plus 5cm}void Notify\+Handover\+Start\+Ue (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{uint64\+\_\+t}]{imsi, }
+\item[{uint16\+\_\+t}]{cellid, }
+\item[{uint16\+\_\+t}]{rnti, }
+\item[{uint16\+\_\+t}]{target\+Cell\+Id}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-x2-handover_8cc_a86f5a4f1ce25b40b625682a16b714f03}{}\label{lena-x2-handover_8cc_a86f5a4f1ce25b40b625682a16b714f03}
+
+\begin{DoxyCode}
+53 \{
+54   std::cout << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" "} << context
+55             << \textcolor{stringliteral}{" UE IMSI "} << imsi
+56             << \textcolor{stringliteral}{": previously connected to CellId "} << cellid
+57             << \textcolor{stringliteral}{" with RNTI "} << rnti
+58             << \textcolor{stringliteral}{", doing handover to CellId "} << targetCellId
+59             << std::endl;
+60 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 13
+
+
+\index{lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!lena-\/x2-\/handover.\+cc@{lena-\/x2-\/handover.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Lena\+X2\+Handover\+Example"")}{NS_LOG_COMPONENT_DEFINE("LenaX2HandoverExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Lena\+X2\+Handover\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-x2-handover_8cc_a288ceedc37d4c3a1bb3b79f471f64441}{}\label{lena-x2-handover_8cc_a288ceedc37d4c3a1bb3b79f471f64441}

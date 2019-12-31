@@ -1,0 +1,389 @@
+\hypertarget{classns3_1_1ZipfRandomVariable}{}\section{ns3\+:\+:Zipf\+Random\+Variable Class Reference}
+\label{classns3_1_1ZipfRandomVariable}\index{ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}}
+
+
+The Zipf distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically.  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Zipf\+Random\+Variable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Zipf\+Random\+Variable\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1ZipfRandomVariable_a93e22966491ba3333f330a5c2ac9b4bd}{Zipf\+Random\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Creates a Zipf distribution R\+NG with the default values for n and alpha. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1ZipfRandomVariable_a260e2ee846e555cfd275b0a2901d16fe}{GetN} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the n value for the Zipf distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ZipfRandomVariable_aef2f50cde1f4ca56564c390f1c725026}{Get\+Alpha} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the alpha value for the Zipf distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ZipfRandomVariable_a327ce77bd92ece90f8622b5104850676}{Get\+Value} (uint32\+\_\+t \hyperlink{lte__link__budget__x2__handover__measures_8m_abdb05bc5a064cf642a06c83b3392f148}{n}, double \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha})
+\begin{DoxyCompactList}\small\item\em Returns a random double from a Zipf distribution with the specified n and alpha. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1ZipfRandomVariable_a1ca161dc237c5648f62ff260240c7fe1}{Get\+Integer} (uint32\+\_\+t \hyperlink{lte__link__budget__x2__handover__measures_8m_abdb05bc5a064cf642a06c83b3392f148}{n}, uint32\+\_\+t \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha})
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a Zipf distribution with the specified n and alpha. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1ZipfRandomVariable_a3a1a48eed27e3d693bf28c2800d7eab1}{Get\+Value} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random double from a Zipf distribution with the current n and alpha. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1ZipfRandomVariable_adda8cb5e7c55aad89f0d704b5d4cb9bc}{Get\+Integer} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a Zipf distribution with the current n and alpha. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1ZipfRandomVariable_ace1382ab4418489bcdbfb47cf55744eb}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1ZipfRandomVariable_ab8a445c68948057e97c1c95f6f684c73}{m\+\_\+n}
+\item 
+double \hyperlink{classns3_1_1ZipfRandomVariable_a9583e78be81f0ef5a46d9893dcec5556}{m\+\_\+alpha}
+\item 
+double \hyperlink{classns3_1_1ZipfRandomVariable_a4e5d128f53e226f84340471095380ab0}{m\+\_\+c}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The Zipf distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically. 
+
+This class supports the creation of objects that return random numbers from a fixed Zipf distribution. It also supports the generation of single random numbers from various Zipf distributions.
+
+The Zipf\textquotesingle{}s law states that given some corpus of natural language utterances, the frequency of any word is inversely proportional to its rank in the frequency table.
+
+Zipf\textquotesingle{}s distribution has two parameters, alpha and N, where\+: $ \alpha > 0 $ (real) and $ N \in \{1,2,3 \dots\}$ (integer). Probability Mass Function is $ f(k; \alpha, N) = k^{-\alpha}/ H_{N,\alpha} $ where $ H_{N,\alpha} = \sum_{m=1}^N m^{-\alpha} $
+
+Here is an example of how to use this class\+: 
+\begin{DoxyCode}
+uint32\_t \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n} = 1;
+\textcolor{keywordtype}{double} \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha} = 2.0;
+
+Ptr<ZipfRandomVariable> \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x} = CreateObject<ZipfRandomVariable> ();
+x->SetAttribute (\textcolor{stringliteral}{"N"}, IntegerValue (n));
+x->SetAttribute (\textcolor{stringliteral}{"Alpha"}, DoubleValue (alpha));
+
+\textcolor{comment}{// The expected value for the mean of the values returned by a}
+\textcolor{comment}{// Zipfly distributed random variable is equal to }
+\textcolor{comment}{//}
+\textcolor{comment}{//                   H}
+\textcolor{comment}{//                    N, alpha - 1}
+\textcolor{comment}{//     E[value]  =  ---------------}
+\textcolor{comment}{//                     H}
+\textcolor{comment}{//                      N, alpha}
+\textcolor{comment}{//                          }
+\textcolor{comment}{// where}
+\textcolor{comment}{//}
+\textcolor{comment}{//                    N   }
+\textcolor{comment}{//                   ---    }
+\textcolor{comment}{//                   \(\backslash\)     -alpha}
+\textcolor{comment}{//     H          =  /    m        .}
+\textcolor{comment}{//      N, alpha     ---}
+\textcolor{comment}{//                   m=1    }
+\textcolor{comment}{//                 }
+\textcolor{comment}{// For this test,}
+\textcolor{comment}{//}
+\textcolor{comment}{//                      -(alpha - 1)}
+\textcolor{comment}{//                     1}
+\textcolor{comment}{//     E[value]  =  ---------------}
+\textcolor{comment}{//                      -alpha}
+\textcolor{comment}{//                     1}
+\textcolor{comment}{//}
+\textcolor{comment}{//               =  1  .}
+\textcolor{comment}{//               }
+\textcolor{keywordtype}{double} value = x->GetValue ();
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}!Zipf\+Random\+Variable@{Zipf\+Random\+Variable}}
+\index{Zipf\+Random\+Variable@{Zipf\+Random\+Variable}!ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Zipf\+Random\+Variable()}{ZipfRandomVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Zipf\+Random\+Variable\+::\+Zipf\+Random\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ZipfRandomVariable_a93e22966491ba3333f330a5c2ac9b4bd}{}\label{classns3_1_1ZipfRandomVariable_a93e22966491ba3333f330a5c2ac9b4bd}
+
+
+Creates a Zipf distribution R\+NG with the default values for n and alpha. 
+
+
+\begin{DoxyCode}
+1306 \{
+1307   \textcolor{comment}{// m\_n and m\_alpha are initialized after constructor by attributes}
+1308   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1309 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}!Get\+Alpha@{Get\+Alpha}}
+\index{Get\+Alpha@{Get\+Alpha}!ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Alpha(void) const }{GetAlpha(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Zipf\+Random\+Variable\+::\+Get\+Alpha (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ZipfRandomVariable_aef2f50cde1f4ca56564c390f1c725026}{}\label{classns3_1_1ZipfRandomVariable_aef2f50cde1f4ca56564c390f1c725026}
+
+
+Returns the alpha value for the Zipf distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The alpha value for the Zipf distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1319 \{
+1320   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1321   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ZipfRandomVariable_a9583e78be81f0ef5a46d9893dcec5556}{m\_alpha};
+1322 \}
+\end{DoxyCode}
+\index{ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(uint32\+\_\+t n, uint32\+\_\+t alpha)}{GetInteger(uint32_t n, uint32_t alpha)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Zipf\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{n, }
+\item[{uint32\+\_\+t}]{alpha}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ZipfRandomVariable_a1ca161dc237c5648f62ff260240c7fe1}{}\label{classns3_1_1ZipfRandomVariable_a1ca161dc237c5648f62ff260240c7fe1}
+
+
+Returns a random unsigned integer from a Zipf distribution with the specified n and alpha. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em n} & N value for the Zipf distribution. \\
+\hline
+\mbox{\tt in}  & {\em alpha} & Alpha value for the Zipf distribution. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+\begin{DoxyCode}
+1358 \{
+1359   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n} << \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha});
+1360   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>} ( \hyperlink{classns3_1_1ZipfRandomVariable_a3a1a48eed27e3d693bf28c2800d7eab1}{GetValue} (\hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n}, \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha}));
+1361 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(void)}{GetInteger(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Zipf\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1ZipfRandomVariable_adda8cb5e7c55aad89f0d704b5d4cb9bc}{}\label{classns3_1_1ZipfRandomVariable_adda8cb5e7c55aad89f0d704b5d4cb9bc}
+
+
+Returns a random unsigned integer from a Zipf distribution with the current n and alpha. 
+
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+1371 \{
+1372   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1373   \textcolor{keywordflow}{return} (uint32\_t)\hyperlink{classns3_1_1ZipfRandomVariable_a3a1a48eed27e3d693bf28c2800d7eab1}{GetValue} (\hyperlink{classns3_1_1ZipfRandomVariable_ab8a445c68948057e97c1c95f6f684c73}{m\_n}, \hyperlink{classns3_1_1ZipfRandomVariable_a9583e78be81f0ef5a46d9893dcec5556}{m\_alpha});
+1374 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}!GetN@{GetN}}
+\index{GetN@{GetN}!ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+N(void) const }{GetN(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Zipf\+Random\+Variable\+::\+GetN (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ZipfRandomVariable_a260e2ee846e555cfd275b0a2901d16fe}{}\label{classns3_1_1ZipfRandomVariable_a260e2ee846e555cfd275b0a2901d16fe}
+
+
+Returns the n value for the Zipf distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The n value for the Zipf distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1313 \{
+1314   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1315   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ZipfRandomVariable_ab8a445c68948057e97c1c95f6f684c73}{m\_n};
+1316 \}
+\end{DoxyCode}
+\index{ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Zipf\+Random\+Variable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1ZipfRandomVariable_ace1382ab4418489bcdbfb47cf55744eb}{}\label{classns3_1_1ZipfRandomVariable_ace1382ab4418489bcdbfb47cf55744eb}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1289 \{
+1290   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::ZipfRandomVariable"})
+1291     .SetParent<\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{RandomVariableStream}>()
+1292     .SetGroupName (\textcolor{stringliteral}{"Core"})
+1293     .AddConstructor<\hyperlink{classns3_1_1ZipfRandomVariable_a93e22966491ba3333f330a5c2ac9b4bd}{ZipfRandomVariable}> ()
+1294     .AddAttribute(\textcolor{stringliteral}{"N"}, \textcolor{stringliteral}{"The n value for the Zipf distribution returned by this RNG stream."},
+1295                   IntegerValue(1),
+1296                   MakeIntegerAccessor(&\hyperlink{classns3_1_1ZipfRandomVariable_ab8a445c68948057e97c1c95f6f684c73}{ZipfRandomVariable::m\_n}),
+1297                   MakeIntegerChecker<uint32\_t>())
+1298     .AddAttribute(\textcolor{stringliteral}{"Alpha"}, \textcolor{stringliteral}{"The alpha value for the Zipf distribution returned by this RNG stream."},
+1299                   DoubleValue(0.0),
+1300                   MakeDoubleAccessor(&\hyperlink{classns3_1_1ZipfRandomVariable_a9583e78be81f0ef5a46d9893dcec5556}{ZipfRandomVariable::m\_alpha}),
+1301                   MakeDoubleChecker<double>())
+1302     ;
+1303   \textcolor{keywordflow}{return} tid;
+1304 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(uint32\+\_\+t n, double alpha)}{GetValue(uint32_t n, double alpha)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Zipf\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{n, }
+\item[{double}]{alpha}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ZipfRandomVariable_a327ce77bd92ece90f8622b5104850676}{}\label{classns3_1_1ZipfRandomVariable_a327ce77bd92ece90f8622b5104850676}
+
+
+Returns a random double from a Zipf distribution with the specified n and alpha. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em n} & N value for the Zipf distribution. \\
+\hline
+\mbox{\tt in}  & {\em alpha} & Alpha value for the Zipf distribution. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+\begin{DoxyCode}
+1326 \{
+1327   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n} << \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha});
+1328   \textcolor{comment}{// Calculate the normalization constant c.}
+1329   \hyperlink{classns3_1_1ZipfRandomVariable_a4e5d128f53e226f84340471095380ab0}{m\_c} = 0.0;
+1330   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 1; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} <= \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n}; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+1331     \{
+1332       \hyperlink{classns3_1_1ZipfRandomVariable_a4e5d128f53e226f84340471095380ab0}{m\_c} += (1.0 / std::pow ((\textcolor{keywordtype}{double})\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i},\hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha}));
+1333     \}
+1334   \hyperlink{classns3_1_1ZipfRandomVariable_a4e5d128f53e226f84340471095380ab0}{m\_c} = 1.0 / \hyperlink{classns3_1_1ZipfRandomVariable_a4e5d128f53e226f84340471095380ab0}{m\_c};
+1335 
+1336   \textcolor{comment}{// Get a uniform random variable in [0,1].}
+1337   \textcolor{keywordtype}{double} u = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+1338   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+1339     \{
+1340       u = (1 - u);
+1341     \}
+1342 
+1343   \textcolor{keywordtype}{double} sum\_prob = 0,zipf\_value = 0;
+1344   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 1; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} <= \hyperlink{classns3_1_1ZipfRandomVariable_ab8a445c68948057e97c1c95f6f684c73}{m\_n}; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+1345     \{
+1346       sum\_prob += \hyperlink{classns3_1_1ZipfRandomVariable_a4e5d128f53e226f84340471095380ab0}{m\_c} / std::pow ((\textcolor{keywordtype}{double})\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i},\hyperlink{classns3_1_1ZipfRandomVariable_a9583e78be81f0ef5a46d9893dcec5556}{m\_alpha});
+1347       \textcolor{keywordflow}{if} (sum\_prob > u)
+1348         \{
+1349           zipf\_value = \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+1350           \textcolor{keywordflow}{break};
+1351         \}
+1352     \}
+1353   \textcolor{keywordflow}{return} zipf\_value;
+1354 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(void)}{GetValue(void)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Zipf\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1ZipfRandomVariable_a3a1a48eed27e3d693bf28c2800d7eab1}{}\label{classns3_1_1ZipfRandomVariable_a3a1a48eed27e3d693bf28c2800d7eab1}
+
+
+Returns a random double from a Zipf distribution with the current n and alpha. 
+
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1.
+
+Note that we have to re-\/implement this method here because the method is overloaded above for the two-\/argument variant and the c++ name resolution rules don\textquotesingle{}t work well with overloads split between parent and child classes. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+1365 \{
+1366   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1367   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ZipfRandomVariable_a3a1a48eed27e3d693bf28c2800d7eab1}{GetValue} (\hyperlink{classns3_1_1ZipfRandomVariable_ab8a445c68948057e97c1c95f6f684c73}{m\_n}, \hyperlink{classns3_1_1ZipfRandomVariable_a9583e78be81f0ef5a46d9893dcec5556}{m\_alpha});
+1368 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}!m\+\_\+alpha@{m\+\_\+alpha}}
+\index{m\+\_\+alpha@{m\+\_\+alpha}!ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+alpha}{m_alpha}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Zipf\+Random\+Variable\+::m\+\_\+alpha\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ZipfRandomVariable_a9583e78be81f0ef5a46d9893dcec5556}{}\label{classns3_1_1ZipfRandomVariable_a9583e78be81f0ef5a46d9893dcec5556}
+The alpha value for the Zipf distribution returned by this R\+NG stream. \index{ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}!m\+\_\+c@{m\+\_\+c}}
+\index{m\+\_\+c@{m\+\_\+c}!ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+c}{m_c}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Zipf\+Random\+Variable\+::m\+\_\+c\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ZipfRandomVariable_a4e5d128f53e226f84340471095380ab0}{}\label{classns3_1_1ZipfRandomVariable_a4e5d128f53e226f84340471095380ab0}
+The normalization constant. \index{ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}!m\+\_\+n@{m\+\_\+n}}
+\index{m\+\_\+n@{m\+\_\+n}!ns3\+::\+Zipf\+Random\+Variable@{ns3\+::\+Zipf\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+n}{m_n}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Zipf\+Random\+Variable\+::m\+\_\+n\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ZipfRandomVariable_ab8a445c68948057e97c1c95f6f684c73}{}\label{classns3_1_1ZipfRandomVariable_ab8a445c68948057e97c1c95f6f684c73}
+The n value for the Zipf distribution returned by this R\+NG stream. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

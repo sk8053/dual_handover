@@ -1,0 +1,379 @@
+\hypertarget{classCoDelQueueDiscBasicDrop}{}\section{Co\+Del\+Queue\+Disc\+Basic\+Drop Class Reference}
+\label{classCoDelQueueDiscBasicDrop}\index{Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}}
+
+
+Test 5\+: enqueue/dequeue with drops according to Co\+Del algorithm.  
+
+
+
+
+Inheritance diagram for Co\+Del\+Queue\+Disc\+Basic\+Drop\+:
+% FIG 0
+
+
+Collaboration diagram for Co\+Del\+Queue\+Disc\+Basic\+Drop\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCoDelQueueDiscBasicDrop_a88078a0c6c97556509510bf10d85eac1}{Co\+Del\+Queue\+Disc\+Basic\+Drop} (std\+::string mode)
+\item 
+virtual void \hyperlink{classCoDelQueueDiscBasicDrop_ac7338aa80772388f2e8cadb8d975ac13}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+void \hyperlink{classCoDelQueueDiscBasicDrop_a61137d83489ec151993b89863f9928c4}{Queue\+Test\+Size} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1CoDelQueueDisc}{Co\+Del\+Queue\+Disc} $>$ queue, uint32\+\_\+t size, std\+::string error)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classCoDelQueueDiscBasicDrop_ab9cfc5b9eee0eaf28cb7f84a7681d08e}{Enqueue} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1CoDelQueueDisc}{Co\+Del\+Queue\+Disc} $>$ queue, uint32\+\_\+t size, uint32\+\_\+t n\+Pkt)
+\item 
+void \hyperlink{classCoDelQueueDiscBasicDrop_ab858662db8af1c6f181bd0d01d44ce48}{Dequeue} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1CoDelQueueDisc}{Co\+Del\+Queue\+Disc} $>$ queue, uint32\+\_\+t mode\+Size)
+\item 
+void \hyperlink{classCoDelQueueDiscBasicDrop_adc48228083a11737a0cd3ccf172e6c10}{Drop\+Next\+Tracer} (uint32\+\_\+t old\+Val, uint32\+\_\+t new\+Val)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+String\+Value \hyperlink{classCoDelQueueDiscBasicDrop_a1208afca60fdedfcb0be0a73a5905aa7}{m\+\_\+mode}
+\begin{DoxyCompactList}\small\item\em mode \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classCoDelQueueDiscBasicDrop_a64c30d2e4ddd98c5c71e7235d1435c59}{m\+\_\+drop\+Next\+Count}
+\begin{DoxyCompactList}\small\item\em count the number of times m\+\_\+drop\+Next is recalculated \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Test 5\+: enqueue/dequeue with drops according to Co\+Del algorithm. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}!Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}}
+\index{Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}!Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}}
+\subsubsection[{\texorpdfstring{Co\+Del\+Queue\+Disc\+Basic\+Drop(std\+::string mode)}{CoDelQueueDiscBasicDrop(std::string mode)}}]{\setlength{\rightskip}{0pt plus 5cm}Co\+Del\+Queue\+Disc\+Basic\+Drop\+::\+Co\+Del\+Queue\+Disc\+Basic\+Drop (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{mode}
+\end{DoxyParamCaption}
+)}\hypertarget{classCoDelQueueDiscBasicDrop_a88078a0c6c97556509510bf10d85eac1}{}\label{classCoDelQueueDiscBasicDrop_a88078a0c6c97556509510bf10d85eac1}
+Constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & the mode \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+523   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Basic drop operations for "} + mode)
+524 \{
+525   \hyperlink{classCoDelQueueDiscBasicDrop_a1208afca60fdedfcb0be0a73a5905aa7}{m\_mode} = StringValue (mode);
+526   \hyperlink{classCoDelQueueDiscBasicDrop_a64c30d2e4ddd98c5c71e7235d1435c59}{m\_dropNextCount} = 0;
+527 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}!Dequeue@{Dequeue}}
+\index{Dequeue@{Dequeue}!Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}}
+\subsubsection[{\texorpdfstring{Dequeue(\+Ptr$<$ Co\+Del\+Queue\+Disc $>$ queue, uint32\+\_\+t mode\+Size)}{Dequeue(Ptr< CoDelQueueDisc > queue, uint32_t modeSize)}}]{\setlength{\rightskip}{0pt plus 5cm}void Co\+Del\+Queue\+Disc\+Basic\+Drop\+::\+Dequeue (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Co\+Del\+Queue\+Disc} $>$}]{queue, }
+\item[{uint32\+\_\+t}]{mode\+Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCoDelQueueDiscBasicDrop_ab858662db8af1c6f181bd0d01d44ce48}{}\label{classCoDelQueueDiscBasicDrop_ab858662db8af1c6f181bd0d01d44ce48}
+Dequeue function 
+\begin{DoxyParams}{Parameters}
+{\em queue} & the queue disc \\
+\hline
+{\em mode\+Size} & the mode size \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+592 \{
+593   uint32\_t initialDropCount = queue->\hyperlink{classns3_1_1CoDelQueueDisc_a8af7efb44124c9fd4699de0d71c5a58d}{GetDropCount} ();
+594   uint32\_t initialQSize = queue->\hyperlink{classns3_1_1CoDelQueueDisc_a2eed623615f381b9c377ed7add064953}{GetQueueSize} ();
+595   uint32\_t initialDropNext = queue->\hyperlink{classns3_1_1CoDelQueueDisc_a0fb737d0730a5977b84f6f0d10bb28e3}{GetDropNext} ();
+596   \hyperlink{classns3_1_1Time}{Time} currentTime = \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ();
+597   uint32\_t currentDropCount = 0;
+598 
+599   \textcolor{keywordflow}{if} (initialDropCount > 0 && currentTime.\hyperlink{classns3_1_1Time_a2542b9273c336da11fcaf54e8bc6e4c8}{GetMicroSeconds} () >= initialDropNext)
+600     \{
+601       queue->\hyperlink{classns3_1_1ObjectBase_a1be45f6fd561e75dcac9dfa81b2b81e4}{TraceConnectWithoutContext} (\textcolor{stringliteral}{"DropNext"}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{classCoDelQueueDiscBasicDrop_adc48228083a11737a0cd3ccf172e6c10}{CoDelQueueDiscBasicDrop::DropNextTracer}, \textcolor{keyword}{
+      this}));
+602     \}
+603 
+604   \textcolor{keywordflow}{if} (initialQSize != 0)
+605     \{
+606       \hyperlink{classns3_1_1Ptr}{Ptr<QueueDiscItem>} item = queue->\hyperlink{classns3_1_1QueueDisc_a6c13fc489822c1487f61c2289f2e3629}{Dequeue} ();
+607       \textcolor{keywordflow}{if} (initialDropCount == 0 && currentTime > queue->\hyperlink{classns3_1_1CoDelQueueDisc_aacbaf8a85b6a82b9175db11bac44e55f}{GetTarget} ())
+608         \{
+609           \textcolor{keywordflow}{if} (currentTime < queue->GetInterval ())
+610             \{
+611               currentDropCount = queue->\hyperlink{classns3_1_1CoDelQueueDisc_a8af7efb44124c9fd4699de0d71c5a58d}{GetDropCount} ();
+612               \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (currentDropCount, 0, \textcolor{stringliteral}{"We are not in dropping
+       state."}
+613                                      \textcolor{stringliteral}{"Sojourn time has just gone above target from below."}
+614                                      \textcolor{stringliteral}{"Hence, there should be no packet drops"});
+615               \hyperlink{classCoDelQueueDiscBasicDrop_a61137d83489ec151993b89863f9928c4}{QueueTestSize} (queue, initialQSize - modeSize, \textcolor{stringliteral}{"There should be 1 packet
+       dequeued."});
+616 
+617             \}
+618           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (currentTime >= queue->\hyperlink{classns3_1_1CoDelQueueDisc_a8527687c2e67d2b90adb63fb5b9ce204}{GetInterval} ())
+619             \{
+620               currentDropCount = queue->\hyperlink{classns3_1_1CoDelQueueDisc_a8af7efb44124c9fd4699de0d71c5a58d}{GetDropCount} ();
+621               \hyperlink{classCoDelQueueDiscBasicDrop_a61137d83489ec151993b89863f9928c4}{QueueTestSize} (queue, initialQSize - 2 * modeSize, \textcolor{stringliteral}{"Sojourn time has been above
+       target for at least interval."}
+622                                      \textcolor{stringliteral}{"We enter the dropping state, perform initial packet drop, and dequeue
+       the next."}
+623                                      \textcolor{stringliteral}{"So there should be 2 more packets dequeued."});
+624               \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (currentDropCount, 1, \textcolor{stringliteral}{"There should be 1 packet
+       drop"});
+625             \}
+626         \}
+627       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (initialDropCount > 0)
+628         \{ \textcolor{comment}{// In dropping state}
+629           \textcolor{keywordflow}{if} (currentTime.\hyperlink{classns3_1_1Time_a2542b9273c336da11fcaf54e8bc6e4c8}{GetMicroSeconds} () < initialDropNext)
+630             \{
+631               currentDropCount = queue->\hyperlink{classns3_1_1CoDelQueueDisc_a8af7efb44124c9fd4699de0d71c5a58d}{GetDropCount} ();
+632               \hyperlink{classCoDelQueueDiscBasicDrop_a61137d83489ec151993b89863f9928c4}{QueueTestSize} (queue, initialQSize - modeSize, \textcolor{stringliteral}{"We are in dropping state."}
+633                                      \textcolor{stringliteral}{"Sojourn is still above target."}
+634                                      \textcolor{stringliteral}{"However, it's not time for next drop."}
+635                                      \textcolor{stringliteral}{"So there should be only 1 more packet dequeued"});
+636 
+637               \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (currentDropCount, 1, \textcolor{stringliteral}{"There should still be only
+       1 packet drop from the last dequeue"});
+638             \}
+639           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (currentTime.\hyperlink{classns3_1_1Time_a2542b9273c336da11fcaf54e8bc6e4c8}{GetMicroSeconds} () >= initialDropNext)
+640             \{
+641               currentDropCount = queue->\hyperlink{classns3_1_1CoDelQueueDisc_a8af7efb44124c9fd4699de0d71c5a58d}{GetDropCount} ();
+642               \hyperlink{classCoDelQueueDiscBasicDrop_a61137d83489ec151993b89863f9928c4}{QueueTestSize} (queue, initialQSize - (\hyperlink{classCoDelQueueDiscBasicDrop_a64c30d2e4ddd98c5c71e7235d1435c59}{m\_dropNextCount} + 1) * 
+      modeSize, \textcolor{stringliteral}{"We are in dropping state."}
+643                                      \textcolor{stringliteral}{"It's time for next drop."}
+644                                      \textcolor{stringliteral}{"The number of packets dequeued equals to the number of times
+       m\_dropNext is updated plus initial dequeue"});
+645               \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (currentDropCount, 1 + 
+      \hyperlink{classCoDelQueueDiscBasicDrop_a64c30d2e4ddd98c5c71e7235d1435c59}{m\_dropNextCount}, \textcolor{stringliteral}{"The number of drops equals to the number of times m\_dropNext is updated
+       plus 1 from last dequeue"});
+646             \}
+647         \}
+648     \}
+649 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Co\+Del\+Queue\+Disc\+Basic\+Drop\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classCoDelQueueDiscBasicDrop_ac7338aa80772388f2e8cadb8d975ac13}{}\label{classCoDelQueueDiscBasicDrop_ac7338aa80772388f2e8cadb8d975ac13}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+537 \{
+538   \hyperlink{classns3_1_1Ptr}{Ptr<CoDelQueueDisc>} queue = CreateObject<CoDelQueueDisc> ();
+539   uint32\_t pktSize = 1000;
+540   uint32\_t modeSize = 0;
+541 
+542   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1ObjectBase_aa7d333004e970f925a4ed5df275541b5}{SetAttributeFailSafe} (\textcolor{stringliteral}{"Mode"}, 
+      \hyperlink{classCoDelQueueDiscBasicDrop_a1208afca60fdedfcb0be0a73a5905aa7}{m\_mode}), \textcolor{keyword}{true},
+543                          \textcolor{stringliteral}{"Verify that we can actually set the attribute Mode"});
+544   
+545   \textcolor{keywordflow}{if} (queue->\hyperlink{classns3_1_1CoDelQueueDisc_ab4e1b3733d0961c823b6fa7d2e36c0bb}{GetMode} () == CoDelQueueDisc::QUEUE\_DISC\_MODE\_BYTES)
+546     \{
+547       modeSize = pktSize;
+548     \}
+549   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (queue->\hyperlink{classns3_1_1CoDelQueueDisc_ab4e1b3733d0961c823b6fa7d2e36c0bb}{GetMode} () == CoDelQueueDisc::QUEUE\_DISC\_MODE\_PACKETS)
+550     \{
+551       modeSize = 1;
+552     \}
+553 
+554   queue->\hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Initialize} ();
+555 
+556   \hyperlink{classCoDelQueueDiscBasicDrop_ab9cfc5b9eee0eaf28cb7f84a7681d08e}{Enqueue} (queue, pktSize, 20);
+557   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1CoDelQueueDisc_a2eed623615f381b9c377ed7add064953}{GetQueueSize} (), 20 * modeSize, \textcolor{stringliteral}{"There
+       should be 20 packets in queue."});
+558 
+559   \textcolor{comment}{// Although the first dequeue occurs with a sojourn time above target}
+560   \textcolor{comment}{// the dequeue should be successful in this interval}
+561   \hyperlink{classns3_1_1Time}{Time} waitUntilFirstDequeue =  2 * queue->\hyperlink{classns3_1_1CoDelQueueDisc_aacbaf8a85b6a82b9175db11bac44e55f}{GetTarget} ();
+562   Simulator::Schedule (waitUntilFirstDequeue, &\hyperlink{classCoDelQueueDiscBasicDrop_ab858662db8af1c6f181bd0d01d44ce48}{CoDelQueueDiscBasicDrop::Dequeue}
+      , \textcolor{keyword}{this}, queue, modeSize);
+563 
+564   \textcolor{comment}{// This dequeue should cause a drop}
+565   \hyperlink{classns3_1_1Time}{Time} waitUntilSecondDequeue = waitUntilFirstDequeue + 2 * queue->
+      \hyperlink{classns3_1_1CoDelQueueDisc_a8527687c2e67d2b90adb63fb5b9ce204}{GetInterval} ();
+566   Simulator::Schedule (waitUntilSecondDequeue, &\hyperlink{classCoDelQueueDiscBasicDrop_ab858662db8af1c6f181bd0d01d44ce48}{CoDelQueueDiscBasicDrop::Dequeue}
+      , \textcolor{keyword}{this}, queue, modeSize);
+567 
+568   \textcolor{comment}{// Although we are in dropping state, it's not time for next drop}
+569   \textcolor{comment}{// the dequeue should not cause a drop}
+570   Simulator::Schedule (waitUntilSecondDequeue, &\hyperlink{classCoDelQueueDiscBasicDrop_ab858662db8af1c6f181bd0d01d44ce48}{CoDelQueueDiscBasicDrop::Dequeue}
+      , \textcolor{keyword}{this}, queue, modeSize);
+571 
+572   \textcolor{comment}{// In dropping time and it's time for next drop}
+573   \textcolor{comment}{// the dequeue should cause additional packet drops}
+574   Simulator::Schedule (waitUntilSecondDequeue * 2, &
+      \hyperlink{classCoDelQueueDiscBasicDrop_ab858662db8af1c6f181bd0d01d44ce48}{CoDelQueueDiscBasicDrop::Dequeue}, \textcolor{keyword}{this}, queue, modeSize);
+575 
+576   Simulator::Run ();
+577   Simulator::Destroy ();
+578 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}!Drop\+Next\+Tracer@{Drop\+Next\+Tracer}}
+\index{Drop\+Next\+Tracer@{Drop\+Next\+Tracer}!Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}}
+\subsubsection[{\texorpdfstring{Drop\+Next\+Tracer(uint32\+\_\+t old\+Val, uint32\+\_\+t new\+Val)}{DropNextTracer(uint32_t oldVal, uint32_t newVal)}}]{\setlength{\rightskip}{0pt plus 5cm}void Co\+Del\+Queue\+Disc\+Basic\+Drop\+::\+Drop\+Next\+Tracer (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{old\+Val, }
+\item[{uint32\+\_\+t}]{new\+Val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCoDelQueueDiscBasicDrop_adc48228083a11737a0cd3ccf172e6c10}{}\label{classCoDelQueueDiscBasicDrop_adc48228083a11737a0cd3ccf172e6c10}
+Drop next tracer function 
+\begin{DoxyParams}{Parameters}
+{\em old\+Val} & the old value \\
+\hline
+{\em new\+Val} & the new value \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+531 \{
+532   \hyperlink{classCoDelQueueDiscBasicDrop_a64c30d2e4ddd98c5c71e7235d1435c59}{m\_dropNextCount}++;
+533 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}!Enqueue@{Enqueue}}
+\index{Enqueue@{Enqueue}!Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}}
+\subsubsection[{\texorpdfstring{Enqueue(\+Ptr$<$ Co\+Del\+Queue\+Disc $>$ queue, uint32\+\_\+t size, uint32\+\_\+t n\+Pkt)}{Enqueue(Ptr< CoDelQueueDisc > queue, uint32_t size, uint32_t nPkt)}}]{\setlength{\rightskip}{0pt plus 5cm}void Co\+Del\+Queue\+Disc\+Basic\+Drop\+::\+Enqueue (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Co\+Del\+Queue\+Disc} $>$}]{queue, }
+\item[{uint32\+\_\+t}]{size, }
+\item[{uint32\+\_\+t}]{n\+Pkt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCoDelQueueDiscBasicDrop_ab9cfc5b9eee0eaf28cb7f84a7681d08e}{}\label{classCoDelQueueDiscBasicDrop_ab9cfc5b9eee0eaf28cb7f84a7681d08e}
+Enqueue function 
+\begin{DoxyParams}{Parameters}
+{\em queue} & the queue disc \\
+\hline
+{\em size} & the size \\
+\hline
+{\em n\+Pkt} & the number of packets \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+582 \{
+583   \hyperlink{classns3_1_1Address}{Address} dest;
+584   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < nPkt; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+585     \{
+586       queue->\hyperlink{classns3_1_1QueueDisc_af452fb01b98fed312125163f1fe85431}{Enqueue} (Create<CodelQueueDiscTestItem> (Create<Packet> (size), dest, 0));
+587     \}
+588 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}!Queue\+Test\+Size@{Queue\+Test\+Size}}
+\index{Queue\+Test\+Size@{Queue\+Test\+Size}!Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}}
+\subsubsection[{\texorpdfstring{Queue\+Test\+Size(\+Ptr$<$ Co\+Del\+Queue\+Disc $>$ queue, uint32\+\_\+t size, std\+::string error)}{QueueTestSize(Ptr< CoDelQueueDisc > queue, uint32_t size, std::string error)}}]{\setlength{\rightskip}{0pt plus 5cm}void Co\+Del\+Queue\+Disc\+Basic\+Drop\+::\+Queue\+Test\+Size (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Co\+Del\+Queue\+Disc} $>$}]{queue, }
+\item[{uint32\+\_\+t}]{size, }
+\item[{std\+::string}]{error}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classCoDelQueueDiscBasicDrop_a61137d83489ec151993b89863f9928c4}{}\label{classCoDelQueueDiscBasicDrop_a61137d83489ec151993b89863f9928c4}
+Queue test size function 
+\begin{DoxyParams}{Parameters}
+{\em queue} & the queue disc \\
+\hline
+{\em size} & the size \\
+\hline
+{\em error} & the error string \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+486   \{
+487     \textcolor{keywordflow}{if} (queue->\hyperlink{classns3_1_1CoDelQueueDisc_ab4e1b3733d0961c823b6fa7d2e36c0bb}{GetMode} () == CoDelQueueDisc::QUEUE\_DISC\_MODE\_BYTES)
+488       \{
+489         \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1QueueDisc_ac87d3bbf7381d64808f6764bdfd812e5}{GetNBytes} (), size, error);
+490       \}
+491     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (queue->\hyperlink{classns3_1_1CoDelQueueDisc_ab4e1b3733d0961c823b6fa7d2e36c0bb}{GetMode} () == CoDelQueueDisc::QUEUE\_DISC\_MODE\_PACKETS)
+492       \{
+493         \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1QueueDisc_a6ee992f32c1671512f0948fd6cc46a7e}{GetNPackets} (), size, error);
+494       \}
+495 
+496     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1CoDelQueueDisc_a2eed623615f381b9c377ed7add064953}{GetQueueSize} (), size, error);
+497   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}!m\+\_\+drop\+Next\+Count@{m\+\_\+drop\+Next\+Count}}
+\index{m\+\_\+drop\+Next\+Count@{m\+\_\+drop\+Next\+Count}!Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}}
+\subsubsection[{\texorpdfstring{m\+\_\+drop\+Next\+Count}{m_dropNextCount}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Co\+Del\+Queue\+Disc\+Basic\+Drop\+::m\+\_\+drop\+Next\+Count\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCoDelQueueDiscBasicDrop_a64c30d2e4ddd98c5c71e7235d1435c59}{}\label{classCoDelQueueDiscBasicDrop_a64c30d2e4ddd98c5c71e7235d1435c59}
+
+
+count the number of times m\+\_\+drop\+Next is recalculated 
+
+\index{Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}!m\+\_\+mode@{m\+\_\+mode}}
+\index{m\+\_\+mode@{m\+\_\+mode}!Co\+Del\+Queue\+Disc\+Basic\+Drop@{Co\+Del\+Queue\+Disc\+Basic\+Drop}}
+\subsubsection[{\texorpdfstring{m\+\_\+mode}{m_mode}}]{\setlength{\rightskip}{0pt plus 5cm}String\+Value Co\+Del\+Queue\+Disc\+Basic\+Drop\+::m\+\_\+mode\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCoDelQueueDiscBasicDrop_a1208afca60fdedfcb0be0a73a5905aa7}{}\label{classCoDelQueueDiscBasicDrop_a1208afca60fdedfcb0be0a73a5905aa7}
+
+
+mode 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+traffic-\/control/test/\hyperlink{codel-queue-disc-test-suite_8cc}{codel-\/queue-\/disc-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

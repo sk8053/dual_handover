@@ -1,0 +1,290 @@
+\hypertarget{group__fd-net-device}{}\section{File Descriptor Network Device}
+\label{group__fd-net-device}\index{File Descriptor Network Device@{File Descriptor Network Device}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1EmuFdNetDeviceHelper}{ns3\+::\+Emu\+Fd\+Net\+Device\+Helper}
+\begin{DoxyCompactList}\small\item\em build a set of \hyperlink{classns3_1_1FdNetDevice}{Fd\+Net\+Device} objects attached to a physical network interface \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1FdNetDeviceHelper}{ns3\+::\+Fd\+Net\+Device\+Helper}
+\begin{DoxyCompactList}\small\item\em build a set of \hyperlink{classns3_1_1FdNetDevice}{Fd\+Net\+Device} objects Normally we eschew multiple inheritance, however, the classes Pcap\+User\+Helper\+For\+Device and Ascii\+Trace\+User\+Helper\+For\+Device are treated as \char`\"{}mixins\char`\"{}. A mixin is a self-\/contained class that encapsulates a general attribute or a set of functionality that may be of interest to many other classes. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1PlanetLabFdNetDeviceHelper}{ns3\+::\+Planet\+Lab\+Fd\+Net\+Device\+Helper}
+\begin{DoxyCompactList}\small\item\em build a set of \hyperlink{classns3_1_1FdNetDevice}{Fd\+Net\+Device} objects attached to a virtual T\+AP network interface \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1TapFdNetDeviceHelper}{ns3\+::\+Tap\+Fd\+Net\+Device\+Helper}
+\begin{DoxyCompactList}\small\item\em build a set of \hyperlink{classns3_1_1FdNetDevice}{Fd\+Net\+Device} objects attached to a virtual T\+AP network interface \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1FdNetDeviceFdReader}{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader}
+\begin{DoxyCompactList}\small\item\em This class performs the actual data reading from the sockets. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1FdNetDevice}{ns3\+::\+Fd\+Net\+Device}
+\begin{DoxyCompactList}\small\item\em a \hyperlink{classns3_1_1NetDevice}{Net\+Device} to read/write network traffic from/into a file descriptor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__fd-net-device_gacca4623034d2ebd58b9eebb916545ceb}{ns3\+::\+Send\+Socket} (const char $\ast$path, int \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd}, const int magic\+\_\+number)
+\begin{DoxyCompactList}\small\item\em Send the file descriptor back to the code that invoked the creation. \end{DoxyCompactList}\item 
+static void \hyperlink{group__fd-net-device_gad3e41a1d562aec7c106c65c5964071b6}{ns3\+::\+Add\+P\+I\+Header} (uint8\+\_\+t $\ast$\&buf, size\+\_\+t \&len)
+\begin{DoxyCompactList}\small\item\em Synthesize PI header for the kernel. \end{DoxyCompactList}\item 
+static void \hyperlink{group__fd-net-device_ga297e68cd3a421ef11540f26b073ea881}{ns3\+::\+Remove\+P\+I\+Header} (uint8\+\_\+t $\ast$\&buf, ssize\+\_\+t \&len)
+\begin{DoxyCompactList}\small\item\em Removes PI header. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This section documents the A\+PI of the ns-\/3 fd-\/net-\/device module. For a generic functional description, please refer to the ns-\/3 manual. 
+
+\subsection{Function Documentation}
+\index{File Descriptor Network Device@{File Descriptor Network Device}!Add\+P\+I\+Header@{Add\+P\+I\+Header}}
+\index{Add\+P\+I\+Header@{Add\+P\+I\+Header}!File Descriptor Network Device@{File Descriptor Network Device}}
+\subsubsection[{\texorpdfstring{Add\+P\+I\+Header(uint8\+\_\+t $\ast$\&buf, size\+\_\+t \&len)}{AddPIHeader(uint8_t *&buf, size_t &len)}}]{\setlength{\rightskip}{0pt plus 5cm}static void ns3\+::\+Add\+P\+I\+Header (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t $\ast$\&}]{buf, }
+\item[{size\+\_\+t \&}]{len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{group__fd-net-device_gad3e41a1d562aec7c106c65c5964071b6}{}\label{group__fd-net-device_gad3e41a1d562aec7c106c65c5964071b6}
+
+
+Synthesize PI header for the kernel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & the buffer to add the header to \\
+\hline
+{\em len} & the buffer length\\
+\hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000031}{Todo}]Consider having a instance member m\+\_\+packet\+Buffer and using memmove instead of memcpy to add the PI header. It might be faster in this case to use memmove and avoid the extra mallocs. \end{DoxyRefDesc}
+
+\begin{DoxyCode}
+332 \{
+333   \textcolor{comment}{// Synthesize PI header for our friend the kernel}
+334   uint8\_t *buf2 = (uint8\_t*)malloc (len + 4);
+335   memcpy (buf2 + 4, buf, len);
+336   len += 4;
+337 
+338   \textcolor{comment}{// PI = 16 bits flags (0) + 16 bits proto}
+339   \textcolor{comment}{// NOTE: be careful to interpret buffer data explicitly as}
+340   \textcolor{comment}{//  little-endian to be insensible to native byte ordering.}
+341   uint16\_t flags = 0;
+342   uint16\_t proto = 0x0008; \textcolor{comment}{// default to IPv4}
+343   \textcolor{keywordflow}{if} (len > 14)
+344     \{
+345       \textcolor{keywordflow}{if} (buf[12] == 0x81 && buf[13] == 0x00 && len > 18)
+346         \{
+347           \textcolor{comment}{// tagged ethernet packet}
+348           proto = buf[16] | (buf[17] << 8);
+349         \}
+350       \textcolor{keywordflow}{else}
+351         \{
+352           \textcolor{comment}{// untagged ethernet packet}
+353           proto = buf[12] | (buf[13] << 8);
+354         \}
+355     \}
+356   buf2[0] = (uint8\_t)flags;
+357   buf2[1] = (uint8\_t)(flags >> 8);
+358   buf2[2] = (uint8\_t)proto;
+359   buf2[3] = (uint8\_t)(proto >> 8);
+360 
+361   \textcolor{comment}{// swap buffer}
+362   free (buf);
+363   buf = buf2;
+364 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 0
+
+
+\index{File Descriptor Network Device@{File Descriptor Network Device}!Remove\+P\+I\+Header@{Remove\+P\+I\+Header}}
+\index{Remove\+P\+I\+Header@{Remove\+P\+I\+Header}!File Descriptor Network Device@{File Descriptor Network Device}}
+\subsubsection[{\texorpdfstring{Remove\+P\+I\+Header(uint8\+\_\+t $\ast$\&buf, ssize\+\_\+t \&len)}{RemovePIHeader(uint8_t *&buf, ssize_t &len)}}]{\setlength{\rightskip}{0pt plus 5cm}static void ns3\+::\+Remove\+P\+I\+Header (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t $\ast$\&}]{buf, }
+\item[{ssize\+\_\+t \&}]{len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{group__fd-net-device_ga297e68cd3a421ef11540f26b073ea881}{}\label{group__fd-net-device_ga297e68cd3a421ef11540f26b073ea881}
+
+
+Removes PI header. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & the buffer to add the header to \\
+\hline
+{\em len} & the buffer length \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+374 \{
+375   \textcolor{comment}{// strip PI header if present, shrink buffer}
+376   \textcolor{keywordflow}{if} (len >= 4)
+377     \{
+378       len -= 4;
+379       memmove (buf, buf + 4, len);
+380       buf = (uint8\_t*)realloc (buf, len);
+381     \}
+382 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{File Descriptor Network Device@{File Descriptor Network Device}!Send\+Socket@{Send\+Socket}}
+\index{Send\+Socket@{Send\+Socket}!File Descriptor Network Device@{File Descriptor Network Device}}
+\subsubsection[{\texorpdfstring{Send\+Socket(const char $\ast$path, int fd, const int magic\+\_\+number)}{SendSocket(const char *path, int fd, const int magic_number)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Send\+Socket (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{path, }
+\item[{int}]{fd, }
+\item[{const int}]{magic\+\_\+number}
+\end{DoxyParamCaption}
+)}\hypertarget{group__fd-net-device_gacca4623034d2ebd58b9eebb916545ceb}{}\label{group__fd-net-device_gacca4623034d2ebd58b9eebb916545ceb}
+
+
+Send the file descriptor back to the code that invoked the creation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The socket address information from the Unix socket we use to send the created socket back to. \\
+\hline
+{\em fd} & The file descriptor we\textquotesingle{}re going to send. \\
+\hline
+{\em magic\+\_\+number} & A verification number to verify the caller is talking to the right process. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+55 \{
+56   \textcolor{comment}{//}
+57   \textcolor{comment}{// Open a Unix (local interprocess) socket to call back to the emu net}
+58   \textcolor{comment}{// device.}
+59   \textcolor{comment}{//}
+60   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Create Unix socket"});
+61   \textcolor{keywordtype}{int} sock = socket (PF\_UNIX, SOCK\_DGRAM, 0);
+62   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (sock == -1, \textcolor{stringliteral}{"Unable to open socket"}, 1);
+63 
+64   \textcolor{comment}{//}
+65   \textcolor{comment}{// We have this string called path, which is really a hex representation}
+66   \textcolor{comment}{// of the endpoint that the net device created.  It used a forward encoding}
+67   \textcolor{comment}{// method (BufferToString) to take the sockaddr\_un it made and passed}
+68   \textcolor{comment}{// the resulting string to us.  So we need to take the inverse method}
+69   \textcolor{comment}{// (StringToBuffer) and build the same sockaddr\_un over here.}
+70   \textcolor{comment}{//}
+71   socklen\_t clientAddrLen;
+72   \textcolor{keyword}{struct }sockaddr\_un clientAddr;
+73 
+74   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Decode address "} << path);
+75   \textcolor{keywordtype}{bool} rc = \hyperlink{namespacens3_a8582a97439c4fae64f9d073a91fc7699}{ns3::StringToBuffer} (path, (uint8\_t *)&clientAddr, &clientAddrLen);
+76   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (rc == \textcolor{keyword}{false}, \textcolor{stringliteral}{"Unable to decode path"}, 0);
+77 
+78   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Connect"});
+79   \textcolor{keywordtype}{int} status = connect (sock, (\textcolor{keyword}{struct} sockaddr*)&clientAddr, clientAddrLen);
+80   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (status == -1, \textcolor{stringliteral}{"Unable to connect to emu device"}, 1);
+81 
+82   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Connected"});
+83 
+84   \textcolor{comment}{//}
+85   \textcolor{comment}{// This is arcane enough that a few words are worthwhile to explain what's}
+86   \textcolor{comment}{// going on here.}
+87   \textcolor{comment}{//}
+88   \textcolor{comment}{// The interesting information (the socket FD) is going to go back to the}
+89   \textcolor{comment}{// fd net device as an integer of ancillary data.  Ancillary data is bits}
+90   \textcolor{comment}{// that are not a part a socket payload (out-of-band data).  We're also}
+91   \textcolor{comment}{// going to send one integer back.  It's just initialized to a magic number}
+92   \textcolor{comment}{// we use to make sure that the fd device is talking to the emu socket}
+93   \textcolor{comment}{// creator and not some other creator process.}
+94   \textcolor{comment}{//}
+95   \textcolor{comment}{// The struct iovec below is part of a scatter-gather list.  It describes a}
+96   \textcolor{comment}{// buffer.  In this case, it describes a buffer (an integer) containing the}
+97   \textcolor{comment}{// data that we're going to send back to the emu net device (that magic}
+98   \textcolor{comment}{// number).}
+99   \textcolor{comment}{//}
+100   \textcolor{keyword}{struct }iovec iov;
+101   uint32\_t magic = magic\_number;
+102   iov.iov\_base = &magic;
+103   iov.iov\_len = \textcolor{keyword}{sizeof}(magic);
+104 
+105   \textcolor{comment}{//}
+106   \textcolor{comment}{// The CMSG macros you'll see below are used to create and access control}
+107   \textcolor{comment}{// messages (which is another name for ancillary data).  The ancillary}
+108   \textcolor{comment}{// data is made up of pairs of struct cmsghdr structures and associated}
+109   \textcolor{comment}{// data arrays.}
+110   \textcolor{comment}{//}
+111   \textcolor{comment}{// First, we're going to allocate a buffer on the stack to contain our}
+112   \textcolor{comment}{// data array (that contains the socket).  Sometimes you'll see this called}
+113   \textcolor{comment}{// an "ancillary element" but the msghdr uses the control message termimology}
+114   \textcolor{comment}{// so we call it "control."}
+115   \textcolor{comment}{//}
+116   \textcolor{keywordtype}{size\_t} msg\_size = \textcolor{keyword}{sizeof}(int);
+117   \textcolor{keywordtype}{char} control[CMSG\_SPACE (msg\_size)];
+118 
+119   \textcolor{comment}{//}
+120   \textcolor{comment}{// There is a msghdr that is used to minimize the number of parameters}
+121   \textcolor{comment}{// passed to sendmsg (which we will use to send our ancillary data).  This}
+122   \textcolor{comment}{// structure uses terminology corresponding to control messages, so you'll}
+123   \textcolor{comment}{// see msg\_control, which is the pointer to the ancillary data and controllen}
+124   \textcolor{comment}{// which is the size of the ancillary data array.}
+125   \textcolor{comment}{//}
+126   \textcolor{comment}{// So, initialize the message header that describes our ancillary/control data}
+127   \textcolor{comment}{// and point it to the control message/ancillary data we just allocated space}
+128   \textcolor{comment}{// for.}
+129   \textcolor{comment}{//}
+130   \textcolor{keyword}{struct }msghdr msg;
+131   msg.msg\_name = 0;
+132   msg.msg\_namelen = 0;
+133   msg.msg\_iov = &iov;
+134   msg.msg\_iovlen = 1;
+135   msg.msg\_control = control;
+136   msg.msg\_controllen = \textcolor{keyword}{sizeof} (control);
+137   msg.msg\_flags = 0;
+138 
+139   \textcolor{comment}{//}
+140   \textcolor{comment}{// A cmsghdr contains a length field that is the length of the header and}
+141   \textcolor{comment}{// the data.  It has a cmsg\_level field corresponding to the originating}
+142   \textcolor{comment}{// protocol.  This takes values which are legal levels for getsockopt and}
+143   \textcolor{comment}{// setsockopt (here SOL\_SOCKET).  We're going to use the SCM\_RIGHTS type of}
+144   \textcolor{comment}{// cmsg, that indicates that the ancillary data array contains access rights}
+145   \textcolor{comment}{// that we are sending back to the emu net device.}
+146   \textcolor{comment}{//}
+147   \textcolor{comment}{// We have to put together the first (and only) cmsghdr that will describe}
+148   \textcolor{comment}{// the whole package we're sending.}
+149   \textcolor{comment}{//}
+150   \textcolor{keyword}{struct }cmsghdr *cmsg;
+151   cmsg = CMSG\_FIRSTHDR (&msg);
+152   cmsg->cmsg\_level = SOL\_SOCKET;
+153   cmsg->cmsg\_type = SCM\_RIGHTS;
+154   cmsg->cmsg\_len = CMSG\_LEN (msg\_size);
+155   \textcolor{comment}{//}
+156   \textcolor{comment}{// We also have to update the controllen in case other stuff is actually}
+157   \textcolor{comment}{// in there we may not be aware of (due to macros).}
+158   \textcolor{comment}{//}
+159   msg.msg\_controllen = cmsg->cmsg\_len;
+160 
+161   \textcolor{comment}{//}
+162   \textcolor{comment}{// Finally, we get a pointer to the start of the ancillary data array and}
+163   \textcolor{comment}{// put our file descriptor in.}
+164   \textcolor{comment}{//}
+165   \textcolor{keywordtype}{int} *fdptr = (\textcolor{keywordtype}{int}*)(CMSG\_DATA (cmsg));
+166   *fdptr = \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd}; \textcolor{comment}{//}
+167 
+168   \textcolor{comment}{//}
+169   \textcolor{comment}{// Actually send the file descriptor back to the emulated net device.}
+170   \textcolor{comment}{//}
+171   ssize\_t len = sendmsg (sock, &msg, 0);
+172   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (len == -1, \textcolor{stringliteral}{"Could not send socket back to emu net device"}, 1);
+173 
+174   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"sendmsg complete"});
+175 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+

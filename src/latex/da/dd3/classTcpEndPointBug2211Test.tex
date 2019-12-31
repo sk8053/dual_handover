@@ -1,0 +1,263 @@
+\hypertarget{classTcpEndPointBug2211Test}{}\section{Tcp\+End\+Point\+Bug2211\+Test Class Reference}
+\label{classTcpEndPointBug2211Test}\index{Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}}
+
+
+Test for bug 2211.  
+
+
+
+
+Inheritance diagram for Tcp\+End\+Point\+Bug2211\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Tcp\+End\+Point\+Bug2211\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTcpEndPointBug2211Test_affa1a464857e3330b29a5d4a3aa47d64}{Tcp\+End\+Point\+Bug2211\+Test} (std\+::string desc, bool ip\+Version)
+\item 
+void \hyperlink{classTcpEndPointBug2211Test_a6bc32c2507ff250acf8e93079408e0ed}{Recv} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\begin{DoxyCompactList}\small\item\em Receive a packet. \end{DoxyCompactList}\item 
+void \hyperlink{classTcpEndPointBug2211Test_adfcd92c55b5489fa47ff231803b7d940}{Handle\+Accept} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s}, const \hyperlink{classns3_1_1Address}{Address} \&\hyperlink{lte__amc_8m_a1b4c81ff74eb1a626b5ade44c81004b3}{from})
+\begin{DoxyCompactList}\small\item\em Handle an incoming connection. \end{DoxyCompactList}\item 
+void \hyperlink{classTcpEndPointBug2211Test_aeadec4cba94c55bd4e9b47b21652cfb6}{Handle\+Connect} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\begin{DoxyCompactList}\small\item\em Handle a connection establishment. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpEndPointBug2211Test_ab0f069f68fbb6b3e69a42e090be8215c}{Do\+Run} ()
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classTcpEndPointBug2211Test_a187eb7cee3ee1550d773cab9bd1ccfc4}{m\+\_\+v6}
+\begin{DoxyCompactList}\small\item\em True to use I\+Pv6. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Test for bug 2211. 
+
+\href{https://www.nsnam.org/bugzilla/show_bug.cgi?id=2211}{\tt https\+://www.\+nsnam.\+org/bugzilla/show\+\_\+bug.\+cgi?id=2211}
+
+N\+O\+TE\+: It is a valgrind testcase, it contains no A\+S\+S\+E\+R\+Ts.
+
+Test creates one node and sets up two T\+CP sockets on the loopback with default parameters\+: C\+W\+ND = 1, M\+TU = 536. Sender socket sends 3 segments. When first segment is acknowledged, cwnd is raised to 2. Then, two segments are sent and arrive into receive buffer. Until bugfix, the following happened\+: Ipv4\+End\+Point\+::\+Forward\+Up was called for both second and third segment. These calls scheduled two Ipv4\+End\+Point\+::\+Do\+Forward\+Up events. To demonstrate the bug, test case closes the receiver socket after receiving the second segment. As a result, Ipv4\+End\+Point is destroyed. However, Ipv4\+End\+Point\+::\+Do\+Forward\+Up is already scheduled for third segment. It is a use-\/after-\/free bug. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}!Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}}
+\index{Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}!Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}}
+\subsubsection[{\texorpdfstring{Tcp\+End\+Point\+Bug2211\+Test(std\+::string desc, bool ip\+Version)}{TcpEndPointBug2211Test(std::string desc, bool ipVersion)}}]{\setlength{\rightskip}{0pt plus 5cm}Tcp\+End\+Point\+Bug2211\+Test\+::\+Tcp\+End\+Point\+Bug2211\+Test (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{desc, }
+\item[{bool}]{ip\+Version}
+\end{DoxyParamCaption}
+)}\hypertarget{classTcpEndPointBug2211Test_affa1a464857e3330b29a5d4a3aa47d64}{}\label{classTcpEndPointBug2211Test_affa1a464857e3330b29a5d4a3aa47d64}
+Constructor. 
+\begin{DoxyParams}{Parameters}
+{\em desc} & Test description. \\
+\hline
+{\em ip\+Version} & True to use I\+Pv6. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+107                                                                               : 
+      \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (desc)
+108 \{
+109   \hyperlink{classTcpEndPointBug2211Test_a187eb7cee3ee1550d773cab9bd1ccfc4}{m\_v6} = ipVersion;
+110 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run()}{DoRun()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+End\+Point\+Bug2211\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTcpEndPointBug2211Test_ab0f069f68fbb6b3e69a42e090be8215c}{}\label{classTcpEndPointBug2211Test_ab0f069f68fbb6b3e69a42e090be8215c}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+114 \{
+115   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = CreateObject<Node> ();
+116 
+117   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+118   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (node);
+119 
+120   \hyperlink{classns3_1_1TypeId}{TypeId} tid = TcpSocketFactory::GetTypeId ();
+121   \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} sink = Socket::CreateSocket (node, tid);
+122   \textcolor{keywordflow}{if} (\hyperlink{classTcpEndPointBug2211Test_a187eb7cee3ee1550d773cab9bd1ccfc4}{m\_v6} == \textcolor{keyword}{false})
+123     \{
+124       sink->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 9));
+125     \}
+126   \textcolor{keywordflow}{else}
+127     \{
+128       sink->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} (\hyperlink{classns3_1_1Inet6SocketAddress}{Inet6SocketAddress} (Ipv6Address::GetAny (), 9));
+129     \}
+130   sink->\hyperlink{classns3_1_1Socket_a6b3529a32632cf1a56debf5f79e56c54}{Listen} ();
+131   sink->\hyperlink{classns3_1_1Socket_a408532e435c63166e6ccc337c0cea871}{SetAcceptCallback} (\hyperlink{group__makenullcallback_ga7e3cd6816f63ea9112c04b0086c2c65a}{MakeNullCallback}<\textcolor{keywordtype}{bool}, 
+      \hyperlink{classns3_1_1Ptr}{Ptr<Socket>}, \textcolor{keyword}{const} \hyperlink{classns3_1_1Address}{Address} &> (),
+132                            \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classTcpEndPointBug2211Test_adfcd92c55b5489fa47ff231803b7d940}{TcpEndPointBug2211Test::HandleAccept}, \textcolor{keyword}{this}));
+133 
+134   \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} source = Socket::CreateSocket (node, tid);
+135   source->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} ();
+136   source->\hyperlink{classns3_1_1Socket_a18935c615315a1921ea52c1b8c16be7f}{SetConnectCallback} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classTcpEndPointBug2211Test_aeadec4cba94c55bd4e9b47b21652cfb6}{TcpEndPointBug2211Test::HandleConnect}, \textcolor{keyword}{this}),
+137                               \hyperlink{group__makenullcallback_ga7e3cd6816f63ea9112c04b0086c2c65a}{MakeNullCallback} <\textcolor{keywordtype}{void}, 
+      \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} >());
+138   \textcolor{keywordflow}{if} (\hyperlink{classTcpEndPointBug2211Test_a187eb7cee3ee1550d773cab9bd1ccfc4}{m\_v6} == \textcolor{keyword}{false})
+139     \{
+140       source->\hyperlink{classns3_1_1Socket_a97f08aaf37b8fd7d4b5cad4dfdd4022a}{Connect} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetLoopback (), 9));
+141     \}
+142   \textcolor{keywordflow}{else}
+143     \{
+144       source->\hyperlink{classns3_1_1Socket_a97f08aaf37b8fd7d4b5cad4dfdd4022a}{Connect} (\hyperlink{classns3_1_1Inet6SocketAddress}{Inet6SocketAddress} (Ipv6Address::GetLoopback (), 9));
+145     \}
+146 
+147   Simulator::Run ();
+148   Simulator::Destroy ();
+149 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}!Handle\+Accept@{Handle\+Accept}}
+\index{Handle\+Accept@{Handle\+Accept}!Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}}
+\subsubsection[{\texorpdfstring{Handle\+Accept(\+Ptr$<$ Socket $>$ s, const Address \&from)}{HandleAccept(Ptr< Socket > s, const Address &from)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+End\+Point\+Bug2211\+Test\+::\+Handle\+Accept (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{s, }
+\item[{const {\bf Address} \&}]{from}
+\end{DoxyParamCaption}
+)}\hypertarget{classTcpEndPointBug2211Test_adfcd92c55b5489fa47ff231803b7d940}{}\label{classTcpEndPointBug2211Test_adfcd92c55b5489fa47ff231803b7d940}
+
+
+Handle an incoming connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The receiving socket. \\
+\hline
+{\em from} & The other node IP address. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+94 \{
+95   s->\hyperlink{classns3_1_1Socket_a243f7835ef1a85f9270fd3577e3a40da}{SetRecvCallback} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classTcpEndPointBug2211Test_a6bc32c2507ff250acf8e93079408e0ed}{TcpEndPointBug2211Test::Recv}, \textcolor{keyword}{this}));
+96 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}!Handle\+Connect@{Handle\+Connect}}
+\index{Handle\+Connect@{Handle\+Connect}!Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}}
+\subsubsection[{\texorpdfstring{Handle\+Connect(\+Ptr$<$ Socket $>$ socket)}{HandleConnect(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+End\+Point\+Bug2211\+Test\+::\+Handle\+Connect (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)}\hypertarget{classTcpEndPointBug2211Test_aeadec4cba94c55bd4e9b47b21652cfb6}{}\label{classTcpEndPointBug2211Test_aeadec4cba94c55bd4e9b47b21652cfb6}
+
+
+Handle a connection establishment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & The receiving socket. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+100 \{
+101   socket->\hyperlink{classns3_1_1Socket_a036901c8f485fe5b6eab93b7f2ec289d}{Send} (Create<Packet> (536));
+102   socket->\hyperlink{classns3_1_1Socket_a036901c8f485fe5b6eab93b7f2ec289d}{Send} (Create<Packet> (536));
+103   socket->\hyperlink{classns3_1_1Socket_a036901c8f485fe5b6eab93b7f2ec289d}{Send} (Create<Packet> (536));
+104   socket->\hyperlink{classns3_1_1Socket_abdac6e2498c5aa2963ef361d4200ddf3}{Close} ();
+105 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}!Recv@{Recv}}
+\index{Recv@{Recv}!Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}}
+\subsubsection[{\texorpdfstring{Recv(\+Ptr$<$ Socket $>$ socket)}{Recv(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+End\+Point\+Bug2211\+Test\+::\+Recv (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)}\hypertarget{classTcpEndPointBug2211Test_a6bc32c2507ff250acf8e93079408e0ed}{}\label{classTcpEndPointBug2211Test_a6bc32c2507ff250acf8e93079408e0ed}
+
+
+Receive a packet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & The receiving socket. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+85 \{
+86   \textcolor{keywordflow}{if} (socket->\hyperlink{classns3_1_1Socket_ad35d8931e53ae0754ee864acb1cecd0e}{GetRxAvailable}() == 536 * 2)
+87     \{
+88       socket->\hyperlink{classns3_1_1Socket_abdac6e2498c5aa2963ef361d4200ddf3}{Close}();
+89     \}
+90 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}!m\+\_\+v6@{m\+\_\+v6}}
+\index{m\+\_\+v6@{m\+\_\+v6}!Tcp\+End\+Point\+Bug2211\+Test@{Tcp\+End\+Point\+Bug2211\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+v6}{m_v6}}]{\setlength{\rightskip}{0pt plus 5cm}bool Tcp\+End\+Point\+Bug2211\+Test\+::m\+\_\+v6\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpEndPointBug2211Test_a187eb7cee3ee1550d773cab9bd1ccfc4}{}\label{classTcpEndPointBug2211Test_a187eb7cee3ee1550d773cab9bd1ccfc4}
+
+
+True to use I\+Pv6. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{tcp-endpoint-bug2211_8cc}{tcp-\/endpoint-\/bug2211.\+cc}\end{DoxyCompactItemize}

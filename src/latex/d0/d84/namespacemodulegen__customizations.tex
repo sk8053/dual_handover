@@ -1,0 +1,201 @@
+\hypertarget{namespacemodulegen__customizations}{}\section{modulegen\+\_\+customizations Namespace Reference}
+\label{namespacemodulegen__customizations}\index{modulegen\+\_\+customizations@{modulegen\+\_\+customizations}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classmodulegen__customizations_1_1ArgvParam}{Argv\+Param}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacemodulegen__customizations_a752cb066e8de8ee88028481335101ec9}{post\+\_\+register\+\_\+types} (root\+\_\+module)
+\item 
+def \hyperlink{namespacemodulegen__customizations_afb127c0333e2c1a8f1df9e5d0970ceea}{Simulator\+\_\+customizations} (module)
+\item 
+def \hyperlink{namespacemodulegen__customizations_ae3405a5c68e65ca0b437e669324f1137}{Command\+Line\+\_\+customizations} (module)
+\item 
+def \hyperlink{namespacemodulegen__customizations_a4f5089ad18d21ef000444e780f2ecd40}{Type\+Id\+\_\+customizations} (module)
+\item 
+def \hyperlink{namespacemodulegen__customizations_a34c99faa371f389a7584911a7248e2f7}{add\+\_\+std\+\_\+ofstream} (module)
+\item 
+def \hyperlink{namespacemodulegen__customizations_a53789676c4b3f9b31690de930793b3bf}{add\+\_\+ipv4\+\_\+address\+\_\+tp\+\_\+hash} (module)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{modulegen\+\_\+customizations@{modulegen\+\_\+customizations}!add\+\_\+ipv4\+\_\+address\+\_\+tp\+\_\+hash@{add\+\_\+ipv4\+\_\+address\+\_\+tp\+\_\+hash}}
+\index{add\+\_\+ipv4\+\_\+address\+\_\+tp\+\_\+hash@{add\+\_\+ipv4\+\_\+address\+\_\+tp\+\_\+hash}!modulegen\+\_\+customizations@{modulegen\+\_\+customizations}}
+\subsubsection[{\texorpdfstring{add\+\_\+ipv4\+\_\+address\+\_\+tp\+\_\+hash(module)}{add_ipv4_address_tp_hash(module)}}]{\setlength{\rightskip}{0pt plus 5cm}def modulegen\+\_\+customizations.\+add\+\_\+ipv4\+\_\+address\+\_\+tp\+\_\+hash (
+\begin{DoxyParamCaption}
+\item[{}]{module}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacemodulegen__customizations_a53789676c4b3f9b31690de930793b3bf}{}\label{namespacemodulegen__customizations_a53789676c4b3f9b31690de930793b3bf}
+
+\begin{DoxyCode}
+143 \textcolor{keyword}{def }\hyperlink{namespacemodulegen__customizations_a53789676c4b3f9b31690de930793b3bf}{add\_ipv4\_address\_tp\_hash}(module):
+144     module.body.writeln(\textcolor{stringliteral}{'''}
+145 \textcolor{stringliteral}{long}
+146 \textcolor{stringliteral}{\_ns3\_Ipv4Address\_tp\_hash (PyObject *obj)}
+147 \textcolor{stringliteral}{\{}
+148 \textcolor{stringliteral}{   PyNs3Ipv4Address *addr = reinterpret\_cast<PyNs3Ipv4Address *> (obj);}
+149 \textcolor{stringliteral}{   return static\_cast<long> (ns3::Ipv4AddressHash () (*addr->obj));}
+150 \textcolor{stringliteral}{\}}
+151 \textcolor{stringliteral}{'''})
+152     module.header.writeln(\textcolor{stringliteral}{'long \_ns3\_Ipv4Address\_tp\_hash (PyObject *obj);'})
+153     module[\textcolor{stringliteral}{'Ipv4Address'}].pytype.slots[\textcolor{stringliteral}{'tp\_hash'}] = \textcolor{stringliteral}{"\_ns3\_Ipv4Address\_tp\_hash"}
+154 
+155 
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 0
+
+
+\index{modulegen\+\_\+customizations@{modulegen\+\_\+customizations}!add\+\_\+std\+\_\+ofstream@{add\+\_\+std\+\_\+ofstream}}
+\index{add\+\_\+std\+\_\+ofstream@{add\+\_\+std\+\_\+ofstream}!modulegen\+\_\+customizations@{modulegen\+\_\+customizations}}
+\subsubsection[{\texorpdfstring{add\+\_\+std\+\_\+ofstream(module)}{add_std_ofstream(module)}}]{\setlength{\rightskip}{0pt plus 5cm}def modulegen\+\_\+customizations.\+add\+\_\+std\+\_\+ofstream (
+\begin{DoxyParamCaption}
+\item[{}]{module}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacemodulegen__customizations_a34c99faa371f389a7584911a7248e2f7}{}\label{namespacemodulegen__customizations_a34c99faa371f389a7584911a7248e2f7}
+
+\begin{DoxyCode}
+116 \textcolor{keyword}{def }\hyperlink{namespacemodulegen__customizations_a34c99faa371f389a7584911a7248e2f7}{add\_std\_ofstream}(module):
+117     module.add\_include(\textcolor{stringliteral}{'<fstream>'})
+118     ostream = module.add\_class(\textcolor{stringliteral}{'ostream'}, foreign\_cpp\_namespace=\textcolor{stringliteral}{'::std'})
+119     ostream.set\_cannot\_be\_constructed(\textcolor{stringliteral}{"abstract base class"})
+120     ofstream = module.add\_class(\textcolor{stringliteral}{'ofstream'}, foreign\_cpp\_namespace=\textcolor{stringliteral}{'::std'}, parent=ostream)
+121     ofstream.add\_enum(\textcolor{stringliteral}{'openmode'}, [
+122             (\textcolor{stringliteral}{'app'}, \textcolor{stringliteral}{'std::ios\_base::app'}),
+123             (\textcolor{stringliteral}{'ate'}, \textcolor{stringliteral}{'std::ios\_base::ate'}),
+124             (\textcolor{stringliteral}{'binary'}, \textcolor{stringliteral}{'std::ios\_base::binary'}),
+125             (\textcolor{stringliteral}{'in'}, \textcolor{stringliteral}{'std::ios\_base::in'}),
+126             (\textcolor{stringliteral}{'out'}, \textcolor{stringliteral}{'std::ios\_base::out'}),
+127             (\textcolor{stringliteral}{'trunc'}, \textcolor{stringliteral}{'std::ios\_base::trunc'}),
+128             ])
+129     ofstream.add\_constructor([Parameter.new(\textcolor{stringliteral}{"const char *"}, \textcolor{stringliteral}{'filename'}),
+130                               Parameter.new(\textcolor{stringliteral}{"::std::ofstream::openmode"}, \textcolor{stringliteral}{'mode'}, default\_value=\textcolor{stringliteral}{"
+      std::ios\_base::out"})])
+131     ofstream.add\_method(\textcolor{stringliteral}{'close'}, \textcolor{keywordtype}{None}, [])
+132 
+133     \textcolor{keyword}{import} pybindgen.typehandlers.base
+134     \textcolor{keywordflow}{for} alias \textcolor{keywordflow}{in} \textcolor{stringliteral}{"std::\_Ios\_Openmode"}, \textcolor{stringliteral}{"std::ios::openmode"}:
+135         pybindgen.typehandlers.base.param\_type\_matcher.add\_type\_alias(alias, \textcolor{stringliteral}{"int"})
+136 
+137     \textcolor{keywordflow}{for} flag \textcolor{keywordflow}{in} \textcolor{stringliteral}{'in'}, \textcolor{stringliteral}{'out'}, \textcolor{stringliteral}{'ate'}, \textcolor{stringliteral}{'app'}, \textcolor{stringliteral}{'trunc'}, \textcolor{stringliteral}{'binary'}:
+138         module.after\_init.write\_code(\textcolor{stringliteral}{'PyModule\_AddIntConstant(m, (char *) "STD\_IOS\_%s", std::ios::%s);'}
+139                                      % (flag.upper(), flag))
+140 
+141 
+142 
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{modulegen\+\_\+customizations@{modulegen\+\_\+customizations}!Command\+Line\+\_\+customizations@{Command\+Line\+\_\+customizations}}
+\index{Command\+Line\+\_\+customizations@{Command\+Line\+\_\+customizations}!modulegen\+\_\+customizations@{modulegen\+\_\+customizations}}
+\subsubsection[{\texorpdfstring{Command\+Line\+\_\+customizations(module)}{CommandLine_customizations(module)}}]{\setlength{\rightskip}{0pt plus 5cm}def modulegen\+\_\+customizations.\+Command\+Line\+\_\+customizations (
+\begin{DoxyParamCaption}
+\item[{}]{module}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacemodulegen__customizations_ae3405a5c68e65ca0b437e669324f1137}{}\label{namespacemodulegen__customizations_ae3405a5c68e65ca0b437e669324f1137}
+
+\begin{DoxyCode}
+102 \textcolor{keyword}{def }\hyperlink{namespacemodulegen__customizations_ae3405a5c68e65ca0b437e669324f1137}{CommandLine\_customizations}(module):
+103     CommandLine = module[\textcolor{stringliteral}{'ns3::CommandLine'}]
+104     CommandLine.add\_method(\textcolor{stringliteral}{'Parse'}, \textcolor{keywordtype}{None}, [\hyperlink{classmodulegen__customizations_1_1ArgvParam}{ArgvParam}(\textcolor{keywordtype}{None}, \textcolor{stringliteral}{'argv'})],
+105                            is\_static=\textcolor{keyword}{False})
+106     CommandLine.add\_custom\_method\_wrapper(\textcolor{stringliteral}{"AddValue"}, \textcolor{stringliteral}{"\_wrap\_CommandLine\_AddValue"},
+107                                           flags=[\textcolor{stringliteral}{"METH\_VARARGS"}, \textcolor{stringliteral}{"METH\_KEYWORDS"}])
+108 
+109 
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{modulegen\+\_\+customizations@{modulegen\+\_\+customizations}!post\+\_\+register\+\_\+types@{post\+\_\+register\+\_\+types}}
+\index{post\+\_\+register\+\_\+types@{post\+\_\+register\+\_\+types}!modulegen\+\_\+customizations@{modulegen\+\_\+customizations}}
+\subsubsection[{\texorpdfstring{post\+\_\+register\+\_\+types(root\+\_\+module)}{post_register_types(root_module)}}]{\setlength{\rightskip}{0pt plus 5cm}def modulegen\+\_\+customizations.\+post\+\_\+register\+\_\+types (
+\begin{DoxyParamCaption}
+\item[{}]{root\+\_\+module}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacemodulegen__customizations_a752cb066e8de8ee88028481335101ec9}{}\label{namespacemodulegen__customizations_a752cb066e8de8ee88028481335101ec9}
+
+\begin{DoxyCode}
+3 \textcolor{keyword}{def }\hyperlink{namespacemodulegen__customizations_a752cb066e8de8ee88028481335101ec9}{post\_register\_types}(root\_module):
+4     root\_module.add\_include(\textcolor{stringliteral}{'"ns3/network-module.h"'})
+5 \end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{modulegen\+\_\+customizations@{modulegen\+\_\+customizations}!Simulator\+\_\+customizations@{Simulator\+\_\+customizations}}
+\index{Simulator\+\_\+customizations@{Simulator\+\_\+customizations}!modulegen\+\_\+customizations@{modulegen\+\_\+customizations}}
+\subsubsection[{\texorpdfstring{Simulator\+\_\+customizations(module)}{Simulator_customizations(module)}}]{\setlength{\rightskip}{0pt plus 5cm}def modulegen\+\_\+customizations.\+Simulator\+\_\+customizations (
+\begin{DoxyParamCaption}
+\item[{}]{module}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacemodulegen__customizations_afb127c0333e2c1a8f1df9e5d0970ceea}{}\label{namespacemodulegen__customizations_afb127c0333e2c1a8f1df9e5d0970ceea}
+
+\begin{DoxyCode}
+79 \textcolor{keyword}{def }\hyperlink{namespacemodulegen__customizations_afb127c0333e2c1a8f1df9e5d0970ceea}{Simulator\_customizations}(module):
+80     Simulator = module[\textcolor{stringliteral}{'ns3::Simulator'}]
+81 
+82     \textcolor{comment}{## Simulator::Schedule(delay, callback, ...user..args...)}
+83     Simulator.add\_custom\_method\_wrapper(\textcolor{stringliteral}{"Schedule"}, \textcolor{stringliteral}{"\_wrap\_Simulator\_Schedule"},
+84                                         flags=[\textcolor{stringliteral}{"METH\_VARARGS"}, \textcolor{stringliteral}{"METH\_KEYWORDS"}, \textcolor{stringliteral}{"METH\_STATIC"}])
+85 
+86     \textcolor{comment}{## Simulator::ScheduleNow(callback, ...user..args...)}
+87     Simulator.add\_custom\_method\_wrapper(\textcolor{stringliteral}{"ScheduleNow"}, \textcolor{stringliteral}{"\_wrap\_Simulator\_ScheduleNow"},
+88                                         flags=[\textcolor{stringliteral}{"METH\_VARARGS"}, \textcolor{stringliteral}{"METH\_KEYWORDS"}, \textcolor{stringliteral}{"METH\_STATIC"}])
+89 
+90     \textcolor{comment}{## Simulator::ScheduleWithContext(delay, callback, ...user..args...)}
+91     Simulator.add\_custom\_method\_wrapper(\textcolor{stringliteral}{"ScheduleWithContext"}, \textcolor{stringliteral}{"\_wrap\_Simulator\_ScheduleWithContext"},
+92                                         flags=[\textcolor{stringliteral}{"METH\_VARARGS"}, \textcolor{stringliteral}{"METH\_KEYWORDS"}, \textcolor{stringliteral}{"METH\_STATIC"}])
+93 
+94     \textcolor{comment}{## Simulator::ScheduleDestroy(callback, ...user..args...)}
+95     Simulator.add\_custom\_method\_wrapper(\textcolor{stringliteral}{"ScheduleDestroy"}, \textcolor{stringliteral}{"\_wrap\_Simulator\_ScheduleDestroy"},
+96                                         flags=[\textcolor{stringliteral}{"METH\_VARARGS"}, \textcolor{stringliteral}{"METH\_KEYWORDS"}, \textcolor{stringliteral}{"METH\_STATIC"}])
+97 
+98     Simulator.add\_custom\_method\_wrapper(\textcolor{stringliteral}{"Run"}, \textcolor{stringliteral}{"\_wrap\_Simulator\_Run"},
+99                                         flags=[\textcolor{stringliteral}{"METH\_VARARGS"}, \textcolor{stringliteral}{"METH\_KEYWORDS"}, \textcolor{stringliteral}{"METH\_STATIC"}])
+100 
+101 
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{modulegen\+\_\+customizations@{modulegen\+\_\+customizations}!Type\+Id\+\_\+customizations@{Type\+Id\+\_\+customizations}}
+\index{Type\+Id\+\_\+customizations@{Type\+Id\+\_\+customizations}!modulegen\+\_\+customizations@{modulegen\+\_\+customizations}}
+\subsubsection[{\texorpdfstring{Type\+Id\+\_\+customizations(module)}{TypeId_customizations(module)}}]{\setlength{\rightskip}{0pt plus 5cm}def modulegen\+\_\+customizations.\+Type\+Id\+\_\+customizations (
+\begin{DoxyParamCaption}
+\item[{}]{module}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacemodulegen__customizations_a4f5089ad18d21ef000444e780f2ecd40}{}\label{namespacemodulegen__customizations_a4f5089ad18d21ef000444e780f2ecd40}
+
+\begin{DoxyCode}
+110 \textcolor{keyword}{def }\hyperlink{namespacemodulegen__customizations_a4f5089ad18d21ef000444e780f2ecd40}{TypeId\_customizations}(module):
+111     TypeId = module[\textcolor{stringliteral}{'ns3::TypeId'}]
+112     TypeId.add\_custom\_method\_wrapper(\textcolor{stringliteral}{"LookupByNameFailSafe"}, \textcolor{stringliteral}{"\_wrap\_TypeId\_LookupByNameFailSafe"},
+113                                      flags=[\textcolor{stringliteral}{"METH\_VARARGS"}, \textcolor{stringliteral}{"METH\_KEYWORDS"}, \textcolor{stringliteral}{"METH\_STATIC"}])
+114 
+115 
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+

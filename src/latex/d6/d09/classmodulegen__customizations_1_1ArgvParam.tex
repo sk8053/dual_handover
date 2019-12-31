@@ -1,0 +1,123 @@
+\hypertarget{classmodulegen__customizations_1_1ArgvParam}{}\section{modulegen\+\_\+customizations.\+Argv\+Param Class Reference}
+\label{classmodulegen__customizations_1_1ArgvParam}\index{modulegen\+\_\+customizations.\+Argv\+Param@{modulegen\+\_\+customizations.\+Argv\+Param}}
+
+
+Inheritance diagram for modulegen\+\_\+customizations.\+Argv\+Param\+:
+% FIG 0
+
+
+Collaboration diagram for modulegen\+\_\+customizations.\+Argv\+Param\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classmodulegen__customizations_1_1ArgvParam_adbba0b7fbbfbd1d8cd1f91aef899f9f0}{convert\+\_\+c\+\_\+to\+\_\+python} (self, wrapper)
+\item 
+def \hyperlink{classmodulegen__customizations_1_1ArgvParam_ad518a7e0a127f301ff0ee0f8b9ad1fed}{convert\+\_\+python\+\_\+to\+\_\+c} (self, wrapper)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{list} \hyperlink{classmodulegen__customizations_1_1ArgvParam_ae66ae412c4269d6caac50c994f61d548}{D\+I\+R\+E\+C\+T\+I\+O\+NS} = \mbox{[}Parameter.\+D\+I\+R\+E\+C\+T\+I\+O\+N\+\_\+\+IN\mbox{]}
+\item 
+\hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{list} \hyperlink{classmodulegen__customizations_1_1ArgvParam_a3c181cd1071bedc3e0d70219db4ab740}{C\+T\+Y\+P\+ES} = \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}Converts a python list-of-strings argument to a pair of 'int argc,
+char *argv[]' arguments to pass into C.
+
+One Python argument becomes two C function arguments -> it's a miracle!
+
+Note: this parameter type handler is not registered by any name;
+must be used explicitly.
+\end{DoxyVerb}
+ 
+
+\subsection{Member Function Documentation}
+\index{modulegen\+\_\+customizations\+::\+Argv\+Param@{modulegen\+\_\+customizations\+::\+Argv\+Param}!convert\+\_\+c\+\_\+to\+\_\+python@{convert\+\_\+c\+\_\+to\+\_\+python}}
+\index{convert\+\_\+c\+\_\+to\+\_\+python@{convert\+\_\+c\+\_\+to\+\_\+python}!modulegen\+\_\+customizations\+::\+Argv\+Param@{modulegen\+\_\+customizations\+::\+Argv\+Param}}
+\subsubsection[{\texorpdfstring{convert\+\_\+c\+\_\+to\+\_\+python(self, wrapper)}{convert_c_to_python(self, wrapper)}}]{\setlength{\rightskip}{0pt plus 5cm}def modulegen\+\_\+customizations.\+Argv\+Param.\+convert\+\_\+c\+\_\+to\+\_\+python (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{wrapper}
+\end{DoxyParamCaption}
+)}\hypertarget{classmodulegen__customizations_1_1ArgvParam_adbba0b7fbbfbd1d8cd1f91aef899f9f0}{}\label{classmodulegen__customizations_1_1ArgvParam_adbba0b7fbbfbd1d8cd1f91aef899f9f0}
+
+\begin{DoxyCode}
+30     \textcolor{keyword}{def }\hyperlink{classmodulegen__customizations_1_1ArgvParam_adbba0b7fbbfbd1d8cd1f91aef899f9f0}{convert\_c\_to\_python}(self, wrapper):
+31         \textcolor{keywordflow}{raise} NotImplementedError
+32 
+\end{DoxyCode}
+\index{modulegen\+\_\+customizations\+::\+Argv\+Param@{modulegen\+\_\+customizations\+::\+Argv\+Param}!convert\+\_\+python\+\_\+to\+\_\+c@{convert\+\_\+python\+\_\+to\+\_\+c}}
+\index{convert\+\_\+python\+\_\+to\+\_\+c@{convert\+\_\+python\+\_\+to\+\_\+c}!modulegen\+\_\+customizations\+::\+Argv\+Param@{modulegen\+\_\+customizations\+::\+Argv\+Param}}
+\subsubsection[{\texorpdfstring{convert\+\_\+python\+\_\+to\+\_\+c(self, wrapper)}{convert_python_to_c(self, wrapper)}}]{\setlength{\rightskip}{0pt plus 5cm}def modulegen\+\_\+customizations.\+Argv\+Param.\+convert\+\_\+python\+\_\+to\+\_\+c (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{wrapper}
+\end{DoxyParamCaption}
+)}\hypertarget{classmodulegen__customizations_1_1ArgvParam_ad518a7e0a127f301ff0ee0f8b9ad1fed}{}\label{classmodulegen__customizations_1_1ArgvParam_ad518a7e0a127f301ff0ee0f8b9ad1fed}
+
+\begin{DoxyCode}
+33     \textcolor{keyword}{def }\hyperlink{classmodulegen__customizations_1_1ArgvParam_ad518a7e0a127f301ff0ee0f8b9ad1fed}{convert\_python\_to\_c}(self, wrapper):
+34         py\_name = wrapper.declarations.declare\_variable(\textcolor{stringliteral}{'PyObject*'}, \textcolor{stringliteral}{'py\_'} + self.name)
+35         argc\_var = wrapper.declarations.declare\_variable(\textcolor{stringliteral}{'int'}, \textcolor{stringliteral}{'argc'})
+36         name = wrapper.declarations.declare\_variable(\textcolor{stringliteral}{'char**'}, self.name)
+37         idx = wrapper.declarations.declare\_variable(\textcolor{stringliteral}{'Py\_ssize\_t'}, \textcolor{stringliteral}{'idx'})
+38         wrapper.parse\_params.add\_parameter(\textcolor{stringliteral}{'O!'}, [\textcolor{stringliteral}{'&PyList\_Type'}, \textcolor{stringliteral}{'&'}+py\_name], self.name)
+39 
+40         \textcolor{comment}{#wrapper.before\_call.write\_error\_check('!PyList\_Check(%s)' % py\_name) # XXX}
+41 
+42         wrapper.before\_call.write\_code(\textcolor{stringliteral}{"%s = (char **) malloc(sizeof(char*)*PyList\_Size(%s));"}
+43                                        % (name, py\_name))
+44         wrapper.before\_call.add\_cleanup\_code(\textcolor{stringliteral}{'free(%s);'} % name)
+45         wrapper.before\_call.write\_code(\textcolor{stringliteral}{'''}
+46 \textcolor{stringliteral}{for (%(idx)s = 0; %(idx)s < PyList\_Size(%(py\_name)s); %(idx)s++)}
+47 \textcolor{stringliteral}{\{}
+48 \textcolor{stringliteral}{'''} % vars())
+49         wrapper.before\_call.sink.indent()
+50         wrapper.before\_call.write\_code(\textcolor{stringliteral}{'''}
+51 \textcolor{stringliteral}{PyObject *item = PyList\_GET\_ITEM(%(py\_name)s, %(idx)s);}
+52 \textcolor{stringliteral}{'''} % vars())
+53         \textcolor{comment}{#wrapper.before\_call.write\_error\_check('item == NULL')}
+54         wrapper.before\_call.write\_error\_check(
+55             \textcolor{stringliteral}{'\(\backslash\)n'}
+56             \textcolor{stringliteral}{'#if PY\_VERSION\_HEX >= 0x03000000\(\backslash\)n'}
+57             \textcolor{stringliteral}{'!PyUnicode\_Check(item)\(\backslash\)n'}
+58             \textcolor{stringliteral}{'#else\(\backslash\)n'}
+59             \textcolor{stringliteral}{'!PyString\_Check(item)\(\backslash\)n'}
+60             \textcolor{stringliteral}{'#endif\(\backslash\)n'},
+61             failure\_cleanup=(\textcolor{stringliteral}{'PyErr\_SetString(PyExc\_TypeError, '}
+62                              \textcolor{stringliteral}{'"argument %s must be a list of strings");'}) % self.name)
+63         wrapper.before\_call.write\_code(
+64             \textcolor{stringliteral}{'#if PY\_VERSION\_HEX >= 0x03000000\(\backslash\)n'}
+65             \textcolor{stringliteral}{'\{var\}[\{idx\}] = PyUnicode\_AsUTF8(item);\(\backslash\)n'}
+66             \textcolor{stringliteral}{'#else\(\backslash\)n'}
+67             \textcolor{stringliteral}{'\{var\}[\{idx\}] = PyString\_AsString(item);\(\backslash\)n'}
+68             \textcolor{stringliteral}{'#endif\(\backslash\)n'}
+69             .format(var=name, idx=idx))
+70         wrapper.before\_call.sink.unindent()
+71         wrapper.before\_call.write\_code(\textcolor{stringliteral}{'\}'})
+72         wrapper.before\_call.write\_code(\textcolor{stringliteral}{'%s = PyList\_Size(%s);'} % (argc\_var, py\_name))
+73         
+74         wrapper.call\_params.append(argc\_var)
+75         wrapper.call\_params.append(name)
+76 
+77 
+78 
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{modulegen\+\_\+customizations\+::\+Argv\+Param@{modulegen\+\_\+customizations\+::\+Argv\+Param}!C\+T\+Y\+P\+ES@{C\+T\+Y\+P\+ES}}
+\index{C\+T\+Y\+P\+ES@{C\+T\+Y\+P\+ES}!modulegen\+\_\+customizations\+::\+Argv\+Param@{modulegen\+\_\+customizations\+::\+Argv\+Param}}
+\subsubsection[{\texorpdfstring{C\+T\+Y\+P\+ES}{CTYPES}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf list} modulegen\+\_\+customizations.\+Argv\+Param.\+C\+T\+Y\+P\+ES = \mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classmodulegen__customizations_1_1ArgvParam_a3c181cd1071bedc3e0d70219db4ab740}{}\label{classmodulegen__customizations_1_1ArgvParam_a3c181cd1071bedc3e0d70219db4ab740}
+\index{modulegen\+\_\+customizations\+::\+Argv\+Param@{modulegen\+\_\+customizations\+::\+Argv\+Param}!D\+I\+R\+E\+C\+T\+I\+O\+NS@{D\+I\+R\+E\+C\+T\+I\+O\+NS}}
+\index{D\+I\+R\+E\+C\+T\+I\+O\+NS@{D\+I\+R\+E\+C\+T\+I\+O\+NS}!modulegen\+\_\+customizations\+::\+Argv\+Param@{modulegen\+\_\+customizations\+::\+Argv\+Param}}
+\subsubsection[{\texorpdfstring{D\+I\+R\+E\+C\+T\+I\+O\+NS}{DIRECTIONS}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf list} modulegen\+\_\+customizations.\+Argv\+Param.\+D\+I\+R\+E\+C\+T\+I\+O\+NS = \mbox{[}Parameter.\+D\+I\+R\+E\+C\+T\+I\+O\+N\+\_\+\+IN\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classmodulegen__customizations_1_1ArgvParam_ae66ae412c4269d6caac50c994f61d548}{}\label{classmodulegen__customizations_1_1ArgvParam_ae66ae412c4269d6caac50c994f61d548}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/bindings/\hyperlink{core_2bindings_2modulegen__customizations_8py}{modulegen\+\_\+customizations.\+py}\end{DoxyCompactItemize}

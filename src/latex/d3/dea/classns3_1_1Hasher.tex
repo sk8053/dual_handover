@@ -1,0 +1,312 @@
+\hypertarget{classns3_1_1Hasher}{}\section{ns3\+:\+:Hasher Class Reference}
+\label{classns3_1_1Hasher}\index{ns3\+::\+Hasher@{ns3\+::\+Hasher}}
+
+
+Generic \hyperlink{namespacens3_1_1Hash}{Hash} function interface.  
+
+
+
+
+{\ttfamily \#include $<$hash.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Hasher\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Hasher_a137fd6ecd2281f201369ea8880934e71}{Hasher} ()
+\item 
+\hyperlink{classns3_1_1Hasher_ae659616319a1601e7fa527ef57a39422}{Hasher} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Hash_1_1Implementation}{Hash\+::\+Implementation} $>$ hp)
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Hasher_ae3508556dba4c2f4fc4901a059623117}{Get\+Hash32} (const char $\ast$buffer, const size\+\_\+t size)
+\item 
+uint64\+\_\+t \hyperlink{classns3_1_1Hasher_a88d83c8f9ae40f84df743b3efae2d9ce}{Get\+Hash64} (const char $\ast$buffer, const size\+\_\+t size)
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Hasher_a412a5670ca266e384fb013d2175f65b7}{Get\+Hash32} (const std\+::string \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s})
+\item 
+uint64\+\_\+t \hyperlink{classns3_1_1Hasher_a81ee2195f18e2f97af9eb57c185542d2}{Get\+Hash64} (const std\+::string \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s})
+\item 
+\hyperlink{classns3_1_1Hasher}{Hasher} \& \hyperlink{classns3_1_1Hasher_a629108aa89019d84af8b2d85c7185f54}{clear} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Hash_1_1Implementation}{Hash\+::\+Implementation} $>$ \hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\+\_\+impl}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Generic \hyperlink{namespacens3_1_1Hash}{Hash} function interface. 
+
+This class provides a generic interface for computing hashes of buffers. Various getters return hashes of different lengths.
+
+Call \hyperlink{classns3_1_1Hasher_a629108aa89019d84af8b2d85c7185f54}{clear()} between calls to the getter to reset the internal state and hash each buffer separately.
+
+If you don\textquotesingle{}t call \hyperlink{classns3_1_1Hasher_a629108aa89019d84af8b2d85c7185f54}{clear()} between calls to the getter you can hash successive buffers. The final return value will be the cumulative hash across all calls.
+
+The choice of hash function can be made at construction by 
+\begin{DoxyCode}
+\hyperlink{classns3_1_1Hasher_a137fd6ecd2281f201369ea8880934e71}{Hasher} hasher = \hyperlink{classns3_1_1Hasher_a137fd6ecd2281f201369ea8880934e71}{Hasher} ( Create<Hash::Function::Fnv1a> () );
+uint32\_t hash = \hyperlink{classns3_1_1Hasher_a137fd6ecd2281f201369ea8880934e71}{Hasher}.GetHash32 (\hyperlink{topology-example-sim_8cc_a26c65296e316af77b787dc77469bb2a4}{data});
+\end{DoxyCode}
+
+
+The available implementations are documented in \hyperlink{group__hash}{Hash Functions}. The default implementation is Murmur3. F\+N\+V1a is also available.
+
+In addition to this class interface, global functions are defined which use the default hash implementation. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Hasher@{ns3\+::\+Hasher}!Hasher@{Hasher}}
+\index{Hasher@{Hasher}!ns3\+::\+Hasher@{ns3\+::\+Hasher}}
+\subsubsection[{\texorpdfstring{Hasher()}{Hasher()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Hasher\+::\+Hasher (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Hasher_a137fd6ecd2281f201369ea8880934e71}{}\label{classns3_1_1Hasher_a137fd6ecd2281f201369ea8880934e71}
+Constructor using the default implementation. 
+\begin{DoxyCode}
+36 \{
+37   \hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl} = Create <Hash::Function::Murmur3> ();
+38   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl} != 0);
+39 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Hasher@{ns3\+::\+Hasher}!Hasher@{Hasher}}
+\index{Hasher@{Hasher}!ns3\+::\+Hasher@{ns3\+::\+Hasher}}
+\subsubsection[{\texorpdfstring{Hasher(\+Ptr$<$ Hash\+::\+Implementation $>$ hp)}{Hasher(Ptr< Hash::Implementation > hp)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Hasher\+::\+Hasher (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Hash\+::\+Implementation} $>$}]{hp}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Hasher_ae659616319a1601e7fa527ef57a39422}{}\label{classns3_1_1Hasher_ae659616319a1601e7fa527ef57a39422}
+Constructor using the supplied implementation.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em hp} & \hyperlink{classns3_1_1Ptr}{Ptr$<$\+Hash\+::\+Implementation$>$} to the desired implementation. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+42   : \hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl} (hp)
+43 \{
+44   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl} != 0);
+45 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Hasher@{ns3\+::\+Hasher}!clear@{clear}}
+\index{clear@{clear}!ns3\+::\+Hasher@{ns3\+::\+Hasher}}
+\subsubsection[{\texorpdfstring{clear(void)}{clear(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hasher} \& ns3\+::\+Hasher\+::clear (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Hasher_a629108aa89019d84af8b2d85c7185f54}{}\label{classns3_1_1Hasher_a629108aa89019d84af8b2d85c7185f54}
+Restore initial state.
+
+Returning this \hyperlink{classns3_1_1Hasher}{Hasher} allows code like this\+:
+
+
+\begin{DoxyCode}
+\hyperlink{classns3_1_1Hasher_a137fd6ecd2281f201369ea8880934e71}{Hasher} h;
+h.GetHash32 (...);
+...
+h.clear ().GetHash64 (...);
+\end{DoxyCode}
+
+
+\begin{DoxyReturn}{Returns}
+This hasher. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+49 \{
+50   \hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl}->\hyperlink{classns3_1_1Hash_1_1Implementation_a5d4e565e4292e8ada991ccc1e28bb3d1}{clear} ();
+51   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+52 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Hasher@{ns3\+::\+Hasher}!Get\+Hash32@{Get\+Hash32}}
+\index{Get\+Hash32@{Get\+Hash32}!ns3\+::\+Hasher@{ns3\+::\+Hasher}}
+\subsubsection[{\texorpdfstring{Get\+Hash32(const char $\ast$buffer, const size\+\_\+t size)}{GetHash32(const char *buffer, const size_t size)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Hasher\+::\+Get\+Hash32 (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{buffer, }
+\item[{const size\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1Hasher_ae3508556dba4c2f4fc4901a059623117}{}\label{classns3_1_1Hasher_ae3508556dba4c2f4fc4901a059623117}
+Compute 32-\/bit hash of a byte buffer.
+
+Call clear () between calls to \hyperlink{classns3_1_1Hasher_ae3508556dba4c2f4fc4901a059623117}{Get\+Hash32()} to reset the internal state and hash each buffer separately.
+
+If you don\textquotesingle{}t call \hyperlink{classns3_1_1Hasher_a629108aa89019d84af8b2d85c7185f54}{clear()} between calls to Get\+Hash32, you can hash successive buffers. The final return value will be the cumulative hash across all calls.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em buffer} & Pointer to the beginning of the buffer. \\
+\hline
+\mbox{\tt in}  & {\em size} & Length of the buffer, in bytes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+32-\/bit hash of the buffer.. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+240 \{
+241   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl} != 0);
+242   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl}->\hyperlink{classns3_1_1Hash_1_1Implementation_a8389694c8a89ec15f4f356ef52fe8891}{GetHash32}  (buffer, size);
+243 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Hasher@{ns3\+::\+Hasher}!Get\+Hash32@{Get\+Hash32}}
+\index{Get\+Hash32@{Get\+Hash32}!ns3\+::\+Hasher@{ns3\+::\+Hasher}}
+\subsubsection[{\texorpdfstring{Get\+Hash32(const std\+::string s)}{GetHash32(const std::string s)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Hasher\+::\+Get\+Hash32 (
+\begin{DoxyParamCaption}
+\item[{const std\+::string}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1Hasher_a412a5670ca266e384fb013d2175f65b7}{}\label{classns3_1_1Hasher_a412a5670ca266e384fb013d2175f65b7}
+Compute 32-\/bit hash of a string.
+
+Call clear () between calls to \hyperlink{classns3_1_1Hasher_ae3508556dba4c2f4fc4901a059623117}{Get\+Hash32()} to reset the internal state and hash each string separately.
+
+If you don\textquotesingle{}t call \hyperlink{classns3_1_1Hasher_a629108aa89019d84af8b2d85c7185f54}{clear()} between calls to Get\+Hash32, you can hash successive strings. The final return value will be the cumulative hash across all calls.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em s} & String to hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+32-\/bit hash of the string. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+256 \{
+257   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl} != 0);
+258   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl}->\hyperlink{classns3_1_1Hash_1_1Implementation_a8389694c8a89ec15f4f356ef52fe8891}{GetHash32}  (\hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s}.c\_str (), \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s}.size ());
+259 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Hasher@{ns3\+::\+Hasher}!Get\+Hash64@{Get\+Hash64}}
+\index{Get\+Hash64@{Get\+Hash64}!ns3\+::\+Hasher@{ns3\+::\+Hasher}}
+\subsubsection[{\texorpdfstring{Get\+Hash64(const char $\ast$buffer, const size\+\_\+t size)}{GetHash64(const char *buffer, const size_t size)}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Hasher\+::\+Get\+Hash64 (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{buffer, }
+\item[{const size\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1Hasher_a88d83c8f9ae40f84df743b3efae2d9ce}{}\label{classns3_1_1Hasher_a88d83c8f9ae40f84df743b3efae2d9ce}
+Compute 64-\/bit hash of a byte buffer.
+
+Call clear () between calls to \hyperlink{classns3_1_1Hasher_a88d83c8f9ae40f84df743b3efae2d9ce}{Get\+Hash64()} to reset the internal state and hash each buffer separately.
+
+If you don\textquotesingle{}t call \hyperlink{classns3_1_1Hasher_a629108aa89019d84af8b2d85c7185f54}{clear()} between calls to Get\+Hash64, you can hash successive buffers. The final return value will be the cumulative hash across all calls.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em buffer} & Pointer to the beginning of the buffer. \\
+\hline
+\mbox{\tt in}  & {\em size} & Length of the buffer, in bytes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+64-\/bit hash of the buffer. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+248 \{
+249   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl} != 0);
+250   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl}->\hyperlink{classns3_1_1Hash_1_1Implementation_ae11335959394d22427d81abfa520106a}{GetHash64}  (buffer, size);
+251 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Hasher@{ns3\+::\+Hasher}!Get\+Hash64@{Get\+Hash64}}
+\index{Get\+Hash64@{Get\+Hash64}!ns3\+::\+Hasher@{ns3\+::\+Hasher}}
+\subsubsection[{\texorpdfstring{Get\+Hash64(const std\+::string s)}{GetHash64(const std::string s)}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Hasher\+::\+Get\+Hash64 (
+\begin{DoxyParamCaption}
+\item[{const std\+::string}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1Hasher_a81ee2195f18e2f97af9eb57c185542d2}{}\label{classns3_1_1Hasher_a81ee2195f18e2f97af9eb57c185542d2}
+Compute 64-\/bit hash of a string.
+
+Call clear () between calls to \hyperlink{classns3_1_1Hasher_a88d83c8f9ae40f84df743b3efae2d9ce}{Get\+Hash64()} to reset the internal state and hash each string separately.
+
+If you don\textquotesingle{}t call \hyperlink{classns3_1_1Hasher_a629108aa89019d84af8b2d85c7185f54}{clear()} between calls to Get\+Hash64, you can hash successive strings. The final return value will be the cumulative hash across all calls.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em s} & String to hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+64-\/bit hash of the string. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+264 \{
+265   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl} != 0);
+266   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{m\_impl}->\hyperlink{classns3_1_1Hash_1_1Implementation_ae11335959394d22427d81abfa520106a}{GetHash64}  (\hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s}.c\_str (), \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s}.size ());
+267 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Hasher@{ns3\+::\+Hasher}!m\+\_\+impl@{m\+\_\+impl}}
+\index{m\+\_\+impl@{m\+\_\+impl}!ns3\+::\+Hasher@{ns3\+::\+Hasher}}
+\subsubsection[{\texorpdfstring{m\+\_\+impl}{m_impl}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Hash\+::\+Implementation}$>$ ns3\+::\+Hasher\+::m\+\_\+impl\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}{}\label{classns3_1_1Hasher_a33ed78e6b2e454d98197339c75423883}
+\hyperlink{namespacens3_1_1Hash}{Hash} implementation. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{hash_8h}{hash.\+h}\item 
+core/model/\hyperlink{hash_8cc}{hash.\+cc}\end{DoxyCompactItemize}

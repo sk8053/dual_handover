@@ -1,0 +1,223 @@
+\hypertarget{main-test-sync_8cc}{}\section{core/examples/main-\/test-\/sync.cc File Reference}
+\label{main-test-sync_8cc}\index{core/examples/main-\/test-\/sync.\+cc@{core/examples/main-\/test-\/sync.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/command-\/line.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/simulator.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/realtime-\/simulator-\/impl.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/nstime.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/system-\/thread.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/string.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/global-\/value.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ptr.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$sys/time.\+h$>$}\\*
+Include dependency graph for main-\/test-\/sync.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classFakeNetDevice}{Fake\+Net\+Device}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{main-test-sync_8cc_a3def2f3d782680e485a25432e225618c}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Test\+Sync\char`\"{})
+\item 
+void \hyperlink{main-test-sync_8cc_a9b03c33f77fcea8b7888887fed6aa11f}{inserted\+\_\+function} (void)
+\item 
+void \hyperlink{main-test-sync_8cc_afeb997847681305e1f5fd01776870464}{background\+\_\+function} (void)
+\item 
+void \hyperlink{main-test-sync_8cc_aa009afa571d9f2b4edbeeb80fb22fca3}{first\+\_\+function} (void)
+\item 
+void \hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test} (void)
+\item 
+int \hyperlink{main-test-sync_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{main-test-sync_8cc_a7f665ac99b46b322e6d18f21eace3cd7}{g\+First\+Run} = \hyperlink{lte__cqi__generation_8m_ab1bef239d413c4da139c4bac92cd657a}{false}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An example of scheduling events in a background thread.
+
+See \hyperlink{classns3_1_1SystemThread}{ns3\+::\+System\+Thread}, \hyperlink{classns3_1_1SimulatorImpl_a75a00f1362af7f641cc1467361201b13}{ns3\+::\+Simulator\+Impl\+::\+Schedule\+With\+Context} 
+
+\subsection{Function Documentation}
+\index{main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}!background\+\_\+function@{background\+\_\+function}}
+\index{background\+\_\+function@{background\+\_\+function}!main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}}
+\subsubsection[{\texorpdfstring{background\+\_\+function(void)}{background_function(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void background\+\_\+function (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{main-test-sync_8cc_afeb997847681305e1f5fd01776870464}{}\label{main-test-sync_8cc_afeb997847681305e1f5fd01776870464}
+An event method called many times from the main thread. 
+\begin{DoxyCode}
+61 \{
+62   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{main-test-sync_8cc_a7f665ac99b46b322e6d18f21eace3cd7}{gFirstRun});
+63   \hyperlink{log-macros-disabled_8h_a0b36e5e182b37194f85ef1c5e979fb2e}{NS\_LOG\_UNCOND} (\textcolor{stringliteral}{"background\_function() called at "} << 
+64                  \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().GetSeconds () << \textcolor{stringliteral}{" s"});
+65 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}!first\+\_\+function@{first\+\_\+function}}
+\index{first\+\_\+function@{first\+\_\+function}!main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}}
+\subsubsection[{\texorpdfstring{first\+\_\+function(void)}{first_function(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void first\+\_\+function (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{main-test-sync_8cc_aa009afa571d9f2b4edbeeb80fb22fca3}{}\label{main-test-sync_8cc_aa009afa571d9f2b4edbeeb80fb22fca3}
+An event method called once from the main thread. 
+\begin{DoxyCode}
+70 \{
+71   \hyperlink{log-macros-disabled_8h_a0b36e5e182b37194f85ef1c5e979fb2e}{NS\_LOG\_UNCOND} (\textcolor{stringliteral}{"first\_function() called at "} << 
+72                  \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().GetSeconds () << \textcolor{stringliteral}{" s"});
+73   \hyperlink{main-test-sync_8cc_a7f665ac99b46b322e6d18f21eace3cd7}{gFirstRun} = \textcolor{keyword}{true};
+74 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}!inserted\+\_\+function@{inserted\+\_\+function}}
+\index{inserted\+\_\+function@{inserted\+\_\+function}!main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}}
+\subsubsection[{\texorpdfstring{inserted\+\_\+function(void)}{inserted_function(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void inserted\+\_\+function (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{main-test-sync_8cc_a9b03c33f77fcea8b7888887fed6aa11f}{}\label{main-test-sync_8cc_a9b03c33f77fcea8b7888887fed6aa11f}
+An event method called many times from the background thread. 
+\begin{DoxyCode}
+52 \{
+53   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{main-test-sync_8cc_a7f665ac99b46b322e6d18f21eace3cd7}{gFirstRun});
+54   \hyperlink{log-macros-disabled_8h_a0b36e5e182b37194f85ef1c5e979fb2e}{NS\_LOG\_UNCOND} (\textcolor{stringliteral}{"inserted\_function() called at "} << 
+55                  \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().GetSeconds () << \textcolor{stringliteral}{" s"});
+56 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}!main@{main}}
+\index{main@{main}!main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{main-test-sync_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{main-test-sync_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+148 \{
+149   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+150   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+151   
+152   \textcolor{keywordflow}{while} (\textcolor{keyword}{true})
+153     \{
+154       \hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test} ();
+155     \}
+156 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\index{main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Test\+Sync"")}{NS_LOG_COMPONENT_DEFINE("TestSync")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Test\+Sync\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{main-test-sync_8cc_a3def2f3d782680e485a25432e225618c}{}\label{main-test-sync_8cc_a3def2f3d782680e485a25432e225618c}
+\index{main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}!test@{test}}
+\index{test@{test}!main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}}
+\subsubsection[{\texorpdfstring{test(void)}{test(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void test (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{}\label{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}
+Example use of \hyperlink{classns3_1_1SystemThread}{ns3\+::\+System\+Thread}.
+
+This example is a complete simulation. It schedules {\ttfamily first\+\_\+function} and many executions of {\ttfamily background\+\_\+function} to execute in the main (foreground) thread. It also launches a background thread with an instance of \hyperlink{classFakeNetDevice}{Fake\+Net\+Device}, which schedules many instances of {\ttfamily inserted\+\_\+function}. 
+\begin{DoxyCode}
+117 \{
+118   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"}, 
+119                      StringValue (\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl"}));
+120 
+121   \hyperlink{classFakeNetDevice}{FakeNetDevice} fnd;
+122 
+123   \textcolor{comment}{// }
+124   \textcolor{comment}{// Make sure ScheduleNow works when the system isn't running}
+125   \textcolor{comment}{//}
+126   Simulator::ScheduleWithContext(0xffffffff, \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds}(0.0), \hyperlink{group__makeeventfnptr_ga289a28a2497c18a9bd299e5e2014094b}{MakeEvent} (&
+      \hyperlink{main-test-sync_8cc_aa009afa571d9f2b4edbeeb80fb22fca3}{first\_function}));
+127 
+128   \textcolor{comment}{// }
+129   \textcolor{comment}{// drive the progression of m\_currentTs at a ten millisecond rate from the main thread}
+130   \textcolor{comment}{//}
+131   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{double} \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d} = 0.; \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d} < 14.999; \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d} += 0.01)
+132     \{
+133       Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}), &\hyperlink{main-test-sync_8cc_afeb997847681305e1f5fd01776870464}{background\_function});
+134     \}
+135 
+136   \hyperlink{classns3_1_1Ptr}{Ptr<SystemThread>} st3 = Create<SystemThread> (
+137       \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{classFakeNetDevice_a8a9e7c66558bdae03fac8940d3682849}{FakeNetDevice::Doit3}, &fnd));
+138   st3->\hyperlink{classns3_1_1SystemThread_a95716a1cd24ee8e7c6a08b7a2ad9481e}{Start} ();
+139 
+140   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (15.0));
+141   Simulator::Run ();
+142   st3->\hyperlink{classns3_1_1SystemThread_a1cd5114bf675acf91565a6b85c95545f}{Join} ();
+143   Simulator::Destroy ();
+144 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+
+
+\subsection{Variable Documentation}
+\index{main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}!g\+First\+Run@{g\+First\+Run}}
+\index{g\+First\+Run@{g\+First\+Run}!main-\/test-\/sync.\+cc@{main-\/test-\/sync.\+cc}}
+\subsubsection[{\texorpdfstring{g\+First\+Run}{gFirstRun}}]{\setlength{\rightskip}{0pt plus 5cm}bool g\+First\+Run = {\bf false}}\hypertarget{main-test-sync_8cc_a7f665ac99b46b322e6d18f21eace3cd7}{}\label{main-test-sync_8cc_a7f665ac99b46b322e6d18f21eace3cd7}
+Check that the event functions run in the intended order. 

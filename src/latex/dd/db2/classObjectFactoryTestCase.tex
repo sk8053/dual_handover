@@ -1,0 +1,135 @@
+\hypertarget{classObjectFactoryTestCase}{}\section{Object\+Factory\+Test\+Case Class Reference}
+\label{classObjectFactoryTestCase}\index{Object\+Factory\+Test\+Case@{Object\+Factory\+Test\+Case}}
+
+
+Inheritance diagram for Object\+Factory\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Object\+Factory\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classObjectFactoryTestCase_ab34643fb562a87f5d61a5b003325ef6f}{Object\+Factory\+Test\+Case} ()
+\item 
+virtual \hyperlink{classObjectFactoryTestCase_a36b7c8f6cfc5c39b7fc3d803d23c5b3e}{$\sim$\+Object\+Factory\+Test\+Case} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classObjectFactoryTestCase_ab6f760c13e727b5ca3205d5f28ea04f4}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Object\+Factory\+Test\+Case@{Object\+Factory\+Test\+Case}!Object\+Factory\+Test\+Case@{Object\+Factory\+Test\+Case}}
+\index{Object\+Factory\+Test\+Case@{Object\+Factory\+Test\+Case}!Object\+Factory\+Test\+Case@{Object\+Factory\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Object\+Factory\+Test\+Case()}{ObjectFactoryTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Object\+Factory\+Test\+Case\+::\+Object\+Factory\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classObjectFactoryTestCase_ab34643fb562a87f5d61a5b003325ef6f}{}\label{classObjectFactoryTestCase_ab34643fb562a87f5d61a5b003325ef6f}
+
+\begin{DoxyCode}
+376   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check ObjectFactory functionality"})
+377 \{
+378 \}
+\end{DoxyCode}
+\index{Object\+Factory\+Test\+Case@{Object\+Factory\+Test\+Case}!````~Object\+Factory\+Test\+Case@{$\sim$\+Object\+Factory\+Test\+Case}}
+\index{````~Object\+Factory\+Test\+Case@{$\sim$\+Object\+Factory\+Test\+Case}!Object\+Factory\+Test\+Case@{Object\+Factory\+Test\+Case}}
+\subsubsection[{\texorpdfstring{$\sim$\+Object\+Factory\+Test\+Case()}{~ObjectFactoryTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Object\+Factory\+Test\+Case\+::$\sim$\+Object\+Factory\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classObjectFactoryTestCase_a36b7c8f6cfc5c39b7fc3d803d23c5b3e}{}\label{classObjectFactoryTestCase_a36b7c8f6cfc5c39b7fc3d803d23c5b3e}
+
+\begin{DoxyCode}
+381 \{
+382 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Object\+Factory\+Test\+Case@{Object\+Factory\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Object\+Factory\+Test\+Case@{Object\+Factory\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Factory\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classObjectFactoryTestCase_ab6f760c13e727b5ca3205d5f28ea04f4}{}\label{classObjectFactoryTestCase_ab6f760c13e727b5ca3205d5f28ea04f4}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+386 \{
+387   \hyperlink{classns3_1_1ObjectFactory}{ObjectFactory} factory;
+388 
+389   \textcolor{comment}{//}
+390   \textcolor{comment}{// Create an Object of type BaseA through an object factory.}
+391   \textcolor{comment}{//}
+392   factory.\hyperlink{classns3_1_1ObjectFactory_a77dcd099064038a1eb7a6b8251229ec3}{SetTypeId} (BaseA::GetTypeId ());
+393   \hyperlink{classns3_1_1Ptr}{Ptr<Object>} a = factory.\hyperlink{classns3_1_1ObjectFactory_a18152e93f0a6fe184ed7300cb31e9896}{Create} ();
+394   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (a, 0, \textcolor{stringliteral}{"Unable to factory.Create() a BaseA"});
+395 
+396   \textcolor{comment}{//}
+397   \textcolor{comment}{// What we made should be a BaseA, not have anything to do with a DerivedA}
+398   \textcolor{comment}{//}
+399   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (a->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<BaseA> (DerivedA::GetTypeId ()), 0, \textcolor{stringliteral}{"
+      BaseA is unexpectedly a DerivedA also"});
+400 
+401   \textcolor{comment}{//}
+402   \textcolor{comment}{// The BaseA we got should not respond to a GetObject for DerivedA}
+403   \textcolor{comment}{//}
+404   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (a->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<DerivedA> (), 0, \textcolor{stringliteral}{"BaseA unexpectedly
+       responds to GetObject for DerivedA"});
+405 
+406   \textcolor{comment}{//}
+407   \textcolor{comment}{// Now tell the factory to make DerivedA Objects and create one with an }
+408   \textcolor{comment}{// implied cast back to a BaseA}
+409   \textcolor{comment}{//}
+410   factory.\hyperlink{classns3_1_1ObjectFactory_a77dcd099064038a1eb7a6b8251229ec3}{SetTypeId} (DerivedA::GetTypeId ());
+411   a = factory.\hyperlink{classns3_1_1ObjectFactory_a18152e93f0a6fe184ed7300cb31e9896}{Create} ();
+412 
+413   \textcolor{comment}{//}
+414   \textcolor{comment}{// Since the DerivedA has a BaseA part, we should be able to use GetObject to }
+415   \textcolor{comment}{// dynamically cast back to a BaseA.}
+416   \textcolor{comment}{//}
+417   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (a->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<BaseA> (), a, \textcolor{stringliteral}{"Unable to use GetObject
+       as dynamic\_cast<BaseA>()"});
+418 
+419   \textcolor{comment}{//}
+420   \textcolor{comment}{// Since a is already a BaseA and is really a DerivedA, we should be able to}
+421   \textcolor{comment}{// GetObject for the DerivedA and cast it back to a BaseA getting the same}
+422   \textcolor{comment}{// value that is there.}
+423   \textcolor{comment}{//}
+424   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (a->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<BaseA> (DerivedA::GetTypeId ()), a, \textcolor{stringliteral}{"
+      GetObject with implied cast returns different Ptr"});
+425 
+426   \textcolor{comment}{//}
+427   \textcolor{comment}{// Since a declared a BaseA, even if it is really a DerivedA, we should not}
+428   \textcolor{comment}{// be able to GetOBject for a DerivedA since this would break the type}
+429   \textcolor{comment}{// declaration.}
+430   \textcolor{comment}{//}
+431   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (a->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<DerivedA> (), 0, \textcolor{stringliteral}{"Unexpectedly able to
+       work around C++ type system"});
+432 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/test/\hyperlink{object-test-suite_8cc}{object-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

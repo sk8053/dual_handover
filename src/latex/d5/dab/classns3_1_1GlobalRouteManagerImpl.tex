@@ -1,0 +1,2234 @@
+\hypertarget{classns3_1_1GlobalRouteManagerImpl}{}\section{ns3\+:\+:Global\+Route\+Manager\+Impl Class Reference}
+\label{classns3_1_1GlobalRouteManagerImpl}\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+
+
+A global router implementation.  
+
+
+
+
+{\ttfamily \#include $<$global-\/route-\/manager-\/impl.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Global\+Route\+Manager\+Impl\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1GlobalRouteManagerImpl_a1cf679f897a5196e5890f007746d1b7b}{Global\+Route\+Manager\+Impl} ()
+\item 
+virtual \hyperlink{classns3_1_1GlobalRouteManagerImpl_a187579db3a512ec1a51d669b1359c10b}{$\sim$\+Global\+Route\+Manager\+Impl} ()
+\item 
+virtual void \hyperlink{classns3_1_1GlobalRouteManagerImpl_a74aa2a4b5dc2015b6424cb307fcc2d1a}{Delete\+Global\+Routes} ()
+\begin{DoxyCompactList}\small\item\em Delete all static routes on all nodes that have a Global\+Router\+Interface. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1GlobalRouteManagerImpl_a4354ed5c5b4b26f9593991e9254a1370}{Build\+Global\+Routing\+Database} ()
+\begin{DoxyCompactList}\small\item\em Build the routing database by gathering Link State Advertisements from each node exporting a \hyperlink{classns3_1_1GlobalRouter}{Global\+Router} interface. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1GlobalRouteManagerImpl_a25f57b2c41927c1a3f0bbba596accb6b}{Initialize\+Routes} ()
+\begin{DoxyCompactList}\small\item\em Compute routes using a Dijkstra S\+PF computation and populate per-\/node forwarding tables. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1GlobalRouteManagerImpl_a9e287c00be9cb2d6d5cbb1a7cbdb40e9}{Debug\+Use\+Lsdb} (\hyperlink{classns3_1_1GlobalRouteManagerLSDB}{Global\+Route\+Manager\+L\+S\+DB} $\ast$)
+\begin{DoxyCompactList}\small\item\em Debugging routine; allow client code to supply a pre-\/built L\+S\+DB. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1GlobalRouteManagerImpl_aaa692001ef22911e3483583b0de78909}{Debug\+S\+P\+F\+Calculate} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} root)
+\begin{DoxyCompactList}\small\item\em Debugging routine; call the core S\+PF from the unit tests. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1GlobalRouteManagerImpl_a74fb1b423c3050cbdd0d9b03e94d3b23}{Global\+Route\+Manager\+Impl} (\hyperlink{classns3_1_1GlobalRouteManagerImpl}{Global\+Route\+Manager\+Impl} \&srmi)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1GlobalRouteManagerImpl}{Global\+Route\+Manager\+Impl} copy construction is disallowed. There\textquotesingle{}s no need for it and a compiler provided shallow copy would be wrong. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1GlobalRouteManagerImpl}{Global\+Route\+Manager\+Impl} \& \hyperlink{classns3_1_1GlobalRouteManagerImpl_aef03d72b95a91f0478916671ede3511b}{operator=} (\hyperlink{classns3_1_1GlobalRouteManagerImpl}{Global\+Route\+Manager\+Impl} \&srmi)
+\begin{DoxyCompactList}\small\item\em Global Route Manager Implementation assignment operator is disallowed. There\textquotesingle{}s no need for it and a compiler provided shallow copy would be hopelessly wrong. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1GlobalRouteManagerImpl_a84085f1fc0b4d7c9d18bf0145df3e01c}{Check\+For\+Stub\+Node} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} root)
+\begin{DoxyCompactList}\small\item\em Test if a node is a stub, from an O\+S\+PF sense. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1GlobalRouteManagerImpl_a03cdea3013a73c90ae8d67946b237c45}{S\+P\+F\+Calculate} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} root)
+\begin{DoxyCompactList}\small\item\em Calculate the shortest path first (S\+PF) tree. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1GlobalRouteManagerImpl_a3d43e1ea8faefbbb7139b2ede6315cbb}{S\+P\+F\+Process\+Stubs} (\hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$v)
+\begin{DoxyCompactList}\small\item\em Process Stub nodes. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1GlobalRouteManagerImpl_a1b3aa701b33156b04d351f33e3ebdcb4}{Process\+A\+S\+Externals} (\hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$v, \hyperlink{classns3_1_1GlobalRoutingLSA}{Global\+Routing\+L\+SA} $\ast$extlsa)
+\begin{DoxyCompactList}\small\item\em Process Autonomous Systems (AS) External L\+SA. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1GlobalRouteManagerImpl_aaa3d86729d6cfb61708d1c7083423da6}{S\+P\+F\+Next} (\hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$v, \hyperlink{classns3_1_1CandidateQueue}{Candidate\+Queue} \&candidate)
+\begin{DoxyCompactList}\small\item\em Examine the links in v\textquotesingle{}s L\+SA and update the list of candidates with any vertices not already on the list. \end{DoxyCompactList}\item 
+int \hyperlink{classns3_1_1GlobalRouteManagerImpl_ab082a78c423009f77c9cfe9018d40021}{S\+P\+F\+Nexthop\+Calculation} (\hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$v, \hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$\hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}, \hyperlink{classns3_1_1GlobalRoutingLinkRecord}{Global\+Routing\+Link\+Record} $\ast$\hyperlink{lte__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l}, uint32\+\_\+t distance)
+\begin{DoxyCompactList}\small\item\em Calculate nexthop from root through V (parent) to vertex W (destination) with given distance from root-\/$>$W. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1GlobalRouteManagerImpl_ae7824a06e22187d1dc6823c46c95a3fc}{S\+P\+F\+Vertex\+Add\+Parent} (\hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$v)
+\begin{DoxyCompactList}\small\item\em Adds a vertex to the list of children {\itshape in} each of its parents. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1GlobalRoutingLinkRecord}{Global\+Routing\+Link\+Record} $\ast$ \hyperlink{classns3_1_1GlobalRouteManagerImpl_a4c868c90e06e063ac2eb60cfe93c2c84}{S\+P\+F\+Get\+Next\+Link} (\hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$v, \hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$\hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}, \hyperlink{classns3_1_1GlobalRoutingLinkRecord}{Global\+Routing\+Link\+Record} $\ast$prev\+\_\+link)
+\begin{DoxyCompactList}\small\item\em Search for a link between two vertexes. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1GlobalRouteManagerImpl_adc0725b441a01d02bc4db842771a36d5}{S\+P\+F\+Intra\+Add\+Router} (\hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$v)
+\begin{DoxyCompactList}\small\item\em Add a host route to the routing tables. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1GlobalRouteManagerImpl_aaafd698f94e453e3fe41f08bd62867be}{S\+P\+F\+Intra\+Add\+Transit} (\hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$v)
+\begin{DoxyCompactList}\small\item\em Add a transit to the routing tables. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1GlobalRouteManagerImpl_ac939f5c304a02470c566b99699db402c}{S\+P\+F\+Intra\+Add\+Stub} (\hyperlink{classns3_1_1GlobalRoutingLinkRecord}{Global\+Routing\+Link\+Record} $\ast$\hyperlink{lte__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l}, \hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$v)
+\begin{DoxyCompactList}\small\item\em Add a stub to the routing tables. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1GlobalRouteManagerImpl_a0ccd93a5b90948571d2b762d4219c65d}{S\+P\+F\+Add\+A\+S\+External} (\hyperlink{classns3_1_1GlobalRoutingLSA}{Global\+Routing\+L\+SA} $\ast$extlsa, \hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$v)
+\begin{DoxyCompactList}\small\item\em Add an external route to the routing tables. \end{DoxyCompactList}\item 
+int32\+\_\+t \hyperlink{classns3_1_1GlobalRouteManagerImpl_a55b3c7bf042d95de52cf56cc6699dc9a}{Find\+Outgoing\+Interface\+Id} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} a, \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} amask=\hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask}(\char`\"{}255.\+255.\+255.\+255\char`\"{}))
+\begin{DoxyCompactList}\small\item\em Return the interface number corresponding to a given IP address and mask. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1SPFVertex}{S\+P\+F\+Vertex} $\ast$ \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\+\_\+spfroot}
+\begin{DoxyCompactList}\small\item\em the root node \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1GlobalRouteManagerLSDB}{Global\+Route\+Manager\+L\+S\+DB} $\ast$ \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\+\_\+lsdb}
+\begin{DoxyCompactList}\small\item\em the Link State Data\+Base (L\+S\+DB) of the Global Route Manager \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A global router implementation. 
+
+This singleton object can query interface each node in the system for a \hyperlink{classns3_1_1GlobalRouter}{Global\+Router} interface. For those nodes, it fetches one or more Link State Advertisements and stores them in a local database. Then, it can compute shortest paths on a per-\/node basis to all routers, and finally configure each of the node\textquotesingle{}s forwarding tables.
+
+The design is guided by O\+S\+P\+Fv2 \{2328\} section 16.\+1.\+1 and quagga ospfd. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!Global\+Route\+Manager\+Impl@{Global\+Route\+Manager\+Impl}}
+\index{Global\+Route\+Manager\+Impl@{Global\+Route\+Manager\+Impl}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{Global\+Route\+Manager\+Impl()}{GlobalRouteManagerImpl()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Global\+Route\+Manager\+Impl\+::\+Global\+Route\+Manager\+Impl (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a1cf679f897a5196e5890f007746d1b7b}{}\label{classns3_1_1GlobalRouteManagerImpl_a1cf679f897a5196e5890f007746d1b7b}
+
+\begin{DoxyCode}
+541   :
+542     \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot} (0)
+543 \{
+544   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+545   \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb} = \textcolor{keyword}{new} GlobalRouteManagerLSDB ();
+546 \}
+\end{DoxyCode}
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!````~Global\+Route\+Manager\+Impl@{$\sim$\+Global\+Route\+Manager\+Impl}}
+\index{````~Global\+Route\+Manager\+Impl@{$\sim$\+Global\+Route\+Manager\+Impl}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{$\sim$\+Global\+Route\+Manager\+Impl()}{~GlobalRouteManagerImpl()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Global\+Route\+Manager\+Impl\+::$\sim$\+Global\+Route\+Manager\+Impl (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a187579db3a512ec1a51d669b1359c10b}{}\label{classns3_1_1GlobalRouteManagerImpl_a187579db3a512ec1a51d669b1359c10b}
+
+\begin{DoxyCode}
+549 \{
+550   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+551   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb})
+552     \{
+553       \textcolor{keyword}{delete} \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb};
+554     \}
+555 \}
+\end{DoxyCode}
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!Global\+Route\+Manager\+Impl@{Global\+Route\+Manager\+Impl}}
+\index{Global\+Route\+Manager\+Impl@{Global\+Route\+Manager\+Impl}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{Global\+Route\+Manager\+Impl(\+Global\+Route\+Manager\+Impl \&srmi)}{GlobalRouteManagerImpl(GlobalRouteManagerImpl &srmi)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Global\+Route\+Manager\+Impl\+::\+Global\+Route\+Manager\+Impl (
+\begin{DoxyParamCaption}
+\item[{{\bf Global\+Route\+Manager\+Impl} \&}]{srmi}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a74fb1b423c3050cbdd0d9b03e94d3b23}{}\label{classns3_1_1GlobalRouteManagerImpl_a74fb1b423c3050cbdd0d9b03e94d3b23}
+
+
+\hyperlink{classns3_1_1GlobalRouteManagerImpl}{Global\+Route\+Manager\+Impl} copy construction is disallowed. There\textquotesingle{}s no need for it and a compiler provided shallow copy would be wrong. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em srmi} & object to copy from \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!Build\+Global\+Routing\+Database@{Build\+Global\+Routing\+Database}}
+\index{Build\+Global\+Routing\+Database@{Build\+Global\+Routing\+Database}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{Build\+Global\+Routing\+Database()}{BuildGlobalRoutingDatabase()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+Build\+Global\+Routing\+Database (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a4354ed5c5b4b26f9593991e9254a1370}{}\label{classns3_1_1GlobalRouteManagerImpl_a4354ed5c5b4b26f9593991e9254a1370}
+
+
+Build the routing database by gathering Link State Advertisements from each node exporting a \hyperlink{classns3_1_1GlobalRouter}{Global\+Router} interface. 
+
+
+\begin{DoxyCode}
+614 \{
+615   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+616 \textcolor{comment}{//}
+617 \textcolor{comment}{// Walk the list of nodes looking for the GlobalRouter Interface.  Nodes with}
+618 \textcolor{comment}{// global router interfaces are, not too surprisingly, our routers.}
+619 \textcolor{comment}{//}
+620   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} listEnd = \hyperlink{classns3_1_1NodeList_a027a558c16e6078e25c7ffc67becb559}{NodeList::End} ();
+621   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1NodeList_a93d2211831f5cb71d1dbb721e2721d7f}{NodeList::Begin} (); 
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != listEnd; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+622     \{
+623       Ptr<Node> node = *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+624 
+625       Ptr<GlobalRouter> rtr = node->GetObject<GlobalRouter> ();
+626 \textcolor{comment}{//}
+627 \textcolor{comment}{// Ignore nodes that aren't participating in routing.}
+628 \textcolor{comment}{//}
+629       \textcolor{keywordflow}{if} (!rtr)
+630         \{
+631           \textcolor{keywordflow}{continue};
+632         \}
+633 \textcolor{comment}{//}
+634 \textcolor{comment}{// You must call DiscoverLSAs () before trying to use any routing info or to}
+635 \textcolor{comment}{// update LSAs.  DiscoverLSAs () drives the process of discovering routes in}
+636 \textcolor{comment}{// the GlobalRouter.  Afterward, you may use GetNumLSAs (), which is a very}
+637 \textcolor{comment}{// computationally inexpensive call.  If you call GetNumLSAs () before calling }
+638 \textcolor{comment}{// DiscoverLSAs () will get zero as the number since no routes have been }
+639 \textcolor{comment}{// found.}
+640 \textcolor{comment}{//}
+641       Ptr<Ipv4GlobalRouting> grouting = rtr->GetRoutingProtocol ();
+642       uint32\_t numLSAs = rtr->DiscoverLSAs ();
+643       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Found "} << numLSAs << \textcolor{stringliteral}{" LSAs"});
+644 
+645       \textcolor{keywordflow}{for} (uint32\_t j = 0; j < numLSAs; ++j)
+646         \{
+647           GlobalRoutingLSA* lsa = \textcolor{keyword}{new} GlobalRoutingLSA ();
+648 \textcolor{comment}{//}
+649 \textcolor{comment}{// This is the call to actually fetch a Link State Advertisement from the }
+650 \textcolor{comment}{// router.}
+651 \textcolor{comment}{//}
+652           rtr->GetLSA (j, *lsa);
+653           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (*lsa);
+654 \textcolor{comment}{//}
+655 \textcolor{comment}{// Write the newly discovered link state advertisement to the database.}
+656 \textcolor{comment}{//}
+657           \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb}->\hyperlink{classns3_1_1GlobalRouteManagerLSDB_a832fe8b5361c7b4f680edfd98763346d}{Insert} (lsa->GetLinkStateId (), lsa); 
+658         \}
+659     \}
+660 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!Check\+For\+Stub\+Node@{Check\+For\+Stub\+Node}}
+\index{Check\+For\+Stub\+Node@{Check\+For\+Stub\+Node}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{Check\+For\+Stub\+Node(\+Ipv4\+Address root)}{CheckForStubNode(Ipv4Address root)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Global\+Route\+Manager\+Impl\+::\+Check\+For\+Stub\+Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Address}}]{root}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a84085f1fc0b4d7c9d18bf0145df3e01c}{}\label{classns3_1_1GlobalRouteManagerImpl_a84085f1fc0b4d7c9d18bf0145df3e01c}
+
+
+Test if a node is a stub, from an O\+S\+PF sense. 
+
+If there is only one link of type 1 or 2, then a default route can safely be added to the next-\/hop router and S\+PF does not need to be run
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & the root node \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the node is a stub 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1261 \{
+1262   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << root);
+1263   GlobalRoutingLSA *rlsa = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb}->\hyperlink{classns3_1_1GlobalRouteManagerLSDB_a3504bf3573cc64a056835684c41e1aa5}{GetLSA} (root);
+1264   Ipv4Address myRouterId = rlsa->\hyperlink{classns3_1_1GlobalRoutingLSA_afc7dd85af408f8b9236bd73e1a78f5bd}{GetLinkStateId} ();
+1265   \textcolor{keywordtype}{int} transits = 0;
+1266   GlobalRoutingLinkRecord *transitLink = 0;
+1267   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < rlsa->GetNLinkRecords (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+1268     \{
+1269       GlobalRoutingLinkRecord *\hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l} = rlsa->GetLinkRecord (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+1270       \textcolor{keywordflow}{if} (l->GetLinkType () == \hyperlink{classns3_1_1GlobalRoutingLinkRecord_a9380bcce9bca03943c4761b166a694f4ad3d00014c9ba50539a53b55fce117856}{GlobalRoutingLinkRecord::TransitNetwork}
+      )
+1271         \{
+1272           transits++;
+1273           transitLink = \hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l};
+1274         \}
+1275       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (l->GetLinkType () == \hyperlink{classns3_1_1GlobalRoutingLinkRecord_a9380bcce9bca03943c4761b166a694f4aa345c79cdcaba957f5e8296509183912}{GlobalRoutingLinkRecord::PointToPoint}
+      )
+1276         \{
+1277           transits++;
+1278           transitLink = \hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l};
+1279         \}
+1280     \}
+1281   \textcolor{keywordflow}{if} (transits == 0)
+1282     \{
+1283       \textcolor{comment}{// This router is not connected to any router.  Probably, global}
+1284       \textcolor{comment}{// routing should not be called for this node, but we can just raise}
+1285       \textcolor{comment}{// a warning here and return true.}
+1286       \hyperlink{group__logging_gade7208b4009cdf0e25783cd26766f559}{NS\_LOG\_WARN} (\textcolor{stringliteral}{"all nodes should have at least one transit link:"} << root );
+1287       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+1288     \}
+1289   \textcolor{keywordflow}{if} (transits == 1)
+1290     \{
+1291       \textcolor{keywordflow}{if} (transitLink->GetLinkType () == \hyperlink{classns3_1_1GlobalRoutingLinkRecord_a9380bcce9bca03943c4761b166a694f4ad3d00014c9ba50539a53b55fce117856}{GlobalRoutingLinkRecord::TransitNetwork}
+      )
+1292         \{
+1293           \textcolor{comment}{// Install default route to next hop router}
+1294           \textcolor{comment}{// What is the next hop?  We need to check all neighbors on the link.}
+1295           \textcolor{comment}{// If there is a single router that has two transit links, then}
+1296           \textcolor{comment}{// that is the default next hop.  If there are more than one}
+1297           \textcolor{comment}{// routers on link with multiple transit links, return false.}
+1298           \textcolor{comment}{// Not yet implemented, so simply return false}
+1299           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"TBD: Would have inserted default for transit"});
+1300           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+1301         \}
+1302       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (transitLink->GetLinkType () == 
+      \hyperlink{classns3_1_1GlobalRoutingLinkRecord_a9380bcce9bca03943c4761b166a694f4aa345c79cdcaba957f5e8296509183912}{GlobalRoutingLinkRecord::PointToPoint})
+1303         \{
+1304           \textcolor{comment}{// Install default route to next hop}
+1305           \textcolor{comment}{// The link record LinkID is the router ID of the peer.}
+1306           \textcolor{comment}{// The Link Data is the local IP interface address}
+1307           GlobalRoutingLSA *w\_lsa = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb}->\hyperlink{classns3_1_1GlobalRouteManagerLSDB_a3504bf3573cc64a056835684c41e1aa5}{GetLSA} (transitLink->GetLinkId ());
+1308           uint32\_t nLinkRecords = w\_lsa->\hyperlink{classns3_1_1GlobalRoutingLSA_a49043980a9d54ce4125cab4dbdba5a5c}{GetNLinkRecords} ();
+1309           \textcolor{keywordflow}{for} (uint32\_t j = 0; j < nLinkRecords; ++j)
+1310             \{
+1311               \textcolor{comment}{//}
+1312               \textcolor{comment}{// We are only concerned about point-to-point links}
+1313               \textcolor{comment}{//}
+1314               GlobalRoutingLinkRecord *lr = w\_lsa->GetLinkRecord (j);
+1315               \textcolor{keywordflow}{if} (lr->GetLinkType () != \hyperlink{classns3_1_1GlobalRoutingLinkRecord_a9380bcce9bca03943c4761b166a694f4aa345c79cdcaba957f5e8296509183912}{GlobalRoutingLinkRecord::PointToPoint}
+      )
+1316                 \{
+1317                   \textcolor{keywordflow}{continue};
+1318                 \}
+1319               \textcolor{comment}{// Find the link record that corresponds to our routerId}
+1320               \textcolor{keywordflow}{if} (lr->GetLinkId () == myRouterId)
+1321                 \{
+1322                   \textcolor{comment}{// Next hop is stored in the LinkID field of lr}
+1323                   Ptr<GlobalRouter> router = rlsa->GetNode ()->GetObject<GlobalRouter> ();
+1324                   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (router);
+1325                   Ptr<Ipv4GlobalRouting> gr = router->GetRoutingProtocol ();
+1326                   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (gr);
+1327                   gr->AddNetworkRouteTo (Ipv4Address (\textcolor{stringliteral}{"0.0.0.0"}), Ipv4Mask (\textcolor{stringliteral}{"0.0.0.0"}), lr->GetLinkData (),
+       
+1328                                          \hyperlink{classns3_1_1GlobalRouteManagerImpl_a55b3c7bf042d95de52cf56cc6699dc9a}{FindOutgoingInterfaceId} (transitLink->
+      GetLinkData ()));
+1329                   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Inserting default route for node "} << myRouterId << \textcolor{stringliteral}{" to next
+       hop "} << 
+1330                                 lr->GetLinkData () << \textcolor{stringliteral}{" via interface "} << 
+1331                                 \hyperlink{classns3_1_1GlobalRouteManagerImpl_a55b3c7bf042d95de52cf56cc6699dc9a}{FindOutgoingInterfaceId} (transitLink->GetLinkData ()
+      ));
+1332                   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+1333                 \}
+1334             \}
+1335         \}
+1336     \}
+1337   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+1338 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!Debug\+S\+P\+F\+Calculate@{Debug\+S\+P\+F\+Calculate}}
+\index{Debug\+S\+P\+F\+Calculate@{Debug\+S\+P\+F\+Calculate}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{Debug\+S\+P\+F\+Calculate(\+Ipv4\+Address root)}{DebugSPFCalculate(Ipv4Address root)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+Debug\+S\+P\+F\+Calculate (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Address}}]{root}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1GlobalRouteManagerImpl_aaa692001ef22911e3483583b0de78909}{}\label{classns3_1_1GlobalRouteManagerImpl_aaa692001ef22911e3483583b0de78909}
+
+
+Debugging routine; call the core S\+PF from the unit tests. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & the root node to start calculations \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+1248 \{
+1249   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << root);
+1250   \hyperlink{classns3_1_1GlobalRouteManagerImpl_a03cdea3013a73c90ae8d67946b237c45}{SPFCalculate} (root);
+1251 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!Debug\+Use\+Lsdb@{Debug\+Use\+Lsdb}}
+\index{Debug\+Use\+Lsdb@{Debug\+Use\+Lsdb}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{Debug\+Use\+Lsdb(\+Global\+Route\+Manager\+L\+S\+D\+B $\ast$)}{DebugUseLsdb(GlobalRouteManagerLSDB *)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+Debug\+Use\+Lsdb (
+\begin{DoxyParamCaption}
+\item[{{\bf Global\+Route\+Manager\+L\+S\+DB} $\ast$}]{lsdb}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a9e287c00be9cb2d6d5cbb1a7cbdb40e9}{}\label{classns3_1_1GlobalRouteManagerImpl_a9e287c00be9cb2d6d5cbb1a7cbdb40e9}
+
+
+Debugging routine; allow client code to supply a pre-\/built L\+S\+DB. 
+
+
+\begin{DoxyCode}
+559 \{
+560   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << lsdb);
+561   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb})
+562     \{
+563       \textcolor{keyword}{delete} \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb};
+564     \}
+565   \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb} = lsdb;
+566 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!Delete\+Global\+Routes@{Delete\+Global\+Routes}}
+\index{Delete\+Global\+Routes@{Delete\+Global\+Routes}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{Delete\+Global\+Routes()}{DeleteGlobalRoutes()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+Delete\+Global\+Routes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a74aa2a4b5dc2015b6424cb307fcc2d1a}{}\label{classns3_1_1GlobalRouteManagerImpl_a74aa2a4b5dc2015b6424cb307fcc2d1a}
+
+
+Delete all static routes on all nodes that have a Global\+Router\+Interface. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000036}{Todo}]separate manually assigned static routes from static routes that the global routing code injects, and only delete the latter \end{DoxyRefDesc}
+
+\begin{DoxyCode}
+570 \{
+571   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+572   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} listEnd = \hyperlink{classns3_1_1NodeList_a027a558c16e6078e25c7ffc67becb559}{NodeList::End} ();
+573   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1NodeList_a93d2211831f5cb71d1dbb721e2721d7f}{NodeList::Begin} (); 
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != listEnd; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+574     \{
+575       Ptr<Node> node = *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+576       Ptr<GlobalRouter> router = node->GetObject<GlobalRouter> ();
+577       \textcolor{keywordflow}{if} (router == 0)
+578         \{
+579           \textcolor{keywordflow}{continue};
+580         \}
+581       Ptr<Ipv4GlobalRouting> gr = router->GetRoutingProtocol ();
+582       uint32\_t j = 0;
+583       uint32\_t nRoutes = gr->GetNRoutes ();
+584       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Deleting "} << gr->GetNRoutes ()<< \textcolor{stringliteral}{" routes from node "} << node->GetId ());
+585       \textcolor{comment}{// Each time we delete route 0, the route index shifts downward}
+586       \textcolor{comment}{// We can delete all routes if we delete the route numbered 0}
+587       \textcolor{comment}{// nRoutes times}
+588       \textcolor{keywordflow}{for} (j = 0; j < nRoutes; j++)
+589         \{
+590           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Deleting global route "} << j << \textcolor{stringliteral}{" from node "} << node->GetId ());
+591           gr->RemoveRoute (0);
+592         \}
+593       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Deleted "} << j << \textcolor{stringliteral}{" global routes from node "}<< node->GetId ());
+594     \}
+595   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb})
+596     \{
+597       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Deleting LSDB, creating new one"});
+598       \textcolor{keyword}{delete} \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb};
+599       \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb} = \textcolor{keyword}{new} GlobalRouteManagerLSDB ();
+600     \}
+601 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!Find\+Outgoing\+Interface\+Id@{Find\+Outgoing\+Interface\+Id}}
+\index{Find\+Outgoing\+Interface\+Id@{Find\+Outgoing\+Interface\+Id}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{Find\+Outgoing\+Interface\+Id(\+Ipv4\+Address a, Ipv4\+Mask amask=\+Ipv4\+Mask(""255.\+255.\+255.\+255""))}{FindOutgoingInterfaceId(Ipv4Address a, Ipv4Mask amask=Ipv4Mask("255.255.255.255"))}}]{\setlength{\rightskip}{0pt plus 5cm}int32\+\_\+t ns3\+::\+Global\+Route\+Manager\+Impl\+::\+Find\+Outgoing\+Interface\+Id (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Address}}]{a, }
+\item[{{\bf Ipv4\+Mask}}]{amask = {\ttfamily {\bf Ipv4\+Mask}~(\char`\"{}255.255.255.255\char`\"{})}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a55b3c7bf042d95de52cf56cc6699dc9a}{}\label{classns3_1_1GlobalRouteManagerImpl_a55b3c7bf042d95de52cf56cc6699dc9a}
+
+
+Return the interface number corresponding to a given IP address and mask. 
+
+This is a wrapper around Get\+Interface\+For\+Prefix(), but we first have to find the right node pointer to pass to that function. If no such interface is found, return -\/1 (note\+: unit test framework for routing assumes -\/1 to be a legal return value)
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & the target IP address \\
+\hline
+{\em amask} & the target subnet mask \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the outgoing interface number 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1844 \{
+1845   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << a << amask);
+1846 \textcolor{comment}{//}
+1847 \textcolor{comment}{// We have an IP address <a> and a vertex ID of the root of the SPF tree.}
+1848 \textcolor{comment}{// The question is what interface index does this address correspond to.}
+1849 \textcolor{comment}{// The answer is a little complicated since we have to find a pointer to}
+1850 \textcolor{comment}{// the node corresponding to the vertex ID, find the Ipv4 interface on that}
+1851 \textcolor{comment}{// node in order to iterate the interfaces and find the one corresponding to}
+1852 \textcolor{comment}{// the address in question.}
+1853 \textcolor{comment}{//}
+1854   Ipv4Address routerId = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot}->\hyperlink{classns3_1_1SPFVertex_addc1067d86f26e9fe3b2e34ed16f929c}{GetVertexId} ();
+1855 \textcolor{comment}{//}
+1856 \textcolor{comment}{// Walk the list of nodes in the system looking for the one corresponding to}
+1857 \textcolor{comment}{// the node at the root of the SPF tree.  This is the node for which we are}
+1858 \textcolor{comment}{// building the routing table.}
+1859 \textcolor{comment}{//}
+1860   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1NodeList_a93d2211831f5cb71d1dbb721e2721d7f}{NodeList::Begin} (); 
+1861   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} listEnd = \hyperlink{classns3_1_1NodeList_a027a558c16e6078e25c7ffc67becb559}{NodeList::End} ();
+1862   \textcolor{keywordflow}{for} (; i != listEnd; i++)
+1863     \{
+1864       Ptr<Node> node = *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+1865 
+1866       Ptr<GlobalRouter> rtr = 
+1867         node->GetObject<GlobalRouter> ();
+1868 \textcolor{comment}{//}
+1869 \textcolor{comment}{// If the node doesn't have a GlobalRouter interface it can't be the one}
+1870 \textcolor{comment}{// we're interested in.}
+1871 \textcolor{comment}{//}
+1872       \textcolor{keywordflow}{if} (rtr == 0)
+1873         \{
+1874           \textcolor{keywordflow}{continue};
+1875         \}
+1876 
+1877       \textcolor{keywordflow}{if} (rtr->GetRouterId () == routerId)
+1878         \{
+1879 \textcolor{comment}{//}
+1880 \textcolor{comment}{// This is the node we're building the routing table for.  We're going to need}
+1881 \textcolor{comment}{// the Ipv4 interface to look for the ipv4 interface index.  Since this node}
+1882 \textcolor{comment}{// is participating in routing IP version 4 packets, it certainly must have }
+1883 \textcolor{comment}{// an Ipv4 interface.}
+1884 \textcolor{comment}{//}
+1885           Ptr<Ipv4> ipv4 = node->GetObject<Ipv4> ();
+1886           \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (ipv4, 
+1887                          \textcolor{stringliteral}{"GlobalRouteManagerImpl::FindOutgoingInterfaceId (): "}
+1888                          \textcolor{stringliteral}{"GetObject for <Ipv4> interface failed"});
+1889 \textcolor{comment}{//}
+1890 \textcolor{comment}{// Look through the interfaces on this node for one that has the IP address}
+1891 \textcolor{comment}{// we're looking for.  If we find one, return the corresponding interface}
+1892 \textcolor{comment}{// index, or -1 if not found.}
+1893 \textcolor{comment}{//}
+1894           int32\_t \textcolor{keyword}{interface }= ipv4->GetInterfaceForPrefix (a, amask);
+1895 
+1896 \textcolor{preprocessor}{#if 0}
+1897           \textcolor{keywordflow}{if} (interface < 0)
+1898             \{
+1899               \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"GlobalRouteManagerImpl::FindOutgoingInterfaceId(): "}
+1900                               \textcolor{stringliteral}{"Expected an interface associated with address a:"} << a);
+1901             \}
+1902 \textcolor{preprocessor}{#endif }
+1903           \textcolor{keywordflow}{return} interface;
+1904         \}
+1905     \}
+1906 \textcolor{comment}{//}
+1907 \textcolor{comment}{// Couldn't find it.}
+1908 \textcolor{comment}{//}
+1909   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"FindOutgoingInterfaceId():Can't find root node "} << routerId);
+1910   \textcolor{keywordflow}{return} -1;
+1911 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!Initialize\+Routes@{Initialize\+Routes}}
+\index{Initialize\+Routes@{Initialize\+Routes}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{Initialize\+Routes()}{InitializeRoutes()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+Initialize\+Routes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a25f57b2c41927c1a3f0bbba596accb6b}{}\label{classns3_1_1GlobalRouteManagerImpl_a25f57b2c41927c1a3f0bbba596accb6b}
+
+
+Compute routes using a Dijkstra S\+PF computation and populate per-\/node forwarding tables. 
+
+
+\begin{DoxyCode}
+697 \{
+698   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+699 \textcolor{comment}{//}
+700 \textcolor{comment}{// Walk the list of nodes in the system.}
+701 \textcolor{comment}{//}
+702   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"About to start SPF calculation"});
+703   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} listEnd = \hyperlink{classns3_1_1NodeList_a027a558c16e6078e25c7ffc67becb559}{NodeList::End} ();
+704   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1NodeList_a93d2211831f5cb71d1dbb721e2721d7f}{NodeList::Begin} (); 
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != listEnd; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+705     \{
+706       Ptr<Node> node = *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+707 \textcolor{comment}{//}
+708 \textcolor{comment}{// Look for the GlobalRouter interface that indicates that the node is}
+709 \textcolor{comment}{// participating in routing.}
+710 \textcolor{comment}{//}
+711       Ptr<GlobalRouter> rtr = 
+712         node->GetObject<GlobalRouter> ();
+713 
+714       uint32\_t systemId = \hyperlink{classns3_1_1MpiInterface_a7f1f671b55948fb1c8f7eb54f22a9619}{MpiInterface::GetSystemId} ();
+715       \textcolor{comment}{// Ignore nodes that are not assigned to our systemId (distributed sim)}
+716       \textcolor{keywordflow}{if} (node->GetSystemId () != systemId) 
+717         \{
+718           \textcolor{keywordflow}{continue};
+719         \}
+720 
+721 \textcolor{comment}{//}
+722 \textcolor{comment}{// if the node has a global router interface, then run the global routing}
+723 \textcolor{comment}{// algorithms.}
+724 \textcolor{comment}{//}
+725       \textcolor{keywordflow}{if} (rtr && rtr->GetNumLSAs () )
+726         \{
+727           \hyperlink{classns3_1_1GlobalRouteManagerImpl_a03cdea3013a73c90ae8d67946b237c45}{SPFCalculate} (rtr->GetRouterId ());
+728         \}
+729     \}
+730   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Finished SPF calculation"});
+731 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!operator=@{operator=}}
+\index{operator=@{operator=}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{operator=(\+Global\+Route\+Manager\+Impl \&srmi)}{operator=(GlobalRouteManagerImpl &srmi)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Global\+Route\+Manager\+Impl}\& ns3\+::\+Global\+Route\+Manager\+Impl\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Global\+Route\+Manager\+Impl} \&}]{srmi}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_aef03d72b95a91f0478916671ede3511b}{}\label{classns3_1_1GlobalRouteManagerImpl_aef03d72b95a91f0478916671ede3511b}
+
+
+Global Route Manager Implementation assignment operator is disallowed. There\textquotesingle{}s no need for it and a compiler provided shallow copy would be hopelessly wrong. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em srmi} & object to copy from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the copied object 
+\end{DoxyReturn}
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!Process\+A\+S\+Externals@{Process\+A\+S\+Externals}}
+\index{Process\+A\+S\+Externals@{Process\+A\+S\+Externals}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{Process\+A\+S\+Externals(\+S\+P\+F\+Vertex $\ast$v, Global\+Routing\+L\+S\+A $\ast$extlsa)}{ProcessASExternals(SPFVertex *v, GlobalRoutingLSA *extlsa)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+Process\+A\+S\+Externals (
+\begin{DoxyParamCaption}
+\item[{{\bf S\+P\+F\+Vertex} $\ast$}]{v, }
+\item[{{\bf Global\+Routing\+L\+SA} $\ast$}]{extlsa}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a1b3aa701b33156b04d351f33e3ebdcb4}{}\label{classns3_1_1GlobalRouteManagerImpl_a1b3aa701b33156b04d351f33e3ebdcb4}
+
+
+Process Autonomous Systems (AS) External L\+SA. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & vertex to be processed \\
+\hline
+{\em extlsa} & external L\+SA \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+1509 \{
+1510   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << v << extlsa);
+1511   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Processing external for destination "} << 
+1512                 extlsa->GetLinkStateId () <<
+1513                 \textcolor{stringliteral}{", for router "}  << v->GetVertexId () <<
+1514                 \textcolor{stringliteral}{", advertised by "} << extlsa->GetAdvertisingRouter ());
+1515   \textcolor{keywordflow}{if} (v->GetVertexType () == \hyperlink{classns3_1_1SPFVertex_a20f8a4cfc99a1b7ecd10a23151b93afda340822983a2833fff14de88ea20a3f31}{SPFVertex::VertexRouter})
+1516     \{
+1517       GlobalRoutingLSA *rlsa = v->GetLSA ();
+1518       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Processing router LSA with id "} << rlsa->GetLinkStateId ());
+1519       \textcolor{keywordflow}{if} ((rlsa->GetLinkStateId ()) == (extlsa->GetAdvertisingRouter ()))
+1520         \{
+1521           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Found advertising router to destination"});
+1522           \hyperlink{classns3_1_1GlobalRouteManagerImpl_a0ccd93a5b90948571d2b762d4219c65d}{SPFAddASExternal} (extlsa,v);
+1523         \}
+1524     \}
+1525   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < v->GetNChildren (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+1526     \{
+1527       \textcolor{keywordflow}{if} (!v->GetChild (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})->IsVertexProcessed ())
+1528         \{
+1529           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Vertex's child "} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{" not yet processed, processing..."});
+1530           \hyperlink{classns3_1_1GlobalRouteManagerImpl_a1b3aa701b33156b04d351f33e3ebdcb4}{ProcessASExternals} (v->GetChild (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), extlsa);
+1531           v->GetChild (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})->SetVertexProcessed (\textcolor{keyword}{true});
+1532         \}
+1533     \}
+1534 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 12
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!S\+P\+F\+Add\+A\+S\+External@{S\+P\+F\+Add\+A\+S\+External}}
+\index{S\+P\+F\+Add\+A\+S\+External@{S\+P\+F\+Add\+A\+S\+External}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{S\+P\+F\+Add\+A\+S\+External(\+Global\+Routing\+L\+S\+A $\ast$extlsa, S\+P\+F\+Vertex $\ast$v)}{SPFAddASExternal(GlobalRoutingLSA *extlsa, SPFVertex *v)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+S\+P\+F\+Add\+A\+S\+External (
+\begin{DoxyParamCaption}
+\item[{{\bf Global\+Routing\+L\+SA} $\ast$}]{extlsa, }
+\item[{{\bf S\+P\+F\+Vertex} $\ast$}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a0ccd93a5b90948571d2b762d4219c65d}{}\label{classns3_1_1GlobalRouteManagerImpl_a0ccd93a5b90948571d2b762d4219c65d}
+
+
+Add an external route to the routing tables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em extlsa} & the external L\+SA \\
+\hline
+{\em v} & the vertex \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+1543 \{
+1544   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << extlsa << v);
+1545 
+1546   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (\hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot}, \textcolor{stringliteral}{"GlobalRouteManagerImpl::SPFAddASExternal (): Root
+       pointer not set"});
+1547 \textcolor{comment}{// Two cases to consider: We are advertising the external ourselves}
+1548 \textcolor{comment}{// => No need to add anything}
+1549 \textcolor{comment}{// OR find best path to the advertising router}
+1550   \textcolor{keywordflow}{if} (v->GetVertexId () == \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot}->\hyperlink{classns3_1_1SPFVertex_addc1067d86f26e9fe3b2e34ed16f929c}{GetVertexId} ())
+1551     \{
+1552       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"External is on local host: "} 
+1553                     << v->GetVertexId () << \textcolor{stringliteral}{"; returning"});
+1554       \textcolor{keywordflow}{return};
+1555     \}
+1556   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"External is on remote host: "} 
+1557                 << extlsa->GetAdvertisingRouter () << \textcolor{stringliteral}{"; installing"});
+1558 
+1559   Ipv4Address routerId = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot}->\hyperlink{classns3_1_1SPFVertex_addc1067d86f26e9fe3b2e34ed16f929c}{GetVertexId} ();
+1560 
+1561   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Vertex ID = "} << routerId);
+1562 \textcolor{comment}{//}
+1563 \textcolor{comment}{// We need to walk the list of nodes looking for the one that has the router}
+1564 \textcolor{comment}{// ID corresponding to the root vertex.  This is the one we're going to write}
+1565 \textcolor{comment}{// the routing information to.}
+1566 \textcolor{comment}{//}
+1567   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1NodeList_a93d2211831f5cb71d1dbb721e2721d7f}{NodeList::Begin} (); 
+1568   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} listEnd = \hyperlink{classns3_1_1NodeList_a027a558c16e6078e25c7ffc67becb559}{NodeList::End} ();
+1569   \textcolor{keywordflow}{for} (; i != listEnd; i++)
+1570     \{
+1571       Ptr<Node> node = *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+1572 \textcolor{comment}{//}
+1573 \textcolor{comment}{// The router ID is accessible through the GlobalRouter interface, so we need}
+1574 \textcolor{comment}{// to QI for that interface.  If there's no GlobalRouter interface, the node}
+1575 \textcolor{comment}{// in question cannot be the router we want, so we continue.}
+1576 \textcolor{comment}{// }
+1577       Ptr<GlobalRouter> rtr = node->GetObject<GlobalRouter> ();
+1578 
+1579       \textcolor{keywordflow}{if} (rtr == 0)
+1580         \{
+1581           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"No GlobalRouter interface on node "} << node->GetId ());
+1582           \textcolor{keywordflow}{continue};
+1583         \}
+1584 \textcolor{comment}{//}
+1585 \textcolor{comment}{// If the router ID of the current node is equal to the router ID of the }
+1586 \textcolor{comment}{// root of the SPF tree, then this node is the one for which we need to }
+1587 \textcolor{comment}{// write the routing tables.}
+1588 \textcolor{comment}{//}
+1589       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Considering router "} << rtr->GetRouterId ());
+1590 
+1591       \textcolor{keywordflow}{if} (rtr->GetRouterId () == routerId)
+1592         \{
+1593           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Setting routes for node "} << node->GetId ());
+1594 \textcolor{comment}{//}
+1595 \textcolor{comment}{// Routing information is updated using the Ipv4 interface.  We need to QI}
+1596 \textcolor{comment}{// for that interface.  If the node is acting as an IP version 4 router, it}
+1597 \textcolor{comment}{// should absolutely have an Ipv4 interface.}
+1598 \textcolor{comment}{//}
+1599           Ptr<Ipv4> ipv4 = node->GetObject<Ipv4> ();
+1600           \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (ipv4, 
+1601                          \textcolor{stringliteral}{"GlobalRouteManagerImpl::SPFIntraAddRouter (): "}
+1602                          \textcolor{stringliteral}{"QI for <Ipv4> interface failed"});
+1603 \textcolor{comment}{//}
+1604 \textcolor{comment}{// Get the Global Router Link State Advertisement from the vertex we're}
+1605 \textcolor{comment}{// adding the routes to.  The LSA will have a number of attached Global Router}
+1606 \textcolor{comment}{// Link Records corresponding to links off of that vertex / node.  We're going}
+1607 \textcolor{comment}{// to be interested in the records corresponding to point-to-point links.}
+1608 \textcolor{comment}{//}
+1609           \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (v->GetLSA (), 
+1610                          \textcolor{stringliteral}{"GlobalRouteManagerImpl::SPFIntraAddRouter (): "}
+1611                          \textcolor{stringliteral}{"Expected valid LSA in SPFVertex* v"});
+1612           Ipv4Mask tempmask = extlsa->GetNetworkLSANetworkMask ();
+1613           Ipv4Address tempip = extlsa->GetLinkStateId ();
+1614           tempip = tempip.CombineMask (tempmask);
+1615 
+1616 \textcolor{comment}{//}
+1617 \textcolor{comment}{// Here's why we did all of that work.  We're going to add a host route to the}
+1618 \textcolor{comment}{// host address found in the m\_linkData field of the point-to-point link}
+1619 \textcolor{comment}{// record.  In the case of a point-to-point link, this is the local IP address}
+1620 \textcolor{comment}{// of the node connected to the link.  Each of these point-to-point links}
+1621 \textcolor{comment}{// will correspond to a local interface that has an IP address to which}
+1622 \textcolor{comment}{// the node at the root of the SPF tree can send packets.  The vertex <v> }
+1623 \textcolor{comment}{// (corresponding to the node that has these links and interfaces) has }
+1624 \textcolor{comment}{// an m\_nextHop address precalculated for us that is the address to which the}
+1625 \textcolor{comment}{// root node should send packets to be forwarded to these IP addresses.}
+1626 \textcolor{comment}{// Similarly, the vertex <v> has an m\_rootOif (outbound interface index) to}
+1627 \textcolor{comment}{// which the packets should be send for forwarding.}
+1628 \textcolor{comment}{//}
+1629           Ptr<GlobalRouter> router = node->GetObject<GlobalRouter> ();
+1630           \textcolor{keywordflow}{if} (router == 0)
+1631             \{
+1632               \textcolor{keywordflow}{continue};
+1633             \}
+1634           Ptr<Ipv4GlobalRouting> gr = router->GetRoutingProtocol ();
+1635           \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (gr);
+1636           \textcolor{comment}{// walk through all next-hop-IPs and out-going-interfaces for reaching}
+1637           \textcolor{comment}{// the stub network gateway 'v' from the root node}
+1638           \textcolor{keywordflow}{for} (uint32\_t i = 0; i < v->GetNRootExitDirections (); i++)
+1639             \{
+1640               \hyperlink{classns3_1_1SPFVertex_a0adf6255ec0357050ef5436597b4cb32}{SPFVertex::NodeExit\_t} exit = v->GetRootExitDirection (i);
+1641               Ipv4Address nextHop = exit.first;
+1642               int32\_t outIf = exit.second;
+1643               \textcolor{keywordflow}{if} (outIf >= 0)
+1644                 \{
+1645                   gr->AddASExternalRouteTo (tempip, tempmask, nextHop, outIf);
+1646                   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"(Route "} << i << \textcolor{stringliteral}{") Node "} << node->GetId () <<
+1647                                 \textcolor{stringliteral}{" add external network route to "} << tempip <<
+1648                                 \textcolor{stringliteral}{" using next hop "} << nextHop <<
+1649                                 \textcolor{stringliteral}{" via interface "} << outIf);
+1650                 \}
+1651               \textcolor{keywordflow}{else}
+1652                 \{
+1653                   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"(Route "} << i << \textcolor{stringliteral}{") Node "} << node->GetId () <<
+1654                                 \textcolor{stringliteral}{" NOT able to add network route to "} << tempip <<
+1655                                 \textcolor{stringliteral}{" using next hop "} << nextHop <<
+1656                                 \textcolor{stringliteral}{" since outgoing interface id is negative"});
+1657                 \}
+1658             \}
+1659           \textcolor{keywordflow}{return};
+1660         \} \textcolor{comment}{// if}
+1661     \} \textcolor{comment}{// for}
+1662 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 13
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 14
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!S\+P\+F\+Calculate@{S\+P\+F\+Calculate}}
+\index{S\+P\+F\+Calculate@{S\+P\+F\+Calculate}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{S\+P\+F\+Calculate(\+Ipv4\+Address root)}{SPFCalculate(Ipv4Address root)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+S\+P\+F\+Calculate (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Address}}]{root}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a03cdea3013a73c90ae8d67946b237c45}{}\label{classns3_1_1GlobalRouteManagerImpl_a03cdea3013a73c90ae8d67946b237c45}
+
+
+Calculate the shortest path first (S\+PF) tree. 
+
+Equivalent to quagga ospf\+\_\+spf\+\_\+calculate 
+\begin{DoxyParams}{Parameters}
+{\em root} & the root node \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+1343 \{
+1344   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << root);
+1345 
+1346   SPFVertex *v;
+1347 \textcolor{comment}{//}
+1348 \textcolor{comment}{// Initialize the Link State Database.}
+1349 \textcolor{comment}{//}
+1350   \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb}->\hyperlink{classns3_1_1GlobalRouteManagerLSDB_a25ea9823747e40df5d43eb64100a5f85}{Initialize} ();
+1351 \textcolor{comment}{//}
+1352 \textcolor{comment}{// The candidate queue is a priority queue of SPFVertex objects, with the top}
+1353 \textcolor{comment}{// of the queue being the closest vertex in terms of distance from the root}
+1354 \textcolor{comment}{// of the tree.  Initially, this queue is empty.}
+1355 \textcolor{comment}{//}
+1356   CandidateQueue candidate;
+1357   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (candidate.Size () == 0);
+1358 \textcolor{comment}{//}
+1359 \textcolor{comment}{// Initialize the shortest-path tree to only contain the router doing the }
+1360 \textcolor{comment}{// calculation.  Each router (and corresponding network) is a vertex in the}
+1361 \textcolor{comment}{// shortest path first (SPF) tree.}
+1362 \textcolor{comment}{//}
+1363   v = \textcolor{keyword}{new} SPFVertex (\hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb}->\hyperlink{classns3_1_1GlobalRouteManagerLSDB_a3504bf3573cc64a056835684c41e1aa5}{GetLSA} (root));
+1364 \textcolor{comment}{// }
+1365 \textcolor{comment}{// This vertex is the root of the SPF tree and it is distance 0 from the root.}
+1366 \textcolor{comment}{// We also mark this vertex as being in the SPF tree.}
+1367 \textcolor{comment}{//}
+1368   \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot}= v;
+1369   v->\hyperlink{classns3_1_1SPFVertex_a30885442cd0d8f7ae0e4690373b2c50a}{SetDistanceFromRoot} (0);
+1370   v->GetLSA ()->SetStatus (\hyperlink{classns3_1_1GlobalRoutingLSA_a18bf63da580856fe1cc158aa855af1bda2a14fe5ba992deb9a1cb953f77ec8072}{GlobalRoutingLSA::LSA\_SPF\_IN\_SPFTREE});
+1371   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Starting SPFCalculate for node "} << root);
+1372 
+1373 \textcolor{comment}{//}
+1374 \textcolor{comment}{// Optimize SPF calculation, for ns-3.}
+1375 \textcolor{comment}{// We do not need to calculate SPF for every node in the network if this}
+1376 \textcolor{comment}{// node has only one interface through which another router can be }
+1377 \textcolor{comment}{// reached.  Instead, short-circuit this computation and just install}
+1378 \textcolor{comment}{// a default route in the CheckForStubNode() method.}
+1379 \textcolor{comment}{//}
+1380   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1NodeList_a1d110b1670005895dd5812baab13682a}{NodeList::GetNNodes} () > 0 && \hyperlink{classns3_1_1GlobalRouteManagerImpl_a84085f1fc0b4d7c9d18bf0145df3e01c}{CheckForStubNode} (root))
+1381     \{
+1382       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"SPFCalculate truncated for stub node "} << root);
+1383       \textcolor{keyword}{delete} \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot};
+1384       \textcolor{keywordflow}{return};
+1385     \}
+1386 
+1387   \textcolor{keywordflow}{for} (;;)
+1388     \{
+1389 \textcolor{comment}{//}
+1390 \textcolor{comment}{// The operations we need to do are given in the OSPF RFC which we reference}
+1391 \textcolor{comment}{// as we go along.}
+1392 \textcolor{comment}{//}
+1393 \textcolor{comment}{// RFC2328 16.1. (2). }
+1394 \textcolor{comment}{//}
+1395 \textcolor{comment}{// We examine the Global Router Link Records in the Link State }
+1396 \textcolor{comment}{// Advertisements of the current vertex.  If there are any point-to-point}
+1397 \textcolor{comment}{// links to unexplored adjacent vertices we add them to the tree and update}
+1398 \textcolor{comment}{// the distance and next hop information on how to get there.  We also add}
+1399 \textcolor{comment}{// the new vertices to the candidate queue (the priority queue ordered by}
+1400 \textcolor{comment}{// shortest path).  If the new vertices represent shorter paths, we use them}
+1401 \textcolor{comment}{// and update the path cost.}
+1402 \textcolor{comment}{//}
+1403       \hyperlink{classns3_1_1GlobalRouteManagerImpl_aaa3d86729d6cfb61708d1c7083423da6}{SPFNext} (v, candidate);
+1404 \textcolor{comment}{//}
+1405 \textcolor{comment}{// RFC2328 16.1. (3). }
+1406 \textcolor{comment}{//}
+1407 \textcolor{comment}{// If at this step the candidate list is empty, the shortest-path tree (of}
+1408 \textcolor{comment}{// transit vertices) has been completely built and this stage of the}
+1409 \textcolor{comment}{// procedure terminates. }
+1410 \textcolor{comment}{//}
+1411       \textcolor{keywordflow}{if} (candidate.Size () == 0)
+1412         \{
+1413           \textcolor{keywordflow}{break};
+1414         \}
+1415 \textcolor{comment}{//}
+1416 \textcolor{comment}{// Choose the vertex belonging to the candidate list that is closest to the}
+1417 \textcolor{comment}{// root, and add it to the shortest-path tree (removing it from the candidate}
+1418 \textcolor{comment}{// list in the process).}
+1419 \textcolor{comment}{//}
+1420 \textcolor{comment}{// Recall that in the previous step, we created SPFVertex structures for each}
+1421 \textcolor{comment}{// of the routers found in the Global Router Link Records and added tehm to }
+1422 \textcolor{comment}{// the candidate list.}
+1423 \textcolor{comment}{//}
+1424       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (candidate);
+1425       v = candidate.Pop ();
+1426       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Popped vertex "} << v->GetVertexId ());
+1427 \textcolor{comment}{//}
+1428 \textcolor{comment}{// Update the status field of the vertex to indicate that it is in the SPF}
+1429 \textcolor{comment}{// tree.}
+1430 \textcolor{comment}{//}
+1431       v->GetLSA ()->SetStatus (\hyperlink{classns3_1_1GlobalRoutingLSA_a18bf63da580856fe1cc158aa855af1bda2a14fe5ba992deb9a1cb953f77ec8072}{GlobalRoutingLSA::LSA\_SPF\_IN\_SPFTREE});
+1432 \textcolor{comment}{//}
+1433 \textcolor{comment}{// The current vertex has a parent pointer.  By calling this rather oddly }
+1434 \textcolor{comment}{// named method (blame quagga) we add the current vertex to the list of }
+1435 \textcolor{comment}{// children of that parent vertex.  In the next hop calculation called during}
+1436 \textcolor{comment}{// SPFNext, the parent pointer was set but the vertex has been orphaned up}
+1437 \textcolor{comment}{// to now.}
+1438 \textcolor{comment}{//}
+1439       \hyperlink{classns3_1_1GlobalRouteManagerImpl_ae7824a06e22187d1dc6823c46c95a3fc}{SPFVertexAddParent} (v);
+1440 \textcolor{comment}{//}
+1441 \textcolor{comment}{// Note that when there is a choice of vertices closest to the root, network}
+1442 \textcolor{comment}{// vertices must be chosen before router vertices in order to necessarily}
+1443 \textcolor{comment}{// find all equal-cost paths. }
+1444 \textcolor{comment}{//}
+1445 \textcolor{comment}{// RFC2328 16.1. (4). }
+1446 \textcolor{comment}{//}
+1447 \textcolor{comment}{// This is the method that actually adds the routes.  It'll walk the list}
+1448 \textcolor{comment}{// of nodes in the system, looking for the node corresponding to the router}
+1449 \textcolor{comment}{// ID of the root of the tree -- that is the router we're building the routes}
+1450 \textcolor{comment}{// for.  It looks for the Ipv4 interface of that node and remembers it.  So}
+1451 \textcolor{comment}{// we are only actually adding routes to that one node at the root of the SPF }
+1452 \textcolor{comment}{// tree.}
+1453 \textcolor{comment}{//}
+1454 \textcolor{comment}{// We're going to pop of a pointer to every vertex in the tree except the }
+1455 \textcolor{comment}{// root in order of distance from the root.  For each of the vertices, we call}
+1456 \textcolor{comment}{// SPFIntraAddRouter ().  Down in SPFIntraAddRouter, we look at all of the }
+1457 \textcolor{comment}{// point-to-point Global Router Link Records (the links to nodes adjacent to}
+1458 \textcolor{comment}{// the node represented by the vertex).  We add a route to the IP address }
+1459 \textcolor{comment}{// specified by the m\_linkData field of each of those link records.  This will}
+1460 \textcolor{comment}{// be the *local* IP address associated with the interface attached to the }
+1461 \textcolor{comment}{// link.  We use the outbound interface and next hop information present in }
+1462 \textcolor{comment}{// the vertex <v> which have possibly been inherited from the root.}
+1463 \textcolor{comment}{//}
+1464 \textcolor{comment}{// To summarize, we're going to look at the node represented by <v> and loop}
+1465 \textcolor{comment}{// through its point-to-point links, adding a *host* route to the local IP}
+1466 \textcolor{comment}{// address (at the <v> side) for each of those links.}
+1467 \textcolor{comment}{//}
+1468       \textcolor{keywordflow}{if} (v->GetVertexType () == \hyperlink{classns3_1_1SPFVertex_a20f8a4cfc99a1b7ecd10a23151b93afda340822983a2833fff14de88ea20a3f31}{SPFVertex::VertexRouter})
+1469         \{
+1470           \hyperlink{classns3_1_1GlobalRouteManagerImpl_adc0725b441a01d02bc4db842771a36d5}{SPFIntraAddRouter} (v);
+1471         \}
+1472       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (v->GetVertexType () == \hyperlink{classns3_1_1SPFVertex_a20f8a4cfc99a1b7ecd10a23151b93afda00415acb788d8d95bee545fe2046c2a8}{SPFVertex::VertexNetwork})
+1473         \{
+1474           \hyperlink{classns3_1_1GlobalRouteManagerImpl_aaafd698f94e453e3fe41f08bd62867be}{SPFIntraAddTransit} (v);
+1475         \}
+1476       \textcolor{keywordflow}{else}
+1477         \{
+1478           \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (0, \textcolor{stringliteral}{"illegal SPFVertex type"});
+1479         \}
+1480 \textcolor{comment}{//}
+1481 \textcolor{comment}{// RFC2328 16.1. (5). }
+1482 \textcolor{comment}{//}
+1483 \textcolor{comment}{// Iterate the algorithm by returning to Step 2 until there are no more}
+1484 \textcolor{comment}{// candidate vertices.}
+1485 
+1486     \}  \textcolor{comment}{// end for loop}
+1487 
+1488 \textcolor{comment}{// Second stage of SPF calculation procedure}
+1489   \hyperlink{classns3_1_1GlobalRouteManagerImpl_a3d43e1ea8faefbbb7139b2ede6315cbb}{SPFProcessStubs} (m\_spfroot);
+1490   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb}->\hyperlink{classns3_1_1GlobalRouteManagerLSDB_ac82114cbf8adfab500e580dd8d66ec69}{GetNumExtLSAs} (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+1491     \{
+1492       m\_spfroot->ClearVertexProcessed ();
+1493       GlobalRoutingLSA *extlsa = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb}->\hyperlink{classns3_1_1GlobalRouteManagerLSDB_aaf8413863f2002d3a2508e61c4cab64c}{GetExtLSA} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+1494       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Processing External LSA with id "} << extlsa->GetLinkStateId ());
+1495       \hyperlink{classns3_1_1GlobalRouteManagerImpl_a1b3aa701b33156b04d351f33e3ebdcb4}{ProcessASExternals} (m\_spfroot, extlsa);
+1496     \}
+1497 
+1498 \textcolor{comment}{//}
+1499 \textcolor{comment}{// We're all done setting the routing information for the node at the root of}
+1500 \textcolor{comment}{// the SPF tree.  Delete all of the vertices and corresponding resources.  Go}
+1501 \textcolor{comment}{// possibly do it again for the next router.}
+1502 \textcolor{comment}{//}
+1503   \textcolor{keyword}{delete} \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot};
+1504   m\_spfroot = 0;
+1505 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 15
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 16
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!S\+P\+F\+Get\+Next\+Link@{S\+P\+F\+Get\+Next\+Link}}
+\index{S\+P\+F\+Get\+Next\+Link@{S\+P\+F\+Get\+Next\+Link}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{S\+P\+F\+Get\+Next\+Link(\+S\+P\+F\+Vertex $\ast$v, S\+P\+F\+Vertex $\ast$w, Global\+Routing\+Link\+Record $\ast$prev\+\_\+link)}{SPFGetNextLink(SPFVertex *v, SPFVertex *w, GlobalRoutingLinkRecord *prev_link)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Global\+Routing\+Link\+Record} $\ast$ ns3\+::\+Global\+Route\+Manager\+Impl\+::\+S\+P\+F\+Get\+Next\+Link (
+\begin{DoxyParamCaption}
+\item[{{\bf S\+P\+F\+Vertex} $\ast$}]{v, }
+\item[{{\bf S\+P\+F\+Vertex} $\ast$}]{w, }
+\item[{{\bf Global\+Routing\+Link\+Record} $\ast$}]{prev\+\_\+link}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a4c868c90e06e063ac2eb60cfe93c2c84}{}\label{classns3_1_1GlobalRouteManagerImpl_a4c868c90e06e063ac2eb60cfe93c2c84}
+
+
+Search for a link between two vertexes. 
+
+This method is derived from quagga ospf\+\_\+get\+\_\+next\+\_\+link ()
+
+First search the Global Router Link Records of vertex {\itshape v} for one representing a point-\/to point link to vertex {\itshape w}.
+
+What is done depends on prev\+\_\+link. Contrary to appearances, prev\+\_\+link just acts as a flag here. If prev\+\_\+link is N\+U\+LL, we return the first Global Router Link Record we find that describes a point-\/to-\/point link from {\itshape v} to {\itshape w}. If prev\+\_\+link is not N\+U\+LL, we return a Global Router Link Record representing a possible {\itshape second} link from {\itshape v} to {\itshape w}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & first vertex \\
+\hline
+{\em w} & second vertex \\
+\hline
+{\em prev\+\_\+link} & the previous link in the list \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the link\textquotesingle{}s record 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1173 \{
+1174   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << v << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} << prev\_link);
+1175 
+1176   \textcolor{keywordtype}{bool} skip = \textcolor{keyword}{true};
+1177   \textcolor{keywordtype}{bool} found\_prev\_link = \textcolor{keyword}{false};
+1178   GlobalRoutingLinkRecord* \hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l};
+1179 \textcolor{comment}{//}
+1180 \textcolor{comment}{// If prev\_link is 0, we are really looking for the first link, not the next }
+1181 \textcolor{comment}{// link.}
+1182 \textcolor{comment}{//}
+1183   \textcolor{keywordflow}{if} (prev\_link == 0)
+1184     \{
+1185       skip = \textcolor{keyword}{false};
+1186       found\_prev\_link = \textcolor{keyword}{true};
+1187     \}
+1188 \textcolor{comment}{//}
+1189 \textcolor{comment}{// Iterate through the Global Router Link Records advertised by the vertex}
+1190 \textcolor{comment}{// <v> looking for records representing the point-to-point links off of this}
+1191 \textcolor{comment}{// vertex.}
+1192 \textcolor{comment}{//}
+1193   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < v->GetLSA ()->GetNLinkRecords (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+1194     \{
+1195       l = v->GetLSA ()->GetLinkRecord (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+1196 \textcolor{comment}{//}
+1197 \textcolor{comment}{// The link ID of a link record representing a point-to-point link is set to}
+1198 \textcolor{comment}{// the router ID of the neighboring router -- the router to which the link}
+1199 \textcolor{comment}{// connects from the perspective of <v> in this case.  The vertex ID is also}
+1200 \textcolor{comment}{// set to the router ID (using the link state advertisement of a router node).}
+1201 \textcolor{comment}{// We're just checking to see if the link <l> is actually the link from <v> to}
+1202 \textcolor{comment}{// <w>.}
+1203 \textcolor{comment}{//}
+1204       \textcolor{keywordflow}{if} (l->GetLinkId () == \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->GetVertexId ()) 
+1205         \{
+1206           \textcolor{keywordflow}{if} (!found\_prev\_link)
+1207             \{
+1208               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Skipping links before prev\_link found"});
+1209               found\_prev\_link = \textcolor{keyword}{true};
+1210               \textcolor{keywordflow}{continue};
+1211             \}
+1212 
+1213           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Found matching link l:  linkId = "} <<
+1214                         l->GetLinkId () << \textcolor{stringliteral}{" linkData = "} << l->GetLinkData ());
+1215 \textcolor{comment}{//}
+1216 \textcolor{comment}{// If skip is false, don't (not too surprisingly) skip the link found -- it's }
+1217 \textcolor{comment}{// the one we're interested in.  That's either because we didn't pass in a }
+1218 \textcolor{comment}{// previous link, and we're interested in the first one, or because we've }
+1219 \textcolor{comment}{// skipped a previous link and moved forward to the next (which is then the}
+1220 \textcolor{comment}{// one we want).}
+1221 \textcolor{comment}{//}
+1222           \textcolor{keywordflow}{if} (skip == \textcolor{keyword}{false})
+1223             \{
+1224               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Returning the found link"});
+1225               \textcolor{keywordflow}{return} \hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l};
+1226             \}
+1227           \textcolor{keywordflow}{else}
+1228             \{
+1229 \textcolor{comment}{//}
+1230 \textcolor{comment}{// Skip is true and we've found a link from <v> to <w>.  We want the next one.}
+1231 \textcolor{comment}{// Setting skip to false gets us the next point-to-point global router link}
+1232 \textcolor{comment}{// record in the LSA from <v>.}
+1233 \textcolor{comment}{//}
+1234               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Skipping the found link"});
+1235               skip = \textcolor{keyword}{false};
+1236               \textcolor{keywordflow}{continue};
+1237             \}
+1238         \}
+1239     \}
+1240   \textcolor{keywordflow}{return} 0;
+1241 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 17
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 18
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!S\+P\+F\+Intra\+Add\+Router@{S\+P\+F\+Intra\+Add\+Router}}
+\index{S\+P\+F\+Intra\+Add\+Router@{S\+P\+F\+Intra\+Add\+Router}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{S\+P\+F\+Intra\+Add\+Router(\+S\+P\+F\+Vertex $\ast$v)}{SPFIntraAddRouter(SPFVertex *v)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+S\+P\+F\+Intra\+Add\+Router (
+\begin{DoxyParamCaption}
+\item[{{\bf S\+P\+F\+Vertex} $\ast$}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_adc0725b441a01d02bc4db842771a36d5}{}\label{classns3_1_1GlobalRouteManagerImpl_adc0725b441a01d02bc4db842771a36d5}
+
+
+Add a host route to the routing tables. 
+
+This method is derived from quagga ospf\+\_\+intra\+\_\+add\+\_\+router ()
+
+This is where we are actually going to add the host routes to the routing tables of the individual nodes.
+
+The vertex passed as a parameter has just been added to the S\+PF tree. This vertex must have a valid m\+\_\+root\+\_\+oid, corresponding to the outgoing interface on the root router of the tree that is the first hop on the path to the vertex. The vertex must also have a next hop address, corresponding to the next hop on the path to the vertex. The vertex has an m\+\_\+lsa field that has some number of link records. For each point to point link record, the m\+\_\+link\+Data is the local IP address of the link. This corresponds to a destination IP address, reachable from the root, to which we add a host route.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & the vertex \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+1931 \{
+1932   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << v);
+1933 
+1934   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (\hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot}, 
+1935                  \textcolor{stringliteral}{"GlobalRouteManagerImpl::SPFIntraAddRouter (): Root pointer not set"});
+1936 \textcolor{comment}{//}
+1937 \textcolor{comment}{// The root of the Shortest Path First tree is the router to which we are }
+1938 \textcolor{comment}{// going to write the actual routing table entries.  The vertex corresponding}
+1939 \textcolor{comment}{// to this router has a vertex ID which is the router ID of that node.  We're}
+1940 \textcolor{comment}{// going to use this ID to discover which node it is that we're actually going}
+1941 \textcolor{comment}{// to update.}
+1942 \textcolor{comment}{//}
+1943   Ipv4Address routerId = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot}->\hyperlink{classns3_1_1SPFVertex_addc1067d86f26e9fe3b2e34ed16f929c}{GetVertexId} ();
+1944 
+1945   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Vertex ID = "} << routerId);
+1946 \textcolor{comment}{//}
+1947 \textcolor{comment}{// We need to walk the list of nodes looking for the one that has the router}
+1948 \textcolor{comment}{// ID corresponding to the root vertex.  This is the one we're going to write}
+1949 \textcolor{comment}{// the routing information to.}
+1950 \textcolor{comment}{//}
+1951   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1NodeList_a93d2211831f5cb71d1dbb721e2721d7f}{NodeList::Begin} (); 
+1952   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} listEnd = \hyperlink{classns3_1_1NodeList_a027a558c16e6078e25c7ffc67becb559}{NodeList::End} ();
+1953   \textcolor{keywordflow}{for} (; i != listEnd; i++)
+1954     \{
+1955       Ptr<Node> node = *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+1956 \textcolor{comment}{//}
+1957 \textcolor{comment}{// The router ID is accessible through the GlobalRouter interface, so we need}
+1958 \textcolor{comment}{// to GetObject for that interface.  If there's no GlobalRouter interface, }
+1959 \textcolor{comment}{// the node in question cannot be the router we want, so we continue.}
+1960 \textcolor{comment}{// }
+1961       Ptr<GlobalRouter> rtr = 
+1962         node->GetObject<GlobalRouter> ();
+1963 
+1964       \textcolor{keywordflow}{if} (rtr == 0)
+1965         \{
+1966           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"No GlobalRouter interface on node "} << 
+1967                         node->GetId ());
+1968           \textcolor{keywordflow}{continue};
+1969         \}
+1970 \textcolor{comment}{//}
+1971 \textcolor{comment}{// If the router ID of the current node is equal to the router ID of the }
+1972 \textcolor{comment}{// root of the SPF tree, then this node is the one for which we need to }
+1973 \textcolor{comment}{// write the routing tables.}
+1974 \textcolor{comment}{//}
+1975       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Considering router "} << rtr->GetRouterId ());
+1976 
+1977       \textcolor{keywordflow}{if} (rtr->GetRouterId () == routerId)
+1978         \{
+1979           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Setting routes for node "} << node->GetId ());
+1980 \textcolor{comment}{//}
+1981 \textcolor{comment}{// Routing information is updated using the Ipv4 interface.  We need to }
+1982 \textcolor{comment}{// GetObject for that interface.  If the node is acting as an IP version 4 }
+1983 \textcolor{comment}{// router, it should absolutely have an Ipv4 interface.}
+1984 \textcolor{comment}{//}
+1985           Ptr<Ipv4> ipv4 = node->GetObject<Ipv4> ();
+1986           \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (ipv4, 
+1987                          \textcolor{stringliteral}{"GlobalRouteManagerImpl::SPFIntraAddRouter (): "}
+1988                          \textcolor{stringliteral}{"GetObject for <Ipv4> interface failed"});
+1989 \textcolor{comment}{//}
+1990 \textcolor{comment}{// Get the Global Router Link State Advertisement from the vertex we're}
+1991 \textcolor{comment}{// adding the routes to.  The LSA will have a number of attached Global Router}
+1992 \textcolor{comment}{// Link Records corresponding to links off of that vertex / node.  We're going}
+1993 \textcolor{comment}{// to be interested in the records corresponding to point-to-point links.}
+1994 \textcolor{comment}{//}
+1995           GlobalRoutingLSA *lsa = v->GetLSA ();
+1996           \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (lsa, 
+1997                          \textcolor{stringliteral}{"GlobalRouteManagerImpl::SPFIntraAddRouter (): "}
+1998                          \textcolor{stringliteral}{"Expected valid LSA in SPFVertex* v"});
+1999 
+2000           uint32\_t nLinkRecords = lsa->GetNLinkRecords ();
+2001 \textcolor{comment}{//}
+2002 \textcolor{comment}{// Iterate through the link records on the vertex to which we're going to add}
+2003 \textcolor{comment}{// routes.  To make sure we're being clear, we're going to add routing table}
+2004 \textcolor{comment}{// entries to the tables on the node corresping to the root of the SPF tree.}
+2005 \textcolor{comment}{// These entries will have routes to the IP addresses we find from looking at}
+2006 \textcolor{comment}{// the local side of the point-to-point links found on the node described by}
+2007 \textcolor{comment}{// the vertex <v>.}
+2008 \textcolor{comment}{//}
+2009           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{" Node "} << node->GetId () <<
+2010                         \textcolor{stringliteral}{" found "} << nLinkRecords << \textcolor{stringliteral}{" link records in LSA "} << lsa << \textcolor{stringliteral}{"with LinkStateId "}<
+      < lsa->GetLinkStateId ());
+2011           \textcolor{keywordflow}{for} (uint32\_t j = 0; j < nLinkRecords; ++j)
+2012             \{
+2013 \textcolor{comment}{//}
+2014 \textcolor{comment}{// We are only concerned about point-to-point links}
+2015 \textcolor{comment}{//}
+2016               GlobalRoutingLinkRecord *lr = lsa->GetLinkRecord (j);
+2017               \textcolor{keywordflow}{if} (lr->GetLinkType () != \hyperlink{classns3_1_1GlobalRoutingLinkRecord_a9380bcce9bca03943c4761b166a694f4aa345c79cdcaba957f5e8296509183912}{GlobalRoutingLinkRecord::PointToPoint}
+      )
+2018                 \{
+2019                   \textcolor{keywordflow}{continue};
+2020                 \}
+2021 \textcolor{comment}{//}
+2022 \textcolor{comment}{// Here's why we did all of that work.  We're going to add a host route to the}
+2023 \textcolor{comment}{// host address found in the m\_linkData field of the point-to-point link}
+2024 \textcolor{comment}{// record.  In the case of a point-to-point link, this is the local IP address}
+2025 \textcolor{comment}{// of the node connected to the link.  Each of these point-to-point links}
+2026 \textcolor{comment}{// will correspond to a local interface that has an IP address to which}
+2027 \textcolor{comment}{// the node at the root of the SPF tree can send packets.  The vertex <v> }
+2028 \textcolor{comment}{// (corresponding to the node that has these links and interfaces) has }
+2029 \textcolor{comment}{// an m\_nextHop address precalculated for us that is the address to which the}
+2030 \textcolor{comment}{// root node should send packets to be forwarded to these IP addresses.}
+2031 \textcolor{comment}{// Similarly, the vertex <v> has an m\_rootOif (outbound interface index) to}
+2032 \textcolor{comment}{// which the packets should be send for forwarding.}
+2033 \textcolor{comment}{//}
+2034               Ptr<GlobalRouter> router = node->GetObject<GlobalRouter> ();
+2035               \textcolor{keywordflow}{if} (router == 0)
+2036                 \{
+2037                   \textcolor{keywordflow}{continue};
+2038                 \}
+2039               Ptr<Ipv4GlobalRouting> gr = router->GetRoutingProtocol ();
+2040               \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (gr);
+2041               \textcolor{comment}{// walk through all available exit directions due to ECMP,}
+2042               \textcolor{comment}{// and add host route for each of the exit direction toward}
+2043               \textcolor{comment}{// the vertex 'v'}
+2044               \textcolor{keywordflow}{for} (uint32\_t i = 0; i < v->GetNRootExitDirections (); i++)
+2045                 \{
+2046                   \hyperlink{classns3_1_1SPFVertex_a0adf6255ec0357050ef5436597b4cb32}{SPFVertex::NodeExit\_t} exit = v->GetRootExitDirection (i);
+2047                   Ipv4Address nextHop = exit.first;
+2048                   int32\_t outIf = exit.second;
+2049                   \textcolor{keywordflow}{if} (outIf >= 0)
+2050                     \{
+2051                       gr->AddHostRouteTo (lr->GetLinkData (), nextHop,
+2052                                           outIf);
+2053                       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"(Route "} << i << \textcolor{stringliteral}{") Node "} << node->GetId () <<
+2054                                     \textcolor{stringliteral}{" adding host route to "} << lr->GetLinkData () <<
+2055                                     \textcolor{stringliteral}{" using next hop "} << nextHop <<
+2056                                     \textcolor{stringliteral}{" and outgoing interface "} << outIf);
+2057                     \}
+2058                   \textcolor{keywordflow}{else}
+2059                     \{
+2060                       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"(Route "} << i << \textcolor{stringliteral}{") Node "} << node->GetId () <<
+2061                                     \textcolor{stringliteral}{" NOT able to add host route to "} << lr->GetLinkData () <<
+2062                                     \textcolor{stringliteral}{" using next hop "} << nextHop <<
+2063                                     \textcolor{stringliteral}{" since outgoing interface id is negative "} << outIf);
+2064                     \}
+2065                 \} \textcolor{comment}{// for all routes from the root the vertex 'v'}
+2066             \}
+2067 \textcolor{comment}{//}
+2068 \textcolor{comment}{// Done adding the routes for the selected node.}
+2069 \textcolor{comment}{//}
+2070           \textcolor{keywordflow}{return};
+2071         \}
+2072     \}
+2073 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 19
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 20
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!S\+P\+F\+Intra\+Add\+Stub@{S\+P\+F\+Intra\+Add\+Stub}}
+\index{S\+P\+F\+Intra\+Add\+Stub@{S\+P\+F\+Intra\+Add\+Stub}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{S\+P\+F\+Intra\+Add\+Stub(\+Global\+Routing\+Link\+Record $\ast$l, S\+P\+F\+Vertex $\ast$v)}{SPFIntraAddStub(GlobalRoutingLinkRecord *l, SPFVertex *v)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+S\+P\+F\+Intra\+Add\+Stub (
+\begin{DoxyParamCaption}
+\item[{{\bf Global\+Routing\+Link\+Record} $\ast$}]{l, }
+\item[{{\bf S\+P\+F\+Vertex} $\ast$}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_ac939f5c304a02470c566b99699db402c}{}\label{classns3_1_1GlobalRouteManagerImpl_ac939f5c304a02470c566b99699db402c}
+
+
+Add a stub to the routing tables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & the global routing link record \\
+\hline
+{\em v} & the vertex \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+1704 \{
+1705   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l} << v);
+1706 
+1707   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (\hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot}, 
+1708                  \textcolor{stringliteral}{"GlobalRouteManagerImpl::SPFIntraAddStub (): Root pointer not set"});
+1709 
+1710   \textcolor{comment}{// XXX simplifed logic for the moment.  There are two cases to consider:}
+1711   \textcolor{comment}{// 1) the stub network is on this router; do nothing for now}
+1712   \textcolor{comment}{//    (already handled above)}
+1713   \textcolor{comment}{// 2) the stub network is on a remote router, so I should use the}
+1714   \textcolor{comment}{// same next hop that I use to get to vertex v}
+1715   \textcolor{keywordflow}{if} (v->GetVertexId () == \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot}->\hyperlink{classns3_1_1SPFVertex_addc1067d86f26e9fe3b2e34ed16f929c}{GetVertexId} ())
+1716     \{
+1717       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Stub is on local host: "} << v->GetVertexId () << \textcolor{stringliteral}{"; returning"});
+1718       \textcolor{keywordflow}{return};
+1719     \}
+1720   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Stub is on remote host: "} << v->GetVertexId () << \textcolor{stringliteral}{"; installing"});
+1721 \textcolor{comment}{//}
+1722 \textcolor{comment}{// The root of the Shortest Path First tree is the router to which we are }
+1723 \textcolor{comment}{// going to write the actual routing table entries.  The vertex corresponding}
+1724 \textcolor{comment}{// to this router has a vertex ID which is the router ID of that node.  We're}
+1725 \textcolor{comment}{// going to use this ID to discover which node it is that we're actually going}
+1726 \textcolor{comment}{// to update.}
+1727 \textcolor{comment}{//}
+1728   Ipv4Address routerId = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot}->\hyperlink{classns3_1_1SPFVertex_addc1067d86f26e9fe3b2e34ed16f929c}{GetVertexId} ();
+1729 
+1730   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Vertex ID = "} << routerId);
+1731 \textcolor{comment}{//}
+1732 \textcolor{comment}{// We need to walk the list of nodes looking for the one that has the router}
+1733 \textcolor{comment}{// ID corresponding to the root vertex.  This is the one we're going to write}
+1734 \textcolor{comment}{// the routing information to.}
+1735 \textcolor{comment}{//}
+1736   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1NodeList_a93d2211831f5cb71d1dbb721e2721d7f}{NodeList::Begin} (); 
+1737   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} listEnd = \hyperlink{classns3_1_1NodeList_a027a558c16e6078e25c7ffc67becb559}{NodeList::End} ();
+1738   \textcolor{keywordflow}{for} (; i != listEnd; i++)
+1739     \{
+1740       Ptr<Node> node = *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+1741 \textcolor{comment}{//}
+1742 \textcolor{comment}{// The router ID is accessible through the GlobalRouter interface, so we need}
+1743 \textcolor{comment}{// to QI for that interface.  If there's no GlobalRouter interface, the node}
+1744 \textcolor{comment}{// in question cannot be the router we want, so we continue.}
+1745 \textcolor{comment}{// }
+1746       Ptr<GlobalRouter> rtr = 
+1747         node->GetObject<GlobalRouter> ();
+1748 
+1749       \textcolor{keywordflow}{if} (rtr == 0)
+1750         \{
+1751           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"No GlobalRouter interface on node "} << 
+1752                         node->GetId ());
+1753           \textcolor{keywordflow}{continue};
+1754         \}
+1755 \textcolor{comment}{//}
+1756 \textcolor{comment}{// If the router ID of the current node is equal to the router ID of the }
+1757 \textcolor{comment}{// root of the SPF tree, then this node is the one for which we need to }
+1758 \textcolor{comment}{// write the routing tables.}
+1759 \textcolor{comment}{//}
+1760       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Considering router "} << rtr->GetRouterId ());
+1761 
+1762       \textcolor{keywordflow}{if} (rtr->GetRouterId () == routerId)
+1763         \{
+1764           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Setting routes for node "} << node->GetId ());
+1765 \textcolor{comment}{//}
+1766 \textcolor{comment}{// Routing information is updated using the Ipv4 interface.  We need to QI}
+1767 \textcolor{comment}{// for that interface.  If the node is acting as an IP version 4 router, it}
+1768 \textcolor{comment}{// should absolutely have an Ipv4 interface.}
+1769 \textcolor{comment}{//}
+1770           Ptr<Ipv4> ipv4 = node->GetObject<Ipv4> ();
+1771           \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (ipv4, 
+1772                          \textcolor{stringliteral}{"GlobalRouteManagerImpl::SPFIntraAddRouter (): "}
+1773                          \textcolor{stringliteral}{"QI for <Ipv4> interface failed"});
+1774 \textcolor{comment}{//}
+1775 \textcolor{comment}{// Get the Global Router Link State Advertisement from the vertex we're}
+1776 \textcolor{comment}{// adding the routes to.  The LSA will have a number of attached Global Router}
+1777 \textcolor{comment}{// Link Records corresponding to links off of that vertex / node.  We're going}
+1778 \textcolor{comment}{// to be interested in the records corresponding to point-to-point links.}
+1779 \textcolor{comment}{//}
+1780           \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (v->GetLSA (), 
+1781                          \textcolor{stringliteral}{"GlobalRouteManagerImpl::SPFIntraAddRouter (): "}
+1782                          \textcolor{stringliteral}{"Expected valid LSA in SPFVertex* v"});
+1783           Ipv4Mask tempmask (\hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l}->GetLinkData ().Get ());
+1784           Ipv4Address tempip = \hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l}->GetLinkId ();
+1785           tempip = tempip.CombineMask (tempmask);
+1786 \textcolor{comment}{//}
+1787 \textcolor{comment}{// Here's why we did all of that work.  We're going to add a host route to the}
+1788 \textcolor{comment}{// host address found in the m\_linkData field of the point-to-point link}
+1789 \textcolor{comment}{// record.  In the case of a point-to-point link, this is the local IP address}
+1790 \textcolor{comment}{// of the node connected to the link.  Each of these point-to-point links}
+1791 \textcolor{comment}{// will correspond to a local interface that has an IP address to which}
+1792 \textcolor{comment}{// the node at the root of the SPF tree can send packets.  The vertex <v> }
+1793 \textcolor{comment}{// (corresponding to the node that has these links and interfaces) has }
+1794 \textcolor{comment}{// an m\_nextHop address precalculated for us that is the address to which the}
+1795 \textcolor{comment}{// root node should send packets to be forwarded to these IP addresses.}
+1796 \textcolor{comment}{// Similarly, the vertex <v> has an m\_rootOif (outbound interface index) to}
+1797 \textcolor{comment}{// which the packets should be send for forwarding.}
+1798 \textcolor{comment}{//}
+1799 
+1800           Ptr<GlobalRouter> router = node->GetObject<GlobalRouter> ();
+1801           \textcolor{keywordflow}{if} (router == 0)
+1802             \{
+1803               \textcolor{keywordflow}{continue};
+1804             \}
+1805           Ptr<Ipv4GlobalRouting> gr = router->GetRoutingProtocol ();
+1806           \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (gr);
+1807           \textcolor{comment}{// walk through all next-hop-IPs and out-going-interfaces for reaching}
+1808           \textcolor{comment}{// the stub network gateway 'v' from the root node}
+1809           \textcolor{keywordflow}{for} (uint32\_t i = 0; i < v->GetNRootExitDirections (); i++)
+1810             \{
+1811               \hyperlink{classns3_1_1SPFVertex_a0adf6255ec0357050ef5436597b4cb32}{SPFVertex::NodeExit\_t} exit = v->GetRootExitDirection (i);
+1812               Ipv4Address nextHop = exit.first;
+1813               int32\_t outIf = exit.second;
+1814               \textcolor{keywordflow}{if} (outIf >= 0)
+1815                 \{
+1816                   gr->AddNetworkRouteTo (tempip, tempmask, nextHop, outIf);
+1817                   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"(Route "} << i << \textcolor{stringliteral}{") Node "} << node->GetId () <<
+1818                                 \textcolor{stringliteral}{" add network route to "} << tempip <<
+1819                                 \textcolor{stringliteral}{" using next hop "} << nextHop <<
+1820                                 \textcolor{stringliteral}{" via interface "} << outIf);
+1821                 \}
+1822               \textcolor{keywordflow}{else}
+1823                 \{
+1824                   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"(Route "} << i << \textcolor{stringliteral}{") Node "} << node->GetId () <<
+1825                                 \textcolor{stringliteral}{" NOT able to add network route to "} << tempip <<
+1826                                 \textcolor{stringliteral}{" using next hop "} << nextHop <<
+1827                                 \textcolor{stringliteral}{" since outgoing interface id is negative"});
+1828                 \}
+1829             \}
+1830           \textcolor{keywordflow}{return};
+1831         \} \textcolor{comment}{// if}
+1832     \} \textcolor{comment}{// for}
+1833 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 21
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 22
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!S\+P\+F\+Intra\+Add\+Transit@{S\+P\+F\+Intra\+Add\+Transit}}
+\index{S\+P\+F\+Intra\+Add\+Transit@{S\+P\+F\+Intra\+Add\+Transit}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{S\+P\+F\+Intra\+Add\+Transit(\+S\+P\+F\+Vertex $\ast$v)}{SPFIntraAddTransit(SPFVertex *v)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+S\+P\+F\+Intra\+Add\+Transit (
+\begin{DoxyParamCaption}
+\item[{{\bf S\+P\+F\+Vertex} $\ast$}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_aaafd698f94e453e3fe41f08bd62867be}{}\label{classns3_1_1GlobalRouteManagerImpl_aaafd698f94e453e3fe41f08bd62867be}
+
+
+Add a transit to the routing tables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & the vertex \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+2076 \{
+2077   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << v);
+2078 
+2079   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (\hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot}, 
+2080                  \textcolor{stringliteral}{"GlobalRouteManagerImpl::SPFIntraAddTransit (): Root pointer not set"});
+2081 \textcolor{comment}{//}
+2082 \textcolor{comment}{// The root of the Shortest Path First tree is the router to which we are }
+2083 \textcolor{comment}{// going to write the actual routing table entries.  The vertex corresponding}
+2084 \textcolor{comment}{// to this router has a vertex ID which is the router ID of that node.  We're}
+2085 \textcolor{comment}{// going to use this ID to discover which node it is that we're actually going}
+2086 \textcolor{comment}{// to update.}
+2087 \textcolor{comment}{//}
+2088   Ipv4Address routerId = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot}->\hyperlink{classns3_1_1SPFVertex_addc1067d86f26e9fe3b2e34ed16f929c}{GetVertexId} ();
+2089 
+2090   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Vertex ID = "} << routerId);
+2091 \textcolor{comment}{//}
+2092 \textcolor{comment}{// We need to walk the list of nodes looking for the one that has the router}
+2093 \textcolor{comment}{// ID corresponding to the root vertex.  This is the one we're going to write}
+2094 \textcolor{comment}{// the routing information to.}
+2095 \textcolor{comment}{//}
+2096   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1NodeList_a93d2211831f5cb71d1dbb721e2721d7f}{NodeList::Begin} (); 
+2097   \hyperlink{classns3_1_1NodeList_a9e2679a94efb4f0066cc21e65440364d}{NodeList::Iterator} listEnd = \hyperlink{classns3_1_1NodeList_a027a558c16e6078e25c7ffc67becb559}{NodeList::End} ();
+2098   \textcolor{keywordflow}{for} (; i != listEnd; i++)
+2099     \{
+2100       Ptr<Node> node = *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+2101 \textcolor{comment}{//}
+2102 \textcolor{comment}{// The router ID is accessible through the GlobalRouter interface, so we need}
+2103 \textcolor{comment}{// to GetObject for that interface.  If there's no GlobalRouter interface, }
+2104 \textcolor{comment}{// the node in question cannot be the router we want, so we continue.}
+2105 \textcolor{comment}{// }
+2106       Ptr<GlobalRouter> rtr = 
+2107         node->GetObject<GlobalRouter> ();
+2108 
+2109       \textcolor{keywordflow}{if} (rtr == 0)
+2110         \{
+2111           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"No GlobalRouter interface on node "} << 
+2112                         node->GetId ());
+2113           \textcolor{keywordflow}{continue};
+2114         \}
+2115 \textcolor{comment}{//}
+2116 \textcolor{comment}{// If the router ID of the current node is equal to the router ID of the }
+2117 \textcolor{comment}{// root of the SPF tree, then this node is the one for which we need to }
+2118 \textcolor{comment}{// write the routing tables.}
+2119 \textcolor{comment}{//}
+2120       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Considering router "} << rtr->GetRouterId ());
+2121 
+2122       \textcolor{keywordflow}{if} (rtr->GetRouterId () == routerId)
+2123         \{
+2124           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"setting routes for node "} << node->GetId ());
+2125 \textcolor{comment}{//}
+2126 \textcolor{comment}{// Routing information is updated using the Ipv4 interface.  We need to }
+2127 \textcolor{comment}{// GetObject for that interface.  If the node is acting as an IP version 4 }
+2128 \textcolor{comment}{// router, it should absolutely have an Ipv4 interface.}
+2129 \textcolor{comment}{//}
+2130           Ptr<Ipv4> ipv4 = node->GetObject<Ipv4> ();
+2131           \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (ipv4, 
+2132                          \textcolor{stringliteral}{"GlobalRouteManagerImpl::SPFIntraAddTransit (): "}
+2133                          \textcolor{stringliteral}{"GetObject for <Ipv4> interface failed"});
+2134 \textcolor{comment}{//}
+2135 \textcolor{comment}{// Get the Global Router Link State Advertisement from the vertex we're}
+2136 \textcolor{comment}{// adding the routes to.  The LSA will have a number of attached Global Router}
+2137 \textcolor{comment}{// Link Records corresponding to links off of that vertex / node.  We're going}
+2138 \textcolor{comment}{// to be interested in the records corresponding to point-to-point links.}
+2139 \textcolor{comment}{//}
+2140           GlobalRoutingLSA *lsa = v->GetLSA ();
+2141           \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (lsa, 
+2142                          \textcolor{stringliteral}{"GlobalRouteManagerImpl::SPFIntraAddTransit (): "}
+2143                          \textcolor{stringliteral}{"Expected valid LSA in SPFVertex* v"});
+2144           Ipv4Mask tempmask = lsa->GetNetworkLSANetworkMask ();
+2145           Ipv4Address tempip = lsa->GetLinkStateId ();
+2146           tempip = tempip.CombineMask (tempmask);
+2147           Ptr<GlobalRouter> router = node->GetObject<GlobalRouter> ();
+2148           \textcolor{keywordflow}{if} (router == 0)
+2149             \{
+2150               \textcolor{keywordflow}{continue};
+2151             \}
+2152           Ptr<Ipv4GlobalRouting> gr = router->GetRoutingProtocol ();
+2153           \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (gr);
+2154           \textcolor{comment}{// walk through all available exit directions due to ECMP,}
+2155           \textcolor{comment}{// and add host route for each of the exit direction toward}
+2156           \textcolor{comment}{// the vertex 'v'}
+2157           \textcolor{keywordflow}{for} (uint32\_t i = 0; i < v->GetNRootExitDirections (); i++)
+2158             \{
+2159               \hyperlink{classns3_1_1SPFVertex_a0adf6255ec0357050ef5436597b4cb32}{SPFVertex::NodeExit\_t} exit = v->GetRootExitDirection (i);
+2160               Ipv4Address nextHop = exit.first;
+2161               int32\_t outIf = exit.second;
+2162 
+2163               \textcolor{keywordflow}{if} (outIf >= 0)
+2164                 \{
+2165                   gr->AddNetworkRouteTo (tempip, tempmask, nextHop, outIf);
+2166                   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"(Route "} << i << \textcolor{stringliteral}{") Node "} << node->GetId () <<
+2167                                 \textcolor{stringliteral}{" add network route to "} << tempip <<
+2168                                 \textcolor{stringliteral}{" using next hop "} << nextHop <<
+2169                                 \textcolor{stringliteral}{" via interface "} << outIf);
+2170                 \}
+2171               \textcolor{keywordflow}{else}
+2172                 \{
+2173                   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"(Route "} << i << \textcolor{stringliteral}{") Node "} << node->GetId () <<
+2174                                 \textcolor{stringliteral}{" NOT able to add network route to "} << tempip <<
+2175                                 \textcolor{stringliteral}{" using next hop "} << nextHop <<
+2176                                 \textcolor{stringliteral}{" since outgoing interface id is negative "} << outIf);
+2177                 \}
+2178             \}
+2179         \}
+2180     \} 
+2181 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 23
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 24
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!S\+P\+F\+Next@{S\+P\+F\+Next}}
+\index{S\+P\+F\+Next@{S\+P\+F\+Next}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{S\+P\+F\+Next(\+S\+P\+F\+Vertex $\ast$v, Candidate\+Queue \&candidate)}{SPFNext(SPFVertex *v, CandidateQueue &candidate)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+S\+P\+F\+Next (
+\begin{DoxyParamCaption}
+\item[{{\bf S\+P\+F\+Vertex} $\ast$}]{v, }
+\item[{{\bf Candidate\+Queue} \&}]{candidate}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_aaa3d86729d6cfb61708d1c7083423da6}{}\label{classns3_1_1GlobalRouteManagerImpl_aaa3d86729d6cfb61708d1c7083423da6}
+
+
+Examine the links in v\textquotesingle{}s L\+SA and update the list of candidates with any vertices not already on the list. 
+
+
+\begin{DoxyCode}
+748 \{
+749   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << v << &candidate);
+750 
+751   SPFVertex* \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} = 0;
+752   GlobalRoutingLSA* w\_lsa = 0;
+753   GlobalRoutingLinkRecord *\hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l} = 0;
+754   uint32\_t distance = 0;
+755   uint32\_t numRecordsInVertex = 0;
+756 \textcolor{comment}{//}
+757 \textcolor{comment}{// V points to a Router-LSA or Network-LSA}
+758 \textcolor{comment}{// Loop over the links in router LSA or attached routers in Network LSA}
+759 \textcolor{comment}{//}
+760   \textcolor{keywordflow}{if} (v->GetVertexType () == \hyperlink{classns3_1_1SPFVertex_a20f8a4cfc99a1b7ecd10a23151b93afda340822983a2833fff14de88ea20a3f31}{SPFVertex::VertexRouter})
+761     \{
+762       numRecordsInVertex = v->GetLSA ()->GetNLinkRecords (); 
+763     \}
+764   \textcolor{keywordflow}{if} (v->GetVertexType () == \hyperlink{classns3_1_1SPFVertex_a20f8a4cfc99a1b7ecd10a23151b93afda00415acb788d8d95bee545fe2046c2a8}{SPFVertex::VertexNetwork})
+765     \{
+766       numRecordsInVertex = v->GetLSA ()->GetNAttachedRouters (); 
+767     \}
+768 
+769   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < numRecordsInVertex; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+770     \{
+771 \textcolor{comment}{// Get w\_lsa:  In case of V is Router-LSA}
+772       \textcolor{keywordflow}{if} (v->GetVertexType () == \hyperlink{classns3_1_1SPFVertex_a20f8a4cfc99a1b7ecd10a23151b93afda340822983a2833fff14de88ea20a3f31}{SPFVertex::VertexRouter}) 
+773         \{
+774           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Examining link "} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{" of "} << 
+775                         v->GetVertexId () << \textcolor{stringliteral}{"'s "} <<
+776                         v->GetLSA ()->GetNLinkRecords () << \textcolor{stringliteral}{" link records"});
+777 \textcolor{comment}{//}
+778 \textcolor{comment}{// (a) If this is a link to a stub network, examine the next link in V's LSA.}
+779 \textcolor{comment}{// Links to stub networks will be considered in the second stage of the}
+780 \textcolor{comment}{// shortest path calculation.}
+781 \textcolor{comment}{//}
+782           l = v->GetLSA ()->GetLinkRecord (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+783           \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (l != 0);
+784           \textcolor{keywordflow}{if} (l->GetLinkType () == \hyperlink{classns3_1_1GlobalRoutingLinkRecord_a9380bcce9bca03943c4761b166a694f4a183ff8c880e05253fdca7bece2cad90b}{GlobalRoutingLinkRecord::StubNetwork}
+      )
+785             \{
+786               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Found a Stub record to "} << l->GetLinkId ());
+787               \textcolor{keywordflow}{continue};
+788             \}
+789 \textcolor{comment}{//}
+790 \textcolor{comment}{// (b) Otherwise, W is a transit vertex (router or transit network).  Look up}
+791 \textcolor{comment}{// the vertex W's LSA (router-LSA or network-LSA) in Area A's link state}
+792 \textcolor{comment}{// database. }
+793 \textcolor{comment}{//}
+794           \textcolor{keywordflow}{if} (l->GetLinkType () == \hyperlink{classns3_1_1GlobalRoutingLinkRecord_a9380bcce9bca03943c4761b166a694f4aa345c79cdcaba957f5e8296509183912}{GlobalRoutingLinkRecord::PointToPoint}
+      )
+795             \{
+796 \textcolor{comment}{//}
+797 \textcolor{comment}{// Lookup the link state advertisement of the new link -- we call it <w> in}
+798 \textcolor{comment}{// the link state database.}
+799 \textcolor{comment}{//}
+800               w\_lsa = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb}->\hyperlink{classns3_1_1GlobalRouteManagerLSDB_a3504bf3573cc64a056835684c41e1aa5}{GetLSA} (l->GetLinkId ());
+801               \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (w\_lsa);
+802               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Found a P2P record from "} << 
+803                             v->GetVertexId () << \textcolor{stringliteral}{" to "} << w\_lsa->GetLinkStateId ());
+804             \}
+805           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (l->GetLinkType () == 
+806                    \hyperlink{classns3_1_1GlobalRoutingLinkRecord_a9380bcce9bca03943c4761b166a694f4ad3d00014c9ba50539a53b55fce117856}{GlobalRoutingLinkRecord::TransitNetwork})
+807             \{
+808               w\_lsa = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb}->\hyperlink{classns3_1_1GlobalRouteManagerLSDB_a3504bf3573cc64a056835684c41e1aa5}{GetLSA} (l->GetLinkId ());
+809               \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (w\_lsa);
+810               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Found a Transit record from "} << 
+811                             v->GetVertexId () << \textcolor{stringliteral}{" to "} << w\_lsa->GetLinkStateId ());
+812             \}
+813           \textcolor{keywordflow}{else} 
+814             \{
+815               \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (0, \textcolor{stringliteral}{"illegal Link Type"});
+816             \}
+817         \}
+818 \textcolor{comment}{// Get w\_lsa:  In case of V is Network-LSA}
+819       \textcolor{keywordflow}{if} (v->GetVertexType () == \hyperlink{classns3_1_1SPFVertex_a20f8a4cfc99a1b7ecd10a23151b93afda00415acb788d8d95bee545fe2046c2a8}{SPFVertex::VertexNetwork}) 
+820         \{
+821           w\_lsa = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{m\_lsdb}->\hyperlink{classns3_1_1GlobalRouteManagerLSDB_aca4c2cb4c36f590198f203cddb30b493}{GetLSAByLinkData} 
+822               (v->GetLSA ()->GetAttachedRouter (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+823           \textcolor{keywordflow}{if} (!w\_lsa)
+824             \{
+825               \textcolor{keywordflow}{continue};
+826             \}
+827           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Found a Network LSA from "} << 
+828                         v->GetVertexId () << \textcolor{stringliteral}{" to "} << w\_lsa->GetLinkStateId ());
+829         \}
+830 
+831 \textcolor{comment}{// Note:  w\_lsa at this point may be either RouterLSA or NetworkLSA}
+832 \textcolor{comment}{//}
+833 \textcolor{comment}{// (c) If vertex W is already on the shortest-path tree, examine the next}
+834 \textcolor{comment}{// link in the LSA.}
+835 \textcolor{comment}{//}
+836 \textcolor{comment}{// If the link is to a router that is already in the shortest path first tree}
+837 \textcolor{comment}{// then we have it covered -- ignore it.}
+838 \textcolor{comment}{//}
+839       \textcolor{keywordflow}{if} (w\_lsa->GetStatus () == \hyperlink{classns3_1_1GlobalRoutingLSA_a18bf63da580856fe1cc158aa855af1bda2a14fe5ba992deb9a1cb953f77ec8072}{GlobalRoutingLSA::LSA\_SPF\_IN\_SPFTREE}) 
+840         \{
+841           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Skipping ->  LSA "}<< 
+842                         w\_lsa->GetLinkStateId () << \textcolor{stringliteral}{" already in SPF tree"});
+843           \textcolor{keywordflow}{continue};
+844         \}
+845 \textcolor{comment}{//}
+846 \textcolor{comment}{// (d) Calculate the link state cost D of the resulting path from the root to }
+847 \textcolor{comment}{// vertex W.  D is equal to the sum of the link state cost of the (already }
+848 \textcolor{comment}{// calculated) shortest path to vertex V and the advertised cost of the link}
+849 \textcolor{comment}{// between vertices V and W.}
+850 \textcolor{comment}{//}
+851       \textcolor{keywordflow}{if} (v->GetLSA ()->GetLSType () == \hyperlink{classns3_1_1GlobalRoutingLSA_a34eb53a1ed37c877923b74d671224fdeada9e6185a392b3bb450846f5282e415d}{GlobalRoutingLSA::RouterLSA})
+852         \{
+853           \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (l != 0);
+854           distance = v->GetDistanceFromRoot () + l->GetMetric ();
+855         \}
+856       \textcolor{keywordflow}{else}
+857         \{
+858           distance = v->GetDistanceFromRoot ();
+859         \}
+860 
+861       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Considering w\_lsa "} << w\_lsa->GetLinkStateId ());
+862 
+863 \textcolor{comment}{// Is there already vertex w in candidate list?}
+864       \textcolor{keywordflow}{if} (w\_lsa->GetStatus () == \hyperlink{classns3_1_1GlobalRoutingLSA_a18bf63da580856fe1cc158aa855af1bda0d9a91161488cead75d479293fd05a94}{GlobalRoutingLSA::LSA\_SPF\_NOT\_EXPLORED}
+      )
+865         \{
+866 \textcolor{comment}{// Calculate nexthop to w}
+867 \textcolor{comment}{// We need to figure out how to actually get to the new router represented}
+868 \textcolor{comment}{// by <w>.  This will (among other things) find the next hop address to send}
+869 \textcolor{comment}{// packets destined for this network to, and also find the outbound interface}
+870 \textcolor{comment}{// used to forward the packets.}
+871 
+872 \textcolor{comment}{// prepare vertex w}
+873           w = \textcolor{keyword}{new} SPFVertex (w\_lsa);
+874           \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1GlobalRouteManagerImpl_ab082a78c423009f77c9cfe9018d40021}{SPFNexthopCalculation} (v, w, l, distance))
+875             \{
+876               w\_lsa->SetStatus (\hyperlink{classns3_1_1GlobalRoutingLSA_a18bf63da580856fe1cc158aa855af1bda9f23e66077c059f58318033586e74c50}{GlobalRoutingLSA::LSA\_SPF\_CANDIDATE});
+877 \textcolor{comment}{//}
+878 \textcolor{comment}{// Push this new vertex onto the priority queue (ordered by distance from the}
+879 \textcolor{comment}{// root node).}
+880 \textcolor{comment}{//}
+881               candidate.Push (w);
+882               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Pushing "} << 
+883                             w->GetVertexId () << \textcolor{stringliteral}{", parent vertexId: "} <<
+884                             v->GetVertexId () << \textcolor{stringliteral}{", distance: "} <<
+885                             w->GetDistanceFromRoot ());
+886             \}
+887           \textcolor{keywordflow}{else}
+888             \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (0, \textcolor{stringliteral}{"SPFNexthopCalculation never "} 
+889                            << \textcolor{stringliteral}{"return false, but it does now!"});
+890         \}
+891       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (w\_lsa->GetStatus () == \hyperlink{classns3_1_1GlobalRoutingLSA_a18bf63da580856fe1cc158aa855af1bda9f23e66077c059f58318033586e74c50}{GlobalRoutingLSA::LSA\_SPF\_CANDIDATE}
+      )
+892         \{
+893 \textcolor{comment}{//}
+894 \textcolor{comment}{// We have already considered the link represented by <w>.  What wse have to}
+895 \textcolor{comment}{// do now is to decide if this new router represents a route with a shorter}
+896 \textcolor{comment}{// distance metric.}
+897 \textcolor{comment}{//}
+898 \textcolor{comment}{// So, locate the vertex in the candidate queue and take a look at the }
+899 \textcolor{comment}{// distance.}
+900 
+901 \textcolor{comment}{/* (quagga-0.98.6) W is already on the candidate list; call it cw.}
+902 \textcolor{comment}{* Compare the previously calculated cost (cw->distance)}
+903 \textcolor{comment}{* with the cost we just determined (w->distance) to see}
+904 \textcolor{comment}{* if we've found a shorter path.}
+905 \textcolor{comment}{*/}
+906           SPFVertex* cw;
+907           cw = candidate.Find (w\_lsa->GetLinkStateId ());
+908           \textcolor{keywordflow}{if} (cw->GetDistanceFromRoot () < distance)
+909             \{
+910 \textcolor{comment}{//}
+911 \textcolor{comment}{// This is not a shorter path, so don't do anything.}
+912 \textcolor{comment}{//}
+913               \textcolor{keywordflow}{continue};
+914             \}
+915           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (cw->GetDistanceFromRoot () == distance)
+916             \{
+917 \textcolor{comment}{//}
+918 \textcolor{comment}{// This path is one with an equal cost.}
+919 \textcolor{comment}{//}
+920               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Equal cost multiple paths found."});
+921 
+922 \textcolor{comment}{// At this point, there are two instances 'w' and 'cw' of the}
+923 \textcolor{comment}{// same vertex, the vertex that is currently being considered}
+924 \textcolor{comment}{// for adding into the shortest path tree. 'w' is the instance}
+925 \textcolor{comment}{// as seen from the root via vertex 'v', and 'cw' is the instance }
+926 \textcolor{comment}{// as seen from the root via some other vertices other than 'v'.}
+927 \textcolor{comment}{// These two instances are being merged in the following code.}
+928 \textcolor{comment}{// In particular, the parent nodes, the next hops, and the root's}
+929 \textcolor{comment}{// output interfaces of the two instances are being merged.}
+930 \textcolor{comment}{// }
+931 \textcolor{comment}{// Note that this is functionally equivalent to calling}
+932 \textcolor{comment}{// ospf\_nexthop\_merge (cw->nexthop, w->nexthop) in quagga-0.98.6}
+933 \textcolor{comment}{// (ospf\_spf.c::859), although the detail implementation}
+934 \textcolor{comment}{// is very different from quagga (blame ns3::GlobalRouteManagerImpl)}
+935 
+936 \textcolor{comment}{// prepare vertex w}
+937               w = \textcolor{keyword}{new} SPFVertex (w\_lsa);
+938               \hyperlink{classns3_1_1GlobalRouteManagerImpl_ab082a78c423009f77c9cfe9018d40021}{SPFNexthopCalculation} (v, w, l, distance);
+939               cw->MergeRootExitDirections (w);
+940               cw->MergeParent (w);
+941 \textcolor{comment}{// SPFVertexAddParent (w) is necessary as the destructor of }
+942 \textcolor{comment}{// SPFVertex checks if the vertex and its parent is linked}
+943 \textcolor{comment}{// bidirectionally}
+944               \hyperlink{classns3_1_1GlobalRouteManagerImpl_ae7824a06e22187d1dc6823c46c95a3fc}{SPFVertexAddParent} (w);
+945               \textcolor{keyword}{delete} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w};
+946             \}
+947           \textcolor{keywordflow}{else} \textcolor{comment}{// cw->GetDistanceFromRoot () > w->GetDistanceFromRoot ()}
+948             \{
+949 \textcolor{comment}{// }
+950 \textcolor{comment}{// this path represents a new, lower-cost path to <w> (the vertex we found in}
+951 \textcolor{comment}{// the current link record of the link state advertisement of the current root}
+952 \textcolor{comment}{// (vertex <v>)}
+953 \textcolor{comment}{//}
+954 \textcolor{comment}{// N.B. the nexthop\_calculation is conditional, if it finds a valid nexthop}
+955 \textcolor{comment}{// it will call spf\_add\_parents, which will flush the old parents}
+956 \textcolor{comment}{//}
+957               \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1GlobalRouteManagerImpl_ab082a78c423009f77c9cfe9018d40021}{SPFNexthopCalculation} (v, cw, l, distance))
+958                 \{
+959 \textcolor{comment}{//}
+960 \textcolor{comment}{// If we've changed the cost to get to the vertex represented by <w>, we }
+961 \textcolor{comment}{// must reorder the priority queue keyed to that cost.}
+962 \textcolor{comment}{//}
+963                   candidate.Reorder ();
+964                 \}
+965             \} \textcolor{comment}{// new lower cost path found}
+966         \} \textcolor{comment}{// end W is already on the candidate list}
+967     \} \textcolor{comment}{// end loop over the links in V's LSA}
+968 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 25
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 26
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!S\+P\+F\+Nexthop\+Calculation@{S\+P\+F\+Nexthop\+Calculation}}
+\index{S\+P\+F\+Nexthop\+Calculation@{S\+P\+F\+Nexthop\+Calculation}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{S\+P\+F\+Nexthop\+Calculation(\+S\+P\+F\+Vertex $\ast$v, S\+P\+F\+Vertex $\ast$w, Global\+Routing\+Link\+Record $\ast$l, uint32\+\_\+t distance)}{SPFNexthopCalculation(SPFVertex *v, SPFVertex *w, GlobalRoutingLinkRecord *l, uint32_t distance)}}]{\setlength{\rightskip}{0pt plus 5cm}int ns3\+::\+Global\+Route\+Manager\+Impl\+::\+S\+P\+F\+Nexthop\+Calculation (
+\begin{DoxyParamCaption}
+\item[{{\bf S\+P\+F\+Vertex} $\ast$}]{v, }
+\item[{{\bf S\+P\+F\+Vertex} $\ast$}]{w, }
+\item[{{\bf Global\+Routing\+Link\+Record} $\ast$}]{l, }
+\item[{uint32\+\_\+t}]{distance}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_ab082a78c423009f77c9cfe9018d40021}{}\label{classns3_1_1GlobalRouteManagerImpl_ab082a78c423009f77c9cfe9018d40021}
+
+
+Calculate nexthop from root through V (parent) to vertex W (destination) with given distance from root-\/$>$W. 
+
+This method is derived from quagga ospf\+\_\+nexthop\+\_\+calculation() 16.\+1.\+1. For now, this is greatly simplified from the quagga code
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & the parent \\
+\hline
+{\em w} & the destination \\
+\hline
+{\em l} & the link record \\
+\hline
+{\em distance} & the target distance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+986 \{
+987   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << v << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} << \hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l} << distance);
+988 \textcolor{comment}{//}
+989 \textcolor{comment}{// If w is a NetworkVertex, l should be null}
+990 \textcolor{comment}{/*}
+991 \textcolor{comment}{  if (w->GetVertexType () == SPFVertex::VertexNetwork && l)}
+992 \textcolor{comment}{    \{}
+993 \textcolor{comment}{        NS\_ASSERT\_MSG (0, "Error:  SPFNexthopCalculation parameter problem");}
+994 \textcolor{comment}{    \}}
+995 \textcolor{comment}{*/}
+996 
+997 \textcolor{comment}{//}
+998 \textcolor{comment}{// The vertex m\_spfroot is a distinguished vertex representing the node at}
+999 \textcolor{comment}{// the root of the calculations.  That is, it is the node for which we are}
+1000 \textcolor{comment}{// calculating the routes.}
+1001 \textcolor{comment}{//}
+1002 \textcolor{comment}{// There are two distinct cases for calculating the next hop information.}
+1003 \textcolor{comment}{// First, if we're considering a hop from the root to an "adjacent" network}
+1004 \textcolor{comment}{// (one that is on the other side of a point-to-point link connected to the}
+1005 \textcolor{comment}{// root), then we need to store the information needed to forward down that}
+1006 \textcolor{comment}{// link.  The second case is if the network is not directly adjacent.  In that}
+1007 \textcolor{comment}{// case we need to use the forwarding information from the vertex on the path}
+1008 \textcolor{comment}{// to the destination that is directly adjacent [node 1] in both cases of the}
+1009 \textcolor{comment}{// diagram below.}
+1010 \textcolor{comment}{// }
+1011 \textcolor{comment}{// (1) [root] -> [point-to-point] -> [node 1]}
+1012 \textcolor{comment}{// (2) [root] -> [point-to-point] -> [node 1] -> [point-to-point] -> [node 2]}
+1013 \textcolor{comment}{//}
+1014 \textcolor{comment}{// We call the propagation of next hop information down vertices of a path}
+1015 \textcolor{comment}{// "inheriting" the next hop information.}
+1016 \textcolor{comment}{//}
+1017 \textcolor{comment}{// The point-to-point link information is only useful in this calculation when}
+1018 \textcolor{comment}{// we are examining the root node. }
+1019 \textcolor{comment}{//}
+1020   \textcolor{keywordflow}{if} (v == \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot})
+1021     \{
+1022 \textcolor{comment}{//}
+1023 \textcolor{comment}{// In this case <v> is the root node, which means it is the starting point}
+1024 \textcolor{comment}{// for the packets forwarded by that node.  This also means that the next hop}
+1025 \textcolor{comment}{// address of packets headed for some arbitrary off-network destination must}
+1026 \textcolor{comment}{// be the destination at the other end of one of the links off of the root}
+1027 \textcolor{comment}{// node if this root node is a router.  We then need to see if this node <w>}
+1028 \textcolor{comment}{// is a router.}
+1029 \textcolor{comment}{//}
+1030       \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->GetVertexType () == \hyperlink{classns3_1_1SPFVertex_a20f8a4cfc99a1b7ecd10a23151b93afda340822983a2833fff14de88ea20a3f31}{SPFVertex::VertexRouter}) 
+1031         \{
+1032 \textcolor{comment}{//}
+1033 \textcolor{comment}{// In the case of point-to-point links, the link data field (m\_linkData) of a}
+1034 \textcolor{comment}{// Global Router Link Record contains the local IP address.  If we look at the}
+1035 \textcolor{comment}{// link record describing the link from the perspecive of <w> (the remote}
+1036 \textcolor{comment}{// node from the viewpoint of <v>) back to the root node, we can discover the}
+1037 \textcolor{comment}{// IP address of the router to which <v> is adjacent.  This is a distinguished}
+1038 \textcolor{comment}{// address -- the next hop address to get from <v> to <w> and all networks }
+1039 \textcolor{comment}{// accessed through that path.}
+1040 \textcolor{comment}{//}
+1041 \textcolor{comment}{// SPFGetNextLink () is a little odd.  used in this way it is just going to}
+1042 \textcolor{comment}{// return the link record describing the link from <w> to <v>.  Think of it as}
+1043 \textcolor{comment}{// SPFGetLink.}
+1044 \textcolor{comment}{//}
+1045           \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l});
+1046           GlobalRoutingLinkRecord *linkRemote = 0;
+1047           linkRemote = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a4c868c90e06e063ac2eb60cfe93c2c84}{SPFGetNextLink} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}, v, linkRemote);
+1048 \textcolor{comment}{// }
+1049 \textcolor{comment}{// At this point, <l> is the Global Router Link Record describing the point-}
+1050 \textcolor{comment}{// to point link from <v> to <w> from the perspective of <v>; and <linkRemote>}
+1051 \textcolor{comment}{// is the Global Router Link Record describing that same link from the }
+1052 \textcolor{comment}{// perspective of <w> (back to <v>).  Now we can just copy the next hop }
+1053 \textcolor{comment}{// address from the m\_linkData member variable.}
+1054 \textcolor{comment}{// }
+1055 \textcolor{comment}{// The next hop member variable we put in <w> has the sense "in order to get}
+1056 \textcolor{comment}{// from the root node to the host represented by vertex <w>, you have to send}
+1057 \textcolor{comment}{// the packet to the next hop address specified in w->m\_nextHop.}
+1058 \textcolor{comment}{//}
+1059           Ipv4Address nextHop = linkRemote->GetLinkData ();
+1060 \textcolor{comment}{// }
+1061 \textcolor{comment}{// Now find the outgoing interface corresponding to the point to point link}
+1062 \textcolor{comment}{// from the perspective of <v> -- remember that <l> is the link "from"}
+1063 \textcolor{comment}{// <v> "to" <w>.}
+1064 \textcolor{comment}{//}
+1065           uint32\_t outIf = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a55b3c7bf042d95de52cf56cc6699dc9a}{FindOutgoingInterfaceId} (\hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l}->GetLinkData ());
+1066 
+1067           \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->SetRootExitDirection (nextHop, outIf);
+1068           \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->SetDistanceFromRoot (distance);
+1069           \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->SetParent (v);
+1070           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Next hop from "} << 
+1071                         v->GetVertexId () << \textcolor{stringliteral}{" to "} << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->GetVertexId () <<
+1072                         \textcolor{stringliteral}{" goes through next hop "} << nextHop <<
+1073                         \textcolor{stringliteral}{" via outgoing interface "} << outIf <<
+1074                         \textcolor{stringliteral}{" with distance "} << distance);
+1075         \}  \textcolor{comment}{// end W is a router vertes}
+1076       \textcolor{keywordflow}{else} 
+1077         \{
+1078           \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->GetVertexType () == \hyperlink{classns3_1_1SPFVertex_a20f8a4cfc99a1b7ecd10a23151b93afda00415acb788d8d95bee545fe2046c2a8}{SPFVertex::VertexNetwork});
+1079 \textcolor{comment}{// W is a directly connected network; no next hop is required}
+1080           GlobalRoutingLSA* w\_lsa = \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->GetLSA ();
+1081           \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (w\_lsa->GetLSType () == 
+      \hyperlink{classns3_1_1GlobalRoutingLSA_a34eb53a1ed37c877923b74d671224fdeab37398976cdc8ddd08e1428a4700b5b4}{GlobalRoutingLSA::NetworkLSA});
+1082 \textcolor{comment}{// Find outgoing interface ID for this network}
+1083           uint32\_t outIf = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a55b3c7bf042d95de52cf56cc6699dc9a}{FindOutgoingInterfaceId} (w\_lsa->GetLinkStateId (), 
+1084                                                     w\_lsa->GetNetworkLSANetworkMask () );
+1085 \textcolor{comment}{// Set the next hop to 0.0.0.0 meaning "not exist"}
+1086           Ipv4Address nextHop = \hyperlink{classns3_1_1Ipv4Address_aeeb1c76b35d4ab612fda7bc51e99c5db}{Ipv4Address::GetZero} ();
+1087           \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->SetRootExitDirection (nextHop, outIf);
+1088           \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->SetDistanceFromRoot (distance);
+1089           \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->SetParent (v);
+1090           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Next hop from "} << 
+1091                         v->GetVertexId () << \textcolor{stringliteral}{" to network "} << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->GetVertexId () <<
+1092                         \textcolor{stringliteral}{" via outgoing interface "} << outIf <<
+1093                         \textcolor{stringliteral}{" with distance "} << distance);
+1094           \textcolor{keywordflow}{return} 1;
+1095         \}
+1096     \} \textcolor{comment}{// end v is the root}
+1097   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (v->GetVertexType () == \hyperlink{classns3_1_1SPFVertex_a20f8a4cfc99a1b7ecd10a23151b93afda00415acb788d8d95bee545fe2046c2a8}{SPFVertex::VertexNetwork}) 
+1098     \{
+1099 \textcolor{comment}{// See if any of v's parents are the root}
+1100       \textcolor{keywordflow}{if} (v->GetParent () == \hyperlink{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{m\_spfroot})
+1101         \{
+1102 \textcolor{comment}{// 16.1.1 para 5. ...the parent vertex is a network that}
+1103 \textcolor{comment}{// directly connects the calculating router to the destination}
+1104 \textcolor{comment}{// router.  The list of next hops is then determined by}
+1105 \textcolor{comment}{// examining the destination's router-LSA...}
+1106           \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->GetVertexType () == \hyperlink{classns3_1_1SPFVertex_a20f8a4cfc99a1b7ecd10a23151b93afda340822983a2833fff14de88ea20a3f31}{SPFVertex::VertexRouter});
+1107           GlobalRoutingLinkRecord *linkRemote = 0;
+1108           \textcolor{keywordflow}{while} ((linkRemote = \hyperlink{classns3_1_1GlobalRouteManagerImpl_a4c868c90e06e063ac2eb60cfe93c2c84}{SPFGetNextLink} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}, v, linkRemote)))
+1109             \{
+1110 \textcolor{comment}{/* ...For each link in the router-LSA that points back to the}
+1111 \textcolor{comment}{ * parent network, the link's Link Data field provides the IP}
+1112 \textcolor{comment}{ * address of a next hop router.  The outgoing interface to}
+1113 \textcolor{comment}{ * use can then be derived from the next hop IP address (or }
+1114 \textcolor{comment}{ * it can be inherited from the parent network).}
+1115 \textcolor{comment}{ */}
+1116               Ipv4Address nextHop = linkRemote->GetLinkData ();
+1117               uint32\_t outIf = v->GetRootExitDirection ().second;
+1118               \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->SetRootExitDirection (nextHop, outIf);
+1119               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Next hop from "} <<
+1120                             v->GetVertexId () << \textcolor{stringliteral}{" to "} << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->GetVertexId () <<
+1121                             \textcolor{stringliteral}{" goes through next hop "} << nextHop <<
+1122                             \textcolor{stringliteral}{" via outgoing interface "} << outIf);
+1123             \}
+1124         \}
+1125       \textcolor{keywordflow}{else} 
+1126         \{
+1127           \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->SetRootExitDirection (v->GetRootExitDirection ());
+1128         \}
+1129     \}
+1130   \textcolor{keywordflow}{else} 
+1131     \{
+1132 \textcolor{comment}{//}
+1133 \textcolor{comment}{// If we're calculating the next hop information from a node (v) that is }
+1134 \textcolor{comment}{// *not* the root, then we need to "inherit" the information needed to}
+1135 \textcolor{comment}{// forward the packet from the vertex closer to the root.  That is, we'll}
+1136 \textcolor{comment}{// still send packets to the next hop address of the router adjacent to the}
+1137 \textcolor{comment}{// root on the path toward <w>.}
+1138 \textcolor{comment}{//}
+1139 \textcolor{comment}{// Above, when we were considering the root node, we calculated the next hop}
+1140 \textcolor{comment}{// address and outgoing interface required to get off of the root network.}
+1141 \textcolor{comment}{// At this point, we are further away from the root network along one of the}
+1142 \textcolor{comment}{// (shortest) paths.  So the next hop and outoing interface remain the same}
+1143 \textcolor{comment}{// (are inherited).}
+1144 \textcolor{comment}{//}
+1145       \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->InheritAllRootExitDirections (v);
+1146     \}
+1147 \textcolor{comment}{//}
+1148 \textcolor{comment}{// In all cases, we need valid values for the distance metric and a parent.}
+1149 \textcolor{comment}{//}
+1150   \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->SetDistanceFromRoot (distance);
+1151   \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w}->SetParent (v);
+1152 
+1153   \textcolor{keywordflow}{return} 1;
+1154 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 27
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 28
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!S\+P\+F\+Process\+Stubs@{S\+P\+F\+Process\+Stubs}}
+\index{S\+P\+F\+Process\+Stubs@{S\+P\+F\+Process\+Stubs}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{S\+P\+F\+Process\+Stubs(\+S\+P\+F\+Vertex $\ast$v)}{SPFProcessStubs(SPFVertex *v)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+S\+P\+F\+Process\+Stubs (
+\begin{DoxyParamCaption}
+\item[{{\bf S\+P\+F\+Vertex} $\ast$}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a3d43e1ea8faefbbb7139b2ede6315cbb}{}\label{classns3_1_1GlobalRouteManagerImpl_a3d43e1ea8faefbbb7139b2ede6315cbb}
+
+
+Process Stub nodes. 
+
+Processing logic from R\+FC 2328, page 166 and quagga ospf\+\_\+spf\+\_\+process\+\_\+stubs () stub link records will exist for point-\/to-\/point interfaces and for broadcast interfaces for which no neighboring router can be found
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & vertex to be processed \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+1670 \{
+1671   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << v);
+1672   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Processing stubs for "} << v->GetVertexId ());
+1673   \textcolor{keywordflow}{if} (v->GetVertexType () == \hyperlink{classns3_1_1SPFVertex_a20f8a4cfc99a1b7ecd10a23151b93afda340822983a2833fff14de88ea20a3f31}{SPFVertex::VertexRouter})
+1674     \{
+1675       GlobalRoutingLSA *rlsa = v->GetLSA ();
+1676       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Processing router LSA with id "} << rlsa->GetLinkStateId ());
+1677       \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < rlsa->GetNLinkRecords (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+1678         \{
+1679           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Examining link "} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{" of "} << 
+1680                         v->GetVertexId () << \textcolor{stringliteral}{"'s "} <<
+1681                         v->GetLSA ()->GetNLinkRecords () << \textcolor{stringliteral}{" link records"});
+1682           GlobalRoutingLinkRecord *\hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l} = v->GetLSA ()->GetLinkRecord (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+1683           \textcolor{keywordflow}{if} (l->GetLinkType () == \hyperlink{classns3_1_1GlobalRoutingLinkRecord_a9380bcce9bca03943c4761b166a694f4a183ff8c880e05253fdca7bece2cad90b}{GlobalRoutingLinkRecord::StubNetwork}
+      )
+1684             \{
+1685               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Found a Stub record to "} << l->GetLinkId ());
+1686               \hyperlink{classns3_1_1GlobalRouteManagerImpl_ac939f5c304a02470c566b99699db402c}{SPFIntraAddStub} (l, v);
+1687               \textcolor{keywordflow}{continue};
+1688             \}
+1689         \}
+1690     \}
+1691   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < v->GetNChildren (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+1692     \{
+1693       \textcolor{keywordflow}{if} (!v->GetChild (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})->IsVertexProcessed ())
+1694         \{
+1695           \hyperlink{classns3_1_1GlobalRouteManagerImpl_a3d43e1ea8faefbbb7139b2ede6315cbb}{SPFProcessStubs} (v->GetChild (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+1696           v->GetChild (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})->SetVertexProcessed (\textcolor{keyword}{true});
+1697         \}
+1698     \}
+1699 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 29
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 30
+
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!S\+P\+F\+Vertex\+Add\+Parent@{S\+P\+F\+Vertex\+Add\+Parent}}
+\index{S\+P\+F\+Vertex\+Add\+Parent@{S\+P\+F\+Vertex\+Add\+Parent}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{S\+P\+F\+Vertex\+Add\+Parent(\+S\+P\+F\+Vertex $\ast$v)}{SPFVertexAddParent(SPFVertex *v)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+Impl\+::\+S\+P\+F\+Vertex\+Add\+Parent (
+\begin{DoxyParamCaption}
+\item[{{\bf S\+P\+F\+Vertex} $\ast$}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_ae7824a06e22187d1dc6823c46c95a3fc}{}\label{classns3_1_1GlobalRouteManagerImpl_ae7824a06e22187d1dc6823c46c95a3fc}
+
+
+Adds a vertex to the list of children {\itshape in} each of its parents. 
+
+\hyperlink{classDerived}{Derived} from quagga ospf\+\_\+vertex\+\_\+add\+\_\+parents ()
+
+This is a somewhat oddly named method (blame quagga). Although you might expect it to add a parent {\itshape to} something, it actually adds a vertex to the list of children {\itshape in} each of its parents.
+
+Given a pointer to a vertex, it links back to the vertex\textquotesingle{}s parent that it already has set and adds itself to that vertex\textquotesingle{}s list of children.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & the vertex \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+2194 \{
+2195   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << v);
+2196 
+2197   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}=0;;)
+2198     \{
+2199       SPFVertex* parent;
+2200       \textcolor{comment}{// check if all parents of vertex v}
+2201       \textcolor{keywordflow}{if} ((parent = v->GetParent (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)) == 0) \textcolor{keywordflow}{break};
+2202       parent->AddChild (v);
+2203     \}
+2204 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 31
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 32
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!m\+\_\+lsdb@{m\+\_\+lsdb}}
+\index{m\+\_\+lsdb@{m\+\_\+lsdb}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{m\+\_\+lsdb}{m_lsdb}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Global\+Route\+Manager\+L\+S\+DB}$\ast$ ns3\+::\+Global\+Route\+Manager\+Impl\+::m\+\_\+lsdb\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}{}\label{classns3_1_1GlobalRouteManagerImpl_a7e528f818fa3e6c794b07c0b3cba5f61}
+
+
+the Link State Data\+Base (L\+S\+DB) of the Global Route Manager 
+
+\index{ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}!m\+\_\+spfroot@{m\+\_\+spfroot}}
+\index{m\+\_\+spfroot@{m\+\_\+spfroot}!ns3\+::\+Global\+Route\+Manager\+Impl@{ns3\+::\+Global\+Route\+Manager\+Impl}}
+\subsubsection[{\texorpdfstring{m\+\_\+spfroot}{m_spfroot}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf S\+P\+F\+Vertex}$\ast$ ns3\+::\+Global\+Route\+Manager\+Impl\+::m\+\_\+spfroot\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}{}\label{classns3_1_1GlobalRouteManagerImpl_a977f6b62ef1f1b58d041a2f49c093a1c}
+
+
+the root node 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{global-route-manager-impl_8h}{global-\/route-\/manager-\/impl.\+h}\item 
+internet/model/\hyperlink{global-route-manager-impl_8cc}{global-\/route-\/manager-\/impl.\+cc}\end{DoxyCompactItemize}

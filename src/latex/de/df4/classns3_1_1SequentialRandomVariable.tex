@@ -1,0 +1,379 @@
+\hypertarget{classns3_1_1SequentialRandomVariable}{}\section{ns3\+:\+:Sequential\+Random\+Variable Class Reference}
+\label{classns3_1_1SequentialRandomVariable}\index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+
+
+The Random Number Generator (R\+NG) that returns a pattern of sequential values.  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Sequential\+Random\+Variable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Sequential\+Random\+Variable\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1SequentialRandomVariable_aed65a4dd9c1d8ecbded1b11a852ab59a}{Sequential\+Random\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Creates a sequential R\+NG with the default values for the sequence parameters. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1SequentialRandomVariable_a9b3e91e6c67f8fe332fa9a8e1c01c5a6}{Get\+Min} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the first value of the sequence. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1SequentialRandomVariable_ae761d5525c612dd7abc9bac579c82221}{Get\+Max} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the limit of the sequence, which is (at least) one more than the last value of the sequence. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} $>$ \hyperlink{classns3_1_1SequentialRandomVariable_ac2511f4f229e230424ef0f8324f1618d}{Get\+Increment} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the increment for the sequence. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1SequentialRandomVariable_ae02a039bffbc27c727ca39c7eb89b0b7}{Get\+Consecutive} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the number of times each distinct value of the sequence is repeated before incrementing to the next value. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1SequentialRandomVariable_a78f36ee1a8102df7d7d40c4490ddf250}{Get\+Value} (void)
+\begin{DoxyCompactList}\small\item\em Get the next random value as a double drawn from the distribution. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1SequentialRandomVariable_ab93ac4c689c25c3b727881925f476401}{Get\+Integer} (void)
+\begin{DoxyCompactList}\small\item\em Get the next random value as an integer drawn from the distribution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1SequentialRandomVariable_a0d5681ef517e100c2a3ad5f8dccd9dc7}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1SequentialRandomVariable_a168c620d4730301c20caab6abcbd00dc}{m\+\_\+min}
+\item 
+double \hyperlink{classns3_1_1SequentialRandomVariable_ab3ab59c289b5ee0751562c5e46020def}{m\+\_\+max}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} $>$ \hyperlink{classns3_1_1SequentialRandomVariable_abb30c71cae8727ea8c2330f0dc309e6f}{m\+\_\+increment}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1SequentialRandomVariable_a4c6baa5a3e757ccee2928b8d4ba9fcf3}{m\+\_\+consecutive}
+\item 
+double \hyperlink{classns3_1_1SequentialRandomVariable_a91885067ac2516545153f122666ea6ac}{m\+\_\+current}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1SequentialRandomVariable_a04bb3e0a4537b255340d174f827d463c}{m\+\_\+current\+Consecutive}
+\item 
+bool \hyperlink{classns3_1_1SequentialRandomVariable_afa73acac6f4f810d2ff71e794a5a0c2d}{m\+\_\+is\+Current\+Set}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The Random Number Generator (R\+NG) that returns a pattern of sequential values. 
+
+This R\+NG has four configuration attributes\+:
+
+
+\begin{DoxyItemize}
+\item An increment, {\ttfamily Increment}.
+\item A consecutive repeat numer, {\ttfamily Consecutive}.
+\item The minimum value, {\ttfamily Min}.
+\item The maximum value, {\ttfamily Max}.
+\end{DoxyItemize}
+
+The R\+NG starts at the {\ttfamily Min} value. Each return value is repeated {\ttfamily Consecutive} times, before advancing by the {\ttfamily Increment}. When the {\ttfamily Increment} would cause the value to equal or exceed {\ttfamily Max} it is reset to {\ttfamily Min} first.
+
+For example, if an instance is configured with\+:
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*2{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}{\bf Attribute }&\PBS\raggedleft {\bf Value  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}{\bf Attribute }&\PBS\raggedleft {\bf Value  }\\\cline{1-2}
+\endhead
+Min &\PBS\raggedleft 2 \\\cline{1-2}
+Max &\PBS\raggedleft 13 \\\cline{1-2}
+Increment &\PBS\raggedleft 4 \\\cline{1-2}
+Consecutive &\PBS\raggedleft 3 \\\cline{1-2}
+\end{longtabu}
+The sequence will repeat this pattern\+: 2 2 2 6 6 6 10 10 10.
+
+Notice that {\ttfamily Max} will be a strict upper bound on the values\+: all values in the sequence will be less than {\ttfamily Max}.
+
+\begin{DoxyParagraph}{Antithetic Values.}
+
+\end{DoxyParagraph}
+This R\+NG ignores the antithetic setting. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!Sequential\+Random\+Variable@{Sequential\+Random\+Variable}}
+\index{Sequential\+Random\+Variable@{Sequential\+Random\+Variable}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Sequential\+Random\+Variable()}{SequentialRandomVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Sequential\+Random\+Variable\+::\+Sequential\+Random\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SequentialRandomVariable_aed65a4dd9c1d8ecbded1b11a852ab59a}{}\label{classns3_1_1SequentialRandomVariable_aed65a4dd9c1d8ecbded1b11a852ab59a}
+
+
+Creates a sequential R\+NG with the default values for the sequence parameters. 
+
+
+\begin{DoxyCode}
+296     :
+297     \hyperlink{classns3_1_1SequentialRandomVariable_a91885067ac2516545153f122666ea6ac}{m\_current}            (0),
+298     \hyperlink{classns3_1_1SequentialRandomVariable_a04bb3e0a4537b255340d174f827d463c}{m\_currentConsecutive} (0),
+299     \hyperlink{classns3_1_1SequentialRandomVariable_afa73acac6f4f810d2ff71e794a5a0c2d}{m\_isCurrentSet}       (\textcolor{keyword}{false})
+300 \{
+301   \textcolor{comment}{// m\_min, m\_max, m\_increment, and m\_consecutive are initialized}
+302   \textcolor{comment}{// after constructor by attributes.}
+303   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+304 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!Get\+Consecutive@{Get\+Consecutive}}
+\index{Get\+Consecutive@{Get\+Consecutive}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Consecutive(void) const }{GetConsecutive(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Sequential\+Random\+Variable\+::\+Get\+Consecutive (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1SequentialRandomVariable_ae02a039bffbc27c727ca39c7eb89b0b7}{}\label{classns3_1_1SequentialRandomVariable_ae02a039bffbc27c727ca39c7eb89b0b7}
+
+
+Get the number of times each distinct value of the sequence is repeated before incrementing to the next value. 
+
+\begin{DoxyReturn}{Returns}
+The number of times each value is repeated. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+329 \{
+330   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+331   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SequentialRandomVariable_a4c6baa5a3e757ccee2928b8d4ba9fcf3}{m\_consecutive};
+332 \}
+\end{DoxyCode}
+\index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!Get\+Increment@{Get\+Increment}}
+\index{Get\+Increment@{Get\+Increment}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Increment(void) const }{GetIncrement(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Random\+Variable\+Stream} $>$ ns3\+::\+Sequential\+Random\+Variable\+::\+Get\+Increment (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1SequentialRandomVariable_ac2511f4f229e230424ef0f8324f1618d}{}\label{classns3_1_1SequentialRandomVariable_ac2511f4f229e230424ef0f8324f1618d}
+
+
+Get the increment for the sequence. 
+
+\begin{DoxyReturn}{Returns}
+The increment between distinct values for the sequence. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+322 \{
+323   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+324   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SequentialRandomVariable_abb30c71cae8727ea8c2330f0dc309e6f}{m\_increment};
+325 \}
+\end{DoxyCode}
+\index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(void)}{GetInteger(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Sequential\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1SequentialRandomVariable_ab93ac4c689c25c3b727881925f476401}{}\label{classns3_1_1SequentialRandomVariable_ab93ac4c689c25c3b727881925f476401}
+
+
+Get the next random value as an integer drawn from the distribution. 
+
+\begin{DoxyReturn}{Returns}
+An integer random value. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+362 \{
+363   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+364   \textcolor{keywordflow}{return} (uint32\_t)\hyperlink{classns3_1_1SequentialRandomVariable_a78f36ee1a8102df7d7d40c4490ddf250}{GetValue} ();
+365 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!Get\+Max@{Get\+Max}}
+\index{Get\+Max@{Get\+Max}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Max(void) const }{GetMax(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Sequential\+Random\+Variable\+::\+Get\+Max (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1SequentialRandomVariable_ae761d5525c612dd7abc9bac579c82221}{}\label{classns3_1_1SequentialRandomVariable_ae761d5525c612dd7abc9bac579c82221}
+
+
+Get the limit of the sequence, which is (at least) one more than the last value of the sequence. 
+
+\begin{DoxyReturn}{Returns}
+The limit of the sequence. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+315 \{
+316   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+317   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SequentialRandomVariable_ab3ab59c289b5ee0751562c5e46020def}{m\_max};
+318 \}
+\end{DoxyCode}
+\index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!Get\+Min@{Get\+Min}}
+\index{Get\+Min@{Get\+Min}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Min(void) const }{GetMin(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Sequential\+Random\+Variable\+::\+Get\+Min (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1SequentialRandomVariable_a9b3e91e6c67f8fe332fa9a8e1c01c5a6}{}\label{classns3_1_1SequentialRandomVariable_a9b3e91e6c67f8fe332fa9a8e1c01c5a6}
+
+
+Get the first value of the sequence. 
+
+\begin{DoxyReturn}{Returns}
+The first value of the sequence. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+308 \{
+309   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+310   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SequentialRandomVariable_a168c620d4730301c20caab6abcbd00dc}{m\_min};
+311 \}
+\end{DoxyCode}
+\index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Sequential\+Random\+Variable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1SequentialRandomVariable_a0d5681ef517e100c2a3ad5f8dccd9dc7}{}\label{classns3_1_1SequentialRandomVariable_a0d5681ef517e100c2a3ad5f8dccd9dc7}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+271 \{
+272   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::SequentialRandomVariable"})
+273     .SetParent<\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{RandomVariableStream}>()
+274     .SetGroupName (\textcolor{stringliteral}{"Core"})
+275     .AddConstructor<\hyperlink{classns3_1_1SequentialRandomVariable_aed65a4dd9c1d8ecbded1b11a852ab59a}{SequentialRandomVariable}> ()
+276     .AddAttribute(\textcolor{stringliteral}{"Min"}, \textcolor{stringliteral}{"The first value of the sequence."},
+277                   DoubleValue(0),
+278                   MakeDoubleAccessor(&\hyperlink{classns3_1_1SequentialRandomVariable_a168c620d4730301c20caab6abcbd00dc}{SequentialRandomVariable::m\_min}),
+279                   MakeDoubleChecker<double>())
+280     .AddAttribute(\textcolor{stringliteral}{"Max"}, \textcolor{stringliteral}{"One more than the last value of the sequence."},
+281                   DoubleValue(0),
+282                   MakeDoubleAccessor(&\hyperlink{classns3_1_1SequentialRandomVariable_ab3ab59c289b5ee0751562c5e46020def}{SequentialRandomVariable::m\_max}),
+283                   MakeDoubleChecker<double>())
+284     .AddAttribute(\textcolor{stringliteral}{"Increment"}, \textcolor{stringliteral}{"The sequence random variable increment."},
+285                   StringValue(\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}),
+286                   MakePointerAccessor (&\hyperlink{classns3_1_1SequentialRandomVariable_abb30c71cae8727ea8c2330f0dc309e6f}{SequentialRandomVariable::m\_increment}
+      ),
+287                   MakePointerChecker<RandomVariableStream> ())
+288     .AddAttribute(\textcolor{stringliteral}{"Consecutive"}, \textcolor{stringliteral}{"The number of times each member of the sequence is repeated."},
+289                   IntegerValue(1),
+290                   MakeIntegerAccessor(&\hyperlink{classns3_1_1SequentialRandomVariable_a4c6baa5a3e757ccee2928b8d4ba9fcf3}{SequentialRandomVariable::m\_consecutive}
+      ),
+291                   MakeIntegerChecker<uint32\_t>());
+292      ;
+293   \textcolor{keywordflow}{return} tid;
+294 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(void)}{GetValue(void)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Sequential\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1SequentialRandomVariable_a78f36ee1a8102df7d7d40c4490ddf250}{}\label{classns3_1_1SequentialRandomVariable_a78f36ee1a8102df7d7d40c4490ddf250}
+
+
+Get the next random value as a double drawn from the distribution. 
+
+\begin{DoxyReturn}{Returns}
+A floating point random value. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+336 \{
+337   \textcolor{comment}{// Set the current sequence value if it hasn't been set.}
+338   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+339   \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1SequentialRandomVariable_afa73acac6f4f810d2ff71e794a5a0c2d}{m\_isCurrentSet})
+340     \{
+341       \textcolor{comment}{// Start the sequence at its minimium value.}
+342       \hyperlink{classns3_1_1SequentialRandomVariable_a91885067ac2516545153f122666ea6ac}{m\_current} = \hyperlink{classns3_1_1SequentialRandomVariable_a168c620d4730301c20caab6abcbd00dc}{m\_min};
+343       \hyperlink{classns3_1_1SequentialRandomVariable_afa73acac6f4f810d2ff71e794a5a0c2d}{m\_isCurrentSet} = \textcolor{keyword}{true};
+344     \}
+345 
+346  \textcolor{comment}{// Return a sequential series of values}
+347   \textcolor{keywordtype}{double} r = \hyperlink{classns3_1_1SequentialRandomVariable_a91885067ac2516545153f122666ea6ac}{m\_current};
+348   \textcolor{keywordflow}{if} (++\hyperlink{classns3_1_1SequentialRandomVariable_a04bb3e0a4537b255340d174f827d463c}{m\_currentConsecutive} == \hyperlink{classns3_1_1SequentialRandomVariable_a4c6baa5a3e757ccee2928b8d4ba9fcf3}{m\_consecutive})
+349     \{ \textcolor{comment}{// Time to advance to next}
+350       \hyperlink{classns3_1_1SequentialRandomVariable_a04bb3e0a4537b255340d174f827d463c}{m\_currentConsecutive} = 0;
+351       \hyperlink{classns3_1_1SequentialRandomVariable_a91885067ac2516545153f122666ea6ac}{m\_current} += \hyperlink{classns3_1_1SequentialRandomVariable_abb30c71cae8727ea8c2330f0dc309e6f}{m\_increment}->\hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{GetValue} ();
+352       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1SequentialRandomVariable_a91885067ac2516545153f122666ea6ac}{m\_current} >= \hyperlink{classns3_1_1SequentialRandomVariable_ab3ab59c289b5ee0751562c5e46020def}{m\_max})
+353         \{
+354           \hyperlink{classns3_1_1SequentialRandomVariable_a91885067ac2516545153f122666ea6ac}{m\_current} = \hyperlink{classns3_1_1SequentialRandomVariable_a168c620d4730301c20caab6abcbd00dc}{m\_min} + (\hyperlink{classns3_1_1SequentialRandomVariable_a91885067ac2516545153f122666ea6ac}{m\_current} - \hyperlink{classns3_1_1SequentialRandomVariable_ab3ab59c289b5ee0751562c5e46020def}{m\_max});
+355         \}
+356     \}
+357   \textcolor{keywordflow}{return} r;
+358 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!m\+\_\+consecutive@{m\+\_\+consecutive}}
+\index{m\+\_\+consecutive@{m\+\_\+consecutive}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+consecutive}{m_consecutive}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Sequential\+Random\+Variable\+::m\+\_\+consecutive\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SequentialRandomVariable_a4c6baa5a3e757ccee2928b8d4ba9fcf3}{}\label{classns3_1_1SequentialRandomVariable_a4c6baa5a3e757ccee2928b8d4ba9fcf3}
+The number of times each distinct value is repeated. \index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!m\+\_\+current@{m\+\_\+current}}
+\index{m\+\_\+current@{m\+\_\+current}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+current}{m_current}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Sequential\+Random\+Variable\+::m\+\_\+current\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SequentialRandomVariable_a91885067ac2516545153f122666ea6ac}{}\label{classns3_1_1SequentialRandomVariable_a91885067ac2516545153f122666ea6ac}
+The current sequence value. \index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!m\+\_\+current\+Consecutive@{m\+\_\+current\+Consecutive}}
+\index{m\+\_\+current\+Consecutive@{m\+\_\+current\+Consecutive}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+current\+Consecutive}{m_currentConsecutive}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Sequential\+Random\+Variable\+::m\+\_\+current\+Consecutive\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SequentialRandomVariable_a04bb3e0a4537b255340d174f827d463c}{}\label{classns3_1_1SequentialRandomVariable_a04bb3e0a4537b255340d174f827d463c}
+The number of times the current distinct value has been repeated. \index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!m\+\_\+increment@{m\+\_\+increment}}
+\index{m\+\_\+increment@{m\+\_\+increment}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+increment}{m_increment}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Random\+Variable\+Stream}$>$ ns3\+::\+Sequential\+Random\+Variable\+::m\+\_\+increment\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SequentialRandomVariable_abb30c71cae8727ea8c2330f0dc309e6f}{}\label{classns3_1_1SequentialRandomVariable_abb30c71cae8727ea8c2330f0dc309e6f}
+Increment between distinct values. \index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!m\+\_\+is\+Current\+Set@{m\+\_\+is\+Current\+Set}}
+\index{m\+\_\+is\+Current\+Set@{m\+\_\+is\+Current\+Set}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+is\+Current\+Set}{m_isCurrentSet}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Sequential\+Random\+Variable\+::m\+\_\+is\+Current\+Set\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SequentialRandomVariable_afa73acac6f4f810d2ff71e794a5a0c2d}{}\label{classns3_1_1SequentialRandomVariable_afa73acac6f4f810d2ff71e794a5a0c2d}
+Indicates if the current sequence value has been properly initialized. \index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!m\+\_\+max@{m\+\_\+max}}
+\index{m\+\_\+max@{m\+\_\+max}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+max}{m_max}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Sequential\+Random\+Variable\+::m\+\_\+max\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SequentialRandomVariable_ab3ab59c289b5ee0751562c5e46020def}{}\label{classns3_1_1SequentialRandomVariable_ab3ab59c289b5ee0751562c5e46020def}
+Strict upper bound on the sequence. \index{ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}!m\+\_\+min@{m\+\_\+min}}
+\index{m\+\_\+min@{m\+\_\+min}!ns3\+::\+Sequential\+Random\+Variable@{ns3\+::\+Sequential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+min}{m_min}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Sequential\+Random\+Variable\+::m\+\_\+min\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SequentialRandomVariable_a168c620d4730301c20caab6abcbd00dc}{}\label{classns3_1_1SequentialRandomVariable_a168c620d4730301c20caab6abcbd00dc}
+The first value of the sequence. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,280 @@
+\hypertarget{classBridgeTest}{}\section{Bridge\+Test Class Reference}
+\label{classBridgeTest}\index{Bridge\+Test@{Bridge\+Test}}
+
+
+I\+Pv4 Global\+Routing Bridge test.  
+
+
+
+
+Inheritance diagram for Bridge\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Bridge\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classBridgeTest_a4d88ad6e9248541478917f836cf52b78}{Do\+Setup} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to do any local setup required for this Test\+Case. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classBridgeTest_af5aa91b39e8242e01f3a46cbfbdb9c35}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+\hyperlink{classBridgeTest_a19f6a29a926206209abbddc872d06ea4}{Bridge\+Test} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\+\_\+nodes}
+\begin{DoxyCompactList}\small\item\em Nodes used in the test. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+I\+Pv4 Global\+Routing Bridge test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Bridge\+Test@{Bridge\+Test}!Bridge\+Test@{Bridge\+Test}}
+\index{Bridge\+Test@{Bridge\+Test}!Bridge\+Test@{Bridge\+Test}}
+\subsubsection[{\texorpdfstring{Bridge\+Test()}{BridgeTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Bridge\+Test\+::\+Bridge\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBridgeTest_a19f6a29a926206209abbddc872d06ea4}{}\label{classBridgeTest_a19f6a29a926206209abbddc872d06ea4}
+
+\begin{DoxyCode}
+521   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Global routing across bridging topology (bug 2102)"})
+522 \{
+523 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Bridge\+Test@{Bridge\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Bridge\+Test@{Bridge\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Bridge\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classBridgeTest_af5aa91b39e8242e01f3a46cbfbdb9c35}{}\label{classBridgeTest_af5aa91b39e8242e01f3a46cbfbdb9c35}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+591 \{
+592   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+593 
+594   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4L3Protocol>} ip0 = \hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4L3Protocol}{Ipv4L3Protocol}> ();
+595   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (ip0, 0, \textcolor{stringliteral}{"Error-- no Ipv4 object"});  
+596   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4RoutingProtocol>} routing0 = ip0->
+      \hyperlink{classns3_1_1Ipv4L3Protocol_aa1e4efbf4978299e47406895c3f4b41d}{GetRoutingProtocol} ();
+597   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (routing0, 0, \textcolor{stringliteral}{"Error-- no Ipv4 routing protocol object"});  
+598   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4GlobalRouting>} globalRouting0 = routing0->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject} <\hyperlink{classns3_1_1Ipv4GlobalRouting}{Ipv4GlobalRouting}> ();
+599   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (globalRouting0, 0, \textcolor{stringliteral}{"Error-- no Ipv4GlobalRouting object"});  
+600 
+601   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4L3Protocol>} ip1 = \hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1)->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4L3Protocol}{Ipv4L3Protocol}> ();
+602   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (ip1, 0, \textcolor{stringliteral}{"Error-- no Ipv4 object"});  
+603   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4RoutingProtocol>} routing1 = ip1->
+      \hyperlink{classns3_1_1Ipv4L3Protocol_aa1e4efbf4978299e47406895c3f4b41d}{GetRoutingProtocol} ();
+604   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (routing1, 0, \textcolor{stringliteral}{"Error-- no Ipv4 routing protocol object"});  
+605   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4GlobalRouting>} globalRouting1 = routing1->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject} <\hyperlink{classns3_1_1Ipv4GlobalRouting}{Ipv4GlobalRouting}> ();
+606   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (globalRouting1, 0, \textcolor{stringliteral}{"Error-- no Ipv4GlobalRouting object"});  
+607 
+608   \textcolor{comment}{// Skip to n4}
+609   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4L3Protocol>} ip4 = \hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (4)->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4L3Protocol}{Ipv4L3Protocol}> ();
+610   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (ip4, 0, \textcolor{stringliteral}{"Error-- no Ipv4 object"});  
+611   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4RoutingProtocol>} routing4 = ip4->
+      \hyperlink{classns3_1_1Ipv4L3Protocol_aa1e4efbf4978299e47406895c3f4b41d}{GetRoutingProtocol} ();
+612   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (routing4, 0, \textcolor{stringliteral}{"Error-- no Ipv4 routing protocol object"});  
+613   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4GlobalRouting>} globalRouting4 = routing4->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject} <\hyperlink{classns3_1_1Ipv4GlobalRouting}{Ipv4GlobalRouting}> ();
+614   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (globalRouting4, 0, \textcolor{stringliteral}{"Error-- no Ipv4GlobalRouting object"});  
+615 
+616   \hyperlink{classns3_1_1Ipv4RoutingTableEntry}{Ipv4RoutingTableEntry}* route = 0;
+617   \textcolor{comment}{// n0}
+618   \textcolor{comment}{// Test that the right number of routes found}
+619   uint32\_t nRoutes0 = globalRouting0->\hyperlink{classns3_1_1Ipv4GlobalRouting_abb9d2b3642272b9bd2697a5699922fa7}{GetNRoutes} ();
+620   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"BridgeTest nRoutes0 "} << nRoutes0);
+621   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (nRoutes0, 3, \textcolor{stringliteral}{"Error-- not three entries"});
+622   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < globalRouting0->\hyperlink{classns3_1_1Ipv4GlobalRouting_abb9d2b3642272b9bd2697a5699922fa7}{GetNRoutes} (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+623     \{
+624       route = globalRouting0->\hyperlink{classns3_1_1Ipv4GlobalRouting_accd518b9888908dbea189c1d1c73dcf1}{GetRoute} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+625       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"entry dest "} << route->\hyperlink{classns3_1_1Ipv4RoutingTableEntry_adcd2084c5f0261c43c059c2b981e91fa}{GetDest} () << \textcolor{stringliteral}{" gw "} << route->
+      \hyperlink{classns3_1_1Ipv4RoutingTableEntry_a49dda51e0ba3c78bc969a9378bd15893}{GetGateway} ());
+626     \}
+627   \textcolor{comment}{// Spot check the last route}
+628   \textcolor{keywordflow}{if} (route)
+629     \{
+630       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (route->\hyperlink{classns3_1_1Ipv4RoutingTableEntry_adcd2084c5f0261c43c059c2b981e91fa}{GetDest} (), 
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.3.0"}), \textcolor{stringliteral}{"Error-- wrong destination"});
+631       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (route->\hyperlink{classns3_1_1Ipv4RoutingTableEntry_a49dda51e0ba3c78bc969a9378bd15893}{GetGateway} (), 
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.1.2"}), \textcolor{stringliteral}{"Error-- wrong gateway"});
+632     \}
+633 
+634   \textcolor{comment}{// n1}
+635   \textcolor{comment}{// Test that the right number of routes found}
+636   route = 0;
+637   uint32\_t nRoutes1 = globalRouting1->\hyperlink{classns3_1_1Ipv4GlobalRouting_abb9d2b3642272b9bd2697a5699922fa7}{GetNRoutes} ();
+638   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"BridgeTest nRoutes1 "} << nRoutes1);
+639   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (nRoutes1, 3, \textcolor{stringliteral}{"Error-- not three entries"});
+640   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < globalRouting1->\hyperlink{classns3_1_1Ipv4GlobalRouting_abb9d2b3642272b9bd2697a5699922fa7}{GetNRoutes} (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+641     \{
+642       route = globalRouting1->\hyperlink{classns3_1_1Ipv4GlobalRouting_accd518b9888908dbea189c1d1c73dcf1}{GetRoute} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+643       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"entry dest "} << route->GetDest () << \textcolor{stringliteral}{" gw "} << route->GetGateway ());
+644     \}
+645   \textcolor{comment}{// Spot check the last route}
+646   \textcolor{keywordflow}{if} (route)
+647     \{
+648       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (route->GetDest (), \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.3.0"}), \textcolor{stringliteral}{"
+      Error-- wrong destination"});
+649       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (route->GetGateway (), 
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.2.2"}), \textcolor{stringliteral}{"Error-- wrong gateway"});
+650     \}
+651 
+652   \textcolor{comment}{// skip n2 and n3, just verify n4}
+653   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"BridgeTest skip print out of n2 and n3, go next to node n4"});
+654 
+655   \textcolor{comment}{// n4}
+656   route = 0;
+657   \textcolor{comment}{// Test that the right number of routes found}
+658   uint32\_t nRoutes4 = globalRouting4->\hyperlink{classns3_1_1Ipv4GlobalRouting_abb9d2b3642272b9bd2697a5699922fa7}{GetNRoutes} ();
+659   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"BridgeTest nRoutes4 "} << nRoutes4);
+660   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (nRoutes4, 3, \textcolor{stringliteral}{"Error-- not three entries"});
+661   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < globalRouting4->\hyperlink{classns3_1_1Ipv4GlobalRouting_abb9d2b3642272b9bd2697a5699922fa7}{GetNRoutes} (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+662     \{
+663       route = globalRouting4->\hyperlink{classns3_1_1Ipv4GlobalRouting_accd518b9888908dbea189c1d1c73dcf1}{GetRoute} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+664       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"entry dest "} << route->GetDest () << \textcolor{stringliteral}{" gw "} << route->GetGateway ());
+665     \}
+666   \textcolor{comment}{// Spot check the last route}
+667   \textcolor{keywordflow}{if} (route)
+668     \{
+669       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (route->GetDest (), \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.1.0"}), \textcolor{stringliteral}{"
+      Error-- wrong destination"});
+670       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (route->GetGateway (), 
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.3.1"}), \textcolor{stringliteral}{"Error-- wrong gateway"});
+671     \}
+672 
+673   Simulator::Destroy ();
+674 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Bridge\+Test@{Bridge\+Test}!Do\+Setup@{Do\+Setup}}
+\index{Do\+Setup@{Do\+Setup}!Bridge\+Test@{Bridge\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Setup(void)}{DoSetup(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Bridge\+Test\+::\+Do\+Setup (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classBridgeTest_a4d88ad6e9248541478917f836cf52b78}{}\label{classBridgeTest_a4d88ad6e9248541478917f836cf52b78}
+
+
+Implementation to do any local setup required for this Test\+Case. 
+
+Subclasses should override this method to perform any costly per-\/test setup before Do\+Run is invoked. 
+
+Reimplemented from \hyperlink{classns3_1_1TestCase_a4a7e32ad32a10a508910815cd38e9177}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+527 \{
+528   \hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (5);
+529 
+530   \textcolor{comment}{//connect node0 to node1}
+531   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleChannel>} channel = CreateObject <SimpleChannel> ();
+532   \hyperlink{classns3_1_1SimpleNetDeviceHelper}{SimpleNetDeviceHelper} simpleHelper;
+533   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} net = simpleHelper.Install (\hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), channel);
+534   net.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (simpleHelper.Install (\hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), channel));
+535 
+536   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} bridgeFacingDevices;
+537   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} switchDevices;
+538 
+539   \textcolor{comment}{//connect node1 to node2 (switch)}
+540   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleChannel>} channel2 = CreateObject <SimpleChannel> ();
+541   \hyperlink{classns3_1_1SimpleNetDeviceHelper}{SimpleNetDeviceHelper} simpleHelper2;
+542   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} net2 = simpleHelper2.Install (\hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), channel2);
+543   net2.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (simpleHelper2.Install (\hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2), channel2));
+544   bridgeFacingDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (net2.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+545   switchDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (net2.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+546 
+547   \textcolor{comment}{//connect node2 (switch) to node3}
+548   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleChannel>} channel3 = CreateObject <SimpleChannel> ();
+549   \hyperlink{classns3_1_1SimpleNetDeviceHelper}{SimpleNetDeviceHelper} simpleHelper3;
+550   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} net3 = simpleHelper3.Install (\hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2), channel3);
+551   net3.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (simpleHelper3.Install (\hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3), channel3));
+552   bridgeFacingDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (net3.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+553   switchDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (net3.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+554 
+555   \textcolor{comment}{//connect node3 to node4}
+556   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleChannel>} channel4 = CreateObject <SimpleChannel> ();
+557   \hyperlink{classns3_1_1SimpleNetDeviceHelper}{SimpleNetDeviceHelper} simpleHelper4;
+558   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} net4 = simpleHelper4.Install (\hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3), channel4);
+559   net4.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (simpleHelper4.Install (\hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (4), channel4));
+560 
+561   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} switchNode = \hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2);
+562   \hyperlink{classns3_1_1BridgeHelper}{BridgeHelper} bridge;
+563   bridge.\hyperlink{classns3_1_1BridgeHelper_aba53f6381b7adda00d9163840b072fa6}{Install} (switchNode, switchDevices);
+564 
+565   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+566   \textcolor{comment}{// By default, InternetStackHelper adds a static and global routing}
+567   \textcolor{comment}{// implementation.  We just want the global for this test.}
+568   \hyperlink{classns3_1_1Ipv4GlobalRoutingHelper}{Ipv4GlobalRoutingHelper} ipv4RoutingHelper;
+569   internet.\hyperlink{classns3_1_1InternetStackHelper_a3e382c02df022dec79952a7eca8cd5ba}{SetRoutingHelper} (ipv4RoutingHelper);
+570 
+571   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (\hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+572   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (\hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+573   \textcolor{comment}{// m\_nodes.Get (2) is bridge node}
+574   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (\hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+575   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (\hyperlink{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (4));
+576 
+577   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+578   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+579   address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (net);
+580 
+581   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.2.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+582   address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (bridgeFacingDevices);
+583 
+584   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.3.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+585   address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (net4);
+586 
+587 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Bridge\+Test@{Bridge\+Test}!m\+\_\+nodes@{m\+\_\+nodes}}
+\index{m\+\_\+nodes@{m\+\_\+nodes}!Bridge\+Test@{Bridge\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+nodes}{m_nodes}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} Bridge\+Test\+::m\+\_\+nodes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}{}\label{classBridgeTest_af539673ded293faf900a2202eeb0dbb0}
+
+
+Nodes used in the test. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{ipv4-global-routing-test-suite_8cc}{ipv4-\/global-\/routing-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

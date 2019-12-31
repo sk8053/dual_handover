@@ -1,0 +1,511 @@
+\hypertarget{classFlameRegressionTest}{}\section{Flame\+Regression\+Test Class Reference}
+\label{classFlameRegressionTest}\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+
+
+F\+L\+A\+ME protocol regression test of three stations\+:  
+
+
+
+
+{\ttfamily \#include $<$flame-\/regression.\+h$>$}
+
+
+
+Inheritance diagram for Flame\+Regression\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Flame\+Regression\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFlameRegressionTest_a20c931a78182815ded4195a5faf7eba6}{Flame\+Regression\+Test} ()
+\item 
+virtual \hyperlink{classFlameRegressionTest_a2b76b9f0ed8706bcf0c89d715b9972e8}{$\sim$\+Flame\+Regression\+Test} ()
+\item 
+virtual void \hyperlink{classFlameRegressionTest_aa1cc862bafd9d367a75cc42c9779b603}{Do\+Run} ()
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+void \hyperlink{classFlameRegressionTest_a2937295ad65fd72117e3a7580d74ed85}{Check\+Results} ()
+\begin{DoxyCompactList}\small\item\em Check results function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classFlameRegressionTest_a65e358d7c06b4a4df04f8a78873bfdac}{Create\+Nodes} ()
+\begin{DoxyCompactList}\small\item\em Create nodes function. \end{DoxyCompactList}\item 
+void \hyperlink{classFlameRegressionTest_aeee4af77af2814f7339f204135cc2733}{Create\+Devices} ()
+\begin{DoxyCompactList}\small\item\em Creat devices function. \end{DoxyCompactList}\item 
+void \hyperlink{classFlameRegressionTest_a4ecfd50a2506bba8a65b7143539998b1}{Install\+Applications} ()
+\begin{DoxyCompactList}\small\item\em Install application function. \end{DoxyCompactList}\item 
+void \hyperlink{classFlameRegressionTest_a8745e5dad068bbfecd1df44601154cb0}{Send\+Data} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\item 
+void \hyperlink{classFlameRegressionTest_ab0ea347ba0dff709c8b80ccc4a311390}{Handle\+Read\+Server} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\begin{DoxyCompactList}\small\item\em Handle a packet reception. \end{DoxyCompactList}\item 
+void \hyperlink{classFlameRegressionTest_ab0112bb1d87bc8778ba4219f11eae0f6}{Handle\+Read\+Client} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\begin{DoxyCompactList}\small\item\em Handle a packet reception. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} $\ast$ \hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\+\_\+nodes}
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classFlameRegressionTest_a091f31a70bd540a33a5a182b85df03de}{m\+\_\+time}
+\begin{DoxyCompactList}\small\item\em Simulation time. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{classFlameRegressionTest_ac7f8b22e0f903c6ea767e9dba2d3bed3}{m\+\_\+interfaces}
+\begin{DoxyCompactList}\small\item\em Needed to install applications. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ \hyperlink{classFlameRegressionTest_a9b6074ea583c3c1f7401fb47c05cd34e}{m\+\_\+server\+Socket}
+\begin{DoxyCompactList}\small\item\em Server-\/side socket. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ \hyperlink{classFlameRegressionTest_a68f248c38efe4db3cc4cd288e5d0b331}{m\+\_\+client\+Socket}
+\begin{DoxyCompactList}\small\item\em Client-\/side socket. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classFlameRegressionTest_afd9230653770d041f6b34880ecc57459}{m\+\_\+sent\+Pkts\+Counter}
+\begin{DoxyCompactList}\small\item\em sent packets counter \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+F\+L\+A\+ME protocol regression test of three stations\+: 
+
+\begin{DoxyVerb}* <-----------|----------->   Broadcast frame
+*             |----------->|  Unicast frame
+*           Source                   Destination
+* <-----------|----------->|            |             ARP request
+*             |<-----------|----------->|             ARP request
+*             |            |<-----------|             ARP reply
+*             |<-----------|            |             ARP reply
+*             |----------->|            |             Data
+*             |            |----------->|             Data
+*             |            |<-----------|-----------> PATH_UPDATE (no broadcast was sent)
+*             |<-----------|----------->|             PATH_UPDATE
+* <-----------|----------->|            |             PATH_UPDATE
+*             |            |<-----------|-----------> ARP request
+*             |<-----------|----------->|             ARP request
+* <-----------|----------->|            |             ARP request
+*             |----------->|            |             ARP reply
+*             |            |----------->|             ARP reply
+*             |            |<-----------|             Data
+*             |<-----------|            |             Data
+*             |............|............|
+*             After five seconds data is transmitted again as
+*             broadcast, and PATH_UPDATE is sent
+* \end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Flame\+Regression\+Test()}{FlameRegressionTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Flame\+Regression\+Test\+::\+Flame\+Regression\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classFlameRegressionTest_a20c931a78182815ded4195a5faf7eba6}{}\label{classFlameRegressionTest_a20c931a78182815ded4195a5faf7eba6}
+
+\begin{DoxyCode}
+44                                           : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"FLAME regression test"}),
+45                                               \hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\_nodes} (0),
+46                                               \hyperlink{classFlameRegressionTest_a091f31a70bd540a33a5a182b85df03de}{m\_time} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10)),
+47                                               \hyperlink{classFlameRegressionTest_afd9230653770d041f6b34880ecc57459}{m\_sentPktsCounter} (0)
+48 \{
+49 \}
+\end{DoxyCode}
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!````~Flame\+Regression\+Test@{$\sim$\+Flame\+Regression\+Test}}
+\index{````~Flame\+Regression\+Test@{$\sim$\+Flame\+Regression\+Test}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{$\sim$\+Flame\+Regression\+Test()}{~FlameRegressionTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Flame\+Regression\+Test\+::$\sim$\+Flame\+Regression\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classFlameRegressionTest_a2b76b9f0ed8706bcf0c89d715b9972e8}{}\label{classFlameRegressionTest_a2b76b9f0ed8706bcf0c89d715b9972e8}
+
+\begin{DoxyCode}
+52 \{
+53   \textcolor{keyword}{delete} \hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\_nodes};
+54 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!Check\+Results@{Check\+Results}}
+\index{Check\+Results@{Check\+Results}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Check\+Results()}{CheckResults()}}]{\setlength{\rightskip}{0pt plus 5cm}void Flame\+Regression\+Test\+::\+Check\+Results (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classFlameRegressionTest_a2937295ad65fd72117e3a7580d74ed85}{}\label{classFlameRegressionTest_a2937295ad65fd72117e3a7580d74ed85}
+
+
+Check results function. 
+
+
+\begin{DoxyCode}
+146 \{
+147   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 3; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+148     \{
+149       \hyperlink{pcap-test_8h_a38f2c17a62d8613f78ec2dd7b638d329}{NS\_PCAP\_TEST\_EXPECT\_EQ} (\hyperlink{flame-regression_8cc_a61dc66981fa47bfd0066a57a487c599c}{PREFIX} << \textcolor{stringliteral}{"-"} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{"-1.pcap"});
+150     \}
+151 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!Create\+Devices@{Create\+Devices}}
+\index{Create\+Devices@{Create\+Devices}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Create\+Devices()}{CreateDevices()}}]{\setlength{\rightskip}{0pt plus 5cm}void Flame\+Regression\+Test\+::\+Create\+Devices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFlameRegressionTest_aeee4af77af2814f7339f204135cc2733}{}\label{classFlameRegressionTest_aeee4af77af2814f7339f204135cc2733}
+
+
+Creat devices function. 
+
+
+\begin{DoxyCode}
+93 \{
+94   int64\_t streamsUsed = 0;
+95   \textcolor{comment}{// 1. setup WiFi}
+96   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} wifiPhy = YansWifiPhyHelper::Default ();
+97   \textcolor{comment}{// This test suite output was originally based on YansErrorRateModel}
+98   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_a219d3ae5881842aa42ea341b985ce114}{SetErrorRateModel} (\textcolor{stringliteral}{"ns3::YansErrorRateModel"}); 
+99   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} wifiChannel = YansWifiChannelHelper::Default ();
+100   \hyperlink{classns3_1_1Ptr}{Ptr<YansWifiChannel>} chan = wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ();
+101   wifiPhy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (chan);
+102   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_a2527d6d7b29f717fd7436166c5f05f1a}{Set} (\textcolor{stringliteral}{"TxGain"}, DoubleValue (1.0)); \textcolor{comment}{//this configuration should go away in future revision to
+       the test}
+103   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_a2527d6d7b29f717fd7436166c5f05f1a}{Set} (\textcolor{stringliteral}{"RxGain"}, DoubleValue (1.0)); \textcolor{comment}{//this configuration should go away in future revision to
+       the test}
+104   \textcolor{comment}{// 2. setup mesh}
+105   \hyperlink{classns3_1_1MeshHelper}{MeshHelper} mesh = MeshHelper::Default ();
+106   mesh.\hyperlink{classns3_1_1MeshHelper_ac1074aff829d0cde1659bdef572880ca}{SetStackInstaller} (\textcolor{stringliteral}{"ns3::FlameStack"});
+107   mesh.\hyperlink{classns3_1_1MeshHelper_a549d568927a88e95a721f2be58232c10}{SetMacType} (\textcolor{stringliteral}{"RandomStart"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.1)));
+108   mesh.\hyperlink{classns3_1_1MeshHelper_adfc08b62a8d6e835d0fbbac7a349ef5f}{SetNumberOfInterfaces} (1);
+109   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} meshDevices = mesh.\hyperlink{classns3_1_1MeshHelper_a7b33f6ca7b6842b3def4479bc7526f2c}{Install} (wifiPhy, *
+      \hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\_nodes});
+110   \textcolor{comment}{// Three devices, seven streams per device}
+111   streamsUsed += mesh.\hyperlink{classns3_1_1MeshHelper_a93e9c88a375a86c621a494aafe68882e}{AssignStreams} (meshDevices, streamsUsed);
+112   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (streamsUsed, (meshDevices.\hyperlink{classns3_1_1NetDeviceContainer_a74cafc212479bc38976bebd118e856b9}{GetN} () * 7), \textcolor{stringliteral}{"Stream
+       assignment unexpected value"});
+113   \textcolor{comment}{// No further streams used in the default wifi channel configuration}
+114   streamsUsed += wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_ab409a15cfb8abb5195177625191e2584}{AssignStreams} (chan, streamsUsed);
+115   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (streamsUsed, (meshDevices.\hyperlink{classns3_1_1NetDeviceContainer_a74cafc212479bc38976bebd118e856b9}{GetN} () * 7), \textcolor{stringliteral}{"Stream
+       assignment unexpected value"});
+116   \textcolor{comment}{// 3. setup TCP/IP}
+117   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internetStack;
+118   internetStack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (*\hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\_nodes});
+119   streamsUsed += internetStack.\hyperlink{classns3_1_1InternetStackHelper_a63c904e832a2f17e036338db4aa2f1b8}{AssignStreams} (*\hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\_nodes}, streamsUsed);
+120   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+121   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+122   \hyperlink{classFlameRegressionTest_ac7f8b22e0f903c6ea767e9dba2d3bed3}{m\_interfaces} = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (meshDevices);
+123   \textcolor{comment}{// 4. write PCAP if needed}
+124   wifiPhy.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\hyperlink{classns3_1_1TestCase_a8a04695a6fb9ba0f89e28e9523963f88}{CreateTempDirFilename} (
+      \hyperlink{flame-regression_8cc_a61dc66981fa47bfd0066a57a487c599c}{PREFIX}));
+125 
+126 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!Create\+Nodes@{Create\+Nodes}}
+\index{Create\+Nodes@{Create\+Nodes}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Create\+Nodes()}{CreateNodes()}}]{\setlength{\rightskip}{0pt plus 5cm}void Flame\+Regression\+Test\+::\+Create\+Nodes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFlameRegressionTest_a65e358d7c06b4a4df04f8a78873bfdac}{}\label{classFlameRegressionTest_a65e358d7c06b4a4df04f8a78873bfdac}
+
+
+Create nodes function. 
+
+
+\begin{DoxyCode}
+76 \{
+77   \hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\_nodes} = \textcolor{keyword}{new} \hyperlink{classns3_1_1NodeContainer}{NodeContainer};
+78   \hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\_nodes}->\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (3);
+79   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+80   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (\textcolor{stringliteral}{"ns3::GridPositionAllocator"},
+81                                  \textcolor{stringliteral}{"MinX"}, DoubleValue (0.0),
+82                                  \textcolor{stringliteral}{"MinY"}, DoubleValue (0.0),
+83                                  \textcolor{stringliteral}{"DeltaX"}, DoubleValue (150),
+84                                  \textcolor{stringliteral}{"DeltaY"}, DoubleValue (0),
+85                                  \textcolor{stringliteral}{"GridWidth"}, UintegerValue (3),
+86                                  \textcolor{stringliteral}{"LayoutType"}, StringValue (\textcolor{stringliteral}{"RowFirst"}));
+87   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+88   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (*\hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\_nodes});
+89 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run()}{DoRun()}}]{\setlength{\rightskip}{0pt plus 5cm}void Flame\+Regression\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classFlameRegressionTest_aa1cc862bafd9d367a75cc42c9779b603}{}\label{classFlameRegressionTest_aa1cc862bafd9d367a75cc42c9779b603}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+58 \{
+59   RngSeedManager::SetSeed (12345);
+60   RngSeedManager::SetRun (7);
+61   \hyperlink{classFlameRegressionTest_a65e358d7c06b4a4df04f8a78873bfdac}{CreateNodes} ();
+62   \hyperlink{classFlameRegressionTest_aeee4af77af2814f7339f204135cc2733}{CreateDevices} ();
+63   \hyperlink{classFlameRegressionTest_a4ecfd50a2506bba8a65b7143539998b1}{InstallApplications} ();
+64 
+65   Simulator::Stop (\hyperlink{classFlameRegressionTest_a091f31a70bd540a33a5a182b85df03de}{m\_time});
+66   Simulator::Run ();
+67   Simulator::Destroy ();
+68 
+69   \hyperlink{classFlameRegressionTest_a2937295ad65fd72117e3a7580d74ed85}{CheckResults} ();
+70 
+71   \textcolor{keyword}{delete} \hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\_nodes}, \hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\_nodes} = 0;
+72 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!Handle\+Read\+Client@{Handle\+Read\+Client}}
+\index{Handle\+Read\+Client@{Handle\+Read\+Client}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Handle\+Read\+Client(\+Ptr$<$ Socket $>$ socket)}{HandleReadClient(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Flame\+Regression\+Test\+::\+Handle\+Read\+Client (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFlameRegressionTest_ab0112bb1d87bc8778ba4219f11eae0f6}{}\label{classFlameRegressionTest_ab0112bb1d87bc8778ba4219f11eae0f6}
+
+
+Handle a packet reception. 
+
+This function is called by lower layers.
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & the socket the packet was received to. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+181 \{
+182   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} packet;
+183   \hyperlink{classns3_1_1Address}{Address} \hyperlink{lte__amc_8m_a1b4c81ff74eb1a626b5ade44c81004b3}{from};
+184   \textcolor{keywordflow}{while} ((packet = socket->\hyperlink{classns3_1_1Socket_af22378d7af9a2745a9eada20210da215}{RecvFrom} (from)))
+185     \{
+186     \}
+187 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!Handle\+Read\+Server@{Handle\+Read\+Server}}
+\index{Handle\+Read\+Server@{Handle\+Read\+Server}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Handle\+Read\+Server(\+Ptr$<$ Socket $>$ socket)}{HandleReadServer(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Flame\+Regression\+Test\+::\+Handle\+Read\+Server (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFlameRegressionTest_ab0ea347ba0dff709c8b80ccc4a311390}{}\label{classFlameRegressionTest_ab0ea347ba0dff709c8b80ccc4a311390}
+
+
+Handle a packet reception. 
+
+This function is called by lower layers.
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & the socket the packet was received to. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+167 \{
+168   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} packet;
+169   \hyperlink{classns3_1_1Address}{Address} \hyperlink{lte__amc_8m_a1b4c81ff74eb1a626b5ade44c81004b3}{from};
+170   \textcolor{keywordflow}{while} ((packet = socket->\hyperlink{classns3_1_1Socket_af22378d7af9a2745a9eada20210da215}{RecvFrom} (from)))
+171     \{
+172       packet->\hyperlink{classns3_1_1Packet_a6c7bc5d1067c1d7fbd0fd70289182e8b}{RemoveAllPacketTags} ();
+173       packet->\hyperlink{classns3_1_1Packet_a083f54c9db31aeff30551a9e20fcda42}{RemoveAllByteTags} ();
+174 
+175       socket->\hyperlink{classns3_1_1Socket_af898fce6a58e0dbba23c1c6de1d4220e}{SendTo} (packet, 0, from);
+176     \}
+177 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!Install\+Applications@{Install\+Applications}}
+\index{Install\+Applications@{Install\+Applications}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Install\+Applications()}{InstallApplications()}}]{\setlength{\rightskip}{0pt plus 5cm}void Flame\+Regression\+Test\+::\+Install\+Applications (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFlameRegressionTest_a4ecfd50a2506bba8a65b7143539998b1}{}\label{classFlameRegressionTest_a4ecfd50a2506bba8a65b7143539998b1}
+
+
+Install application function. 
+
+
+\begin{DoxyCode}
+129 \{
+130   \textcolor{comment}{// client socket}
+131   \hyperlink{classFlameRegressionTest_a68f248c38efe4db3cc4cd288e5d0b331}{m\_clientSocket} = Socket::CreateSocket (\hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\_nodes}->\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2), TypeId::LookupByName (\textcolor{stringliteral}{"
+      ns3::UdpSocketFactory"}));
+132   \hyperlink{classFlameRegressionTest_a68f248c38efe4db3cc4cd288e5d0b331}{m\_clientSocket}->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} ();
+133   \hyperlink{classFlameRegressionTest_a68f248c38efe4db3cc4cd288e5d0b331}{m\_clientSocket}->\hyperlink{classns3_1_1Socket_a97f08aaf37b8fd7d4b5cad4dfdd4022a}{Connect} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (
+      \hyperlink{classFlameRegressionTest_ac7f8b22e0f903c6ea767e9dba2d3bed3}{m\_interfaces}.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (0), 9));
+134   \hyperlink{classFlameRegressionTest_a68f248c38efe4db3cc4cd288e5d0b331}{m\_clientSocket}->\hyperlink{classns3_1_1Socket_a243f7835ef1a85f9270fd3577e3a40da}{SetRecvCallback} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classFlameRegressionTest_ab0112bb1d87bc8778ba4219f11eae0f6}{FlameRegressionTest::HandleReadClient}, \textcolor{keyword}{this}));
+135   Simulator::ScheduleWithContext (\hyperlink{classFlameRegressionTest_a68f248c38efe4db3cc4cd288e5d0b331}{m\_clientSocket}->\hyperlink{classns3_1_1Socket_aba642ad4301c1df47befc0aa9afa2e48}{GetNode} ()->
+      \hyperlink{classns3_1_1Node_aaf49b64a843565ce3812326313b370ac}{GetId} (), \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0),
+136                                   &\hyperlink{classFlameRegressionTest_a8745e5dad068bbfecd1df44601154cb0}{FlameRegressionTest::SendData}, \textcolor{keyword}{this}, 
+      \hyperlink{classFlameRegressionTest_a68f248c38efe4db3cc4cd288e5d0b331}{m\_clientSocket});
+137 
+138   \textcolor{comment}{// server socket}
+139   \hyperlink{classFlameRegressionTest_a9b6074ea583c3c1f7401fb47c05cd34e}{m\_serverSocket} = Socket::CreateSocket (\hyperlink{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{m\_nodes}->\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), TypeId::LookupByName (\textcolor{stringliteral}{"
+      ns3::UdpSocketFactory"}));
+140   m\_serverSocket->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 9));
+141   m\_serverSocket->SetRecvCallback (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classFlameRegressionTest_ab0ea347ba0dff709c8b80ccc4a311390}{FlameRegressionTest::HandleReadServer}, \textcolor{keyword}{this}));
+142 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 13
+
+
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!Send\+Data@{Send\+Data}}
+\index{Send\+Data@{Send\+Data}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Send\+Data(\+Ptr$<$ Socket $>$ socket)}{SendData(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Flame\+Regression\+Test\+::\+Send\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFlameRegressionTest_a8745e5dad068bbfecd1df44601154cb0}{}\label{classFlameRegressionTest_a8745e5dad068bbfecd1df44601154cb0}
+Send data 
+\begin{DoxyParams}{Parameters}
+{\em socket} & the sending socket \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+155 \{
+156   \textcolor{keywordflow}{if} ((\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} () < \hyperlink{classFlameRegressionTest_a091f31a70bd540a33a5a182b85df03de}{m\_time}) && (\hyperlink{classFlameRegressionTest_afd9230653770d041f6b34880ecc57459}{m\_sentPktsCounter} < 300))
+157     \{
+158       socket->\hyperlink{classns3_1_1Socket_a036901c8f485fe5b6eab93b7f2ec289d}{Send} (Create<Packet> (20));
+159       \hyperlink{classFlameRegressionTest_afd9230653770d041f6b34880ecc57459}{m\_sentPktsCounter} ++;
+160       Simulator::ScheduleWithContext (socket->\hyperlink{classns3_1_1Socket_aba642ad4301c1df47befc0aa9afa2e48}{GetNode} ()->\hyperlink{classns3_1_1Node_aaf49b64a843565ce3812326313b370ac}{GetId} (), 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.1),
+161                                       &\hyperlink{classFlameRegressionTest_a8745e5dad068bbfecd1df44601154cb0}{FlameRegressionTest::SendData}, \textcolor{keyword}{this}, 
+      socket);
+162     \}
+163 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 14
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 15
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!m\+\_\+client\+Socket@{m\+\_\+client\+Socket}}
+\index{m\+\_\+client\+Socket@{m\+\_\+client\+Socket}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+client\+Socket}{m_clientSocket}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Socket}$>$ Flame\+Regression\+Test\+::m\+\_\+client\+Socket\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFlameRegressionTest_a68f248c38efe4db3cc4cd288e5d0b331}{}\label{classFlameRegressionTest_a68f248c38efe4db3cc4cd288e5d0b331}
+
+
+Client-\/side socket. 
+
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!m\+\_\+interfaces@{m\+\_\+interfaces}}
+\index{m\+\_\+interfaces@{m\+\_\+interfaces}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+interfaces}{m_interfaces}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} Flame\+Regression\+Test\+::m\+\_\+interfaces\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFlameRegressionTest_ac7f8b22e0f903c6ea767e9dba2d3bed3}{}\label{classFlameRegressionTest_ac7f8b22e0f903c6ea767e9dba2d3bed3}
+
+
+Needed to install applications. 
+
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!m\+\_\+nodes@{m\+\_\+nodes}}
+\index{m\+\_\+nodes@{m\+\_\+nodes}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+nodes}{m_nodes}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container}$\ast$ Flame\+Regression\+Test\+::m\+\_\+nodes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}{}\label{classFlameRegressionTest_a86bffb878b688af7c76815e44edc8f1a}
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!m\+\_\+sent\+Pkts\+Counter@{m\+\_\+sent\+Pkts\+Counter}}
+\index{m\+\_\+sent\+Pkts\+Counter@{m\+\_\+sent\+Pkts\+Counter}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+sent\+Pkts\+Counter}{m_sentPktsCounter}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Flame\+Regression\+Test\+::m\+\_\+sent\+Pkts\+Counter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFlameRegressionTest_afd9230653770d041f6b34880ecc57459}{}\label{classFlameRegressionTest_afd9230653770d041f6b34880ecc57459}
+
+
+sent packets counter 
+
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!m\+\_\+server\+Socket@{m\+\_\+server\+Socket}}
+\index{m\+\_\+server\+Socket@{m\+\_\+server\+Socket}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+server\+Socket}{m_serverSocket}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Socket}$>$ Flame\+Regression\+Test\+::m\+\_\+server\+Socket\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFlameRegressionTest_a9b6074ea583c3c1f7401fb47c05cd34e}{}\label{classFlameRegressionTest_a9b6074ea583c3c1f7401fb47c05cd34e}
+
+
+Server-\/side socket. 
+
+\index{Flame\+Regression\+Test@{Flame\+Regression\+Test}!m\+\_\+time@{m\+\_\+time}}
+\index{m\+\_\+time@{m\+\_\+time}!Flame\+Regression\+Test@{Flame\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+time}{m_time}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} Flame\+Regression\+Test\+::m\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFlameRegressionTest_a091f31a70bd540a33a5a182b85df03de}{}\label{classFlameRegressionTest_a091f31a70bd540a33a5a182b85df03de}
+
+
+Simulation time. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mesh/test/flame/\hyperlink{flame-regression_8h}{flame-\/regression.\+h}\item 
+mesh/test/flame/\hyperlink{flame-regression_8cc}{flame-\/regression.\+cc}\end{DoxyCompactItemize}

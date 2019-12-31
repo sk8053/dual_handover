@@ -1,0 +1,139 @@
+\hypertarget{nsclick-routing_8cc}{}\section{click/examples/nsclick-\/routing.cc File Reference}
+\label{nsclick-routing_8cc}\index{click/examples/nsclick-\/routing.\+cc@{click/examples/nsclick-\/routing.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/click-\/routing.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/l3-\/click-\/protocol.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/click-\/internet-\/stack-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for nsclick-\/routing.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{nsclick-routing_8cc_a63b416aa26608ab2f0d0ec5dd9b84f04}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Nsclick\+Routing\char`\"{})
+\item 
+int \hyperlink{nsclick-routing_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{nsclick-\/routing.\+cc@{nsclick-\/routing.\+cc}!main@{main}}
+\index{main@{main}!nsclick-\/routing.\+cc@{nsclick-\/routing.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{nsclick-routing_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{nsclick-routing_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+48 \{
+49 \textcolor{preprocessor}{#ifdef NS3\_CLICK}
+50   std::string clickConfigFolder = \textcolor{stringliteral}{"src/click/examples"};
+51 
+52   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+53   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"clickConfigFolder"}, \textcolor{stringliteral}{"Base folder for click configuration files"}, clickConfigFolder
+      );
+54   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+55 
+56 \textcolor{comment}{//}
+57 \textcolor{comment}{// Explicitly create the nodes required by the topology (shown above).}
+58 \textcolor{comment}{//}
+59   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes."});
+60   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n};
+61   n.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (3);
+62 
+63 \textcolor{comment}{//}
+64 \textcolor{comment}{// Install Click on the nodes}
+65 \textcolor{comment}{//}
+66   ClickInternetStackHelper clickinternet;
+67   clickinternet.SetClickFile (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), clickConfigFolder + \textcolor{stringliteral}{"/nsclick-routing-node0.click"});
+68   clickinternet.SetClickFile (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), clickConfigFolder + \textcolor{stringliteral}{"/nsclick-ip-router.click"});
+69   clickinternet.SetClickFile (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2), clickConfigFolder + \textcolor{stringliteral}{"/nsclick-routing-node2.click"});
+70   clickinternet.SetRoutingTableElement (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), \textcolor{stringliteral}{"kernel/rt"});
+71   clickinternet.SetRoutingTableElement (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), \textcolor{stringliteral}{"u/rt"});
+72   clickinternet.SetRoutingTableElement (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2), \textcolor{stringliteral}{"kernel/rt"});
+73   clickinternet.Install (n);
+74 
+75   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create channels."});
+76 \textcolor{comment}{//}
+77 \textcolor{comment}{// Explicitly create the channels required by the topology (shown above).}
+78 \textcolor{comment}{//}
+79   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+80   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (
+      \hyperlink{classns3_1_1DataRate}{DataRate} (5000000)));
+81   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+82   csma.\hyperlink{classns3_1_1CsmaHelper_a741c31b2526e3570cc62c9d7d9667ca9}{SetDeviceAttribute} (\textcolor{stringliteral}{"Mtu"}, UintegerValue (1400));
+83   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} d01 = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (\hyperlink{classns3_1_1NodeContainer}{NodeContainer} (n.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1)));
+84   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} d12 = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (\hyperlink{classns3_1_1NodeContainer}{NodeContainer} (n.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2)));
+85 
+86   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+87 \textcolor{comment}{//}
+88 \textcolor{comment}{// We've got the "hardware" in place.  Now we need to add IP addresses.}
+89 \textcolor{comment}{//}
+90   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+91   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"172.16.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+92   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} i01 = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (d01);
+93 
+94   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"172.16.2.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+95   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} i12 = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (d12);
+96 
+97   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Applications."});
+98 \textcolor{comment}{//}
+99 \textcolor{comment}{// Create one udpServer applications on node one.}
+100 \textcolor{comment}{//}
+101   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 4000;
+102   \hyperlink{classns3_1_1UdpServerHelper}{UdpServerHelper} server (port);
+103   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} apps = server.Install (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+104   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+105   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+106 
+107 \textcolor{comment}{//}
+108 \textcolor{comment}{// Create one UdpClient application to send UDP datagrams from node zero to}
+109 \textcolor{comment}{// node one.}
+110 \textcolor{comment}{//}
+111   uint32\_t MaxPacketSize = 1024;
+112   \hyperlink{classns3_1_1Time}{Time} interPacketInterval = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.05);
+113   uint32\_t maxPacketCount = 320;
+114   \hyperlink{classns3_1_1UdpClientHelper}{UdpClientHelper} client (i12.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1), \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port});
+115   client.\hyperlink{classns3_1_1UdpClientHelper_a8bbae16a28f85ab3f3b5aa4642edfeae}{SetAttribute} (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (maxPacketCount));
+116   client.SetAttribute (\textcolor{stringliteral}{"Interval"}, TimeValue (interPacketInterval));
+117   client.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (MaxPacketSize));
+118   apps = client.Install (\hyperlink{classns3_1_1NodeContainer}{NodeContainer} (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)));
+119   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0));
+120   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+121 
+122   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"nsclick-routing"}, d01, \textcolor{keyword}{false});
+123   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"nsclick-routing"}, d12, \textcolor{keyword}{false});
+124 
+125 \textcolor{comment}{//}
+126 \textcolor{comment}{// Now, do the actual simulation.}
+127 \textcolor{comment}{//}
+128   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+129   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (20.0));
+130   Simulator::Run ();
+131   Simulator::Destroy ();
+132   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+133 \textcolor{preprocessor}{#else}
+134   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Can't use ns-3-click without NSCLICK compiled in"});
+135 \textcolor{preprocessor}{#endif}
+136 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{nsclick-\/routing.\+cc@{nsclick-\/routing.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!nsclick-\/routing.\+cc@{nsclick-\/routing.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Nsclick\+Routing"")}{NS_LOG_COMPONENT_DEFINE("NsclickRouting")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Nsclick\+Routing\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{nsclick-routing_8cc_a63b416aa26608ab2f0d0ec5dd9b84f04}{}\label{nsclick-routing_8cc_a63b416aa26608ab2f0d0ec5dd9b84f04}

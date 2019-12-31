@@ -1,0 +1,400 @@
+\hypertarget{classns3_1_1LogNormalRandomVariable}{}\section{ns3\+:\+:Log\+Normal\+Random\+Variable Class Reference}
+\label{classns3_1_1LogNormalRandomVariable}\index{ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}}
+
+
+The log-\/normal distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically.  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Log\+Normal\+Random\+Variable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Log\+Normal\+Random\+Variable\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1LogNormalRandomVariable_a69738761a9533b9ac16ac76dadda7b86}{Log\+Normal\+Random\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Creates a log-\/normal distribution R\+NG with the default values for mu and sigma. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1LogNormalRandomVariable_af0e5068584bc50f5efe643e3e37db751}{Get\+Mu} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the mu value for the log-\/normal distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1LogNormalRandomVariable_a3f7f5dfc6f4a922687857c109b382dea}{Get\+Sigma} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the sigma value for the log-\/normal distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1LogNormalRandomVariable_af37e3543a8416881d09bad093275d349}{Get\+Value} (double mu, double sigma)
+\begin{DoxyCompactList}\small\item\em Returns a random double from a log-\/normal distribution with the specified mu and sigma. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1LogNormalRandomVariable_a13f6d7a6efe7faea646c5e0aa1b3d70e}{Get\+Integer} (uint32\+\_\+t mu, uint32\+\_\+t sigma)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a log-\/normal distribution with the specified mu and sigma. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1LogNormalRandomVariable_a032ddb20a74ff98a35a76a2e43d12a0b}{Get\+Value} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random double from a log-\/normal distribution with the current mu and sigma. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1LogNormalRandomVariable_addd3b764b837aba256b3d1873c8b1ce6}{Get\+Integer} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a log-\/normal distribution with the current mu and sigma. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1LogNormalRandomVariable_af531456b8d8c3c162717a662199ba9ed}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1LogNormalRandomVariable_a562108c77ea1dbc4786fe96d037b0fc9}{m\+\_\+mu}
+\item 
+double \hyperlink{classns3_1_1LogNormalRandomVariable_a5836fe394673dd9f142e3a15904419a9}{m\+\_\+sigma}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The log-\/normal distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically. 
+
+This class supports the creation of objects that return random numbers from a fixed log-\/normal distribution. It also supports the generation of single random numbers from various log-\/normal distributions.
+
+\hyperlink{classns3_1_1LogNormalRandomVariable}{Log\+Normal\+Random\+Variable} defines a random variable with a log-\/normal distribution. If one takes the natural logarithm of random variable following the log-\/normal distribution, the obtained values follow a normal distribution.
+
+The probability density function is defined over the interval \mbox{[}0, $+\infty$) as\+: $ \frac{1}{x\sigma\sqrt{2\pi}} e^{-\frac{(ln(x) - \mu)^2}{2\sigma^2}}$ where $ mean = e^{\mu+\frac{\sigma^2}{2}} $ and $ variance = (e^{\sigma^2}-1)e^{2\mu+\sigma^2}$
+
+The $ \mu $ and $ \sigma $ parameters can be calculated instead if the mean and variance are known with the following equations\+: $ \mu = ln(mean) - \frac{1}{2}ln\left(1+\frac{variance}{mean^2}\right)$, and, $ \sigma = \sqrt{ln\left(1+\frac{variance}{mean^2}\right)}$
+
+Here is an example of how to use this class\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{double} mu = 5.0;
+\textcolor{keywordtype}{double} sigma = 2.0;
+
+Ptr<LogNormalRandomVariable> \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x} = CreateObject<LogNormalRandomVariable> ();
+x->SetAttribute (\textcolor{stringliteral}{"Mu"}, DoubleValue (mu));
+x->SetAttribute (\textcolor{stringliteral}{"Sigma"}, DoubleValue (sigma));
+
+\textcolor{comment}{// The expected value for the mean of the values returned by a}
+\textcolor{comment}{// log-normally distributed random variable is equal to }
+\textcolor{comment}{//}
+\textcolor{comment}{//                             2}
+\textcolor{comment}{//                   mu + sigma  / 2}
+\textcolor{comment}{//     E[value]  =  e                 .}
+\textcolor{comment}{//}
+\textcolor{keywordtype}{double} value = x->GetValue ();
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}!Log\+Normal\+Random\+Variable@{Log\+Normal\+Random\+Variable}}
+\index{Log\+Normal\+Random\+Variable@{Log\+Normal\+Random\+Variable}!ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Log\+Normal\+Random\+Variable()}{LogNormalRandomVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Log\+Normal\+Random\+Variable\+::\+Log\+Normal\+Random\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LogNormalRandomVariable_a69738761a9533b9ac16ac76dadda7b86}{}\label{classns3_1_1LogNormalRandomVariable_a69738761a9533b9ac16ac76dadda7b86}
+
+
+Creates a log-\/normal distribution R\+NG with the default values for mu and sigma. 
+
+
+\begin{DoxyCode}
+803 \{
+804   \textcolor{comment}{// m\_mu and m\_sigma are initialized after constructor by}
+805   \textcolor{comment}{// attributes}
+806   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+807 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(uint32\+\_\+t mu, uint32\+\_\+t sigma)}{GetInteger(uint32_t mu, uint32_t sigma)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Log\+Normal\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{mu, }
+\item[{uint32\+\_\+t}]{sigma}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LogNormalRandomVariable_a13f6d7a6efe7faea646c5e0aa1b3d70e}{}\label{classns3_1_1LogNormalRandomVariable_a13f6d7a6efe7faea646c5e0aa1b3d70e}
+
+
+Returns a random unsigned integer from a log-\/normal distribution with the specified mu and sigma. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mu} & Mu value for the log-\/normal distribution. \\
+\hline
+\mbox{\tt in}  & {\em sigma} & Sigma value for the log-\/normal distribution. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u1$ and $u2$ are uniform variables over \mbox{[}0,1\mbox{]}, then the value that would be returned normally, $x$, is calculated as follows\+:
+
+\begin{eqnarray*} v1 & = & -1 + 2 * u1 \\ v2 & = & -1 + 2 * u2 \\ r2 & = & v1 * v1 + v2 * v2 \\ normal & = & v1 * \sqrt{\frac{-2.0 * \log{r2}}{r2}} \\ x & = & \exp{sigma * normal + mu} . \end{eqnarray*}
+
+For the antithetic case, $(1 - u1$) and $(1 - u2$) are the distances that $u1$ and $u2$ would be from $1$. The antithetic value returned, $x'$, is calculated as follows\+:
+
+\begin{eqnarray*} v1' & = & -1 + 2 * (1 - u1) \\ v2' & = & -1 + 2 * (1 - u2) \\ r2' & = & v1' * v1' + v2' * v2' \\ normal' & = & v1' * \sqrt{\frac{-2.0 * \log{r2'}}{r2'}} \\ x' & = & \exp{sigma * normal' + mu} . \end{eqnarray*}
+
+which now involves the distances $u1$ and $u2$ are from 1. 
+\begin{DoxyCode}
+884 \{
+885   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mu << sigma);
+886   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>} ( \hyperlink{classns3_1_1LogNormalRandomVariable_a032ddb20a74ff98a35a76a2e43d12a0b}{GetValue} (mu, sigma));
+887 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(void)}{GetInteger(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Log\+Normal\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1LogNormalRandomVariable_addd3b764b837aba256b3d1873c8b1ce6}{}\label{classns3_1_1LogNormalRandomVariable_addd3b764b837aba256b3d1873c8b1ce6}
+
+
+Returns a random unsigned integer from a log-\/normal distribution with the current mu and sigma. 
+
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u1$ and $u2$ are uniform variables over \mbox{[}0,1\mbox{]}, then the value that would be returned normally, $x$, is calculated as follows\+:
+
+\begin{eqnarray*} v1 & = & -1 + 2 * u1 \\ v2 & = & -1 + 2 * u2 \\ r2 & = & v1 * v1 + v2 * v2 \\ normal & = & v1 * \sqrt{\frac{-2.0 * \log{r2}}{r2}} \\ x & = & \exp{sigma * normal + mu} . \end{eqnarray*}
+
+For the antithetic case, $(1 - u1$) and $(1 - u2$) are the distances that $u1$ and $u2$ would be from $1$. The antithetic value returned, $x'$, is calculated as follows\+:
+
+\begin{eqnarray*} v1' & = & -1 + 2 * (1 - u1) \\ v2' & = & -1 + 2 * (1 - u2) \\ r2' & = & v1' * v1' + v2' * v2' \\ normal' & = & v1' * \sqrt{\frac{-2.0 * \log{r2'}}{r2'}} \\ x' & = & \exp{sigma * normal' + mu} . \end{eqnarray*}
+
+which now involves the distances $u1$ and $u2$ are from 1. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+897 \{
+898   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+899   \textcolor{keywordflow}{return} (uint32\_t)\hyperlink{classns3_1_1LogNormalRandomVariable_a032ddb20a74ff98a35a76a2e43d12a0b}{GetValue} (\hyperlink{classns3_1_1LogNormalRandomVariable_a562108c77ea1dbc4786fe96d037b0fc9}{m\_mu}, \hyperlink{classns3_1_1LogNormalRandomVariable_a5836fe394673dd9f142e3a15904419a9}{m\_sigma});
+900 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}!Get\+Mu@{Get\+Mu}}
+\index{Get\+Mu@{Get\+Mu}!ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Mu(void) const }{GetMu(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Log\+Normal\+Random\+Variable\+::\+Get\+Mu (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1LogNormalRandomVariable_af0e5068584bc50f5efe643e3e37db751}{}\label{classns3_1_1LogNormalRandomVariable_af0e5068584bc50f5efe643e3e37db751}
+
+
+Returns the mu value for the log-\/normal distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The mu value for the log-\/normal distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+811 \{
+812   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+813   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1LogNormalRandomVariable_a562108c77ea1dbc4786fe96d037b0fc9}{m\_mu};
+814 \}
+\end{DoxyCode}
+\index{ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}!Get\+Sigma@{Get\+Sigma}}
+\index{Get\+Sigma@{Get\+Sigma}!ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Sigma(void) const }{GetSigma(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Log\+Normal\+Random\+Variable\+::\+Get\+Sigma (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1LogNormalRandomVariable_a3f7f5dfc6f4a922687857c109b382dea}{}\label{classns3_1_1LogNormalRandomVariable_a3f7f5dfc6f4a922687857c109b382dea}
+
+
+Returns the sigma value for the log-\/normal distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The sigma value for the log-\/normal distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+817 \{
+818   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+819   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1LogNormalRandomVariable_a5836fe394673dd9f142e3a15904419a9}{m\_sigma};
+820 \}
+\end{DoxyCode}
+\index{ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Log\+Normal\+Random\+Variable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1LogNormalRandomVariable_af531456b8d8c3c162717a662199ba9ed}{}\label{classns3_1_1LogNormalRandomVariable_af531456b8d8c3c162717a662199ba9ed}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+786 \{
+787   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::LogNormalRandomVariable"})
+788     .SetParent<\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{RandomVariableStream}>()
+789     .SetGroupName (\textcolor{stringliteral}{"Core"})
+790     .AddConstructor<\hyperlink{classns3_1_1LogNormalRandomVariable_a69738761a9533b9ac16ac76dadda7b86}{LogNormalRandomVariable}> ()
+791     .AddAttribute(\textcolor{stringliteral}{"Mu"}, \textcolor{stringliteral}{"The mu value for the log-normal distribution returned by this RNG stream."},
+792                   DoubleValue(0.0),
+793                   MakeDoubleAccessor(&\hyperlink{classns3_1_1LogNormalRandomVariable_a562108c77ea1dbc4786fe96d037b0fc9}{LogNormalRandomVariable::m\_mu}),
+794                   MakeDoubleChecker<double>())
+795     .AddAttribute(\textcolor{stringliteral}{"Sigma"}, \textcolor{stringliteral}{"The sigma value for the log-normal distribution returned by this RNG stream."},
+796                   DoubleValue(1.0),
+797                   MakeDoubleAccessor(&\hyperlink{classns3_1_1LogNormalRandomVariable_a5836fe394673dd9f142e3a15904419a9}{LogNormalRandomVariable::m\_sigma}),
+798                   MakeDoubleChecker<double>())
+799     ;
+800   \textcolor{keywordflow}{return} tid;
+801 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(double mu, double sigma)}{GetValue(double mu, double sigma)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Log\+Normal\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{double}]{mu, }
+\item[{double}]{sigma}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LogNormalRandomVariable_af37e3543a8416881d09bad093275d349}{}\label{classns3_1_1LogNormalRandomVariable_af37e3543a8416881d09bad093275d349}
+
+
+Returns a random double from a log-\/normal distribution with the specified mu and sigma. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mu} & Mu value for the log-\/normal distribution. \\
+\hline
+\mbox{\tt in}  & {\em sigma} & Sigma value for the log-\/normal distribution. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u1$ and $u2$ are uniform variables over \mbox{[}0,1\mbox{]}, then the value that would be returned normally, $x$, is calculated as follows\+:
+
+\begin{eqnarray*} v1 & = & -1 + 2 * u1 \\ v2 & = & -1 + 2 * u2 \\ r2 & = & v1 * v1 + v2 * v2 \\ normal & = & v1 * \sqrt{\frac{-2.0 * \log{r2}}{r2}} \\ x & = & \exp{sigma * normal + mu} . \end{eqnarray*}
+
+For the antithetic case, $(1 - u1$) and $(1 - u2$) are the distances that $u1$ and $u2$ would be from $1$. The antithetic value returned, $x'$, is calculated as follows\+:
+
+\begin{eqnarray*} v1' & = & -1 + 2 * (1 - u1) \\ v2' & = & -1 + 2 * (1 - u2) \\ r2' & = & v1' * v1' + v2' * v2' \\ normal' & = & v1' * \sqrt{\frac{-2.0 * \log{r2'}}{r2'}} \\ x' & = & \exp{sigma * normal' + mu} . \end{eqnarray*}
+
+which now involves the distances $u1$ and $u2$ are from 1. 
+\begin{DoxyCode}
+850 \{
+851   \textcolor{keywordtype}{double} v1, v2, r2, \hyperlink{namespacens3_acf4e55ff5777ad2ac5ce429a45c38506a123a600b571a8e18f4616d304a33ef31}{normal}, \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x};
+852 
+853   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mu << sigma);
+854 
+855   \textcolor{keywordflow}{do}
+856     \{
+857       \textcolor{comment}{/* choose x,y in uniform square (-1,-1) to (+1,+1) */}
+858 
+859       \textcolor{keywordtype}{double} u1 = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+860       \textcolor{keywordtype}{double} u2 = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+861       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+862         \{
+863           u1 = (1 - u1);
+864           u2 = (1 - u2);
+865         \}
+866 
+867       v1 = -1 + 2 * u1;
+868       v2 = -1 + 2 * u2;
+869 
+870       \textcolor{comment}{/* see if it is in the unit circle */}
+871       r2 = v1 * v1 + v2 * v2;
+872     \}
+873   \textcolor{keywordflow}{while} (r2 > 1.0 || r2 == 0);
+874 
+875   normal = v1 * std::sqrt (-2.0 * std::log (r2) / r2);
+876 
+877   x =  std::exp (sigma * normal + mu);
+878 
+879   \textcolor{keywordflow}{return} \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x};
+880 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(void)}{GetValue(void)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Log\+Normal\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1LogNormalRandomVariable_a032ddb20a74ff98a35a76a2e43d12a0b}{}\label{classns3_1_1LogNormalRandomVariable_a032ddb20a74ff98a35a76a2e43d12a0b}
+
+
+Returns a random double from a log-\/normal distribution with the current mu and sigma. 
+
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u1$ and $u2$ are uniform variables over \mbox{[}0,1\mbox{]}, then the value that would be returned normally, $x$, is calculated as follows\+:
+
+\begin{eqnarray*} v1 & = & -1 + 2 * u1 \\ v2 & = & -1 + 2 * u2 \\ r2 & = & v1 * v1 + v2 * v2 \\ normal & = & v1 * \sqrt{\frac{-2.0 * \log{r2}}{r2}} \\ x & = & \exp{sigma * normal + mu} . \end{eqnarray*}
+
+For the antithetic case, $(1 - u1$) and $(1 - u2$) are the distances that $u1$ and $u2$ would be from $1$. The antithetic value returned, $x'$, is calculated as follows\+:
+
+\begin{eqnarray*} v1' & = & -1 + 2 * (1 - u1) \\ v2' & = & -1 + 2 * (1 - u2) \\ r2' & = & v1' * v1' + v2' * v2' \\ normal' & = & v1' * \sqrt{\frac{-2.0 * \log{r2'}}{r2'}} \\ x' & = & \exp{sigma * normal' + mu} . \end{eqnarray*}
+
+which now involves the distances $u1$ and $u2$ are from 1.
+
+Note that we have to re-\/implement this method here because the method is overloaded above for the two-\/argument variant and the c++ name resolution rules don\textquotesingle{}t work well with overloads split between parent and child classes. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+891 \{
+892   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+893   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1LogNormalRandomVariable_a032ddb20a74ff98a35a76a2e43d12a0b}{GetValue} (\hyperlink{classns3_1_1LogNormalRandomVariable_a562108c77ea1dbc4786fe96d037b0fc9}{m\_mu}, \hyperlink{classns3_1_1LogNormalRandomVariable_a5836fe394673dd9f142e3a15904419a9}{m\_sigma});
+894 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}!m\+\_\+mu@{m\+\_\+mu}}
+\index{m\+\_\+mu@{m\+\_\+mu}!ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+mu}{m_mu}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Log\+Normal\+Random\+Variable\+::m\+\_\+mu\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1LogNormalRandomVariable_a562108c77ea1dbc4786fe96d037b0fc9}{}\label{classns3_1_1LogNormalRandomVariable_a562108c77ea1dbc4786fe96d037b0fc9}
+The mu value for the log-\/normal distribution returned by this R\+NG stream. \index{ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}!m\+\_\+sigma@{m\+\_\+sigma}}
+\index{m\+\_\+sigma@{m\+\_\+sigma}!ns3\+::\+Log\+Normal\+Random\+Variable@{ns3\+::\+Log\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+sigma}{m_sigma}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Log\+Normal\+Random\+Variable\+::m\+\_\+sigma\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1LogNormalRandomVariable_a5836fe394673dd9f142e3a15904419a9}{}\label{classns3_1_1LogNormalRandomVariable_a5836fe394673dd9f142e3a15904419a9}
+The sigma value for the log-\/normal distribution returned by this R\+NG stream. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,84 @@
+\hypertarget{nsclick-defines_8cc}{}\section{click/examples/nsclick-\/defines.cc File Reference}
+\label{nsclick-defines_8cc}\index{click/examples/nsclick-\/defines.\+cc@{click/examples/nsclick-\/defines.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/click-\/routing.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/click-\/internet-\/stack-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$map$>$}\\*
+Include dependency graph for nsclick-\/defines.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{nsclick-defines_8cc_a63b416aa26608ab2f0d0ec5dd9b84f04}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Nsclick\+Routing\char`\"{})
+\item 
+int \hyperlink{nsclick-defines_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{nsclick-\/defines.\+cc@{nsclick-\/defines.\+cc}!main@{main}}
+\index{main@{main}!nsclick-\/defines.\+cc@{nsclick-\/defines.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{nsclick-defines_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{nsclick-defines_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+31 \{
+32 \textcolor{preprocessor}{#ifdef NS3\_CLICK}
+33   std::string clickConfigFolder = \textcolor{stringliteral}{"src/click/examples"};
+34 
+35   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+36   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"clickConfigFolder"}, \textcolor{stringliteral}{"Base folder for click configuration files"}, clickConfigFolder
+      );
+37   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+38 
+39 \textcolor{comment}{//}
+40 \textcolor{comment}{// Explicitly create the nodes required by the topology (shown above).}
+41 \textcolor{comment}{//}
+42   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create a node."});
+43   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n};
+44   n.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+45 
+46 \textcolor{comment}{//}
+47 \textcolor{comment}{// Install Click on the nodes}
+48 \textcolor{comment}{//}
+49   std::map<std::string, std::string> defines;
+50 \textcolor{comment}{// Strings, especially with blanks in it, have to be enclosed in quotation}
+51 \textcolor{comment}{// marks, like in click configuration files.}
+52   defines[\textcolor{stringliteral}{"OUTPUT"}] = \textcolor{stringliteral}{"\(\backslash\)"Hello World!\(\backslash\)""};
+53   
+54   ClickInternetStackHelper clickinternet;
+55   clickinternet.SetClickFile (n, clickConfigFolder + \textcolor{stringliteral}{"/nsclick-defines.click"});
+56   clickinternet.SetRoutingTableElement (n, \textcolor{stringliteral}{"rt"});
+57   clickinternet.SetDefines(n, defines);
+58   clickinternet.Install (n);
+59 
+60 \textcolor{comment}{//}
+61 \textcolor{comment}{// Now, do the actual simulation.}
+62 \textcolor{comment}{//}
+63   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+64   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (20.0));
+65   Simulator::Run ();
+66   Simulator::Destroy ();
+67   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+68 \textcolor{preprocessor}{#else}
+69   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Can't use ns-3-click without NSCLICK compiled in"});
+70 \textcolor{preprocessor}{#endif}
+71 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{nsclick-\/defines.\+cc@{nsclick-\/defines.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!nsclick-\/defines.\+cc@{nsclick-\/defines.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Nsclick\+Routing"")}{NS_LOG_COMPONENT_DEFINE("NsclickRouting")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Nsclick\+Routing\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{nsclick-defines_8cc_a63b416aa26608ab2f0d0ec5dd9b84f04}{}\label{nsclick-defines_8cc_a63b416aa26608ab2f0d0ec5dd9b84f04}

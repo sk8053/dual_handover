@@ -1,0 +1,90 @@
+\hypertarget{classTestOptionWithoutAlignment}{}\section{Test\+Option\+Without\+Alignment Class Reference}
+\label{classTestOptionWithoutAlignment}\index{Test\+Option\+Without\+Alignment@{Test\+Option\+Without\+Alignment}}
+
+
+I\+Pv6 extensions Test\+: Test the option without alignment.  
+
+
+
+
+Inheritance diagram for Test\+Option\+Without\+Alignment\+:
+% FIG 0
+
+
+Collaboration diagram for Test\+Option\+Without\+Alignment\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTestOptionWithoutAlignment_acbe1226956a8a88e3dc3baa6c1338d2e}{Test\+Option\+Without\+Alignment} ()
+\item 
+virtual void \hyperlink{classTestOptionWithoutAlignment_a23bf45b7de739a1c5b2521dee904e95b}{Do\+Run} ()
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+I\+Pv6 extensions Test\+: Test the option without alignment. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Test\+Option\+Without\+Alignment@{Test\+Option\+Without\+Alignment}!Test\+Option\+Without\+Alignment@{Test\+Option\+Without\+Alignment}}
+\index{Test\+Option\+Without\+Alignment@{Test\+Option\+Without\+Alignment}!Test\+Option\+Without\+Alignment@{Test\+Option\+Without\+Alignment}}
+\subsubsection[{\texorpdfstring{Test\+Option\+Without\+Alignment()}{TestOptionWithoutAlignment()}}]{\setlength{\rightskip}{0pt plus 5cm}Test\+Option\+Without\+Alignment\+::\+Test\+Option\+Without\+Alignment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classTestOptionWithoutAlignment_acbe1226956a8a88e3dc3baa6c1338d2e}{}\label{classTestOptionWithoutAlignment_acbe1226956a8a88e3dc3baa6c1338d2e}
+
+\begin{DoxyCode}
+107 : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"TestOptionWithoutAlignment"}) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Option\+Without\+Alignment@{Test\+Option\+Without\+Alignment}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Test\+Option\+Without\+Alignment@{Test\+Option\+Without\+Alignment}}
+\subsubsection[{\texorpdfstring{Do\+Run()}{DoRun()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Test\+Option\+Without\+Alignment\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classTestOptionWithoutAlignment_a23bf45b7de739a1c5b2521dee904e95b}{}\label{classTestOptionWithoutAlignment_a23bf45b7de739a1c5b2521dee904e95b}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+110   \{
+111     \hyperlink{classns3_1_1Ipv6ExtensionDestinationHeader}{Ipv6ExtensionDestinationHeader} header;
+112     \hyperlink{classOptionWithoutAlignmentHeader}{OptionWithoutAlignmentHeader} optionHeader;
+113     header.\hyperlink{classns3_1_1OptionField_aa6a592f9fd65421ce1176ce4fa50826a}{AddOption} (optionHeader);
+114 
+115 
+116     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (header.\hyperlink{classns3_1_1Ipv6ExtensionDestinationHeader_a4a43146a75ea4259b984df145c573146}{GetSerializedSize} () % 8, 0, \textcolor{stringliteral}{"
+      length of extension header is not a multiple of 8"});
+117 
+118     \hyperlink{classns3_1_1Buffer}{Buffer} buf;
+119     buf.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (header.\hyperlink{classns3_1_1Ipv6ExtensionDestinationHeader_a4a43146a75ea4259b984df145c573146}{GetSerializedSize} ());
+120     header.\hyperlink{classns3_1_1Ipv6ExtensionDestinationHeader_a13d3b01676de81cbcdd3fcebaf2fdd6b}{Serialize} (buf.Begin ());
+121 
+122     \textcolor{keyword}{const} uint8\_t* \hyperlink{topology-example-sim_8cc_a26c65296e316af77b787dc77469bb2a4}{data} = buf.PeekData ();
+123     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (*(data+2), 
+      \hyperlink{classOptionWithoutAlignmentHeader_ad463c4aa80ea726e57fcd404b118ce5d}{OptionWithoutAlignmentHeader::TYPE}, \textcolor{stringliteral}{"option without alignment is not
+       first in header field"});
+124   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{ipv6-extension-header-test-suite_8cc}{ipv6-\/extension-\/header-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

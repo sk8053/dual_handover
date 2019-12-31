@@ -1,0 +1,108 @@
+\hypertarget{classLteUplinkSinrTestSuite}{}\section{Lte\+Uplink\+Sinr\+Test\+Suite Class Reference}
+\label{classLteUplinkSinrTestSuite}\index{Lte\+Uplink\+Sinr\+Test\+Suite@{Lte\+Uplink\+Sinr\+Test\+Suite}}
+
+
+{\ttfamily \#include $<$lte-\/test-\/uplink-\/sinr.\+h$>$}
+
+
+
+Inheritance diagram for Lte\+Uplink\+Sinr\+Test\+Suite\+:
+% FIG 0
+
+
+Collaboration diagram for Lte\+Uplink\+Sinr\+Test\+Suite\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLteUplinkSinrTestSuite_a46b4de31cb6c52342996f122b21d5d43}{Lte\+Uplink\+Sinr\+Test\+Suite} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Test 1.\+2 S\+I\+NR calculation in uplink 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Lte\+Uplink\+Sinr\+Test\+Suite@{Lte\+Uplink\+Sinr\+Test\+Suite}!Lte\+Uplink\+Sinr\+Test\+Suite@{Lte\+Uplink\+Sinr\+Test\+Suite}}
+\index{Lte\+Uplink\+Sinr\+Test\+Suite@{Lte\+Uplink\+Sinr\+Test\+Suite}!Lte\+Uplink\+Sinr\+Test\+Suite@{Lte\+Uplink\+Sinr\+Test\+Suite}}
+\subsubsection[{\texorpdfstring{Lte\+Uplink\+Sinr\+Test\+Suite()}{LteUplinkSinrTestSuite()}}]{\setlength{\rightskip}{0pt plus 5cm}Lte\+Uplink\+Sinr\+Test\+Suite\+::\+Lte\+Uplink\+Sinr\+Test\+Suite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLteUplinkSinrTestSuite_a46b4de31cb6c52342996f122b21d5d43}{}\label{classLteUplinkSinrTestSuite_a46b4de31cb6c52342996f122b21d5d43}
+Test 1.\+2 S\+I\+NR calculation in uplink Test\+Suite Build Spectrum Model values for the TX signal
+
+TX signals \#1\+: Power Spectral Density (W/\+Hz) of the signals of interest = \mbox{[}-\/46 -\/inf\mbox{]} and \mbox{[}-\/inf -\/48\mbox{]} d\+Bm and BW = \mbox{[}20 22\mbox{]} M\+Hz
+
+TX signals \#2\+: Power Spectral Density of the signals of interest = \mbox{[}-\/63 -\/inf\mbox{]} and \mbox{[}-\/inf -\/61\mbox{]} d\+Bm and BW = \mbox{[}20 22\mbox{]} M\+Hz
+\begin{DoxyCode}
+50   : \hyperlink{classns3_1_1TestSuite_a904b0c40583b744d30908aeb94636d1a}{TestSuite} (\textcolor{stringliteral}{"lte-uplink-sinr"}, \hyperlink{classns3_1_1TestSuite_a1ebfcab34ec8161e085e8e3a1855eae0a90c5529a26ab3a5ffcc6e57040dbd82e}{SYSTEM})
+51 \{
+55   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumModel>} sm;
+56 
+57   \hyperlink{namespacens3_a46ac9188e5cf43bd5292f7b67451246e}{Bands} bands;
+58   \hyperlink{structns3_1_1BandInfo}{BandInfo} bi;
+59 
+60   bi.\hyperlink{structns3_1_1BandInfo_a5e9018ae65c7625cc6d5c3c0067a9104}{fl} = 2.400e9;
+61   bi.\hyperlink{structns3_1_1BandInfo_a02fad8a855735ff477f736bb8cb7bc25}{fc} = 2.410e9;
+62   bi.\hyperlink{structns3_1_1BandInfo_a78e8fadd8cafcc28d74bda6010e3d6f4}{fh} = 2.420e9;
+63   bands.push\_back (bi);
+64 
+65   bi.\hyperlink{structns3_1_1BandInfo_a5e9018ae65c7625cc6d5c3c0067a9104}{fl} = 2.420e9;
+66   bi.\hyperlink{structns3_1_1BandInfo_a02fad8a855735ff477f736bb8cb7bc25}{fc} = 2.431e9;
+67   bi.\hyperlink{structns3_1_1BandInfo_a78e8fadd8cafcc28d74bda6010e3d6f4}{fh} = 2.442e9;
+68   bands.push\_back (bi);
+69 
+70   sm = Create<SpectrumModel> (bands);
+71 
+75   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} rxPsd1 = Create<SpectrumValue> (sm);
+76   (*rxPsd1)[0] = 1.255943215755e-15;
+77   (*rxPsd1)[1] = 0.0;
+78 
+79   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} rxPsd2 = Create<SpectrumValue> (sm);
+80   (*rxPsd2)[0] = 0.0;
+81   (*rxPsd2)[1] = 7.204059965732e-16;
+82 
+83   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} theoreticalSinr1 = Create<SpectrumValue> (sm);
+84   (*theoreticalSinr1)[0] = 3.72589167251055;
+85   (*theoreticalSinr1)[1] = 3.72255684126076;
+86 
+87   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUplinkDataSinrTestCase}{LteUplinkDataSinrTestCase} (rxPsd1, rxPsd2, 
+      theoreticalSinr1, \textcolor{stringliteral}{"sdBm = [-46 -inf] and [-inf -48]"}), TestCase::QUICK);
+88   
+89   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUplinkSrsSinrTestCase}{LteUplinkSrsSinrTestCase} (rxPsd1, rxPsd2, 
+      theoreticalSinr1, \textcolor{stringliteral}{"sdBm = [-46 -inf] and [-inf -48]"}), TestCase::QUICK);
+90 
+94   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} rxPsd3 = Create<SpectrumValue> (sm);
+95   (*rxPsd3)[0] = 2.505936168136e-17;
+96   (*rxPsd3)[1] = 0.0;
+97 
+98   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} rxPsd4 = Create<SpectrumValue> (sm);
+99   (*rxPsd4)[0] = 0.0;
+100   (*rxPsd4)[1] = 3.610582885110e-17;
+101 
+102   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} theoreticalSinr2 = Create<SpectrumValue> (sm);
+103   (*theoreticalSinr2)[0] = 0.0743413124381667;
+104   (*theoreticalSinr2)[1] = 0.1865697965291756;
+105 
+106   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUplinkDataSinrTestCase}{LteUplinkDataSinrTestCase} (rxPsd3, rxPsd4, 
+      theoreticalSinr2, \textcolor{stringliteral}{"sdBm = [-63 -inf] and [-inf -61]"}), TestCase::QUICK);
+107   
+108   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUplinkSrsSinrTestCase}{LteUplinkSrsSinrTestCase} (rxPsd3, rxPsd4, 
+      theoreticalSinr2, \textcolor{stringliteral}{"sdBm = [-63 -inf] and [-inf -61]"}), TestCase::QUICK);
+109 
+110 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lte/test/\hyperlink{lte-test-uplink-sinr_8h}{lte-\/test-\/uplink-\/sinr.\+h}\item 
+lte/test/\hyperlink{lte-test-uplink-sinr_8cc}{lte-\/test-\/uplink-\/sinr.\+cc}\end{DoxyCompactItemize}

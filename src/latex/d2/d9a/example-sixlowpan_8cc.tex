@@ -1,0 +1,128 @@
+\hypertarget{example-sixlowpan_8cc}{}\section{sixlowpan/examples/example-\/sixlowpan.cc File Reference}
+\label{example-sixlowpan_8cc}\index{sixlowpan/examples/example-\/sixlowpan.\+cc@{sixlowpan/examples/example-\/sixlowpan.\+cc}}
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/apps-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv6-\/static-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv6-\/routing-\/table-\/entry.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/sixlowpan-\/module.\+h\char`\"{}}\\*
+Include dependency graph for example-\/sixlowpan.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{example-sixlowpan_8cc_a1bd3bac95c73ae99a212a23e83fbcfad}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Example\+Sixlowpan\char`\"{})
+\item 
+int \hyperlink{example-sixlowpan_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{example-\/sixlowpan.\+cc@{example-\/sixlowpan.\+cc}!main@{main}}
+\index{main@{main}!example-\/sixlowpan.\+cc@{example-\/sixlowpan.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{example-sixlowpan_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{example-sixlowpan_8cc_a3c04138a5bfe5d72780bb7e82a18e627}
+
+\begin{DoxyCode}
+56 \{
+57   \textcolor{keywordtype}{bool} \hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose} = \textcolor{keyword}{false};
+58 
+59   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+60   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"verbose"}, \textcolor{stringliteral}{"turn on some relevant log components"}, verbose);
+61   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+62 
+63   \textcolor{keywordflow}{if} (verbose)
+64     \{
+65       \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"SixLowPanNetDevice"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+66       \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"Ping6Application"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+67     \}
+68 
+69   Packet::EnablePrinting ();
+70   Packet::EnableChecking ();
+71 
+72   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes."});
+73   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} n0 = CreateObject<Node> ();
+74   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} \hyperlink{structrgb_afd9a3feaf22de2f96ba25d19494235a6}{r} = CreateObject<Node> ();
+75   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} n1 = CreateObject<Node> ();
+76 
+77 
+78   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} net1 (n0, r);
+79   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} net2 (r, n1);
+80   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{buildings__pathloss_8m_a00a349297fa58bc80ff5329e25dcfe28}{all} (n0, r, n1);
+81 
+82   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create IPv6 Internet Stack"});
+83   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internetv6;
+84   internetv6.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (\hyperlink{buildings__pathloss_8m_a00a349297fa58bc80ff5329e25dcfe28}{all});
+85 
+86   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create channels."});
+87   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+88   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (5000000));
+89   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+90   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} \hyperlink{lte__cqi__generation_8m_a479b78c01efbe4664b402a300da492f7}{d2} = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (net2);
+91   csma.\hyperlink{classns3_1_1CsmaHelper_a741c31b2526e3570cc62c9d7d9667ca9}{SetDeviceAttribute} (\textcolor{stringliteral}{"Mtu"}, UintegerValue (150));
+92   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} \hyperlink{lte__link__budget__interference_8m_ab5ca0c44c6f0a063a5219b3749db661f}{d1} = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (net1);
+93 
+94   \hyperlink{classns3_1_1SixLowPanHelper}{SixLowPanHelper} sixlowpan;
+95   sixlowpan.\hyperlink{classns3_1_1SixLowPanHelper_a1bbb0e214b34e88673ca0c86fc2fcf84}{SetDeviceAttribute} (\textcolor{stringliteral}{"ForceEtherType"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}) );
+96   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} six1 = sixlowpan.\hyperlink{classns3_1_1SixLowPanHelper_a638d855fa28d59736b59446aefccf7b3}{Install} (d1);
+97 
+98   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create networks and assign IPv6 Addresses."});
+99   \hyperlink{classns3_1_1Ipv6AddressHelper}{Ipv6AddressHelper} ipv6;
+100   ipv6.\hyperlink{classns3_1_1Ipv6AddressHelper_a13467412e9da6263395c09460681c0f1}{SetBase} (\hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"2001:1::"}), \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (64));
+101   \hyperlink{classns3_1_1Ipv6InterfaceContainer}{Ipv6InterfaceContainer} \hyperlink{generate__test__data__lte__sinr_8m_ac6ef61fb0fec52abd81fd71388742cc0}{i1} = ipv6.\hyperlink{classns3_1_1Ipv6AddressHelper_aad4685588aea1757beaf881bc4157912}{Assign} (six1);
+102   i1.\hyperlink{classns3_1_1Ipv6InterfaceContainer_a080aad6f43a52c6478053b237e5e6979}{SetForwarding} (1, \textcolor{keyword}{true});
+103   i1.\hyperlink{classns3_1_1Ipv6InterfaceContainer_a3fb0cfdcb3780bc624b10a04e58ffbd0}{SetDefaultRouteInAllNodes} (1);
+104 
+105   ipv6.\hyperlink{classns3_1_1Ipv6AddressHelper_a13467412e9da6263395c09460681c0f1}{SetBase} (\hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"2001:2::"}), \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (64));
+106   \hyperlink{classns3_1_1Ipv6InterfaceContainer}{Ipv6InterfaceContainer} \hyperlink{generate__test__data__lte__sinr_8m_a2fce890a7c411f1fe7c0c55ec9eb4106}{i2} = ipv6.\hyperlink{classns3_1_1Ipv6AddressHelper_aad4685588aea1757beaf881bc4157912}{Assign} (d2);
+107   i2.\hyperlink{classns3_1_1Ipv6InterfaceContainer_a080aad6f43a52c6478053b237e5e6979}{SetForwarding} (0, \textcolor{keyword}{true});
+108   i2.\hyperlink{classns3_1_1Ipv6InterfaceContainer_a3fb0cfdcb3780bc624b10a04e58ffbd0}{SetDefaultRouteInAllNodes} (0);
+109 
+110   \textcolor{comment}{/* Create a Ping6 application to send ICMPv6 echo request from n0 to n1 via r */}
+111   uint32\_t packetSize = 200;
+112   uint32\_t maxPacketCount = 50;
+113   \hyperlink{classns3_1_1Time}{Time} interPacketInterval = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.);
+114   \hyperlink{classns3_1_1Ping6Helper}{Ping6Helper} ping6;
+115 
+116   ping6.\hyperlink{classns3_1_1Ping6Helper_aa1453d2ea29e762a3ae161a8099192e2}{SetLocal} (i1.\hyperlink{classns3_1_1Ipv6InterfaceContainer_ac888a9b8e70b501e44fdb12e4adc7d79}{GetAddress} (0, 1));
+117   ping6.\hyperlink{classns3_1_1Ping6Helper_a1a2aaa6931daf3c493ceae3138f26072}{SetRemote} (i2.\hyperlink{classns3_1_1Ipv6InterfaceContainer_ac888a9b8e70b501e44fdb12e4adc7d79}{GetAddress} (1, 1));
+118 
+119   ping6.\hyperlink{classns3_1_1Ping6Helper_aa049dde33bc4f712b7bf79e16da1243e}{SetAttribute} (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (maxPacketCount));
+120   ping6.\hyperlink{classns3_1_1Ping6Helper_aa049dde33bc4f712b7bf79e16da1243e}{SetAttribute} (\textcolor{stringliteral}{"Interval"}, TimeValue (interPacketInterval));
+121   ping6.\hyperlink{classns3_1_1Ping6Helper_aa049dde33bc4f712b7bf79e16da1243e}{SetAttribute} (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (packetSize));
+122   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} apps = ping6.\hyperlink{classns3_1_1Ping6Helper_a3f450b54b353b5181dec6c6d69733e0a}{Install} (net1.Get (0));
+123 
+124   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5.0));
+125   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (15.0));
+126 
+127 
+128   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+129   csma.\hyperlink{classns3_1_1AsciiTraceHelperForDevice_a63e57c878526c732924e14c1e52cca8b}{EnableAsciiAll} (ascii.\hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (\textcolor{stringliteral}{"example-sixlowpan.tr"}));
+130   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (std::string (\textcolor{stringliteral}{"example-sixlowpan"}), \textcolor{keyword}{true});
+131 
+132   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (100));
+133   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+134   Simulator::Run ();
+135   Simulator::Destroy ();
+136   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+137 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{example-\/sixlowpan.\+cc@{example-\/sixlowpan.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!example-\/sixlowpan.\+cc@{example-\/sixlowpan.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Example\+Sixlowpan"")}{NS_LOG_COMPONENT_DEFINE("ExampleSixlowpan")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Example\+Sixlowpan\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{example-sixlowpan_8cc_a1bd3bac95c73ae99a212a23e83fbcfad}{}\label{example-sixlowpan_8cc_a1bd3bac95c73ae99a212a23e83fbcfad}

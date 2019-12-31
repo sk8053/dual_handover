@@ -1,0 +1,78 @@
+\hypertarget{main-grid-topology_8cc}{}\section{mobility/examples/main-\/grid-\/topology.cc File Reference}
+\label{main-grid-topology_8cc}\index{mobility/examples/main-\/grid-\/topology.\+cc@{mobility/examples/main-\/grid-\/topology.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+Include dependency graph for main-\/grid-\/topology.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{main-grid-topology_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{main-\/grid-\/topology.\+cc@{main-\/grid-\/topology.\+cc}!main@{main}}
+\index{main@{main}!main-\/grid-\/topology.\+cc@{main-\/grid-\/topology.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{main-grid-topology_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{main-grid-topology_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+27 \{
+28   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+29   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+30 
+31   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+32 
+33   \textcolor{comment}{// create an array of empty nodes for testing purposes }
+34   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (120);
+35 
+36   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+37   \textcolor{comment}{// setup the grid itself: objects are layed out}
+38   \textcolor{comment}{// started from (-100,-100) with 20 objects per row, }
+39   \textcolor{comment}{// the x interval between each object is 5 meters}
+40   \textcolor{comment}{// and the y interval between each object is 20 meters}
+41   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (\textcolor{stringliteral}{"ns3::GridPositionAllocator"},
+42                                  \textcolor{stringliteral}{"MinX"}, DoubleValue (-100.0),
+43                                  \textcolor{stringliteral}{"MinY"}, DoubleValue (-100.0),
+44                                  \textcolor{stringliteral}{"DeltaX"}, DoubleValue (5.0),
+45                                  \textcolor{stringliteral}{"DeltaY"}, DoubleValue (20.0),
+46                                  \textcolor{stringliteral}{"GridWidth"}, UintegerValue (20),
+47                                  \textcolor{stringliteral}{"LayoutType"}, StringValue (\textcolor{stringliteral}{"RowFirst"}));
+48   \textcolor{comment}{// each object will be attached a static position.}
+49   \textcolor{comment}{// i.e., once set by the "position allocator", the}
+50   \textcolor{comment}{// position will never change.}
+51   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+52 
+53   \textcolor{comment}{// finalize the setup by attaching to each object}
+54   \textcolor{comment}{// in the input array a position and initializing}
+55   \textcolor{comment}{// this position with the calculated coordinates.}
+56   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (nodes);
+57 
+58   \textcolor{comment}{// iterate our nodes and print their position.}
+59   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1NodeContainer_aa1a9f2d2b09bfef7d066d3974bca2cc4}{NodeContainer::Iterator} j = nodes.\hyperlink{classns3_1_1NodeContainer_adf0f639aff139db107526288777eb533}{Begin} ();
+60        j != nodes.\hyperlink{classns3_1_1NodeContainer_a8ea0bcac137597d192c5e6b95ca60464}{End} (); ++j)
+61     \{
+62       \hyperlink{classns3_1_1Ptr}{Ptr<Node>} \textcolor{keywordtype}{object} = *j;
+63       \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} position = \textcolor{keywordtype}{object}->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+64       \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (position != 0);
+65       \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} pos = position->\hyperlink{classns3_1_1MobilityModel_aba838f06ec5bbb2d193d94b8c0e4abb4}{GetPosition} ();
+66       std::cout << \textcolor{stringliteral}{"x="} << pos.x << \textcolor{stringliteral}{", y="} << pos.y << \textcolor{stringliteral}{", z="} << pos.z << std::endl;
+67     \}
+68 
+69   Simulator::Destroy ();
+70   \textcolor{keywordflow}{return} 0;
+71 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

@@ -1,0 +1,274 @@
+\hypertarget{third-distributed_8cc}{}\section{mpi/examples/third-\/distributed.cc File Reference}
+\label{third-distributed_8cc}\index{mpi/examples/third-\/distributed.\+cc@{mpi/examples/third-\/distributed.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wifi-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mpi-\/module.\+h\char`\"{}}\\*
+Include dependency graph for third-\/distributed.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{third-distributed_8cc_a9e2e8518a534020a59e1e284ab6b4110}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Third\+Example\+Distributed\char`\"{})
+\item 
+int \hyperlink{third-distributed_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{third-\/distributed.\+cc@{third-\/distributed.\+cc}!main@{main}}
+\index{main@{main}!third-\/distributed.\+cc@{third-\/distributed.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{third-distributed_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{third-distributed_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+50 \{
+51   \textcolor{keywordtype}{bool} \hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose} = \textcolor{keyword}{true};
+52   uint32\_t nCsma = 3;
+53   uint32\_t nWifi = 3;
+54   \textcolor{keywordtype}{bool} tracing = \textcolor{keyword}{false};
+55   \textcolor{keywordtype}{bool} nullmsg = \textcolor{keyword}{false};
+56 
+57   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+58   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nCsma"}, \textcolor{stringliteral}{"Number of \(\backslash\)"extra\(\backslash\)" CSMA nodes/devices"}, nCsma);
+59   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nWifi"}, \textcolor{stringliteral}{"Number of wifi STA devices"}, nWifi);
+60   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"verbose"}, \textcolor{stringliteral}{"Tell echo applications to log if true"}, verbose);
+61   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"tracing"}, \textcolor{stringliteral}{"Enable pcap tracing"}, tracing);
+62   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nullmsg"}, \textcolor{stringliteral}{"Enable the use of null-message synchronization"}, nullmsg);
+63 
+64   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc,argv);
+65 
+66   \textcolor{comment}{// The underlying restriction of 18 is due to the grid position}
+67   \textcolor{comment}{// allocator's configuration; the grid layout will exceed the}
+68   \textcolor{comment}{// bounding box if more than 18 nodes are provided.}
+69   \textcolor{keywordflow}{if} (nWifi > 18)
+70     \{
+71       std::cout << \textcolor{stringliteral}{"nWifi should be 18 or less; otherwise grid layout exceeds the bounding box"} << 
+      std::endl;
+72       \textcolor{keywordflow}{return} 1;
+73     \}
+74 
+75   \textcolor{keywordflow}{if} (verbose)
+76     \{
+77       \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"UdpEchoClientApplication"}, 
+      \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+78       \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"UdpEchoServerApplication"}, 
+      \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+79     \}
+80 
+81   \textcolor{comment}{// Sequential fallback values}
+82   uint32\_t systemId = 0;
+83   uint32\_t systemCount = 1;
+84 
+85 \textcolor{preprocessor}{#ifdef NS3\_MPI}
+86 
+87   \textcolor{comment}{// Distributed simulation setup; by default use granted time window algorithm.}
+88   \textcolor{keywordflow}{if}(nullmsg) 
+89     \{
+90       GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"},
+91                          StringValue (\textcolor{stringliteral}{"ns3::NullMessageSimulatorImpl"}));
+92     \} 
+93   \textcolor{keywordflow}{else} 
+94     \{
+95       GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"},
+96                          StringValue (\textcolor{stringliteral}{"ns3::DistributedSimulatorImpl"}));
+97     \}
+98 
+99   MpiInterface::Enable (&argc, &argv);
+100 
+101   systemId = MpiInterface::GetSystemId ();
+102   systemCount = MpiInterface::GetSize ();
+103 
+104   \textcolor{comment}{// Check for valid distributed parameters.}
+105   \textcolor{comment}{// Must have 2 and only 2 Logical Processors (LPs)}
+106   \textcolor{keywordflow}{if} (systemCount != 2)
+107     \{
+108       std::cout << \textcolor{stringliteral}{"This simulation requires 2 and only 2 logical processors."} << std::endl;
+109       \textcolor{keywordflow}{return} 1;
+110     \}
+111 
+112 \textcolor{preprocessor}{#endif // NS3\_MPI}
+113 
+114   \textcolor{comment}{// System id of Wifi side}
+115   uint32\_t systemWifi = 0;
+116   
+117   \textcolor{comment}{// System id of CSMA side}
+118   uint32\_t systemCsma = systemCount - 1;
+119   
+120   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} p2pNodes;
+121   \textcolor{comment}{// Create each end of the P2P link on a separate system (rank)}
+122   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} p2pNode1 = CreateObject<Node> (systemWifi);
+123   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} p2pNode2 = CreateObject<Node> (systemCsma);
+124   p2pNodes.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (p2pNode1);
+125   p2pNodes.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (p2pNode2);
+126 
+127   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} pointToPoint;
+128   pointToPoint.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"5Mbps"}));
+129   pointToPoint.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"2ms"}));
+130 
+131   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} p2pDevices;
+132   p2pDevices = pointToPoint.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (p2pNodes);
+133 
+134   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} csmaNodes;
+135   csmaNodes.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (p2pNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+136   \textcolor{comment}{// Create the csma nodes on one system (rank)}
+137   csmaNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (nCsma, systemCsma);
+138 
+139   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+140   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"100Mbps"}));
+141   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_ga281d64bcb4dad96267d83c7688ec433f}{NanoSeconds} (6560)));
+142 
+143   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} csmaDevices;
+144   csmaDevices = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (csmaNodes);
+145 
+146   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} wifiStaNodes;
+147   \textcolor{comment}{// Create the wifi nodes on the other system (rank)}
+148   wifiStaNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (nWifi, systemWifi);
+149   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} wifiApNode = p2pNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0);
+150 
+151   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} channel = YansWifiChannelHelper::Default ();
+152   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} phy = YansWifiPhyHelper::Default ();
+153   phy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (channel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ());
+154 
+155   \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+156   wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::AarfWifiManager"});
+157 
+158   \hyperlink{classns3_1_1WifiMacHelper}{WifiMacHelper} mac;
+159   \hyperlink{classns3_1_1Ssid}{Ssid} ssid = \hyperlink{classns3_1_1Ssid}{Ssid} (\textcolor{stringliteral}{"ns-3-ssid"});
+160   mac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::StaWifiMac"},
+161                \textcolor{stringliteral}{"Ssid"}, SsidValue (ssid),
+162                \textcolor{stringliteral}{"ActiveProbing"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+163 
+164   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} staDevices;
+165   staDevices = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, mac, wifiStaNodes);
+166 
+167   mac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::ApWifiMac"},
+168                \textcolor{stringliteral}{"Ssid"}, SsidValue (ssid));
+169 
+170   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} apDevices;
+171   apDevices = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, mac, wifiApNode);
+172 
+173   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+174 
+175   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (\textcolor{stringliteral}{"ns3::GridPositionAllocator"},
+176                                  \textcolor{stringliteral}{"MinX"}, DoubleValue (0.0),
+177                                  \textcolor{stringliteral}{"MinY"}, DoubleValue (0.0),
+178                                  \textcolor{stringliteral}{"DeltaX"}, DoubleValue (5.0),
+179                                  \textcolor{stringliteral}{"DeltaY"}, DoubleValue (10.0),
+180                                  \textcolor{stringliteral}{"GridWidth"}, UintegerValue (3),
+181                                  \textcolor{stringliteral}{"LayoutType"}, StringValue (\textcolor{stringliteral}{"RowFirst"}));
+182 
+183   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::RandomWalk2dMobilityModel"},
+184                              \textcolor{stringliteral}{"Bounds"}, RectangleValue (\hyperlink{classns3_1_1Rectangle}{Rectangle} (-50, 50, -50, 50)));
+185   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (wifiStaNodes);
+186 
+187   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+188   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (wifiApNode);
+189 
+190   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+191   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (csmaNodes);
+192   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (wifiApNode);
+193   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (wifiStaNodes);
+194 
+195   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+196 
+197   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+198   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} p2pInterfaces;
+199   p2pInterfaces = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (p2pDevices);
+200 
+201   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.2.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+202   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} csmaInterfaces;
+203   csmaInterfaces = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (csmaDevices);
+204 
+205   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.3.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+206   address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (staDevices);
+207   address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (apDevices);
+208 
+209   \textcolor{comment}{// If this rank is systemCsma, }
+210   \textcolor{comment}{// it should contain the server application, }
+211   \textcolor{comment}{// since it is on one of the csma nodes}
+212   \textcolor{keywordflow}{if} (systemId == systemCsma)
+213     \{
+214       \hyperlink{classns3_1_1UdpEchoServerHelper}{UdpEchoServerHelper} echoServer (9);
+215 
+216       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} serverApps = echoServer.Install (csmaNodes.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (nCsma));
+217       serverApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+218       serverApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+219     \}
+220 
+221   \textcolor{comment}{// If this rank is systemWifi}
+222   \textcolor{comment}{// it should contain the client application, }
+223   \textcolor{comment}{// since it is on one of the wifi nodes}
+224   \textcolor{keywordflow}{if} (systemId == systemWifi)
+225     \{
+226       \hyperlink{classns3_1_1UdpEchoClientHelper}{UdpEchoClientHelper} echoClient (csmaInterfaces.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (nCsma), 9);
+227       echoClient.\hyperlink{classns3_1_1UdpEchoClientHelper_a11228c069ad896f8ed13f4d37c13f51d}{SetAttribute} (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (1));
+228       echoClient.SetAttribute (\textcolor{stringliteral}{"Interval"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0)));
+229       echoClient.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (1024));
+230 
+231       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps = 
+232         echoClient.Install (wifiStaNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (nWifi - 1));
+233       clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0));
+234       clientApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+235     \}
+236  
+237   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+238 
+239   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+240 
+241   \textcolor{keywordflow}{if} (tracing == \textcolor{keyword}{true})
+242     \{
+243       \textcolor{comment}{// Depending on the system Id (rank), the pcap information }
+244       \textcolor{comment}{// traced will be different.  For example, the ethernet pcap}
+245       \textcolor{comment}{// will be empty for rank0, since these nodes are placed on }
+246       \textcolor{comment}{// on rank 1.  All ethernet traffic will take place on rank 1.}
+247       \textcolor{comment}{// Similar differences are seen in the p2p and wireless pcaps.}
+248       \textcolor{keywordflow}{if} (systemId == systemCsma)
+249         \{
+250           pointToPoint.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"third-distributed-csma"});
+251           phy.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"third-distributed-csma"}, apDevices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+252           csma.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"third-distributed-csma"}, csmaDevices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0), \textcolor{keyword}{true});
+253         \}
+254       \textcolor{keywordflow}{else} \textcolor{comment}{// systemWifi}
+255         \{
+256           pointToPoint.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"third-distributed-wifi"});
+257           phy.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"third-distributed-wifi"}, apDevices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+258           csma.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"third-distributed-wifi"}, csmaDevices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0), \textcolor{keyword}{true});
+259         \}
+260     \}
+261 
+262   Simulator::Run ();
+263   Simulator::Destroy ();
+264 
+265 \textcolor{preprocessor}{#ifdef NS3\_MPI}
+266   \textcolor{comment}{// Exit the MPI execution environment}
+267   MpiInterface::Disable ();
+268 \textcolor{preprocessor}{#endif}
+269   
+270   \textcolor{keywordflow}{return} 0;
+271 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{third-\/distributed.\+cc@{third-\/distributed.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!third-\/distributed.\+cc@{third-\/distributed.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Third\+Example\+Distributed"")}{NS_LOG_COMPONENT_DEFINE("ThirdExampleDistributed")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Third\+Example\+Distributed\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{third-distributed_8cc_a9e2e8518a534020a59e1e284ab6b4110}{}\label{third-distributed_8cc_a9e2e8518a534020a59e1e284ab6b4110}

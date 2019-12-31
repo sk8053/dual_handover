@@ -1,0 +1,304 @@
+\hypertarget{classns3_1_1SystemConditionPrivate}{}\section{ns3\+:\+:System\+Condition\+Private Class Reference}
+\label{classns3_1_1SystemConditionPrivate}\index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+
+
+Collaboration diagram for ns3\+:\+:System\+Condition\+Private\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1SystemConditionPrivate_abe3fc50cee109405355a7d56d24ce756}{System\+Condition\+Private} ()
+\item 
+\hyperlink{classns3_1_1SystemConditionPrivate_a4b680c47b2ba5b30d07dbc4b5845d71b}{$\sim$\+System\+Condition\+Private} ()
+\item 
+void \hyperlink{classns3_1_1SystemConditionPrivate_a195e038524b1efa106049a0358af99d5}{Set\+Condition} (bool condition)
+\item 
+bool \hyperlink{classns3_1_1SystemConditionPrivate_a304f88722c58b734ebfc701f702c844c}{Get\+Condition} (void)
+\item 
+void \hyperlink{classns3_1_1SystemConditionPrivate_a0213a8ffd678629df223ec9f890aa413}{Signal} (void)
+\item 
+void \hyperlink{classns3_1_1SystemConditionPrivate_ab7839aa1aae74cad0bb6cc8cc1cdfb27}{Broadcast} (void)
+\item 
+void \hyperlink{classns3_1_1SystemConditionPrivate_ac2e3dfcd1eef3271602eaef7634351f1}{Wait} (void)
+\item 
+bool \hyperlink{classns3_1_1SystemConditionPrivate_a9c5f7d03c27f1986c56dabe609798b8a}{Timed\+Wait} (uint64\+\_\+t ns)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const uint64\+\_\+t \hyperlink{classns3_1_1SystemConditionPrivate_a677a08c18d846d886ad1b3b251d48d9b}{N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC} = (uint64\+\_\+t)1000000000
+\begin{DoxyCompactList}\small\item\em Conversion from ns to s. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+pthread\+\_\+mutex\+\_\+t \hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\+\_\+mutex}
+\item 
+pthread\+\_\+cond\+\_\+t \hyperlink{classns3_1_1SystemConditionPrivate_a812da27a9c28ef6191f6defa019a02d4}{m\+\_\+cond}
+\item 
+bool \hyperlink{classns3_1_1SystemConditionPrivate_abab2c2936fff504312d0c30f0ca1e145}{m\+\_\+condition}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of \hyperlink{classns3_1_1SystemCondition}{System\+Condition} for Unix-\/like systems. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}!System\+Condition\+Private@{System\+Condition\+Private}}
+\index{System\+Condition\+Private@{System\+Condition\+Private}!ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+\subsubsection[{\texorpdfstring{System\+Condition\+Private()}{SystemConditionPrivate()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+System\+Condition\+Private\+::\+System\+Condition\+Private (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemConditionPrivate_abe3fc50cee109405355a7d56d24ce756}{}\label{classns3_1_1SystemConditionPrivate_abe3fc50cee109405355a7d56d24ce756}
+Constructor. 
+\begin{DoxyCode}
+92 \{
+93   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+94 
+95   \hyperlink{classns3_1_1SystemConditionPrivate_abab2c2936fff504312d0c30f0ca1e145}{m\_condition} = \textcolor{keyword}{false};
+96 
+97   pthread\_mutexattr\_t mAttr;
+98   pthread\_mutexattr\_init (&mAttr);
+99 \textcolor{comment}{//}
+100 \textcolor{comment}{// Linux and OS X (at least) have, of course chosen different names for the }
+101 \textcolor{comment}{// error checking flags just to make life difficult.}
+102 \textcolor{comment}{//}
+103 \textcolor{preprocessor}{#if defined (PTHREAD\_MUTEX\_ERRORCHECK\_NP)}
+104   pthread\_mutexattr\_settype (&mAttr, PTHREAD\_MUTEX\_ERRORCHECK\_NP);
+105 \textcolor{preprocessor}{#else}
+106   pthread\_mutexattr\_settype (&mAttr, PTHREAD\_MUTEX\_ERRORCHECK);
+107 \textcolor{preprocessor}{#endif}
+108   pthread\_mutex\_init (&\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex}, &mAttr);
+109 
+110   pthread\_condattr\_t cAttr;
+111   pthread\_condattr\_init (&cAttr);
+112   pthread\_condattr\_setpshared (&cAttr, PTHREAD\_PROCESS\_PRIVATE);
+113   pthread\_cond\_init (&\hyperlink{classns3_1_1SystemConditionPrivate_a812da27a9c28ef6191f6defa019a02d4}{m\_cond}, &cAttr);
+114 \}
+\end{DoxyCode}
+\index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}!````~System\+Condition\+Private@{$\sim$\+System\+Condition\+Private}}
+\index{````~System\+Condition\+Private@{$\sim$\+System\+Condition\+Private}!ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+\subsubsection[{\texorpdfstring{$\sim$\+System\+Condition\+Private()}{~SystemConditionPrivate()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+System\+Condition\+Private\+::$\sim$\+System\+Condition\+Private (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemConditionPrivate_a4b680c47b2ba5b30d07dbc4b5845d71b}{}\label{classns3_1_1SystemConditionPrivate_a4b680c47b2ba5b30d07dbc4b5845d71b}
+Destructor. 
+\begin{DoxyCode}
+117 \{
+118   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+119   pthread\_mutex\_destroy (&\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex});
+120   pthread\_cond\_destroy (&\hyperlink{classns3_1_1SystemConditionPrivate_a812da27a9c28ef6191f6defa019a02d4}{m\_cond});
+121 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}!Broadcast@{Broadcast}}
+\index{Broadcast@{Broadcast}!ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+\subsubsection[{\texorpdfstring{Broadcast(void)}{Broadcast(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Condition\+Private\+::\+Broadcast (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemConditionPrivate_ab7839aa1aae74cad0bb6cc8cc1cdfb27}{}\label{classns3_1_1SystemConditionPrivate_ab7839aa1aae74cad0bb6cc8cc1cdfb27}
+Broadcast the condition. 
+\begin{DoxyCode}
+149 \{
+150   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+151 
+152   pthread\_mutex\_lock (&\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex});
+153   pthread\_cond\_broadcast (&\hyperlink{classns3_1_1SystemConditionPrivate_a812da27a9c28ef6191f6defa019a02d4}{m\_cond});
+154   pthread\_mutex\_unlock (&\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex});
+155 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}!Get\+Condition@{Get\+Condition}}
+\index{Get\+Condition@{Get\+Condition}!ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+\subsubsection[{\texorpdfstring{Get\+Condition(void)}{GetCondition(void)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+System\+Condition\+Private\+::\+Get\+Condition (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemConditionPrivate_a304f88722c58b734ebfc701f702c844c}{}\label{classns3_1_1SystemConditionPrivate_a304f88722c58b734ebfc701f702c844c}
+Get the condition value.
+
+\begin{DoxyReturn}{Returns}
+The condition value. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+132 \{
+133   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+134   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SystemConditionPrivate_abab2c2936fff504312d0c30f0ca1e145}{m\_condition};
+135 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}!Set\+Condition@{Set\+Condition}}
+\index{Set\+Condition@{Set\+Condition}!ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+\subsubsection[{\texorpdfstring{Set\+Condition(bool condition)}{SetCondition(bool condition)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Condition\+Private\+::\+Set\+Condition (
+\begin{DoxyParamCaption}
+\item[{bool}]{condition}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemConditionPrivate_a195e038524b1efa106049a0358af99d5}{}\label{classns3_1_1SystemConditionPrivate_a195e038524b1efa106049a0358af99d5}
+Set the condition.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em condition} & The new condition value. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+125 \{
+126   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << condition);
+127   \hyperlink{classns3_1_1SystemConditionPrivate_abab2c2936fff504312d0c30f0ca1e145}{m\_condition} = condition;
+128 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}!Signal@{Signal}}
+\index{Signal@{Signal}!ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+\subsubsection[{\texorpdfstring{Signal(void)}{Signal(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Condition\+Private\+::\+Signal (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemConditionPrivate_a0213a8ffd678629df223ec9f890aa413}{}\label{classns3_1_1SystemConditionPrivate_a0213a8ffd678629df223ec9f890aa413}
+Signal the condition. 
+\begin{DoxyCode}
+139 \{
+140   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+141 
+142   pthread\_mutex\_lock (&\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex});
+143   pthread\_cond\_signal (&\hyperlink{classns3_1_1SystemConditionPrivate_a812da27a9c28ef6191f6defa019a02d4}{m\_cond});
+144   pthread\_mutex\_unlock (&\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex});
+145 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}!Timed\+Wait@{Timed\+Wait}}
+\index{Timed\+Wait@{Timed\+Wait}!ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+\subsubsection[{\texorpdfstring{Timed\+Wait(uint64\+\_\+t ns)}{TimedWait(uint64_t ns)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+System\+Condition\+Private\+::\+Timed\+Wait (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{ns}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemConditionPrivate_a9c5f7d03c27f1986c56dabe609798b8a}{}\label{classns3_1_1SystemConditionPrivate_a9c5f7d03c27f1986c56dabe609798b8a}
+Unset the condition, then wait for a limited amount of wall-\/clock time for another thread to set it with Set\+Condition.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ns} & Maximum time to wait, in ns. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the condition timed out; {\ttfamily false} if the other thread set it. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+173 \{
+174   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << ns);
+175 
+176   \textcolor{keyword}{struct }timespec \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts};
+177   \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts}.tv\_sec = ns / \hyperlink{classns3_1_1SystemConditionPrivate_a677a08c18d846d886ad1b3b251d48d9b}{NS\_PER\_SEC};
+178   \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts}.tv\_nsec = ns % \hyperlink{classns3_1_1SystemConditionPrivate_a677a08c18d846d886ad1b3b251d48d9b}{NS\_PER\_SEC};
+179 
+180   \textcolor{keyword}{struct }timeval tv;
+181   gettimeofday (&tv, NULL);
+182 
+183   \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts}.tv\_sec += tv.tv\_sec;
+184   \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts}.tv\_nsec += tv.tv\_usec * 1000;
+185   \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts}.tv\_nsec > (int64\_t)\hyperlink{classns3_1_1SystemConditionPrivate_a677a08c18d846d886ad1b3b251d48d9b}{NS\_PER\_SEC})
+186     \{
+187       ++\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts}.tv\_sec;
+188       \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts}.tv\_nsec %= \hyperlink{classns3_1_1SystemConditionPrivate_a677a08c18d846d886ad1b3b251d48d9b}{NS\_PER\_SEC};
+189     \}
+190 
+191   \textcolor{keywordtype}{int} rc;
+192 
+193   pthread\_mutex\_lock (&\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex});
+194   \textcolor{keywordflow}{while} (\hyperlink{classns3_1_1SystemConditionPrivate_abab2c2936fff504312d0c30f0ca1e145}{m\_condition} == \textcolor{keyword}{false})
+195     \{
+196       rc = pthread\_cond\_timedwait (&\hyperlink{classns3_1_1SystemConditionPrivate_a812da27a9c28ef6191f6defa019a02d4}{m\_cond}, &\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex}, &\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts});
+197       \textcolor{keywordflow}{if} (rc == ETIMEDOUT)
+198         \{
+199           pthread\_mutex\_unlock (&\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex}); 
+200           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+201         \}
+202     \}
+203   pthread\_mutex\_unlock (&\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex});
+204   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+205 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}!Wait@{Wait}}
+\index{Wait@{Wait}!ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+\subsubsection[{\texorpdfstring{Wait(void)}{Wait(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Condition\+Private\+::\+Wait (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemConditionPrivate_ac2e3dfcd1eef3271602eaef7634351f1}{}\label{classns3_1_1SystemConditionPrivate_ac2e3dfcd1eef3271602eaef7634351f1}
+Unset the condition, then wait for another thread to set it with Set\+Condition. 
+\begin{DoxyCode}
+159 \{
+160   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+161 
+162   pthread\_mutex\_lock (&\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex});
+163   \hyperlink{classns3_1_1SystemConditionPrivate_abab2c2936fff504312d0c30f0ca1e145}{m\_condition} = \textcolor{keyword}{false};
+164   \textcolor{keywordflow}{while} (\hyperlink{classns3_1_1SystemConditionPrivate_abab2c2936fff504312d0c30f0ca1e145}{m\_condition} == \textcolor{keyword}{false})
+165     \{
+166       pthread\_cond\_wait (&\hyperlink{classns3_1_1SystemConditionPrivate_a812da27a9c28ef6191f6defa019a02d4}{m\_cond}, &\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex});
+167     \}
+168   pthread\_mutex\_unlock (&\hyperlink{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{m\_mutex});
+169 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}!m\+\_\+cond@{m\+\_\+cond}}
+\index{m\+\_\+cond@{m\+\_\+cond}!ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+\subsubsection[{\texorpdfstring{m\+\_\+cond}{m_cond}}]{\setlength{\rightskip}{0pt plus 5cm}pthread\+\_\+cond\+\_\+t ns3\+::\+System\+Condition\+Private\+::m\+\_\+cond\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SystemConditionPrivate_a812da27a9c28ef6191f6defa019a02d4}{}\label{classns3_1_1SystemConditionPrivate_a812da27a9c28ef6191f6defa019a02d4}
+The pthread condition variable. \index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}!m\+\_\+condition@{m\+\_\+condition}}
+\index{m\+\_\+condition@{m\+\_\+condition}!ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+\subsubsection[{\texorpdfstring{m\+\_\+condition}{m_condition}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+System\+Condition\+Private\+::m\+\_\+condition\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SystemConditionPrivate_abab2c2936fff504312d0c30f0ca1e145}{}\label{classns3_1_1SystemConditionPrivate_abab2c2936fff504312d0c30f0ca1e145}
+The condition state. \index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}!m\+\_\+mutex@{m\+\_\+mutex}}
+\index{m\+\_\+mutex@{m\+\_\+mutex}!ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+\subsubsection[{\texorpdfstring{m\+\_\+mutex}{m_mutex}}]{\setlength{\rightskip}{0pt plus 5cm}pthread\+\_\+mutex\+\_\+t ns3\+::\+System\+Condition\+Private\+::m\+\_\+mutex\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}{}\label{classns3_1_1SystemConditionPrivate_abb57bb9b2d0d6459ea861ff1eef5959e}
+Mutex controlling access to the condition. \index{ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}!N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC@{N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC}}
+\index{N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC@{N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC}!ns3\+::\+System\+Condition\+Private@{ns3\+::\+System\+Condition\+Private}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC}{NS_PER_SEC}}]{\setlength{\rightskip}{0pt plus 5cm}const uint64\+\_\+t ns3\+::\+System\+Condition\+Private\+::\+N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC = (uint64\+\_\+t)1000000000\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1SystemConditionPrivate_a677a08c18d846d886ad1b3b251d48d9b}{}\label{classns3_1_1SystemConditionPrivate_a677a08c18d846d886ad1b3b251d48d9b}
+
+
+Conversion from ns to s. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{unix-system-condition_8cc}{unix-\/system-\/condition.\+cc}\end{DoxyCompactItemize}

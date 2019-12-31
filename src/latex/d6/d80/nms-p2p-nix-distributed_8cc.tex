@@ -1,0 +1,674 @@
+\hypertarget{nms-p2p-nix-distributed_8cc}{}\section{mpi/examples/nms-\/p2p-\/nix-\/distributed.cc File Reference}
+\label{nms-p2p-nix-distributed_8cc}\index{mpi/examples/nms-\/p2p-\/nix-\/distributed.\+cc@{mpi/examples/nms-\/p2p-\/nix-\/distributed.\+cc}}
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$sys/time.\+h$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/on-\/off-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/packet-\/sink-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mpi-\/interface.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/nix-\/vector-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for nms-\/p2p-\/nix-\/distributed.cc\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{nms-p2p-nix-distributed_8cc_a4ea1f7c69e863076962d247fee766870}{T\+I\+M\+E\+R\+\_\+\+N\+OW}(\+\_\+t)~gettimeofday (\&\+\_\+t,N\+U\+LL);
+\item 
+\#define \hyperlink{nms-p2p-nix-distributed_8cc_a6ea93eec918073a64885fa89d19e7b06}{T\+I\+M\+E\+R\+\_\+\+S\+E\+C\+O\+N\+DS}(\+\_\+t)~((double)(\+\_\+t).tv\+\_\+sec + (\+\_\+t).tv\+\_\+usec $\ast$ 1e-\/6)
+\item 
+\#define \hyperlink{nms-p2p-nix-distributed_8cc_ad474bed5f9f85ea66d5cf9a9648d4a72}{T\+I\+M\+E\+R\+\_\+\+D\+I\+FF}(\+\_\+t1,  \+\_\+t2)~(\hyperlink{nms-p2p-nix_8cc_a6ea93eec918073a64885fa89d19e7b06}{T\+I\+M\+E\+R\+\_\+\+S\+E\+C\+O\+N\+DS} (\+\_\+t1) -\/ \hyperlink{nms-p2p-nix_8cc_a6ea93eec918073a64885fa89d19e7b06}{T\+I\+M\+E\+R\+\_\+\+S\+E\+C\+O\+N\+DS} (\+\_\+t2))
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct timeval \hyperlink{nms-p2p-nix-distributed_8cc_adfc7b6dfe70e564fc379bd23c8e5b488}{T\+I\+M\+E\+R\+\_\+\+T\+Y\+PE}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{nms-p2p-nix-distributed_8cc_a6074487a1600d5a42972a70587ba8a7d}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Campus\+Network\+Model\+Distributed\char`\"{})
+\item 
+int \hyperlink{nms-p2p-nix-distributed_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{nms-\/p2p-\/nix-\/distributed.\+cc@{nms-\/p2p-\/nix-\/distributed.\+cc}!T\+I\+M\+E\+R\+\_\+\+D\+I\+FF@{T\+I\+M\+E\+R\+\_\+\+D\+I\+FF}}
+\index{T\+I\+M\+E\+R\+\_\+\+D\+I\+FF@{T\+I\+M\+E\+R\+\_\+\+D\+I\+FF}!nms-\/p2p-\/nix-\/distributed.\+cc@{nms-\/p2p-\/nix-\/distributed.\+cc}}
+\subsubsection[{\texorpdfstring{T\+I\+M\+E\+R\+\_\+\+D\+I\+FF}{TIMER_DIFF}}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+I\+M\+E\+R\+\_\+\+D\+I\+FF(
+\begin{DoxyParamCaption}
+\item[{}]{\+\_\+t1, }
+\item[{}]{\+\_\+t2}
+\end{DoxyParamCaption}
+)~({\bf T\+I\+M\+E\+R\+\_\+\+S\+E\+C\+O\+N\+DS} (\+\_\+t1) -\/ {\bf T\+I\+M\+E\+R\+\_\+\+S\+E\+C\+O\+N\+DS} (\+\_\+t2))}\hypertarget{nms-p2p-nix-distributed_8cc_ad474bed5f9f85ea66d5cf9a9648d4a72}{}\label{nms-p2p-nix-distributed_8cc_ad474bed5f9f85ea66d5cf9a9648d4a72}
+\index{nms-\/p2p-\/nix-\/distributed.\+cc@{nms-\/p2p-\/nix-\/distributed.\+cc}!T\+I\+M\+E\+R\+\_\+\+N\+OW@{T\+I\+M\+E\+R\+\_\+\+N\+OW}}
+\index{T\+I\+M\+E\+R\+\_\+\+N\+OW@{T\+I\+M\+E\+R\+\_\+\+N\+OW}!nms-\/p2p-\/nix-\/distributed.\+cc@{nms-\/p2p-\/nix-\/distributed.\+cc}}
+\subsubsection[{\texorpdfstring{T\+I\+M\+E\+R\+\_\+\+N\+OW}{TIMER_NOW}}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+I\+M\+E\+R\+\_\+\+N\+OW(
+\begin{DoxyParamCaption}
+\item[{}]{\+\_\+t}
+\end{DoxyParamCaption}
+)~gettimeofday (\&\+\_\+t,N\+U\+LL);}\hypertarget{nms-p2p-nix-distributed_8cc_a4ea1f7c69e863076962d247fee766870}{}\label{nms-p2p-nix-distributed_8cc_a4ea1f7c69e863076962d247fee766870}
+\index{nms-\/p2p-\/nix-\/distributed.\+cc@{nms-\/p2p-\/nix-\/distributed.\+cc}!T\+I\+M\+E\+R\+\_\+\+S\+E\+C\+O\+N\+DS@{T\+I\+M\+E\+R\+\_\+\+S\+E\+C\+O\+N\+DS}}
+\index{T\+I\+M\+E\+R\+\_\+\+S\+E\+C\+O\+N\+DS@{T\+I\+M\+E\+R\+\_\+\+S\+E\+C\+O\+N\+DS}!nms-\/p2p-\/nix-\/distributed.\+cc@{nms-\/p2p-\/nix-\/distributed.\+cc}}
+\subsubsection[{\texorpdfstring{T\+I\+M\+E\+R\+\_\+\+S\+E\+C\+O\+N\+DS}{TIMER_SECONDS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+I\+M\+E\+R\+\_\+\+S\+E\+C\+O\+N\+DS(
+\begin{DoxyParamCaption}
+\item[{}]{\+\_\+t}
+\end{DoxyParamCaption}
+)~((double)(\+\_\+t).tv\+\_\+sec + (\+\_\+t).tv\+\_\+usec $\ast$ 1e-\/6)}\hypertarget{nms-p2p-nix-distributed_8cc_a6ea93eec918073a64885fa89d19e7b06}{}\label{nms-p2p-nix-distributed_8cc_a6ea93eec918073a64885fa89d19e7b06}
+
+
+\subsection{Typedef Documentation}
+\index{nms-\/p2p-\/nix-\/distributed.\+cc@{nms-\/p2p-\/nix-\/distributed.\+cc}!T\+I\+M\+E\+R\+\_\+\+T\+Y\+PE@{T\+I\+M\+E\+R\+\_\+\+T\+Y\+PE}}
+\index{T\+I\+M\+E\+R\+\_\+\+T\+Y\+PE@{T\+I\+M\+E\+R\+\_\+\+T\+Y\+PE}!nms-\/p2p-\/nix-\/distributed.\+cc@{nms-\/p2p-\/nix-\/distributed.\+cc}}
+\subsubsection[{\texorpdfstring{T\+I\+M\+E\+R\+\_\+\+T\+Y\+PE}{TIMER_TYPE}}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct timeval {\bf T\+I\+M\+E\+R\+\_\+\+T\+Y\+PE}}\hypertarget{nms-p2p-nix-distributed_8cc_adfc7b6dfe70e564fc379bd23c8e5b488}{}\label{nms-p2p-nix-distributed_8cc_adfc7b6dfe70e564fc379bd23c8e5b488}
+
+
+\subsection{Function Documentation}
+\index{nms-\/p2p-\/nix-\/distributed.\+cc@{nms-\/p2p-\/nix-\/distributed.\+cc}!main@{main}}
+\index{main@{main}!nms-\/p2p-\/nix-\/distributed.\+cc@{nms-\/p2p-\/nix-\/distributed.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{nms-p2p-nix-distributed_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{nms-p2p-nix-distributed_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+62 \{
+63 \textcolor{preprocessor}{#ifdef NS3\_MPI}
+64 
+65   \textcolor{keyword}{typedef} std::vector<NodeContainer> vectorOfNodeContainer;
+66   \textcolor{keyword}{typedef} std::vector<vectorOfNodeContainer> vectorOfVectorOfNodeContainer;
+67   \textcolor{keyword}{typedef} std::vector<vectorOfVectorOfNodeContainer> vectorOfVectorOfVectorOfNodeContainer;  
+68 
+69   \textcolor{keyword}{typedef} std::vector<Ipv4InterfaceContainer> vectorOfIpv4InterfaceContainer;
+70   \textcolor{keyword}{typedef} std::vector<vectorOfIpv4InterfaceContainer> vectorOfVectorOfIpv4InterfaceContainer;
+71   \textcolor{keyword}{typedef} std::vector<vectorOfVectorOfIpv4InterfaceContainer> 
+      vectorOfVectorOfVectorOfIpv4InterfaceContainer;
+72  
+73   \textcolor{keyword}{typedef} std::vector<NetDeviceContainer> vectorOfNetDeviceContainer;
+74   \textcolor{keyword}{typedef} std::vector<vectorOfNetDeviceContainer> vectorOfVectorOfNetDeviceContainer;
+75 
+76   \textcolor{comment}{// Enable parallel simulator with the command line arguments}
+77   MpiInterface::Enable (&argc, &argv);
+78 
+79   \hyperlink{nms-p2p-nix-distributed_8cc_adfc7b6dfe70e564fc379bd23c8e5b488}{TIMER\_TYPE} t0, t1, t2;
+80   \hyperlink{nms-p2p-nix-distributed_8cc_a4ea1f7c69e863076962d247fee766870}{TIMER\_NOW} (t0);
+81   std::cout << \textcolor{stringliteral}{" ==== DARPA NMS CAMPUS NETWORK SIMULATION ===="} << std::endl;
+82 
+83   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"},
+84                      StringValue (\textcolor{stringliteral}{"ns3::DistributedSimulatorImpl"}));
+85 
+86   uint32\_t systemId = MpiInterface::GetSystemId ();
+87   uint32\_t systemCount = MpiInterface::GetSize ();
+88 
+89   uint32\_t nCN = 2, nLANClients = 42;
+90   int32\_t single = 0;
+91   \textcolor{keywordtype}{int} nBytes = 500000; \textcolor{comment}{// Bytes for each on/off app}
+92   \textcolor{keywordtype}{bool} nix = \textcolor{keyword}{true};
+93 
+94   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+95   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"CN"}, \textcolor{stringliteral}{"Number of total CNs [2]"}, nCN);
+96   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"LAN"}, \textcolor{stringliteral}{"Number of nodes per LAN [42]"}, nLANClients);
+97   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"single"}, \textcolor{stringliteral}{"1 if use single flow"}, single);
+98   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nBytes"}, \textcolor{stringliteral}{"Number of bytes for each on/off app"}, nBytes);
+99   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nix"}, \textcolor{stringliteral}{"Toggle the use of nix-vector or global routing"}, nix);
+100   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc,argv);
+101 
+102   \textcolor{keywordflow}{if} (nCN < 2)
+103     \{
+104       std::cout << \textcolor{stringliteral}{"Number of total CNs ("} << nCN << \textcolor{stringliteral}{") lower than minimum of 2"}
+105            << std::endl;
+106       \textcolor{keywordflow}{return} 1;
+107     \}
+108   \textcolor{keywordflow}{if} (systemCount > nCN)
+109     \{
+110       std::cout << \textcolor{stringliteral}{"Number of total CNs ("} << nCN << \textcolor{stringliteral}{") should be >= systemCount ("}
+111            << systemCount << \textcolor{stringliteral}{")."} << std::endl;
+112       \textcolor{keywordflow}{return} 1;
+113     \}
+114 
+115   std::cout << \textcolor{stringliteral}{"Number of CNs: "} << nCN << \textcolor{stringliteral}{", LAN nodes: "} << nLANClients << std::endl;
+116   
+117 
+118 
+119   vectorOfNodeContainer nodes\_netLR(nCN);
+120   vectorOfVectorOfNodeContainer nodes\_net0(nCN,vectorOfNodeContainer(3));
+121   vectorOfVectorOfNodeContainer nodes\_net1(nCN,vectorOfNodeContainer(6));
+122   vectorOfVectorOfNodeContainer nodes\_net2(nCN,vectorOfNodeContainer(14));
+123   vectorOfVectorOfNodeContainer nodes\_net3(nCN,vectorOfNodeContainer(9));
+124      
+125   vectorOfVectorOfVectorOfNodeContainer nodes\_net2LAN(nCN,vectorOfVectorOfNodeContainer(7,
+      vectorOfNodeContainer(nLANClients)));
+126   vectorOfVectorOfVectorOfNodeContainer nodes\_net3LAN(nCN,vectorOfVectorOfNodeContainer(5,
+      vectorOfNodeContainer(nLANClients)));
+127   
+128   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} p2p\_2gb200ms, p2p\_1gb5ms, p2p\_100mb1ms;
+129   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+130   
+131   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} ifs;  
+132 
+133   vectorOfVectorOfIpv4InterfaceContainer ifs0(nCN,vectorOfIpv4InterfaceContainer(3));
+134   vectorOfVectorOfIpv4InterfaceContainer ifs1(nCN,vectorOfIpv4InterfaceContainer(6));
+135   vectorOfVectorOfIpv4InterfaceContainer ifs2(nCN,vectorOfIpv4InterfaceContainer(14));
+136   vectorOfVectorOfIpv4InterfaceContainer ifs3(nCN,vectorOfIpv4InterfaceContainer(9));
+137   vectorOfVectorOfVectorOfIpv4InterfaceContainer ifs2LAN(nCN,vectorOfVectorOfIpv4InterfaceContainer(7,
+      vectorOfIpv4InterfaceContainer(nLANClients)));
+138   vectorOfVectorOfVectorOfIpv4InterfaceContainer ifs3LAN(nCN,vectorOfVectorOfIpv4InterfaceContainer(5,
+      vectorOfIpv4InterfaceContainer(nLANClients)));
+139   
+140   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+141   std::ostringstream oss;
+142   p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"1Gbps"}));
+143   p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"5ms"}));
+144   p2p\_2gb200ms.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"2Gbps"}));
+145   p2p\_2gb200ms.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"200ms"}));
+146   p2p\_100mb1ms.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"100Mbps"}));
+147   p2p\_100mb1ms.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"1ms"}));
+148 
+149   \textcolor{keywordflow}{if} (nix)
+150     \{
+151       \hyperlink{classns3_1_1Ipv4NixVectorHelper}{Ipv4NixVectorHelper} nixRouting;
+152       stack.\hyperlink{classns3_1_1InternetStackHelper_a3e382c02df022dec79952a7eca8cd5ba}{SetRoutingHelper} (nixRouting); \textcolor{comment}{// has effect on the next Install ()}
+153     \}
+154 
+155   \textcolor{comment}{// Create Campus Networks}
+156   \textcolor{keywordflow}{for} (uint32\_t z = 0; z < nCN; ++z)
+157     \{
+158       std::cout << \textcolor{stringliteral}{"Creating Campus Network "} << z << \textcolor{stringliteral}{":"} << std::endl;
+159       \textcolor{comment}{// Create Net0}
+160       std::cout << \textcolor{stringliteral}{"  SubNet [ 0"};
+161       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 3; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+162         \{
+163           \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = CreateObject<Node> (z % systemCount);
+164           nodes\_net0[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].Add (node);
+165           stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodes\_net0[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]);
+166         \}
+167       nodes\_net0[z][0].Add (nodes\_net0[z][1].Get (0));
+168       nodes\_net0[z][1].Add (nodes\_net0[z][2].Get (0));
+169       nodes\_net0[z][2].Add (nodes\_net0[z][0].Get (0));
+170       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ndc0[3];
+171       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 3; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+172         \{
+173           ndc0[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nodes\_net0[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]);
+174         \}
+175       \textcolor{comment}{// Create Net1}
+176       std::cout << \textcolor{stringliteral}{" 1"};
+177       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 6; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+178         \{
+179           \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = CreateObject<Node> (z % systemCount);
+180           nodes\_net1[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].Add (node);
+181           stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodes\_net1[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]);
+182         \}
+183       nodes\_net1[z][0].Add (nodes\_net1[z][1].Get (0));
+184       nodes\_net1[z][2].Add (nodes\_net1[z][0].Get (0));
+185       nodes\_net1[z][3].Add (nodes\_net1[z][0].Get (0));
+186       nodes\_net1[z][4].Add (nodes\_net1[z][1].Get (0));
+187       nodes\_net1[z][5].Add (nodes\_net1[z][1].Get (0));
+188       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ndc1[6];
+189       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 6; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+190         \{
+191           \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} == 1)
+192             \{
+193               \textcolor{keywordflow}{continue};
+194             \}
+195           ndc1[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nodes\_net1[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]);
+196         \}
+197       \textcolor{comment}{// Connect Net0 <-> Net1}
+198       \hyperlink{classns3_1_1NodeContainer}{NodeContainer} net0\_1;
+199       net0\_1.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_net0[z][2].Get (0));
+200       net0\_1.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_net1[z][0].Get (0));
+201       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ndc0\_1;
+202       ndc0\_1 = p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (net0\_1);
+203       oss.str (\textcolor{stringliteral}{""});
+204       oss << 10 + z << \textcolor{stringliteral}{".1.252.0"};
+205       address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+206       ifs = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc0\_1);
+207       \textcolor{comment}{// Create Net2}
+208       std::cout << \textcolor{stringliteral}{" 2"};
+209       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 14; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+210         \{
+211           \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = CreateObject<Node> (z % systemCount);
+212           nodes\_net2[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].Add (node);
+213           stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodes\_net2[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]);
+214         \}
+215       nodes\_net2[z][0].Add (nodes\_net2[z][1].Get (0));
+216       nodes\_net2[z][2].Add (nodes\_net2[z][0].Get (0));
+217       nodes\_net2[z][1].Add (nodes\_net2[z][3].Get (0));
+218       nodes\_net2[z][3].Add (nodes\_net2[z][2].Get (0));
+219       nodes\_net2[z][4].Add (nodes\_net2[z][2].Get (0));
+220       nodes\_net2[z][5].Add (nodes\_net2[z][3].Get (0));
+221       nodes\_net2[z][6].Add (nodes\_net2[z][5].Get (0));
+222       nodes\_net2[z][7].Add (nodes\_net2[z][2].Get (0));
+223       nodes\_net2[z][8].Add (nodes\_net2[z][3].Get (0));
+224       nodes\_net2[z][9].Add (nodes\_net2[z][4].Get (0));
+225       nodes\_net2[z][10].Add (nodes\_net2[z][5].Get (0));
+226       nodes\_net2[z][11].Add (nodes\_net2[z][6].Get (0));
+227       nodes\_net2[z][12].Add (nodes\_net2[z][6].Get (0));
+228       nodes\_net2[z][13].Add (nodes\_net2[z][6].Get (0));
+229       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ndc2[14];
+230       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 14; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+231         \{
+232           ndc2[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nodes\_net2[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]);
+233         \}
+234       vectorOfVectorOfNetDeviceContainer ndc2LAN(7, vectorOfNetDeviceContainer(nLANClients));
+235       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 7; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+236         \{
+237           oss.str (\textcolor{stringliteral}{""});
+238           oss << 10 + z << \textcolor{stringliteral}{".4."} << 15 + \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{".0"};
+239           address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+240           \textcolor{keywordflow}{for} (uint32\_t j = 0; j < nLANClients; ++j)
+241             \{
+242               \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = CreateObject<Node> (z % systemCount);
+243               nodes\_net2LAN[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}][j].Add (node);
+244               stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodes\_net2LAN[z][i][j]);
+245               nodes\_net2LAN[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}][j].Add (nodes\_net2[z][i + 7].Get (0));
+246               ndc2LAN[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}][j] = p2p\_100mb1ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nodes\_net2LAN[z][i][j]);
+247               ifs2LAN[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}][j] = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc2LAN[i][j]);
+248             \}
+249         \}
+250       \textcolor{comment}{// Create Net3}
+251       std::cout << \textcolor{stringliteral}{" 3 ]"} << std::endl;
+252       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 9; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+253         \{
+254           \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = CreateObject<Node> (z % systemCount);
+255           nodes\_net3[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].Add (node);
+256           stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodes\_net3[z][i]);
+257         \}
+258       nodes\_net3[z][0].Add (nodes\_net3[z][1].Get (0));
+259       nodes\_net3[z][1].Add (nodes\_net3[z][2].Get (0));
+260       nodes\_net3[z][2].Add (nodes\_net3[z][3].Get (0));
+261       nodes\_net3[z][3].Add (nodes\_net3[z][1].Get (0));
+262       nodes\_net3[z][4].Add (nodes\_net3[z][0].Get (0));
+263       nodes\_net3[z][5].Add (nodes\_net3[z][0].Get (0));
+264       nodes\_net3[z][6].Add (nodes\_net3[z][2].Get (0));
+265       nodes\_net3[z][7].Add (nodes\_net3[z][3].Get (0));
+266       nodes\_net3[z][8].Add (nodes\_net3[z][3].Get (0));
+267       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ndc3[9];
+268       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 9; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+269         \{
+270           ndc3[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nodes\_net3[z][i]);
+271         \}
+272       vectorOfVectorOfNetDeviceContainer ndc3LAN(5, vectorOfNetDeviceContainer(nLANClients));
+273       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 5; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+274         \{
+275           oss.str (\textcolor{stringliteral}{""});
+276           oss << 10 + z << \textcolor{stringliteral}{".5."} << 10 + i << \textcolor{stringliteral}{".0"};
+277           address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.255"});
+278           \textcolor{keywordflow}{for} (uint32\_t j = 0; j < nLANClients; ++j)
+279             \{
+280               \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = CreateObject<Node> (z % systemCount);
+281               nodes\_net3LAN[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}][j].Add (node);
+282               stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodes\_net3LAN[z][i][j]);
+283               nodes\_net3LAN[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}][j].Add (nodes\_net3[z][i + 4].Get (0));
+284               ndc3LAN[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}][j] = p2p\_100mb1ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nodes\_net3LAN[z][i][j]);
+285               ifs3LAN[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}][j] = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc3LAN[i][j]);
+286             \}
+287         \}
+288       std::cout << \textcolor{stringliteral}{"  Connecting Subnets..."} << std::endl;
+289       \textcolor{comment}{// Create Lone Routers (Node 4 & 5)}
+290       \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node1 = CreateObject<Node> (z % systemCount);
+291       \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node2 = CreateObject<Node> (z % systemCount);
+292       nodes\_netLR[z].Add (node1);
+293       nodes\_netLR[z].Add (node2);
+294       stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodes\_netLR[z]);
+295       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ndcLR;
+296       ndcLR = p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nodes\_netLR[z]);
+297       \textcolor{comment}{// Connect Net2/Net3 through Lone Routers to Net0}
+298       \hyperlink{classns3_1_1NodeContainer}{NodeContainer} net0\_4, net0\_5, net2\_4a, net2\_4b, net3\_5a, net3\_5b;
+299       net0\_4.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_netLR[z].Get (0));
+300       net0\_4.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_net0[z][0].Get (0));
+301       net0\_5.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_netLR[z].Get (1));
+302       net0\_5.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_net0[z][1].Get (0));
+303       net2\_4a.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_netLR[z].Get (0));
+304       net2\_4a.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_net2[z][0].Get (0));
+305       net2\_4b.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_netLR[z].Get (1));
+306       net2\_4b.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_net2[z][1].Get (0));
+307       net3\_5a.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_netLR[z].Get (1));
+308       net3\_5a.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_net3[z][0].Get (0));
+309       net3\_5b.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_netLR[z].Get (1));
+310       net3\_5b.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes\_net3[z][1].Get (0));
+311       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ndc0\_4, ndc0\_5, ndc2\_4a, ndc2\_4b, ndc3\_5a, ndc3\_5b;
+312       ndc0\_4 = p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (net0\_4);
+313       oss.str (\textcolor{stringliteral}{""});
+314       oss << 10 + z << \textcolor{stringliteral}{".1.253.0"};
+315       address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+316       ifs = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc0\_4);
+317       ndc0\_5 = p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (net0\_5);
+318       oss.str (\textcolor{stringliteral}{""});
+319       oss << 10 + z << \textcolor{stringliteral}{".1.254.0"};
+320       address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+321       ifs = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc0\_5);
+322       ndc2\_4a = p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (net2\_4a);
+323       oss.str (\textcolor{stringliteral}{""});
+324       oss << 10 + z << \textcolor{stringliteral}{".4.253.0"};
+325       address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+326       ifs = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc2\_4a);
+327       ndc2\_4b = p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (net2\_4b);
+328       oss.str (\textcolor{stringliteral}{""});
+329       oss << 10 + z << \textcolor{stringliteral}{".4.254.0"};
+330       address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+331       ifs = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc2\_4b);
+332       ndc3\_5a = p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (net3\_5a);
+333       oss.str (\textcolor{stringliteral}{""});
+334       oss << 10 + z << \textcolor{stringliteral}{".5.253.0"};
+335       address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+336       ifs = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc3\_5a);
+337       ndc3\_5b = p2p\_1gb5ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (net3\_5b);
+338       oss.str (\textcolor{stringliteral}{""});
+339       oss << 10 + z << \textcolor{stringliteral}{".5.254.0"};
+340       address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+341       ifs = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc3\_5b);
+342       \textcolor{comment}{// Assign IP addresses}
+343       std::cout << \textcolor{stringliteral}{"  Assigning IP addresses..."} << std::endl;
+344       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 3; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+345         \{
+346           oss.str (\textcolor{stringliteral}{""});
+347           oss << 10 + z << \textcolor{stringliteral}{".1."} << 1 + i << \textcolor{stringliteral}{".0"};
+348           address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+349           ifs0[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc0[i]);
+350         \}
+351       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 6; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+352         \{
+353           \textcolor{keywordflow}{if} (i == 1)
+354             \{
+355               \textcolor{keywordflow}{continue};
+356             \}
+357           oss.str (\textcolor{stringliteral}{""});
+358           oss << 10 + z << \textcolor{stringliteral}{".2."} << 1 + i << \textcolor{stringliteral}{".0"};
+359           address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+360           ifs1[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc1[i]);
+361         \}
+362       oss.str (\textcolor{stringliteral}{""});
+363       oss << 10 + z << \textcolor{stringliteral}{".3.1.0"};
+364       address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+365       ifs = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndcLR);
+366       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 14; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+367         \{
+368           oss.str (\textcolor{stringliteral}{""});
+369           oss << 10 + z << \textcolor{stringliteral}{".4."} << 1 + i << \textcolor{stringliteral}{".0"};
+370           address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+371           ifs2[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc2[i]);
+372         \}
+373       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 9; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+374         \{
+375           oss.str (\textcolor{stringliteral}{""});
+376           oss << 10 + z << \textcolor{stringliteral}{".5."} << 1 + i << \textcolor{stringliteral}{".0"};
+377           address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+378           ifs3[z][\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc3[i]);
+379         \}
+380     \}
+381   \textcolor{comment}{// Create Ring Links}
+382   \textcolor{keywordflow}{if} (nCN > 1)
+383     \{
+384       std::cout << \textcolor{stringliteral}{"Forming Ring Topology..."} << std::endl;
+385       vectorOfNodeContainer nodes\_ring(nCN);
+386       \textcolor{keywordflow}{for} (uint32\_t z = 0; z < nCN - 1; ++z)
+387         \{
+388           nodes\_ring[z].Add (nodes\_net0[z][0].Get (0));
+389           nodes\_ring[z].Add (nodes\_net0[z + 1][0].Get (0));
+390         \}
+391       nodes\_ring[nCN - 1].Add (nodes\_net0[nCN - 1][0].Get (0));
+392       nodes\_ring[nCN - 1].Add (nodes\_net0[0][0].Get (0));
+393       vectorOfNetDeviceContainer ndc\_ring(nCN);
+394       \textcolor{keywordflow}{for} (uint32\_t z = 0; z < nCN; ++z)
+395         \{
+396           ndc\_ring[z] = p2p\_2gb200ms.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nodes\_ring[z]);
+397           oss.str (\textcolor{stringliteral}{""});
+398           oss << \textcolor{stringliteral}{"254.1."} << z + 1 << \textcolor{stringliteral}{".0"};
+399           address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (oss.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"});
+400           ifs = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc\_ring[z]);
+401         \}
+402     \}
+403 
+404   \textcolor{comment}{// Create Traffic Flows}
+405   std::cout << \textcolor{stringliteral}{"Creating UDP Traffic Flows:"} << std::endl;
+406   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::MaxBytes"},
+407                       UintegerValue (nBytes));
+408   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::OnTime"},
+409                       StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}));
+410   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::OffTime"},
+411                       StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=0]"}));
+412 
+413 
+414   \textcolor{keywordflow}{if} (single)
+415     \{
+416       \textcolor{keywordflow}{if} (systemCount == 1)
+417         \{
+418           \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+419                                        \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (),
+420                                                           9999));
+421           \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp = sinkHelper.Install (nodes\_net1[0][2].Get (0));
+422           sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+423 
+424           \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} client (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+425           AddressValue remoteAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (ifs1[0][2].GetAddress (0), 9999))
+      ;
+426           std::cout << \textcolor{stringliteral}{"Remote Address is "} << ifs1[0][2].GetAddress (0) << std::endl;
+427           client.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+428 
+429           \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApp;
+430           clientApp.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (client.Install (nodes\_net2LAN[0][0][0].Get (0)));
+431           clientApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0));
+432         \}
+433       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (systemId == 1)
+434         \{
+435           \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+436                                        \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (),
+437                                                           9999));
+438           \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp =
+439             sinkHelper.Install (nodes\_net1[1][0].Get (0));
+440 
+441           sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+442         \}
+443       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (systemId == 0)
+444         \{
+445           \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} client (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+446           AddressValue remoteAddress
+447             (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (ifs1[1][0].GetAddress (0), 9999));
+448 
+449           std::cout << \textcolor{stringliteral}{"Remote Address is "} << ifs1[1][0].GetAddress (0) << std::endl;
+450           client.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+451 
+452           \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApp;
+453           clientApp.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (client.Install (nodes\_net2LAN[0][0][0].Get (0)));
+454           clientApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0));
+455         \}
+456     \}
+457   \textcolor{keywordflow}{else}
+458     \{
+459       \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} urng = CreateObject<UniformRandomVariable> ();
+460       \textcolor{keywordtype}{int} r1;
+461       \textcolor{keywordtype}{double} r2;
+462       \textcolor{keywordflow}{for} (uint32\_t z = 0; z < nCN; ++z)
+463         \{
+464           uint32\_t \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x} = z + 1;
+465           \textcolor{keywordflow}{if} (z == nCN - 1)
+466             \{
+467               x = 0;
+468             \}
+469           \textcolor{comment}{// Subnet 2 LANs}
+470           std::cout << \textcolor{stringliteral}{"  Campus Network "} << z << \textcolor{stringliteral}{" Flows [ Net2 "};
+471           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 7; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+472             \{
+473               \textcolor{keywordflow}{for} (uint32\_t j = 0; j < nLANClients; ++j)
+474                 \{
+475                   \textcolor{comment}{// Sinks}
+476                   \textcolor{keywordflow}{if} (systemCount == 1)
+477                     \{
+478                       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper
+479                         (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+480                         \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 9999));
+481 
+482                       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp =
+483                         sinkHelper.Install (nodes\_net2LAN[z][i][j].Get (0));
+484 
+485                       sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+486                     \}
+487                   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (systemId == z % systemCount)
+488                     \{
+489                       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper
+490                         (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+491                         \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 9999));
+492 
+493                       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp =
+494                         sinkHelper.Install (nodes\_net2LAN[z][i][j].Get (0));
+495 
+496                       sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+497                     \}
+498                   \textcolor{comment}{// Sources}
+499                   \textcolor{keywordflow}{if} (systemCount == 1)
+500                     \{
+501                       r1 = 2 + (int)(4 * urng->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ());
+502                       r2 = 10 * urng->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ();
+503                       \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} client (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+      \hyperlink{classns3_1_1Address}{Address} ());
+504 
+505                       AddressValue remoteAddress
+506                         (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (ifs2LAN[z][i][j].GetAddress (0), 9999));
+507 
+508                       client.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+509                       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApp;
+510                       clientApp.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (client.Install (nodes\_net1[x][r1].Get (0)));
+511                       clientApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (r2));
+512                     \}
+513                   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (systemId == x % systemCount)
+514                     \{
+515                       r1 = 2 + (int)(4 * urng->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ());
+516                       r2 = 10 * urng->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ();
+517                       \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} client (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+      \hyperlink{classns3_1_1Address}{Address} ());
+518 
+519                       AddressValue remoteAddress
+520                         (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (ifs2LAN[z][i][j].GetAddress (0), 9999));
+521 
+522                       client.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+523                       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApp;
+524                       clientApp.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (client.Install (nodes\_net1[x][r1].Get (0)));
+525                       clientApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (r2));
+526                     \}
+527                 \}
+528             \}
+529           \textcolor{comment}{// Subnet 3 LANs}
+530           std::cout << \textcolor{stringliteral}{"Net3 ]"} << std::endl;
+531           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 5; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+532             \{
+533               \textcolor{keywordflow}{for} (uint32\_t j = 0; j < nLANClients; ++j)
+534                 \{
+535                   \textcolor{comment}{// Sinks}
+536                   \textcolor{keywordflow}{if} (systemCount == 1)
+537                     \{
+538                       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper
+539                         (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+540                         \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 9999));
+541 
+542                       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp =
+543                         sinkHelper.Install (nodes\_net3LAN[z][i][j].Get (0));
+544 
+545                       sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+546                     \}
+547                   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (systemId == z % systemCount)
+548                     \{
+549                       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper
+550                         (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+551                         \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 9999));
+552 
+553                       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp =
+554                         sinkHelper.Install (nodes\_net3LAN[z][i][j].Get (0));
+555 
+556                       sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+557                     \}
+558                   \textcolor{comment}{// Sources}
+559                   \textcolor{keywordflow}{if} (systemCount == 1)
+560                     \{
+561                       r1 = 2 + (int)(4 * urng->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ());
+562                       r2 = 10 * urng->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ();
+563                       \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} client (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+      \hyperlink{classns3_1_1Address}{Address} ());
+564 
+565                       AddressValue remoteAddress
+566                         (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (ifs3LAN[z][i][j].GetAddress (0), 9999));
+567 
+568                       client.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+569                       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApp;
+570                       clientApp.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (client.Install (nodes\_net1[x][r1].Get (0)));
+571                       clientApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (r2));
+572                     \}
+573                   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (systemId == x % systemCount)
+574                     \{
+575                       r1 = 2 + (int)(4 * urng->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ());
+576                       r2 = 10 * urng->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ();
+577                       \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} client (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+      \hyperlink{classns3_1_1Address}{Address} ());
+578 
+579                       AddressValue remoteAddress
+580                         (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (ifs3LAN[z][i][j].GetAddress (0), 9999));
+581 
+582                       client.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+583                       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApp;
+584                       clientApp.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (client.Install (nodes\_net1[x][r1].Get (0)));
+585                       clientApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (r2));
+586                     \}
+587                 \}
+588             \}
+589         \}
+590     \}
+591 
+592   std::cout << \textcolor{stringliteral}{"Created "} << NodeList::GetNNodes () << \textcolor{stringliteral}{" nodes."} << std::endl;
+593   \hyperlink{nms-p2p-nix-distributed_8cc_adfc7b6dfe70e564fc379bd23c8e5b488}{TIMER\_TYPE} routingStart;
+594   \hyperlink{nms-p2p-nix-distributed_8cc_a4ea1f7c69e863076962d247fee766870}{TIMER\_NOW} (routingStart);
+595 
+596   \textcolor{keywordflow}{if} (nix)
+597     \{
+598       std::cout << \textcolor{stringliteral}{"Using Nix-vectors..."} << std::endl;
+599     \}
+600   \textcolor{keywordflow}{else}
+601     \{
+602       \textcolor{comment}{// Calculate routing tables}
+603       std::cout << \textcolor{stringliteral}{"Populating Routing tables..."} << std::endl;
+604       Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+605     \}
+606 
+607   \hyperlink{nms-p2p-nix-distributed_8cc_adfc7b6dfe70e564fc379bd23c8e5b488}{TIMER\_TYPE} routingEnd;
+608   \hyperlink{nms-p2p-nix-distributed_8cc_a4ea1f7c69e863076962d247fee766870}{TIMER\_NOW} (routingEnd);
+609   std::cout << \textcolor{stringliteral}{"Routing tables population took "}
+610        << \hyperlink{nms-p2p-nix-distributed_8cc_ad474bed5f9f85ea66d5cf9a9648d4a72}{TIMER\_DIFF} (routingEnd, routingStart) << std::endl;
+611 
+612   std::cout << \textcolor{stringliteral}{"Running simulator..."} << std::endl;
+613   \hyperlink{nms-p2p-nix-distributed_8cc_a4ea1f7c69e863076962d247fee766870}{TIMER\_NOW} (t1);
+614   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (100.0));
+615   Simulator::Run ();
+616   \hyperlink{nms-p2p-nix-distributed_8cc_a4ea1f7c69e863076962d247fee766870}{TIMER\_NOW} (t2);
+617   std::cout << \textcolor{stringliteral}{"Simulator finished."} << std::endl;
+618   Simulator::Destroy ();
+619   \textcolor{comment}{// Exit the parallel execution environment}
+620   MpiInterface::Disable ();
+621   \textcolor{keywordtype}{double} \hyperlink{lte__link__budget__interference_8m_ab5ca0c44c6f0a063a5219b3749db661f}{d1} = \hyperlink{nms-p2p-nix-distributed_8cc_ad474bed5f9f85ea66d5cf9a9648d4a72}{TIMER\_DIFF} (t1, t0), \hyperlink{lte__cqi__generation_8m_a479b78c01efbe4664b402a300da492f7}{d2} = \hyperlink{nms-p2p-nix-distributed_8cc_ad474bed5f9f85ea66d5cf9a9648d4a72}{TIMER\_DIFF} (t2, t1);
+622   std::cout << \textcolor{stringliteral}{"-----"} << std::endl << \textcolor{stringliteral}{"Runtime Stats:"} << std::endl;
+623   std::cout << \textcolor{stringliteral}{"Simulator init time: "} << d1 << std::endl;
+624   std::cout << \textcolor{stringliteral}{"Simulator run time: "} << \hyperlink{lte__cqi__generation_8m_a479b78c01efbe4664b402a300da492f7}{d2} << std::endl;
+625   std::cout << \textcolor{stringliteral}{"Total elapsed time: "} << d1 + \hyperlink{lte__cqi__generation_8m_a479b78c01efbe4664b402a300da492f7}{d2} << std::endl;
+626   \textcolor{keywordflow}{return} 0;
+627 \textcolor{preprocessor}{#else}
+628   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Can't use distributed simulator without MPI compiled in"});
+629 \textcolor{preprocessor}{#endif}
+630 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{nms-\/p2p-\/nix-\/distributed.\+cc@{nms-\/p2p-\/nix-\/distributed.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!nms-\/p2p-\/nix-\/distributed.\+cc@{nms-\/p2p-\/nix-\/distributed.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Campus\+Network\+Model\+Distributed"")}{NS_LOG_COMPONENT_DEFINE("CampusNetworkModelDistributed")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Campus\+Network\+Model\+Distributed\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{nms-p2p-nix-distributed_8cc_a6074487a1600d5a42972a70587ba8a7d}{}\label{nms-p2p-nix-distributed_8cc_a6074487a1600d5a42972a70587ba8a7d}

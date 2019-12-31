@@ -1,0 +1,125 @@
+\hypertarget{mmwave-example_8cc}{}\section{mmwave/examples/mmwave-\/example.cc File Reference}
+\label{mmwave-example_8cc}\index{mmwave/examples/mmwave-\/example.\+cc@{mmwave/examples/mmwave-\/example.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mmwave-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$ns3/buildings-\/helper.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/global-\/route-\/manager.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/global-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+Include dependency graph for mmwave-\/example.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{mmwave-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{mmwave-\/example.\+cc@{mmwave-\/example.\+cc}!main@{main}}
+\index{main@{main}!mmwave-\/example.\+cc@{mmwave-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{mmwave-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{mmwave-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+45 \{
+46 
+47         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWavePhyMacCommon::ResourceBlockNum"}, UintegerValue(1)
+      );
+48         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWavePhyMacCommon::ChunkPerRB"}, UintegerValue(72));
+49 
+50   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+51   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+52 \textcolor{comment}{//  LogComponentEnable ("MmWaveSpectrumPhy", LOG\_LEVEL\_INFO);}
+53   \textcolor{comment}{//LogComponentEnable ("MmWaveUePhy", LOG\_LEVEL\_INFO);}
+54   \textcolor{comment}{//LogComponentEnable ("MmWaveEnbPhy", LOG\_LEVEL\_INFO);}
+55   \textcolor{comment}{//LogComponentEnable ("MmWavePhy", LOG\_LEVEL\_INFO);}
+56 
+57 \textcolor{comment}{//  LogComponentEnable ("MmWaveUeMac", LOG\_LEVEL\_INFO);}
+58 \textcolor{comment}{//  LogComponentEnable ("MmWaveEnbMac", LOG\_LEVEL\_INFO);}
+59 \textcolor{comment}{//  LogComponentEnable ("MmWaveRrMacScheduler", LOG\_LEVEL\_INFO);}
+60 
+61   \textcolor{comment}{//LogComponentEnable ("LteUeRrc", LOG\_LEVEL\_ALL);}
+62   \textcolor{comment}{//LogComponentEnable ("LteEnbRrc", LOG\_LEVEL\_ALL);}
+63   \textcolor{comment}{//LogComponentEnable("PropagationLossModel",LOG\_LEVEL\_ALL);}
+64   \textcolor{comment}{//LogComponentEnable("mmWaveInterference",LOG\_LEVEL\_ALL);}
+65   \textcolor{comment}{//LogComponentEnable("MmWaveBeamforming",LOG\_LEVEL\_ALL);}
+66   \textcolor{comment}{//LogComponentEnable ("UdpEchoClientApplication", LOG\_LEVEL\_INFO);}
+67   \textcolor{comment}{//LogComponentEnable ("UdpEchoServerApplication", LOG\_LEVEL\_INFO);}
+68 
+69   \textcolor{comment}{/* Information regarding the traces generated:}
+70 \textcolor{comment}{   *}
+71 \textcolor{comment}{   * 1. UE\_1\_SINR.txt : Gives the SINR for each sub-band}
+72 \textcolor{comment}{   *    Subframe no.  | Slot No. | Sub-band  | SINR (db)}
+73 \textcolor{comment}{   *}
+74 \textcolor{comment}{   * 2. UE\_1\_Tb\_size.txt : Allocated transport block size}
+75 \textcolor{comment}{   *    Time (micro-sec)  |  Tb-size in bytes}
+76 \textcolor{comment}{   * */}
+77 
+78   \hyperlink{classns3_1_1Ptr}{Ptr<MmWaveHelper>} ptr\_mmWave = CreateObject<MmWaveHelper> ();
+79 
+80   ptr\_mmWave->\hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Initialize}();
+81 
+82   \textcolor{comment}{/* A configuration example.}
+83 \textcolor{comment}{   * ptr\_mmWave->GetPhyMacConfigurable ()->SetAttribute("SymbolPerSlot", UintegerValue(30)); */}
+84 
+85   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+86   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNodes;
+87   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+88   ueNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+89 
+90   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} enbPositionAlloc = 
+      CreateObject<ListPositionAllocator> ();
+91   enbPositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));
+92 
+93   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} enbmobility;
+94   enbmobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+95   enbmobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator}(enbPositionAlloc);
+96   enbmobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+97   BuildingsHelper::Install (enbNodes);
+98 
+99   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} uemobility;
+100   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} uePositionAlloc = 
+      CreateObject<ListPositionAllocator> ();
+101   uePositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (80.0, 0.0, 0.0));
+102 
+103   uemobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+104   uemobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator}(uePositionAlloc);
+105   uemobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes);
+106   BuildingsHelper::Install (ueNodes);
+107 
+108   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbNetDev = ptr\_mmWave->InstallEnbDevice (enbNodes);
+109   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueNetDev = ptr\_mmWave->\hyperlink{classns3_1_1MmWaveHelper_a9311c819d7ee539c8710c5b7e98df37a}{InstallUeDevice} (ueNodes);
+110 
+111 
+112   ptr\_mmWave->\hyperlink{classns3_1_1MmWaveHelper_a202baea67b0af0d4fb6069de73766dc6}{AttachToClosestEnb} (ueNetDev, enbNetDev);
+113   ptr\_mmWave->\hyperlink{classns3_1_1MmWaveHelper_a4eae3871876b62965d612d9a56ed21bc}{EnableTraces}();
+114 
+115   \textcolor{comment}{// Activate a data radio bearer}
+116   \textcolor{keyword}{enum} \hyperlink{structns3_1_1EpsBearer_aecf0c67109c5eb4ec0b07226fff5885e}{EpsBearer::Qci} q = EpsBearer::GBR\_CONV\_VOICE;
+117   \hyperlink{structns3_1_1EpsBearer}{EpsBearer} bearer (q);
+118   ptr\_mmWave->\hyperlink{classns3_1_1MmWaveHelper_a9178ae3493484a9582039bb14edb282a}{ActivateDataRadioBearer} (ueNetDev, bearer);
+119 
+120 
+121 
+122   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1));
+123   Simulator::Run ();
+124   Simulator::Destroy ();
+125   \textcolor{keywordflow}{return} 0;
+126 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

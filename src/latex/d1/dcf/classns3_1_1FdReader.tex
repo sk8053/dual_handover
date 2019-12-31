@@ -1,0 +1,432 @@
+\hypertarget{classns3_1_1FdReader}{}\section{ns3\+:\+:Fd\+Reader Class Reference}
+\label{classns3_1_1FdReader}\index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+
+
+A class that asynchronously reads from a file descriptor.  
+
+
+
+
+{\ttfamily \#include $<$unix-\/fd-\/reader.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Fd\+Reader\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Fd\+Reader\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structns3_1_1FdReader_1_1Data}{Data}
+\begin{DoxyCompactList}\small\item\em A structure representing data read. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1FdReader_a1c1ba5297d4015304350f909e3d658f3}{Fd\+Reader} ()
+\item 
+virtual \hyperlink{classns3_1_1FdReader_ae69d0181118f371221ac3c339004314b}{$\sim$\+Fd\+Reader} ()
+\item 
+void \hyperlink{classns3_1_1FdReader_aad8139555df8e9fd58e819f19547a42d}{Start} (int \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd}, \hyperlink{classns3_1_1Callback}{Callback}$<$ void, uint8\+\_\+t $\ast$, ssize\+\_\+t $>$ read\+Callback)
+\item 
+void \hyperlink{classns3_1_1FdReader_a0d30fe465fc06dc41a66a439e84f61b6}{Stop} (void)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{structns3_1_1FdReader_1_1Data}{Fd\+Reader\+::\+Data} \hyperlink{classns3_1_1FdReader_a5d622d726859828ba7bc557b57689b1b}{Do\+Read} (void)=0
+\begin{DoxyCompactList}\small\item\em The read implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\+\_\+fd}
+\begin{DoxyCompactList}\small\item\em The file descriptor to read from. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1FdReader_abac0b41fc484fbc47c37a14174bddb03}{Run} (void)
+\item 
+void \hyperlink{classns3_1_1FdReader_a7de041cbd9bfab170576ddd6fa83eea9}{Destroy\+Event} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Callback}{Callback}$<$ void, uint8\+\_\+t $\ast$, ssize\+\_\+t $>$ \hyperlink{classns3_1_1FdReader_af5cd7136ecc802487df40cd8046d6fe1}{m\+\_\+read\+Callback}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1SystemThread}{System\+Thread} $>$ \hyperlink{classns3_1_1FdReader_ae610be5a8e8c8e72620fe131f3277cd6}{m\+\_\+read\+Thread}
+\item 
+int \hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\+\_\+evpipe} \mbox{[}2\mbox{]}
+\item 
+bool \hyperlink{classns3_1_1FdReader_a53bb467852fcfe1a12dd0e32f846b01e}{m\+\_\+stop}
+\item 
+\hyperlink{classns3_1_1EventId}{Event\+Id} \hyperlink{classns3_1_1FdReader_a9f3cee67eb1d43aa53ebc23384e32828}{m\+\_\+destroy\+Event}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A class that asynchronously reads from a file descriptor. 
+
+This class can be used to start a system thread that reads from a given file descriptor and invokes a given callback when data is received. This class handles thread management automatically but the {\ttfamily \hyperlink{classns3_1_1FdReader_a5d622d726859828ba7bc557b57689b1b}{Do\+Read()}} method must be implemented by a subclass. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!Fd\+Reader@{Fd\+Reader}}
+\index{Fd\+Reader@{Fd\+Reader}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{Fd\+Reader()}{FdReader()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Fd\+Reader\+::\+Fd\+Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1FdReader_a1c1ba5297d4015304350f909e3d658f3}{}\label{classns3_1_1FdReader_a1c1ba5297d4015304350f909e3d658f3}
+Constructor. 
+\begin{DoxyCode}
+46   : \hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\_fd} (-1), \hyperlink{classns3_1_1FdReader_af5cd7136ecc802487df40cd8046d6fe1}{m\_readCallback} (0), \hyperlink{classns3_1_1FdReader_ae610be5a8e8c8e72620fe131f3277cd6}{m\_readThread} (0), 
+      \hyperlink{classns3_1_1FdReader_a53bb467852fcfe1a12dd0e32f846b01e}{m\_stop} (\textcolor{keyword}{false}),
+47     \hyperlink{classns3_1_1FdReader_a9f3cee67eb1d43aa53ebc23384e32828}{m\_destroyEvent} ()
+48 \{
+49   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+50   \hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[0] = -1;
+51   \hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[1] = -1;
+52 \}
+\end{DoxyCode}
+\index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!````~Fd\+Reader@{$\sim$\+Fd\+Reader}}
+\index{````~Fd\+Reader@{$\sim$\+Fd\+Reader}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{$\sim$\+Fd\+Reader()}{~FdReader()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Fd\+Reader\+::$\sim$\+Fd\+Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1FdReader_ae69d0181118f371221ac3c339004314b}{}\label{classns3_1_1FdReader_ae69d0181118f371221ac3c339004314b}
+Destructor. 
+\begin{DoxyCode}
+55 \{
+56   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+57   \hyperlink{classns3_1_1FdReader_a0d30fe465fc06dc41a66a439e84f61b6}{Stop} ();
+58 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!Destroy\+Event@{Destroy\+Event}}
+\index{Destroy\+Event@{Destroy\+Event}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{Destroy\+Event(void)}{DestroyEvent(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Fd\+Reader\+::\+Destroy\+Event (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1FdReader_a7de041cbd9bfab170576ddd6fa83eea9}{}\label{classns3_1_1FdReader_a7de041cbd9bfab170576ddd6fa83eea9}
+Event handler scheduled for destroy time to halt the thread. 
+\begin{DoxyCode}
+113 \{
+114   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+115   \hyperlink{classns3_1_1FdReader_a0d30fe465fc06dc41a66a439e84f61b6}{Stop} ();
+116   this->\hyperlink{classns3_1_1SimpleRefCount_aeb8f59b2f744915a64a2271c9e4b5ec0}{Unref} ();
+117 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!Do\+Read@{Do\+Read}}
+\index{Do\+Read@{Do\+Read}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{Do\+Read(void)=0}{DoRead(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Fd\+Reader\+::\+Data} ns3\+::\+Fd\+Reader\+::\+Do\+Read (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1FdReader_a5d622d726859828ba7bc557b57689b1b}{}\label{classns3_1_1FdReader_a5d622d726859828ba7bc557b57689b1b}
+
+
+The read implementation. 
+
+The value of {\ttfamily m\+\_\+len} returned controls further processing. The callback function is only invoked when {\ttfamily m\+\_\+len} is positive; any data read is not processed when {\ttfamily m\+\_\+len} is negative; reading stops when {\ttfamily m\+\_\+len} is zero.
+
+The management of memory associated with {\ttfamily m\+\_\+buf} must be compatible with the read callback.
+
+\begin{DoxyReturn}{Returns}
+A structure representing what was read. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1FdNetDeviceFdReader_accdcf64286ebf82623e99c0073c933df}{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader}, and \hyperlink{classns3_1_1TapBridgeFdReader_a15e2178765f12e4f8d043205e02fb9d0}{ns3\+::\+Tap\+Bridge\+Fd\+Reader}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!Run@{Run}}
+\index{Run@{Run}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{Run(void)}{Run(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Fd\+Reader\+::\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1FdReader_abac0b41fc484fbc47c37a14174bddb03}{}\label{classns3_1_1FdReader_abac0b41fc484fbc47c37a14174bddb03}
+The asynchronous function which performs the read. 
+\begin{DoxyCode}
+162 \{
+163   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+164   \textcolor{keywordtype}{int} nfds;
+165   fd\_set rfds;
+166 
+167   nfds = (\hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\_fd} > \hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[0] ? \hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\_fd} : \hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[0]) + 1;
+168 
+169   FD\_ZERO (&rfds);
+170   FD\_SET (\hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\_fd}, &rfds);
+171   FD\_SET (\hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[0], &rfds);
+172 
+173   \textcolor{keywordflow}{for} (;;)
+174     \{
+175       \textcolor{keywordtype}{int} r;
+176       fd\_set readfds = rfds;
+177 
+178       r = select (nfds, &readfds, NULL, NULL, NULL);
+179       \textcolor{keywordflow}{if} (r == -1 && errno != EINTR)
+180         \{
+181           \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"select() failed: "} << std::strerror (errno));
+182         \}
+183 
+184       \textcolor{keywordflow}{if} (FD\_ISSET (\hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[0], &readfds))
+185         \{
+186           \textcolor{comment}{// drain the event pipe}
+187           \textcolor{keywordflow}{for} (;;)
+188             \{
+189               \textcolor{keywordtype}{char} buf[1024];
+190               ssize\_t len = read (\hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[0], buf, \textcolor{keyword}{sizeof} (buf));
+191               \textcolor{keywordflow}{if} (len == 0)
+192                 \{
+193                   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"event pipe closed"});
+194                 \}
+195               \textcolor{keywordflow}{if} (len < 0)
+196                 \{
+197                   \textcolor{keywordflow}{if} (errno == EAGAIN || errno == EINTR || errno == EWOULDBLOCK)
+198                     \{
+199                       \textcolor{keywordflow}{break};
+200                     \}
+201                   \textcolor{keywordflow}{else}
+202                     \{
+203                       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"read() failed: "} << std::strerror (errno));
+204                     \}
+205                 \}
+206             \}
+207         \}
+208 
+209       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1FdReader_a53bb467852fcfe1a12dd0e32f846b01e}{m\_stop})
+210         \{
+211           \textcolor{comment}{// this thread is done}
+212           \textcolor{keywordflow}{break};
+213         \}
+214 
+215       \textcolor{keywordflow}{if} (FD\_ISSET (\hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\_fd}, &readfds))
+216         \{
+217           \textcolor{keyword}{struct }FdReader::Data \hyperlink{topology-example-sim_8cc_a26c65296e316af77b787dc77469bb2a4}{data} = \hyperlink{classns3_1_1FdReader_a5d622d726859828ba7bc557b57689b1b}{DoRead} ();
+218           \textcolor{comment}{// reading stops when m\_len is zero}
+219           \textcolor{keywordflow}{if} (data.m\_len == 0)
+220             \{
+221               \textcolor{keywordflow}{break};
+222             \}
+223           \textcolor{comment}{// the callback is only called when m\_len is positive (data}
+224           \textcolor{comment}{// is ignored if m\_len is negative)}
+225           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (data.m\_len > 0)
+226             \{
+227               \hyperlink{classns3_1_1FdReader_af5cd7136ecc802487df40cd8046d6fe1}{m\_readCallback} (data.m\_buf, data.m\_len);
+228             \}
+229         \}
+230     \}
+231 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!Start@{Start}}
+\index{Start@{Start}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{Start(int fd, Callback$<$ void, uint8\+\_\+t $\ast$, ssize\+\_\+t $>$ read\+Callback)}{Start(int fd, Callback< void, uint8_t *, ssize_t > readCallback)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Fd\+Reader\+::\+Start (
+\begin{DoxyParamCaption}
+\item[{int}]{fd, }
+\item[{{\bf Callback}$<$ void, uint8\+\_\+t $\ast$, ssize\+\_\+t $>$}]{read\+Callback}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1FdReader_aad8139555df8e9fd58e819f19547a42d}{}\label{classns3_1_1FdReader_aad8139555df8e9fd58e819f19547a42d}
+Start a new read thread.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em fd} & A valid file descriptor open for reading.\\
+\hline
+\mbox{\tt in}  & {\em read\+Callback} & A callback to invoke when new data is available. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+61 \{
+62   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd} << &readCallback);
+63   \textcolor{keywordtype}{int} tmp;
+64 
+65   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (\hyperlink{classns3_1_1FdReader_ae610be5a8e8c8e72620fe131f3277cd6}{m\_readThread} == 0, \textcolor{stringliteral}{"read thread already exists"});
+66 
+67   \textcolor{comment}{// create a pipe for inter-thread event notification}
+68   tmp = pipe (\hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe});
+69   \textcolor{keywordflow}{if} (tmp == -1)
+70     \{
+71       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"pipe() failed: "} << std::strerror (errno));
+72     \}
+73 
+74   \textcolor{comment}{// make the read end non-blocking}
+75   tmp = fcntl (\hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[0], F\_GETFL);
+76   \textcolor{keywordflow}{if} (tmp == -1)
+77     \{
+78       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"fcntl() failed: "} << std::strerror (errno));
+79     \}
+80   \textcolor{keywordflow}{if} (fcntl (\hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[0], F\_SETFL, tmp | O\_NONBLOCK) == -1)
+81     \{
+82       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"fcntl() failed: "} << std::strerror (errno));
+83     \}
+84 
+85   \hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\_fd} = \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd};
+86   \hyperlink{classns3_1_1FdReader_af5cd7136ecc802487df40cd8046d6fe1}{m\_readCallback} = readCallback;
+87 
+88   \textcolor{comment}{//}
+89   \textcolor{comment}{// We're going to spin up a thread soon, so we need to make sure we have}
+90   \textcolor{comment}{// a way to tear down that thread when the simulation stops.  Do this by}
+91   \textcolor{comment}{// scheduling a "destroy time" method to make sure the thread exits before}
+92   \textcolor{comment}{// proceeding.}
+93   \textcolor{comment}{//}
+94   \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1FdReader_a9f3cee67eb1d43aa53ebc23384e32828}{m\_destroyEvent}.\hyperlink{classns3_1_1EventId_aabf8476d1a080c199ea0c6aa9ccea372}{IsRunning} ())
+95     \{
+96       \textcolor{comment}{// hold a reference to ensure that this object is not}
+97       \textcolor{comment}{// deallocated before the destroy-time event fires}
+98       this->\hyperlink{classns3_1_1SimpleRefCount_ab7545a4e56ceef44cb91e2bbf0f26f18}{Ref} ();
+99       \hyperlink{classns3_1_1FdReader_a9f3cee67eb1d43aa53ebc23384e32828}{m\_destroyEvent} =
+100         \hyperlink{classns3_1_1Simulator_a7e1c6479e6d0bd3f0eb3e005d6941302}{Simulator::ScheduleDestroy} (&
+      \hyperlink{classns3_1_1FdReader_a7de041cbd9bfab170576ddd6fa83eea9}{FdReader::DestroyEvent}, \textcolor{keyword}{this});
+101     \}
+102 
+103   \textcolor{comment}{//}
+104   \textcolor{comment}{// Now spin up a thread to read from the fd}
+105   \textcolor{comment}{//}
+106   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Spinning up read thread"});
+107 
+108   \hyperlink{classns3_1_1FdReader_ae610be5a8e8c8e72620fe131f3277cd6}{m\_readThread} = Create<SystemThread> (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classns3_1_1FdReader_abac0b41fc484fbc47c37a14174bddb03}{FdReader::Run}, \textcolor{keyword}{this}));
+109   \hyperlink{classns3_1_1FdReader_ae610be5a8e8c8e72620fe131f3277cd6}{m\_readThread}->Start ();
+110 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!Stop@{Stop}}
+\index{Stop@{Stop}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{Stop(void)}{Stop(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Fd\+Reader\+::\+Stop (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1FdReader_a0d30fe465fc06dc41a66a439e84f61b6}{}\label{classns3_1_1FdReader_a0d30fe465fc06dc41a66a439e84f61b6}
+Stop the read thread and reset internal state. This does not close the file descriptor used for reading. 
+\begin{DoxyCode}
+120 \{
+121   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+122   \hyperlink{classns3_1_1FdReader_a53bb467852fcfe1a12dd0e32f846b01e}{m\_stop} = \textcolor{keyword}{true};
+123 
+124   \textcolor{comment}{// signal the read thread}
+125   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[1] != -1)
+126     \{
+127       \textcolor{keywordtype}{char} \hyperlink{data-calculator_8cc_a548c77babcdf18ce7b6b96e73fb912cd}{zero} = 0;
+128       ssize\_t len = write (\hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[1], &zero, \textcolor{keyword}{sizeof} (zero));
+129       \textcolor{keywordflow}{if} (len != \textcolor{keyword}{sizeof} (zero))
+130         \hyperlink{group__logging_gade7208b4009cdf0e25783cd26766f559}{NS\_LOG\_WARN} (\textcolor{stringliteral}{"incomplete write(): "} << std::strerror (errno));
+131     \}
+132 
+133   \textcolor{comment}{// join the read thread}
+134   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1FdReader_ae610be5a8e8c8e72620fe131f3277cd6}{m\_readThread} != 0)
+135     \{
+136       \hyperlink{classns3_1_1FdReader_ae610be5a8e8c8e72620fe131f3277cd6}{m\_readThread}->Join ();
+137       \hyperlink{classns3_1_1FdReader_ae610be5a8e8c8e72620fe131f3277cd6}{m\_readThread} = 0;
+138     \}
+139 
+140   \textcolor{comment}{// close the write end of the event pipe}
+141   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[1] != -1)
+142     \{
+143       close (\hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[1]);
+144       \hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[1] = -1;
+145     \}
+146 
+147   \textcolor{comment}{// close the read end of the event pipe}
+148   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[0] != -1)
+149     \{
+150       close (\hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[0]);
+151       \hyperlink{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{m\_evpipe}[0] = -1;
+152     \}
+153 
+154   \textcolor{comment}{// reset everything else}
+155   \hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\_fd} = -1;
+156   \hyperlink{classns3_1_1FdReader_af5cd7136ecc802487df40cd8046d6fe1}{m\_readCallback}.\hyperlink{classns3_1_1Callback_ab24de4ac458fc5b1ac6f7a672c4c6cea}{Nullify} ();
+157   \hyperlink{classns3_1_1FdReader_a53bb467852fcfe1a12dd0e32f846b01e}{m\_stop} = \textcolor{keyword}{false};
+158 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!m\+\_\+destroy\+Event@{m\+\_\+destroy\+Event}}
+\index{m\+\_\+destroy\+Event@{m\+\_\+destroy\+Event}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{m\+\_\+destroy\+Event}{m_destroyEvent}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Event\+Id} ns3\+::\+Fd\+Reader\+::m\+\_\+destroy\+Event\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1FdReader_a9f3cee67eb1d43aa53ebc23384e32828}{}\label{classns3_1_1FdReader_a9f3cee67eb1d43aa53ebc23384e32828}
+The event scheduled for destroy time which will invoke Destroy\+Event and halt the thread. \index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!m\+\_\+evpipe@{m\+\_\+evpipe}}
+\index{m\+\_\+evpipe@{m\+\_\+evpipe}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{m\+\_\+evpipe}{m_evpipe}}]{\setlength{\rightskip}{0pt plus 5cm}int ns3\+::\+Fd\+Reader\+::m\+\_\+evpipe\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}{}\label{classns3_1_1FdReader_a0c4a678111029fdc40948d4d7657aa41}
+Pipe used to signal events between threads. \index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!m\+\_\+fd@{m\+\_\+fd}}
+\index{m\+\_\+fd@{m\+\_\+fd}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{m\+\_\+fd}{m_fd}}]{\setlength{\rightskip}{0pt plus 5cm}int ns3\+::\+Fd\+Reader\+::m\+\_\+fd\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{}\label{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}
+
+
+The file descriptor to read from. 
+
+\index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!m\+\_\+read\+Callback@{m\+\_\+read\+Callback}}
+\index{m\+\_\+read\+Callback@{m\+\_\+read\+Callback}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{m\+\_\+read\+Callback}{m_readCallback}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Callback}$<$void, uint8\+\_\+t $\ast$, ssize\+\_\+t$>$ ns3\+::\+Fd\+Reader\+::m\+\_\+read\+Callback\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1FdReader_af5cd7136ecc802487df40cd8046d6fe1}{}\label{classns3_1_1FdReader_af5cd7136ecc802487df40cd8046d6fe1}
+The main thread callback function to invoke when we have data. \index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!m\+\_\+read\+Thread@{m\+\_\+read\+Thread}}
+\index{m\+\_\+read\+Thread@{m\+\_\+read\+Thread}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{m\+\_\+read\+Thread}{m_readThread}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf System\+Thread}$>$ ns3\+::\+Fd\+Reader\+::m\+\_\+read\+Thread\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1FdReader_ae610be5a8e8c8e72620fe131f3277cd6}{}\label{classns3_1_1FdReader_ae610be5a8e8c8e72620fe131f3277cd6}
+The thread doing the read, created and launched by \hyperlink{classns3_1_1FdReader_aad8139555df8e9fd58e819f19547a42d}{Start()}. \index{ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}!m\+\_\+stop@{m\+\_\+stop}}
+\index{m\+\_\+stop@{m\+\_\+stop}!ns3\+::\+Fd\+Reader@{ns3\+::\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{m\+\_\+stop}{m_stop}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Fd\+Reader\+::m\+\_\+stop\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1FdReader_a53bb467852fcfe1a12dd0e32f846b01e}{}\label{classns3_1_1FdReader_a53bb467852fcfe1a12dd0e32f846b01e}
+Signal the read thread to stop. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{unix-fd-reader_8h}{unix-\/fd-\/reader.\+h}\item 
+core/model/\hyperlink{unix-fd-reader_8cc}{unix-\/fd-\/reader.\+cc}\end{DoxyCompactItemize}

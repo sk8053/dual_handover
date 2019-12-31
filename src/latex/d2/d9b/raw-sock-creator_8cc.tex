@@ -1,0 +1,107 @@
+\hypertarget{raw-sock-creator_8cc}{}\section{fd-\/net-\/device/helper/raw-\/sock-\/creator.cc File Reference}
+\label{raw-sock-creator_8cc}\index{fd-\/net-\/device/helper/raw-\/sock-\/creator.\+cc@{fd-\/net-\/device/helper/raw-\/sock-\/creator.\+cc}}
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$iomanip$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$sys/un.\+h$>$}\\*
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\\*
+{\ttfamily \#include $<$net/ethernet.\+h$>$}\\*
+{\ttfamily \#include $<$net/if.\+h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\+h$>$}\\*
+{\ttfamily \#include $<$netpacket/packet.\+h$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}creator-\/utils.\+h\char`\"{}}\\*
+Include dependency graph for raw-\/sock-\/creator.cc\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{raw-sock-creator_8cc_adc226a140a49fe19a57e21bbe86341e4}{E\+M\+U\+\_\+\+M\+A\+G\+IC}~65867
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{raw-sock-creator_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{raw-\/sock-\/creator.\+cc@{raw-\/sock-\/creator.\+cc}!E\+M\+U\+\_\+\+M\+A\+G\+IC@{E\+M\+U\+\_\+\+M\+A\+G\+IC}}
+\index{E\+M\+U\+\_\+\+M\+A\+G\+IC@{E\+M\+U\+\_\+\+M\+A\+G\+IC}!raw-\/sock-\/creator.\+cc@{raw-\/sock-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{E\+M\+U\+\_\+\+M\+A\+G\+IC}{EMU_MAGIC}}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\+M\+U\+\_\+\+M\+A\+G\+IC~65867}\hypertarget{raw-sock-creator_8cc_adc226a140a49fe19a57e21bbe86341e4}{}\label{raw-sock-creator_8cc_adc226a140a49fe19a57e21bbe86341e4}
+
+
+\subsection{Function Documentation}
+\index{raw-\/sock-\/creator.\+cc@{raw-\/sock-\/creator.\+cc}!main@{main}}
+\index{main@{main}!raw-\/sock-\/creator.\+cc@{raw-\/sock-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{raw-sock-creator_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{raw-sock-creator_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+44 \{
+45   \textcolor{keywordtype}{int} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+46   \textcolor{keywordtype}{char} *path = NULL;
+47 
+48   opterr = 0;
+49 
+50   \textcolor{keywordflow}{while} ((c = getopt (argc, argv, \textcolor{stringliteral}{"vp:"})) != -1)
+51     \{
+52       \textcolor{keywordflow}{switch} (c)
+53         \{
+54         \textcolor{keywordflow}{case} \textcolor{charliteral}{'v'}:
+55           \hyperlink{tap-creator_8cc_a80b7a0563409f3e21c80e0459c85845e}{gVerbose} = \textcolor{keyword}{true};
+56           \textcolor{keywordflow}{break};
+57         \textcolor{keywordflow}{case} \textcolor{charliteral}{'p'}:
+58           path = optarg;
+59           \textcolor{keywordflow}{break};
+60         \}
+61     \}
+62 
+63   \textcolor{comment}{//}
+64   \textcolor{comment}{// This program is spawned by an emu net device running in a simulation.  It}
+65   \textcolor{comment}{// wants to create a raw socket as described below.  We are going to do the}
+66   \textcolor{comment}{// work here since we're running suid root.  Once we create the raw socket,}
+67   \textcolor{comment}{// we have to send it back to the emu net device.  We do that over a Unix}
+68   \textcolor{comment}{// (local interprocess) socket.  The emu net device created a socket to}
+69   \textcolor{comment}{// listen for our response on, and it is expected to have encoded the address}
+70   \textcolor{comment}{// information as a string and to have passed that string as an argument to}
+71   \textcolor{comment}{// us.  We see it here as the "path" string.  We can't do anything useful}
+72   \textcolor{comment}{// unless we have that string.}
+73   \textcolor{comment}{//}
+74   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (path == NULL, \textcolor{stringliteral}{"path is a required argument"}, 0);
+75   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided path is \(\backslash\)""} << path << \textcolor{stringliteral}{"\(\backslash\)""});
+76   \textcolor{comment}{//}
+77   \textcolor{comment}{// The whole reason for all of the hoops we went through to call out to this}
+78   \textcolor{comment}{// program will pay off here.  We created this program to run as suid root}
+79   \textcolor{comment}{// in order to keep the main simulation program from having to be run with}
+80   \textcolor{comment}{// root privileges.  We need root privileges to be able to open a raw socket}
+81   \textcolor{comment}{// though.  So all of these hoops are to allow us to execute the following}
+82   \textcolor{comment}{// single line of code:}
+83   \textcolor{comment}{//}
+84   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Creating raw socket"});
+85   \textcolor{keywordtype}{int} sock = socket (PF\_PACKET, SOCK\_RAW, htons (ETH\_P\_ALL));
+86   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (sock == -1, \textcolor{stringliteral}{"CreateSocket(): Unable to open raw socket"}, 1);
+87 
+88   \textcolor{comment}{//}
+89   \textcolor{comment}{// Send the socket back to the emu net device so it can go about its business}
+90   \textcolor{comment}{//}
+91   \hyperlink{tap-creator_8cc_a11a114b8401a27939e87a94ade65213a}{SendSocket} (path, sock, \hyperlink{raw-sock-creator_8cc_adc226a140a49fe19a57e21bbe86341e4}{EMU\_MAGIC});
+92 
+93   \textcolor{keywordflow}{return} 0;
+94 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

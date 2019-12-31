@@ -1,0 +1,483 @@
+\hypertarget{classns3_1_1ParetoRandomVariable}{}\section{ns3\+:\+:Pareto\+Random\+Variable Class Reference}
+\label{classns3_1_1ParetoRandomVariable}\index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+
+
+The Pareto distribution Random Number Generator (R\+NG).  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Pareto\+Random\+Variable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Pareto\+Random\+Variable\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1ParetoRandomVariable_a382e7b2687861ed6dd5e25ddea67d69f}{Pareto\+Random\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Creates a Pareto distribution R\+NG with the default values for the mean, the shape, and upper bound. \end{DoxyCompactList}\item 
+\hyperlink{deprecated_8h_a771fbc06c05c32655c757f56492d98c5}{N\+S\+\_\+\+D\+E\+P\+R\+E\+C\+A\+T\+ED} double \hyperlink{classns3_1_1ParetoRandomVariable_a2e425103905e2772d98d2bbc6c32a0b3}{Get\+Mean} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the mean parameter for the Pareto distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ParetoRandomVariable_a32665fbfd8fb7d1aba7fe6c5ab172bdb}{Get\+Scale} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the scale parameter for the Pareto distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ParetoRandomVariable_a346c46dc10697f4128eade7eab0e737d}{Get\+Shape} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the shape parameter for the Pareto distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ParetoRandomVariable_afee493e22a788ffcce342606fdf566b8}{Get\+Bound} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the upper bound on values that can be returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ParetoRandomVariable_a382e896b56412a86d009c4ec6140c2c5}{Get\+Value} (double scale, double shape, double bound)
+\begin{DoxyCompactList}\small\item\em Returns a random double from a Pareto distribution with the specified scale, shape, and upper bound. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1ParetoRandomVariable_a3c5f13921075d1fcb0caea45eac624fe}{Get\+Integer} (uint32\+\_\+t scale, uint32\+\_\+t shape, uint32\+\_\+t bound)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a Pareto distribution with the specified mean, shape, and upper bound. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1ParetoRandomVariable_af5588dd7354a1de1a3926fbf8c6edd74}{Get\+Value} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random double from a Pareto distribution with the current mean, shape, and upper bound. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1ParetoRandomVariable_a5606df53e01a0254b5bfb3af14929acc}{Get\+Integer} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a Pareto distribution with the current mean, shape, and upper bound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1ParetoRandomVariable_a67aef9aab600df6b3f42a07b75b83dc2}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1ParetoRandomVariable_a6d245bceabbb307777a942674433ee39}{m\+\_\+mean}
+\item 
+double \hyperlink{classns3_1_1ParetoRandomVariable_a2c52677237cc9bce3c01ea0052444d81}{m\+\_\+scale}
+\item 
+double \hyperlink{classns3_1_1ParetoRandomVariable_a606ababe260201098981f88c30fa8b39}{m\+\_\+shape}
+\item 
+double \hyperlink{classns3_1_1ParetoRandomVariable_ab9bf62721171d3bc401081cdaa22e1b7}{m\+\_\+bound}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The Pareto distribution Random Number Generator (R\+NG). 
+
+This class supports the creation of objects that return random numbers from a fixed Pareto distribution. It also supports the generation of single random numbers from various Pareto distributions.
+
+The probability density function of a Pareto variable is defined over the range \mbox{[} $x_m$, $+\infty$) as\+: $ k \frac{x_m^k}{x^{k+1}}$ where $x_m > 0$ is called the scale parameter and $ k > 0$ is called the Pareto index or shape.
+
+The parameter $ x_m $ can be inferred from the mean and the parameter $ k $ with the equation $ x_m = mean \frac{k-1}{k}, k > 1$.
+
+Since Pareto distributions can theoretically return unbounded values, it is sometimes useful to specify a fixed upper limit. Note however when the upper limit is specified, the true mean of the distribution is slightly smaller than the mean value specified.
+
+Here is an example of how to use this class\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{double} scale = 5.0;
+\textcolor{keywordtype}{double} shape = 2.0;
+
+Ptr<ParetoRandomVariable> \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x} = CreateObject<ParetoRandomVariable> ();
+x->SetAttribute (\textcolor{stringliteral}{"Scale"}, DoubleValue (scale));
+x->SetAttribute (\textcolor{stringliteral}{"Shape"}, DoubleValue (shape));
+
+\textcolor{comment}{// The expected value for the mean of the values returned by a}
+\textcolor{comment}{// Pareto distributed random variable is}
+\textcolor{comment}{//}
+\textcolor{comment}{//                   shape * scale}
+\textcolor{comment}{//     E[value]  =  ---------------  ,}
+\textcolor{comment}{//                     shape - 1}
+
+\textcolor{keywordtype}{double} value = x->GetValue ();
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!Pareto\+Random\+Variable@{Pareto\+Random\+Variable}}
+\index{Pareto\+Random\+Variable@{Pareto\+Random\+Variable}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Pareto\+Random\+Variable()}{ParetoRandomVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Pareto\+Random\+Variable\+::\+Pareto\+Random\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ParetoRandomVariable_a382e7b2687861ed6dd5e25ddea67d69f}{}\label{classns3_1_1ParetoRandomVariable_a382e7b2687861ed6dd5e25ddea67d69f}
+
+
+Creates a Pareto distribution R\+NG with the default values for the mean, the shape, and upper bound. 
+
+
+\begin{DoxyCode}
+480 \{
+481   \textcolor{comment}{// m\_shape, m\_shape, and m\_bound are initialized after constructor}
+482   \textcolor{comment}{// by attributes}
+483   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+484   \hyperlink{unused_8h_a3ba03ad859378e9f01285afb60f0e3ab}{NS\_UNUSED} (\hyperlink{classns3_1_1ParetoRandomVariable_a6d245bceabbb307777a942674433ee39}{m\_mean});
+485 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!Get\+Bound@{Get\+Bound}}
+\index{Get\+Bound@{Get\+Bound}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Bound(void) const }{GetBound(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Pareto\+Random\+Variable\+::\+Get\+Bound (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ParetoRandomVariable_afee493e22a788ffcce342606fdf566b8}{}\label{classns3_1_1ParetoRandomVariable_afee493e22a788ffcce342606fdf566b8}
+
+
+Returns the upper bound on values that can be returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The upper bound on values that can be returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+518 \{
+519   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+520   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ParetoRandomVariable_ab9bf62721171d3bc401081cdaa22e1b7}{m\_bound};
+521 \}
+\end{DoxyCode}
+\index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(uint32\+\_\+t scale, uint32\+\_\+t shape, uint32\+\_\+t bound)}{GetInteger(uint32_t scale, uint32_t shape, uint32_t bound)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Pareto\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{scale, }
+\item[{uint32\+\_\+t}]{shape, }
+\item[{uint32\+\_\+t}]{bound}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ParetoRandomVariable_a3c5f13921075d1fcb0caea45eac624fe}{}\label{classns3_1_1ParetoRandomVariable_a3c5f13921075d1fcb0caea45eac624fe}
+
+
+Returns a random unsigned integer from a Pareto distribution with the specified mean, shape, and upper bound. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em scale} & Scale parameter for the Pareto distribution. \\
+\hline
+\mbox{\tt in}  & {\em shape} & Shape parameter for the Pareto distribution. \\
+\hline
+\mbox{\tt in}  & {\em bound} & Upper bound on values returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and
+
+\[ x = \frac{scale}{u^{\frac{1}{shape}}} \]
+
+is a value that would be returned normally.
+
+The value returned in the antithetic case, $x'$, is calculated as
+
+\[ x' = \frac{scale}{{(1 - u)}^{\frac{1}{shape}}} , \]
+
+which now involves the distance $u$ is from 1 in the denominator. 
+\begin{DoxyCode}
+550 \{
+551   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << scale << shape << bound);
+552   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>} ( \hyperlink{classns3_1_1ParetoRandomVariable_af5588dd7354a1de1a3926fbf8c6edd74}{GetValue} (scale, shape, bound) );
+553 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(void)}{GetInteger(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Pareto\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1ParetoRandomVariable_a5606df53e01a0254b5bfb3af14929acc}{}\label{classns3_1_1ParetoRandomVariable_a5606df53e01a0254b5bfb3af14929acc}
+
+
+Returns a random unsigned integer from a Pareto distribution with the current mean, shape, and upper bound. 
+
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and
+
+\[ x = \frac{scale}{u^{\frac{1}{shape}}} \]
+
+is a value that would be returned normally.
+
+The value returned in the antithetic case, $x'$, is calculated as
+
+\[ x' = \frac{scale}{{(1 - u)}^{\frac{1}{shape}}} , \]
+
+which now involves the distance $u$ is from 1 in the denominator. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+563 \{
+564   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+565   \textcolor{keywordflow}{return} (uint32\_t)\hyperlink{classns3_1_1ParetoRandomVariable_af5588dd7354a1de1a3926fbf8c6edd74}{GetValue} (\hyperlink{classns3_1_1ParetoRandomVariable_a2c52677237cc9bce3c01ea0052444d81}{m\_scale}, \hyperlink{classns3_1_1ParetoRandomVariable_a606ababe260201098981f88c30fa8b39}{m\_shape}, \hyperlink{classns3_1_1ParetoRandomVariable_ab9bf62721171d3bc401081cdaa22e1b7}{m\_bound});
+566 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!Get\+Mean@{Get\+Mean}}
+\index{Get\+Mean@{Get\+Mean}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Mean(void) const }{GetMean(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Pareto\+Random\+Variable\+::\+Get\+Mean (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ParetoRandomVariable_a2e425103905e2772d98d2bbc6c32a0b3}{}\label{classns3_1_1ParetoRandomVariable_a2e425103905e2772d98d2bbc6c32a0b3}
+
+
+Returns the mean parameter for the Pareto distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The mean parameter for the Pareto distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+489 \{
+490   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+491 
+492   \textcolor{keywordtype}{double} mean = std::numeric\_limits<double>::infinity();
+493 
+494   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1ParetoRandomVariable_a606ababe260201098981f88c30fa8b39}{m\_shape} > 1)
+495     \{
+496       mean = \hyperlink{classns3_1_1ParetoRandomVariable_a606ababe260201098981f88c30fa8b39}{m\_shape} * \hyperlink{classns3_1_1ParetoRandomVariable_a2c52677237cc9bce3c01ea0052444d81}{m\_scale} / (\hyperlink{classns3_1_1ParetoRandomVariable_a606ababe260201098981f88c30fa8b39}{m\_shape} -1);
+497     \}
+498 
+499   \textcolor{keywordflow}{return} mean;
+500 \}
+\end{DoxyCode}
+\index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!Get\+Scale@{Get\+Scale}}
+\index{Get\+Scale@{Get\+Scale}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Scale(void) const }{GetScale(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Pareto\+Random\+Variable\+::\+Get\+Scale (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ParetoRandomVariable_a32665fbfd8fb7d1aba7fe6c5ab172bdb}{}\label{classns3_1_1ParetoRandomVariable_a32665fbfd8fb7d1aba7fe6c5ab172bdb}
+
+
+Returns the scale parameter for the Pareto distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The scale parameter for the Pareto distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+504 \{
+505   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+506   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ParetoRandomVariable_a2c52677237cc9bce3c01ea0052444d81}{m\_scale};
+507 \}
+\end{DoxyCode}
+\index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!Get\+Shape@{Get\+Shape}}
+\index{Get\+Shape@{Get\+Shape}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Shape(void) const }{GetShape(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Pareto\+Random\+Variable\+::\+Get\+Shape (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ParetoRandomVariable_a346c46dc10697f4128eade7eab0e737d}{}\label{classns3_1_1ParetoRandomVariable_a346c46dc10697f4128eade7eab0e737d}
+
+
+Returns the shape parameter for the Pareto distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The shape parameter for the Pareto distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+511 \{
+512   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+513   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ParetoRandomVariable_a606ababe260201098981f88c30fa8b39}{m\_shape};
+514 \}
+\end{DoxyCode}
+\index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Pareto\+Random\+Variable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1ParetoRandomVariable_a67aef9aab600df6b3f42a07b75b83dc2}{}\label{classns3_1_1ParetoRandomVariable_a67aef9aab600df6b3f42a07b75b83dc2}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+453 \{
+454   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::ParetoRandomVariable"})
+455     .SetParent<\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{RandomVariableStream}>()
+456     .SetGroupName (\textcolor{stringliteral}{"Core"})
+457     .AddConstructor<\hyperlink{classns3_1_1ParetoRandomVariable_a382e7b2687861ed6dd5e25ddea67d69f}{ParetoRandomVariable}> ()
+458     .AddAttribute(\textcolor{stringliteral}{"Mean"}, \textcolor{stringliteral}{"The mean parameter for the Pareto distribution returned by this RNG stream."},
+459       DoubleValue(0.0),
+460       MakeDoubleAccessor(&\hyperlink{classns3_1_1ParetoRandomVariable_a6d245bceabbb307777a942674433ee39}{ParetoRandomVariable::m\_mean}),
+461       MakeDoubleChecker<double>(),
+462       \hyperlink{classns3_1_1TypeId_ad55d31e57490a83a3ededa096a8d2588aa50cc8669d91c8449f81557ffa5d2024}{TypeId::DEPRECATED},
+463       \textcolor{stringliteral}{"Not anymore used. Use 'Scale' instead - changing this attribute has no effect."})
+464     .AddAttribute(\textcolor{stringliteral}{"Scale"}, \textcolor{stringliteral}{"The scale parameter for the Pareto distribution returned by this RNG stream."},
+465       DoubleValue(1.0),
+466       MakeDoubleAccessor(&\hyperlink{classns3_1_1ParetoRandomVariable_a2c52677237cc9bce3c01ea0052444d81}{ParetoRandomVariable::m\_scale}),
+467       MakeDoubleChecker<double>())
+468     .AddAttribute(\textcolor{stringliteral}{"Shape"}, \textcolor{stringliteral}{"The shape parameter for the Pareto distribution returned by this RNG stream."},
+469                   DoubleValue(2.0),
+470                   MakeDoubleAccessor(&\hyperlink{classns3_1_1ParetoRandomVariable_a606ababe260201098981f88c30fa8b39}{ParetoRandomVariable::m\_shape}),
+471                   MakeDoubleChecker<double>())
+472     .AddAttribute(\textcolor{stringliteral}{"Bound"}, \textcolor{stringliteral}{"The upper bound on the values returned by this RNG stream (if non-zero)."},
+473                   DoubleValue(0.0),
+474                   MakeDoubleAccessor(&\hyperlink{classns3_1_1ParetoRandomVariable_ab9bf62721171d3bc401081cdaa22e1b7}{ParetoRandomVariable::m\_bound}),
+475                   MakeDoubleChecker<double>())
+476     ;
+477   \textcolor{keywordflow}{return} tid;
+478 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(double scale, double shape, double bound)}{GetValue(double scale, double shape, double bound)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Pareto\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{double}]{scale, }
+\item[{double}]{shape, }
+\item[{double}]{bound}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ParetoRandomVariable_a382e896b56412a86d009c4ec6140c2c5}{}\label{classns3_1_1ParetoRandomVariable_a382e896b56412a86d009c4ec6140c2c5}
+
+
+Returns a random double from a Pareto distribution with the specified scale, shape, and upper bound. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em scale} & Mean parameter for the Pareto distribution. \\
+\hline
+\mbox{\tt in}  & {\em shape} & Shape parameter for the Pareto distribution. \\
+\hline
+\mbox{\tt in}  & {\em bound} & Upper bound on values returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and
+
+\[ x = \frac{scale}{u^{\frac{1}{shape}}} \]
+
+is a value that would be returned normally.
+
+The value returned in the antithetic case, $x'$, is calculated as
+
+\[ x' = \frac{scale}{{(1 - u)}^{\frac{1}{shape}}} , \]
+
+which now involves the distance $u$ is from 1 in the denominator. 
+\begin{DoxyCode}
+525 \{
+526   \textcolor{comment}{// Calculate the scale parameter.}
+527   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << scale << shape << bound);
+528 
+529   \textcolor{keywordflow}{while} (1)
+530     \{
+531       \textcolor{comment}{// Get a uniform random variable in [0,1].}
+532       \textcolor{keywordtype}{double} v = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+533       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+534         \{
+535           v = (1 - v);
+536         \}
+537 
+538       \textcolor{comment}{// Calculate the Pareto random variable.}
+539       \textcolor{keywordtype}{double} r = (scale * ( 1.0 / std::pow (v, 1.0 / shape)));
+540 
+541       \textcolor{comment}{// Use this value if it's acceptable.}
+542       \textcolor{keywordflow}{if} (bound == 0 || r <= bound)
+543         \{
+544           \textcolor{keywordflow}{return} r;
+545         \}
+546     \}
+547 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(void)}{GetValue(void)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Pareto\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1ParetoRandomVariable_af5588dd7354a1de1a3926fbf8c6edd74}{}\label{classns3_1_1ParetoRandomVariable_af5588dd7354a1de1a3926fbf8c6edd74}
+
+
+Returns a random double from a Pareto distribution with the current mean, shape, and upper bound. 
+
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and
+
+\[ x = \frac{scale}{u^{\frac{1}{shape}}} \]
+
+is a value that would be returned normally, where
+
+\[ scale = mean * (shape - 1.0) / shape . \]
+
+The value returned in the antithetic case, $x'$, is calculated as
+
+\[ x' = \frac{scale}{{(1 - u)}^{\frac{1}{shape}}} , \]
+
+which now involves the distance $u$ is from 1 in the denominator.
+
+Note that we have to re-\/implement this method here because the method is overloaded above for the three-\/argument variant and the c++ name resolution rules don\textquotesingle{}t work well with overloads split between parent and child classes. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+557 \{
+558   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+559   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ParetoRandomVariable_af5588dd7354a1de1a3926fbf8c6edd74}{GetValue} (\hyperlink{classns3_1_1ParetoRandomVariable_a2c52677237cc9bce3c01ea0052444d81}{m\_scale}, \hyperlink{classns3_1_1ParetoRandomVariable_a606ababe260201098981f88c30fa8b39}{m\_shape}, \hyperlink{classns3_1_1ParetoRandomVariable_ab9bf62721171d3bc401081cdaa22e1b7}{m\_bound});
+560 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!m\+\_\+bound@{m\+\_\+bound}}
+\index{m\+\_\+bound@{m\+\_\+bound}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+bound}{m_bound}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Pareto\+Random\+Variable\+::m\+\_\+bound\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ParetoRandomVariable_ab9bf62721171d3bc401081cdaa22e1b7}{}\label{classns3_1_1ParetoRandomVariable_ab9bf62721171d3bc401081cdaa22e1b7}
+The upper bound on values that can be returned by this R\+NG stream. \index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!m\+\_\+mean@{m\+\_\+mean}}
+\index{m\+\_\+mean@{m\+\_\+mean}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+mean}{m_mean}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Pareto\+Random\+Variable\+::m\+\_\+mean\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ParetoRandomVariable_a6d245bceabbb307777a942674433ee39}{}\label{classns3_1_1ParetoRandomVariable_a6d245bceabbb307777a942674433ee39}
+The mean parameter for the Pareto distribution returned by this R\+NG stream. \index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!m\+\_\+scale@{m\+\_\+scale}}
+\index{m\+\_\+scale@{m\+\_\+scale}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+scale}{m_scale}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Pareto\+Random\+Variable\+::m\+\_\+scale\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ParetoRandomVariable_a2c52677237cc9bce3c01ea0052444d81}{}\label{classns3_1_1ParetoRandomVariable_a2c52677237cc9bce3c01ea0052444d81}
+The scale parameter for the Pareto distribution returned by this R\+NG stream. \index{ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}!m\+\_\+shape@{m\+\_\+shape}}
+\index{m\+\_\+shape@{m\+\_\+shape}!ns3\+::\+Pareto\+Random\+Variable@{ns3\+::\+Pareto\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+shape}{m_shape}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Pareto\+Random\+Variable\+::m\+\_\+shape\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ParetoRandomVariable_a606ababe260201098981f88c30fa8b39}{}\label{classns3_1_1ParetoRandomVariable_a606ababe260201098981f88c30fa8b39}
+The shape parameter for the Pareto distribution returned by this R\+NG stream. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

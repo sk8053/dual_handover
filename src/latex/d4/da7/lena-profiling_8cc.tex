@@ -1,0 +1,219 @@
+\hypertarget{lena-profiling_8cc}{}\section{lte/examples/lena-\/profiling.cc File Reference}
+\label{lena-profiling_8cc}\index{lte/examples/lena-\/profiling.\+cc@{lte/examples/lena-\/profiling.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/lte-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$ns3/buildings-\/module.\+h$>$}\\*
+{\ttfamily \#include $<$iomanip$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+Include dependency graph for lena-\/profiling.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{lena-profiling_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{lena-\/profiling.\+cc@{lena-\/profiling.\+cc}!main@{main}}
+\index{main@{main}!lena-\/profiling.\+cc@{lena-\/profiling.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-profiling_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{lena-profiling_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+36 \{
+37   uint32\_t nEnbPerFloor = 1;
+38   uint32\_t nUe = 1;
+39   uint32\_t nFloors = 0;
+40   \textcolor{keywordtype}{double} simTime = 1.0;
+41   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+42 
+43   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nEnb"}, \textcolor{stringliteral}{"Number of eNodeBs per floor"}, nEnbPerFloor);
+44   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nUe"}, \textcolor{stringliteral}{"Number of UEs"}, nUe);
+45   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nFloors"}, \textcolor{stringliteral}{"Number of floors, 0 for Friis propagation model"},
+46                 nFloors);
+47   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"simTime"}, \textcolor{stringliteral}{"Total duration of the simulation (in seconds)"},
+48                 simTime);
+49   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+50 
+51   \hyperlink{classns3_1_1ConfigStore}{ConfigStore} inputConfig;
+52   inputConfig.\hyperlink{classns3_1_1ConfigStore_a0a6137574d7c847c3823af8b9d1bb886}{ConfigureDefaults} ();
+53 
+54   \textcolor{comment}{// parse again so you can override default values from the command line}
+55   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+56 
+57   \textcolor{comment}{// Geometry of the scenario (in meters)}
+58   \textcolor{comment}{// Assume squared building}
+59   \textcolor{keywordtype}{double} nodeHeight = 1.5;
+60   \textcolor{keywordtype}{double} roomHeight = 3;
+61   \textcolor{keywordtype}{double} roomLength = 8;
+62   uint32\_t nRooms = std::ceil (std::sqrt (nEnbPerFloor));
+63   uint32\_t nEnb;
+64 
+65   \hyperlink{classns3_1_1Ptr}{Ptr<LteHelper>} lteHelper = CreateObject<LteHelper> ();
+66   \textcolor{comment}{//lteHelper->EnableLogComponents ();}
+67   \textcolor{comment}{//LogComponentEnable ("BuildingsPropagationLossModel", LOG\_LEVEL\_ALL);}
+68   \textcolor{keywordflow}{if} (nFloors == 0)
+69     \{
+70       lteHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"PathlossModel"},
+71                                StringValue (\textcolor{stringliteral}{"ns3::FriisPropagationLossModel"}));
+72       nEnb = nEnbPerFloor;
+73     \}
+74   \textcolor{keywordflow}{else}
+75     \{
+76       lteHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"PathlossModel"},
+77                                StringValue (\textcolor{stringliteral}{"ns3::HybridBuildingsPropagationLossModel"}));
+78       nEnb = nFloors * nEnbPerFloor;
+79     \}
+80 
+81   \textcolor{comment}{// Create Nodes: eNodeB and UE}
+82   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+83   std::vector<NodeContainer> ueNodes;
+84 
+85   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (nEnb);
+86   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < nEnb; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+87     \{
+88       \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNode;
+89       ueNode.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (nUe);
+90       ueNodes.push\_back (ueNode);
+91     \}
+92 
+93   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+94   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+95   std::vector<Vector> enbPosition;
+96   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} positionAlloc = CreateObject<ListPositionAllocator> 
+      ();
+97   \hyperlink{classns3_1_1Ptr}{Ptr<Building>} building;
+98 
+99   \textcolor{keywordflow}{if} (nFloors == 0)
+100     \{
+101       \textcolor{comment}{// Position of eNBs}
+102       uint32\_t plantedEnb = 0;
+103       \textcolor{keywordflow}{for} (uint32\_t row = 0; row < nRooms; row++)
+104         \{
+105           \textcolor{keywordflow}{for} (uint32\_t column = 0; column < nRooms && plantedEnb < nEnbPerFloor; column++, plantedEnb++)
+106             \{
+107               \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} v (roomLength * (column + 0.5), roomLength * (row + 0.5), nodeHeight);
+108               positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (v);
+109               enbPosition.push\_back (v);
+110               mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes.at(plantedEnb));
+111             \}
+112         \}
+113       mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+114       mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+115       BuildingsHelper::Install (enbNodes);
+116 
+117       \textcolor{comment}{// Position of UEs attached to eNB}
+118       \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < nEnb; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+119         \{
+120           \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} posX = CreateObject<UniformRandomVariable> (
+      );
+121           posX->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (enbPosition.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).x - roomLength * 0.5));
+122           posX->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (enbPosition.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).x + roomLength * 0.5));
+123           \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} posY = CreateObject<UniformRandomVariable> (
+      );
+124           posY->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (enbPosition.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).y - roomLength * 0.5));
+125           posY->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (enbPosition.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).y + roomLength * 0.5));
+126           positionAlloc = CreateObject<ListPositionAllocator> ();
+127           \textcolor{keywordflow}{for} (uint32\_t j = 0; j < nUe; j++)
+128             \{
+129               positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (posX->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} (), posY->
+      \hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} (), nodeHeight));
+130               mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+131             \}
+132           mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+133           BuildingsHelper::Install (ueNodes.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+134         \}
+135 
+136     \}
+137   \textcolor{keywordflow}{else}
+138     \{
+139       building = CreateObject<Building> ();
+140       building->SetBoundaries (\hyperlink{classns3_1_1Box}{Box} (0.0, nRooms * roomLength,
+141                                     0.0, nRooms * roomLength,
+142                                     0.0, nFloors* roomHeight));
+143       building->SetBuildingType (Building::Residential);
+144       building->SetExtWallsType (Building::ConcreteWithWindows);
+145       building->SetNFloors (nFloors);
+146       building->SetNRoomsX (nRooms);
+147       building->SetNRoomsY (nRooms);
+148       mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+149       BuildingsHelper::Install (enbNodes);
+150       uint32\_t plantedEnb = 0;
+151       \textcolor{keywordflow}{for} (uint32\_t floor = 0; floor < nFloors; floor++)
+152         \{
+153           uint32\_t plantedEnbPerFloor = 0;
+154           \textcolor{keywordflow}{for} (uint32\_t row = 0; row < nRooms; row++)
+155             \{
+156               \textcolor{keywordflow}{for} (uint32\_t column = 0; column < nRooms && plantedEnbPerFloor < nEnbPerFloor; column++, 
+      plantedEnb++, plantedEnbPerFloor++)
+157                 \{
+158                   \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} v (roomLength * (column + 0.5),
+159                             roomLength * (row + 0.5),
+160                             nodeHeight + roomHeight * floor);
+161                   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (v);
+162                   enbPosition.push\_back (v);
+163                   \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} mmEnb = enbNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (plantedEnb)->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+164                   mmEnb->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (v);
+165 
+166                   \textcolor{comment}{// Positioning UEs attached to eNB}
+167                   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes.at(plantedEnb));
+168                   BuildingsHelper::Install (ueNodes.at(plantedEnb));
+169                   \textcolor{keywordflow}{for} (uint32\_t ue = 0; ue < nUe; ue++)
+170                     \{
+171                       \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} mmUe = ueNodes.at(plantedEnb).Get (ue)->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+172                       \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} vUe (v.x, v.y, v.z);
+173                       mmUe->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (vUe);
+174                     \}
+175                 \}
+176             \}
+177         \}
+178     \}
+179 
+180 
+181   \textcolor{comment}{// Create Devices and install them in the Nodes (eNB and UE)}
+182   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbDevs;
+183   std::vector<NetDeviceContainer> ueDevs;
+184   enbDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (enbNodes);
+185   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < nEnb; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+186     \{
+187       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueDev = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (ueNodes.at(
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+188       ueDevs.push\_back (ueDev);
+189       lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (ueDev, enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+190       \textcolor{keyword}{enum} \hyperlink{structns3_1_1EpsBearer_aecf0c67109c5eb4ec0b07226fff5885e}{EpsBearer::Qci} q = EpsBearer::GBR\_CONV\_VOICE;
+191       \hyperlink{structns3_1_1EpsBearer}{EpsBearer} bearer (q);
+192       lteHelper->\hyperlink{classns3_1_1LteHelper_ac896e16cf162e4beeaa292d39ab1b700}{ActivateDataRadioBearer} (ueDev, bearer);
+193     \}
+194 
+195 
+196   BuildingsHelper::MakeMobilityModelConsistent ();
+197 
+198   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (simTime));
+199   lteHelper->\hyperlink{classns3_1_1LteHelper_aeb70fd96f1c58806a5b7ad9f68a795e0}{EnableTraces} ();
+200 
+201   Simulator::Run ();
+202 
+203   \textcolor{comment}{/*GtkConfigStore config;}
+204 \textcolor{comment}{  config.ConfigureAttributes ();*/}
+205 
+206   Simulator::Destroy ();
+207   \textcolor{keywordflow}{return} 0;
+208 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

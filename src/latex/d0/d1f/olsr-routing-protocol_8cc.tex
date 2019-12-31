@@ -1,0 +1,287 @@
+\hypertarget{olsr-routing-protocol_8cc}{}\section{olsr/model/olsr-\/routing-\/protocol.cc File Reference}
+\label{olsr-routing-protocol_8cc}\index{olsr/model/olsr-\/routing-\/protocol.\+cc@{olsr/model/olsr-\/routing-\/protocol.\+cc}}
+{\ttfamily \#include \char`\"{}olsr-\/routing-\/protocol.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/socket-\/factory.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/udp-\/socket-\/factory.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/simulator.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/names.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/inet-\/socket-\/address.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/routing-\/protocol.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/routing-\/table-\/entry.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/route.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/boolean.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/uinteger.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/enum.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/trace-\/source-\/accessor.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/header.\+h\char`\"{}}\\*
+Include dependency graph for olsr-\/routing-\/protocol.cc\+:
+% FIG 0
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacens3}{ns3}
+\begin{DoxyCompactList}\small\item\em Here are defined all data structures needed by an O\+L\+SR node. \end{DoxyCompactList}\item 
+ \hyperlink{namespacens3_1_1olsr}{ns3\+::olsr}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_abe50035652d407c40bdaef78214c4955}{N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT}~\hyperlink{loss__OH__large__cities__urban_8m_ac77b6cfa3068152087725fe54b4ae8c8}{if} (Get\+Object$<$Node$>$ ()) \{ std\+::clog $<$$<$ \char`\"{}\mbox{[}node \char`\"{} $<$$<$ Get\+Object$<$Node$>$ ()-\/$>$Get\+Id () $<$$<$ \char`\"{}\mbox{]} \char`\"{}; \}
+\begin{DoxyCompactList}\small\item\em Implementation of O\+L\+SR agent and related classes. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_ad0a00c3386c4a24278b3b710ae798220}{D\+E\+L\+AY}(time)
+\begin{DoxyCompactList}\small\item\em Gets the delay between a given time and the current time. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_abd4f5d49ab0d9070519757a8f5e8b86d}{O\+L\+S\+R\+\_\+\+R\+E\+F\+R\+E\+S\+H\+\_\+\+I\+N\+T\+E\+R\+V\+AL}~m\+\_\+hello\+Interval
+\begin{DoxyCompactList}\small\item\em Period at which a node must cite every link and every neighbor. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a32428f0b560f93c0a160b27181704faa}{O\+L\+S\+R\+\_\+\+N\+E\+I\+G\+H\+B\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}~Time (3 $\ast$ \hyperlink{olsr-routing-protocol_8cc_abd4f5d49ab0d9070519757a8f5e8b86d}{O\+L\+S\+R\+\_\+\+R\+E\+F\+R\+E\+S\+H\+\_\+\+I\+N\+T\+E\+R\+V\+AL})
+\begin{DoxyCompactList}\small\item\em Neighbor holding time. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a52dd6b4ef360db0602f9cfbc820e3402}{O\+L\+S\+R\+\_\+\+T\+O\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}~Time (3 $\ast$ m\+\_\+tc\+Interval)
+\begin{DoxyCompactList}\small\item\em Top holding time. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_ab108121273061d42abc9819edccc06d2}{O\+L\+S\+R\+\_\+\+D\+U\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}~Seconds (30)
+\begin{DoxyCompactList}\small\item\em Dup holding time. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a823aeb2161a33758b6e99c3d1c00e7fa}{O\+L\+S\+R\+\_\+\+M\+I\+D\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}~Time (3 $\ast$ m\+\_\+mid\+Interval)
+\begin{DoxyCompactList}\small\item\em M\+ID holding time. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a223d875fc1256e80f16130ae9d74be5f}{O\+L\+S\+R\+\_\+\+H\+N\+A\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}~Time (3 $\ast$ m\+\_\+hna\+Interval)
+\begin{DoxyCompactList}\small\item\em H\+NA holding time. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a5c8faefa61edbdfbca0858c3cc09e463}{O\+L\+S\+R\+\_\+\+U\+N\+S\+P\+E\+C\+\_\+\+L\+I\+NK}~0
+\begin{DoxyCompactList}\small\item\em Unspecified link type. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a8ebf1daea9834b2e4dfb42ca05b05f4a}{O\+L\+S\+R\+\_\+\+A\+S\+Y\+M\+\_\+\+L\+I\+NK}~1
+\begin{DoxyCompactList}\small\item\em Asymmetric link type. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_aa7acefeda0e22f22d9ca6b9f445859d7}{O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+L\+I\+NK}~2
+\begin{DoxyCompactList}\small\item\em Symmetric link type. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_ab230470cf0b3270a8bba72a05501dd8d}{O\+L\+S\+R\+\_\+\+L\+O\+S\+T\+\_\+\+L\+I\+NK}~3
+\begin{DoxyCompactList}\small\item\em Lost link type. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a7ff690f7463019aec83c1f0edd911034}{O\+L\+S\+R\+\_\+\+N\+O\+T\+\_\+\+N\+E\+I\+GH}~0
+\begin{DoxyCompactList}\small\item\em Not neighbor type. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a46286c316da9922151b354295e71d35a}{O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+N\+E\+I\+GH}~1
+\begin{DoxyCompactList}\small\item\em Symmetric neighbor type. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a08fbe0b4c74b944f681630df4fa0fd82}{O\+L\+S\+R\+\_\+\+M\+P\+R\+\_\+\+N\+E\+I\+GH}~2
+\begin{DoxyCompactList}\small\item\em Asymmetric neighbor type. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a146d2c103abd49bdfad44b4424769696}{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+N\+E\+V\+ER}~0
+\begin{DoxyCompactList}\small\item\em Willingness for forwarding packets from other nodes\+: never. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_af5179e8ea62927c15150f279ce4bf0c7}{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+L\+OW}~1
+\begin{DoxyCompactList}\small\item\em Willingness for forwarding packets from other nodes\+: low. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a0b87d49ad8114eabe8dd6eecfb6858e1}{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+D\+E\+F\+A\+U\+LT}~3
+\begin{DoxyCompactList}\small\item\em Willingness for forwarding packets from other nodes\+: medium. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_ac18eca80c0f239fb80d32461d51e3644}{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+H\+I\+GH}~6
+\begin{DoxyCompactList}\small\item\em Willingness for forwarding packets from other nodes\+: high. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a47254d140ed26351d672c338a8cda435}{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+A\+L\+W\+A\+YS}~7
+\begin{DoxyCompactList}\small\item\em Willingness for forwarding packets from other nodes\+: always. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_ab0b9b41284db0de1040db520f6ac8f74}{O\+L\+S\+R\+\_\+\+M\+A\+X\+J\+I\+T\+T\+ER}~(m\+\_\+hello\+Interval.\+Get\+Seconds () / 4)
+\begin{DoxyCompactList}\small\item\em Maximum allowed jitter. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a33c0bdae6376cc58e151fdd28db2a33b}{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+S\+E\+Q\+\_\+\+N\+UM}~65535
+\begin{DoxyCompactList}\small\item\em Maximum allowed sequence number. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a06863e04dddc5f7fbbedb516974df4b3}{J\+I\+T\+T\+ER}~(Seconds (m\+\_\+uniform\+Random\+Variable-\/$>$Get\+Value (0, \hyperlink{olsr-routing-protocol_8cc_ab0b9b41284db0de1040db520f6ac8f74}{O\+L\+S\+R\+\_\+\+M\+A\+X\+J\+I\+T\+T\+ER})))
+\begin{DoxyCompactList}\small\item\em Random number between \mbox{[}0-\/\+O\+L\+S\+R\+\_\+\+M\+A\+X\+J\+I\+T\+T\+ER\mbox{]} used to jitter O\+L\+SR packet transmission. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_a56099fb2a14f4a74c5e155c13e9ef8db}{O\+L\+S\+R\+\_\+\+P\+O\+R\+T\+\_\+\+N\+U\+M\+B\+ER}~698
+\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_acec0137086044d30a83596f39122a0f9}{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+M\+S\+GS}~64
+\begin{DoxyCompactList}\small\item\em Maximum number of messages per packet. \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_af0e465a86f67e97e65dafca114fdceb0}{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+H\+E\+L\+L\+OS}~12
+\begin{DoxyCompactList}\small\item\em Maximum number of hellos per message (4 possible link types $\ast$ 3 possible nb types). \end{DoxyCompactList}\item 
+\#define \hyperlink{olsr-routing-protocol_8cc_ad247b44c5f6cdcf4c8054d0b79db4e3b}{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+A\+D\+D\+RS}~64
+\begin{DoxyCompactList}\small\item\em Maximum number of addresses advertised on a message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacens3_a36c16dfc1399ed2266bb0ddabe815d73}{ns3\+::\+N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Olsr\+Routing\+Protocol\char`\"{})
+\item 
+\hyperlink{namespacens3_1_1olsr_adc69ba20cb6650fc9e1659c4d2c074d6}{ns3\+::olsr\+::\+N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED} (Routing\+Protocol)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!D\+E\+L\+AY@{D\+E\+L\+AY}}
+\index{D\+E\+L\+AY@{D\+E\+L\+AY}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{D\+E\+L\+AY}{DELAY}}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+L\+AY(
+\begin{DoxyParamCaption}
+\item[{}]{time}
+\end{DoxyParamCaption}
+)}\hypertarget{olsr-routing-protocol_8cc_ad0a00c3386c4a24278b3b710ae798220}{}\label{olsr-routing-protocol_8cc_ad0a00c3386c4a24278b3b710ae798220}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+(((time) < (\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ())) ? \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.000001) : \(\backslash\)
+                     (time - Simulator::\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Now} () + \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.000001)))
+\end{DoxyCode}
+
+
+Gets the delay between a given time and the current time. 
+
+If given time is previous to the current one, then this macro returns a number close to 0. This is used for scheduling events at a certain moment. \index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!J\+I\+T\+T\+ER@{J\+I\+T\+T\+ER}}
+\index{J\+I\+T\+T\+ER@{J\+I\+T\+T\+ER}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{J\+I\+T\+T\+ER}{JITTER}}]{\setlength{\rightskip}{0pt plus 5cm}\#define J\+I\+T\+T\+ER~(Seconds (m\+\_\+uniform\+Random\+Variable-\/$>$Get\+Value (0, {\bf O\+L\+S\+R\+\_\+\+M\+A\+X\+J\+I\+T\+T\+ER})))}\hypertarget{olsr-routing-protocol_8cc_a06863e04dddc5f7fbbedb516974df4b3}{}\label{olsr-routing-protocol_8cc_a06863e04dddc5f7fbbedb516974df4b3}
+
+
+Random number between \mbox{[}0-\/\+O\+L\+S\+R\+\_\+\+M\+A\+X\+J\+I\+T\+T\+ER\mbox{]} used to jitter O\+L\+SR packet transmission. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT@{N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT@{N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT}{NS_LOG_APPEND_CONTEXT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT~{\bf if} (Get\+Object$<$Node$>$ ()) \{ std\+::clog $<$$<$ \char`\"{}\mbox{[}node \char`\"{} $<$$<$ Get\+Object$<$Node$>$ ()-\/$>$Get\+Id () $<$$<$ \char`\"{}\mbox{]} \char`\"{}; \}}\hypertarget{olsr-routing-protocol_8cc_abe50035652d407c40bdaef78214c4955}{}\label{olsr-routing-protocol_8cc_abe50035652d407c40bdaef78214c4955}
+
+
+Implementation of O\+L\+SR agent and related classes. 
+
+This is the main file of this software because O\+L\+SR\textquotesingle{}s behaviour is implemented here. \index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+A\+S\+Y\+M\+\_\+\+L\+I\+NK@{O\+L\+S\+R\+\_\+\+A\+S\+Y\+M\+\_\+\+L\+I\+NK}}
+\index{O\+L\+S\+R\+\_\+\+A\+S\+Y\+M\+\_\+\+L\+I\+NK@{O\+L\+S\+R\+\_\+\+A\+S\+Y\+M\+\_\+\+L\+I\+NK}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+A\+S\+Y\+M\+\_\+\+L\+I\+NK}{OLSR_ASYM_LINK}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+A\+S\+Y\+M\+\_\+\+L\+I\+NK~1}\hypertarget{olsr-routing-protocol_8cc_a8ebf1daea9834b2e4dfb42ca05b05f4a}{}\label{olsr-routing-protocol_8cc_a8ebf1daea9834b2e4dfb42ca05b05f4a}
+
+
+Asymmetric link type. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+D\+U\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME@{O\+L\+S\+R\+\_\+\+D\+U\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}}
+\index{O\+L\+S\+R\+\_\+\+D\+U\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME@{O\+L\+S\+R\+\_\+\+D\+U\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+D\+U\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}{OLSR_DUP_HOLD_TIME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+D\+U\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME~Seconds (30)}\hypertarget{olsr-routing-protocol_8cc_ab108121273061d42abc9819edccc06d2}{}\label{olsr-routing-protocol_8cc_ab108121273061d42abc9819edccc06d2}
+
+
+Dup holding time. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+H\+N\+A\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME@{O\+L\+S\+R\+\_\+\+H\+N\+A\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}}
+\index{O\+L\+S\+R\+\_\+\+H\+N\+A\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME@{O\+L\+S\+R\+\_\+\+H\+N\+A\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+H\+N\+A\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}{OLSR_HNA_HOLD_TIME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+H\+N\+A\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME~Time (3 $\ast$ m\+\_\+hna\+Interval)}\hypertarget{olsr-routing-protocol_8cc_a223d875fc1256e80f16130ae9d74be5f}{}\label{olsr-routing-protocol_8cc_a223d875fc1256e80f16130ae9d74be5f}
+
+
+H\+NA holding time. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+L\+O\+S\+T\+\_\+\+L\+I\+NK@{O\+L\+S\+R\+\_\+\+L\+O\+S\+T\+\_\+\+L\+I\+NK}}
+\index{O\+L\+S\+R\+\_\+\+L\+O\+S\+T\+\_\+\+L\+I\+NK@{O\+L\+S\+R\+\_\+\+L\+O\+S\+T\+\_\+\+L\+I\+NK}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+L\+O\+S\+T\+\_\+\+L\+I\+NK}{OLSR_LOST_LINK}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+L\+O\+S\+T\+\_\+\+L\+I\+NK~3}\hypertarget{olsr-routing-protocol_8cc_ab230470cf0b3270a8bba72a05501dd8d}{}\label{olsr-routing-protocol_8cc_ab230470cf0b3270a8bba72a05501dd8d}
+
+
+Lost link type. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+A\+D\+D\+RS@{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+A\+D\+D\+RS}}
+\index{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+A\+D\+D\+RS@{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+A\+D\+D\+RS}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+A\+D\+D\+RS}{OLSR_MAX_ADDRS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+A\+D\+D\+RS~64}\hypertarget{olsr-routing-protocol_8cc_ad247b44c5f6cdcf4c8054d0b79db4e3b}{}\label{olsr-routing-protocol_8cc_ad247b44c5f6cdcf4c8054d0b79db4e3b}
+
+
+Maximum number of addresses advertised on a message. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+H\+E\+L\+L\+OS@{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+H\+E\+L\+L\+OS}}
+\index{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+H\+E\+L\+L\+OS@{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+H\+E\+L\+L\+OS}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+H\+E\+L\+L\+OS}{OLSR_MAX_HELLOS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+H\+E\+L\+L\+OS~12}\hypertarget{olsr-routing-protocol_8cc_af0e465a86f67e97e65dafca114fdceb0}{}\label{olsr-routing-protocol_8cc_af0e465a86f67e97e65dafca114fdceb0}
+
+
+Maximum number of hellos per message (4 possible link types $\ast$ 3 possible nb types). 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+M\+S\+GS@{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+M\+S\+GS}}
+\index{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+M\+S\+GS@{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+M\+S\+GS}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+M\+S\+GS}{OLSR_MAX_MSGS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+M\+S\+GS~64}\hypertarget{olsr-routing-protocol_8cc_acec0137086044d30a83596f39122a0f9}{}\label{olsr-routing-protocol_8cc_acec0137086044d30a83596f39122a0f9}
+
+
+Maximum number of messages per packet. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+S\+E\+Q\+\_\+\+N\+UM@{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+S\+E\+Q\+\_\+\+N\+UM}}
+\index{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+S\+E\+Q\+\_\+\+N\+UM@{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+S\+E\+Q\+\_\+\+N\+UM}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+S\+E\+Q\+\_\+\+N\+UM}{OLSR_MAX_SEQ_NUM}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+M\+A\+X\+\_\+\+S\+E\+Q\+\_\+\+N\+UM~65535}\hypertarget{olsr-routing-protocol_8cc_a33c0bdae6376cc58e151fdd28db2a33b}{}\label{olsr-routing-protocol_8cc_a33c0bdae6376cc58e151fdd28db2a33b}
+
+
+Maximum allowed sequence number. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+M\+A\+X\+J\+I\+T\+T\+ER@{O\+L\+S\+R\+\_\+\+M\+A\+X\+J\+I\+T\+T\+ER}}
+\index{O\+L\+S\+R\+\_\+\+M\+A\+X\+J\+I\+T\+T\+ER@{O\+L\+S\+R\+\_\+\+M\+A\+X\+J\+I\+T\+T\+ER}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+M\+A\+X\+J\+I\+T\+T\+ER}{OLSR_MAXJITTER}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+M\+A\+X\+J\+I\+T\+T\+ER~(m\+\_\+hello\+Interval.\+Get\+Seconds () / 4)}\hypertarget{olsr-routing-protocol_8cc_ab0b9b41284db0de1040db520f6ac8f74}{}\label{olsr-routing-protocol_8cc_ab0b9b41284db0de1040db520f6ac8f74}
+
+
+Maximum allowed jitter. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+M\+I\+D\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME@{O\+L\+S\+R\+\_\+\+M\+I\+D\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}}
+\index{O\+L\+S\+R\+\_\+\+M\+I\+D\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME@{O\+L\+S\+R\+\_\+\+M\+I\+D\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+M\+I\+D\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}{OLSR_MID_HOLD_TIME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+M\+I\+D\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME~Time (3 $\ast$ m\+\_\+mid\+Interval)}\hypertarget{olsr-routing-protocol_8cc_a823aeb2161a33758b6e99c3d1c00e7fa}{}\label{olsr-routing-protocol_8cc_a823aeb2161a33758b6e99c3d1c00e7fa}
+
+
+M\+ID holding time. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+M\+P\+R\+\_\+\+N\+E\+I\+GH@{O\+L\+S\+R\+\_\+\+M\+P\+R\+\_\+\+N\+E\+I\+GH}}
+\index{O\+L\+S\+R\+\_\+\+M\+P\+R\+\_\+\+N\+E\+I\+GH@{O\+L\+S\+R\+\_\+\+M\+P\+R\+\_\+\+N\+E\+I\+GH}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+M\+P\+R\+\_\+\+N\+E\+I\+GH}{OLSR_MPR_NEIGH}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+M\+P\+R\+\_\+\+N\+E\+I\+GH~2}\hypertarget{olsr-routing-protocol_8cc_a08fbe0b4c74b944f681630df4fa0fd82}{}\label{olsr-routing-protocol_8cc_a08fbe0b4c74b944f681630df4fa0fd82}
+
+
+Asymmetric neighbor type. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+N\+E\+I\+G\+H\+B\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME@{O\+L\+S\+R\+\_\+\+N\+E\+I\+G\+H\+B\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}}
+\index{O\+L\+S\+R\+\_\+\+N\+E\+I\+G\+H\+B\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME@{O\+L\+S\+R\+\_\+\+N\+E\+I\+G\+H\+B\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+N\+E\+I\+G\+H\+B\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}{OLSR_NEIGHB_HOLD_TIME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+N\+E\+I\+G\+H\+B\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME~Time (3 $\ast$ {\bf O\+L\+S\+R\+\_\+\+R\+E\+F\+R\+E\+S\+H\+\_\+\+I\+N\+T\+E\+R\+V\+AL})}\hypertarget{olsr-routing-protocol_8cc_a32428f0b560f93c0a160b27181704faa}{}\label{olsr-routing-protocol_8cc_a32428f0b560f93c0a160b27181704faa}
+
+
+Neighbor holding time. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+N\+O\+T\+\_\+\+N\+E\+I\+GH@{O\+L\+S\+R\+\_\+\+N\+O\+T\+\_\+\+N\+E\+I\+GH}}
+\index{O\+L\+S\+R\+\_\+\+N\+O\+T\+\_\+\+N\+E\+I\+GH@{O\+L\+S\+R\+\_\+\+N\+O\+T\+\_\+\+N\+E\+I\+GH}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+N\+O\+T\+\_\+\+N\+E\+I\+GH}{OLSR_NOT_NEIGH}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+N\+O\+T\+\_\+\+N\+E\+I\+GH~0}\hypertarget{olsr-routing-protocol_8cc_a7ff690f7463019aec83c1f0edd911034}{}\label{olsr-routing-protocol_8cc_a7ff690f7463019aec83c1f0edd911034}
+
+
+Not neighbor type. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+P\+O\+R\+T\+\_\+\+N\+U\+M\+B\+ER@{O\+L\+S\+R\+\_\+\+P\+O\+R\+T\+\_\+\+N\+U\+M\+B\+ER}}
+\index{O\+L\+S\+R\+\_\+\+P\+O\+R\+T\+\_\+\+N\+U\+M\+B\+ER@{O\+L\+S\+R\+\_\+\+P\+O\+R\+T\+\_\+\+N\+U\+M\+B\+ER}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+P\+O\+R\+T\+\_\+\+N\+U\+M\+B\+ER}{OLSR_PORT_NUMBER}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+P\+O\+R\+T\+\_\+\+N\+U\+M\+B\+ER~698}\hypertarget{olsr-routing-protocol_8cc_a56099fb2a14f4a74c5e155c13e9ef8db}{}\label{olsr-routing-protocol_8cc_a56099fb2a14f4a74c5e155c13e9ef8db}
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+R\+E\+F\+R\+E\+S\+H\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{O\+L\+S\+R\+\_\+\+R\+E\+F\+R\+E\+S\+H\+\_\+\+I\+N\+T\+E\+R\+V\+AL}}
+\index{O\+L\+S\+R\+\_\+\+R\+E\+F\+R\+E\+S\+H\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{O\+L\+S\+R\+\_\+\+R\+E\+F\+R\+E\+S\+H\+\_\+\+I\+N\+T\+E\+R\+V\+AL}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+R\+E\+F\+R\+E\+S\+H\+\_\+\+I\+N\+T\+E\+R\+V\+AL}{OLSR_REFRESH_INTERVAL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+R\+E\+F\+R\+E\+S\+H\+\_\+\+I\+N\+T\+E\+R\+V\+AL~m\+\_\+hello\+Interval}\hypertarget{olsr-routing-protocol_8cc_abd4f5d49ab0d9070519757a8f5e8b86d}{}\label{olsr-routing-protocol_8cc_abd4f5d49ab0d9070519757a8f5e8b86d}
+
+
+Period at which a node must cite every link and every neighbor. 
+
+We only use this value in order to define O\+L\+S\+R\+\_\+\+N\+E\+I\+G\+H\+B\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME. \index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+L\+I\+NK@{O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+L\+I\+NK}}
+\index{O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+L\+I\+NK@{O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+L\+I\+NK}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+L\+I\+NK}{OLSR_SYM_LINK}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+L\+I\+NK~2}\hypertarget{olsr-routing-protocol_8cc_aa7acefeda0e22f22d9ca6b9f445859d7}{}\label{olsr-routing-protocol_8cc_aa7acefeda0e22f22d9ca6b9f445859d7}
+
+
+Symmetric link type. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+N\+E\+I\+GH@{O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+N\+E\+I\+GH}}
+\index{O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+N\+E\+I\+GH@{O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+N\+E\+I\+GH}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+N\+E\+I\+GH}{OLSR_SYM_NEIGH}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+S\+Y\+M\+\_\+\+N\+E\+I\+GH~1}\hypertarget{olsr-routing-protocol_8cc_a46286c316da9922151b354295e71d35a}{}\label{olsr-routing-protocol_8cc_a46286c316da9922151b354295e71d35a}
+
+
+Symmetric neighbor type. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+T\+O\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME@{O\+L\+S\+R\+\_\+\+T\+O\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}}
+\index{O\+L\+S\+R\+\_\+\+T\+O\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME@{O\+L\+S\+R\+\_\+\+T\+O\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+T\+O\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME}{OLSR_TOP_HOLD_TIME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+T\+O\+P\+\_\+\+H\+O\+L\+D\+\_\+\+T\+I\+ME~Time (3 $\ast$ m\+\_\+tc\+Interval)}\hypertarget{olsr-routing-protocol_8cc_a52dd6b4ef360db0602f9cfbc820e3402}{}\label{olsr-routing-protocol_8cc_a52dd6b4ef360db0602f9cfbc820e3402}
+
+
+Top holding time. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+U\+N\+S\+P\+E\+C\+\_\+\+L\+I\+NK@{O\+L\+S\+R\+\_\+\+U\+N\+S\+P\+E\+C\+\_\+\+L\+I\+NK}}
+\index{O\+L\+S\+R\+\_\+\+U\+N\+S\+P\+E\+C\+\_\+\+L\+I\+NK@{O\+L\+S\+R\+\_\+\+U\+N\+S\+P\+E\+C\+\_\+\+L\+I\+NK}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+U\+N\+S\+P\+E\+C\+\_\+\+L\+I\+NK}{OLSR_UNSPEC_LINK}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+U\+N\+S\+P\+E\+C\+\_\+\+L\+I\+NK~0}\hypertarget{olsr-routing-protocol_8cc_a5c8faefa61edbdfbca0858c3cc09e463}{}\label{olsr-routing-protocol_8cc_a5c8faefa61edbdfbca0858c3cc09e463}
+
+
+Unspecified link type. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+A\+L\+W\+A\+YS@{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+A\+L\+W\+A\+YS}}
+\index{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+A\+L\+W\+A\+YS@{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+A\+L\+W\+A\+YS}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+A\+L\+W\+A\+YS}{OLSR_WILL_ALWAYS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+A\+L\+W\+A\+YS~7}\hypertarget{olsr-routing-protocol_8cc_a47254d140ed26351d672c338a8cda435}{}\label{olsr-routing-protocol_8cc_a47254d140ed26351d672c338a8cda435}
+
+
+Willingness for forwarding packets from other nodes\+: always. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+D\+E\+F\+A\+U\+LT@{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+D\+E\+F\+A\+U\+LT}}
+\index{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+D\+E\+F\+A\+U\+LT@{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+D\+E\+F\+A\+U\+LT}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+D\+E\+F\+A\+U\+LT}{OLSR_WILL_DEFAULT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+D\+E\+F\+A\+U\+LT~3}\hypertarget{olsr-routing-protocol_8cc_a0b87d49ad8114eabe8dd6eecfb6858e1}{}\label{olsr-routing-protocol_8cc_a0b87d49ad8114eabe8dd6eecfb6858e1}
+
+
+Willingness for forwarding packets from other nodes\+: medium. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+H\+I\+GH@{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+H\+I\+GH}}
+\index{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+H\+I\+GH@{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+H\+I\+GH}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+H\+I\+GH}{OLSR_WILL_HIGH}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+H\+I\+GH~6}\hypertarget{olsr-routing-protocol_8cc_ac18eca80c0f239fb80d32461d51e3644}{}\label{olsr-routing-protocol_8cc_ac18eca80c0f239fb80d32461d51e3644}
+
+
+Willingness for forwarding packets from other nodes\+: high. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+L\+OW@{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+L\+OW}}
+\index{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+L\+OW@{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+L\+OW}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+L\+OW}{OLSR_WILL_LOW}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+L\+OW~1}\hypertarget{olsr-routing-protocol_8cc_af5179e8ea62927c15150f279ce4bf0c7}{}\label{olsr-routing-protocol_8cc_af5179e8ea62927c15150f279ce4bf0c7}
+
+
+Willingness for forwarding packets from other nodes\+: low. 
+
+\index{olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}!O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+N\+E\+V\+ER@{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+N\+E\+V\+ER}}
+\index{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+N\+E\+V\+ER@{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+N\+E\+V\+ER}!olsr-\/routing-\/protocol.\+cc@{olsr-\/routing-\/protocol.\+cc}}
+\subsubsection[{\texorpdfstring{O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+N\+E\+V\+ER}{OLSR_WILL_NEVER}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+L\+S\+R\+\_\+\+W\+I\+L\+L\+\_\+\+N\+E\+V\+ER~0}\hypertarget{olsr-routing-protocol_8cc_a146d2c103abd49bdfad44b4424769696}{}\label{olsr-routing-protocol_8cc_a146d2c103abd49bdfad44b4424769696}
+
+
+Willingness for forwarding packets from other nodes\+: never. 
+

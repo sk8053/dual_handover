@@ -1,0 +1,211 @@
+\hypertarget{perf-io_8cc}{}\section{test/perf/perf-\/io.cc File Reference}
+\label{perf-io_8cc}\index{test/perf/perf-\/io.\+cc@{test/perf/perf-\/io.\+cc}}
+{\ttfamily \#include $<$ctime$>$}\\*
+{\ttfamily \#include $<$sys/time.\+h$>$}\\*
+{\ttfamily \#include $<$cstdio$>$}\\*
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/abort.\+h\char`\"{}}\\*
+Include dependency graph for perf-\/io.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \hyperlink{perf-io_8cc_af641cbb1b31d6238aa887f2bea43864b}{Get\+Realtime\+In\+Ns} (void)
+\item 
+void \hyperlink{perf-io_8cc_a0f69b54561b690d3307a394602cbbc87}{Perf\+File} (F\+I\+LE $\ast$file, uint32\+\_\+t \hyperlink{lte__link__budget__x2__handover__measures_8m_abdb05bc5a064cf642a06c83b3392f148}{n}, const char $\ast$buffer, uint32\+\_\+t size)
+\item 
+void \hyperlink{perf-io_8cc_a56edeee167f06792d972f3801d12b6c9}{Perf\+Stream} (ostream \&stream, uint32\+\_\+t \hyperlink{lte__link__budget__x2__handover__measures_8m_abdb05bc5a064cf642a06c83b3392f148}{n}, const char $\ast$buffer, uint32\+\_\+t size)
+\item 
+int \hyperlink{perf-io_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const uint64\+\_\+t \hyperlink{perf-io_8cc_a68163ff157df4ce1da3deb9c8e8caf0a}{U\+S\+\_\+\+P\+E\+R\+\_\+\+NS} = (uint64\+\_\+t)1000
+\item 
+static const uint64\+\_\+t \hyperlink{perf-io_8cc_ae9bec129e5ccb16d3354f8c86275ddce}{U\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC} = (uint64\+\_\+t)1000000
+\item 
+static const uint64\+\_\+t \hyperlink{perf-io_8cc_a479bcca5923196d202ddc97a0c52ccfc}{N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC} = (uint64\+\_\+t)1000000000
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{perf-\/io.\+cc@{perf-\/io.\+cc}!Get\+Realtime\+In\+Ns@{Get\+Realtime\+In\+Ns}}
+\index{Get\+Realtime\+In\+Ns@{Get\+Realtime\+In\+Ns}!perf-\/io.\+cc@{perf-\/io.\+cc}}
+\subsubsection[{\texorpdfstring{Get\+Realtime\+In\+Ns(void)}{GetRealtimeInNs(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t Get\+Realtime\+In\+Ns (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{perf-io_8cc_af641cbb1b31d6238aa887f2bea43864b}{}\label{perf-io_8cc_af641cbb1b31d6238aa887f2bea43864b}
+
+\begin{DoxyCode}
+37 \{
+38   \textcolor{keyword}{struct }timeval tv;
+39   gettimeofday (&tv, NULL);
+40 
+41   uint64\_t nsResult = tv.tv\_sec * \hyperlink{perf-io_8cc_a479bcca5923196d202ddc97a0c52ccfc}{NS\_PER\_SEC} + tv.tv\_usec * \hyperlink{perf-io_8cc_a68163ff157df4ce1da3deb9c8e8caf0a}{US\_PER\_NS};
+42   \textcolor{keywordflow}{return} nsResult;
+43 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{perf-\/io.\+cc@{perf-\/io.\+cc}!main@{main}}
+\index{main@{main}!perf-\/io.\+cc@{perf-\/io.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{perf-io_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{perf-io_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+69 \{
+70   uint32\_t \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n} = 100000;
+71   uint32\_t iter = 50;
+72   \textcolor{keywordtype}{bool} doStream = \textcolor{keyword}{false};
+73   \textcolor{keywordtype}{bool} binmode = \textcolor{keyword}{true};
+74  
+75 
+76   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+77   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"n"}, \textcolor{stringliteral}{"How many times to write (defaults to 100000"}, n);
+78   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"iter"}, \textcolor{stringliteral}{"How many times to run the test looking for a min (defaults to 50)"}, iter);
+79   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"doStream"}, \textcolor{stringliteral}{"Run the C++ I/O benchmark otherwise the C I/O "}, doStream);
+80   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"binmode"}, \textcolor{stringliteral}{"Select binary mode for the C++ I/O benchmark (defaults to true)"}, 
+      binmode);
+81   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+82 
+83   uint64\_t result = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::numeric\_limits<uint64\_t>::max} ();
+84 
+85   \textcolor{keywordtype}{char} buffer[1024];
+86 
+87   \textcolor{keywordflow}{if} (doStream)
+88     \{
+89       \textcolor{comment}{//}
+90       \textcolor{comment}{// This will probably run on a machine doing other things.  Run it some}
+91       \textcolor{comment}{// relatively large number of times and try to find a minimum, which}
+92       \textcolor{comment}{// will hopefully represent a time when it runs free of interference.}
+93       \textcolor{comment}{//}
+94       \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < iter; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+95         \{
+96           ofstream stream;
+97           \textcolor{keywordflow}{if} (binmode)
+98             \{
+99               stream.open (\textcolor{stringliteral}{"streamtest"}, std::ios\_base::binary | std::ios\_base::out);
+100             \}
+101           \textcolor{keywordflow}{else}
+102             \{
+103               stream.open (\textcolor{stringliteral}{"streamtest"}, std::ios\_base::out);
+104             \}
+105 
+106           uint64\_t \hyperlink{namespacevisualizer_1_1core_a2a35e5d8a34af358b508dac8635754e0}{start} = \hyperlink{perf-io_8cc_af641cbb1b31d6238aa887f2bea43864b}{GetRealtimeInNs} ();
+107           \hyperlink{perf-io_8cc_a56edeee167f06792d972f3801d12b6c9}{PerfStream} (stream, n, buffer, 1024);
+108           uint64\_t et = \hyperlink{perf-io_8cc_af641cbb1b31d6238aa887f2bea43864b}{GetRealtimeInNs} () - \hyperlink{namespacevisualizer_1_1core_a2a35e5d8a34af358b508dac8635754e0}{start};
+109           result = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min} (result, et);
+110           stream.close ();
+111           std::cout << \textcolor{stringliteral}{"."}; std::cout.flush ();
+112         \}
+113       cout << std::endl;
+114     \}
+115   \textcolor{keywordflow}{else}
+116     \{
+117       \textcolor{comment}{//}
+118       \textcolor{comment}{// This will probably run on a machine doing other things.  Run it some}
+119       \textcolor{comment}{// relatively large number of times and try to find a minimum, which}
+120       \textcolor{comment}{// will hopefully represent a time when it runs free of interference.}
+121       \textcolor{comment}{//}
+122       \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < iter; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+123         \{
+124           FILE *file = fopen (\textcolor{stringliteral}{"filetest"}, \textcolor{stringliteral}{"w"});
+125 
+126           uint64\_t start = \hyperlink{perf-io_8cc_af641cbb1b31d6238aa887f2bea43864b}{GetRealtimeInNs} ();
+127           \hyperlink{perf-io_8cc_a0f69b54561b690d3307a394602cbbc87}{PerfFile} (file, n, buffer, 1024);
+128           uint64\_t et = \hyperlink{perf-io_8cc_af641cbb1b31d6238aa887f2bea43864b}{GetRealtimeInNs} () - \hyperlink{namespacevisualizer_1_1core_a2a35e5d8a34af358b508dac8635754e0}{start};
+129           result = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (result, et);
+130           fclose (file);
+131           file = 0;
+132           std::cout << \textcolor{stringliteral}{"."}; std::cout.flush ();
+133         \}
+134       std::cout << std::endl;
+135     \}
+136   std::cout << argv[0] << \textcolor{stringliteral}{": "} << result << \textcolor{stringliteral}{"ns"} << std::endl;
+137 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{perf-\/io.\+cc@{perf-\/io.\+cc}!Perf\+File@{Perf\+File}}
+\index{Perf\+File@{Perf\+File}!perf-\/io.\+cc@{perf-\/io.\+cc}}
+\subsubsection[{\texorpdfstring{Perf\+File(\+F\+I\+L\+E $\ast$file, uint32\+\_\+t n, const char $\ast$buffer, uint32\+\_\+t size)}{PerfFile(FILE *file, uint32_t n, const char *buffer, uint32_t size)}}]{\setlength{\rightskip}{0pt plus 5cm}void Perf\+File (
+\begin{DoxyParamCaption}
+\item[{F\+I\+LE $\ast$}]{file, }
+\item[{uint32\+\_\+t}]{n, }
+\item[{const char $\ast$}]{buffer, }
+\item[{uint32\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)}\hypertarget{perf-io_8cc_a0f69b54561b690d3307a394602cbbc87}{}\label{perf-io_8cc_a0f69b54561b690d3307a394602cbbc87}
+
+\begin{DoxyCode}
+47 \{
+48   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n}; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+49     \{
+50       \textcolor{keywordflow}{if} (std::fwrite (buffer, 1, size, file) !=  size)
+51         \{
+52           \hyperlink{group__fatal_ga51ac4699be799d772ae7258d1ef6af21}{NS\_ABORT\_MSG} (\textcolor{stringliteral}{"PerfFile():  fwrite error"});
+53         \}
+54     \}
+55 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{perf-\/io.\+cc@{perf-\/io.\+cc}!Perf\+Stream@{Perf\+Stream}}
+\index{Perf\+Stream@{Perf\+Stream}!perf-\/io.\+cc@{perf-\/io.\+cc}}
+\subsubsection[{\texorpdfstring{Perf\+Stream(ostream \&stream, uint32\+\_\+t n, const char $\ast$buffer, uint32\+\_\+t size)}{PerfStream(ostream &stream, uint32_t n, const char *buffer, uint32_t size)}}]{\setlength{\rightskip}{0pt plus 5cm}void Perf\+Stream (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{stream, }
+\item[{uint32\+\_\+t}]{n, }
+\item[{const char $\ast$}]{buffer, }
+\item[{uint32\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)}\hypertarget{perf-io_8cc_a56edeee167f06792d972f3801d12b6c9}{}\label{perf-io_8cc_a56edeee167f06792d972f3801d12b6c9}
+
+\begin{DoxyCode}
+59 \{
+60 
+61   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n}; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+62     \{
+63       stream.write (buffer, size);
+64     \}
+65 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+\subsection{Variable Documentation}
+\index{perf-\/io.\+cc@{perf-\/io.\+cc}!N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC@{N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC}}
+\index{N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC@{N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC}!perf-\/io.\+cc@{perf-\/io.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC}{NS_PER_SEC}}]{\setlength{\rightskip}{0pt plus 5cm}const uint64\+\_\+t N\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC = (uint64\+\_\+t)1000000000\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{perf-io_8cc_a479bcca5923196d202ddc97a0c52ccfc}{}\label{perf-io_8cc_a479bcca5923196d202ddc97a0c52ccfc}
+\index{perf-\/io.\+cc@{perf-\/io.\+cc}!U\+S\+\_\+\+P\+E\+R\+\_\+\+NS@{U\+S\+\_\+\+P\+E\+R\+\_\+\+NS}}
+\index{U\+S\+\_\+\+P\+E\+R\+\_\+\+NS@{U\+S\+\_\+\+P\+E\+R\+\_\+\+NS}!perf-\/io.\+cc@{perf-\/io.\+cc}}
+\subsubsection[{\texorpdfstring{U\+S\+\_\+\+P\+E\+R\+\_\+\+NS}{US_PER_NS}}]{\setlength{\rightskip}{0pt plus 5cm}const uint64\+\_\+t U\+S\+\_\+\+P\+E\+R\+\_\+\+NS = (uint64\+\_\+t)1000\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{perf-io_8cc_a68163ff157df4ce1da3deb9c8e8caf0a}{}\label{perf-io_8cc_a68163ff157df4ce1da3deb9c8e8caf0a}
+\index{perf-\/io.\+cc@{perf-\/io.\+cc}!U\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC@{U\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC}}
+\index{U\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC@{U\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC}!perf-\/io.\+cc@{perf-\/io.\+cc}}
+\subsubsection[{\texorpdfstring{U\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC}{US_PER_SEC}}]{\setlength{\rightskip}{0pt plus 5cm}const uint64\+\_\+t U\+S\+\_\+\+P\+E\+R\+\_\+\+S\+EC = (uint64\+\_\+t)1000000\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{perf-io_8cc_ae9bec129e5ccb16d3354f8c86275ddce}{}\label{perf-io_8cc_ae9bec129e5ccb16d3354f8c86275ddce}

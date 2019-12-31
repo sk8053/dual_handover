@@ -1,0 +1,471 @@
+\hypertarget{classns3_1_1HierarchicalMobilityModel}{}\section{ns3\+:\+:Hierarchical\+Mobility\+Model Class Reference}
+\label{classns3_1_1HierarchicalMobilityModel}\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+
+
+Hierarchical mobility model.  
+
+
+
+
+{\ttfamily \#include $<$hierarchical-\/mobility-\/model.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Hierarchical\+Mobility\+Model\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Hierarchical\+Mobility\+Model\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1HierarchicalMobilityModel_a7c90a694a3be183f38bf1d6ea9e4216c}{Hierarchical\+Mobility\+Model} ()
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ \hyperlink{classns3_1_1HierarchicalMobilityModel_a44872560f7815311d92907d32428d93c}{Get\+Child} (void) const 
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ \hyperlink{classns3_1_1HierarchicalMobilityModel_a72d86fc82fe9dcd3fb50b86487f39111}{Get\+Parent} (void) const 
+\item 
+void \hyperlink{classns3_1_1HierarchicalMobilityModel_ac25ee0060180aaf841715684ad827521}{Set\+Child} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ model)
+\item 
+void \hyperlink{classns3_1_1HierarchicalMobilityModel_a703a6a61e730333fb1527ce03c893cff}{Set\+Parent} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ model)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1HierarchicalMobilityModel_a0d4203c545238561910673a520994b76}{Get\+Type\+Id} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual Vector \hyperlink{classns3_1_1HierarchicalMobilityModel_a6fe2632548407b182d8ae369993c4f1b}{Do\+Get\+Position} (void) const 
+\item 
+virtual void \hyperlink{classns3_1_1HierarchicalMobilityModel_a484afa83a1a90737a901409279284296}{Do\+Set\+Position} (const Vector \&position)
+\item 
+virtual Vector \hyperlink{classns3_1_1HierarchicalMobilityModel_ad43e62f3ea6d73b3b4621959f3016f32}{Do\+Get\+Velocity} (void) const 
+\item 
+void \hyperlink{classns3_1_1HierarchicalMobilityModel_ad702b836af69d11308ef4735e8f77f63}{Parent\+Changed} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ model)
+\item 
+void \hyperlink{classns3_1_1HierarchicalMobilityModel_a48ec474c82848ebe47d0b182df0d1776}{Child\+Changed} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ model)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\+\_\+child}
+\begin{DoxyCompactList}\small\item\em pointer to child mobility model \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ \hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\+\_\+parent}
+\begin{DoxyCompactList}\small\item\em pointer to parent mobility model \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Hierarchical mobility model. 
+
+This model allows you to specify the position of a child object relative to a parent object.
+
+Basically this is a mobility model that combines two other mobility models\+: a \char`\"{}parent\char`\"{} model and a \char`\"{}child\char`\"{} model. The position of the hierarchical model is always the vector sum of the parent + child positions, so that if the parent model \char`\"{}moves\char`\"{}, then this model will report an equal relative movement. Useful, for instance, if you want to simulate a node inside another node that moves, such as a vehicle.
+
+Setting the position on this model is always done using world absolute coordinates, and it changes only the child mobility model position, never the parent. The child mobility model always uses a coordinate system relative to the parent model position.
+
+\begin{DoxyNote}{Note}
+\+: as a special case, the parent model may be N\+U\+LL, which is semantically equivalent to having a \hyperlink{classns3_1_1ConstantPositionMobilityModel}{Constant\+Position\+Mobility\+Model} as parent positioned at origin (0,0,0). In other words, setting the parent model to N\+U\+LL makes the child model and the hierarchical model start using world absolute coordinates.
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+\+: changing the parent/child mobility models in the middle of a simulation will probably not play very well with the \hyperlink{classns3_1_1ConfigStore}{Config\+Store} A\+P\+Is, so do this only if you know what you are doing. 
+\end{DoxyWarning}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!Hierarchical\+Mobility\+Model@{Hierarchical\+Mobility\+Model}}
+\index{Hierarchical\+Mobility\+Model@{Hierarchical\+Mobility\+Model}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Hierarchical\+Mobility\+Model()}{HierarchicalMobilityModel()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Hierarchical\+Mobility\+Model\+::\+Hierarchical\+Mobility\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1HierarchicalMobilityModel_a7c90a694a3be183f38bf1d6ea9e4216c}{}\label{classns3_1_1HierarchicalMobilityModel_a7c90a694a3be183f38bf1d6ea9e4216c}
+
+\begin{DoxyCode}
+49   : \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child} (0),
+50     \hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent} (0)
+51 \{
+52 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!Child\+Changed@{Child\+Changed}}
+\index{Child\+Changed@{Child\+Changed}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Child\+Changed(\+Ptr$<$ const Mobility\+Model $>$ model)}{ChildChanged(Ptr< const MobilityModel > model)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Hierarchical\+Mobility\+Model\+::\+Child\+Changed (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Mobility\+Model} $>$}]{model}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1HierarchicalMobilityModel_a48ec474c82848ebe47d0b182df0d1776}{}\label{classns3_1_1HierarchicalMobilityModel_a48ec474c82848ebe47d0b182df0d1776}
+\hyperlink{classns3_1_1Callback}{Callback} for when child mobility model course change occurs 
+\begin{DoxyCode}
+173 \{
+174   \hyperlink{classns3_1_1MobilityModel_add1317917ac801284c2467a68f09fbe5}{MobilityModel::NotifyCourseChange} ();
+175 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!Do\+Get\+Position@{Do\+Get\+Position}}
+\index{Do\+Get\+Position@{Do\+Get\+Position}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Get\+Position(void) const }{DoGetPosition(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}Vector ns3\+::\+Hierarchical\+Mobility\+Model\+::\+Do\+Get\+Position (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1HierarchicalMobilityModel_a6fe2632548407b182d8ae369993c4f1b}{}\label{classns3_1_1HierarchicalMobilityModel_a6fe2632548407b182d8ae369993c4f1b}
+\begin{DoxyReturn}{Returns}
+the current position.
+\end{DoxyReturn}
+Concrete subclasses of this base class must implement this method. 
+
+Implements \hyperlink{classns3_1_1MobilityModel_a518f70bd8cb78d0031f9a26572434c34}{ns3\+::\+Mobility\+Model}.
+
+
+\begin{DoxyCode}
+114 \{
+115   \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent})
+116     \{
+117       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child}->\hyperlink{classns3_1_1MobilityModel_aba838f06ec5bbb2d193d94b8c0e4abb4}{GetPosition} ();
+118     \}
+119   Vector parentPosition = \hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent}->\hyperlink{classns3_1_1MobilityModel_aba838f06ec5bbb2d193d94b8c0e4abb4}{GetPosition} ();
+120   Vector childPosition = \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child}->\hyperlink{classns3_1_1MobilityModel_aba838f06ec5bbb2d193d94b8c0e4abb4}{GetPosition} ();
+121   \textcolor{keywordflow}{return} Vector (parentPosition.x + childPosition.x,
+122                  parentPosition.y + childPosition.y,
+123                  parentPosition.z + childPosition.z);
+124 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!Do\+Get\+Velocity@{Do\+Get\+Velocity}}
+\index{Do\+Get\+Velocity@{Do\+Get\+Velocity}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Get\+Velocity(void) const }{DoGetVelocity(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}Vector ns3\+::\+Hierarchical\+Mobility\+Model\+::\+Do\+Get\+Velocity (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1HierarchicalMobilityModel_ad43e62f3ea6d73b3b4621959f3016f32}{}\label{classns3_1_1HierarchicalMobilityModel_ad43e62f3ea6d73b3b4621959f3016f32}
+\begin{DoxyReturn}{Returns}
+the current velocity.
+\end{DoxyReturn}
+Concrete subclasses of this base class must implement this method. 
+
+Implements \hyperlink{classns3_1_1MobilityModel_aeb712201a80442ef941d4b460f98aebf}{ns3\+::\+Mobility\+Model}.
+
+
+\begin{DoxyCode}
+149 \{
+150   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent})
+151     \{
+152       Vector parentSpeed = \hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent}->\hyperlink{classns3_1_1MobilityModel_a77004c56b45773bf57bdd3750887ced3}{GetVelocity} ();
+153       Vector childSpeed = \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child}->\hyperlink{classns3_1_1MobilityModel_a77004c56b45773bf57bdd3750887ced3}{GetVelocity} ();
+154       Vector \hyperlink{mmwave-amc-test_8cc_a6dc6e6f3c75c509ce943163afb5dade7}{speed} (parentSpeed.x + childSpeed.x,
+155                     parentSpeed.y + childSpeed.y,
+156                     parentSpeed.z + childSpeed.z);
+157       \textcolor{keywordflow}{return} \hyperlink{mmwave-amc-test_8cc_a6dc6e6f3c75c509ce943163afb5dade7}{speed};
+158     \}
+159   \textcolor{keywordflow}{else}
+160     \{
+161       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child}->\hyperlink{classns3_1_1MobilityModel_a77004c56b45773bf57bdd3750887ced3}{GetVelocity} ();
+162     \}
+163 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!Do\+Set\+Position@{Do\+Set\+Position}}
+\index{Do\+Set\+Position@{Do\+Set\+Position}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Set\+Position(const Vector \&position)}{DoSetPosition(const Vector &position)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Hierarchical\+Mobility\+Model\+::\+Do\+Set\+Position (
+\begin{DoxyParamCaption}
+\item[{const Vector \&}]{position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1HierarchicalMobilityModel_a484afa83a1a90737a901409279284296}{}\label{classns3_1_1HierarchicalMobilityModel_a484afa83a1a90737a901409279284296}
+
+\begin{DoxyParams}{Parameters}
+{\em position} & the position to set.\\
+\hline
+\end{DoxyParams}
+Concrete subclasses of this base class must implement this method. 
+
+Implements \hyperlink{classns3_1_1MobilityModel_aa2f52cd86754da71ac649413c049785e}{ns3\+::\+Mobility\+Model}.
+
+
+\begin{DoxyCode}
+127 \{
+128   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child} == 0)
+129     \{
+130       \textcolor{keywordflow}{return};
+131     \}
+132   \textcolor{comment}{// This implementation of DoSetPosition is really an arbitraty choice.}
+133   \textcolor{comment}{// anything else would have been ok.}
+134   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent})
+135     \{
+136       Vector parentPosition = \hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent}->\hyperlink{classns3_1_1MobilityModel_aba838f06ec5bbb2d193d94b8c0e4abb4}{GetPosition} ();
+137       Vector childPosition (position.x - parentPosition.x,
+138                             position.y - parentPosition.y,
+139                             position.z - parentPosition.z);
+140       \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child}->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (childPosition);
+141     \}
+142   \textcolor{keywordflow}{else}
+143     \{
+144       \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child}->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (position);
+145     \}
+146 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!Get\+Child@{Get\+Child}}
+\index{Get\+Child@{Get\+Child}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Child(void) const }{GetChild(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Mobility\+Model} $>$ ns3\+::\+Hierarchical\+Mobility\+Model\+::\+Get\+Child (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1HierarchicalMobilityModel_a44872560f7815311d92907d32428d93c}{}\label{classns3_1_1HierarchicalMobilityModel_a44872560f7815311d92907d32428d93c}
+\begin{DoxyReturn}{Returns}
+the child mobility model.
+\end{DoxyReturn}
+This allows you to get access to the position of the child relative to its parent. 
+\begin{DoxyCode}
+102 \{
+103   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child};
+104 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!Get\+Parent@{Get\+Parent}}
+\index{Get\+Parent@{Get\+Parent}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Parent(void) const }{GetParent(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Mobility\+Model} $>$ ns3\+::\+Hierarchical\+Mobility\+Model\+::\+Get\+Parent (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1HierarchicalMobilityModel_a72d86fc82fe9dcd3fb50b86487f39111}{}\label{classns3_1_1HierarchicalMobilityModel_a72d86fc82fe9dcd3fb50b86487f39111}
+\begin{DoxyReturn}{Returns}
+the parent mobility model.
+\end{DoxyReturn}
+This allows you to get access to the position of the parent mobility model which is used as the reference position by the child mobility model. 
+\begin{DoxyCode}
+108 \{
+109   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent};
+110 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Hierarchical\+Mobility\+Model\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1HierarchicalMobilityModel_a0d4203c545238561910673a520994b76}{}\label{classns3_1_1HierarchicalMobilityModel_a0d4203c545238561910673a520994b76}
+Register this type with the \hyperlink{classns3_1_1TypeId}{Type\+Id} system. \begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+29 \{
+30   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::HierarchicalMobilityModel"})
+31     .SetParent<\hyperlink{classns3_1_1MobilityModel_af61ca3dbc723d8109d115fb081fd0299}{MobilityModel}> ()
+32     .SetGroupName (\textcolor{stringliteral}{"Mobility"})
+33     .AddConstructor<\hyperlink{classns3_1_1HierarchicalMobilityModel_a7c90a694a3be183f38bf1d6ea9e4216c}{HierarchicalMobilityModel}> ()
+34     .AddAttribute (\textcolor{stringliteral}{"Child"}, \textcolor{stringliteral}{"The child mobility model."},
+35                    PointerValue (),
+36                    MakePointerAccessor (&\hyperlink{classns3_1_1HierarchicalMobilityModel_ac25ee0060180aaf841715684ad827521}{HierarchicalMobilityModel::SetChild}
+      ,
+37                                         &\hyperlink{classns3_1_1HierarchicalMobilityModel_a44872560f7815311d92907d32428d93c}{HierarchicalMobilityModel::GetChild}
+      ),
+38                    MakePointerChecker<MobilityModel> ())
+39     .AddAttribute (\textcolor{stringliteral}{"Parent"}, \textcolor{stringliteral}{"The parent mobility model."},
+40                    PointerValue (),
+41                    MakePointerAccessor (&\hyperlink{classns3_1_1HierarchicalMobilityModel_a703a6a61e730333fb1527ce03c893cff}{HierarchicalMobilityModel::SetParent}
+      ,
+42                                         &\hyperlink{classns3_1_1HierarchicalMobilityModel_a72d86fc82fe9dcd3fb50b86487f39111}{HierarchicalMobilityModel::GetParent}
+      ),
+43                    MakePointerChecker<MobilityModel> ())
+44   ;
+45   \textcolor{keywordflow}{return} tid;
+46 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!Parent\+Changed@{Parent\+Changed}}
+\index{Parent\+Changed@{Parent\+Changed}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Parent\+Changed(\+Ptr$<$ const Mobility\+Model $>$ model)}{ParentChanged(Ptr< const MobilityModel > model)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Hierarchical\+Mobility\+Model\+::\+Parent\+Changed (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Mobility\+Model} $>$}]{model}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1HierarchicalMobilityModel_ad702b836af69d11308ef4735e8f77f63}{}\label{classns3_1_1HierarchicalMobilityModel_ad702b836af69d11308ef4735e8f77f63}
+\hyperlink{classns3_1_1Callback}{Callback} for when parent mobility model course change occurs 
+\begin{DoxyCode}
+167 \{
+168   \hyperlink{classns3_1_1MobilityModel_add1317917ac801284c2467a68f09fbe5}{MobilityModel::NotifyCourseChange} ();
+169 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!Set\+Child@{Set\+Child}}
+\index{Set\+Child@{Set\+Child}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Child(\+Ptr$<$ Mobility\+Model $>$ model)}{SetChild(Ptr< MobilityModel > model)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Hierarchical\+Mobility\+Model\+::\+Set\+Child (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Mobility\+Model} $>$}]{model}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1HierarchicalMobilityModel_ac25ee0060180aaf841715684ad827521}{}\label{classns3_1_1HierarchicalMobilityModel_ac25ee0060180aaf841715684ad827521}
+Sets the child mobility model to a new one. If before there already existed a child model, then the child mobility model current position is also modified to ensure that the composite position is preserved. 
+\begin{DoxyParams}{Parameters}
+{\em model} & new mobility model child \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+56 \{
+57   Ptr<MobilityModel> oldChild = \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child};
+58   Vector pos;
+59   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child})
+60     \{
+61       pos = \hyperlink{classns3_1_1MobilityModel_aba838f06ec5bbb2d193d94b8c0e4abb4}{GetPosition} ();
+62       \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child}->\hyperlink{classns3_1_1ObjectBase_a460d74131ef97d9d7ba79c6d70b2f304}{TraceDisconnectWithoutContext} (\textcolor{stringliteral}{"CourseChange"}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{classns3_1_1HierarchicalMobilityModel_a48ec474c82848ebe47d0b182df0d1776}{HierarchicalMobilityModel::ChildChanged}, \textcolor{keyword}{
+      this}));
+63     \}
+64   \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child} = model;
+65   \hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child}->\hyperlink{classns3_1_1ObjectBase_a1be45f6fd561e75dcac9dfa81b2b81e4}{TraceConnectWithoutContext} (\textcolor{stringliteral}{"CourseChange"}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{classns3_1_1HierarchicalMobilityModel_a48ec474c82848ebe47d0b182df0d1776}{HierarchicalMobilityModel::ChildChanged}, \textcolor{keyword}{
+      this}));
+66 
+67   \textcolor{comment}{// if we had a child before, then we had a valid position before;}
+68   \textcolor{comment}{// try to preserve the old absolute position.}
+69   \textcolor{keywordflow}{if} (oldChild)
+70     \{
+71       \hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (pos);
+72     \}
+73 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 13
+
+
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!Set\+Parent@{Set\+Parent}}
+\index{Set\+Parent@{Set\+Parent}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Parent(\+Ptr$<$ Mobility\+Model $>$ model)}{SetParent(Ptr< MobilityModel > model)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Hierarchical\+Mobility\+Model\+::\+Set\+Parent (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Mobility\+Model} $>$}]{model}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1HierarchicalMobilityModel_a703a6a61e730333fb1527ce03c893cff}{}\label{classns3_1_1HierarchicalMobilityModel_a703a6a61e730333fb1527ce03c893cff}
+Sets the parent mobility model to a new one. If before there already existed a child model, then the child mobility model current position is also modified to ensure that the composite position is preserved. 
+\begin{DoxyParams}{Parameters}
+{\em model} & new mobility model parent \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+77 \{
+78   Vector pos;
+79   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child})
+80     \{
+81       pos = \hyperlink{classns3_1_1MobilityModel_aba838f06ec5bbb2d193d94b8c0e4abb4}{GetPosition} ();
+82     \}
+83   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent})
+84     \{
+85       \hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent}->\hyperlink{classns3_1_1ObjectBase_a460d74131ef97d9d7ba79c6d70b2f304}{TraceDisconnectWithoutContext} (\textcolor{stringliteral}{"CourseChange"}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{classns3_1_1HierarchicalMobilityModel_ad702b836af69d11308ef4735e8f77f63}{HierarchicalMobilityModel::ParentChanged}
+      , \textcolor{keyword}{this}));
+86     \}
+87   \hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent} = model;
+88   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent})
+89     \{
+90       \hyperlink{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{m\_parent}->\hyperlink{classns3_1_1ObjectBase_a1be45f6fd561e75dcac9dfa81b2b81e4}{TraceConnectWithoutContext} (\textcolor{stringliteral}{"CourseChange"}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{classns3_1_1HierarchicalMobilityModel_ad702b836af69d11308ef4735e8f77f63}{HierarchicalMobilityModel::ParentChanged}
+      , \textcolor{keyword}{this}));
+91     \}
+92   \textcolor{comment}{// try to preserve the old position across parent changes}
+93   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{m\_child})
+94     \{
+95       \hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (pos);
+96     \}
+97 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 14
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 15
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!m\+\_\+child@{m\+\_\+child}}
+\index{m\+\_\+child@{m\+\_\+child}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+child}{m_child}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Mobility\+Model}$>$ ns3\+::\+Hierarchical\+Mobility\+Model\+::m\+\_\+child\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}{}\label{classns3_1_1HierarchicalMobilityModel_a07ebcdb83ae4934089832879b1b2f6ca}
+
+
+pointer to child mobility model 
+
+\index{ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}!m\+\_\+parent@{m\+\_\+parent}}
+\index{m\+\_\+parent@{m\+\_\+parent}!ns3\+::\+Hierarchical\+Mobility\+Model@{ns3\+::\+Hierarchical\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+parent}{m_parent}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Mobility\+Model}$>$ ns3\+::\+Hierarchical\+Mobility\+Model\+::m\+\_\+parent\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}{}\label{classns3_1_1HierarchicalMobilityModel_a5fba1ec797033befe2d231649919d3e0}
+
+
+pointer to parent mobility model 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mobility/model/\hyperlink{hierarchical-mobility-model_8h}{hierarchical-\/mobility-\/model.\+h}\item 
+mobility/model/\hyperlink{hierarchical-mobility-model_8cc}{hierarchical-\/mobility-\/model.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,329 @@
+\hypertarget{classLrWpanEdTestCase}{}\section{Lr\+Wpan\+Ed\+Test\+Case Class Reference}
+\label{classLrWpanEdTestCase}\index{Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}}
+
+
+Lr\+Wpan Energy Detection Test.  
+
+
+
+
+Inheritance diagram for Lr\+Wpan\+Ed\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Lr\+Wpan\+Ed\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLrWpanEdTestCase_acf58a034a4ae51e54854c3b4dcd8efd5}{Lr\+Wpan\+Ed\+Test\+Case} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classLrWpanEdTestCase_a432fdebeb0336845350d0b96834ceea4}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+void \hyperlink{classLrWpanEdTestCase_acbc6e6847dbe21b4984393c0e4d9f57e}{Plme\+Ed\+Confirm} (\hyperlink{group__lr-wpan_ga6494269d13d45c511a07b7ccbb1de754}{Lr\+Wpan\+Phy\+Enumeration} status, uint8\+\_\+t level)
+\begin{DoxyCompactList}\small\item\em Function called when Plme\+Ed\+Confirm is hit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__lr-wpan_ga6494269d13d45c511a07b7ccbb1de754}{Lr\+Wpan\+Phy\+Enumeration} \hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\+\_\+status}
+\begin{DoxyCompactList}\small\item\em P\+HY status. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\+\_\+level}
+\begin{DoxyCompactList}\small\item\em ED level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Lr\+Wpan Energy Detection Test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}!Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}}
+\index{Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}!Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Lr\+Wpan\+Ed\+Test\+Case()}{LrWpanEdTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Lr\+Wpan\+Ed\+Test\+Case\+::\+Lr\+Wpan\+Ed\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLrWpanEdTestCase_acf58a034a4ae51e54854c3b4dcd8efd5}{}\label{classLrWpanEdTestCase_acf58a034a4ae51e54854c3b4dcd8efd5}
+
+\begin{DoxyCode}
+65   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Test the 802.15.4 energie detection"})
+66 \{
+67   \hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\_status} = \hyperlink{group__lr-wpan_gga6494269d13d45c511a07b7ccbb1de754a33aedad985a3e4dd7a0c6790a2c677a0}{IEEE\_802\_15\_4\_PHY\_UNSPECIFIED};
+68   \hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\_level} = 0;
+69 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Lr\+Wpan\+Ed\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classLrWpanEdTestCase_a432fdebeb0336845350d0b96834ceea4}{}\label{classLrWpanEdTestCase_a432fdebeb0336845350d0b96834ceea4}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+81 \{
+82   \textcolor{comment}{// Tx Power: 0 dBm}
+83   \textcolor{comment}{// Receiver Sensitivity: -106.58 dBm}
+84   \textcolor{comment}{// Do energy detection for a single packet, arriving with 5 dB, 10 dB, 25 dB,}
+85   \textcolor{comment}{// 40 dB, relative to RX Power / Sensitivity. This should yield 0, 0, 127,}
+86   \textcolor{comment}{// and 255 as the reported energy levels.}
+87   \textcolor{comment}{// TODO: Maybe there should be a test for several interfering packets.}
+88   \textcolor{comment}{// TODO: There should be tests for signals not originating from 802.15.4}
+89   \textcolor{comment}{//       devices.}
+90 
+91   \textcolor{comment}{// Test setup:}
+92   \textcolor{comment}{// Two nodes in communication range. The propagation model is adjusted to}
+93   \textcolor{comment}{// give us the above mentioned RX powers.}
+94   \textcolor{comment}{// Node 1 sends a packet to node 2. Node 2 starts energy detection, while the}
+95   \textcolor{comment}{// packet reception is in progress. The detected energy level is compared to}
+96   \textcolor{comment}{// the expected values.}
+97 
+98   \textcolor{comment}{// Enable calculation of FCS in the trailers. Only necessary when interacting with real devices or
+       wireshark.}
+99   \textcolor{comment}{// GlobalValue::Bind ("ChecksumEnabled", BooleanValue (true));}
+100 
+101   \textcolor{comment}{// Set the random seed and run number for this test}
+102   RngSeedManager::SetSeed (1);
+103   RngSeedManager::SetRun (6);
+104 
+105   \textcolor{comment}{// Create 2 nodes, and a NetDevice for each one}
+106   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} n0 = CreateObject <Node> ();
+107   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} n1 = CreateObject <Node> ();
+108 
+109   \hyperlink{classns3_1_1Ptr}{Ptr<LrWpanNetDevice>} dev0 = CreateObject<LrWpanNetDevice> ();
+110   \hyperlink{classns3_1_1Ptr}{Ptr<LrWpanNetDevice>} dev1 = CreateObject<LrWpanNetDevice> ();
+111 
+112   \textcolor{comment}{// Make random variable stream assignment deterministic}
+113   dev0->AssignStreams (0);
+114   dev1->AssignStreams (10);
+115 
+116   dev0->SetAddress (\hyperlink{classns3_1_1Mac16Address}{Mac16Address} (\textcolor{stringliteral}{"00:01"}));
+117   dev1->SetAddress (\hyperlink{classns3_1_1Mac16Address}{Mac16Address} (\textcolor{stringliteral}{"00:02"}));
+118 
+119   \textcolor{comment}{// Each device must be attached to the same channel}
+120   \hyperlink{classns3_1_1Ptr}{Ptr<SingleModelSpectrumChannel>} channel = 
+      CreateObject<SingleModelSpectrumChannel> ();
+121   \hyperlink{classns3_1_1Ptr}{Ptr<FixedRssLossModel>} propModel = CreateObject<FixedRssLossModel> ();
+122   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantSpeedPropagationDelayModel>} delayModel = 
+      CreateObject<ConstantSpeedPropagationDelayModel> ();
+123   channel->\hyperlink{classns3_1_1SingleModelSpectrumChannel_a3d8c68e54e0e7659fdf715260d5613ac}{AddPropagationLossModel} (propModel);
+124   channel->\hyperlink{classns3_1_1SingleModelSpectrumChannel_afd757c085623596ebf3da8264cfbaa45}{SetPropagationDelayModel} (delayModel);
+125 
+126   dev0->SetChannel (channel);
+127   dev1->SetChannel (channel);
+128 
+129   \textcolor{comment}{// To complete configuration, a LrWpanNetDevice must be added to a node}
+130   n0->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (dev0);
+131   n1->AddDevice (dev1);
+132 
+133   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} sender0Mobility = 
+      CreateObject<ConstantPositionMobilityModel> ();
+134   sender0Mobility->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (Vector (0, 0, 0));
+135   dev0->GetPhy ()->SetMobility (sender0Mobility);
+136   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} sender1Mobility = 
+      CreateObject<ConstantPositionMobilityModel> ();
+137   \textcolor{comment}{// Configure position 10 m distance}
+138   sender1Mobility->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (Vector (0, 10, 0));
+139   dev1->GetPhy ()->SetMobility (sender1Mobility);
+140 
+141   \textcolor{comment}{// Set the ED confirm callback.}
+142   dev0->GetPhy ()->SetPlmeEdConfirmCallback (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classLrWpanEdTestCase_acbc6e6847dbe21b4984393c0e4d9f57e}{LrWpanEdTestCase::PlmeEdConfirm}, \textcolor{keyword}{this}));
+143   dev1->GetPhy ()->SetPlmeEdConfirmCallback (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classLrWpanEdTestCase_acbc6e6847dbe21b4984393c0e4d9f57e}{LrWpanEdTestCase::PlmeEdConfirm}, \textcolor{keyword}{this}));
+144 
+145   \textcolor{comment}{// Configure the RX Power to be -107.58 dBm, i.e. 1 dB below receiver sensitivity.}
+146   propModel->SetRss (-107.58);
+147 
+148   \hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\_status} = \hyperlink{group__lr-wpan_gga6494269d13d45c511a07b7ccbb1de754a33aedad985a3e4dd7a0c6790a2c677a0}{IEEE\_802\_15\_4\_PHY\_UNSPECIFIED};
+149   \hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\_level} = 0;
+150   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} p0 = Create<Packet> (100);  \textcolor{comment}{// 100 bytes of dummy data}
+151   \hyperlink{structns3_1_1McpsDataRequestParams}{McpsDataRequestParams} params;
+152   params.\hyperlink{structns3_1_1McpsDataRequestParams_a31f4c281d07cf3b5992d45416bd71309}{m\_srcAddrMode} = \hyperlink{group__lr-wpan_gga9ea4702ab11d5329e1593afebce06bbba7bf58267dde39bdabfeeb5793450c5e3}{SHORT\_ADDR};
+153   params.m\_dstAddrMode = \hyperlink{group__lr-wpan_gga9ea4702ab11d5329e1593afebce06bbba7bf58267dde39bdabfeeb5793450c5e3}{SHORT\_ADDR};
+154   params.m\_dstPanId = 0;
+155   params.m\_dstAddr = \hyperlink{classns3_1_1Mac16Address}{Mac16Address} (\textcolor{stringliteral}{"00:02"});
+156   params.m\_msduHandle = 0;
+157   params.m\_txOptions = \hyperlink{group__lr-wpan_gga74ea891230ebf45d80d69a67266930a4a873c8b896435efcdd1c058668efb88ea}{TX\_OPTION\_NONE};
+158   Simulator::ScheduleNow (&LrWpanMac::McpsDataRequest, dev0->GetMac (), params, p0);
+159 
+160   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0025), &LrWpanPhy::PlmeEdRequest, dev1->GetPhy ());
+161 
+162   Simulator::Run ();
+163 
+164   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\_status}, 
+      \hyperlink{group__lr-wpan_gga6494269d13d45c511a07b7ccbb1de754a2a81d56261f039e08cf2dd91de10b618}{IEEE\_802\_15\_4\_PHY\_SUCCESS}, \textcolor{stringliteral}{"ED status SUCCESS (as expected)"});
+165   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\_level}, 0, \textcolor{stringliteral}{"ED reported signal level 0 (as expected)"}
+      );
+166 
+167 
+168   \textcolor{comment}{// Configure the RX Power to be -106.58 dBm, i.e. exectly to receiver sensitivity.}
+169   propModel->SetRss (-106.58);
+170 
+171   \hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\_status} = \hyperlink{group__lr-wpan_gga6494269d13d45c511a07b7ccbb1de754a33aedad985a3e4dd7a0c6790a2c677a0}{IEEE\_802\_15\_4\_PHY\_UNSPECIFIED};
+172   \hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\_level} = 0;
+173   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} p1 = Create<Packet> (100);  \textcolor{comment}{// 100 bytes of dummy data}
+174   params.m\_srcAddrMode = \hyperlink{group__lr-wpan_gga9ea4702ab11d5329e1593afebce06bbba7bf58267dde39bdabfeeb5793450c5e3}{SHORT\_ADDR};
+175   params.m\_dstAddrMode = \hyperlink{group__lr-wpan_gga9ea4702ab11d5329e1593afebce06bbba7bf58267dde39bdabfeeb5793450c5e3}{SHORT\_ADDR};
+176   params.m\_dstPanId = 0;
+177   params.m\_dstAddr = \hyperlink{classns3_1_1Mac16Address}{Mac16Address} (\textcolor{stringliteral}{"00:02"});
+178   params.m\_msduHandle = 0;
+179   params.m\_txOptions = \hyperlink{group__lr-wpan_gga74ea891230ebf45d80d69a67266930a4a873c8b896435efcdd1c058668efb88ea}{TX\_OPTION\_NONE};
+180   Simulator::ScheduleNow (&LrWpanMac::McpsDataRequest, dev0->GetMac (), params, p1);
+181 
+182   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0025), &LrWpanPhy::PlmeEdRequest, dev1->GetPhy ());
+183 
+184   Simulator::Run ();
+185 
+186   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\_status}, 
+      \hyperlink{group__lr-wpan_gga6494269d13d45c511a07b7ccbb1de754a2a81d56261f039e08cf2dd91de10b618}{IEEE\_802\_15\_4\_PHY\_SUCCESS}, \textcolor{stringliteral}{"ED status SUCCESS (as expected)"});
+187   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\_level}, 0, \textcolor{stringliteral}{"ED reported signal level 0 (as expected)"}
+      );
+188 
+189 
+190   \textcolor{comment}{// Configure the RX Power to be -81.58 dBm, i.e. 25 dB above receiver sensitivity.}
+191   propModel->SetRss (-81.58);
+192 
+193   \hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\_status} = \hyperlink{group__lr-wpan_gga6494269d13d45c511a07b7ccbb1de754a33aedad985a3e4dd7a0c6790a2c677a0}{IEEE\_802\_15\_4\_PHY\_UNSPECIFIED};
+194   \hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\_level} = 0;
+195   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} p2 = Create<Packet> (100);  \textcolor{comment}{// 100 bytes of dummy data}
+196   params.m\_srcAddrMode = \hyperlink{group__lr-wpan_gga9ea4702ab11d5329e1593afebce06bbba7bf58267dde39bdabfeeb5793450c5e3}{SHORT\_ADDR};
+197   params.m\_dstAddrMode = \hyperlink{group__lr-wpan_gga9ea4702ab11d5329e1593afebce06bbba7bf58267dde39bdabfeeb5793450c5e3}{SHORT\_ADDR};
+198   params.m\_dstPanId = 0;
+199   params.m\_dstAddr = \hyperlink{classns3_1_1Mac16Address}{Mac16Address} (\textcolor{stringliteral}{"00:02"});
+200   params.m\_msduHandle = 0;
+201   params.m\_txOptions = \hyperlink{group__lr-wpan_gga74ea891230ebf45d80d69a67266930a4a873c8b896435efcdd1c058668efb88ea}{TX\_OPTION\_NONE};
+202   Simulator::ScheduleNow (&LrWpanMac::McpsDataRequest, dev0->GetMac (), params, p2);
+203 
+204   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0025), &LrWpanPhy::PlmeEdRequest, dev1->GetPhy ());
+205 
+206   Simulator::Run ();
+207 
+208   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\_status}, 
+      \hyperlink{group__lr-wpan_gga6494269d13d45c511a07b7ccbb1de754a2a81d56261f039e08cf2dd91de10b618}{IEEE\_802\_15\_4\_PHY\_SUCCESS}, \textcolor{stringliteral}{"ED status SUCCESS (as expected)"});
+209   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\_level}, 127, \textcolor{stringliteral}{"ED reported signal level 127 (as
+       expected)"});
+210 
+211 
+212   \textcolor{comment}{// Configure the RX Power to be -66.58 dBm, i.e. 40 dB above receiver sensitivity.}
+213   propModel->SetRss (-66.58);
+214 
+215   \hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\_status} = \hyperlink{group__lr-wpan_gga6494269d13d45c511a07b7ccbb1de754a33aedad985a3e4dd7a0c6790a2c677a0}{IEEE\_802\_15\_4\_PHY\_UNSPECIFIED};
+216   \hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\_level} = 0;
+217   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} p3 = Create<Packet> (100);  \textcolor{comment}{// 100 bytes of dummy data}
+218   params.m\_srcAddrMode = \hyperlink{group__lr-wpan_gga9ea4702ab11d5329e1593afebce06bbba7bf58267dde39bdabfeeb5793450c5e3}{SHORT\_ADDR};
+219   params.m\_dstAddrMode = \hyperlink{group__lr-wpan_gga9ea4702ab11d5329e1593afebce06bbba7bf58267dde39bdabfeeb5793450c5e3}{SHORT\_ADDR};
+220   params.m\_dstPanId = 0;
+221   params.m\_dstAddr = \hyperlink{classns3_1_1Mac16Address}{Mac16Address} (\textcolor{stringliteral}{"00:02"});
+222   params.m\_msduHandle = 0;
+223   params.m\_txOptions = \hyperlink{group__lr-wpan_gga74ea891230ebf45d80d69a67266930a4a873c8b896435efcdd1c058668efb88ea}{TX\_OPTION\_NONE};
+224   Simulator::ScheduleNow (&LrWpanMac::McpsDataRequest, dev0->GetMac (), params, p3);
+225 
+226   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0025), &LrWpanPhy::PlmeEdRequest, dev1->GetPhy ());
+227 
+228   Simulator::Run ();
+229 
+230   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\_status}, 
+      \hyperlink{group__lr-wpan_gga6494269d13d45c511a07b7ccbb1de754a2a81d56261f039e08cf2dd91de10b618}{IEEE\_802\_15\_4\_PHY\_SUCCESS}, \textcolor{stringliteral}{"ED status SUCCESS (as expected)"});
+231   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\_level}, 255, \textcolor{stringliteral}{"ED reported signal level 255 (as
+       expected)"});
+232 
+233   \textcolor{comment}{// Test ED at sender.}
+234   \hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\_status} = \hyperlink{group__lr-wpan_gga6494269d13d45c511a07b7ccbb1de754a33aedad985a3e4dd7a0c6790a2c677a0}{IEEE\_802\_15\_4\_PHY\_UNSPECIFIED};
+235   \hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\_level} = 0;
+236   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} p4 = Create<Packet> (100);  \textcolor{comment}{// 100 bytes of dummy data}
+237   params.m\_srcAddrMode = \hyperlink{group__lr-wpan_gga9ea4702ab11d5329e1593afebce06bbba7bf58267dde39bdabfeeb5793450c5e3}{SHORT\_ADDR};
+238   params.m\_dstAddrMode = \hyperlink{group__lr-wpan_gga9ea4702ab11d5329e1593afebce06bbba7bf58267dde39bdabfeeb5793450c5e3}{SHORT\_ADDR};
+239   params.m\_dstPanId = 0;
+240   params.m\_dstAddr = \hyperlink{classns3_1_1Mac16Address}{Mac16Address} (\textcolor{stringliteral}{"00:02"});
+241   params.m\_msduHandle = 0;
+242   params.m\_txOptions = \hyperlink{group__lr-wpan_gga74ea891230ebf45d80d69a67266930a4a873c8b896435efcdd1c058668efb88ea}{TX\_OPTION\_NONE};
+243   Simulator::ScheduleNow (&LrWpanMac::McpsDataRequest, dev0->GetMac (), params, p4);
+244 
+245   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0025), &LrWpanPhy::PlmeEdRequest, dev0->GetPhy ());
+246 
+247   Simulator::Run ();
+248 
+249   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\_status}, 
+      \hyperlink{group__lr-wpan_gga6494269d13d45c511a07b7ccbb1de754aa595d552b56b89b363b800b9fcfbe67f}{IEEE\_802\_15\_4\_PHY\_TX\_ON}, \textcolor{stringliteral}{"ED status TX\_ON (as expected)"});
+250   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\_level}, 0, \textcolor{stringliteral}{"ED reported signal level 0 (as expected)"}
+      );
+251 
+252   Simulator::Destroy ();
+253 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}!Plme\+Ed\+Confirm@{Plme\+Ed\+Confirm}}
+\index{Plme\+Ed\+Confirm@{Plme\+Ed\+Confirm}!Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Plme\+Ed\+Confirm(\+Lr\+Wpan\+Phy\+Enumeration status, uint8\+\_\+t level)}{PlmeEdConfirm(LrWpanPhyEnumeration status, uint8_t level)}}]{\setlength{\rightskip}{0pt plus 5cm}void Lr\+Wpan\+Ed\+Test\+Case\+::\+Plme\+Ed\+Confirm (
+\begin{DoxyParamCaption}
+\item[{{\bf Lr\+Wpan\+Phy\+Enumeration}}]{status, }
+\item[{uint8\+\_\+t}]{level}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLrWpanEdTestCase_acbc6e6847dbe21b4984393c0e4d9f57e}{}\label{classLrWpanEdTestCase_acbc6e6847dbe21b4984393c0e4d9f57e}
+
+
+Function called when Plme\+Ed\+Confirm is hit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & The P\+HY status. \\
+\hline
+{\em level} & The ED level. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+73 \{
+74   \hyperlink{log-macros-disabled_8h_a0b36e5e182b37194f85ef1c5e979fb2e}{NS\_LOG\_UNCOND} (\textcolor{stringliteral}{"Energy Detection completed with status "} << 
+      LrWpanHelper::LrWpanPhyEnumerationPrinter (status) << \textcolor{stringliteral}{" and energy level "} << static\_cast<uint32\_t> (level));
+75   \hyperlink{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{m\_status} = status;
+76   \hyperlink{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{m\_level} = level;
+77 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}!m\+\_\+level@{m\+\_\+level}}
+\index{m\+\_\+level@{m\+\_\+level}!Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}}
+\subsubsection[{\texorpdfstring{m\+\_\+level}{m_level}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Lr\+Wpan\+Ed\+Test\+Case\+::m\+\_\+level\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}{}\label{classLrWpanEdTestCase_a7ecaee7923b4d55cc4a8545bc0332469}
+
+
+ED level. 
+
+\index{Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}!m\+\_\+status@{m\+\_\+status}}
+\index{m\+\_\+status@{m\+\_\+status}!Lr\+Wpan\+Ed\+Test\+Case@{Lr\+Wpan\+Ed\+Test\+Case}}
+\subsubsection[{\texorpdfstring{m\+\_\+status}{m_status}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lr\+Wpan\+Phy\+Enumeration} Lr\+Wpan\+Ed\+Test\+Case\+::m\+\_\+status\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}{}\label{classLrWpanEdTestCase_a412f77be5f81e80661cf8e5563e62851}
+
+
+P\+HY status. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lr-\/wpan/test/\hyperlink{lr-wpan-ed-test_8cc}{lr-\/wpan-\/ed-\/test.\+cc}\end{DoxyCompactItemize}

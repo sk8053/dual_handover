@@ -1,0 +1,243 @@
+\hypertarget{lena-rem-sector-antenna_8cc}{}\section{lte/examples/lena-\/rem-\/sector-\/antenna.cc File Reference}
+\label{lena-rem-sector-antenna_8cc}\index{lte/examples/lena-\/rem-\/sector-\/antenna.\+cc@{lte/examples/lena-\/rem-\/sector-\/antenna.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/lte-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$ns3/buildings-\/propagation-\/loss-\/model.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/buildings-\/helper.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/radio-\/environment-\/map-\/helper.\+h$>$}\\*
+{\ttfamily \#include $<$iomanip$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+Include dependency graph for lena-\/rem-\/sector-\/antenna.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{lena-rem-sector-antenna_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{lena-\/rem-\/sector-\/antenna.\+cc@{lena-\/rem-\/sector-\/antenna.\+cc}!main@{main}}
+\index{main@{main}!lena-\/rem-\/sector-\/antenna.\+cc@{lena-\/rem-\/sector-\/antenna.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-rem-sector-antenna_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{lena-rem-sector-antenna_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+39 \{
+40   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+41   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+42 
+43   \hyperlink{classns3_1_1ConfigStore}{ConfigStore} inputConfig;
+44   inputConfig.\hyperlink{classns3_1_1ConfigStore_a0a6137574d7c847c3823af8b9d1bb886}{ConfigureDefaults} ();
+45 
+46   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+47 
+48   \textcolor{comment}{// Geometry of the scenario (in meters)}
+49   \textcolor{comment}{// Assume squared building}
+50   \textcolor{keywordtype}{double} nodeHeight = 1.5;
+51   \textcolor{keywordtype}{double} roomHeight = 3;
+52   \textcolor{keywordtype}{double} roomLength = 500;
+53   uint32\_t nRooms = 2;
+54   \textcolor{comment}{// Create one eNodeB per room + one 3 sector eNodeB (i.e. 3 eNodeB) + one regular eNodeB}
+55   uint32\_t nEnb = nRooms*nRooms + 4;
+56   uint32\_t nUe = 1;
+57 
+58   \hyperlink{classns3_1_1Ptr}{Ptr < LteHelper >} lteHelper = CreateObject<LteHelper> ();
+59   \textcolor{comment}{//lteHelper->EnableLogComponents ();}
+60   lteHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"PathlossModel"}, StringValue (\textcolor{stringliteral}{"ns3::FriisPropagationLossModel"}));
+61 
+62   \textcolor{comment}{// Create Nodes: eNodeB and UE}
+63   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+64   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} oneSectorNodes;
+65   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} threeSectorNodes;
+66   vector < NodeContainer > ueNodes;
+67 
+68   oneSectorNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (nEnb-3);
+69   threeSectorNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (3);
+70 
+71   enbNodes.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (oneSectorNodes);
+72   enbNodes.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (threeSectorNodes);
+73 
+74   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < nEnb; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+75     \{
+76       \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNode;
+77       ueNode.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (nUe);
+78       ueNodes.push\_back (ueNode);
+79     \}
+80 
+81   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+82   vector<Vector> enbPosition;
+83   \hyperlink{classns3_1_1Ptr}{Ptr < ListPositionAllocator >} positionAlloc = 
+      CreateObject<ListPositionAllocator> ();
+84   \hyperlink{classns3_1_1Ptr}{Ptr < Building >} building;
+85   building = Create<Building> ();
+86   building->SetBoundaries (\hyperlink{classns3_1_1Box}{Box} (0.0, nRooms * roomLength,
+87                                 0.0, nRooms * roomLength,
+88                                 0.0, roomHeight));
+89   building->SetBuildingType (Building::Residential);
+90   building->SetExtWallsType (Building::ConcreteWithWindows);
+91   building->SetNFloors (1);
+92   building->SetNRoomsX (nRooms);
+93   building->SetNRoomsY (nRooms);
+94   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+95   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+96   BuildingsHelper::Install (enbNodes);
+97   uint32\_t plantedEnb = 0;
+98   \textcolor{keywordflow}{for} (uint32\_t row = 0; row < nRooms; row++)
+99     \{
+100       \textcolor{keywordflow}{for} (uint32\_t column = 0; column < nRooms; column++, plantedEnb++)
+101         \{
+102           \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} v (roomLength * (column + 0.5),
+103                     roomLength * (row + 0.5),
+104                     nodeHeight );
+105           positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (v);
+106           enbPosition.push\_back (v);
+107           \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} mmEnb = enbNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (plantedEnb)->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+108           mmEnb->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (v);
+109         \}
+110     \}
+111 
+112   \textcolor{comment}{// Add a 1-sector site}
+113   \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} v (500, 3000, nodeHeight);
+114   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (v);
+115   enbPosition.push\_back (v);
+116   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes.at(plantedEnb));
+117   plantedEnb++;
+118 
+119   \textcolor{comment}{// Add the 3-sector site}
+120   \textcolor{keywordflow}{for} (uint32\_t index = 0; index < 3; index++, plantedEnb++)
+121     \{
+122       \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} v (500, 2000, nodeHeight);
+123       positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (v);
+124       enbPosition.push\_back (v);
+125       mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes.at(plantedEnb));
+126     \}
+127 
+128 
+129   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+130   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+131 
+132   \textcolor{comment}{// Position of UEs attached to eNB}
+133   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < nEnb; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+134     \{
+135       \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} posX = CreateObject<UniformRandomVariable> ();
+136       posX->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (enbPosition.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).x - roomLength * 0));
+137       posX->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (enbPosition.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).x + roomLength * 0));
+138       \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} posY = CreateObject<UniformRandomVariable> ();
+139       posY->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (enbPosition.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).y - roomLength * 0));
+140       posY->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (enbPosition.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).y + roomLength * 0));
+141       positionAlloc = CreateObject<ListPositionAllocator> ();
+142       \textcolor{keywordflow}{for} (uint32\_t j = 0; j < nUe; j++)
+143         \{
+144           \textcolor{keywordflow}{if} ( \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} == nEnb - 3 )
+145             \{
+146               positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (enbPosition.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).x + 10, enbPosition.at(
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).y, nodeHeight));
+147             \}
+148           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} == nEnb - 2 )
+149             \{
+150               positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (enbPosition.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).x - std::sqrt (10), enbPosition.at(
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).y + std::sqrt (10), nodeHeight));
+151             \}
+152           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} == nEnb - 1 )
+153             \{
+154               positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (enbPosition.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).x - std::sqrt (10), enbPosition.at(
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).y - std::sqrt (10), nodeHeight));
+155             \}
+156           \textcolor{keywordflow}{else}
+157             \{
+158               positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (posX->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} (), posY->
+      \hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} (), nodeHeight));
+159             \}
+160           mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+161         \}
+162       mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+163       BuildingsHelper::Install (ueNodes.at(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+164     \}
+165 
+166   \textcolor{comment}{// Create Devices and install them in the Nodes (eNB and UE)}
+167   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbDevs;
+168   vector < NetDeviceContainer > ueDevs;
+169 
+170   \textcolor{comment}{// power setting in dBm for small cells}
+171   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteEnbPhy::TxPower"}, DoubleValue (20.0));
+172   enbDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (oneSectorNodes);
+173 
+174 
+175   \textcolor{comment}{// power setting for three-sector macrocell}
+176   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteEnbPhy::TxPower"}, DoubleValue (43.0));
+177 
+178   \textcolor{comment}{// Beam width is made quite narrow so sectors can be noticed in the REM}
+179   lteHelper->\hyperlink{classns3_1_1LteHelper_a758494fc0edaeaf7f311c6aa1c0b42d9}{SetEnbAntennaModelType} (\textcolor{stringliteral}{"ns3::CosineAntennaModel"});
+180   lteHelper->\hyperlink{classns3_1_1LteHelper_ac0c1bc4eddaf7f8711f282cb681f99c5}{SetEnbAntennaModelAttribute} (\textcolor{stringliteral}{"Orientation"}, DoubleValue (0));
+181   lteHelper->\hyperlink{classns3_1_1LteHelper_ac0c1bc4eddaf7f8711f282cb681f99c5}{SetEnbAntennaModelAttribute} (\textcolor{stringliteral}{"Beamwidth"},   DoubleValue (100));
+182   lteHelper->\hyperlink{classns3_1_1LteHelper_ac0c1bc4eddaf7f8711f282cb681f99c5}{SetEnbAntennaModelAttribute} (\textcolor{stringliteral}{"MaxGain"},     DoubleValue (0.0));
+183   enbDevs.Add ( lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (threeSectorNodes.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)));
+184 
+185   lteHelper->\hyperlink{classns3_1_1LteHelper_a758494fc0edaeaf7f311c6aa1c0b42d9}{SetEnbAntennaModelType} (\textcolor{stringliteral}{"ns3::CosineAntennaModel"});
+186   lteHelper->\hyperlink{classns3_1_1LteHelper_ac0c1bc4eddaf7f8711f282cb681f99c5}{SetEnbAntennaModelAttribute} (\textcolor{stringliteral}{"Orientation"}, DoubleValue (360/3));
+187   lteHelper->\hyperlink{classns3_1_1LteHelper_ac0c1bc4eddaf7f8711f282cb681f99c5}{SetEnbAntennaModelAttribute} (\textcolor{stringliteral}{"Beamwidth"},   DoubleValue (100));
+188   lteHelper->\hyperlink{classns3_1_1LteHelper_ac0c1bc4eddaf7f8711f282cb681f99c5}{SetEnbAntennaModelAttribute} (\textcolor{stringliteral}{"MaxGain"},     DoubleValue (0.0));
+189   enbDevs.Add ( lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (threeSectorNodes.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1)));
+190 
+191   lteHelper->\hyperlink{classns3_1_1LteHelper_a758494fc0edaeaf7f311c6aa1c0b42d9}{SetEnbAntennaModelType} (\textcolor{stringliteral}{"ns3::CosineAntennaModel"});
+192   lteHelper->\hyperlink{classns3_1_1LteHelper_ac0c1bc4eddaf7f8711f282cb681f99c5}{SetEnbAntennaModelAttribute} (\textcolor{stringliteral}{"Orientation"}, DoubleValue (2*360/3));
+193   lteHelper->\hyperlink{classns3_1_1LteHelper_ac0c1bc4eddaf7f8711f282cb681f99c5}{SetEnbAntennaModelAttribute} (\textcolor{stringliteral}{"Beamwidth"},   DoubleValue (100));
+194   lteHelper->\hyperlink{classns3_1_1LteHelper_ac0c1bc4eddaf7f8711f282cb681f99c5}{SetEnbAntennaModelAttribute} (\textcolor{stringliteral}{"MaxGain"},     DoubleValue (0.0));
+195   enbDevs.Add ( lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (threeSectorNodes.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2)));
+196 
+197   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < nEnb; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+198     \{
+199       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueDev = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (ueNodes.at(
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+200       ueDevs.push\_back (ueDev);
+201       lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (ueDev, enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+202       \textcolor{keyword}{enum} \hyperlink{structns3_1_1EpsBearer_aecf0c67109c5eb4ec0b07226fff5885e}{EpsBearer::Qci} q = EpsBearer::GBR\_CONV\_VOICE;
+203       \hyperlink{structns3_1_1EpsBearer}{EpsBearer} bearer (q);
+204       lteHelper->\hyperlink{classns3_1_1LteHelper_ac896e16cf162e4beeaa292d39ab1b700}{ActivateDataRadioBearer} (ueDev, bearer);
+205     \}
+206 
+207   BuildingsHelper::MakeMobilityModelConsistent ();
+208 
+209   \textcolor{comment}{// by default, simulation will anyway stop right after the REM has been generated}
+210   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0069));  
+211 
+212   \hyperlink{classns3_1_1Ptr}{Ptr<RadioEnvironmentMapHelper>} remHelper = 
+      CreateObject<RadioEnvironmentMapHelper> ();
+213   remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ChannelPath"}, StringValue (\textcolor{stringliteral}{"/ChannelList/0"}));
+214   remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"OutputFile"}, StringValue (\textcolor{stringliteral}{"rem.out"}));
+215   remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"XMin"}, DoubleValue (-2000.0));
+216   remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"XMax"}, DoubleValue (+2000.0));
+217   remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"YMin"}, DoubleValue (-500.0));
+218   remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"YMax"}, DoubleValue (+3500.0));
+219   remHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Z"}, DoubleValue (1.5));
+220   remHelper->\hyperlink{classns3_1_1RadioEnvironmentMapHelper_a0b15c982ea80037f9409d73654b48548}{Install} ();
+221 
+222   Simulator::Run ();
+223 
+224 \textcolor{comment}{//  GtkConfigStore config;}
+225 \textcolor{comment}{//  config.ConfigureAttributes ();}
+226 
+227   lteHelper = 0;
+228   Simulator::Destroy ();
+229   \textcolor{keywordflow}{return} 0;
+230 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

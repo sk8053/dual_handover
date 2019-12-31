@@ -1,0 +1,674 @@
+\hypertarget{group__hash__fnv}{}\section{F\+NV Hash Implementation}
+\label{group__hash__fnv}\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+Collaboration diagram for F\+NV Hash Implementation\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{group__hash__fnv_gac8e163567fdac1fd24f2871819172457}{\+\_\+\+\_\+\+F\+N\+V\+\_\+\+H\+\_\+\+\_\+}
+\item 
+\#define \hyperlink{group__hash__fnv_gafc332c72d6d3d69585287caedad7c292}{F\+N\+V\+\_\+\+V\+E\+R\+S\+I\+ON}~\char`\"{}5.\+0.\+2\char`\"{}
+\item 
+\#define \hyperlink{group__hash__fnv_ga059b80066b559fcc2869a8679f2abd3a}{F\+N\+V0\+\_\+32\+\_\+\+I\+N\+IT}~((Fnv1a\+Implementation\+::\+Fnv32\+\_\+t)0)
+\item 
+\#define \hyperlink{group__hash__fnv_ga47ad2404853d345b29ec28838f6414f7}{F\+N\+V1\+\_\+32\+\_\+\+I\+N\+IT}~((Fnv1a\+Implementation\+::\+Fnv32\+\_\+t)0x811c9dc5)
+\item 
+\#define \hyperlink{group__hash__fnv_ga40a142ccb9ca21d50ea9f6ed8589cc96}{F\+N\+V1\+\_\+32\+A\+\_\+\+I\+N\+IT}~\hyperlink{group__hash__fnv_ga47ad2404853d345b29ec28838f6414f7}{F\+N\+V1\+\_\+32\+\_\+\+I\+N\+IT}
+\item 
+\#define \hyperlink{group__hash__fnv_gae08b3a786e98cbb5778e6fb75beaa485}{H\+A\+V\+E\+\_\+64\+B\+I\+T\+\_\+\+L\+O\+N\+G\+\_\+\+L\+O\+NG}
+\item 
+\#define \hyperlink{group__hash__fnv_gacb9cb4b59bd9db3a5d335369fa58032a}{F\+N\+V0\+\_\+64\+\_\+\+I\+N\+IT}~((Fnv1a\+Implementation\+::\+Fnv64\+\_\+t)0)
+\item 
+\#define \hyperlink{group__hash__fnv_ga97c6e8016ffe540a627163d406059552}{F\+N\+V1\+\_\+64\+\_\+\+I\+N\+IT}~((Fnv1a\+Implementation\+::\+Fnv64\+\_\+t)0xcbf29ce484222325\+U\+L\+L)
+\item 
+\#define \hyperlink{group__hash__fnv_ga1eb99785c4898f16341824639f52d50f}{F\+N\+V1\+A\+\_\+64\+\_\+\+I\+N\+IT}~\hyperlink{group__hash__fnv_ga97c6e8016ffe540a627163d406059552}{F\+N\+V1\+\_\+64\+\_\+\+I\+N\+IT}
+\item 
+\#define \hyperlink{group__hash__fnv_gae13a6565bea334e9b6fb19033a392857}{F\+N\+V\+\_\+32\+\_\+\+P\+R\+I\+ME}~((Fnv1a\+Implementation\+::\+Fnv32\+\_\+t)0x01000193)
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef u\+\_\+int32\+\_\+t \hyperlink{group__hash__fnv_ga6de33672f4d12dba1c58d1b9ff210d65}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::\+Fnv32\+\_\+t}
+\item 
+typedef u\+\_\+int64\+\_\+t \hyperlink{group__hash__fnv_ga4b6673bffbef8355685a9e0129b86e16}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::\+Fnv64\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{group__hash__fnv_gade4dc6882f24a5ecd6b9d41e6698b275}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+type} \{ \\*
+\hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a9ddf1e553238aab7e8c19411f88be262}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::\+F\+N\+V\+\_\+\+N\+O\+NE} = 0, 
+\hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275ae43fe5fd2bea5e0a1a4f34144f7acb84}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::\+F\+N\+V0\+\_\+32} = 1, 
+\hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275af56bb58f654f4ad17f9e84e7118021a9}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::\+F\+N\+V1\+\_\+32} = 2, 
+\hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a0cf8d0725ff84c31470b8041737e17ca}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::\+F\+N\+V1a\+\_\+32} = 3, 
+\\*
+\hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275ab97f50ad95fcf2a4f11c77079e4cfeee}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::\+F\+N\+V0\+\_\+64} = 4, 
+\hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a5eb69234449bf051b23d003555325bde}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::\+F\+N\+V1\+\_\+64} = 5, 
+\hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a97b127307500c011595ba0cbf56903b5}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::\+F\+N\+V1a\+\_\+64} = 6
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Fnv32\+\_\+t \hyperlink{group__hash__fnv_gadaf15dca2b23a80e5cf6ce781da4906c}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+32\+\_\+buf} (void $\ast$buf, size\+\_\+t len, Fnv32\+\_\+t hval)
+\item 
+Fnv32\+\_\+t \hyperlink{group__hash__fnv_ga468252c78bf386134ad329d81d4d6eea}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+32\+\_\+str} (char $\ast$str, Fnv32\+\_\+t hval)
+\item 
+Fnv32\+\_\+t \hyperlink{group__hash__fnv_gaf1f4a73d8e353e33a70f6a0e9cb44f9b}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+32a\+\_\+buf} (void $\ast$buf, size\+\_\+t len, Fnv32\+\_\+t hashval)
+\item 
+Fnv32\+\_\+t \hyperlink{group__hash__fnv_ga6b0ed3c48edfd96df1222d7a414ef6d1}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+32a\+\_\+str} (char $\ast$buf, Fnv32\+\_\+t hashval)
+\item 
+Fnv64\+\_\+t \hyperlink{group__hash__fnv_gab250be2cf62835a4221cd58bf8cb136c}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+64\+\_\+buf} (void $\ast$buf, size\+\_\+t len, Fnv64\+\_\+t hval)
+\item 
+Fnv64\+\_\+t \hyperlink{group__hash__fnv_ga5de54a6ab9399b2e6780a3867889c568}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+64\+\_\+str} (char $\ast$str, Fnv64\+\_\+t hval)
+\item 
+Fnv64\+\_\+t \hyperlink{group__hash__fnv_ga61da2150923405756a0fd5ae19170dd2}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+64a\+\_\+buf} (void $\ast$buf, size\+\_\+t len, Fnv64\+\_\+t hashval)
+\item 
+Fnv64\+\_\+t \hyperlink{group__hash__fnv_gaa404ed488258e9943aa51a90e6dea631}{ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+64a\+\_\+str} (char $\ast$buf, Fnv64\+\_\+t hashval)
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{group__hash__fnv_ga843a032e93d6d54b28933d827eb4c966}{F\+N\+V\+\_\+64\+\_\+\+P\+R\+I\+ME}~((Fnv1a\+Implementation\+::\+Fnv64\+\_\+t)0x100000001b3\+U\+L\+L)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Macro Definition Documentation}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!\+\_\+\+\_\+\+F\+N\+V\+\_\+\+H\+\_\+\+\_\+@{\+\_\+\+\_\+\+F\+N\+V\+\_\+\+H\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+\+F\+N\+V\+\_\+\+H\+\_\+\+\_\+@{\+\_\+\+\_\+\+F\+N\+V\+\_\+\+H\+\_\+\+\_\+}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+\+F\+N\+V\+\_\+\+H\+\_\+\+\_\+}{__FNV_H__}}]{\setlength{\rightskip}{0pt plus 5cm}\#define \+\_\+\+\_\+\+F\+N\+V\+\_\+\+H\+\_\+\+\_\+}\hypertarget{group__hash__fnv_gac8e163567fdac1fd24f2871819172457}{}\label{group__hash__fnv_gac8e163567fdac1fd24f2871819172457}
+Include guard from the original fnv.\+h. \index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V0\+\_\+32\+\_\+\+I\+N\+IT@{F\+N\+V0\+\_\+32\+\_\+\+I\+N\+IT}}
+\index{F\+N\+V0\+\_\+32\+\_\+\+I\+N\+IT@{F\+N\+V0\+\_\+32\+\_\+\+I\+N\+IT}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{F\+N\+V0\+\_\+32\+\_\+\+I\+N\+IT}{FNV0_32_INIT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+N\+V0\+\_\+32\+\_\+\+I\+N\+IT~((Fnv1a\+Implementation\+::\+Fnv32\+\_\+t)0)}\hypertarget{group__hash__fnv_ga059b80066b559fcc2869a8679f2abd3a}{}\label{group__hash__fnv_ga059b80066b559fcc2869a8679f2abd3a}
+32 bit F\+N\+V-\/0 zero initial basis
+
+This historic hash is not recommended. One should use the F\+N\+V-\/1 hash and initial basis instead. \index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V0\+\_\+64\+\_\+\+I\+N\+IT@{F\+N\+V0\+\_\+64\+\_\+\+I\+N\+IT}}
+\index{F\+N\+V0\+\_\+64\+\_\+\+I\+N\+IT@{F\+N\+V0\+\_\+64\+\_\+\+I\+N\+IT}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{F\+N\+V0\+\_\+64\+\_\+\+I\+N\+IT}{FNV0_64_INIT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+N\+V0\+\_\+64\+\_\+\+I\+N\+IT~((Fnv1a\+Implementation\+::\+Fnv64\+\_\+t)0)}\hypertarget{group__hash__fnv_gacb9cb4b59bd9db3a5d335369fa58032a}{}\label{group__hash__fnv_gacb9cb4b59bd9db3a5d335369fa58032a}
+64 bit F\+N\+V-\/0 zero initial basis
+
+This historic hash is not recommended. One should use the F\+N\+V-\/1 hash and initial basis instead. \index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V1\+\_\+32\+\_\+\+I\+N\+IT@{F\+N\+V1\+\_\+32\+\_\+\+I\+N\+IT}}
+\index{F\+N\+V1\+\_\+32\+\_\+\+I\+N\+IT@{F\+N\+V1\+\_\+32\+\_\+\+I\+N\+IT}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{F\+N\+V1\+\_\+32\+\_\+\+I\+N\+IT}{FNV1_32_INIT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+N\+V1\+\_\+32\+\_\+\+I\+N\+IT~((Fnv1a\+Implementation\+::\+Fnv32\+\_\+t)0x811c9dc5)}\hypertarget{group__hash__fnv_ga47ad2404853d345b29ec28838f6414f7}{}\label{group__hash__fnv_ga47ad2404853d345b29ec28838f6414f7}
+32 bit F\+N\+V-\/1 and F\+N\+V-\/1a non-\/zero initial basis
+
+The F\+N\+V-\/1 initial basis is the F\+N\+V-\/0 hash of the following 32 octets\+: \begin{DoxyVerb}         chongo <Landon Curt Noll> /\../\
+\end{DoxyVerb}
+
+
+\begin{DoxyNote}{Note}
+The \textbackslash{}\textquotesingle{}s above are not back-\/slashing escape characters. They are literal A\+S\+C\+II backslash 0x5c characters.
+
+The F\+N\+V-\/1a initial basis is the same value as F\+N\+V-\/1 by definition. 
+\end{DoxyNote}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V1\+\_\+32\+A\+\_\+\+I\+N\+IT@{F\+N\+V1\+\_\+32\+A\+\_\+\+I\+N\+IT}}
+\index{F\+N\+V1\+\_\+32\+A\+\_\+\+I\+N\+IT@{F\+N\+V1\+\_\+32\+A\+\_\+\+I\+N\+IT}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{F\+N\+V1\+\_\+32\+A\+\_\+\+I\+N\+IT}{FNV1_32A_INIT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+N\+V1\+\_\+32\+A\+\_\+\+I\+N\+IT~{\bf F\+N\+V1\+\_\+32\+\_\+\+I\+N\+IT}}\hypertarget{group__hash__fnv_ga40a142ccb9ca21d50ea9f6ed8589cc96}{}\label{group__hash__fnv_ga40a142ccb9ca21d50ea9f6ed8589cc96}
+
+
+
+
+32 bit F\+N\+V-\/1 and F\+N\+V-\/1a non-\/zero initial basis
+
+The F\+N\+V-\/1 initial basis is the F\+N\+V-\/0 hash of the following 32 octets\+: \begin{DoxyVerb}         chongo <Landon Curt Noll> /\../\
+\end{DoxyVerb}
+
+
+\begin{DoxyNote}{Note}
+The \textbackslash{}\textquotesingle{}s above are not back-\/slashing escape characters. They are literal A\+S\+C\+II backslash 0x5c characters.
+
+The F\+N\+V-\/1a initial basis is the same value as F\+N\+V-\/1 by definition. 
+\end{DoxyNote}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V1\+\_\+64\+\_\+\+I\+N\+IT@{F\+N\+V1\+\_\+64\+\_\+\+I\+N\+IT}}
+\index{F\+N\+V1\+\_\+64\+\_\+\+I\+N\+IT@{F\+N\+V1\+\_\+64\+\_\+\+I\+N\+IT}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{F\+N\+V1\+\_\+64\+\_\+\+I\+N\+IT}{FNV1_64_INIT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+N\+V1\+\_\+64\+\_\+\+I\+N\+IT~((Fnv1a\+Implementation\+::\+Fnv64\+\_\+t)0xcbf29ce484222325\+U\+L\+L)}\hypertarget{group__hash__fnv_ga97c6e8016ffe540a627163d406059552}{}\label{group__hash__fnv_ga97c6e8016ffe540a627163d406059552}
+64 bit F\+N\+V-\/1 non-\/zero initial basis
+
+The F\+N\+V-\/1 initial basis is the F\+N\+V-\/0 hash of the following 32 octets\+: \begin{DoxyVerb}         chongo <Landon Curt Noll> /\../\
+\end{DoxyVerb}
+
+
+\begin{DoxyNote}{Note}
+The \textbackslash{}\textquotesingle{}s above are not back-\/slashing escape characters. They are literal A\+S\+C\+II backslash 0x5c characters.
+
+The F\+N\+V-\/1a initial basis is the same value as F\+N\+V-\/1 by definition. 
+\end{DoxyNote}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V1\+A\+\_\+64\+\_\+\+I\+N\+IT@{F\+N\+V1\+A\+\_\+64\+\_\+\+I\+N\+IT}}
+\index{F\+N\+V1\+A\+\_\+64\+\_\+\+I\+N\+IT@{F\+N\+V1\+A\+\_\+64\+\_\+\+I\+N\+IT}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{F\+N\+V1\+A\+\_\+64\+\_\+\+I\+N\+IT}{FNV1A_64_INIT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+N\+V1\+A\+\_\+64\+\_\+\+I\+N\+IT~{\bf F\+N\+V1\+\_\+64\+\_\+\+I\+N\+IT}}\hypertarget{group__hash__fnv_ga1eb99785c4898f16341824639f52d50f}{}\label{group__hash__fnv_ga1eb99785c4898f16341824639f52d50f}
+
+
+
+
+64 bit F\+N\+V-\/1 non-\/zero initial basis
+
+The F\+N\+V-\/1 initial basis is the F\+N\+V-\/0 hash of the following 32 octets\+: \begin{DoxyVerb}         chongo <Landon Curt Noll> /\../\
+\end{DoxyVerb}
+
+
+\begin{DoxyNote}{Note}
+The \textbackslash{}\textquotesingle{}s above are not back-\/slashing escape characters. They are literal A\+S\+C\+II backslash 0x5c characters.
+
+The F\+N\+V-\/1a initial basis is the same value as F\+N\+V-\/1 by definition. 
+\end{DoxyNote}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V\+\_\+32\+\_\+\+P\+R\+I\+ME@{F\+N\+V\+\_\+32\+\_\+\+P\+R\+I\+ME}}
+\index{F\+N\+V\+\_\+32\+\_\+\+P\+R\+I\+ME@{F\+N\+V\+\_\+32\+\_\+\+P\+R\+I\+ME}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{F\+N\+V\+\_\+32\+\_\+\+P\+R\+I\+ME}{FNV_32_PRIME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+N\+V\+\_\+32\+\_\+\+P\+R\+I\+ME~((Fnv1a\+Implementation\+::\+Fnv32\+\_\+t)0x01000193)}\hypertarget{group__hash__fnv_gae13a6565bea334e9b6fb19033a392857}{}\label{group__hash__fnv_gae13a6565bea334e9b6fb19033a392857}
+32 bit magic F\+N\+V-\/1a prime \index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V\+\_\+64\+\_\+\+P\+R\+I\+ME@{F\+N\+V\+\_\+64\+\_\+\+P\+R\+I\+ME}}
+\index{F\+N\+V\+\_\+64\+\_\+\+P\+R\+I\+ME@{F\+N\+V\+\_\+64\+\_\+\+P\+R\+I\+ME}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{F\+N\+V\+\_\+64\+\_\+\+P\+R\+I\+ME}{FNV_64_PRIME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+N\+V\+\_\+64\+\_\+\+P\+R\+I\+ME~((Fnv1a\+Implementation\+::\+Fnv64\+\_\+t)0x100000001b3\+U\+L\+L)}\hypertarget{group__hash__fnv_ga843a032e93d6d54b28933d827eb4c966}{}\label{group__hash__fnv_ga843a032e93d6d54b28933d827eb4c966}
+F\+N\+V-\/1a defines the initial basis to be non-\/zero 64 bit magic F\+N\+V-\/1a prime \index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V\+\_\+\+V\+E\+R\+S\+I\+ON@{F\+N\+V\+\_\+\+V\+E\+R\+S\+I\+ON}}
+\index{F\+N\+V\+\_\+\+V\+E\+R\+S\+I\+ON@{F\+N\+V\+\_\+\+V\+E\+R\+S\+I\+ON}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{F\+N\+V\+\_\+\+V\+E\+R\+S\+I\+ON}{FNV_VERSION}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+N\+V\+\_\+\+V\+E\+R\+S\+I\+ON~\char`\"{}5.\+0.\+2\char`\"{}}\hypertarget{group__hash__fnv_gafc332c72d6d3d69585287caedad7c292}{}\label{group__hash__fnv_gafc332c72d6d3d69585287caedad7c292}
+@(\#) F\+NV Version \index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!H\+A\+V\+E\+\_\+64\+B\+I\+T\+\_\+\+L\+O\+N\+G\+\_\+\+L\+O\+NG@{H\+A\+V\+E\+\_\+64\+B\+I\+T\+\_\+\+L\+O\+N\+G\+\_\+\+L\+O\+NG}}
+\index{H\+A\+V\+E\+\_\+64\+B\+I\+T\+\_\+\+L\+O\+N\+G\+\_\+\+L\+O\+NG@{H\+A\+V\+E\+\_\+64\+B\+I\+T\+\_\+\+L\+O\+N\+G\+\_\+\+L\+O\+NG}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{H\+A\+V\+E\+\_\+64\+B\+I\+T\+\_\+\+L\+O\+N\+G\+\_\+\+L\+O\+NG}{HAVE_64BIT_LONG_LONG}}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+A\+V\+E\+\_\+64\+B\+I\+T\+\_\+\+L\+O\+N\+G\+\_\+\+L\+O\+NG}\hypertarget{group__hash__fnv_gae08b3a786e98cbb5778e6fb75beaa485}{}\label{group__hash__fnv_gae08b3a786e98cbb5778e6fb75beaa485}
+Determine how 64 bit unsigned values are represented 
+
+\subsection{Typedef Documentation}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!Fnv32\+\_\+t@{Fnv32\+\_\+t}}
+\index{Fnv32\+\_\+t@{Fnv32\+\_\+t}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{Fnv32\+\_\+t}{Fnv32_t}}]{\setlength{\rightskip}{0pt plus 5cm}typedef u\+\_\+int32\+\_\+t {\bf ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::\+Fnv32\+\_\+t}}\hypertarget{group__hash__fnv_ga6de33672f4d12dba1c58d1b9ff210d65}{}\label{group__hash__fnv_ga6de33672f4d12dba1c58d1b9ff210d65}
+32 bit F\+N\+V-\/0 hash type \index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!Fnv64\+\_\+t@{Fnv64\+\_\+t}}
+\index{Fnv64\+\_\+t@{Fnv64\+\_\+t}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{Fnv64\+\_\+t}{Fnv64_t}}]{\setlength{\rightskip}{0pt plus 5cm}typedef u\+\_\+int64\+\_\+t {\bf ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::\+Fnv64\+\_\+t}}\hypertarget{group__hash__fnv_ga4b6673bffbef8355685a9e0129b86e16}{}\label{group__hash__fnv_ga4b6673bffbef8355685a9e0129b86e16}
+64 bit F\+N\+V-\/0 hash 
+
+\subsection{Enumeration Type Documentation}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!fnv\+\_\+type@{fnv\+\_\+type}}
+\index{fnv\+\_\+type@{fnv\+\_\+type}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{fnv\+\_\+type}{fnv_type}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+type}}\hypertarget{group__hash__fnv_gade4dc6882f24a5ecd6b9d41e6698b275}{}\label{group__hash__fnv_gade4dc6882f24a5ecd6b9d41e6698b275}
+F\+NV hash types \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\+N\+V\+\_\+\+N\+O\+NE@{F\+N\+V\+\_\+\+N\+O\+NE}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V\+\_\+\+N\+O\+NE@{F\+N\+V\+\_\+\+N\+O\+NE}}\item[{\em 
+F\+N\+V\+\_\+\+N\+O\+NE\hypertarget{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a9ddf1e553238aab7e8c19411f88be262}{}\label{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a9ddf1e553238aab7e8c19411f88be262}
+}]invalid F\+NV hash type \index{F\+N\+V0\+\_\+32@{F\+N\+V0\+\_\+32}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V0\+\_\+32@{F\+N\+V0\+\_\+32}}\item[{\em 
+F\+N\+V0\+\_\+32\hypertarget{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275ae43fe5fd2bea5e0a1a4f34144f7acb84}{}\label{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275ae43fe5fd2bea5e0a1a4f34144f7acb84}
+}]F\+N\+V-\/0 32 bit hash \index{F\+N\+V1\+\_\+32@{F\+N\+V1\+\_\+32}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V1\+\_\+32@{F\+N\+V1\+\_\+32}}\item[{\em 
+F\+N\+V1\+\_\+32\hypertarget{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275af56bb58f654f4ad17f9e84e7118021a9}{}\label{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275af56bb58f654f4ad17f9e84e7118021a9}
+}]F\+N\+V-\/1 32 bit hash \index{F\+N\+V1a\+\_\+32@{F\+N\+V1a\+\_\+32}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V1a\+\_\+32@{F\+N\+V1a\+\_\+32}}\item[{\em 
+F\+N\+V1a\+\_\+32\hypertarget{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a0cf8d0725ff84c31470b8041737e17ca}{}\label{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a0cf8d0725ff84c31470b8041737e17ca}
+}]F\+N\+V-\/1a 32 bit hash \index{F\+N\+V0\+\_\+64@{F\+N\+V0\+\_\+64}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V0\+\_\+64@{F\+N\+V0\+\_\+64}}\item[{\em 
+F\+N\+V0\+\_\+64\hypertarget{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275ab97f50ad95fcf2a4f11c77079e4cfeee}{}\label{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275ab97f50ad95fcf2a4f11c77079e4cfeee}
+}]F\+N\+V-\/0 64 bit hash \index{F\+N\+V1\+\_\+64@{F\+N\+V1\+\_\+64}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V1\+\_\+64@{F\+N\+V1\+\_\+64}}\item[{\em 
+F\+N\+V1\+\_\+64\hypertarget{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a5eb69234449bf051b23d003555325bde}{}\label{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a5eb69234449bf051b23d003555325bde}
+}]F\+N\+V-\/1 64 bit hash \index{F\+N\+V1a\+\_\+64@{F\+N\+V1a\+\_\+64}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!F\+N\+V1a\+\_\+64@{F\+N\+V1a\+\_\+64}}\item[{\em 
+F\+N\+V1a\+\_\+64\hypertarget{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a97b127307500c011595ba0cbf56903b5}{}\label{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a97b127307500c011595ba0cbf56903b5}
+}]F\+N\+V-\/1a 64 bit hash \end{description}
+\end{Desc}
+
+\begin{DoxyCode}
+256               \{
+257     \hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a9ddf1e553238aab7e8c19411f88be262}{FNV\_NONE} = 0,       
+258     \hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275ae43fe5fd2bea5e0a1a4f34144f7acb84}{FNV0\_32} = 1, 
+259     \hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275af56bb58f654f4ad17f9e84e7118021a9}{FNV1\_32} = 2, 
+260     \hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a0cf8d0725ff84c31470b8041737e17ca}{FNV1a\_32} = 3,       
+261     \hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275ab97f50ad95fcf2a4f11c77079e4cfeee}{FNV0\_64} = 4, 
+262     \hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a5eb69234449bf051b23d003555325bde}{FNV1\_64} = 5, 
+263     \hyperlink{group__hash__fnv_ggade4dc6882f24a5ecd6b9d41e6698b275a97b127307500c011595ba0cbf56903b5}{FNV1a\_64} = 6,       
+264 \};
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!fnv\+\_\+32\+\_\+buf@{fnv\+\_\+32\+\_\+buf}}
+\index{fnv\+\_\+32\+\_\+buf@{fnv\+\_\+32\+\_\+buf}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{fnv\+\_\+32\+\_\+buf(void $\ast$buf, size\+\_\+t len, Fnv32\+\_\+t hval)}{fnv_32_buf(void *buf, size_t len, Fnv32_t hval)}}]{\setlength{\rightskip}{0pt plus 5cm}Fnv32\+\_\+t ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+32\+\_\+buf (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len, }
+\item[{{\bf Fnv32\+\_\+t}}]{hval}
+\end{DoxyParamCaption}
+)}\hypertarget{group__hash__fnv_gadaf15dca2b23a80e5cf6ce781da4906c}{}\label{group__hash__fnv_gadaf15dca2b23a80e5cf6ce781da4906c}
+
+
+
+
+fnv\+\_\+32a\+\_\+buf -\/ perform a 32 bit Fowler/\+Noll/\+Vo F\+N\+V-\/1a hash on a buffer
+
+input\+: 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em buf} & start of buffer to hash \\
+\hline
+\mbox{\tt in}  & {\em len} & length of buffer in octets \\
+\hline
+\mbox{\tt in}  & {\em hval} & previous hash value or 0 if first call\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+32 bit hash as a static hash type.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+To use the recommended 32 bit F\+N\+V-\/1a hash, use F\+N\+V1\+\_\+32\+A\+\_\+\+I\+N\+IT as the hval arg on the first call to either \hyperlink{group__hash__fnv_gaf1f4a73d8e353e33a70f6a0e9cb44f9b}{fnv\+\_\+32a\+\_\+buf()} or \hyperlink{group__hash__fnv_ga6b0ed3c48edfd96df1222d7a414ef6d1}{fnv\+\_\+32a\+\_\+str()}. 
+\end{DoxyNote}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!fnv\+\_\+32\+\_\+str@{fnv\+\_\+32\+\_\+str}}
+\index{fnv\+\_\+32\+\_\+str@{fnv\+\_\+32\+\_\+str}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{fnv\+\_\+32\+\_\+str(char $\ast$str, Fnv32\+\_\+t hval)}{fnv_32_str(char *str, Fnv32_t hval)}}]{\setlength{\rightskip}{0pt plus 5cm}Fnv32\+\_\+t ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+32\+\_\+str (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str, }
+\item[{{\bf Fnv32\+\_\+t}}]{hval}
+\end{DoxyParamCaption}
+)}\hypertarget{group__hash__fnv_ga468252c78bf386134ad329d81d4d6eea}{}\label{group__hash__fnv_ga468252c78bf386134ad329d81d4d6eea}
+
+
+
+
+fnv\+\_\+32a\+\_\+str -\/ perform a 32 bit Fowler/\+Noll/\+Vo F\+N\+V-\/1a hash on a string
+
+input\+: 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em str} & string to hash \\
+\hline
+\mbox{\tt in}  & {\em hval} & previous hash value or 0 if first call\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+32 bit hash as a static hash type
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+To use the recommended 32 bit F\+N\+V-\/1a hash, use F\+N\+V1\+\_\+32\+A\+\_\+\+I\+N\+IT as the hval arg on the first call to either \hyperlink{group__hash__fnv_gaf1f4a73d8e353e33a70f6a0e9cb44f9b}{fnv\+\_\+32a\+\_\+buf()} or \hyperlink{group__hash__fnv_ga6b0ed3c48edfd96df1222d7a414ef6d1}{fnv\+\_\+32a\+\_\+str()}. 
+\end{DoxyNote}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!fnv\+\_\+32a\+\_\+buf@{fnv\+\_\+32a\+\_\+buf}}
+\index{fnv\+\_\+32a\+\_\+buf@{fnv\+\_\+32a\+\_\+buf}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{fnv\+\_\+32a\+\_\+buf(void $\ast$buf, size\+\_\+t len, Fnv32\+\_\+t hashval)}{fnv_32a_buf(void *buf, size_t len, Fnv32_t hashval)}}]{\setlength{\rightskip}{0pt plus 5cm}Fnv32\+\_\+t ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+32a\+\_\+buf (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len, }
+\item[{{\bf Fnv32\+\_\+t}}]{hval}
+\end{DoxyParamCaption}
+)}\hypertarget{group__hash__fnv_gaf1f4a73d8e353e33a70f6a0e9cb44f9b}{}\label{group__hash__fnv_gaf1f4a73d8e353e33a70f6a0e9cb44f9b}
+fnv\+\_\+32a\+\_\+buf -\/ perform a 32 bit Fowler/\+Noll/\+Vo F\+N\+V-\/1a hash on a buffer
+
+input\+: 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em buf} & start of buffer to hash \\
+\hline
+\mbox{\tt in}  & {\em len} & length of buffer in octets \\
+\hline
+\mbox{\tt in}  & {\em hval} & previous hash value or 0 if first call\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+32 bit hash as a static hash type.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+To use the recommended 32 bit F\+N\+V-\/1a hash, use F\+N\+V1\+\_\+32\+A\+\_\+\+I\+N\+IT as the hval arg on the first call to either \hyperlink{group__hash__fnv_gaf1f4a73d8e353e33a70f6a0e9cb44f9b}{fnv\+\_\+32a\+\_\+buf()} or \hyperlink{group__hash__fnv_ga6b0ed3c48edfd96df1222d7a414ef6d1}{fnv\+\_\+32a\+\_\+str()}. 
+\end{DoxyNote}
+
+\begin{DoxyCode}
+382 \{
+383     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *bp = (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *)buf;   \textcolor{comment}{/* start of buffer */}
+384     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *be = bp + len;               \textcolor{comment}{/* beyond end of buffer */}
+385 
+386     \textcolor{comment}{/*}
+387 \textcolor{comment}{     * FNV-1a hash each octet in the buffer}
+388 \textcolor{comment}{     */}
+389     \textcolor{keywordflow}{while} (bp < be) \{
+390 
+391         \textcolor{comment}{/* xor the bottom with the current octet */}
+392         hval ^= (\hyperlink{group__hash__fnv_ga6de33672f4d12dba1c58d1b9ff210d65}{Fnv32\_t})*bp++;
+393 
+394         \textcolor{comment}{/* multiply by the 32 bit FNV magic prime mod 2^32 */}
+395 \textcolor{preprocessor}{#if defined(NO\_FNV\_GCC\_OPTIMIZATION)}
+396         hval *= \hyperlink{group__hash__fnv_gae13a6565bea334e9b6fb19033a392857}{FNV\_32\_PRIME};
+397 \textcolor{preprocessor}{#else}
+398         hval += (hval<<1) + (hval<<4) + (hval<<7) + (hval<<8) + (hval<<24);
+399 \textcolor{preprocessor}{#endif}
+400     \}
+401 
+402     \textcolor{comment}{/* return our new hash value */}
+403     \textcolor{keywordflow}{return} hval;
+404 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!fnv\+\_\+32a\+\_\+str@{fnv\+\_\+32a\+\_\+str}}
+\index{fnv\+\_\+32a\+\_\+str@{fnv\+\_\+32a\+\_\+str}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{fnv\+\_\+32a\+\_\+str(char $\ast$buf, Fnv32\+\_\+t hashval)}{fnv_32a_str(char *buf, Fnv32_t hashval)}}]{\setlength{\rightskip}{0pt plus 5cm}Fnv32\+\_\+t ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+32a\+\_\+str (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str, }
+\item[{{\bf Fnv32\+\_\+t}}]{hval}
+\end{DoxyParamCaption}
+)}\hypertarget{group__hash__fnv_ga6b0ed3c48edfd96df1222d7a414ef6d1}{}\label{group__hash__fnv_ga6b0ed3c48edfd96df1222d7a414ef6d1}
+fnv\+\_\+32a\+\_\+str -\/ perform a 32 bit Fowler/\+Noll/\+Vo F\+N\+V-\/1a hash on a string
+
+input\+: 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em str} & string to hash \\
+\hline
+\mbox{\tt in}  & {\em hval} & previous hash value or 0 if first call\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+32 bit hash as a static hash type
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+To use the recommended 32 bit F\+N\+V-\/1a hash, use F\+N\+V1\+\_\+32\+A\+\_\+\+I\+N\+IT as the hval arg on the first call to either \hyperlink{group__hash__fnv_gaf1f4a73d8e353e33a70f6a0e9cb44f9b}{fnv\+\_\+32a\+\_\+buf()} or \hyperlink{group__hash__fnv_ga6b0ed3c48edfd96df1222d7a414ef6d1}{fnv\+\_\+32a\+\_\+str()}. 
+\end{DoxyNote}
+
+\begin{DoxyCode}
+421 \{
+422     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *\hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s} = (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *)str;   \textcolor{comment}{/* unsigned string */}
+423 
+424     \textcolor{comment}{/*}
+425 \textcolor{comment}{     * FNV-1a hash each octet in the buffer}
+426 \textcolor{comment}{     */}
+427     \textcolor{keywordflow}{while} (*s) \{
+428 
+429         \textcolor{comment}{/* xor the bottom with the current octet */}
+430         hval ^= (\hyperlink{group__hash__fnv_ga6de33672f4d12dba1c58d1b9ff210d65}{Fnv32\_t})*s++;
+431 
+432         \textcolor{comment}{/* multiply by the 32 bit FNV magic prime mod 2^32 */}
+433 \textcolor{preprocessor}{#if defined(NO\_FNV\_GCC\_OPTIMIZATION)}
+434         hval *= \hyperlink{group__hash__fnv_gae13a6565bea334e9b6fb19033a392857}{FNV\_32\_PRIME};
+435 \textcolor{preprocessor}{#else}
+436         hval += (hval<<1) + (hval<<4) + (hval<<7) + (hval<<8) + (hval<<24);
+437 \textcolor{preprocessor}{#endif}
+438     \}
+439 
+440     \textcolor{comment}{/* return our new hash value */}
+441     \textcolor{keywordflow}{return} hval;
+442 \}
+\end{DoxyCode}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!fnv\+\_\+64\+\_\+buf@{fnv\+\_\+64\+\_\+buf}}
+\index{fnv\+\_\+64\+\_\+buf@{fnv\+\_\+64\+\_\+buf}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{fnv\+\_\+64\+\_\+buf(void $\ast$buf, size\+\_\+t len, Fnv64\+\_\+t hval)}{fnv_64_buf(void *buf, size_t len, Fnv64_t hval)}}]{\setlength{\rightskip}{0pt plus 5cm}Fnv64\+\_\+t ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+64\+\_\+buf (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len, }
+\item[{{\bf Fnv64\+\_\+t}}]{hval}
+\end{DoxyParamCaption}
+)}\hypertarget{group__hash__fnv_gab250be2cf62835a4221cd58bf8cb136c}{}\label{group__hash__fnv_gab250be2cf62835a4221cd58bf8cb136c}
+
+
+
+
+fnv\+\_\+64a\+\_\+buf -\/ perform a 64 bit Fowler/\+Noll/\+Vo F\+N\+V-\/1a hash on a buffer
+
+input\+: 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em buf} & start of buffer to hash \\
+\hline
+\mbox{\tt in}  & {\em len} & length of buffer in octets \\
+\hline
+\mbox{\tt in}  & {\em hval} & previous hash value or 0 if first call\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+64 bit hash as a static hash type
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+To use the recommended 64 bit F\+N\+V-\/1a hash, use F\+N\+V1\+A\+\_\+64\+\_\+\+I\+N\+IT as the hval arg on the first call to either \hyperlink{group__hash__fnv_ga61da2150923405756a0fd5ae19170dd2}{fnv\+\_\+64a\+\_\+buf()} or \hyperlink{group__hash__fnv_gaa404ed488258e9943aa51a90e6dea631}{fnv\+\_\+64a\+\_\+str()}. 
+\end{DoxyNote}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!fnv\+\_\+64\+\_\+str@{fnv\+\_\+64\+\_\+str}}
+\index{fnv\+\_\+64\+\_\+str@{fnv\+\_\+64\+\_\+str}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{fnv\+\_\+64\+\_\+str(char $\ast$str, Fnv64\+\_\+t hval)}{fnv_64_str(char *str, Fnv64_t hval)}}]{\setlength{\rightskip}{0pt plus 5cm}Fnv64\+\_\+t ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+64\+\_\+str (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str, }
+\item[{{\bf Fnv64\+\_\+t}}]{hval}
+\end{DoxyParamCaption}
+)}\hypertarget{group__hash__fnv_ga5de54a6ab9399b2e6780a3867889c568}{}\label{group__hash__fnv_ga5de54a6ab9399b2e6780a3867889c568}
+
+
+
+
+fnv\+\_\+64a\+\_\+str -\/ perform a 64 bit Fowler/\+Noll/\+Vo F\+N\+V-\/1a hash on a buffer
+
+input\+: 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em str} & string to hash \\
+\hline
+\mbox{\tt in}  & {\em hval} & previous hash value or 0 if first call\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+64 bit hash as a static hash type
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+To use the recommended 64 bit F\+N\+V-\/1a hash, use F\+N\+V1\+A\+\_\+64\+\_\+\+I\+N\+IT as the hval arg on the first call to either \hyperlink{group__hash__fnv_ga61da2150923405756a0fd5ae19170dd2}{fnv\+\_\+64a\+\_\+buf()} or \hyperlink{group__hash__fnv_gaa404ed488258e9943aa51a90e6dea631}{fnv\+\_\+64a\+\_\+str()}. 
+\end{DoxyNote}
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!fnv\+\_\+64a\+\_\+buf@{fnv\+\_\+64a\+\_\+buf}}
+\index{fnv\+\_\+64a\+\_\+buf@{fnv\+\_\+64a\+\_\+buf}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{fnv\+\_\+64a\+\_\+buf(void $\ast$buf, size\+\_\+t len, Fnv64\+\_\+t hashval)}{fnv_64a_buf(void *buf, size_t len, Fnv64_t hashval)}}]{\setlength{\rightskip}{0pt plus 5cm}Fnv64\+\_\+t ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+64a\+\_\+buf (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len, }
+\item[{{\bf Fnv64\+\_\+t}}]{hval}
+\end{DoxyParamCaption}
+)}\hypertarget{group__hash__fnv_ga61da2150923405756a0fd5ae19170dd2}{}\label{group__hash__fnv_ga61da2150923405756a0fd5ae19170dd2}
+fnv\+\_\+64a\+\_\+buf -\/ perform a 64 bit Fowler/\+Noll/\+Vo F\+N\+V-\/1a hash on a buffer
+
+input\+: 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em buf} & start of buffer to hash \\
+\hline
+\mbox{\tt in}  & {\em len} & length of buffer in octets \\
+\hline
+\mbox{\tt in}  & {\em hval} & previous hash value or 0 if first call\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+64 bit hash as a static hash type
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+To use the recommended 64 bit F\+N\+V-\/1a hash, use F\+N\+V1\+A\+\_\+64\+\_\+\+I\+N\+IT as the hval arg on the first call to either \hyperlink{group__hash__fnv_ga61da2150923405756a0fd5ae19170dd2}{fnv\+\_\+64a\+\_\+buf()} or \hyperlink{group__hash__fnv_gaa404ed488258e9943aa51a90e6dea631}{fnv\+\_\+64a\+\_\+str()}. 
+\end{DoxyNote}
+
+\begin{DoxyCode}
+545 \{
+546     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *bp = (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *)buf;   \textcolor{comment}{/* start of buffer */}
+547     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *be = bp + len;               \textcolor{comment}{/* beyond end of buffer */}
+548 
+549 \textcolor{preprocessor}{#if defined(HAVE\_64BIT\_LONG\_LONG)}
+550     \textcolor{comment}{/*}
+551 \textcolor{comment}{     * FNV-1a hash each octet of the buffer}
+552 \textcolor{comment}{     */}
+553     \textcolor{keywordflow}{while} (bp < be) \{
+554 
+555         \textcolor{comment}{/* xor the bottom with the current octet */}
+556         hval ^= (\hyperlink{group__hash__fnv_ga4b6673bffbef8355685a9e0129b86e16}{Fnv64\_t})*bp++;
+557 
+558         \textcolor{comment}{/* multiply by the 64 bit FNV magic prime mod 2^64 */}
+559 \textcolor{preprocessor}{#if defined(NO\_FNV\_GCC\_OPTIMIZATION)}
+560         hval *= \hyperlink{group__hash__fnv_ga843a032e93d6d54b28933d827eb4c966}{FNV\_64\_PRIME};
+561 \textcolor{preprocessor}{#else }\textcolor{comment}{/* NO\_FNV\_GCC\_OPTIMIZATION */}\textcolor{preprocessor}{}
+562         hval += (hval << 1) + (hval << 4) + (hval << 5) +
+563                 (hval << 7) + (hval << 8) + (hval << 40);
+564 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* NO\_FNV\_GCC\_OPTIMIZATION */}\textcolor{preprocessor}{}
+565     \}
+566 
+567 \textcolor{preprocessor}{#else }\textcolor{comment}{/* HAVE\_64BIT\_LONG\_LONG */}\textcolor{preprocessor}{}
+568 
+569     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} val[4];                       \textcolor{comment}{/* hash value in base 2^16 */}
+570     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} tmp[4];                       \textcolor{comment}{/* tmp 64 bit value */}
+571 
+572     \textcolor{comment}{/*}
+573 \textcolor{comment}{     * Convert Fnv64\_t hval into a base 2^16 array}
+574 \textcolor{comment}{     */}
+575     val[0] = hval.w32[0];
+576     val[1] = (val[0] >> 16);
+577     val[0] &= 0xffff;
+578     val[2] = hval.w32[1];
+579     val[3] = (val[2] >> 16);
+580     val[2] &= 0xffff;
+581 
+582     \textcolor{comment}{/*}
+583 \textcolor{comment}{     * FNV-1a hash each octet of the buffer}
+584 \textcolor{comment}{     */}
+585     \textcolor{keywordflow}{while} (bp < be) \{
+586 
+587         \textcolor{comment}{/* xor the bottom with the current octet */}
+588         val[0] ^= (\textcolor{keywordtype}{unsigned} \hyperlink{generate__test__data__lte__sinr_8m_a0eab6be67e93c3411f7a8b53cc297285}{long})*bp++;
+589 
+590         \textcolor{comment}{/*}
+591 \textcolor{comment}{         * multiply by the 64 bit FNV magic prime mod 2^64}
+592 \textcolor{comment}{         *}
+593 \textcolor{comment}{         * Using 0x100000001b3 we have the following digits base 2^16:}
+594 \textcolor{comment}{         *}
+595 \textcolor{comment}{         *      0x0     0x100   0x0     0x1b3}
+596 \textcolor{comment}{         *}
+597 \textcolor{comment}{         * which is the same as:}
+598 \textcolor{comment}{         *}
+599 \textcolor{comment}{         *      0x0     1<<FNV\_64\_PRIME\_SHIFT   0x0     FNV\_64\_PRIME\_LOW}
+600 \textcolor{comment}{         */}
+601         \textcolor{comment}{/* multiply by the lowest order digit base 2^16 */}
+602         tmp[0] = val[0] * FNV\_64\_PRIME\_LOW;
+603         tmp[1] = val[1] * FNV\_64\_PRIME\_LOW;
+604         tmp[2] = val[2] * FNV\_64\_PRIME\_LOW;
+605         tmp[3] = val[3] * FNV\_64\_PRIME\_LOW;
+606         \textcolor{comment}{/* multiply by the other non-zero digit */}
+607         tmp[2] += val[0] << FNV\_64\_PRIME\_SHIFT; \textcolor{comment}{/* tmp[2] += val[0] * 0x100 */}
+608         tmp[3] += val[1] << FNV\_64\_PRIME\_SHIFT; \textcolor{comment}{/* tmp[3] += val[1] * 0x100 */}
+609         \textcolor{comment}{/* propagate carries */}
+610         tmp[1] += (tmp[0] >> 16);
+611         val[0] = tmp[0] & 0xffff;
+612         tmp[2] += (tmp[1] >> 16);
+613         val[1] = tmp[1] & 0xffff;
+614         val[3] = tmp[3] + (tmp[2] >> 16);
+615         val[2] = tmp[2] & 0xffff;
+616         \textcolor{comment}{/*}
+617 \textcolor{comment}{         * Doing a val[3] &= 0xffff; is not really needed since it simply}
+618 \textcolor{comment}{         * removes multiples of 2^64.  We can discard these excess bits}
+619 \textcolor{comment}{         * outside of the loop when we convert to Fnv64\_t.}
+620 \textcolor{comment}{         */}
+621     \}
+622 
+623     \textcolor{comment}{/*}
+624 \textcolor{comment}{     * Convert base 2^16 array back into an Fnv64\_t}
+625 \textcolor{comment}{     */}
+626     hval.w32[1] = ((val[3]<<16) | val[2]);
+627     hval.w32[0] = ((val[1]<<16) | val[0]);
+628 
+629 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* HAVE\_64BIT\_LONG\_LONG */}\textcolor{preprocessor}{}
+630 
+631     \textcolor{comment}{/* return our new hash value */}
+632     \textcolor{keywordflow}{return} hval;
+633 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}!fnv\+\_\+64a\+\_\+str@{fnv\+\_\+64a\+\_\+str}}
+\index{fnv\+\_\+64a\+\_\+str@{fnv\+\_\+64a\+\_\+str}!F\+N\+V Hash Implementation@{F\+N\+V Hash Implementation}}
+\subsubsection[{\texorpdfstring{fnv\+\_\+64a\+\_\+str(char $\ast$buf, Fnv64\+\_\+t hashval)}{fnv_64a_str(char *buf, Fnv64_t hashval)}}]{\setlength{\rightskip}{0pt plus 5cm}Fnv64\+\_\+t ns3\+::\+Hash\+::\+Function\+::\+Fnv1a\+Implementation\+::fnv\+\_\+64a\+\_\+str (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str, }
+\item[{{\bf Fnv64\+\_\+t}}]{hval}
+\end{DoxyParamCaption}
+)}\hypertarget{group__hash__fnv_gaa404ed488258e9943aa51a90e6dea631}{}\label{group__hash__fnv_gaa404ed488258e9943aa51a90e6dea631}
+fnv\+\_\+64a\+\_\+str -\/ perform a 64 bit Fowler/\+Noll/\+Vo F\+N\+V-\/1a hash on a buffer
+
+input\+: 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em str} & string to hash \\
+\hline
+\mbox{\tt in}  & {\em hval} & previous hash value or 0 if first call\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+64 bit hash as a static hash type
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+To use the recommended 64 bit F\+N\+V-\/1a hash, use F\+N\+V1\+A\+\_\+64\+\_\+\+I\+N\+IT as the hval arg on the first call to either \hyperlink{group__hash__fnv_ga61da2150923405756a0fd5ae19170dd2}{fnv\+\_\+64a\+\_\+buf()} or \hyperlink{group__hash__fnv_gaa404ed488258e9943aa51a90e6dea631}{fnv\+\_\+64a\+\_\+str()}. 
+\end{DoxyNote}
+
+\begin{DoxyCode}
+650 \{
+651     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *\hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s} = (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *)str;   \textcolor{comment}{/* unsigned string */}
+652 
+653 \textcolor{preprocessor}{#if defined(HAVE\_64BIT\_LONG\_LONG)}
+654 
+655     \textcolor{comment}{/*}
+656 \textcolor{comment}{     * FNV-1a hash each octet of the string}
+657 \textcolor{comment}{     */}
+658     \textcolor{keywordflow}{while} (*s) \{
+659 
+660         \textcolor{comment}{/* xor the bottom with the current octet */}
+661         hval ^= (\hyperlink{group__hash__fnv_ga4b6673bffbef8355685a9e0129b86e16}{Fnv64\_t})*s++;
+662 
+663         \textcolor{comment}{/* multiply by the 64 bit FNV magic prime mod 2^64 */}
+664 \textcolor{preprocessor}{#if defined(NO\_FNV\_GCC\_OPTIMIZATION)}
+665         hval *= \hyperlink{group__hash__fnv_ga843a032e93d6d54b28933d827eb4c966}{FNV\_64\_PRIME};
+666 \textcolor{preprocessor}{#else }\textcolor{comment}{/* NO\_FNV\_GCC\_OPTIMIZATION */}\textcolor{preprocessor}{}
+667         hval += (hval << 1) + (hval << 4) + (hval << 5) +
+668                 (hval << 7) + (hval << 8) + (hval << 40);
+669 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* NO\_FNV\_GCC\_OPTIMIZATION */}\textcolor{preprocessor}{}
+670     \}
+671 
+672 \textcolor{preprocessor}{#else }\textcolor{comment}{/* !HAVE\_64BIT\_LONG\_LONG */}\textcolor{preprocessor}{}
+673 
+674     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} val[4];       \textcolor{comment}{/* hash value in base 2^16 */}
+675     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} tmp[4];       \textcolor{comment}{/* tmp 64 bit value */}
+676 
+677     \textcolor{comment}{/*}
+678 \textcolor{comment}{     * Convert Fnv64\_t hval into a base 2^16 array}
+679 \textcolor{comment}{     */}
+680     val[0] = hval.w32[0];
+681     val[1] = (val[0] >> 16);
+682     val[0] &= 0xffff;
+683     val[2] = hval.w32[1];
+684     val[3] = (val[2] >> 16);
+685     val[2] &= 0xffff;
+686 
+687     \textcolor{comment}{/*}
+688 \textcolor{comment}{     * FNV-1a hash each octet of the string}
+689 \textcolor{comment}{     */}
+690     \textcolor{keywordflow}{while} (*s) \{
+691 
+692         \textcolor{comment}{/* xor the bottom with the current octet */}
+693 
+694         \textcolor{comment}{/*}
+695 \textcolor{comment}{         * multiply by the 64 bit FNV magic prime mod 2^64}
+696 \textcolor{comment}{         *}
+697 \textcolor{comment}{         * Using 1099511628211, we have the following digits base 2^16:}
+698 \textcolor{comment}{         *}
+699 \textcolor{comment}{         *      0x0     0x100   0x0     0x1b3}
+700 \textcolor{comment}{         *}
+701 \textcolor{comment}{         * which is the same as:}
+702 \textcolor{comment}{         *}
+703 \textcolor{comment}{         *      0x0     1<<FNV\_64\_PRIME\_SHIFT   0x0     FNV\_64\_PRIME\_LOW}
+704 \textcolor{comment}{         */}
+705         \textcolor{comment}{/* multiply by the lowest order digit base 2^16 */}
+706         tmp[0] = val[0] * FNV\_64\_PRIME\_LOW;
+707         tmp[1] = val[1] * FNV\_64\_PRIME\_LOW;
+708         tmp[2] = val[2] * FNV\_64\_PRIME\_LOW;
+709         tmp[3] = val[3] * FNV\_64\_PRIME\_LOW;
+710         \textcolor{comment}{/* multiply by the other non-zero digit */}
+711         tmp[2] += val[0] << FNV\_64\_PRIME\_SHIFT; \textcolor{comment}{/* tmp[2] += val[0] * 0x100 */}
+712         tmp[3] += val[1] << FNV\_64\_PRIME\_SHIFT; \textcolor{comment}{/* tmp[3] += val[1] * 0x100 */}
+713         \textcolor{comment}{/* propagate carries */}
+714         tmp[1] += (tmp[0] >> 16);
+715         val[0] = tmp[0] & 0xffff;
+716         tmp[2] += (tmp[1] >> 16);
+717         val[1] = tmp[1] & 0xffff;
+718         val[3] = tmp[3] + (tmp[2] >> 16);
+719         val[2] = tmp[2] & 0xffff;
+720         \textcolor{comment}{/*}
+721 \textcolor{comment}{         * Doing a val[3] &= 0xffff; is not really needed since it simply}
+722 \textcolor{comment}{         * removes multiples of 2^64.  We can discard these excess bits}
+723 \textcolor{comment}{         * outside of the loop when we convert to Fnv64\_t.}
+724 \textcolor{comment}{         */}
+725         val[0] ^= (\textcolor{keywordtype}{unsigned} \hyperlink{generate__test__data__lte__sinr_8m_a0eab6be67e93c3411f7a8b53cc297285}{long})(*s++);
+726     \}
+727 
+728     \textcolor{comment}{/*}
+729 \textcolor{comment}{     * Convert base 2^16 array back into an Fnv64\_t}
+730 \textcolor{comment}{     */}
+731     hval.w32[1] = ((val[3]<<16) | val[2]);
+732     hval.w32[0] = ((val[1]<<16) | val[0]);
+733 
+734 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* !HAVE\_64BIT\_LONG\_LONG */}\textcolor{preprocessor}{}
+735 
+736     \textcolor{comment}{/* return our new hash value */}
+737     \textcolor{keywordflow}{return} hval;
+738 \}
+\end{DoxyCode}

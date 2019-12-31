@@ -1,0 +1,384 @@
+\hypertarget{classns3_1_1PfifoFastQueueDisc}{}\section{ns3\+:\+:Pfifo\+Fast\+Queue\+Disc Class Reference}
+\label{classns3_1_1PfifoFastQueueDisc}\index{ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}}
+
+
+{\ttfamily \#include $<$pfifo-\/fast-\/queue-\/disc.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Pfifo\+Fast\+Queue\+Disc\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Pfifo\+Fast\+Queue\+Disc\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1PfifoFastQueueDisc_af0fd107e762495a1579be2e3913e6a97}{Pfifo\+Fast\+Queue\+Disc} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1PfifoFastQueueDisc}{Pfifo\+Fast\+Queue\+Disc} constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1PfifoFastQueueDisc_a47ca8d2c176b87e6b8e1ce9a3959b9e5}{$\sim$\+Pfifo\+Fast\+Queue\+Disc} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1PfifoFastQueueDisc_a2c8d164b89f5934e2b0bbf261aba5bc9}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{classns3_1_1PfifoFastQueueDisc_aac7fa518f6f59bf89a7a5fa5b9579d8b}{Do\+Enqueue} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1QueueDiscItem}{Queue\+Disc\+Item} $>$ item)
+\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1QueueDiscItem}{Queue\+Disc\+Item} $>$ \hyperlink{classns3_1_1PfifoFastQueueDisc_aa5fe80fa033b5df94f626d99e99d52f3}{Do\+Dequeue} (void)
+\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1QueueDiscItem}{Queue\+Disc\+Item} $>$ \hyperlink{classns3_1_1PfifoFastQueueDisc_ac94bb03da6c61c6b4d2755ca77704470}{Do\+Peek} (void) const 
+\item 
+virtual bool \hyperlink{classns3_1_1PfifoFastQueueDisc_a9fa5e68b79b7431cd734f4e8845bdced}{Check\+Config} (void)
+\item 
+virtual void \hyperlink{classns3_1_1PfifoFastQueueDisc_abea83fd533e5e527f04a58cd079de204}{Initialize\+Params} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1PfifoFastQueueDisc_ac0c01461b2419ffafef7485e526c1990}{m\+\_\+limit}
+\begin{DoxyCompactList}\small\item\em Maximum number of packets that can be stored. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const uint32\+\_\+t \hyperlink{classns3_1_1PfifoFastQueueDisc_ae5565927d8c9b16c534480c24c5f38ab}{prio2band} \mbox{[}16\mbox{]} = \{1, 2, 2, 2, 1, 2, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1\}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Linux pfifo\+\_\+fast is the default priority queue enabled on Linux systems. Packets are enqueued in three F\+I\+FO droptail queues according to three priority bands based on the packet priority.
+
+The system behaves similar to three ns3\+::\+Drop\+Tail queues operating together, in which packets from higher priority bands are always dequeued before a packet from a lower priority band is dequeued.
+
+The queue disc capacity, i.\+e., the maximum number of packets that can be enqueued in the queue disc, is set through the limit attribute, which plays the same role as txqueuelen in Linux. If no internal queue is provided, three Drop\+Tail queues having each a capacity equal to limit are created by default. User is allowed to provide queues, but they must be three, operate in packet mode and each have a capacity not less than limit. No packet filter can be provided. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}!Pfifo\+Fast\+Queue\+Disc@{Pfifo\+Fast\+Queue\+Disc}}
+\index{Pfifo\+Fast\+Queue\+Disc@{Pfifo\+Fast\+Queue\+Disc}!ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}}
+\subsubsection[{\texorpdfstring{Pfifo\+Fast\+Queue\+Disc()}{PfifoFastQueueDisc()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Pfifo\+Fast\+Queue\+Disc\+::\+Pfifo\+Fast\+Queue\+Disc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1PfifoFastQueueDisc_af0fd107e762495a1579be2e3913e6a97}{}\label{classns3_1_1PfifoFastQueueDisc_af0fd107e762495a1579be2e3913e6a97}
+
+
+\hyperlink{classns3_1_1PfifoFastQueueDisc}{Pfifo\+Fast\+Queue\+Disc} constructor. 
+
+Creates a queue with a depth of 1000 packets per band by default 
+\begin{DoxyCode}
+52 \{
+53   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+54 \}
+\end{DoxyCode}
+\index{ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}!````~Pfifo\+Fast\+Queue\+Disc@{$\sim$\+Pfifo\+Fast\+Queue\+Disc}}
+\index{````~Pfifo\+Fast\+Queue\+Disc@{$\sim$\+Pfifo\+Fast\+Queue\+Disc}!ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}}
+\subsubsection[{\texorpdfstring{$\sim$\+Pfifo\+Fast\+Queue\+Disc()}{~PfifoFastQueueDisc()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Pfifo\+Fast\+Queue\+Disc\+::$\sim$\+Pfifo\+Fast\+Queue\+Disc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1PfifoFastQueueDisc_a47ca8d2c176b87e6b8e1ce9a3959b9e5}{}\label{classns3_1_1PfifoFastQueueDisc_a47ca8d2c176b87e6b8e1ce9a3959b9e5}
+
+\begin{DoxyCode}
+57 \{
+58   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+59 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}!Check\+Config@{Check\+Config}}
+\index{Check\+Config@{Check\+Config}!ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}}
+\subsubsection[{\texorpdfstring{Check\+Config(void)}{CheckConfig(void)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Pfifo\+Fast\+Queue\+Disc\+::\+Check\+Config (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1PfifoFastQueueDisc_a9fa5e68b79b7431cd734f4e8845bdced}{}\label{classns3_1_1PfifoFastQueueDisc_a9fa5e68b79b7431cd734f4e8845bdced}
+Check whether the current configuration is correct. Default objects (such as internal queues) might be created by this method to ensure the configuration is correct. \begin{DoxyReturn}{Returns}
+true if the configuration is correct, false otherwise 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1QueueDisc_ace6ef0c9afd0954c4629ad454bf975f5}{ns3\+::\+Queue\+Disc}.
+
+
+\begin{DoxyCode}
+138 \{
+139   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+140   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1QueueDisc_a8165c6afde992b073bc4d3bb283ed138}{GetNQueueDiscClasses} () > 0)
+141     \{
+142       \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"PfifoFastQueueDisc cannot have classes"});
+143       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+144     \}
+145 
+146   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1QueueDisc_aff24dd5be3fe3aa46b88c00659e09b23}{GetNPacketFilters} () != 0)
+147     \{
+148       \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"PfifoFastQueueDisc needs no packet filter"});
+149       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+150     \}
+151 
+152   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1QueueDisc_a98e658dc1b0b32104ffc9e07afd205c6}{GetNInternalQueues} () == 0)
+153     \{
+154       \textcolor{comment}{// create 3 DropTail queues with m\_limit packets each}
+155       \hyperlink{classns3_1_1Object_a2810e70b8c8377aa8617138fc0f65e92}{ObjectFactory} factory;
+156       factory.SetTypeId (\textcolor{stringliteral}{"ns3::DropTailQueue<QueueDiscItem>"});
+157       factory.Set (\textcolor{stringliteral}{"Mode"}, EnumValue (\hyperlink{classns3_1_1QueueBase_adc473162c2a2bcb3d76d151d6d7ee02aa68a809be7a09a4c4c7d8feb37f2f7a9d}{QueueBase::QUEUE\_MODE\_PACKETS}));
+158       factory.Set (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (\hyperlink{classns3_1_1PfifoFastQueueDisc_ac0c01461b2419ffafef7485e526c1990}{m\_limit}));
+159       \hyperlink{classns3_1_1QueueDisc_a0599223e2a3976ef042a56c2923a2b61}{AddInternalQueue} (factory.Create<\hyperlink{classns3_1_1QueueDisc_a3acb7d460465f9f13c6fbbdeae7508f8}{InternalQueue}> ());
+160       \hyperlink{classns3_1_1QueueDisc_a0599223e2a3976ef042a56c2923a2b61}{AddInternalQueue} (factory.Create<\hyperlink{classns3_1_1QueueDisc_a3acb7d460465f9f13c6fbbdeae7508f8}{InternalQueue}> ());
+161       \hyperlink{classns3_1_1QueueDisc_a0599223e2a3976ef042a56c2923a2b61}{AddInternalQueue} (factory.Create<\hyperlink{classns3_1_1QueueDisc_a3acb7d460465f9f13c6fbbdeae7508f8}{InternalQueue}> ());
+162     \}
+163 
+164   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1QueueDisc_a98e658dc1b0b32104ffc9e07afd205c6}{GetNInternalQueues} () != 3)
+165     \{
+166       \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"PfifoFastQueueDisc needs 3 internal queues"});
+167       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+168     \}
+169 
+170   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1QueueDisc_adf09b498c07c5677c26ea4b8309def74}{GetInternalQueue} (0)-> GetMode () != 
+      \hyperlink{classns3_1_1QueueBase_adc473162c2a2bcb3d76d151d6d7ee02aa68a809be7a09a4c4c7d8feb37f2f7a9d}{QueueBase::QUEUE\_MODE\_PACKETS} ||
+171       \hyperlink{classns3_1_1QueueDisc_adf09b498c07c5677c26ea4b8309def74}{GetInternalQueue} (1)-> GetMode () != 
+      \hyperlink{classns3_1_1QueueBase_adc473162c2a2bcb3d76d151d6d7ee02aa68a809be7a09a4c4c7d8feb37f2f7a9d}{QueueBase::QUEUE\_MODE\_PACKETS} ||
+172       \hyperlink{classns3_1_1QueueDisc_adf09b498c07c5677c26ea4b8309def74}{GetInternalQueue} (2)-> GetMode () != 
+      \hyperlink{classns3_1_1QueueBase_adc473162c2a2bcb3d76d151d6d7ee02aa68a809be7a09a4c4c7d8feb37f2f7a9d}{QueueBase::QUEUE\_MODE\_PACKETS})
+173     \{
+174       \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"PfifoFastQueueDisc needs 3 internal queues operating in packet mode"});
+175       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+176     \}
+177 
+178   \textcolor{keywordflow}{for} (uint8\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 2; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+179     \{
+180       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1QueueDisc_adf09b498c07c5677c26ea4b8309def74}{GetInternalQueue} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})->GetMaxPackets () < \hyperlink{classns3_1_1PfifoFastQueueDisc_ac0c01461b2419ffafef7485e526c1990}{m\_limit})
+181         \{
+182           \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"The capacity of some internal queue(s) is less than the queue disc
+       capacity"});
+183           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+184         \}
+185     \}
+186 
+187   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+188 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}!Do\+Dequeue@{Do\+Dequeue}}
+\index{Do\+Dequeue@{Do\+Dequeue}!ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}}
+\subsubsection[{\texorpdfstring{Do\+Dequeue(void)}{DoDequeue(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Queue\+Disc\+Item} $>$ ns3\+::\+Pfifo\+Fast\+Queue\+Disc\+::\+Do\+Dequeue (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1PfifoFastQueueDisc_aa5fe80fa033b5df94f626d99e99d52f3}{}\label{classns3_1_1PfifoFastQueueDisc_aa5fe80fa033b5df94f626d99e99d52f3}
+This function actually extracts a packet from the queue disc. \begin{DoxyReturn}{Returns}
+0 if the operation was not successful; the item otherwise. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1QueueDisc_afefae1a05f45db101c2c75d67a440c63}{ns3\+::\+Queue\+Disc}.
+
+
+\begin{DoxyCode}
+96 \{
+97   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+98 
+99   Ptr<QueueDiscItem> item;
+100 
+101   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{classns3_1_1QueueDisc_a98e658dc1b0b32104ffc9e07afd205c6}{GetNInternalQueues} (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+102     \{
+103       \textcolor{keywordflow}{if} ((item = \hyperlink{classns3_1_1QueueDisc_adf09b498c07c5677c26ea4b8309def74}{GetInternalQueue} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})->\hyperlink{classns3_1_1QueueDisc_a6c13fc489822c1487f61c2289f2e3629}{Dequeue} ()) != 0)
+104         \{
+105           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Popped from band "} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{": "} << item);
+106           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Number packets band "} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{": "} << 
+      \hyperlink{classns3_1_1QueueDisc_adf09b498c07c5677c26ea4b8309def74}{GetInternalQueue} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})->\hyperlink{classns3_1_1QueueDisc_a6ee992f32c1671512f0948fd6cc46a7e}{GetNPackets} ());
+107           \textcolor{keywordflow}{return} item;
+108         \}
+109     \}
+110   
+111   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Queue empty"});
+112   \textcolor{keywordflow}{return} item;
+113 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}!Do\+Enqueue@{Do\+Enqueue}}
+\index{Do\+Enqueue@{Do\+Enqueue}!ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}}
+\subsubsection[{\texorpdfstring{Do\+Enqueue(\+Ptr$<$ Queue\+Disc\+Item $>$ item)}{DoEnqueue(Ptr< QueueDiscItem > item)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Pfifo\+Fast\+Queue\+Disc\+::\+Do\+Enqueue (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Queue\+Disc\+Item} $>$}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1PfifoFastQueueDisc_aac7fa518f6f59bf89a7a5fa5b9579d8b}{}\label{classns3_1_1PfifoFastQueueDisc_aac7fa518f6f59bf89a7a5fa5b9579d8b}
+This function actually enqueues a packet into the queue disc. 
+\begin{DoxyParams}{Parameters}
+{\em item} & item to enqueue \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the operation was successful; false otherwise 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1QueueDisc_a22d77d2ec26e6fe5476d976d9d5e3a66}{ns3\+::\+Queue\+Disc}.
+
+
+\begin{DoxyCode}
+65 \{
+66   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << item);
+67 
+68   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1QueueDisc_a6ee992f32c1671512f0948fd6cc46a7e}{GetNPackets} () > \hyperlink{classns3_1_1PfifoFastQueueDisc_ac0c01461b2419ffafef7485e526c1990}{m\_limit})
+69     \{
+70       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Queue disc limit exceeded -- dropping packet"});
+71       \hyperlink{classns3_1_1QueueDisc_a4e8bbd3afbd927df3342dd015f30b08c}{Drop} (item);
+72       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+73     \}
+74 
+75   uint8\_t priority = 0;
+76   SocketPriorityTag priorityTag;
+77   \textcolor{keywordflow}{if} (item->GetPacket ()->PeekPacketTag (priorityTag))
+78     \{
+79       priority = priorityTag.GetPriority ();
+80     \}
+81 
+82   uint32\_t band = \hyperlink{classns3_1_1PfifoFastQueueDisc_ae5565927d8c9b16c534480c24c5f38ab}{prio2band}[priority & 0x0f];
+83 
+84   \textcolor{keywordtype}{bool} retval = \hyperlink{classns3_1_1QueueDisc_adf09b498c07c5677c26ea4b8309def74}{GetInternalQueue} (band)->Enqueue (item);
+85 
+86   \textcolor{comment}{// If Queue::Enqueue fails, QueueDisc::Drop is called by the internal queue}
+87   \textcolor{comment}{// because QueueDisc::AddInternalQueue sets the drop callback}
+88 
+89   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Number packets band "} << band << \textcolor{stringliteral}{": "} << 
+      \hyperlink{classns3_1_1QueueDisc_adf09b498c07c5677c26ea4b8309def74}{GetInternalQueue} (band)->\hyperlink{classns3_1_1QueueDisc_a6ee992f32c1671512f0948fd6cc46a7e}{GetNPackets} ());
+90 
+91   \textcolor{keywordflow}{return} retval;
+92 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}!Do\+Peek@{Do\+Peek}}
+\index{Do\+Peek@{Do\+Peek}!ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}}
+\subsubsection[{\texorpdfstring{Do\+Peek(void) const }{DoPeek(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ const {\bf Queue\+Disc\+Item} $>$ ns3\+::\+Pfifo\+Fast\+Queue\+Disc\+::\+Do\+Peek (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1PfifoFastQueueDisc_ac94bb03da6c61c6b4d2755ca77704470}{}\label{classns3_1_1PfifoFastQueueDisc_ac94bb03da6c61c6b4d2755ca77704470}
+This function returns a copy of the next packet the queue disc will extract. \begin{DoxyReturn}{Returns}
+0 if the operation was not successful; the packet otherwise. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1QueueDisc_aff6a0523b7132a4df6cf202ab49bd788}{ns3\+::\+Queue\+Disc}.
+
+
+\begin{DoxyCode}
+117 \{
+118   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+119 
+120   Ptr<const QueueDiscItem> item;
+121 
+122   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{classns3_1_1QueueDisc_a98e658dc1b0b32104ffc9e07afd205c6}{GetNInternalQueues} (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+123     \{
+124       \textcolor{keywordflow}{if} ((item = \hyperlink{classns3_1_1QueueDisc_adf09b498c07c5677c26ea4b8309def74}{GetInternalQueue} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})->\hyperlink{classns3_1_1QueueDisc_a952cddf7fbe32e180a170a7be21875fa}{Peek} ()) != 0)
+125         \{
+126           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Peeked from band "} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{": "} << item);
+127           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Number packets band "} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{": "} << 
+      \hyperlink{classns3_1_1QueueDisc_adf09b498c07c5677c26ea4b8309def74}{GetInternalQueue} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})->\hyperlink{classns3_1_1QueueDisc_a6ee992f32c1671512f0948fd6cc46a7e}{GetNPackets} ());
+128           \textcolor{keywordflow}{return} item;
+129         \}
+130     \}
+131 
+132   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Queue empty"});
+133   \textcolor{keywordflow}{return} item;
+134 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Pfifo\+Fast\+Queue\+Disc\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1PfifoFastQueueDisc_a2c8d164b89f5934e2b0bbf261aba5bc9}{}\label{classns3_1_1PfifoFastQueueDisc_a2c8d164b89f5934e2b0bbf261aba5bc9}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+37 \{
+38   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::PfifoFastQueueDisc"})
+39     .SetParent<\hyperlink{classns3_1_1QueueDisc_a0e328ad3196b7d16783b8680722381d6}{QueueDisc}> ()
+40     .SetGroupName (\textcolor{stringliteral}{"TrafficControl"})
+41     .AddConstructor<\hyperlink{classns3_1_1PfifoFastQueueDisc_af0fd107e762495a1579be2e3913e6a97}{PfifoFastQueueDisc}> ()
+42     .AddAttribute (\textcolor{stringliteral}{"Limit"},
+43                    \textcolor{stringliteral}{"The maximum number of packets accepted by this queue disc."},
+44                    UintegerValue (1000),
+45                    MakeUintegerAccessor (&\hyperlink{classns3_1_1PfifoFastQueueDisc_ac0c01461b2419ffafef7485e526c1990}{PfifoFastQueueDisc::m\_limit}),
+46                    MakeUintegerChecker<uint32\_t> ())
+47   ;
+48   \textcolor{keywordflow}{return} tid;
+49 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}!Initialize\+Params@{Initialize\+Params}}
+\index{Initialize\+Params@{Initialize\+Params}!ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}}
+\subsubsection[{\texorpdfstring{Initialize\+Params(void)}{InitializeParams(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Pfifo\+Fast\+Queue\+Disc\+::\+Initialize\+Params (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1PfifoFastQueueDisc_abea83fd533e5e527f04a58cd079de204}{}\label{classns3_1_1PfifoFastQueueDisc_abea83fd533e5e527f04a58cd079de204}
+Initialize parameters (if any) before the first packet is enqueued. 
+
+Implements \hyperlink{classns3_1_1QueueDisc_a600ed3e7110b9d506b28ad62beb84592}{ns3\+::\+Queue\+Disc}.
+
+
+\begin{DoxyCode}
+192 \{
+193   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+194 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}!m\+\_\+limit@{m\+\_\+limit}}
+\index{m\+\_\+limit@{m\+\_\+limit}!ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}}
+\subsubsection[{\texorpdfstring{m\+\_\+limit}{m_limit}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Pfifo\+Fast\+Queue\+Disc\+::m\+\_\+limit\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1PfifoFastQueueDisc_ac0c01461b2419ffafef7485e526c1990}{}\label{classns3_1_1PfifoFastQueueDisc_ac0c01461b2419ffafef7485e526c1990}
+
+
+Maximum number of packets that can be stored. 
+
+\index{ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}!prio2band@{prio2band}}
+\index{prio2band@{prio2band}!ns3\+::\+Pfifo\+Fast\+Queue\+Disc@{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}}
+\subsubsection[{\texorpdfstring{prio2band}{prio2band}}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t ns3\+::\+Pfifo\+Fast\+Queue\+Disc\+::prio2band = \{1, 2, 2, 2, 1, 2, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classns3_1_1PfifoFastQueueDisc_ae5565927d8c9b16c534480c24c5f38ab}{}\label{classns3_1_1PfifoFastQueueDisc_ae5565927d8c9b16c534480c24c5f38ab}
+Priority to band map. Values are taken from the prio2band array used by the Linux pfifo\+\_\+fast queue disc. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+traffic-\/control/model/\hyperlink{pfifo-fast-queue-disc_8h}{pfifo-\/fast-\/queue-\/disc.\+h}\item 
+traffic-\/control/model/\hyperlink{pfifo-fast-queue-disc_8cc}{pfifo-\/fast-\/queue-\/disc.\+cc}\end{DoxyCompactItemize}

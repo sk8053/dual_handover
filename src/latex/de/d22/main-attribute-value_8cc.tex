@@ -1,0 +1,150 @@
+\hypertarget{main-attribute-value_8cc}{}\section{point-\/to-\/point/examples/main-\/attribute-\/value.cc File Reference}
+\label{main-attribute-value_8cc}\index{point-\/to-\/point/examples/main-\/attribute-\/value.\+cc@{point-\/to-\/point/examples/main-\/attribute-\/value.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/command-\/line.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ptr.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/uinteger.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/string.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/pointer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/simulator.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/node.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/queue.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/drop-\/tail-\/queue.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/net-\/device.\+h\char`\"{}}\\*
+Include dependency graph for main-\/attribute-\/value.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{main-attribute-value_8cc_aa270904e4c35a164a833f94b3817d64d}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Attribute\+Value\+Sample\char`\"{})
+\item 
+int \hyperlink{main-attribute-value_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{main-\/attribute-\/value.\+cc@{main-\/attribute-\/value.\+cc}!main@{main}}
+\index{main@{main}!main-\/attribute-\/value.\+cc@{main-\/attribute-\/value.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{main-attribute-value_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{main-attribute-value_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+47 \{
+48   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"AttributeValueSample"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+49 
+50   \textcolor{comment}{// By default, the MaxPackets attribute has a value of 100 packets}
+51   \textcolor{comment}{// (this default can be observed in the function DropTailQueue::GetTypeId)}
+52   \textcolor{comment}{// }
+53   \textcolor{comment}{// Here, we set it to 80 packets.  We could use one of two value types:}
+54   \textcolor{comment}{// a string-based value or a UintegerValue value}
+55   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::DropTailQueue<Packet>::MaxPackets"}, StringValue (\textcolor{stringliteral}{"80"}));
+56   \textcolor{comment}{// The below function call is redundant}
+57   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::DropTailQueue<Packet>::MaxPackets"}, UintegerValue (80));
+58 
+59   \textcolor{comment}{// Allow the user to override any of the defaults and the above}
+60   \textcolor{comment}{// SetDefaults() at run-time, via command-line arguments}
+61   \textcolor{comment}{// For example, via "--ns3::DropTailQueue::MaxPackets=80"}
+62   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+63   \textcolor{comment}{// This provides yet another way to set the value from the command line:}
+64   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"maxPackets"}, \textcolor{stringliteral}{"ns3::DropTailQueue<Packet>::MaxPackets"});
+65   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+66 
+67   \textcolor{comment}{// Now, we will create a few objects using the low-level API}
+68   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} n0 = CreateObject<Node> ();
+69 
+70   \hyperlink{classns3_1_1Ptr}{Ptr<PointToPointNetDevice>} net0 = CreateObject<PointToPointNetDevice> ();
+71   n0->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (net0);
+72 
+73   \hyperlink{classns3_1_1Ptr}{Ptr<Queue<Packet>} > q = CreateObject<DropTailQueue<Packet> > ();
+74   net0->SetQueue (q);
+75 
+76   \textcolor{comment}{// At this point, we have created a single node (Node 0) and a }
+77   \textcolor{comment}{// single PointToPointNetDevice (NetDevice 0) and added a }
+78   \textcolor{comment}{// DropTailQueue to it.}
+79 
+80   \textcolor{comment}{// Now, we can manipulate the MaxPackets value of the already }
+81   \textcolor{comment}{// instantiated DropTailQueue.  Here are various ways to do that.}
+82 
+83   \textcolor{comment}{// We assume that a smart pointer (Ptr) to a relevant network device}
+84   \textcolor{comment}{// is in hand; here, it is the net0 pointer. }
+85 
+86   \textcolor{comment}{// 1.  Pointer-based access}
+87   \textcolor{comment}{//}
+88   \textcolor{comment}{// One way to change the value is to access a pointer to the}
+89   \textcolor{comment}{// underlying queue and modify its attribute.}
+90   \textcolor{comment}{// }
+91   \textcolor{comment}{// First, we observe that we can get a pointer to the (base class)}
+92   \textcolor{comment}{// queue via the PointToPointNetDevice attributes, where it is called}
+93   \textcolor{comment}{// TxQueue }
+94   \hyperlink{classns3_1_1PointerValue}{PointerValue} ptr;
+95   net0->GetAttribute (\textcolor{stringliteral}{"TxQueue"}, ptr);
+96   \hyperlink{classns3_1_1Ptr}{Ptr<Queue<Packet>} > txQueue = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1Queue}{Queue<Packet>} > ();
+97 
+98   \textcolor{comment}{// Using the GetObject function, we can perform a safe downcast}
+99   \textcolor{comment}{// to a DropTailQueue, where MaxPackets is a member}
+100   \hyperlink{classns3_1_1Ptr}{Ptr<DropTailQueue<Packet>} > dtq = txQueue->GetObject <
+      \hyperlink{classns3_1_1DropTailQueue}{DropTailQueue<Packet>} > ();
+101   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (dtq);
+102 
+103   \textcolor{comment}{// Next, we can get the value of an attribute on this queue}
+104   \textcolor{comment}{// We have introduced wrapper "Value" classes for the underlying}
+105   \textcolor{comment}{// data types, similar to Java wrappers around these types, since}
+106   \textcolor{comment}{// the attribute system stores values and not disparate types.}
+107   \textcolor{comment}{// Here, the attribute value is assigned to a Uinteger, and}
+108   \textcolor{comment}{// the Get() method on this value produces the (unwrapped) uint32\_t.}
+109   UintegerValue limit;
+110   dtq->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"MaxPackets"}, limit);
+111   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"1.  dtq limit: "} << limit.Get () << \textcolor{stringliteral}{" packets"});
+112 
+113   \textcolor{comment}{// Note that the above downcast is not really needed; we could have}
+114   \textcolor{comment}{// done the same using the Ptr<Queue> even though the attribute}
+115   \textcolor{comment}{// is a member of the subclass}
+116   txQueue->GetAttribute (\textcolor{stringliteral}{"MaxPackets"}, limit);
+117   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"2.  txQueue limit: "} << limit.Get () << \textcolor{stringliteral}{" packets"});
+118 
+119   \textcolor{comment}{// Now, let's set it to another value (60 packets)}
+120   txQueue->SetAttribute (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (60));
+121   txQueue->GetAttribute (\textcolor{stringliteral}{"MaxPackets"}, limit);
+122   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"3.  txQueue limit changed: "} << limit.Get () << \textcolor{stringliteral}{" packets"});
+123 
+124   \textcolor{comment}{// 2.  Namespace-based access}
+125   \textcolor{comment}{//}
+126   \textcolor{comment}{// An alternative way to get at the attribute is to use the configuration}
+127   \textcolor{comment}{// namespace.  Here, this attribute resides on a known path in this}
+128   \textcolor{comment}{// namespace; this approach is useful if one doesn't have access to}
+129   \textcolor{comment}{// the underlying pointers and would like to configure a specific}
+130   \textcolor{comment}{// attribute with a single statement.}
+131   \hyperlink{group__config_gadce03667ec621d64ce4aace85d9bcfd0}{Config::Set} (\textcolor{stringliteral}{"/NodeList/0/DeviceList/0/TxQueue/MaxPackets"}, UintegerValue (25));
+132   txQueue->GetAttribute (\textcolor{stringliteral}{"MaxPackets"}, limit); 
+133   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"4.  txQueue limit changed through namespace: "} << 
+134                limit.Get () << \textcolor{stringliteral}{" packets"});
+135 
+136   \textcolor{comment}{// we could have also used wildcards to set this value for all nodes}
+137   \textcolor{comment}{// and all net devices (which in this simple example has the same}
+138   \textcolor{comment}{// effect as the previous Set())}
+139   \hyperlink{group__config_gadce03667ec621d64ce4aace85d9bcfd0}{Config::Set} (\textcolor{stringliteral}{"/NodeList/*/DeviceList/*/TxQueue/MaxPackets"}, UintegerValue (15));
+140   txQueue->GetAttribute (\textcolor{stringliteral}{"MaxPackets"}, limit); 
+141   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"5.  txQueue limit changed through wildcarded namespace: "} << 
+142                limit.Get () << \textcolor{stringliteral}{" packets"});
+143 
+144   Simulator::Destroy ();
+145 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{main-\/attribute-\/value.\+cc@{main-\/attribute-\/value.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!main-\/attribute-\/value.\+cc@{main-\/attribute-\/value.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Attribute\+Value\+Sample"")}{NS_LOG_COMPONENT_DEFINE("AttributeValueSample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Attribute\+Value\+Sample\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{main-attribute-value_8cc_aa270904e4c35a164a833f94b3817d64d}{}\label{main-attribute-value_8cc_aa270904e4c35a164a833f94b3817d64d}

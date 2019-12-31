@@ -1,0 +1,164 @@
+\hypertarget{classns3_1_1LteGlobalPathlossDatabase}{}\section{ns3\+:\+:Lte\+Global\+Pathloss\+Database Class Reference}
+\label{classns3_1_1LteGlobalPathlossDatabase}\index{ns3\+::\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Lte\+Global\+Pathloss\+Database}}
+
+
+{\ttfamily \#include $<$lte-\/global-\/pathloss-\/database.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Lte\+Global\+Pathloss\+Database\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Lte\+Global\+Pathloss\+Database\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classns3_1_1LteGlobalPathlossDatabase_a92b6c2f86e6159cb1f41e63673229e65}{$\sim$\+Lte\+Global\+Pathloss\+Database} (void)
+\item 
+virtual void \hyperlink{classns3_1_1LteGlobalPathlossDatabase_ad787865c41ddf1ff7a8a269afba7ccfc}{Update\+Pathloss} (std\+::string context, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1SpectrumPhy}{Spectrum\+Phy} $>$ tx\+Phy, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1SpectrumPhy}{Spectrum\+Phy} $>$ rx\+Phy, double loss\+Db)=0
+\item 
+double \hyperlink{classns3_1_1LteGlobalPathlossDatabase_a06da4a86a140c90b2dad5f5fad9868f3}{Get\+Pathloss} (uint16\+\_\+t cell\+Id, uint64\+\_\+t imsi)
+\item 
+void \hyperlink{classns3_1_1LteGlobalPathlossDatabase_a4b89b48f47321bab1f721356255b0822}{Print} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ uint16\+\_\+t, std\+::map$<$ uint64\+\_\+t, double $>$ $>$ \hyperlink{classns3_1_1LteGlobalPathlossDatabase_a3a193fa1babca27aa0a2dfccebf8c0ab}{m\+\_\+pathloss\+Map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Store the last pathloss value for each T\+X-\/\+RX pair. This is an example of how the Pathloss\+Trace (provided by some \hyperlink{classns3_1_1SpectrumChannel}{Spectrum\+Channel} implementations) work. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Lte\+Global\+Pathloss\+Database}!````~Lte\+Global\+Pathloss\+Database@{$\sim$\+Lte\+Global\+Pathloss\+Database}}
+\index{````~Lte\+Global\+Pathloss\+Database@{$\sim$\+Lte\+Global\+Pathloss\+Database}!ns3\+::\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Lte\+Global\+Pathloss\+Database}}
+\subsubsection[{\texorpdfstring{$\sim$\+Lte\+Global\+Pathloss\+Database(void)}{~LteGlobalPathlossDatabase(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Lte\+Global\+Pathloss\+Database\+::$\sim$\+Lte\+Global\+Pathloss\+Database (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1LteGlobalPathlossDatabase_a92b6c2f86e6159cb1f41e63673229e65}{}\label{classns3_1_1LteGlobalPathlossDatabase_a92b6c2f86e6159cb1f41e63673229e65}
+
+\begin{DoxyCode}
+34 \{
+35 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Lte\+Global\+Pathloss\+Database}!Get\+Pathloss@{Get\+Pathloss}}
+\index{Get\+Pathloss@{Get\+Pathloss}!ns3\+::\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Lte\+Global\+Pathloss\+Database}}
+\subsubsection[{\texorpdfstring{Get\+Pathloss(uint16\+\_\+t cell\+Id, uint64\+\_\+t imsi)}{GetPathloss(uint16_t cellId, uint64_t imsi)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Lte\+Global\+Pathloss\+Database\+::\+Get\+Pathloss (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{cell\+Id, }
+\item[{uint64\+\_\+t}]{imsi}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LteGlobalPathlossDatabase_a06da4a86a140c90b2dad5f5fad9868f3}{}\label{classns3_1_1LteGlobalPathlossDatabase_a06da4a86a140c90b2dad5f5fad9868f3}
+
+\begin{DoxyParams}{Parameters}
+{\em cell\+Id} & the id of the e\+NB \\
+\hline
+{\em imsi} & the id of the UE\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pathloss value bewteen the UE and the e\+NB 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+57 \{
+58   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+59   std::map<uint16\_t, std::map<uint64\_t, double> >::iterator cellIt = 
+      \hyperlink{classns3_1_1LteGlobalPathlossDatabase_a3a193fa1babca27aa0a2dfccebf8c0ab}{m\_pathlossMap}.find (cellId);
+60   \textcolor{keywordflow}{if} (cellIt == \hyperlink{classns3_1_1LteGlobalPathlossDatabase_a3a193fa1babca27aa0a2dfccebf8c0ab}{m\_pathlossMap}.end())
+61     \{
+62       \textcolor{keywordflow}{return} std::numeric\_limits<double>::infinity ();
+63     \}
+64   std::map<uint64\_t, double>::iterator ueIt = cellIt->second.find (imsi);
+65   \textcolor{keywordflow}{if} (ueIt ==  cellIt->second.end())
+66     \{
+67       \textcolor{keywordflow}{return} std::numeric\_limits<double>::infinity ();
+68     \}
+69   \textcolor{keywordflow}{return} ueIt->second;
+70 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Lte\+Global\+Pathloss\+Database}!Print@{Print}}
+\index{Print@{Print}!ns3\+::\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Lte\+Global\+Pathloss\+Database}}
+\subsubsection[{\texorpdfstring{Print()}{Print()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Lte\+Global\+Pathloss\+Database\+::\+Print (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LteGlobalPathlossDatabase_a4b89b48f47321bab1f721356255b0822}{}\label{classns3_1_1LteGlobalPathlossDatabase_a4b89b48f47321bab1f721356255b0822}
+print the stored pathloss values to standard output 
+\begin{DoxyCode}
+39 \{
+40   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+41   \textcolor{keywordflow}{for} (std::map<uint16\_t, std::map<uint64\_t, double> >::const\_iterator cellIdIt = 
+      \hyperlink{classns3_1_1LteGlobalPathlossDatabase_a3a193fa1babca27aa0a2dfccebf8c0ab}{m\_pathlossMap}.begin ();
+42        cellIdIt != \hyperlink{classns3_1_1LteGlobalPathlossDatabase_a3a193fa1babca27aa0a2dfccebf8c0ab}{m\_pathlossMap}.end ();
+43        ++cellIdIt)
+44     \{
+45       \textcolor{keywordflow}{for} (std::map<uint64\_t, double>::const\_iterator imsiIt = cellIdIt->second.begin ();
+46            imsiIt != cellIdIt->second.end ();
+47            ++imsiIt)
+48         \{
+49           std::cout << \textcolor{stringliteral}{"CellId: "} << cellIdIt->first << \textcolor{stringliteral}{" IMSI: "} << imsiIt->first << \textcolor{stringliteral}{" pathloss: "} << 
+      imsiIt->second << \textcolor{stringliteral}{" dB"} << std::endl;
+50         \}
+51     \}
+52 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Lte\+Global\+Pathloss\+Database}!Update\+Pathloss@{Update\+Pathloss}}
+\index{Update\+Pathloss@{Update\+Pathloss}!ns3\+::\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Lte\+Global\+Pathloss\+Database}}
+\subsubsection[{\texorpdfstring{Update\+Pathloss(std\+::string context, Ptr$<$ Spectrum\+Phy $>$ tx\+Phy, Ptr$<$ Spectrum\+Phy $>$ rx\+Phy, double loss\+Db)=0}{UpdatePathloss(std::string context, Ptr< SpectrumPhy > txPhy, Ptr< SpectrumPhy > rxPhy, double lossDb)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Lte\+Global\+Pathloss\+Database\+::\+Update\+Pathloss (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{{\bf Ptr}$<$ {\bf Spectrum\+Phy} $>$}]{tx\+Phy, }
+\item[{{\bf Ptr}$<$ {\bf Spectrum\+Phy} $>$}]{rx\+Phy, }
+\item[{double}]{loss\+Db}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1LteGlobalPathlossDatabase_ad787865c41ddf1ff7a8a269afba7ccfc}{}\label{classns3_1_1LteGlobalPathlossDatabase_ad787865c41ddf1ff7a8a269afba7ccfc}
+update the pathloss value
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & \\
+\hline
+{\em tx\+Phy} & the transmitting P\+HY \\
+\hline
+{\em rx\+Phy} & the receiving P\+HY \\
+\hline
+{\em loss\+Db} & the loss in dB \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classns3_1_1UplinkLteGlobalPathlossDatabase_a28ac651fd5a7e525095a3ffa117725d8}{ns3\+::\+Uplink\+Lte\+Global\+Pathloss\+Database}, and \hyperlink{classns3_1_1DownlinkLteGlobalPathlossDatabase_ad7d9c4f30509e6486af64c99b717c24c}{ns3\+::\+Downlink\+Lte\+Global\+Pathloss\+Database}.
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Lte\+Global\+Pathloss\+Database}!m\+\_\+pathloss\+Map@{m\+\_\+pathloss\+Map}}
+\index{m\+\_\+pathloss\+Map@{m\+\_\+pathloss\+Map}!ns3\+::\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Lte\+Global\+Pathloss\+Database}}
+\subsubsection[{\texorpdfstring{m\+\_\+pathloss\+Map}{m_pathlossMap}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$uint16\+\_\+t, std\+::map$<$uint64\+\_\+t, double$>$ $>$ ns3\+::\+Lte\+Global\+Pathloss\+Database\+::m\+\_\+pathloss\+Map\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classns3_1_1LteGlobalPathlossDatabase_a3a193fa1babca27aa0a2dfccebf8c0ab}{}\label{classns3_1_1LteGlobalPathlossDatabase_a3a193fa1babca27aa0a2dfccebf8c0ab}
+List of the last pathloss value for each UE by Cell\+Id. ( C\+E\+LL ID, ( I\+M\+SI,P\+A\+T\+H\+L\+O\+SS )) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lte/helper/\hyperlink{lte-global-pathloss-database_8h}{lte-\/global-\/pathloss-\/database.\+h}\item 
+lte/helper/\hyperlink{lte-global-pathloss-database_8cc}{lte-\/global-\/pathloss-\/database.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,175 @@
+\hypertarget{classns3_1_1QueueLimits}{}\section{ns3\+:\+:Queue\+Limits Class Reference}
+\label{classns3_1_1QueueLimits}\index{ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}}
+
+
+Abstract base class for \hyperlink{classns3_1_1NetDevice}{Net\+Device} queue length controller.  
+
+
+
+
+{\ttfamily \#include $<$queue-\/limits.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Queue\+Limits\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Queue\+Limits\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classns3_1_1QueueLimits_a41a2ad95fc7cf8b0ce4c18a9087fcbc7}{$\sim$\+Queue\+Limits} ()
+\item 
+virtual void \hyperlink{classns3_1_1QueueLimits_a646f81a6ce23d7e005d7ca7e4f98bab9}{Reset} ()=0
+\begin{DoxyCompactList}\small\item\em Reset queue limits state. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1QueueLimits_adac8dd4e161b7b9e49f369852e90d0c0}{Completed} (uint32\+\_\+t count)=0
+\begin{DoxyCompactList}\small\item\em Record number of completed bytes and recalculate the limit. \end{DoxyCompactList}\item 
+virtual int32\+\_\+t \hyperlink{classns3_1_1QueueLimits_add8726121604ba48146ff3f62a8051c6}{Available} () const =0
+\begin{DoxyCompactList}\small\item\em Returns how many bytes can be queued. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1QueueLimits_a79591fdecc7ec76388b9b85d060faef9}{Queued} (uint32\+\_\+t count)=0
+\begin{DoxyCompactList}\small\item\em Record the number of bytes queued. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1QueueLimits_ab64b98f129b9904c93c7f85b822f8c53}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Abstract base class for \hyperlink{classns3_1_1NetDevice}{Net\+Device} queue length controller. 
+
+\hyperlink{classns3_1_1QueueLimits}{Queue\+Limits} is an abstract base class providing the interface to the \hyperlink{classns3_1_1NetDevice}{Net\+Device} queue length controller.
+
+Child classes need to implement the methods used for a byte-\/based measure of the queue length.
+
+The design and implementation of this class is inspired by Linux. For more details, see the queue limits Sphinx documentation. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}!````~Queue\+Limits@{$\sim$\+Queue\+Limits}}
+\index{````~Queue\+Limits@{$\sim$\+Queue\+Limits}!ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}}
+\subsubsection[{\texorpdfstring{$\sim$\+Queue\+Limits()}{~QueueLimits()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Queue\+Limits\+::$\sim$\+Queue\+Limits (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1QueueLimits_a41a2ad95fc7cf8b0ce4c18a9087fcbc7}{}\label{classns3_1_1QueueLimits_a41a2ad95fc7cf8b0ce4c18a9087fcbc7}
+
+\begin{DoxyCode}
+42 \{
+43   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+44 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}!Available@{Available}}
+\index{Available@{Available}!ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}}
+\subsubsection[{\texorpdfstring{Available() const =0}{Available() const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual int32\+\_\+t ns3\+::\+Queue\+Limits\+::\+Available (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1QueueLimits_add8726121604ba48146ff3f62a8051c6}{}\label{classns3_1_1QueueLimits_add8726121604ba48146ff3f62a8051c6}
+
+
+Returns how many bytes can be queued. 
+
+Available is called from Notify\+Transmitted\+Bytes to calculate the number of bytes that can be passed again to the \hyperlink{classns3_1_1NetDevice}{Net\+Device}. A negative value means that no packets can be passed to the \hyperlink{classns3_1_1NetDevice}{Net\+Device}. In this case, Notify\+Transmitted\+Bytes stops the transmission queue. \begin{DoxyReturn}{Returns}
+the number of bytes that can be queued 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1DynamicQueueLimits_a8e340e0743a4c40c38a97b0994f3d52a}{ns3\+::\+Dynamic\+Queue\+Limits}.
+
+\index{ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}!Completed@{Completed}}
+\index{Completed@{Completed}!ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}}
+\subsubsection[{\texorpdfstring{Completed(uint32\+\_\+t count)=0}{Completed(uint32_t count)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Queue\+Limits\+::\+Completed (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{count}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1QueueLimits_adac8dd4e161b7b9e49f369852e90d0c0}{}\label{classns3_1_1QueueLimits_adac8dd4e161b7b9e49f369852e90d0c0}
+
+
+Record number of completed bytes and recalculate the limit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & the number of completed bytes \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classns3_1_1DynamicQueueLimits_afb93b0f1b631e8336de22fe0239d7f0a}{ns3\+::\+Dynamic\+Queue\+Limits}.
+
+\index{ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Queue\+Limits\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1QueueLimits_ab64b98f129b9904c93c7f85b822f8c53}{}\label{classns3_1_1QueueLimits_ab64b98f129b9904c93c7f85b822f8c53}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+33 \{
+34   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::QueueLimits"})
+35     .SetParent<\hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object}> ()
+36     .SetGroupName (\textcolor{stringliteral}{"Network"})
+37   ;
+38   \textcolor{keywordflow}{return} tid;
+39 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}!Queued@{Queued}}
+\index{Queued@{Queued}!ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}}
+\subsubsection[{\texorpdfstring{Queued(uint32\+\_\+t count)=0}{Queued(uint32_t count)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Queue\+Limits\+::\+Queued (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{count}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1QueueLimits_a79591fdecc7ec76388b9b85d060faef9}{}\label{classns3_1_1QueueLimits_a79591fdecc7ec76388b9b85d060faef9}
+
+
+Record the number of bytes queued. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & the number of bytes queued \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classns3_1_1DynamicQueueLimits_a89b242e59d1c0765d49633afd4ae7e09}{ns3\+::\+Dynamic\+Queue\+Limits}.
+
+\index{ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}!Reset@{Reset}}
+\index{Reset@{Reset}!ns3\+::\+Queue\+Limits@{ns3\+::\+Queue\+Limits}}
+\subsubsection[{\texorpdfstring{Reset()=0}{Reset()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Queue\+Limits\+::\+Reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1QueueLimits_a646f81a6ce23d7e005d7ca7e4f98bab9}{}\label{classns3_1_1QueueLimits_a646f81a6ce23d7e005d7ca7e4f98bab9}
+
+
+Reset queue limits state. 
+
+
+
+Implemented in \hyperlink{classns3_1_1DynamicQueueLimits_a94a1daf2abc0544908d21200aa7b4dbb}{ns3\+::\+Dynamic\+Queue\+Limits}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+network/utils/\hyperlink{queue-limits_8h}{queue-\/limits.\+h}\item 
+network/utils/\hyperlink{queue-limits_8cc}{queue-\/limits.\+cc}\end{DoxyCompactItemize}

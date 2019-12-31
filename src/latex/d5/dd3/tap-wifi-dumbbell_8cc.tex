@@ -1,0 +1,168 @@
+\hypertarget{tap-wifi-dumbbell_8cc}{}\section{tap-\/bridge/examples/tap-\/wifi-\/dumbbell.cc File Reference}
+\label{tap-wifi-dumbbell_8cc}\index{tap-\/bridge/examples/tap-\/wifi-\/dumbbell.\+cc@{tap-\/bridge/examples/tap-\/wifi-\/dumbbell.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wifi-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/global-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/tap-\/bridge-\/module.\+h\char`\"{}}\\*
+Include dependency graph for tap-\/wifi-\/dumbbell.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{tap-wifi-dumbbell_8cc_a8fd84ffcdfa7d857f4d68b99d3bffb39}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Tap\+Dumbbell\+Example\char`\"{})
+\item 
+int \hyperlink{tap-wifi-dumbbell_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{tap-\/wifi-\/dumbbell.\+cc@{tap-\/wifi-\/dumbbell.\+cc}!main@{main}}
+\index{main@{main}!tap-\/wifi-\/dumbbell.\+cc@{tap-\/wifi-\/dumbbell.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-wifi-dumbbell_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{tap-wifi-dumbbell_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+119 \{
+120   std::string mode = \textcolor{stringliteral}{"ConfigureLocal"};
+121   std::string tapName = \textcolor{stringliteral}{"thetap"};
+122 
+123   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+124   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"mode"}, \textcolor{stringliteral}{"Mode setting of TapBridge"}, mode);
+125   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"tapName"}, \textcolor{stringliteral}{"Name of the OS tap device"}, tapName);
+126   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+127 
+128   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"}, StringValue (\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl"}));
+129   GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+130 
+131   \textcolor{comment}{//}
+132   \textcolor{comment}{// The topology has a Wifi network of four nodes on the left side.  We'll make}
+133   \textcolor{comment}{// node zero the AP and have the other three will be the STAs.}
+134   \textcolor{comment}{//}
+135   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} nodesLeft;
+136   nodesLeft.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (4);
+137 
+138   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} wifiPhy = YansWifiPhyHelper::Default ();
+139   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} wifiChannel = YansWifiChannelHelper::Default ();
+140   wifiPhy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ());
+141 
+142   \hyperlink{classns3_1_1Ssid}{Ssid} ssid = \hyperlink{classns3_1_1Ssid}{Ssid} (\textcolor{stringliteral}{"left"});
+143   \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+144   \hyperlink{classns3_1_1WifiMacHelper}{WifiMacHelper} wifiMac;
+145   wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::ArfWifiManager"});
+146 
+147   wifiMac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::ApWifiMac"},
+148                    \textcolor{stringliteral}{"Ssid"}, SsidValue (ssid));
+149   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devicesLeft = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (wifiPhy, wifiMac, nodesLeft.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+150 
+151 
+152   wifiMac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::StaWifiMac"},
+153                    \textcolor{stringliteral}{"Ssid"}, SsidValue (ssid),
+154                    \textcolor{stringliteral}{"ActiveProbing"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+155   devicesLeft.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (wifiPhy, wifiMac, \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (nodesLeft.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), nodesLeft.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2), nodesLeft.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3))));
+156 
+157   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+158   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (nodesLeft);
+159 
+160   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internetLeft;
+161   internetLeft.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodesLeft);
+162 
+163   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4Left;
+164   ipv4Left.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+165   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} interfacesLeft = ipv4Left.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devicesLeft);
+166 
+167   \hyperlink{classns3_1_1TapBridgeHelper}{TapBridgeHelper} tapBridge (interfacesLeft.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1));
+168   tapBridge.\hyperlink{classns3_1_1TapBridgeHelper_ac13f757f82c0ee66504693ede7230397}{SetAttribute} (\textcolor{stringliteral}{"Mode"}, StringValue (mode));
+169   tapBridge.SetAttribute (\textcolor{stringliteral}{"DeviceName"}, StringValue (tapName));
+170   tapBridge.Install (nodesLeft.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), devicesLeft.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+171 
+172   \textcolor{comment}{//}
+173   \textcolor{comment}{// Now, create the right side.}
+174   \textcolor{comment}{//}
+175   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} nodesRight;
+176   nodesRight.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (4);
+177 
+178   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csmaRight;
+179   csmaRight.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (5000000));
+180   csmaRight.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (
+      \hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+181 
+182   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devicesRight = csmaRight.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (nodesRight);
+183 
+184   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internetRight;
+185   internetRight.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodesRight);
+186 
+187   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4Right;
+188   ipv4Right.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.3.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+189   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} interfacesRight = ipv4Right.
+      \hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devicesRight);
+190 
+191   \textcolor{comment}{//}
+192   \textcolor{comment}{// Stick in the point-to-point line between the sides.}
+193   \textcolor{comment}{//}
+194   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} p2p;
+195   p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"512kbps"}));
+196   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"10ms"}));
+197 
+198   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (nodesLeft.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3), nodesRight.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+199   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nodes);
+200 
+201   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+202   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.2.0"}, \textcolor{stringliteral}{"255.255.255.192"});
+203   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} interfaces = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devices);
+204 
+205   \textcolor{comment}{//}
+206   \textcolor{comment}{// Simulate some CBR traffic over the point-to-point link}
+207   \textcolor{comment}{//}
+208   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 9;   \textcolor{comment}{// Discard port (RFC 863)}
+209   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (interfaces.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1), \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}));
+210   onoff.SetConstantRate (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"500kb/s"}));
+211 
+212   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} apps = onoff.Install (nodesLeft.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+213   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+214 
+215   \textcolor{comment}{// Create a packet sink to receive these packets}
+216   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sink (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+      \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port));
+217 
+218   apps = sink.Install (nodesRight.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+219   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+220 
+221   wifiPhy.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"tap-wifi-dumbbell"});
+222 
+223   csmaRight.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"tap-wifi-dumbbell"}, \textcolor{keyword}{false});
+224   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+225 
+226   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (60.));
+227   Simulator::Run ();
+228   Simulator::Destroy ();
+229 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{tap-\/wifi-\/dumbbell.\+cc@{tap-\/wifi-\/dumbbell.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!tap-\/wifi-\/dumbbell.\+cc@{tap-\/wifi-\/dumbbell.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Tap\+Dumbbell\+Example"")}{NS_LOG_COMPONENT_DEFINE("TapDumbbellExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Tap\+Dumbbell\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-wifi-dumbbell_8cc_a8fd84ffcdfa7d857f4d68b99d3bffb39}{}\label{tap-wifi-dumbbell_8cc_a8fd84ffcdfa7d857f4d68b99d3bffb39}

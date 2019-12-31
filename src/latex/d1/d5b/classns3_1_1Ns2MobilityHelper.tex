@@ -1,0 +1,500 @@
+\hypertarget{classns3_1_1Ns2MobilityHelper}{}\section{ns3\+:\+:Ns2\+Mobility\+Helper Class Reference}
+\label{classns3_1_1Ns2MobilityHelper}\index{ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}}
+
+
+Helper class which can read ns-\/2 movement files and configure nodes mobility.  
+
+
+
+
+{\ttfamily \#include $<$ns2-\/mobility-\/helper.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Ns2\+Mobility\+Helper\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1Ns2MobilityHelper_1_1ObjectStore}{Object\+Store}
+\begin{DoxyCompactList}\small\item\em a class to hold input objects internally \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ns2MobilityHelper_aafed6f99e77c1fc74192da4d54e0eae7}{Ns2\+Mobility\+Helper} (std\+::string filename)
+\item 
+void \hyperlink{classns3_1_1Ns2MobilityHelper_ae54f17492e3efd54ff7501566fc6e9cf}{Install} (void) const 
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \hyperlink{classns3_1_1Ns2MobilityHelper_a0d22b6c0acc9cd93479fb2fafa692c14}{Install} (T begin, T end) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1Ns2MobilityHelper_a07ac38324875ef8cf45e9cd4669756dc}{Config\+Nodes\+Movements} (const \hyperlink{classns3_1_1Ns2MobilityHelper_1_1ObjectStore}{Object\+Store} \&store) const 
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1ConstantVelocityMobilityModel}{Constant\+Velocity\+Mobility\+Model} $>$ \hyperlink{classns3_1_1Ns2MobilityHelper_a5787c916365033678d89a0f0aba8bac7}{Get\+Mobility\+Model} (std\+::string id\+String, const \hyperlink{classns3_1_1Ns2MobilityHelper_1_1ObjectStore}{Object\+Store} \&store) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classns3_1_1Ns2MobilityHelper_a788b7d060c9c7c853f227e9315378316}{m\+\_\+filename}
+\begin{DoxyCompactList}\small\item\em filename of file containing ns-\/2 mobility trace \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helper class which can read ns-\/2 movement files and configure nodes mobility. 
+
+This implementation is based on the ns2 movement documentation of ns2 as described in \href{http://www.isi.edu/nsnam/ns/doc/node172.html}{\tt http\+://www.\+isi.\+edu/nsnam/ns/doc/node172.\+html}
+
+Valid trace files use the following ns2 statements\+: \begin{DoxyVerb}  $node set X_ x1
+  $node set Y_ y1
+  $node set Z_ z1
+  $ns at $time $node setdest x2 y2 speed
+  $ns at $time $node set X_ x1
+  $ns at $time $node set Y_ Y1
+  $ns at $time $node set Z_ Z1
+\end{DoxyVerb}
+
+
+Note that initial position statements may also appear at the end of the mobility file like this\+: \begin{DoxyVerb}  $ns at $time $node setdest x2 y2 speed
+  $ns at $time $node set X_ x1
+  $ns at $time $node set Y_ Y1
+  $ns at $time $node set Z_ Z1
+  $node set X_ x1
+  $node set Y_ y1
+  $node set Z_ z1
+\end{DoxyVerb}
+
+
+The following tools are known to support this format\+:
+\begin{DoxyItemize}
+\item Bonn\+Motion \href{http://net.cs.uni-bonn.de/wg/cs/applications/bonnmotion/}{\tt http\+://net.\+cs.\+uni-\/bonn.\+de/wg/cs/applications/bonnmotion/}
+\item S\+U\+MO \href{http://sourceforge.net/apps/mediawiki/sumo/index.php?title=Main_Page}{\tt http\+://sourceforge.\+net/apps/mediawiki/sumo/index.\+php?title=\+Main\+\_\+\+Page}
+\item Tra\+NS \href{http://trans.epfl.ch/}{\tt http\+://trans.\+epfl.\+ch/}
+\end{DoxyItemize}
+
+See usage example in examples/mobility/ns2-\/mobility-\/trace.\+cc
+
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000001}{Bug}]Rounding errors may cause movement to diverge from the mobility pattern in ns-\/2 (using the same trace). See \href{https://www.nsnam.org/bugzilla/show_bug.cgi?id=1316}{\tt https\+://www.\+nsnam.\+org/bugzilla/show\+\_\+bug.\+cgi?id=1316} \end{DoxyRefDesc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}!Ns2\+Mobility\+Helper@{Ns2\+Mobility\+Helper}}
+\index{Ns2\+Mobility\+Helper@{Ns2\+Mobility\+Helper}!ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}}
+\subsubsection[{\texorpdfstring{Ns2\+Mobility\+Helper(std\+::string filename)}{Ns2MobilityHelper(std::string filename)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Ns2\+Mobility\+Helper\+::\+Ns2\+Mobility\+Helper (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{filename}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ns2MobilityHelper_aafed6f99e77c1fc74192da4d54e0eae7}{}\label{classns3_1_1Ns2MobilityHelper_aafed6f99e77c1fc74192da4d54e0eae7}
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & filename of file which contains the ns2 movement trace. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+186   : \hyperlink{classns3_1_1Ns2MobilityHelper_a788b7d060c9c7c853f227e9315378316}{m\_filename} (filename)
+187 \{
+188   std::ifstream file (\hyperlink{classns3_1_1Ns2MobilityHelper_a788b7d060c9c7c853f227e9315378316}{m\_filename}.c\_str (), std::ios::in);
+189   \textcolor{keywordflow}{if} (!(file.is\_open ())) \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR}(\textcolor{stringliteral}{"Could not open trace file "} << 
+      \hyperlink{classns3_1_1Ns2MobilityHelper_a788b7d060c9c7c853f227e9315378316}{m\_filename}.c\_str() << \textcolor{stringliteral}{" for reading, aborting here \(\backslash\)n"}); 
+190 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}!Config\+Nodes\+Movements@{Config\+Nodes\+Movements}}
+\index{Config\+Nodes\+Movements@{Config\+Nodes\+Movements}!ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}}
+\subsubsection[{\texorpdfstring{Config\+Nodes\+Movements(const Object\+Store \&store) const }{ConfigNodesMovements(const ObjectStore &store) const }}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ns2\+Mobility\+Helper\+::\+Config\+Nodes\+Movements (
+\begin{DoxyParamCaption}
+\item[{const {\bf Object\+Store} \&}]{store}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ns2MobilityHelper_a07ac38324875ef8cf45e9cd4669756dc}{}\label{classns3_1_1Ns2MobilityHelper_a07ac38324875ef8cf45e9cd4669756dc}
+Parses ns-\/2 mobility file to create ns-\/3 mobility events 
+\begin{DoxyParams}{Parameters}
+{\em store} & \hyperlink{classns3_1_1Object}{Object} store containing ns-\/3 mobility models \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+216 \{
+217   std::map<int, DestinationPoint> last\_pos;    \textcolor{comment}{// Stores previous movement scheduled for each node}
+218 
+219   \textcolor{comment}{//*****************************************************************}
+220   \textcolor{comment}{// Parse the file the first time to get the initial node positions.}
+221   \textcolor{comment}{//*****************************************************************}
+222 
+223   \textcolor{comment}{// Look through the whole the file for the the initial node}
+224   \textcolor{comment}{// positions to make this helper robust to handle trace files with}
+225   \textcolor{comment}{// the initial node positions at the end.}
+226   std::ifstream file (\hyperlink{classns3_1_1Ns2MobilityHelper_a788b7d060c9c7c853f227e9315378316}{m\_filename}.c\_str (), std::ios::in);
+227   \textcolor{keywordflow}{if} (file.is\_open ())
+228     \{
+229       \textcolor{keywordflow}{while} (!file.eof () )
+230         \{
+231           \textcolor{keywordtype}{int}         iNodeId = 0;
+232           std::string nodeId;
+233           std::string line;
+234 
+235           getline (file, line);
+236 
+237           \textcolor{comment}{// ignore empty lines}
+238           \textcolor{keywordflow}{if} (line.empty ())
+239             \{
+240               \textcolor{keywordflow}{continue};
+241             \}
+242 
+243           ParseResult pr = \hyperlink{namespacens3_a675ca86d3b63bf614be1139b5bf1f2b3}{ParseNs2Line} (line); \textcolor{comment}{// Parse line and obtain tokens}
+244 
+245           \textcolor{comment}{// Check if the line corresponds with setting the initial}
+246           \textcolor{comment}{// node positions}
+247           \textcolor{keywordflow}{if} (pr.tokens.size () != 4)
+248             \{
+249               \textcolor{keywordflow}{continue};
+250             \}
+251 
+252           \textcolor{comment}{// Get the node Id}
+253           nodeId  = \hyperlink{namespacens3_af4795da6a0f7062b1e74ceda3414e457}{GetNodeIdString} (pr);
+254           iNodeId = \hyperlink{namespacens3_aeb754d89802287943c5dafeb7ba4e1ba}{GetNodeIdInt} (pr);
+255           \textcolor{keywordflow}{if} (iNodeId == -1)
+256             \{
+257               \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"Node number couldn't be obtained (corrupted file?): "} << line << \textcolor{stringliteral}{"
+      \(\backslash\)n"});
+258               \textcolor{keywordflow}{continue};
+259             \}
+260 
+261           \textcolor{comment}{// get mobility model of node}
+262           Ptr<ConstantVelocityMobilityModel> model = \hyperlink{classns3_1_1Ns2MobilityHelper_a5787c916365033678d89a0f0aba8bac7}{GetMobilityModel} (nodeId,store);
+263 
+264           \textcolor{comment}{// if model not exists, continue}
+265           \textcolor{keywordflow}{if} (model == 0)
+266             \{
+267               \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"Unknown node ID (corrupted file?): "} << nodeId << \textcolor{stringliteral}{"\(\backslash\)n"});
+268               \textcolor{keywordflow}{continue};
+269             \}
+270 
+271 
+272           \textcolor{comment}{/*}
+273 \textcolor{comment}{           * In this case a initial position is being seted}
+274 \textcolor{comment}{           * line like $node\_(0) set X\_ 151.05190721688197}
+275 \textcolor{comment}{           */}
+276           \textcolor{keywordflow}{if} (\hyperlink{namespacens3_a9857c35eef6abfd7464f64108e1bfd29}{IsSetInitialPos} (pr))
+277             \{
+278               DestinationPoint point;
+279               \textcolor{comment}{//                                                    coord         coord value}
+280               point.m\_finalPosition = \hyperlink{namespacens3_ac0a281186f351b540a57372d4124032c}{SetInitialPosition} (model, pr.tokens[2], pr.dvals[3
+      ]);
+281               last\_pos[iNodeId] = point;
+282 
+283               \textcolor{comment}{// Log new position}
+284               \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Positions after parse for node "} << iNodeId << \textcolor{stringliteral}{" "} << nodeId <<
+285                             \textcolor{stringliteral}{" position = "} << last\_pos[iNodeId].m\_finalPosition);
+286             \}
+287         \}
+288       file.close ();
+289     \}
+290 
+291   \textcolor{comment}{//*****************************************************************}
+292   \textcolor{comment}{// Parse the file a second time to get the rest of its values}
+293   \textcolor{comment}{//*****************************************************************}
+294 
+295   \textcolor{comment}{// The reason the file is parsed again is to make this helper robust}
+296   \textcolor{comment}{// to handle trace files with the initial node positions at the end.}
+297   file.open (\hyperlink{classns3_1_1Ns2MobilityHelper_a788b7d060c9c7c853f227e9315378316}{m\_filename}.c\_str (), std::ios::in);
+298   \textcolor{keywordflow}{if} (file.is\_open ())
+299     \{
+300       \textcolor{keywordflow}{while} (!file.eof () )
+301         \{
+302           \textcolor{keywordtype}{int}         iNodeId = 0;
+303           std::string nodeId;
+304           std::string line;
+305 
+306           getline (file, line);
+307 
+308           \textcolor{comment}{// ignore empty lines}
+309           \textcolor{keywordflow}{if} (line.empty ())
+310             \{
+311               \textcolor{keywordflow}{continue};
+312             \}
+313 
+314           ParseResult pr = \hyperlink{namespacens3_a675ca86d3b63bf614be1139b5bf1f2b3}{ParseNs2Line} (line); \textcolor{comment}{// Parse line and obtain tokens}
+315 
+316           \textcolor{comment}{// Check if the line corresponds with one of the three types of line}
+317           \textcolor{keywordflow}{if} (pr.tokens.size () != 4 && pr.tokens.size () != 7 && pr.tokens.size () != 8)
+318             \{
+319               \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"Line has not correct number of parameters (corrupted file?): "} << 
+      line << \textcolor{stringliteral}{"\(\backslash\)n"});
+320               \textcolor{keywordflow}{continue};
+321             \}
+322 
+323           \textcolor{comment}{// Get the node Id}
+324           nodeId  = \hyperlink{namespacens3_af4795da6a0f7062b1e74ceda3414e457}{GetNodeIdString} (pr);
+325           iNodeId = \hyperlink{namespacens3_aeb754d89802287943c5dafeb7ba4e1ba}{GetNodeIdInt} (pr);
+326           \textcolor{keywordflow}{if} (iNodeId == -1)
+327             \{
+328               \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"Node number couldn't be obtained (corrupted file?): "} << line << \textcolor{stringliteral}{"
+      \(\backslash\)n"});
+329               \textcolor{keywordflow}{continue};
+330             \}
+331 
+332           \textcolor{comment}{// get mobility model of node}
+333           Ptr<ConstantVelocityMobilityModel> model = \hyperlink{classns3_1_1Ns2MobilityHelper_a5787c916365033678d89a0f0aba8bac7}{GetMobilityModel} (nodeId,store);
+334 
+335           \textcolor{comment}{// if model not exists, continue}
+336           \textcolor{keywordflow}{if} (model == 0)
+337             \{
+338               \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"Unknown node ID (corrupted file?): "} << nodeId << \textcolor{stringliteral}{"\(\backslash\)n"});
+339               \textcolor{keywordflow}{continue};
+340             \}
+341 
+342 
+343           \textcolor{comment}{/*}
+344 \textcolor{comment}{           * In this case a initial position is being seted}
+345 \textcolor{comment}{           * line like $node\_(0) set X\_ 151.05190721688197}
+346 \textcolor{comment}{           */}
+347           \textcolor{keywordflow}{if} (\hyperlink{namespacens3_a9857c35eef6abfd7464f64108e1bfd29}{IsSetInitialPos} (pr))
+348             \{
+349               \textcolor{comment}{// This is the second time this file has been parsed,}
+350               \textcolor{comment}{// and the initial node positions were already set the}
+351               \textcolor{comment}{// first time.  So, do nothing this time with this line.}
+352               \textcolor{keywordflow}{continue};
+353             \}
+354 
+355           \textcolor{keywordflow}{else} \textcolor{comment}{// NOW EVENTS TO BE SCHEDULED}
+356             \{
+357 
+358               \textcolor{comment}{// This is a scheduled event, so time at should be present}
+359               \textcolor{keywordtype}{double} at;
+360 
+361               \textcolor{keywordflow}{if} (!\hyperlink{namespacens3_a1e7c472bb9c018ecd3509390ca7d09b3}{IsNumber} (pr.tokens[2]))
+362                 \{
+363                   \hyperlink{group__logging_gade7208b4009cdf0e25783cd26766f559}{NS\_LOG\_WARN} (\textcolor{stringliteral}{"Time is not a number: "} << pr.tokens[2]);
+364                   \textcolor{keywordflow}{continue};
+365                 \}
+366 
+367               at = pr.dvals[2]; \textcolor{comment}{// set time at}
+368 
+369               \textcolor{keywordflow}{if} ( at < 0 )
+370                 \{
+371                   \hyperlink{group__logging_gade7208b4009cdf0e25783cd26766f559}{NS\_LOG\_WARN} (\textcolor{stringliteral}{"Time is less than cero: "} << at);
+372                   \textcolor{keywordflow}{continue};
+373                 \}
+374 
+375 
+376 
+377               \textcolor{comment}{/*}
+378 \textcolor{comment}{               * In this case a new waypoint is added}
+379 \textcolor{comment}{               * line like $ns\_ at 1 "$node\_(0) setdest 2 3 4"}
+380 \textcolor{comment}{               */}
+381               \textcolor{keywordflow}{if} (\hyperlink{namespacens3_a1ccf8bc01e3dea4e713a6bddb9ef6e0e}{IsSchedMobilityPos} (pr))
+382                 \{
+383                   \textcolor{keywordflow}{if} (last\_pos[iNodeId].m\_targetArrivalTime > at)
+384                     \{
+385                       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Did not reach a destination! stoptime = "} << last\_pos[
+      iNodeId].m\_targetArrivalTime << \textcolor{stringliteral}{", at = "}<<  at);
+386                       \textcolor{keywordtype}{double} actuallytraveled = at - last\_pos[iNodeId].m\_travelStartTime;
+387                       Vector reached = Vector (
+388                           last\_pos[iNodeId].m\_startPosition.x + last\_pos[iNodeId].m\_speed.x * 
+      actuallytraveled,
+389                           last\_pos[iNodeId].m\_startPosition.y + last\_pos[iNodeId].m\_speed.y * 
+      actuallytraveled,
+390                           0
+391                           );
+392                       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Final point = "} << last\_pos[iNodeId].m\_finalPosition << \textcolor{stringliteral}{",
+       actually reached = "} << reached);
+393                       last\_pos[iNodeId].m\_stopEvent.Cancel ();
+394                       last\_pos[iNodeId].m\_finalPosition = reached;
+395                     \}
+396                   \textcolor{comment}{//                                     last position     time  X coord     Y coord     
+       velocity}
+397                   last\_pos[iNodeId] = \hyperlink{namespacens3_acdd6ecb3571f04192019c1afc1b935bd}{SetMovement} (model, last\_pos[iNodeId].m\_finalPosition, at,
+       pr.dvals[5], pr.dvals[6], pr.dvals[7]);
+398 
+399                   \textcolor{comment}{// Log new position}
+400                   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Positions after parse for node "} << iNodeId << \textcolor{stringliteral}{" "} << nodeId 
+      << \textcolor{stringliteral}{" position ="} << last\_pos[iNodeId].m\_finalPosition);
+401                 \}
+402 
+403 
+404               \textcolor{comment}{/*}
+405 \textcolor{comment}{               * Scheduled set position}
+406 \textcolor{comment}{               * line like $ns\_ at 4.634906291962 "$node\_(0) set X\_ 28.675920486450"}
+407 \textcolor{comment}{               */}
+408               \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{namespacens3_ae70eba6d6fbf3bb4fa349cc82df28f57}{IsSchedSetPos} (pr))
+409                 \{
+410                   \textcolor{comment}{//                                         time  coordinate   coord value}
+411                   last\_pos[iNodeId].m\_finalPosition = \hyperlink{namespacens3_ad0171060956d13fe6e048a14e04daea4}{SetSchedPosition} (model, at, pr.
+      tokens[5], pr.dvals[6]);
+412                   \textcolor{keywordflow}{if} (last\_pos[iNodeId].m\_targetArrivalTime > at)
+413                     \{
+414                       last\_pos[iNodeId].m\_stopEvent.Cancel ();
+415                     \}
+416                   last\_pos[iNodeId].m\_targetArrivalTime = at;
+417                   last\_pos[iNodeId].m\_travelStartTime = at;
+418                   \textcolor{comment}{// Log new position}
+419                   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Positions after parse for node "} << iNodeId << \textcolor{stringliteral}{" "} << nodeId 
+      <<
+420                                 \textcolor{stringliteral}{" position ="} << last\_pos[iNodeId].m\_finalPosition);
+421                 \}
+422               \textcolor{keywordflow}{else}
+423                 \{
+424                   \hyperlink{group__logging_gade7208b4009cdf0e25783cd26766f559}{NS\_LOG\_WARN} (\textcolor{stringliteral}{"Format Line is not correct: "} << line << \textcolor{stringliteral}{"\(\backslash\)n"});
+425                 \}
+426             \}
+427         \}
+428       file.close ();
+429     \}
+430 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}!Get\+Mobility\+Model@{Get\+Mobility\+Model}}
+\index{Get\+Mobility\+Model@{Get\+Mobility\+Model}!ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}}
+\subsubsection[{\texorpdfstring{Get\+Mobility\+Model(std\+::string id\+String, const Object\+Store \&store) const }{GetMobilityModel(std::string idString, const ObjectStore &store) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Constant\+Velocity\+Mobility\+Model} $>$ ns3\+::\+Ns2\+Mobility\+Helper\+::\+Get\+Mobility\+Model (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{id\+String, }
+\item[{const {\bf Object\+Store} \&}]{store}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ns2MobilityHelper_a5787c916365033678d89a0f0aba8bac7}{}\label{classns3_1_1Ns2MobilityHelper_a5787c916365033678d89a0f0aba8bac7}
+Get or create a \hyperlink{classns3_1_1ConstantVelocityMobilityModel}{Constant\+Velocity\+Mobility\+Model} corresponding to id\+String 
+\begin{DoxyParams}{Parameters}
+{\em id\+String} & string name for a node \\
+\hline
+{\em store} & \hyperlink{classns3_1_1Object}{Object} store containing ns-\/3 mobility models \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to a \hyperlink{classns3_1_1ConstantVelocityMobilityModel}{Constant\+Velocity\+Mobility\+Model} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+194 \{
+195   std::istringstream iss;
+196   iss.str (idString);
+197   uint32\_t id (0);
+198   iss >> id;
+199   Ptr<Object> \textcolor{keywordtype}{object} = store.Get (\textcolor{keywordtype}{id});
+200   \textcolor{keywordflow}{if} (\textcolor{keywordtype}{object} == 0)
+201     \{
+202       \textcolor{keywordflow}{return} 0;
+203     \}
+204   Ptr<ConstantVelocityMobilityModel> model = \textcolor{keywordtype}{object}->GetObject<ConstantVelocityMobilityModel> ();
+205   \textcolor{keywordflow}{if} (model == 0)
+206     \{
+207       model = CreateObject<ConstantVelocityMobilityModel> ();
+208       \textcolor{keywordtype}{object}->AggregateObject (model);
+209     \}
+210   \textcolor{keywordflow}{return} model;
+211 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}!Install@{Install}}
+\index{Install@{Install}!ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}}
+\subsubsection[{\texorpdfstring{Install(void) const }{Install(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ns2\+Mobility\+Helper\+::\+Install (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1Ns2MobilityHelper_ae54f17492e3efd54ff7501566fc6e9cf}{}\label{classns3_1_1Ns2MobilityHelper_ae54f17492e3efd54ff7501566fc6e9cf}
+Read the ns2 trace file and configure the movement patterns of all nodes contained in the global \hyperlink{classns3_1_1NodeList}{ns3\+::\+Node\+List} whose node\+Id is matches the node\+Id of the nodes in the trace file. 
+\begin{DoxyCode}
+812 \{
+813   \hyperlink{classns3_1_1Ns2MobilityHelper_ae54f17492e3efd54ff7501566fc6e9cf}{Install} (\hyperlink{classns3_1_1NodeList_a93d2211831f5cb71d1dbb721e2721d7f}{NodeList::Begin} (), \hyperlink{classns3_1_1NodeList_a027a558c16e6078e25c7ffc67becb559}{NodeList::End} ());
+814 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}!Install@{Install}}
+\index{Install@{Install}!ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}}
+\subsubsection[{\texorpdfstring{Install(\+T begin, T end) const }{Install(T begin, T end) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void ns3\+::\+Ns2\+Mobility\+Helper\+::\+Install (
+\begin{DoxyParamCaption}
+\item[{T}]{begin, }
+\item[{T}]{end}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1Ns2MobilityHelper_a0d22b6c0acc9cd93479fb2fafa692c14}{}\label{classns3_1_1Ns2MobilityHelper_a0d22b6c0acc9cd93479fb2fafa692c14}
+
+\begin{DoxyParams}{Parameters}
+{\em begin} & an iterator which points to the start of the input object array. \\
+\hline
+{\em end} & an iterator which points to the end of the input object array.\\
+\hline
+\end{DoxyParams}
+Read the ns2 trace file and configure the movement patterns of all input objects. Each input object is identified by a unique node id which reflects the index of the object in the input array. 
+\begin{DoxyCode}
+143 \{
+144   \textcolor{keyword}{class }MyObjectStore : \textcolor{keyword}{public} ObjectStore
+145   \{
+146 \textcolor{keyword}{public}:
+147     MyObjectStore (T begin, T end)
+148       : m\_begin (begin),
+149         m\_end (end)
+150     \{\}
+151     \textcolor{keyword}{virtual} Ptr<Object> Get (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})\textcolor{keyword}{ const }\{
+152       T iterator = m\_begin;
+153       iterator += \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+154       \textcolor{keywordflow}{if} (iterator >= m\_end)
+155         \{
+156           \textcolor{keywordflow}{return} 0;
+157         \}
+158       \textcolor{keywordflow}{return} *iterator;
+159     \}
+160 \textcolor{keyword}{private}:
+161     T m\_begin;
+162     T m\_end;
+163   \};
+164   \hyperlink{classns3_1_1Ns2MobilityHelper_a07ac38324875ef8cf45e9cd4669756dc}{ConfigNodesMovements} (MyObjectStore (begin, end));
+165 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}!m\+\_\+filename@{m\+\_\+filename}}
+\index{m\+\_\+filename@{m\+\_\+filename}!ns3\+::\+Ns2\+Mobility\+Helper@{ns3\+::\+Ns2\+Mobility\+Helper}}
+\subsubsection[{\texorpdfstring{m\+\_\+filename}{m_filename}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Ns2\+Mobility\+Helper\+::m\+\_\+filename\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ns2MobilityHelper_a788b7d060c9c7c853f227e9315378316}{}\label{classns3_1_1Ns2MobilityHelper_a788b7d060c9c7c853f227e9315378316}
+
+
+filename of file containing ns-\/2 mobility trace 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mobility/helper/\hyperlink{ns2-mobility-helper_8h}{ns2-\/mobility-\/helper.\+h}\item 
+mobility/helper/\hyperlink{ns2-mobility-helper_8cc}{ns2-\/mobility-\/helper.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,1034 @@
+\hypertarget{classns3_1_1IdealWifiManager}{}\section{ns3\+:\+:Ideal\+Wifi\+Manager Class Reference}
+\label{classns3_1_1IdealWifiManager}\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+
+
+Ideal rate control algorithm
+
+This class implements an \textquotesingle{}ideal\textquotesingle{} rate control algorithm similar to R\+B\+AR in spirit (see {\itshape A rate-\/adaptive M\+AC protocol for multihop wireless networks} by G. Holland, N. Vaidya, and P. Bahl.)\+: every station keeps track of the snr of every packet received and sends back this snr to the original transmitter by an out-\/of-\/band mechanism. Each transmitter keeps track of the last snr sent back by a receiver and uses it to pick a transmission mode based on a set of snr thresholds built from a target ber and transmission mode-\/specific snr/ber curves.  
+
+
+
+
+{\ttfamily \#include $<$ideal-\/wifi-\/manager.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Ideal\+Wifi\+Manager\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Ideal\+Wifi\+Manager\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1IdealWifiManager_a4d5bed0e67bbea6721accc7084e526c4}{Ideal\+Wifi\+Manager} ()
+\item 
+virtual \hyperlink{classns3_1_1IdealWifiManager_ae83d746cc97747ef93c14b13b0b580e3}{$\sim$\+Ideal\+Wifi\+Manager} ()
+\item 
+void \hyperlink{classns3_1_1IdealWifiManager_a6eda44a7d20e9e09e7530a141a80dc03}{Setup\+Phy} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1WifiPhy}{Wifi\+Phy} $>$ phy)
+\item 
+void \hyperlink{classns3_1_1IdealWifiManager_ad9c8c9fcf2e10badc69da75007366732}{Set\+He\+Supported} (bool enable)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1IdealWifiManager_a98bda34492dd38b9dddeee56113a068d}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ std\+::pair$<$ double, \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} $>$ $>$ \hyperlink{classns3_1_1IdealWifiManager_ae4c6d6e6edd816faeb30a2f010eec7d7}{Thresholds}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1IdealWifiManager_a678947f49366ca1734b6299b667845da}{Do\+Initialize} (void)
+\item 
+\hyperlink{structns3_1_1WifiRemoteStation}{Wifi\+Remote\+Station} $\ast$ \hyperlink{classns3_1_1IdealWifiManager_a9918be4b33fc15e50743ead9bb5a8d17}{Do\+Create\+Station} (void) const 
+\item 
+void \hyperlink{classns3_1_1IdealWifiManager_ab970bb587d9ff4913983e9120600b5d9}{Do\+Report\+Rx\+Ok} (\hyperlink{structns3_1_1WifiRemoteStation}{Wifi\+Remote\+Station} $\ast$station, double rx\+Snr, \hyperlink{classns3_1_1WifiMode}{Wifi\+Mode} tx\+Mode)
+\item 
+void \hyperlink{classns3_1_1IdealWifiManager_a517e8e8d340df21fde394236daae107e}{Do\+Report\+Rts\+Failed} (\hyperlink{structns3_1_1WifiRemoteStation}{Wifi\+Remote\+Station} $\ast$station)
+\item 
+void \hyperlink{classns3_1_1IdealWifiManager_aa9f4a7d3ed8e58cb7a5d0c1d312c0ce9}{Do\+Report\+Data\+Failed} (\hyperlink{structns3_1_1WifiRemoteStation}{Wifi\+Remote\+Station} $\ast$station)
+\item 
+void \hyperlink{classns3_1_1IdealWifiManager_a3baa107493052456308092dd737f94a0}{Do\+Report\+Rts\+Ok} (\hyperlink{structns3_1_1WifiRemoteStation}{Wifi\+Remote\+Station} $\ast$station, double cts\+Snr, \hyperlink{classns3_1_1WifiMode}{Wifi\+Mode} cts\+Mode, double rts\+Snr)
+\item 
+void \hyperlink{classns3_1_1IdealWifiManager_a80a9c2d8cda6728bc2ae4a12096a33c1}{Do\+Report\+Data\+Ok} (\hyperlink{structns3_1_1WifiRemoteStation}{Wifi\+Remote\+Station} $\ast$station, double ack\+Snr, \hyperlink{classns3_1_1WifiMode}{Wifi\+Mode} ack\+Mode, double data\+Snr)
+\item 
+void \hyperlink{classns3_1_1IdealWifiManager_aa3784a2bcc47408f2471aa629db566ff}{Do\+Report\+Ampdu\+Tx\+Status} (\hyperlink{structns3_1_1WifiRemoteStation}{Wifi\+Remote\+Station} $\ast$station, uint8\+\_\+t n\+Successful\+Mpdus, uint8\+\_\+t n\+Failed\+Mpdus, double rx\+Snr, double data\+Snr)
+\item 
+void \hyperlink{classns3_1_1IdealWifiManager_a982b93142de6352a7d1dfbe524720f4a}{Do\+Report\+Final\+Rts\+Failed} (\hyperlink{structns3_1_1WifiRemoteStation}{Wifi\+Remote\+Station} $\ast$station)
+\item 
+void \hyperlink{classns3_1_1IdealWifiManager_a6192666e6f32a33d59d832f6af4ca00b}{Do\+Report\+Final\+Data\+Failed} (\hyperlink{structns3_1_1WifiRemoteStation}{Wifi\+Remote\+Station} $\ast$station)
+\item 
+\hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} \hyperlink{classns3_1_1IdealWifiManager_a2e7570eb1f5cbef1067cfb714e94218e}{Do\+Get\+Data\+Tx\+Vector} (\hyperlink{structns3_1_1WifiRemoteStation}{Wifi\+Remote\+Station} $\ast$station)
+\item 
+\hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} \hyperlink{classns3_1_1IdealWifiManager_ab263f9a1c04747b2c2b55774bf97854a}{Do\+Get\+Rts\+Tx\+Vector} (\hyperlink{structns3_1_1WifiRemoteStation}{Wifi\+Remote\+Station} $\ast$station)
+\item 
+bool \hyperlink{classns3_1_1IdealWifiManager_a9eda2f184115bb0c1cf9493cfc2bdb95}{Is\+Low\+Latency} (void) const 
+\item 
+double \hyperlink{classns3_1_1IdealWifiManager_a4712a1357ab7ba3f2aba5b183cd18f6a}{Get\+Snr\+Threshold} (\hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} tx\+Vector) const 
+\item 
+void \hyperlink{classns3_1_1IdealWifiManager_a07b8198f3c1f258c46af76a3ffe746a7}{Add\+Snr\+Threshold} (\hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} tx\+Vector, double \hyperlink{lte__pathloss_8m_ae6e82a215dff6b79fb6e9952a1b78453}{snr})
+\item 
+uint8\+\_\+t \hyperlink{classns3_1_1IdealWifiManager_a02a51cef1d20b348546c8dc21537e565}{Get\+Channel\+Width\+For\+Mode} (\hyperlink{classns3_1_1WifiMode}{Wifi\+Mode} mode) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1IdealWifiManager_a470ced4d78876560eaffb1d96cb2a1d9}{m\+\_\+ber}
+\begin{DoxyCompactList}\small\item\em The maximum Bit Error Rate acceptable at any transmission mode. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1IdealWifiManager_ae4c6d6e6edd816faeb30a2f010eec7d7}{Thresholds} \hyperlink{classns3_1_1IdealWifiManager_add5cf767e7cc6a6d86da48d7be2ed2c9}{m\+\_\+thresholds}
+\begin{DoxyCompactList}\small\item\em List of \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} and the minimum S\+NR pair. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1TracedValue}{Traced\+Value}$<$ uint64\+\_\+t $>$ \hyperlink{classns3_1_1IdealWifiManager_ace233bd5a507e354ee1eac6c77b3944b}{m\+\_\+current\+Rate}
+\begin{DoxyCompactList}\small\item\em Trace rate changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Ideal rate control algorithm
+
+This class implements an \textquotesingle{}ideal\textquotesingle{} rate control algorithm similar to R\+B\+AR in spirit (see {\itshape A rate-\/adaptive M\+AC protocol for multihop wireless networks} by G. Holland, N. Vaidya, and P. Bahl.)\+: every station keeps track of the snr of every packet received and sends back this snr to the original transmitter by an out-\/of-\/band mechanism. Each transmitter keeps track of the last snr sent back by a receiver and uses it to pick a transmission mode based on a set of snr thresholds built from a target ber and transmission mode-\/specific snr/ber curves. 
+
+\subsection{Member Typedef Documentation}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Thresholds@{Thresholds}}
+\index{Thresholds@{Thresholds}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Thresholds}{Thresholds}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<$std\+::pair$<$double, {\bf Wifi\+Tx\+Vector}$>$ $>$ {\bf ns3\+::\+Ideal\+Wifi\+Manager\+::\+Thresholds}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1IdealWifiManager_ae4c6d6e6edd816faeb30a2f010eec7d7}{}\label{classns3_1_1IdealWifiManager_ae4c6d6e6edd816faeb30a2f010eec7d7}
+A vector of $<$snr, \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector}$>$ pair holding the minimum S\+NR for the \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Ideal\+Wifi\+Manager@{Ideal\+Wifi\+Manager}}
+\index{Ideal\+Wifi\+Manager@{Ideal\+Wifi\+Manager}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Ideal\+Wifi\+Manager()}{IdealWifiManager()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Ideal\+Wifi\+Manager\+::\+Ideal\+Wifi\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1IdealWifiManager_a4d5bed0e67bbea6721accc7084e526c4}{}\label{classns3_1_1IdealWifiManager_a4d5bed0e67bbea6721accc7084e526c4}
+
+\begin{DoxyCode}
+66   : \hyperlink{classns3_1_1IdealWifiManager_ace233bd5a507e354ee1eac6c77b3944b}{m\_currentRate} (0)
+67 \{
+68 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!````~Ideal\+Wifi\+Manager@{$\sim$\+Ideal\+Wifi\+Manager}}
+\index{````~Ideal\+Wifi\+Manager@{$\sim$\+Ideal\+Wifi\+Manager}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Ideal\+Wifi\+Manager()}{~IdealWifiManager()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Ideal\+Wifi\+Manager\+::$\sim$\+Ideal\+Wifi\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_ae83d746cc97747ef93c14b13b0b580e3}{}\label{classns3_1_1IdealWifiManager_ae83d746cc97747ef93c14b13b0b580e3}
+
+\begin{DoxyCode}
+71 \{
+72 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Add\+Snr\+Threshold@{Add\+Snr\+Threshold}}
+\index{Add\+Snr\+Threshold@{Add\+Snr\+Threshold}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Snr\+Threshold(\+Wifi\+Tx\+Vector tx\+Vector, double snr)}{AddSnrThreshold(WifiTxVector txVector, double snr)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ideal\+Wifi\+Manager\+::\+Add\+Snr\+Threshold (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Tx\+Vector}}]{tx\+Vector, }
+\item[{double}]{snr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1IdealWifiManager_a07b8198f3c1f258c46af76a3ffe746a7}{}\label{classns3_1_1IdealWifiManager_a07b8198f3c1f258c46af76a3ffe746a7}
+Adds a pair of \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} and the minimum S\+NR for that given vector to the list.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tx\+Vector} & the \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} storing mode, channel width, and nss \\
+\hline
+{\em snr} & the minimum S\+NR for the given tx\+Vector \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+184 \{
+185   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << txVector.GetMode ().GetUniqueName () << 
+      \hyperlink{lte__amc_8m_a7543c5e4e80c828b652e0c63e4a6de70}{snr});
+186   \hyperlink{classns3_1_1IdealWifiManager_add5cf767e7cc6a6d86da48d7be2ed2c9}{m\_thresholds}.push\_back (std::make\_pair (\hyperlink{lte__amc_8m_a7543c5e4e80c828b652e0c63e4a6de70}{snr}, txVector));
+187 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Do\+Create\+Station@{Do\+Create\+Station}}
+\index{Do\+Create\+Station@{Do\+Create\+Station}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Do\+Create\+Station(void) const }{DoCreateStation(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Wifi\+Remote\+Station} $\ast$ ns3\+::\+Ideal\+Wifi\+Manager\+::\+Do\+Create\+Station (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_a9918be4b33fc15e50743ead9bb5a8d17}{}\label{classns3_1_1IdealWifiManager_a9918be4b33fc15e50743ead9bb5a8d17}
+\begin{DoxyReturn}{Returns}
+a new station data structure 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1WifiRemoteStationManager_a63dfc98d85d14b9e6b6314c7648c6a7d}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+191 \{
+192   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+193   IdealWifiRemoteStation *station = \textcolor{keyword}{new} IdealWifiRemoteStation ();
+194   station->m\_lastSnrObserved = 0.0;
+195   station->m\_lastSnrCached = 0.0;
+196   station->m\_lastMode = \hyperlink{classns3_1_1WifiRemoteStationManager_a54cc63cdbc8067b7f737be74a9e0081c}{GetDefaultMode} ();
+197   station->m\_nss = 1;
+198   \textcolor{keywordflow}{return} station;
+199 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Do\+Get\+Data\+Tx\+Vector@{Do\+Get\+Data\+Tx\+Vector}}
+\index{Do\+Get\+Data\+Tx\+Vector@{Do\+Get\+Data\+Tx\+Vector}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Do\+Get\+Data\+Tx\+Vector(\+Wifi\+Remote\+Station $\ast$station)}{DoGetDataTxVector(WifiRemoteStation *station)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Wifi\+Tx\+Vector} ns3\+::\+Ideal\+Wifi\+Manager\+::\+Do\+Get\+Data\+Tx\+Vector (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Remote\+Station} $\ast$}]{station}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_a2e7570eb1f5cbef1067cfb714e94218e}{}\label{classns3_1_1IdealWifiManager_a2e7570eb1f5cbef1067cfb714e94218e}
+
+\begin{DoxyParams}{Parameters}
+{\em station} & the station that we need to communicate\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the T\+X\+V\+E\+C\+T\+OR to use to send a packet to the station
+\end{DoxyReturn}
+Note\+: This method is called before sending a unicast packet or a fragment of a unicast packet to decide which transmission mode to use. 
+
+Implements \hyperlink{classns3_1_1WifiRemoteStationManager_a5a6b2bfcd4959da43c54f0072bd01202}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+267 \{
+268   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << st);
+269   IdealWifiRemoteStation *station = (IdealWifiRemoteStation *)st;
+270   \textcolor{comment}{//We search within the Supported rate set the mode with the}
+271   \textcolor{comment}{//highest snr threshold possible which is smaller than m\_lastSnr}
+272   \textcolor{comment}{//to ensure correct packet delivery.}
+273   \textcolor{keywordtype}{double} maxThreshold = 0.0;
+274   WifiMode maxMode = \hyperlink{classns3_1_1WifiRemoteStationManager_a54cc63cdbc8067b7f737be74a9e0081c}{GetDefaultMode} ();
+275   std::vector<WifiTxVector> candidateTxVectors;
+276   WifiTxVector txVector;
+277   WifiMode mode;
+278   uint8\_t selectedNss = 1;
+279   txVector.SetChannelWidth (\hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->\hyperlink{classns3_1_1WifiRemoteStationManager_a918213c5b9fa629c4986f6d90521bbd4}{GetChannelWidth} ());
+280   txVector.SetGuardInterval (\hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->\hyperlink{classns3_1_1WifiRemoteStationManager_aa55f6cb04128c88710119c8289f1b17e}{GetShortGuardInterval} () ? 400 : 800);
+281   \textcolor{keywordflow}{if} (station->m\_lastSnrObserved == station->m\_lastSnrCached)
+282     \{
+283       \textcolor{comment}{// SNR has not changed, so skip the search and use the last}
+284       \textcolor{comment}{// mode selected}
+285       maxMode = station->m\_lastMode;
+286       selectedNss = station->m\_nss;
+287       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Using cached mode = "} << maxMode.GetUniqueName () <<
+288                     \textcolor{stringliteral}{" last snr observed "} << station->m\_lastSnrObserved <<
+289                     \textcolor{stringliteral}{" cached "} << station->m\_lastSnrCached);
+290     \}
+291   \textcolor{keywordflow}{else}
+292     \{
+293       \textcolor{keywordflow}{if} ((\hyperlink{classns3_1_1WifiRemoteStationManager_afae2836c7785854272d73bf33e58c95a}{HasVhtSupported} () == \textcolor{keyword}{true} || \hyperlink{classns3_1_1WifiRemoteStationManager_ac792dc8f3c77d507d25de0b87b52608c}{HasHtSupported} () == \textcolor{keyword}{true})
+294           && (\hyperlink{classns3_1_1WifiRemoteStationManager_a84f0f86ec191bd3a00c531f1e9639f96}{GetHtSupported} (st) == \textcolor{keyword}{true} || \hyperlink{classns3_1_1WifiRemoteStationManager_aecf5ed3203b9b55cd831696a08daa5fe}{GetVhtSupported} (st) == \textcolor{keyword}{true}))
+295         \{
+296           \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{classns3_1_1WifiRemoteStationManager_a3b4fd7e5c50dfe3270831ad38de180e9}{GetNMcsSupported} (station); 
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+297             \{
+298               mode = \hyperlink{classns3_1_1WifiRemoteStationManager_af21ecff608cea2837c1af9385bbe6e4e}{GetMcsSupported} (station, \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+299               txVector.SetMode (mode);
+300               \textcolor{keywordflow}{if} (mode.GetModulationClass () == \hyperlink{namespacens3_aa999e1221606a2b21b1eb33c2007c217a6ac45cac36cc4454649435d24ebf349c}{WIFI\_MOD\_CLASS\_HT})
+301                 \{
+302                   \textcolor{comment}{// If the node and peer are both VHT capable, only search VHT modes}
+303                   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1WifiRemoteStationManager_afae2836c7785854272d73bf33e58c95a}{HasVhtSupported} () && \hyperlink{classns3_1_1WifiRemoteStationManager_aecf5ed3203b9b55cd831696a08daa5fe}{GetVhtSupported} (station))
+304                     \{
+305                       \textcolor{keywordflow}{continue};
+306                     \}
+307                   \textcolor{comment}{// Derive NSS from the MCS index. There is a different mode for each possible NSS value.}
+308                   uint8\_t nss = (mode.GetMcsValue () / 8) + 1;
+309                   txVector.SetNss (nss);
+310                   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1WifiPhy_a2df962f7fd9468b514ea16d5fbed97f6}{WifiPhy::IsValidTxVector} (txVector) == \textcolor{keyword}{false})
+311                     \{
+312                       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Skipping mode "} << mode.GetUniqueName () <<
+313                                     \textcolor{stringliteral}{" nss "} << (uint16\_t) nss << \textcolor{stringliteral}{" width "} <<
+314                                     (uint16\_t) txVector.GetChannelWidth ());
+315                       \textcolor{keywordflow}{continue};
+316                     \}
+317                   \textcolor{keywordtype}{double} threshold = \hyperlink{classns3_1_1IdealWifiManager_a4712a1357ab7ba3f2aba5b183cd18f6a}{GetSnrThreshold} (txVector);
+318                   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Testing mode = "} << mode.GetUniqueName () <<
+319                                 \textcolor{stringliteral}{" threshold "} << threshold  << \textcolor{stringliteral}{" maxThreshold "} <<
+320                                 maxThreshold << \textcolor{stringliteral}{" last snr observed "} <<
+321                                 station->m\_lastSnrObserved << \textcolor{stringliteral}{" cached "} <<
+322                                 station->m\_lastSnrCached);
+323                   \textcolor{keywordflow}{if} (threshold > maxThreshold && threshold < station->m\_lastSnrObserved)
+324                     \{
+325                       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Candidate mode = "} << mode.GetUniqueName () <<
+326                                     \textcolor{stringliteral}{" threshold "} << threshold  <<
+327                                     \textcolor{stringliteral}{" last snr observed "} <<
+328                                     station->m\_lastSnrObserved);
+329                       maxThreshold = threshold;
+330                       maxMode = mode;
+331                       selectedNss = nss;
+332                     \}
+333                  \}
+334               \textcolor{keywordflow}{else}
+335                 \{
+336                   \textcolor{comment}{// If the node and peer are not both VHT capable, only search HT modes}
+337                   \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1WifiRemoteStationManager_afae2836c7785854272d73bf33e58c95a}{HasVhtSupported} () || !\hyperlink{classns3_1_1WifiRemoteStationManager_aecf5ed3203b9b55cd831696a08daa5fe}{GetVhtSupported} (station))
+338                     \{
+339                       \textcolor{keywordflow}{continue};
+340                     \}
+341                   uint8\_t maxNss = \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->
+      \hyperlink{classns3_1_1WifiPhy_ab5e6bb95a75d0e6e7e666efd3c014fe4}{GetMaxSupportedTxSpatialStreams} ();
+342                   \textcolor{keywordflow}{for} (uint8\_t nss = 1; nss <= maxNss; nss++)
+343                     \{
+344                       \textcolor{comment}{// If the peer does not support more streams, stop searching.}
+345                       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1WifiRemoteStationManager_a5b08585f67c512242a2f3a53eeedade3}{GetNumberOfSupportedStreams} (station) < nss)
+346                         \{
+347                           \textcolor{keywordflow}{break};
+348                         \}
+349                       txVector.SetNss (nss);
+350                       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1WifiPhy_a2df962f7fd9468b514ea16d5fbed97f6}{WifiPhy::IsValidTxVector} (txVector) == \textcolor{keyword}{false})
+351                         \{
+352                           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Skipping mode "} << mode.GetUniqueName () <<
+353                                         \textcolor{stringliteral}{" nss "} << (uint16\_t) nss << \textcolor{stringliteral}{" width "} <<
+354                                         (uint16\_t) txVector.GetChannelWidth ());
+355                           \textcolor{keywordflow}{continue};
+356                         \}
+357                       \textcolor{keywordtype}{double} threshold = \hyperlink{classns3_1_1IdealWifiManager_a4712a1357ab7ba3f2aba5b183cd18f6a}{GetSnrThreshold} (txVector);
+358                       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Testing mode = "} << mode.GetUniqueName () <<
+359                                     \textcolor{stringliteral}{" threshold "} << threshold  << \textcolor{stringliteral}{" maxThreshold "} <<
+360                                     maxThreshold << \textcolor{stringliteral}{" last snr observed "} <<
+361                                     station->m\_lastSnrObserved << \textcolor{stringliteral}{" cached "} <<
+362                                     station->m\_lastSnrCached);
+363                       \textcolor{keywordflow}{if} (threshold > maxThreshold && threshold < station->m\_lastSnrObserved)
+364                         \{
+365                           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Candidate mode = "} << mode.GetUniqueName () <<
+366                                         \textcolor{stringliteral}{" threshold "} << threshold  <<
+367                                         \textcolor{stringliteral}{" last snr observed "} <<
+368                                         station->m\_lastSnrObserved);
+369                           maxThreshold = threshold;
+370                           maxMode = mode;
+371                           selectedNss = nss;
+372                         \}
+373                     \}
+374                 \}
+375             \}
+376         \}
+377       \textcolor{keywordflow}{else}
+378         \{
+379           \textcolor{comment}{// Non-HT selection}
+380           selectedNss = 1;
+381           \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{classns3_1_1WifiRemoteStationManager_a7316bf091ebad5b8cd1a8b5ee47554d8}{GetNSupported} (station); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+382             \{
+383               mode = \hyperlink{classns3_1_1WifiRemoteStationManager_a995c8bae0d84b168fd3e8bc9ecaacdd4}{GetSupported} (station, \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+384               txVector.SetMode (mode);
+385               txVector.SetNss (selectedNss);
+386               txVector.SetChannelWidth (\hyperlink{classns3_1_1IdealWifiManager_a02a51cef1d20b348546c8dc21537e565}{GetChannelWidthForMode} (mode));
+387               \textcolor{keywordtype}{double} threshold = \hyperlink{classns3_1_1IdealWifiManager_a4712a1357ab7ba3f2aba5b183cd18f6a}{GetSnrThreshold} (txVector);
+388               \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"mode = "} << mode.GetUniqueName () <<
+389                             \textcolor{stringliteral}{" threshold "} << threshold  <<
+390                             \textcolor{stringliteral}{" last snr observed "} <<
+391                             station->m\_lastSnrObserved);
+392               \textcolor{keywordflow}{if} (threshold > maxThreshold && threshold < station->m\_lastSnrObserved)
+393                 \{
+394                   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Candidate mode = "} << mode.GetUniqueName () <<
+395                                 \textcolor{stringliteral}{" threshold "} << threshold  <<
+396                                 \textcolor{stringliteral}{" last snr observed "} <<
+397                                 station->m\_lastSnrObserved);
+398                   maxThreshold = threshold;
+399                   maxMode = mode;
+400                 \}
+401             \}
+402         \}
+403       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updating cached values for station to "} <<  maxMode.GetUniqueName () << \textcolor{stringliteral}{"
+       snr "} << station->m\_lastSnrObserved);
+404       station->m\_lastSnrCached = station->m\_lastSnrObserved;
+405       station->m\_lastMode = maxMode;
+406       station->m\_nss = selectedNss;
+407     \}
+408   uint8\_t channelWidth = \hyperlink{classns3_1_1WifiRemoteStationManager_a918213c5b9fa629c4986f6d90521bbd4}{GetChannelWidth} (station);
+409   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Found maxMode: "} << maxMode << \textcolor{stringliteral}{" channelWidth: "} << (uint16\_t) channelWidth);
+410   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1IdealWifiManager_ace233bd5a507e354ee1eac6c77b3944b}{m\_currentRate} != maxMode.GetDataRate (channelWidth, \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->
+      \hyperlink{classns3_1_1WifiRemoteStationManager_aa55f6cb04128c88710119c8289f1b17e}{GetShortGuardInterval} () ? 400 : 800, selectedNss))
+411     \{
+412       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"New datarate: "} << maxMode.GetDataRate (channelWidth, 
+      \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->\hyperlink{classns3_1_1WifiRemoteStationManager_aa55f6cb04128c88710119c8289f1b17e}{GetShortGuardInterval} () ? 400 : 800, selectedNss));
+413       \hyperlink{classns3_1_1IdealWifiManager_ace233bd5a507e354ee1eac6c77b3944b}{m\_currentRate} = maxMode.GetDataRate (channelWidth, \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->
+      \hyperlink{classns3_1_1WifiRemoteStationManager_aa55f6cb04128c88710119c8289f1b17e}{GetShortGuardInterval} () ? 400 : 800, selectedNss);
+414     \}
+415   \textcolor{keywordflow}{return} WifiTxVector (maxMode, \hyperlink{classns3_1_1WifiRemoteStationManager_acff2fc859ee6b4c66ea7a83dd075b5d6}{GetDefaultTxPowerLevel} (), 
+      \hyperlink{classns3_1_1WifiRemoteStationManager_aac10b1403fb0bd670f8a8bd6d7e48304}{GetLongRetryCount} (station), \hyperlink{classns3_1_1WifiRemoteStationManager_a0f44967cbd7488baada4802ebc642110}{GetPreambleForTransmission} (maxMode
+      , \hyperlink{classns3_1_1WifiRemoteStationManager_ac9ccc8c514bd8d2af05c290e63461a2a}{GetAddress} (station)), 800, \hyperlink{classns3_1_1WifiRemoteStationManager_a6fe1a93cbc48862715bfa97dfe3b3830}{GetNumberOfAntennas} (), selectedNss, 0, 
+      channelWidth, \hyperlink{classns3_1_1WifiRemoteStationManager_a5421c8d510cb16eebeac9f2ea9dd73c3}{GetAggregation} (station), \textcolor{keyword}{false});
+416 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Do\+Get\+Rts\+Tx\+Vector@{Do\+Get\+Rts\+Tx\+Vector}}
+\index{Do\+Get\+Rts\+Tx\+Vector@{Do\+Get\+Rts\+Tx\+Vector}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Do\+Get\+Rts\+Tx\+Vector(\+Wifi\+Remote\+Station $\ast$station)}{DoGetRtsTxVector(WifiRemoteStation *station)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Wifi\+Tx\+Vector} ns3\+::\+Ideal\+Wifi\+Manager\+::\+Do\+Get\+Rts\+Tx\+Vector (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Remote\+Station} $\ast$}]{station}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_ab263f9a1c04747b2c2b55774bf97854a}{}\label{classns3_1_1IdealWifiManager_ab263f9a1c04747b2c2b55774bf97854a}
+
+\begin{DoxyParams}{Parameters}
+{\em station} & the station that we need to communicate\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the transmission mode to use to send an rts to the station
+\end{DoxyReturn}
+Note\+: This method is called before sending an rts to a station to decide which transmission mode to use for the rts. 
+
+Implements \hyperlink{classns3_1_1WifiRemoteStationManager_abf44eccb31d4b1b58644fd6721d132c9}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+420 \{
+421   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << st);
+422   IdealWifiRemoteStation *station = (IdealWifiRemoteStation *)st;
+423   \textcolor{comment}{//We search within the Basic rate set the mode with the highest}
+424   \textcolor{comment}{//snr threshold possible which is smaller than m\_lastSnr to}
+425   \textcolor{comment}{//ensure correct packet delivery.}
+426   \textcolor{keywordtype}{double} maxThreshold = 0.0;
+427   WifiTxVector txVector;
+428   WifiMode mode;
+429   uint8\_t nss = 1;
+430   WifiMode maxMode = \hyperlink{classns3_1_1WifiRemoteStationManager_a54cc63cdbc8067b7f737be74a9e0081c}{GetDefaultMode} ();
+431   \textcolor{comment}{//avoid to use legacy rate adaptation algorithms for IEEE 802.11n/ac}
+432   \textcolor{comment}{// RTS is sent in a non-HT frame; RTS with (V)HT is not yet supported}
+433   txVector.SetGuardInterval (\hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->\hyperlink{classns3_1_1WifiRemoteStationManager_aa55f6cb04128c88710119c8289f1b17e}{GetShortGuardInterval} () ? 400 : 800);
+434   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{classns3_1_1WifiRemoteStationManager_a1528f837dd70f82cda248f1434b94357}{GetNBasicModes} (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+435     \{
+436       mode = \hyperlink{classns3_1_1WifiRemoteStationManager_a8e4599eafc71fa98f6869e3d8908ea24}{GetBasicMode} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+437       txVector.SetMode (mode);
+438       txVector.SetNss (nss);
+439       txVector.SetChannelWidth (\hyperlink{classns3_1_1IdealWifiManager_a02a51cef1d20b348546c8dc21537e565}{GetChannelWidthForMode} (mode));
+440       \textcolor{keywordtype}{double} threshold = \hyperlink{classns3_1_1IdealWifiManager_a4712a1357ab7ba3f2aba5b183cd18f6a}{GetSnrThreshold} (txVector);
+441       \textcolor{keywordflow}{if} (threshold > maxThreshold && threshold < station->m\_lastSnrObserved)
+442         \{
+443           maxThreshold = threshold;
+444           maxMode = mode;
+445         \}
+446     \}
+447   \textcolor{keywordflow}{return} WifiTxVector (maxMode, \hyperlink{classns3_1_1WifiRemoteStationManager_acff2fc859ee6b4c66ea7a83dd075b5d6}{GetDefaultTxPowerLevel} (), 
+      \hyperlink{classns3_1_1WifiRemoteStationManager_ad61157a9a56cf668f3255730f6a416b2}{GetShortRetryCount} (station), \hyperlink{classns3_1_1WifiRemoteStationManager_a0f44967cbd7488baada4802ebc642110}{GetPreambleForTransmission} (
+      maxMode, \hyperlink{classns3_1_1WifiRemoteStationManager_ac9ccc8c514bd8d2af05c290e63461a2a}{GetAddress} (station)), 800, \hyperlink{classns3_1_1WifiRemoteStationManager_a6fe1a93cbc48862715bfa97dfe3b3830}{GetNumberOfAntennas} (), nss, 0, 
+      \hyperlink{classns3_1_1IdealWifiManager_a02a51cef1d20b348546c8dc21537e565}{GetChannelWidthForMode} (maxMode), \hyperlink{classns3_1_1WifiRemoteStationManager_a5421c8d510cb16eebeac9f2ea9dd73c3}{GetAggregation} (station), \textcolor{keyword}{false});
+448 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Do\+Initialize@{Do\+Initialize}}
+\index{Do\+Initialize@{Do\+Initialize}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Do\+Initialize(void)}{DoInitialize(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ideal\+Wifi\+Manager\+::\+Do\+Initialize (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_a678947f49366ca1734b6299b667845da}{}\label{classns3_1_1IdealWifiManager_a678947f49366ca1734b6299b667845da}
+\hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Initialize()} implementation.
+
+This method is called only once by \hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Initialize()}. If the user calls \hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Initialize()} multiple times, \hyperlink{classns3_1_1IdealWifiManager_a678947f49366ca1734b6299b667845da}{Do\+Initialize()} is called only the first time.
+
+Subclasses are expected to override this method and chain up to their parent\textquotesingle{}s implementation once they are done. It is safe to call \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{Get\+Object()} and \hyperlink{classns3_1_1Object_a79dd435d300f3deca814553f561a2922}{Aggregate\+Object()} from within this method. 
+
+Reimplemented from \hyperlink{classns3_1_1Object_af8482a521433409fb5c7f749398c9dbe}{ns3\+::\+Object}.
+
+
+\begin{DoxyCode}
+99 \{
+100   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+101   WifiMode mode;
+102   WifiTxVector txVector;
+103   uint8\_t nss = 1;
+104   uint32\_t nModes = \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->\hyperlink{classns3_1_1WifiPhy_a2467e56b69d64bb2d648302f39397317}{GetNModes} ();
+105   txVector.SetGuardInterval (\hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->\hyperlink{classns3_1_1WifiRemoteStationManager_aa55f6cb04128c88710119c8289f1b17e}{GetShortGuardInterval} () ? 400 : 800);
+106   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < nModes; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+107     \{
+108       mode = \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->\hyperlink{classns3_1_1WifiPhy_ac35983a13a769a7fbaac43340b8cdaf2}{GetMode} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+109       txVector.SetChannelWidth (\hyperlink{classns3_1_1IdealWifiManager_a02a51cef1d20b348546c8dc21537e565}{GetChannelWidthForMode} (mode));
+110       txVector.SetNss (nss);
+111       txVector.SetMode (mode);
+112       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Initialize, adding mode = "} << mode.GetUniqueName () <<
+113                     \textcolor{stringliteral}{" channel width "} << (uint16\_t) txVector.GetChannelWidth () <<
+114                     \textcolor{stringliteral}{" nss "} << (uint16\_t) nss <<
+115                     \textcolor{stringliteral}{" short GI "} << \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->\hyperlink{classns3_1_1WifiPhy_ae907e448ace9df4d647c8f97bbec23fc}{GetShortGuardInterval} ());
+116       \hyperlink{classns3_1_1IdealWifiManager_a07b8198f3c1f258c46af76a3ffe746a7}{AddSnrThreshold} (txVector, \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->CalculateSnr (txVector, 
+      \hyperlink{classns3_1_1IdealWifiManager_a470ced4d78876560eaffb1d96cb2a1d9}{m\_ber}));
+117     \}
+118   \textcolor{comment}{// Add all Ht and Vht MCSes}
+119   txVector.SetChannelWidth (\hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->\hyperlink{classns3_1_1WifiRemoteStationManager_a918213c5b9fa629c4986f6d90521bbd4}{GetChannelWidth} ());
+120   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1WifiRemoteStationManager_afae2836c7785854272d73bf33e58c95a}{HasVhtSupported} () == \textcolor{keyword}{true} || \hyperlink{classns3_1_1WifiRemoteStationManager_ac792dc8f3c77d507d25de0b87b52608c}{HasHtSupported} () == \textcolor{keyword}{true} )
+121     \{
+122       nModes = \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->\hyperlink{classns3_1_1WifiPhy_aede1b3de380510e387aaafcfda7a0db0}{GetNMcs} ();
+123       \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < nModes; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+124         \{
+125           mode = \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->\hyperlink{classns3_1_1WifiPhy_a6a8740a6fbb7ff618c80e0a0867467fd}{GetMcs} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+126           \textcolor{keywordflow}{if} (mode.GetModulationClass () == \hyperlink{namespacens3_aa999e1221606a2b21b1eb33c2007c217a6ac45cac36cc4454649435d24ebf349c}{WIFI\_MOD\_CLASS\_HT})
+127             \{
+128               \textcolor{comment}{//derive NSS from the Mcs index}
+129               nss = (mode.GetMcsValue () / 8) + 1;
+130               \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Initialize, adding mode = "} << mode.GetUniqueName () <<
+131                             \textcolor{stringliteral}{" channel width "} << (uint16\_t) \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->
+      \hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} () <<
+132                             \textcolor{stringliteral}{" nss "} << (uint16\_t) nss <<
+133                             \textcolor{stringliteral}{" short GI "} << \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->
+      \hyperlink{classns3_1_1WifiPhy_ae907e448ace9df4d647c8f97bbec23fc}{GetShortGuardInterval} ());
+134               \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"In SetupPhy, adding mode = "} << mode.GetUniqueName ());
+135               txVector.SetNss (nss);
+136               txVector.SetMode (mode);
+137               \hyperlink{classns3_1_1IdealWifiManager_a07b8198f3c1f258c46af76a3ffe746a7}{AddSnrThreshold} (txVector, \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->CalculateSnr (txVector, 
+      \hyperlink{classns3_1_1IdealWifiManager_a470ced4d78876560eaffb1d96cb2a1d9}{m\_ber}));
+138             \}
+139           \textcolor{keywordflow}{else}
+140             \{
+141               uint8\_t maxNss = \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->\hyperlink{classns3_1_1WifiPhy_ab5e6bb95a75d0e6e7e666efd3c014fe4}{GetMaxSupportedTxSpatialStreams}
+       ();
+142               \textcolor{keywordflow}{for} (uint8\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 1; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} <= maxNss; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+143                 \{
+144                   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Initialize, adding mode = "} << mode.GetUniqueName () <<
+145                                 \textcolor{stringliteral}{" channel width "} << (uint16\_t) \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->
+      \hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} () <<
+146                                 \textcolor{stringliteral}{" nss "} << (uint16\_t) \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} <<
+147                                 \textcolor{stringliteral}{" short GI "} << \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->
+      \hyperlink{classns3_1_1WifiPhy_ae907e448ace9df4d647c8f97bbec23fc}{GetShortGuardInterval} ());
+148                   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"In SetupPhy, adding mode = "} << mode.GetUniqueName ());
+149                   txVector.SetNss (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+150                   txVector.SetMode (mode);
+151                   \hyperlink{classns3_1_1IdealWifiManager_a07b8198f3c1f258c46af76a3ffe746a7}{AddSnrThreshold} (txVector, \hyperlink{classns3_1_1WifiRemoteStationManager_ab92b49cf78e0b72a51f5d13a1f15e242}{GetPhy} ()->CalculateSnr (txVector, 
+      \hyperlink{classns3_1_1IdealWifiManager_a470ced4d78876560eaffb1d96cb2a1d9}{m\_ber}));
+152                 \}
+153             \}
+154         \}
+155     \}
+156 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Do\+Report\+Ampdu\+Tx\+Status@{Do\+Report\+Ampdu\+Tx\+Status}}
+\index{Do\+Report\+Ampdu\+Tx\+Status@{Do\+Report\+Ampdu\+Tx\+Status}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Do\+Report\+Ampdu\+Tx\+Status(\+Wifi\+Remote\+Station $\ast$station, uint8\+\_\+t n\+Successful\+Mpdus, uint8\+\_\+t n\+Failed\+Mpdus, double rx\+Snr, double data\+Snr)}{DoReportAmpduTxStatus(WifiRemoteStation *station, uint8_t nSuccessfulMpdus, uint8_t nFailedMpdus, double rxSnr, double dataSnr)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ideal\+Wifi\+Manager\+::\+Do\+Report\+Ampdu\+Tx\+Status (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Remote\+Station} $\ast$}]{station, }
+\item[{uint8\+\_\+t}]{n\+Successful\+Mpdus, }
+\item[{uint8\+\_\+t}]{n\+Failed\+Mpdus, }
+\item[{double}]{rx\+Snr, }
+\item[{double}]{data\+Snr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_aa3784a2bcc47408f2471aa629db566ff}{}\label{classns3_1_1IdealWifiManager_aa3784a2bcc47408f2471aa629db566ff}
+Typically called per A-\/\+M\+P\+DU, either when a Block A\+CK was successfully received or when a Block\+Ack\+Timeout has elapsed. This method is a virtual method that must be implemented by the sub-\/class intended to handle A-\/\+M\+P\+D\+Us. This allows different types of \hyperlink{classns3_1_1WifiRemoteStationManager}{Wifi\+Remote\+Station\+Manager} to respond differently.
+
+
+\begin{DoxyParams}{Parameters}
+{\em station} & the station that sent the D\+A\+TA to us \\
+\hline
+{\em n\+Successful\+Mpdus} & number of successfully transmitted M\+P\+D\+Us. A value of 0 means that the Block A\+CK was missed. \\
+\hline
+{\em n\+Failed\+Mpdus} & number of unsuccessfully transmitted M\+P\+D\+Us. \\
+\hline
+{\em rx\+Snr} & received S\+NR of the block ack frame itself \\
+\hline
+{\em data\+Snr} & data S\+NR reported by remote station \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1WifiRemoteStationManager_a25709c3fb16dbf9c07170a952d33415f}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+243 \{
+244   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << st << (uint16\_t)nSuccessfulMpdus << (uint16\_t)nFailedMpdus << 
+      rxSnr << dataSnr);
+245   IdealWifiRemoteStation *station = (IdealWifiRemoteStation *)st;
+246   \textcolor{keywordflow}{if} (dataSnr == 0)
+247     \{
+248       \hyperlink{group__logging_gade7208b4009cdf0e25783cd26766f559}{NS\_LOG\_WARN} (\textcolor{stringliteral}{"DataSnr reported to be zero; not saving this report."});
+249       \textcolor{keywordflow}{return};
+250     \}
+251   station->m\_lastSnrObserved = dataSnr;
+252 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Do\+Report\+Data\+Failed@{Do\+Report\+Data\+Failed}}
+\index{Do\+Report\+Data\+Failed@{Do\+Report\+Data\+Failed}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Do\+Report\+Data\+Failed(\+Wifi\+Remote\+Station $\ast$station)}{DoReportDataFailed(WifiRemoteStation *station)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ideal\+Wifi\+Manager\+::\+Do\+Report\+Data\+Failed (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Remote\+Station} $\ast$}]{station}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_aa9f4a7d3ed8e58cb7a5d0c1d312c0ce9}{}\label{classns3_1_1IdealWifiManager_aa9f4a7d3ed8e58cb7a5d0c1d312c0ce9}
+This method is a pure virtual method that must be implemented by the sub-\/class. This allows different types of \hyperlink{classns3_1_1WifiRemoteStationManager}{Wifi\+Remote\+Station\+Manager} to respond differently,
+
+
+\begin{DoxyParams}{Parameters}
+{\em station} & the station that we failed to send D\+A\+TA \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classns3_1_1WifiRemoteStationManager_a38a4401b6232cb547f5a85337e02b12c}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+215 \{
+216 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Do\+Report\+Data\+Ok@{Do\+Report\+Data\+Ok}}
+\index{Do\+Report\+Data\+Ok@{Do\+Report\+Data\+Ok}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Do\+Report\+Data\+Ok(\+Wifi\+Remote\+Station $\ast$station, double ack\+Snr, Wifi\+Mode ack\+Mode, double data\+Snr)}{DoReportDataOk(WifiRemoteStation *station, double ackSnr, WifiMode ackMode, double dataSnr)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ideal\+Wifi\+Manager\+::\+Do\+Report\+Data\+Ok (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Remote\+Station} $\ast$}]{station, }
+\item[{double}]{ack\+Snr, }
+\item[{{\bf Wifi\+Mode}}]{ack\+Mode, }
+\item[{double}]{data\+Snr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_a80a9c2d8cda6728bc2ae4a12096a33c1}{}\label{classns3_1_1IdealWifiManager_a80a9c2d8cda6728bc2ae4a12096a33c1}
+This method is a pure virtual method that must be implemented by the sub-\/class. This allows different types of \hyperlink{classns3_1_1WifiRemoteStationManager}{Wifi\+Remote\+Station\+Manager} to respond differently,
+
+
+\begin{DoxyParams}{Parameters}
+{\em station} & the station that we successfully sent R\+TS \\
+\hline
+{\em ack\+Snr} & the S\+NR of the A\+CK we received \\
+\hline
+{\em ack\+Mode} & the \hyperlink{classns3_1_1WifiMode}{Wifi\+Mode} the receiver used to send the A\+CK \\
+\hline
+{\em data\+Snr} & the S\+NR of the D\+A\+TA we sent \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classns3_1_1WifiRemoteStationManager_a9328ead6b0b4ad50fbd589b286a84c21}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+230 \{
+231   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << st << ackSnr << ackMode.GetUniqueName () << dataSnr);
+232   IdealWifiRemoteStation *station = (IdealWifiRemoteStation *)st;
+233   \textcolor{keywordflow}{if} (dataSnr == 0)
+234     \{
+235       \hyperlink{group__logging_gade7208b4009cdf0e25783cd26766f559}{NS\_LOG\_WARN} (\textcolor{stringliteral}{"DataSnr reported to be zero; not saving this report."});
+236       \textcolor{keywordflow}{return};
+237     \}
+238   station->m\_lastSnrObserved = dataSnr;
+239 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Do\+Report\+Final\+Data\+Failed@{Do\+Report\+Final\+Data\+Failed}}
+\index{Do\+Report\+Final\+Data\+Failed@{Do\+Report\+Final\+Data\+Failed}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Do\+Report\+Final\+Data\+Failed(\+Wifi\+Remote\+Station $\ast$station)}{DoReportFinalDataFailed(WifiRemoteStation *station)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ideal\+Wifi\+Manager\+::\+Do\+Report\+Final\+Data\+Failed (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Remote\+Station} $\ast$}]{station}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_a6192666e6f32a33d59d832f6af4ca00b}{}\label{classns3_1_1IdealWifiManager_a6192666e6f32a33d59d832f6af4ca00b}
+This method is a pure virtual method that must be implemented by the sub-\/class. This allows different types of \hyperlink{classns3_1_1WifiRemoteStationManager}{Wifi\+Remote\+Station\+Manager} to respond differently,
+
+
+\begin{DoxyParams}{Parameters}
+{\em station} & the station that we failed to send D\+A\+TA \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classns3_1_1WifiRemoteStationManager_a32e2a7a9f651b5224b5c037c14598cf7}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+262 \{
+263 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Do\+Report\+Final\+Rts\+Failed@{Do\+Report\+Final\+Rts\+Failed}}
+\index{Do\+Report\+Final\+Rts\+Failed@{Do\+Report\+Final\+Rts\+Failed}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Do\+Report\+Final\+Rts\+Failed(\+Wifi\+Remote\+Station $\ast$station)}{DoReportFinalRtsFailed(WifiRemoteStation *station)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ideal\+Wifi\+Manager\+::\+Do\+Report\+Final\+Rts\+Failed (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Remote\+Station} $\ast$}]{station}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_a982b93142de6352a7d1dfbe524720f4a}{}\label{classns3_1_1IdealWifiManager_a982b93142de6352a7d1dfbe524720f4a}
+This method is a pure virtual method that must be implemented by the sub-\/class. This allows different types of \hyperlink{classns3_1_1WifiRemoteStationManager}{Wifi\+Remote\+Station\+Manager} to respond differently,
+
+
+\begin{DoxyParams}{Parameters}
+{\em station} & the station that we failed to send R\+TS \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classns3_1_1WifiRemoteStationManager_aed2a605fb30d7fc31638eae3f8ee7403}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+257 \{
+258 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Do\+Report\+Rts\+Failed@{Do\+Report\+Rts\+Failed}}
+\index{Do\+Report\+Rts\+Failed@{Do\+Report\+Rts\+Failed}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Do\+Report\+Rts\+Failed(\+Wifi\+Remote\+Station $\ast$station)}{DoReportRtsFailed(WifiRemoteStation *station)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ideal\+Wifi\+Manager\+::\+Do\+Report\+Rts\+Failed (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Remote\+Station} $\ast$}]{station}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_a517e8e8d340df21fde394236daae107e}{}\label{classns3_1_1IdealWifiManager_a517e8e8d340df21fde394236daae107e}
+This method is a pure virtual method that must be implemented by the sub-\/class. This allows different types of \hyperlink{classns3_1_1WifiRemoteStationManager}{Wifi\+Remote\+Station\+Manager} to respond differently,
+
+
+\begin{DoxyParams}{Parameters}
+{\em station} & the station that we failed to send R\+TS \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classns3_1_1WifiRemoteStationManager_ab825ef773e7d251f0e157624a49c7041}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+210 \{
+211 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Do\+Report\+Rts\+Ok@{Do\+Report\+Rts\+Ok}}
+\index{Do\+Report\+Rts\+Ok@{Do\+Report\+Rts\+Ok}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Do\+Report\+Rts\+Ok(\+Wifi\+Remote\+Station $\ast$station, double cts\+Snr, Wifi\+Mode cts\+Mode, double rts\+Snr)}{DoReportRtsOk(WifiRemoteStation *station, double ctsSnr, WifiMode ctsMode, double rtsSnr)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ideal\+Wifi\+Manager\+::\+Do\+Report\+Rts\+Ok (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Remote\+Station} $\ast$}]{station, }
+\item[{double}]{cts\+Snr, }
+\item[{{\bf Wifi\+Mode}}]{cts\+Mode, }
+\item[{double}]{rts\+Snr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_a3baa107493052456308092dd737f94a0}{}\label{classns3_1_1IdealWifiManager_a3baa107493052456308092dd737f94a0}
+This method is a pure virtual method that must be implemented by the sub-\/class. This allows different types of \hyperlink{classns3_1_1WifiRemoteStationManager}{Wifi\+Remote\+Station\+Manager} to respond differently,
+
+
+\begin{DoxyParams}{Parameters}
+{\em station} & the station that we successfully sent R\+TS \\
+\hline
+{\em cts\+Snr} & the S\+NR of the C\+TS we received \\
+\hline
+{\em cts\+Mode} & the \hyperlink{classns3_1_1WifiMode}{Wifi\+Mode} the receiver used to send the C\+TS \\
+\hline
+{\em rts\+Snr} & the S\+NR of the R\+TS we sent \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classns3_1_1WifiRemoteStationManager_a33a010f86ce5e68ceda2a0abbf21b71e}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+221 \{
+222   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << st << ctsSnr << ctsMode.GetUniqueName () << rtsSnr);
+223   IdealWifiRemoteStation *station = (IdealWifiRemoteStation *)st;
+224   station->m\_lastSnrObserved = rtsSnr;
+225 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Do\+Report\+Rx\+Ok@{Do\+Report\+Rx\+Ok}}
+\index{Do\+Report\+Rx\+Ok@{Do\+Report\+Rx\+Ok}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Do\+Report\+Rx\+Ok(\+Wifi\+Remote\+Station $\ast$station, double rx\+Snr, Wifi\+Mode tx\+Mode)}{DoReportRxOk(WifiRemoteStation *station, double rxSnr, WifiMode txMode)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ideal\+Wifi\+Manager\+::\+Do\+Report\+Rx\+Ok (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Remote\+Station} $\ast$}]{station, }
+\item[{double}]{rx\+Snr, }
+\item[{{\bf Wifi\+Mode}}]{tx\+Mode}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_ab970bb587d9ff4913983e9120600b5d9}{}\label{classns3_1_1IdealWifiManager_ab970bb587d9ff4913983e9120600b5d9}
+This method is a pure virtual method that must be implemented by the sub-\/class. This allows different types of \hyperlink{classns3_1_1WifiRemoteStationManager}{Wifi\+Remote\+Station\+Manager} to respond differently,
+
+
+\begin{DoxyParams}{Parameters}
+{\em station} & the station that sent the D\+A\+TA to us \\
+\hline
+{\em rx\+Snr} & the S\+NR of the D\+A\+TA we received \\
+\hline
+{\em tx\+Mode} & the \hyperlink{classns3_1_1WifiMode}{Wifi\+Mode} the sender used to send the D\+A\+TA \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classns3_1_1WifiRemoteStationManager_ade990f17f78d8fc32c736b91a2557b25}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+205 \{
+206 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Get\+Channel\+Width\+For\+Mode@{Get\+Channel\+Width\+For\+Mode}}
+\index{Get\+Channel\+Width\+For\+Mode@{Get\+Channel\+Width\+For\+Mode}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Channel\+Width\+For\+Mode(\+Wifi\+Mode mode) const }{GetChannelWidthForMode(WifiMode mode) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t ns3\+::\+Ideal\+Wifi\+Manager\+::\+Get\+Channel\+Width\+For\+Mode (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Mode}}]{mode}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1IdealWifiManager_a02a51cef1d20b348546c8dc21537e565}{}\label{classns3_1_1IdealWifiManager_a02a51cef1d20b348546c8dc21537e565}
+Convenience function for selecting a channel width for legacy mode 
+\begin{DoxyParams}{Parameters}
+{\em mode} & non-\/(V)HT \hyperlink{classns3_1_1WifiMode}{Wifi\+Mode} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the channel width (M\+Hz) for the selected mode 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+83 \{
+84   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (mode.GetModulationClass () != \hyperlink{namespacens3_aa999e1221606a2b21b1eb33c2007c217a6ac45cac36cc4454649435d24ebf349c}{WIFI\_MOD\_CLASS\_HT});
+85   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (mode.GetModulationClass () != \hyperlink{namespacens3_aa999e1221606a2b21b1eb33c2007c217a9863e4342bf5c238c74dddfc4d96c67e}{WIFI\_MOD\_CLASS\_VHT});
+86   \textcolor{keywordflow}{if} (mode.GetModulationClass () == \hyperlink{namespacens3_aa999e1221606a2b21b1eb33c2007c217aed8070e1ee089724d73fe63030cc112c}{WIFI\_MOD\_CLASS\_DSSS}
+87       || mode.GetModulationClass () == \hyperlink{namespacens3_aa999e1221606a2b21b1eb33c2007c217a3c847bbae970f2de31e7b4eb7ff49840}{WIFI\_MOD\_CLASS\_HR\_DSSS})
+88     \{
+89       \textcolor{keywordflow}{return} 22;
+90     \}
+91   \textcolor{keywordflow}{else}
+92     \{
+93       \textcolor{keywordflow}{return} 20;
+94     \}
+95 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Get\+Snr\+Threshold@{Get\+Snr\+Threshold}}
+\index{Get\+Snr\+Threshold@{Get\+Snr\+Threshold}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Snr\+Threshold(\+Wifi\+Tx\+Vector tx\+Vector) const }{GetSnrThreshold(WifiTxVector txVector) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Ideal\+Wifi\+Manager\+::\+Get\+Snr\+Threshold (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Tx\+Vector}}]{tx\+Vector}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1IdealWifiManager_a4712a1357ab7ba3f2aba5b183cd18f6a}{}\label{classns3_1_1IdealWifiManager_a4712a1357ab7ba3f2aba5b183cd18f6a}
+Return the minimum S\+NR needed to successfully transmit data with this \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} at the specified B\+ER.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tx\+Vector} & \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} (containing valid mode, width, and nss)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the minimum S\+NR for the given \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+160 \{
+161   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << txVector.GetMode ().GetUniqueName ());
+162   \textcolor{keywordflow}{for} (Thresholds::const\_iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1IdealWifiManager_add5cf767e7cc6a6d86da48d7be2ed2c9}{m\_thresholds}.begin (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != 
+      \hyperlink{classns3_1_1IdealWifiManager_add5cf767e7cc6a6d86da48d7be2ed2c9}{m\_thresholds}.end (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+163     \{
+164       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Checking "} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->second.GetMode ().GetUniqueName () <<
+165                     \textcolor{stringliteral}{" nss "} << (uint16\_t) \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->second.GetNss () <<
+166                     \textcolor{stringliteral}{" width "} << (uint16\_t) \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->second.GetChannelWidth ());
+167       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"against TxVector "} << txVector.GetMode ().GetUniqueName () <<
+168                     \textcolor{stringliteral}{" nss "} << (uint16\_t) txVector.GetNss () <<
+169                     \textcolor{stringliteral}{" width "} << (uint16\_t) txVector.GetChannelWidth ());
+170       \textcolor{keywordflow}{if} (txVector.GetMode () == \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->second.GetMode ()
+171           && txVector.GetNss () == \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->second.GetNss ()
+172           && txVector.GetGuardInterval () == \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->second.GetGuardInterval ()
+173           && txVector.GetChannelWidth () == \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->second.GetChannelWidth ())
+174         \{
+175           \textcolor{keywordflow}{return} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->first;
+176         \}
+177     \}
+178   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\textcolor{keyword}{false});
+179   \textcolor{keywordflow}{return} 0.0;
+180 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 13
+
+
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Ideal\+Wifi\+Manager\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1IdealWifiManager_a98bda34492dd38b9dddeee56113a068d}{}\label{classns3_1_1IdealWifiManager_a98bda34492dd38b9dddeee56113a068d}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+47 \{
+48   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::IdealWifiManager"})
+49     .SetParent<\hyperlink{classns3_1_1WifiRemoteStationManager_a78524840f5900e1937e8e2d6df48954d}{WifiRemoteStationManager}> ()
+50     .SetGroupName (\textcolor{stringliteral}{"Wifi"})
+51     .AddConstructor<\hyperlink{classns3_1_1IdealWifiManager_a4d5bed0e67bbea6721accc7084e526c4}{IdealWifiManager}> ()
+52     .AddAttribute (\textcolor{stringliteral}{"BerThreshold"},
+53                    \textcolor{stringliteral}{"The maximum Bit Error Rate acceptable at any transmission mode"},
+54                    DoubleValue (1e-5),
+55                    MakeDoubleAccessor (&\hyperlink{classns3_1_1IdealWifiManager_a470ced4d78876560eaffb1d96cb2a1d9}{IdealWifiManager::m\_ber}),
+56                    MakeDoubleChecker<double> ())
+57     .AddTraceSource (\textcolor{stringliteral}{"Rate"},
+58                      \textcolor{stringliteral}{"Traced value for rate changes (b/s)"},
+59                      \hyperlink{group__tracing_gab21a770b9855af4e8f69f7531ea4a6b0}{MakeTraceSourceAccessor} (&
+      \hyperlink{classns3_1_1IdealWifiManager_ace233bd5a507e354ee1eac6c77b3944b}{IdealWifiManager::m\_currentRate}),
+60                      \textcolor{stringliteral}{"ns3::TracedValueCallback::Uint64"})
+61   ;
+62   \textcolor{keywordflow}{return} tid;
+63 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 14
+
+
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Is\+Low\+Latency@{Is\+Low\+Latency}}
+\index{Is\+Low\+Latency@{Is\+Low\+Latency}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Is\+Low\+Latency(void) const }{IsLowLatency(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Ideal\+Wifi\+Manager\+::\+Is\+Low\+Latency (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_a9eda2f184115bb0c1cf9493cfc2bdb95}{}\label{classns3_1_1IdealWifiManager_a9eda2f184115bb0c1cf9493cfc2bdb95}
+\begin{DoxyReturn}{Returns}
+whether this manager is a manager designed to work in low-\/latency environments.
+\end{DoxyReturn}
+Note\+: In this context, low vs high latency is defined in {\itshape I\+E\+EE 802.\+11 Rate Adaptation\+: A Practical Approach}, by M. Lacage, M.\+H. Manshaei, and T. Turletti. 
+
+Implements \hyperlink{classns3_1_1WifiRemoteStationManager_a3b5ae71dce8e994b493ddfdb1d2f57f6}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+452 \{
+453   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+454 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Set\+He\+Supported@{Set\+He\+Supported}}
+\index{Set\+He\+Supported@{Set\+He\+Supported}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Set\+He\+Supported(bool enable)}{SetHeSupported(bool enable)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ideal\+Wifi\+Manager\+::\+Set\+He\+Supported (
+\begin{DoxyParamCaption}
+\item[{bool}]{enable}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_ad9c8c9fcf2e10badc69da75007366732}{}\label{classns3_1_1IdealWifiManager_ad9c8c9fcf2e10badc69da75007366732}
+Enable or disable HE capability support.
+
+
+\begin{DoxyParams}{Parameters}
+{\em enable} & enable or disable HE capability support \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1WifiRemoteStationManager_a18c218db519ceb78e910b6184a4e2992}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+458 \{
+459   \textcolor{comment}{//HE is not supported yet by this algorithm.}
+460   \textcolor{keywordflow}{if} (enable)
+461     \{
+462       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"WifiRemoteStationManager selected does not support HE rates"});
+463     \}
+464 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!Setup\+Phy@{Setup\+Phy}}
+\index{Setup\+Phy@{Setup\+Phy}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{Setup\+Phy(\+Ptr$<$ Wifi\+Phy $>$ phy)}{SetupPhy(Ptr< WifiPhy > phy)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ideal\+Wifi\+Manager\+::\+Setup\+Phy (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Wifi\+Phy} $>$}]{phy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1IdealWifiManager_a6eda44a7d20e9e09e7530a141a80dc03}{}\label{classns3_1_1IdealWifiManager_a6eda44a7d20e9e09e7530a141a80dc03}
+Set up P\+HY associated with this device since it is the object that knows the full set of transmit rates that are supported.
+
+
+\begin{DoxyParams}{Parameters}
+{\em phy} & the P\+HY of this device \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1WifiRemoteStationManager_a823deffface82c9fe1daa06ce11c585b}{ns3\+::\+Wifi\+Remote\+Station\+Manager}.
+
+
+\begin{DoxyCode}
+76 \{
+77   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << phy);
+78   \hyperlink{classns3_1_1WifiRemoteStationManager_a823deffface82c9fe1daa06ce11c585b}{WifiRemoteStationManager::SetupPhy} (phy);
+79 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 15
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!m\+\_\+ber@{m\+\_\+ber}}
+\index{m\+\_\+ber@{m\+\_\+ber}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{m\+\_\+ber}{m_ber}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Ideal\+Wifi\+Manager\+::m\+\_\+ber\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1IdealWifiManager_a470ced4d78876560eaffb1d96cb2a1d9}{}\label{classns3_1_1IdealWifiManager_a470ced4d78876560eaffb1d96cb2a1d9}
+
+
+The maximum Bit Error Rate acceptable at any transmission mode. 
+
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!m\+\_\+current\+Rate@{m\+\_\+current\+Rate}}
+\index{m\+\_\+current\+Rate@{m\+\_\+current\+Rate}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{m\+\_\+current\+Rate}{m_currentRate}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Traced\+Value}$<$uint64\+\_\+t$>$ ns3\+::\+Ideal\+Wifi\+Manager\+::m\+\_\+current\+Rate\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1IdealWifiManager_ace233bd5a507e354ee1eac6c77b3944b}{}\label{classns3_1_1IdealWifiManager_ace233bd5a507e354ee1eac6c77b3944b}
+
+
+Trace rate changes. 
+
+\index{ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}!m\+\_\+thresholds@{m\+\_\+thresholds}}
+\index{m\+\_\+thresholds@{m\+\_\+thresholds}!ns3\+::\+Ideal\+Wifi\+Manager@{ns3\+::\+Ideal\+Wifi\+Manager}}
+\subsubsection[{\texorpdfstring{m\+\_\+thresholds}{m_thresholds}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Thresholds} ns3\+::\+Ideal\+Wifi\+Manager\+::m\+\_\+thresholds\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1IdealWifiManager_add5cf767e7cc6a6d86da48d7be2ed2c9}{}\label{classns3_1_1IdealWifiManager_add5cf767e7cc6a6d86da48d7be2ed2c9}
+
+
+List of \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} and the minimum S\+NR pair. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+wifi/model/\hyperlink{ideal-wifi-manager_8h}{ideal-\/wifi-\/manager.\+h}\item 
+wifi/model/\hyperlink{ideal-wifi-manager_8cc}{ideal-\/wifi-\/manager.\+cc}\end{DoxyCompactItemize}

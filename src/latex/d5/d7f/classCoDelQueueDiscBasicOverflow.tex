@@ -1,0 +1,235 @@
+\hypertarget{classCoDelQueueDiscBasicOverflow}{}\section{Co\+Del\+Queue\+Disc\+Basic\+Overflow Class Reference}
+\label{classCoDelQueueDiscBasicOverflow}\index{Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}}
+
+
+Test 2\+: enqueue with drops due to queue overflow.  
+
+
+
+
+Inheritance diagram for Co\+Del\+Queue\+Disc\+Basic\+Overflow\+:
+% FIG 0
+
+
+Collaboration diagram for Co\+Del\+Queue\+Disc\+Basic\+Overflow\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCoDelQueueDiscBasicOverflow_a426f13121ac484732af154567c4197d4}{Co\+Del\+Queue\+Disc\+Basic\+Overflow} (std\+::string mode)
+\item 
+virtual void \hyperlink{classCoDelQueueDiscBasicOverflow_a902879310f02ffebbdf420e3de3daaad}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+void \hyperlink{classCoDelQueueDiscBasicOverflow_aeb7cd13596fa7241fba47a6dff735fc0}{Queue\+Test\+Size} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1CoDelQueueDisc}{Co\+Del\+Queue\+Disc} $>$ queue, uint32\+\_\+t size, std\+::string error)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classCoDelQueueDiscBasicOverflow_aafa1c6aac502787881de33c06bd97436}{Enqueue} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1CoDelQueueDisc}{Co\+Del\+Queue\+Disc} $>$ queue, uint32\+\_\+t size, uint32\+\_\+t n\+Pkt)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+String\+Value \hyperlink{classCoDelQueueDiscBasicOverflow_a8300058029d180f082de23dbde5b1ba0}{m\+\_\+mode}
+\begin{DoxyCompactList}\small\item\em mode \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Test 2\+: enqueue with drops due to queue overflow. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}!Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}}
+\index{Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}!Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}}
+\subsubsection[{\texorpdfstring{Co\+Del\+Queue\+Disc\+Basic\+Overflow(std\+::string mode)}{CoDelQueueDiscBasicOverflow(std::string mode)}}]{\setlength{\rightskip}{0pt plus 5cm}Co\+Del\+Queue\+Disc\+Basic\+Overflow\+::\+Co\+Del\+Queue\+Disc\+Basic\+Overflow (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{mode}
+\end{DoxyParamCaption}
+)}\hypertarget{classCoDelQueueDiscBasicOverflow_a426f13121ac484732af154567c4197d4}{}\label{classCoDelQueueDiscBasicOverflow_a426f13121ac484732af154567c4197d4}
+Constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & the mode \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+303   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Basic overflow behavior for "} + mode)
+304 \{
+305   \hyperlink{classCoDelQueueDiscBasicOverflow_a8300058029d180f082de23dbde5b1ba0}{m\_mode} = StringValue (mode);
+306 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Co\+Del\+Queue\+Disc\+Basic\+Overflow\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classCoDelQueueDiscBasicOverflow_a902879310f02ffebbdf420e3de3daaad}{}\label{classCoDelQueueDiscBasicOverflow_a902879310f02ffebbdf420e3de3daaad}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+310 \{
+311   \hyperlink{classns3_1_1Ptr}{Ptr<CoDelQueueDisc>} queue = CreateObject<CoDelQueueDisc> ();
+312   uint32\_t pktSize = 1000;
+313   uint32\_t modeSize = 0;
+314 
+315   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1ObjectBase_aa7d333004e970f925a4ed5df275541b5}{SetAttributeFailSafe} (\textcolor{stringliteral}{"Mode"}, 
+      \hyperlink{classCoDelQueueDiscBasicOverflow_a8300058029d180f082de23dbde5b1ba0}{m\_mode}), \textcolor{keyword}{true},
+316                          \textcolor{stringliteral}{"Verify that we can actually set the attribute Mode"});
+317 
+318   \hyperlink{classns3_1_1Address}{Address} dest;
+319 
+320   \textcolor{keywordflow}{if} (queue->\hyperlink{classns3_1_1CoDelQueueDisc_ab4e1b3733d0961c823b6fa7d2e36c0bb}{GetMode} () == CoDelQueueDisc::QUEUE\_DISC\_MODE\_BYTES)
+321     \{
+322       modeSize = pktSize;
+323     \}
+324   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (queue->\hyperlink{classns3_1_1CoDelQueueDisc_ab4e1b3733d0961c823b6fa7d2e36c0bb}{GetMode} () == CoDelQueueDisc::QUEUE\_DISC\_MODE\_PACKETS)
+325     \{
+326       modeSize = 1;
+327     \}
+328 
+329   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} p1, p2, p3;
+330   p1 = Create<Packet> (pktSize);
+331   p2 = Create<Packet> (pktSize);
+332   p3 = Create<Packet> (pktSize);
+333 
+334   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1ObjectBase_aa7d333004e970f925a4ed5df275541b5}{SetAttributeFailSafe} (\textcolor{stringliteral}{"MaxPackets"}
+      , UintegerValue (500)), \textcolor{keyword}{true},
+335                          \textcolor{stringliteral}{"Verify that we can actually set the attribute MaxPackets"});
+336   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1ObjectBase_aa7d333004e970f925a4ed5df275541b5}{SetAttributeFailSafe} (\textcolor{stringliteral}{"MaxBytes"}, 
+      UintegerValue (pktSize * 500)), \textcolor{keyword}{true},
+337                          \textcolor{stringliteral}{"Verify that we can actually set the attribute MaxBytes"});
+338   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1ObjectBase_aa7d333004e970f925a4ed5df275541b5}{SetAttributeFailSafe} (\textcolor{stringliteral}{"MinBytes"}, 
+      UintegerValue (pktSize)), \textcolor{keyword}{true},
+339                          \textcolor{stringliteral}{"Verify that we can actually set the attribute MinBytes"});
+340 
+341   queue->\hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Initialize} ();
+342 
+343   \hyperlink{classCoDelQueueDiscBasicOverflow_aafa1c6aac502787881de33c06bd97436}{Enqueue} (queue, pktSize, 500);
+344   queue->\hyperlink{classns3_1_1QueueDisc_af452fb01b98fed312125163f1fe85431}{Enqueue} (Create<CodelQueueDiscTestItem> (p1, dest, 0));
+345   queue->\hyperlink{classns3_1_1QueueDisc_af452fb01b98fed312125163f1fe85431}{Enqueue} (Create<CodelQueueDiscTestItem> (p2, dest, 0));
+346   queue->\hyperlink{classns3_1_1QueueDisc_af452fb01b98fed312125163f1fe85431}{Enqueue} (Create<CodelQueueDiscTestItem> (p3, dest, 0));
+347 
+348   \hyperlink{classCoDelQueueDiscBasicOverflow_aeb7cd13596fa7241fba47a6dff735fc0}{QueueTestSize} (queue, 500 * modeSize, \textcolor{stringliteral}{"There should be 500 packets in queue"});
+349   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1CoDelQueueDisc_adff74bb49a41862a99f5900f54b7ee39}{GetDropOverLimit} (), 3, \textcolor{stringliteral}{"There should
+       be three packets being dropped due to full queue"});
+350 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}!Enqueue@{Enqueue}}
+\index{Enqueue@{Enqueue}!Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}}
+\subsubsection[{\texorpdfstring{Enqueue(\+Ptr$<$ Co\+Del\+Queue\+Disc $>$ queue, uint32\+\_\+t size, uint32\+\_\+t n\+Pkt)}{Enqueue(Ptr< CoDelQueueDisc > queue, uint32_t size, uint32_t nPkt)}}]{\setlength{\rightskip}{0pt plus 5cm}void Co\+Del\+Queue\+Disc\+Basic\+Overflow\+::\+Enqueue (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Co\+Del\+Queue\+Disc} $>$}]{queue, }
+\item[{uint32\+\_\+t}]{size, }
+\item[{uint32\+\_\+t}]{n\+Pkt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCoDelQueueDiscBasicOverflow_aafa1c6aac502787881de33c06bd97436}{}\label{classCoDelQueueDiscBasicOverflow_aafa1c6aac502787881de33c06bd97436}
+Enqueue function 
+\begin{DoxyParams}{Parameters}
+{\em queue} & the queue disc \\
+\hline
+{\em size} & the size \\
+\hline
+{\em n\+Pkt} & the number of packets \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+354 \{
+355   \hyperlink{classns3_1_1Address}{Address} dest;
+356   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < nPkt; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+357     \{
+358       queue->\hyperlink{classns3_1_1QueueDisc_af452fb01b98fed312125163f1fe85431}{Enqueue} (Create<CodelQueueDiscTestItem> (Create<Packet> (size), dest, 0));
+359     \}
+360 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}!Queue\+Test\+Size@{Queue\+Test\+Size}}
+\index{Queue\+Test\+Size@{Queue\+Test\+Size}!Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}}
+\subsubsection[{\texorpdfstring{Queue\+Test\+Size(\+Ptr$<$ Co\+Del\+Queue\+Disc $>$ queue, uint32\+\_\+t size, std\+::string error)}{QueueTestSize(Ptr< CoDelQueueDisc > queue, uint32_t size, std::string error)}}]{\setlength{\rightskip}{0pt plus 5cm}void Co\+Del\+Queue\+Disc\+Basic\+Overflow\+::\+Queue\+Test\+Size (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Co\+Del\+Queue\+Disc} $>$}]{queue, }
+\item[{uint32\+\_\+t}]{size, }
+\item[{std\+::string}]{error}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classCoDelQueueDiscBasicOverflow_aeb7cd13596fa7241fba47a6dff735fc0}{}\label{classCoDelQueueDiscBasicOverflow_aeb7cd13596fa7241fba47a6dff735fc0}
+Queue test size function 
+\begin{DoxyParams}{Parameters}
+{\em queue} & the queue disc \\
+\hline
+{\em size} & the size \\
+\hline
+{\em error} & the error string \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+278   \{
+279     \textcolor{keywordflow}{if} (queue->\hyperlink{classns3_1_1CoDelQueueDisc_ab4e1b3733d0961c823b6fa7d2e36c0bb}{GetMode} () == CoDelQueueDisc::QUEUE\_DISC\_MODE\_BYTES)
+280       \{
+281         \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1QueueDisc_ac87d3bbf7381d64808f6764bdfd812e5}{GetNBytes} (), size, error);
+282       \}
+283     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (queue->\hyperlink{classns3_1_1CoDelQueueDisc_ab4e1b3733d0961c823b6fa7d2e36c0bb}{GetMode} () == CoDelQueueDisc::QUEUE\_DISC\_MODE\_PACKETS)
+284       \{
+285         \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1QueueDisc_a6ee992f32c1671512f0948fd6cc46a7e}{GetNPackets} (), size, error);
+286       \}
+287 
+288     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->\hyperlink{classns3_1_1CoDelQueueDisc_a2eed623615f381b9c377ed7add064953}{GetQueueSize} (), size, error);
+289   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}!m\+\_\+mode@{m\+\_\+mode}}
+\index{m\+\_\+mode@{m\+\_\+mode}!Co\+Del\+Queue\+Disc\+Basic\+Overflow@{Co\+Del\+Queue\+Disc\+Basic\+Overflow}}
+\subsubsection[{\texorpdfstring{m\+\_\+mode}{m_mode}}]{\setlength{\rightskip}{0pt plus 5cm}String\+Value Co\+Del\+Queue\+Disc\+Basic\+Overflow\+::m\+\_\+mode\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCoDelQueueDiscBasicOverflow_a8300058029d180f082de23dbde5b1ba0}{}\label{classCoDelQueueDiscBasicOverflow_a8300058029d180f082de23dbde5b1ba0}
+
+
+mode 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+traffic-\/control/test/\hyperlink{codel-queue-disc-test-suite_8cc}{codel-\/queue-\/disc-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

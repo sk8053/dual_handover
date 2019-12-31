@@ -1,0 +1,1190 @@
+\hypertarget{classPowerRateAdaptationTest}{}\section{Power\+Rate\+Adaptation\+Test Class Reference}
+\label{classPowerRateAdaptationTest}\index{Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}}
+
+
+Power Rate Adaptation Test.  
+
+
+
+
+Inheritance diagram for Power\+Rate\+Adaptation\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Power\+Rate\+Adaptation\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPowerRateAdaptationTest_a7c9dabaff02e1e82491e0a1106c2fcb8}{Power\+Rate\+Adaptation\+Test} ()
+\item 
+virtual void \hyperlink{classPowerRateAdaptationTest_aab868cfafe1fcef3c1a777720571147d}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classPowerRateAdaptationTest_a06db52c180644f3b961de054c41f2115}{Test\+Parf} ()
+\begin{DoxyCompactList}\small\item\em Test parf function. \end{DoxyCompactList}\item 
+void \hyperlink{classPowerRateAdaptationTest_a3c3954526cb787125fea4c50cfe76174}{Test\+Aparf} ()
+\begin{DoxyCompactList}\small\item\em Test aparf function. \end{DoxyCompactList}\item 
+void \hyperlink{classPowerRateAdaptationTest_af0e5f044ed9bdf20dc203926ff8677b4}{Test\+Rrpaa} ()
+\begin{DoxyCompactList}\small\item\em Test rrpaa function. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Node}{Node} $>$ \hyperlink{classPowerRateAdaptationTest_a498edc12eed6e91b38d1b71d4565a306}{Configure\+Node} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1ObjectFactory}{Object\+Factory} \hyperlink{classPowerRateAdaptationTest_afa9f7fb131c12b88efa24138930c50b3}{m\+\_\+manager}
+\begin{DoxyCompactList}\small\item\em manager \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Power Rate Adaptation Test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}!Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}}
+\index{Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}!Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}}
+\subsubsection[{\texorpdfstring{Power\+Rate\+Adaptation\+Test()}{PowerRateAdaptationTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Power\+Rate\+Adaptation\+Test\+::\+Power\+Rate\+Adaptation\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPowerRateAdaptationTest_a7c9dabaff02e1e82491e0a1106c2fcb8}{}\label{classPowerRateAdaptationTest_a7c9dabaff02e1e82491e0a1106c2fcb8}
+
+\begin{DoxyCode}
+60   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"PowerRateAdaptation"})
+61 \{
+62 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}!Configure\+Node@{Configure\+Node}}
+\index{Configure\+Node@{Configure\+Node}!Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}}
+\subsubsection[{\texorpdfstring{Configure\+Node()}{ConfigureNode()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Node} $>$ Power\+Rate\+Adaptation\+Test\+::\+Configure\+Node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPowerRateAdaptationTest_a498edc12eed6e91b38d1b71d4565a306}{}\label{classPowerRateAdaptationTest_a498edc12eed6e91b38d1b71d4565a306}
+Configure nde function \begin{DoxyReturn}{Returns}
+the node 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+66 \{
+67   \textcolor{comment}{/*}
+68 \textcolor{comment}{   * Create channel model. Is is necessary to configure correctly the phy layer.}
+69 \textcolor{comment}{   */}
+70   \hyperlink{classns3_1_1Ptr}{Ptr<YansWifiChannel>} channel = CreateObject<YansWifiChannel> ();
+71 
+72   \textcolor{comment}{/*}
+73 \textcolor{comment}{   * Create mac layer. We use Adhoc because association is not needed to get supported rates.}
+74 \textcolor{comment}{   */}
+75   \hyperlink{classns3_1_1Ptr}{Ptr<AdhocWifiMac>} mac = CreateObject<AdhocWifiMac> ();
+76   mac->ConfigureStandard (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a22db1e8022db2c3450414b86c77b11e4}{WIFI\_PHY\_STANDARD\_80211a});
+77 
+78   \textcolor{comment}{/*}
+79 \textcolor{comment}{   * Create mobility model. Is needed by the phy layer for transmission.}
+80 \textcolor{comment}{   */}
+81   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} mobility = 
+      CreateObject<ConstantPositionMobilityModel> ();
+82 
+83   \textcolor{comment}{/*}
+84 \textcolor{comment}{   * Create and configure phy layer.}
+85 \textcolor{comment}{   */}
+86   \hyperlink{classns3_1_1Ptr}{Ptr<WifiNetDevice>} dev = CreateObject<WifiNetDevice> ();
+87   \hyperlink{classns3_1_1Ptr}{Ptr<YansWifiPhy>} phy = CreateObject<YansWifiPhy> ();
+88   phy->\hyperlink{classns3_1_1YansWifiPhy_ad2eeb0ab17ef01b26436f7110cccff1d}{SetChannel} (channel);
+89   phy->SetDevice (dev);
+90   phy->SetMobility (mobility);
+91   phy->ConfigureStandard (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a22db1e8022db2c3450414b86c77b11e4}{WIFI\_PHY\_STANDARD\_80211a});
+92 
+93   \textcolor{comment}{/*}
+94 \textcolor{comment}{   * Configure power control parameters.}
+95 \textcolor{comment}{   */}
+96   phy->SetNTxPower (18);
+97   phy->SetTxPowerStart (0);
+98   phy->SetTxPowerEnd (17);
+99 
+100   \textcolor{comment}{/*}
+101 \textcolor{comment}{   * Create manager.}
+102 \textcolor{comment}{   */}
+103   \hyperlink{classns3_1_1Ptr}{Ptr<WifiRemoteStationManager>} manager = \hyperlink{classPowerRateAdaptationTest_afa9f7fb131c12b88efa24138930c50b3}{m\_manager}.
+      \hyperlink{classns3_1_1ObjectFactory_a18152e93f0a6fe184ed7300cb31e9896}{Create}<\hyperlink{classns3_1_1WifiRemoteStationManager}{WifiRemoteStationManager}> ();
+104 
+105   \textcolor{comment}{/*}
+106 \textcolor{comment}{   * Create and configure node. Add mac and phy layer and the manager.}
+107 \textcolor{comment}{   */}
+108   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = CreateObject<Node> ();
+109   mac->SetAddress (Mac48Address::Allocate ());
+110   dev->SetMac (mac);
+111   dev->SetPhy (phy);
+112   dev->SetRemoteStationManager (manager);
+113   node->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (dev);
+114 
+115   \textcolor{keywordflow}{return} node;
+116 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Power\+Rate\+Adaptation\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPowerRateAdaptationTest_aab868cfafe1fcef3c1a777720571147d}{}\label{classPowerRateAdaptationTest_aab868cfafe1fcef3c1a777720571147d}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+1008 \{
+1009 
+1010   \hyperlink{classPowerRateAdaptationTest_a06db52c180644f3b961de054c41f2115}{TestParf} ();
+1011   \hyperlink{classPowerRateAdaptationTest_a3c3954526cb787125fea4c50cfe76174}{TestAparf} ();
+1012   \hyperlink{classPowerRateAdaptationTest_af0e5f044ed9bdf20dc203926ff8677b4}{TestRrpaa} ();
+1013 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}!Test\+Aparf@{Test\+Aparf}}
+\index{Test\+Aparf@{Test\+Aparf}!Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}}
+\subsubsection[{\texorpdfstring{Test\+Aparf()}{TestAparf()}}]{\setlength{\rightskip}{0pt plus 5cm}void Power\+Rate\+Adaptation\+Test\+::\+Test\+Aparf (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPowerRateAdaptationTest_a3c3954526cb787125fea4c50cfe76174}{}\label{classPowerRateAdaptationTest_a3c3954526cb787125fea4c50cfe76174}
+
+
+Test aparf function. 
+
+
+\begin{DoxyCode}
+338 \{
+339   \hyperlink{classPowerRateAdaptationTest_afa9f7fb131c12b88efa24138930c50b3}{m\_manager}.\hyperlink{classns3_1_1ObjectFactory_a77dcd099064038a1eb7a6b8251229ec3}{SetTypeId} (\textcolor{stringliteral}{"ns3::AparfWifiManager"});
+340   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = \hyperlink{classPowerRateAdaptationTest_a498edc12eed6e91b38d1b71d4565a306}{ConfigureNode} ();
+341   \hyperlink{classns3_1_1Ptr}{Ptr<WifiNetDevice>} dev = DynamicCast<WifiNetDevice> (node->
+      \hyperlink{classns3_1_1Node_a5918dfd24ef632efc9a83a5f6561c76e}{GetDevice} (0));
+342   \hyperlink{classns3_1_1Ptr}{Ptr<WifiRemoteStationManager>} manager = dev->
+      \hyperlink{classns3_1_1WifiNetDevice_a8b8bb06504a6d76552dd626103b1e5fd}{GetRemoteStationManager} ();
+343 
+344   \textcolor{comment}{/*}
+345 \textcolor{comment}{   * Configure thresholds for rate and power control.}
+346 \textcolor{comment}{   */}
+347   manager->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"SuccessThreshold1"},UintegerValue (3));
+348   manager->SetAttribute (\textcolor{stringliteral}{"SuccessThreshold2"},UintegerValue (10));
+349   manager->SetAttribute (\textcolor{stringliteral}{"FailThreshold"},UintegerValue (1));
+350   manager->SetAttribute (\textcolor{stringliteral}{"PowerThreshold"},UintegerValue (10));
+351 
+352   \textcolor{comment}{/*}
+353 \textcolor{comment}{   * Create a dummy packet to simulate transmission.}
+354 \textcolor{comment}{   */}
+355   \hyperlink{classns3_1_1Mac48Address}{Mac48Address} remoteAddress = Mac48Address::Allocate ();
+356   \hyperlink{classns3_1_1WifiMacHeader}{WifiMacHeader} packetHeader;
+357   packetHeader.\hyperlink{classns3_1_1WifiMacHeader_a8bc4915d867ea16df7c110a87c534c27}{SetTypeData} ();
+358   packetHeader.\hyperlink{classns3_1_1WifiMacHeader_a84a98932f5b66cca86bdfaa9cb1bcf7b}{SetQosTid} (0);
+359   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} packet = Create<Packet> (10);
+360   \hyperlink{classns3_1_1WifiMode}{WifiMode} ackMode;
+361 
+362   \textcolor{comment}{/*}
+363 \textcolor{comment}{   * To initialize the manager we need to generate a transmission.}
+364 \textcolor{comment}{   */}
+365   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = Create<Packet> ();
+366   dev->\hyperlink{classns3_1_1WifiNetDevice_a14b6919a10da25e74e1c92554106b2c6}{Send} (p, remoteAddress, 1);
+367 
+368   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+369 
+370   \textcolor{comment}{/*}
+371 \textcolor{comment}{   * Aparf initiates with maximal rate and power.}
+372 \textcolor{comment}{   */}
+373   \hyperlink{classns3_1_1WifiTxVector}{WifiTxVector} txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+374   \hyperlink{classns3_1_1WifiMode}{WifiMode} mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+375   \textcolor{keywordtype}{int} power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+376 
+377   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"APARF: Initial data rate wrong"});
+378   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"APARF: Initial power level wrong"});
+379 
+380   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+381 
+382   \textcolor{comment}{/*}
+383 \textcolor{comment}{   * As Aparf starts in state High, after 3 consecutive successful transmissions aparf increase rate or
+       decrease power.}
+384 \textcolor{comment}{   * As we are at maximal rate, the power should be decreased.}
+385 \textcolor{comment}{   * Change to state Spread.}
+386 \textcolor{comment}{   */}
+387   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 3; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+388     \{
+389       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+390     \}
+391 
+392   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+393   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+394   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+395 
+396   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"APARF: Incorrect vale of data rate"});
+397   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 16, \textcolor{stringliteral}{"APARF: Incorrect value of power level"});
+398 
+399   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+400 
+401   \textcolor{comment}{/*}
+402 \textcolor{comment}{   * One failure make the power to be increased again.}
+403 \textcolor{comment}{   * Change to state Low.}
+404 \textcolor{comment}{   */}
+405   manager->ReportDataFailed (remoteAddress, &packetHeader);
+406 
+407   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+408   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+409   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+410 
+411   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"APARF: Incorrect vale of data rate"});
+412   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"APARF: Incorrect value of power level"});
+413 
+414   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+415 
+416   \textcolor{comment}{/*}
+417 \textcolor{comment}{   * As we are in state Low we need 10 successful transmissions to increase rate or decrease power.}
+418 \textcolor{comment}{   * As we are at maximal rate, the power should be decreased.}
+419 \textcolor{comment}{   * Change to state Spread.}
+420 \textcolor{comment}{   */}
+421   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 10; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+422     \{
+423       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+424     \}
+425 
+426   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+427   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+428   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+429 
+430   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"APARF: Incorrect vale of data rate"});
+431   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 16, \textcolor{stringliteral}{"APARF: Incorrect value of power level"});
+432 
+433   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+434 
+435   \textcolor{comment}{/*}
+436 \textcolor{comment}{   * One more successful transmission make to change to state High.}
+437 \textcolor{comment}{   * Two more successful transmissions make power decrease.}
+438 \textcolor{comment}{   */}
+439 
+440   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 3; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+441     \{
+442       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+443     \}
+444 
+445   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+446   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+447   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+448 
+449   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"APARF: Incorrect vale of data rate"});
+450   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 15, \textcolor{stringliteral}{"APARF: Incorrect value of power level"});
+451 
+452   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+453 
+454   \textcolor{comment}{/*}
+455 \textcolor{comment}{   * As we are in state High we need 3 successful transmissions to increase rate or decrease power.}
+456 \textcolor{comment}{   * After 16*3 successful transmissions power is decreased to zero.}
+457 \textcolor{comment}{   */}
+458   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 16 * 3; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+459     \{
+460       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+461     \}
+462 
+463   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+464   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+465   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+466 
+467   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"APARF: Incorrect vale of data rate"});
+468   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 0, \textcolor{stringliteral}{"APARF: Incorrect value of power level"});
+469 
+470   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+471 
+472   \textcolor{comment}{/*}
+473 \textcolor{comment}{   * After one fail the rate is decreased or the power increased.}
+474 \textcolor{comment}{   * As we are at minimal power, the power should be increased.}
+475 \textcolor{comment}{   */}
+476   manager->ReportDataFailed (remoteAddress,&packetHeader);
+477 
+478   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+479   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+480   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+481 
+482   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"Incorrect vale of data rate"});
+483   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 1, \textcolor{stringliteral}{"Incorrect value of power level"});
+484 
+485   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+486 
+487   \textcolor{comment}{/*}
+488 \textcolor{comment}{   * After one fail the rate is decreased or the power increased.}
+489 \textcolor{comment}{   * After 16 failed transmissions power is increase to 17.}
+490 \textcolor{comment}{   */}
+491   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 16; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+492     \{
+493       manager->ReportDataFailed (remoteAddress,&packetHeader);
+494     \}
+495 
+496   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+497   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+498   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+499 
+500   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"APARF: Incorrect vale of data rate"});
+501   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"APARF: Incorrect value of power level"});
+502 
+503   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+504 
+505   \textcolor{comment}{/*}
+506 \textcolor{comment}{   * After one fail the rate is decreased or the power increased.}
+507 \textcolor{comment}{   * As we are at maximal power, the rate should be decreased.}
+508 \textcolor{comment}{   * Set critical rate to 54 Mbps.}
+509 \textcolor{comment}{   */}
+510   manager->ReportDataFailed (remoteAddress,&packetHeader);
+511 
+512   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+513   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+514   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+515 
+516   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 48000000, \textcolor{stringliteral}{"Incorrect vale of data rate"});
+517   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"Incorrect value of power level"});
+518 
+519   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+520 
+521   \textcolor{comment}{/*}
+522 \textcolor{comment}{   * As we are in state High we need 3 successful transmissions to increase rate or decrease power.}
+523 \textcolor{comment}{   * As rate critical is set, after 3 successful transmissions power is decreased.}
+524 \textcolor{comment}{   */}
+525   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 3; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+526     \{
+527       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+528     \}
+529 
+530   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+531   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+532   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+533 
+534   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 48000000, \textcolor{stringliteral}{"APARF: Incorrect vale of data rate"});
+535   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 16, \textcolor{stringliteral}{"APARF: Incorrect value of power level"});
+536 
+537   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+538 
+539   \textcolor{comment}{/*}
+540 \textcolor{comment}{   * As we are in state High we need 3 successful transmissions to increase rate or decrease power.}
+541 \textcolor{comment}{   * After 10 power changes critical rate is reseted.}
+542 \textcolor{comment}{   * So after 10*3 successful transmissions critical rate is set to 0.}
+543 \textcolor{comment}{   * And 3 successful transmissions more will make power increase to maximum and rate increase to the
+       critical rate.}
+544 \textcolor{comment}{   */}
+545   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 9 * 3; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+546     \{
+547       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+548     \}
+549 
+550   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+551   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+552   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+553 
+554   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 48000000, \textcolor{stringliteral}{"APARF: Incorrect vale of data rate"});
+555   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 7, \textcolor{stringliteral}{"APARF: Incorrect value of power level"});
+556 
+557   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 3; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+558     \{
+559       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+560     \}
+561 
+562   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+563   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+564   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+565 
+566   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"APARF: Incorrect vale of data rate"});
+567   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"APARF: Incorrect value of power level"});
+568 
+569   Simulator::Destroy ();
+570 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}!Test\+Parf@{Test\+Parf}}
+\index{Test\+Parf@{Test\+Parf}!Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}}
+\subsubsection[{\texorpdfstring{Test\+Parf()}{TestParf()}}]{\setlength{\rightskip}{0pt plus 5cm}void Power\+Rate\+Adaptation\+Test\+::\+Test\+Parf (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPowerRateAdaptationTest_a06db52c180644f3b961de054c41f2115}{}\label{classPowerRateAdaptationTest_a06db52c180644f3b961de054c41f2115}
+
+
+Test parf function. 
+
+
+\begin{DoxyCode}
+120 \{
+121   \hyperlink{classPowerRateAdaptationTest_afa9f7fb131c12b88efa24138930c50b3}{m\_manager}.\hyperlink{classns3_1_1ObjectFactory_a77dcd099064038a1eb7a6b8251229ec3}{SetTypeId} (\textcolor{stringliteral}{"ns3::ParfWifiManager"});
+122   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = \hyperlink{classPowerRateAdaptationTest_a498edc12eed6e91b38d1b71d4565a306}{ConfigureNode} ();
+123   \hyperlink{classns3_1_1Ptr}{Ptr<WifiNetDevice>} dev = DynamicCast<WifiNetDevice> (node->
+      \hyperlink{classns3_1_1Node_a5918dfd24ef632efc9a83a5f6561c76e}{GetDevice} (0));
+124   \hyperlink{classns3_1_1Ptr}{Ptr<WifiRemoteStationManager>} manager = dev->
+      \hyperlink{classns3_1_1WifiNetDevice_a8b8bb06504a6d76552dd626103b1e5fd}{GetRemoteStationManager} ();
+125 
+126   \textcolor{comment}{/*}
+127 \textcolor{comment}{   * Configure thresholds for rate and power control.}
+128 \textcolor{comment}{   */}
+129   manager->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"AttemptThreshold"},UintegerValue (15));
+130   manager->SetAttribute (\textcolor{stringliteral}{"SuccessThreshold"},UintegerValue (10));
+131 
+132   \textcolor{comment}{/*}
+133 \textcolor{comment}{   * Create a dummy packet to simulate transmission.}
+134 \textcolor{comment}{   */}
+135   \hyperlink{classns3_1_1Mac48Address}{Mac48Address} remoteAddress = Mac48Address::Allocate ();
+136   \hyperlink{classns3_1_1WifiMacHeader}{WifiMacHeader} packetHeader;
+137   packetHeader.\hyperlink{classns3_1_1WifiMacHeader_a8bc4915d867ea16df7c110a87c534c27}{SetTypeData} ();
+138   packetHeader.\hyperlink{classns3_1_1WifiMacHeader_a84a98932f5b66cca86bdfaa9cb1bcf7b}{SetQosTid} (0);
+139   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} packet = Create<Packet> (10);
+140   \hyperlink{classns3_1_1WifiMode}{WifiMode} ackMode;
+141 
+142   \textcolor{comment}{/*}
+143 \textcolor{comment}{   * To initialize the manager we need to generate a transmission.}
+144 \textcolor{comment}{   */}
+145   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = Create<Packet> ();
+146   dev->\hyperlink{classns3_1_1WifiNetDevice_a14b6919a10da25e74e1c92554106b2c6}{Send} (p, remoteAddress, 1);
+147 
+148   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+149 
+150   \textcolor{comment}{/*}
+151 \textcolor{comment}{   * Parf initiates with maximal rate and power.}
+152 \textcolor{comment}{   */}
+153   \hyperlink{classns3_1_1WifiTxVector}{WifiTxVector} txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+154   \hyperlink{classns3_1_1WifiMode}{WifiMode} mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+155   \textcolor{keywordtype}{int} power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+156 
+157   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"PARF: Initial data rate wrong"});
+158   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"PARF: Initial power level wrong"});
+159 
+160   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+161 
+162   \textcolor{comment}{/*}
+163 \textcolor{comment}{   * After 10 consecutive successful transmissions parf increase rate or decrease power.}
+164 \textcolor{comment}{   * As we are at maximal rate, the power should be decreased. recoveryPower=true.}
+165 \textcolor{comment}{   */}
+166   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 10; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+167     \{
+168       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+169     \}
+170 
+171   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+172   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+173   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+174 
+175   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"PARF: Incorrect vale of data rate"});
+176   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 16, \textcolor{stringliteral}{"PARF: Incorrect value of power level"});
+177 
+178   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+179 
+180   \textcolor{comment}{/*}
+181 \textcolor{comment}{   * As we are using recovery power, one failure make power increase.}
+182 \textcolor{comment}{   *}
+183 \textcolor{comment}{   */}
+184   manager->ReportDataFailed (remoteAddress, &packetHeader);
+185 
+186   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+187   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+188   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+189 
+190   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"PARF: Incorrect vale of data rate"});
+191   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"PARF: Incorrect value of power level"});
+192 
+193   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+194 
+195   \textcolor{comment}{/*}
+196 \textcolor{comment}{   * After 15 transmissions attempts parf increase rate or decrease power.}
+197 \textcolor{comment}{   * As we are at maximal rate, the power should be decreased. recoveryPower=true.}
+198 \textcolor{comment}{   */}
+199   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 7; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+200     \{
+201       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+202       manager->ReportDataFailed (remoteAddress, &packetHeader);
+203     \}
+204   manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+205 
+206   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+207   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+208   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+209 
+210   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"PARF: Incorrect vale of data rate"});
+211   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 16, \textcolor{stringliteral}{"PARF: Incorrect value of power level"});
+212 
+213   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+214 
+215   \textcolor{comment}{/*}
+216 \textcolor{comment}{   * As we are using recovery power, one failure make power increase. recoveryPower=false.}
+217 \textcolor{comment}{   */}
+218 
+219   manager->ReportDataFailed (remoteAddress, &packetHeader);
+220 
+221   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+222   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+223   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+224 
+225   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"PARF: Incorrect vale of data rate"});
+226   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"PARF: Incorrect value of power level"});
+227 
+228   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+229 
+230   \textcolor{comment}{/*}
+231 \textcolor{comment}{   * After two consecutive fails the rate is decreased or the power increased.}
+232 \textcolor{comment}{   * As we are at maximal power, the rate should be decreased.}
+233 \textcolor{comment}{   */}
+234   manager->ReportDataFailed (remoteAddress, &packetHeader);
+235   manager->ReportDataFailed (remoteAddress, &packetHeader);
+236 
+237   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+238   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+239   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+240 
+241   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 48000000, \textcolor{stringliteral}{"PARF: Incorrect vale of data rate"});
+242   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"PARF: Incorrect value of power level"});
+243 
+244   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+245 
+246   \textcolor{comment}{/*}
+247 \textcolor{comment}{   * After 10 consecutive successful transmissions parf increase rate or decrease power.}
+248 \textcolor{comment}{   * As we are not at maximal rate, the rate is increased again. recoveryRate=true.}
+249 \textcolor{comment}{   */}
+250   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 10; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+251     \{
+252       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+253     \}
+254 
+255   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+256   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+257   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+258 
+259   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"PARF: Incorrect vale of data rate"});
+260   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"PARF: Incorrect value of power level"});
+261 
+262   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+263 
+264   \textcolor{comment}{/*}
+265 \textcolor{comment}{   * As we are using recovery rate, one failure make rate decrease. recoveryRate=false.}
+266 \textcolor{comment}{   */}
+267 
+268   manager->ReportDataFailed (remoteAddress, &packetHeader);
+269 
+270   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+271   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+272   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+273 
+274   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 48000000, \textcolor{stringliteral}{"PARF: Incorrect vale of data rate"});
+275   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"PARF: Incorrect value of power level"});
+276 
+277   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+278 
+279   \textcolor{comment}{/*}
+280 \textcolor{comment}{   * After 10 consecutive successful transmissions parf increase rate or decrease power.}
+281 \textcolor{comment}{   * As we are not at maximal rate, the rate is increased again. recoveryRate=true.}
+282 \textcolor{comment}{   */}
+283   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 10; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+284     \{
+285       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+286     \}
+287 
+288   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+289   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+290   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+291 
+292   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"PARF: Incorrect vale of data rate"});
+293   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"PARF: Incorrect value of power level"});
+294 
+295   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+296 
+297   \textcolor{comment}{/*}
+298 \textcolor{comment}{   * After 10 consecutive successful transmissions parf increase rate or decrease power.}
+299 \textcolor{comment}{   * As we are at maximal rate, the power is decreased. recoveryRate=false, recoveryPower=true.}
+300 \textcolor{comment}{   */}
+301   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 10; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+302     \{
+303       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+304     \}
+305 
+306   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+307   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+308   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+309 
+310   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"PARF: Incorrect vale of data rate"});
+311   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 16, \textcolor{stringliteral}{"PARF: Incorrect value of power level"});
+312 
+313   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+314 
+315   \textcolor{comment}{/*}
+316 \textcolor{comment}{   * One successful transmissions after a power decrease make recoverPower=false.}
+317 \textcolor{comment}{   * So we need two consecutive failures to increase power again.}
+318 \textcolor{comment}{   */}
+319   manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+320 
+321   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 2; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+322     \{
+323       manager->ReportDataFailed (remoteAddress,&packetHeader);
+324     \}
+325 
+326   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+327   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+328   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+329 
+330   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} ()), 54000000, \textcolor{stringliteral}{"PARF: Incorrect vale of data rate"});
+331   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"PARF: Incorrect value of power level"});
+332 
+333   Simulator::Destroy ();
+334 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}!Test\+Rrpaa@{Test\+Rrpaa}}
+\index{Test\+Rrpaa@{Test\+Rrpaa}!Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}}
+\subsubsection[{\texorpdfstring{Test\+Rrpaa()}{TestRrpaa()}}]{\setlength{\rightskip}{0pt plus 5cm}void Power\+Rate\+Adaptation\+Test\+::\+Test\+Rrpaa (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPowerRateAdaptationTest_af0e5f044ed9bdf20dc203926ff8677b4}{}\label{classPowerRateAdaptationTest_af0e5f044ed9bdf20dc203926ff8677b4}
+
+
+Test rrpaa function. 
+
+This will be the thresholds table. The parameters of the table are\+:
+\begin{DoxyItemize}
+\item Estimation Window Size (E\+W\+ND)
+\item Maximum Tolerable Loss Probability Threshold (M\+TL)
+\item Opportunistic Rate Increase (and Power Decrease) Probability Threshold (O\+RI)
+\end{DoxyItemize}
+
+We also calculate the needed success and failures to generate a rate or power change\+: Rate Increase or Power Decrease limits (R\+I-\/\+PD) Rate Decrease or Power Increase limits (R\+D-\/\+PI) Power Decrease limits (PD)
+
+Mode E\+W\+ND M\+TL O\+RI R\+I-\/\+PD R\+D-\/\+PI PD succ fails succ fails Ofdm\+Rate6\+Mbps 8 1 0.\+19861 7 8 2 Ofdm\+Rate9\+Mbps 11 0.\+397219 0.\+14556 10 5 7 2 Ofdm\+Rate12\+Mbps 15 0.\+291121 0.\+189753 13 5 11 3 Ofdm\+Rate18\+Mbps 21 0.\+379507 0.\+13624 19 8 14 3 Ofdm\+Rate24\+Mbps 27 0.\+27248 0.\+174216 23 8 20 5 Ofdm\+Rate36\+Mbps 37 0.\+348432 0.\+120773 33 13 25 5 Ofdm\+Rate48\+Mbps 45 0.\+241546 0.\+0523952 43 11 35 3 Ofdm\+Rate54\+Mbps 50 0.\+10479 0 50 6 45 5
+
+Test that 6 is not enough.
+
+Test that 7 is enough.
+
+Increase rate until maximal rate.
+
+Now we need more successful transmissions to make power decrease. As we are at maximal rate, the power is decreased when it is sure that the failures will not generate a rate decrease.
+
+As rate hasn\textquotesingle{}t change the same amount of success are needed. After 16$\ast$45 successful transmissions power is decreased to zero.
+
+After 6 failures the power should be increased.
+\begin{DoxyCode}
+574 \{
+575   \hyperlink{classPowerRateAdaptationTest_afa9f7fb131c12b88efa24138930c50b3}{m\_manager}.\hyperlink{classns3_1_1ObjectFactory_a77dcd099064038a1eb7a6b8251229ec3}{SetTypeId} (\textcolor{stringliteral}{"ns3::RrpaaWifiManager"});
+576   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = \hyperlink{classPowerRateAdaptationTest_a498edc12eed6e91b38d1b71d4565a306}{ConfigureNode} ();
+577   \hyperlink{classns3_1_1Ptr}{Ptr<WifiNetDevice>} dev = DynamicCast<WifiNetDevice> (node->
+      \hyperlink{classns3_1_1Node_a5918dfd24ef632efc9a83a5f6561c76e}{GetDevice} (0));
+578   \hyperlink{classns3_1_1Ptr}{Ptr<WifiRemoteStationManager>} manager = dev->
+      \hyperlink{classns3_1_1WifiNetDevice_a8b8bb06504a6d76552dd626103b1e5fd}{GetRemoteStationManager} ();
+579 
+580   \textcolor{comment}{/*}
+581 \textcolor{comment}{   * Configure constants for rate and power control.}
+582 \textcolor{comment}{   */}
+583   manager->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Basic"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+584   manager->SetAttribute (\textcolor{stringliteral}{"Alpha"}, DoubleValue (1.25));
+585   manager->SetAttribute (\textcolor{stringliteral}{"Beta"}, DoubleValue (2));
+586   manager->SetAttribute (\textcolor{stringliteral}{"Tau"}, DoubleValue (0.015));
+587   \textcolor{comment}{/*}
+588 \textcolor{comment}{   * Constants for the Probabilistic Decision Table.}
+589 \textcolor{comment}{   * We set both to 1 to avoid random behaviour in tests.}
+590 \textcolor{comment}{   */}
+591   manager->SetAttribute (\textcolor{stringliteral}{"Gamma"}, DoubleValue (1));
+592   manager->SetAttribute (\textcolor{stringliteral}{"Delta"}, DoubleValue (1));
+593 
+594   \textcolor{comment}{/*}
+595 \textcolor{comment}{   * Create a dummy packet to simulate transmission.}
+596 \textcolor{comment}{   */}
+597   \hyperlink{classns3_1_1Mac48Address}{Mac48Address} remoteAddress = Mac48Address::Allocate ();
+598   \hyperlink{classns3_1_1WifiMacHeader}{WifiMacHeader} packetHeader;
+599   packetHeader.\hyperlink{classns3_1_1WifiMacHeader_a8bc4915d867ea16df7c110a87c534c27}{SetTypeData} ();
+600   packetHeader.\hyperlink{classns3_1_1WifiMacHeader_a84a98932f5b66cca86bdfaa9cb1bcf7b}{SetQosTid} (0);
+601   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} packet = Create<Packet> (10);
+602   \hyperlink{classns3_1_1WifiMode}{WifiMode} ackMode;
+603 
+604   \textcolor{comment}{/*}
+605 \textcolor{comment}{   * To initialize the manager we need to generate a transmission.}
+606 \textcolor{comment}{   */}
+607   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = Create<Packet> ();
+608   dev->\hyperlink{classns3_1_1WifiNetDevice_a14b6919a10da25e74e1c92554106b2c6}{Send} (p, remoteAddress, 1);
+609 
+636   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+637 
+638   \textcolor{comment}{/*}
+639 \textcolor{comment}{   * RRPAA initiates with minimal rate and maximal power.}
+640 \textcolor{comment}{   */}
+641   \hyperlink{classns3_1_1WifiTxVector}{WifiTxVector} txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+642   \hyperlink{classns3_1_1WifiMode}{WifiMode} mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+643   \textcolor{keywordtype}{int} power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+644 
+645   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 6000000, \textcolor{stringliteral}{"RRPAA:
+       Initial data rate wrong"}); \textcolor{comment}{//802.11a minimal rate is 6Mbps}
+646   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Initial power level wrong"});
+647 
+648   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+649 
+650   \textcolor{comment}{/*}
+651 \textcolor{comment}{   * As RRPAA starts with the 6Mbps rate, 7 successful transmissions are needed for RRPAA to increase rate.}
+652 \textcolor{comment}{   * 1/8 = 0.125}
+653 \textcolor{comment}{   */}
+654 
+658   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 6; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+659     \{
+660       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+661     \}
+662 
+663   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+664   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+665   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+666 
+667   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 6000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+668   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+669 
+673   manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+674 
+675   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+676   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+677   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+678 
+679   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 9000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+680   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+681 
+682   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+683 
+684   \textcolor{comment}{/*}
+685 \textcolor{comment}{   * 5 failures are needed to make the rate decrease again.}
+686 \textcolor{comment}{   * 5/11 = 0.45}
+687 \textcolor{comment}{   */}
+688   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 4; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+689     \{
+690       manager->ReportDataFailed (remoteAddress,&packetHeader);
+691     \}
+692 
+693   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+694   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+695   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+696 
+697   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 9000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+698   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+699 
+700   manager->ReportDataFailed (remoteAddress,&packetHeader);
+701 
+702   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+703   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+704   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+705 
+706   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 6000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+707   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+708 
+709   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+710 
+715   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 7; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+716     \{
+717       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+718     \}
+719 
+720   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+721   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+722   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+723 
+724   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 9000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+725   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+726 
+727   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 10; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+728     \{
+729       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+730     \}
+731 
+732   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+733   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+734   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+735 
+736   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 12000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+737   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+738 
+739   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 13; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+740     \{
+741       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+742     \}
+743 
+744   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+745   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+746   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+747 
+748   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 18000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+749   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+750 
+751   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 19; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+752     \{
+753       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+754     \}
+755 
+756   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+757   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+758   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+759 
+760   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 24000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+761   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+762 
+763   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 23; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+764     \{
+765       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+766     \}
+767 
+768   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+769   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+770   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+771 
+772   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 36000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+773   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+774 
+775   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 33; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+776     \{
+777       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+778     \}
+779 
+780   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+781   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+782   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+783 
+784   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 48000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+785   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+786 
+787   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 43; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+788     \{
+789       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+790     \}
+791 
+792   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+793   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+794   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+795 
+796   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 54000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+797   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+798 
+799   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+800 
+807   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 49; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+808     \{
+809       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+810     \}
+811 
+812   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+813   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+814   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+815 
+816   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 54000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+817   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+818 
+819   manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+820 
+821   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+822   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+823   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+824 
+825   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 54000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+826   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 16, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+827 
+828   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+829 
+835   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 16 * 50; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+836     \{
+837       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+838     \}
+839 
+840   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+841   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+842   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+843 
+844   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 54000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+845   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 0, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+846 
+847   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+848 
+853   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 6; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+854     \{
+855       manager->ReportDataFailed (remoteAddress,&packetHeader);
+856     \}
+857 
+858   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+859   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+860   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+861 
+862   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 54000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+863   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 1, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+864 
+865   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+866 
+867   \textcolor{comment}{/*}
+868 \textcolor{comment}{   * After 16*6 failed transmissions power is increase to 17.}
+869 \textcolor{comment}{   */}
+870 
+871   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 16 * 6; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+872     \{
+873       manager->ReportDataFailed (remoteAddress,&packetHeader);
+874     \}
+875 
+876   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+877   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+878   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+879 
+880   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 54000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+881   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+882 
+883   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+884 
+885   \textcolor{comment}{/*}
+886 \textcolor{comment}{   * After 6 more failures the rate should be decreased.}
+887 \textcolor{comment}{   */}
+888 
+889   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 6; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+890     \{
+891       manager->ReportDataFailed (remoteAddress,&packetHeader);
+892     \}
+893 
+894   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+895   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+896   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+897 
+898   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 48000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+899   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+900 
+901   \textcolor{comment}{/*}
+902 \textcolor{comment}{   * Now 11 failures are needed to decrease rate again.}
+903 \textcolor{comment}{   */}
+904 
+905   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 11; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+906     \{
+907       manager->ReportDataFailed (remoteAddress,&packetHeader);
+908     \}
+909 
+910   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+911   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+912   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+913 
+914   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 36000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+915   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+916 
+917   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+918 
+919   \textcolor{comment}{/*}
+920 \textcolor{comment}{   * Test power decrement when loss probability is between MTL and ORI.}
+921 \textcolor{comment}{   * As we are at rate 36 Mbps we need at least 25 successful transmissions}
+922 \textcolor{comment}{   * and 5 failures.}
+923 \textcolor{comment}{   */}
+924 
+925   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 25; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+926     \{
+927       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+928     \}
+929 
+930   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+931   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+932   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+933 
+934   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 36000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+935   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 17, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+936 
+937   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 5; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+938     \{
+939       manager->ReportDataFailed (remoteAddress,&packetHeader);
+940     \}
+941 
+942   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+943   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+944   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+945 
+946   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 36000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+947   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 16, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+948 
+949   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 5; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+950     \{
+951       manager->ReportDataFailed (remoteAddress,&packetHeader);
+952     \}
+953 
+954   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+955   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+956   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+957 
+958   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 36000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+959   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 16, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+960 
+961   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 25; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+962     \{
+963       manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+964     \}
+965 
+966   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+967   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+968   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+969 
+970   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 36000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+971   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 15, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+972 
+973   \textcolor{comment}{//-----------------------------------------------------------------------------------------------------}
+974 
+975   \textcolor{comment}{/*}
+976 \textcolor{comment}{   * Repeat the previous test until power 0 is reached.}
+977 \textcolor{comment}{   */}
+978 
+979   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 16; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+980     \{
+981       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 25; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+982         \{
+983           manager->ReportDataOk (remoteAddress, &packetHeader, 0, ackMode, 0);
+984         \}
+985 
+986       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 5; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+987         \{
+988           manager->ReportDataFailed (remoteAddress,&packetHeader);
+989         \}
+990     \}
+991 
+992   txVector = manager->GetDataTxVector (remoteAddress, &packetHeader, packet);
+993   mode = txVector.\hyperlink{classns3_1_1WifiTxVector_a497b1f11cad4b8b26251dfa07c9ad1d6}{GetMode} ();
+994   power = (int) txVector.\hyperlink{classns3_1_1WifiTxVector_a7c98bd9609ff1c5cefa6e22d6908a2fe}{GetTxPowerLevel} ();
+995 
+996   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mode.\hyperlink{classns3_1_1WifiMode_adcfbe150f69da720db23387f733b8a52}{GetDataRate} (txVector.
+      \hyperlink{classns3_1_1WifiTxVector_a1f8bfa51778a3e217581eb665f059564}{GetChannelWidth} (), txVector.\hyperlink{classns3_1_1WifiTxVector_ab80c0fd812542ef337a6cace4f64db63}{GetGuardInterval} (), 1), 36000000, \textcolor{stringliteral}{"RRPAA:
+       Incorrect vale of data rate"});
+997   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (power, 0, \textcolor{stringliteral}{"RRPAA: Incorrect value of power level"});
+998 
+999   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+1000 
+1001   Simulator::Run ();
+1002   Simulator::Destroy ();
+1003 
+1004 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}!m\+\_\+manager@{m\+\_\+manager}}
+\index{m\+\_\+manager@{m\+\_\+manager}!Power\+Rate\+Adaptation\+Test@{Power\+Rate\+Adaptation\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+manager}{m_manager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object\+Factory} Power\+Rate\+Adaptation\+Test\+::m\+\_\+manager\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPowerRateAdaptationTest_afa9f7fb131c12b88efa24138930c50b3}{}\label{classPowerRateAdaptationTest_afa9f7fb131c12b88efa24138930c50b3}
+
+
+manager 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+wifi/test/\hyperlink{power-rate-adaptation-test_8cc}{power-\/rate-\/adaptation-\/test.\+cc}\end{DoxyCompactItemize}

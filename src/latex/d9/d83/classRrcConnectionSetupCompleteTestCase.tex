@@ -1,0 +1,99 @@
+\hypertarget{classRrcConnectionSetupCompleteTestCase}{}\section{Rrc\+Connection\+Setup\+Complete\+Test\+Case Class Reference}
+\label{classRrcConnectionSetupCompleteTestCase}\index{Rrc\+Connection\+Setup\+Complete\+Test\+Case@{Rrc\+Connection\+Setup\+Complete\+Test\+Case}}
+
+
+Inheritance diagram for Rrc\+Connection\+Setup\+Complete\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Rrc\+Connection\+Setup\+Complete\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRrcConnectionSetupCompleteTestCase_afd8edeff36a1cee5254319a0e55f0f24}{Rrc\+Connection\+Setup\+Complete\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classRrcConnectionSetupCompleteTestCase_a0bec6b3fe9ff042780ccbc5f94160412}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Rrc\+Connection\+Setup\+Complete\+Test\+Case@{Rrc\+Connection\+Setup\+Complete\+Test\+Case}!Rrc\+Connection\+Setup\+Complete\+Test\+Case@{Rrc\+Connection\+Setup\+Complete\+Test\+Case}}
+\index{Rrc\+Connection\+Setup\+Complete\+Test\+Case@{Rrc\+Connection\+Setup\+Complete\+Test\+Case}!Rrc\+Connection\+Setup\+Complete\+Test\+Case@{Rrc\+Connection\+Setup\+Complete\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Rrc\+Connection\+Setup\+Complete\+Test\+Case()}{RrcConnectionSetupCompleteTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Rrc\+Connection\+Setup\+Complete\+Test\+Case\+::\+Rrc\+Connection\+Setup\+Complete\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classRrcConnectionSetupCompleteTestCase_afd8edeff36a1cee5254319a0e55f0f24}{}\label{classRrcConnectionSetupCompleteTestCase_afd8edeff36a1cee5254319a0e55f0f24}
+
+\begin{DoxyCode}
+360                                                                         : 
+      \hyperlink{classRrcHeaderTestCase_a59d334d21492c281b877a73bb0ac2a03}{RrcHeaderTestCase} (\textcolor{stringliteral}{"Testing RrcConnectionSetupCompleteTestCase"})
+361 \{
+362 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Rrc\+Connection\+Setup\+Complete\+Test\+Case@{Rrc\+Connection\+Setup\+Complete\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Rrc\+Connection\+Setup\+Complete\+Test\+Case@{Rrc\+Connection\+Setup\+Complete\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Rrc\+Connection\+Setup\+Complete\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classRrcConnectionSetupCompleteTestCase_a0bec6b3fe9ff042780ccbc5f94160412}{}\label{classRrcConnectionSetupCompleteTestCase_a0bec6b3fe9ff042780ccbc5f94160412}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classRrcHeaderTestCase_ab72ac5cd07c4359237c8e36ab16f5414}{Rrc\+Header\+Test\+Case}.
+
+
+\begin{DoxyCode}
+366 \{
+367   \hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet} = Create<Packet> ();
+368   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"============= RrcConnectionSetupCompleteTestCase ==========="});
+369 
+370   \hyperlink{structns3_1_1LteRrcSap_1_1RrcConnectionSetupCompleted}{LteRrcSap::RrcConnectionSetupCompleted} msg;
+371   msg.\hyperlink{structns3_1_1LteRrcSap_1_1RrcConnectionSetupCompleted_a35e8f1ef1d17066400805eb2d803db1e}{rrcTransactionIdentifier} = 3;
+372 
+373   \hyperlink{classns3_1_1RrcConnectionSetupCompleteHeader}{RrcConnectionSetupCompleteHeader} source;
+374   source.\hyperlink{classns3_1_1RrcConnectionSetupCompleteHeader_acd1592d5ffcda03172c6d367e3097c38}{SetMessage} (msg);
+375 
+376   \textcolor{comment}{// Log source info}
+377   TestUtils::LogPacketInfo<RrcConnectionSetupCompleteHeader> (source,\textcolor{stringliteral}{"SOURCE"});
+378 
+379   \textcolor{comment}{// Add header}
+380   \hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet}->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (source);
+381 
+382   \textcolor{comment}{// Log serialized packet contents}
+383   \hyperlink{classTestUtils_a9391dac3282094e6e57c0052d88a086f}{TestUtils::LogPacketContents} (\hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet});
+384 
+385   \textcolor{comment}{// Remove header}
+386   \hyperlink{classns3_1_1RrcConnectionSetupCompleteHeader}{RrcConnectionSetupCompleteHeader} destination;
+387   \hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet}->\hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{RemoveHeader} (destination);
+388 
+389   \textcolor{comment}{// Log destination info}
+390   TestUtils::LogPacketInfo<RrcConnectionSetupCompleteHeader> (destination,\textcolor{stringliteral}{"DESTINATION"});
+391 
+392   \textcolor{comment}{// Check that the destination and source headers contain the same values}
+393   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (source.GetRrcTransactionIdentifier (),destination.
+      GetRrcTransactionIdentifier (), \textcolor{stringliteral}{"RrcTransactionIdentifier"});
+394 
+395   \hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet} = 0;
+396 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lte/test/\hyperlink{test-asn1-encoding_8cc}{test-\/asn1-\/encoding.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,238 @@
+\hypertarget{topology-example-sim_8cc}{}\section{topology-\/read/examples/topology-\/example-\/sim.cc File Reference}
+\label{topology-example-sim_8cc}\index{topology-\/read/examples/topology-\/example-\/sim.\+cc@{topology-\/read/examples/topology-\/example-\/sim.\+cc}}
+{\ttfamily \#include $<$ctime$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/nix-\/vector-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/topology-\/read-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$list$>$}\\*
+Include dependency graph for topology-\/example-\/sim.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{topology-example-sim_8cc_a4871085c27c50efc2f9308fecf26c88f}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Topology\+Creation\+Experiment\char`\"{})
+\item 
+static void \hyperlink{topology-example-sim_8cc_ab5a3a26cb523a53ed19ba80dcbb97d11}{Sink\+Rx} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p}, const \hyperlink{classns3_1_1Address}{Address} \&ad)
+\item 
+int \hyperlink{topology-example-sim_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{std\+::list}$<$ unsigned int $>$ \hyperlink{topology-example-sim_8cc_a26c65296e316af77b787dc77469bb2a4}{data}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{topology-\/example-\/sim.\+cc@{topology-\/example-\/sim.\+cc}!main@{main}}
+\index{main@{main}!topology-\/example-\/sim.\+cc@{topology-\/example-\/sim.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{topology-example-sim_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{topology-example-sim_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+57 \{
+58 
+59   std::string format (\textcolor{stringliteral}{"Inet"});
+60   std::string input (\textcolor{stringliteral}{"src/topology-read/examples/Inet\_small\_toposample.txt"});
+61 
+62   \textcolor{comment}{// Set up command line parameters used to control the experiment.}
+63   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+64   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"format"}, \textcolor{stringliteral}{"Format to use for data input [Orbis|Inet|Rocketfuel]."},
+65                 format);
+66   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"input"}, \textcolor{stringliteral}{"Name of the input file."},
+67                 input);
+68   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+69 
+70 
+71   \textcolor{comment}{// ------------------------------------------------------------}
+72   \textcolor{comment}{// -- Read topology data.}
+73   \textcolor{comment}{// --------------------------------------------}
+74 
+75   \textcolor{comment}{// Pick a topology reader based in the requested format.}
+76   \hyperlink{classns3_1_1TopologyReaderHelper}{TopologyReaderHelper} topoHelp;
+77   topoHelp.\hyperlink{classns3_1_1TopologyReaderHelper_aadb5ec87fde6aba01d6a1822c8d42e89}{SetFileName} (input);
+78   topoHelp.\hyperlink{classns3_1_1TopologyReaderHelper_a5365b0f002b20399917d4b832a52bdb2}{SetFileType} (format);
+79   \hyperlink{classns3_1_1Ptr}{Ptr<TopologyReader>} inFile = topoHelp.\hyperlink{classns3_1_1TopologyReaderHelper_aaa2058c9cdebfe726cde28bbfc1562f4}{GetTopologyReader} ();
+80 
+81   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+82 
+83   \textcolor{keywordflow}{if} (inFile != 0)
+84     \{
+85       nodes = inFile->\hyperlink{classns3_1_1TopologyReader_ae2a69c10e0bb66d6c850a72c6655e69c}{Read} ();
+86     \}
+87 
+88   \textcolor{keywordflow}{if} (inFile->\hyperlink{classns3_1_1TopologyReader_ae610852021242bb82d7bae992a31ebb7}{LinksSize} () == 0)
+89     \{
+90       \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"Problems reading the topology file. Failing."});
+91       \textcolor{keywordflow}{return} -1;
+92     \}
+93 
+94   \textcolor{comment}{// ------------------------------------------------------------}
+95   \textcolor{comment}{// -- Create nodes and network stacks}
+96   \textcolor{comment}{// --------------------------------------------}
+97   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"creating internet stack"});
+98   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+99 
+100   \textcolor{comment}{// Setup NixVector Routing}
+101   \hyperlink{classns3_1_1Ipv4NixVectorHelper}{Ipv4NixVectorHelper} nixRouting;
+102   stack.\hyperlink{classns3_1_1InternetStackHelper_a3e382c02df022dec79952a7eca8cd5ba}{SetRoutingHelper} (nixRouting);  \textcolor{comment}{// has effect on the next Install ()}
+103   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodes);
+104 
+105   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"creating ip4 addresses"});
+106   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+107   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.0.0.0"}, \textcolor{stringliteral}{"255.255.255.252"});
+108 
+109   \textcolor{keywordtype}{int} totlinks = inFile->\hyperlink{classns3_1_1TopologyReader_ae610852021242bb82d7bae992a31ebb7}{LinksSize} ();
+110 
+111   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"creating node containers"});
+112   \hyperlink{classns3_1_1NodeContainer}{NodeContainer}* nc = \textcolor{keyword}{new} \hyperlink{classns3_1_1NodeContainer}{NodeContainer}[totlinks];
+113   \hyperlink{classns3_1_1TopologyReader_a13f936af0da10bb38b80bd23048bbe20}{TopologyReader::ConstLinksIterator} iter;
+114   \textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0;
+115   \textcolor{keywordflow}{for} ( iter = inFile->\hyperlink{classns3_1_1TopologyReader_a5b102e7761470c8d798a45dff85c8396}{LinksBegin} (); iter != inFile->\hyperlink{classns3_1_1TopologyReader_a9169165a40b1acf2a4137b0f408fc8e6}{LinksEnd} (); iter++, i++ )
+116     \{
+117       nc[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (iter->GetFromNode (), iter->GetToNode ());
+118     \}
+119 
+120   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"creating net device containers"});
+121   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer}* ndc = \textcolor{keyword}{new} \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer}[totlinks];
+122   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} p2p;
+123   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < totlinks; i++)
+124     \{
+125       \textcolor{comment}{// p2p.SetChannelAttribute ("Delay", TimeValue(MilliSeconds(weight[i])));}
+126       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"2ms"}));
+127       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"5Mbps"}));
+128       ndc[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nc[i]);
+129     \}
+130 
+131   \textcolor{comment}{// it crates little subnets, one for each couple of nodes.}
+132   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"creating ipv4 interfaces"});
+133   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer}* ipic = \textcolor{keyword}{new} 
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer}[totlinks];
+134   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < totlinks; i++)
+135     \{
+136       ipic[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc[i]);
+137       address.\hyperlink{classns3_1_1Ipv4AddressHelper_a3277d133ef0d2669934a16a8206ba8e4}{NewNetwork} ();
+138     \}
+139 
+140 
+141   uint32\_t totalNodes = nodes.\hyperlink{classns3_1_1NodeContainer_aed647ac56d0407a7706aba02eb44b951}{GetN} ();
+142   \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} unifRandom = CreateObject<UniformRandomVariable> ();
+143   unifRandom->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (0));
+144   unifRandom->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (totalNodes - 1));
+145 
+146   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} randomServerNumber = unifRandom->\hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{GetInteger} (0, totalNodes - 1);
+147 
+148   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} randomServerNode = nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (randomServerNumber);
+149   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4>} ipv4Server = randomServerNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ();
+150   \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} iaddrServer = ipv4Server->\hyperlink{classns3_1_1Ipv4_a5aa7213c1365083840b2311a3cb5b24b}{GetAddress} (1,0);
+151   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} ipv4AddrServer = iaddrServer.GetLocal ();
+152 
+153   \textcolor{comment}{// ------------------------------------------------------------}
+154   \textcolor{comment}{// -- Send around packets to check the ttl}
+155   \textcolor{comment}{// --------------------------------------------}
+156   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::Ipv4RawSocketImpl::Protocol"}, StringValue (\textcolor{stringliteral}{"2"}));
+157   \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} dst = \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} ( ipv4AddrServer );
+158 
+159   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff = \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} (\textcolor{stringliteral}{"ns3::Ipv4RawSocketFactory"}, dst);
+160   onoff.\hyperlink{classns3_1_1OnOffHelper_a73526acef24a4559fb50db9f7c1c10ef}{SetConstantRate} (\hyperlink{classns3_1_1DataRate}{DataRate} (15000));
+161   onoff.\hyperlink{classns3_1_1OnOffHelper_a9f29b8db5fd9afa3075a74f48d30d914}{SetAttribute} (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (1200));
+162 
+163   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} clientNodes;
+164   \textcolor{keywordflow}{for} ( \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i = 0; i < nodes.\hyperlink{classns3_1_1NodeContainer_aed647ac56d0407a7706aba02eb44b951}{GetN} (); i++ )
+165     \{
+166       \textcolor{keywordflow}{if} (i != randomServerNumber )
+167         \{
+168           \hyperlink{classns3_1_1Ptr}{Ptr<Node>} clientNode = nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (i);
+169           clientNodes.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (clientNode);
+170         \}
+171     \}
+172 
+173   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} apps = onoff.\hyperlink{classns3_1_1OnOffHelper_aa4471e2fec7b08ad7c46aa568f424323}{Install} (clientNodes);
+174   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+175   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0));
+176 
+177   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sink = \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} (\textcolor{stringliteral}{"ns3::Ipv4RawSocketFactory"}, 
+      dst);
+178   apps = sink.\hyperlink{classns3_1_1PacketSinkHelper_a394059adb24348dd366ce703fc39bbdd}{Install} (randomServerNode);
+179   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+180   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (3.0));
+181 
+182   \textcolor{comment}{// we trap the packet sink receiver to extract the TTL.}
+183   \hyperlink{group__config_gaa2f896aa7021f95fffabc80b2ec22e08}{Config::ConnectWithoutContext} (\textcolor{stringliteral}{"
+      /NodeList/*/ApplicationList/*/$ns3::PacketSink/Rx"},
+184                                  \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{topology-example-sim_8cc_ab5a3a26cb523a53ed19ba80dcbb97d11}{SinkRx}));
+185 
+186   \textcolor{comment}{// ------------------------------------------------------------}
+187   \textcolor{comment}{// -- Run the simulation}
+188   \textcolor{comment}{// --------------------------------------------}
+189   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+190   Simulator::Run ();
+191   Simulator::Destroy ();
+192 
+193   \textcolor{keyword}{delete}[] ipic;
+194   \textcolor{keyword}{delete}[] ndc;
+195   \textcolor{keyword}{delete}[] nc;
+196 
+197   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+198 
+199   \textcolor{keywordflow}{return} 0;
+200 
+201   \textcolor{comment}{// end main}
+202 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{topology-\/example-\/sim.\+cc@{topology-\/example-\/sim.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!topology-\/example-\/sim.\+cc@{topology-\/example-\/sim.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Topology\+Creation\+Experiment"")}{NS_LOG_COMPONENT_DEFINE("TopologyCreationExperiment")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Topology\+Creation\+Experiment\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{topology-example-sim_8cc_a4871085c27c50efc2f9308fecf26c88f}{}\label{topology-example-sim_8cc_a4871085c27c50efc2f9308fecf26c88f}
+\index{topology-\/example-\/sim.\+cc@{topology-\/example-\/sim.\+cc}!Sink\+Rx@{Sink\+Rx}}
+\index{Sink\+Rx@{Sink\+Rx}!topology-\/example-\/sim.\+cc@{topology-\/example-\/sim.\+cc}}
+\subsubsection[{\texorpdfstring{Sink\+Rx(\+Ptr$<$ const Packet $>$ p, const Address \&ad)}{SinkRx(Ptr< const Packet > p, const Address &ad)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Sink\+Rx (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Packet} $>$}]{p, }
+\item[{const {\bf Address} \&}]{ad}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{topology-example-sim_8cc_ab5a3a26cb523a53ed19ba80dcbb97d11}{}\label{topology-example-sim_8cc_ab5a3a26cb523a53ed19ba80dcbb97d11}
+
+\begin{DoxyCode}
+46 \{
+47   \hyperlink{classns3_1_1Ipv4Header}{Ipv4Header} ipv4;
+48   p->\hyperlink{classns3_1_1Packet_aadc63487bea70945c418f4c3e9b81964}{PeekHeader} (ipv4);
+49   std::cout << \textcolor{stringliteral}{"TTL: "} << (unsigned)ipv4.\hyperlink{classns3_1_1Ipv4Header_a7ca7a17f9749f92d65bb5e9d25972a53}{GetTtl} () << std::endl;
+50 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Variable Documentation}
+\index{topology-\/example-\/sim.\+cc@{topology-\/example-\/sim.\+cc}!data@{data}}
+\index{data@{data}!topology-\/example-\/sim.\+cc@{topology-\/example-\/sim.\+cc}}
+\subsubsection[{\texorpdfstring{data}{data}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+::list}$<$unsigned int$>$ data\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{topology-example-sim_8cc_a26c65296e316af77b787dc77469bb2a4}{}\label{topology-example-sim_8cc_a26c65296e316af77b787dc77469bb2a4}

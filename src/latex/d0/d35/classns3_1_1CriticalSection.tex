@@ -1,0 +1,123 @@
+\hypertarget{classns3_1_1CriticalSection}{}\section{ns3\+:\+:Critical\+Section Class Reference}
+\label{classns3_1_1CriticalSection}\index{ns3\+::\+Critical\+Section@{ns3\+::\+Critical\+Section}}
+
+
+A class which provides a simple way to implement a Critical Section.  
+
+
+
+
+{\ttfamily \#include $<$system-\/mutex.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Critical\+Section\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1CriticalSection_a35704dd8cd5640871670bd52f6ba6bad}{Critical\+Section} (\hyperlink{classns3_1_1SystemMutex}{System\+Mutex} \&mutex)
+\item 
+\hyperlink{classns3_1_1CriticalSection_ad2142c4a368cecaee74111a7f2a1554d}{$\sim$\+Critical\+Section} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1SystemMutex}{System\+Mutex} \& \hyperlink{classns3_1_1CriticalSection_a083af9071caca5a2a4c5dd8aa60516d4}{m\+\_\+mutex}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class which provides a simple way to implement a Critical Section. 
+
+When more than one \hyperlink{classns3_1_1SystemThread}{System\+Thread} needs to access a shared resource, we control access by acquiring a \hyperlink{classns3_1_1SystemMutex}{System\+Mutex}. The \hyperlink{classns3_1_1CriticalSection}{Critical\+Section} class uses the C++ scoping rules to automatically perform the required Lock and Unlock operations on the shared \hyperlink{classns3_1_1SystemMutex}{System\+Mutex} to implement a Critical Section.
+
+If one wants to treat an entire method call as a critical section, one would do something like, 
+\begin{DoxyCode}
+Class::Method ()
+\{
+  \hyperlink{classns3_1_1CriticalSection_a35704dd8cd5640871670bd52f6ba6bad}{CriticalSection} cs (mutex);
+  ...
+\}
+\end{DoxyCode}
+ In this case, the critical section is entered when the \hyperlink{classns3_1_1CriticalSection}{Critical\+Section} object is created, and the critical section is exited when the \hyperlink{classns3_1_1CriticalSection}{Critical\+Section} object goes out of scope at the end of the method.
+
+Finer granularity is achieved by using local scope blocks. 
+\begin{DoxyCode}
+Class::Method ()
+\{
+  ...
+  \{
+    \hyperlink{classns3_1_1CriticalSection_a35704dd8cd5640871670bd52f6ba6bad}{CriticalSection} cs (mutex);
+  \}
+  ...
+\}
+\end{DoxyCode}
+ Here, the critical section is entered partway through the method when the \hyperlink{classns3_1_1CriticalSection}{Critical\+Section} object is created in the local scope block (the braces). The critical section is exited when the \hyperlink{classns3_1_1CriticalSection}{Critical\+Section} object goes out of scope at the end of block.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1SystemMutex}{System\+Mutex} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Critical\+Section@{ns3\+::\+Critical\+Section}!Critical\+Section@{Critical\+Section}}
+\index{Critical\+Section@{Critical\+Section}!ns3\+::\+Critical\+Section@{ns3\+::\+Critical\+Section}}
+\subsubsection[{\texorpdfstring{Critical\+Section(\+System\+Mutex \&mutex)}{CriticalSection(SystemMutex &mutex)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Critical\+Section\+::\+Critical\+Section (
+\begin{DoxyParamCaption}
+\item[{{\bf System\+Mutex} \&}]{mutex}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1CriticalSection_a35704dd8cd5640871670bd52f6ba6bad}{}\label{classns3_1_1CriticalSection_a35704dd8cd5640871670bd52f6ba6bad}
+Construct with the required \hyperlink{classns3_1_1SystemMutex}{System\+Mutex}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mutex} & The mutex. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+136   : \hyperlink{classns3_1_1CriticalSection_a083af9071caca5a2a4c5dd8aa60516d4}{m\_mutex} (mutex)
+137 \{
+138   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << &mutex);
+139   \hyperlink{classns3_1_1CriticalSection_a083af9071caca5a2a4c5dd8aa60516d4}{m\_mutex}.\hyperlink{classns3_1_1SystemMutex_a28900ef4479f872b78eb3467ad27157a}{Lock} ();
+140 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Critical\+Section@{ns3\+::\+Critical\+Section}!````~Critical\+Section@{$\sim$\+Critical\+Section}}
+\index{````~Critical\+Section@{$\sim$\+Critical\+Section}!ns3\+::\+Critical\+Section@{ns3\+::\+Critical\+Section}}
+\subsubsection[{\texorpdfstring{$\sim$\+Critical\+Section()}{~CriticalSection()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Critical\+Section\+::$\sim$\+Critical\+Section (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1CriticalSection_ad2142c4a368cecaee74111a7f2a1554d}{}\label{classns3_1_1CriticalSection_ad2142c4a368cecaee74111a7f2a1554d}
+Destructor 
+\begin{DoxyCode}
+143 \{
+144   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+145   \hyperlink{classns3_1_1CriticalSection_a083af9071caca5a2a4c5dd8aa60516d4}{m\_mutex}.\hyperlink{classns3_1_1SystemMutex_a8004da6c8f1904efb14161455e0e06bc}{Unlock} ();
+146 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Critical\+Section@{ns3\+::\+Critical\+Section}!m\+\_\+mutex@{m\+\_\+mutex}}
+\index{m\+\_\+mutex@{m\+\_\+mutex}!ns3\+::\+Critical\+Section@{ns3\+::\+Critical\+Section}}
+\subsubsection[{\texorpdfstring{m\+\_\+mutex}{m_mutex}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf System\+Mutex}\& ns3\+::\+Critical\+Section\+::m\+\_\+mutex\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1CriticalSection_a083af9071caca5a2a4c5dd8aa60516d4}{}\label{classns3_1_1CriticalSection_a083af9071caca5a2a4c5dd8aa60516d4}
+The mutex. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{system-mutex_8h}{system-\/mutex.\+h}\item 
+core/model/\hyperlink{unix-system-mutex_8cc}{unix-\/system-\/mutex.\+cc}\end{DoxyCompactItemize}

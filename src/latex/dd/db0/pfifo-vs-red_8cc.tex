@@ -1,0 +1,197 @@
+\hypertarget{pfifo-vs-red_8cc}{}\section{traffic-\/control/examples/pfifo-\/vs-\/red.cc File Reference}
+\label{pfifo-vs-red_8cc}\index{traffic-\/control/examples/pfifo-\/vs-\/red.\+cc@{traffic-\/control/examples/pfifo-\/vs-\/red.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/layout-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/traffic-\/control-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$iomanip$>$}\\*
+{\ttfamily \#include $<$map$>$}\\*
+Include dependency graph for pfifo-\/vs-\/red.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{pfifo-vs-red_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{pfifo-\/vs-\/red.\+cc@{pfifo-\/vs-\/red.\+cc}!main@{main}}
+\index{main@{main}!pfifo-\/vs-\/red.\+cc@{pfifo-\/vs-\/red.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{pfifo-vs-red_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{pfifo-vs-red_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+38 \{
+39   uint32\_t    nLeaf = 5; 
+40   uint32\_t    maxPackets = 100;
+41   uint32\_t    modeBytes  = 0;
+42   uint32\_t    queueDiscLimitPackets = 1000;
+43   \textcolor{keywordtype}{double}      minTh = 50;
+44   \textcolor{keywordtype}{double}      maxTh = 80;
+45   uint32\_t    pktSize = 512;
+46   std::string appDataRate = \textcolor{stringliteral}{"10Mbps"};
+47   std::string queueDiscType = \textcolor{stringliteral}{"PfifoFast"};
+48   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 5001;
+49   std::string bottleNeckLinkBw = \textcolor{stringliteral}{"1Mbps"};
+50   std::string bottleNeckLinkDelay = \textcolor{stringliteral}{"50ms"};
+51 
+52   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+53   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nLeaf"},     \textcolor{stringliteral}{"Number of left and right side leaf nodes"}, nLeaf);
+54   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"maxPackets"},\textcolor{stringliteral}{"Max Packets allowed in the device queue"}, maxPackets);
+55   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"queueDiscLimitPackets"},\textcolor{stringliteral}{"Max Packets allowed in the queue disc"}, 
+      queueDiscLimitPackets);
+56   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"queueDiscType"}, \textcolor{stringliteral}{"Set QueueDisc type to PfifoFast or RED"}, queueDiscType);
+57   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"appPktSize"}, \textcolor{stringliteral}{"Set OnOff App Packet Size"}, pktSize);
+58   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"appDataRate"}, \textcolor{stringliteral}{"Set OnOff App DataRate"}, appDataRate);
+59   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"modeBytes"}, \textcolor{stringliteral}{"Set QueueDisc mode to Packets <0> or bytes <1>"}, modeBytes);
+60 
+61   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"redMinTh"}, \textcolor{stringliteral}{"RED queue minimum threshold"}, minTh);
+62   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"redMaxTh"}, \textcolor{stringliteral}{"RED queue maximum threshold"}, maxTh);
+63   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc,argv);
+64 
+65   \textcolor{keywordflow}{if} ((queueDiscType != \textcolor{stringliteral}{"RED"}) && (queueDiscType != \textcolor{stringliteral}{"PfifoFast"}))
+66     \{
+67       \hyperlink{group__fatal_ga51ac4699be799d772ae7258d1ef6af21}{NS\_ABORT\_MSG} (\textcolor{stringliteral}{"Invalid queue disc type: Use --queueDiscType=RED or
+       --queueDiscType=PfifoFast"});
+68     \}
+69 
+70   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::PacketSize"}, UintegerValue (pktSize));
+71   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::DataRate"}, StringValue (appDataRate));
+72 
+73   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::QueueBase::Mode"}, StringValue (\textcolor{stringliteral}{"QUEUE\_MODE\_PACKETS"}));
+74   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::QueueBase::MaxPackets"}, UintegerValue (maxPackets));
+75 
+76   \textcolor{keywordflow}{if} (!modeBytes)
+77   \{
+78     \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::Mode"}, StringValue (\textcolor{stringliteral}{"QUEUE\_DISC\_MODE\_PACKETS"}
+      ));
+79     \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::QueueLimit"}, UintegerValue (
+      queueDiscLimitPackets));
+80     \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::PfifoFastQueueDisc::Limit"}, UintegerValue (
+      queueDiscLimitPackets));
+81   \}
+82   \textcolor{keywordflow}{else} 
+83   \{
+84     \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::Mode"}, StringValue (\textcolor{stringliteral}{"QUEUE\_DISC\_MODE\_BYTES"}))
+      ;
+85     \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::QueueLimit"}, UintegerValue (
+      queueDiscLimitPackets * pktSize));
+86     minTh *= pktSize;
+87     maxTh *= pktSize;
+88   \}
+89 
+90   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::MinTh"}, DoubleValue (minTh));
+91   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::MaxTh"}, DoubleValue (maxTh));
+92   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::LinkBandwidth"}, StringValue (bottleNeckLinkBw))
+      ;
+93   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::LinkDelay"}, StringValue (bottleNeckLinkDelay));
+94 
+95   \textcolor{comment}{// Create the point-to-point link helpers}
+96   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} bottleNeckLink;
+97   bottleNeckLink.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute}  (\textcolor{stringliteral}{"DataRate"}, StringValue (bottleNeckLinkBw));
+98   bottleNeckLink.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (bottleNeckLinkDelay));
+99 
+100   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} pointToPointLeaf;
+101   pointToPointLeaf.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute}    (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+102   pointToPointLeaf.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute}   (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"1ms"}));
+103 
+104   \hyperlink{classns3_1_1PointToPointDumbbellHelper}{PointToPointDumbbellHelper} \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d} (nLeaf, pointToPointLeaf,
+105                                 nLeaf, pointToPointLeaf,
+106                                 bottleNeckLink);
+107 
+108   \textcolor{comment}{// Install Stack}
+109   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+110   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.LeftCount (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+111     \{
+112      stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetLeft (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+113     \}
+114   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.RightCount (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+115     \{
+116      stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetRight (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+117     \}
+118 
+119   \textcolor{keywordflow}{if} (queueDiscType == \textcolor{stringliteral}{"PfifoFast"})
+120     \{
+121       stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetLeft ());
+122       stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetRight ());
+123     \}
+124   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (queueDiscType == \textcolor{stringliteral}{"RED"})
+125     \{
+126       stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetLeft ());
+127       stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetRight ());
+128       \hyperlink{classns3_1_1TrafficControlHelper}{TrafficControlHelper} tchBottleneck;
+129       tchBottleneck.\hyperlink{classns3_1_1TrafficControlHelper_a8588aac7a08e4dc4e7bb10fa7b9e25c8}{SetRootQueueDisc} (\textcolor{stringliteral}{"ns3::RedQueueDisc"});
+130       tchBottleneck.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetLeft ()->GetDevice (0));
+131       tchBottleneck.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetRight ()->GetDevice (0));
+132     \}
+133 
+134   \textcolor{comment}{// Assign IP Addresses}
+135   \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.AssignIpv4Addresses (\hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"}),
+136                          \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} (\textcolor{stringliteral}{"10.2.1.0"}, \textcolor{stringliteral}{"255.255.255.0"}),
+137                          \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} (\textcolor{stringliteral}{"10.3.1.0"}, \textcolor{stringliteral}{"255.255.255.0"}));
+138 
+139   \textcolor{comment}{// Install on/off app on all right side nodes}
+140   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} clientHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+141   clientHelper.SetAttribute (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=0.|Max=1.]"}));
+142   clientHelper.SetAttribute (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=0.|Max=1.]"}));
+143   \hyperlink{classns3_1_1Address}{Address} sinkLocalAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port));
+144   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} packetSinkHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, sinkLocalAddress);
+145   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApps; 
+146   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.LeftCount (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+147     \{
+148       sinkApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (packetSinkHelper.Install (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetLeft (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})));
+149     \}
+150   sinkApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+151   sinkApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (30.0));
+152 
+153   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps;
+154   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.RightCount (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+155     \{
+156       \textcolor{comment}{// Create an on/off app sending packets to the left side}
+157       AddressValue remoteAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetLeftIpv4Address (
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}));
+158       clientHelper.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+159       clientApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (clientHelper.Install (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetRight (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})));
+160     \}
+161   clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0)); \textcolor{comment}{// Start 1 second after sink}
+162   clientApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (15.0)); \textcolor{comment}{// Stop before the sink}
+163 
+164   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+165 
+166   std::cout << \textcolor{stringliteral}{"Running the simulation"} << std::endl;
+167   Simulator::Run ();
+168 
+169   uint32\_t totalRxBytesCounter = 0;
+170   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < sinkApps.\hyperlink{classns3_1_1ApplicationContainer_ad3068a3b77264a6527043beb7f2c05d8}{GetN} (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+171     \{
+172       \hyperlink{classns3_1_1Ptr}{Ptr <Application>} app = sinkApps.\hyperlink{classns3_1_1ApplicationContainer_a9e565807abd4213a56566a7ccd8d7509}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+173       \hyperlink{classns3_1_1Ptr}{Ptr <PacketSink>} pktSink = DynamicCast <PacketSink> (app);
+174       totalRxBytesCounter += pktSink->\hyperlink{classns3_1_1PacketSink_a11e7c4cc4a3c1e16e9abbb2cd3a12334}{GetTotalRx} ();
+175     \}
+176   \hyperlink{log-macros-disabled_8h_a0b36e5e182b37194f85ef1c5e979fb2e}{NS\_LOG\_UNCOND} (\textcolor{stringliteral}{"----------------------------\(\backslash\)nQueueDisc Type:"} 
+177                  << queueDiscType 
+178                  << \textcolor{stringliteral}{"\(\backslash\)nGoodput Bytes/sec:"} 
+179                  << totalRxBytesCounter/\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().GetSeconds ()); 
+180   \hyperlink{log-macros-disabled_8h_a0b36e5e182b37194f85ef1c5e979fb2e}{NS\_LOG\_UNCOND} (\textcolor{stringliteral}{"----------------------------"});
+181 
+182 
+183   std::cout << \textcolor{stringliteral}{"Destroying the simulation"} << std::endl;
+184   Simulator::Destroy ();
+185   \textcolor{keywordflow}{return} 0;
+186 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

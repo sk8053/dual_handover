@@ -1,0 +1,405 @@
+\hypertarget{classns3_1_1ErlangRandomVariable}{}\section{ns3\+:\+:Erlang\+Random\+Variable Class Reference}
+\label{classns3_1_1ErlangRandomVariable}\index{ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}}
+
+
+The Erlang distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically.  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Erlang\+Random\+Variable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Erlang\+Random\+Variable\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1ErlangRandomVariable_affed2d0031f241c8c22a999cf07bd9b2}{Erlang\+Random\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Creates an Erlang distribution R\+NG with the default values for k and lambda. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1ErlangRandomVariable_a3c778a8da2f315f4230391e2408a50c9}{GetK} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the k value for the Erlang distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ErlangRandomVariable_a888082b78ee85b24544de0ebceaa9086}{Get\+Lambda} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the lambda value for the Erlang distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ErlangRandomVariable_a144e603fbee33b5167339f90d4dd4a57}{Get\+Value} (uint32\+\_\+t k, double \hyperlink{loss__ITU1411__NLOS__over__rooftop_8m_aca36b09d6e71a60cfa3837d7e24c07ca}{lambda})
+\begin{DoxyCompactList}\small\item\em Returns a random double from an Erlang distribution with the specified k and lambda. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1ErlangRandomVariable_ac09b5763ce698aed7dd662f9459ecd9a}{Get\+Integer} (uint32\+\_\+t k, uint32\+\_\+t \hyperlink{loss__ITU1411__NLOS__over__rooftop_8m_aca36b09d6e71a60cfa3837d7e24c07ca}{lambda})
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from an Erlang distribution with the specified k and lambda. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1ErlangRandomVariable_a73f65efeea94a22bb0212eeb85f949a4}{Get\+Value} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random double from an Erlang distribution with the current k and lambda. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1ErlangRandomVariable_aa8ee11ddf2b88ccc7b8eb098ade5712a}{Get\+Integer} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from an Erlang distribution with the current k and lambda. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1ErlangRandomVariable_a13edcc1751e0843c4ed57ec243ce29d9}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1ErlangRandomVariable_a3cc2a2c6aee746af38bc2174ff0830c9}{Get\+Exponential\+Value} (double mean, double bound)
+\begin{DoxyCompactList}\small\item\em Returns a random double from an exponential distribution with the specified mean and upper bound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1ErlangRandomVariable_aba3e31567d448969e496c45edc80aabe}{m\+\_\+k}
+\item 
+double \hyperlink{classns3_1_1ErlangRandomVariable_a035cbd956276b953c22eff30c979d651}{m\+\_\+lambda}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The Erlang distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically. 
+
+This class supports the creation of objects that return random numbers from a fixed Erlang distribution. It also supports the generation of single random numbers from various Erlang distributions.
+
+The Erlang distribution is a special case of the Gamma distribution where k (= alpha) is a non-\/negative integer. Erlang distributed variables can be generated using a much faster algorithm than gamma variables.
+
+The probability density function is defined over the interval \mbox{[}0, $+\infty$) as\+: $ \frac{x^{k-1} e^{-\frac{x}{\lambda}}}{\lambda^k (k-1)!}$ where $ mean = k \lambda $ and $ variance = k \lambda^2$
+
+Here is an example of how to use this class\+: 
+\begin{DoxyCode}
+uint32\_t k = 5;
+\textcolor{keywordtype}{double} \hyperlink{loss__ITU1238_8m_aca36b09d6e71a60cfa3837d7e24c07ca}{lambda} = 2.0;
+
+Ptr<ErlangRandomVariable> \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x} = CreateObject<ErlangRandomVariable> ();
+x->SetAttribute (\textcolor{stringliteral}{"K"}, IntegerValue (k));
+x->SetAttribute (\textcolor{stringliteral}{"Lambda"}, DoubleValue (lambda));
+
+\textcolor{comment}{// The expected value for the mean of the values returned by a}
+\textcolor{comment}{// Erlangly distributed random variable is equal to }
+\textcolor{comment}{//}
+\textcolor{comment}{//     E[value]  =  k * lambda  .}
+\textcolor{comment}{//}
+\textcolor{keywordtype}{double} value = x->GetValue ();
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}!Erlang\+Random\+Variable@{Erlang\+Random\+Variable}}
+\index{Erlang\+Random\+Variable@{Erlang\+Random\+Variable}!ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Erlang\+Random\+Variable()}{ErlangRandomVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Erlang\+Random\+Variable\+::\+Erlang\+Random\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ErlangRandomVariable_affed2d0031f241c8c22a999cf07bd9b2}{}\label{classns3_1_1ErlangRandomVariable_affed2d0031f241c8c22a999cf07bd9b2}
+
+
+Creates an Erlang distribution R\+NG with the default values for k and lambda. 
+
+
+\begin{DoxyCode}
+1099 \{
+1100   \textcolor{comment}{// m\_k and m\_lambda are initialized after constructor by attributes}
+1101   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1102 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}!Get\+Exponential\+Value@{Get\+Exponential\+Value}}
+\index{Get\+Exponential\+Value@{Get\+Exponential\+Value}!ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Exponential\+Value(double mean, double bound)}{GetExponentialValue(double mean, double bound)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Erlang\+Random\+Variable\+::\+Get\+Exponential\+Value (
+\begin{DoxyParamCaption}
+\item[{double}]{mean, }
+\item[{double}]{bound}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ErlangRandomVariable_a3cc2a2c6aee746af38bc2174ff0830c9}{}\label{classns3_1_1ErlangRandomVariable_a3cc2a2c6aee746af38bc2174ff0830c9}
+
+
+Returns a random double from an exponential distribution with the specified mean and upper bound. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mean} & Mean value of the random variables. \\
+\hline
+\mbox{\tt in}  & {\em bound} & Upper bound on values returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and
+
+\[ x = - mean * \log(u) \]
+
+is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, is calculated as
+
+\[ x' = - mean * \log(1 - u), \]
+
+which now involves the log of the distance $u$ is from the 1. 
+\begin{DoxyCode}
+1168 \{
+1169   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mean << bound);
+1170   \textcolor{keywordflow}{while} (1)
+1171     \{
+1172       \textcolor{comment}{// Get a uniform random variable in [0,1].}
+1173       \textcolor{keywordtype}{double} v = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+1174       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+1175         \{
+1176           v = (1 - v);
+1177         \}
+1178 
+1179       \textcolor{comment}{// Calculate the exponential random variable.}
+1180       \textcolor{keywordtype}{double} r = -mean*std::log (v);
+1181 
+1182       \textcolor{comment}{// Use this value if it's acceptable.}
+1183       \textcolor{keywordflow}{if} (bound == 0 || r <= bound)
+1184         \{
+1185           \textcolor{keywordflow}{return} r;
+1186         \}
+1187     \}
+1188 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(uint32\+\_\+t k, uint32\+\_\+t lambda)}{GetInteger(uint32_t k, uint32_t lambda)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Erlang\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{k, }
+\item[{uint32\+\_\+t}]{lambda}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ErlangRandomVariable_ac09b5763ce698aed7dd662f9459ecd9a}{}\label{classns3_1_1ErlangRandomVariable_ac09b5763ce698aed7dd662f9459ecd9a}
+
+
+Returns a random unsigned integer from an Erlang distribution with the specified k and lambda. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em k} & K value for the Erlang distribution. \\
+\hline
+\mbox{\tt in}  & {\em lambda} & Lambda value for the Erlang distribution. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+\begin{DoxyCode}
+1148 \{
+1149   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << k << \hyperlink{loss__ITU1238_8m_aca36b09d6e71a60cfa3837d7e24c07ca}{lambda});
+1150   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>} ( \hyperlink{classns3_1_1ErlangRandomVariable_a73f65efeea94a22bb0212eeb85f949a4}{GetValue} (k, \hyperlink{loss__ITU1238_8m_aca36b09d6e71a60cfa3837d7e24c07ca}{lambda}));
+1151 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(void)}{GetInteger(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Erlang\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1ErlangRandomVariable_aa8ee11ddf2b88ccc7b8eb098ade5712a}{}\label{classns3_1_1ErlangRandomVariable_aa8ee11ddf2b88ccc7b8eb098ade5712a}
+
+
+Returns a random unsigned integer from an Erlang distribution with the current k and lambda. 
+
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+1161 \{
+1162   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1163   \textcolor{keywordflow}{return} (uint32\_t)\hyperlink{classns3_1_1ErlangRandomVariable_a73f65efeea94a22bb0212eeb85f949a4}{GetValue} (\hyperlink{classns3_1_1ErlangRandomVariable_aba3e31567d448969e496c45edc80aabe}{m\_k}, \hyperlink{classns3_1_1ErlangRandomVariable_a035cbd956276b953c22eff30c979d651}{m\_lambda});
+1164 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}!GetK@{GetK}}
+\index{GetK@{GetK}!ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+K(void) const }{GetK(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Erlang\+Random\+Variable\+::\+GetK (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ErlangRandomVariable_a3c778a8da2f315f4230391e2408a50c9}{}\label{classns3_1_1ErlangRandomVariable_a3c778a8da2f315f4230391e2408a50c9}
+
+
+Returns the k value for the Erlang distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The k value for the Erlang distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1106 \{
+1107   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1108   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ErlangRandomVariable_aba3e31567d448969e496c45edc80aabe}{m\_k};
+1109 \}
+\end{DoxyCode}
+\index{ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}!Get\+Lambda@{Get\+Lambda}}
+\index{Get\+Lambda@{Get\+Lambda}!ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Lambda(void) const }{GetLambda(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Erlang\+Random\+Variable\+::\+Get\+Lambda (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ErlangRandomVariable_a888082b78ee85b24544de0ebceaa9086}{}\label{classns3_1_1ErlangRandomVariable_a888082b78ee85b24544de0ebceaa9086}
+
+
+Returns the lambda value for the Erlang distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The lambda value for the Erlang distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1112 \{
+1113   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1114   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ErlangRandomVariable_a035cbd956276b953c22eff30c979d651}{m\_lambda};
+1115 \}
+\end{DoxyCode}
+\index{ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Erlang\+Random\+Variable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1ErlangRandomVariable_a13edcc1751e0843c4ed57ec243ce29d9}{}\label{classns3_1_1ErlangRandomVariable_a13edcc1751e0843c4ed57ec243ce29d9}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1082 \{
+1083   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::ErlangRandomVariable"})
+1084     .SetParent<\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{RandomVariableStream}>()
+1085     .SetGroupName (\textcolor{stringliteral}{"Core"})
+1086     .AddConstructor<\hyperlink{classns3_1_1ErlangRandomVariable_affed2d0031f241c8c22a999cf07bd9b2}{ErlangRandomVariable}> ()
+1087     .AddAttribute(\textcolor{stringliteral}{"K"}, \textcolor{stringliteral}{"The k value for the Erlang distribution returned by this RNG stream."},
+1088                   IntegerValue(1),
+1089                   MakeIntegerAccessor(&\hyperlink{classns3_1_1ErlangRandomVariable_aba3e31567d448969e496c45edc80aabe}{ErlangRandomVariable::m\_k}),
+1090                   MakeIntegerChecker<uint32\_t>())
+1091     .AddAttribute(\textcolor{stringliteral}{"Lambda"}, \textcolor{stringliteral}{"The lambda value for the Erlang distribution returned by this RNG stream."},
+1092                   DoubleValue(1.0),
+1093                   MakeDoubleAccessor(&\hyperlink{classns3_1_1ErlangRandomVariable_a035cbd956276b953c22eff30c979d651}{ErlangRandomVariable::m\_lambda}),
+1094                   MakeDoubleChecker<double>())
+1095     ;
+1096   \textcolor{keywordflow}{return} tid;
+1097 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(uint32\+\_\+t k, double lambda)}{GetValue(uint32_t k, double lambda)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Erlang\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{k, }
+\item[{double}]{lambda}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ErlangRandomVariable_a144e603fbee33b5167339f90d4dd4a57}{}\label{classns3_1_1ErlangRandomVariable_a144e603fbee33b5167339f90d4dd4a57}
+
+
+Returns a random double from an Erlang distribution with the specified k and lambda. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em k} & K value for the Erlang distribution. \\
+\hline
+\mbox{\tt in}  & {\em lambda} & Lambda value for the Erlang distribution. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+\begin{DoxyCode}
+1131 \{
+1132   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << k << \hyperlink{loss__ITU1238_8m_aca36b09d6e71a60cfa3837d7e24c07ca}{lambda});
+1133   \textcolor{keywordtype}{double} mean = \hyperlink{loss__ITU1238_8m_aca36b09d6e71a60cfa3837d7e24c07ca}{lambda};
+1134   \textcolor{keywordtype}{double} bound = 0.0;
+1135 
+1136   \textcolor{keywordtype}{double} result = 0;
+1137   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < k; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+1138     \{
+1139       result += \hyperlink{classns3_1_1ErlangRandomVariable_a3cc2a2c6aee746af38bc2174ff0830c9}{GetExponentialValue} (mean, bound);
+1140 
+1141     \}
+1142 
+1143   \textcolor{keywordflow}{return} result;
+1144 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(void)}{GetValue(void)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Erlang\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1ErlangRandomVariable_a73f65efeea94a22bb0212eeb85f949a4}{}\label{classns3_1_1ErlangRandomVariable_a73f65efeea94a22bb0212eeb85f949a4}
+
+
+Returns a random double from an Erlang distribution with the current k and lambda. 
+
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1.
+
+Note that we have to re-\/implement this method here because the method is overloaded above for the two-\/argument variant and the c++ name resolution rules don\textquotesingle{}t work well with overloads split between parent and child classes. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+1155 \{
+1156   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1157   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ErlangRandomVariable_a73f65efeea94a22bb0212eeb85f949a4}{GetValue} (\hyperlink{classns3_1_1ErlangRandomVariable_aba3e31567d448969e496c45edc80aabe}{m\_k}, \hyperlink{classns3_1_1ErlangRandomVariable_a035cbd956276b953c22eff30c979d651}{m\_lambda});
+1158 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}!m\+\_\+k@{m\+\_\+k}}
+\index{m\+\_\+k@{m\+\_\+k}!ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+k}{m_k}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Erlang\+Random\+Variable\+::m\+\_\+k\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ErlangRandomVariable_aba3e31567d448969e496c45edc80aabe}{}\label{classns3_1_1ErlangRandomVariable_aba3e31567d448969e496c45edc80aabe}
+The k value for the Erlang distribution returned by this R\+NG stream. \index{ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}!m\+\_\+lambda@{m\+\_\+lambda}}
+\index{m\+\_\+lambda@{m\+\_\+lambda}!ns3\+::\+Erlang\+Random\+Variable@{ns3\+::\+Erlang\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+lambda}{m_lambda}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Erlang\+Random\+Variable\+::m\+\_\+lambda\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ErlangRandomVariable_a035cbd956276b953c22eff30c979d651}{}\label{classns3_1_1ErlangRandomVariable_a035cbd956276b953c22eff30c979d651}
+The lambda value for the Erlang distribution returned by this R\+NG stream. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

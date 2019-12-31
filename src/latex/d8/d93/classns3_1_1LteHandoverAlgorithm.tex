@@ -1,0 +1,210 @@
+\hypertarget{classns3_1_1LteHandoverAlgorithm}{}\section{ns3\+:\+:Lte\+Handover\+Algorithm Class Reference}
+\label{classns3_1_1LteHandoverAlgorithm}\index{ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}}
+
+
+The abstract base class of a handover algorithm that operates using the Handover Management S\+AP interface.  
+
+
+
+
+{\ttfamily \#include $<$lte-\/handover-\/algorithm.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Lte\+Handover\+Algorithm\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Lte\+Handover\+Algorithm\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1LteHandoverAlgorithm_acb457c6d2a93677efd36a65376ce31fc}{Lte\+Handover\+Algorithm} ()
+\item 
+virtual \hyperlink{classns3_1_1LteHandoverAlgorithm_aba996bd4f48bc61aab831ee90d0eece2}{$\sim$\+Lte\+Handover\+Algorithm} ()
+\item 
+virtual void \hyperlink{classns3_1_1LteHandoverAlgorithm_a3e5a5f7f7f69291ea38778a21fbe8f47}{Set\+Lte\+Handover\+Management\+Sap\+User} (\hyperlink{classns3_1_1LteHandoverManagementSapUser}{Lte\+Handover\+Management\+Sap\+User} $\ast$\hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s})=0
+\begin{DoxyCompactList}\small\item\em Set the \char`\"{}user\char`\"{} part of the Handover Management S\+AP interface that this handover algorithm instance will interact with. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1LteHandoverManagementSapProvider}{Lte\+Handover\+Management\+Sap\+Provider} $\ast$ \hyperlink{classns3_1_1LteHandoverAlgorithm_a271711fe4849bc28077905a21d2cadba}{Get\+Lte\+Handover\+Management\+Sap\+Provider} ()=0
+\begin{DoxyCompactList}\small\item\em Export the \char`\"{}provider\char`\"{} part of the Handover Management S\+AP interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1LteHandoverAlgorithm_af0901a842bccd915c6028ba7569d4578}{Get\+Type\+Id} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classns3_1_1LteHandoverAlgorithm_acb41503e8dd1313690d0da69f9eba564}{Do\+Dispose} ()
+\item 
+virtual void \hyperlink{classns3_1_1LteHandoverAlgorithm_a6ff069477dd5902b2e564e5cf88bac64}{Do\+Report\+Ue\+Meas} (uint16\+\_\+t rnti, \hyperlink{structns3_1_1LteRrcSap_1_1MeasResults}{Lte\+Rrc\+Sap\+::\+Meas\+Results} meas\+Results)=0
+\begin{DoxyCompactList}\small\item\em Implementation of \hyperlink{classns3_1_1LteHandoverManagementSapProvider_a5daca6a055e4f8794f7f1e8ba1077b15}{Lte\+Handover\+Management\+Sap\+Provider\+::\+Report\+Ue\+Meas}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The abstract base class of a handover algorithm that operates using the Handover Management S\+AP interface. 
+
+Handover algorithm receives measurement reports from an e\+Node R\+RC instance and tells the e\+NodeB R\+RC instance when to do a handover.
+
+This class is an abstract class intended to be inherited by subclasses that implement its virtual methods. By inheriting from this abstract class, the subclasses gain the benefits of being compatible with the \hyperlink{classns3_1_1LteEnbNetDevice}{Lte\+Enb\+Net\+Device} class, being accessible using namespace-\/based access through ns-\/3 \hyperlink{namespacens3_1_1Config}{Config} subsystem, and being installed and configured by \hyperlink{classns3_1_1LteHelper}{Lte\+Helper} class (see \hyperlink{classns3_1_1LteHelper_a6301630b8a7082043efff2a7aaaa1d20}{Lte\+Helper\+::\+Set\+Handover\+Algorithm\+Type} and \hyperlink{classns3_1_1LteHelper_a4da448bb1d3d13534cc54f6b7d33f26a}{Lte\+Helper\+::\+Set\+Handover\+Algorithm\+Attribute} methods).
+
+The communication with the e\+NodeB R\+RC instance is done through the {\itshape Handover Management S\+AP} interface. The handover algorithm instance corresponds to the \char`\"{}provider\char`\"{} part of this interface, while the e\+NodeB R\+RC instance takes the role of the \char`\"{}user\char`\"{} part. The following code skeleton establishes the connection between both instances\+: \begin{DoxyVerb}Ptr<LteEnbRrc> u = ...;
+Ptr<LteHandoverAlgorithm> p = ...;
+u->SetLteHandoverManagementSapProvider (p->GetLteHandoverManagementSapProvider ());
+p->SetLteHandoverManagementSapUser (u->GetLteHandoverManagementSapUser ());
+\end{DoxyVerb}
+
+
+However, user rarely needs to use the above code, since it has already been taken care by \hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{Lte\+Helper\+::\+Install\+Enb\+Device}.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1LteHandoverManagementSapProvider}{Lte\+Handover\+Management\+Sap\+Provider}, \hyperlink{classns3_1_1LteHandoverManagementSapUser}{Lte\+Handover\+Management\+Sap\+User} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}!Lte\+Handover\+Algorithm@{Lte\+Handover\+Algorithm}}
+\index{Lte\+Handover\+Algorithm@{Lte\+Handover\+Algorithm}!ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}}
+\subsubsection[{\texorpdfstring{Lte\+Handover\+Algorithm()}{LteHandoverAlgorithm()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Lte\+Handover\+Algorithm\+::\+Lte\+Handover\+Algorithm (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LteHandoverAlgorithm_acb457c6d2a93677efd36a65376ce31fc}{}\label{classns3_1_1LteHandoverAlgorithm_acb457c6d2a93677efd36a65376ce31fc}
+
+\begin{DoxyCode}
+33 \{
+34 \}
+\end{DoxyCode}
+\index{ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}!````~Lte\+Handover\+Algorithm@{$\sim$\+Lte\+Handover\+Algorithm}}
+\index{````~Lte\+Handover\+Algorithm@{$\sim$\+Lte\+Handover\+Algorithm}!ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}}
+\subsubsection[{\texorpdfstring{$\sim$\+Lte\+Handover\+Algorithm()}{~LteHandoverAlgorithm()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Lte\+Handover\+Algorithm\+::$\sim$\+Lte\+Handover\+Algorithm (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1LteHandoverAlgorithm_aba996bd4f48bc61aab831ee90d0eece2}{}\label{classns3_1_1LteHandoverAlgorithm_aba996bd4f48bc61aab831ee90d0eece2}
+
+\begin{DoxyCode}
+38 \{
+39 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}!Do\+Dispose@{Do\+Dispose}}
+\index{Do\+Dispose@{Do\+Dispose}!ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}}
+\subsubsection[{\texorpdfstring{Do\+Dispose()}{DoDispose()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Lte\+Handover\+Algorithm\+::\+Do\+Dispose (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1LteHandoverAlgorithm_acb41503e8dd1313690d0da69f9eba564}{}\label{classns3_1_1LteHandoverAlgorithm_acb41503e8dd1313690d0da69f9eba564}
+Destructor implementation.
+
+This method is called by \hyperlink{classns3_1_1Object_aa90ae598863f6c251cdab3c3722afdaf}{Dispose()} or by the \hyperlink{classns3_1_1Object}{Object}\textquotesingle{}s destructor, whichever comes first.
+
+Subclasses are expected to implement their real destruction code in an overriden version of this method and chain up to their parent\textquotesingle{}s implementation once they are done. {\itshape i.\+e}, for simplicity, the destructor of every subclass should be empty and its content should be moved to the associated \hyperlink{classns3_1_1LteHandoverAlgorithm_acb41503e8dd1313690d0da69f9eba564}{Do\+Dispose()} method.
+
+It is safe to call \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{Get\+Object()} from within this method. 
+
+Reimplemented from \hyperlink{classns3_1_1Object_a475d429a75d302d4775f4ae32479b287}{ns3\+::\+Object}.
+
+
+
+Reimplemented in \hyperlink{classns3_1_1A2A4RsrqHandoverAlgorithm_a3da521192195d0401eb49c275ca70174}{ns3\+::\+A2\+A4\+Rsrq\+Handover\+Algorithm}, \hyperlink{classns3_1_1A3RsrpHandoverAlgorithm_a938f01d137e22ebec37bd6c65eaaeb9a}{ns3\+::\+A3\+Rsrp\+Handover\+Algorithm}, \hyperlink{classns3_1_1NoOpHandoverAlgorithm_a3f17fe716d6d081826322270e8d7b3ab}{ns3\+::\+No\+Op\+Handover\+Algorithm}, and \hyperlink{classns3_1_1NoOpHandoverAlgorithm_a6ab8ea0f5dc79b50fe89844d5ae69e96}{ns3\+::\+No\+Op\+Handover\+Algorithm}.
+
+
+\begin{DoxyCode}
+55 \{
+56 \}
+\end{DoxyCode}
+\index{ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}!Do\+Report\+Ue\+Meas@{Do\+Report\+Ue\+Meas}}
+\index{Do\+Report\+Ue\+Meas@{Do\+Report\+Ue\+Meas}!ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}}
+\subsubsection[{\texorpdfstring{Do\+Report\+Ue\+Meas(uint16\+\_\+t rnti, Lte\+Rrc\+Sap\+::\+Meas\+Results meas\+Results)=0}{DoReportUeMeas(uint16_t rnti, LteRrcSap::MeasResults measResults)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Lte\+Handover\+Algorithm\+::\+Do\+Report\+Ue\+Meas (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{rnti, }
+\item[{{\bf Lte\+Rrc\+Sap\+::\+Meas\+Results}}]{meas\+Results}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1LteHandoverAlgorithm_a6ff069477dd5902b2e564e5cf88bac64}{}\label{classns3_1_1LteHandoverAlgorithm_a6ff069477dd5902b2e564e5cf88bac64}
+
+
+Implementation of \hyperlink{classns3_1_1LteHandoverManagementSapProvider_a5daca6a055e4f8794f7f1e8ba1077b15}{Lte\+Handover\+Management\+Sap\+Provider\+::\+Report\+Ue\+Meas}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rnti} & Radio Network Temporary Identity, an integer identifying the UE where the report originates from \\
+\hline
+{\em meas\+Results} & a single report of one measurement identity \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classns3_1_1A2A4RsrqHandoverAlgorithm_a49d20f578c2853426103a532e9f862ec}{ns3\+::\+A2\+A4\+Rsrq\+Handover\+Algorithm}, \hyperlink{classns3_1_1A3RsrpHandoverAlgorithm_a985a69ab65c89a4c999af84fcfb7e391}{ns3\+::\+A3\+Rsrp\+Handover\+Algorithm}, \hyperlink{classns3_1_1NoOpHandoverAlgorithm_a9aaa12980d64b132c36cec892eecec64}{ns3\+::\+No\+Op\+Handover\+Algorithm}, and \hyperlink{classns3_1_1NoOpHandoverAlgorithm_a9aaa12980d64b132c36cec892eecec64}{ns3\+::\+No\+Op\+Handover\+Algorithm}.
+
+\index{ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}!Get\+Lte\+Handover\+Management\+Sap\+Provider@{Get\+Lte\+Handover\+Management\+Sap\+Provider}}
+\index{Get\+Lte\+Handover\+Management\+Sap\+Provider@{Get\+Lte\+Handover\+Management\+Sap\+Provider}!ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}}
+\subsubsection[{\texorpdfstring{Get\+Lte\+Handover\+Management\+Sap\+Provider()=0}{GetLteHandoverManagementSapProvider()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Lte\+Handover\+Management\+Sap\+Provider}$\ast$ ns3\+::\+Lte\+Handover\+Algorithm\+::\+Get\+Lte\+Handover\+Management\+Sap\+Provider (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1LteHandoverAlgorithm_a271711fe4849bc28077905a21d2cadba}{}\label{classns3_1_1LteHandoverAlgorithm_a271711fe4849bc28077905a21d2cadba}
+
+
+Export the \char`\"{}provider\char`\"{} part of the Handover Management S\+AP interface. 
+
+\begin{DoxyReturn}{Returns}
+the reference to the \char`\"{}provider\char`\"{} part of the interface, typically to be kept by an \hyperlink{classns3_1_1LteEnbRrc}{Lte\+Enb\+Rrc} instance 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1A2A4RsrqHandoverAlgorithm_accacf1f5305c5d210dc41c64f0ae1f6a}{ns3\+::\+A2\+A4\+Rsrq\+Handover\+Algorithm}, \hyperlink{classns3_1_1A3RsrpHandoverAlgorithm_a9fa1e860d2b8a6e4af53a54de4072471}{ns3\+::\+A3\+Rsrp\+Handover\+Algorithm}, \hyperlink{classns3_1_1NoOpHandoverAlgorithm_a1a0a9cbc06ee042c11768d4767bc3062}{ns3\+::\+No\+Op\+Handover\+Algorithm}, and \hyperlink{classns3_1_1NoOpHandoverAlgorithm_a0ea101bd0c3026e4a299fe4b56a48b6e}{ns3\+::\+No\+Op\+Handover\+Algorithm}.
+
+\index{ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id()}{GetTypeId()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Lte\+Handover\+Algorithm\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1LteHandoverAlgorithm_af0901a842bccd915c6028ba7569d4578}{}\label{classns3_1_1LteHandoverAlgorithm_af0901a842bccd915c6028ba7569d4578}
+
+\begin{DoxyCode}
+44 \{
+45   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::LteHandoverAlgorithm"})
+46     .SetParent<\hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object}> ()
+47     .SetGroupName(\textcolor{stringliteral}{"Lte"})
+48   ;
+49   \textcolor{keywordflow}{return} tid;
+50 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}!Set\+Lte\+Handover\+Management\+Sap\+User@{Set\+Lte\+Handover\+Management\+Sap\+User}}
+\index{Set\+Lte\+Handover\+Management\+Sap\+User@{Set\+Lte\+Handover\+Management\+Sap\+User}!ns3\+::\+Lte\+Handover\+Algorithm@{ns3\+::\+Lte\+Handover\+Algorithm}}
+\subsubsection[{\texorpdfstring{Set\+Lte\+Handover\+Management\+Sap\+User(\+Lte\+Handover\+Management\+Sap\+User $\ast$s)=0}{SetLteHandoverManagementSapUser(LteHandoverManagementSapUser *s)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Lte\+Handover\+Algorithm\+::\+Set\+Lte\+Handover\+Management\+Sap\+User (
+\begin{DoxyParamCaption}
+\item[{{\bf Lte\+Handover\+Management\+Sap\+User} $\ast$}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1LteHandoverAlgorithm_a3e5a5f7f7f69291ea38778a21fbe8f47}{}\label{classns3_1_1LteHandoverAlgorithm_a3e5a5f7f7f69291ea38778a21fbe8f47}
+
+
+Set the \char`\"{}user\char`\"{} part of the Handover Management S\+AP interface that this handover algorithm instance will interact with. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & a reference to the \char`\"{}user\char`\"{} part of the interface, typically a member of an \hyperlink{classns3_1_1LteEnbRrc}{Lte\+Enb\+Rrc} instance \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classns3_1_1A2A4RsrqHandoverAlgorithm_aa0800422eef0bbf24cd4a38991973fe0}{ns3\+::\+A2\+A4\+Rsrq\+Handover\+Algorithm}, \hyperlink{classns3_1_1A3RsrpHandoverAlgorithm_ae3bbe08d5f94370dc025984ced30484d}{ns3\+::\+A3\+Rsrp\+Handover\+Algorithm}, \hyperlink{classns3_1_1NoOpHandoverAlgorithm_a0d07ba908a911ec57e5b55ff8518cbe8}{ns3\+::\+No\+Op\+Handover\+Algorithm}, and \hyperlink{classns3_1_1NoOpHandoverAlgorithm_a571693f73b55e2b865adaf0a1a1ee612}{ns3\+::\+No\+Op\+Handover\+Algorithm}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lte/model/\hyperlink{lte-handover-algorithm_8h}{lte-\/handover-\/algorithm.\+h}\item 
+lte/model/\hyperlink{lte-handover-algorithm_8cc}{lte-\/handover-\/algorithm.\+cc}\end{DoxyCompactItemize}

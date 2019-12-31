@@ -1,0 +1,62 @@
+\hypertarget{classns3_1_1PrintList}{}\section{ns3\+:\+:Print\+List Class Reference}
+\label{classns3_1_1PrintList}\index{ns3\+::\+Print\+List@{ns3\+::\+Print\+List}}
+
+
+Collaboration diagram for ns3\+:\+:Print\+List\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1PrintList_a0504a671851935c3be9abd363ade19a6}{Print\+List} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Handler for {\ttfamily print-\/list} token in N\+S\+\_\+\+L\+OG to print the list of log components. This is private to the logging implementation. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Print\+List@{ns3\+::\+Print\+List}!Print\+List@{Print\+List}}
+\index{Print\+List@{Print\+List}!ns3\+::\+Print\+List@{ns3\+::\+Print\+List}}
+\subsubsection[{\texorpdfstring{Print\+List()}{PrintList()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Print\+List\+::\+Print\+List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1PrintList_a0504a671851935c3be9abd363ade19a6}{}\label{classns3_1_1PrintList_a0504a671851935c3be9abd363ade19a6}
+
+\begin{DoxyCode}
+87 \{
+88 \textcolor{preprocessor}{#ifdef HAVE\_GETENV}
+89   \textcolor{keywordtype}{char} *envVar = getenv (\textcolor{stringliteral}{"NS\_LOG"});
+90   \textcolor{keywordflow}{if} (envVar == 0)
+91     \{
+92       \textcolor{keywordflow}{return};
+93     \}
+94   std::string env = envVar;
+95   std::string::size\_type cur = 0;
+96   std::string::size\_type next = 0;
+97   \textcolor{keywordflow}{while} (next != std::string::npos)
+98     \{
+99       next = env.find\_first\_of (\textcolor{stringliteral}{":"}, cur);
+100       std::string tmp = std::string (env, cur, next-cur);
+101       \textcolor{keywordflow}{if} (tmp == \textcolor{stringliteral}{"print-list"})
+102         \{
+103           \hyperlink{namespacens3_a5252703c3f8260fd6dc609f1b276e57c}{LogComponentPrintList} ();
+104           exit (0);
+105           \textcolor{keywordflow}{break};
+106         \}
+107       cur = next + 1;
+108     \}
+109 \textcolor{preprocessor}{#endif}
+110 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{log_8cc}{log.\+cc}\end{DoxyCompactItemize}

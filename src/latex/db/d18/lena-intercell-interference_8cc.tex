@@ -1,0 +1,145 @@
+\hypertarget{lena-intercell-interference_8cc}{}\section{lte/examples/lena-\/intercell-\/interference.cc File Reference}
+\label{lena-intercell-interference_8cc}\index{lte/examples/lena-\/intercell-\/interference.\+cc@{lte/examples/lena-\/intercell-\/interference.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/lte-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/radio-\/bearer-\/stats-\/calculator.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iomanip$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+Include dependency graph for lena-\/intercell-\/interference.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{lena-intercell-interference_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{lena-\/intercell-\/interference.\+cc@{lena-\/intercell-\/interference.\+cc}!main@{main}}
+\index{main@{main}!lena-\/intercell-\/interference.\+cc@{lena-\/intercell-\/interference.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-intercell-interference_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{lena-intercell-interference_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+This simulation script creates two e\+Node\+Bs and drops randomly several U\+Es in a disc around them (same number on both). The number of U\+Es , the radius of that disc and the distance between the e\+Node\+Bs can be configured. 
+\begin{DoxyCode}
+41 \{
+42   \textcolor{keywordtype}{double} enbDist = 100.0;
+43   \textcolor{keywordtype}{double} radius = 50.0;
+44   uint32\_t numUes = 1;
+45   \textcolor{keywordtype}{double} simTime = 1.0;
+46 
+47   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+48   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"enbDist"}, \textcolor{stringliteral}{"distance between the two eNBs"}, enbDist);
+49   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"radius"}, \textcolor{stringliteral}{"the radius of the disc where UEs are placed around an eNB"}, radius);
+50   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"numUes"}, \textcolor{stringliteral}{"how many UEs are attached to each eNB"}, numUes);
+51   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"simTime"}, \textcolor{stringliteral}{"Total duration of the simulation (in seconds)"}, simTime);
+52   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+53 
+54   \hyperlink{classns3_1_1ConfigStore}{ConfigStore} inputConfig;
+55   inputConfig.\hyperlink{classns3_1_1ConfigStore_a0a6137574d7c847c3823af8b9d1bb886}{ConfigureDefaults} ();
+56 
+57   \textcolor{comment}{// parse again so you can override default values from the command line}
+58   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+59 
+60   \textcolor{comment}{// determine the string tag that identifies this simulation run}
+61   \textcolor{comment}{// this tag is then appended to all filenames}
+62 
+63   IntegerValue runValue;
+64   GlobalValue::GetValueByName (\textcolor{stringliteral}{"RngRun"}, runValue);
+65 
+66   std::ostringstream tag;
+67   tag  << \textcolor{stringliteral}{"\_enbDist"} << std::setw (3) << std::setfill (\textcolor{charliteral}{'0'}) << std::fixed << std::setprecision (0) << 
+      enbDist
+68        << \textcolor{stringliteral}{"\_radius"}  << std::setw (3) << std::setfill (\textcolor{charliteral}{'0'}) << std::fixed << std::setprecision (0) << 
+      radius
+69        << \textcolor{stringliteral}{"\_numUes"}  << std::setw (3) << std::setfill (\textcolor{charliteral}{'0'})  << numUes
+70        << \textcolor{stringliteral}{"\_rngRun"}  << std::setw (3) << std::setfill (\textcolor{charliteral}{'0'})  << runValue.Get () ;
+71 
+72   \hyperlink{classns3_1_1Ptr}{Ptr<LteHelper>} lteHelper = CreateObject<LteHelper> ();
+73   
+74   lteHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"PathlossModel"}, StringValue (\textcolor{stringliteral}{"
+      ns3::FriisSpectrumPropagationLossModel"}));
+75 
+76   \textcolor{comment}{// Create Nodes: eNodeB and UE}
+77   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+78   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNodes1, ueNodes2;
+79   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+80   ueNodes1.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (numUes);
+81   ueNodes2.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (numUes);
+82 
+83   \textcolor{comment}{// Position of eNBs}
+84   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} positionAlloc = CreateObject<ListPositionAllocator> 
+      ();
+85   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));
+86   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (enbDist, 0.0, 0.0));
+87   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} enbMobility;
+88   enbMobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+89   enbMobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+90   enbMobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+91 
+92   \textcolor{comment}{// Position of UEs attached to eNB 1}
+93   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} ue1mobility;
+94   ue1mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (\textcolor{stringliteral}{"ns3::UniformDiscPositionAllocator"},
+95                                     \textcolor{stringliteral}{"X"}, DoubleValue (0.0),
+96                                     \textcolor{stringliteral}{"Y"}, DoubleValue (0.0),
+97                                     \textcolor{stringliteral}{"rho"}, DoubleValue (radius));
+98   ue1mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+99   ue1mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes1);
+100 
+101   \textcolor{comment}{// Position of UEs attached to eNB 2}
+102   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} ue2mobility;
+103   ue2mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (\textcolor{stringliteral}{"ns3::UniformDiscPositionAllocator"},
+104                                     \textcolor{stringliteral}{"X"}, DoubleValue (enbDist),
+105                                     \textcolor{stringliteral}{"Y"}, DoubleValue (0.0),
+106                                     \textcolor{stringliteral}{"rho"}, DoubleValue (radius));
+107   ue2mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+108   ue2mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes2);
+109 
+110 
+111 
+112   \textcolor{comment}{// Create Devices and install them in the Nodes (eNB and UE)}
+113   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbDevs;
+114   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueDevs1;
+115   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueDevs2;
+116   enbDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (enbNodes);
+117   ueDevs1 = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (ueNodes1);
+118   ueDevs2 = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (ueNodes2);
+119 
+120   \textcolor{comment}{// Attach UEs to a eNB}
+121   lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (ueDevs1, enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+122   lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (ueDevs2, enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+123 
+124   \textcolor{comment}{// Activate a data radio bearer each UE}
+125   \textcolor{keyword}{enum} \hyperlink{structns3_1_1EpsBearer_aecf0c67109c5eb4ec0b07226fff5885e}{EpsBearer::Qci} q = EpsBearer::GBR\_CONV\_VOICE;
+126   \hyperlink{structns3_1_1EpsBearer}{EpsBearer} bearer (q);
+127   lteHelper->\hyperlink{classns3_1_1LteHelper_ac896e16cf162e4beeaa292d39ab1b700}{ActivateDataRadioBearer} (ueDevs1, bearer);
+128   lteHelper->\hyperlink{classns3_1_1LteHelper_ac896e16cf162e4beeaa292d39ab1b700}{ActivateDataRadioBearer} (ueDevs2, bearer);
+129 
+130   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (simTime));
+131 
+132   \textcolor{comment}{// Insert RLC Performance Calculator}
+133   std::string dlOutFname = \textcolor{stringliteral}{"DlRlcStats"};
+134   dlOutFname.append (tag.str ());
+135   std::string ulOutFname = \textcolor{stringliteral}{"UlRlcStats"};
+136   ulOutFname.append (tag.str ());
+137 
+138   lteHelper->\hyperlink{classns3_1_1LteHelper_affa3a12841520407d3662417fe41863d}{EnableMacTraces} ();
+139   lteHelper->\hyperlink{classns3_1_1LteHelper_abadfdd04d30b261e9b6f0846b4784928}{EnableRlcTraces} ();
+140 
+141   Simulator::Run ();
+142   Simulator::Destroy ();
+143   \textcolor{keywordflow}{return} 0;
+144 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

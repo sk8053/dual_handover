@@ -1,0 +1,153 @@
+\hypertarget{classPointToPointTest}{}\section{Point\+To\+Point\+Test Class Reference}
+\label{classPointToPointTest}\index{Point\+To\+Point\+Test@{Point\+To\+Point\+Test}}
+
+
+Test class for Point\+To\+Point model.  
+
+
+
+
+Inheritance diagram for Point\+To\+Point\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Point\+To\+Point\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPointToPointTest_a3af806f53d0aa2057df7d9acf3ac7ef7}{Point\+To\+Point\+Test} ()
+\begin{DoxyCompactList}\small\item\em Create the test. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPointToPointTest_afd738a4b03ad89822e12e898cc1b09df}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Run the test. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classPointToPointTest_a62dc99f3a74b830a62d00355801636e9}{Send\+One\+Packet} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1PointToPointNetDevice}{Point\+To\+Point\+Net\+Device} $>$ device)
+\begin{DoxyCompactList}\small\item\em Send one packet to the device specified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Test class for Point\+To\+Point model. 
+
+It tries to send one packet from one Net\+Device to another, over a Point\+To\+Point\+Channel. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Point\+To\+Point\+Test@{Point\+To\+Point\+Test}!Point\+To\+Point\+Test@{Point\+To\+Point\+Test}}
+\index{Point\+To\+Point\+Test@{Point\+To\+Point\+Test}!Point\+To\+Point\+Test@{Point\+To\+Point\+Test}}
+\subsubsection[{\texorpdfstring{Point\+To\+Point\+Test()}{PointToPointTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Point\+To\+Point\+Test\+::\+Point\+To\+Point\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPointToPointTest_a3af806f53d0aa2057df7d9acf3ac7ef7}{}\label{classPointToPointTest_a3af806f53d0aa2057df7d9acf3ac7ef7}
+
+
+Create the test. 
+
+
+\begin{DoxyCode}
+59   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"PointToPoint"})
+60 \{
+61 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Point\+To\+Point\+Test@{Point\+To\+Point\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Point\+To\+Point\+Test@{Point\+To\+Point\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Point\+To\+Point\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPointToPointTest_afd738a4b03ad89822e12e898cc1b09df}{}\label{classPointToPointTest_afd738a4b03ad89822e12e898cc1b09df}
+
+
+Run the test. 
+
+
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+73 \{
+74   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} a = CreateObject<Node> ();
+75   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b} = CreateObject<Node> ();
+76   \hyperlink{classns3_1_1Ptr}{Ptr<PointToPointNetDevice>} devA = CreateObject<PointToPointNetDevice> ();
+77   \hyperlink{classns3_1_1Ptr}{Ptr<PointToPointNetDevice>} devB = CreateObject<PointToPointNetDevice> ();
+78   \hyperlink{classns3_1_1Ptr}{Ptr<PointToPointChannel>} channel = CreateObject<PointToPointChannel> ();
+79 
+80   devA->Attach (channel);
+81   devA->SetAddress (Mac48Address::Allocate ());
+82   devA->SetQueue (\hyperlink{group__object_gad1d36559be10afa72c3656fd8598c1e2}{CreateObject}<\hyperlink{classns3_1_1DropTailQueue}{DropTailQueue<Packet>} > ());
+83   devB->Attach (channel);
+84   devB->SetAddress (Mac48Address::Allocate ());
+85   devB->SetQueue (\hyperlink{group__object_gad1d36559be10afa72c3656fd8598c1e2}{CreateObject}<\hyperlink{classns3_1_1DropTailQueue}{DropTailQueue<Packet>} > ());
+86 
+87   a->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (devA);
+88   b->AddDevice (devB);
+89 
+90   \hyperlink{classns3_1_1Ptr}{Ptr<NetDeviceQueueInterface>} ifaceA = CreateObject<NetDeviceQueueInterface> (
+      );
+91   devA->AggregateObject (ifaceA);
+92   ifaceA->\hyperlink{classns3_1_1NetDeviceQueueInterface_ac5322269a36260319e3ff2767c87504f}{CreateTxQueues} ();
+93   \hyperlink{classns3_1_1Ptr}{Ptr<NetDeviceQueueInterface>} ifaceB = CreateObject<NetDeviceQueueInterface> (
+      );
+94   devB->AggregateObject (ifaceB);
+95   ifaceB->\hyperlink{classns3_1_1NetDeviceQueueInterface_ac5322269a36260319e3ff2767c87504f}{CreateTxQueues} ();
+96 
+97   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0), &\hyperlink{classPointToPointTest_a62dc99f3a74b830a62d00355801636e9}{PointToPointTest::SendOnePacket}
+      , \textcolor{keyword}{this}, devA);
+98 
+99   Simulator::Run ();
+100 
+101   Simulator::Destroy ();
+102 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Point\+To\+Point\+Test@{Point\+To\+Point\+Test}!Send\+One\+Packet@{Send\+One\+Packet}}
+\index{Send\+One\+Packet@{Send\+One\+Packet}!Point\+To\+Point\+Test@{Point\+To\+Point\+Test}}
+\subsubsection[{\texorpdfstring{Send\+One\+Packet(\+Ptr$<$ Point\+To\+Point\+Net\+Device $>$ device)}{SendOnePacket(Ptr< PointToPointNetDevice > device)}}]{\setlength{\rightskip}{0pt plus 5cm}void Point\+To\+Point\+Test\+::\+Send\+One\+Packet (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Point\+To\+Point\+Net\+Device} $>$}]{device}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPointToPointTest_a62dc99f3a74b830a62d00355801636e9}{}\label{classPointToPointTest_a62dc99f3a74b830a62d00355801636e9}
+
+
+Send one packet to the device specified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em device} & Net\+Device to send to \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+65 \{
+66   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = Create<Packet> ();
+67   device->\hyperlink{classns3_1_1PointToPointNetDevice_ad084e76d4a07b0818f1de9d188aa447e}{Send} (p, device->\hyperlink{classns3_1_1PointToPointNetDevice_ae51576bfce6f4620ffc09bcce3e2fba9}{GetBroadcast} (), 0x800);
+68 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+point-\/to-\/point/test/\hyperlink{point-to-point-test_8cc}{point-\/to-\/point-\/test.\+cc}\end{DoxyCompactItemize}

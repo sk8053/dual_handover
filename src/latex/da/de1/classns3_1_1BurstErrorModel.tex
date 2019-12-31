@@ -1,0 +1,403 @@
+\hypertarget{classns3_1_1BurstErrorModel}{}\section{ns3\+:\+:Burst\+Error\+Model Class Reference}
+\label{classns3_1_1BurstErrorModel}\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+
+
+Determine which bursts of packets are errored corresponding to an underlying distribution, burst rate, and burst size.  
+
+
+
+
+{\ttfamily \#include $<$error-\/model.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Burst\+Error\+Model\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Burst\+Error\+Model\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1BurstErrorModel_a37ba662e1bd169a66eab024845ba5fe5}{Burst\+Error\+Model} ()
+\item 
+virtual \hyperlink{classns3_1_1BurstErrorModel_a8f4eab888501296a9f52e09ae0e6f252}{$\sim$\+Burst\+Error\+Model} ()
+\item 
+double \hyperlink{classns3_1_1BurstErrorModel_ae6915974b68d948b99813522e99a1926}{Get\+Burst\+Rate} (void) const 
+\item 
+void \hyperlink{classns3_1_1BurstErrorModel_aac099fc5cafc9d837f31647609ed6e7f}{Set\+Burst\+Rate} (double rate)
+\item 
+void \hyperlink{classns3_1_1BurstErrorModel_a12c57e987f27335fad1c023607778795}{Set\+Random\+Variable} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} $>$ ran\+Var)
+\item 
+void \hyperlink{classns3_1_1BurstErrorModel_aedc9f16a9c02a825eae385ee75cbedda}{Set\+Random\+Burst\+Size} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} $>$ burst\+Sz)
+\item 
+int64\+\_\+t \hyperlink{classns3_1_1BurstErrorModel_ae054a2275b29a6b0405bb63756b4e6b9}{Assign\+Streams} (int64\+\_\+t stream)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1BurstErrorModel_a60d6119e4752c13c4d990cb2bac00cef}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{classns3_1_1BurstErrorModel_a42b33011d7c55aa034105b36f7555b6f}{Do\+Corrupt} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p})
+\item 
+virtual void \hyperlink{classns3_1_1BurstErrorModel_a374a3d2c1cba5e13ed1444349751cd0e}{Do\+Reset} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1BurstErrorModel_aa2e1ae3a457e02d293087e60d9c3e817}{m\+\_\+burst\+Rate}
+\begin{DoxyCompactList}\small\item\em the burst error event \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} $>$ \hyperlink{classns3_1_1BurstErrorModel_a09d02e5eba8d09bb9629441a5de8aa5c}{m\+\_\+burst\+Start}
+\begin{DoxyCompactList}\small\item\em the error decision variable \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} $>$ \hyperlink{classns3_1_1BurstErrorModel_a70535824359d6850824de2dca0435978}{m\+\_\+burst\+Size}
+\begin{DoxyCompactList}\small\item\em the number of packets being flagged as errored \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1BurstErrorModel_ab4f68bc4b8ac8283562386898cb7983e}{m\+\_\+counter}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1BurstErrorModel_a976dfedc746d41733a789f969e25d0a9}{m\+\_\+current\+Burst\+Sz}
+\begin{DoxyCompactList}\small\item\em the current burst size \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Determine which bursts of packets are errored corresponding to an underlying distribution, burst rate, and burst size. 
+
+This object is used to flag packets as being lost/errored or not. The two parameters that govern the behavior are the burst rate (or equivalently, the mean duration/spacing between between error events), and the burst size (or equivalently, the number of packets being flagged as errored at each error event).
+
+Users can optionally provide \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} objects; the default for the decision variable is to use a Uniform(0,1) distribution; the default for the burst size (number of packets) is to use a discrete Uniform\mbox{[}1,4\mbox{]} distribution.
+
+For every packet, the model generates a random number based on the decision variable, and compares it with the burst error rate to determine if a burst error event should occur. If a new error event occurs, the model to will generate a new burst size to determine how many packets should be dropped in this particular burst error event in addition to the current packet.
+
+When a second packet arrives, the model again determines if a new error event should occur based on a newly generated decision variable and the burst error rate. If a new error event is determined to occur, the model will restart with a new burst size. Otherwise, the model will resume the last error event and drop the packet provided that the total number of packets that has been dropped does not exceed the burst size.
+
+\hyperlink{classns3_1_1ErrorModel_af75222d384e342b46d0aed09d5e3a3fd}{Is\+Corrupt()} will not modify the packet data buffer 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!Burst\+Error\+Model@{Burst\+Error\+Model}}
+\index{Burst\+Error\+Model@{Burst\+Error\+Model}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Burst\+Error\+Model()}{BurstErrorModel()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Burst\+Error\+Model\+::\+Burst\+Error\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1BurstErrorModel_a37ba662e1bd169a66eab024845ba5fe5}{}\label{classns3_1_1BurstErrorModel_a37ba662e1bd169a66eab024845ba5fe5}
+
+\begin{DoxyCode}
+314                                   : \hyperlink{classns3_1_1BurstErrorModel_ab4f68bc4b8ac8283562386898cb7983e}{m\_counter} (0), \hyperlink{classns3_1_1BurstErrorModel_a976dfedc746d41733a789f969e25d0a9}{m\_currentBurstSz} (0)
+315 \{
+316 
+317 \}
+\end{DoxyCode}
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!````~Burst\+Error\+Model@{$\sim$\+Burst\+Error\+Model}}
+\index{````~Burst\+Error\+Model@{$\sim$\+Burst\+Error\+Model}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{$\sim$\+Burst\+Error\+Model()}{~BurstErrorModel()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Burst\+Error\+Model\+::$\sim$\+Burst\+Error\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1BurstErrorModel_a8f4eab888501296a9f52e09ae0e6f252}{}\label{classns3_1_1BurstErrorModel_a8f4eab888501296a9f52e09ae0e6f252}
+
+\begin{DoxyCode}
+320 \{
+321   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+322 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!Assign\+Streams@{Assign\+Streams}}
+\index{Assign\+Streams@{Assign\+Streams}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Assign\+Streams(int64\+\_\+t stream)}{AssignStreams(int64_t stream)}}]{\setlength{\rightskip}{0pt plus 5cm}int64\+\_\+t ns3\+::\+Burst\+Error\+Model\+::\+Assign\+Streams (
+\begin{DoxyParamCaption}
+\item[{int64\+\_\+t}]{stream}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1BurstErrorModel_ae054a2275b29a6b0405bb63756b4e6b9}{}\label{classns3_1_1BurstErrorModel_ae054a2275b29a6b0405bb63756b4e6b9}
+Assign a fixed random variable stream number to the random variables used by this model. Return the number of streams (possibly zero) that have been assigned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & first stream index to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of stream indices assigned by this model 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+354 \{
+355   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << stream);
+356   \hyperlink{classns3_1_1BurstErrorModel_a09d02e5eba8d09bb9629441a5de8aa5c}{m\_burstStart}->\hyperlink{classns3_1_1RandomVariableStream_add11aaf975607746b7e271d300659a94}{SetStream} (stream);
+357   \hyperlink{classns3_1_1BurstErrorModel_a70535824359d6850824de2dca0435978}{m\_burstSize}->\hyperlink{classns3_1_1RandomVariableStream_add11aaf975607746b7e271d300659a94}{SetStream}(stream);
+358   \textcolor{keywordflow}{return} 2;
+359 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!Do\+Corrupt@{Do\+Corrupt}}
+\index{Do\+Corrupt@{Do\+Corrupt}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Corrupt(\+Ptr$<$ Packet $>$ p)}{DoCorrupt(Ptr< Packet > p)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Burst\+Error\+Model\+::\+Do\+Corrupt (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Packet} $>$}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1BurstErrorModel_a42b33011d7c55aa034105b36f7555b6f}{}\label{classns3_1_1BurstErrorModel_a42b33011d7c55aa034105b36f7555b6f}
+Corrupt a packet according to the specified model. 
+\begin{DoxyParams}{Parameters}
+{\em p} & the packet to corrupt \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the packet is corrupted 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1ErrorModel_a7be074c59511ef72066d17a37036a0e0}{ns3\+::\+Error\+Model}.
+
+
+\begin{DoxyCode}
+363 \{
+364   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+365   \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1ErrorModel_a471bffecc63bfce9c4dc7b59d7038cd4}{IsEnabled} ())
+366     \{
+367       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+368     \}
+369   \textcolor{keywordtype}{double} ranVar = \hyperlink{classns3_1_1BurstErrorModel_a09d02e5eba8d09bb9629441a5de8aa5c}{m\_burstStart} ->\hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{GetValue}();
+370 
+371   \textcolor{keywordflow}{if} (ranVar < \hyperlink{classns3_1_1BurstErrorModel_aa2e1ae3a457e02d293087e60d9c3e817}{m\_burstRate})
+372     \{
+373       \textcolor{comment}{// get a new burst size for the new error event}
+374       \hyperlink{classns3_1_1BurstErrorModel_a976dfedc746d41733a789f969e25d0a9}{m\_currentBurstSz} = \hyperlink{classns3_1_1BurstErrorModel_a70535824359d6850824de2dca0435978}{m\_burstSize}->\hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{GetInteger}();     
+375       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"new burst size selected: "} << \hyperlink{classns3_1_1BurstErrorModel_a976dfedc746d41733a789f969e25d0a9}{m\_currentBurstSz});
+376       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1BurstErrorModel_a976dfedc746d41733a789f969e25d0a9}{m\_currentBurstSz} == 0)                        
+377         \{
+378           \hyperlink{group__logging_gade7208b4009cdf0e25783cd26766f559}{NS\_LOG\_WARN} (\textcolor{stringliteral}{"Burst size == 0; shouldn't happen"});
+379           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+380         \}
+381       \hyperlink{classns3_1_1BurstErrorModel_ab4f68bc4b8ac8283562386898cb7983e}{m\_counter} = 1;  \textcolor{comment}{// start counting dropped packets}
+382       \textcolor{keywordflow}{return} \textcolor{keyword}{true};    \textcolor{comment}{// drop this packet}
+383     \}
+384   \textcolor{keywordflow}{else}
+385     \{
+386       \textcolor{comment}{// not a burst error event}
+387       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1BurstErrorModel_ab4f68bc4b8ac8283562386898cb7983e}{m\_counter} < \hyperlink{classns3_1_1BurstErrorModel_a976dfedc746d41733a789f969e25d0a9}{m\_currentBurstSz})
+388         \{
+389          \textcolor{comment}{// check to see if all the packets (determined by the last }
+390          \textcolor{comment}{// generated m\_currentBurstSz) have been dropped. }
+391          \textcolor{comment}{// If not, drop 1 more packet}
+392           \hyperlink{classns3_1_1BurstErrorModel_ab4f68bc4b8ac8283562386898cb7983e}{m\_counter}++;                                 
+393           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+394         \}
+395       \textcolor{keywordflow}{else}
+396         \{
+397           \textcolor{comment}{// all packets in the last error event have been dropped}
+398           \textcolor{comment}{// and there is no new error event, so do not drop the packet}
+399           \textcolor{keywordflow}{return} \textcolor{keyword}{false};  \textcolor{comment}{// no error event}
+400         \}
+401     \}
+402 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!Do\+Reset@{Do\+Reset}}
+\index{Do\+Reset@{Do\+Reset}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Reset(void)}{DoReset(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Burst\+Error\+Model\+::\+Do\+Reset (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1BurstErrorModel_a374a3d2c1cba5e13ed1444349751cd0e}{}\label{classns3_1_1BurstErrorModel_a374a3d2c1cba5e13ed1444349751cd0e}
+Re-\/initialize any state 
+
+Implements \hyperlink{classns3_1_1ErrorModel_ad7974020410bb8072c5b7e2a390e3030}{ns3\+::\+Error\+Model}.
+
+
+\begin{DoxyCode}
+406 \{
+407   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+408   \hyperlink{classns3_1_1BurstErrorModel_ab4f68bc4b8ac8283562386898cb7983e}{m\_counter} = 0;
+409   \hyperlink{classns3_1_1BurstErrorModel_a976dfedc746d41733a789f969e25d0a9}{m\_currentBurstSz} = 0;
+410 
+411 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!Get\+Burst\+Rate@{Get\+Burst\+Rate}}
+\index{Get\+Burst\+Rate@{Get\+Burst\+Rate}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Burst\+Rate(void) const }{GetBurstRate(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Burst\+Error\+Model\+::\+Get\+Burst\+Rate (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1BurstErrorModel_ae6915974b68d948b99813522e99a1926}{}\label{classns3_1_1BurstErrorModel_ae6915974b68d948b99813522e99a1926}
+\begin{DoxyReturn}{Returns}
+the error rate being applied by the model 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+326 \{
+327   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+328   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1BurstErrorModel_aa2e1ae3a457e02d293087e60d9c3e817}{m\_burstRate};
+329 \}
+\end{DoxyCode}
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Burst\+Error\+Model\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1BurstErrorModel_a60d6119e4752c13c4d990cb2bac00cef}{}\label{classns3_1_1BurstErrorModel_a60d6119e4752c13c4d990cb2bac00cef}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+292 \{
+293   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::BurstErrorModel"})
+294     .SetParent<\hyperlink{classns3_1_1ErrorModel_a89d58fc926bb907d546844d8e6437f30}{ErrorModel}> ()
+295     .SetGroupName(\textcolor{stringliteral}{"Network"})
+296     .AddConstructor<\hyperlink{classns3_1_1BurstErrorModel_a37ba662e1bd169a66eab024845ba5fe5}{BurstErrorModel}> ()
+297     .AddAttribute (\textcolor{stringliteral}{"ErrorRate"}, \textcolor{stringliteral}{"The burst error event."},
+298                    DoubleValue (0.0),
+299                    MakeDoubleAccessor (&\hyperlink{classns3_1_1BurstErrorModel_aa2e1ae3a457e02d293087e60d9c3e817}{BurstErrorModel::m\_burstRate}),
+300                    MakeDoubleChecker<double> ())
+301     .AddAttribute (\textcolor{stringliteral}{"BurstStart"}, \textcolor{stringliteral}{"The decision variable attached to this error model."},
+302                    StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=0.0|Max=1.0]"}),
+303                    MakePointerAccessor (&\hyperlink{classns3_1_1BurstErrorModel_a09d02e5eba8d09bb9629441a5de8aa5c}{BurstErrorModel::m\_burstStart}),
+304                    MakePointerChecker<RandomVariableStream> ())
+305     .AddAttribute (\textcolor{stringliteral}{"BurstSize"}, \textcolor{stringliteral}{"The number of packets being corrupted at one drop."},
+306                    StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=1|Max=4]"}),
+307                    MakePointerAccessor (&\hyperlink{classns3_1_1BurstErrorModel_a70535824359d6850824de2dca0435978}{BurstErrorModel::m\_burstSize}),
+308                    MakePointerChecker<RandomVariableStream> ())
+309   ;
+310   \textcolor{keywordflow}{return} tid;
+311 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!Set\+Burst\+Rate@{Set\+Burst\+Rate}}
+\index{Set\+Burst\+Rate@{Set\+Burst\+Rate}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Burst\+Rate(double rate)}{SetBurstRate(double rate)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Burst\+Error\+Model\+::\+Set\+Burst\+Rate (
+\begin{DoxyParamCaption}
+\item[{double}]{rate}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1BurstErrorModel_aac099fc5cafc9d837f31647609ed6e7f}{}\label{classns3_1_1BurstErrorModel_aac099fc5cafc9d837f31647609ed6e7f}
+
+\begin{DoxyParams}{Parameters}
+{\em rate} & the error rate to be used by the model \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+333 \{
+334   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << rate);
+335   \hyperlink{classns3_1_1BurstErrorModel_aa2e1ae3a457e02d293087e60d9c3e817}{m\_burstRate} = rate;
+336 \}
+\end{DoxyCode}
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!Set\+Random\+Burst\+Size@{Set\+Random\+Burst\+Size}}
+\index{Set\+Random\+Burst\+Size@{Set\+Random\+Burst\+Size}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Random\+Burst\+Size(\+Ptr$<$ Random\+Variable\+Stream $>$ burst\+Sz)}{SetRandomBurstSize(Ptr< RandomVariableStream > burstSz)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Burst\+Error\+Model\+::\+Set\+Random\+Burst\+Size (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Random\+Variable\+Stream} $>$}]{burst\+Sz}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1BurstErrorModel_aedc9f16a9c02a825eae385ee75cbedda}{}\label{classns3_1_1BurstErrorModel_aedc9f16a9c02a825eae385ee75cbedda}
+
+\begin{DoxyParams}{Parameters}
+{\em burst\+Sz} & A random variable distribution to generate random burst size \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+347 \{
+348   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << burstSz);
+349   \hyperlink{classns3_1_1BurstErrorModel_a70535824359d6850824de2dca0435978}{m\_burstSize} = burstSz;
+350 \}
+\end{DoxyCode}
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!Set\+Random\+Variable@{Set\+Random\+Variable}}
+\index{Set\+Random\+Variable@{Set\+Random\+Variable}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Random\+Variable(\+Ptr$<$ Random\+Variable\+Stream $>$ ran\+Var)}{SetRandomVariable(Ptr< RandomVariableStream > ranVar)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Burst\+Error\+Model\+::\+Set\+Random\+Variable (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Random\+Variable\+Stream} $>$}]{ran\+Var}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1BurstErrorModel_a12c57e987f27335fad1c023607778795}{}\label{classns3_1_1BurstErrorModel_a12c57e987f27335fad1c023607778795}
+
+\begin{DoxyParams}{Parameters}
+{\em ran\+Var} & A random variable distribution to generate random variates \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+340 \{
+341   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << ranVar);
+342   \hyperlink{classns3_1_1BurstErrorModel_a09d02e5eba8d09bb9629441a5de8aa5c}{m\_burstStart} = ranVar;
+343 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!m\+\_\+burst\+Rate@{m\+\_\+burst\+Rate}}
+\index{m\+\_\+burst\+Rate@{m\+\_\+burst\+Rate}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+burst\+Rate}{m_burstRate}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Burst\+Error\+Model\+::m\+\_\+burst\+Rate\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1BurstErrorModel_aa2e1ae3a457e02d293087e60d9c3e817}{}\label{classns3_1_1BurstErrorModel_aa2e1ae3a457e02d293087e60d9c3e817}
+
+
+the burst error event 
+
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!m\+\_\+burst\+Size@{m\+\_\+burst\+Size}}
+\index{m\+\_\+burst\+Size@{m\+\_\+burst\+Size}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+burst\+Size}{m_burstSize}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Random\+Variable\+Stream}$>$ ns3\+::\+Burst\+Error\+Model\+::m\+\_\+burst\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1BurstErrorModel_a70535824359d6850824de2dca0435978}{}\label{classns3_1_1BurstErrorModel_a70535824359d6850824de2dca0435978}
+
+
+the number of packets being flagged as errored 
+
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!m\+\_\+burst\+Start@{m\+\_\+burst\+Start}}
+\index{m\+\_\+burst\+Start@{m\+\_\+burst\+Start}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+burst\+Start}{m_burstStart}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Random\+Variable\+Stream}$>$ ns3\+::\+Burst\+Error\+Model\+::m\+\_\+burst\+Start\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1BurstErrorModel_a09d02e5eba8d09bb9629441a5de8aa5c}{}\label{classns3_1_1BurstErrorModel_a09d02e5eba8d09bb9629441a5de8aa5c}
+
+
+the error decision variable 
+
+\index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!m\+\_\+counter@{m\+\_\+counter}}
+\index{m\+\_\+counter@{m\+\_\+counter}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+counter}{m_counter}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Burst\+Error\+Model\+::m\+\_\+counter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1BurstErrorModel_ab4f68bc4b8ac8283562386898cb7983e}{}\label{classns3_1_1BurstErrorModel_ab4f68bc4b8ac8283562386898cb7983e}
+keep track of the number of packets being errored until it reaches m\+\_\+burst\+Size \index{ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}!m\+\_\+current\+Burst\+Sz@{m\+\_\+current\+Burst\+Sz}}
+\index{m\+\_\+current\+Burst\+Sz@{m\+\_\+current\+Burst\+Sz}!ns3\+::\+Burst\+Error\+Model@{ns3\+::\+Burst\+Error\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+current\+Burst\+Sz}{m_currentBurstSz}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Burst\+Error\+Model\+::m\+\_\+current\+Burst\+Sz\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1BurstErrorModel_a976dfedc746d41733a789f969e25d0a9}{}\label{classns3_1_1BurstErrorModel_a976dfedc746d41733a789f969e25d0a9}
+
+
+the current burst size 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+network/utils/\hyperlink{error-model_8h}{error-\/model.\+h}\item 
+network/utils/\hyperlink{error-model_8cc}{error-\/model.\+cc}\end{DoxyCompactItemize}

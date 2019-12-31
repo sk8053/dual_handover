@@ -1,0 +1,73 @@
+\hypertarget{group__mesh}{}\section{Mesh Device}
+\label{group__mesh}\index{Mesh Device@{Mesh Device}}
+
+
+M\+A\+C-\/layer mobile mesh networking.  
+
+
+Collaboration diagram for Mesh Device\+:
+% FIG 0
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__dot11s}{I\+E\+E\+E 802.\+11s draft}
+\begin{DoxyCompactList}\small\item\em I\+E\+EE 802.\+11s (mesh) draft standard implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classMeshTest}{Mesh\+Test}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classMeshTest}{Mesh\+Test} class. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1MeshStack}{ns3\+::\+Mesh\+Stack}
+\begin{DoxyCompactList}\small\item\em Prototype for class, which helps to install M\+A\+C-\/layer routing stack to \hyperlink{classns3_1_1MeshPointDevice}{ns3\+::\+Mesh\+Point\+Device}. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1MeshL2RoutingProtocol}{ns3\+::\+Mesh\+L2\+Routing\+Protocol}
+\begin{DoxyCompactList}\small\item\em Interface for L2 mesh routing protocol and mesh point communication. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1MeshPointDevice}{ns3\+::\+Mesh\+Point\+Device}
+\begin{DoxyCompactList}\small\item\em Virtual net device modeling mesh point. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1MeshWifiInterfaceMacPlugin}{ns3\+::\+Mesh\+Wifi\+Interface\+Mac\+Plugin}
+\begin{DoxyCompactList}\small\item\em Common interface for mesh point interface M\+AC plugins. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1MeshWifiInterfaceMac}{ns3\+::\+Mesh\+Wifi\+Interface\+Mac}
+\begin{DoxyCompactList}\small\item\em Basic M\+AC of mesh point Wi-\/\+Fi interface. Its function is extendable through plugins mechanism. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+M\+A\+C-\/layer mobile mesh networking. 
+
+\hypertarget{group__mesh_MeshOverview}{}\subsection{Overview of Layer-\/2 Mesh networking protocols}\label{group__mesh_MeshOverview}
+The main goal of this module is to provide M\+A\+C-\/layer routing functionality.
+
+The main part of M\+A\+C-\/layer routing model is specific type of a network device -- \hyperlink{classns3_1_1MeshPointDevice}{ns3\+::\+Mesh\+Point\+Device}. Being an interface to upper-\/layer protocols, it provides routing functionality hidden from upper-\/layer protocols, by means of \hyperlink{classns3_1_1MeshL2RoutingProtocol}{ns3\+::\+Mesh\+L2\+Routing\+Protocol}.
+
+Our model supports stations with multiple network devices handled by a single M\+A\+C-\/layer routing protocol. So, \hyperlink{classns3_1_1MeshPointDevice}{ns3\+::\+Mesh\+Point\+Device} serves as an umbrella to multiple network devices (\char`\"{}interfaces\char`\"{}) working under the same M\+A\+C-\/layer routing protocol.
+
+Network devices may be of different types, each with a specific medium access method. So \hyperlink{classns3_1_1MeshL2RoutingProtocol}{ns3\+::\+Mesh\+L2\+Routing\+Protocol} consists of two parts\+: the one independent from the network device type, which we refer to as a routing protocol, and the other one depended on the network device type which we refer to as a plug-\/in to the routing protocol.
+
+One can imagine a M\+A\+C-\/layer routing as a two-\/tier model. \hyperlink{classns3_1_1MeshL2RoutingProtocol}{ns3\+::\+Mesh\+L2\+Routing\+Protocol} and \hyperlink{classns3_1_1MeshPointDevice}{ns3\+::\+Mesh\+Point\+Device} belong to the upper tier. The task of \hyperlink{classns3_1_1MeshPointDevice}{ns3\+::\+Mesh\+Point\+Device} is to send, receive, and forward frames, while the task of \hyperlink{classns3_1_1MeshL2RoutingProtocol}{ns3\+::\+Mesh\+L2\+Routing\+Protocol} is to resolve routes and keep frames waiting for route resolution. This functionality is independent from the types of underlying network devices (\char`\"{}interfaces\char`\"{}).
+
+The lower tier implements the part of M\+A\+C-\/layer routing, specific for underlying network devices and their medium access control methods. For example, H\+W\+MP routing protocol in I\+E\+E\+E802.\+11s uses its own specific management frames.
+
+At present, two routing protocols are implemented in this module\+:
+\begin{DoxyItemize}
+\item H\+W\+MP (default routing protocol for I\+E\+E\+E802.\+11s standard) + Peer management protocol (also described in 802.\+11s standard draft) which is required by H\+W\+MP to manage peer links (it works like association mechanism in I\+E\+E\+E802.\+11).
+\item F\+L\+A\+ME (Forwarding L\+Ayer for M\+Eshing).
+\end{DoxyItemize}
+
+While H\+W\+MP only works with 802.\+11-\/\+M\+AC, F\+L\+A\+ME works with all types of network devices, which support 48-\/bit M\+A\+C-\/addressing scheme.\hypertarget{group__mesh_Architecture}{}\subsubsection{Architecture of M\+A\+C-\/layer routing stack}\label{group__mesh_Architecture}
+As already mentioned, M\+A\+C-\/layer routing consists of two tiers. An \hyperlink{classns3_1_1MeshPointDevice}{ns3\+::\+Mesh\+Point\+Device} which forwards frames by using an attached \hyperlink{classns3_1_1MeshL2RoutingProtocol}{ns3\+::\+Mesh\+L2\+Routing\+Protocol} forms the upper tier. The interface between \hyperlink{classns3_1_1MeshPointDevice}{ns3\+::\+Mesh\+Point\+Device} and the upper-\/layer protocols is inherited from \hyperlink{classns3_1_1NetDevice}{ns3\+::\+Net\+Device} class. The \hyperlink{classns3_1_1MeshPointDevice}{ns3\+::\+Mesh\+Point\+Device} interacts with \hyperlink{classns3_1_1MeshL2RoutingProtocol}{ns3\+::\+Mesh\+L2\+Routing\+Protocol} as follows\+: \hyperlink{classns3_1_1MeshPointDevice}{ns3\+::\+Mesh\+Point\+Device} gives to \hyperlink{classns3_1_1MeshL2RoutingProtocol}{ns3\+::\+Mesh\+L2\+Routing\+Protocol} a frame with the source and destination addresses, the network device index which the frame is received from, and a callback to be executed when the route is found. The callback is needed because all routing queues are implemented inside \hyperlink{classns3_1_1MeshL2RoutingProtocol}{ns3\+::\+Mesh\+L2\+Routing\+Protocol}. When the route is resolved, \hyperlink{classns3_1_1MeshL2RoutingProtocol}{ns3\+::\+Mesh\+L2\+Routing\+Protocol} returns the frame back to \hyperlink{classns3_1_1MeshPointDevice}{ns3\+::\+Mesh\+Point\+Device} with the network device index which the packet shall be sent to. All additional routing information is stored inside the frame by means of tags. In the end, when all these routines are done, the frame goes to the lower tier.
+
+The lower tier is responsible for filling M\+A\+C-\/specific headers. At present, we have only implemented the lower tier which is specific for \hyperlink{classns3_1_1WifiNetDevice}{ns3\+::\+Wifi\+Net\+Device}. This tier is implemented as two base classes\+: \hyperlink{classns3_1_1MeshWifiInterfaceMac}{ns3\+::\+Mesh\+Wifi\+Interface\+Mac} and \hyperlink{classns3_1_1MeshWifiInterfaceMacPlugin}{ns3\+::\+Mesh\+Wifi\+Interface\+Mac\+Plugin}. The former is a new kind of Wifi\+Mac. If beacon generation is enabled or disabled, it implements I\+E\+E\+E802.\+11s mesh functionality or a simple ad hoc functionality of the M\+A\+C-\/high part of the Wi\+Fi model, respectively. The latter is a plug-\/in to L2\+Routing protocol. It handles all outgoing and incoming frames, fills headers and make decisions to drop a frame or not. Also, it adds information elements to beacons specific to given L2\+Routing protocol, if needed.  \hypertarget{group__mesh_NewProtocol}{}\subsubsection{Adding a new protocol}\label{group__mesh_NewProtocol}
+This module requires all the network devices operate with \hyperlink{classns3_1_1Mac48Address}{ns3\+::\+Mac48\+Address} addressing scheme.
+
+To add a new L2\+Routing protocol, one needs to define the following\+:
+\begin{DoxyItemize}
+\item Write an upper part of the protocol inherited from ns3\+::\+Mesh\+L2\+Routing.
+\item If the protocol works only with 802.\+11 M\+AC -- write a plug-\/in inherited from \hyperlink{classns3_1_1MeshWifiInterfaceMacPlugin}{ns3\+::\+Mesh\+Wifi\+Interface\+Mac\+Plugin}
+\item If the protocol works with other types of network devices -- write your own plug-\/in (interface for communication with other types of network devices is not implemented).
+\end{DoxyItemize}
+
+When you implement a L2\+Routing protocol, remember that when you are at L2\+Routing tier, you work with a frame without an L\+LC header, and when you are at plug-\/in tier using \hyperlink{classns3_1_1MeshWifiInterfaceMacPlugin}{ns3\+::\+Mesh\+Wifi\+Interface\+Mac\+Plugin}, an L\+LC header is already attached (by Wifi\+Net\+Device)
+
+\begin{DoxyAttention}{Attention}
+Note, when you use \hyperlink{classns3_1_1MeshWifiInterfaceMac}{ns3\+::\+Mesh\+Wifi\+Interface\+Mac}, multiple plug-\/ins may be installed.
+\end{DoxyAttention}
+\hypertarget{group__mesh_Statistics}{}\subsubsection{Statistics}\label{group__mesh_Statistics}
+Each L2\+Routing protocol has a structure to capture statistics, Report and Reset\+Stats methods. This gives an opportunity to collect statistic to an $\ast$.xml file periodically. 

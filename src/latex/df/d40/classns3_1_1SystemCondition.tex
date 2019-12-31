@@ -1,0 +1,255 @@
+\hypertarget{classns3_1_1SystemCondition}{}\section{ns3\+:\+:System\+Condition Class Reference}
+\label{classns3_1_1SystemCondition}\index{ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}}
+
+
+A class which provides a relatively platform-\/independent conditional-\/wait thread synchronization primitive.  
+
+
+
+
+{\ttfamily \#include $<$system-\/condition.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:System\+Condition\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1SystemCondition_af72c4261f575e792a63aa3158cda49cc}{System\+Condition} ()
+\item 
+\hyperlink{classns3_1_1SystemCondition_aedd031718ff818e54254c5a3c1408076}{$\sim$\+System\+Condition} ()
+\item 
+void \hyperlink{classns3_1_1SystemCondition_a63be545fd067843934460a375a48e2f3}{Set\+Condition} (bool condition)
+\item 
+bool \hyperlink{classns3_1_1SystemCondition_a4b6665089213af3531f8903373947239}{Get\+Condition} (void)
+\item 
+void \hyperlink{classns3_1_1SystemCondition_a40465be65c11db720833a17787652454}{Signal} (void)
+\item 
+void \hyperlink{classns3_1_1SystemCondition_a9857d6418cd7ce654818c48f479fc652}{Broadcast} (void)
+\item 
+void \hyperlink{classns3_1_1SystemCondition_acbeea6bc6a31a1bcf03ac562a04f0ab6}{Wait} (void)
+\item 
+bool \hyperlink{classns3_1_1SystemCondition_af86d685047fcc5e68d36d6a3b033b626}{Timed\+Wait} (uint64\+\_\+t ns)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1SystemConditionPrivate}{System\+Condition\+Private} $\ast$ \hyperlink{classns3_1_1SystemCondition_abedcdf182d9c7b51958191d18d61f295}{m\+\_\+priv}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class which provides a relatively platform-\/independent conditional-\/wait thread synchronization primitive. 
+
+It is often desirable to have a mechanism by which a thread can suspend its execution and relinquish the process until some condition to becomes true. We provide platform-\/independent access to this O\+S-\/dependent capability with the \hyperlink{classns3_1_1SystemCondition}{System\+Condition} class.
+
+There are two ways to tell the underlying primitive that the condition has become true\+: Signal and Broadcast. Signal will only wake up one thread waiting on the condition (according to the OS scheduling policy); Broadcast will wake up all of the threads waiting on the condition (cf. \char`\"{}\+The Thundering Herd\char`\"{}).
+
+In order to wait for the underlying condition, you also have two alternatives\+: Wait and Timed\+Wait. The Wait call will wait forever for the condition to become true; but the Timed\+Wait has a timeout.
+
+The condition underlying this class is a simple boolean variable. It is set to false in each call to Wait and Timed\+Wait. It is set to true in each call to Signal and Broadcast. This is a fairly simple-\/minded condition designed for
+
+A typical use case will be to call \hyperlink{classns3_1_1SystemCondition_acbeea6bc6a31a1bcf03ac562a04f0ab6}{Wait()} or \hyperlink{classns3_1_1SystemCondition_af86d685047fcc5e68d36d6a3b033b626}{Timed\+Wait()} in one thread context and put the processor to sleep until an event happens somewhere else that 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}!System\+Condition@{System\+Condition}}
+\index{System\+Condition@{System\+Condition}!ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}}
+\subsubsection[{\texorpdfstring{System\+Condition()}{SystemCondition()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+System\+Condition\+::\+System\+Condition (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemCondition_af72c4261f575e792a63aa3158cda49cc}{}\label{classns3_1_1SystemCondition_af72c4261f575e792a63aa3158cda49cc}
+
+\begin{DoxyCode}
+208   : \hyperlink{classns3_1_1SystemCondition_abedcdf182d9c7b51958191d18d61f295}{m\_priv} (\textcolor{keyword}{new} SystemConditionPrivate ())
+209 \{
+210   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});;
+211 \}
+\end{DoxyCode}
+\index{ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}!````~System\+Condition@{$\sim$\+System\+Condition}}
+\index{````~System\+Condition@{$\sim$\+System\+Condition}!ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}}
+\subsubsection[{\texorpdfstring{$\sim$\+System\+Condition()}{~SystemCondition()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+System\+Condition\+::$\sim$\+System\+Condition (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemCondition_aedd031718ff818e54254c5a3c1408076}{}\label{classns3_1_1SystemCondition_aedd031718ff818e54254c5a3c1408076}
+
+\begin{DoxyCode}
+214 \{
+215   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+216   \textcolor{keyword}{delete} \hyperlink{classns3_1_1SystemCondition_abedcdf182d9c7b51958191d18d61f295}{m\_priv};
+217 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}!Broadcast@{Broadcast}}
+\index{Broadcast@{Broadcast}!ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}}
+\subsubsection[{\texorpdfstring{Broadcast(void)}{Broadcast(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Condition\+::\+Broadcast (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemCondition_a9857d6418cd7ce654818c48f479fc652}{}\label{classns3_1_1SystemCondition_a9857d6418cd7ce654818c48f479fc652}
+Release all threads waiting for the condition to be true. If you want all waiting threads to return, you should have done a Set\+Condition (true) prior to calling. 
+\begin{DoxyCode}
+242 \{
+243   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+244   \hyperlink{classns3_1_1SystemCondition_abedcdf182d9c7b51958191d18d61f295}{m\_priv}->\hyperlink{classns3_1_1SystemConditionPrivate_ab7839aa1aae74cad0bb6cc8cc1cdfb27}{Broadcast} ();
+245 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}!Get\+Condition@{Get\+Condition}}
+\index{Get\+Condition@{Get\+Condition}!ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}}
+\subsubsection[{\texorpdfstring{Get\+Condition(void)}{GetCondition(void)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+System\+Condition\+::\+Get\+Condition (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemCondition_a4b6665089213af3531f8903373947239}{}\label{classns3_1_1SystemCondition_a4b6665089213af3531f8903373947239}
+Get the value of the underlying condition. 
+\begin{DoxyCode}
+228 \{
+229   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+230   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SystemCondition_abedcdf182d9c7b51958191d18d61f295}{m\_priv}->\hyperlink{classns3_1_1SystemConditionPrivate_a304f88722c58b734ebfc701f702c844c}{GetCondition} ();
+231 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}!Set\+Condition@{Set\+Condition}}
+\index{Set\+Condition@{Set\+Condition}!ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}}
+\subsubsection[{\texorpdfstring{Set\+Condition(bool condition)}{SetCondition(bool condition)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Condition\+::\+Set\+Condition (
+\begin{DoxyParamCaption}
+\item[{bool}]{condition}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemCondition_a63be545fd067843934460a375a48e2f3}{}\label{classns3_1_1SystemCondition_a63be545fd067843934460a375a48e2f3}
+Set the value of the underlying condition. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em condition} & value \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+221 \{
+222   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << condition);
+223   \hyperlink{classns3_1_1SystemCondition_abedcdf182d9c7b51958191d18d61f295}{m\_priv}->\hyperlink{classns3_1_1SystemConditionPrivate_a195e038524b1efa106049a0358af99d5}{SetCondition} (condition);
+224 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}!Signal@{Signal}}
+\index{Signal@{Signal}!ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}}
+\subsubsection[{\texorpdfstring{Signal(void)}{Signal(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Condition\+::\+Signal (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemCondition_a40465be65c11db720833a17787652454}{}\label{classns3_1_1SystemCondition_a40465be65c11db720833a17787652454}
+Release one thread if waiting for the condition to be true. If you want a waiting thread to return, you should have done a Set\+Condition (true) prior to calling. 
+\begin{DoxyCode}
+235 \{
+236   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+237   \hyperlink{classns3_1_1SystemCondition_abedcdf182d9c7b51958191d18d61f295}{m\_priv}->\hyperlink{classns3_1_1SystemConditionPrivate_a0213a8ffd678629df223ec9f890aa413}{Signal} ();
+238 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}!Timed\+Wait@{Timed\+Wait}}
+\index{Timed\+Wait@{Timed\+Wait}!ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}}
+\subsubsection[{\texorpdfstring{Timed\+Wait(uint64\+\_\+t ns)}{TimedWait(uint64_t ns)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+System\+Condition\+::\+Timed\+Wait (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{ns}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemCondition_af86d685047fcc5e68d36d6a3b033b626}{}\label{classns3_1_1SystemCondition_af86d685047fcc5e68d36d6a3b033b626}
+Wait a maximum of ns nanoseconds for the condition to be true. If the wait times out, return true else return false. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ns} & maximum of nanoseconds to wait \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the timer expired, otherwise return {\ttfamily false}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+256 \{
+257   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << ns);
+258   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SystemCondition_abedcdf182d9c7b51958191d18d61f295}{m\_priv}->\hyperlink{classns3_1_1SystemConditionPrivate_a9c5f7d03c27f1986c56dabe609798b8a}{TimedWait} (ns);
+259 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}!Wait@{Wait}}
+\index{Wait@{Wait}!ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}}
+\subsubsection[{\texorpdfstring{Wait(void)}{Wait(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Condition\+::\+Wait (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemCondition_acbeea6bc6a31a1bcf03ac562a04f0ab6}{}\label{classns3_1_1SystemCondition_acbeea6bc6a31a1bcf03ac562a04f0ab6}
+Wait, possibly forever, for the condition to be true. 
+\begin{DoxyCode}
+249 \{
+250   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+251   \hyperlink{classns3_1_1SystemCondition_abedcdf182d9c7b51958191d18d61f295}{m\_priv}->\hyperlink{classns3_1_1SystemConditionPrivate_ac2e3dfcd1eef3271602eaef7634351f1}{Wait} ();
+252 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}!m\+\_\+priv@{m\+\_\+priv}}
+\index{m\+\_\+priv@{m\+\_\+priv}!ns3\+::\+System\+Condition@{ns3\+::\+System\+Condition}}
+\subsubsection[{\texorpdfstring{m\+\_\+priv}{m_priv}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf System\+Condition\+Private}$\ast$ ns3\+::\+System\+Condition\+::m\+\_\+priv\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SystemCondition_abedcdf182d9c7b51958191d18d61f295}{}\label{classns3_1_1SystemCondition_abedcdf182d9c7b51958191d18d61f295}
+The (system-\/dependent) implementation. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{system-condition_8h}{system-\/condition.\+h}\item 
+core/model/\hyperlink{unix-system-condition_8cc}{unix-\/system-\/condition.\+cc}\end{DoxyCompactItemize}

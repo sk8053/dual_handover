@@ -1,0 +1,200 @@
+\hypertarget{classns3_1_1SystemThread}{}\section{ns3\+:\+:System\+Thread Class Reference}
+\label{classns3_1_1SystemThread}\index{ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}}
+
+
+A class which provides a relatively platform-\/independent thread primitive.  
+
+
+
+
+{\ttfamily \#include $<$system-\/thread.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:System\+Thread\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:System\+Thread\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1SystemThread_a710d3d98beeda0d66af56a6a8d90a281}{System\+Thread} (\hyperlink{classns3_1_1Callback}{Callback}$<$ void $>$ callback)
+\begin{DoxyCompactList}\small\item\em Create a \hyperlink{classns3_1_1SystemThread}{System\+Thread} object. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1SystemThread_a9d905c76b478a702684ee2b18360fe61}{$\sim$\+System\+Thread} ()
+\begin{DoxyCompactList}\small\item\em Destroy a \hyperlink{classns3_1_1SystemThread}{System\+Thread} object. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1SystemThread_a95716a1cd24ee8e7c6a08b7a2ad9481e}{Start} (void)
+\begin{DoxyCompactList}\small\item\em Start a thread of execution, running the provided callback. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1SystemThread_a1cd5114bf675acf91565a6b85c95545f}{Join} (void)
+\begin{DoxyCompactList}\small\item\em Suspend the caller until the thread of execution, running the provided callback, finishes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Thread\+Id \hyperlink{classns3_1_1SystemThread_a76dffd0c4383357194c9604f073b0d79}{Self} (void)
+\begin{DoxyCompactList}\small\item\em Returns the current thread Id. \end{DoxyCompactList}\item 
+static bool \hyperlink{classns3_1_1SystemThread_af6bfffe1a51a4df5f9aa1a468df8bd59}{Equals} (Thread\+Id id)
+\begin{DoxyCompactList}\small\item\em Compares an Thread\+Id with the current Thread\+Id . \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class which provides a relatively platform-\/independent thread primitive. 
+
+This class allows for creation of multiple threads of execution in a process. The exact implementation of the thread functionality is operating system dependent, but typically in ns-\/3 one is using an environment in which Posix Threads are supported (either navively or in the case of Windows via Cygwin\textquotesingle{}s implementation of pthreads on the Win32 A\+PI. In either case we expect that these will be kernel-\/level threads and therefore a system with multiple C\+P\+Us will see truly concurrent execution.
+
+Synchronization between threads is provided via the \hyperlink{classns3_1_1SystemMutex}{System\+Mutex} class.
+
+See \hyperlink{main-test-sync_8cc}{main-\/test-\/sync.\+cc} for example usage. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}!System\+Thread@{System\+Thread}}
+\index{System\+Thread@{System\+Thread}!ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}}
+\subsubsection[{\texorpdfstring{System\+Thread(\+Callback$<$ void $>$ callback)}{SystemThread(Callback< void > callback)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+System\+Thread\+::\+System\+Thread (
+\begin{DoxyParamCaption}
+\item[{{\bf Callback}$<$ void $>$}]{callback}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemThread_a710d3d98beeda0d66af56a6a8d90a281}{}\label{classns3_1_1SystemThread_a710d3d98beeda0d66af56a6a8d90a281}
+
+
+Create a \hyperlink{classns3_1_1SystemThread}{System\+Thread} object. 
+
+A system thread object is not created running. A thread of execution must be explicitly started by calling the Start method. When the Start method is called, it will spawn a thread of execution and cause that thread to call out into the callback function provided here as a parameter.
+
+Like all ns-\/3 callbacks, the provided callback may refer to a function or a method of an object depending on how the Make\+Callback function is used.
+
+The most common use is expected to be creating a thread of execution in a method. In this case you would use code similar to, 
+\begin{DoxyCode}
+MyClass myObject;
+Ptr<SystemThread> st = Create<SystemThread> (
+  \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&MyClass::MyMethod, &myObject));
+st->Start ();
+\end{DoxyCode}
+
+
+The \hyperlink{classns3_1_1SystemThread}{System\+Thread} is passed a callback that calls out to the function {\ttfamily My\+Class\+::\+My\+Method}. When this function is called, it is called as an object method on the {\ttfamily my\+Object} object. Essentially what you are doing is asking the \hyperlink{classns3_1_1SystemThread}{System\+Thread} to call {\ttfamily object-\/$>$My\+Method()} in a new thread of execution.
+
+If starting a thread in your currently executing object, you can use the \char`\"{}this\char`\"{} pointer\+: 
+\begin{DoxyCode}
+Ptr<SystemThread> st = Create<SystemThread> (
+  \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&MyClass::MyMethod, \textcolor{keyword}{this}));
+st->Start ();
+\end{DoxyCode}
+
+
+\hyperlink{classns3_1_1Object}{Object} lifetime is always an issue with threads, so it is common to use smart pointers. If you are spinning up a thread in an object that is managed by a smart pointer, you can use that pointer directly\+: 
+\begin{DoxyCode}
+Ptr<MyClass> myPtr = Create<MyClass> ();
+Ptr<SystemThread> st = Create<SystemThread> (
+  \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&MyClass::MyMethod, myPtr));
+st->Start ();
+\end{DoxyCode}
+
+
+Just like any thread, you can synchronize with its termination. The method provided to do this is \hyperlink{classns3_1_1SystemThread_a1cd5114bf675acf91565a6b85c95545f}{Join()}. If you call \hyperlink{classns3_1_1SystemThread_a1cd5114bf675acf91565a6b85c95545f}{Join()} you will block until the \hyperlink{classns3_1_1SystemThread}{System\+Thread} run method returns.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em callback} & entry point of the thread\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+I\textquotesingle{}ve made the system thread class look like a normal \hyperlink{namespacens3}{ns3} object with smart pointers, and living in the heap. This makes it very easy to manage threads from a single master thread context. You should be very aware though that I have not made \hyperlink{classns3_1_1Ptr}{Ptr} multithread safe! This means that if you pass Ptr$<$\+System\+Thread$>$ around in a multithreaded environment, it is possible that the reference count will get messed up since it is not an atomic operation. C\+R\+E\+A\+TE A\+ND M\+A\+N\+A\+GE Y\+O\+UR T\+H\+R\+E\+A\+DS IN O\+NE P\+L\+A\+CE -- L\+E\+A\+VE T\+HE P\+TR T\+H\+E\+RE. 
+\end{DoxyWarning}
+\index{ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}!````~System\+Thread@{$\sim$\+System\+Thread}}
+\index{````~System\+Thread@{$\sim$\+System\+Thread}!ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}}
+\subsubsection[{\texorpdfstring{$\sim$\+System\+Thread()}{~SystemThread()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+System\+Thread\+::$\sim$\+System\+Thread (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemThread_a9d905c76b478a702684ee2b18360fe61}{}\label{classns3_1_1SystemThread_a9d905c76b478a702684ee2b18360fe61}
+
+
+Destroy a \hyperlink{classns3_1_1SystemThread}{System\+Thread} object. 
+
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}!Equals@{Equals}}
+\index{Equals@{Equals}!ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}}
+\subsubsection[{\texorpdfstring{Equals(\+Thread\+Id id)}{Equals(ThreadId id)}}]{\setlength{\rightskip}{0pt plus 5cm}static bool ns3\+::\+System\+Thread\+::\+Equals (
+\begin{DoxyParamCaption}
+\item[{Thread\+Id}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1SystemThread_af6bfffe1a51a4df5f9aa1a468df8bd59}{}\label{classns3_1_1SystemThread_af6bfffe1a51a4df5f9aa1a468df8bd59}
+
+
+Compares an Thread\+Id with the current Thread\+Id . 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em id} & The Thread\+Id to compare to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if {\ttfamily id} matches the current Thread\+Id. 
+\end{DoxyReturn}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}!Join@{Join}}
+\index{Join@{Join}!ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}}
+\subsubsection[{\texorpdfstring{Join(void)}{Join(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Thread\+::\+Join (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemThread_a1cd5114bf675acf91565a6b85c95545f}{}\label{classns3_1_1SystemThread_a1cd5114bf675acf91565a6b85c95545f}
+
+
+Suspend the caller until the thread of execution, running the provided callback, finishes. 
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}!Self@{Self}}
+\index{Self@{Self}!ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}}
+\subsubsection[{\texorpdfstring{Self(void)}{Self(void)}}]{\setlength{\rightskip}{0pt plus 5cm}static Thread\+Id ns3\+::\+System\+Thread\+::\+Self (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1SystemThread_a76dffd0c4383357194c9604f073b0d79}{}\label{classns3_1_1SystemThread_a76dffd0c4383357194c9604f073b0d79}
+
+
+Returns the current thread Id. 
+
+\begin{DoxyReturn}{Returns}
+Current thread Id. 
+\end{DoxyReturn}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}!Start@{Start}}
+\index{Start@{Start}!ns3\+::\+System\+Thread@{ns3\+::\+System\+Thread}}
+\subsubsection[{\texorpdfstring{Start(void)}{Start(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Thread\+::\+Start (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemThread_a95716a1cd24ee8e7c6a08b7a2ad9481e}{}\label{classns3_1_1SystemThread_a95716a1cd24ee8e7c6a08b7a2ad9481e}
+
+
+Start a thread of execution, running the provided callback. 
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{system-thread_8h}{system-\/thread.\+h}\end{DoxyCompactItemize}

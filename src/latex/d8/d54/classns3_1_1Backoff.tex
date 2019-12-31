@@ -1,0 +1,305 @@
+\hypertarget{classns3_1_1Backoff}{}\section{ns3\+:\+:Backoff Class Reference}
+\label{classns3_1_1Backoff}\index{ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+
+
+The backoff class is used for calculating backoff times when many net devices can write to the same channel.  
+
+
+
+
+{\ttfamily \#include $<$backoff.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Backoff\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Backoff_af39e9ddd21741927e45ff346b2fdb464}{Backoff} (void)
+\item 
+\hyperlink{classns3_1_1Backoff_a6307f5bf4a3ce8313f17fbcf12e4c113}{Backoff} (\hyperlink{classns3_1_1Time}{Time} slot\+Time, uint32\+\_\+t min\+Slots, uint32\+\_\+t max\+Slots, uint32\+\_\+t ceiling, uint32\+\_\+t max\+Retries)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1Backoff_ab805c5622b6c624d8d929be36ac6cc93}{Get\+Backoff\+Time} ()
+\item 
+void \hyperlink{classns3_1_1Backoff_a103dc910a4f81c7444e873be3d055237}{Reset\+Backoff\+Time} (void)
+\item 
+bool \hyperlink{classns3_1_1Backoff_a273e3444ab023da993742d4bdd72e982}{Max\+Retries\+Reached} (void)
+\item 
+void \hyperlink{classns3_1_1Backoff_af0b4605876aeb05e9cf1a90acf6b5f86}{Incr\+Num\+Retries} (void)
+\item 
+int64\+\_\+t \hyperlink{classns3_1_1Backoff_a5227e2034c6a5b54fd3ea59ed2be2c93}{Assign\+Streams} (int64\+\_\+t stream)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Backoff_a8870f8d30cfe1766d097314af562fc69}{m\+\_\+min\+Slots}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Backoff_a53371fae4145bba2abb512cd16156bf6}{m\+\_\+max\+Slots}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Backoff_acf1cad1862af4a90b881d84087e49d5e}{m\+\_\+ceiling}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Backoff_a15d153e005b039f7a0c796f7084bb96a}{m\+\_\+max\+Retries}
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1Backoff_ae6a94d4f007f1cac661b2dc6cf84be0f}{m\+\_\+slot\+Time}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Backoff_a6dbf047af4b1bf7cf2e8c65fb47ae8e3}{m\+\_\+num\+Backoff\+Retries}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1UniformRandomVariable}{Uniform\+Random\+Variable} $>$ \hyperlink{classns3_1_1Backoff_ace4778afde585215faf4e5a5cc150f2b}{m\+\_\+rng}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The backoff class is used for calculating backoff times when many net devices can write to the same channel. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!Backoff@{Backoff}}
+\index{Backoff@{Backoff}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{Backoff(void)}{Backoff(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Backoff\+::\+Backoff (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Backoff_af39e9ddd21741927e45ff346b2fdb464}{}\label{classns3_1_1Backoff_af39e9ddd21741927e45ff346b2fdb464}
+
+\begin{DoxyCode}
+29 \{
+30   \hyperlink{classns3_1_1Backoff_ae6a94d4f007f1cac661b2dc6cf84be0f}{m\_slotTime} = \hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (1);
+31   \hyperlink{classns3_1_1Backoff_a8870f8d30cfe1766d097314af562fc69}{m\_minSlots} = 1;
+32   \hyperlink{classns3_1_1Backoff_a53371fae4145bba2abb512cd16156bf6}{m\_maxSlots} = 1000;
+33   \hyperlink{classns3_1_1Backoff_acf1cad1862af4a90b881d84087e49d5e}{m\_ceiling} = 10;
+34   \hyperlink{classns3_1_1Backoff_a15d153e005b039f7a0c796f7084bb96a}{m\_maxRetries} = 1000;
+35   \hyperlink{classns3_1_1Backoff_a6dbf047af4b1bf7cf2e8c65fb47ae8e3}{m\_numBackoffRetries} = 0;
+36   \hyperlink{classns3_1_1Backoff_ace4778afde585215faf4e5a5cc150f2b}{m\_rng} = CreateObject<UniformRandomVariable> ();
+37 
+38   \hyperlink{classns3_1_1Backoff_a103dc910a4f81c7444e873be3d055237}{ResetBackoffTime} ();
+39 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!Backoff@{Backoff}}
+\index{Backoff@{Backoff}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{Backoff(\+Time slot\+Time, uint32\+\_\+t min\+Slots, uint32\+\_\+t max\+Slots, uint32\+\_\+t ceiling, uint32\+\_\+t max\+Retries)}{Backoff(Time slotTime, uint32_t minSlots, uint32_t maxSlots, uint32_t ceiling, uint32_t maxRetries)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Backoff\+::\+Backoff (
+\begin{DoxyParamCaption}
+\item[{{\bf Time}}]{slot\+Time, }
+\item[{uint32\+\_\+t}]{min\+Slots, }
+\item[{uint32\+\_\+t}]{max\+Slots, }
+\item[{uint32\+\_\+t}]{ceiling, }
+\item[{uint32\+\_\+t}]{max\+Retries}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Backoff_a6307f5bf4a3ce8313f17fbcf12e4c113}{}\label{classns3_1_1Backoff_a6307f5bf4a3ce8313f17fbcf12e4c113}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em slot\+Time} & Length of one slot \\
+\hline
+{\em min\+Slots} & Minimum number of backoff slots \\
+\hline
+{\em max\+Slots} & Maximum number of backoff slots \\
+\hline
+{\em ceiling} & Cap to the exponential function \\
+\hline
+{\em max\+Retries} & Maximum number of transmission retries \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+42 \{
+43   \hyperlink{classns3_1_1Backoff_ae6a94d4f007f1cac661b2dc6cf84be0f}{m\_slotTime} = slotTime;
+44   \hyperlink{classns3_1_1Backoff_a8870f8d30cfe1766d097314af562fc69}{m\_minSlots} = minSlots;
+45   \hyperlink{classns3_1_1Backoff_a53371fae4145bba2abb512cd16156bf6}{m\_maxSlots} = maxSlots;
+46   \hyperlink{classns3_1_1Backoff_acf1cad1862af4a90b881d84087e49d5e}{m\_ceiling} = ceiling;
+47   \hyperlink{classns3_1_1Backoff_a15d153e005b039f7a0c796f7084bb96a}{m\_maxRetries} = maxRetries;
+48   \hyperlink{classns3_1_1Backoff_a6dbf047af4b1bf7cf2e8c65fb47ae8e3}{m\_numBackoffRetries} = 0;
+49   \hyperlink{classns3_1_1Backoff_ace4778afde585215faf4e5a5cc150f2b}{m\_rng} = CreateObject<UniformRandomVariable> ();
+50 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!Assign\+Streams@{Assign\+Streams}}
+\index{Assign\+Streams@{Assign\+Streams}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{Assign\+Streams(int64\+\_\+t stream)}{AssignStreams(int64_t stream)}}]{\setlength{\rightskip}{0pt plus 5cm}int64\+\_\+t ns3\+::\+Backoff\+::\+Assign\+Streams (
+\begin{DoxyParamCaption}
+\item[{int64\+\_\+t}]{stream}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Backoff_a5227e2034c6a5b54fd3ea59ed2be2c93}{}\label{classns3_1_1Backoff_a5227e2034c6a5b54fd3ea59ed2be2c93}
+Assign a fixed random variable stream number to the random variables used by this model. Return the number of streams (possibly zero) that have been assigned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & first stream index to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of stream indices assigned by this model 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+99 \{
+100   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << stream);
+101   \hyperlink{classns3_1_1Backoff_ace4778afde585215faf4e5a5cc150f2b}{m\_rng}->\hyperlink{classns3_1_1RandomVariableStream_add11aaf975607746b7e271d300659a94}{SetStream} (stream);
+102   \textcolor{keywordflow}{return} 1;
+103 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!Get\+Backoff\+Time@{Get\+Backoff\+Time}}
+\index{Get\+Backoff\+Time@{Get\+Backoff\+Time}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{Get\+Backoff\+Time()}{GetBackoffTime()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Backoff\+::\+Get\+Backoff\+Time (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Backoff_ab805c5622b6c624d8d929be36ac6cc93}{}\label{classns3_1_1Backoff_ab805c5622b6c624d8d929be36ac6cc93}
+\begin{DoxyReturn}{Returns}
+The amount of time that the net device should wait before trying to retransmit the packet 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+54 \{
+55   uint32\_t ceiling;
+56 
+57   \textcolor{keywordflow}{if} ((\hyperlink{classns3_1_1Backoff_acf1cad1862af4a90b881d84087e49d5e}{m\_ceiling} > 0) &&(\hyperlink{classns3_1_1Backoff_a6dbf047af4b1bf7cf2e8c65fb47ae8e3}{m\_numBackoffRetries} > 
+      \hyperlink{classns3_1_1Backoff_acf1cad1862af4a90b881d84087e49d5e}{m\_ceiling}))
+58     \{
+59       ceiling = \hyperlink{classns3_1_1Backoff_acf1cad1862af4a90b881d84087e49d5e}{m\_ceiling};
+60     \}
+61   \textcolor{keywordflow}{else}
+62     \{
+63       ceiling = \hyperlink{classns3_1_1Backoff_a6dbf047af4b1bf7cf2e8c65fb47ae8e3}{m\_numBackoffRetries};
+64     \}
+65 
+66   uint32\_t minSlot = \hyperlink{classns3_1_1Backoff_a8870f8d30cfe1766d097314af562fc69}{m\_minSlots};
+67   uint32\_t maxSlot = (uint32\_t)pow (2, ceiling) - 1;
+68   \textcolor{keywordflow}{if} (maxSlot > \hyperlink{classns3_1_1Backoff_a53371fae4145bba2abb512cd16156bf6}{m\_maxSlots})
+69     \{
+70       maxSlot = \hyperlink{classns3_1_1Backoff_a53371fae4145bba2abb512cd16156bf6}{m\_maxSlots};
+71     \}
+72 
+73   uint32\_t backoffSlots = (uint32\_t)\hyperlink{classns3_1_1Backoff_ace4778afde585215faf4e5a5cc150f2b}{m\_rng}->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} (minSlot, maxSlot);
+74 
+75   \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} backoff = \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} (backoffSlots * \hyperlink{classns3_1_1Backoff_ae6a94d4f007f1cac661b2dc6cf84be0f}{m\_slotTime});
+76   \textcolor{keywordflow}{return} backoff;
+77 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!Incr\+Num\+Retries@{Incr\+Num\+Retries}}
+\index{Incr\+Num\+Retries@{Incr\+Num\+Retries}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{Incr\+Num\+Retries(void)}{IncrNumRetries(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Backoff\+::\+Incr\+Num\+Retries (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Backoff_af0b4605876aeb05e9cf1a90acf6b5f86}{}\label{classns3_1_1Backoff_af0b4605876aeb05e9cf1a90acf6b5f86}
+Increments the number of retries by 1. 
+\begin{DoxyCode}
+93 \{
+94   \hyperlink{classns3_1_1Backoff_a6dbf047af4b1bf7cf2e8c65fb47ae8e3}{m\_numBackoffRetries}++;
+95 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!Max\+Retries\+Reached@{Max\+Retries\+Reached}}
+\index{Max\+Retries\+Reached@{Max\+Retries\+Reached}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{Max\+Retries\+Reached(void)}{MaxRetriesReached(void)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Backoff\+::\+Max\+Retries\+Reached (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Backoff_a273e3444ab023da993742d4bdd72e982}{}\label{classns3_1_1Backoff_a273e3444ab023da993742d4bdd72e982}
+\begin{DoxyReturn}{Returns}
+True if the maximum number of retries has been reached 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+87 \{
+88   \textcolor{keywordflow}{return} (\hyperlink{classns3_1_1Backoff_a6dbf047af4b1bf7cf2e8c65fb47ae8e3}{m\_numBackoffRetries} >= \hyperlink{classns3_1_1Backoff_a15d153e005b039f7a0c796f7084bb96a}{m\_maxRetries});
+89 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!Reset\+Backoff\+Time@{Reset\+Backoff\+Time}}
+\index{Reset\+Backoff\+Time@{Reset\+Backoff\+Time}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{Reset\+Backoff\+Time(void)}{ResetBackoffTime(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Backoff\+::\+Reset\+Backoff\+Time (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Backoff_a103dc910a4f81c7444e873be3d055237}{}\label{classns3_1_1Backoff_a103dc910a4f81c7444e873be3d055237}
+Indicates to the backoff object that the last packet was successfully transmitted and that the number of retries should be reset to 0. 
+\begin{DoxyCode}
+81 \{
+82   \hyperlink{classns3_1_1Backoff_a6dbf047af4b1bf7cf2e8c65fb47ae8e3}{m\_numBackoffRetries} = 0;
+83 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!m\+\_\+ceiling@{m\+\_\+ceiling}}
+\index{m\+\_\+ceiling@{m\+\_\+ceiling}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{m\+\_\+ceiling}{m_ceiling}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Backoff\+::m\+\_\+ceiling}\hypertarget{classns3_1_1Backoff_acf1cad1862af4a90b881d84087e49d5e}{}\label{classns3_1_1Backoff_acf1cad1862af4a90b881d84087e49d5e}
+Caps the exponential function when the number of retries reaches m\+\_\+ceiling. \index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!m\+\_\+max\+Retries@{m\+\_\+max\+Retries}}
+\index{m\+\_\+max\+Retries@{m\+\_\+max\+Retries}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{m\+\_\+max\+Retries}{m_maxRetries}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Backoff\+::m\+\_\+max\+Retries}\hypertarget{classns3_1_1Backoff_a15d153e005b039f7a0c796f7084bb96a}{}\label{classns3_1_1Backoff_a15d153e005b039f7a0c796f7084bb96a}
+Maximum number of transmission retries before the packet is dropped. \index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!m\+\_\+max\+Slots@{m\+\_\+max\+Slots}}
+\index{m\+\_\+max\+Slots@{m\+\_\+max\+Slots}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{m\+\_\+max\+Slots}{m_maxSlots}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Backoff\+::m\+\_\+max\+Slots}\hypertarget{classns3_1_1Backoff_a53371fae4145bba2abb512cd16156bf6}{}\label{classns3_1_1Backoff_a53371fae4145bba2abb512cd16156bf6}
+Maximum number of backoff slots (when multiplied by m\+\_\+slot\+Time, determines maximum backoff time) \index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!m\+\_\+min\+Slots@{m\+\_\+min\+Slots}}
+\index{m\+\_\+min\+Slots@{m\+\_\+min\+Slots}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{m\+\_\+min\+Slots}{m_minSlots}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Backoff\+::m\+\_\+min\+Slots}\hypertarget{classns3_1_1Backoff_a8870f8d30cfe1766d097314af562fc69}{}\label{classns3_1_1Backoff_a8870f8d30cfe1766d097314af562fc69}
+Minimum number of backoff slots (when multiplied by m\+\_\+slot\+Time, determines minimum backoff time) \index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!m\+\_\+num\+Backoff\+Retries@{m\+\_\+num\+Backoff\+Retries}}
+\index{m\+\_\+num\+Backoff\+Retries@{m\+\_\+num\+Backoff\+Retries}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{m\+\_\+num\+Backoff\+Retries}{m_numBackoffRetries}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Backoff\+::m\+\_\+num\+Backoff\+Retries\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Backoff_a6dbf047af4b1bf7cf2e8c65fb47ae8e3}{}\label{classns3_1_1Backoff_a6dbf047af4b1bf7cf2e8c65fb47ae8e3}
+Number of times that the transmitter has tried to unsuccessfully transmit the current packet. \index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!m\+\_\+rng@{m\+\_\+rng}}
+\index{m\+\_\+rng@{m\+\_\+rng}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{m\+\_\+rng}{m_rng}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Uniform\+Random\+Variable}$>$ ns3\+::\+Backoff\+::m\+\_\+rng\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Backoff_ace4778afde585215faf4e5a5cc150f2b}{}\label{classns3_1_1Backoff_ace4778afde585215faf4e5a5cc150f2b}
+Random number generator \index{ns3\+::\+Backoff@{ns3\+::\+Backoff}!m\+\_\+slot\+Time@{m\+\_\+slot\+Time}}
+\index{m\+\_\+slot\+Time@{m\+\_\+slot\+Time}!ns3\+::\+Backoff@{ns3\+::\+Backoff}}
+\subsubsection[{\texorpdfstring{m\+\_\+slot\+Time}{m_slotTime}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Backoff\+::m\+\_\+slot\+Time}\hypertarget{classns3_1_1Backoff_ae6a94d4f007f1cac661b2dc6cf84be0f}{}\label{classns3_1_1Backoff_ae6a94d4f007f1cac661b2dc6cf84be0f}
+Length of one slot. A slot time, it usually the packet transmission time, if the packet size is fixed. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+csma/model/\hyperlink{backoff_8h}{backoff.\+h}\item 
+csma/model/\hyperlink{backoff_8cc}{backoff.\+cc}\end{DoxyCompactItemize}

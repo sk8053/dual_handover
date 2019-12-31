@@ -1,0 +1,354 @@
+\hypertarget{classns3_1_1PacketLossCounter}{}\section{ns3\+:\+:Packet\+Loss\+Counter Class Reference}
+\label{classns3_1_1PacketLossCounter}\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+
+
+A class to count the number of lost packets.  
+
+
+
+
+{\ttfamily \#include $<$packet-\/loss-\/counter.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Packet\+Loss\+Counter\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1PacketLossCounter_a73950628cb5756f19c2589814d9d6029}{Packet\+Loss\+Counter} (uint8\+\_\+t bitmap\+Size)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1PacketLossCounter_aeeb2433d34ce9bb722c123825afd16bc}{$\sim$\+Packet\+Loss\+Counter} ()
+\item 
+void \hyperlink{classns3_1_1PacketLossCounter_a3ad5968a1f30dd3d0ca79051f07ba72a}{Notify\+Received} (uint32\+\_\+t seq)
+\begin{DoxyCompactList}\small\item\em Record a successfully received packet. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1PacketLossCounter_a604d5fe48945a46d0d84328e53baa935}{Get\+Lost} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the number of lost packets. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classns3_1_1PacketLossCounter_ab180f3dac45da2d2e8575c1b93bd8606}{Get\+Bit\+Map\+Size} (void) const 
+\begin{DoxyCompactList}\small\item\em Return the size of the window used to compute the packet loss. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1PacketLossCounter_a7dac1fee51b61a546554d0e816c142df}{Set\+Bit\+Map\+Size} (uint16\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Set the size of the window used to compute the packet loss. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classns3_1_1PacketLossCounter_a548b759d404415f50111047786ee09d0}{Get\+Bit} (uint32\+\_\+t seq\+Num)
+\begin{DoxyCompactList}\small\item\em Check if a sequence number in the window has been received. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1PacketLossCounter_a196384cef20a0a9134ff61f505773d71}{Set\+Bit} (uint32\+\_\+t seq\+Num, bool val)
+\begin{DoxyCompactList}\small\item\em Set a sequence number to a given state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1PacketLossCounter_a764928ff787c0586db03f92f1e7babb1}{m\+\_\+lost}
+\begin{DoxyCompactList}\small\item\em Lost packets counter. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classns3_1_1PacketLossCounter_afb7f1479593f5ffe9352772e8a37dfa1}{m\+\_\+bit\+Map\+Size}
+\begin{DoxyCompactList}\small\item\em Window size. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1PacketLossCounter_a4d24c5d85acd4bcaa976d0e2e9ebcc8d}{m\+\_\+last\+Max\+Seq\+Num}
+\begin{DoxyCompactList}\small\item\em Last sequence number seen. \end{DoxyCompactList}\item 
+uint8\+\_\+t $\ast$ \hyperlink{classns3_1_1PacketLossCounter_aaef80a448508d9395f6d9663ef2cf301}{m\+\_\+receive\+Bit\+Map}
+\begin{DoxyCompactList}\small\item\em Received packets in the window size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class to count the number of lost packets. 
+
+This class records the packet lost in a client/server transmission leveraging a sequence number. All the packets outside a given window (i.\+e., too old wit respect to the last sequence number seen) are considered lost, 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}!Packet\+Loss\+Counter@{Packet\+Loss\+Counter}}
+\index{Packet\+Loss\+Counter@{Packet\+Loss\+Counter}!ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+\subsubsection[{\texorpdfstring{Packet\+Loss\+Counter(uint8\+\_\+t bitmap\+Size)}{PacketLossCounter(uint8_t bitmapSize)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Packet\+Loss\+Counter\+::\+Packet\+Loss\+Counter (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{bitmap\+Size}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1PacketLossCounter_a73950628cb5756f19c2589814d9d6029}{}\label{classns3_1_1PacketLossCounter_a73950628cb5756f19c2589814d9d6029}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bitmap\+Size} & The window size. Must be a multiple of 8. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+32   : \hyperlink{classns3_1_1PacketLossCounter_a764928ff787c0586db03f92f1e7babb1}{m\_lost} (0),
+33     \hyperlink{classns3_1_1PacketLossCounter_afb7f1479593f5ffe9352772e8a37dfa1}{m\_bitMapSize} (0),
+34     \hyperlink{classns3_1_1PacketLossCounter_a4d24c5d85acd4bcaa976d0e2e9ebcc8d}{m\_lastMaxSeqNum} (0),
+35     \hyperlink{classns3_1_1PacketLossCounter_aaef80a448508d9395f6d9663ef2cf301}{m\_receiveBitMap} (0)
+36 \{
+37   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << bitmapSize);
+38   \hyperlink{classns3_1_1PacketLossCounter_a7dac1fee51b61a546554d0e816c142df}{SetBitMapSize} (bitmapSize);
+39 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}!````~Packet\+Loss\+Counter@{$\sim$\+Packet\+Loss\+Counter}}
+\index{````~Packet\+Loss\+Counter@{$\sim$\+Packet\+Loss\+Counter}!ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+\subsubsection[{\texorpdfstring{$\sim$\+Packet\+Loss\+Counter()}{~PacketLossCounter()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Packet\+Loss\+Counter\+::$\sim$\+Packet\+Loss\+Counter (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1PacketLossCounter_aeeb2433d34ce9bb722c123825afd16bc}{}\label{classns3_1_1PacketLossCounter_aeeb2433d34ce9bb722c123825afd16bc}
+
+\begin{DoxyCode}
+42 \{
+43   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+44   \textcolor{keyword}{delete} [] \hyperlink{classns3_1_1PacketLossCounter_aaef80a448508d9395f6d9663ef2cf301}{m\_receiveBitMap};
+45 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}!Get\+Bit@{Get\+Bit}}
+\index{Get\+Bit@{Get\+Bit}!ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+\subsubsection[{\texorpdfstring{Get\+Bit(uint32\+\_\+t seq\+Num)}{GetBit(uint32_t seqNum)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Packet\+Loss\+Counter\+::\+Get\+Bit (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{seq\+Num}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1PacketLossCounter_a548b759d404415f50111047786ee09d0}{}\label{classns3_1_1PacketLossCounter_a548b759d404415f50111047786ee09d0}
+
+
+Check if a sequence number in the window has been received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seq\+Num} & the sequence number. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if the packet has not been received. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+78 \{
+79   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << seqNum);
+80   \textcolor{keywordflow}{return} ((\hyperlink{classns3_1_1PacketLossCounter_aaef80a448508d9395f6d9663ef2cf301}{m\_receiveBitMap}[(seqNum%(\hyperlink{classns3_1_1PacketLossCounter_afb7f1479593f5ffe9352772e8a37dfa1}{m\_bitMapSize}*8))/8] >> (7-(seqNum%8)))&0x01)
+      ;
+81 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}!Get\+Bit\+Map\+Size@{Get\+Bit\+Map\+Size}}
+\index{Get\+Bit\+Map\+Size@{Get\+Bit\+Map\+Size}!ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+\subsubsection[{\texorpdfstring{Get\+Bit\+Map\+Size(void) const }{GetBitMapSize(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Packet\+Loss\+Counter\+::\+Get\+Bit\+Map\+Size (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1PacketLossCounter_ab180f3dac45da2d2e8575c1b93bd8606}{}\label{classns3_1_1PacketLossCounter_ab180f3dac45da2d2e8575c1b93bd8606}
+
+
+Return the size of the window used to compute the packet loss. 
+
+\begin{DoxyReturn}{Returns}
+the window size. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+49 \{
+50   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+51   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1PacketLossCounter_afb7f1479593f5ffe9352772e8a37dfa1}{m\_bitMapSize} * 8;
+52 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}!Get\+Lost@{Get\+Lost}}
+\index{Get\+Lost@{Get\+Lost}!ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+\subsubsection[{\texorpdfstring{Get\+Lost(void) const }{GetLost(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Packet\+Loss\+Counter\+::\+Get\+Lost (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1PacketLossCounter_a604d5fe48945a46d0d84328e53baa935}{}\label{classns3_1_1PacketLossCounter_a604d5fe48945a46d0d84328e53baa935}
+
+
+Get the number of lost packets. 
+
+\begin{DoxyReturn}{Returns}
+the number of lost packets. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+71 \{
+72   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+73   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1PacketLossCounter_a764928ff787c0586db03f92f1e7babb1}{m\_lost};
+74 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}!Notify\+Received@{Notify\+Received}}
+\index{Notify\+Received@{Notify\+Received}!ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+\subsubsection[{\texorpdfstring{Notify\+Received(uint32\+\_\+t seq)}{NotifyReceived(uint32_t seq)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Packet\+Loss\+Counter\+::\+Notify\+Received (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{seq}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1PacketLossCounter_a3ad5968a1f30dd3d0ca79051f07ba72a}{}\label{classns3_1_1PacketLossCounter_a3ad5968a1f30dd3d0ca79051f07ba72a}
+
+
+Record a successfully received packet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seq} & the packet sequence number \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+111 \{
+112   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << seqNum);
+113   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}=\hyperlink{classns3_1_1PacketLossCounter_a4d24c5d85acd4bcaa976d0e2e9ebcc8d}{m\_lastMaxSeqNum}+1; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<=seqNum; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+114     \{
+115       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1PacketLossCounter_a548b759d404415f50111047786ee09d0}{GetBit} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})!=1)
+116         \{
+117           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Packet lost: "} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}-(\hyperlink{classns3_1_1PacketLossCounter_afb7f1479593f5ffe9352772e8a37dfa1}{m\_bitMapSize}*8));
+118           \hyperlink{classns3_1_1PacketLossCounter_a764928ff787c0586db03f92f1e7babb1}{m\_lost}++;
+119         \}
+120       \hyperlink{classns3_1_1PacketLossCounter_a196384cef20a0a9134ff61f505773d71}{SetBit} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}, 0);
+121     \}
+122   \hyperlink{classns3_1_1PacketLossCounter_a196384cef20a0a9134ff61f505773d71}{SetBit} (seqNum, 1);
+123   \textcolor{keywordflow}{if} (seqNum>\hyperlink{classns3_1_1PacketLossCounter_a4d24c5d85acd4bcaa976d0e2e9ebcc8d}{m\_lastMaxSeqNum})
+124     \{
+125       \hyperlink{classns3_1_1PacketLossCounter_a4d24c5d85acd4bcaa976d0e2e9ebcc8d}{m\_lastMaxSeqNum} = seqNum;
+126     \}
+127 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}!Set\+Bit@{Set\+Bit}}
+\index{Set\+Bit@{Set\+Bit}!ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+\subsubsection[{\texorpdfstring{Set\+Bit(uint32\+\_\+t seq\+Num, bool val)}{SetBit(uint32_t seqNum, bool val)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Packet\+Loss\+Counter\+::\+Set\+Bit (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{seq\+Num, }
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1PacketLossCounter_a196384cef20a0a9134ff61f505773d71}{}\label{classns3_1_1PacketLossCounter_a196384cef20a0a9134ff61f505773d71}
+
+
+Set a sequence number to a given state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seq\+Num} & the sequence number. \\
+\hline
+{\em val} & false if the packet has not been received. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+85 \{
+86   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << seqNum << val);
+87   \textcolor{keywordflow}{if} (val)
+88     \{
+89       \hyperlink{classns3_1_1PacketLossCounter_aaef80a448508d9395f6d9663ef2cf301}{m\_receiveBitMap}[(seqNum%(\hyperlink{classns3_1_1PacketLossCounter_afb7f1479593f5ffe9352772e8a37dfa1}{m\_bitMapSize}*8))/8] |= 0x80 >> (seqNum%8);
+90     \}
+91   \textcolor{keywordflow}{else}
+92     \{
+93       \hyperlink{classns3_1_1PacketLossCounter_aaef80a448508d9395f6d9663ef2cf301}{m\_receiveBitMap}[(seqNum%(\hyperlink{classns3_1_1PacketLossCounter_afb7f1479593f5ffe9352772e8a37dfa1}{m\_bitMapSize}*8))/8] &= ~(0x80 >> (seqNum%8));
+94     \}
+95 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}!Set\+Bit\+Map\+Size@{Set\+Bit\+Map\+Size}}
+\index{Set\+Bit\+Map\+Size@{Set\+Bit\+Map\+Size}!ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+\subsubsection[{\texorpdfstring{Set\+Bit\+Map\+Size(uint16\+\_\+t size)}{SetBitMapSize(uint16_t size)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Packet\+Loss\+Counter\+::\+Set\+Bit\+Map\+Size (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1PacketLossCounter_a7dac1fee51b61a546554d0e816c142df}{}\label{classns3_1_1PacketLossCounter_a7dac1fee51b61a546554d0e816c142df}
+
+
+Set the size of the window used to compute the packet loss. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The window size. Must be a multiple of 8. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+56 \{
+57   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << winSize);
+58 
+59   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (winSize%8==0,\textcolor{stringliteral}{"The packet window size should be a multiple of 8"});
+60   \hyperlink{classns3_1_1PacketLossCounter_afb7f1479593f5ffe9352772e8a37dfa1}{m\_bitMapSize} = winSize/8;
+61   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1PacketLossCounter_aaef80a448508d9395f6d9663ef2cf301}{m\_receiveBitMap}!=0)
+62     \{
+63       \textcolor{keyword}{delete} [] \hyperlink{classns3_1_1PacketLossCounter_aaef80a448508d9395f6d9663ef2cf301}{m\_receiveBitMap};
+64     \}
+65   \hyperlink{classns3_1_1PacketLossCounter_aaef80a448508d9395f6d9663ef2cf301}{m\_receiveBitMap} = \textcolor{keyword}{new} uint8\_t [\hyperlink{classns3_1_1PacketLossCounter_afb7f1479593f5ffe9352772e8a37dfa1}{m\_bitMapSize}] ();
+66   memset (\hyperlink{classns3_1_1PacketLossCounter_aaef80a448508d9395f6d9663ef2cf301}{m\_receiveBitMap},0xFF,\hyperlink{classns3_1_1PacketLossCounter_afb7f1479593f5ffe9352772e8a37dfa1}{m\_bitMapSize});
+67 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}!m\+\_\+bit\+Map\+Size@{m\+\_\+bit\+Map\+Size}}
+\index{m\+\_\+bit\+Map\+Size@{m\+\_\+bit\+Map\+Size}!ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+\subsubsection[{\texorpdfstring{m\+\_\+bit\+Map\+Size}{m_bitMapSize}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Packet\+Loss\+Counter\+::m\+\_\+bit\+Map\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1PacketLossCounter_afb7f1479593f5ffe9352772e8a37dfa1}{}\label{classns3_1_1PacketLossCounter_afb7f1479593f5ffe9352772e8a37dfa1}
+
+
+Window size. 
+
+\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}!m\+\_\+last\+Max\+Seq\+Num@{m\+\_\+last\+Max\+Seq\+Num}}
+\index{m\+\_\+last\+Max\+Seq\+Num@{m\+\_\+last\+Max\+Seq\+Num}!ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+\subsubsection[{\texorpdfstring{m\+\_\+last\+Max\+Seq\+Num}{m_lastMaxSeqNum}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Packet\+Loss\+Counter\+::m\+\_\+last\+Max\+Seq\+Num\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1PacketLossCounter_a4d24c5d85acd4bcaa976d0e2e9ebcc8d}{}\label{classns3_1_1PacketLossCounter_a4d24c5d85acd4bcaa976d0e2e9ebcc8d}
+
+
+Last sequence number seen. 
+
+\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}!m\+\_\+lost@{m\+\_\+lost}}
+\index{m\+\_\+lost@{m\+\_\+lost}!ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+\subsubsection[{\texorpdfstring{m\+\_\+lost}{m_lost}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Packet\+Loss\+Counter\+::m\+\_\+lost\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1PacketLossCounter_a764928ff787c0586db03f92f1e7babb1}{}\label{classns3_1_1PacketLossCounter_a764928ff787c0586db03f92f1e7babb1}
+
+
+Lost packets counter. 
+
+\index{ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}!m\+\_\+receive\+Bit\+Map@{m\+\_\+receive\+Bit\+Map}}
+\index{m\+\_\+receive\+Bit\+Map@{m\+\_\+receive\+Bit\+Map}!ns3\+::\+Packet\+Loss\+Counter@{ns3\+::\+Packet\+Loss\+Counter}}
+\subsubsection[{\texorpdfstring{m\+\_\+receive\+Bit\+Map}{m_receiveBitMap}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t$\ast$ ns3\+::\+Packet\+Loss\+Counter\+::m\+\_\+receive\+Bit\+Map\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1PacketLossCounter_aaef80a448508d9395f6d9663ef2cf301}{}\label{classns3_1_1PacketLossCounter_aaef80a448508d9395f6d9663ef2cf301}
+
+
+Received packets in the window size. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+applications/model/\hyperlink{packet-loss-counter_8h}{packet-\/loss-\/counter.\+h}\item 
+applications/model/\hyperlink{packet-loss-counter_8cc}{packet-\/loss-\/counter.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,177 @@
+\hypertarget{group__fatalimpl}{}\section{Fatal Implementation.}
+\label{group__fatalimpl}\index{Fatal Implementation.@{Fatal Implementation.}}
+Collaboration diagram for Fatal Implementation.\+:
+% FIG 0
+\subsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \hyperlink{fatal-impl_8cc}{fatal-\/impl.\+cc}
+\begin{DoxyCompactList}\small\item\em Implementation of \hyperlink{group__fatalimpl_gad552ca3d6d85b95147b8c6a2eb4d4579}{Register\+Stream()}, \hyperlink{group__fatalimpl_ga2bf70e98e990f01912527b4ccfac27d0}{Unregister\+Stream()}, and \hyperlink{group__fatalimpl_gad96fb19ef26235aaccd15e6d2a72382f}{Flush\+Streams()}; see Implementation note! \end{DoxyCompactList}\item 
+file \hyperlink{fatal-impl_8h}{fatal-\/impl.\+h}
+\begin{DoxyCompactList}\small\item\em Declaration of \hyperlink{group__fatalimpl_gad552ca3d6d85b95147b8c6a2eb4d4579}{Register\+Stream()}, \hyperlink{group__fatalimpl_ga2bf70e98e990f01912527b4ccfac27d0}{Unregister\+Stream()}, and \hyperlink{group__fatalimpl_gad96fb19ef26235aaccd15e6d2a72382f}{Flush\+Streams()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacens3_1_1FatalImpl}{ns3\+::\+Fatal\+Impl}
+\begin{DoxyCompactList}\small\item\em Implementation namespace for fatal error handlers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__fatalimpl_gad552ca3d6d85b95147b8c6a2eb4d4579}{ns3\+::\+Fatal\+Impl\+::\+Register\+Stream} (std\+::ostream $\ast$stream)
+\begin{DoxyCompactList}\small\item\em Register a stream to be flushed on abnormal exit. \end{DoxyCompactList}\item 
+void \hyperlink{group__fatalimpl_ga2bf70e98e990f01912527b4ccfac27d0}{ns3\+::\+Fatal\+Impl\+::\+Unregister\+Stream} (std\+::ostream $\ast$stream)
+\begin{DoxyCompactList}\small\item\em Unregister a stream for flushing on abnormal exit. \end{DoxyCompactList}\item 
+void \hyperlink{group__fatalimpl_gad96fb19ef26235aaccd15e6d2a72382f}{ns3\+::\+Fatal\+Impl\+::\+Flush\+Streams} (void)
+\begin{DoxyCompactList}\small\item\em Flush all currently registered streams. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\index{Fatal Implementation.@{Fatal Implementation.}!Flush\+Streams@{Flush\+Streams}}
+\index{Flush\+Streams@{Flush\+Streams}!Fatal Implementation.@{Fatal Implementation.}}
+\subsubsection[{\texorpdfstring{Flush\+Streams(void)}{FlushStreams(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Fatal\+Impl\+::\+Flush\+Streams (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{group__fatalimpl_gad96fb19ef26235aaccd15e6d2a72382f}{}\label{group__fatalimpl_gad96fb19ef26235aaccd15e6d2a72382f}
+
+
+Flush all currently registered streams. 
+
+This function iterates through each registered stream and unregisters them. The default {\ttfamily S\+I\+G\+S\+E\+GV} handler is overridden when this function is being executed, and will be restored when this function returns.
+
+If a {\ttfamily S\+I\+G\+S\+E\+GV} is encountered (most likely due to a bad {\ttfamily ostream$\ast$} being registered, or a registered {\ttfamily osteam$\ast$} pointing to an {\ttfamily ostream} that had already been destroyed), this function will skip the bad {\ttfamily ostream$\ast$} and continue to flush the next stream. The function will then terminate raising {\ttfamily S\+I\+G\+I\+OT} (aka {\ttfamily S\+I\+G\+A\+B\+RT})
+
+DO N\+OT call this function until the program is ready to crash. 
+\begin{DoxyCode}
+148 \{
+149   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+150   std::list<std::ostream*> **pl = PeekStreamList ();
+151   \textcolor{keywordflow}{if} (*pl == 0)
+152     \{
+153       \textcolor{keywordflow}{return};
+154     \}
+155 
+156 
+157   \textcolor{comment}{/* Override default SIGSEGV handler - will flush subsequent}
+158 \textcolor{comment}{   * streams even if one of the stream pointers is bad.}
+159 \textcolor{comment}{   * The SIGSEGV override should only be active for the}
+160 \textcolor{comment}{   * duration of this function. */}
+161   \textcolor{keyword}{struct }sigaction hdl;
+162   hdl.sa\_handler=sigHandler;
+163   sigaction (SIGSEGV, &hdl, 0);
+164 
+165   std::list<std::ostream*> *\hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l} = *pl;
+166 
+167   \textcolor{comment}{/* Need to do it this way in case any of the ostream* causes SIGSEGV */}
+168   \textcolor{keywordflow}{while} (!l->empty ())
+169     \{
+170       std::ostream* \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s} (l->front ());
+171       l->pop\_front ();
+172       \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s}->flush ();
+173     \}
+174 
+175   \textcolor{comment}{/* Restore default SIGSEGV handler (Not that it matters anyway) */}
+176   hdl.sa\_handler=SIG\_DFL;
+177   sigaction (SIGSEGV, &hdl, 0);
+178 
+179   \textcolor{comment}{/* Flush all opened FILE* */}
+180   std::fflush (0);
+181 
+182   \textcolor{comment}{/* Flush stdandard streams - shouldn't be required (except for clog) */}
+183   std::cout.flush ();
+184   std::cerr.flush ();
+185   std::clog.flush ();
+186 
+187   \textcolor{keyword}{delete} \hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l};
+188   *pl = 0;
+189 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{Fatal Implementation.@{Fatal Implementation.}!Register\+Stream@{Register\+Stream}}
+\index{Register\+Stream@{Register\+Stream}!Fatal Implementation.@{Fatal Implementation.}}
+\subsubsection[{\texorpdfstring{Register\+Stream(std\+::ostream $\ast$stream)}{RegisterStream(std::ostream *stream)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Fatal\+Impl\+::\+Register\+Stream (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream $\ast$}]{stream}
+\end{DoxyParamCaption}
+)}\hypertarget{group__fatalimpl_gad552ca3d6d85b95147b8c6a2eb4d4579}{}\label{group__fatalimpl_gad552ca3d6d85b95147b8c6a2eb4d4579}
+
+
+Register a stream to be flushed on abnormal exit. 
+
+If a {\ttfamily std\+::terminate()} call is encountered after the stream had been registered and before it has been unregistered, {\ttfamily stream-\/$>$flush()} will be called. Users of this function should ensure the stream remains valid until it had been unregistered.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em stream} & The stream to be flushed on abnormal exit. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+99 \{
+100   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (stream);
+101   GetStreamList ()->push\_back (stream);
+102 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{Fatal Implementation.@{Fatal Implementation.}!Unregister\+Stream@{Unregister\+Stream}}
+\index{Unregister\+Stream@{Unregister\+Stream}!Fatal Implementation.@{Fatal Implementation.}}
+\subsubsection[{\texorpdfstring{Unregister\+Stream(std\+::ostream $\ast$stream)}{UnregisterStream(std::ostream *stream)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Fatal\+Impl\+::\+Unregister\+Stream (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream $\ast$}]{stream}
+\end{DoxyParamCaption}
+)}\hypertarget{group__fatalimpl_ga2bf70e98e990f01912527b4ccfac27d0}{}\label{group__fatalimpl_ga2bf70e98e990f01912527b4ccfac27d0}
+
+
+Unregister a stream for flushing on abnormal exit. 
+
+After a stream had been unregistered, {\ttfamily stream-\/$>$flush()} will no longer be called should abnormal termination be encountered.
+
+If the stream is not registered, nothing will happen.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em stream} & The stream to be unregistered. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+106 \{
+107   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (stream);
+108   std::list<std::ostream*> **pl = PeekStreamList ();
+109   \textcolor{keywordflow}{if} (*pl == 0)
+110     \{
+111       \textcolor{keywordflow}{return};
+112     \}
+113   (*pl)->remove (stream);
+114   \textcolor{keywordflow}{if} ((*pl)->empty ())
+115     \{
+116       \textcolor{keyword}{delete} *pl;
+117       *pl = 0;
+118     \}
+119 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+

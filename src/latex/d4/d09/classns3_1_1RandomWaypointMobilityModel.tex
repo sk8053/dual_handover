@@ -1,0 +1,380 @@
+\hypertarget{classns3_1_1RandomWaypointMobilityModel}{}\section{ns3\+:\+:Random\+Waypoint\+Mobility\+Model Class Reference}
+\label{classns3_1_1RandomWaypointMobilityModel}\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+
+
+Random waypoint mobility model.  
+
+
+
+
+{\ttfamily \#include $<$random-\/waypoint-\/mobility-\/model.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Random\+Waypoint\+Mobility\+Model\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Random\+Waypoint\+Mobility\+Model\+:
+% FIG 1
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1RandomWaypointMobilityModel_ac5dd2a5c630655400f1a0f49c91f2dbc}{Get\+Type\+Id} (void)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classns3_1_1RandomWaypointMobilityModel_ab3c24223f92f3b81d9b9b3d916e57808}{Do\+Initialize} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2bdd46473a659a69038bd71efe730c0f}{Begin\+Walk} (void)
+\item 
+void \hyperlink{classns3_1_1RandomWaypointMobilityModel_a54eb8b2d814d3dfe78f5b189d1e40cf8}{Do\+Initialize\+Private} (void)
+\item 
+virtual Vector \hyperlink{classns3_1_1RandomWaypointMobilityModel_af33383b21bfeb2e69e1575034c737dc5}{Do\+Get\+Position} (void) const 
+\item 
+virtual void \hyperlink{classns3_1_1RandomWaypointMobilityModel_aaa7ec1c8816486310082042724e3d76b}{Do\+Set\+Position} (const Vector \&position)
+\item 
+virtual Vector \hyperlink{classns3_1_1RandomWaypointMobilityModel_a8570979b4af77043df70407f1d191baf}{Do\+Get\+Velocity} (void) const 
+\item 
+virtual int64\+\_\+t \hyperlink{classns3_1_1RandomWaypointMobilityModel_a3e119d88e301546b51489c06863f9fcc}{Do\+Assign\+Streams} (int64\+\_\+t)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1ConstantVelocityHelper}{Constant\+Velocity\+Helper} \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}{m\+\_\+helper}
+\begin{DoxyCompactList}\small\item\em helper for velocity computations \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1PositionAllocator}{Position\+Allocator} $>$ \hyperlink{classns3_1_1RandomWaypointMobilityModel_a5403d3195d0dd7afee4de130d9dc8a14}{m\+\_\+position}
+\begin{DoxyCompactList}\small\item\em pointer to position allocator \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} $>$ \hyperlink{classns3_1_1RandomWaypointMobilityModel_a573f6a14ec00b07199fa6445f006f4ba}{m\+\_\+speed}
+\begin{DoxyCompactList}\small\item\em random variable to generate speeds \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} $>$ \hyperlink{classns3_1_1RandomWaypointMobilityModel_a96ecd2f32821fa7ce41897191a8aab8d}{m\+\_\+pause}
+\begin{DoxyCompactList}\small\item\em random variable to generate pauses \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1EventId}{Event\+Id} \hyperlink{classns3_1_1RandomWaypointMobilityModel_a972b615df5f597fa3c8c6408a0d15907}{m\+\_\+event}
+\begin{DoxyCompactList}\small\item\em event ID of next scheduled event \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Random waypoint mobility model. 
+
+Each object starts by pausing at time zero for the duration governed by the random variable \char`\"{}\+Pause\char`\"{}. After pausing, the object will pick a new waypoint (via the \hyperlink{classns3_1_1PositionAllocator}{Position\+Allocator}) and a new random speed via the random variable \char`\"{}\+Speed\char`\"{}, and will begin moving towards the waypoint at a constant speed. When it reaches the destination, the process starts over (by pausing).
+
+This mobility model enforces no bounding box by itself; the \hyperlink{classns3_1_1PositionAllocator}{Position\+Allocator} assigned to this object will bound the movement. If the user fails to provide a pointer to a \hyperlink{classns3_1_1PositionAllocator}{Position\+Allocator} to be used to pick waypoints, the simulation program will assert.
+
+The implementation of this model is not 2d-\/specific. i.\+e. if you provide a 3d random waypoint position model to this mobility model, the model will still work. There is no 3d position allocator for now but it should be trivial to add one. 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!Begin\+Walk@{Begin\+Walk}}
+\index{Begin\+Walk@{Begin\+Walk}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Begin\+Walk(void)}{BeginWalk(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::\+Begin\+Walk (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_a2bdd46473a659a69038bd71efe730c0f}{}\label{classns3_1_1RandomWaypointMobilityModel_a2bdd46473a659a69038bd71efe730c0f}
+Get next position, begin moving towards it, schedule future pause event 
+\begin{DoxyCode}
+60 \{
+61   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}{m\_helper}.\hyperlink{classns3_1_1ConstantVelocityHelper_aaec113a6c2bae2bf8834bfb1e88d6192}{Update} ();
+62   Vector m\_current = \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}{m\_helper}.\hyperlink{classns3_1_1ConstantVelocityHelper_a9416fca612f00cca9fc9f453cad734b6}{GetCurrentPosition} ();
+63   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (\hyperlink{classns3_1_1RandomWaypointMobilityModel_a5403d3195d0dd7afee4de130d9dc8a14}{m\_position}, \textcolor{stringliteral}{"No position allocator added before using this model"});
+64   Vector destination = \hyperlink{classns3_1_1RandomWaypointMobilityModel_a5403d3195d0dd7afee4de130d9dc8a14}{m\_position}->GetNext ();
+65   \textcolor{keywordtype}{double} \hyperlink{mmwave-amc-test_8cc_a6dc6e6f3c75c509ce943163afb5dade7}{speed} = \hyperlink{classns3_1_1RandomWaypointMobilityModel_a573f6a14ec00b07199fa6445f006f4ba}{m\_speed}->\hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{GetValue} ();
+66   \textcolor{keywordtype}{double} dx = (destination.x - m\_current.x);
+67   \textcolor{keywordtype}{double} dy = (destination.y - m\_current.y);
+68   \textcolor{keywordtype}{double} dz = (destination.z - m\_current.z);
+69   \textcolor{keywordtype}{double} k = speed / std::sqrt (dx*dx + dy*dy + dz*dz);
+70 
+71   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}{m\_helper}.\hyperlink{classns3_1_1ConstantVelocityHelper_a985ce86c5b3c94c43048f8db314bbb51}{SetVelocity} (Vector (k*dx, k*dy, k*dz));
+72   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}{m\_helper}.\hyperlink{classns3_1_1ConstantVelocityHelper_a053e3968696019359f50d2b2739f783a}{Unpause} ();
+73   \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} travelDelay = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{namespacens3_aaae60adf695e280c4882ced6041d1628}{CalculateDistance} (destination, m\_current) / 
+      speed);
+74   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a972b615df5f597fa3c8c6408a0d15907}{m\_event}.\hyperlink{classns3_1_1EventId_a993ae94e48e014e1afd47edb16db7a11}{Cancel} ();
+75   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a972b615df5f597fa3c8c6408a0d15907}{m\_event} = \hyperlink{classns3_1_1Simulator_a671882c894a08af4a5e91181bf1eec13}{Simulator::Schedule} (travelDelay,
+76                                  &
+      \hyperlink{classns3_1_1RandomWaypointMobilityModel_a54eb8b2d814d3dfe78f5b189d1e40cf8}{RandomWaypointMobilityModel::DoInitializePrivate}, \textcolor{keyword}{this});
+77   \hyperlink{classns3_1_1MobilityModel_add1317917ac801284c2467a68f09fbe5}{NotifyCourseChange} ();
+78 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!Do\+Assign\+Streams@{Do\+Assign\+Streams}}
+\index{Do\+Assign\+Streams@{Do\+Assign\+Streams}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Assign\+Streams(int64\+\_\+t)}{DoAssignStreams(int64_t)}}]{\setlength{\rightskip}{0pt plus 5cm}int64\+\_\+t ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::\+Do\+Assign\+Streams (
+\begin{DoxyParamCaption}
+\item[{int64\+\_\+t}]{start}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_a3e119d88e301546b51489c06863f9fcc}{}\label{classns3_1_1RandomWaypointMobilityModel_a3e119d88e301546b51489c06863f9fcc}
+The default implementation does nothing but return the passed-\/in parameter. Subclasses using random variables are expected to override this. 
+\begin{DoxyParams}{Parameters}
+{\em start} & starting stream index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of streams used 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1MobilityModel_aa8aa889c9d2d49903a547d58ff5cbadf}{ns3\+::\+Mobility\+Model}.
+
+
+\begin{DoxyCode}
+117 \{
+118   int64\_t positionStreamsAllocated;
+119   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a573f6a14ec00b07199fa6445f006f4ba}{m\_speed}->\hyperlink{classns3_1_1RandomVariableStream_add11aaf975607746b7e271d300659a94}{SetStream} (stream);
+120   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a96ecd2f32821fa7ce41897191a8aab8d}{m\_pause}->\hyperlink{classns3_1_1RandomVariableStream_add11aaf975607746b7e271d300659a94}{SetStream} (stream + 1);
+121   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (\hyperlink{classns3_1_1RandomWaypointMobilityModel_a5403d3195d0dd7afee4de130d9dc8a14}{m\_position}, \textcolor{stringliteral}{"No position allocator added before using this model"});
+122   positionStreamsAllocated = \hyperlink{classns3_1_1RandomWaypointMobilityModel_a5403d3195d0dd7afee4de130d9dc8a14}{m\_position}->AssignStreams (stream + 2);
+123   \textcolor{keywordflow}{return} (2 + positionStreamsAllocated);
+124 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!Do\+Get\+Position@{Do\+Get\+Position}}
+\index{Do\+Get\+Position@{Do\+Get\+Position}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Get\+Position(void) const }{DoGetPosition(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}Vector ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::\+Do\+Get\+Position (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_af33383b21bfeb2e69e1575034c737dc5}{}\label{classns3_1_1RandomWaypointMobilityModel_af33383b21bfeb2e69e1575034c737dc5}
+\begin{DoxyReturn}{Returns}
+the current position.
+\end{DoxyReturn}
+Concrete subclasses of this base class must implement this method. 
+
+Implements \hyperlink{classns3_1_1MobilityModel_a518f70bd8cb78d0031f9a26572434c34}{ns3\+::\+Mobility\+Model}.
+
+
+\begin{DoxyCode}
+99 \{
+100   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}{m\_helper}.\hyperlink{classns3_1_1ConstantVelocityHelper_aaec113a6c2bae2bf8834bfb1e88d6192}{Update} ();
+101   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}{m\_helper}.\hyperlink{classns3_1_1ConstantVelocityHelper_a9416fca612f00cca9fc9f453cad734b6}{GetCurrentPosition} ();
+102 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!Do\+Get\+Velocity@{Do\+Get\+Velocity}}
+\index{Do\+Get\+Velocity@{Do\+Get\+Velocity}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Get\+Velocity(void) const }{DoGetVelocity(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}Vector ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::\+Do\+Get\+Velocity (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_a8570979b4af77043df70407f1d191baf}{}\label{classns3_1_1RandomWaypointMobilityModel_a8570979b4af77043df70407f1d191baf}
+\begin{DoxyReturn}{Returns}
+the current velocity.
+\end{DoxyReturn}
+Concrete subclasses of this base class must implement this method. 
+
+Implements \hyperlink{classns3_1_1MobilityModel_aeb712201a80442ef941d4b460f98aebf}{ns3\+::\+Mobility\+Model}.
+
+
+\begin{DoxyCode}
+112 \{
+113   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}{m\_helper}.\hyperlink{classns3_1_1ConstantVelocityHelper_aa38dd5be77680154c481e71f4965ae90}{GetVelocity} ();
+114 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!Do\+Initialize@{Do\+Initialize}}
+\index{Do\+Initialize@{Do\+Initialize}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Initialize(void)}{DoInitialize(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::\+Do\+Initialize (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_ab3c24223f92f3b81d9b9b3d916e57808}{}\label{classns3_1_1RandomWaypointMobilityModel_ab3c24223f92f3b81d9b9b3d916e57808}
+\hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Initialize()} implementation.
+
+This method is called only once by \hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Initialize()}. If the user calls \hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Initialize()} multiple times, \hyperlink{classns3_1_1RandomWaypointMobilityModel_ab3c24223f92f3b81d9b9b3d916e57808}{Do\+Initialize()} is called only the first time.
+
+Subclasses are expected to override this method and chain up to their parent\textquotesingle{}s implementation once they are done. It is safe to call \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{Get\+Object()} and \hyperlink{classns3_1_1Object_a79dd435d300f3deca814553f561a2922}{Aggregate\+Object()} from within this method. 
+
+Reimplemented from \hyperlink{classns3_1_1Object_af8482a521433409fb5c7f749398c9dbe}{ns3\+::\+Object}.
+
+
+\begin{DoxyCode}
+82 \{
+83   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a54eb8b2d814d3dfe78f5b189d1e40cf8}{DoInitializePrivate} ();
+84   \hyperlink{classns3_1_1Object_af8482a521433409fb5c7f749398c9dbe}{MobilityModel::DoInitialize} ();
+85 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!Do\+Initialize\+Private@{Do\+Initialize\+Private}}
+\index{Do\+Initialize\+Private@{Do\+Initialize\+Private}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Initialize\+Private(void)}{DoInitializePrivate(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::\+Do\+Initialize\+Private (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_a54eb8b2d814d3dfe78f5b189d1e40cf8}{}\label{classns3_1_1RandomWaypointMobilityModel_a54eb8b2d814d3dfe78f5b189d1e40cf8}
+Begin current pause event, schedule future walk event 
+\begin{DoxyCode}
+89 \{
+90   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}{m\_helper}.\hyperlink{classns3_1_1ConstantVelocityHelper_aaec113a6c2bae2bf8834bfb1e88d6192}{Update} ();
+91   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}{m\_helper}.\hyperlink{classns3_1_1ConstantVelocityHelper_a90668d4ba75783657fb4dab7fe098740}{Pause} ();
+92   \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} pause = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{classns3_1_1RandomWaypointMobilityModel_a96ecd2f32821fa7ce41897191a8aab8d}{m\_pause}->\hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{GetValue} ());
+93   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a972b615df5f597fa3c8c6408a0d15907}{m\_event} = \hyperlink{classns3_1_1Simulator_a671882c894a08af4a5e91181bf1eec13}{Simulator::Schedule} (pause, &
+      \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2bdd46473a659a69038bd71efe730c0f}{RandomWaypointMobilityModel::BeginWalk}, \textcolor{keyword}{this});
+94   \hyperlink{classns3_1_1MobilityModel_add1317917ac801284c2467a68f09fbe5}{NotifyCourseChange} ();
+95 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!Do\+Set\+Position@{Do\+Set\+Position}}
+\index{Do\+Set\+Position@{Do\+Set\+Position}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Set\+Position(const Vector \&position)}{DoSetPosition(const Vector &position)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::\+Do\+Set\+Position (
+\begin{DoxyParamCaption}
+\item[{const Vector \&}]{position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_aaa7ec1c8816486310082042724e3d76b}{}\label{classns3_1_1RandomWaypointMobilityModel_aaa7ec1c8816486310082042724e3d76b}
+
+\begin{DoxyParams}{Parameters}
+{\em position} & the position to set.\\
+\hline
+\end{DoxyParams}
+Concrete subclasses of this base class must implement this method. 
+
+Implements \hyperlink{classns3_1_1MobilityModel_aa2f52cd86754da71ac649413c049785e}{ns3\+::\+Mobility\+Model}.
+
+
+\begin{DoxyCode}
+105 \{
+106   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}{m\_helper}.\hyperlink{classns3_1_1ConstantVelocityHelper_a892b4b9ba9a1fbf4f8c221eae6a35cb9}{SetPosition} (position);
+107   \hyperlink{classns3_1_1Simulator_ae30cacdda6cd0d5d62a8f2097b320506}{Simulator::Remove} (\hyperlink{classns3_1_1RandomWaypointMobilityModel_a972b615df5f597fa3c8c6408a0d15907}{m\_event});
+108   \hyperlink{classns3_1_1RandomWaypointMobilityModel_a972b615df5f597fa3c8c6408a0d15907}{m\_event} = \hyperlink{classns3_1_1Simulator_a2219ee02c0647adc83d1c918c3256266}{Simulator::ScheduleNow} (&
+      \hyperlink{classns3_1_1RandomWaypointMobilityModel_a54eb8b2d814d3dfe78f5b189d1e40cf8}{RandomWaypointMobilityModel::DoInitializePrivate}, \textcolor{keyword}{this});
+109 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_ac5dd2a5c630655400f1a0f49c91f2dbc}{}\label{classns3_1_1RandomWaypointMobilityModel_ac5dd2a5c630655400f1a0f49c91f2dbc}
+Register this type with the \hyperlink{classns3_1_1TypeId}{Type\+Id} system. \begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+34 \{
+35   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::RandomWaypointMobilityModel"})
+36     .SetParent<\hyperlink{classns3_1_1MobilityModel_af61ca3dbc723d8109d115fb081fd0299}{MobilityModel}> ()
+37     .SetGroupName (\textcolor{stringliteral}{"Mobility"})
+38     .AddConstructor<RandomWaypointMobilityModel> ()
+39     .AddAttribute (\textcolor{stringliteral}{"Speed"},
+40                    \textcolor{stringliteral}{"A random variable used to pick the speed of a random waypoint model."},
+41                    StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=0.3|Max=0.7]"}),
+42                    MakePointerAccessor (&\hyperlink{classns3_1_1RandomWaypointMobilityModel_a573f6a14ec00b07199fa6445f006f4ba}{RandomWaypointMobilityModel::m\_speed}
+      ),
+43                    MakePointerChecker<RandomVariableStream> ())
+44     .AddAttribute (\textcolor{stringliteral}{"Pause"},
+45                    \textcolor{stringliteral}{"A random variable used to pick the pause of a random waypoint model."},
+46                    StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=2.0]"}),
+47                    MakePointerAccessor (&\hyperlink{classns3_1_1RandomWaypointMobilityModel_a96ecd2f32821fa7ce41897191a8aab8d}{RandomWaypointMobilityModel::m\_pause}
+      ),
+48                    MakePointerChecker<RandomVariableStream> ())
+49     .AddAttribute (\textcolor{stringliteral}{"PositionAllocator"},
+50                    \textcolor{stringliteral}{"The position model used to pick a destination point."},
+51                    PointerValue (),
+52                    MakePointerAccessor (&\hyperlink{classns3_1_1RandomWaypointMobilityModel_a5403d3195d0dd7afee4de130d9dc8a14}{RandomWaypointMobilityModel::m\_position}
+      ),
+53                    MakePointerChecker<PositionAllocator> ());
+54 
+55   \textcolor{keywordflow}{return} tid;
+56 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!m\+\_\+event@{m\+\_\+event}}
+\index{m\+\_\+event@{m\+\_\+event}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+event}{m_event}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Event\+Id} ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::m\+\_\+event\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_a972b615df5f597fa3c8c6408a0d15907}{}\label{classns3_1_1RandomWaypointMobilityModel_a972b615df5f597fa3c8c6408a0d15907}
+
+
+event ID of next scheduled event 
+
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!m\+\_\+helper@{m\+\_\+helper}}
+\index{m\+\_\+helper@{m\+\_\+helper}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+helper}{m_helper}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Constant\+Velocity\+Helper} ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::m\+\_\+helper\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}{}\label{classns3_1_1RandomWaypointMobilityModel_a2e9ce665622899c64f915b4c1af74189}
+
+
+helper for velocity computations 
+
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!m\+\_\+pause@{m\+\_\+pause}}
+\index{m\+\_\+pause@{m\+\_\+pause}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+pause}{m_pause}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Random\+Variable\+Stream}$>$ ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::m\+\_\+pause\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_a96ecd2f32821fa7ce41897191a8aab8d}{}\label{classns3_1_1RandomWaypointMobilityModel_a96ecd2f32821fa7ce41897191a8aab8d}
+
+
+random variable to generate pauses 
+
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!m\+\_\+position@{m\+\_\+position}}
+\index{m\+\_\+position@{m\+\_\+position}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+position}{m_position}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Position\+Allocator}$>$ ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::m\+\_\+position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_a5403d3195d0dd7afee4de130d9dc8a14}{}\label{classns3_1_1RandomWaypointMobilityModel_a5403d3195d0dd7afee4de130d9dc8a14}
+
+
+pointer to position allocator 
+
+\index{ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}!m\+\_\+speed@{m\+\_\+speed}}
+\index{m\+\_\+speed@{m\+\_\+speed}!ns3\+::\+Random\+Waypoint\+Mobility\+Model@{ns3\+::\+Random\+Waypoint\+Mobility\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+speed}{m_speed}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Random\+Variable\+Stream}$>$ ns3\+::\+Random\+Waypoint\+Mobility\+Model\+::m\+\_\+speed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RandomWaypointMobilityModel_a573f6a14ec00b07199fa6445f006f4ba}{}\label{classns3_1_1RandomWaypointMobilityModel_a573f6a14ec00b07199fa6445f006f4ba}
+
+
+random variable to generate speeds 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mobility/model/\hyperlink{random-waypoint-mobility-model_8h}{random-\/waypoint-\/mobility-\/model.\+h}\item 
+mobility/model/\hyperlink{random-waypoint-mobility-model_8cc}{random-\/waypoint-\/mobility-\/model.\+cc}\end{DoxyCompactItemize}

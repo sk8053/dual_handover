@@ -1,0 +1,131 @@
+\hypertarget{tap-wifi-virtual-machine_8cc}{}\section{tap-\/bridge/examples/tap-\/wifi-\/virtual-\/machine.cc File Reference}
+\label{tap-wifi-virtual-machine_8cc}\index{tap-\/bridge/examples/tap-\/wifi-\/virtual-\/machine.\+cc@{tap-\/bridge/examples/tap-\/wifi-\/virtual-\/machine.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wifi-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/tap-\/bridge-\/module.\+h\char`\"{}}\\*
+Include dependency graph for tap-\/wifi-\/virtual-\/machine.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{tap-wifi-virtual-machine_8cc_ab1efb7839fd438587ea4daeccad1bf43}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Tap\+Wifi\+Virtual\+Machine\+Example\char`\"{})
+\item 
+int \hyperlink{tap-wifi-virtual-machine_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{tap-\/wifi-\/virtual-\/machine.\+cc@{tap-\/wifi-\/virtual-\/machine.\+cc}!main@{main}}
+\index{main@{main}!tap-\/wifi-\/virtual-\/machine.\+cc@{tap-\/wifi-\/virtual-\/machine.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-wifi-virtual-machine_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{tap-wifi-virtual-machine_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+84 \{
+85   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+86   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+87 
+88   \textcolor{comment}{//}
+89   \textcolor{comment}{// We are interacting with the outside, real, world.  This means we have to }
+90   \textcolor{comment}{// interact in real-time and therefore means we have to use the real-time}
+91   \textcolor{comment}{// simulator and take the time to calculate checksums.}
+92   \textcolor{comment}{//}
+93   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"}, StringValue (\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl"}));
+94   GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+95 
+96   \textcolor{comment}{//}
+97   \textcolor{comment}{// Create two ghost nodes.  The first will represent the virtual machine host}
+98   \textcolor{comment}{// on the left side of the network; and the second will represent the VM on }
+99   \textcolor{comment}{// the right side.}
+100   \textcolor{comment}{//}
+101   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+102   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+103 
+104   \textcolor{comment}{//}
+105   \textcolor{comment}{// We're going to use 802.11 A so set up a wifi helper to reflect that.}
+106   \textcolor{comment}{//}
+107   \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+108   wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a22db1e8022db2c3450414b86c77b11e4}{WIFI\_PHY\_STANDARD\_80211a});
+109   wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::ConstantRateWifiManager"}, \textcolor{stringliteral}{"DataMode"}, 
+      StringValue (\textcolor{stringliteral}{"OfdmRate54Mbps"}));
+110 
+111   \textcolor{comment}{//}
+112   \textcolor{comment}{// No reason for pesky access points, so we'll use an ad-hoc network.}
+113   \textcolor{comment}{//}
+114   \hyperlink{classns3_1_1WifiMacHelper}{WifiMacHelper} wifiMac;
+115   wifiMac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::AdhocWifiMac"});
+116 
+117   \textcolor{comment}{//}
+118   \textcolor{comment}{// Configure the physcial layer.}
+119   \textcolor{comment}{//}
+120   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} wifiChannel = YansWifiChannelHelper::Default ();
+121   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} wifiPhy = YansWifiPhyHelper::Default ();
+122   wifiPhy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ());
+123 
+124   \textcolor{comment}{//}
+125   \textcolor{comment}{// Install the wireless devices onto our ghost nodes.}
+126   \textcolor{comment}{//}
+127   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (wifiPhy, wifiMac, nodes);
+128 
+129   \textcolor{comment}{//}
+130   \textcolor{comment}{// We need location information since we are talking about wifi, so add a}
+131   \textcolor{comment}{// constant position to the ghost nodes.}
+132   \textcolor{comment}{//}
+133   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+134   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} positionAlloc = CreateObject<ListPositionAllocator> 
+      ();
+135   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));
+136   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (5.0, 0.0, 0.0));
+137   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+138   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+139   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (nodes);
+140 
+141   \textcolor{comment}{//}
+142   \textcolor{comment}{// Use the TapBridgeHelper to connect to the pre-configured tap devices for }
+143   \textcolor{comment}{// the left side.  We go with "UseLocal" mode since the wifi devices do not}
+144   \textcolor{comment}{// support promiscuous mode (because of their natures0.  This is a special}
+145   \textcolor{comment}{// case mode that allows us to extend a linux bridge into ns-3 IFF we will}
+146   \textcolor{comment}{// only see traffic from one other device on that bridge.  That is the case}
+147   \textcolor{comment}{// for this configuration.}
+148   \textcolor{comment}{//}
+149   \hyperlink{classns3_1_1TapBridgeHelper}{TapBridgeHelper} tapBridge;
+150   tapBridge.\hyperlink{classns3_1_1TapBridgeHelper_ac13f757f82c0ee66504693ede7230397}{SetAttribute} (\textcolor{stringliteral}{"Mode"}, StringValue (\textcolor{stringliteral}{"UseLocal"}));
+151   tapBridge.\hyperlink{classns3_1_1TapBridgeHelper_ac13f757f82c0ee66504693ede7230397}{SetAttribute} (\textcolor{stringliteral}{"DeviceName"}, StringValue (\textcolor{stringliteral}{"tap-left"}));
+152   tapBridge.\hyperlink{classns3_1_1TapBridgeHelper_a3bc88e67e28990845ce6cab3e7cafd6e}{Install} (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+153 
+154   \textcolor{comment}{//}
+155   \textcolor{comment}{// Connect the right side tap to the right side wifi device on the right-side}
+156   \textcolor{comment}{// ghost node.}
+157   \textcolor{comment}{//}
+158   tapBridge.\hyperlink{classns3_1_1TapBridgeHelper_ac13f757f82c0ee66504693ede7230397}{SetAttribute} (\textcolor{stringliteral}{"DeviceName"}, StringValue (\textcolor{stringliteral}{"tap-right"}));
+159   tapBridge.\hyperlink{classns3_1_1TapBridgeHelper_a3bc88e67e28990845ce6cab3e7cafd6e}{Install} (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+160 
+161   \textcolor{comment}{//}
+162   \textcolor{comment}{// Run the simulation for ten minutes to give the user time to play around}
+163   \textcolor{comment}{//}
+164   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (600.));
+165   Simulator::Run ();
+166   Simulator::Destroy ();
+167 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{tap-\/wifi-\/virtual-\/machine.\+cc@{tap-\/wifi-\/virtual-\/machine.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!tap-\/wifi-\/virtual-\/machine.\+cc@{tap-\/wifi-\/virtual-\/machine.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Tap\+Wifi\+Virtual\+Machine\+Example"")}{NS_LOG_COMPONENT_DEFINE("TapWifiVirtualMachineExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Tap\+Wifi\+Virtual\+Machine\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-wifi-virtual-machine_8cc_ab1efb7839fd438587ea4daeccad1bf43}{}\label{tap-wifi-virtual-machine_8cc_ab1efb7839fd438587ea4daeccad1bf43}

@@ -1,0 +1,88 @@
+\hypertarget{main-random-topology_8cc}{}\section{mobility/examples/main-\/random-\/topology.cc File Reference}
+\label{main-random-topology_8cc}\index{mobility/examples/main-\/random-\/topology.\+cc@{mobility/examples/main-\/random-\/topology.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+Include dependency graph for main-\/random-\/topology.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{main-random-topology_8cc_a964f8f921355f96436845cc6034fffd2}{Course\+Change} (std\+::string context, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ position)
+\item 
+int \hyperlink{main-random-topology_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{main-\/random-\/topology.\+cc@{main-\/random-\/topology.\+cc}!Course\+Change@{Course\+Change}}
+\index{Course\+Change@{Course\+Change}!main-\/random-\/topology.\+cc@{main-\/random-\/topology.\+cc}}
+\subsubsection[{\texorpdfstring{Course\+Change(std\+::string context, Ptr$<$ const Mobility\+Model $>$ position)}{CourseChange(std::string context, Ptr< const MobilityModel > position)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Course\+Change (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{{\bf Ptr}$<$ const {\bf Mobility\+Model} $>$}]{position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-random-topology_8cc_a964f8f921355f96436845cc6034fffd2}{}\label{main-random-topology_8cc_a964f8f921355f96436845cc6034fffd2}
+
+\begin{DoxyCode}
+27 \{
+28   \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} pos = position->\hyperlink{classns3_1_1MobilityModel_aba838f06ec5bbb2d193d94b8c0e4abb4}{GetPosition} ();
+29   std::cout << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} () << \textcolor{stringliteral}{", pos="} << position << \textcolor{stringliteral}{", x="} << pos.x << \textcolor{stringliteral}{", y="} << pos.
+      y
+30             << \textcolor{stringliteral}{", z="} << pos.z << std::endl;
+31 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{main-\/random-\/topology.\+cc@{main-\/random-\/topology.\+cc}!main@{main}}
+\index{main@{main}!main-\/random-\/topology.\+cc@{main-\/random-\/topology.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{main-random-topology_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{main-random-topology_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+34 \{
+35   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+36   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+37 
+38 
+39   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+40   c.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (10000);
+41 
+42   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+43   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (\textcolor{stringliteral}{"ns3::RandomDiscPositionAllocator"},
+44                                  \textcolor{stringliteral}{"X"}, StringValue (\textcolor{stringliteral}{"100.0"}),
+45                                  \textcolor{stringliteral}{"Y"}, StringValue (\textcolor{stringliteral}{"100.0"}),
+46                                  \textcolor{stringliteral}{"Rho"}, StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=0|Max=30]"}));
+47   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+48   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (c);
+49 
+50   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/NodeList/*/$ns3::MobilityModel/CourseChange"},
+51                    \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{main-random-topology_8cc_a964f8f921355f96436845cc6034fffd2}{CourseChange}));
+52 
+53   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (100.0));
+54 
+55   Simulator::Run ();
+56 
+57   Simulator::Destroy ();
+58   \textcolor{keywordflow}{return} 0;
+59 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+

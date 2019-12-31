@@ -1,0 +1,675 @@
+\hypertarget{classns3_1_1TcpVeno}{}\section{ns3\+:\+:Tcp\+Veno Class Reference}
+\label{classns3_1_1TcpVeno}\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+
+
+An implementation of T\+CP Veno.  
+
+
+
+
+{\ttfamily \#include $<$tcp-\/veno.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Tcp\+Veno\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Tcp\+Veno\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1TcpVeno_a6a4a54e29b00f88169572c5b710f9c31}{Tcp\+Veno} (void)
+\item 
+\hyperlink{classns3_1_1TcpVeno_a2116c900f21fd917acd8f3fcb3dcc318}{Tcp\+Veno} (const \hyperlink{classns3_1_1TcpVeno}{Tcp\+Veno} \&sock)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1TcpVeno_aec966ca40fa5ebb773fec6ae609efca0}{$\sim$\+Tcp\+Veno} (void)
+\item 
+virtual std\+::string \hyperlink{classns3_1_1TcpVeno_a53f0c8ff201ea8972166ae6cca450d07}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the name of the congestion control algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpVeno_a8270456c1a00231bd8c2282da8b99561}{Pkts\+Acked} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked, const \hyperlink{classns3_1_1Time}{Time} \&rtt)
+\begin{DoxyCompactList}\small\item\em Perform R\+TT sampling needed to execute Veno algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpVeno_a39f34ca48e88063934c9c4f893d9c1dc}{Congestion\+State\+Set} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, const \hyperlink{classns3_1_1TcpSocketState_a6fc313945a33d48fd60cbffe0c787b19}{Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t} new\+State)
+\begin{DoxyCompactList}\small\item\em Enable/disable Veno depending on the congestion state. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpVeno_a5865787a20ea7c2c8beee2df5cefcdaa}{Increase\+Window} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked)
+\begin{DoxyCompactList}\small\item\em Adjust cwnd following Veno additive increase algorithm. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1TcpVeno_a03a169d4fd7653a6a56a7963578cc489}{Get\+Ss\+Thresh} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)
+\begin{DoxyCompactList}\small\item\em Get slow start threshold during Veno multiplicative-\/decrease phase. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} $>$ \hyperlink{classns3_1_1TcpVeno_a32d40c4563a8ba8e0317b860c184c055}{Fork} ()
+\begin{DoxyCompactList}\small\item\em Copy the congestion control algorithm across socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1TcpVeno_adb5c48263b4c12ac1e7715b1c5adc749}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1TcpVeno_a7ece86eb87a0b29cb1d13be11a963873}{Enable\+Veno} ()
+\begin{DoxyCompactList}\small\item\em Enable Veno algorithm to start Veno sampling. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1TcpVeno_ad3c860be7664f91a2409145d6085da01}{Disable\+Veno} ()
+\begin{DoxyCompactList}\small\item\em Turn off Veno. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpVeno_aeae3dd21752b2d7dd774202fe8a6d5e1}{m\+\_\+base\+Rtt}
+\begin{DoxyCompactList}\small\item\em Minimum of all R\+TT measurements seen during connection. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpVeno_a9fd4b7308b7f0b7cd4179d6f65aba383}{m\+\_\+min\+Rtt}
+\begin{DoxyCompactList}\small\item\em Minimum of R\+T\+Ts measured within last R\+TT. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpVeno_a56ba63c2e02200d19b808741c1f68c64}{m\+\_\+cnt\+Rtt}
+\begin{DoxyCompactList}\small\item\em Number of R\+TT measurements during last R\+TT. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1TcpVeno_aaf29a4f390edec44d3b5db1a70a5d119}{m\+\_\+doing\+Veno\+Now}
+\begin{DoxyCompactList}\small\item\em If true, do Veno for this R\+TT. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpVeno_ae98841fe53c815c3d754675d2857ac80}{m\+\_\+diff}
+\begin{DoxyCompactList}\small\item\em Difference between expected and actual throughput. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1TcpVeno_a0962710ab039eac65735fb61bbe850b2}{m\+\_\+inc}
+\begin{DoxyCompactList}\small\item\em If true, cwnd needs to be incremented. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpVeno_abcf5701edb3712b02e492701f1abfdac}{m\+\_\+ack\+Cnt}
+\begin{DoxyCompactList}\small\item\em Number of received A\+CK. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpVeno_ad041620f3dc6988923c412d8a4183f36}{m\+\_\+beta}
+\begin{DoxyCompactList}\small\item\em Threshold for congestion detection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An implementation of T\+CP Veno. 
+
+T\+CP Veno enhances Reno algorithm for more effectively dealing with random packet loss in wireless access networks by employing Vegas\textquotesingle{}s method in estimating the backlog at the bottleneck queue to distinguish between congestive and non-\/congestive states.
+
+The backlog (the number of packets accumulated at the bottleneck queue) is calculated using Equation (1)\+: \begin{DoxyVerb}    N = Actual * (RTT - BaseRTT) = Diff * BaseRTT        (1)
+\end{DoxyVerb}
+ where Diff = Expected -\/ Actual = cwnd/\+Base\+R\+TT -\/ cwnd/\+R\+TT
+
+Veno makes decision on cwnd modification based on the calculated N and its predefined threshold beta.
+
+Specifically, it refines the additive increase algorithm of Reno so that the connection can stay longer in the stable state by incrementing cwnd by 1/cwnd for every other new A\+CK received after the available bandwidth has been fully utilized, i.\+e. when N exceeds beta. Otherwise, Veno increases its cwnd by 1/cwnd upon every new A\+CK receipt as in Reno.
+
+In the multiplicative decrease algorithm, when Veno is in the non-\/congestive state, i.\+e. when N is less than beta, Veno decrements its cwnd by only 1/5 because the loss encountered is more likely a corruption-\/based loss than a congestion-\/based. Only when N is greater than beta, Veno halves its sending rate as in Reno.
+
+More information\+: \href{http://dx.doi.org/10.1109/JSAC.2002.807336}{\tt http\+://dx.\+doi.\+org/10.\+1109/\+J\+S\+A\+C.\+2002.\+807336} 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!Tcp\+Veno@{Tcp\+Veno}}
+\index{Tcp\+Veno@{Tcp\+Veno}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{Tcp\+Veno(void)}{TcpVeno(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Veno\+::\+Tcp\+Veno (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpVeno_a6a4a54e29b00f88169572c5b710f9c31}{}\label{classns3_1_1TcpVeno_a6a4a54e29b00f88169572c5b710f9c31}
+Create an unbound tcp socket. 
+\begin{DoxyCode}
+52   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (),
+53     \hyperlink{classns3_1_1TcpVeno_aeae3dd21752b2d7dd774202fe8a6d5e1}{m\_baseRtt} (\hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ()),
+54     \hyperlink{classns3_1_1TcpVeno_a9fd4b7308b7f0b7cd4179d6f65aba383}{m\_minRtt} (\hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ()),
+55     \hyperlink{classns3_1_1TcpVeno_a56ba63c2e02200d19b808741c1f68c64}{m\_cntRtt} (0),
+56     \hyperlink{classns3_1_1TcpVeno_aaf29a4f390edec44d3b5db1a70a5d119}{m\_doingVenoNow} (\textcolor{keyword}{true}),
+57     \hyperlink{classns3_1_1TcpVeno_ae98841fe53c815c3d754675d2857ac80}{m\_diff} (0),
+58     \hyperlink{classns3_1_1TcpVeno_a0962710ab039eac65735fb61bbe850b2}{m\_inc} (\textcolor{keyword}{true}),
+59     \hyperlink{classns3_1_1TcpVeno_abcf5701edb3712b02e492701f1abfdac}{m\_ackCnt} (0),
+60     \hyperlink{classns3_1_1TcpVeno_ad041620f3dc6988923c412d8a4183f36}{m\_beta} (6)
+61 \{
+62   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+63 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!Tcp\+Veno@{Tcp\+Veno}}
+\index{Tcp\+Veno@{Tcp\+Veno}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{Tcp\+Veno(const Tcp\+Veno \&sock)}{TcpVeno(const TcpVeno &sock)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Veno\+::\+Tcp\+Veno (
+\begin{DoxyParamCaption}
+\item[{const {\bf Tcp\+Veno} \&}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpVeno_a2116c900f21fd917acd8f3fcb3dcc318}{}\label{classns3_1_1TcpVeno_a2116c900f21fd917acd8f3fcb3dcc318}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & the object to copy \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+66   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (sock),
+67     \hyperlink{classns3_1_1TcpVeno_aeae3dd21752b2d7dd774202fe8a6d5e1}{m\_baseRtt} (sock.m\_baseRtt),
+68     \hyperlink{classns3_1_1TcpVeno_a9fd4b7308b7f0b7cd4179d6f65aba383}{m\_minRtt} (sock.m\_minRtt),
+69     \hyperlink{classns3_1_1TcpVeno_a56ba63c2e02200d19b808741c1f68c64}{m\_cntRtt} (sock.m\_cntRtt),
+70     \hyperlink{classns3_1_1TcpVeno_aaf29a4f390edec44d3b5db1a70a5d119}{m\_doingVenoNow} (\textcolor{keyword}{true}),
+71     \hyperlink{classns3_1_1TcpVeno_ae98841fe53c815c3d754675d2857ac80}{m\_diff} (0),
+72     \hyperlink{classns3_1_1TcpVeno_a0962710ab039eac65735fb61bbe850b2}{m\_inc} (\textcolor{keyword}{true}),
+73     \hyperlink{classns3_1_1TcpVeno_abcf5701edb3712b02e492701f1abfdac}{m\_ackCnt} (sock.m\_ackCnt),
+74     \hyperlink{classns3_1_1TcpVeno_ad041620f3dc6988923c412d8a4183f36}{m\_beta} (sock.m\_beta)
+75 \{
+76   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+77 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!````~Tcp\+Veno@{$\sim$\+Tcp\+Veno}}
+\index{````~Tcp\+Veno@{$\sim$\+Tcp\+Veno}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{$\sim$\+Tcp\+Veno(void)}{~TcpVeno(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Veno\+::$\sim$\+Tcp\+Veno (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVeno_aec966ca40fa5ebb773fec6ae609efca0}{}\label{classns3_1_1TcpVeno_aec966ca40fa5ebb773fec6ae609efca0}
+
+\begin{DoxyCode}
+80 \{
+81   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+82 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!Congestion\+State\+Set@{Congestion\+State\+Set}}
+\index{Congestion\+State\+Set@{Congestion\+State\+Set}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{Congestion\+State\+Set(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, const Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t new\+State)}{CongestionStateSet(Ptr< TcpSocketState > tcb, const TcpSocketState::TcpCongState_t newState)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Veno\+::\+Congestion\+State\+Set (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{const {\bf Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t}}]{new\+State}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVeno_a39f34ca48e88063934c9c4f893d9c1dc}{}\label{classns3_1_1TcpVeno_a39f34ca48e88063934c9c4f893d9c1dc}
+
+
+Enable/disable Veno depending on the congestion state. 
+
+We only start a Veno when we are in normal congestion state (C\+A\+\_\+\+O\+P\+EN state).
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em new\+State} & new congestion state to which the T\+CP is going to switch \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpCongestionOps_a2777666dc7df24040d718ddba896928b}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+133 \{
+134   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << newState);
+135   \textcolor{keywordflow}{if} (newState == \hyperlink{classns3_1_1TcpSocketState_a6fc313945a33d48fd60cbffe0c787b19af2d22f02a77b603394c34d4968bad142}{TcpSocketState::CA\_OPEN})
+136     \{
+137       \hyperlink{classns3_1_1TcpVeno_a7ece86eb87a0b29cb1d13be11a963873}{EnableVeno} ();
+138       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Veno is now on."});
+139     \}
+140   \textcolor{keywordflow}{else}
+141     \{
+142       \hyperlink{classns3_1_1TcpVeno_ad3c860be7664f91a2409145d6085da01}{DisableVeno} ();
+143       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Veno is turned off."});
+144     \}
+145 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!Disable\+Veno@{Disable\+Veno}}
+\index{Disable\+Veno@{Disable\+Veno}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{Disable\+Veno()}{DisableVeno()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Veno\+::\+Disable\+Veno (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVeno_ad3c860be7664f91a2409145d6085da01}{}\label{classns3_1_1TcpVeno_ad3c860be7664f91a2409145d6085da01}
+
+
+Turn off Veno. 
+
+
+\begin{DoxyCode}
+124 \{
+125   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+126 
+127   \hyperlink{classns3_1_1TcpVeno_aaf29a4f390edec44d3b5db1a70a5d119}{m\_doingVenoNow} = \textcolor{keyword}{false};
+128 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!Enable\+Veno@{Enable\+Veno}}
+\index{Enable\+Veno@{Enable\+Veno}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{Enable\+Veno()}{EnableVeno()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Veno\+::\+Enable\+Veno (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVeno_a7ece86eb87a0b29cb1d13be11a963873}{}\label{classns3_1_1TcpVeno_a7ece86eb87a0b29cb1d13be11a963873}
+
+
+Enable Veno algorithm to start Veno sampling. 
+
+Veno algorithm is enabled in the following situations\+:
+\begin{DoxyEnumerate}
+\item at the establishment of a connection
+\item after an R\+TO
+\item after fast recovery
+\item when an idle connection is restarted 
+\end{DoxyEnumerate}
+\begin{DoxyCode}
+115 \{
+116   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+117 
+118   \hyperlink{classns3_1_1TcpVeno_aaf29a4f390edec44d3b5db1a70a5d119}{m\_doingVenoNow} = \textcolor{keyword}{true};
+119   \hyperlink{classns3_1_1TcpVeno_a9fd4b7308b7f0b7cd4179d6f65aba383}{m\_minRtt} = \hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ();
+120 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!Fork@{Fork}}
+\index{Fork@{Fork}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{Fork()}{Fork()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Congestion\+Ops} $>$ ns3\+::\+Tcp\+Veno\+::\+Fork (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVeno_a32d40c4563a8ba8e0317b860c184c055}{}\label{classns3_1_1TcpVeno_a32d40c4563a8ba8e0317b860c184c055}
+
+
+Copy the congestion control algorithm across socket. 
+
+\begin{DoxyReturn}{Returns}
+a pointer of the copied object 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a2606d5fcd01a1eb4d5f4e6beb7a33192}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+86 \{
+87   \textcolor{keywordflow}{return} CopyObject<TcpVeno> (\textcolor{keyword}{this});
+88 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Tcp\+Veno\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVeno_a53f0c8ff201ea8972166ae6cca450d07}{}\label{classns3_1_1TcpVeno_a53f0c8ff201ea8972166ae6cca450d07}
+
+
+Get the name of the congestion control algorithm. 
+
+\begin{DoxyReturn}{Returns}
+A string identifying the name 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a0ecf92cb36c236c70e0ecaedfff6609e}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+236 \{
+237   \textcolor{keywordflow}{return} \textcolor{stringliteral}{"TcpVeno"};
+238 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!Get\+Ss\+Thresh@{Get\+Ss\+Thresh}}
+\index{Get\+Ss\+Thresh@{Get\+Ss\+Thresh}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{Get\+Ss\+Thresh(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)}{GetSsThresh(Ptr< const TcpSocketState > tcb, uint32_t bytesInFlight)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Veno\+::\+Get\+Ss\+Thresh (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{bytes\+In\+Flight}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVeno_a03a169d4fd7653a6a56a7963578cc489}{}\label{classns3_1_1TcpVeno_a03a169d4fd7653a6a56a7963578cc489}
+
+
+Get slow start threshold during Veno multiplicative-\/decrease phase. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em bytes\+In\+Flight} & bytes in flight\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the slow start threshold value 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a1cb467aaa4960dfe10b963ed9f3d5aa2}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+243 \{
+244   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << bytesInFlight);
+245 
+246   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpVeno_ae98841fe53c815c3d754675d2857ac80}{m\_diff} < \hyperlink{classns3_1_1TcpVeno_ad041620f3dc6988923c412d8a4183f36}{m\_beta})
+247     \{
+248       \textcolor{comment}{// random loss due to bit errors is most likely to have occurred,}
+249       \textcolor{comment}{// we cut cwnd by 1/5}
+250       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Random loss is most likely to have occurred, "}
+251                     \textcolor{stringliteral}{"cwnd is reduced by 1/5"});
+252       \textcolor{keyword}{static} \textcolor{keywordtype}{double} tmp = 4.0/5.0;
+253       \textcolor{keywordflow}{return} \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (static\_cast<uint32\_t> (bytesInFlight * tmp),
+254                        2 * tcb->m\_segmentSize);
+255     \}
+256   \textcolor{keywordflow}{else}
+257     \{
+258       \textcolor{comment}{// congestion-based loss is most likely to have occurred,}
+259       \textcolor{comment}{// we reduce cwnd by 1/2 as in NewReno}
+260       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Congestive loss is most likely to have occurred, "}
+261                     \textcolor{stringliteral}{"cwnd is halved"});
+262       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1TcpNewReno_a1cb467aaa4960dfe10b963ed9f3d5aa2}{TcpNewReno::GetSsThresh} (tcb, bytesInFlight);
+263     \}
+264 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Tcp\+Veno\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpVeno_adb5c48263b4c12ac1e7715b1c5adc749}{}\label{classns3_1_1TcpVeno_adb5c48263b4c12ac1e7715b1c5adc749}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+38 \{
+39   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::TcpVeno"})
+40     .SetParent<\hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno}> ()
+41     .AddConstructor<TcpVeno> ()
+42     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+43     .AddAttribute (\textcolor{stringliteral}{"Beta"}, \textcolor{stringliteral}{"Threshold for congestion detection"},
+44                    UintegerValue (3),
+45                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpVeno_ad041620f3dc6988923c412d8a4183f36}{TcpVeno::m\_beta}),
+46                    MakeUintegerChecker<uint32\_t> ())
+47   ;
+48   \textcolor{keywordflow}{return} tid;
+49 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!Increase\+Window@{Increase\+Window}}
+\index{Increase\+Window@{Increase\+Window}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{Increase\+Window(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked)}{IncreaseWindow(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Veno\+::\+Increase\+Window (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVeno_a5865787a20ea7c2c8beee2df5cefcdaa}{}\label{classns3_1_1TcpVeno_a5865787a20ea7c2c8beee2df5cefcdaa}
+
+
+Adjust cwnd following Veno additive increase algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments A\+C\+Ked \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a11db8ae90f4cebacc15524a793b0741a}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+149 \{
+150   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked);
+151 
+152   \textcolor{comment}{// Always calculate m\_diff, even if we are not doing Veno now}
+153   uint32\_t targetCwnd;
+154   uint32\_t segCwnd = tcb->\hyperlink{classns3_1_1TcpSocketState_ab6dfe309ca53fd3207dcafede75ad12d}{GetCwndInSegments} ();
+155 
+156   \textcolor{comment}{/*}
+157 \textcolor{comment}{   * Calculate the cwnd we should have. baseRtt is the minimum RTT}
+158 \textcolor{comment}{   * per-connection, minRtt is the minimum RTT in this window}
+159 \textcolor{comment}{   *}
+160 \textcolor{comment}{   * little trick:}
+161 \textcolor{comment}{   * desidered throughput is currentCwnd * baseRtt}
+162 \textcolor{comment}{   * target cwnd is throughput / minRtt}
+163 \textcolor{comment}{   */}
+164   \textcolor{keywordtype}{double} tmp = \hyperlink{classns3_1_1TcpVeno_aeae3dd21752b2d7dd774202fe8a6d5e1}{m\_baseRtt}.\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () / \hyperlink{classns3_1_1TcpVeno_a9fd4b7308b7f0b7cd4179d6f65aba383}{m\_minRtt}.
+      \hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} ();
+165   targetCwnd = segCwnd * tmp;
+166   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Calculated targetCwnd = "} << targetCwnd);
+167   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (segCwnd >= targetCwnd); \textcolor{comment}{// implies baseRtt <= minRtt}
+168 
+169   \textcolor{comment}{// Calculate the difference between actual and target cwnd}
+170   \hyperlink{classns3_1_1TcpVeno_ae98841fe53c815c3d754675d2857ac80}{m\_diff} = segCwnd - targetCwnd;
+171   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Calculated m\_diff = "} << \hyperlink{classns3_1_1TcpVeno_ae98841fe53c815c3d754675d2857ac80}{m\_diff});
+172 
+173   \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1TcpVeno_aaf29a4f390edec44d3b5db1a70a5d119}{m\_doingVenoNow})
+174     \{
+175       \textcolor{comment}{// If Veno is not on, we follow NewReno algorithm}
+176       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Veno is not turned on, we follow NewReno algorithm."});
+177       \hyperlink{classns3_1_1TcpNewReno_a11db8ae90f4cebacc15524a793b0741a}{TcpNewReno::IncreaseWindow} (tcb, segmentsAcked);
+178       \textcolor{keywordflow}{return};
+179     \}
+180 
+181   \textcolor{comment}{// We do the Veno calculations only if we got enough RTT samples}
+182   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpVeno_a56ba63c2e02200d19b808741c1f68c64}{m\_cntRtt} <= 2)
+183     \{    \textcolor{comment}{// We do not have enough RTT samples, so we should behave like NewReno}
+184       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"We do not have enough RTT samples to perform Veno "}
+185                     \textcolor{stringliteral}{"calculations, we behave like NewReno."});
+186       \hyperlink{classns3_1_1TcpNewReno_a11db8ae90f4cebacc15524a793b0741a}{TcpNewReno::IncreaseWindow} (tcb, segmentsAcked);
+187     \}
+188   \textcolor{keywordflow}{else}
+189     \{
+190       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"We have enough RTT samples to perform Veno calculations."});
+191 
+192       \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} < tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh})
+193         \{ \textcolor{comment}{// Slow start mode. Veno employs same slow start algorithm as NewReno's.}
+194           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"We are in slow start, behave like NewReno."});
+195           \hyperlink{classns3_1_1TcpNewReno_a1cf5fd9585eb3b745727f4f5beae0706}{TcpNewReno::SlowStart} (tcb, segmentsAcked);
+196         \}
+197       \textcolor{keywordflow}{else}
+198         \{ \textcolor{comment}{// Congestion avoidance mode}
+199           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"We are in congestion avoidance, execute Veno additive "}
+200                         \textcolor{stringliteral}{"increase algo."});
+201 
+202           \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpVeno_ae98841fe53c815c3d754675d2857ac80}{m\_diff} < \hyperlink{classns3_1_1TcpVeno_ad041620f3dc6988923c412d8a4183f36}{m\_beta})
+203             \{
+204               \textcolor{comment}{// Available bandwidth is not fully utilized,}
+205               \textcolor{comment}{// increase cwnd by 1 every RTT}
+206               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Available bandwidth not fully utilized, increase "}
+207                             \textcolor{stringliteral}{"cwnd by 1 every RTT"});
+208               \hyperlink{classns3_1_1TcpNewReno_a34a5eec0649a7b485852c74c825e14ba}{TcpNewReno::CongestionAvoidance} (tcb, segmentsAcked);
+209             \}
+210           \textcolor{keywordflow}{else}
+211             \{
+212               \textcolor{comment}{// Available bandwidth is fully utilized,}
+213               \textcolor{comment}{// increase cwnd by 1 every other RTT}
+214               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Available bandwidth fully utilized, increase cwnd "}
+215                             \textcolor{stringliteral}{"by 1 every other RTT"});
+216               \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpVeno_a0962710ab039eac65735fb61bbe850b2}{m\_inc})
+217                 \{
+218                   \hyperlink{classns3_1_1TcpNewReno_a34a5eec0649a7b485852c74c825e14ba}{TcpNewReno::CongestionAvoidance} (tcb, segmentsAcked);
+219                   \hyperlink{classns3_1_1TcpVeno_a0962710ab039eac65735fb61bbe850b2}{m\_inc} = \textcolor{keyword}{false};
+220                 \}
+221               \textcolor{keywordflow}{else}
+222                 \{
+223                   \hyperlink{classns3_1_1TcpVeno_a0962710ab039eac65735fb61bbe850b2}{m\_inc} = \textcolor{keyword}{true};
+224                 \}
+225             \}
+226         \}
+227     \}
+228 
+229   \textcolor{comment}{// Reset cntRtt & minRtt every RTT}
+230   \hyperlink{classns3_1_1TcpVeno_a56ba63c2e02200d19b808741c1f68c64}{m\_cntRtt} = 0;
+231   \hyperlink{classns3_1_1TcpVeno_a9fd4b7308b7f0b7cd4179d6f65aba383}{m\_minRtt} = \hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ();
+232 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!Pkts\+Acked@{Pkts\+Acked}}
+\index{Pkts\+Acked@{Pkts\+Acked}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{Pkts\+Acked(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked, const Time \&rtt)}{PktsAcked(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked, const Time &rtt)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Veno\+::\+Pkts\+Acked (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked, }
+\item[{const {\bf Time} \&}]{rtt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVeno_a8270456c1a00231bd8c2282da8b99561}{}\label{classns3_1_1TcpVeno_a8270456c1a00231bd8c2282da8b99561}
+
+
+Perform R\+TT sampling needed to execute Veno algorithm. 
+
+The function filters R\+TT samples from the last R\+TT to find the current smallest propagation delay + queueing delay (m\+\_\+min\+Rtt). We take the minimum to avoid the effects of delayed A\+C\+Ks.
+
+The function also min-\/filters all R\+TT measurements seen to find the propagation delay (m\+\_\+base\+Rtt).
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments A\+C\+Ked \\
+\hline
+{\em rtt} & last R\+TT \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpCongestionOps_a76d3ffb7b1a7ba761026e3f94c1f50fa}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+93 \{
+94   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked << rtt);
+95 
+96   \textcolor{keywordflow}{if} (rtt.IsZero ())
+97     \{
+98       \textcolor{keywordflow}{return};
+99     \}
+100 
+101   \hyperlink{classns3_1_1TcpVeno_a9fd4b7308b7f0b7cd4179d6f65aba383}{m\_minRtt} = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (\hyperlink{classns3_1_1TcpVeno_a9fd4b7308b7f0b7cd4179d6f65aba383}{m\_minRtt}, rtt);
+102   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_minRtt= "} << \hyperlink{classns3_1_1TcpVeno_a9fd4b7308b7f0b7cd4179d6f65aba383}{m\_minRtt});
+103 
+104 
+105   \hyperlink{classns3_1_1TcpVeno_aeae3dd21752b2d7dd774202fe8a6d5e1}{m\_baseRtt} = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (\hyperlink{classns3_1_1TcpVeno_aeae3dd21752b2d7dd774202fe8a6d5e1}{m\_baseRtt}, rtt);
+106   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_baseRtt= "} << \hyperlink{classns3_1_1TcpVeno_aeae3dd21752b2d7dd774202fe8a6d5e1}{m\_baseRtt});
+107 
+108   \textcolor{comment}{// Update RTT counter}
+109   \hyperlink{classns3_1_1TcpVeno_a56ba63c2e02200d19b808741c1f68c64}{m\_cntRtt}++;
+110   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_cntRtt= "} << \hyperlink{classns3_1_1TcpVeno_a56ba63c2e02200d19b808741c1f68c64}{m\_cntRtt});
+111 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 13
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!m\+\_\+ack\+Cnt@{m\+\_\+ack\+Cnt}}
+\index{m\+\_\+ack\+Cnt@{m\+\_\+ack\+Cnt}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{m\+\_\+ack\+Cnt}{m_ackCnt}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Veno\+::m\+\_\+ack\+Cnt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVeno_abcf5701edb3712b02e492701f1abfdac}{}\label{classns3_1_1TcpVeno_abcf5701edb3712b02e492701f1abfdac}
+
+
+Number of received A\+CK. 
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!m\+\_\+base\+Rtt@{m\+\_\+base\+Rtt}}
+\index{m\+\_\+base\+Rtt@{m\+\_\+base\+Rtt}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{m\+\_\+base\+Rtt}{m_baseRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Veno\+::m\+\_\+base\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVeno_aeae3dd21752b2d7dd774202fe8a6d5e1}{}\label{classns3_1_1TcpVeno_aeae3dd21752b2d7dd774202fe8a6d5e1}
+
+
+Minimum of all R\+TT measurements seen during connection. 
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!m\+\_\+beta@{m\+\_\+beta}}
+\index{m\+\_\+beta@{m\+\_\+beta}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{m\+\_\+beta}{m_beta}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Veno\+::m\+\_\+beta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVeno_ad041620f3dc6988923c412d8a4183f36}{}\label{classns3_1_1TcpVeno_ad041620f3dc6988923c412d8a4183f36}
+
+
+Threshold for congestion detection. 
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!m\+\_\+cnt\+Rtt@{m\+\_\+cnt\+Rtt}}
+\index{m\+\_\+cnt\+Rtt@{m\+\_\+cnt\+Rtt}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{m\+\_\+cnt\+Rtt}{m_cntRtt}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Veno\+::m\+\_\+cnt\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVeno_a56ba63c2e02200d19b808741c1f68c64}{}\label{classns3_1_1TcpVeno_a56ba63c2e02200d19b808741c1f68c64}
+
+
+Number of R\+TT measurements during last R\+TT. 
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!m\+\_\+diff@{m\+\_\+diff}}
+\index{m\+\_\+diff@{m\+\_\+diff}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{m\+\_\+diff}{m_diff}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Veno\+::m\+\_\+diff\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVeno_ae98841fe53c815c3d754675d2857ac80}{}\label{classns3_1_1TcpVeno_ae98841fe53c815c3d754675d2857ac80}
+
+
+Difference between expected and actual throughput. 
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!m\+\_\+doing\+Veno\+Now@{m\+\_\+doing\+Veno\+Now}}
+\index{m\+\_\+doing\+Veno\+Now@{m\+\_\+doing\+Veno\+Now}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{m\+\_\+doing\+Veno\+Now}{m_doingVenoNow}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Tcp\+Veno\+::m\+\_\+doing\+Veno\+Now\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVeno_aaf29a4f390edec44d3b5db1a70a5d119}{}\label{classns3_1_1TcpVeno_aaf29a4f390edec44d3b5db1a70a5d119}
+
+
+If true, do Veno for this R\+TT. 
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!m\+\_\+inc@{m\+\_\+inc}}
+\index{m\+\_\+inc@{m\+\_\+inc}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{m\+\_\+inc}{m_inc}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Tcp\+Veno\+::m\+\_\+inc\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVeno_a0962710ab039eac65735fb61bbe850b2}{}\label{classns3_1_1TcpVeno_a0962710ab039eac65735fb61bbe850b2}
+
+
+If true, cwnd needs to be incremented. 
+
+\index{ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}!m\+\_\+min\+Rtt@{m\+\_\+min\+Rtt}}
+\index{m\+\_\+min\+Rtt@{m\+\_\+min\+Rtt}!ns3\+::\+Tcp\+Veno@{ns3\+::\+Tcp\+Veno}}
+\subsubsection[{\texorpdfstring{m\+\_\+min\+Rtt}{m_minRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Veno\+::m\+\_\+min\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVeno_a9fd4b7308b7f0b7cd4179d6f65aba383}{}\label{classns3_1_1TcpVeno_a9fd4b7308b7f0b7cd4179d6f65aba383}
+
+
+Minimum of R\+T\+Ts measured within last R\+TT. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{tcp-veno_8h}{tcp-\/veno.\+h}\item 
+internet/model/\hyperlink{tcp-veno_8cc}{tcp-\/veno.\+cc}\end{DoxyCompactItemize}

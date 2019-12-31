@@ -1,0 +1,285 @@
+\hypertarget{namespacecreate-module}{}\section{create-\/module Namespace Reference}
+\label{namespacecreate-module}\index{create-\/module@{create-\/module}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacecreate-module_a293e91dd0a44f4845da45a092e947974}{main} (argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{namespacecreate-module_aef22727f8a119447d4829afdcccdea22}{W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}
+\item 
+string \hyperlink{namespacecreate-module_a992dfc57cde92a96351e12d640f7be2d}{M\+O\+D\+E\+L\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}
+\item 
+string \hyperlink{namespacecreate-module_a99886e8cbcd240dcaeb7ca65566cdbe6}{M\+O\+D\+E\+L\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE}
+\item 
+string \hyperlink{namespacecreate-module_a4482926e9b75454a934c5dbfce4c7f0e}{H\+E\+L\+P\+E\+R\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}
+\item 
+string \hyperlink{namespacecreate-module_a3c745bb622340458336d4c27bd054465}{H\+E\+L\+P\+E\+R\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE}
+\item 
+string \hyperlink{namespacecreate-module_a4d78d45f600aab71771019e9e66a321f}{E\+X\+A\+M\+P\+L\+E\+S\+\_\+\+W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}
+\item 
+string \hyperlink{namespacecreate-module_a969d5fe5f908bb860dd51f921435e8a9}{E\+X\+A\+M\+P\+L\+E\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}
+\item 
+string \hyperlink{namespacecreate-module_a0d5b7c6f3becb0800ddaf6c1e5d7a0e5}{T\+E\+S\+T\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}
+\item 
+string \hyperlink{namespacecreate-module_aa462227e0236ab55cb3474b007e28cff}{D\+O\+C\+\_\+\+R\+S\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{create-\/module@{create-\/module}!main@{main}}
+\index{main@{main}!create-\/module@{create-\/module}}
+\subsubsection[{\texorpdfstring{main(argv)}{main(argv)}}]{\setlength{\rightskip}{0pt plus 5cm}def create-\/module.\+main (
+\begin{DoxyParamCaption}
+\item[{}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecreate-module_a293e91dd0a44f4845da45a092e947974}{}\label{namespacecreate-module_a293e91dd0a44f4845da45a092e947974}
+
+\begin{DoxyCode}
+316 \textcolor{keyword}{def }\hyperlink{namespacecreate-module_a293e91dd0a44f4845da45a092e947974}{main}(argv):
+317     parser = OptionParser(usage=(\textcolor{stringliteral}{"Usage: %prog [options] modulename\(\backslash\)n"}
+318                                  \textcolor{stringliteral}{"Utility script to create a basic template for a new ns-3 module"}))
+319     (options, args) = parser.parse\_args()
+320     \textcolor{keywordflow}{if} len(args) != 1:
+321         parser.print\_help()
+322         \textcolor{keywordflow}{return} 1
+323 
+324     modname = args[0].lower()
+325     \textcolor{keywordflow}{if} \textcolor{keyword}{False} \textcolor{keywordflow}{in} [word.isalnum() \textcolor{keywordflow}{for} word \textcolor{keywordflow}{in} modname.split(\textcolor{stringliteral}{"-"})]:
+326         \hyperlink{lte__link__budget_8m_adeb58160e8a06243630c5f01e1808e15}{print}(\textcolor{stringliteral}{"Module name should only contain alphanumeric characters and dashes"}, file=sys.stderr)
+327         \textcolor{keywordflow}{return} 2
+328     \textcolor{keyword}{assert} os.path.sep \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} modname
+329 
+330     moduledir = os.path.join(os.path.dirname(\_\_file\_\_), modname)
+331 
+332     \textcolor{keywordflow}{if} os.path.exists(moduledir):
+333         \hyperlink{lte__link__budget_8m_adeb58160e8a06243630c5f01e1808e15}{print}(\textcolor{stringliteral}{"Module %r already exists"} % (modname,), file=sys.stderr)
+334         \textcolor{keywordflow}{return} 2
+335 
+336     \hyperlink{lte__link__budget_8m_adeb58160e8a06243630c5f01e1808e15}{print}(\textcolor{stringliteral}{"Creating module %r, "}
+337           \textcolor{stringliteral}{"run './waf configure' to include it in the build"} % (modname,))
+338 
+339     os.mkdir(moduledir)
+340     wscript = open(os.path.join(moduledir, \textcolor{stringliteral}{"wscript"}), \textcolor{stringliteral}{"wt"})
+341     wscript.write(WSCRIPT\_TEMPLATE % dict(MODULE=modname))
+342     wscript.close()
+343 
+344 
+345     \textcolor{comment}{#}
+346     \textcolor{comment}{# model}
+347     \textcolor{comment}{# }
+348     modeldir = os.path.join(moduledir, \textcolor{stringliteral}{"model"})
+349     os.mkdir(modeldir)
+350 
+351     model\_cc = open(os.path.join(moduledir, \textcolor{stringliteral}{"model"}, \textcolor{stringliteral}{"%s.cc"} % modname), \textcolor{stringliteral}{"wt"})
+352     model\_cc.write(MODEL\_CC\_TEMPLATE % dict(MODULE=modname))
+353     model\_cc.close()
+354 
+355     model\_h = open(os.path.join(moduledir, \textcolor{stringliteral}{"model"}, \textcolor{stringliteral}{"%s.h"} % modname), \textcolor{stringliteral}{"wt"})
+356     model\_h.write(MODEL\_H\_TEMPLATE % dict(MODULE=modname, INCLUDE\_GUARD=\textcolor{stringliteral}{"%s\_H"} % (modname.replace(\textcolor{stringliteral}{"-"}, \textcolor{stringliteral}{"\_"})
+      .upper()),))
+357     model\_h.close()
+358 
+359 
+360 
+361     \textcolor{comment}{#}
+362     \textcolor{comment}{# test}
+363     \textcolor{comment}{# }
+364     testdir = os.path.join(moduledir, \textcolor{stringliteral}{"test"})
+365     os.mkdir(testdir)
+366     test\_cc = open(os.path.join(moduledir, \textcolor{stringliteral}{"test"}, \textcolor{stringliteral}{"%s-test-suite.cc"} % modname), \textcolor{stringliteral}{"wt"})
+367     test\_cc.write(TEST\_CC\_TEMPLATE % dict(MODULE=modname,
+368                                           CAPITALIZED=\textcolor{stringliteral}{''}.join([word.capitalize() \textcolor{keywordflow}{for} word \textcolor{keywordflow}{in} modname.split(\textcolor{stringliteral}{
+      '-'})]),
+369                                           COMPOUND=\textcolor{stringliteral}{''}.join([modname.split(\textcolor{stringliteral}{'-'})[0]] + [word.capitalize() \textcolor{keywordflow}{for}
+       word \textcolor{keywordflow}{in} modname.split(\textcolor{stringliteral}{'-'})[1:]]),
+370                                           ))
+371     test\_cc.close()
+372 
+373 
+374 
+375     \textcolor{comment}{#}
+376     \textcolor{comment}{# helper}
+377     \textcolor{comment}{# }
+378     helperdir = os.path.join(moduledir, \textcolor{stringliteral}{"helper"})
+379     os.mkdir(helperdir)
+380 
+381     helper\_cc = open(os.path.join(moduledir, \textcolor{stringliteral}{"helper"}, \textcolor{stringliteral}{"%s-helper.cc"} % modname), \textcolor{stringliteral}{"wt"})
+382     helper\_cc.write(HELPER\_CC\_TEMPLATE % dict(MODULE=modname))
+383     helper\_cc.close()
+384 
+385     helper\_h = open(os.path.join(moduledir, \textcolor{stringliteral}{"helper"}, \textcolor{stringliteral}{"%s-helper.h"} % modname), \textcolor{stringliteral}{"wt"})
+386     helper\_h.write(HELPER\_H\_TEMPLATE % dict(MODULE=modname, INCLUDE\_GUARD=\textcolor{stringliteral}{"%s\_HELPER\_H"} % (modname.replace(\textcolor{stringliteral}{
+      "-"}, \textcolor{stringliteral}{"\_"}).upper()),))
+387     helper\_h.close()
+388 
+389     \textcolor{comment}{#}
+390     \textcolor{comment}{# examples}
+391     \textcolor{comment}{#}
+392     examplesdir = os.path.join(moduledir, \textcolor{stringliteral}{"examples"})
+393     os.mkdir(examplesdir)
+394 
+395     examples\_wscript = open(os.path.join(examplesdir, \textcolor{stringliteral}{"wscript"}), \textcolor{stringliteral}{"wt"})
+396     examples\_wscript.write(EXAMPLES\_WSCRIPT\_TEMPLATE % dict(MODULE=modname))
+397     examples\_wscript.close()
+398 
+399     example\_cc = open(os.path.join(moduledir, \textcolor{stringliteral}{"examples"}, \textcolor{stringliteral}{"%s-example.cc"} % modname), \textcolor{stringliteral}{"wt"})
+400     example\_cc.write(EXAMPLE\_CC\_TEMPLATE % dict(MODULE=modname))
+401     example\_cc.close()
+402 
+403     \textcolor{comment}{#}
+404     \textcolor{comment}{# doc}
+405     \textcolor{comment}{# }
+406     docdir = os.path.join(moduledir, \textcolor{stringliteral}{"doc"})
+407     os.mkdir(docdir)
+408 
+409     doc\_rst = open(os.path.join(moduledir, \textcolor{stringliteral}{"doc"}, \textcolor{stringliteral}{"%s.rst"} % modname), \textcolor{stringliteral}{"wt"})
+410     doc\_rst.write(DOC\_RST\_TEMPLATE % dict(MODULE=modname))
+411     doc\_rst.close()
+412 
+413 
+414     \textcolor{keywordflow}{return} 0
+415 
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 0
+
+
+
+
+\subsection{Variable Documentation}
+\index{create-\/module@{create-\/module}!D\+O\+C\+\_\+\+R\+S\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{D\+O\+C\+\_\+\+R\+S\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}
+\index{D\+O\+C\+\_\+\+R\+S\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{D\+O\+C\+\_\+\+R\+S\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}!create-\/module@{create-\/module}}
+\subsubsection[{\texorpdfstring{D\+O\+C\+\_\+\+R\+S\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}{DOC_RST_TEMPLATE}}]{\setlength{\rightskip}{0pt plus 5cm}string create-\/module.\+D\+O\+C\+\_\+\+R\+S\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}\hypertarget{namespacecreate-module_aa462227e0236ab55cb3474b007e28cff}{}\label{namespacecreate-module_aa462227e0236ab55cb3474b007e28cff}
+\index{create-\/module@{create-\/module}!E\+X\+A\+M\+P\+L\+E\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{E\+X\+A\+M\+P\+L\+E\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}
+\index{E\+X\+A\+M\+P\+L\+E\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{E\+X\+A\+M\+P\+L\+E\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}!create-\/module@{create-\/module}}
+\subsubsection[{\texorpdfstring{E\+X\+A\+M\+P\+L\+E\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}{EXAMPLE_CC_TEMPLATE}}]{\setlength{\rightskip}{0pt plus 5cm}string create-\/module.\+E\+X\+A\+M\+P\+L\+E\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}\hypertarget{namespacecreate-module_a969d5fe5f908bb860dd51f921435e8a9}{}\label{namespacecreate-module_a969d5fe5f908bb860dd51f921435e8a9}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 = \textcolor{stringliteral}{'''/* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */}
+2 \textcolor{stringliteral}{}
+3 \textcolor{stringliteral}{#include "ns3/core-module.h"}
+4 \textcolor{stringliteral}{#include "ns3/%(MODULE)s-helper.h"}
+5 \textcolor{stringliteral}{}
+6 \textcolor{stringliteral}{using namespace ns3;}
+7 \textcolor{stringliteral}{}
+8 \textcolor{stringliteral}{}
+9 \textcolor{stringliteral}{int }
+10 \textcolor{stringliteral}{main (int argc, char *argv[])}
+11 \textcolor{stringliteral}{\{}
+12 \textcolor{stringliteral}{  bool verbose = true;}
+13 \textcolor{stringliteral}{}
+14 \textcolor{stringliteral}{  CommandLine cmd;}
+15 \textcolor{stringliteral}{  cmd.AddValue ("verbose", "Tell application to log if true", verbose);}
+16 \textcolor{stringliteral}{}
+17 \textcolor{stringliteral}{  cmd.Parse (argc,argv);}
+18 \textcolor{stringliteral}{}
+19 \textcolor{stringliteral}{  /* ... */}
+20 \textcolor{stringliteral}{}
+21 \textcolor{stringliteral}{  Simulator::Run ();}
+22 \textcolor{stringliteral}{  Simulator::Destroy ();}
+23 \textcolor{stringliteral}{  return 0;}
+24 \textcolor{stringliteral}{\}}
+25 \textcolor{stringliteral}{}
+26 \textcolor{stringliteral}{}
+27 \textcolor{stringliteral}{'''}
+\end{DoxyCode}
+\index{create-\/module@{create-\/module}!E\+X\+A\+M\+P\+L\+E\+S\+\_\+\+W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{E\+X\+A\+M\+P\+L\+E\+S\+\_\+\+W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}
+\index{E\+X\+A\+M\+P\+L\+E\+S\+\_\+\+W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{E\+X\+A\+M\+P\+L\+E\+S\+\_\+\+W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}!create-\/module@{create-\/module}}
+\subsubsection[{\texorpdfstring{E\+X\+A\+M\+P\+L\+E\+S\+\_\+\+W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}{EXAMPLES_WSCRIPT_TEMPLATE}}]{\setlength{\rightskip}{0pt plus 5cm}string create-\/module.\+E\+X\+A\+M\+P\+L\+E\+S\+\_\+\+W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}\hypertarget{namespacecreate-module_a4d78d45f600aab71771019e9e66a321f}{}\label{namespacecreate-module_a4d78d45f600aab71771019e9e66a321f}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 = \textcolor{stringliteral}{'''# -*- Mode: python; py-indent-offset: 4; indent-tabs-mode: nil; coding: utf-8; -*-}
+2 \textcolor{stringliteral}{}
+3 \textcolor{stringliteral}{def build(bld):}
+4 \textcolor{stringliteral}{    obj = bld.create\_ns3\_program('%(MODULE)s-example', [%(MODULE)r])}
+5 \textcolor{stringliteral}{    obj.source = '%(MODULE)s-example.cc'}
+6 \textcolor{stringliteral}{}
+7 \textcolor{stringliteral}{'''}
+\end{DoxyCode}
+\index{create-\/module@{create-\/module}!H\+E\+L\+P\+E\+R\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{H\+E\+L\+P\+E\+R\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}
+\index{H\+E\+L\+P\+E\+R\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{H\+E\+L\+P\+E\+R\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}!create-\/module@{create-\/module}}
+\subsubsection[{\texorpdfstring{H\+E\+L\+P\+E\+R\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}{HELPER_CC_TEMPLATE}}]{\setlength{\rightskip}{0pt plus 5cm}string create-\/module.\+H\+E\+L\+P\+E\+R\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}\hypertarget{namespacecreate-module_a4482926e9b75454a934c5dbfce4c7f0e}{}\label{namespacecreate-module_a4482926e9b75454a934c5dbfce4c7f0e}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 = \textcolor{stringliteral}{'''/* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */}
+2 \textcolor{stringliteral}{}
+3 \textcolor{stringliteral}{#include "%(MODULE)s-helper.h"}
+4 \textcolor{stringliteral}{}
+5 \textcolor{stringliteral}{namespace ns3 \{}
+6 \textcolor{stringliteral}{}
+7 \textcolor{stringliteral}{/* ... */}
+8 \textcolor{stringliteral}{}
+9 \textcolor{stringliteral}{}
+10 \textcolor{stringliteral}{\}}
+11 \textcolor{stringliteral}{}
+12 \textcolor{stringliteral}{'''}
+\end{DoxyCode}
+\index{create-\/module@{create-\/module}!H\+E\+L\+P\+E\+R\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{H\+E\+L\+P\+E\+R\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}
+\index{H\+E\+L\+P\+E\+R\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{H\+E\+L\+P\+E\+R\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE}!create-\/module@{create-\/module}}
+\subsubsection[{\texorpdfstring{H\+E\+L\+P\+E\+R\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE}{HELPER_H_TEMPLATE}}]{\setlength{\rightskip}{0pt plus 5cm}string create-\/module.\+H\+E\+L\+P\+E\+R\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE}\hypertarget{namespacecreate-module_a3c745bb622340458336d4c27bd054465}{}\label{namespacecreate-module_a3c745bb622340458336d4c27bd054465}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 = \textcolor{stringliteral}{'''/* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */}
+2 \textcolor{stringliteral}{#ifndef %(INCLUDE\_GUARD)s}
+3 \textcolor{stringliteral}{#define %(INCLUDE\_GUARD)s}
+4 \textcolor{stringliteral}{}
+5 \textcolor{stringliteral}{#include "ns3/%(MODULE)s.h"}
+6 \textcolor{stringliteral}{}
+7 \textcolor{stringliteral}{namespace ns3 \{}
+8 \textcolor{stringliteral}{}
+9 \textcolor{stringliteral}{/* ... */}
+10 \textcolor{stringliteral}{}
+11 \textcolor{stringliteral}{\}}
+12 \textcolor{stringliteral}{}
+13 \textcolor{stringliteral}{#endif /* %(INCLUDE\_GUARD)s */}
+14 \textcolor{stringliteral}{}
+15 \textcolor{stringliteral}{'''}
+\end{DoxyCode}
+\index{create-\/module@{create-\/module}!M\+O\+D\+E\+L\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{M\+O\+D\+E\+L\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}
+\index{M\+O\+D\+E\+L\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{M\+O\+D\+E\+L\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}!create-\/module@{create-\/module}}
+\subsubsection[{\texorpdfstring{M\+O\+D\+E\+L\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}{MODEL_CC_TEMPLATE}}]{\setlength{\rightskip}{0pt plus 5cm}string create-\/module.\+M\+O\+D\+E\+L\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}\hypertarget{namespacecreate-module_a992dfc57cde92a96351e12d640f7be2d}{}\label{namespacecreate-module_a992dfc57cde92a96351e12d640f7be2d}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 = \textcolor{stringliteral}{'''/* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */}
+2 \textcolor{stringliteral}{}
+3 \textcolor{stringliteral}{#include "%(MODULE)s.h"}
+4 \textcolor{stringliteral}{}
+5 \textcolor{stringliteral}{namespace ns3 \{}
+6 \textcolor{stringliteral}{}
+7 \textcolor{stringliteral}{/* ... */}
+8 \textcolor{stringliteral}{}
+9 \textcolor{stringliteral}{}
+10 \textcolor{stringliteral}{\}}
+11 \textcolor{stringliteral}{}
+12 \textcolor{stringliteral}{'''}
+\end{DoxyCode}
+\index{create-\/module@{create-\/module}!M\+O\+D\+E\+L\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{M\+O\+D\+E\+L\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}
+\index{M\+O\+D\+E\+L\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{M\+O\+D\+E\+L\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE}!create-\/module@{create-\/module}}
+\subsubsection[{\texorpdfstring{M\+O\+D\+E\+L\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE}{MODEL_H_TEMPLATE}}]{\setlength{\rightskip}{0pt plus 5cm}string create-\/module.\+M\+O\+D\+E\+L\+\_\+\+H\+\_\+\+T\+E\+M\+P\+L\+A\+TE}\hypertarget{namespacecreate-module_a99886e8cbcd240dcaeb7ca65566cdbe6}{}\label{namespacecreate-module_a99886e8cbcd240dcaeb7ca65566cdbe6}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 = \textcolor{stringliteral}{'''/* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */}
+2 \textcolor{stringliteral}{#ifndef %(INCLUDE\_GUARD)s}
+3 \textcolor{stringliteral}{#define %(INCLUDE\_GUARD)s}
+4 \textcolor{stringliteral}{}
+5 \textcolor{stringliteral}{namespace ns3 \{}
+6 \textcolor{stringliteral}{}
+7 \textcolor{stringliteral}{/* ... */}
+8 \textcolor{stringliteral}{}
+9 \textcolor{stringliteral}{\}}
+10 \textcolor{stringliteral}{}
+11 \textcolor{stringliteral}{#endif /* %(INCLUDE\_GUARD)s */}
+12 \textcolor{stringliteral}{}
+13 \textcolor{stringliteral}{'''}
+\end{DoxyCode}
+\index{create-\/module@{create-\/module}!T\+E\+S\+T\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{T\+E\+S\+T\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}
+\index{T\+E\+S\+T\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{T\+E\+S\+T\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}!create-\/module@{create-\/module}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}{TEST_CC_TEMPLATE}}]{\setlength{\rightskip}{0pt plus 5cm}string create-\/module.\+T\+E\+S\+T\+\_\+\+C\+C\+\_\+\+T\+E\+M\+P\+L\+A\+TE}\hypertarget{namespacecreate-module_a0d5b7c6f3becb0800ddaf6c1e5d7a0e5}{}\label{namespacecreate-module_a0d5b7c6f3becb0800ddaf6c1e5d7a0e5}
+\index{create-\/module@{create-\/module}!W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}
+\index{W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}!create-\/module@{create-\/module}}
+\subsubsection[{\texorpdfstring{W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}{WSCRIPT_TEMPLATE}}]{\setlength{\rightskip}{0pt plus 5cm}string create-\/module.\+W\+S\+C\+R\+I\+P\+T\+\_\+\+T\+E\+M\+P\+L\+A\+TE}\hypertarget{namespacecreate-module_aef22727f8a119447d4829afdcccdea22}{}\label{namespacecreate-module_aef22727f8a119447d4829afdcccdea22}

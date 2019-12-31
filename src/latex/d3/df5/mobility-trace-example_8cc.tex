@@ -1,0 +1,62 @@
+\hypertarget{mobility-trace-example_8cc}{}\section{mobility/examples/mobility-\/trace-\/example.cc File Reference}
+\label{mobility-trace-example_8cc}\index{mobility/examples/mobility-\/trace-\/example.\+cc@{mobility/examples/mobility-\/trace-\/example.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+Include dependency graph for mobility-\/trace-\/example.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{mobility-trace-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{mobility-\/trace-\/example.\+cc@{mobility-\/trace-\/example.\+cc}!main@{main}}
+\index{main@{main}!mobility-\/trace-\/example.\+cc@{mobility-\/trace-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{mobility-trace-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{mobility-trace-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+28 \{
+29   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+30   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+31   
+32   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} sta;
+33   sta.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (4);
+34   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+35   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (\textcolor{stringliteral}{"ns3::GridPositionAllocator"},
+36                                  \textcolor{stringliteral}{"MinX"}, DoubleValue (1.0),
+37                                  \textcolor{stringliteral}{"MinY"}, DoubleValue (1.0),
+38                                  \textcolor{stringliteral}{"DeltaX"}, DoubleValue (5.0),
+39                                  \textcolor{stringliteral}{"DeltaY"}, DoubleValue (5.0),
+40                                  \textcolor{stringliteral}{"GridWidth"}, UintegerValue (3),
+41                                  \textcolor{stringliteral}{"LayoutType"}, StringValue (\textcolor{stringliteral}{"RowFirst"}));
+42   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::RandomWalk2dMobilityModel"},
+43                              \textcolor{stringliteral}{"Mode"}, StringValue (\textcolor{stringliteral}{"Time"}),
+44                              \textcolor{stringliteral}{"Time"}, StringValue (\textcolor{stringliteral}{"2s"}),
+45                              \textcolor{stringliteral}{"Speed"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1.0]"}),
+46                              \textcolor{stringliteral}{"Bounds"}, RectangleValue (\hyperlink{classns3_1_1Rectangle}{Rectangle} (0.0, 20.0, 0.0, 20.0)));
+47   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (sta);
+48   \textcolor{comment}{// Set mobility random number streams to fixed values}
+49   mobility.\hyperlink{classns3_1_1MobilityHelper_a13e35a27577e5927574af6cfdec4c605}{AssignStreams} (sta, 0);
+50 
+51   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+52   MobilityHelper::EnableAsciiAll (ascii.\hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (\textcolor{stringliteral}{"mobility-trace-example.mob"}));
+53 
+54   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5.0));
+55   Simulator::Run ();
+56   Simulator::Destroy ();
+57 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

@@ -1,0 +1,293 @@
+\hypertarget{openflow-switch_8cc}{}\section{openflow/examples/openflow-\/switch.cc File Reference}
+\label{openflow-switch_8cc}\index{openflow/examples/openflow-\/switch.\+cc@{openflow/examples/openflow-\/switch.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/openflow-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+Include dependency graph for openflow-\/switch.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{openflow-switch_8cc_aa571fd29120b9088cf218d1432d3aa63}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Open\+Flow\+Csma\+Switch\+Example\char`\"{})
+\item 
+bool \hyperlink{openflow-switch_8cc_aabb01f1253262daf5b9d12bcf26eafa7}{Set\+Verbose} (std\+::string value)
+\item 
+bool \hyperlink{openflow-switch_8cc_a39c23c06091b2372b665c9bafd7992a3}{Set\+Drop} (std\+::string value)
+\item 
+bool \hyperlink{openflow-switch_8cc_a8a605e661c7465f5be2e79bbce12032d}{Set\+Timeout} (std\+::string value)
+\item 
+int \hyperlink{openflow-switch_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose} = \hyperlink{lte__cqi__generation_8m_ab1bef239d413c4da139c4bac92cd657a}{false}
+\item 
+bool \hyperlink{openflow-switch_8cc_a95505924ac59ff14d4a2fb6623f86da7}{use\+\_\+drop} = \hyperlink{lte__cqi__generation_8m_ab1bef239d413c4da139c4bac92cd657a}{false}
+\item 
+\hyperlink{classns3_1_1Time}{ns3\+::\+Time} \hyperlink{openflow-switch_8cc_a386d174ae121d1cfa279074b7e209714}{timeout} = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{ns3\+::\+Seconds} (0)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{openflow-\/switch.\+cc@{openflow-\/switch.\+cc}!main@{main}}
+\index{main@{main}!openflow-\/switch.\+cc@{openflow-\/switch.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{openflow-switch_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{openflow-switch_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+81 \{
+82 \textcolor{preprocessor}{  #ifdef NS3\_OPENFLOW}
+83   \textcolor{comment}{//}
+84   \textcolor{comment}{// Allow the user to override any of the defaults and the above Bind() at}
+85   \textcolor{comment}{// run-time, via command-line arguments}
+86   \textcolor{comment}{//}
+87   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+88   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"v"}, \textcolor{stringliteral}{"Verbose (turns on logging)."}, \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{openflow-switch_8cc_aabb01f1253262daf5b9d12bcf26eafa7}{SetVerbose}));
+89   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"verbose"}, \textcolor{stringliteral}{"Verbose (turns on logging)."}, \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{openflow-switch_8cc_aabb01f1253262daf5b9d12bcf26eafa7}{SetVerbose}));
+90   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"d"}, \textcolor{stringliteral}{"Use Drop Controller (Learning if not specified)."}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{openflow-switch_8cc_a39c23c06091b2372b665c9bafd7992a3}{SetDrop}));
+91   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"drop"}, \textcolor{stringliteral}{"Use Drop Controller (Learning if not specified)."}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{openflow-switch_8cc_a39c23c06091b2372b665c9bafd7992a3}{SetDrop}));
+92   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"t"}, \textcolor{stringliteral}{"Learning Controller Timeout (has no effect if drop controller is specified)."}
+      , \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} ( &\hyperlink{openflow-switch_8cc_a8a605e661c7465f5be2e79bbce12032d}{SetTimeout}));
+93   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"timeout"}, \textcolor{stringliteral}{"Learning Controller Timeout (has no effect if drop controller is
+       specified)."}, \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} ( &\hyperlink{openflow-switch_8cc_a8a605e661c7465f5be2e79bbce12032d}{SetTimeout}));
+94 
+95   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+96 
+97   \textcolor{keywordflow}{if} (\hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose})
+98     \{
+99       \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"OpenFlowCsmaSwitchExample"}, 
+      \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+100       \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"OpenFlowInterface"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+101       \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"OpenFlowSwitchNetDevice"}, 
+      \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+102     \}
+103 
+104   \textcolor{comment}{//}
+105   \textcolor{comment}{// Explicitly create the nodes required by the topology (shown above).}
+106   \textcolor{comment}{//}
+107   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes."});
+108   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} terminals;
+109   terminals.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (4);
+110 
+111   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} csmaSwitch;
+112   csmaSwitch.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+113 
+114   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Build Topology"});
+115   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+116   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (5000000));
+117   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+118 
+119   \textcolor{comment}{// Create the csma links, from each terminal to the switch}
+120   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} terminalDevices;
+121   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} switchDevices;
+122   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 4; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+123     \{
+124       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} link = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (
+      \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (terminals.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), csmaSwitch));
+125       terminalDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (link.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+126       switchDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (link.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+127     \}
+128 
+129   \textcolor{comment}{// Create the switch netdevice, which will do the packet switching}
+130   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} switchNode = csmaSwitch.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0);
+131   \hyperlink{classns3_1_1OpenFlowSwitchHelper}{OpenFlowSwitchHelper} swtch;
+132 
+133   \textcolor{keywordflow}{if} (\hyperlink{openflow-switch_8cc_a95505924ac59ff14d4a2fb6623f86da7}{use\_drop})
+134     \{
+135       \hyperlink{classns3_1_1Ptr}{Ptr<ns3::ofi::DropController>} controller = 
+      CreateObject<ns3::ofi::DropController> ();
+136       swtch.\hyperlink{classns3_1_1OpenFlowSwitchHelper_a761e89df7011d691652d85bc5c36e32d}{Install} (switchNode, switchDevices, controller);
+137     \}
+138   \textcolor{keywordflow}{else}
+139     \{
+140       \hyperlink{classns3_1_1Ptr}{Ptr<ns3::ofi::LearningController>} controller = 
+      CreateObject<ns3::ofi::LearningController> ();
+141       \textcolor{keywordflow}{if} (!\hyperlink{openflow-switch_8cc_a386d174ae121d1cfa279074b7e209714}{timeout}.\hyperlink{classns3_1_1Time_ae47420e5c8a04d222b18ee13c2a95799}{IsZero} ()) controller->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ExpirationTime"}, 
+      TimeValue (\hyperlink{openflow-switch_8cc_a386d174ae121d1cfa279074b7e209714}{timeout}));
+142       swtch.\hyperlink{classns3_1_1OpenFlowSwitchHelper_a761e89df7011d691652d85bc5c36e32d}{Install} (switchNode, switchDevices, controller);
+143     \}
+144 
+145   \textcolor{comment}{// Add internet stack to the terminals}
+146   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+147   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (terminals);
+148 
+149   \textcolor{comment}{// We've got the "hardware" in place.  Now we need to add IP addresses.}
+150   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+151   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+152   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+153   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (terminalDevices);
+154 
+155   \textcolor{comment}{// Create an OnOff application to send UDP datagrams from n0 to n1.}
+156   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Applications."});
+157   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 9;   \textcolor{comment}{// Discard port (RFC 863)}
+158 
+159   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+160                      \hyperlink{classns3_1_1Address}{Address} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.1.2"}), port)));
+161   onoff.SetConstantRate (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"500kb/s"}));
+162 
+163   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} app = onoff.Install (terminals.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+164   \textcolor{comment}{// Start the application}
+165   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+166   app.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+167 
+168   \textcolor{comment}{// Create an optional packet sink to receive these packets}
+169   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sink (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+170                          \hyperlink{classns3_1_1Address}{Address} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port))
+      );
+171   app = sink.Install (terminals.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+172   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+173 
+174   \textcolor{comment}{//}
+175   \textcolor{comment}{// Create a similar flow from n3 to n0, starting at time 1.1 seconds}
+176   \textcolor{comment}{//}
+177   onoff.SetAttribute (\textcolor{stringliteral}{"Remote"},
+178                       AddressValue (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.1.1"}), port)));
+179   app = onoff.Install (terminals.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+180   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.1));
+181   app.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+182 
+183   app = sink.Install (terminals.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+184   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+185 
+186   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Configure Tracing."});
+187 
+188   \textcolor{comment}{//}
+189   \textcolor{comment}{// Configure tracing of all enqueue, dequeue, and NetDevice receive events.}
+190   \textcolor{comment}{// Trace output will be sent to the file "openflow-switch.tr"}
+191   \textcolor{comment}{//}
+192   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+193   csma.\hyperlink{classns3_1_1AsciiTraceHelperForDevice_a63e57c878526c732924e14c1e52cca8b}{EnableAsciiAll} (ascii.\hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (\textcolor{stringliteral}{"openflow-switch.tr"}));
+194 
+195   \textcolor{comment}{//}
+196   \textcolor{comment}{// Also configure some tcpdump traces; each interface will be traced.}
+197   \textcolor{comment}{// The output files will be named:}
+198   \textcolor{comment}{//     openflow-switch-<nodeId>-<interfaceId>.pcap}
+199   \textcolor{comment}{// and can be read by the "tcpdump -r" command (use "-tt" option to}
+200   \textcolor{comment}{// display timestamps correctly)}
+201   \textcolor{comment}{//}
+202   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"openflow-switch"}, \textcolor{keyword}{false});
+203 
+204   \textcolor{comment}{//}
+205   \textcolor{comment}{// Now, do the actual simulation.}
+206   \textcolor{comment}{//}
+207   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+208   Simulator::Run ();
+209   Simulator::Destroy ();
+210   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+211 \textcolor{preprocessor}{  #else}
+212   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"NS-3 OpenFlow is not enabled. Cannot run simulation."});
+213 \textcolor{preprocessor}{  #endif // NS3\_OPENFLOW}
+214 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{openflow-\/switch.\+cc@{openflow-\/switch.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!openflow-\/switch.\+cc@{openflow-\/switch.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Open\+Flow\+Csma\+Switch\+Example"")}{NS_LOG_COMPONENT_DEFINE("OpenFlowCsmaSwitchExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Open\+Flow\+Csma\+Switch\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{openflow-switch_8cc_aa571fd29120b9088cf218d1432d3aa63}{}\label{openflow-switch_8cc_aa571fd29120b9088cf218d1432d3aa63}
+\index{openflow-\/switch.\+cc@{openflow-\/switch.\+cc}!Set\+Drop@{Set\+Drop}}
+\index{Set\+Drop@{Set\+Drop}!openflow-\/switch.\+cc@{openflow-\/switch.\+cc}}
+\subsubsection[{\texorpdfstring{Set\+Drop(std\+::string value)}{SetDrop(std::string value)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Set\+Drop (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{openflow-switch_8cc_a39c23c06091b2372b665c9bafd7992a3}{}\label{openflow-switch_8cc_a39c23c06091b2372b665c9bafd7992a3}
+
+\begin{DoxyCode}
+63 \{
+64   \hyperlink{openflow-switch_8cc_a95505924ac59ff14d4a2fb6623f86da7}{use\_drop} = \textcolor{keyword}{true};
+65   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+66 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{openflow-\/switch.\+cc@{openflow-\/switch.\+cc}!Set\+Timeout@{Set\+Timeout}}
+\index{Set\+Timeout@{Set\+Timeout}!openflow-\/switch.\+cc@{openflow-\/switch.\+cc}}
+\subsubsection[{\texorpdfstring{Set\+Timeout(std\+::string value)}{SetTimeout(std::string value)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Set\+Timeout (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{openflow-switch_8cc_a8a605e661c7465f5be2e79bbce12032d}{}\label{openflow-switch_8cc_a8a605e661c7465f5be2e79bbce12032d}
+
+\begin{DoxyCode}
+70 \{
+71   \textcolor{keywordflow}{try} \{
+72       \hyperlink{openflow-switch_8cc_a386d174ae121d1cfa279074b7e209714}{timeout} = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{ns3::Seconds} (atof (value.c\_str ()));
+73       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+74     \}
+75   \textcolor{keywordflow}{catch} (...) \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}
+76   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+77 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{openflow-\/switch.\+cc@{openflow-\/switch.\+cc}!Set\+Verbose@{Set\+Verbose}}
+\index{Set\+Verbose@{Set\+Verbose}!openflow-\/switch.\+cc@{openflow-\/switch.\+cc}}
+\subsubsection[{\texorpdfstring{Set\+Verbose(std\+::string value)}{SetVerbose(std::string value)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Set\+Verbose (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{openflow-switch_8cc_aabb01f1253262daf5b9d12bcf26eafa7}{}\label{openflow-switch_8cc_aabb01f1253262daf5b9d12bcf26eafa7}
+
+\begin{DoxyCode}
+56 \{
+57   \hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose} = \textcolor{keyword}{true};
+58   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+59 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+
+
+\subsection{Variable Documentation}
+\index{openflow-\/switch.\+cc@{openflow-\/switch.\+cc}!timeout@{timeout}}
+\index{timeout@{timeout}!openflow-\/switch.\+cc@{openflow-\/switch.\+cc}}
+\subsubsection[{\texorpdfstring{timeout}{timeout}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ns3\+::\+Time} timeout = {\bf ns3\+::\+Seconds} (0)}\hypertarget{openflow-switch_8cc_a386d174ae121d1cfa279074b7e209714}{}\label{openflow-switch_8cc_a386d174ae121d1cfa279074b7e209714}
+\index{openflow-\/switch.\+cc@{openflow-\/switch.\+cc}!use\+\_\+drop@{use\+\_\+drop}}
+\index{use\+\_\+drop@{use\+\_\+drop}!openflow-\/switch.\+cc@{openflow-\/switch.\+cc}}
+\subsubsection[{\texorpdfstring{use\+\_\+drop}{use_drop}}]{\setlength{\rightskip}{0pt plus 5cm}bool use\+\_\+drop = {\bf false}}\hypertarget{openflow-switch_8cc_a95505924ac59ff14d4a2fb6623f86da7}{}\label{openflow-switch_8cc_a95505924ac59ff14d4a2fb6623f86da7}
+\index{openflow-\/switch.\+cc@{openflow-\/switch.\+cc}!verbose@{verbose}}
+\index{verbose@{verbose}!openflow-\/switch.\+cc@{openflow-\/switch.\+cc}}
+\subsubsection[{\texorpdfstring{verbose}{verbose}}]{\setlength{\rightskip}{0pt plus 5cm}bool verbose = {\bf false}}\hypertarget{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{}\label{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}

@@ -1,0 +1,121 @@
+\hypertarget{classFindPathTestCase}{}\section{Find\+Path\+Test\+Case Class Reference}
+\label{classFindPathTestCase}\index{Find\+Path\+Test\+Case@{Find\+Path\+Test\+Case}}
+
+
+Inheritance diagram for Find\+Path\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Find\+Path\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFindPathTestCase_a7a87d836a0d0a83765f484b0d938cbd1}{Find\+Path\+Test\+Case} ()
+\item 
+virtual \hyperlink{classFindPathTestCase_abf571d21b5bc9ce52d545c1b686f337c}{$\sim$\+Find\+Path\+Test\+Case} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classFindPathTestCase_a0cd0fed9b6488881c2c1e0d49225f460}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classFindPathTestCase_a82112f15bd8dd2edbf4d55c84a206494}{Do\+Teardown} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to do any local setup required for this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Find\+Path\+Test\+Case@{Find\+Path\+Test\+Case}!Find\+Path\+Test\+Case@{Find\+Path\+Test\+Case}}
+\index{Find\+Path\+Test\+Case@{Find\+Path\+Test\+Case}!Find\+Path\+Test\+Case@{Find\+Path\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Find\+Path\+Test\+Case()}{FindPathTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Find\+Path\+Test\+Case\+::\+Find\+Path\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classFindPathTestCase_a7a87d836a0d0a83765f484b0d938cbd1}{}\label{classFindPathTestCase_a7a87d836a0d0a83765f484b0d938cbd1}
+
+\begin{DoxyCode}
+588   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check Names::FindPath functionality"})
+589 \{
+590 \}
+\end{DoxyCode}
+\index{Find\+Path\+Test\+Case@{Find\+Path\+Test\+Case}!````~Find\+Path\+Test\+Case@{$\sim$\+Find\+Path\+Test\+Case}}
+\index{````~Find\+Path\+Test\+Case@{$\sim$\+Find\+Path\+Test\+Case}!Find\+Path\+Test\+Case@{Find\+Path\+Test\+Case}}
+\subsubsection[{\texorpdfstring{$\sim$\+Find\+Path\+Test\+Case()}{~FindPathTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Find\+Path\+Test\+Case\+::$\sim$\+Find\+Path\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classFindPathTestCase_abf571d21b5bc9ce52d545c1b686f337c}{}\label{classFindPathTestCase_abf571d21b5bc9ce52d545c1b686f337c}
+
+\begin{DoxyCode}
+593 \{
+594 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Find\+Path\+Test\+Case@{Find\+Path\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Find\+Path\+Test\+Case@{Find\+Path\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Find\+Path\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classFindPathTestCase_a0cd0fed9b6488881c2c1e0d49225f460}{}\label{classFindPathTestCase_a0cd0fed9b6488881c2c1e0d49225f460}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+604 \{
+605   std::string found;
+606 
+607   \hyperlink{classns3_1_1Ptr}{Ptr<TestObject>} objectOne = CreateObject<TestObject> ();
+608   Names::Add (\textcolor{stringliteral}{"Name"}, objectOne);
+609 
+610   \hyperlink{classns3_1_1Ptr}{Ptr<TestObject>} childOfObjectOne = CreateObject<TestObject> ();
+611   Names::Add (\textcolor{stringliteral}{"/Names/Name/Child"}, childOfObjectOne);
+612 
+613   found = Names::FindPath (objectOne);
+614   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (found, \textcolor{stringliteral}{"/Names/Name"}, \textcolor{stringliteral}{"Could not Names::Add and
+       Names::FindPath an Object"});
+615 
+616   found = Names::FindPath (childOfObjectOne);
+617   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (found, \textcolor{stringliteral}{"/Names/Name/Child"}, \textcolor{stringliteral}{"Could not Names::Add and
+       Names::FindPath a child Object"});
+618 
+619   \hyperlink{classns3_1_1Ptr}{Ptr<TestObject>} objectNotThere = CreateObject<TestObject> ();
+620   found = Names::FindPath (objectNotThere);
+621   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (found, \textcolor{stringliteral}{""}, \textcolor{stringliteral}{"Unexpectedly found a non-existent Object"});
+622 \}
+\end{DoxyCode}
+\index{Find\+Path\+Test\+Case@{Find\+Path\+Test\+Case}!Do\+Teardown@{Do\+Teardown}}
+\index{Do\+Teardown@{Do\+Teardown}!Find\+Path\+Test\+Case@{Find\+Path\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Teardown(void)}{DoTeardown(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Find\+Path\+Test\+Case\+::\+Do\+Teardown (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classFindPathTestCase_a82112f15bd8dd2edbf4d55c84a206494}{}\label{classFindPathTestCase_a82112f15bd8dd2edbf4d55c84a206494}
+
+
+Implementation to do any local setup required for this Test\+Case. 
+
+Subclasses should override this method to perform any costly per-\/test teardown 
+
+Reimplemented from \hyperlink{classns3_1_1TestCase_a8917f1604e28d312a8086f76291e3c46}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+598 \{
+599   Names::Clear ();
+600 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/test/\hyperlink{names-test-suite_8cc}{names-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

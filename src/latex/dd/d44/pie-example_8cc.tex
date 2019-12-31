@@ -1,0 +1,464 @@
+\hypertarget{pie-example_8cc}{}\section{traffic-\/control/examples/pie-\/example.cc File Reference}
+\label{pie-example_8cc}\index{traffic-\/control/examples/pie-\/example.\+cc@{traffic-\/control/examples/pie-\/example.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/flow-\/monitor-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/traffic-\/control-\/module.\+h\char`\"{}}\\*
+Include dependency graph for pie-\/example.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{pie-example_8cc_a40a2488cf4393aeb41598de13af518f3}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Pie\+Example\char`\"{})
+\item 
+void \hyperlink{pie-example_8cc_a64451d920062e967d2c0fa8b6ae85911}{Check\+Queue\+Disc\+Size} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1QueueDisc}{Queue\+Disc} $>$ queue)
+\item 
+void \hyperlink{pie-example_8cc_a0c000010f0a49a9809242c8ec4148666}{Build\+Apps\+Test} ()
+\item 
+int \hyperlink{pie-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{pie-example_8cc_aeea215f1e5c3568bca85c126b9870c09}{check\+Times}
+\item 
+double \hyperlink{pie-example_8cc_a7058a9ca1256be97bd01c637ff170dc2}{avg\+Queue\+Disc\+Size}
+\item 
+double \hyperlink{pie-example_8cc_ab3a0ca969f11332a6b4ca8bc81e19ba7}{global\+\_\+start\+\_\+time}
+\item 
+double \hyperlink{pie-example_8cc_a374328526043935f11841a7ec7e396d5}{global\+\_\+stop\+\_\+time}
+\item 
+double \hyperlink{pie-example_8cc_a2c56dc9b543a4442a7edd8d680c4a1bc}{sink\+\_\+start\+\_\+time}
+\item 
+double \hyperlink{pie-example_8cc_a2462eef540f5b896f14d4ea7b7bb6214}{sink\+\_\+stop\+\_\+time}
+\item 
+double \hyperlink{pie-example_8cc_a18ff86acaf663200fbedb1f77d03b515}{client\+\_\+start\+\_\+time}
+\item 
+double \hyperlink{pie-example_8cc_aee714f5dcf74da2f73bcdd66c8a9e265}{client\+\_\+stop\+\_\+time}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{pie-example_8cc_aeaa87dbd052b50719525adea0f586b36}{n0n2}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{pie-example_8cc_a68f69f65725cbe7529e8b594708b8fc0}{n1n2}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{pie-example_8cc_a4bc708159d3ec761080f4639c1c8f409}{n2n3}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{pie-example_8cc_a71269c713841141f40860e991d435588}{n3n4}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{pie-example_8cc_af4c498a2bfb720685107e00e03067e31}{n3n5}
+\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{pie-example_8cc_a04048bb862423a1ed10deed33021fe0c}{i0i2}
+\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{pie-example_8cc_abe23af3b1cb569ee9ee4ed7370791041}{i1i2}
+\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{pie-example_8cc_affe7f66c0345fed19eab1e55824055e3}{i2i3}
+\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{pie-example_8cc_ae521eb38559954aa9357fa662c3bb76e}{i3i4}
+\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{pie-example_8cc_afd160932e196777fd40772bb913a63f5}{i3i5}
+\item 
+std\+::stringstream \hyperlink{pie-example_8cc_a06d9ff5c07ecb984ef94ad415abd87b5}{file\+Plot\+Queue\+Disc}
+\item 
+std\+::stringstream \hyperlink{pie-example_8cc_a4164ee3b210acca3b1e1c45ad2bac980}{file\+Plot\+Queue\+Disc\+Avg}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!Build\+Apps\+Test@{Build\+Apps\+Test}}
+\index{Build\+Apps\+Test@{Build\+Apps\+Test}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{Build\+Apps\+Test()}{BuildAppsTest()}}]{\setlength{\rightskip}{0pt plus 5cm}void Build\+Apps\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{pie-example_8cc_a0c000010f0a49a9809242c8ec4148666}{}\label{pie-example_8cc_a0c000010f0a49a9809242c8ec4148666}
+
+\begin{DoxyCode}
+95 \{
+96   \textcolor{comment}{// SINK is in the right side}
+97   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 50000;
+98   \hyperlink{classns3_1_1Address}{Address} sinkLocalAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port));
+99   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, sinkLocalAddress);
+100   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp = sinkHelper.Install (\hyperlink{pie-example_8cc_a71269c713841141f40860e991d435588}{n3n4}.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+101   sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{pie-example_8cc_a2c56dc9b543a4442a7edd8d680c4a1bc}{sink\_start\_time}));
+102   sinkApp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{pie-example_8cc_a2462eef540f5b896f14d4ea7b7bb6214}{sink\_stop\_time}));
+103 
+104   \textcolor{comment}{// Connection one}
+105   \textcolor{comment}{// Clients are in left side}
+106   \textcolor{comment}{/*}
+107 \textcolor{comment}{   * Create the OnOff applications to send TCP to the server}
+108 \textcolor{comment}{   * onoffhelper is a client that send data to TCP destination}
+109 \textcolor{comment}{  */}
+110   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} clientHelper1 (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+111   clientHelper1.SetAttribute (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}));
+112   clientHelper1.SetAttribute (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=0]"}));
+113   clientHelper1.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (1000));
+114   clientHelper1.SetAttribute (\textcolor{stringliteral}{"DataRate"}, DataRateValue (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"10Mb/s"})));
+115 
+116   \textcolor{comment}{// Connection two}
+117   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} clientHelper2 (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+118   clientHelper2.SetAttribute (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}));
+119   clientHelper2.SetAttribute (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=0]"}));
+120   clientHelper2.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (1000));
+121   clientHelper2.SetAttribute (\textcolor{stringliteral}{"DataRate"}, DataRateValue (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"10Mb/s"})));
+122 
+123   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps1;
+124   AddressValue remoteAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (\hyperlink{pie-example_8cc_ae521eb38559954aa9357fa662c3bb76e}{i3i4}.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1), \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}));
+125   clientHelper1.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+126   clientApps1.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (clientHelper1.Install (\hyperlink{pie-example_8cc_aeaa87dbd052b50719525adea0f586b36}{n0n2}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)));
+127   clientApps1.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{pie-example_8cc_a18ff86acaf663200fbedb1f77d03b515}{client\_start\_time}));
+128   clientApps1.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{pie-example_8cc_aee714f5dcf74da2f73bcdd66c8a9e265}{client\_stop\_time}));
+129 
+130   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps2;
+131   clientHelper2.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+132   clientApps2.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (clientHelper2.Install (\hyperlink{pie-example_8cc_a68f69f65725cbe7529e8b594708b8fc0}{n1n2}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)));
+133   clientApps2.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{pie-example_8cc_a18ff86acaf663200fbedb1f77d03b515}{client\_start\_time}));
+134   clientApps2.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{pie-example_8cc_aee714f5dcf74da2f73bcdd66c8a9e265}{client\_stop\_time}));
+135 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!Check\+Queue\+Disc\+Size@{Check\+Queue\+Disc\+Size}}
+\index{Check\+Queue\+Disc\+Size@{Check\+Queue\+Disc\+Size}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{Check\+Queue\+Disc\+Size(\+Ptr$<$ Queue\+Disc $>$ queue)}{CheckQueueDiscSize(Ptr< QueueDisc > queue)}}]{\setlength{\rightskip}{0pt plus 5cm}void Check\+Queue\+Disc\+Size (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Queue\+Disc} $>$}]{queue}
+\end{DoxyParamCaption}
+)}\hypertarget{pie-example_8cc_a64451d920062e967d2c0fa8b6ae85911}{}\label{pie-example_8cc_a64451d920062e967d2c0fa8b6ae85911}
+
+\begin{DoxyCode}
+75 \{
+76   uint32\_t qSize = StaticCast<PieQueueDisc> (queue)->GetQueueSize ();
+77 
+78   \hyperlink{pie-example_8cc_a7058a9ca1256be97bd01c637ff170dc2}{avgQueueDiscSize} += qSize;
+79   \hyperlink{pie-example_8cc_aeea215f1e5c3568bca85c126b9870c09}{checkTimes}++;
+80 
+81   \textcolor{comment}{// check queue disc size every 1/100 of a second}
+82   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.01), &\hyperlink{pie-example_8cc_a64451d920062e967d2c0fa8b6ae85911}{CheckQueueDiscSize}, queue);
+83 
+84   std::ofstream fPlotQueueDisc (\hyperlink{pie-example_8cc_a06d9ff5c07ecb984ef94ad415abd87b5}{filePlotQueueDisc}.str ().c\_str (), std::ios::out | 
+      std::ios::app);
+85   fPlotQueueDisc << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" "} << qSize << std::endl;
+86   fPlotQueueDisc.close ();
+87 
+88   std::ofstream fPlotQueueDiscAvg (\hyperlink{pie-example_8cc_a4164ee3b210acca3b1e1c45ad2bac980}{filePlotQueueDiscAvg}.str ().c\_str (), std::ios::out 
+      | std::ios::app);
+89   fPlotQueueDiscAvg << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" "} << 
+      \hyperlink{pie-example_8cc_a7058a9ca1256be97bd01c637ff170dc2}{avgQueueDiscSize} / \hyperlink{pie-example_8cc_aeea215f1e5c3568bca85c126b9870c09}{checkTimes} << std::endl;
+90   fPlotQueueDiscAvg.close ();
+91 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!main@{main}}
+\index{main@{main}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{pie-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{pie-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+139 \{
+140   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"PieQueueDisc"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+141 
+142   std::string pieLinkDataRate = \textcolor{stringliteral}{"1.5Mbps"};
+143   std::string pieLinkDelay = \textcolor{stringliteral}{"20ms"};
+144 
+145   std::string pathOut;
+146   \textcolor{keywordtype}{bool} writeForPlot = \textcolor{keyword}{false};
+147   \textcolor{keywordtype}{bool} writePcap = \textcolor{keyword}{false};
+148   \textcolor{keywordtype}{bool} flowMonitor = \textcolor{keyword}{false};
+149 
+150   \textcolor{keywordtype}{bool} printPieStats = \textcolor{keyword}{true};
+151 
+152   \hyperlink{pie-example_8cc_ab3a0ca969f11332a6b4ca8bc81e19ba7}{global\_start\_time} = 0.0;
+153   \hyperlink{pie-example_8cc_a2c56dc9b543a4442a7edd8d680c4a1bc}{sink\_start\_time} = \hyperlink{pie-example_8cc_ab3a0ca969f11332a6b4ca8bc81e19ba7}{global\_start\_time};
+154   \hyperlink{pie-example_8cc_a18ff86acaf663200fbedb1f77d03b515}{client\_start\_time} = \hyperlink{pie-example_8cc_ab3a0ca969f11332a6b4ca8bc81e19ba7}{global\_start\_time} + 1.5;
+155   \hyperlink{pie-example_8cc_a374328526043935f11841a7ec7e396d5}{global\_stop\_time} = 7.0;
+156   \hyperlink{pie-example_8cc_a2462eef540f5b896f14d4ea7b7bb6214}{sink\_stop\_time} = \hyperlink{pie-example_8cc_a374328526043935f11841a7ec7e396d5}{global\_stop\_time} + 3.0;
+157   \hyperlink{pie-example_8cc_aee714f5dcf74da2f73bcdd66c8a9e265}{client\_stop\_time} = \hyperlink{pie-example_8cc_a374328526043935f11841a7ec7e396d5}{global\_stop\_time} - 2.0;
+158 
+159   \textcolor{comment}{// Configuration and command line parameter parsing}
+160   \textcolor{comment}{// Will only save in the directory if enable opts below}
+161   pathOut = \textcolor{stringliteral}{"."}; \textcolor{comment}{// Current directory}
+162   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+163   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"pathOut"}, \textcolor{stringliteral}{"Path to save results from --writeForPlot/--writePcap/--writeFlowMonitor
+      "}, pathOut);
+164   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"writeForPlot"}, \textcolor{stringliteral}{"<0/1> to write results for plot (gnuplot)"}, writeForPlot);
+165   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"writePcap"}, \textcolor{stringliteral}{"<0/1> to write results in pcapfile"}, writePcap);
+166   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"writeFlowMonitor"}, \textcolor{stringliteral}{"<0/1> to enable Flow Monitor and write their results"}, 
+      flowMonitor);
+167 
+168   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+169 
+170   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes"});
+171   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+172   c.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (6);
+173   Names::Add ( \textcolor{stringliteral}{"N0"}, c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+174   Names::Add ( \textcolor{stringliteral}{"N1"}, c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+175   Names::Add ( \textcolor{stringliteral}{"N2"}, c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+176   Names::Add ( \textcolor{stringliteral}{"N3"}, c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+177   Names::Add ( \textcolor{stringliteral}{"N4"}, c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (4));
+178   Names::Add ( \textcolor{stringliteral}{"N5"}, c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (5));
+179   \hyperlink{pie-example_8cc_aeaa87dbd052b50719525adea0f586b36}{n0n2} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+180   \hyperlink{pie-example_8cc_a68f69f65725cbe7529e8b594708b8fc0}{n1n2} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+181   \hyperlink{pie-example_8cc_a4bc708159d3ec761080f4639c1c8f409}{n2n3} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+182   \hyperlink{pie-example_8cc_a71269c713841141f40860e991d435588}{n3n4} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (4));
+183   \hyperlink{pie-example_8cc_af4c498a2bfb720685107e00e03067e31}{n3n5} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (5));
+184 
+185   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::TcpL4Protocol::SocketType"}, StringValue (\textcolor{stringliteral}{"ns3::TcpNewReno"}));
+186   \textcolor{comment}{// 42 = headers size}
+187   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::TcpSocket::SegmentSize"}, UintegerValue (1000 - 42));
+188   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::TcpSocket::DelAckCount"}, UintegerValue (1));
+189   GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+190 
+191   uint32\_t meanPktSize = 1000;
+192 
+193   \textcolor{comment}{// PIE params}
+194   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Set PIE params"});
+195   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::PieQueueDisc::Mode"}, StringValue (\textcolor{stringliteral}{"QUEUE\_DISC\_MODE\_PACKETS"}))
+      ;
+196   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::PieQueueDisc::MeanPktSize"}, UintegerValue (meanPktSize));
+197   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::PieQueueDisc::DequeueThreshold"}, UintegerValue (10000));
+198   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::PieQueueDisc::QueueDelayReference"}, TimeValue (
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.02)));
+199   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::PieQueueDisc::MaxBurstAllowance"}, TimeValue (
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.1)));
+200   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::PieQueueDisc::QueueLimit"}, UintegerValue (100));
+201 
+202   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Install internet stack on all nodes."});
+203   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+204   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (c);
+205 
+206   \hyperlink{classns3_1_1TrafficControlHelper}{TrafficControlHelper} tchPfifo;
+207   uint16\_t handle = tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a8588aac7a08e4dc4e7bb10fa7b9e25c8}{SetRootQueueDisc} (\textcolor{stringliteral}{"ns3::PfifoFastQueueDisc"});
+208   tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_aefc1be32222be2d9aa714367552c7179}{AddInternalQueues} (handle, 3, \textcolor{stringliteral}{"ns3::DropTailQueue"}, \textcolor{stringliteral}{"MaxPackets"}, UintegerValue
+       (1000));
+209 
+210   \hyperlink{classns3_1_1TrafficControlHelper}{TrafficControlHelper} tchPie;
+211   tchPie.\hyperlink{classns3_1_1TrafficControlHelper_a8588aac7a08e4dc4e7bb10fa7b9e25c8}{SetRootQueueDisc} (\textcolor{stringliteral}{"ns3::PieQueueDisc"});
+212 
+213   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create channels"});
+214   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} p2p;
+215 
+216   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devn0n2;
+217   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devn1n2;
+218   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devn2n3;
+219   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devn3n4;
+220   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devn3n5;
+221 
+222   \hyperlink{classns3_1_1QueueDiscContainer}{QueueDiscContainer} queueDiscs;
+223 
+224   p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+225   p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+226   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"2ms"}));
+227   devn0n2 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n0n2);
+228   tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn0n2);
+229 
+230   p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+231   p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+232   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"3ms"}));
+233   devn1n2 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n1n2);
+234   tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn1n2);
+235 
+236   p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+237   p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (pieLinkDataRate));
+238   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (pieLinkDelay));
+239   devn2n3 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n2n3);
+240   \textcolor{comment}{// only backbone link has PIE queue disc}
+241   queueDiscs = tchPie.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn2n3);
+242 
+243   p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+244   p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+245   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"4ms"}));
+246   devn3n4 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n3n4);
+247   tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn3n4);
+248 
+249   p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+250   p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+251   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"5ms"}));
+252   devn3n5 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n3n5);
+253   tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn3n5);
+254 
+255   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses"});
+256   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+257 
+258   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+259   \hyperlink{pie-example_8cc_a04048bb862423a1ed10deed33021fe0c}{i0i2} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devn0n2);
+260 
+261   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.2.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+262   \hyperlink{pie-example_8cc_abe23af3b1cb569ee9ee4ed7370791041}{i1i2} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devn1n2);
+263 
+264   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.3.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+265   \hyperlink{pie-example_8cc_affe7f66c0345fed19eab1e55824055e3}{i2i3} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devn2n3);
+266 
+267   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.4.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+268   \hyperlink{pie-example_8cc_ae521eb38559954aa9357fa662c3bb76e}{i3i4} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devn3n4);
+269 
+270   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.5.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+271   \hyperlink{pie-example_8cc_afd160932e196777fd40772bb913a63f5}{i3i5} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devn3n5);
+272 
+273   \textcolor{comment}{// Set up the routing}
+274   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+275 
+276   \hyperlink{pie-example_8cc_a0c000010f0a49a9809242c8ec4148666}{BuildAppsTest} ();
+277 
+278   \textcolor{keywordflow}{if} (writePcap)
+279     \{
+280       \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} ptp;
+281       std::stringstream stmp;
+282       stmp << pathOut << \textcolor{stringliteral}{"/pie"};
+283       ptp.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (stmp.str ().c\_str ());
+284     \}
+285 
+286   \hyperlink{classns3_1_1Ptr}{Ptr<FlowMonitor>} flowmon;
+287   \textcolor{keywordflow}{if} (flowMonitor)
+288     \{
+289       \hyperlink{classns3_1_1FlowMonitorHelper}{FlowMonitorHelper} flowmonHelper;
+290       flowmon = flowmonHelper.\hyperlink{classns3_1_1FlowMonitorHelper_a722b383a10c5a959576f3bfee8d4374f}{InstallAll} ();
+291     \}
+292 
+293   \textcolor{keywordflow}{if} (writeForPlot)
+294     \{
+295       \hyperlink{pie-example_8cc_a06d9ff5c07ecb984ef94ad415abd87b5}{filePlotQueueDisc} << pathOut << \textcolor{stringliteral}{"/"} << \textcolor{stringliteral}{"pie-queue-disc.plotme"};
+296       \hyperlink{pie-example_8cc_a4164ee3b210acca3b1e1c45ad2bac980}{filePlotQueueDiscAvg} << pathOut << \textcolor{stringliteral}{"/"} << \textcolor{stringliteral}{"pie-queue-disc\_avg.plotme"};
+297 
+298       \textcolor{keyword}{remove} (\hyperlink{pie-example_8cc_a06d9ff5c07ecb984ef94ad415abd87b5}{filePlotQueueDisc}.str ().c\_str ());
+299       \textcolor{keyword}{remove} (\hyperlink{pie-example_8cc_a4164ee3b210acca3b1e1c45ad2bac980}{filePlotQueueDiscAvg}.str ().c\_str ());
+300       \hyperlink{classns3_1_1Ptr}{Ptr<QueueDisc>} queue = queueDiscs.\hyperlink{classns3_1_1QueueDiscContainer_a236064f6321b5f0d32561bb2a14e74af}{Get} (0);
+301       Simulator::ScheduleNow (&\hyperlink{pie-example_8cc_a64451d920062e967d2c0fa8b6ae85911}{CheckQueueDiscSize}, queue);
+302     \}
+303 
+304   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{pie-example_8cc_a2462eef540f5b896f14d4ea7b7bb6214}{sink\_stop\_time}));
+305   Simulator::Run ();
+306 
+307   \hyperlink{structns3_1_1PieQueueDisc_1_1Stats}{PieQueueDisc::Stats} st = StaticCast<PieQueueDisc> (queueDiscs.
+      \hyperlink{classns3_1_1QueueDiscContainer_a236064f6321b5f0d32561bb2a14e74af}{Get} (0))->GetStats ();
+308 
+309   \textcolor{keywordflow}{if} (st.\hyperlink{structns3_1_1PieQueueDisc_1_1Stats_a40eea66d9bc2ce766df9390776eb88a9}{forcedDrop} != 0)
+310     \{
+311       std::cout << \textcolor{stringliteral}{"There should be no drops due to queue full."} << std::endl;
+312       exit (1);
+313     \}
+314 
+315   \textcolor{keywordflow}{if} (flowMonitor)
+316     \{
+317       std::stringstream stmp;
+318       stmp << pathOut << \textcolor{stringliteral}{"/pie.flowmon"};
+319 
+320       flowmon->\hyperlink{classns3_1_1FlowMonitor_a4c92ccb32c95122857aefbcfc82d6746}{SerializeToXmlFile} (stmp.str ().c\_str (), \textcolor{keyword}{false}, \textcolor{keyword}{false});
+321     \}
+322 
+323   \textcolor{keywordflow}{if} (printPieStats)
+324     \{
+325       std::cout << \textcolor{stringliteral}{"*** PIE stats from Node 2 queue ***"} << std::endl;
+326       std::cout << \textcolor{stringliteral}{"\(\backslash\)t "} << st.\hyperlink{structns3_1_1PieQueueDisc_1_1Stats_afe4c9f6e4c910cf47d475ff5d29d5bb0}{unforcedDrop} << \textcolor{stringliteral}{" drops due to prob mark"} << std::endl;
+327       std::cout << \textcolor{stringliteral}{"\(\backslash\)t "} << st.\hyperlink{structns3_1_1PieQueueDisc_1_1Stats_a40eea66d9bc2ce766df9390776eb88a9}{forcedDrop} << \textcolor{stringliteral}{" drops due to queue limits"} << std::endl;
+328     \}
+329 
+330   Simulator::Destroy ();
+331 
+332   \textcolor{keywordflow}{return} 0;
+333 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Pie\+Example"")}{NS_LOG_COMPONENT_DEFINE("PieExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Pie\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{pie-example_8cc_a40a2488cf4393aeb41598de13af518f3}{}\label{pie-example_8cc_a40a2488cf4393aeb41598de13af518f3}
+
+
+\subsection{Variable Documentation}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!avg\+Queue\+Disc\+Size@{avg\+Queue\+Disc\+Size}}
+\index{avg\+Queue\+Disc\+Size@{avg\+Queue\+Disc\+Size}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{avg\+Queue\+Disc\+Size}{avgQueueDiscSize}}]{\setlength{\rightskip}{0pt plus 5cm}double avg\+Queue\+Disc\+Size}\hypertarget{pie-example_8cc_a7058a9ca1256be97bd01c637ff170dc2}{}\label{pie-example_8cc_a7058a9ca1256be97bd01c637ff170dc2}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!check\+Times@{check\+Times}}
+\index{check\+Times@{check\+Times}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{check\+Times}{checkTimes}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t check\+Times}\hypertarget{pie-example_8cc_aeea215f1e5c3568bca85c126b9870c09}{}\label{pie-example_8cc_aeea215f1e5c3568bca85c126b9870c09}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!client\+\_\+start\+\_\+time@{client\+\_\+start\+\_\+time}}
+\index{client\+\_\+start\+\_\+time@{client\+\_\+start\+\_\+time}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{client\+\_\+start\+\_\+time}{client_start_time}}]{\setlength{\rightskip}{0pt plus 5cm}double client\+\_\+start\+\_\+time}\hypertarget{pie-example_8cc_a18ff86acaf663200fbedb1f77d03b515}{}\label{pie-example_8cc_a18ff86acaf663200fbedb1f77d03b515}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!client\+\_\+stop\+\_\+time@{client\+\_\+stop\+\_\+time}}
+\index{client\+\_\+stop\+\_\+time@{client\+\_\+stop\+\_\+time}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{client\+\_\+stop\+\_\+time}{client_stop_time}}]{\setlength{\rightskip}{0pt plus 5cm}double client\+\_\+stop\+\_\+time}\hypertarget{pie-example_8cc_aee714f5dcf74da2f73bcdd66c8a9e265}{}\label{pie-example_8cc_aee714f5dcf74da2f73bcdd66c8a9e265}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!file\+Plot\+Queue\+Disc@{file\+Plot\+Queue\+Disc}}
+\index{file\+Plot\+Queue\+Disc@{file\+Plot\+Queue\+Disc}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{file\+Plot\+Queue\+Disc}{filePlotQueueDisc}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::stringstream file\+Plot\+Queue\+Disc}\hypertarget{pie-example_8cc_a06d9ff5c07ecb984ef94ad415abd87b5}{}\label{pie-example_8cc_a06d9ff5c07ecb984ef94ad415abd87b5}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!file\+Plot\+Queue\+Disc\+Avg@{file\+Plot\+Queue\+Disc\+Avg}}
+\index{file\+Plot\+Queue\+Disc\+Avg@{file\+Plot\+Queue\+Disc\+Avg}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{file\+Plot\+Queue\+Disc\+Avg}{filePlotQueueDiscAvg}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::stringstream file\+Plot\+Queue\+Disc\+Avg}\hypertarget{pie-example_8cc_a4164ee3b210acca3b1e1c45ad2bac980}{}\label{pie-example_8cc_a4164ee3b210acca3b1e1c45ad2bac980}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!global\+\_\+start\+\_\+time@{global\+\_\+start\+\_\+time}}
+\index{global\+\_\+start\+\_\+time@{global\+\_\+start\+\_\+time}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{global\+\_\+start\+\_\+time}{global_start_time}}]{\setlength{\rightskip}{0pt plus 5cm}double global\+\_\+start\+\_\+time}\hypertarget{pie-example_8cc_ab3a0ca969f11332a6b4ca8bc81e19ba7}{}\label{pie-example_8cc_ab3a0ca969f11332a6b4ca8bc81e19ba7}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!global\+\_\+stop\+\_\+time@{global\+\_\+stop\+\_\+time}}
+\index{global\+\_\+stop\+\_\+time@{global\+\_\+stop\+\_\+time}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{global\+\_\+stop\+\_\+time}{global_stop_time}}]{\setlength{\rightskip}{0pt plus 5cm}double global\+\_\+stop\+\_\+time}\hypertarget{pie-example_8cc_a374328526043935f11841a7ec7e396d5}{}\label{pie-example_8cc_a374328526043935f11841a7ec7e396d5}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!i0i2@{i0i2}}
+\index{i0i2@{i0i2}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{i0i2}{i0i2}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} i0i2}\hypertarget{pie-example_8cc_a04048bb862423a1ed10deed33021fe0c}{}\label{pie-example_8cc_a04048bb862423a1ed10deed33021fe0c}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!i1i2@{i1i2}}
+\index{i1i2@{i1i2}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{i1i2}{i1i2}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} i1i2}\hypertarget{pie-example_8cc_abe23af3b1cb569ee9ee4ed7370791041}{}\label{pie-example_8cc_abe23af3b1cb569ee9ee4ed7370791041}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!i2i3@{i2i3}}
+\index{i2i3@{i2i3}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{i2i3}{i2i3}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} i2i3}\hypertarget{pie-example_8cc_affe7f66c0345fed19eab1e55824055e3}{}\label{pie-example_8cc_affe7f66c0345fed19eab1e55824055e3}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!i3i4@{i3i4}}
+\index{i3i4@{i3i4}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{i3i4}{i3i4}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} i3i4}\hypertarget{pie-example_8cc_ae521eb38559954aa9357fa662c3bb76e}{}\label{pie-example_8cc_ae521eb38559954aa9357fa662c3bb76e}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!i3i5@{i3i5}}
+\index{i3i5@{i3i5}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{i3i5}{i3i5}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} i3i5}\hypertarget{pie-example_8cc_afd160932e196777fd40772bb913a63f5}{}\label{pie-example_8cc_afd160932e196777fd40772bb913a63f5}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!n0n2@{n0n2}}
+\index{n0n2@{n0n2}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{n0n2}{n0n2}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} n0n2}\hypertarget{pie-example_8cc_aeaa87dbd052b50719525adea0f586b36}{}\label{pie-example_8cc_aeaa87dbd052b50719525adea0f586b36}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!n1n2@{n1n2}}
+\index{n1n2@{n1n2}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{n1n2}{n1n2}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} n1n2}\hypertarget{pie-example_8cc_a68f69f65725cbe7529e8b594708b8fc0}{}\label{pie-example_8cc_a68f69f65725cbe7529e8b594708b8fc0}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!n2n3@{n2n3}}
+\index{n2n3@{n2n3}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{n2n3}{n2n3}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} n2n3}\hypertarget{pie-example_8cc_a4bc708159d3ec761080f4639c1c8f409}{}\label{pie-example_8cc_a4bc708159d3ec761080f4639c1c8f409}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!n3n4@{n3n4}}
+\index{n3n4@{n3n4}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{n3n4}{n3n4}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} n3n4}\hypertarget{pie-example_8cc_a71269c713841141f40860e991d435588}{}\label{pie-example_8cc_a71269c713841141f40860e991d435588}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!n3n5@{n3n5}}
+\index{n3n5@{n3n5}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{n3n5}{n3n5}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} n3n5}\hypertarget{pie-example_8cc_af4c498a2bfb720685107e00e03067e31}{}\label{pie-example_8cc_af4c498a2bfb720685107e00e03067e31}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!sink\+\_\+start\+\_\+time@{sink\+\_\+start\+\_\+time}}
+\index{sink\+\_\+start\+\_\+time@{sink\+\_\+start\+\_\+time}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{sink\+\_\+start\+\_\+time}{sink_start_time}}]{\setlength{\rightskip}{0pt plus 5cm}double sink\+\_\+start\+\_\+time}\hypertarget{pie-example_8cc_a2c56dc9b543a4442a7edd8d680c4a1bc}{}\label{pie-example_8cc_a2c56dc9b543a4442a7edd8d680c4a1bc}
+\index{pie-\/example.\+cc@{pie-\/example.\+cc}!sink\+\_\+stop\+\_\+time@{sink\+\_\+stop\+\_\+time}}
+\index{sink\+\_\+stop\+\_\+time@{sink\+\_\+stop\+\_\+time}!pie-\/example.\+cc@{pie-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{sink\+\_\+stop\+\_\+time}{sink_stop_time}}]{\setlength{\rightskip}{0pt plus 5cm}double sink\+\_\+stop\+\_\+time}\hypertarget{pie-example_8cc_a2462eef540f5b896f14d4ea7b7bb6214}{}\label{pie-example_8cc_a2462eef540f5b896f14d4ea7b7bb6214}

@@ -1,0 +1,216 @@
+\hypertarget{brite-MPI-example_8cc}{}\section{brite/examples/brite-\/\+M\+P\+I-\/example.cc File Reference}
+\label{brite-MPI-example_8cc}\index{brite/examples/brite-\/\+M\+P\+I-\/example.\+cc@{brite/examples/brite-\/\+M\+P\+I-\/example.\+cc}}
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mpi-\/interface.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/brite-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/nix-\/vector-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+Include dependency graph for brite-\/\+M\+P\+I-\/example.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{brite-MPI-example_8cc_a79dce00b6f357d283b3a796267018fb2}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Brite\+M\+P\+I\+Test\char`\"{})
+\item 
+int \hyperlink{brite-MPI-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{brite-\/\+M\+P\+I-\/example.\+cc@{brite-\/\+M\+P\+I-\/example.\+cc}!main@{main}}
+\index{main@{main}!brite-\/\+M\+P\+I-\/example.\+cc@{brite-\/\+M\+P\+I-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{brite-MPI-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{brite-MPI-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+44 \{
+45 \textcolor{preprocessor}{#ifdef NS3\_MPI}
+46   \textcolor{comment}{// Distributed simulation setup}
+47   MpiInterface::Enable (&argc, &argv);
+48   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"},
+49                      StringValue (\textcolor{stringliteral}{"ns3::DistributedSimulatorImpl"}));
+50 
+51   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"BriteMPITest"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+52   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"TcpSocketBase"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+53 
+54   uint32\_t systemId = MpiInterface::GetSystemId ();
+55   uint32\_t systemCount = MpiInterface::GetSize ();
+56 
+57   \textcolor{comment}{// Check for valid distributed parameters.}
+58   \textcolor{comment}{// For just this particular example, must have 2 and only 2 Logical Processors (LPs)}
+59   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (systemCount == 2, \textcolor{stringliteral}{"This demonstration requires 2 and only 2 logical
+       processors."});
+60 
+61   \textcolor{comment}{// BRITE needs a configuration file to build its graph. By default, this}
+62   \textcolor{comment}{// example will use the TD\_ASBarabasi\_RTWaxman.conf file. There are many others}
+63   \textcolor{comment}{// which can be found in the BRITE/conf\_files directory}
+64   std::string confFile = \textcolor{stringliteral}{"src/brite/examples/conf\_files/TD\_ASBarabasi\_RTWaxman.conf"};
+65   \textcolor{keywordtype}{bool} tracing = \textcolor{keyword}{false};
+66   \textcolor{keywordtype}{bool} nix = \textcolor{keyword}{false};
+67 
+68   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+69   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"confFile"}, \textcolor{stringliteral}{"BRITE conf file"}, confFile);
+70   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"tracing"}, \textcolor{stringliteral}{"Enable or disable ascii tracing"}, tracing);
+71   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nix"}, \textcolor{stringliteral}{"Enable or disable nix-vector routing"}, nix);
+72 
+73   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc,argv);
+74 
+75   \textcolor{comment}{// Invoke the BriteTopologyHelper and pass in a BRITE}
+76   \textcolor{comment}{// configuration file and a seed file. This will use}
+77   \textcolor{comment}{// BRITE to build a graph from which we can build the ns-3 topology}
+78   \hyperlink{classns3_1_1BriteTopologyHelper}{BriteTopologyHelper} bth (confFile);
+79 
+80   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} p2p;
+81 
+82 
+83   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+84 
+85   \textcolor{keywordflow}{if} (nix)
+86     \{
+87       \hyperlink{classns3_1_1Ipv4NixVectorHelper}{Ipv4NixVectorHelper} nixRouting;
+88       stack.\hyperlink{classns3_1_1InternetStackHelper_a3e382c02df022dec79952a7eca8cd5ba}{SetRoutingHelper} (nixRouting);
+89     \}
+90 
+91   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+92   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.0.0.0"}, \textcolor{stringliteral}{"255.255.255.252"});
+93 
+94   \textcolor{comment}{//build topology as normal but also pass systemCount}
+95   bth.BuildBriteTopology (stack, systemCount);
+96   bth.AssignIpv4Addresses (address);
+97 
+98   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Number of AS created "} << bth.GetNAs ());
+99 
+100   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 5001;
+101 
+102   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} client;
+103   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} server;
+104 
+105   \textcolor{comment}{//For this example will use AS 0 and AS 1 which will be on seperate systems}
+106   \textcolor{comment}{//due to the mod divide used to assign AS to system.}
+107 
+108   \textcolor{comment}{//GetSystemNumberForAs (uint32\_t) can be used to determine which system an}
+109   \textcolor{comment}{//AS is assigned to}
+110   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"AS 0 has been assigned to system "} << bth.GetSystemNumberForAs (0));
+111   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"As 1 has been assigned to system "} << bth.GetSystemNumberForAs (1));
+112 
+113   \textcolor{comment}{//install client node on last leaf node of AS 0}
+114   client.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (CreateObject<Node> (0));
+115   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (client);
+116   \textcolor{keywordtype}{int} numLeafNodesInAsZero = bth.GetNLeafNodesForAs (0);
+117   client.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (bth.GetLeafNodeForAs (0, numLeafNodesInAsZero - 1));
+118 
+119   \textcolor{comment}{//install server node on last leaf node on AS 1}
+120   server.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (CreateObject<Node> (1));
+121   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (server);
+122   \textcolor{keywordtype}{int} numLeafNodesInAsOne = bth.GetNLeafNodesForAs (1);
+123   server.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (bth.GetLeafNodeForAs (1, numLeafNodesInAsOne - 1));
+124 
+125   p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"5Mbps"}));
+126   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"2ms"}));
+127 
+128   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} p2pClientDevices;
+129   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} p2pServerDevices;
+130 
+131   p2pClientDevices = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (client);
+132   p2pServerDevices = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (server);
+133 
+134   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.0.0"}, \textcolor{stringliteral}{"255.255.0.0"});
+135   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} clientInterfaces;
+136   clientInterfaces = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (p2pClientDevices);
+137 
+138   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.2.0.0"}, \textcolor{stringliteral}{"255.255.0.0"});
+139   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} serverInterfaces;
+140   serverInterfaces = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (p2pServerDevices);
+141 
+142   \textcolor{keywordflow}{if} (!nix)
+143     \{
+144       Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+145     \}
+146 
+147   \textcolor{comment}{//only has two systems in this example.  Install applications only on nodes in my system}
+148 
+149 
+150   \textcolor{comment}{//Moved here to get totalRX at end}
+151   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApps;
+152 
+153   \textcolor{keywordflow}{if} (systemId == 1)
+154     \{
+155 
+156       \hyperlink{classns3_1_1Address}{Address} sinkLocalAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port));
+157       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} packetSinkHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, sinkLocalAddress);
+158       sinkApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (packetSinkHelper.Install (server.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)));
+159       sinkApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+160       sinkApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+161     \}
+162 
+163   \textcolor{keywordflow}{if} (systemId == 0)
+164     \{
+165       \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} clientHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+166       clientHelper.SetAttribute (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}));
+167       clientHelper.SetAttribute (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=0]"}));
+168 
+169       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps;
+170       AddressValue remoteAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (serverInterfaces.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (0), \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}));
+171       clientHelper.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+172       clientApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (clientHelper.Install (client.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)));
+173       clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0)); \textcolor{comment}{// Start 1 second after sink}
+174       clientApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (9.0)); \textcolor{comment}{// Stop before the sink}
+175     \}
+176 
+177   \textcolor{keywordflow}{if} (!nix)
+178     \{
+179       Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+180     \}
+181 
+182   \textcolor{keywordflow}{if} (tracing)
+183     \{
+184       \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+185       p2p.\hyperlink{classns3_1_1AsciiTraceHelperForDevice_a63e57c878526c732924e14c1e52cca8b}{EnableAsciiAll} (ascii.\hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (\textcolor{stringliteral}{"briteLeaves.tr"}));
+186     \}
+187 
+188   \textcolor{comment}{// Run the simulator}
+189   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (200.0));
+190   Simulator::Run ();
+191   Simulator::Destroy ();
+192 
+193   \textcolor{keywordflow}{if} (systemId == 1)
+194     \{
+195       \hyperlink{classns3_1_1Ptr}{Ptr<PacketSink>} sink1 = DynamicCast<PacketSink> (sinkApps.
+      \hyperlink{classns3_1_1ApplicationContainer_a9e565807abd4213a56566a7ccd8d7509}{Get} (0));
+196       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Total Bytes Received: "} << sink1->\hyperlink{classns3_1_1PacketSink_a11e7c4cc4a3c1e16e9abbb2cd3a12334}{GetTotalRx} ());
+197     \}
+198 
+199   MpiInterface::Disable ();
+200 
+201   \textcolor{keywordflow}{return} 0;
+202 
+203 \textcolor{preprocessor}{#else}
+204   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Can't use distributed simulator without MPI compiled in"});
+205 \textcolor{preprocessor}{#endif}
+206 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{brite-\/\+M\+P\+I-\/example.\+cc@{brite-\/\+M\+P\+I-\/example.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!brite-\/\+M\+P\+I-\/example.\+cc@{brite-\/\+M\+P\+I-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Brite\+M\+P\+I\+Test"")}{NS_LOG_COMPONENT_DEFINE("BriteMPITest")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Brite\+M\+P\+I\+Test\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{brite-MPI-example_8cc_a79dce00b6f357d283b3a796267018fb2}{}\label{brite-MPI-example_8cc_a79dce00b6f357d283b3a796267018fb2}

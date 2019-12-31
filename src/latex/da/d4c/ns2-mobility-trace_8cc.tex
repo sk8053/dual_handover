@@ -1,0 +1,131 @@
+\hypertarget{ns2-mobility-trace_8cc}{}\section{mobility/examples/ns2-\/mobility-\/trace.cc File Reference}
+\label{ns2-mobility-trace_8cc}\index{mobility/examples/ns2-\/mobility-\/trace.\+cc@{mobility/examples/ns2-\/mobility-\/trace.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ns2-\/mobility-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for ns2-\/mobility-\/trace.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{ns2-mobility-trace_8cc_a6488aa51fddc446bc1a40d66a29f7445}{Course\+Change} (std\+::ostream $\ast$os, std\+::string foo, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ mobility)
+\item 
+int \hyperlink{ns2-mobility-trace_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{ns2-\/mobility-\/trace.\+cc@{ns2-\/mobility-\/trace.\+cc}!Course\+Change@{Course\+Change}}
+\index{Course\+Change@{Course\+Change}!ns2-\/mobility-\/trace.\+cc@{ns2-\/mobility-\/trace.\+cc}}
+\subsubsection[{\texorpdfstring{Course\+Change(std\+::ostream $\ast$os, std\+::string foo, Ptr$<$ const Mobility\+Model $>$ mobility)}{CourseChange(std::ostream *os, std::string foo, Ptr< const MobilityModel > mobility)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Course\+Change (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream $\ast$}]{os, }
+\item[{std\+::string}]{foo, }
+\item[{{\bf Ptr}$<$ const {\bf Mobility\+Model} $>$}]{mobility}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{ns2-mobility-trace_8cc_a6488aa51fddc446bc1a40d66a29f7445}{}\label{ns2-mobility-trace_8cc_a6488aa51fddc446bc1a40d66a29f7445}
+
+\begin{DoxyCode}
+65 \{
+66   \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} pos = mobility->\hyperlink{classns3_1_1MobilityModel_aba838f06ec5bbb2d193d94b8c0e4abb4}{GetPosition} (); \textcolor{comment}{// Get position}
+67   \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} vel = mobility->\hyperlink{classns3_1_1MobilityModel_a77004c56b45773bf57bdd3750887ced3}{GetVelocity} (); \textcolor{comment}{// Get velocity}
+68 
+69   \textcolor{comment}{// Prints position and velocities}
+70   *os << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} () << \textcolor{stringliteral}{" POS: x="} << pos.x << \textcolor{stringliteral}{", y="} << pos.y
+71       << \textcolor{stringliteral}{", z="} << pos.z << \textcolor{stringliteral}{"; VEL:"} << vel.x << \textcolor{stringliteral}{", y="} << vel.y
+72       << \textcolor{stringliteral}{", z="} << vel.z << std::endl;
+73 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns2-\/mobility-\/trace.\+cc@{ns2-\/mobility-\/trace.\+cc}!main@{main}}
+\index{main@{main}!ns2-\/mobility-\/trace.\+cc@{ns2-\/mobility-\/trace.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{ns2-mobility-trace_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{ns2-mobility-trace_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+77 \{
+78   std::string traceFile;
+79   std::string logFile;
+80 
+81   \textcolor{keywordtype}{int}    nodeNum;
+82   \textcolor{keywordtype}{double} duration;
+83 
+84   \textcolor{comment}{// Enable logging from the ns2 helper}
+85   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"Ns2MobilityHelper"},\hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbabc85ae851e992c4d8577705c712061ef}{LOG\_LEVEL\_DEBUG});
+86 
+87   \textcolor{comment}{// Parse command line attribute}
+88   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+89   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"traceFile"}, \textcolor{stringliteral}{"Ns2 movement trace file"}, traceFile);
+90   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nodeNum"}, \textcolor{stringliteral}{"Number of nodes"}, nodeNum);
+91   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"duration"}, \textcolor{stringliteral}{"Duration of Simulation"}, duration);
+92   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"logFile"}, \textcolor{stringliteral}{"Log file"}, logFile);
+93   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc,argv);
+94 
+95   \textcolor{comment}{// Check command line arguments}
+96   \textcolor{keywordflow}{if} (traceFile.empty () || nodeNum <= 0 || duration <= 0 || logFile.empty ())
+97     \{
+98       std::cout << \textcolor{stringliteral}{"Usage of "} << argv[0] << \textcolor{stringliteral}{" :\(\backslash\)n\(\backslash\)n"}
+99       \textcolor{stringliteral}{"./waf --run \(\backslash\)"ns2-mobility-trace"}
+100       \textcolor{stringliteral}{" --traceFile=src/mobility/examples/default.ns\_movements"}
+101       \textcolor{stringliteral}{" --nodeNum=2 --duration=100.0 --logFile=ns2-mob.log\(\backslash\)" \(\backslash\)n\(\backslash\)n"}
+102       \textcolor{stringliteral}{"NOTE: ns2-traces-file could be an absolute or relative path. You could use the file
+       default.ns\_movements\(\backslash\)n"}
+103       \textcolor{stringliteral}{"      included in the same directory of this example file.\(\backslash\)n\(\backslash\)n"}
+104       \textcolor{stringliteral}{"NOTE 2: Number of nodes present in the trace file must match with the command line argument and must
+      \(\backslash\)n"}
+105       \textcolor{stringliteral}{"        be a positive number. Note that you must know it before to be able to load it.\(\backslash\)n\(\backslash\)n"}
+106       \textcolor{stringliteral}{"NOTE 3: Duration must be a positive number. Note that you must know it before to be able to load it.
+      \(\backslash\)n\(\backslash\)n"};
+107 
+108       \textcolor{keywordflow}{return} 0;
+109     \}
+110 
+111   \textcolor{comment}{// Create Ns2MobilityHelper with the specified trace log file as parameter}
+112   \hyperlink{classns3_1_1Ns2MobilityHelper}{Ns2MobilityHelper} ns2 = \hyperlink{classns3_1_1Ns2MobilityHelper}{Ns2MobilityHelper} (traceFile);
+113 
+114   \textcolor{comment}{// open log file for output}
+115   std::ofstream os;
+116   os.open (logFile.c\_str ());
+117 
+118   \textcolor{comment}{// Create all nodes.}
+119   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} stas;
+120   stas.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (nodeNum);
+121 
+122   ns2.\hyperlink{classns3_1_1Ns2MobilityHelper_ae54f17492e3efd54ff7501566fc6e9cf}{Install} (); \textcolor{comment}{// configure movements for each node, while reading trace file}
+123 
+124   \textcolor{comment}{// Configure callback for logging}
+125   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/NodeList/*/$ns3::MobilityModel/CourseChange"},
+126                    \hyperlink{group__makeboundcallback_ga1725d6362e6065faa0709f7c93f8d770}{MakeBoundCallback} (&\hyperlink{ns2-mobility-trace_8cc_a6488aa51fddc446bc1a40d66a29f7445}{CourseChange}, &os));
+127 
+128   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (duration));
+129   Simulator::Run ();
+130   Simulator::Destroy ();
+131 
+132   os.close (); \textcolor{comment}{// close log file}
+133   \textcolor{keywordflow}{return} 0;
+134 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+

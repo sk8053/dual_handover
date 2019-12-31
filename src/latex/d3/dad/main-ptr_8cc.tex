@@ -1,0 +1,135 @@
+\hypertarget{main-ptr_8cc}{}\section{core/examples/main-\/ptr.cc File Reference}
+\label{main-ptr_8cc}\index{core/examples/main-\/ptr.\+cc@{core/examples/main-\/ptr.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/ptr.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/object.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+Include dependency graph for main-\/ptr.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classPtrExample}{Ptr\+Example}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classPtrExample}{Ptr\+Example} $>$ \hyperlink{main-ptr_8cc_a192be4f338c81bbf13abb66e0ba1db14}{Store\+Ptr} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classPtrExample}{Ptr\+Example} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p})
+\item 
+static void \hyperlink{main-ptr_8cc_a6c8a7abd464ec1e718a0122299262f78}{Clear\+Ptr} (void)
+\item 
+int \hyperlink{main-ptr_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classPtrExample}{Ptr\+Example} $>$ \hyperlink{main-ptr_8cc_a7f246f352a3f9f2e28ba7d122c0788b8}{g\+\_\+ptr} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Example program illustrating use of the \hyperlink{classns3_1_1Ptr}{ns3\+::\+Ptr} smart pointer. 
+
+\subsection{Function Documentation}
+\index{main-\/ptr.\+cc@{main-\/ptr.\+cc}!Clear\+Ptr@{Clear\+Ptr}}
+\index{Clear\+Ptr@{Clear\+Ptr}!main-\/ptr.\+cc@{main-\/ptr.\+cc}}
+\subsubsection[{\texorpdfstring{Clear\+Ptr(void)}{ClearPtr(void)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Clear\+Ptr (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-ptr_8cc_a6c8a7abd464ec1e718a0122299262f78}{}\label{main-ptr_8cc_a6c8a7abd464ec1e718a0122299262f78}
+Set {\ttfamily g\+\_\+ptr} to N\+U\+LL. 
+\begin{DoxyCode}
+86 \{
+87   \hyperlink{main-ptr_8cc_a7f246f352a3f9f2e28ba7d122c0788b8}{g\_ptr} = 0;
+88 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{main-\/ptr.\+cc@{main-\/ptr.\+cc}!main@{main}}
+\index{main@{main}!main-\/ptr.\+cc@{main-\/ptr.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{main-ptr_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{main-ptr_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+93 \{
+94   \{
+95     \textcolor{comment}{// Create a new object of type PtrExample, store it in global }
+96     \textcolor{comment}{// variable g\_ptr}
+97     \hyperlink{classns3_1_1Ptr}{Ptr<PtrExample>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = CreateObject<PtrExample> ();
+98     p->\hyperlink{classPtrExample_adb474d25bb99de1bb8a0da53311db3d8}{Method} ();
+99     \hyperlink{classns3_1_1Ptr}{Ptr<PtrExample>} prev = \hyperlink{main-ptr_8cc_a192be4f338c81bbf13abb66e0ba1db14}{StorePtr} (p);
+100     \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (prev == 0);
+101   \}
+102 
+103   \{
+104     \textcolor{comment}{// Create a new object of type PtrExample, store it in global }
+105     \textcolor{comment}{// variable g\_ptr, get a hold on the previous PtrExample object.}
+106     \hyperlink{classns3_1_1Ptr}{Ptr<PtrExample>} p = CreateObject<PtrExample> ();
+107     \hyperlink{classns3_1_1Ptr}{Ptr<PtrExample>} prev = \hyperlink{main-ptr_8cc_a192be4f338c81bbf13abb66e0ba1db14}{StorePtr} (p);
+108     \textcolor{comment}{// call method on object}
+109     prev->Method ();
+110     \textcolor{comment}{// Clear the currently-stored object}
+111     \hyperlink{main-ptr_8cc_a6c8a7abd464ec1e718a0122299262f78}{ClearPtr} ();
+112     \textcolor{comment}{// get the raw pointer and release it.}
+113     \hyperlink{classPtrExample}{PtrExample} *raw = \hyperlink{namespacens3_ab4e173cdfd43d17c1a40d5348510a670}{GetPointer} (prev);
+114     prev = 0;
+115     raw->\hyperlink{classPtrExample_adb474d25bb99de1bb8a0da53311db3d8}{Method} ();
+116     raw->\hyperlink{classns3_1_1SimpleRefCount_aeb8f59b2f744915a64a2271c9e4b5ec0}{Unref} ();
+117   \}
+118 
+119 
+120   \textcolor{keywordflow}{return} 0;
+121 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{main-\/ptr.\+cc@{main-\/ptr.\+cc}!Store\+Ptr@{Store\+Ptr}}
+\index{Store\+Ptr@{Store\+Ptr}!main-\/ptr.\+cc@{main-\/ptr.\+cc}}
+\subsubsection[{\texorpdfstring{Store\+Ptr(\+Ptr$<$ Ptr\+Example $>$ p)}{StorePtr(Ptr< PtrExample > p)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Ptr}$<${\bf Ptr\+Example}$>$ Store\+Ptr (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Ptr\+Example} $>$}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-ptr_8cc_a192be4f338c81bbf13abb66e0ba1db14}{}\label{main-ptr_8cc_a192be4f338c81bbf13abb66e0ba1db14}
+Example Ptr manipulations.
+
+This function stores it\textquotesingle{}s argument in the global variable {\ttfamily g\+\_\+ptr} and returns the old value of {\ttfamily g\+\_\+ptr}. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & A Ptr. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The prior value of {\ttfamily g\+\_\+ptr}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+75 \{
+76   \hyperlink{classns3_1_1Ptr}{Ptr<PtrExample>} prev = \hyperlink{main-ptr_8cc_a7f246f352a3f9f2e28ba7d122c0788b8}{g\_ptr};
+77   \hyperlink{main-ptr_8cc_a7f246f352a3f9f2e28ba7d122c0788b8}{g\_ptr} = \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p};
+78   \textcolor{keywordflow}{return} prev;
+79 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Variable Documentation}
+\index{main-\/ptr.\+cc@{main-\/ptr.\+cc}!g\+\_\+ptr@{g\+\_\+ptr}}
+\index{g\+\_\+ptr@{g\+\_\+ptr}!main-\/ptr.\+cc@{main-\/ptr.\+cc}}
+\subsubsection[{\texorpdfstring{g\+\_\+ptr}{g_ptr}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Ptr\+Example}$>$ g\+\_\+ptr = 0\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-ptr_8cc_a7f246f352a3f9f2e28ba7d122c0788b8}{}\label{main-ptr_8cc_a7f246f352a3f9f2e28ba7d122c0788b8}
+Example Ptr global variable. 

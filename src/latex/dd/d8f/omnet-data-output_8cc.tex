@@ -1,0 +1,69 @@
+\hypertarget{omnet-data-output_8cc}{}\section{stats/model/omnet-\/data-\/output.cc File Reference}
+\label{omnet-data-output_8cc}\index{stats/model/omnet-\/data-\/output.\+cc@{stats/model/omnet-\/data-\/output.\+cc}}
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/nstime.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}data-\/collector.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}data-\/calculator.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}omnet-\/data-\/output.\+h\char`\"{}}\\*
+Include dependency graph for omnet-\/data-\/output.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{omnet-data-output_8cc_a878c2b355c01dd4073528e6c1b56bc83}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Omnet\+Data\+Output\char`\"{})
+\item 
+bool \hyperlink{omnet-data-output_8cc_af747a0cbe4349a7cad54557b77696865}{is\+Numeric} (const std\+::string \&\hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{omnet-\/data-\/output.\+cc@{omnet-\/data-\/output.\+cc}!is\+Numeric@{is\+Numeric}}
+\index{is\+Numeric@{is\+Numeric}!omnet-\/data-\/output.\+cc@{omnet-\/data-\/output.\+cc}}
+\subsubsection[{\texorpdfstring{is\+Numeric(const std\+::string \&s)}{isNumeric(const std::string &s)}}]{\setlength{\rightskip}{0pt plus 5cm}bool is\+Numeric (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{omnet-data-output_8cc_af747a0cbe4349a7cad54557b77696865}{}\label{omnet-data-output_8cc_af747a0cbe4349a7cad54557b77696865}
+
+\begin{DoxyCode}
+70                                            \{
+71   \textcolor{keywordtype}{bool} decimalPtSeen = \textcolor{keyword}{false};
+72   \textcolor{keywordtype}{bool} exponentSeen = \textcolor{keyword}{false};
+73   \textcolor{keywordtype}{char} last = \textcolor{charliteral}{'\(\backslash\)0'};
+74 
+75   \textcolor{keywordflow}{for} (std::string::const\_iterator it = \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s}.begin (); it != \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s}.end (); it++)
+76     \{
+77       \textcolor{keywordflow}{if} ((*it == \textcolor{charliteral}{'.'}) && (decimalPtSeen))
+78         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+79       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (*it == \textcolor{charliteral}{'.'})
+80         decimalPtSeen = \textcolor{keyword}{true};
+81       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((*it == \textcolor{charliteral}{'e'}) && exponentSeen)
+82         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+83       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (*it == \textcolor{charliteral}{'e'})
+84         \{
+85           exponentSeen = \textcolor{keyword}{true};
+86           decimalPtSeen = \textcolor{keyword}{false};
+87         \}
+88       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (*it == \textcolor{charliteral}{'-'} && it != \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s}.begin () && last != \textcolor{charliteral}{'e'})
+89         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+90 
+91       last = *it;
+92     \}
+93   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+94 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{omnet-\/data-\/output.\+cc@{omnet-\/data-\/output.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!omnet-\/data-\/output.\+cc@{omnet-\/data-\/output.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Omnet\+Data\+Output"")}{NS_LOG_COMPONENT_DEFINE("OmnetDataOutput")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Omnet\+Data\+Output\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{omnet-data-output_8cc_a878c2b355c01dd4073528e6c1b56bc83}{}\label{omnet-data-output_8cc_a878c2b355c01dd4073528e6c1b56bc83}

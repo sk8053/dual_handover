@@ -1,0 +1,115 @@
+\hypertarget{tv-trans-regional-example_8cc}{}\section{spectrum/examples/tv-\/trans-\/regional-\/example.cc File Reference}
+\label{tv-trans-regional-example_8cc}\index{spectrum/examples/tv-\/trans-\/regional-\/example.\+cc@{spectrum/examples/tv-\/trans-\/regional-\/example.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/core-\/module.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/mobility-\/module.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/spectrum-\/helper.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/spectrum-\/analyzer-\/helper.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/tv-\/spectrum-\/transmitter-\/helper.\+h$>$}\\*
+Include dependency graph for tv-\/trans-\/regional-\/example.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{tv-trans-regional-example_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{tv-\/trans-\/regional-\/example.\+cc@{tv-\/trans-\/regional-\/example.\+cc}!main@{main}}
+\index{main@{main}!tv-\/trans-\/regional-\/example.\+cc@{tv-\/trans-\/regional-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{tv-trans-regional-example_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{tv-trans-regional-example_8cc_a3c04138a5bfe5d72780bb7e82a18e627}
+This example uses the Tv\+Spectrum\+Transmitter\+Helper class to generate a random number of C\+O\+F\+DM TV transmitters within a 250 km radius around latitude 48.\+86 degrees and longitude 2.\+35 degrees (Paris, France). The transmitters\textquotesingle{} frequencies and bandwidths correspond to the European TV channel allocations. These TV transmitters model the digital D\+V\+B-\/T standard.
+
+A spectrum analyzer is used to measure the transmitted spectra from the TV transmitters. The file \char`\"{}spectrum-\/analyzer-\/tv-\/sim-\/regional-\/0-\/0.\+tr\char`\"{} contains its output post simulation (and can be plotted with Gnuplot or M\+A\+T\+L\+AB). 
+\begin{DoxyCode}
+43 \{
+44   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+45   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+46   
+47   \textcolor{comment}{/* random seed and run number; adjust these to change random draws */}
+48   RngSeedManager::SetSeed(1);
+49   RngSeedManager::SetRun(3);
+50 
+51   \textcolor{comment}{/* nodes and positions */}
+52   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} spectrumAnalyzerNodes;
+53   spectrumAnalyzerNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+54   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+55   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} nodePositionList = 
+      CreateObject<ListPositionAllocator> ();
+56   \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} coordinates = GeographicPositions::GeographicToCartesianCoordinates (48.86, 
+57                                                                               2.35, 
+58                                                                               0,
+59                                                                               GeographicPositions::SPHERE);
+60   nodePositionList->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (coordinates); \textcolor{comment}{// spectrum analyzer}
+61   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (nodePositionList);
+62   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+63   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (spectrumAnalyzerNodes);
+64 
+65   \textcolor{comment}{/* channel and propagation */}
+66   \hyperlink{classns3_1_1SpectrumChannelHelper}{SpectrumChannelHelper} channelHelper = SpectrumChannelHelper::Default ();
+67   channelHelper.\hyperlink{classns3_1_1SpectrumChannelHelper_a11ffe86edea8cdd30f181e41c0e3e29f}{SetChannel} (\textcolor{stringliteral}{"ns3::MultiModelSpectrumChannel"});
+68   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumChannel>} channel = channelHelper.\hyperlink{classns3_1_1SpectrumChannelHelper_a419ea84f5046763085f94f38af319fb9}{Create} ();
+69   
+70   \textcolor{comment}{/* TV transmitter setup */}
+71   \hyperlink{classns3_1_1TvSpectrumTransmitterHelper}{TvSpectrumTransmitterHelper} tvTransHelper;
+72   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_a14d44a79d659b99a2e80916eadefbd54}{SetChannel} (channel);
+73   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_af602e03cad3ae4cabafcb127c888fb53}{SetAttribute} (\textcolor{stringliteral}{"StartingTime"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.1)));
+74   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_af602e03cad3ae4cabafcb127c888fb53}{SetAttribute} (\textcolor{stringliteral}{"TransmitDuration"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.1)));
+75   \textcolor{comment}{// 7.96 dBm/Hz from 50 kW ERP transmit power, flat 8 MHz PSD spectrum assumed for this approximation }
+76   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_af602e03cad3ae4cabafcb127c888fb53}{SetAttribute} (\textcolor{stringliteral}{"BasePsd"}, DoubleValue (7.96));
+77   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_af602e03cad3ae4cabafcb127c888fb53}{SetAttribute} (\textcolor{stringliteral}{"TvType"}, \hyperlink{classns3_1_1EnumValue}{EnumValue} (TvSpectrumTransmitter::TVTYPE\_COFDM
+      ));
+78   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_af602e03cad3ae4cabafcb127c888fb53}{SetAttribute} (\textcolor{stringliteral}{"Antenna"}, StringValue (\textcolor{stringliteral}{"ns3::IsotropicAntennaModel"}));
+79 
+80   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_ae862f97e3cec251b391b2ec27b2e9bf3}{AssignStreams} (300);
+81   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_aebb24cb396c43e4f0355c04b2506bb35}{CreateRegionalTvTransmitters}(
+      TvSpectrumTransmitterHelper::REGION\_EUROPE, 
+82                                              TvSpectrumTransmitterHelper::DENSITY\_MEDIUM, 
+83                                              48.86, 
+84                                              2.35, 
+85                                              0,
+86                                              250000);
+87 
+88   \textcolor{comment}{/* frequency range for spectrum analyzer */}
+89   std::vector<double> freqs;
+90   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 6860; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} + 5)
+91     \{
+92       freqs.push\_back ((\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} + 1740) * 1e5);
+93     \}
+94   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumModel>} spectrumAnalyzerFreqModel = Create<SpectrumModel> (freqs);
+95 
+96   \textcolor{comment}{/* spectrum analyzer setup */}
+97   \hyperlink{classns3_1_1SpectrumAnalyzerHelper}{SpectrumAnalyzerHelper} spectrumAnalyzerHelper;
+98   spectrumAnalyzerHelper.\hyperlink{classns3_1_1SpectrumAnalyzerHelper_a7fb7b79c0706c9aecd427af6c4148031}{SetChannel} (channel);
+99   spectrumAnalyzerHelper.SetRxSpectrumModel (spectrumAnalyzerFreqModel);
+100   spectrumAnalyzerHelper.SetPhyAttribute (\textcolor{stringliteral}{"NoisePowerSpectralDensity"}, DoubleValue (4.14e-21)); \textcolor{comment}{// approx
+       -174 dBm/Hz}
+101   spectrumAnalyzerHelper.EnableAsciiAll (\textcolor{stringliteral}{"spectrum-analyzer-tv-sim-regional"});
+102   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} spectrumAnalyzerDevices = spectrumAnalyzerHelper.Install (
+      spectrumAnalyzerNodes);
+103 
+104   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.4));
+105 
+106   Simulator::Run ();
+107 
+108   Simulator::Destroy ();
+109 
+110   std::cout << \textcolor{stringliteral}{"simulation done!"} << std::endl;
+111   std::cout << \textcolor{stringliteral}{"see spectrum analyzer output file"} << std::endl;
+112 
+113   \textcolor{keywordflow}{return} 0;
+114 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

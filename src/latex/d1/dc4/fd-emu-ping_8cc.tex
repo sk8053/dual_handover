@@ -1,0 +1,219 @@
+\hypertarget{fd-emu-ping_8cc}{}\section{fd-\/net-\/device/examples/fd-\/emu-\/ping.cc File Reference}
+\label{fd-emu-ping_8cc}\index{fd-\/net-\/device/examples/fd-\/emu-\/ping.\+cc@{fd-\/net-\/device/examples/fd-\/emu-\/ping.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/abort.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/fd-\/net-\/device-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/apps-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/static-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/list-\/routing-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for fd-\/emu-\/ping.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{fd-emu-ping_8cc_a2b9eea29f4773033a7ecf1b30896dd19}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Ping\+Emulation\+Example\char`\"{})
+\item 
+static void \hyperlink{fd-emu-ping_8cc_a1a49f760c7e3da367b3406515d2a3ef9}{Ping\+Rtt} (std\+::string context, \hyperlink{classns3_1_1Time}{Time} rtt)
+\item 
+int \hyperlink{fd-emu-ping_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{fd-\/emu-\/ping.\+cc@{fd-\/emu-\/ping.\+cc}!main@{main}}
+\index{main@{main}!fd-\/emu-\/ping.\+cc@{fd-\/emu-\/ping.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{fd-emu-ping_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{fd-emu-ping_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+91 \{
+92   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Ping Emulation Example"});
+93 
+94   std::string deviceName (\textcolor{stringliteral}{"eth0"});
+95   std::string remote (\textcolor{stringliteral}{"173.194.34.51"}); \textcolor{comment}{// example.com}
+96 
+97   \textcolor{comment}{//}
+98   \textcolor{comment}{// Allow the user to override any of the defaults at run-time, via}
+99   \textcolor{comment}{// command-line arguments}
+100   \textcolor{comment}{//}
+101   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+102   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"deviceName"}, \textcolor{stringliteral}{"Device name"}, deviceName);
+103   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"remote"}, \textcolor{stringliteral}{"Remote IP address (dotted decimal only please)"}, remote);
+104   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+105 
+106   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} remoteIp (remote.c\_str ());
+107   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} localIp (\textcolor{stringliteral}{"1.2.3.4"});
+108   \hyperlink{group__fatal_ga6653324225bc139e46deea177614ceee}{NS\_ABORT\_MSG\_IF} (localIp == \textcolor{stringliteral}{"1.2.3.4"}, \textcolor{stringliteral}{"You must change the local IP address before
+       running this example"});
+109 
+110   \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} localMask (\textcolor{stringliteral}{"255.255.255.0"});
+111 
+112   \textcolor{comment}{//}
+113   \textcolor{comment}{// Since we are using a real piece of hardware we need to use the realtime}
+114   \textcolor{comment}{// simulator.}
+115   \textcolor{comment}{//}
+116   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"}, StringValue (\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl"}));
+117 
+118   \textcolor{comment}{//}
+119   \textcolor{comment}{// Since we are going to be talking to real-world machines, we need to enable}
+120   \textcolor{comment}{// calculation of checksums in our protocols.}
+121   \textcolor{comment}{//}
+122   GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+123 
+124   \textcolor{comment}{//}
+125   \textcolor{comment}{// In such a simple topology, the use of the helper API can be a hindrance}
+126   \textcolor{comment}{// so we drop down into the low level API and do it manually.}
+127   \textcolor{comment}{//}
+128   \textcolor{comment}{// First we need a single node.}
+129   \textcolor{comment}{//}
+130   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Node"});
+131   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = CreateObject<Node> ();
+132 
+133   \textcolor{comment}{//}
+134   \textcolor{comment}{// Create an emu device, allocate a MAC address and point the device to the}
+135   \textcolor{comment}{// Linux device name.  The device needs a transmit queueing discipline so}
+136   \textcolor{comment}{// create a droptail queue and give it to the device.  Finally, "install"}
+137   \textcolor{comment}{// the device into the node.}
+138   \textcolor{comment}{//}
+139   \textcolor{comment}{// Do understand that the ns-3 allocated MAC address will be sent out over}
+140   \textcolor{comment}{// your network since the emu net device will spoof it.  By default, this}
+141   \textcolor{comment}{// address will have an Organizationally Unique Identifier (OUI) of zero.}
+142   \textcolor{comment}{// The Internet Assigned Number Authority IANA}
+143   \textcolor{comment}{//}
+144   \textcolor{comment}{//  http://www.iana.org/assignments/ethernet-numbers}
+145   \textcolor{comment}{//}
+146   \textcolor{comment}{// reports that this OUI is unassigned, and so should not conflict with}
+147   \textcolor{comment}{// real hardware on your net.  It may raise all kinds of red flags in a}
+148   \textcolor{comment}{// real environment to have packets from a device with an obviously bogus}
+149   \textcolor{comment}{// OUI flying around.  Be aware.}
+150   \textcolor{comment}{//}
+151   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Device"});
+152   \hyperlink{classns3_1_1EmuFdNetDeviceHelper}{EmuFdNetDeviceHelper} emu;
+153   emu.\hyperlink{classns3_1_1EmuFdNetDeviceHelper_aa5c26a78442e507ba969f28ffa5f748e}{SetDeviceName} (deviceName);
+154   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = emu.\hyperlink{classns3_1_1FdNetDeviceHelper_af70d55cbb4f6411c33cacb84eb651ad5}{Install} (node);
+155   \hyperlink{classns3_1_1Ptr}{Ptr<NetDevice>} device = devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0);
+156   device->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Address"}, Mac48AddressValue (Mac48Address::Allocate ()));
+157 
+158   \textcolor{comment}{//Ptr<Queue> queue = CreateObject<DropTailQueue> ();}
+159   \textcolor{comment}{//device->SetQueue (queue);}
+160   \textcolor{comment}{//node->AddDevice (device);}
+161 
+162   \textcolor{comment}{//}
+163   \textcolor{comment}{// Add a default internet stack to the node.  This gets us the ns-3 versions}
+164   \textcolor{comment}{// of ARP, IPv4, ICMP, UDP and TCP.}
+165   \textcolor{comment}{//}
+166   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Add Internet Stack"});
+167   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internetStackHelper;
+168   internetStackHelper.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (node);
+169 
+170   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create IPv4 Interface"});
+171   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4>} ipv4 = node->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ();
+172   uint32\_t \textcolor{keyword}{interface }= ipv4->AddInterface (device);
+173   \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} address = \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} (localIp, 
+      localMask);
+174   ipv4->\hyperlink{classns3_1_1Ipv4_ad203526cae6a4b86f1bb89e44d2b62f7}{AddAddress} (interface, address);
+175   ipv4->\hyperlink{classns3_1_1Ipv4_a2b5632573b67957fabe2dfea248a57a3}{SetMetric} (interface, 1);
+176   ipv4->\hyperlink{classns3_1_1Ipv4_a71b2f8acca4923aef907b50b3196bf23}{SetUp} (interface);
+177 
+178   \textcolor{comment}{//}
+179   \textcolor{comment}{// When the ping application sends its ICMP packet, it will happily send it}
+180   \textcolor{comment}{// down the ns-3 protocol stack.  We set the IP address of the destination}
+181   \textcolor{comment}{// to the address corresponding to example.com above.  This address is off}
+182   \textcolor{comment}{// our local network so we have got to provide some kind of default route}
+183   \textcolor{comment}{// to ns-3 to be able to get that ICMP packet forwarded off of our network.}
+184   \textcolor{comment}{//}
+185   \textcolor{comment}{// You have got to provide an IP address of a real host that you can send}
+186   \textcolor{comment}{// real packets to and have them forwarded off of your local network.  One}
+187   \textcolor{comment}{// thing you could do is a 'netstat -rn' command and find the IP address of}
+188   \textcolor{comment}{// the default gateway on your host and add it below, replacing the}
+189   \textcolor{comment}{// "1.2.3.4" string.}
+190   \textcolor{comment}{//}
+191   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} gateway (\textcolor{stringliteral}{"1.2.3.4"});
+192   \hyperlink{group__fatal_ga6653324225bc139e46deea177614ceee}{NS\_ABORT\_MSG\_IF} (gateway == \textcolor{stringliteral}{"1.2.3.4"}, \textcolor{stringliteral}{"You must change the gateway IP address before
+       running this example"});
+193 
+194   \hyperlink{classns3_1_1Ipv4StaticRoutingHelper}{Ipv4StaticRoutingHelper} ipv4RoutingHelper;
+195   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4StaticRouting>} staticRouting = ipv4RoutingHelper.
+      \hyperlink{classns3_1_1Ipv4StaticRoutingHelper_a731206e50d305695dac7fb2ef963a4bb}{GetStaticRouting} (ipv4);
+196   staticRouting->\hyperlink{classns3_1_1Ipv4StaticRouting_aee30fa3246c2b42f122dabdff2725331}{SetDefaultRoute} (gateway, interface);
+197 
+198   \textcolor{comment}{//}
+199   \textcolor{comment}{// Create the ping application.  This application knows how to send}
+200   \textcolor{comment}{// ICMP echo requests.  Setting up the packet sink manually is a bit}
+201   \textcolor{comment}{// of a hassle and since there is no law that says we cannot mix the}
+202   \textcolor{comment}{// helper API with the low level API, let's just use the helper.}
+203   \textcolor{comment}{//}
+204   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create V4Ping Appliation"});
+205   \hyperlink{classns3_1_1Ptr}{Ptr<V4Ping>} app = CreateObject<V4Ping> ();
+206   app->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Remote"}, Ipv4AddressValue (remoteIp));
+207   app->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Verbose"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}) );
+208   node->\hyperlink{classns3_1_1Node_ab98b4fdc4aadc86366b80e8a79a53f47}{AddApplication} (app);
+209   app->\hyperlink{classns3_1_1Application_a8360a49748e30c52ffdcc7a305c3cd48}{SetStartTime} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+210   app->\hyperlink{classns3_1_1Application_a732c1fdadf0be176c753a2ce6e27dff9}{SetStopTime} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (21.0));
+211 
+212   \textcolor{comment}{//}
+213   \textcolor{comment}{// Give the application a name.  This makes life much easier when constructing}
+214   \textcolor{comment}{// config paths.}
+215   \textcolor{comment}{//}
+216   Names::Add (\textcolor{stringliteral}{"app"}, app);
+217 
+218   \textcolor{comment}{//}
+219   \textcolor{comment}{// Hook a trace to print something when the response comes back.}
+220   \textcolor{comment}{//}
+221   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/Names/app/Rtt"}, \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{fd-emu-ping_8cc_a1a49f760c7e3da367b3406515d2a3ef9}{PingRtt}));
+222 
+223   \textcolor{comment}{//}
+224   \textcolor{comment}{// Enable a promiscuous pcap trace to see what is coming and going on our device.}
+225   \textcolor{comment}{//}
+226   emu.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"emu-ping"}, device, \textcolor{keyword}{true});
+227 
+228   \textcolor{comment}{//}
+229   \textcolor{comment}{// Now, do the actual emulation.}
+230   \textcolor{comment}{//}
+231   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Emulation."});
+232   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (22.0));
+233   Simulator::Run ();
+234   Simulator::Destroy ();
+235   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+236 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{fd-\/emu-\/ping.\+cc@{fd-\/emu-\/ping.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!fd-\/emu-\/ping.\+cc@{fd-\/emu-\/ping.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Ping\+Emulation\+Example"")}{NS_LOG_COMPONENT_DEFINE("PingEmulationExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Ping\+Emulation\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{fd-emu-ping_8cc_a2b9eea29f4773033a7ecf1b30896dd19}{}\label{fd-emu-ping_8cc_a2b9eea29f4773033a7ecf1b30896dd19}
+\index{fd-\/emu-\/ping.\+cc@{fd-\/emu-\/ping.\+cc}!Ping\+Rtt@{Ping\+Rtt}}
+\index{Ping\+Rtt@{Ping\+Rtt}!fd-\/emu-\/ping.\+cc@{fd-\/emu-\/ping.\+cc}}
+\subsubsection[{\texorpdfstring{Ping\+Rtt(std\+::string context, Time rtt)}{PingRtt(std::string context, Time rtt)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Ping\+Rtt (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{{\bf Time}}]{rtt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{fd-emu-ping_8cc_a1a49f760c7e3da367b3406515d2a3ef9}{}\label{fd-emu-ping_8cc_a1a49f760c7e3da367b3406515d2a3ef9}
+
+\begin{DoxyCode}
+85 \{
+86   \hyperlink{log-macros-disabled_8h_a0b36e5e182b37194f85ef1c5e979fb2e}{NS\_LOG\_UNCOND} (\textcolor{stringliteral}{"Received Response with RTT = "} << rtt);
+87 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+

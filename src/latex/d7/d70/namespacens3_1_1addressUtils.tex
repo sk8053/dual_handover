@@ -1,0 +1,47 @@
+\hypertarget{namespacens3_1_1addressUtils}{}\section{ns3\+:\+:address\+Utils Namespace Reference}
+\label{namespacens3_1_1addressUtils}\index{ns3\+::address\+Utils@{ns3\+::address\+Utils}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespacens3_1_1addressUtils_a2806342189d7bd73179d40bbf81bdb41}{Is\+Multicast} (const \hyperlink{classns3_1_1Address}{Address} \&ad)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1Address}{Address} family-\/independent test for a multicast address. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{ns3\+::address\+Utils@{ns3\+::address\+Utils}!Is\+Multicast@{Is\+Multicast}}
+\index{Is\+Multicast@{Is\+Multicast}!ns3\+::address\+Utils@{ns3\+::address\+Utils}}
+\subsubsection[{\texorpdfstring{Is\+Multicast(const Address \&ad)}{IsMulticast(const Address &ad)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::address\+Utils\+::\+Is\+Multicast (
+\begin{DoxyParamCaption}
+\item[{const {\bf Address} \&}]{ad}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacens3_1_1addressUtils_a2806342189d7bd73179d40bbf81bdb41}{}\label{namespacens3_1_1addressUtils_a2806342189d7bd73179d40bbf81bdb41}
+
+
+\hyperlink{classns3_1_1Address}{Address} family-\/independent test for a multicast address. 
+
+
+\begin{DoxyCode}
+115 \{
+116   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (&ad);
+117   \textcolor{keywordflow}{if} (InetSocketAddress::IsMatchingType (ad))
+118     \{
+119       InetSocketAddress inetAddr = InetSocketAddress::ConvertFrom (ad);
+120       Ipv4Address ipv4 = inetAddr.GetIpv4 ();
+121       \textcolor{keywordflow}{return} ipv4.IsMulticast ();
+122     \}
+123   \textcolor{comment}{// IPv6 case can go here, in future}
+124   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+125 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 0
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+

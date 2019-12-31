@@ -1,0 +1,113 @@
+\hypertarget{classGlobalValueTestCase}{}\section{Global\+Value\+Test\+Case Class Reference}
+\label{classGlobalValueTestCase}\index{Global\+Value\+Test\+Case@{Global\+Value\+Test\+Case}}
+
+
+Inheritance diagram for Global\+Value\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Global\+Value\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGlobalValueTestCase_a7b54ba4fb8d8531da9e302f9508127d5}{Global\+Value\+Test\+Case} ()
+\item 
+virtual \hyperlink{classGlobalValueTestCase_ad1fe69fd2914ef6c302859d4811f67de}{$\sim$\+Global\+Value\+Test\+Case} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classGlobalValueTestCase_a93b54a0fcf8a1ace46358bc8c4026eb9}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Global\+Value\+Test\+Case@{Global\+Value\+Test\+Case}!Global\+Value\+Test\+Case@{Global\+Value\+Test\+Case}}
+\index{Global\+Value\+Test\+Case@{Global\+Value\+Test\+Case}!Global\+Value\+Test\+Case@{Global\+Value\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Global\+Value\+Test\+Case()}{GlobalValueTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Global\+Value\+Test\+Case\+::\+Global\+Value\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGlobalValueTestCase_a7b54ba4fb8d8531da9e302f9508127d5}{}\label{classGlobalValueTestCase_a7b54ba4fb8d8531da9e302f9508127d5}
+
+\begin{DoxyCode}
+40   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check GlobalValue mechanism"})
+41 \{
+42 \}
+\end{DoxyCode}
+\index{Global\+Value\+Test\+Case@{Global\+Value\+Test\+Case}!````~Global\+Value\+Test\+Case@{$\sim$\+Global\+Value\+Test\+Case}}
+\index{````~Global\+Value\+Test\+Case@{$\sim$\+Global\+Value\+Test\+Case}!Global\+Value\+Test\+Case@{Global\+Value\+Test\+Case}}
+\subsubsection[{\texorpdfstring{$\sim$\+Global\+Value\+Test\+Case()}{~GlobalValueTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Global\+Value\+Test\+Case\+::$\sim$\+Global\+Value\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classGlobalValueTestCase_ad1fe69fd2914ef6c302859d4811f67de}{}\label{classGlobalValueTestCase_ad1fe69fd2914ef6c302859d4811f67de}
+
+\begin{DoxyCode}
+33 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Global\+Value\+Test\+Case@{Global\+Value\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Global\+Value\+Test\+Case@{Global\+Value\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Global\+Value\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classGlobalValueTestCase_a93b54a0fcf8a1ace46358bc8c4026eb9}{}\label{classGlobalValueTestCase_a93b54a0fcf8a1ace46358bc8c4026eb9}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+46 \{
+47   \textcolor{comment}{//}
+48   \textcolor{comment}{// Typically these are static globals but we can make one on the stack to }
+49   \textcolor{comment}{// keep it hidden from the documentation.}
+50   \textcolor{comment}{//}
+51   \hyperlink{classns3_1_1GlobalValue}{GlobalValue} uint = \hyperlink{classns3_1_1GlobalValue}{GlobalValue} (\textcolor{stringliteral}{"TestUint"}, \textcolor{stringliteral}{"help text"},
+52                                   UintegerValue (10),
+53                                   MakeUintegerChecker<uint32\_t> ());
+54 
+55   \textcolor{comment}{//}
+56   \textcolor{comment}{// Make sure we can get at the value and that it was initialized correctly.}
+57   \textcolor{comment}{//}
+58   UintegerValue uv;
+59   uint.\hyperlink{classns3_1_1GlobalValue_aa33773cb952ba3c285a03ae2c4769b84}{GetValue} (uv);
+60   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (uv.Get (), 10, \textcolor{stringliteral}{"GlobalValue \(\backslash\)"TestUint\(\backslash\)" not initialized as
+       expected"});
+61 
+62   \textcolor{comment}{//}
+63   \textcolor{comment}{// Remove the global value for a valgrind clean run}
+64   \textcolor{comment}{//}
+65   \hyperlink{classns3_1_1GlobalValue_a674b6c1d387dc3b62e416c7fff43a4e9}{GlobalValue::Vector} *vector = GlobalValue::GetVector ();
+66   \textcolor{keywordflow}{for} (GlobalValue::Vector::iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = vector->begin (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != vector->end (); ++
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+67     \{
+68       \textcolor{keywordflow}{if} ((*\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}) == &uint)
+69         \{
+70           vector->erase (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+71           \textcolor{keywordflow}{break};
+72         \}
+73     \}
+74 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/test/\hyperlink{global-value-test-suite_8cc}{global-\/value-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

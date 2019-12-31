@@ -1,0 +1,768 @@
+\hypertarget{group__testing}{}\section{Testing}
+\label{group__testing}\index{Testing@{Testing}}
+
+
+Tools to define and execute unit tests.  
+
+
+Collaboration diagram for Testing\+:
+% FIG 0
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__testingimpl}{Testing Implementation}
+\begin{DoxyCompactList}\small\item\em Internal implementation of the Testing system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \hyperlink{test_8cc}{test.\+cc}
+\item 
+file \hyperlink{test_8h}{test.\+h}
+\begin{DoxyCompactList}\small\item\em Definition of the testing macros and declaration of the testing classes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1TestCase}{ns3\+::\+Test\+Case}
+\begin{DoxyCompactList}\small\item\em encapsulates test code \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1TestSuite}{ns3\+::\+Test\+Suite}
+\begin{DoxyCompactList}\small\item\em A suite of tests to run. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1TestVectors}{ns3\+::\+Test\+Vectors$<$ T $>$}
+\begin{DoxyCompactList}\small\item\em A simple way to store test vectors (for stimulus or from responses) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{A\+S\+S\+E\+R\+T\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE}
+\begin{DoxyCompactList}\small\item\em Check if we should assert on errors, and do so. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga6f2bed856695445564c93cd367c69ea0}{C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE}
+\begin{DoxyCompactList}\small\item\em If we shouldn\textquotesingle{}t continue on errors, return. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_gac69c0f4943a60d1dcecdcd793f905449}{C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+R\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}
+\begin{DoxyCompactList}\small\item\em If we shouldn\textquotesingle{}t continue on errors, return test status. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+EQ}(actual,  limit,  msg)~\hyperlink{group__testingimpl_gaa9d54a0bd3ffaa7f4db82c4a6c1fb83b}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual and expected (limit) value are equal and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga5649dddde97a42ddfd4cd88aa53b37c6}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}(actual,  limit,  msg)~\hyperlink{group__testingimpl_gaa154d45ddff16a28ea0a9f3fe890591d}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual and expected (limit) value are equal and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+EQ}(actual,  limit,  msg)~\hyperlink{group__testingimpl_gaf35a8f7e8a9a1eb011fa6fb33ea721a3}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual and expected (limit) value are equal and report if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga9e7861b56b4e70db3b56044cb7a28e41}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL}(actual,  limit,  tol,  msg)~\hyperlink{group__testingimpl_ga48c926819b2c033fb5a4c97177efbed7}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, tol, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that actual and expected (limit) values are equal to plus or minus some tolerance and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga48231baef222623bcdd2c1bf44e5997e}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}(actual,  limit,  tol,  msg)~\hyperlink{group__testingimpl_ga1fd0b56967248280afec4b3ea83199b3}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, tol, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that actual and expected (limit) values are equal to plus or minus some tolerance and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga7927b376d1fed5e576c7a3d69d26e8a0}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL}(actual,  limit,  tol,  msg)~\hyperlink{group__testingimpl_ga831cf7f3b988d2759f9c1b72f0a1bd5c}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, tol, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that actual and expected (limit) values are equal to plus or minus some tolerance and report if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+NE}(actual,  limit,  msg)~\hyperlink{group__testingimpl_ga2eea3c446afc92efe1d3c3bcf3fcf2b8}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual and expected (limit) value are not equal and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_gaa4fda41a38a289730206f1f77d5c10ef}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}(actual,  limit,  msg)~\hyperlink{group__testingimpl_ga3c64f96a4a23d84a1212da8cbbf4b326}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual and expected (limit) value are not equal and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga6d4b162d26b8a930115b97dd5f3d9ed9}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+NE}(actual,  limit,  msg)~\hyperlink{group__testingimpl_gad5555f4342248139af34e13a31ce7827}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual and expected (limit) value are not equal and report if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga1d96848b91407c9a0b36583e8b0ad7ae}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+LT}(actual,  limit,  msg)~\hyperlink{group__testingimpl_ga82db873e1b99e6311ba0f9dbff7c758d}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is less than a limit and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_gaa657eabfc1af9c3768dfa2d575eb0549}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ}(actual,  limit,  msg)~\hyperlink{group__testingimpl_ga7f276bcecced206bfd26813ac5c9a967}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is less than or equal to a limit and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga5e7f81b9d00df9c727e6281e1b1bbc55}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+LT}(actual,  limit,  msg)~\hyperlink{group__testingimpl_ga73d8db2f2a288409abbd267fc31b2e00}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is less than a limit and report if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga5004077a1e04c52548136691e046514b}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ}(actual,  limit,  msg)~\hyperlink{group__testingimpl_ga249245c784a56a7dbd704bc1d98b6873}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is less than or equal to a limit and report if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga868cfb773df312b867a506bdd2e3cbef}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+GT}(actual,  limit,  msg)~\hyperlink{group__testingimpl_gac0702d4efc2f4d35963c5da2d6fa2c98}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is greater than a limit and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_gae62e6e3e789f618a783576440f4cec2f}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ}(actual,  limit,  msg)~\hyperlink{group__testingimpl_gaf962c2cdf0c9e474ac74427146594e59}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is greater than or equal to a limit and report and abort if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga6ba43672d44c1e85acfb1daf2af66612}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+GT}(actual,  limit,  msg)~\hyperlink{group__testingimpl_ga37eb592b062b1d8ff5086dbbc2668994}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is greater than a limit and report if not. \end{DoxyCompactList}\item 
+\#define \hyperlink{group__testing_ga0c6b73fec1e93735e5154db9c12c338c}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ}(actual,  limit,  msg)~\hyperlink{group__testingimpl_ga63a10e334a06ab384256d1fbc4b7eb29}{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Test that an actual value is greater than or equal to limit and report if not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__testing_ga13a5d60f4d34641d7e2fd799f2c4d952}{ns3\+::\+Test\+Double\+Is\+Equal} (const double a, const double \hyperlink{lte__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b}, const double \hyperlink{tv-spectrum-transmitter-test_8cc_a4904cc82627458fdf6672ccc0b2802c7}{epsilon}=std\+::numeric\+\_\+limits$<$ double $>$\+::\hyperlink{tv-spectrum-transmitter-test_8cc_a4904cc82627458fdf6672ccc0b2802c7}{epsilon}())
+\begin{DoxyCompactList}\small\item\em Compare two double precision floating point numbers and declare them equal if they are within some epsilon of each other. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Tools to define and execute unit tests. 
+
+This module lists the normal Testing A\+PI. Most of these macros forward to the implementation macros in testingimpl. You should generally use these macros only. 
+
+\subsection{Macro Definition Documentation}
+\index{Testing@{Testing}!A\+S\+S\+E\+R\+T\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE@{A\+S\+S\+E\+R\+T\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE}}
+\index{A\+S\+S\+E\+R\+T\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE@{A\+S\+S\+E\+R\+T\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{A\+S\+S\+E\+R\+T\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE}{ASSERT_ON_FAILURE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+S\+E\+R\+T\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE}\hypertarget{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}{}\label{group__testing_ga044d7c8c214fe3761af96ee3cbe2edc3}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                          \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (MustAssertOnFailure ())                 \(\backslash\)
+      \{                                         \(\backslash\)
+        *(\textcolor{keyword}{volatile} \textcolor{keywordtype}{int} *)0 = 0;                 \(\backslash\)
+      \}                                         \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Check if we should assert on errors, and do so. 
+
+\index{Testing@{Testing}!C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE}}
+\index{C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE}{CONTINUE_ON_FAILURE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+RE}\hypertarget{group__testing_ga6f2bed856695445564c93cd367c69ea0}{}\label{group__testing_ga6f2bed856695445564c93cd367c69ea0}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!MustContinueOnFailure ())                                      \(\backslash\)
+      \{                                                                 \(\backslash\)
+        return;                                                         \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+If we shouldn\textquotesingle{}t continue on errors, return. 
+
+\index{Testing@{Testing}!C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+R\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL@{C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+R\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}}
+\index{C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+R\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL@{C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+R\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+R\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}{CONTINUE_ON_FAILURE_RETURNS_BOOL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+O\+N\+T\+I\+N\+U\+E\+\_\+\+O\+N\+\_\+\+F\+A\+I\+L\+U\+R\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}\hypertarget{group__testing_gac69c0f4943a60d1dcecdcd793f905449}{}\label{group__testing_gac69c0f4943a60d1dcecdcd793f905449}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{    if} (!MustContinueOnFailure ())                                      \(\backslash\)
+      \{                                                                 \(\backslash\)
+        return IsStatusFailure ();                                      \(\backslash\)
+      \}                                                                 \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+If we shouldn\textquotesingle{}t continue on errors, return test status. 
+
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+EQ@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+EQ}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+EQ@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+EQ}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+EQ}{NS_TEST_ASSERT_MSG_EQ}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+EQ(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{}\label{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}
+
+
+Test that an actual and expected (limit) value are equal and report and abort if not. 
+
+Check to see if the expected (limit) value is equal to the actual value found in a test case. If the two values are equal nothing happens, but if the comparison fails, an error is reported in a consistent way and the execution of the current test case is aborted.
+
+The message is interpreted as a stream, for example\+:
+
+
+\begin{DoxyCode}
+1 NS\_TEST\_ASSERT\_MSG\_EQ (result, true, 
+2      "cannot open file " << filename << " in test");
+\end{DoxyCode}
+
+
+is legal.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the expected value of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Do not use this macro if you are comparing floating point numbers (float or double) as it is unlikely to do what you expect. Use N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL instead. 
+\end{DoxyWarning}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}{NS_TEST_ASSERT_MSG_EQ_RETURNS_BOOL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga5649dddde97a42ddfd4cd88aa53b37c6}{}\label{group__testing_ga5649dddde97a42ddfd4cd88aa53b37c6}
+
+
+Test that an actual and expected (limit) value are equal and report and abort if not. 
+
+Check to see if the expected (limit) value is equal to the actual value found in a test case. If the two values are equal nothing happens, but if the comparison fails, an error is reported in a consistent way and the execution of the current test case is aborted.
+
+The message is interpreted as a stream, for example\+:
+
+
+\begin{DoxyCode}
+1 NS\_TEST\_ASSERT\_MSG\_EQ\_RETURNS\_BOOL (result, true, 
+2      "cannot open file " << filename << " in test");
+\end{DoxyCode}
+
+
+is legal.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the expected value of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Do not use this macro if you are comparing floating point numbers (float or double) as it is unlikely to do what you expect. Use N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+T\+OL instead.
+\end{DoxyWarning}
+This function returns a boolean value. \index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL}{NS_TEST_ASSERT_MSG_EQ_TOL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{tol, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, tol, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga9e7861b56b4e70db3b56044cb7a28e41}{}\label{group__testing_ga9e7861b56b4e70db3b56044cb7a28e41}
+
+
+Test that actual and expected (limit) values are equal to plus or minus some tolerance and report and abort if not. 
+
+Check to see if the expected (limit) value is equal to the actual value found in a test case to some tolerance. This is not the same thing as asking if two floating point are equal to within some epsilon, but is useful for that case. This assertion is geared toward more of a measurement problem. Consider measuring a physical rod of some kind that you have ordered. You need to determine if it is \char`\"{}good.\char`\"{} You want to measure the rod to an arbitrary precision of sixteen significant figures, you will measure the rod to determine if its length is within the tolerances you provided. For example, 12.\+00 inches plus or minus .005 inch may be just fine.
+
+In ns-\/3, you might want to measure a signal to noise ratio and check to see if the answer is what you expect. If you naively measure (double)1128.\+93 and compare this number with a constant 1128.\+93 you are almost certainly going to have your test fail because of floating point rounding errors. We provide a floating point comparison function \hyperlink{group__testing_ga13a5d60f4d34641d7e2fd799f2c4d952}{ns3\+::\+Test\+Double\+Is\+Equal()} but you will probably quickly find that is not what you want either. It may turn out to be the case that when you measured an snr that printed as 1128.\+93, what was actually measured was something more like 1128.\+9287653857625442 for example. Given that the double epsilon is on the order of 0.\+0000000000000009, you would need to provide sixteen significant figures of expected value for this kind of test to pass even with a typical test for floating point \char`\"{}approximate
+equality.\char`\"{} That is clearly not required or desired. You really want to be able to provide 1128.\+93 along with a tolerance just like you provided 12 inches +-\/ 0.\+005 inch above.
+
+This assertion is designed for real measurements by taking into account measurement tolerances. By doing so it also automatically compensates for floating point rounding errors. If you really want to check floating point equality down to the numeric\+\_\+limits$<$double$>$\+::epsilon () range, consider using \hyperlink{group__testing_ga13a5d60f4d34641d7e2fd799f2c4d952}{ns3\+::\+Test\+Double\+Is\+Equal()}.
+
+\begin{DoxyNote}{Note}
+Mixing signed and unsigned types can lead to misleading results.
+\end{DoxyNote}
+The message is interpreted as a stream, for example\+:
+
+
+\begin{DoxyCode}
+1 NS\_TEST\_ASSERT\_MSG\_EQ\_TOL (snr, 1128.93, 0.005,
+2                            "wrong snr (" << snr << ") in test");
+\end{DoxyCode}
+
+
+is legal.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the expected value of the test. \\
+\hline
+\mbox{\tt in}  & {\em tol} & Tolerance of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass. \\
+\hline
+\end{DoxyParams}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}{NS_TEST_ASSERT_MSG_EQ_TOL_RETURNS_BOOL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{tol, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, tol, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga48231baef222623bcdd2c1bf44e5997e}{}\label{group__testing_ga48231baef222623bcdd2c1bf44e5997e}
+
+
+Test that actual and expected (limit) values are equal to plus or minus some tolerance and report and abort if not. 
+
+Check to see if the expected (limit) value is equal to the actual value found in a test case to some tolerance. This is not the same thing as asking if two floating point are equal to within some epsilon, but is useful for that case. This assertion is geared toward more of a measurement problem. Consider measuring a physical rod of some kind that you have ordered. You need to determine if it is \char`\"{}good.\char`\"{} You want to measure the rod to an arbitrary precision of sixteen significant figures, you will measure the rod to determine if its length is within the tolerances you provided. For example, 12.\+00 inches plus or minus .005 inch may be just fine.
+
+In ns-\/3, you might want to measure a signal to noise ratio and check to see if the answer is what you expect. If you naively measure (double)1128.\+93 and compare this number with a constant 1128.\+93 you are almost certainly going to have your test fail because of floating point rounding errors. We provide a floating point comparison function \hyperlink{group__testing_ga13a5d60f4d34641d7e2fd799f2c4d952}{ns3\+::\+Test\+Double\+Is\+Equal()} but you will probably quickly find that is not what you want either. It may turn out to be the case that when you measured an snr that printed as 1128.\+93, what was actually measured was something more like 1128.\+9287653857625442 for example. Given that the double epsilon is on the order of 0.\+0000000000000009, you would need to provide sixteen significant figures of expected value for this kind of test to pass even with a typical test for floating point \char`\"{}approximate
+equality.\char`\"{} That is clearly not required or desired. You really want to be able to provide 1128.\+93 along with a tolerance just like you provided 12 inches +-\/ 0.\+005 inch above.
+
+This assertion is designed for real measurements by taking into account measurement tolerances. By doing so it also automatically compensates for floating point rounding errors. If you really want to check floating point equality down to the numeric\+\_\+limits$<$double$>$\+::epsilon () range, consider using \hyperlink{group__testing_ga13a5d60f4d34641d7e2fd799f2c4d952}{ns3\+::\+Test\+Double\+Is\+Equal()}.
+
+\begin{DoxyNote}{Note}
+Mixing signed and unsigned types can lead to misleading results.
+\end{DoxyNote}
+The message is interpreted as a stream, for example\+:
+
+
+\begin{DoxyCode}
+1 NS\_TEST\_ASSERT\_MSG\_EQ\_TOL\_RETURNS\_BOOL (snr, 1128.93, 0.005,
+2                                         "wrong snr (" << snr << ") in test");
+\end{DoxyCode}
+
+
+is legal.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the expected value of the test. \\
+\hline
+\mbox{\tt in}  & {\em tol} & Tolerance of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass.\\
+\hline
+\end{DoxyParams}
+This function returns a boolean value. \index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+GT@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+GT}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+GT@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+GT}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+GT}{NS_TEST_ASSERT_MSG_GT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+GT(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga868cfb773df312b867a506bdd2e3cbef}{}\label{group__testing_ga868cfb773df312b867a506bdd2e3cbef}
+
+
+Test that an actual value is greater than a limit and report and abort if not. 
+
+Check to see if the actual value found in a test case is greater than the limit value. If the actual value is greater nothing happens, but if the check fails, an error is reported in a consistent way and the execution of the current test case is aborted.
+
+The message is interpreted as a stream.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the limit value of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass. \\
+\hline
+\end{DoxyParams}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ}{NS_TEST_ASSERT_MSG_GT_OR_EQ}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_gae62e6e3e789f618a783576440f4cec2f}{}\label{group__testing_gae62e6e3e789f618a783576440f4cec2f}
+
+
+Test that an actual value is greater than or equal to a limit and report and abort if not. 
+
+Check to see if the actual value found in a test case is greater than or equal to the limit value. If the actual value is greater nothing happens, but if the check fails, an error is reported in a consistent way and the execution of the current test case is aborted.
+
+The message is interpreted as a stream.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the limit value of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass. \\
+\hline
+\end{DoxyParams}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+LT@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+LT}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+LT@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+LT}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+LT}{NS_TEST_ASSERT_MSG_LT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+LT(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga1d96848b91407c9a0b36583e8b0ad7ae}{}\label{group__testing_ga1d96848b91407c9a0b36583e8b0ad7ae}
+
+
+Test that an actual value is less than a limit and report and abort if not. 
+
+Check to see if the actual value found in a test case is less than the limit value. If the actual value is lesser nothing happens, but if the check fails, an error is reported in a consistent way and the execution of the current test case is aborted.
+
+The message is interpreted as a stream.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the limit value of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass. \\
+\hline
+\end{DoxyParams}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ}{NS_TEST_ASSERT_MSG_LT_OR_EQ}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_gaa657eabfc1af9c3768dfa2d575eb0549}{}\label{group__testing_gaa657eabfc1af9c3768dfa2d575eb0549}
+
+
+Test that an actual value is less than or equal to a limit and report and abort if not. 
+
+Check to see if the actual value found in a test case is less than or equal to the limit value. If the actual value is lesser or equal nothing happens, but if the check fails, an error is reported in a consistent way and the execution of the current test case is aborted.
+
+The message is interpreted as a stream.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the limit value of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass. \\
+\hline
+\end{DoxyParams}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+NE@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+NE}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+NE@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+NE}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+NE}{NS_TEST_ASSERT_MSG_NE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+NE(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga73d66fb0050a5111453fd144e767b91a}{}\label{group__testing_ga73d66fb0050a5111453fd144e767b91a}
+
+
+Test that an actual and expected (limit) value are not equal and report and abort if not. 
+
+Check to see if the expected (limit) value is not equal to the actual value found in a test case. If the two values are not equal nothing happens, but if the comparison fails, an error is reported in a consistent way and the execution of the current test case is aborted.
+
+The message is interpreted as a stream, for example\+:
+
+
+\begin{DoxyCode}
+1 NS\_TEST\_ASSERT\_MSG\_NE (result, false, 
+2      "cannot open file " << filename << " in test");
+\end{DoxyCode}
+
+
+is legal.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the value that actual is tested against. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Do not use this macro if you are comparing floating point numbers (float or double). Use N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+F\+L\+NE instead. 
+\end{DoxyWarning}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL}{NS_TEST_ASSERT_MSG_NE_RETURNS_BOOL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+OL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+B\+O\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_gaa4fda41a38a289730206f1f77d5c10ef}{}\label{group__testing_gaa4fda41a38a289730206f1f77d5c10ef}
+
+
+Test that an actual and expected (limit) value are not equal and report and abort if not. 
+
+Check to see if the expected (limit) value is not equal to the actual value found in a test case. If the two values are equal nothing happens, but if the comparison fails, an error is reported in a consistent way and the execution of the current test case is aborted.
+
+The message is interpreted as a stream, for example\+:
+
+
+\begin{DoxyCode}
+1 NS\_TEST\_ASSERT\_MSG\_NE\_RETURNS\_BOOL (result, false, 
+2      "cannot open file " << filename << " in test");
+\end{DoxyCode}
+
+
+is legal.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the expected value of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Do not use this macro if you are comparing floating point numbers (float or double). Use N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+M\+S\+G\+\_\+\+F\+L\+NE instead.
+\end{DoxyWarning}
+This function returns a boolean value. \index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+EQ@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+EQ}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+EQ@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+EQ}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+EQ}{NS_TEST_EXPECT_MSG_EQ}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+EQ(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{}\label{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}
+
+
+Test that an actual and expected (limit) value are equal and report if not. 
+
+Check to see if the expected (lmit) value is equal to the actual value found in a test case. If the two values are equal nothing happens, but if the comparison fails, an error is reported in a consistent way. E\+X\+P\+E\+C\+T$\ast$ macros do not return if an error is detected.
+
+The message is interpreted as a stream, for example\+:
+
+
+\begin{DoxyCode}
+1 NS\_TEST\_EXPECT\_MSG\_EQUAL (result, true, 
+2      "cannot open file " << filename << " in test");
+\end{DoxyCode}
+
+
+is legal.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the expected value of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Do not use this macro if you are comparing floating point numbers (float or double) as it is unlikely to do what you expect. Use N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL instead. 
+\end{DoxyWarning}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL}{NS_TEST_EXPECT_MSG_EQ_TOL}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+OL(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{tol, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+E\+Q\+\_\+\+T\+O\+L\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, tol, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga7927b376d1fed5e576c7a3d69d26e8a0}{}\label{group__testing_ga7927b376d1fed5e576c7a3d69d26e8a0}
+
+
+Test that actual and expected (limit) values are equal to plus or minus some tolerance and report if not. 
+
+Check to see if the expected (limit) value is equal to the actual value found in a test case to some tolerance. This is not the same thing as asking if two floating point are equal to within some epsilon, but is useful for that case. This assertion is geared toward more of a measurement problem. Consider measuring a physical rod of some kind that you have ordered. You need to determine if it is \char`\"{}good.\char`\"{} You want to measure the rod to an arbitrary precision of sixteen significant figures, you will measure the rod to determine if its length is within the tolerances you provided. For example, 12.\+00 inches plus or minus .005 inch may be just fine.
+
+In ns-\/3, you might want to measure a signal to noise ratio and check to see if the answer is what you expect. If you naively measure (double)1128.\+93 and compare this number with a constant 1128.\+93 you are almost certainly going to have your test fail because of floating point rounding errors. We provide a floating point comparison function \hyperlink{group__testing_ga13a5d60f4d34641d7e2fd799f2c4d952}{ns3\+::\+Test\+Double\+Is\+Equal()} but you will probably quickly find that is not what you want either. It may turn out to be the case that when you measured an snr that printed as 1128.\+93, what was actually measured was something more like 1128.\+9287653857625442 for example. Given that the double epsilon is on the order of 0.\+0000000000000009, you would need to provide sixteen significant figures of expected value for this kind of test to pass even with a typical test for floating point \char`\"{}approximate
+equality.\char`\"{} That is clearly not required or desired. You really want to be able to provide 1128.\+93 along with a tolerance just like you provided 12 inches +-\/ 0.\+005 inch above.
+
+This assertion is designed for real measurements by taking into account measurement tolerances. By doing so it also automatically compensates for floating point rounding errors. If you really want to check floating point equality down to the numeric\+\_\+limits$<$double$>$\+::epsilon () range, consider using \hyperlink{group__testing_ga13a5d60f4d34641d7e2fd799f2c4d952}{ns3\+::\+Test\+Double\+Is\+Equal()}.
+
+\begin{DoxyNote}{Note}
+Mixing signed and unsigned types can lead to misleading results.
+\end{DoxyNote}
+The message is interpreted as a stream, for example\+:
+
+
+\begin{DoxyCode}
+1 NS\_TEST\_EXPECT\_MSG\_EQ\_TOL (snr, 1128.93, 0.005,
+2                            "wrong snr (" << snr << ") in test");
+\end{DoxyCode}
+
+
+is legal.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the expected value of the test. \\
+\hline
+\mbox{\tt in}  & {\em tol} & Tolerance of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass. \\
+\hline
+\end{DoxyParams}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+GT@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+GT}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+GT@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+GT}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+GT}{NS_TEST_EXPECT_MSG_GT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+GT(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga6ba43672d44c1e85acfb1daf2af66612}{}\label{group__testing_ga6ba43672d44c1e85acfb1daf2af66612}
+
+
+Test that an actual value is greater than a limit and report if not. 
+
+Check to see if the actual value found in a test case is greater than the limit value. If the actual value is greater nothing happens, but if the check fails, an error is reported in a consistent way. E\+X\+P\+E\+C\+T$\ast$ macros do not return if an error is detected.
+
+The message is interpreted as a stream.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the limit value of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass. \\
+\hline
+\end{DoxyParams}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ}{NS_TEST_EXPECT_MSG_GT_OR_EQ}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+EQ(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+G\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga0c6b73fec1e93735e5154db9c12c338c}{}\label{group__testing_ga0c6b73fec1e93735e5154db9c12c338c}
+
+
+Test that an actual value is greater than or equal to limit and report if not. 
+
+Check to see if the actual value found in a test case is greater than or equal to the limit value. If the actual value is greater nothing happens, but if the check fails, an error is reported in a consistent way. E\+X\+P\+E\+C\+T$\ast$ macros do not return if an error is detected.
+
+The message is interpreted as a stream.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the limit value of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass. \\
+\hline
+\end{DoxyParams}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+LT@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+LT}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+LT@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+LT}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+LT}{NS_TEST_EXPECT_MSG_LT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+LT(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga5e7f81b9d00df9c727e6281e1b1bbc55}{}\label{group__testing_ga5e7f81b9d00df9c727e6281e1b1bbc55}
+
+
+Test that an actual value is less than a limit and report if not. 
+
+Check to see if the actual value found in a test case is less than the limit value. If the actual value is lesser nothing happens, but if the check fails, an error is reported in a consistent way. E\+X\+P\+E\+C\+T$\ast$ macros do not return if an error is detected.
+
+The message is interpreted as a stream.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the limit value of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass. \\
+\hline
+\end{DoxyParams}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ}{NS_TEST_EXPECT_MSG_LT_OR_EQ}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+EQ(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+L\+T\+\_\+\+O\+R\+\_\+\+E\+Q\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga5004077a1e04c52548136691e046514b}{}\label{group__testing_ga5004077a1e04c52548136691e046514b}
+
+
+Test that an actual value is less than or equal to a limit and report if not. 
+
+Check to see if the actual value found in a test case is less than or equal to the limit value. If the actual value is lesser or equal nothing happens, but if the check fails, an error is reported in a consistent way. E\+X\+P\+E\+C\+T$\ast$ macros do not return if an error is detected.
+
+The message is interpreted as a stream.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the limit value of the test. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass. \\
+\hline
+\end{DoxyParams}
+\index{Testing@{Testing}!N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+NE@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+NE}}
+\index{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+NE@{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+NE}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+NE}{NS_TEST_EXPECT_MSG_NE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+NE(
+\begin{DoxyParamCaption}
+\item[{}]{actual, }
+\item[{}]{limit, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)~{\bf N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+N\+E\+\_\+\+I\+N\+T\+E\+R\+N\+AL} (actual, limit, msg, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}\hypertarget{group__testing_ga6d4b162d26b8a930115b97dd5f3d9ed9}{}\label{group__testing_ga6d4b162d26b8a930115b97dd5f3d9ed9}
+
+
+Test that an actual and expected (limit) value are not equal and report if not. 
+
+Check to see if the expected (limit) value is not equal to the actual value found in a test case. If the two values are not equal nothing happens, but if the comparison fails, an error is reported in a consistent way. E\+X\+P\+E\+C\+T$\ast$ macros do not return if an error is detected.
+
+The message is interpreted as a stream, for example\+:
+
+
+\begin{DoxyCode}
+1 NS\_TEST\_EXPECT\_MSG\_NE (result, false, 
+2      "cannot open file " << filename << " in test");
+\end{DoxyCode}
+
+
+is legal.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em actual} & Expression for the actual value found during the test. \\
+\hline
+\mbox{\tt in}  & {\em limit} & Expression for the value that actual is tested against. \\
+\hline
+\mbox{\tt in}  & {\em msg} & Message that is output if the test does not pass.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Do not use this macro if you are comparing floating point numbers (float or double). Use N\+S\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+M\+S\+G\+\_\+\+F\+L\+NE instead. 
+\end{DoxyWarning}
+
+
+\subsection{Function Documentation}
+\index{Testing@{Testing}!Test\+Double\+Is\+Equal@{Test\+Double\+Is\+Equal}}
+\index{Test\+Double\+Is\+Equal@{Test\+Double\+Is\+Equal}!Testing@{Testing}}
+\subsubsection[{\texorpdfstring{Test\+Double\+Is\+Equal(const double a, const double b, const double epsilon=std\+::numeric\+\_\+limits$<$ double $>$\+::epsilon())}{TestDoubleIsEqual(const double a, const double b, const double epsilon=std::numeric_limits< double >::epsilon())}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Test\+Double\+Is\+Equal (
+\begin{DoxyParamCaption}
+\item[{const double}]{a, }
+\item[{const double}]{b, }
+\item[{const double}]{epsilon = {\ttfamily std\+:\+:numeric\+\_\+limits$<$~double~$>$\+:\+:{\bf epsilon}()}}
+\end{DoxyParamCaption}
+)}\hypertarget{group__testing_ga13a5d60f4d34641d7e2fd799f2c4d952}{}\label{group__testing_ga13a5d60f4d34641d7e2fd799f2c4d952}
+
+
+Compare two double precision floating point numbers and declare them equal if they are within some epsilon of each other. 
+
+Approximate comparison of floating point numbers near equality is trickier than one may expect and is well-\/discussed in the literature. Basic strategies revolve around a suggestion by Knuth to compare the floating point numbers as binary integers, supplying a maximum difference between them . This max difference is specified in Units in the Last Place (ulps) or a floating point epsilon.
+
+This routine is based on the G\+NU Scientific Library function gsl\+\_\+fcmp.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a} & The first of double precision floating point numbers to compare \\
+\hline
+\mbox{\tt in}  & {\em b} & The second of double precision floating point numbers to compare \\
+\hline
+\mbox{\tt in}  & {\em epsilon} & The tolerance to use in the comparison. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns {\ttfamily true} if the doubles are equal to a precision defined by epsilon 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+45 \{
+46   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (x1 << x2 << \hyperlink{tv-spectrum-transmitter-test_8cc_a4904cc82627458fdf6672ccc0b2802c7}{epsilon});
+47   \textcolor{keywordtype}{int} exponent;
+48   \textcolor{keywordtype}{double} delta, difference;
+49 
+50   \textcolor{comment}{//}
+51   \textcolor{comment}{// Find exponent of largest absolute value}
+52   \textcolor{comment}{//}
+53   \{
+54     \textcolor{keywordtype}{double} \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max} = (std::fabs (x1) > std::fabs (x2)) ? x1 : x2;
+55     (void)std::frexp (max, &exponent);
+56   \}
+57 
+58   \textcolor{comment}{//}
+59   \textcolor{comment}{// Form a neighborhood of size  2 * delta}
+60   \textcolor{comment}{//}
+61   delta = std::ldexp (\hyperlink{tv-spectrum-transmitter-test_8cc_a4904cc82627458fdf6672ccc0b2802c7}{epsilon}, exponent);
+62   difference = x1 - x2;
+63 
+64   \textcolor{keywordflow}{if} (difference > delta || difference < -delta)
+65     \{
+66       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+67     \}
+68   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+69 \} 
+\end{DoxyCode}

@@ -1,0 +1,93 @@
+\hypertarget{bonnmotion-ns2-example_8cc}{}\section{mobility/examples/bonnmotion-\/ns2-\/example.cc File Reference}
+\label{bonnmotion-ns2-example_8cc}\index{mobility/examples/bonnmotion-\/ns2-\/example.\+cc@{mobility/examples/bonnmotion-\/ns2-\/example.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+Include dependency graph for bonnmotion-\/ns2-\/example.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{bonnmotion-ns2-example_8cc_aa58f33caf8bba45b2f1d495586580172}{show\+Position} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Node}{Node} $>$ node, double delta\+Time)
+\item 
+int \hyperlink{bonnmotion-ns2-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{bonnmotion-\/ns2-\/example.\+cc@{bonnmotion-\/ns2-\/example.\+cc}!main@{main}}
+\index{main@{main}!bonnmotion-\/ns2-\/example.\+cc@{bonnmotion-\/ns2-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{bonnmotion-ns2-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{bonnmotion-ns2-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+63 \{
+64   std::cout.precision (2);
+65   std::cout.setf (std::ios::fixed);
+66 
+67   \textcolor{keywordtype}{double} deltaTime = 100;
+68   std::string traceFile = \textcolor{stringliteral}{"src/mobility/examples/bonnmotion.ns\_movements"};
+69 
+70   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+71   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"traceFile"}, \textcolor{stringliteral}{"Ns2 movement trace file"}, traceFile);
+72   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"deltaTime"}, \textcolor{stringliteral}{"time interval (s) between updates (default 100)"}, deltaTime);
+73   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+74 
+75   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} n0 = CreateObject<Node> ();
+76 
+77   \hyperlink{classns3_1_1Ns2MobilityHelper}{Ns2MobilityHelper} ns2 = \hyperlink{classns3_1_1Ns2MobilityHelper}{Ns2MobilityHelper} (traceFile);
+78   ns2.Install ();
+79 
+80   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0), &\hyperlink{bonnmotion-ns2-example_8cc_aa58f33caf8bba45b2f1d495586580172}{showPosition}, n0, deltaTime);
+81 
+82   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1000.0));
+83   Simulator::Run ();
+84   Simulator::Destroy ();
+85   \textcolor{keywordflow}{return} 0;
+86 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{bonnmotion-\/ns2-\/example.\+cc@{bonnmotion-\/ns2-\/example.\+cc}!show\+Position@{show\+Position}}
+\index{show\+Position@{show\+Position}!bonnmotion-\/ns2-\/example.\+cc@{bonnmotion-\/ns2-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{show\+Position(\+Ptr$<$ Node $>$ node, double delta\+Time)}{showPosition(Ptr< Node > node, double deltaTime)}}]{\setlength{\rightskip}{0pt plus 5cm}void show\+Position (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Node} $>$}]{node, }
+\item[{double}]{delta\+Time}
+\end{DoxyParamCaption}
+)}\hypertarget{bonnmotion-ns2-example_8cc_aa58f33caf8bba45b2f1d495586580172}{}\label{bonnmotion-ns2-example_8cc_aa58f33caf8bba45b2f1d495586580172}
+
+\begin{DoxyCode}
+49 \{
+50   uint32\_t nodeId = node->\hyperlink{classns3_1_1Node_aaf49b64a843565ce3812326313b370ac}{GetId} ();
+51   \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} mobModel = node->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+52   \hyperlink{classns3_1_1Vector3D}{Vector3D} pos = mobModel->\hyperlink{classns3_1_1MobilityModel_aba838f06ec5bbb2d193d94b8c0e4abb4}{GetPosition} ();
+53   \hyperlink{classns3_1_1Vector3D}{Vector3D} \hyperlink{mmwave-amc-test_8cc_a6dc6e6f3c75c509ce943163afb5dade7}{speed} = mobModel->\hyperlink{classns3_1_1MobilityModel_a77004c56b45773bf57bdd3750887ced3}{GetVelocity} ();
+54   std::cout << \textcolor{stringliteral}{"At "} << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" node "} << nodeId
+55             << \textcolor{stringliteral}{": Position("} << pos.x << \textcolor{stringliteral}{", "} << pos.y << \textcolor{stringliteral}{", "} << pos.z
+56             << \textcolor{stringliteral}{");   Speed("} << speed.\hyperlink{classns3_1_1Vector3D_a59dbc5dc984a4fea2819e042d2d6109c}{x} << \textcolor{stringliteral}{", "} << speed.\hyperlink{classns3_1_1Vector3D_ae679257823406b2e008be04316e4245f}{y} << \textcolor{stringliteral}{", "} << speed.\hyperlink{classns3_1_1Vector3D_ac31aba8cd85d66f8cf52e4b4c313f415}{z}
+57             << \textcolor{stringliteral}{")"} << std::endl;
+58 
+59   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (deltaTime), &\hyperlink{bonnmotion-ns2-example_8cc_aa58f33caf8bba45b2f1d495586580172}{showPosition}, node, deltaTime);
+60 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+

@@ -1,0 +1,409 @@
+\hypertarget{classns3_1_1Ipv6AddressGenerator}{}\section{ns3\+:\+:Ipv6\+Address\+Generator Class Reference}
+\label{classns3_1_1Ipv6AddressGenerator}\index{ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}}
+
+
+This generator assigns addresses sequentially from a provided network address; used in topology code. It also keeps track of all addresses assigned to perform duplicate detection.  
+
+
+
+
+{\ttfamily \#include $<$ipv6-\/address-\/generator.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Ipv6\+Address\+Generator\+:
+% FIG 0
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classns3_1_1Ipv6AddressGenerator_a010449feb2e0aa103dd93abb44b6f423}{Init} (const \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} net, const \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix} prefix, const \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} interface\+Id=\char`\"{}\+::1\char`\"{})
+\begin{DoxyCompactList}\small\item\em Initialise the base network and interface\+Id for the generator. \end{DoxyCompactList}\item 
+static \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} \hyperlink{classns3_1_1Ipv6AddressGenerator_ad3d156d50f45026dd896e121ae04d24b}{Next\+Network} (const \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix} prefix)
+\begin{DoxyCompactList}\small\item\em Get the next network according to the given \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix}. \end{DoxyCompactList}\item 
+static \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} \hyperlink{classns3_1_1Ipv6AddressGenerator_a3d153f59d37c8012186db6a18db5681c}{Get\+Network} (const \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix} prefix)
+\begin{DoxyCompactList}\small\item\em Get the current network of the given \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix}. \end{DoxyCompactList}\item 
+static void \hyperlink{classns3_1_1Ipv6AddressGenerator_a73d9540591ca4aa1ead41d8463d7784f}{Init\+Address} (const \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} interface\+Id, const \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix} prefix)
+\begin{DoxyCompactList}\small\item\em Set the interface\+Id for the given \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix}. \end{DoxyCompactList}\item 
+static \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} \hyperlink{classns3_1_1Ipv6AddressGenerator_a1d470e21bf48dd0dc39fb3c12414218e}{Next\+Address} (const \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix} prefix)
+\begin{DoxyCompactList}\small\item\em Allocate the next \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} for the configured network and prefix. \end{DoxyCompactList}\item 
+static \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} \hyperlink{classns3_1_1Ipv6AddressGenerator_aa28e6390d3289b82b2b3310d9de2015a}{Get\+Address} (const \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix} prefix)
+\begin{DoxyCompactList}\small\item\em Get the \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} that will be allocated upon Next\+Address () \end{DoxyCompactList}\item 
+static void \hyperlink{classns3_1_1Ipv6AddressGenerator_a98078c6611180e79d548c2371d8dd57b}{Reset} (void)
+\begin{DoxyCompactList}\small\item\em Reset the networks and \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} to zero. \end{DoxyCompactList}\item 
+static bool \hyperlink{classns3_1_1Ipv6AddressGenerator_a906de97d82d4e6898eb8d019bc81077f}{Add\+Allocated} (const \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} addr)
+\begin{DoxyCompactList}\small\item\em Add the \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} to the list of I\+Pv6 entries. \end{DoxyCompactList}\item 
+static void \hyperlink{classns3_1_1Ipv6AddressGenerator_a89aa5af34b1e75c15449855032b10e48}{Test\+Mode} (void)
+\begin{DoxyCompactList}\small\item\em Used to turn off fatal errors and assertions, for testing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This generator assigns addresses sequentially from a provided network address; used in topology code. It also keeps track of all addresses assigned to perform duplicate detection. 
+
+Global unicast I\+Pv6 addresses based on \{4291\} definition\+: \begin{DoxyVerb}|         n bits          |   m bits  |       128-n-m bits         |
++-------------------------+-----------+----------------------------+
+| global routing prefix   | subnet ID |       interface ID         |
++-------------------------+-----------+----------------------------+
+\end{DoxyVerb}
+
+
+In this class, the first two quantities (n + m) are what is called the \textquotesingle{}net\textquotesingle{}, and the \textquotesingle{}prefix\textquotesingle{} defines the length in bits of (n + m).
+
+The way this is expected to be used is that, after initializing the network and interface\+Id to a number, a user can call Next\+Address () repeatedly to obtain new interface I\+Ds with the current network (for multiple addresses on the link) and can call Next\+Network () to increment the subnet ID.
+
+The interface ID is often an E\+U\+I-\/64 address derived from the M\+AC address, but can also be a pseudo-\/random value (\{3041\}). This implementation does not generate E\+U\+I-\/64-\/based interface I\+Ds.
+
+\begin{DoxyNote}{Note}
+B\+E\+W\+A\+RE\+: this class acts as a \hyperlink{classns3_1_1Singleton}{Singleton}. In other terms, two different instances of \hyperlink{classns3_1_1Ipv6AddressGenerator}{Ipv6\+Address\+Generator} will pick I\+Pv6 numbers from the same pool. Changing the network in one of them will also change the network in the other instances. 
+\end{DoxyNote}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}!Add\+Allocated@{Add\+Allocated}}
+\index{Add\+Allocated@{Add\+Allocated}!ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}}
+\subsubsection[{\texorpdfstring{Add\+Allocated(const Ipv6\+Address addr)}{AddAllocated(const Ipv6Address addr)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Ipv6\+Address\+Generator\+::\+Add\+Allocated (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv6\+Address}}]{addr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Ipv6AddressGenerator_a906de97d82d4e6898eb8d019bc81077f}{}\label{classns3_1_1Ipv6AddressGenerator_a906de97d82d4e6898eb8d019bc81077f}
+
+
+Add the \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} to the list of I\+Pv6 entries. 
+
+Typically, this is used by external address allocators that want to make use of this class\textquotesingle{}s ability to track duplicates. Add\+Allocated is always called internally for any address generated by Next\+Address ()
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & The \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} to be added to the list of \hyperlink{classns3_1_1Ipv6}{Ipv6} entries \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+672 \{
+673   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+674 
+675   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SimulationSingleton_a35870bf2664aaa6e653ce99fb68fc8fc}{SimulationSingleton<Ipv6AddressGeneratorImpl>::Get}
+       ()
+676          ->AddAllocated (addr);
+677 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}!Get\+Address@{Get\+Address}}
+\index{Get\+Address@{Get\+Address}!ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Address(const Ipv6\+Prefix prefix)}{GetAddress(const Ipv6Prefix prefix)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv6\+Address} ns3\+::\+Ipv6\+Address\+Generator\+::\+Get\+Address (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv6\+Prefix}}]{prefix}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Ipv6AddressGenerator_aa28e6390d3289b82b2b3310d9de2015a}{}\label{classns3_1_1Ipv6AddressGenerator_aa28e6390d3289b82b2b3310d9de2015a}
+
+
+Get the \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} that will be allocated upon Next\+Address () 
+
+Does not change the internal state; just is used to peek the next address that will be allocated upon Next\+Address ()
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & The \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix} for the current network \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the I\+Pv6 address 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+645 \{
+646   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+647 
+648   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SimulationSingleton_a35870bf2664aaa6e653ce99fb68fc8fc}{SimulationSingleton<Ipv6AddressGeneratorImpl>::Get}
+       ()
+649          ->GetAddress (prefix);
+650 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}!Get\+Network@{Get\+Network}}
+\index{Get\+Network@{Get\+Network}!ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Network(const Ipv6\+Prefix prefix)}{GetNetwork(const Ipv6Prefix prefix)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv6\+Address} ns3\+::\+Ipv6\+Address\+Generator\+::\+Get\+Network (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv6\+Prefix}}]{prefix}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Ipv6AddressGenerator_a3d153f59d37c8012186db6a18db5681c}{}\label{classns3_1_1Ipv6AddressGenerator_a3d153f59d37c8012186db6a18db5681c}
+
+
+Get the current network of the given \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix}. 
+
+Does not change the internal state; this just peeks at the current network
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & The \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix} for the current network \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the I\+Pv6 address of the current network 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+625 \{
+626   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+627 
+628   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SimulationSingleton_a35870bf2664aaa6e653ce99fb68fc8fc}{SimulationSingleton<Ipv6AddressGeneratorImpl>::Get}
+       ()
+629          ->GetNetwork (prefix);
+630 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}!Init@{Init}}
+\index{Init@{Init}!ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}}
+\subsubsection[{\texorpdfstring{Init(const Ipv6\+Address net, const Ipv6\+Prefix prefix, const Ipv6\+Address interface\+Id=""\+::1"")}{Init(const Ipv6Address net, const Ipv6Prefix prefix, const Ipv6Address interfaceId="::1")}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ipv6\+Address\+Generator\+::\+Init (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv6\+Address}}]{net, }
+\item[{const {\bf Ipv6\+Prefix}}]{prefix, }
+\item[{const {\bf Ipv6\+Address}}]{interface\+Id = {\ttfamily \char`\"{}\+:\+:1\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Ipv6AddressGenerator_a010449feb2e0aa103dd93abb44b6f423}{}\label{classns3_1_1Ipv6AddressGenerator_a010449feb2e0aa103dd93abb44b6f423}
+
+
+Initialise the base network and interface\+Id for the generator. 
+
+The first call to \hyperlink{classns3_1_1Ipv6AddressGenerator_a1d470e21bf48dd0dc39fb3c12414218e}{Next\+Address()} or \hyperlink{classns3_1_1Ipv6AddressGenerator_aa28e6390d3289b82b2b3310d9de2015a}{Get\+Address()} will return the value passed in.
+
+
+\begin{DoxyParams}{Parameters}
+{\em net} & The network for the base \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} \\
+\hline
+{\em prefix} & The prefix of the base \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} \\
+\hline
+{\em interface\+Id} & The base interface ID used for initialization \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+607 \{
+608   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+609 
+610   \hyperlink{classns3_1_1SimulationSingleton_a35870bf2664aaa6e653ce99fb68fc8fc}{SimulationSingleton<Ipv6AddressGeneratorImpl>::Get} ()
+611   ->Init (net, prefix, interfaceId);
+612 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}!Init\+Address@{Init\+Address}}
+\index{Init\+Address@{Init\+Address}!ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}}
+\subsubsection[{\texorpdfstring{Init\+Address(const Ipv6\+Address interface\+Id, const Ipv6\+Prefix prefix)}{InitAddress(const Ipv6Address interfaceId, const Ipv6Prefix prefix)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ipv6\+Address\+Generator\+::\+Init\+Address (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv6\+Address}}]{interface\+Id, }
+\item[{const {\bf Ipv6\+Prefix}}]{prefix}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Ipv6AddressGenerator_a73d9540591ca4aa1ead41d8463d7784f}{}\label{classns3_1_1Ipv6AddressGenerator_a73d9540591ca4aa1ead41d8463d7784f}
+
+
+Set the interface\+Id for the given \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em interface\+Id} & The interface\+Id to set for the current \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix} \\
+\hline
+{\em prefix} & The \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix} whose address is to be set \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+636 \{
+637   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+638 
+639   \hyperlink{classns3_1_1SimulationSingleton_a35870bf2664aaa6e653ce99fb68fc8fc}{SimulationSingleton<Ipv6AddressGeneratorImpl>::Get} ()
+640   ->InitAddress (interfaceId, prefix);
+641 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}!Next\+Address@{Next\+Address}}
+\index{Next\+Address@{Next\+Address}!ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}}
+\subsubsection[{\texorpdfstring{Next\+Address(const Ipv6\+Prefix prefix)}{NextAddress(const Ipv6Prefix prefix)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv6\+Address} ns3\+::\+Ipv6\+Address\+Generator\+::\+Next\+Address (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv6\+Prefix}}]{prefix}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Ipv6AddressGenerator_a1d470e21bf48dd0dc39fb3c12414218e}{}\label{classns3_1_1Ipv6AddressGenerator_a1d470e21bf48dd0dc39fb3c12414218e}
+
+
+Allocate the next \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} for the configured network and prefix. 
+
+This operation is a post-\/increment, meaning that the first address allocated will be the one that was initially configured.
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & The \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix} for the current network \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the I\+Pv6 address 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+654 \{
+655   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+656 
+657   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SimulationSingleton_a35870bf2664aaa6e653ce99fb68fc8fc}{SimulationSingleton<Ipv6AddressGeneratorImpl>::Get}
+       ()
+658          ->NextAddress (prefix);
+659 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}!Next\+Network@{Next\+Network}}
+\index{Next\+Network@{Next\+Network}!ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}}
+\subsubsection[{\texorpdfstring{Next\+Network(const Ipv6\+Prefix prefix)}{NextNetwork(const Ipv6Prefix prefix)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv6\+Address} ns3\+::\+Ipv6\+Address\+Generator\+::\+Next\+Network (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv6\+Prefix}}]{prefix}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Ipv6AddressGenerator_ad3d156d50f45026dd896e121ae04d24b}{}\label{classns3_1_1Ipv6AddressGenerator_ad3d156d50f45026dd896e121ae04d24b}
+
+
+Get the next network according to the given \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix}. 
+
+This operation is a pre-\/increment, meaning that the internal state is changed before returning the new network address.
+
+This also resets the interface ID to the base interface ID that was used for initialization.
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & The \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6\+Prefix} used to set the next network \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the I\+Pv6 address of the next network 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+616 \{
+617   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+618 
+619   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SimulationSingleton_a35870bf2664aaa6e653ce99fb68fc8fc}{SimulationSingleton<Ipv6AddressGeneratorImpl>::Get}
+       ()
+620          ->NextNetwork (prefix);
+621 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 12
+
+
+\index{ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}!Reset@{Reset}}
+\index{Reset@{Reset}!ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}}
+\subsubsection[{\texorpdfstring{Reset(void)}{Reset(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ipv6\+Address\+Generator\+::\+Reset (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Ipv6AddressGenerator_a98078c6611180e79d548c2371d8dd57b}{}\label{classns3_1_1Ipv6AddressGenerator_a98078c6611180e79d548c2371d8dd57b}
+
+
+Reset the networks and \hyperlink{classns3_1_1Ipv6Address}{Ipv6\+Address} to zero. 
+
+
+\begin{DoxyCode}
+663 \{
+664   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+665 
+666   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SimulationSingleton_a35870bf2664aaa6e653ce99fb68fc8fc}{SimulationSingleton<Ipv6AddressGeneratorImpl>::Get}
+       ()
+667          ->Reset ();
+668 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 13
+
+
+\index{ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}!Test\+Mode@{Test\+Mode}}
+\index{Test\+Mode@{Test\+Mode}!ns3\+::\+Ipv6\+Address\+Generator@{ns3\+::\+Ipv6\+Address\+Generator}}
+\subsubsection[{\texorpdfstring{Test\+Mode(void)}{TestMode(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ipv6\+Address\+Generator\+::\+Test\+Mode (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Ipv6AddressGenerator_a89aa5af34b1e75c15449855032b10e48}{}\label{classns3_1_1Ipv6AddressGenerator_a89aa5af34b1e75c15449855032b10e48}
+
+
+Used to turn off fatal errors and assertions, for testing. 
+
+
+\begin{DoxyCode}
+681 \{
+682   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+683 
+684   \hyperlink{classns3_1_1SimulationSingleton_a35870bf2664aaa6e653ce99fb68fc8fc}{SimulationSingleton<Ipv6AddressGeneratorImpl>::Get} ()
+685   ->TestMode ();
+686 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 14
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{ipv6-address-generator_8h}{ipv6-\/address-\/generator.\+h}\item 
+internet/model/\hyperlink{ipv6-address-generator_8cc}{ipv6-\/address-\/generator.\+cc}\end{DoxyCompactItemize}

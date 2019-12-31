@@ -1,0 +1,147 @@
+\hypertarget{test-interference-helper_8cc}{}\section{wifi/examples/test-\/interference-\/helper.cc File Reference}
+\label{test-interference-helper_8cc}\index{wifi/examples/test-\/interference-\/helper.\+cc@{wifi/examples/test-\/interference-\/helper.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/yans-\/wifi-\/channel.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/propagation-\/loss-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/propagation-\/delay-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/nist-\/error-\/rate-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/constant-\/position-\/mobility-\/model.\+h\char`\"{}}\\*
+Include dependency graph for test-\/interference-\/helper.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classInterferenceExperiment}{Interference\+Experiment}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classInterferenceExperiment}{Interference\+Experiment}. \end{DoxyCompactList}\item 
+struct \hyperlink{structInterferenceExperiment_1_1Input}{Interference\+Experiment\+::\+Input}
+\begin{DoxyCompactList}\small\item\em \hyperlink{structInterferenceExperiment_1_1Input}{Input} atructure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{test-interference-helper_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{test-\/interference-\/helper.\+cc@{test-\/interference-\/helper.\+cc}!main@{main}}
+\index{main@{main}!test-\/interference-\/helper.\+cc@{test-\/interference-\/helper.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{test-interference-helper_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{test-interference-helper_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+187 \{
+188   \hyperlink{structInterferenceExperiment_1_1Input}{InterferenceExperiment::Input} input;
+189   std::string str\_standard = \textcolor{stringliteral}{"WIFI\_PHY\_STANDARD\_80211a"};
+190   std::string str\_preamble = \textcolor{stringliteral}{"WIFI\_PREAMBLE\_LONG"};
+191   \textcolor{keywordtype}{double} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a7964e6aa8f61a9d28973c8267a606ad8}{delay} = 0; \textcolor{comment}{//microseconds}
+192 
+193   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+194   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"delay"}, \textcolor{stringliteral}{"Delay in microseconds between frame transmission from sender A and frame
+       transmission from sender B"}, delay);
+195   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"xA"}, \textcolor{stringliteral}{"The position of transmitter A (< 0)"}, input.\hyperlink{structInterferenceExperiment_1_1Input_a6af2867adbbc4728d94b1a2591b8e12d}{xA});
+196   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"xB"}, \textcolor{stringliteral}{"The position of transmitter B (> 0)"}, input.\hyperlink{structInterferenceExperiment_1_1Input_a87cb6a23e8a0cd61578537cc093acba5}{xB});
+197   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"packetSizeA"}, \textcolor{stringliteral}{"Packet size in bytes of transmitter A"}, input.
+      \hyperlink{structInterferenceExperiment_1_1Input_a7df4f4dd944497911f94525571426713}{packetSizeA});
+198   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"packetSizeB"}, \textcolor{stringliteral}{"Packet size in bytes of transmitter B"}, input.
+      \hyperlink{structInterferenceExperiment_1_1Input_af43818556e8f08c6e85b4aff90c00c41}{packetSizeB});
+199   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"txPowerA"}, \textcolor{stringliteral}{"TX power level of transmitter A"}, input.
+      \hyperlink{structInterferenceExperiment_1_1Input_a51a113cf642b065436543568a64d1c25}{txPowerLevelA});
+200   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"txPowerB"}, \textcolor{stringliteral}{"TX power level of transmitter B"}, input.
+      \hyperlink{structInterferenceExperiment_1_1Input_a4acd70506b27a4c59504e68639101fd1}{txPowerLevelB});
+201   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"txModeA"}, \textcolor{stringliteral}{"Wifi mode used for payload transmission of sender A"}, input.
+      \hyperlink{structInterferenceExperiment_1_1Input_a45a8de8e6656eb04108d500707f2827d}{txModeA});
+202   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"txModeB"}, \textcolor{stringliteral}{"Wifi mode used for payload transmission of sender B"}, input.
+      \hyperlink{structInterferenceExperiment_1_1Input_a79f27f84600607d35444fb9840b5b3ef}{txModeB});
+203   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"standard"}, \textcolor{stringliteral}{"IEEE 802.11 flavor"}, str\_standard);
+204   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"preamble"}, \textcolor{stringliteral}{"Type of preamble"}, str\_preamble);
+205   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+206 
+207   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"YansWifiPhy"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+208   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"InterferenceHelper"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+209 
+210   input.\hyperlink{structInterferenceExperiment_1_1Input_adecd5b2b5c7c4d2e30195d44487a8a45}{interval} = \hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (delay);
+211 
+212   \textcolor{keywordflow}{if} (input.\hyperlink{structInterferenceExperiment_1_1Input_a6af2867adbbc4728d94b1a2591b8e12d}{xA} >= 0 || input.\hyperlink{structInterferenceExperiment_1_1Input_a87cb6a23e8a0cd61578537cc093acba5}{xB} <= 0)
+213     \{
+214       std::cout << \textcolor{stringliteral}{"Value of xA must be smaller than 0 and value of xB must be bigger than 0!"} << std::endl
+      ;
+215       \textcolor{keywordflow}{return} 0;
+216     \}
+217 
+218   \textcolor{keywordflow}{if} (str\_standard == \textcolor{stringliteral}{"WIFI\_PHY\_STANDARD\_80211a"})
+219     \{
+220       input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} = \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a22db1e8022db2c3450414b86c77b11e4}{WIFI\_PHY\_STANDARD\_80211a};
+221     \}
+222   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (str\_standard == \textcolor{stringliteral}{"WIFI\_PHY\_STANDARD\_80211b"})
+223     \{
+224       input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} = \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a77e1cc9f77a0bce8e2bc82cbef437b5a}{WIFI\_PHY\_STANDARD\_80211b};
+225     \}
+226   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (str\_standard == \textcolor{stringliteral}{"WIFI\_PHY\_STANDARD\_80211g"})
+227     \{
+228       input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} = \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aeda6d90f260393ce003ec4765d8100af}{WIFI\_PHY\_STANDARD\_80211g};
+229     \}
+230   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (str\_standard == \textcolor{stringliteral}{"WIFI\_PHY\_STANDARD\_80211n\_2\_4GHZ"})
+231     \{
+232       input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} = \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a6e449a5ca14fc7c0eb36064ce04a5192}{WIFI\_PHY\_STANDARD\_80211n\_2\_4GHZ};
+233     \}
+234   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (str\_standard == \textcolor{stringliteral}{"WIFI\_PHY\_STANDARD\_80211n\_5GHZ"})
+235     \{
+236       input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} = \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aaabe94a0be4668583c42595437b4a6c0}{WIFI\_PHY\_STANDARD\_80211n\_5GHZ};
+237     \}
+238   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (str\_standard == \textcolor{stringliteral}{"WIFI\_PHY\_STANDARD\_80211ac"})
+239     \{
+240       input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} = \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a7c078959de635b84fb280a955dcfb27e}{WIFI\_PHY\_STANDARD\_80211ac};
+241     \}
+242 
+243   \textcolor{keywordflow}{if} (str\_preamble == \textcolor{stringliteral}{"WIFI\_PREAMBLE\_LONG"} && (input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} == 
+      \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a22db1e8022db2c3450414b86c77b11e4}{WIFI\_PHY\_STANDARD\_80211a} || input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} == 
+      \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a77e1cc9f77a0bce8e2bc82cbef437b5a}{WIFI\_PHY\_STANDARD\_80211b} || input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} == 
+      \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aeda6d90f260393ce003ec4765d8100af}{WIFI\_PHY\_STANDARD\_80211g}))
+244     \{
+245       input.\hyperlink{structInterferenceExperiment_1_1Input_aa65f6eed675014431f9750aa15197edc}{preamble} = \hyperlink{group__wifi_gga5e94a56cb338a14ffbbb19c6a41251eba12f3d9468d1630bd38bbef20df1e3eda}{WIFI\_PREAMBLE\_LONG};
+246     \}
+247   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (str\_preamble == \textcolor{stringliteral}{"WIFI\_PREAMBLE\_SHORT"} && (input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} == 
+      \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a77e1cc9f77a0bce8e2bc82cbef437b5a}{WIFI\_PHY\_STANDARD\_80211b} || input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} == 
+      \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aeda6d90f260393ce003ec4765d8100af}{WIFI\_PHY\_STANDARD\_80211g}))
+248     \{
+249       input.\hyperlink{structInterferenceExperiment_1_1Input_aa65f6eed675014431f9750aa15197edc}{preamble} = \hyperlink{group__wifi_gga5e94a56cb338a14ffbbb19c6a41251ebab9a39ca1f62d36c33ac489c4cf59745b}{WIFI\_PREAMBLE\_SHORT};
+250     \}
+251   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (str\_preamble == \textcolor{stringliteral}{"WIFI\_PREAMBLE\_HT\_MF"} && (input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} == 
+      \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a6e449a5ca14fc7c0eb36064ce04a5192}{WIFI\_PHY\_STANDARD\_80211n\_2\_4GHZ} || input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} == 
+      \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aaabe94a0be4668583c42595437b4a6c0}{WIFI\_PHY\_STANDARD\_80211n\_5GHZ}))
+252     \{
+253       input.\hyperlink{structInterferenceExperiment_1_1Input_aa65f6eed675014431f9750aa15197edc}{preamble} = \hyperlink{group__wifi_gga5e94a56cb338a14ffbbb19c6a41251ebae0944a664debb28943c12d4cd7a81d2a}{WIFI\_PREAMBLE\_HT\_MF};
+254     \}
+255   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (str\_preamble == \textcolor{stringliteral}{"WIFI\_PREAMBLE\_HT\_GF"} && (input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} == 
+      \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a6e449a5ca14fc7c0eb36064ce04a5192}{WIFI\_PHY\_STANDARD\_80211n\_2\_4GHZ} || input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} == 
+      \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aaabe94a0be4668583c42595437b4a6c0}{WIFI\_PHY\_STANDARD\_80211n\_5GHZ}))
+256     \{
+257       input.\hyperlink{structInterferenceExperiment_1_1Input_aa65f6eed675014431f9750aa15197edc}{preamble} = \hyperlink{group__wifi_gga5e94a56cb338a14ffbbb19c6a41251eba82e0b00d79c1f01b7a6e46b693bafd72}{WIFI\_PREAMBLE\_HT\_GF};
+258     \}
+259   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (str\_preamble == \textcolor{stringliteral}{"WIFI\_PREAMBLE\_VHT"} && input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard} == 
+      \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a7c078959de635b84fb280a955dcfb27e}{WIFI\_PHY\_STANDARD\_80211ac})
+260     \{
+261       input.\hyperlink{structInterferenceExperiment_1_1Input_aa65f6eed675014431f9750aa15197edc}{preamble} = \hyperlink{group__wifi_gga5e94a56cb338a14ffbbb19c6a41251ebab90b0fe0b17f27e51c0fe16239e7b089}{WIFI\_PREAMBLE\_VHT};
+262     \}
+263   \textcolor{keywordflow}{else}
+264     \{
+265       std::cout << \textcolor{stringliteral}{"Preamble does not exist or is not compatible with the selected standard!"} << std::endl;
+266       \textcolor{keywordflow}{return} 0;
+267     \}
+268 
+269   \hyperlink{classInterferenceExperiment}{InterferenceExperiment} experiment;
+270   experiment.\hyperlink{classInterferenceExperiment_ae31524d224c311c36d8b1dd5fcc9f269}{Run} (input);
+271 
+272   \textcolor{keywordflow}{return} 0;
+273 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

@@ -1,0 +1,186 @@
+\hypertarget{namespacewifi-olsr-flowmon}{}\section{wifi-\/olsr-\/flowmon Namespace Reference}
+\label{namespacewifi-olsr-flowmon}\index{wifi-\/olsr-\/flowmon@{wifi-\/olsr-\/flowmon}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacewifi-olsr-flowmon_ab8793f3e28ca4a531001056ef52436e4}{main} (argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespacewifi-olsr-flowmon_af65c2cd2cd1d45451526f8ae740b1f8d}{D\+I\+S\+T\+A\+N\+CE} = 100
+\item 
+int \hyperlink{namespacewifi-olsr-flowmon_a8678ef1d936e9b45a294168be101c086}{N\+U\+M\+\_\+\+N\+O\+D\+E\+S\+\_\+\+S\+I\+DE} = 3
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{wifi-\/olsr-\/flowmon@{wifi-\/olsr-\/flowmon}!main@{main}}
+\index{main@{main}!wifi-\/olsr-\/flowmon@{wifi-\/olsr-\/flowmon}}
+\subsubsection[{\texorpdfstring{main(argv)}{main(argv)}}]{\setlength{\rightskip}{0pt plus 5cm}def wifi-\/olsr-\/flowmon.\+main (
+\begin{DoxyParamCaption}
+\item[{}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacewifi-olsr-flowmon_ab8793f3e28ca4a531001056ef52436e4}{}\label{namespacewifi-olsr-flowmon_ab8793f3e28ca4a531001056ef52436e4}
+
+\begin{DoxyCode}
+37 \textcolor{keyword}{def }\hyperlink{namespacewifi-olsr-flowmon_ab8793f3e28ca4a531001056ef52436e4}{main}(argv):
+38 
+39     cmd = ns.core.CommandLine()
+40 
+41     cmd.NumNodesSide = \textcolor{keywordtype}{None}
+42     cmd.AddValue(\textcolor{stringliteral}{"NumNodesSide"}, \textcolor{stringliteral}{"Grid side number of nodes (total number of nodes will be this number
+       squared)"})
+43 
+44     cmd.Results = \textcolor{keywordtype}{None}
+45     cmd.AddValue(\textcolor{stringliteral}{"Results"}, \textcolor{stringliteral}{"Write XML results to file"})
+46 
+47     cmd.Plot = \textcolor{keywordtype}{None}
+48     cmd.AddValue(\textcolor{stringliteral}{"Plot"}, \textcolor{stringliteral}{"Plot the results using the matplotlib python module"})
+49 
+50     cmd.Parse(argv)
+51 
+52     wifi = ns.wifi.WifiHelper.Default()
+53     wifiMac = ns.wifi.WifiMacHelper()
+54     wifiPhy = ns.wifi.YansWifiPhyHelper.Default()
+55     wifiChannel = ns.wifi.YansWifiChannelHelper.Default()
+56     wifiPhy.SetChannel(wifiChannel.Create())
+57     ssid = ns.wifi.Ssid(\textcolor{stringliteral}{"wifi-default"})
+58     wifi.SetRemoteStationManager(\textcolor{stringliteral}{"ns3::ArfWifiManager"})
+59     wifiMac.SetType (\textcolor{stringliteral}{"ns3::AdhocWifiMac"},
+60                      \textcolor{stringliteral}{"Ssid"}, ns.wifi.SsidValue(ssid))
+61 
+62     internet = ns.internet.InternetStackHelper()
+63     list\_routing = ns.internet.Ipv4ListRoutingHelper()
+64     olsr\_routing = ns.olsr.OlsrHelper()
+65     static\_routing = ns.internet.Ipv4StaticRoutingHelper()
+66     list\_routing.Add(static\_routing, 0)
+67     list\_routing.Add(olsr\_routing, 100)
+68     internet.SetRoutingHelper(list\_routing)
+69 
+70     ipv4Addresses = ns.internet.Ipv4AddressHelper()
+71     ipv4Addresses.SetBase(ns.network.Ipv4Address(\textcolor{stringliteral}{"10.0.0.0"}), ns.network.Ipv4Mask(\textcolor{stringliteral}{"255.255.255.0"}))
+72 
+73     port = 9   \textcolor{comment}{# Discard port(RFC 863)}
+74     onOffHelper = ns.applications.OnOffHelper(\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+75                                   ns.network.Address(ns.network.InetSocketAddress(ns.network.Ipv4Address(\textcolor{stringliteral}{"
+      10.0.0.1"}), port)))
+76     onOffHelper.SetAttribute(\textcolor{stringliteral}{"DataRate"}, ns.network.DataRateValue(ns.network.DataRate(\textcolor{stringliteral}{"100kbps"})))
+77     onOffHelper.SetAttribute(\textcolor{stringliteral}{"OnTime"}, ns.core.StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}))
+78     onOffHelper.SetAttribute(\textcolor{stringliteral}{"OffTime"}, ns.core.StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=0]"}))
+79 
+80     addresses = []
+81     nodes = []
+82 
+83     \textcolor{keywordflow}{if} cmd.NumNodesSide \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+84         num\_nodes\_side = NUM\_NODES\_SIDE
+85     \textcolor{keywordflow}{else}:
+86         num\_nodes\_side = int(cmd.NumNodesSide)
+87 
+88     \textcolor{keywordflow}{for} xi \textcolor{keywordflow}{in} range(num\_nodes\_side):
+89         \textcolor{keywordflow}{for} yi \textcolor{keywordflow}{in} range(num\_nodes\_side):
+90 
+91             node = ns.network.Node()
+92             nodes.append(node)
+93 
+94             internet.Install(ns.network.NodeContainer(node))
+95 
+96             mobility = ns.mobility.ConstantPositionMobilityModel()
+97             mobility.SetPosition(ns.core.Vector(xi*DISTANCE, yi*DISTANCE, 0))
+98             node.AggregateObject(mobility)
+99             
+100             devices = wifi.Install(wifiPhy, wifiMac, node)
+101             ipv4\_interfaces = ipv4Addresses.Assign(devices)
+102             addresses.append(ipv4\_interfaces.GetAddress(0))
+103 
+104     \textcolor{keywordflow}{for} i, node \textcolor{keywordflow}{in} enumerate(nodes):
+105         destaddr = addresses[(len(addresses) - 1 - i) % len(addresses)]
+106         \textcolor{comment}{#print i, destaddr}
+107         onOffHelper.SetAttribute(\textcolor{stringliteral}{"Remote"}, ns.network.AddressValue(ns.network.InetSocketAddress(destaddr, 
+      port)))
+108         app = onOffHelper.Install(ns.network.NodeContainer(node))
+109         urv = ns.core.UniformRandomVariable()
+110         app.Start(ns.core.Seconds(urv.GetValue(20, 30)))
+111 
+112     \textcolor{comment}{#internet.EnablePcapAll("wifi-olsr")}
+113     flowmon\_helper = ns.flow\_monitor.FlowMonitorHelper()
+114     \textcolor{comment}{#flowmon\_helper.SetMonitorAttribute("StartTime", ns.core.TimeValue(ns.core.Seconds(31)))}
+115     monitor = flowmon\_helper.InstallAll()
+116     monitor = flowmon\_helper.GetMonitor()
+117     monitor.SetAttribute(\textcolor{stringliteral}{"DelayBinWidth"}, ns.core.DoubleValue(0.001))
+118     monitor.SetAttribute(\textcolor{stringliteral}{"JitterBinWidth"}, ns.core.DoubleValue(0.001))
+119     monitor.SetAttribute(\textcolor{stringliteral}{"PacketSizeBinWidth"}, ns.core.DoubleValue(20))
+120 
+121     ns.core.Simulator.Stop(ns.core.Seconds(44.0))
+122     ns.core.Simulator.Run()
+123 
+124     \textcolor{keyword}{def }print\_stats(os, st):
+125         \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{"  Tx Bytes: "}, st.txBytes
+126         \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{"  Rx Bytes: "}, st.rxBytes
+127         \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{"  Tx Packets: "}, st.txPackets
+128         \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{"  Rx Packets: "}, st.rxPackets
+129         \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{"  Lost Packets: "}, st.lostPackets
+130         \textcolor{keywordflow}{if} st.rxPackets > 0:
+131             \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{"  Mean\{Delay\}: "}, (st.delaySum.GetSeconds() / st.rxPackets)
+132             \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{"  Mean\{Jitter\}: "}, (st.jitterSum.GetSeconds() / (st.rxPackets-1))
+133             \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{"  Mean\{Hop Count\}: "}, float(st.timesForwarded) / st.rxPackets + 1
+134 
+135         \textcolor{keywordflow}{if} 0:
+136             \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{"Delay Histogram"}
+137             \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(st.delayHistogram.GetNBins () ):
+138               \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{" "},i,\textcolor{stringliteral}{"("}, st.delayHistogram.GetBinStart (i), \textcolor{stringliteral}{"-"}, \(\backslash\)
+139                   st.delayHistogram.GetBinEnd (i), \textcolor{stringliteral}{"): "}, st.delayHistogram.GetBinCount (i)
+140             \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{"Jitter Histogram"}
+141             \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(st.jitterHistogram.GetNBins () ):
+142               \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{" "},i,\textcolor{stringliteral}{"("}, st.jitterHistogram.GetBinStart (i), \textcolor{stringliteral}{"-"}, \(\backslash\)
+143                   st.jitterHistogram.GetBinEnd (i), \textcolor{stringliteral}{"): "}, st.jitterHistogram.GetBinCount (i)
+144             \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{"PacketSize Histogram"}
+145             \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(st.packetSizeHistogram.GetNBins () ):
+146               \textcolor{keywordflow}{print} >> os, \textcolor{stringliteral}{" "},i,\textcolor{stringliteral}{"("}, st.packetSizeHistogram.GetBinStart (i), \textcolor{stringliteral}{"-"}, \(\backslash\)
+147                   st.packetSizeHistogram.GetBinEnd (i), \textcolor{stringliteral}{"): "}, st.packetSizeHistogram.GetBinCount (i)
+148 
+149         \textcolor{keywordflow}{for} reason, drops \textcolor{keywordflow}{in} enumerate(st.packetsDropped):
+150             \textcolor{keywordflow}{print} \textcolor{stringliteral}{"  Packets dropped by reason %i: %i"} % (reason, drops)
+151         \textcolor{comment}{#for reason, drops in enumerate(st.bytesDropped):}
+152         \textcolor{comment}{#    print "Bytes dropped by reason %i: %i" % (reason, drops)}
+153 
+154     monitor.CheckForLostPackets()
+155     classifier = flowmon\_helper.GetClassifier()
+156 
+157     \textcolor{keywordflow}{if} cmd.Results \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+158         \textcolor{keywordflow}{for} flow\_id, flow\_stats \textcolor{keywordflow}{in} monitor.GetFlowStats():
+159             t = classifier.FindFlow(flow\_id)
+160             proto = \{6: \textcolor{stringliteral}{'TCP'}, 17: \textcolor{stringliteral}{'UDP'}\} [t.protocol]
+161             \textcolor{keywordflow}{print} \textcolor{stringliteral}{"FlowID: %i (%s %s/%s --> %s/%i)"} % \(\backslash\)
+162                 (flow\_id, proto, t.sourceAddress, t.sourcePort, t.destinationAddress, t.destinationPort)
+163             print\_stats(sys.stdout, flow\_stats)
+164     \textcolor{keywordflow}{else}:
+165         \textcolor{keywordflow}{print} monitor.SerializeToXmlFile(cmd.Results, \textcolor{keyword}{True}, \textcolor{keyword}{True})
+166 
+167 
+168     \textcolor{keywordflow}{if} cmd.Plot \textcolor{keywordflow}{is} \textcolor{keywordflow}{not} \textcolor{keywordtype}{None}:
+169         \textcolor{keyword}{import} pylab
+170         delays = []
+171         \textcolor{keywordflow}{for} flow\_id, flow\_stats \textcolor{keywordflow}{in} monitor.GetFlowStats():
+172             tupl = classifier.FindFlow(flow\_id)
+173             \textcolor{keywordflow}{if} tupl.protocol == 17 \textcolor{keywordflow}{and} tupl.sourcePort == 698:
+174                 \textcolor{keywordflow}{continue}
+175             delays.append(flow\_stats.delaySum.GetSeconds() / flow\_stats.rxPackets)
+176         pylab.hist(delays, 20)
+177         pylab.xlabel(\textcolor{stringliteral}{"Delay (s)"})
+178         pylab.ylabel(\textcolor{stringliteral}{"Number of Flows"})
+179         pylab.show()
+180 
+181     \textcolor{keywordflow}{return} 0
+182 
+183 
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{wifi-\/olsr-\/flowmon@{wifi-\/olsr-\/flowmon}!D\+I\+S\+T\+A\+N\+CE@{D\+I\+S\+T\+A\+N\+CE}}
+\index{D\+I\+S\+T\+A\+N\+CE@{D\+I\+S\+T\+A\+N\+CE}!wifi-\/olsr-\/flowmon@{wifi-\/olsr-\/flowmon}}
+\subsubsection[{\texorpdfstring{D\+I\+S\+T\+A\+N\+CE}{DISTANCE}}]{\setlength{\rightskip}{0pt plus 5cm}int wifi-\/olsr-\/flowmon.\+D\+I\+S\+T\+A\+N\+CE = 100}\hypertarget{namespacewifi-olsr-flowmon_af65c2cd2cd1d45451526f8ae740b1f8d}{}\label{namespacewifi-olsr-flowmon_af65c2cd2cd1d45451526f8ae740b1f8d}
+\index{wifi-\/olsr-\/flowmon@{wifi-\/olsr-\/flowmon}!N\+U\+M\+\_\+\+N\+O\+D\+E\+S\+\_\+\+S\+I\+DE@{N\+U\+M\+\_\+\+N\+O\+D\+E\+S\+\_\+\+S\+I\+DE}}
+\index{N\+U\+M\+\_\+\+N\+O\+D\+E\+S\+\_\+\+S\+I\+DE@{N\+U\+M\+\_\+\+N\+O\+D\+E\+S\+\_\+\+S\+I\+DE}!wifi-\/olsr-\/flowmon@{wifi-\/olsr-\/flowmon}}
+\subsubsection[{\texorpdfstring{N\+U\+M\+\_\+\+N\+O\+D\+E\+S\+\_\+\+S\+I\+DE}{NUM_NODES_SIDE}}]{\setlength{\rightskip}{0pt plus 5cm}int wifi-\/olsr-\/flowmon.\+N\+U\+M\+\_\+\+N\+O\+D\+E\+S\+\_\+\+S\+I\+DE = 3}\hypertarget{namespacewifi-olsr-flowmon_a8678ef1d936e9b45a294168be101c086}{}\label{namespacewifi-olsr-flowmon_a8678ef1d936e9b45a294168be101c086}

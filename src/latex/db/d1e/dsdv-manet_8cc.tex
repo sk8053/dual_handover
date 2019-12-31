@@ -1,0 +1,121 @@
+\hypertarget{dsdv-manet_8cc}{}\section{dsdv/examples/dsdv-\/manet.cc File Reference}
+\label{dsdv-manet_8cc}\index{dsdv/examples/dsdv-\/manet.\+cc@{dsdv/examples/dsdv-\/manet.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wifi-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/dsdv-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+Include dependency graph for dsdv-\/manet.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classDsdvManetExample}{Dsdv\+Manet\+Example}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{dsdv-manet_8cc_ab53bd119aad948fcec38869045a1c29b}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Dsdv\+Manet\+Example\char`\"{})
+\item 
+int \hyperlink{dsdv-manet_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 9
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{dsdv-\/manet.\+cc@{dsdv-\/manet.\+cc}!main@{main}}
+\index{main@{main}!dsdv-\/manet.\+cc@{dsdv-\/manet.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{dsdv-manet_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{dsdv-manet_8cc_a3c04138a5bfe5d72780bb7e82a18e627}
+
+\begin{DoxyCode}
+96 \{
+97   \hyperlink{classDsdvManetExample}{DsdvManetExample} \hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test};
+98   uint32\_t nWifis = 30;
+99   uint32\_t nSinks = 10;
+100   \textcolor{keywordtype}{double} totalTime = 100.0;
+101   std::string rate (\textcolor{stringliteral}{"8kbps"});
+102   std::string phyMode (\textcolor{stringliteral}{"DsssRate11Mbps"});
+103   uint32\_t nodeSpeed = 10; \textcolor{comment}{// in m/s}
+104   std::string appl = \textcolor{stringliteral}{"all"};
+105   uint32\_t periodicUpdateInterval = 15;
+106   uint32\_t settlingTime = 6;
+107   \textcolor{keywordtype}{double} dataStart = 50.0;
+108   \textcolor{keywordtype}{bool} printRoutingTable = \textcolor{keyword}{true};
+109   std::string CSVfileName = \textcolor{stringliteral}{"DsdvManetExample.csv"};
+110 
+111   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+112   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nWifis"}, \textcolor{stringliteral}{"Number of wifi nodes[Default:30]"}, nWifis);
+113   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nSinks"}, \textcolor{stringliteral}{"Number of wifi sink nodes[Default:10]"}, nSinks);
+114   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"totalTime"}, \textcolor{stringliteral}{"Total Simulation time[Default:100]"}, totalTime);
+115   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"phyMode"}, \textcolor{stringliteral}{"Wifi Phy mode[Default:DsssRate11Mbps]"}, phyMode);
+116   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"rate"}, \textcolor{stringliteral}{"CBR traffic rate[Default:8kbps]"}, rate);
+117   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nodeSpeed"}, \textcolor{stringliteral}{"Node speed in RandomWayPoint model[Default:10]"}, nodeSpeed);
+118   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"periodicUpdateInterval"}, \textcolor{stringliteral}{"Periodic Interval Time[Default=15]"}, 
+      periodicUpdateInterval);
+119   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"settlingTime"}, \textcolor{stringliteral}{"Settling Time before sending out an update for changed
+       metric[Default=6]"}, settlingTime);
+120   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"dataStart"}, \textcolor{stringliteral}{"Time at which nodes start to transmit data[Default=50.0]"}, dataStart)
+      ;
+121   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"printRoutingTable"}, \textcolor{stringliteral}{"print routing table for nodes[Default:1]"}, printRoutingTable)
+      ;
+122   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"CSVfileName"}, \textcolor{stringliteral}{"The name of the CSV output file name[Default:DsdvManetExample.csv]"}
+      , CSVfileName);
+123   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+124 
+125   std::ofstream out (CSVfileName.c\_str ());
+126   out << \textcolor{stringliteral}{"SimulationSecond,"} <<
+127   \textcolor{stringliteral}{"ReceiveRate,"} <<
+128   \textcolor{stringliteral}{"PacketsReceived,"} <<
+129   \textcolor{stringliteral}{"NumberOfSinks,"} <<
+130   std::endl;
+131   out.close ();
+132 
+133   SeedManager::SetSeed (12345);
+134 
+135   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::PacketSize"}, StringValue (\textcolor{stringliteral}{"1000"}));
+136   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::DataRate"}, StringValue (rate));
+137   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::WifiRemoteStationManager::NonUnicastMode"}, StringValue (
+      phyMode));
+138   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::WifiRemoteStationManager::RtsCtsThreshold"}, StringValue (\textcolor{stringliteral}{"
+      2000"}));
+139 
+140   test = \hyperlink{classDsdvManetExample}{DsdvManetExample} ();
+141   test.\hyperlink{classDsdvManetExample_aa61b3622afce14d04f2cf656fba31f4d}{CaseRun} (nWifis, nSinks, totalTime, rate, phyMode, nodeSpeed, periodicUpdateInterval,
+142                 settlingTime, dataStart, printRoutingTable, CSVfileName);
+143 
+144   \textcolor{keywordflow}{return} 0;
+145 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{dsdv-\/manet.\+cc@{dsdv-\/manet.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!dsdv-\/manet.\+cc@{dsdv-\/manet.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Dsdv\+Manet\+Example"")}{NS_LOG_COMPONENT_DEFINE("DsdvManetExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Dsdv\+Manet\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{dsdv-manet_8cc_ab53bd119aad948fcec38869045a1c29b}{}\label{dsdv-manet_8cc_ab53bd119aad948fcec38869045a1c29b}
+
+
+\subsection{Variable Documentation}
+\index{dsdv-\/manet.\+cc@{dsdv-\/manet.\+cc}!port@{port}}
+\index{port@{port}!dsdv-\/manet.\+cc@{dsdv-\/manet.\+cc}}
+\subsubsection[{\texorpdfstring{port}{port}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t port = 9}\hypertarget{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{}\label{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}

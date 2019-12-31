@@ -1,0 +1,273 @@
+\hypertarget{simple-distributed-empty-node_8cc}{}\section{mpi/examples/simple-\/distributed-\/empty-\/node.cc File Reference}
+\label{simple-distributed-empty-node_8cc}\index{mpi/examples/simple-\/distributed-\/empty-\/node.\+cc@{mpi/examples/simple-\/distributed-\/empty-\/node.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mpi-\/interface.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/global-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/stack-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/nix-\/vector-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/address-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/on-\/off-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/packet-\/sink-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for simple-\/distributed-\/empty-\/node.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{simple-distributed-empty-node_8cc_a1b2a18e518450712e15682beb2ad64fa}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Simple\+Distributed\char`\"{})
+\item 
+int \hyperlink{simple-distributed-empty-node_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{simple-\/distributed-\/empty-\/node.\+cc@{simple-\/distributed-\/empty-\/node.\+cc}!main@{main}}
+\index{main@{main}!simple-\/distributed-\/empty-\/node.\+cc@{simple-\/distributed-\/empty-\/node.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{simple-distributed-empty-node_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{simple-distributed-empty-node_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+80 \{
+81 \textcolor{preprocessor}{#ifdef NS3\_MPI}
+82 
+83   \textcolor{keywordtype}{bool} nix = \textcolor{keyword}{true};
+84   \textcolor{keywordtype}{bool} nullmsg = \textcolor{keyword}{false};
+85   \textcolor{keywordtype}{bool} tracing = \textcolor{keyword}{false};
+86 
+87   \textcolor{comment}{// Parse command line}
+88   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+89   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nix"}, \textcolor{stringliteral}{"Enable the use of nix-vector or global routing"}, nix);
+90   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nullmsg"}, \textcolor{stringliteral}{"Enable the use of null-message synchronization"}, nullmsg);
+91   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"tracing"}, \textcolor{stringliteral}{"Enable pcap tracing"}, tracing);
+92   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+93 
+94   \textcolor{comment}{// Distributed simulation setup; by default use granted time window algorithm.}
+95   \textcolor{keywordflow}{if}(nullmsg) 
+96     \{
+97       GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"},
+98                          StringValue (\textcolor{stringliteral}{"ns3::NullMessageSimulatorImpl"}));
+99     \} 
+100   \textcolor{keywordflow}{else} 
+101     \{
+102       GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"},
+103                          StringValue (\textcolor{stringliteral}{"ns3::DistributedSimulatorImpl"}));
+104     \}
+105 
+106   MpiInterface::Enable (&argc, &argv);
+107 
+108   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"PacketSink"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+109 
+110   uint32\_t systemId = MpiInterface::GetSystemId ();
+111   uint32\_t systemCount = MpiInterface::GetSize ();
+112 
+113   uint32\_t rightHalfSystemId = 777;
+114 
+115   \textcolor{comment}{// Check for valid distributed parameters.}
+116   \textcolor{comment}{// Must have 2 or 3 tasks.}
+117   \textcolor{keywordflow}{if} (systemCount == 2)
+118     \{
+119       rightHalfSystemId = 0;
+120     \}
+121   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (systemCount == 3)
+122     \{
+123       rightHalfSystemId = 1;
+124     \}
+125   \textcolor{keywordflow}{else}
+126     \{
+127       std::cout << \textcolor{stringliteral}{"This simulation requires 2 or 3 logical processors."} << std::endl;
+128       \textcolor{keywordflow}{return} 1;
+129     \}
+130     
+131   \textcolor{comment}{// Some default values}
+132   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::PacketSize"}, UintegerValue (512));
+133   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::DataRate"}, StringValue (\textcolor{stringliteral}{"1Mbps"}));
+134   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::MaxBytes"}, UintegerValue (512));
+135 
+136   \textcolor{comment}{// Create leaf nodes on left with system id 0}
+137   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} leftLeafNodes;
+138   leftLeafNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (4, 0);
+139 
+140   \textcolor{comment}{// Create router nodes.  Left router with system id 0, right router}
+141   \textcolor{comment}{// with system id dependent on number of processors using}
+142   \textcolor{comment}{// rightHalfSystemId}
+143   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} routerNodes;
+144   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} routerNode1 = CreateObject<Node> (0);
+145   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} routerNode2 = CreateObject<Node> (rightHalfSystemId);
+146   routerNodes.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (routerNode1);
+147   routerNodes.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (routerNode2);
+148 
+149   \textcolor{comment}{// Create leaf nodes on left with system id rightHalfSystemId}
+150   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} rightLeafNodes;
+151   rightLeafNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (4, rightHalfSystemId);
+152 
+153   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} routerLink;
+154   routerLink.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"5Mbps"}));
+155   routerLink.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"5ms"}));
+156 
+157   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} leafLink;
+158   leafLink.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"1Mbps"}));
+159   leafLink.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"2ms"}));
+160 
+161   \textcolor{comment}{// Add link connecting routers}
+162   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} routerDevices;
+163   routerDevices = routerLink.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (routerNodes);
+164 
+165   \textcolor{comment}{// Add links for left side leaf nodes to left router}
+166   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} leftRouterDevices;
+167   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} leftLeafDevices;
+168   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 4; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+169     \{
+170       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} temp = leafLink.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (leftLeafNodes.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), routerNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+171       leftLeafDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (temp.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+172       leftRouterDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (temp.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+173     \}
+174 
+175   \textcolor{comment}{// Add links for right side leaf nodes to right router}
+176   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} rightRouterDevices;
+177   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} rightLeafDevices;
+178   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 4; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+179     \{
+180       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} temp = leafLink.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (rightLeafNodes.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), routerNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+181       rightLeafDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (temp.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+182       rightRouterDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (temp.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+183     \}
+184 
+185   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+186   \textcolor{keywordflow}{if} (nix)
+187     \{
+188       \hyperlink{classns3_1_1Ipv4NixVectorHelper}{Ipv4NixVectorHelper} nixRouting;
+189       stack.\hyperlink{classns3_1_1InternetStackHelper_a3e382c02df022dec79952a7eca8cd5ba}{SetRoutingHelper} (nixRouting); \textcolor{comment}{// has effect on the next Install ()}
+190     \}
+191 
+192   stack.\hyperlink{classns3_1_1InternetStackHelper_a6cfa73782fd4071c4cfbd73ebf1bbb44}{InstallAll} ();
+193 
+194   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} routerInterfaces;
+195   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} leftLeafInterfaces;
+196   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} leftRouterInterfaces;
+197   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} rightLeafInterfaces;
+198   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} rightRouterInterfaces;
+199 
+200   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} leftAddress;
+201   leftAddress.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+202 
+203   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} routerAddress;
+204   routerAddress.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.2.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+205 
+206   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} rightAddress;
+207   rightAddress.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.3.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+208 
+209   \textcolor{comment}{// Router-to-Router interfaces}
+210   routerInterfaces = routerAddress.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (routerDevices);
+211 
+212   \textcolor{comment}{// Left interfaces}
+213   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 4; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+214     \{
+215       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ndc;
+216       ndc.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (leftLeafDevices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+217       ndc.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (leftRouterDevices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+218       \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} ifc = leftAddress.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc);
+219       leftLeafInterfaces.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae5e7881307c8d49c7606669ded6ac3d6}{Add} (ifc.\hyperlink{classns3_1_1Ipv4InterfaceContainer_a6528d70874071a882a3f5068c12dd9ad}{Get} (0));
+220       leftRouterInterfaces.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae5e7881307c8d49c7606669ded6ac3d6}{Add} (ifc.\hyperlink{classns3_1_1Ipv4InterfaceContainer_a6528d70874071a882a3f5068c12dd9ad}{Get} (1));
+221       leftAddress.\hyperlink{classns3_1_1Ipv4AddressHelper_a3277d133ef0d2669934a16a8206ba8e4}{NewNetwork} ();
+222     \}
+223 
+224   \textcolor{comment}{// Right interfaces}
+225   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 4; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+226     \{
+227       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ndc;
+228       ndc.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (rightLeafDevices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+229       ndc.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (rightRouterDevices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+230       \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} ifc = rightAddress.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ndc);
+231       rightLeafInterfaces.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae5e7881307c8d49c7606669ded6ac3d6}{Add} (ifc.\hyperlink{classns3_1_1Ipv4InterfaceContainer_a6528d70874071a882a3f5068c12dd9ad}{Get} (0));
+232       rightRouterInterfaces.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae5e7881307c8d49c7606669ded6ac3d6}{Add} (ifc.\hyperlink{classns3_1_1Ipv4InterfaceContainer_a6528d70874071a882a3f5068c12dd9ad}{Get} (1));
+233       rightAddress.\hyperlink{classns3_1_1Ipv4AddressHelper_a3277d133ef0d2669934a16a8206ba8e4}{NewNetwork} ();
+234     \}
+235 
+236   \textcolor{keywordflow}{if} (!nix)
+237     \{
+238       Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+239     \}
+240 
+241   \textcolor{keywordflow}{if} (tracing == \textcolor{keyword}{true})
+242     \{
+243       \textcolor{keywordflow}{if} (systemId == 0)
+244         \{
+245           routerLink.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap}(\textcolor{stringliteral}{"router-left"}, routerDevices, \textcolor{keyword}{true});
+246           leafLink.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap}(\textcolor{stringliteral}{"leaf-left"}, leftLeafDevices, \textcolor{keyword}{true});
+247         \}
+248       
+249       \textcolor{keywordflow}{if} (systemId == rightHalfSystemId)
+250         \{
+251           routerLink.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap}(\textcolor{stringliteral}{"router-right"}, routerDevices, \textcolor{keyword}{true});
+252           leafLink.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap}(\textcolor{stringliteral}{"leaf-right"}, rightLeafDevices, \textcolor{keyword}{true});
+253         \}
+254     \}
+255 
+256   \textcolor{comment}{// Create a packet sink on the right leafs to receive packets from left leafs}
+257   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 50000;
+258   \textcolor{keywordflow}{if} (systemId == rightHalfSystemId)
+259     \{
+260       \hyperlink{classns3_1_1Address}{Address} sinkLocalAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port));
+261       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, sinkLocalAddress);
+262       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp;
+263       \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 4; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+264         \{
+265           sinkApp.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (sinkHelper.Install (rightLeafNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})));
+266         \}
+267       sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+268       sinkApp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5));
+269     \}
+270 
+271   \textcolor{comment}{// Create the OnOff applications to send}
+272   \textcolor{keywordflow}{if} (systemId == 0)
+273     \{
+274       \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} clientHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+275       clientHelper.SetAttribute
+276         (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}));
+277       clientHelper.SetAttribute
+278         (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=0]"}));
+279 
+280       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps;
+281       \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 4; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+282         \{
+283           AddressValue remoteAddress
+284             (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (rightLeafInterfaces.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}));
+285           clientHelper.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+286           clientApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (clientHelper.Install (leftLeafNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})));
+287         \}
+288       clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+289       clientApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5));
+290     \}
+291 
+292   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5));
+293   Simulator::Run ();
+294   Simulator::Destroy ();
+295   \textcolor{comment}{// Exit the MPI execution environment}
+296   MpiInterface::Disable ();
+297   \textcolor{keywordflow}{return} 0;
+298 \textcolor{preprocessor}{#else}
+299   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Can't use distributed simulator without MPI compiled in"});
+300 \textcolor{preprocessor}{#endif}
+301 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{simple-\/distributed-\/empty-\/node.\+cc@{simple-\/distributed-\/empty-\/node.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!simple-\/distributed-\/empty-\/node.\+cc@{simple-\/distributed-\/empty-\/node.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Simple\+Distributed"")}{NS_LOG_COMPONENT_DEFINE("SimpleDistributed")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Simple\+Distributed\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{simple-distributed-empty-node_8cc_a1b2a18e518450712e15682beb2ad64fa}{}\label{simple-distributed-empty-node_8cc_a1b2a18e518450712e15682beb2ad64fa}

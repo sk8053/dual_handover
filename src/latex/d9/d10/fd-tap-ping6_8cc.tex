@@ -1,0 +1,154 @@
+\hypertarget{fd-tap-ping6_8cc}{}\section{fd-\/net-\/device/examples/fd-\/tap-\/ping6.cc File Reference}
+\label{fd-tap-ping6_8cc}\index{fd-\/net-\/device/examples/fd-\/tap-\/ping6.\+cc@{fd-\/net-\/device/examples/fd-\/tap-\/ping6.\+cc}}
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/apps-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/fd-\/net-\/device-\/module.\+h\char`\"{}}\\*
+Include dependency graph for fd-\/tap-\/ping6.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{fd-tap-ping6_8cc_a3e4fef7368407c511294bdddc13d8717}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}T\+A\+P\+Ping6\+Example\char`\"{})
+\item 
+int \hyperlink{fd-tap-ping6_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{fd-\/tap-\/ping6.\+cc@{fd-\/tap-\/ping6.\+cc}!main@{main}}
+\index{main@{main}!fd-\/tap-\/ping6.\+cc@{fd-\/tap-\/ping6.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{fd-tap-ping6_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{fd-tap-ping6_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+62 \{
+63   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+64   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+65   
+66   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Ping6 Emulation Example with TAP"});
+67 
+68   \textcolor{comment}{//}
+69   \textcolor{comment}{// Since we are using a real piece of hardware we need to use the realtime}
+70   \textcolor{comment}{// simulator.}
+71   \textcolor{comment}{//}
+72   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"}, StringValue (\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl"}));
+73 
+74   \textcolor{comment}{//}
+75   \textcolor{comment}{// Since we are going to be talking to real-world machines, we need to enable}
+76   \textcolor{comment}{// calculation of checksums in our protocols.}
+77   \textcolor{comment}{//}
+78   GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+79 
+80   \textcolor{comment}{//}
+81   \textcolor{comment}{// Create the two nodes.}
+82   \textcolor{comment}{//}
+83   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n} = CreateObject<Node> ();
+84   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} r = CreateObject<Node> ();
+85   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} net (n, r);
+86 
+87   \textcolor{comment}{//}
+88   \textcolor{comment}{// Install IPv6 stack.}
+89   \textcolor{comment}{//}
+90   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internetv6;
+91   internetv6.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (net);
+92 
+93   \textcolor{comment}{//}
+94   \textcolor{comment}{// Create CSMA channel.}
+95   \textcolor{comment}{//}
+96   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+97   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (5000000));
+98   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+99   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devs = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (net);
+100 
+101   \textcolor{comment}{//}
+102   \textcolor{comment}{// Assign IPv6 addresses.}
+103   \textcolor{comment}{//}
+104   \hyperlink{classns3_1_1Ipv6AddressHelper}{Ipv6AddressHelper} ipv6;
+105  
+106   ipv6.\hyperlink{classns3_1_1Ipv6AddressHelper_a13467412e9da6263395c09460681c0f1}{SetBase} (\hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"2001:0DB8:1::"}), \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (64));
+107   \hyperlink{classns3_1_1Ipv6InterfaceContainer}{Ipv6InterfaceContainer} \hyperlink{generate__test__data__lte__sinr_8m_ac6ef61fb0fec52abd81fd71388742cc0}{i1} = ipv6.\hyperlink{classns3_1_1Ipv6AddressHelper_aad4685588aea1757beaf881bc4157912}{Assign} (devs);
+108   i1.\hyperlink{classns3_1_1Ipv6InterfaceContainer_a080aad6f43a52c6478053b237e5e6979}{SetForwarding} (1, \textcolor{keyword}{true});
+109   i1.\hyperlink{classns3_1_1Ipv6InterfaceContainer_a3fb0cfdcb3780bc624b10a04e58ffbd0}{SetDefaultRouteInAllNodes} (1);
+110   
+111   ipv6.\hyperlink{classns3_1_1Ipv6AddressHelper_a13467412e9da6263395c09460681c0f1}{SetBase} (\hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"2001:0DB8:2::"}), \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (64));
+112   \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} tapAddr = ipv6.\hyperlink{classns3_1_1Ipv6AddressHelper_a0f9499d21947758623cf17615e3dbc84}{NewAddress} ();
+113   std::stringstream ss;
+114   std::string tapIp; 
+115   tapAddr.\hyperlink{classns3_1_1Ipv6Address_af1da6681e04f3dd56c19045b1f18f201}{Print} (ss);
+116   ss >> tapIp;
+117 
+118   \textcolor{comment}{//}
+119   \textcolor{comment}{// Create FdNetDevice.}
+120   \textcolor{comment}{//}
+121   \hyperlink{classns3_1_1TapFdNetDeviceHelper}{TapFdNetDeviceHelper} helper;
+122   helper.\hyperlink{classns3_1_1EmuFdNetDeviceHelper_aa5c26a78442e507ba969f28ffa5f748e}{SetDeviceName} (\textcolor{stringliteral}{"tap0"});
+123   helper.\hyperlink{classns3_1_1TapFdNetDeviceHelper_ac908bf6fcd13070349828534ee99252c}{SetTapIpv6Address} (tapIp.c\_str ());
+124   helper.\hyperlink{classns3_1_1TapFdNetDeviceHelper_a56f44b68da0b264d7927824cae50785a}{SetTapIpv6Prefix} (64);
+125 
+126   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} fdevs = helper.\hyperlink{classns3_1_1FdNetDeviceHelper_af70d55cbb4f6411c33cacb84eb651ad5}{Install} (r);
+127   \hyperlink{classns3_1_1Ptr}{Ptr<NetDevice>} device = fdevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0);
+128   \hyperlink{classns3_1_1Ptr}{Ptr<FdNetDevice>} fdevice = device->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1FdNetDevice}{FdNetDevice}> ();
+129   fdevice-> SetIsMulticast (\textcolor{keyword}{true});
+130   \hyperlink{classns3_1_1Ipv6InterfaceContainer}{Ipv6InterfaceContainer} \hyperlink{generate__test__data__lte__sinr_8m_a2fce890a7c411f1fe7c0c55ec9eb4106}{i2} = ipv6.\hyperlink{classns3_1_1Ipv6AddressHelper_aad4685588aea1757beaf881bc4157912}{Assign} (fdevs);
+131   i2.\hyperlink{classns3_1_1Ipv6InterfaceContainer_a080aad6f43a52c6478053b237e5e6979}{SetForwarding} (0, \textcolor{keyword}{true});
+132   i2.\hyperlink{classns3_1_1Ipv6InterfaceContainer_a3fb0cfdcb3780bc624b10a04e58ffbd0}{SetDefaultRouteInAllNodes} (0);
+133 
+134   \textcolor{comment}{//}
+135   \textcolor{comment}{// Create the Ping6 application.}
+136   \textcolor{comment}{//}
+137   uint32\_t packetSize = 1024;
+138   uint32\_t maxPacketCount = 1;
+139   \hyperlink{classns3_1_1Time}{Time} interPacketInterval = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0);
+140 
+141   \hyperlink{classns3_1_1Ping6Helper}{Ping6Helper} ping6;
+142 
+143   ping6.\hyperlink{classns3_1_1Ping6Helper_a1a2aaa6931daf3c493ceae3138f26072}{SetRemote} (tapIp.c\_str ());
+144   
+145   ping6.\hyperlink{classns3_1_1Ping6Helper_aa049dde33bc4f712b7bf79e16da1243e}{SetAttribute} (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (maxPacketCount));
+146   ping6.\hyperlink{classns3_1_1Ping6Helper_aa049dde33bc4f712b7bf79e16da1243e}{SetAttribute} (\textcolor{stringliteral}{"Interval"}, TimeValue (interPacketInterval));
+147   ping6.\hyperlink{classns3_1_1Ping6Helper_aa049dde33bc4f712b7bf79e16da1243e}{SetAttribute} (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (packetSize));
+148   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} apps = ping6.\hyperlink{classns3_1_1Ping6Helper_a3f450b54b353b5181dec6c6d69733e0a}{Install} (n);
+149   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0));
+150   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (20.0));
+151 
+152   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+153   csma.\hyperlink{classns3_1_1AsciiTraceHelperForDevice_a63e57c878526c732924e14c1e52cca8b}{EnableAsciiAll} (ascii.\hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (\textcolor{stringliteral}{"csma-ping6.tr"}));
+154   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"csma-ping6"}, \textcolor{keyword}{true});
+155 
+156   \textcolor{comment}{//}
+157   \textcolor{comment}{// Enable a promiscuous pcap trace to see what is coming and going on in the fd-net-device.}
+158   \textcolor{comment}{//}
+159   helper.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"fd-ping6"}, fdevice, \textcolor{keyword}{true});
+160 
+161   \textcolor{comment}{//}
+162   \textcolor{comment}{// Run the experiment.}
+163   \textcolor{comment}{//}
+164   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Emulation."});
+165   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (200.0));
+166   Simulator::Run ();
+167   Simulator::Destroy ();
+168   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+169 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{fd-\/tap-\/ping6.\+cc@{fd-\/tap-\/ping6.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!fd-\/tap-\/ping6.\+cc@{fd-\/tap-\/ping6.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""T\+A\+P\+Ping6\+Example"")}{NS_LOG_COMPONENT_DEFINE("TAPPing6Example")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}T\+A\+P\+Ping6\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{fd-tap-ping6_8cc_a3e4fef7368407c511294bdddc13d8717}{}\label{fd-tap-ping6_8cc_a3e4fef7368407c511294bdddc13d8717}

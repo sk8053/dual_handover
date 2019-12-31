@@ -1,0 +1,389 @@
+\hypertarget{classPacketTest}{}\section{Packet\+Test Class Reference}
+\label{classPacketTest}\index{Packet\+Test@{Packet\+Test}}
+
+
+Inheritance diagram for Packet\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Packet\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPacketTest_a7e1c13354e65690b6e464a234bb3a9ee}{Packet\+Test} ()
+\item 
+virtual void \hyperlink{classPacketTest_a2f4d69aa1b21616ea14efd54fee55da2}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classPacketTest_a8bfedb5c3b60f014e305a87701e73797}{Do\+Check} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p}, const char $\ast$file, int line, uint32\+\_\+t \hyperlink{lte__link__budget__x2__handover__measures_8m_abdb05bc5a064cf642a06c83b3392f148}{n},...)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Packet\+Test@{Packet\+Test}!Packet\+Test@{Packet\+Test}}
+\index{Packet\+Test@{Packet\+Test}!Packet\+Test@{Packet\+Test}}
+\subsubsection[{\texorpdfstring{Packet\+Test()}{PacketTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Packet\+Test\+::\+Packet\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPacketTest_a7e1c13354e65690b6e464a234bb3a9ee}{}\label{classPacketTest_a7e1c13354e65690b6e464a234bb3a9ee}
+
+\begin{DoxyCode}
+346   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Packet"}) \{
+347 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Packet\+Test@{Packet\+Test}!Do\+Check@{Do\+Check}}
+\index{Do\+Check@{Do\+Check}!Packet\+Test@{Packet\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Check(\+Ptr$<$ const Packet $>$ p, const char $\ast$file, int line, uint32\+\_\+t n,...)}{DoCheck(Ptr< const Packet > p, const char *file, int line, uint32_t n,...)}}]{\setlength{\rightskip}{0pt plus 5cm}void Packet\+Test\+::\+Do\+Check (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Packet} $>$}]{p, }
+\item[{const char $\ast$}]{file, }
+\item[{int}]{line, }
+\item[{uint32\+\_\+t}]{n, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPacketTest_a8bfedb5c3b60f014e305a87701e73797}{}\label{classPacketTest_a8bfedb5c3b60f014e305a87701e73797}
+
+\begin{DoxyCode}
+351 \{
+352   std::vector<struct Expected> expected;
+353   va\_list ap;
+354   va\_start (ap, \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n});
+355   \textcolor{keywordflow}{for} (uint32\_t k = 0; k < \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n}; ++k)
+356     \{
+357       uint32\_t \hyperlink{loss__ITU1238_8m_aaa6c78b1d659f53598dbe891c1139b3e}{N} = va\_arg (ap, uint32\_t);
+358       uint32\_t \hyperlink{namespacevisualizer_1_1core_a2a35e5d8a34af358b508dac8635754e0}{start} = va\_arg (ap, uint32\_t);
+359       uint32\_t end = va\_arg (ap, uint32\_t);
+360       expected.push\_back (Expected (N, start, end));
+361     \}
+362   va\_end (ap);
+363 
+364   \hyperlink{classns3_1_1ByteTagIterator}{ByteTagIterator} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = p->\hyperlink{classns3_1_1Packet_a3c03f35c267e8534c29bdaa4686e4823}{GetByteTagIterator} ();
+365   uint32\_t j = 0;
+366   \textcolor{keywordflow}{while} (i.\hyperlink{classns3_1_1ByteTagIterator_a1337834aa5fbb23a982fe521e54fb78a}{HasNext} () && j < expected.size ())
+367     \{
+368       \hyperlink{classns3_1_1ByteTagIterator_1_1Item}{ByteTagIterator::Item} item = i.\hyperlink{classns3_1_1ByteTagIterator_af2fa25a08fe0a868ab051e3c4bfcad01}{Next} ();
+369       \textcolor{keyword}{struct }Expected e = expected[j];
+370       std::ostringstream oss;
+371       oss << \textcolor{stringliteral}{"anon::ATestTag<"} << e.n << \textcolor{stringliteral}{">"};
+372       \hyperlink{group__testingimpl_gaf35a8f7e8a9a1eb011fa6fb33ea721a3}{NS\_TEST\_EXPECT\_MSG\_EQ\_INTERNAL} (item.
+      \hyperlink{classns3_1_1ByteTagIterator_1_1Item_aaae5fe08c2b67ac485faa4372fe38cea}{GetTypeId} ().\hyperlink{classns3_1_1TypeId_aa3c41c79ae428b3cb396a9c6bb3ef314}{GetName} (), oss.str (), \textcolor{stringliteral}{"trivial"}, file, line);
+373       \hyperlink{group__testingimpl_gaf35a8f7e8a9a1eb011fa6fb33ea721a3}{NS\_TEST\_EXPECT\_MSG\_EQ\_INTERNAL} (item.
+      \hyperlink{classns3_1_1ByteTagIterator_1_1Item_abaf7c97dec29431934732d656361d13c}{GetStart} (), e.start, \textcolor{stringliteral}{"trivial"}, file, line);
+374       \hyperlink{group__testingimpl_gaf35a8f7e8a9a1eb011fa6fb33ea721a3}{NS\_TEST\_EXPECT\_MSG\_EQ\_INTERNAL} (item.\hyperlink{classns3_1_1ByteTagIterator_1_1Item_a47e206d7530bd378c26a55f206deefea}{GetEnd} (), e.end, \textcolor{stringliteral}{"trivial"},
+       file, line);
+375       ATestTagBase *tag = \textcolor{keyword}{dynamic\_cast<}ATestTagBase *\textcolor{keyword}{>} (item.\hyperlink{classns3_1_1ByteTagIterator_1_1Item_aaae5fe08c2b67ac485faa4372fe38cea}{GetTypeId} ().
+      \hyperlink{classns3_1_1TypeId_ad9b0bc71ee7593a1ff23ff8d53938e95}{GetConstructor} () ());
+376       \hyperlink{group__testing_ga6d4b162d26b8a930115b97dd5f3d9ed9}{NS\_TEST\_EXPECT\_MSG\_NE} (tag, 0, \textcolor{stringliteral}{"trivial"});
+377       item.\hyperlink{classns3_1_1ByteTagIterator_1_1Item_ada7f72efd4a0d9caef5edae0ea571ec1}{GetTag} (*tag);
+378       \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (tag->m\_error, \textcolor{keyword}{false}, \textcolor{stringliteral}{"trivial"});
+379       \textcolor{keyword}{delete} tag;
+380       j++;
+381     \}
+382   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (i.\hyperlink{classns3_1_1ByteTagIterator_a1337834aa5fbb23a982fe521e54fb78a}{HasNext} (), \textcolor{keyword}{false}, \textcolor{stringliteral}{"Nothing left"});
+383   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (j, expected.size (), \textcolor{stringliteral}{"Size match"});
+384 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Packet\+Test@{Packet\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Packet\+Test@{Packet\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Packet\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPacketTest_a2f4d69aa1b21616ea14efd54fee55da2}{}\label{classPacketTest_a2f4d69aa1b21616ea14efd54fee55da2}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+388 \{
+389   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} pkt1 = Create<Packet> (\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }uint8\_t*\textcolor{keyword}{>} (\textcolor{stringliteral}{"hello"}), 5);
+390   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} pkt2 = Create<Packet> (\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }uint8\_t*\textcolor{keyword}{>} (\textcolor{stringliteral}{" world"}), 6);
+391   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} packet = Create<Packet> ();
+392   packet->\hyperlink{classns3_1_1Packet_a14ec3d4250b425468764de58f5837b6b}{AddAtEnd} (pkt1);
+393   packet->\hyperlink{classns3_1_1Packet_a14ec3d4250b425468764de58f5837b6b}{AddAtEnd} (pkt2);
+394 
+395   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (packet->\hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} (), 11, \textcolor{stringliteral}{"trivial"});
+396 
+397   uint8\_t *buf = \textcolor{keyword}{new} uint8\_t[packet->\hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} ()];
+398   packet->\hyperlink{classns3_1_1Packet_a5a6d304b9e0d90733919ffe224b98f0d}{CopyData} (buf, packet->\hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} ());
+399 
+400   std::string msg = std::string (reinterpret\_cast<const char *>(buf),
+401                                  packet->\hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} ());
+402   \textcolor{keyword}{delete} [] buf;
+403 
+404   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (msg, \textcolor{stringliteral}{"hello world"}, \textcolor{stringliteral}{"trivial"});
+405 
+406 
+407   \hyperlink{classns3_1_1Ptr}{Ptr<const Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = Create<Packet> (1000);
+408 
+409   p->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<1> ());
+410   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (p, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 1000));
+411   \hyperlink{classns3_1_1Ptr}{Ptr<const Packet>} copy = p->\hyperlink{classns3_1_1Packet_a5d5c70802a5f77fc5f0001e0cfc1898b}{Copy} ();
+412   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (copy, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 1000));
+413 
+414   p->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<2> ());
+415   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (p, 2, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 1000), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (2, 0, 1000));
+416   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (copy, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 1000));
+417 
+418   \{
+419     \hyperlink{classns3_1_1Packet}{Packet} c0 = *copy;
+420     \hyperlink{classns3_1_1Packet}{Packet} c1 = *copy;
+421     c0 = c1;
+422     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (&c0, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 1000));
+423     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (&c1, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 1000));
+424     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (copy, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 1000));
+425     c0.\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<10> ());
+426     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (&c0, 2, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 1000), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (10, 0, 1000));
+427     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (&c1, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 1000));
+428     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (copy, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 1000));
+429   \}
+430 
+431   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} frag0 = p->\hyperlink{classns3_1_1Packet_a16f6113606b355b2b346e2245fa2a3d0}{CreateFragment} (0, 10);
+432   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} frag1 = p->\hyperlink{classns3_1_1Packet_a16f6113606b355b2b346e2245fa2a3d0}{CreateFragment} (10, 90);
+433   \hyperlink{classns3_1_1Ptr}{Ptr<const Packet>} frag2 = p->\hyperlink{classns3_1_1Packet_a16f6113606b355b2b346e2245fa2a3d0}{CreateFragment} (100, 900);
+434   frag0->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<3> ());
+435   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (frag0, 3, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 10), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (2, 0, 10), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (3, 0, 10));
+436   frag1->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<4> ());
+437   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (frag1, 3, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 90), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (2, 0, 90), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (4, 0, 90));
+438   frag2->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<5> ());
+439   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (frag2, 3, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 900), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (2, 0, 900), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (5, 0, 900));
+440 
+441   frag1->\hyperlink{classns3_1_1Packet_a14ec3d4250b425468764de58f5837b6b}{AddAtEnd} (frag2);
+442   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (frag1, 6, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 90), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (2, 0, 90), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (4, 0, 90), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 90, 990), 
+      \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (2, 90, 990), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (5, 90, 990));
+443 
+444   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (frag0, 3, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 10), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (2, 0, 10), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (3, 0, 10));
+445   frag0->\hyperlink{classns3_1_1Packet_a14ec3d4250b425468764de58f5837b6b}{AddAtEnd} (frag1);
+446   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (frag0, 9, 
+447          \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 0, 10), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (2, 0, 10), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (3, 0, 10),
+448          \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 10, 100), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (2, 10, 100), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (4, 10, 100),
+449          \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (1, 100, 1000), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (2, 100, 1000), \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (5, 100, 1000));
+450 
+451 
+452   \textcolor{comment}{// force caching a buffer of the right size.}
+453   frag0 = Create<Packet> (1000);
+454   frag0->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (ATestHeader<10> ());
+455   frag0 = 0;
+456 
+457   p = Create<Packet> (1000);
+458   p->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<20> ());
+459   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (p, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 1000));
+460   frag0 = p->\hyperlink{classns3_1_1Packet_a16f6113606b355b2b346e2245fa2a3d0}{CreateFragment} (10, 90);
+461   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (p, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 1000));
+462   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (frag0, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 90));
+463   p = 0;
+464   frag0->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (ATestHeader<10> ());
+465   \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (frag0, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 10, 100));
+466 
+467   \{
+468     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} tmp = Create<Packet> (100);
+469     tmp->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<20> ());
+470     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 100));
+471     tmp->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (ATestHeader<10> ());
+472     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 10, 110));
+473     ATestHeader<10> h;
+474     tmp->\hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{RemoveHeader} (h);
+475     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 100));
+476     tmp->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (ATestHeader<10> ());
+477     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 10, 110));
+478 
+479     tmp = Create<Packet> (100);
+480     tmp->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<20> ());
+481     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 100));
+482     tmp->\hyperlink{classns3_1_1Packet_ae26b490c30ae5bc98be5181ec6e06db8}{AddTrailer} (ATestTrailer<10> ());
+483     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 100));
+484     ATestTrailer<10> t;
+485     tmp->\hyperlink{classns3_1_1Packet_a2155e042083e9a17ad3b33f9fecb4be4}{RemoveTrailer} (t);
+486     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 100));
+487     tmp->\hyperlink{classns3_1_1Packet_ae26b490c30ae5bc98be5181ec6e06db8}{AddTrailer} (ATestTrailer<10> ());
+488     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 100));
+489 
+490   \}
+491 
+492   \{
+493     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} tmp = Create<Packet> (0);
+494     tmp->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (ATestHeader<156> ());
+495     tmp->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<20> ());
+496     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 156));
+497     tmp->\hyperlink{classns3_1_1Packet_a78aa207e7921dd2f9f7e0d0b7a1c730a}{RemoveAtStart} (120);
+498     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 36));
+499     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} a = Create<Packet> (0);
+500     a->\hyperlink{classns3_1_1Packet_a14ec3d4250b425468764de58f5837b6b}{AddAtEnd} (tmp);
+501     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (a, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 36));
+502   \}
+503 
+504   \{
+505     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} tmp = Create<Packet> (0);
+506     tmp->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<20> ());
+507     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 0, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 0));
+508   \}
+509   \{
+510     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} tmp = Create<Packet> (1000);
+511     tmp->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<20> ());
+512     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 1000));
+513     tmp->\hyperlink{classns3_1_1Packet_a78aa207e7921dd2f9f7e0d0b7a1c730a}{RemoveAtStart} (1000);
+514     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 0,  \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (0,0,0));
+515     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} a = Create<Packet> (10);
+516     a->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<10> ());
+517     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (a, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (10, 0, 10));
+518     tmp->\hyperlink{classns3_1_1Packet_a14ec3d4250b425468764de58f5837b6b}{AddAtEnd} (a);
+519     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (10, 0, 10));
+520   \}
+521 
+522   \{
+523     \hyperlink{classns3_1_1Packet}{Packet} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p};
+524     ATestTag<10> a;
+525     p.\hyperlink{classns3_1_1Packet_a7400b8655852f5271c5957250d0141af}{AddPacketTag} (a);
+526     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (p.\hyperlink{classns3_1_1Packet_a1734de11f2ca1e78a7872461a0625168}{PeekPacketTag} (a), \textcolor{keyword}{true}, \textcolor{stringliteral}{"trivial"});
+527     ATestTag<11> \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b};
+528     p.\hyperlink{classns3_1_1Packet_a7400b8655852f5271c5957250d0141af}{AddPacketTag} (b);
+529     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (p.\hyperlink{classns3_1_1Packet_a1734de11f2ca1e78a7872461a0625168}{PeekPacketTag} (b), \textcolor{keyword}{true}, \textcolor{stringliteral}{"trivial"});
+530     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (p.\hyperlink{classns3_1_1Packet_a1734de11f2ca1e78a7872461a0625168}{PeekPacketTag} (a), \textcolor{keyword}{true}, \textcolor{stringliteral}{"trivial"});
+531     \hyperlink{classns3_1_1Packet}{Packet} copy = \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p};
+532     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (copy.PeekPacketTag (b), \textcolor{keyword}{true}, \textcolor{stringliteral}{"trivial"});
+533     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (copy.PeekPacketTag (a), \textcolor{keyword}{true}, \textcolor{stringliteral}{"trivial"});
+534     ATestTag<12> \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+535     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (copy.PeekPacketTag (c), \textcolor{keyword}{false}, \textcolor{stringliteral}{"trivial"});
+536     copy.AddPacketTag (c);
+537     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (copy.PeekPacketTag (c), \textcolor{keyword}{true}, \textcolor{stringliteral}{"trivial"});
+538     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (copy.PeekPacketTag (b), \textcolor{keyword}{true}, \textcolor{stringliteral}{"trivial"});
+539     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (copy.PeekPacketTag (a), \textcolor{keyword}{true}, \textcolor{stringliteral}{"trivial"});
+540     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (p.\hyperlink{classns3_1_1Packet_a1734de11f2ca1e78a7872461a0625168}{PeekPacketTag} (c), \textcolor{keyword}{false}, \textcolor{stringliteral}{"trivial"});
+541     copy.RemovePacketTag (b);
+542     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (copy.PeekPacketTag (b), \textcolor{keyword}{false}, \textcolor{stringliteral}{"trivial"});
+543     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (p.\hyperlink{classns3_1_1Packet_a1734de11f2ca1e78a7872461a0625168}{PeekPacketTag} (b), \textcolor{keyword}{true}, \textcolor{stringliteral}{"trivial"});
+544     p.\hyperlink{classns3_1_1Packet_a078fe922d976a417ab25ba2f3c2fd667}{RemovePacketTag} (a);
+545     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (p.\hyperlink{classns3_1_1Packet_a1734de11f2ca1e78a7872461a0625168}{PeekPacketTag} (a), \textcolor{keyword}{false}, \textcolor{stringliteral}{"trivial"});
+546     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (copy.PeekPacketTag (a), \textcolor{keyword}{true}, \textcolor{stringliteral}{"trivial"});
+547     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (p.\hyperlink{classns3_1_1Packet_a1734de11f2ca1e78a7872461a0625168}{PeekPacketTag} (c), \textcolor{keyword}{false}, \textcolor{stringliteral}{"trivial"});
+548     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (copy.PeekPacketTag (c), \textcolor{keyword}{true}, \textcolor{stringliteral}{"trivial"});
+549     p.\hyperlink{classns3_1_1Packet_a6c7bc5d1067c1d7fbd0fd70289182e8b}{RemoveAllPacketTags} ();
+550     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (p.\hyperlink{classns3_1_1Packet_a1734de11f2ca1e78a7872461a0625168}{PeekPacketTag} (b), \textcolor{keyword}{false}, \textcolor{stringliteral}{"trivial"});
+551   \}
+552 
+553   \{
+556     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} tmp = Create<Packet> (1000);
+557     tmp->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<20> ());
+558     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 0, 1000));
+559     tmp->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (ATestHeader<2> ());
+560     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 2, 1002));
+561     tmp->\hyperlink{classns3_1_1Packet_a78aa207e7921dd2f9f7e0d0b7a1c730a}{RemoveAtStart} (1);
+562     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 1, 1001));
+563 \textcolor{preprocessor}{#if 0}
+564     tmp->PeekData ();
+565     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (20, 1, 1001));
+566 \textcolor{preprocessor}{#endif}
+567   \}
+568 
+569   \textcolor{comment}{/* Test reducing tagged packet size and increasing it back. */}
+570   \{
+571     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} tmp = Create<Packet> (0);
+572     tmp->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (ATestHeader<100> ());
+573     tmp->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<25> ());
+574     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 100));
+575     tmp->\hyperlink{classns3_1_1Packet_a78aa207e7921dd2f9f7e0d0b7a1c730a}{RemoveAtStart} (50);
+576     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 50));
+577     tmp->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (ATestHeader<50> ());
+578     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 50, 100));
+579   \}
+580 
+581   \textcolor{comment}{/* Similar test case, but using trailer instead of header. */}
+582   \{
+583     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} tmp = Create<Packet> (0);
+584     tmp->\hyperlink{classns3_1_1Packet_ae26b490c30ae5bc98be5181ec6e06db8}{AddTrailer} (ATestTrailer<100> ());
+585     tmp->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<25> ());
+586     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 100));
+587     tmp->\hyperlink{classns3_1_1Packet_a607de6c1abda2a960e99a3b59fd35d14}{RemoveAtEnd} (50);
+588     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 50));
+589     tmp->\hyperlink{classns3_1_1Packet_ae26b490c30ae5bc98be5181ec6e06db8}{AddTrailer} (ATestTrailer<50> ());
+590     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 50));
+591   \}
+592 
+593   \textcolor{comment}{/* Test reducing tagged packet size and increasing it by half. */}
+594   \{
+595     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} tmp = Create<Packet> (0);
+596     tmp->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (ATestHeader<100> ());
+597     tmp->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<25> ());
+598     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 100));
+599     tmp->\hyperlink{classns3_1_1Packet_a78aa207e7921dd2f9f7e0d0b7a1c730a}{RemoveAtStart} (50);
+600     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 50));
+601     tmp->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (ATestHeader<25> ());
+602     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 25, 75));
+603   \}
+604 
+605   \textcolor{comment}{/* Similar test case, but using trailer instead of header. */}
+606   \{
+607     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} tmp = Create<Packet> (0);
+608     tmp->\hyperlink{classns3_1_1Packet_ae26b490c30ae5bc98be5181ec6e06db8}{AddTrailer} (ATestTrailer<100> ());
+609     tmp->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<25> ());
+610     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 100));
+611     tmp->\hyperlink{classns3_1_1Packet_a607de6c1abda2a960e99a3b59fd35d14}{RemoveAtEnd} (50);
+612     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 50));
+613     tmp->\hyperlink{classns3_1_1Packet_ae26b490c30ae5bc98be5181ec6e06db8}{AddTrailer} (ATestTrailer<25> ());
+614     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 50));
+615   \}
+616 
+617   \textcolor{comment}{/* Test AddPaddingAtEnd. */}
+618   \{
+619     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} tmp = Create<Packet> (0);
+620     tmp->\hyperlink{classns3_1_1Packet_ae26b490c30ae5bc98be5181ec6e06db8}{AddTrailer} (ATestTrailer<100> ());
+621     tmp->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<25> ());
+622     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 100));
+623     tmp->\hyperlink{classns3_1_1Packet_a607de6c1abda2a960e99a3b59fd35d14}{RemoveAtEnd} (50);
+624     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 50));
+625     tmp->\hyperlink{classns3_1_1Packet_ae964f1fcfd496c6c0db1b73f27e78530}{AddPaddingAtEnd} (50);
+626     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 50));
+627   \}
+628 
+629   \textcolor{comment}{/* Test reducing tagged packet size and increasing it back,}
+630 \textcolor{comment}{   * now using padding bytes to avoid triggering dirty state}
+631 \textcolor{comment}{   * in virtual buffer}
+632 \textcolor{comment}{   */}
+633   \{
+634     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} tmp = Create<Packet> (100);
+635     tmp->\hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{AddByteTag} (ATestTag<25> ());
+636     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 100));
+637     tmp->\hyperlink{classns3_1_1Packet_a607de6c1abda2a960e99a3b59fd35d14}{RemoveAtEnd} (50);
+638     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 50));
+639     tmp->\hyperlink{classns3_1_1Packet_ae964f1fcfd496c6c0db1b73f27e78530}{AddPaddingAtEnd} (50);
+640     \hyperlink{packet-test-suite_8cc_a11af326b9297affa78c47b78c80f8a44}{CHECK} (tmp, 1, \hyperlink{packet-test-suite_8cc_a171669980e29849aa5e3722d573181ee}{E} (25, 0, 50));
+641   \}
+642 
+643   \textcolor{comment}{/* Test ALargeTestTag */}
+644   \{
+645     \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} tmp = Create<Packet> (0);
+646     ALargeTestTag a;
+647     tmp->\hyperlink{classns3_1_1Packet_a7400b8655852f5271c5957250d0141af}{AddPacketTag} (a); 
+648   \}
+649 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+network/test/\hyperlink{packet-test-suite_8cc}{packet-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

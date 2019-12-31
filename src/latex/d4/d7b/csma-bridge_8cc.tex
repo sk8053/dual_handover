@@ -1,0 +1,168 @@
+\hypertarget{csma-bridge_8cc}{}\section{bridge/examples/csma-\/bridge.cc File Reference}
+\label{csma-bridge_8cc}\index{bridge/examples/csma-\/bridge.\+cc@{bridge/examples/csma-\/bridge.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/bridge-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+Include dependency graph for csma-\/bridge.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{csma-bridge_8cc_a1a9881e00b8559beb4a9160ee8c73b13}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Csma\+Bridge\+Example\char`\"{})
+\item 
+int \hyperlink{csma-bridge_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{csma-\/bridge.\+cc@{csma-\/bridge.\+cc}!main@{main}}
+\index{main@{main}!csma-\/bridge.\+cc@{csma-\/bridge.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{csma-bridge_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{csma-bridge_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+48 \{
+49   \textcolor{comment}{//}
+50   \textcolor{comment}{// Users may find it convenient to turn on explicit debugging}
+51   \textcolor{comment}{// for selected modules; the below lines suggest how to do this}
+52   \textcolor{comment}{//}
+53 \textcolor{preprocessor}{#if 0 }
+54   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"CsmaBridgeExample"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+55 \textcolor{preprocessor}{#endif}
+56 
+57   \textcolor{comment}{//}
+58   \textcolor{comment}{// Allow the user to override any of the defaults and the above Bind() at}
+59   \textcolor{comment}{// run-time, via command-line arguments}
+60   \textcolor{comment}{//}
+61   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+62   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+63 
+64   \textcolor{comment}{//}
+65   \textcolor{comment}{// Explicitly create the nodes required by the topology (shown above).}
+66   \textcolor{comment}{//}
+67   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes."});
+68   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} terminals;
+69   terminals.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (4);
+70 
+71   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} csmaSwitch;
+72   csmaSwitch.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+73 
+74   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Build Topology"});
+75   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+76   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (5000000));
+77   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+78 
+79   \textcolor{comment}{// Create the csma links, from each terminal to the switch}
+80 
+81   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} terminalDevices;
+82   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} switchDevices;
+83 
+84   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 4; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+85     \{
+86       \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} link = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (
+      \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (terminals.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), csmaSwitch));
+87       terminalDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (link.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+88       switchDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (link.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+89     \}
+90 
+91   \textcolor{comment}{// Create the bridge netdevice, which will do the packet switching}
+92   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} switchNode = csmaSwitch.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0);
+93   \hyperlink{classns3_1_1BridgeHelper}{BridgeHelper} bridge;
+94   bridge.\hyperlink{classns3_1_1BridgeHelper_aba53f6381b7adda00d9163840b072fa6}{Install} (switchNode, switchDevices);
+95 
+96   \textcolor{comment}{// Add internet stack to the terminals}
+97   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+98   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (terminals);
+99 
+100   \textcolor{comment}{// We've got the "hardware" in place.  Now we need to add IP addresses.}
+101   \textcolor{comment}{//}
+102   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+103   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+104   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+105   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (terminalDevices);
+106 
+107   \textcolor{comment}{//}
+108   \textcolor{comment}{// Create an OnOff application to send UDP datagrams from node zero to node 1.}
+109   \textcolor{comment}{//}
+110   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Applications."});
+111   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 9;   \textcolor{comment}{// Discard port (RFC 863)}
+112 
+113   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+114                      \hyperlink{classns3_1_1Address}{Address} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.1.2"}), port)));
+115   onoff.SetConstantRate (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"500kb/s"}));
+116 
+117   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} app = onoff.Install (terminals.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+118   \textcolor{comment}{// Start the application}
+119   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+120   app.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+121 
+122   \textcolor{comment}{// Create an optional packet sink to receive these packets}
+123   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sink (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+124                          \hyperlink{classns3_1_1Address}{Address} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port))
+      );
+125   app = sink.Install (terminals.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+126   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+127 
+128   \textcolor{comment}{// }
+129   \textcolor{comment}{// Create a similar flow from n3 to n0, starting at time 1.1 seconds}
+130   \textcolor{comment}{//}
+131   onoff.SetAttribute (\textcolor{stringliteral}{"Remote"}, 
+132                       AddressValue (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.1.1"}), port)));
+133   app = onoff.Install (terminals.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+134   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.1));
+135   app.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+136 
+137   app = sink.Install (terminals.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+138   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+139 
+140   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Configure Tracing."});
+141 
+142   \textcolor{comment}{//}
+143   \textcolor{comment}{// Configure tracing of all enqueue, dequeue, and NetDevice receive events.}
+144   \textcolor{comment}{// Trace output will be sent to the file "csma-bridge.tr"}
+145   \textcolor{comment}{//}
+146   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+147   csma.\hyperlink{classns3_1_1AsciiTraceHelperForDevice_a63e57c878526c732924e14c1e52cca8b}{EnableAsciiAll} (ascii.\hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (\textcolor{stringliteral}{"csma-bridge.tr"}));
+148 
+149   \textcolor{comment}{//}
+150   \textcolor{comment}{// Also configure some tcpdump traces; each interface will be traced.}
+151   \textcolor{comment}{// The output files will be named:}
+152   \textcolor{comment}{//     csma-bridge-<nodeId>-<interfaceId>.pcap}
+153   \textcolor{comment}{// and can be read by the "tcpdump -r" command (use "-tt" option to}
+154   \textcolor{comment}{// display timestamps correctly)}
+155   \textcolor{comment}{//}
+156   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"csma-bridge"}, \textcolor{keyword}{false});
+157 
+158   \textcolor{comment}{//}
+159   \textcolor{comment}{// Now, do the actual simulation.}
+160   \textcolor{comment}{//}
+161   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+162   Simulator::Run ();
+163   Simulator::Destroy ();
+164   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+165 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{csma-\/bridge.\+cc@{csma-\/bridge.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!csma-\/bridge.\+cc@{csma-\/bridge.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Csma\+Bridge\+Example"")}{NS_LOG_COMPONENT_DEFINE("CsmaBridgeExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Csma\+Bridge\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{csma-bridge_8cc_a1a9881e00b8559beb4a9160ee8c73b13}{}\label{csma-bridge_8cc_a1a9881e00b8559beb4a9160ee8c73b13}

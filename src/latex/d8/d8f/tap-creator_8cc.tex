@@ -1,0 +1,679 @@
+\hypertarget{tap-creator_8cc}{}\section{tap-\/bridge/model/tap-\/creator.cc File Reference}
+\label{tap-creator_8cc}\index{tap-\/bridge/model/tap-\/creator.\+cc@{tap-\/bridge/model/tap-\/creator.\+cc}}
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$iomanip$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$cerrno$>$}\\*
+{\ttfamily \#include $<$fcntl.\+h$>$}\\*
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$sys/un.\+h$>$}\\*
+{\ttfamily \#include $<$net/if.\+h$>$}\\*
+{\ttfamily \#include $<$linux/if\+\_\+tun.\+h$>$}\\*
+{\ttfamily \#include $<$net/route.\+h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}tap-\/encode-\/decode.\+h\char`\"{}}\\*
+Include dependency graph for tap-\/creator.cc\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{tap-creator_8cc_af9ac95d538205da6013d79a63fee2bd7}{T\+A\+P\+\_\+\+M\+A\+G\+IC}~95549
+\item 
+\#define \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{L\+OG}(msg)
+\item 
+\#define \hyperlink{tap-creator_8cc_ac1fbabec36a484b1551c2855ce8a0514}{A\+B\+O\+RT}(msg,  print\+Errno)
+\item 
+\#define \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{A\+B\+O\+R\+T\+\_\+\+IF}(cond,  msg,  print\+Errno)
+\item 
+\#define \hyperlink{tap-creator_8cc_a6ec0f0cb1e0c4e317469e4103bec5fd5}{A\+S\+C\+I\+I\+\_\+\+D\+OT}~(0x2e)
+\item 
+\#define \hyperlink{tap-creator_8cc_abde11a6ee98560227d0d3889da0408e4}{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}~(0x30)
+\item 
+\#define \hyperlink{tap-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}{A\+S\+C\+I\+I\+\_\+a}~(0x41)
+\item 
+\#define \hyperlink{tap-creator_8cc_a76cb409bf2d31112b1bec0056271e3ce}{A\+S\+C\+I\+I\+\_\+z}~(0x5a)
+\item 
+\#define \hyperlink{tap-creator_8cc_a6ccdee41712ed103021e82cb944f47e6}{A\+S\+C\+I\+I\+\_\+A}~(0x61)
+\item 
+\#define \hyperlink{tap-creator_8cc_a282e9a9765b0ae5f0a4aa813c3a4932c}{A\+S\+C\+I\+I\+\_\+Z}~(0x7a)
+\item 
+\#define \hyperlink{tap-creator_8cc_aa13140b716dfb153353b2bf8be77d3f5}{A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON}~(0x3a)
+\item 
+\#define \hyperlink{tap-creator_8cc_abde11a6ee98560227d0d3889da0408e4}{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}~(0x30)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static char \hyperlink{tap-creator_8cc_ac8511bf2d0acbb99fa4b9a0662b1000c}{Ascii\+To\+Low\+Case} (char \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c})
+\item 
+static uint32\+\_\+t \hyperlink{tap-creator_8cc_ac1b8e624182192ac85e3e35876d6e152}{Ascii\+To\+Ipv4} (const char $\ast$address)
+\item 
+static void \hyperlink{tap-creator_8cc_aeb9510b65095fe530be572d2261f72f7}{Ascii\+To\+Mac48} (const char $\ast$str, uint8\+\_\+t addr\mbox{[}6\mbox{]})
+\item 
+static sockaddr \hyperlink{tap-creator_8cc_a47df9fd87752509424a35340e868acd1}{Create\+Inet\+Address} (uint32\+\_\+t network\+Order)
+\item 
+static void \hyperlink{tap-creator_8cc_a11a114b8401a27939e87a94ade65213a}{Send\+Socket} (const char $\ast$path, int \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd})
+\item 
+static int \hyperlink{tap-creator_8cc_ac41e53836dbd8b7f8a73bf8425df1d65}{Create\+Tap} (const char $\ast$dev, const char $\ast$gw, const char $\ast$ip, const char $\ast$mac, const char $\ast$mode, const char $\ast$netmask)
+\item 
+int \hyperlink{tap-creator_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{tap-creator_8cc_a80b7a0563409f3e21c80e0459c85845e}{g\+Verbose} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!A\+B\+O\+RT@{A\+B\+O\+RT}}
+\index{A\+B\+O\+RT@{A\+B\+O\+RT}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+B\+O\+RT}{ABORT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+B\+O\+RT(
+\begin{DoxyParamCaption}
+\item[{}]{msg, }
+\item[{}]{print\+Errno}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-creator_8cc_ac1fbabec36a484b1551c2855ce8a0514}{}\label{tap-creator_8cc_ac1fbabec36a484b1551c2855ce8a0514}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+std::cout << \_\_FILE\_\_ << \textcolor{stringliteral}{": fatal error at line "} << \_\_LINE\_\_ << \textcolor{stringliteral}{": "} << \_\_FUNCTION\_\_ << \textcolor{stringliteral}{"(): "} << msg << 
+      std::endl; \hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{\(\backslash\)}
+\hyperlink{loss__ITU1238_8m_a419d895abe1313c35fa353c93802647e}{  if} (printErrno) \(\backslash\)
+    \{ \(\backslash\)
+      std::cout << \textcolor{stringliteral}{"    errno = "} << errno << \textcolor{stringliteral}{" ("} << std::strerror (errno) << \textcolor{stringliteral}{")"} << std::endl; \(\backslash\)
+    \} \(\backslash\)
+  std::exit (-1);
+\end{DoxyCode}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!A\+B\+O\+R\+T\+\_\+\+IF@{A\+B\+O\+R\+T\+\_\+\+IF}}
+\index{A\+B\+O\+R\+T\+\_\+\+IF@{A\+B\+O\+R\+T\+\_\+\+IF}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+B\+O\+R\+T\+\_\+\+IF}{ABORT_IF}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+B\+O\+R\+T\+\_\+\+IF(
+\begin{DoxyParamCaption}
+\item[{}]{cond, }
+\item[{}]{msg, }
+\item[{}]{print\+Errno}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{}\label{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (cond) \(\backslash\)
+    \{ \hyperlink{tap-creator_8cc_ac1fbabec36a484b1551c2855ce8a0514}{\(\backslash\)}
+\hyperlink{tap-creator_8cc_ac1fbabec36a484b1551c2855ce8a0514}{      ABORT} (msg, printErrno); \(\backslash\)
+    \}
+\end{DoxyCode}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+a@{A\+S\+C\+I\+I\+\_\+a}}
+\index{A\+S\+C\+I\+I\+\_\+a@{A\+S\+C\+I\+I\+\_\+a}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+a}{ASCII_a}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+a~(0x41)}\hypertarget{tap-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}{}\label{tap-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+A@{A\+S\+C\+I\+I\+\_\+A}}
+\index{A\+S\+C\+I\+I\+\_\+A@{A\+S\+C\+I\+I\+\_\+A}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+A}{ASCII_A}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+A~(0x61)}\hypertarget{tap-creator_8cc_a6ccdee41712ed103021e82cb944f47e6}{}\label{tap-creator_8cc_a6ccdee41712ed103021e82cb944f47e6}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON@{A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON}}
+\index{A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON@{A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON}{ASCII_COLON}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON~(0x3a)}\hypertarget{tap-creator_8cc_aa13140b716dfb153353b2bf8be77d3f5}{}\label{tap-creator_8cc_aa13140b716dfb153353b2bf8be77d3f5}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+\+D\+OT@{A\+S\+C\+I\+I\+\_\+\+D\+OT}}
+\index{A\+S\+C\+I\+I\+\_\+\+D\+OT@{A\+S\+C\+I\+I\+\_\+\+D\+OT}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+\+D\+OT}{ASCII_DOT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+\+D\+OT~(0x2e)}\hypertarget{tap-creator_8cc_a6ec0f0cb1e0c4e317469e4103bec5fd5}{}\label{tap-creator_8cc_a6ec0f0cb1e0c4e317469e4103bec5fd5}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+z@{A\+S\+C\+I\+I\+\_\+z}}
+\index{A\+S\+C\+I\+I\+\_\+z@{A\+S\+C\+I\+I\+\_\+z}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+z}{ASCII_z}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+z~(0x5a)}\hypertarget{tap-creator_8cc_a76cb409bf2d31112b1bec0056271e3ce}{}\label{tap-creator_8cc_a76cb409bf2d31112b1bec0056271e3ce}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+Z@{A\+S\+C\+I\+I\+\_\+Z}}
+\index{A\+S\+C\+I\+I\+\_\+Z@{A\+S\+C\+I\+I\+\_\+Z}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+Z}{ASCII_Z}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+Z~(0x7a)}\hypertarget{tap-creator_8cc_a282e9a9765b0ae5f0a4aa813c3a4932c}{}\label{tap-creator_8cc_a282e9a9765b0ae5f0a4aa813c3a4932c}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO@{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}}
+\index{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO@{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}{ASCII_ZERO}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO~(0x30)}\hypertarget{tap-creator_8cc_abde11a6ee98560227d0d3889da0408e4}{}\label{tap-creator_8cc_abde11a6ee98560227d0d3889da0408e4}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO@{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}}
+\index{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO@{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}{ASCII_ZERO}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO~(0x30)}\hypertarget{tap-creator_8cc_abde11a6ee98560227d0d3889da0408e4}{}\label{tap-creator_8cc_abde11a6ee98560227d0d3889da0408e4}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!L\+OG@{L\+OG}}
+\index{L\+OG@{L\+OG}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{L\+OG}{LOG}}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+OG(
+\begin{DoxyParamCaption}
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{}\label{tap-creator_8cc_a158a8c64f24645c7478298399825737f}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (\hyperlink{tap-creator_8cc_a80b7a0563409f3e21c80e0459c85845e}{gVerbose}) \(\backslash\)
+    \{ \(\backslash\)
+      std::cout << \_\_FUNCTION\_\_ << \textcolor{stringliteral}{"(): "} << msg << std::endl;   \(\backslash\)
+    \}
+\end{DoxyCode}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!T\+A\+P\+\_\+\+M\+A\+G\+IC@{T\+A\+P\+\_\+\+M\+A\+G\+IC}}
+\index{T\+A\+P\+\_\+\+M\+A\+G\+IC@{T\+A\+P\+\_\+\+M\+A\+G\+IC}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{T\+A\+P\+\_\+\+M\+A\+G\+IC}{TAP_MAGIC}}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+A\+P\+\_\+\+M\+A\+G\+IC~95549}\hypertarget{tap-creator_8cc_af9ac95d538205da6013d79a63fee2bd7}{}\label{tap-creator_8cc_af9ac95d538205da6013d79a63fee2bd7}
+
+
+\subsection{Function Documentation}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!Ascii\+To\+Ipv4@{Ascii\+To\+Ipv4}}
+\index{Ascii\+To\+Ipv4@{Ascii\+To\+Ipv4}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Ascii\+To\+Ipv4(const char $\ast$address)}{AsciiToIpv4(const char *address)}}]{\setlength{\rightskip}{0pt plus 5cm}static uint32\+\_\+t Ascii\+To\+Ipv4 (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{address}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{tap-creator_8cc_ac1b8e624182192ac85e3e35876d6e152}{}\label{tap-creator_8cc_ac1b8e624182192ac85e3e35876d6e152}
+
+\begin{DoxyCode}
+90 \{
+91   uint32\_t host = 0;
+92   \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{
+93       uint8\_t byte = 0;
+94       \textcolor{keywordflow}{while} (*address != \hyperlink{tap-creator_8cc_a6ec0f0cb1e0c4e317469e4103bec5fd5}{ASCII\_DOT} &&
+95              *address != 0) \{
+96           byte *= 10;
+97           byte += *address - \hyperlink{tap-creator_8cc_abde11a6ee98560227d0d3889da0408e4}{ASCII\_ZERO};
+98           address++;
+99         \}
+100       host <<= 8;
+101       host |= byte;
+102       \textcolor{keywordflow}{if} (*address == 0) \{
+103           \textcolor{keywordflow}{break};
+104         \}
+105       address++;
+106     \}
+107   \textcolor{keywordflow}{return} host;
+108 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!Ascii\+To\+Low\+Case@{Ascii\+To\+Low\+Case}}
+\index{Ascii\+To\+Low\+Case@{Ascii\+To\+Low\+Case}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Ascii\+To\+Low\+Case(char c)}{AsciiToLowCase(char c)}}]{\setlength{\rightskip}{0pt plus 5cm}static char Ascii\+To\+Low\+Case (
+\begin{DoxyParamCaption}
+\item[{char}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{tap-creator_8cc_ac8511bf2d0acbb99fa4b9a0662b1000c}{}\label{tap-creator_8cc_ac8511bf2d0acbb99fa4b9a0662b1000c}
+
+\begin{DoxyCode}
+78 \{
+79   \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} >= \hyperlink{tap-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}{ASCII\_a} && \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} <= \hyperlink{tap-creator_8cc_a76cb409bf2d31112b1bec0056271e3ce}{ASCII\_z}) \{
+80       \textcolor{keywordflow}{return} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+81     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} >= \hyperlink{tap-creator_8cc_a6ccdee41712ed103021e82cb944f47e6}{ASCII\_A} && \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} <= \hyperlink{tap-creator_8cc_a282e9a9765b0ae5f0a4aa813c3a4932c}{ASCII\_Z}) \{
+82       \textcolor{keywordflow}{return} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} + (\hyperlink{tap-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}{ASCII\_a} - \hyperlink{tap-creator_8cc_a6ccdee41712ed103021e82cb944f47e6}{ASCII\_A});
+83     \} \textcolor{keywordflow}{else} \{
+84       \textcolor{keywordflow}{return} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+85     \}
+86 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!Ascii\+To\+Mac48@{Ascii\+To\+Mac48}}
+\index{Ascii\+To\+Mac48@{Ascii\+To\+Mac48}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Ascii\+To\+Mac48(const char $\ast$str, uint8\+\_\+t addr[6])}{AsciiToMac48(const char *str, uint8_t addr[6])}}]{\setlength{\rightskip}{0pt plus 5cm}static void Ascii\+To\+Mac48 (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{str, }
+\item[{uint8\+\_\+t}]{addr\mbox{[}6\mbox{]}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{tap-creator_8cc_aeb9510b65095fe530be572d2261f72f7}{}\label{tap-creator_8cc_aeb9510b65095fe530be572d2261f72f7}
+
+\begin{DoxyCode}
+112 \{
+113   \textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0;
+114   \textcolor{keywordflow}{while} (*str != 0 && i < 6) 
+115     \{
+116       uint8\_t byte = 0;
+117       \textcolor{keywordflow}{while} (*str != \hyperlink{tap-creator_8cc_aa13140b716dfb153353b2bf8be77d3f5}{ASCII\_COLON} && *str != 0) 
+118         \{
+119           byte <<= 4;
+120           \textcolor{keywordtype}{char} low = \hyperlink{tap-creator_8cc_ac8511bf2d0acbb99fa4b9a0662b1000c}{AsciiToLowCase} (*str);
+121           \textcolor{keywordflow}{if} (low >= \hyperlink{tap-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}{ASCII\_a})
+122             \{
+123               byte |= low - \hyperlink{tap-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}{ASCII\_a} + 10;
+124             \}
+125           \textcolor{keywordflow}{else}
+126             \{
+127               byte |= low - \hyperlink{tap-creator_8cc_abde11a6ee98560227d0d3889da0408e4}{ASCII\_ZERO};
+128             \}
+129           str++;
+130         \}
+131       addr[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = byte;
+132       i++;
+133       \textcolor{keywordflow}{if} (*str == 0) 
+134         \{
+135           \textcolor{keywordflow}{break};
+136         \}
+137       str++;
+138     \}
+139 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!Create\+Inet\+Address@{Create\+Inet\+Address}}
+\index{Create\+Inet\+Address@{Create\+Inet\+Address}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Create\+Inet\+Address(uint32\+\_\+t network\+Order)}{CreateInetAddress(uint32_t networkOrder)}}]{\setlength{\rightskip}{0pt plus 5cm}static sockaddr Create\+Inet\+Address (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{network\+Order}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{tap-creator_8cc_a47df9fd87752509424a35340e868acd1}{}\label{tap-creator_8cc_a47df9fd87752509424a35340e868acd1}
+
+\begin{DoxyCode}
+143 \{
+144   \textcolor{keyword}{union }\{
+145     \textcolor{keyword}{struct }sockaddr any\_socket;
+146     \textcolor{keyword}{struct }sockaddr\_in si;
+147   \} \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s};
+148   s.si.sin\_family = AF\_INET;
+149   s.si.sin\_port = 0; \textcolor{comment}{// unused}
+150   s.si.sin\_addr.s\_addr = htonl (networkOrder);
+151   \textcolor{keywordflow}{return} s.any\_socket;
+152 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!Create\+Tap@{Create\+Tap}}
+\index{Create\+Tap@{Create\+Tap}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Create\+Tap(const char $\ast$dev, const char $\ast$gw, const char $\ast$ip, const char $\ast$mac, const char $\ast$mode, const char $\ast$netmask)}{CreateTap(const char *dev, const char *gw, const char *ip, const char *mac, const char *mode, const char *netmask)}}]{\setlength{\rightskip}{0pt plus 5cm}static int Create\+Tap (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{dev, }
+\item[{const char $\ast$}]{gw, }
+\item[{const char $\ast$}]{ip, }
+\item[{const char $\ast$}]{mac, }
+\item[{const char $\ast$}]{mode, }
+\item[{const char $\ast$}]{netmask}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{tap-creator_8cc_ac41e53836dbd8b7f8a73bf8425df1d65}{}\label{tap-creator_8cc_ac41e53836dbd8b7f8a73bf8425df1d65}
+
+\begin{DoxyCode}
+278 \{
+279   \textcolor{comment}{//}
+280   \textcolor{comment}{// Creation and management of Tap devices is done via the tun device}
+281   \textcolor{comment}{//}
+282   \textcolor{keywordtype}{int} tap = open (\textcolor{stringliteral}{"/dev/net/tun"}, O\_RDWR);
+283   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (tap == -1, \textcolor{stringliteral}{"Could not open /dev/net/tun"}, \textcolor{keyword}{true});
+284 
+285   \textcolor{comment}{//}
+286   \textcolor{comment}{// Allocate a tap device, making sure that it will not send the tun\_pi header.}
+287   \textcolor{comment}{// If we provide a null name to the ifr.ifr\_name, we tell the kernel to pick}
+288   \textcolor{comment}{// a name for us (i.e., tapn where n = 0..255.}
+289   \textcolor{comment}{//}
+290   \textcolor{comment}{// If the device does not already exist, the system will create one.}
+291   \textcolor{comment}{//}
+292   \textcolor{keyword}{struct }ifreq ifr;
+293   ifr.ifr\_flags = IFF\_TAP | IFF\_NO\_PI;
+294   strcpy (ifr.ifr\_name, dev);
+295   \textcolor{keywordtype}{int} status = ioctl (tap, TUNSETIFF, (\textcolor{keywordtype}{void} *) &ifr);
+296   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (status == -1, \textcolor{stringliteral}{"Could not allocate tap device"}, \textcolor{keyword}{true});
+297 
+298   std::string tapDeviceName = (\textcolor{keywordtype}{char} *)ifr.ifr\_name;
+299   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Allocated TAP device "} << tapDeviceName);
+300 
+301   \textcolor{comment}{//}
+302   \textcolor{comment}{// Operating mode "2" corresponds to USE\_LOCAL and "3" to USE\_BRIDGE mode.}
+303   \textcolor{comment}{// This means that we expect that the user will have named, created and }
+304   \textcolor{comment}{// configured a network tap that we are just going to use.  So don't mess }
+305   \textcolor{comment}{// up his hard work by changing anything, just return the tap fd.}
+306   \textcolor{comment}{//}
+307   \textcolor{keywordflow}{if} (strcmp (mode, \textcolor{stringliteral}{"2"}) == 0 || strcmp (mode, \textcolor{stringliteral}{"3"}) == 0)
+308     \{
+309       \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Returning precreated tap "});
+310       \textcolor{keywordflow}{return} tap;
+311     \}
+312 
+313   \textcolor{comment}{//}
+314   \textcolor{comment}{// Set the hardware (MAC) address of the new device}
+315   \textcolor{comment}{//}
+316   ifr.ifr\_hwaddr.sa\_family = 1; \textcolor{comment}{// this is ARPHRD\_ETHER from if\_arp.h}
+317   \hyperlink{tap-creator_8cc_aeb9510b65095fe530be572d2261f72f7}{AsciiToMac48} (mac, (uint8\_t*)ifr.ifr\_hwaddr.sa\_data);
+318   status = ioctl (tap, SIOCSIFHWADDR, &ifr);
+319   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (status == -1, \textcolor{stringliteral}{"Could not set MAC address"}, \textcolor{keyword}{true});
+320   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Set device MAC address to "} << mac);
+321 
+322   \textcolor{keywordtype}{int} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd} = socket (AF\_INET, SOCK\_DGRAM, 0);
+323 
+324   \textcolor{comment}{//}
+325   \textcolor{comment}{// Bring the interface up.}
+326   \textcolor{comment}{//}
+327   status = ioctl (fd, SIOCGIFFLAGS, &ifr);
+328   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (status == -1, \textcolor{stringliteral}{"Could not get flags for interface"}, \textcolor{keyword}{true});
+329   ifr.ifr\_flags |= IFF\_UP | IFF\_RUNNING;
+330   status = ioctl (fd, SIOCSIFFLAGS, &ifr);
+331   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (status == -1, \textcolor{stringliteral}{"Could not bring interface up"}, \textcolor{keyword}{true});
+332   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Device is up"});
+333 
+334   \textcolor{comment}{//}
+335   \textcolor{comment}{// Set the IP address of the new interface/device.}
+336   \textcolor{comment}{//}
+337   ifr.ifr\_addr = \hyperlink{tap-creator_8cc_a47df9fd87752509424a35340e868acd1}{CreateInetAddress} (\hyperlink{tap-creator_8cc_ac1b8e624182192ac85e3e35876d6e152}{AsciiToIpv4} (ip));
+338   status = ioctl (fd, SIOCSIFADDR, &ifr);
+339   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (status == -1, \textcolor{stringliteral}{"Could not set IP address"}, \textcolor{keyword}{true});
+340   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Set device IP address to "} << ip);
+341 
+342   \textcolor{comment}{//}
+343   \textcolor{comment}{// Set the net mask of the new interface/device}
+344   \textcolor{comment}{//}
+345   ifr.ifr\_netmask = \hyperlink{tap-creator_8cc_a47df9fd87752509424a35340e868acd1}{CreateInetAddress} (\hyperlink{tap-creator_8cc_ac1b8e624182192ac85e3e35876d6e152}{AsciiToIpv4} (netmask));
+346   status = ioctl (fd, SIOCSIFNETMASK, &ifr);
+347   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (status == -1, \textcolor{stringliteral}{"Could not set net mask"}, \textcolor{keyword}{true});
+348   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Set device Net Mask to "} << netmask);
+349 
+350   \textcolor{keywordflow}{return} tap;
+351 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!main@{main}}
+\index{main@{main}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-creator_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{tap-creator_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+355 \{
+356   \textcolor{keywordtype}{int} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+357   \textcolor{keywordtype}{char} *dev = (\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{""};
+358   \textcolor{keywordtype}{char} *gw = NULL;
+359   \textcolor{keywordtype}{char} *ip = NULL;
+360   \textcolor{keywordtype}{char} *mac = NULL;
+361   \textcolor{keywordtype}{char} *netmask = NULL;
+362   \textcolor{keywordtype}{char} *operatingMode = NULL;
+363   \textcolor{keywordtype}{char} *path = NULL;
+364 
+365   opterr = 0;
+366 
+367   \textcolor{keywordflow}{while} ((c = getopt (argc, argv, \textcolor{stringliteral}{"vd:g:i:m:n:o:p:"})) != -1)
+368     \{
+369       \textcolor{keywordflow}{switch} (c)
+370         \{
+371         \textcolor{keywordflow}{case} \textcolor{charliteral}{'d'}:
+372           dev = optarg;           \textcolor{comment}{// name of the new tap device}
+373           \textcolor{keywordflow}{break};
+374         \textcolor{keywordflow}{case} \textcolor{charliteral}{'g'}:
+375           gw = optarg;            \textcolor{comment}{// gateway address for the new device}
+376           \textcolor{keywordflow}{break};
+377         \textcolor{keywordflow}{case} \textcolor{charliteral}{'i'}:
+378           ip = optarg;            \textcolor{comment}{// ip address of the new device}
+379           \textcolor{keywordflow}{break};
+380         \textcolor{keywordflow}{case} \textcolor{charliteral}{'m'}:
+381           mac = optarg;           \textcolor{comment}{// mac address of the new device}
+382           \textcolor{keywordflow}{break};
+383         \textcolor{keywordflow}{case} \textcolor{charliteral}{'n'}:
+384           netmask = optarg;       \textcolor{comment}{// net mask for the new device}
+385           \textcolor{keywordflow}{break};
+386         \textcolor{keywordflow}{case} \textcolor{charliteral}{'o'}:
+387           operatingMode = optarg; \textcolor{comment}{// operating mode of tap bridge}
+388           \textcolor{keywordflow}{break};
+389         \textcolor{keywordflow}{case} \textcolor{charliteral}{'p'}:
+390           path = optarg;          \textcolor{comment}{// path back to the tap bridge}
+391           \textcolor{keywordflow}{break};
+392         \textcolor{keywordflow}{case} \textcolor{charliteral}{'v'}:
+393           \hyperlink{tap-creator_8cc_a80b7a0563409f3e21c80e0459c85845e}{gVerbose} = \textcolor{keyword}{true};
+394           \textcolor{keywordflow}{break};
+395         \}
+396     \}
+397 
+398   \textcolor{comment}{//}
+399   \textcolor{comment}{// We have got to be able to coordinate the name of the tap device we are}
+400   \textcolor{comment}{// going to create and or open with the device that an external Linux host}
+401   \textcolor{comment}{// will use.  If this name is provided we use it.  If not we let the system}
+402   \textcolor{comment}{// create the device for us.  This name is given in dev}
+403   \textcolor{comment}{//}
+404   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided Device Name is \(\backslash\)""} << dev << \textcolor{stringliteral}{"\(\backslash\)""});
+405 
+406   \textcolor{comment}{//}
+407   \textcolor{comment}{// We have got to be able to provide a gateway to the external Linux host }
+408   \textcolor{comment}{// so it can talk to the ns-3 network.  This ip address is provided in }
+409   \textcolor{comment}{// gw.}
+410   \textcolor{comment}{//}
+411   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (gw == NULL, \textcolor{stringliteral}{"Gateway Address is a required argument"}, 0);
+412   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided Gateway Address is \(\backslash\)""} << gw << \textcolor{stringliteral}{"\(\backslash\)""});
+413 
+414   \textcolor{comment}{//}
+415   \textcolor{comment}{// We have got to be able to assign an IP address to the tap device we are}
+416   \textcolor{comment}{// allocating.  This address is allocated in the simulation and assigned to}
+417   \textcolor{comment}{// the tap bridge.  This address is given in ip.}
+418   \textcolor{comment}{//}
+419   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ip == NULL, \textcolor{stringliteral}{"IP Address is a required argument"}, 0);
+420   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided IP Address is \(\backslash\)""} << ip << \textcolor{stringliteral}{"\(\backslash\)""});
+421 
+422   \textcolor{comment}{//}
+423   \textcolor{comment}{// We have got to be able to assign a Mac address to the tap device we are}
+424   \textcolor{comment}{// allocating.  This address is allocated in the simulation and assigned to}
+425   \textcolor{comment}{// the bridged device.  This allows packets addressed to the bridged device}
+426   \textcolor{comment}{// to appear in the Linux host as if they were received there.}
+427   \textcolor{comment}{//}
+428   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (mac == NULL, \textcolor{stringliteral}{"MAC Address is a required argument"}, 0);
+429   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided MAC Address is \(\backslash\)""} << mac << \textcolor{stringliteral}{"\(\backslash\)""});
+430 
+431   \textcolor{comment}{//}
+432   \textcolor{comment}{// We have got to be able to assign a net mask to the tap device we are}
+433   \textcolor{comment}{// allocating.  This mask is allocated in the simulation and given to}
+434   \textcolor{comment}{// the bridged device.}
+435   \textcolor{comment}{//}
+436   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (netmask == NULL, \textcolor{stringliteral}{"Net Mask is a required argument"}, 0);
+437   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided Net Mask is \(\backslash\)""} << netmask << \textcolor{stringliteral}{"\(\backslash\)""});
+438 
+439   \textcolor{comment}{//}
+440   \textcolor{comment}{// We have got to know whether or not to create the TAP.}
+441   \textcolor{comment}{//}
+442   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (operatingMode == NULL, \textcolor{stringliteral}{"Operating Mode is a required argument"}, 0);
+443   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided Operating Mode is \(\backslash\)""} << operatingMode << \textcolor{stringliteral}{"\(\backslash\)""});
+444 
+445   \textcolor{comment}{//}
+446   \textcolor{comment}{// This program is spawned by a tap bridge running in a simulation.  It}
+447   \textcolor{comment}{// wants to create a socket as described below.  We are going to do the}
+448   \textcolor{comment}{// work here since we're running suid root.  Once we create the socket,}
+449   \textcolor{comment}{// we have to send it back to the tap bridge.  We do that over a Unix}
+450   \textcolor{comment}{// (local interprocess) socket.  The tap bridge created a socket to }
+451   \textcolor{comment}{// listen for our response on, and it is expected to have encoded the address}
+452   \textcolor{comment}{// information as a string and to have passed that string as an argument to}
+453   \textcolor{comment}{// us.  We see it here as the "path" string.  We can't do anything useful }
+454   \textcolor{comment}{// unless we have that string.}
+455   \textcolor{comment}{//}
+456   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (path == NULL, \textcolor{stringliteral}{"path is a required argument"}, 0);
+457   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided path is \(\backslash\)""} << path << \textcolor{stringliteral}{"\(\backslash\)""});
+458 
+459   \textcolor{comment}{//}
+460   \textcolor{comment}{// The whole reason for all of the hoops we went through to call out to this}
+461   \textcolor{comment}{// program will pay off here.  We created this program to run as suid root}
+462   \textcolor{comment}{// in order to keep the main simulation program from having to be run with}
+463   \textcolor{comment}{// root privileges.  We need root privileges to be able to futz with the }
+464   \textcolor{comment}{// Tap device underlying all of this.  So all of these hoops are to allow }
+465   \textcolor{comment}{// us to exeucte the following code:}
+466   \textcolor{comment}{//}
+467   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Creating Tap"});
+468   \textcolor{keywordtype}{int} sock = \hyperlink{tap-creator_8cc_ac41e53836dbd8b7f8a73bf8425df1d65}{CreateTap} (dev, gw, ip, mac, operatingMode, netmask);
+469   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (sock == -1, \textcolor{stringliteral}{"main(): Unable to create tap socket"}, 1);
+470 
+471   \textcolor{comment}{//}
+472   \textcolor{comment}{// Send the socket back to the tap net device so it can go about its business}
+473   \textcolor{comment}{//}
+474   \hyperlink{tap-creator_8cc_a11a114b8401a27939e87a94ade65213a}{SendSocket} (path, sock);
+475 
+476   \textcolor{keywordflow}{return} 0;
+477 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!Send\+Socket@{Send\+Socket}}
+\index{Send\+Socket@{Send\+Socket}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Send\+Socket(const char $\ast$path, int fd)}{SendSocket(const char *path, int fd)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Send\+Socket (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{path, }
+\item[{int}]{fd}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{tap-creator_8cc_a11a114b8401a27939e87a94ade65213a}{}\label{tap-creator_8cc_a11a114b8401a27939e87a94ade65213a}
+
+\begin{DoxyCode}
+156 \{
+157   \textcolor{comment}{//}
+158   \textcolor{comment}{// Open a Unix (local interprocess) socket to call back to the tap bridge}
+159   \textcolor{comment}{//}
+160   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Create Unix socket"});
+161   \textcolor{keywordtype}{int} sock = socket (PF\_UNIX, SOCK\_DGRAM, 0);
+162   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (sock == -1, \textcolor{stringliteral}{"Unable to open socket"}, 1);
+163 
+164   \textcolor{comment}{//}
+165   \textcolor{comment}{// We have this string called path, which is really a hex representation}
+166   \textcolor{comment}{// of the endpoint that the tap bridge created.  It used a forward encoding}
+167   \textcolor{comment}{// method (TapBufferToString) to take the sockaddr\_un it made and passed }
+168   \textcolor{comment}{// the resulting string to us.  So we need to take the inverse method}
+169   \textcolor{comment}{// (TapStringToBuffer) and build the same sockaddr\_un over here.}
+170   \textcolor{comment}{//}
+171   socklen\_t clientAddrLen;
+172   \textcolor{keyword}{struct }sockaddr\_un clientAddr;
+173 
+174   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Decode address "} << path);
+175   \textcolor{keywordtype}{bool} rc = \hyperlink{namespacens3_aac751b6756ef1eb455958b985b357b6d}{ns3::TapStringToBuffer} (path, (uint8\_t *)&clientAddr, &clientAddrLen);
+176   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (rc == \textcolor{keyword}{false}, \textcolor{stringliteral}{"Unable to decode path"}, 0);
+177 
+178   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Connect"});
+179   \textcolor{keywordtype}{int} status = connect (sock, (\textcolor{keyword}{struct} sockaddr*)&clientAddr, clientAddrLen);
+180   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (status == -1, \textcolor{stringliteral}{"Unable to connect to tap bridge"}, 1);
+181 
+182   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Connected"});
+183 
+184   \textcolor{comment}{//}
+185   \textcolor{comment}{// This is arcane enough that a few words are worthwhile to explain what's }
+186   \textcolor{comment}{// going on here.}
+187   \textcolor{comment}{//}
+188   \textcolor{comment}{// The interesting information (the socket FD) is going to go back to the}
+189   \textcolor{comment}{// tap bridge as an integer of ancillary data.  Ancillary data is bits }
+190   \textcolor{comment}{// that are not a part a socket payload (out-of-band data).  We're also }
+191   \textcolor{comment}{// going to send one integer back.  It's just initialized to a magic number}
+192   \textcolor{comment}{// we use to make sure that the tap bridge is talking to the tap socket }
+193   \textcolor{comment}{// creator and not some other creator process (emu, specifically)}
+194   \textcolor{comment}{//}
+195   \textcolor{comment}{// The struct iovec below is part of a scatter-gather list.  It describes a}
+196   \textcolor{comment}{// buffer.  In this case, it describes a buffer (an integer) containing the}
+197   \textcolor{comment}{// data that we're going to send back to the tap bridge (that magic number).}
+198   \textcolor{comment}{// }
+199   \textcolor{keyword}{struct }iovec iov;
+200   uint32\_t magic = \hyperlink{tap-creator_8cc_af9ac95d538205da6013d79a63fee2bd7}{TAP\_MAGIC};
+201   iov.iov\_base = &magic;
+202   iov.iov\_len = \textcolor{keyword}{sizeof}(magic);
+203 
+204   \textcolor{comment}{//}
+205   \textcolor{comment}{// The CMSG macros you'll see below are used to create and access control }
+206   \textcolor{comment}{// messages (which is another name for ancillary data).  The ancillary }
+207   \textcolor{comment}{// data is made up of pairs of struct cmsghdr structures and associated}
+208   \textcolor{comment}{// data arrays.}
+209   \textcolor{comment}{// }
+210   \textcolor{comment}{// First, we're going to allocate a buffer on the stack to contain our }
+211   \textcolor{comment}{// data array (that contains the socket).  Sometimes you'll see this called}
+212   \textcolor{comment}{// an "ancillary element" but the msghdr uses the control message termimology}
+213   \textcolor{comment}{// so we call it "control."}
+214   \textcolor{comment}{//}
+215   \textcolor{keywordtype}{size\_t} msg\_size = \textcolor{keyword}{sizeof}(int);
+216   \textcolor{keywordtype}{char} control[CMSG\_SPACE (msg\_size)];
+217 
+218   \textcolor{comment}{//}
+219   \textcolor{comment}{// There is a msghdr that is used to minimize the number of parameters}
+220   \textcolor{comment}{// passed to sendmsg (which we will use to send our ancillary data).  This}
+221   \textcolor{comment}{// structure uses terminology corresponding to control messages, so you'll}
+222   \textcolor{comment}{// see msg\_control, which is the pointer to the ancillary data and controllen}
+223   \textcolor{comment}{// which is the size of the ancillary data array.}
+224   \textcolor{comment}{//}
+225   \textcolor{comment}{// So, initialize the message header that describes our ancillary/control data}
+226   \textcolor{comment}{// and point it to the control message/ancillary data we just allocated space}
+227   \textcolor{comment}{// for.}
+228   \textcolor{comment}{//}
+229   \textcolor{keyword}{struct }msghdr msg;
+230   msg.msg\_name = 0;
+231   msg.msg\_namelen = 0;
+232   msg.msg\_iov = &iov;
+233   msg.msg\_iovlen = 1;
+234   msg.msg\_control = control;
+235   msg.msg\_controllen = \textcolor{keyword}{sizeof} (control);
+236   msg.msg\_flags = 0;
+237 
+238   \textcolor{comment}{//}
+239   \textcolor{comment}{// A cmsghdr contains a length field that is the length of the header and}
+240   \textcolor{comment}{// the data.  It has a cmsg\_level field corresponding to the originating }
+241   \textcolor{comment}{// protocol.  This takes values which are legal levels for getsockopt and}
+242   \textcolor{comment}{// setsockopt (here SOL\_SOCKET).  We're going to use the SCM\_RIGHTS type of }
+243   \textcolor{comment}{// cmsg, that indicates that the ancillary data array contains access rights }
+244   \textcolor{comment}{// that we are sending back to the tap bridge.}
+245   \textcolor{comment}{//}
+246   \textcolor{comment}{// We have to put together the first (and only) cmsghdr that will describe}
+247   \textcolor{comment}{// the whole package we're sending.}
+248   \textcolor{comment}{//}
+249   \textcolor{keyword}{struct }cmsghdr *cmsg;
+250   cmsg = CMSG\_FIRSTHDR (&msg);
+251   cmsg->cmsg\_level = SOL\_SOCKET;
+252   cmsg->cmsg\_type = SCM\_RIGHTS;
+253   cmsg->cmsg\_len = CMSG\_LEN (msg\_size);
+254   \textcolor{comment}{//}
+255   \textcolor{comment}{// We also have to update the controllen in case other stuff is actually}
+256   \textcolor{comment}{// in there we may not be aware of (due to macros).}
+257   \textcolor{comment}{//}
+258   msg.msg\_controllen = cmsg->cmsg\_len;
+259 
+260   \textcolor{comment}{//}
+261   \textcolor{comment}{// Finally, we get a pointer to the start of the ancillary data array and}
+262   \textcolor{comment}{// put our file descriptor in.}
+263   \textcolor{comment}{//}
+264   \textcolor{keywordtype}{int} *fdptr = (\textcolor{keywordtype}{int}*)(CMSG\_DATA (cmsg));
+265   *fdptr = \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd}; \textcolor{comment}{// }
+266 
+267   \textcolor{comment}{//}
+268   \textcolor{comment}{// Actually send the file descriptor back to the tap bridge.}
+269   \textcolor{comment}{//}
+270   ssize\_t len = sendmsg (sock, &msg, 0);
+271   \hyperlink{tap-creator_8cc_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (len == -1, \textcolor{stringliteral}{"Could not send socket back to tap bridge"}, 1);
+272 
+273   \hyperlink{tap-creator_8cc_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"sendmsg complete"});
+274 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+
+
+\subsection{Variable Documentation}
+\index{tap-\/creator.\+cc@{tap-\/creator.\+cc}!g\+Verbose@{g\+Verbose}}
+\index{g\+Verbose@{g\+Verbose}!tap-\/creator.\+cc@{tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{g\+Verbose}{gVerbose}}]{\setlength{\rightskip}{0pt plus 5cm}int g\+Verbose = 0\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{tap-creator_8cc_a80b7a0563409f3e21c80e0459c85845e}{}\label{tap-creator_8cc_a80b7a0563409f3e21c80e0459c85845e}

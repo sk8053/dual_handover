@@ -1,0 +1,397 @@
+\hypertarget{classns3_1_1JakesProcess}{}\section{ns3\+:\+:Jakes\+Process Class Reference}
+\label{classns3_1_1JakesProcess}\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+
+
+Implementation for a single path Stationary Jakes propagation loss model.  
+
+
+
+
+{\ttfamily \#include $<$jakes-\/process.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Jakes\+Process\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Jakes\+Process\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structns3_1_1JakesProcess_1_1Oscillator}{Oscillator}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1JakesProcess_a09be54eafd7e13b6dde28dae03f27a35}{Jakes\+Process} ()
+\item 
+virtual \hyperlink{classns3_1_1JakesProcess_a9e844216b7e61feddfdc1f9282682341}{$\sim$\+Jakes\+Process} ()
+\item 
+virtual void \hyperlink{classns3_1_1JakesProcess_ae929759b2f895aaf57e8a12b03a1503e}{Do\+Dispose} ()
+\item 
+std\+::complex$<$ double $>$ \hyperlink{classns3_1_1JakesProcess_a07f5c3d4ee540f7b9ba2369f1f5bbf26}{Get\+Complex\+Gain} () const 
+\item 
+double \hyperlink{classns3_1_1JakesProcess_a33038cb92b289b816b1c28e96a492530}{Get\+Channel\+Gain\+Db} () const 
+\item 
+void \hyperlink{classns3_1_1JakesProcess_afc7bbef31d5fa82a700d95c2691b7798}{Set\+Propagation\+Loss\+Model} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1PropagationLossModel}{Propagation\+Loss\+Model} $>$ model)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1JakesProcess_ad91f96bbc00fc188c9495f8098062b9f}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1JakesProcess_a2d2d4ba512f07ac22bf304995441c90c}{Set\+N\+Oscillators} (unsigned int n\+Oscillators)
+\item 
+void \hyperlink{classns3_1_1JakesProcess_a72d872b63520e1107c6c56177edd87ee}{Set\+Doppler\+Frequency\+Hz} (double doppler\+Frequency\+Hz)
+\item 
+void \hyperlink{classns3_1_1JakesProcess_afcf181e47a7961a2dd20c5f44a4f5bd1}{Construct\+Oscillators} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{structns3_1_1JakesProcess_1_1Oscillator}{Oscillator} $>$ \hyperlink{classns3_1_1JakesProcess_a755674c3009ba93c4a1c0ca064911e75}{m\+\_\+oscillators}
+\begin{DoxyCompactList}\small\item\em Vector of oscillators. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1JakesProcess_ac9e2529b40af28efc63d75c981617594}{m\+\_\+omega\+Doppler\+Max}
+\begin{DoxyCompactList}\small\item\em max rotation speed Doppler frequency \end{DoxyCompactList}\item 
+unsigned int \hyperlink{classns3_1_1JakesProcess_a356927b16370f2b694f61775adbb1c4b}{m\+\_\+n\+Oscillators}
+\begin{DoxyCompactList}\small\item\em number of oscillators \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1UniformRandomVariable}{Uniform\+Random\+Variable} $>$ \hyperlink{classns3_1_1JakesProcess_a2bada1f27e9f1b924b5b0b5da0363f5d}{m\+\_\+uniform\+Variable}
+\begin{DoxyCompactList}\small\item\em random stream \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1JakesPropagationLossModel}{Jakes\+Propagation\+Loss\+Model} $>$ \hyperlink{classns3_1_1JakesProcess_aec08be974a3d3428286077332e09957e}{m\+\_\+jakes}
+\begin{DoxyCompactList}\small\item\em pointer to the propagation loss model \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Implementation for a single path Stationary Jakes propagation loss model. 
+
+The Jakes propagation loss model implemented here is described in \mbox{[}1\mbox{]}.
+
+We consider one transmitter -\/ receiver pair and calculate the complex coefficients for this case as follow\+: \[ X(t)=X_c(t) + j X_s(t)\] \[ X_c(t) = \frac{2}{\sqrt{M}}\sum_{n=1}^{M}\cos(\psi_n)\cos(\omega_d t\cos(\alpha_n)+\phi_n)\] \[ X_s(t) = \frac{2}{\sqrt{M}}\sum_{n=1}^{M}\sin(\psi_n)\cos(\omega_d t\cos(\alpha_n)+\phi_n)\] with \[ \alpha_n = \frac{2\pi n - \pi + \theta}{4M}, n=1,2, \ldots,M\] where $\theta$, $\phi$, and $\psi_n$ are statically independent and uniformly distributed over $[-\pi, \pi)$ for all $n$.
+
+\mbox{[}1\mbox{]} Y. R. Zheng and C. Xiao, \char`\"{}\+Simulation Models With Correct
+ Statistical Properties for Rayleigh Fading Channel\char`\"{}, I\+E\+EE Trans. on Communications, Vol. 51, pp 920-\/928, June 2003 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!Jakes\+Process@{Jakes\+Process}}
+\index{Jakes\+Process@{Jakes\+Process}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{Jakes\+Process()}{JakesProcess()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Jakes\+Process\+::\+Jakes\+Process (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1JakesProcess_a09be54eafd7e13b6dde28dae03f27a35}{}\label{classns3_1_1JakesProcess_a09be54eafd7e13b6dde28dae03f27a35}
+
+\begin{DoxyCode}
+116                             :
+117   \hyperlink{classns3_1_1JakesProcess_ac9e2529b40af28efc63d75c981617594}{m\_omegaDopplerMax} (0),
+118   \hyperlink{classns3_1_1JakesProcess_a356927b16370f2b694f61775adbb1c4b}{m\_nOscillators} (0)
+119 \{
+120 \}
+\end{DoxyCode}
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!````~Jakes\+Process@{$\sim$\+Jakes\+Process}}
+\index{````~Jakes\+Process@{$\sim$\+Jakes\+Process}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{$\sim$\+Jakes\+Process()}{~JakesProcess()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Jakes\+Process\+::$\sim$\+Jakes\+Process (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1JakesProcess_a9e844216b7e61feddfdc1f9282682341}{}\label{classns3_1_1JakesProcess_a9e844216b7e61feddfdc1f9282682341}
+
+\begin{DoxyCode}
+123 \{
+124   \hyperlink{classns3_1_1JakesProcess_a755674c3009ba93c4a1c0ca064911e75}{m\_oscillators}.clear ();
+125 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!Construct\+Oscillators@{Construct\+Oscillators}}
+\index{Construct\+Oscillators@{Construct\+Oscillators}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{Construct\+Oscillators()}{ConstructOscillators()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Jakes\+Process\+::\+Construct\+Oscillators (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1JakesProcess_afcf181e47a7961a2dd20c5f44a4f5bd1}{}\label{classns3_1_1JakesProcess_afcf181e47a7961a2dd20c5f44a4f5bd1}
+
+\begin{DoxyEnumerate}
+\item Rotation speed 1a. Initiate \[ \alpha_n = \frac{2\pi n - \pi + \theta}{4M}, n=1,2, \ldots,M\], n is oscillator\+Number, M is m\+\_\+n\+Oscillators
+\end{DoxyEnumerate}
+
+1b. Initiate rotation speed\+:
+
+
+\begin{DoxyEnumerate}
+\item Initiate complex amplitude\+:
+\item Construct oscillator\+: 
+\end{DoxyEnumerate}
+\begin{DoxyCode}
+94 \{
+95   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1JakesProcess_aec08be974a3d3428286077332e09957e}{m\_jakes});
+96   \textcolor{comment}{// Initial phase is common for all oscillators:}
+97   \textcolor{keywordtype}{double} \hyperlink{buildings__pathloss_8m_aaf40c223796354fb6b79c9ed047c513a}{phi} = \hyperlink{classns3_1_1JakesProcess_aec08be974a3d3428286077332e09957e}{m\_jakes}->GetUniformRandomVariable ()->GetValue ();
+98   \textcolor{comment}{// Theta is common for all oscillators:}
+99   \textcolor{keywordtype}{double} \hyperlink{loss__ITU1411__NLOS__over__rooftop_8m_a68ce9834ce390774bce9c89b78d5bf79}{theta} = \hyperlink{classns3_1_1JakesProcess_aec08be974a3d3428286077332e09957e}{m\_jakes}->GetUniformRandomVariable ()->GetValue ();
+100   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{classns3_1_1JakesProcess_a356927b16370f2b694f61775adbb1c4b}{m\_nOscillators}; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+101     \{
+102       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n} = \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} + 1;
+105       \textcolor{keywordtype}{double} \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha} = (2.0 * M\_PI * n - M\_PI + \hyperlink{loss__ITU1411__NLOS__over__rooftop_8m_a68ce9834ce390774bce9c89b78d5bf79}{theta}) / (4.0 * m\_nOscillators);
+107       \textcolor{keywordtype}{double} omega = \hyperlink{classns3_1_1JakesProcess_ac9e2529b40af28efc63d75c981617594}{m\_omegaDopplerMax} * std::cos (alpha);
+109       \textcolor{keywordtype}{double} psi = \hyperlink{classns3_1_1JakesProcess_aec08be974a3d3428286077332e09957e}{m\_jakes}->GetUniformRandomVariable ()->GetValue ();
+110       std::complex<double> amplitude = std::complex<double> (std::cos (psi), std::sin (psi)) * 2.0 / 
+      std::sqrt (m\_nOscillators);
+112       \hyperlink{classns3_1_1JakesProcess_a755674c3009ba93c4a1c0ca064911e75}{m\_oscillators}.push\_back (Oscillator (amplitude, phi, omega)); 
+113     \}
+114 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!Do\+Dispose@{Do\+Dispose}}
+\index{Do\+Dispose@{Do\+Dispose}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{Do\+Dispose()}{DoDispose()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Jakes\+Process\+::\+Do\+Dispose (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1JakesProcess_ae929759b2f895aaf57e8a12b03a1503e}{}\label{classns3_1_1JakesProcess_ae929759b2f895aaf57e8a12b03a1503e}
+Destructor implementation.
+
+This method is called by \hyperlink{classns3_1_1Object_aa90ae598863f6c251cdab3c3722afdaf}{Dispose()} or by the \hyperlink{classns3_1_1Object}{Object}\textquotesingle{}s destructor, whichever comes first.
+
+Subclasses are expected to implement their real destruction code in an overriden version of this method and chain up to their parent\textquotesingle{}s implementation once they are done. {\itshape i.\+e}, for simplicity, the destructor of every subclass should be empty and its content should be moved to the associated \hyperlink{classns3_1_1JakesProcess_ae929759b2f895aaf57e8a12b03a1503e}{Do\+Dispose()} method.
+
+It is safe to call \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{Get\+Object()} from within this method. 
+
+Reimplemented from \hyperlink{classns3_1_1Object_a475d429a75d302d4775f4ae32479b287}{ns3\+::\+Object}.
+
+
+\begin{DoxyCode}
+129 \{
+130   \hyperlink{classns3_1_1JakesProcess_aec08be974a3d3428286077332e09957e}{m\_jakes} = 0;
+131 \}
+\end{DoxyCode}
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!Get\+Channel\+Gain\+Db@{Get\+Channel\+Gain\+Db}}
+\index{Get\+Channel\+Gain\+Db@{Get\+Channel\+Gain\+Db}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{Get\+Channel\+Gain\+Db() const }{GetChannelGainDb() const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Jakes\+Process\+::\+Get\+Channel\+Gain\+Db (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1JakesProcess_a33038cb92b289b816b1c28e96a492530}{}\label{classns3_1_1JakesProcess_a33038cb92b289b816b1c28e96a492530}
+Get the channel gain in dB \begin{DoxyReturn}{Returns}
+the channel gain \mbox{[}dB\mbox{]} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+146 \{
+147   std::complex<double> complexGain = \hyperlink{classns3_1_1JakesProcess_a07f5c3d4ee540f7b9ba2369f1f5bbf26}{GetComplexGain} ();
+148   \textcolor{keywordflow}{return} (10 * std::log10 ((std::pow (complexGain.real (), 2) + std::pow (complexGain.imag (), 2)) / 2));
+149 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!Get\+Complex\+Gain@{Get\+Complex\+Gain}}
+\index{Get\+Complex\+Gain@{Get\+Complex\+Gain}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{Get\+Complex\+Gain() const }{GetComplexGain() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::complex$<$ double $>$ ns3\+::\+Jakes\+Process\+::\+Get\+Complex\+Gain (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1JakesProcess_a07f5c3d4ee540f7b9ba2369f1f5bbf26}{}\label{classns3_1_1JakesProcess_a07f5c3d4ee540f7b9ba2369f1f5bbf26}
+Get the channel complex gain \begin{DoxyReturn}{Returns}
+the channel complex gain 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+135 \{
+136   std::complex<double> sumAplitude = std::complex<double> (0, 0);
+137   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{classns3_1_1JakesProcess_a755674c3009ba93c4a1c0ca064911e75}{m\_oscillators}.size (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+138     \{
+139       sumAplitude += \hyperlink{classns3_1_1JakesProcess_a755674c3009ba93c4a1c0ca064911e75}{m\_oscillators}[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].GetValueAt (\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Now} ());
+140     \}
+141   \textcolor{keywordflow}{return} sumAplitude;
+142 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Jakes\+Process\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1JakesProcess_ad91f96bbc00fc188c9495f8098062b9f}{}\label{classns3_1_1JakesProcess_ad91f96bbc00fc188c9495f8098062b9f}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+50 \{
+51   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::JakesProcess"})
+52     .SetParent<\hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object}> ()
+53     .SetGroupName (\textcolor{stringliteral}{"Propagation"})
+54     .AddConstructor<\hyperlink{classns3_1_1JakesProcess_a09be54eafd7e13b6dde28dae03f27a35}{JakesProcess}> ()
+55     .AddAttribute (\textcolor{stringliteral}{"DopplerFrequencyHz"}, \textcolor{stringliteral}{"Corresponding doppler frequency[Hz]"},
+56                    DoubleValue (80),
+57                    MakeDoubleAccessor (&\hyperlink{classns3_1_1JakesProcess_a72d872b63520e1107c6c56177edd87ee}{JakesProcess::SetDopplerFrequencyHz}
+      ),
+58                    MakeDoubleChecker<double> (0.0, 1e4))
+59     .AddAttribute (\textcolor{stringliteral}{"NumberOfOscillators"}, \textcolor{stringliteral}{"The number of oscillators"},
+60                    UintegerValue (20),
+61                    MakeUintegerAccessor (&\hyperlink{classns3_1_1JakesProcess_a2d2d4ba512f07ac22bf304995441c90c}{JakesProcess::SetNOscillators}),
+62                    MakeUintegerChecker<unsigned int> (4, 1000))
+63   ;
+64   \textcolor{keywordflow}{return} tid;
+65 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!Set\+Doppler\+Frequency\+Hz@{Set\+Doppler\+Frequency\+Hz}}
+\index{Set\+Doppler\+Frequency\+Hz@{Set\+Doppler\+Frequency\+Hz}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{Set\+Doppler\+Frequency\+Hz(double doppler\+Frequency\+Hz)}{SetDopplerFrequencyHz(double dopplerFrequencyHz)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Jakes\+Process\+::\+Set\+Doppler\+Frequency\+Hz (
+\begin{DoxyParamCaption}
+\item[{double}]{doppler\+Frequency\+Hz}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1JakesProcess_a72d872b63520e1107c6c56177edd87ee}{}\label{classns3_1_1JakesProcess_a72d872b63520e1107c6c56177edd87ee}
+Set the Doppler frequency 
+\begin{DoxyParams}{Parameters}
+{\em doppler\+Frequency\+Hz} & the Doppler frequency \mbox{[}Hz\mbox{]} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+88 \{
+89   \hyperlink{classns3_1_1JakesProcess_ac9e2529b40af28efc63d75c981617594}{m\_omegaDopplerMax} = 2 * dopplerFrequencyHz * M\_PI;
+90 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!Set\+N\+Oscillators@{Set\+N\+Oscillators}}
+\index{Set\+N\+Oscillators@{Set\+N\+Oscillators}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{Set\+N\+Oscillators(unsigned int n\+Oscillators)}{SetNOscillators(unsigned int nOscillators)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Jakes\+Process\+::\+Set\+N\+Oscillators (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{n\+Oscillators}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1JakesProcess_a2d2d4ba512f07ac22bf304995441c90c}{}\label{classns3_1_1JakesProcess_a2d2d4ba512f07ac22bf304995441c90c}
+Set the number of Oscillators to use 
+\begin{DoxyParams}{Parameters}
+{\em n\+Oscillators} & the number of oscillators \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+82 \{
+83   \hyperlink{classns3_1_1JakesProcess_a356927b16370f2b694f61775adbb1c4b}{m\_nOscillators} = nOscillators;
+84 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!Set\+Propagation\+Loss\+Model@{Set\+Propagation\+Loss\+Model}}
+\index{Set\+Propagation\+Loss\+Model@{Set\+Propagation\+Loss\+Model}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{Set\+Propagation\+Loss\+Model(\+Ptr$<$ const Propagation\+Loss\+Model $>$ model)}{SetPropagationLossModel(Ptr< const PropagationLossModel > model)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Jakes\+Process\+::\+Set\+Propagation\+Loss\+Model (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Propagation\+Loss\+Model} $>$}]{model}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1JakesProcess_afc7bbef31d5fa82a700d95c2691b7798}{}\label{classns3_1_1JakesProcess_afc7bbef31d5fa82a700d95c2691b7798}
+Set the propagation model using this class 
+\begin{DoxyParams}{Parameters}
+{\em model} & the propagation model using this class \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+69 \{
+70   Ptr<const JakesPropagationLossModel> jakes = propagationModel->GetObject<JakesPropagationLossModel> ();
+71   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (jakes != 0, \textcolor{stringliteral}{"Jakes Process can work only with JakesPropagationLossModel!"});
+72   \hyperlink{classns3_1_1JakesProcess_aec08be974a3d3428286077332e09957e}{m\_jakes} = jakes;
+73   
+74   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1JakesProcess_a356927b16370f2b694f61775adbb1c4b}{m\_nOscillators} != 0);
+75   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1JakesProcess_ac9e2529b40af28efc63d75c981617594}{m\_omegaDopplerMax} != 0);
+76   
+77   \hyperlink{classns3_1_1JakesProcess_afcf181e47a7961a2dd20c5f44a4f5bd1}{ConstructOscillators} ();
+78 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!m\+\_\+jakes@{m\+\_\+jakes}}
+\index{m\+\_\+jakes@{m\+\_\+jakes}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{m\+\_\+jakes}{m_jakes}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$const {\bf Jakes\+Propagation\+Loss\+Model}$>$ ns3\+::\+Jakes\+Process\+::m\+\_\+jakes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1JakesProcess_aec08be974a3d3428286077332e09957e}{}\label{classns3_1_1JakesProcess_aec08be974a3d3428286077332e09957e}
+
+
+pointer to the propagation loss model 
+
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!m\+\_\+n\+Oscillators@{m\+\_\+n\+Oscillators}}
+\index{m\+\_\+n\+Oscillators@{m\+\_\+n\+Oscillators}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{m\+\_\+n\+Oscillators}{m_nOscillators}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int ns3\+::\+Jakes\+Process\+::m\+\_\+n\+Oscillators\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1JakesProcess_a356927b16370f2b694f61775adbb1c4b}{}\label{classns3_1_1JakesProcess_a356927b16370f2b694f61775adbb1c4b}
+
+
+number of oscillators 
+
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!m\+\_\+omega\+Doppler\+Max@{m\+\_\+omega\+Doppler\+Max}}
+\index{m\+\_\+omega\+Doppler\+Max@{m\+\_\+omega\+Doppler\+Max}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{m\+\_\+omega\+Doppler\+Max}{m_omegaDopplerMax}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Jakes\+Process\+::m\+\_\+omega\+Doppler\+Max\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1JakesProcess_ac9e2529b40af28efc63d75c981617594}{}\label{classns3_1_1JakesProcess_ac9e2529b40af28efc63d75c981617594}
+
+
+max rotation speed Doppler frequency 
+
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!m\+\_\+oscillators@{m\+\_\+oscillators}}
+\index{m\+\_\+oscillators@{m\+\_\+oscillators}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{m\+\_\+oscillators}{m_oscillators}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Oscillator}$>$ ns3\+::\+Jakes\+Process\+::m\+\_\+oscillators\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1JakesProcess_a755674c3009ba93c4a1c0ca064911e75}{}\label{classns3_1_1JakesProcess_a755674c3009ba93c4a1c0ca064911e75}
+
+
+Vector of oscillators. 
+
+\index{ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}!m\+\_\+uniform\+Variable@{m\+\_\+uniform\+Variable}}
+\index{m\+\_\+uniform\+Variable@{m\+\_\+uniform\+Variable}!ns3\+::\+Jakes\+Process@{ns3\+::\+Jakes\+Process}}
+\subsubsection[{\texorpdfstring{m\+\_\+uniform\+Variable}{m_uniformVariable}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Uniform\+Random\+Variable}$>$ ns3\+::\+Jakes\+Process\+::m\+\_\+uniform\+Variable\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1JakesProcess_a2bada1f27e9f1b924b5b0b5da0363f5d}{}\label{classns3_1_1JakesProcess_a2bada1f27e9f1b924b5b0b5da0363f5d}
+
+
+random stream 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+propagation/model/\hyperlink{jakes-process_8h}{jakes-\/process.\+h}\item 
+propagation/model/\hyperlink{jakes-process_8cc}{jakes-\/process.\+cc}\end{DoxyCompactItemize}

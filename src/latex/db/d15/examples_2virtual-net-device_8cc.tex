@@ -1,0 +1,168 @@
+\hypertarget{examples_2virtual-net-device_8cc}{}\section{virtual-\/net-\/device/examples/virtual-\/net-\/device.cc File Reference}
+\label{examples_2virtual-net-device_8cc}\index{virtual-\/net-\/device/examples/virtual-\/net-\/device.\+cc@{virtual-\/net-\/device/examples/virtual-\/net-\/device.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$cassert$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/virtual-\/net-\/device.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/global-\/routing-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for virtual-\/net-\/device.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classTunnel}{Tunnel}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{examples_2virtual-net-device_8cc_a0972f310f8dc7619d5c0fe618a2908e6}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Virtual\+Net\+Device\+Example\char`\"{})
+\item 
+int \hyperlink{examples_2virtual-net-device_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{examples/virtual-\/net-\/device.\+cc@{examples/virtual-\/net-\/device.\+cc}!main@{main}}
+\index{main@{main}!examples/virtual-\/net-\/device.\+cc@{examples/virtual-\/net-\/device.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{examples_2virtual-net-device_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{examples_2virtual-net-device_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+191 \{
+192   \textcolor{comment}{// Users may find it convenient to turn on explicit debugging}
+193   \textcolor{comment}{// for selected modules; the below lines suggest how to do this}
+194 \textcolor{preprocessor}{#if 0 }
+195   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"VirtualNetDeviceExample"}, 
+      \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+196 \textcolor{preprocessor}{#endif}
+197   Packet::EnablePrinting ();
+198 
+199 
+200   \textcolor{comment}{// Set up some default values for the simulation.  Use the }
+201   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::PacketSize"}, UintegerValue (210));
+202   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::DataRate"}, StringValue (\textcolor{stringliteral}{"448kb/s"}));
+203 
+204   \textcolor{comment}{//DefaultValue::Bind ("DropTailQueue::m\_maxPackets", 30);}
+205 
+206   \textcolor{comment}{// Allow the user to override any of the defaults and the above}
+207   \textcolor{comment}{// DefaultValue::Bind ()s at run-time, via command-line arguments}
+208   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+209   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+210 
+211   \textcolor{comment}{// Here, we will explicitly create four nodes.  In more sophisticated}
+212   \textcolor{comment}{// topologies, we could configure a node factory.}
+213   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes."});
+214   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+215   c.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (4);
+216   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{adaptive-red-tests_8cc_aeaa87dbd052b50719525adea0f586b36}{n0n2} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), c.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+217   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{adaptive-red-tests_8cc_a68f69f65725cbe7529e8b594708b8fc0}{n1n2} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), c.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+218   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} n3n2 = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3), c.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+219 
+220   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+221   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (c);
+222 
+223   \textcolor{comment}{// We create the channels first without any IP addressing information}
+224   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create channels."});
+225   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} p2p;
+226   p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"5Mbps"}));
+227   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"2ms"}));
+228   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} d0d2 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n0n2);
+229 
+230   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} d1d2 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n1n2);
+231 
+232   p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"1500kbps"}));
+233   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"10ms"}));
+234   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} d3d2 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n3n2);
+235 
+236   \textcolor{comment}{// Later, we add IP addresses.}
+237   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+238   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+239   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+240   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} \hyperlink{adaptive-red-tests_8cc_a04048bb862423a1ed10deed33021fe0c}{i0i2} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (d0d2);
+241 
+242   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.2.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+243   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} \hyperlink{adaptive-red-tests_8cc_abe23af3b1cb569ee9ee4ed7370791041}{i1i2} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (d1d2);
+244 
+245   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.3.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+246   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} i3i2 = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (d3d2);
+247 
+248   \textcolor{comment}{// Create router nodes, initialize routing database and set up the routing}
+249   \textcolor{comment}{// tables in the nodes.}
+250   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+251 
+252   \textcolor{comment}{// Add the tunnels}
+253   \hyperlink{classTunnel}{Tunnel} tunnel (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1),
+254                  i3i2.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (0), i0i2.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (0), i1i2.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (0));
+255 
+256   \textcolor{comment}{// Create the OnOff application to send UDP datagrams of size}
+257   \textcolor{comment}{// 210 bytes at a rate of 448 Kb/s}
+258   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Applications."});
+259   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 9;   \textcolor{comment}{// Discard port (RFC 863)}
+260   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+261                      \hyperlink{classns3_1_1Address}{Address} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"11.0.0.254"}), port)));
+262   onoff.SetConstantRate (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"448kb/s"}));
+263   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} apps = onoff.Install (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+264   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+265   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+266 
+267   \textcolor{comment}{// Create a packet sink to receive these packets}
+268   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sink (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+269                          \hyperlink{classns3_1_1Address}{Address} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port))
+      );
+270   apps = sink.Install (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+271   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+272   \textcolor{comment}{//apps.Stop (Seconds (10.0));}
+273 
+274   \textcolor{comment}{// Create a similar flow from n3 to n1, starting at time 1.1 seconds}
+275   onoff.SetAttribute (\textcolor{stringliteral}{"Remote"}, 
+276                       AddressValue (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"11.0.0.1"}), port)));
+277   apps = onoff.Install (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+278   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.1));
+279   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+280 
+281   \textcolor{comment}{// Create a packet sink to receive these packets}
+282   apps = sink.Install (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+283   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.1));
+284   \textcolor{comment}{//apps.Stop (Seconds (10.0));}
+285 
+286   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+287   p2p.\hyperlink{classns3_1_1AsciiTraceHelperForDevice_a63e57c878526c732924e14c1e52cca8b}{EnableAsciiAll} (ascii.\hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (\textcolor{stringliteral}{"virtual-net-device.tr"}));
+288   p2p.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"virtual-net-device"});
+289 
+290   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+291   Simulator::Run ();
+292   Simulator::Destroy ();
+293   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+294 
+295   \textcolor{keywordflow}{return} 0;
+296 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{examples/virtual-\/net-\/device.\+cc@{examples/virtual-\/net-\/device.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!examples/virtual-\/net-\/device.\+cc@{examples/virtual-\/net-\/device.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Virtual\+Net\+Device\+Example"")}{NS_LOG_COMPONENT_DEFINE("VirtualNetDeviceExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Virtual\+Net\+Device\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{examples_2virtual-net-device_8cc_a0972f310f8dc7619d5c0fe618a2908e6}{}\label{examples_2virtual-net-device_8cc_a0972f310f8dc7619d5c0fe618a2908e6}

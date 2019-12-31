@@ -1,0 +1,495 @@
+\hypertarget{classns3_1_1Ipv4AddressHelper}{}\section{ns3\+:\+:Ipv4\+Address\+Helper Class Reference}
+\label{classns3_1_1Ipv4AddressHelper}\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+
+
+A helper class to make life easier while doing simple I\+Pv4 address assignment in scripts.  
+
+
+
+
+{\ttfamily \#include $<$ipv4-\/address-\/helper.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Ipv4\+Address\+Helper\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ipv4AddressHelper_abc942a52a319a5c6d13c47ce4de3e584}{Ipv4\+Address\+Helper} ()
+\begin{DoxyCompactList}\small\item\em Construct a helper class to make life easier while doing simple I\+Pv4 address assignment in scripts. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ipv4AddressHelper_a3b4480070c6c876604555c2efaabdc26}{Ipv4\+Address\+Helper} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} network, \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} mask, \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} base=\char`\"{}0.\+0.\+0.\+1\char`\"{})
+\begin{DoxyCompactList}\small\item\em Construct a helper class to make life easier while doing simple I\+Pv4 address assignment in scripts. This version sets the base and mask in the constructor. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{Set\+Base} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} network, \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} mask, \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} base=\char`\"{}0.\+0.\+0.\+1\char`\"{})
+\begin{DoxyCompactList}\small\item\em Set the base network number, network mask and base address. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} \hyperlink{classns3_1_1Ipv4AddressHelper_a3277d133ef0d2669934a16a8206ba8e4}{New\+Network} (void)
+\begin{DoxyCompactList}\small\item\em Increment the network number and reset the IP address counter to the base value provided in the Set\+Base method. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} \hyperlink{classns3_1_1Ipv4AddressHelper_a9d6bc3cd8def204f9c253fce666b2edd}{New\+Address} (void)
+\begin{DoxyCompactList}\small\item\em Increment the IP address counter used to allocate IP addresses. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (const \hyperlink{classns3_1_1NetDeviceContainer}{Net\+Device\+Container} \&\hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c})
+\begin{DoxyCompactList}\small\item\em Assign IP addresses to the net devices specified in the container based on the current network prefix and address base. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Ipv4AddressHelper_a6da9d5543922d9b6c9bfe38934d5dfc4}{Num\+Address\+Bits} (uint32\+\_\+t maskbits) const 
+\begin{DoxyCompactList}\small\item\em Returns the number of address bits (hostpart) for a given netmask. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Ipv4AddressHelper_a33cf40b39d8e89b8ed3db1545371a147}{m\+\_\+network}
+\begin{DoxyCompactList}\small\item\em network address \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Ipv4AddressHelper_a1609535faf34e2010483660d881fe29e}{m\+\_\+mask}
+\begin{DoxyCompactList}\small\item\em network mask \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Ipv4AddressHelper_aa68736c00c771186f9bc5add68c791b1}{m\+\_\+address}
+\begin{DoxyCompactList}\small\item\em address \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Ipv4AddressHelper_a6cc73c3a86586b6432114d1de1bcf485}{m\+\_\+base}
+\begin{DoxyCompactList}\small\item\em base address \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Ipv4AddressHelper_a007ffce20667e8a2187e4fa023589a45}{m\+\_\+shift}
+\begin{DoxyCompactList}\small\item\em shift, equivalent to the number of bits in the hostpart \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1Ipv4AddressHelper_aa4a0386e78cf9fb6851ffeb47c4ae1db}{m\+\_\+max}
+\begin{DoxyCompactList}\small\item\em maximum allowed address \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A helper class to make life easier while doing simple I\+Pv4 address assignment in scripts. 
+
+This class is a very simple I\+Pv4 address generator. You can think of it as a simple local number incrementer. It has no notion that IP addresses are part of a global address space. If you have a complicated address assignment situation you may want to look at the \hyperlink{classns3_1_1Ipv4AddressGenerator}{Ipv4\+Address\+Generator} which does recognize that IP address and network number generation is part of a global problem. \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4\+Address\+Helper} is a simple class to make simple problems easy to handle.
+
+We do call into the global address generator to make sure that there are no duplicate addresses generated.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Ipv4AddressGenerator}{Ipv4\+Address\+Generator} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!Ipv4\+Address\+Helper@{Ipv4\+Address\+Helper}}
+\index{Ipv4\+Address\+Helper@{Ipv4\+Address\+Helper}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{Ipv4\+Address\+Helper()}{Ipv4AddressHelper()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Ipv4\+Address\+Helper\+::\+Ipv4\+Address\+Helper (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressHelper_abc942a52a319a5c6d13c47ce4de3e584}{}\label{classns3_1_1Ipv4AddressHelper_abc942a52a319a5c6d13c47ce4de3e584}
+
+
+Construct a helper class to make life easier while doing simple I\+Pv4 address assignment in scripts. 
+
+
+\begin{DoxyCode}
+37 \{
+38   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+39 
+40 \textcolor{comment}{//}
+41 \textcolor{comment}{// Set the default values to an illegal state.  Do this so the client is }
+42 \textcolor{comment}{// forced to think at least briefly about what addresses get used and what}
+43 \textcolor{comment}{// is going on here.}
+44 \textcolor{comment}{//}
+45   \hyperlink{classns3_1_1Ipv4AddressHelper_a33cf40b39d8e89b8ed3db1545371a147}{m\_network} = 0xffffffff;
+46   \hyperlink{classns3_1_1Ipv4AddressHelper_a1609535faf34e2010483660d881fe29e}{m\_mask} = 0;
+47   \hyperlink{classns3_1_1Ipv4AddressHelper_aa68736c00c771186f9bc5add68c791b1}{m\_address} = 0xffffffff;
+48   \hyperlink{classns3_1_1Ipv4AddressHelper_a6cc73c3a86586b6432114d1de1bcf485}{m\_base} = 0xffffffff;
+49   \hyperlink{classns3_1_1Ipv4AddressHelper_a007ffce20667e8a2187e4fa023589a45}{m\_shift} = 0xffffffff;
+50   \hyperlink{classns3_1_1Ipv4AddressHelper_aa4a0386e78cf9fb6851ffeb47c4ae1db}{m\_max} = 0xffffffff;
+51 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!Ipv4\+Address\+Helper@{Ipv4\+Address\+Helper}}
+\index{Ipv4\+Address\+Helper@{Ipv4\+Address\+Helper}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{Ipv4\+Address\+Helper(\+Ipv4\+Address network, Ipv4\+Mask mask, Ipv4\+Address base=""0.\+0.\+0.\+1"")}{Ipv4AddressHelper(Ipv4Address network, Ipv4Mask mask, Ipv4Address base="0.0.0.1")}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Ipv4\+Address\+Helper\+::\+Ipv4\+Address\+Helper (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Address}}]{network, }
+\item[{{\bf Ipv4\+Mask}}]{mask, }
+\item[{{\bf Ipv4\+Address}}]{base = {\ttfamily \char`\"{}0.0.0.1\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressHelper_a3b4480070c6c876604555c2efaabdc26}{}\label{classns3_1_1Ipv4AddressHelper_a3b4480070c6c876604555c2efaabdc26}
+
+
+Construct a helper class to make life easier while doing simple I\+Pv4 address assignment in scripts. This version sets the base and mask in the constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em network} & the network part \\
+\hline
+{\em mask} & the address mask \\
+\hline
+{\em base} & the host part to start from \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+57 \{
+58   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+59   \hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (network, mask, address);
+60 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!Assign@{Assign}}
+\index{Assign@{Assign}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{Assign(const Net\+Device\+Container \&c)}{Assign(const NetDeviceContainer &c)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} ns3\+::\+Ipv4\+Address\+Helper\+::\+Assign (
+\begin{DoxyParamCaption}
+\item[{const {\bf Net\+Device\+Container} \&}]{c}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{}\label{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}
+
+
+Assign IP addresses to the net devices specified in the container based on the current network prefix and address base. 
+
+The address helper allocates IP addresses based on a given network number and initial IP address. In order to separate the network number and IP address parts, Set\+Base was given an initial value and a network mask. The one bits of this mask define the prefix category from which the helper will allocate new network numbers. An initial value for the network numbers was provided in the base parameter of the Set\+Base method in the bits corresponding to positions in the mask that were 1. An initial value for the IP address counter was also provided in the base parameter in the bits corresponding to positions in the mask that were 0.
+
+This method gets new addresses for each net device in the container. For each net device in the container, the helper finds the associated node and looks up the \hyperlink{classns3_1_1Ipv4}{Ipv4} interface corresponding to the net device. It then sets the \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} and mask in the interface to the appropriate values. If the addresses overflow the number of bits allocated for them by the network mask in the Set\+Base method, the system will N\+S\+\_\+\+A\+S\+S\+E\+RT and halt.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & The \hyperlink{classns3_1_1NetDeviceContainer}{Net\+Device\+Container} holding the collection of net devices we are asked to assign \hyperlink{classns3_1_1Ipv4}{Ipv4} addresses to.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A container holding the added Net\+Devices 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{Set\+Base} 
+
+\hyperlink{classns3_1_1Ipv4AddressHelper_a3277d133ef0d2669934a16a8206ba8e4}{New\+Network} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+135 \{
+136   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+137   Ipv4InterfaceContainer retval;
+138   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}.GetN (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}) \{
+139       Ptr<NetDevice> device = \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}.Get (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+140 
+141       Ptr<Node> node = device->GetNode ();
+142       \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (node, \textcolor{stringliteral}{"Ipv4AddressHelper::Assign(): NetDevice is not not associated "}
+143                      \textcolor{stringliteral}{"with any node -> fail"});
+144 
+145       Ptr<Ipv4> ipv4 = node->GetObject<Ipv4> ();
+146       \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (ipv4, \textcolor{stringliteral}{"Ipv4AddressHelper::Assign(): NetDevice is associated"}
+147                      \textcolor{stringliteral}{" with a node without IPv4 stack installed -> fail "}
+148                      \textcolor{stringliteral}{"(maybe need to use InternetStackHelper?)"});
+149 
+150       int32\_t \textcolor{keyword}{interface }= ipv4->GetInterfaceForDevice (device);
+151       \textcolor{keywordflow}{if} (interface == -1)
+152         \{
+153           \textcolor{keyword}{interface }= ipv4->AddInterface (device);
+154         \}
+155       \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (interface >= 0, \textcolor{stringliteral}{"Ipv4AddressHelper::Assign(): "}
+156                      \textcolor{stringliteral}{"Interface index not found"});
+157 
+158       Ipv4InterfaceAddress ipv4Addr = Ipv4InterfaceAddress (\hyperlink{classns3_1_1Ipv4AddressHelper_a9d6bc3cd8def204f9c253fce666b2edd}{NewAddress} (), 
+      \hyperlink{classns3_1_1Ipv4AddressHelper_a1609535faf34e2010483660d881fe29e}{m\_mask});
+159       ipv4->AddAddress (interface, ipv4Addr);
+160       ipv4->SetMetric (interface, 1);
+161       ipv4->SetUp (interface);
+162       retval.Add (ipv4, interface);
+163 
+164       \textcolor{comment}{// Install the default traffic control configuration if the traffic}
+165       \textcolor{comment}{// control layer has been aggregated, if this is not }
+166       \textcolor{comment}{// a loopback interface, and there is no queue disc installed already}
+167       Ptr<TrafficControlLayer> tc = node->GetObject<TrafficControlLayer> ();
+168       \textcolor{keywordflow}{if} (tc && DynamicCast<LoopbackNetDevice> (device) == 0 && tc->GetRootQueueDiscOnDevice (device) == 0)
+169         \{
+170           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Installing default traffic control configuration"});
+171           TrafficControlHelper tcHelper = \hyperlink{classns3_1_1TrafficControlHelper_afa16cd2a1209beb1c18fa5e8153ba8b8}{TrafficControlHelper::Default} ();
+172           tcHelper.Install (device);
+173         \}
+174     \}
+175   \textcolor{keywordflow}{return} retval;
+176 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!New\+Address@{New\+Address}}
+\index{New\+Address@{New\+Address}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{New\+Address(void)}{NewAddress(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Address} ns3\+::\+Ipv4\+Address\+Helper\+::\+New\+Address (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressHelper_a9d6bc3cd8def204f9c253fce666b2edd}{}\label{classns3_1_1Ipv4AddressHelper_a9d6bc3cd8def204f9c253fce666b2edd}
+
+
+Increment the IP address counter used to allocate IP addresses. 
+
+The address helper allocates IP addresses based on a given network number and initial IP address. In order to separate the network number and IP address parts, Set\+Base was given an initial network number value, a network mask and an initial address base.
+
+This method increments IP address counter. A check is made to ensure that the address returned will not overflow the number of bits allocated to IP addresses in Set\+Base (the number of address bits is defined by the number of mask bits that are not \textquotesingle{}1\textquotesingle{}).
+
+For example, if the network number was set to 192.\+168.\+0.\+0 with a mask of 255.\+255.\+255.\+0 and a base address of 0.\+0.\+0.\+3 in Set\+Base, the next call to New\+Address will return 192.\+168.\+1.\+3. The New\+Address method has post-\/increment semantics. A following New\+Address would return 192.\+168.\+0.\+4, etc., until the 253rd call which would assert due to an address overflow.
+
+\begin{DoxyReturn}{Returns}
+The value of the newly allocated IP address. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{Set\+Base} 
+
+\hyperlink{classns3_1_1Ipv4AddressHelper_a3277d133ef0d2669934a16a8206ba8e4}{New\+Network} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+102 \{
+103 \textcolor{comment}{//}
+104 \textcolor{comment}{// The way this is expected to be used is that an address and network number}
+105 \textcolor{comment}{// are initialized, and then NewAddress() is called repeatedly to allocate and}
+106 \textcolor{comment}{// get new addresses on a given subnet.  The client will expect that the first}
+107 \textcolor{comment}{// address she gets back is the one she used to initialize the generator with.}
+108 \textcolor{comment}{// This implies that this operation is a post-increment.}
+109 \textcolor{comment}{//}
+110   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (\hyperlink{classns3_1_1Ipv4AddressHelper_aa68736c00c771186f9bc5add68c791b1}{m\_address} <= \hyperlink{classns3_1_1Ipv4AddressHelper_aa4a0386e78cf9fb6851ffeb47c4ae1db}{m\_max},
+111                  \textcolor{stringliteral}{"Ipv4AddressHelper::NewAddress(): Address overflow"});
+112 
+113   Ipv4Address addr ((\hyperlink{classns3_1_1Ipv4AddressHelper_a33cf40b39d8e89b8ed3db1545371a147}{m\_network} << \hyperlink{classns3_1_1Ipv4AddressHelper_a007ffce20667e8a2187e4fa023589a45}{m\_shift}) | \hyperlink{classns3_1_1Ipv4AddressHelper_aa68736c00c771186f9bc5add68c791b1}{m\_address});
+114   ++\hyperlink{classns3_1_1Ipv4AddressHelper_aa68736c00c771186f9bc5add68c791b1}{m\_address};
+115 \textcolor{comment}{//}
+116 \textcolor{comment}{// The Ipv4AddressGenerator allows us to keep track of the addresses we have}
+117 \textcolor{comment}{// allocated and will assert if we accidentally generate a duplicate.  This}
+118 \textcolor{comment}{// avoids some really hard to debug problems.}
+119 \textcolor{comment}{//}
+120   \hyperlink{classns3_1_1Ipv4AddressGenerator_aaf2a4f76afaf064183151f874019e2d6}{Ipv4AddressGenerator::AddAllocated} (addr);
+121   \textcolor{keywordflow}{return} addr;
+122 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!New\+Network@{New\+Network}}
+\index{New\+Network@{New\+Network}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{New\+Network(void)}{NewNetwork(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Address} ns3\+::\+Ipv4\+Address\+Helper\+::\+New\+Network (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressHelper_a3277d133ef0d2669934a16a8206ba8e4}{}\label{classns3_1_1Ipv4AddressHelper_a3277d133ef0d2669934a16a8206ba8e4}
+
+
+Increment the network number and reset the IP address counter to the base value provided in the Set\+Base method. 
+
+The address helper allocates IP addresses based on a given network number and initial IP address. In order to separate the network number and IP address parts, Set\+Base was given an initial network number value, a network mask and an initial address base.
+
+This method increments the network number and resets the IP address counter to the last base value used. For example, if the network number was set to 192.\+168.\+0.\+0 with a mask of 255.\+255.\+255.\+0 and a base address of 0.\+0.\+0.\+3 in the Set\+Base call; a call to New\+Network will increment the network number counter resulting in network numbers incrementing as 192.\+168.\+1.\+0, 192.\+168.\+2.\+0, etc. After each network number increment, the IP address counter is reset to the initial value specified in Set\+Base. In this case, that would be 0.\+0.\+0.\+3. so if you were to call New\+Address after the increment that resulted in a network number of 192.\+168.\+2.\+0, the allocated addresses returned by New\+Address would be 192.\+168.\+2.\+3, 192.\+168.\+2.\+4, etc.
+
+\begin{DoxyReturn}{Returns}
+The value of the incremented network number that will be used in following address allocations. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{Set\+Base} 
+
+\hyperlink{classns3_1_1Ipv4AddressHelper_a9d6bc3cd8def204f9c253fce666b2edd}{New\+Address} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+126 \{
+127   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+128   ++\hyperlink{classns3_1_1Ipv4AddressHelper_a33cf40b39d8e89b8ed3db1545371a147}{m\_network};
+129   \hyperlink{classns3_1_1Ipv4AddressHelper_aa68736c00c771186f9bc5add68c791b1}{m\_address} = \hyperlink{classns3_1_1Ipv4AddressHelper_a6cc73c3a86586b6432114d1de1bcf485}{m\_base};
+130   \textcolor{keywordflow}{return} Ipv4Address (\hyperlink{classns3_1_1Ipv4AddressHelper_a33cf40b39d8e89b8ed3db1545371a147}{m\_network} << \hyperlink{classns3_1_1Ipv4AddressHelper_a007ffce20667e8a2187e4fa023589a45}{m\_shift});
+131 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!Num\+Address\+Bits@{Num\+Address\+Bits}}
+\index{Num\+Address\+Bits@{Num\+Address\+Bits}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{Num\+Address\+Bits(uint32\+\_\+t maskbits) const }{NumAddressBits(uint32_t maskbits) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Ipv4\+Address\+Helper\+::\+Num\+Address\+Bits (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{maskbits}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressHelper_a6da9d5543922d9b6c9bfe38934d5dfc4}{}\label{classns3_1_1Ipv4AddressHelper_a6da9d5543922d9b6c9bfe38934d5dfc4}
+
+
+Returns the number of address bits (hostpart) for a given netmask. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em maskbits} & the netmask \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of bits in the hostpart 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+182 \{
+183   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+184   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{namespacens3_a7c3dc552428fc47e06138cb9cdd0de11}{N\_BITS}; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+185     \{
+186       \textcolor{keywordflow}{if} (maskbits & 1)
+187         \{
+188           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"NumAddressBits -> "} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+189           \textcolor{keywordflow}{return} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+190         \}
+191       maskbits >>= 1;
+192     \}
+193 
+194   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (\textcolor{keyword}{false}, \textcolor{stringliteral}{"Ipv4AddressHelper::NumAddressBits(): Bad Mask"});
+195   \textcolor{keywordflow}{return} 0;
+196 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!Set\+Base@{Set\+Base}}
+\index{Set\+Base@{Set\+Base}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{Set\+Base(\+Ipv4\+Address network, Ipv4\+Mask mask, Ipv4\+Address base=""0.\+0.\+0.\+1"")}{SetBase(Ipv4Address network, Ipv4Mask mask, Ipv4Address base="0.0.0.1")}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ipv4\+Address\+Helper\+::\+Set\+Base (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Address}}]{network, }
+\item[{{\bf Ipv4\+Mask}}]{mask, }
+\item[{{\bf Ipv4\+Address}}]{base = {\ttfamily \char`\"{}0.0.0.1\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{}\label{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}
+
+
+Set the base network number, network mask and base address. 
+
+The address helper allocates IP addresses based on a given network number and mask combination along with an initial IP address.
+
+For example, if you want to use a /24 prefix with an initial network number of 192.\+168.\+1 (corresponding to a mask of 255.\+255.\+255.\+0) and you want to start allocating IP addresses out of that network beginning at 192.\+168.\+1.\+3, you would call
+
+Set\+Base (\char`\"{}192.\+168.\+1.\+0\char`\"{}, \char`\"{}255.\+255.\+255.\+0\char`\"{}, \char`\"{}0.\+0.\+0.\+3\char`\"{});
+
+If you don\textquotesingle{}t care about the initial address it defaults to \char`\"{}0.\+0.\+0.\+1\char`\"{} in which case you can simply use,
+
+Set\+Base (\char`\"{}192.\+168.\+1.\+0\char`\"{}, \char`\"{}255.\+255.\+255.\+0\char`\"{});
+
+and the first address generated will be 192.\+168.\+1.\+1.
+
+
+\begin{DoxyParams}{Parameters}
+{\em network} & The \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} containing the initial network number to use during allocation. The bits outside the network mask are not used. \\
+\hline
+{\em mask} & The \hyperlink{classns3_1_1Ipv4Mask}{Ipv4\+Mask} containing one bits in each bit position of the network number. \\
+\hline
+{\em base} & An optional \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} containing the initial address used for IP address allocation. Will be combined (O\+Red) with the network number to generate the first IP address. Defaults to 0.\+0.\+0.\+1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+67 \{
+68   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+69 
+70   \hyperlink{classns3_1_1Ipv4AddressHelper_a33cf40b39d8e89b8ed3db1545371a147}{m\_network} = network.Get ();
+71   \hyperlink{classns3_1_1Ipv4AddressHelper_a1609535faf34e2010483660d881fe29e}{m\_mask} = mask.Get ();
+72   \hyperlink{classns3_1_1Ipv4AddressHelper_a6cc73c3a86586b6432114d1de1bcf485}{m\_base} = \hyperlink{classns3_1_1Ipv4AddressHelper_aa68736c00c771186f9bc5add68c791b1}{m\_address} = address.Get ();
+73 
+74 \textcolor{comment}{//}
+75 \textcolor{comment}{// Some quick reasonableness testing.}
+76 \textcolor{comment}{//}
+77   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} ((\hyperlink{classns3_1_1Ipv4AddressHelper_a33cf40b39d8e89b8ed3db1545371a147}{m\_network} & ~\hyperlink{classns3_1_1Ipv4AddressHelper_a1609535faf34e2010483660d881fe29e}{m\_mask}) == 0,
+78                  \textcolor{stringliteral}{"Ipv4AddressHelper::SetBase(): Inconsistent network and mask"});
+79 
+80 \textcolor{comment}{//}
+81 \textcolor{comment}{// Figure out how much to shift network numbers to get them aligned, and what}
+82 \textcolor{comment}{// the maximum allowed address is with respect to the current mask.}
+83 \textcolor{comment}{//}
+84   \hyperlink{classns3_1_1Ipv4AddressHelper_a007ffce20667e8a2187e4fa023589a45}{m\_shift} = \hyperlink{classns3_1_1Ipv4AddressHelper_a6da9d5543922d9b6c9bfe38934d5dfc4}{NumAddressBits} (\hyperlink{classns3_1_1Ipv4AddressHelper_a1609535faf34e2010483660d881fe29e}{m\_mask});
+85   \hyperlink{classns3_1_1Ipv4AddressHelper_aa4a0386e78cf9fb6851ffeb47c4ae1db}{m\_max} = (1 << \hyperlink{classns3_1_1Ipv4AddressHelper_a007ffce20667e8a2187e4fa023589a45}{m\_shift}) - 2;
+86 
+87   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (\hyperlink{classns3_1_1Ipv4AddressHelper_a007ffce20667e8a2187e4fa023589a45}{m\_shift} <= 32,
+88                  \textcolor{stringliteral}{"Ipv4AddressHelper::SetBase(): Unreasonable address length"});
+89 
+90 \textcolor{comment}{//}
+91 \textcolor{comment}{// Shift the network down into the normalized position.}
+92 \textcolor{comment}{//}
+93   \hyperlink{classns3_1_1Ipv4AddressHelper_a33cf40b39d8e89b8ed3db1545371a147}{m\_network} >>= \hyperlink{classns3_1_1Ipv4AddressHelper_a007ffce20667e8a2187e4fa023589a45}{m\_shift};
+94 
+95   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"m\_network == "} << \hyperlink{classns3_1_1Ipv4AddressHelper_a33cf40b39d8e89b8ed3db1545371a147}{m\_network});
+96   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"m\_mask == "} << \hyperlink{classns3_1_1Ipv4AddressHelper_a1609535faf34e2010483660d881fe29e}{m\_mask});
+97   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"m\_address == "} << \hyperlink{classns3_1_1Ipv4AddressHelper_aa68736c00c771186f9bc5add68c791b1}{m\_address});
+98 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!m\+\_\+address@{m\+\_\+address}}
+\index{m\+\_\+address@{m\+\_\+address}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{m\+\_\+address}{m_address}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Ipv4\+Address\+Helper\+::m\+\_\+address\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressHelper_aa68736c00c771186f9bc5add68c791b1}{}\label{classns3_1_1Ipv4AddressHelper_aa68736c00c771186f9bc5add68c791b1}
+
+
+address 
+
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!m\+\_\+base@{m\+\_\+base}}
+\index{m\+\_\+base@{m\+\_\+base}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{m\+\_\+base}{m_base}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Ipv4\+Address\+Helper\+::m\+\_\+base\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressHelper_a6cc73c3a86586b6432114d1de1bcf485}{}\label{classns3_1_1Ipv4AddressHelper_a6cc73c3a86586b6432114d1de1bcf485}
+
+
+base address 
+
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!m\+\_\+mask@{m\+\_\+mask}}
+\index{m\+\_\+mask@{m\+\_\+mask}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{m\+\_\+mask}{m_mask}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Ipv4\+Address\+Helper\+::m\+\_\+mask\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressHelper_a1609535faf34e2010483660d881fe29e}{}\label{classns3_1_1Ipv4AddressHelper_a1609535faf34e2010483660d881fe29e}
+
+
+network mask 
+
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!m\+\_\+max@{m\+\_\+max}}
+\index{m\+\_\+max@{m\+\_\+max}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{m\+\_\+max}{m_max}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Ipv4\+Address\+Helper\+::m\+\_\+max\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressHelper_aa4a0386e78cf9fb6851ffeb47c4ae1db}{}\label{classns3_1_1Ipv4AddressHelper_aa4a0386e78cf9fb6851ffeb47c4ae1db}
+
+
+maximum allowed address 
+
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!m\+\_\+network@{m\+\_\+network}}
+\index{m\+\_\+network@{m\+\_\+network}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{m\+\_\+network}{m_network}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Ipv4\+Address\+Helper\+::m\+\_\+network\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressHelper_a33cf40b39d8e89b8ed3db1545371a147}{}\label{classns3_1_1Ipv4AddressHelper_a33cf40b39d8e89b8ed3db1545371a147}
+
+
+network address 
+
+\index{ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}!m\+\_\+shift@{m\+\_\+shift}}
+\index{m\+\_\+shift@{m\+\_\+shift}!ns3\+::\+Ipv4\+Address\+Helper@{ns3\+::\+Ipv4\+Address\+Helper}}
+\subsubsection[{\texorpdfstring{m\+\_\+shift}{m_shift}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Ipv4\+Address\+Helper\+::m\+\_\+shift\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4AddressHelper_a007ffce20667e8a2187e4fa023589a45}{}\label{classns3_1_1Ipv4AddressHelper_a007ffce20667e8a2187e4fa023589a45}
+
+
+shift, equivalent to the number of bits in the hostpart 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/helper/\hyperlink{ipv4-address-helper_8h}{ipv4-\/address-\/helper.\+h}\item 
+internet/helper/\hyperlink{ipv4-address-helper_8cc}{ipv4-\/address-\/helper.\+cc}\end{DoxyCompactItemize}

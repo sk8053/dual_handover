@@ -1,0 +1,554 @@
+\hypertarget{classHwmpSimplestRegressionTest}{}\section{Hwmp\+Simplest\+Regression\+Test Class Reference}
+\label{classHwmpSimplestRegressionTest}\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+
+
+Peering Management \& H\+WM Protocol regression test Initiate scenario with 2 stations. Procedure of opening peer link is the following\+:  
+
+
+
+
+{\ttfamily \#include $<$hwmp-\/simplest-\/regression.\+h$>$}
+
+
+
+Inheritance diagram for Hwmp\+Simplest\+Regression\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Hwmp\+Simplest\+Regression\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHwmpSimplestRegressionTest_acfa56e71398e76092cc8690d85287698}{Hwmp\+Simplest\+Regression\+Test} ()
+\item 
+virtual \hyperlink{classHwmpSimplestRegressionTest_a3678b71a16a21344d4c8c1d47289b0de}{$\sim$\+Hwmp\+Simplest\+Regression\+Test} ()
+\item 
+virtual void \hyperlink{classHwmpSimplestRegressionTest_a66060eab1ba10620e724e97901e03168}{Do\+Run} ()
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+void \hyperlink{classHwmpSimplestRegressionTest_a5a56889feb77e8f59a94228cfd2537fa}{Check\+Results} ()
+\begin{DoxyCompactList}\small\item\em Check results function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classHwmpSimplestRegressionTest_a7df5e53c90751f75dd2e5227732200c8}{Create\+Nodes} ()
+\begin{DoxyCompactList}\small\item\em Create nodes function. \end{DoxyCompactList}\item 
+void \hyperlink{classHwmpSimplestRegressionTest_a6866a6d6b0b93241ec0f0c29ef61fd39}{Create\+Devices} ()
+\begin{DoxyCompactList}\small\item\em Create devices function. \end{DoxyCompactList}\item 
+void \hyperlink{classHwmpSimplestRegressionTest_a8c6e0b9cf7ae88ff06694a2520978ffc}{Install\+Applications} ()
+\begin{DoxyCompactList}\small\item\em Install application function. \end{DoxyCompactList}\item 
+void \hyperlink{classHwmpSimplestRegressionTest_a50d0092d9d3f89eaa15670260a147de7}{Reset\+Position} ()
+\begin{DoxyCompactList}\small\item\em Reset position. \end{DoxyCompactList}\item 
+void \hyperlink{classHwmpSimplestRegressionTest_a8d054361a03110baf4d64e28695899f3}{Send\+Data} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\item 
+void \hyperlink{classHwmpSimplestRegressionTest_a5e44f58f91f75ccc9ce42480febc9f5a}{Handle\+Read\+Server} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\begin{DoxyCompactList}\small\item\em Handle a packet reception. \end{DoxyCompactList}\item 
+void \hyperlink{classHwmpSimplestRegressionTest_a1b498167f048f8f13f875371ed554a3e}{Handle\+Read\+Client} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\begin{DoxyCompactList}\small\item\em Handle a packet reception. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} $\ast$ \hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\+\_\+nodes}
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classHwmpSimplestRegressionTest_a6ab9b62ebf4c8ca11cc474cec79359e5}{m\+\_\+time}
+\begin{DoxyCompactList}\small\item\em Simulation time. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{classHwmpSimplestRegressionTest_a502e9224497c1151172194a57c6a9eb6}{m\+\_\+interfaces}
+\begin{DoxyCompactList}\small\item\em interfaces \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ \hyperlink{classHwmpSimplestRegressionTest_a6c524b9c42bb0305d006c13a87a58abb}{m\+\_\+server\+Socket}
+\begin{DoxyCompactList}\small\item\em Server-\/side socket. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ \hyperlink{classHwmpSimplestRegressionTest_aa0702a6626a956c4ae052aea717ddc73}{m\+\_\+client\+Socket}
+\begin{DoxyCompactList}\small\item\em Client-\/side socket. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classHwmpSimplestRegressionTest_a9a703951eb0484cc32bca9e7494380fe}{m\+\_\+sent\+Pkts\+Counter}
+\begin{DoxyCompactList}\small\item\em sent packets counter \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Peering Management \& H\+WM Protocol regression test Initiate scenario with 2 stations. Procedure of opening peer link is the following\+: 
+
+\begin{DoxyVerb}* <-----------|----------->   Broadcast frame
+*             |----------->|  Unicast frame
+*
+*                                        !!! PMP routines:
+* <-----------|----------->|             Beacon
+*             |<-----------|             Peer Link Open frame 
+*             |----------->|             Peer Link Open frame
+*             |----------->|             Peer Link Confirm frame
+*             |<-----------|             Peer Link Confirm frame
+*             |............|             !!! Data started:
+*             |<-----------|-----------> Arp Request
+* <-----------|----------->|             Arp Request (fwd)
+* <-----------|----------->|             PREQ
+*             |<-----------|             PREP
+*             |----------->|             ARP reply
+*             |<-----------|             Data
+*             |----------->|             Data
+*             |............|             Some other beacons
+*             |<-----------|             Data
+*             |----------->|             Data
+*             |............|             !!! Route expiration routines:
+*             |<-----------|-----------> PREQ (route expired)
+*             |----------->|             PREP
+*             |<-----------|             Data
+*             |----------->|             Data
+*             |............|
+* \end{DoxyVerb}
+ At 10 seconds stations become unreachable, so U\+DP client tries to close peer link due to T\+X-\/fail, and U\+D\+P-\/srver tries to close link due to beacon loss 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Hwmp\+Simplest\+Regression\+Test()}{HwmpSimplestRegressionTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Hwmp\+Simplest\+Regression\+Test\+::\+Hwmp\+Simplest\+Regression\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classHwmpSimplestRegressionTest_acfa56e71398e76092cc8690d85287698}{}\label{classHwmpSimplestRegressionTest_acfa56e71398e76092cc8690d85287698}
+
+\begin{DoxyCode}
+44                                                         : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Simplest HWMP regression test"}
+      ),
+45                                                             \hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes} (0),
+46                                                             \hyperlink{classHwmpSimplestRegressionTest_a6ab9b62ebf4c8ca11cc474cec79359e5}{m\_time} (
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (15)),
+47                                                             \hyperlink{classHwmpSimplestRegressionTest_a9a703951eb0484cc32bca9e7494380fe}{m\_sentPktsCounter} (0)
+48 \{
+49 \}
+\end{DoxyCode}
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!````~Hwmp\+Simplest\+Regression\+Test@{$\sim$\+Hwmp\+Simplest\+Regression\+Test}}
+\index{````~Hwmp\+Simplest\+Regression\+Test@{$\sim$\+Hwmp\+Simplest\+Regression\+Test}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{$\sim$\+Hwmp\+Simplest\+Regression\+Test()}{~HwmpSimplestRegressionTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Hwmp\+Simplest\+Regression\+Test\+::$\sim$\+Hwmp\+Simplest\+Regression\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classHwmpSimplestRegressionTest_a3678b71a16a21344d4c8c1d47289b0de}{}\label{classHwmpSimplestRegressionTest_a3678b71a16a21344d4c8c1d47289b0de}
+
+\begin{DoxyCode}
+52 \{
+53   \textcolor{keyword}{delete} \hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes};
+54 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!Check\+Results@{Check\+Results}}
+\index{Check\+Results@{Check\+Results}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Check\+Results()}{CheckResults()}}]{\setlength{\rightskip}{0pt plus 5cm}void Hwmp\+Simplest\+Regression\+Test\+::\+Check\+Results (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classHwmpSimplestRegressionTest_a5a56889feb77e8f59a94228cfd2537fa}{}\label{classHwmpSimplestRegressionTest_a5a56889feb77e8f59a94228cfd2537fa}
+
+
+Check results function. 
+
+
+\begin{DoxyCode}
+152 \{
+153   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 2; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+154     \{
+155       \hyperlink{pcap-test_8h_a38f2c17a62d8613f78ec2dd7b638d329}{NS\_PCAP\_TEST\_EXPECT\_EQ} (\hyperlink{hwmp-simplest-regression_8cc_a61dc66981fa47bfd0066a57a487c599c}{PREFIX} << \textcolor{stringliteral}{"-"} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{"-1.pcap"});
+156     \}
+157 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!Create\+Devices@{Create\+Devices}}
+\index{Create\+Devices@{Create\+Devices}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Create\+Devices()}{CreateDevices()}}]{\setlength{\rightskip}{0pt plus 5cm}void Hwmp\+Simplest\+Regression\+Test\+::\+Create\+Devices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_a6866a6d6b0b93241ec0f0c29ef61fd39}{}\label{classHwmpSimplestRegressionTest_a6866a6d6b0b93241ec0f0c29ef61fd39}
+
+
+Create devices function. 
+
+
+\begin{DoxyCode}
+118 \{
+119   int64\_t streamsUsed = 0;
+120   \textcolor{comment}{// 1. setup WiFi}
+121   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} wifiPhy = YansWifiPhyHelper::Default ();
+122   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} wifiChannel = YansWifiChannelHelper::Default ();
+123   \hyperlink{classns3_1_1Ptr}{Ptr<YansWifiChannel>} chan = wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ();
+124   wifiPhy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (chan);
+125   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_a2527d6d7b29f717fd7436166c5f05f1a}{Set} (\textcolor{stringliteral}{"TxGain"}, DoubleValue (1.0)); \textcolor{comment}{//this configuration should go away in future revision to
+       the test}
+126   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_a2527d6d7b29f717fd7436166c5f05f1a}{Set} (\textcolor{stringliteral}{"RxGain"}, DoubleValue (1.0)); \textcolor{comment}{//this configuration should go away in future revision to
+       the test}
+127   \textcolor{comment}{// 2. setup mesh}
+128   \hyperlink{classns3_1_1MeshHelper}{MeshHelper} mesh = MeshHelper::Default ();
+129   mesh.\hyperlink{classns3_1_1MeshHelper_ac1074aff829d0cde1659bdef572880ca}{SetStackInstaller} (\textcolor{stringliteral}{"ns3::Dot11sStack"});
+130   mesh.\hyperlink{classns3_1_1MeshHelper_a549d568927a88e95a721f2be58232c10}{SetMacType} (\textcolor{stringliteral}{"RandomStart"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.1)));
+131   mesh.\hyperlink{classns3_1_1MeshHelper_adfc08b62a8d6e835d0fbbac7a349ef5f}{SetNumberOfInterfaces} (1);
+132   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} meshDevices = mesh.\hyperlink{classns3_1_1MeshHelper_a7b33f6ca7b6842b3def4479bc7526f2c}{Install} (wifiPhy, *
+      \hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes});
+133   \textcolor{comment}{// Two devices, nine streams per mesh device}
+134   streamsUsed += mesh.\hyperlink{classns3_1_1MeshHelper_a93e9c88a375a86c621a494aafe68882e}{AssignStreams} (meshDevices, streamsUsed);
+135   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (streamsUsed, (meshDevices.\hyperlink{classns3_1_1NetDeviceContainer_a74cafc212479bc38976bebd118e856b9}{GetN} () * 9), \textcolor{stringliteral}{"Stream
+       assignment mismatch"});
+136   streamsUsed += wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_ab409a15cfb8abb5195177625191e2584}{AssignStreams} (chan, streamsUsed);
+137   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (streamsUsed, (meshDevices.\hyperlink{classns3_1_1NetDeviceContainer_a74cafc212479bc38976bebd118e856b9}{GetN} () * 9), \textcolor{stringliteral}{"Stream
+       assignment mismatch"});
+138 
+139   \textcolor{comment}{// 3. setup TCP/IP}
+140   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internetStack;
+141   internetStack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (*\hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes});
+142   streamsUsed += internetStack.\hyperlink{classns3_1_1InternetStackHelper_a63c904e832a2f17e036338db4aa2f1b8}{AssignStreams} (*\hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes}, streamsUsed);
+143   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+144   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+145   \hyperlink{classHwmpSimplestRegressionTest_a502e9224497c1151172194a57c6a9eb6}{m\_interfaces} = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (meshDevices);
+146   \textcolor{comment}{// 4. write PCAP if needed}
+147   wifiPhy.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\hyperlink{classns3_1_1TestCase_a8a04695a6fb9ba0f89e28e9523963f88}{CreateTempDirFilename} (
+      \hyperlink{hwmp-simplest-regression_8cc_a61dc66981fa47bfd0066a57a487c599c}{PREFIX}));
+148 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!Create\+Nodes@{Create\+Nodes}}
+\index{Create\+Nodes@{Create\+Nodes}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Create\+Nodes()}{CreateNodes()}}]{\setlength{\rightskip}{0pt plus 5cm}void Hwmp\+Simplest\+Regression\+Test\+::\+Create\+Nodes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_a7df5e53c90751f75dd2e5227732200c8}{}\label{classHwmpSimplestRegressionTest_a7df5e53c90751f75dd2e5227732200c8}
+
+
+Create nodes function. 
+
+
+\begin{DoxyCode}
+74 \{
+75   \hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes} = \textcolor{keyword}{new} \hyperlink{classns3_1_1NodeContainer}{NodeContainer};
+76   \hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes}->\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+77   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+78   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (\textcolor{stringliteral}{"ns3::GridPositionAllocator"},
+79                                  \textcolor{stringliteral}{"MinX"}, DoubleValue (0.0),
+80                                  \textcolor{stringliteral}{"MinY"}, DoubleValue (0.0),
+81                                  \textcolor{stringliteral}{"DeltaX"}, DoubleValue (1 \textcolor{comment}{/*meter*/}),
+82                                  \textcolor{stringliteral}{"DeltaY"}, DoubleValue (0),
+83                                  \textcolor{stringliteral}{"GridWidth"}, UintegerValue (2),
+84                                  \textcolor{stringliteral}{"LayoutType"}, StringValue (\textcolor{stringliteral}{"RowFirst"}));
+85   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+86   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (*\hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes});
+87   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0), &
+      \hyperlink{classHwmpSimplestRegressionTest_a50d0092d9d3f89eaa15670260a147de7}{HwmpSimplestRegressionTest::ResetPosition}, \textcolor{keyword}{this});
+88 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run()}{DoRun()}}]{\setlength{\rightskip}{0pt plus 5cm}void Hwmp\+Simplest\+Regression\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classHwmpSimplestRegressionTest_a66060eab1ba10620e724e97901e03168}{}\label{classHwmpSimplestRegressionTest_a66060eab1ba10620e724e97901e03168}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+57 \{
+58   RngSeedManager::SetSeed (12345);
+59   RngSeedManager::SetRun (7);
+60   \hyperlink{classHwmpSimplestRegressionTest_a7df5e53c90751f75dd2e5227732200c8}{CreateNodes} ();
+61   \hyperlink{classHwmpSimplestRegressionTest_a6866a6d6b0b93241ec0f0c29ef61fd39}{CreateDevices} ();
+62   \hyperlink{classHwmpSimplestRegressionTest_a8c6e0b9cf7ae88ff06694a2520978ffc}{InstallApplications} ();
+63 
+64   Simulator::Stop (\hyperlink{classHwmpSimplestRegressionTest_a6ab9b62ebf4c8ca11cc474cec79359e5}{m\_time});
+65   Simulator::Run ();
+66   Simulator::Destroy ();
+67 
+68   \hyperlink{classHwmpSimplestRegressionTest_a5a56889feb77e8f59a94228cfd2537fa}{CheckResults} ();
+69 
+70   \textcolor{keyword}{delete} \hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes}, \hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes} = 0;
+71 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!Handle\+Read\+Client@{Handle\+Read\+Client}}
+\index{Handle\+Read\+Client@{Handle\+Read\+Client}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Handle\+Read\+Client(\+Ptr$<$ Socket $>$ socket)}{HandleReadClient(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Hwmp\+Simplest\+Regression\+Test\+::\+Handle\+Read\+Client (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_a1b498167f048f8f13f875371ed554a3e}{}\label{classHwmpSimplestRegressionTest_a1b498167f048f8f13f875371ed554a3e}
+
+
+Handle a packet reception. 
+
+This function is called by lower layers.
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & the socket the packet was received to. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+187 \{
+188   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} packet;
+189   \hyperlink{classns3_1_1Address}{Address} \hyperlink{lte__amc_8m_a1b4c81ff74eb1a626b5ade44c81004b3}{from};
+190   \textcolor{keywordflow}{while} ((packet = socket->\hyperlink{classns3_1_1Socket_af22378d7af9a2745a9eada20210da215}{RecvFrom} (from)))
+191     \{
+192     \}
+193 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!Handle\+Read\+Server@{Handle\+Read\+Server}}
+\index{Handle\+Read\+Server@{Handle\+Read\+Server}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Handle\+Read\+Server(\+Ptr$<$ Socket $>$ socket)}{HandleReadServer(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Hwmp\+Simplest\+Regression\+Test\+::\+Handle\+Read\+Server (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_a5e44f58f91f75ccc9ce42480febc9f5a}{}\label{classHwmpSimplestRegressionTest_a5e44f58f91f75ccc9ce42480febc9f5a}
+
+
+Handle a packet reception. 
+
+This function is called by lower layers.
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & the socket the packet was received to. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+173 \{
+174   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} packet;
+175   \hyperlink{classns3_1_1Address}{Address} \hyperlink{lte__amc_8m_a1b4c81ff74eb1a626b5ade44c81004b3}{from};
+176   \textcolor{keywordflow}{while} ((packet = socket->\hyperlink{classns3_1_1Socket_af22378d7af9a2745a9eada20210da215}{RecvFrom} (from)))
+177     \{
+178       packet->\hyperlink{classns3_1_1Packet_a6c7bc5d1067c1d7fbd0fd70289182e8b}{RemoveAllPacketTags} ();
+179       packet->\hyperlink{classns3_1_1Packet_a083f54c9db31aeff30551a9e20fcda42}{RemoveAllByteTags} ();
+180 
+181       socket->\hyperlink{classns3_1_1Socket_af898fce6a58e0dbba23c1c6de1d4220e}{SendTo} (packet, 0, from);
+182     \}
+183 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!Install\+Applications@{Install\+Applications}}
+\index{Install\+Applications@{Install\+Applications}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Install\+Applications()}{InstallApplications()}}]{\setlength{\rightskip}{0pt plus 5cm}void Hwmp\+Simplest\+Regression\+Test\+::\+Install\+Applications (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_a8c6e0b9cf7ae88ff06694a2520978ffc}{}\label{classHwmpSimplestRegressionTest_a8c6e0b9cf7ae88ff06694a2520978ffc}
+
+
+Install application function. 
+
+
+\begin{DoxyCode}
+102 \{
+103   \textcolor{comment}{// client socket}
+104   \hyperlink{classHwmpSimplestRegressionTest_aa0702a6626a956c4ae052aea717ddc73}{m\_clientSocket} = Socket::CreateSocket (\hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes}->\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), TypeId::LookupByName (\textcolor{stringliteral}{"
+      ns3::UdpSocketFactory"}));
+105   \hyperlink{classHwmpSimplestRegressionTest_aa0702a6626a956c4ae052aea717ddc73}{m\_clientSocket}->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} ();
+106   \hyperlink{classHwmpSimplestRegressionTest_aa0702a6626a956c4ae052aea717ddc73}{m\_clientSocket}->\hyperlink{classns3_1_1Socket_a97f08aaf37b8fd7d4b5cad4dfdd4022a}{Connect} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (
+      \hyperlink{classHwmpSimplestRegressionTest_a502e9224497c1151172194a57c6a9eb6}{m\_interfaces}.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (0), 9));
+107   \hyperlink{classHwmpSimplestRegressionTest_aa0702a6626a956c4ae052aea717ddc73}{m\_clientSocket}->\hyperlink{classns3_1_1Socket_a243f7835ef1a85f9270fd3577e3a40da}{SetRecvCallback} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classHwmpSimplestRegressionTest_a1b498167f048f8f13f875371ed554a3e}{HwmpSimplestRegressionTest::HandleReadClient}, \textcolor{keyword}{this}));
+108   Simulator::ScheduleWithContext (\hyperlink{classHwmpSimplestRegressionTest_aa0702a6626a956c4ae052aea717ddc73}{m\_clientSocket}->\hyperlink{classns3_1_1Socket_aba642ad4301c1df47befc0aa9afa2e48}{GetNode} ()->
+      \hyperlink{classns3_1_1Node_aaf49b64a843565ce3812326313b370ac}{GetId} (), \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0),
+109                                   &\hyperlink{classHwmpSimplestRegressionTest_a8d054361a03110baf4d64e28695899f3}{HwmpSimplestRegressionTest::SendData}
+      , \textcolor{keyword}{this}, \hyperlink{classHwmpSimplestRegressionTest_aa0702a6626a956c4ae052aea717ddc73}{m\_clientSocket});
+110 
+111   \textcolor{comment}{// server socket}
+112   \hyperlink{classHwmpSimplestRegressionTest_a6c524b9c42bb0305d006c13a87a58abb}{m\_serverSocket} = Socket::CreateSocket (\hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes}->\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), TypeId::LookupByName (\textcolor{stringliteral}{"
+      ns3::UdpSocketFactory"}));
+113   m\_serverSocket->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 9));
+114   m\_serverSocket->SetRecvCallback (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classHwmpSimplestRegressionTest_a5e44f58f91f75ccc9ce42480febc9f5a}{HwmpSimplestRegressionTest::HandleReadServer}, \textcolor{keyword}{this}));
+115 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 13
+
+
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!Reset\+Position@{Reset\+Position}}
+\index{Reset\+Position@{Reset\+Position}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Reset\+Position()}{ResetPosition()}}]{\setlength{\rightskip}{0pt plus 5cm}void Hwmp\+Simplest\+Regression\+Test\+::\+Reset\+Position (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_a50d0092d9d3f89eaa15670260a147de7}{}\label{classHwmpSimplestRegressionTest_a50d0092d9d3f89eaa15670260a147de7}
+
+
+Reset position. 
+
+
+\begin{DoxyCode}
+91 \{
+92   \hyperlink{classns3_1_1Ptr}{Ptr<Object>} \textcolor{keywordtype}{object} = \hyperlink{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{m\_nodes}->\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1);
+93   \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} model = \textcolor{keywordtype}{object}->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+94   \textcolor{keywordflow}{if} (model == 0)
+95     \{
+96       \textcolor{keywordflow}{return};
+97     \}
+98   model->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (Vector (9000, 0, 0));
+99 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 14
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 15
+
+
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!Send\+Data@{Send\+Data}}
+\index{Send\+Data@{Send\+Data}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Send\+Data(\+Ptr$<$ Socket $>$ socket)}{SendData(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Hwmp\+Simplest\+Regression\+Test\+::\+Send\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_a8d054361a03110baf4d64e28695899f3}{}\label{classHwmpSimplestRegressionTest_a8d054361a03110baf4d64e28695899f3}
+Send data 
+\begin{DoxyParams}{Parameters}
+{\em socket} & the sending socket \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+161 \{
+162   \textcolor{keywordflow}{if} ((\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} () < \hyperlink{classHwmpSimplestRegressionTest_a6ab9b62ebf4c8ca11cc474cec79359e5}{m\_time}) && (\hyperlink{classHwmpSimplestRegressionTest_a9a703951eb0484cc32bca9e7494380fe}{m\_sentPktsCounter} < 300))
+163     \{
+164       socket->\hyperlink{classns3_1_1Socket_a036901c8f485fe5b6eab93b7f2ec289d}{Send} (Create<Packet> (100));
+165       \hyperlink{classHwmpSimplestRegressionTest_a9a703951eb0484cc32bca9e7494380fe}{m\_sentPktsCounter} ++;
+166       Simulator::ScheduleWithContext (socket->\hyperlink{classns3_1_1Socket_aba642ad4301c1df47befc0aa9afa2e48}{GetNode} ()->\hyperlink{classns3_1_1Node_aaf49b64a843565ce3812326313b370ac}{GetId} (), 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.05),
+167                                       &\hyperlink{classHwmpSimplestRegressionTest_a8d054361a03110baf4d64e28695899f3}{HwmpSimplestRegressionTest::SendData}
+      , \textcolor{keyword}{this}, socket);
+168     \}
+169 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 16
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 17
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!m\+\_\+client\+Socket@{m\+\_\+client\+Socket}}
+\index{m\+\_\+client\+Socket@{m\+\_\+client\+Socket}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+client\+Socket}{m_clientSocket}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Socket}$>$ Hwmp\+Simplest\+Regression\+Test\+::m\+\_\+client\+Socket\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_aa0702a6626a956c4ae052aea717ddc73}{}\label{classHwmpSimplestRegressionTest_aa0702a6626a956c4ae052aea717ddc73}
+
+
+Client-\/side socket. 
+
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!m\+\_\+interfaces@{m\+\_\+interfaces}}
+\index{m\+\_\+interfaces@{m\+\_\+interfaces}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+interfaces}{m_interfaces}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} Hwmp\+Simplest\+Regression\+Test\+::m\+\_\+interfaces\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_a502e9224497c1151172194a57c6a9eb6}{}\label{classHwmpSimplestRegressionTest_a502e9224497c1151172194a57c6a9eb6}
+
+
+interfaces 
+
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!m\+\_\+nodes@{m\+\_\+nodes}}
+\index{m\+\_\+nodes@{m\+\_\+nodes}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+nodes}{m_nodes}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container}$\ast$ Hwmp\+Simplest\+Regression\+Test\+::m\+\_\+nodes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}{}\label{classHwmpSimplestRegressionTest_a09b1242f841e8b9712019309f717523d}
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!m\+\_\+sent\+Pkts\+Counter@{m\+\_\+sent\+Pkts\+Counter}}
+\index{m\+\_\+sent\+Pkts\+Counter@{m\+\_\+sent\+Pkts\+Counter}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+sent\+Pkts\+Counter}{m_sentPktsCounter}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Hwmp\+Simplest\+Regression\+Test\+::m\+\_\+sent\+Pkts\+Counter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_a9a703951eb0484cc32bca9e7494380fe}{}\label{classHwmpSimplestRegressionTest_a9a703951eb0484cc32bca9e7494380fe}
+
+
+sent packets counter 
+
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!m\+\_\+server\+Socket@{m\+\_\+server\+Socket}}
+\index{m\+\_\+server\+Socket@{m\+\_\+server\+Socket}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+server\+Socket}{m_serverSocket}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Socket}$>$ Hwmp\+Simplest\+Regression\+Test\+::m\+\_\+server\+Socket\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_a6c524b9c42bb0305d006c13a87a58abb}{}\label{classHwmpSimplestRegressionTest_a6c524b9c42bb0305d006c13a87a58abb}
+
+
+Server-\/side socket. 
+
+\index{Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}!m\+\_\+time@{m\+\_\+time}}
+\index{m\+\_\+time@{m\+\_\+time}!Hwmp\+Simplest\+Regression\+Test@{Hwmp\+Simplest\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+time}{m_time}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} Hwmp\+Simplest\+Regression\+Test\+::m\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHwmpSimplestRegressionTest_a6ab9b62ebf4c8ca11cc474cec79359e5}{}\label{classHwmpSimplestRegressionTest_a6ab9b62ebf4c8ca11cc474cec79359e5}
+
+
+Simulation time. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mesh/test/dot11s/\hyperlink{hwmp-simplest-regression_8h}{hwmp-\/simplest-\/regression.\+h}\item 
+mesh/test/dot11s/\hyperlink{hwmp-simplest-regression_8cc}{hwmp-\/simplest-\/regression.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,321 @@
+\hypertarget{classns3_1_1TcpCongestionOps}{}\section{ns3\+:\+:Tcp\+Congestion\+Ops Class Reference}
+\label{classns3_1_1TcpCongestionOps}\index{ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}}
+
+
+Congestion control abstract class.  
+
+
+
+
+{\ttfamily \#include $<$tcp-\/congestion-\/ops.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Tcp\+Congestion\+Ops\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Tcp\+Congestion\+Ops\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1TcpCongestionOps_a044982d009b94a2bbf59ed27cdb14e91}{Tcp\+Congestion\+Ops} ()
+\item 
+\hyperlink{classns3_1_1TcpCongestionOps_afb374a7fa432a9319f220b8b481fc28e}{Tcp\+Congestion\+Ops} (const \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1TcpCongestionOps_aaf257a36d53904cb3c0598ceffc439c3}{$\sim$\+Tcp\+Congestion\+Ops} ()
+\item 
+virtual std\+::string \hyperlink{classns3_1_1TcpCongestionOps_afb778629819ba3dbf7aaf15b0d57e114}{Get\+Name} () const =0
+\begin{DoxyCompactList}\small\item\em Get the name of the congestion control algorithm. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1TcpCongestionOps_a504ab8e79dbf8e11c1f2b7120977a8c5}{Get\+Ss\+Thresh} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)=0
+\begin{DoxyCompactList}\small\item\em Get the slow start threshold after a loss event. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpCongestionOps_a3cdceb0ace37bc606d34369ab3f920f0}{Increase\+Window} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked)=0
+\begin{DoxyCompactList}\small\item\em Congestion avoidance algorithm implementation. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpCongestionOps_a76d3ffb7b1a7ba761026e3f94c1f50fa}{Pkts\+Acked} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked, const \hyperlink{classns3_1_1Time}{Time} \&rtt)
+\begin{DoxyCompactList}\small\item\em Timing information on received A\+CK. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpCongestionOps_a2777666dc7df24040d718ddba896928b}{Congestion\+State\+Set} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, const \hyperlink{classns3_1_1TcpSocketState_a6fc313945a33d48fd60cbffe0c787b19}{Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t} new\+State)
+\begin{DoxyCompactList}\small\item\em Trigger events/calculations specific to a congestion state. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} $>$ \hyperlink{classns3_1_1TcpCongestionOps_a328ca18452bca8b4b62217e85fd29ac6}{Fork} ()=0
+\begin{DoxyCompactList}\small\item\em Copy the congestion control algorithm across socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1TcpCongestionOps_a9ee58bfdea7f7fe0e477e234eeaebfbc}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Congestion control abstract class. 
+
+The design is inspired on what Linux v4.\+0 does (but it has been in place since years). The congestion control is splitted from the main socket code, and it is a pluggable component. An interface has been defined; variables are maintained in the \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} class, while subclasses of \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} operate over an instance of that class.
+
+Only three methods has been utilized right now; however, Linux has many others, which can be added later in ns-\/3.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1TcpCongestionOps_a3cdceb0ace37bc606d34369ab3f920f0}{Increase\+Window} 
+
+\hyperlink{classns3_1_1TcpCongestionOps_a76d3ffb7b1a7ba761026e3f94c1f50fa}{Pkts\+Acked} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}!Tcp\+Congestion\+Ops@{Tcp\+Congestion\+Ops}}
+\index{Tcp\+Congestion\+Ops@{Tcp\+Congestion\+Ops}!ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}}
+\subsubsection[{\texorpdfstring{Tcp\+Congestion\+Ops()}{TcpCongestionOps()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Congestion\+Ops\+::\+Tcp\+Congestion\+Ops (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpCongestionOps_a044982d009b94a2bbf59ed27cdb14e91}{}\label{classns3_1_1TcpCongestionOps_a044982d009b94a2bbf59ed27cdb14e91}
+
+\begin{DoxyCode}
+39                                     : \hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object} ()
+40 \{
+41 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}!Tcp\+Congestion\+Ops@{Tcp\+Congestion\+Ops}}
+\index{Tcp\+Congestion\+Ops@{Tcp\+Congestion\+Ops}!ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}}
+\subsubsection[{\texorpdfstring{Tcp\+Congestion\+Ops(const Tcp\+Congestion\+Ops \&other)}{TcpCongestionOps(const TcpCongestionOps &other)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Congestion\+Ops\+::\+Tcp\+Congestion\+Ops (
+\begin{DoxyParamCaption}
+\item[{const {\bf Tcp\+Congestion\+Ops} \&}]{other}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpCongestionOps_afb374a7fa432a9319f220b8b481fc28e}{}\label{classns3_1_1TcpCongestionOps_afb374a7fa432a9319f220b8b481fc28e}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & object to copy. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+43                                                                  : \hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object} (other)
+44 \{
+45 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}!````~Tcp\+Congestion\+Ops@{$\sim$\+Tcp\+Congestion\+Ops}}
+\index{````~Tcp\+Congestion\+Ops@{$\sim$\+Tcp\+Congestion\+Ops}!ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}}
+\subsubsection[{\texorpdfstring{$\sim$\+Tcp\+Congestion\+Ops()}{~TcpCongestionOps()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Congestion\+Ops\+::$\sim$\+Tcp\+Congestion\+Ops (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpCongestionOps_aaf257a36d53904cb3c0598ceffc439c3}{}\label{classns3_1_1TcpCongestionOps_aaf257a36d53904cb3c0598ceffc439c3}
+
+\begin{DoxyCode}
+48 \{
+49 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}!Congestion\+State\+Set@{Congestion\+State\+Set}}
+\index{Congestion\+State\+Set@{Congestion\+State\+Set}!ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}}
+\subsubsection[{\texorpdfstring{Congestion\+State\+Set(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, const Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t new\+State)}{CongestionStateSet(Ptr< TcpSocketState > tcb, const TcpSocketState::TcpCongState_t newState)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Tcp\+Congestion\+Ops\+::\+Congestion\+State\+Set (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{const {\bf Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t}}]{new\+State}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpCongestionOps_a2777666dc7df24040d718ddba896928b}{}\label{classns3_1_1TcpCongestionOps_a2777666dc7df24040d718ddba896928b}
+
+
+Trigger events/calculations specific to a congestion state. 
+
+This function mimics the function set\+\_\+state in Linux. The function is called before changing congestion state.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em new\+State} & new congestion state to which the T\+CP is going to switch \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{classns3_1_1TcpIllinois_a5740754bb7f9db5557a5ae5e33ba7ffb}{ns3\+::\+Tcp\+Illinois}, \hyperlink{classns3_1_1TcpYeah_ad3d8b9d44b3a29ab9f30aabc4af9c08a}{ns3\+::\+Tcp\+Yeah}, \hyperlink{classns3_1_1TcpVeno_a39f34ca48e88063934c9c4f893d9c1dc}{ns3\+::\+Tcp\+Veno}, \hyperlink{classns3_1_1TcpVegas_a0e82c50f7d326449fca838e46cbb9821}{ns3\+::\+Tcp\+Vegas}, and \hyperlink{classns3_1_1TcpCubic_ad7a054cf9c9ebe790d0c347afb1d5193}{ns3\+::\+Tcp\+Cubic}.
+
+
+\begin{DoxyCode}
+136   \{
+137   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}!Fork@{Fork}}
+\index{Fork@{Fork}!ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}}
+\subsubsection[{\texorpdfstring{Fork()=0}{Fork()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Ptr}$<${\bf Tcp\+Congestion\+Ops}$>$ ns3\+::\+Tcp\+Congestion\+Ops\+::\+Fork (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1TcpCongestionOps_a328ca18452bca8b4b62217e85fd29ac6}{}\label{classns3_1_1TcpCongestionOps_a328ca18452bca8b4b62217e85fd29ac6}
+
+
+Copy the congestion control algorithm across socket. 
+
+\begin{DoxyReturn}{Returns}
+a pointer of the copied object 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1TcpNewReno_a2606d5fcd01a1eb4d5f4e6beb7a33192}{ns3\+::\+Tcp\+New\+Reno}, \hyperlink{classns3_1_1TcpYeah_a2e1b0c15fd6c8128cceb7fa395f49892}{ns3\+::\+Tcp\+Yeah}, \hyperlink{classns3_1_1TcpIllinois_a42f28764801115e88e38bff513d4b893}{ns3\+::\+Tcp\+Illinois}, \hyperlink{classns3_1_1TcpVeno_a32d40c4563a8ba8e0317b860c184c055}{ns3\+::\+Tcp\+Veno}, \hyperlink{classns3_1_1TcpVegas_afc91e9d8fb8814b417cf817538ec808d}{ns3\+::\+Tcp\+Vegas}, \hyperlink{classns3_1_1TcpLedbat_a76866fc3f6e142e996465e2c987e2629}{ns3\+::\+Tcp\+Ledbat}, \hyperlink{classns3_1_1TcpBic_aeeae424187b16d5377f88f1efe104c3e}{ns3\+::\+Tcp\+Bic}, \hyperlink{classns3_1_1TcpWestwood_ab601df846ac101da7fdd0e76ca8cffa0}{ns3\+::\+Tcp\+Westwood}, \hyperlink{classns3_1_1TcpScalable_a492457204d44b5cd3089aa913c78c1d2}{ns3\+::\+Tcp\+Scalable}, \hyperlink{classns3_1_1TcpCubic_a27dd69b4c42308485dca5f0fa842fe2f}{ns3\+::\+Tcp\+Cubic}, \hyperlink{classns3_1_1TcpHighSpeed_a299b55baaeb60eb3a3e81f0f2a27e34f}{ns3\+::\+Tcp\+High\+Speed}, \hyperlink{classns3_1_1TcpHybla_a43ce1d6a0ee818a29988fdc9f9b1f6bb}{ns3\+::\+Tcp\+Hybla}, and \hyperlink{classns3_1_1TcpHtcp_ac43b14656621c83a4f229e97052c633c}{ns3\+::\+Tcp\+Htcp}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}}
+\subsubsection[{\texorpdfstring{Get\+Name() const =0}{GetName() const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::string ns3\+::\+Tcp\+Congestion\+Ops\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1TcpCongestionOps_afb778629819ba3dbf7aaf15b0d57e114}{}\label{classns3_1_1TcpCongestionOps_afb778629819ba3dbf7aaf15b0d57e114}
+
+
+Get the name of the congestion control algorithm. 
+
+\begin{DoxyReturn}{Returns}
+A string identifying the name 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1TcpNewReno_a0ecf92cb36c236c70e0ecaedfff6609e}{ns3\+::\+Tcp\+New\+Reno}, \hyperlink{classns3_1_1TcpIllinois_a4515a565bdc968d90a4f7dc160dbd3ff}{ns3\+::\+Tcp\+Illinois}, \hyperlink{classns3_1_1TcpBic_a9bcd165ebad9933aea1e63ea3c5fe954}{ns3\+::\+Tcp\+Bic}, \hyperlink{classns3_1_1TcpYeah_a55437380bf00da00ede56cc44be0b5d2}{ns3\+::\+Tcp\+Yeah}, \hyperlink{classns3_1_1TcpVeno_a53f0c8ff201ea8972166ae6cca450d07}{ns3\+::\+Tcp\+Veno}, \hyperlink{classns3_1_1TcpLedbat_af3706fd2c991966e5a4e7f97e799395a}{ns3\+::\+Tcp\+Ledbat}, \hyperlink{classns3_1_1TcpVegas_a476e123ec5b2cfd44f68ac4063fe3f0c}{ns3\+::\+Tcp\+Vegas}, \hyperlink{classns3_1_1TcpScalable_a9284076eee672a0448d83ec0317d8c88}{ns3\+::\+Tcp\+Scalable}, \hyperlink{classns3_1_1TcpCubic_ae1e17804b13f8f788ab683fbe0e467bd}{ns3\+::\+Tcp\+Cubic}, \hyperlink{classns3_1_1TcpHybla_a5f2c0e4bbceebf35436b596effecf1a7}{ns3\+::\+Tcp\+Hybla}, \hyperlink{classns3_1_1TcpHighSpeed_a448ff7b3c5880d1ae8dba89b0f3d3745}{ns3\+::\+Tcp\+High\+Speed}, and \hyperlink{classns3_1_1TcpHtcp_ad59318c863c81cba937ca8e677a9b07e}{ns3\+::\+Tcp\+Htcp}.
+
+\index{ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}!Get\+Ss\+Thresh@{Get\+Ss\+Thresh}}
+\index{Get\+Ss\+Thresh@{Get\+Ss\+Thresh}!ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}}
+\subsubsection[{\texorpdfstring{Get\+Ss\+Thresh(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)=0}{GetSsThresh(Ptr< const TcpSocketState > tcb, uint32_t bytesInFlight)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint32\+\_\+t ns3\+::\+Tcp\+Congestion\+Ops\+::\+Get\+Ss\+Thresh (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{bytes\+In\+Flight}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1TcpCongestionOps_a504ab8e79dbf8e11c1f2b7120977a8c5}{}\label{classns3_1_1TcpCongestionOps_a504ab8e79dbf8e11c1f2b7120977a8c5}
+
+
+Get the slow start threshold after a loss event. 
+
+Is guaranteed that the congestion control state (Tcp\+Ack\+State\+\_\+t) is changed B\+E\+F\+O\+RE the invocation of this method. The implementator should return the slow start threshold (and not change it directly) because, in the future, the T\+CP implementation may require to instantly recover from a loss event (e.\+g. when there is a network with an high reordering factor).
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em bytes\+In\+Flight} & total bytes in flight \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Slow start threshold 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1TcpNewReno_a1cb467aaa4960dfe10b963ed9f3d5aa2}{ns3\+::\+Tcp\+New\+Reno}, \hyperlink{classns3_1_1TcpYeah_a08fe03bc4dca7f6c36f40ac770335c1a}{ns3\+::\+Tcp\+Yeah}, \hyperlink{classns3_1_1TcpIllinois_a5c041aa5385217f81f97d1b730c90ca6}{ns3\+::\+Tcp\+Illinois}, \hyperlink{classns3_1_1TcpVeno_a03a169d4fd7653a6a56a7963578cc489}{ns3\+::\+Tcp\+Veno}, \hyperlink{classns3_1_1TcpVegas_af42952eb204ae641900b1d0ef4d39d97}{ns3\+::\+Tcp\+Vegas}, \hyperlink{classns3_1_1TcpLedbat_a8d228eff64ff4a9d8d64e939ee19d016}{ns3\+::\+Tcp\+Ledbat}, \hyperlink{classns3_1_1TcpBic_aaec211ef4f1624860911aaf544ac9650}{ns3\+::\+Tcp\+Bic}, \hyperlink{classns3_1_1TcpWestwood_a9e3849fbc8244c5748e49ab2e8b149c4}{ns3\+::\+Tcp\+Westwood}, \hyperlink{classns3_1_1TcpScalable_afc28d1793481db0978085efc5b2c243e}{ns3\+::\+Tcp\+Scalable}, \hyperlink{classns3_1_1TcpCubic_adced32f15c635759de55287319ce7936}{ns3\+::\+Tcp\+Cubic}, \hyperlink{classns3_1_1TcpHighSpeed_abc432f29ca437f1a62cd17d614568842}{ns3\+::\+Tcp\+High\+Speed}, and \hyperlink{classns3_1_1TcpHtcp_add36278610893b4eba23cf688f7779d8}{ns3\+::\+Tcp\+Htcp}.
+
+\index{ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Tcp\+Congestion\+Ops\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpCongestionOps_a9ee58bfdea7f7fe0e477e234eeaebfbc}{}\label{classns3_1_1TcpCongestionOps_a9ee58bfdea7f7fe0e477e234eeaebfbc}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+31 \{
+32   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::TcpCongestionOps"})
+33     .SetParent<\hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object}> ()
+34     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+35   ;
+36   \textcolor{keywordflow}{return} tid;
+37 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}!Increase\+Window@{Increase\+Window}}
+\index{Increase\+Window@{Increase\+Window}!ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}}
+\subsubsection[{\texorpdfstring{Increase\+Window(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked)=0}{IncreaseWindow(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Tcp\+Congestion\+Ops\+::\+Increase\+Window (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1TcpCongestionOps_a3cdceb0ace37bc606d34369ab3f920f0}{}\label{classns3_1_1TcpCongestionOps_a3cdceb0ace37bc606d34369ab3f920f0}
+
+
+Congestion avoidance algorithm implementation. 
+
+Mimic the function cong\+\_\+avoid in Linux. New segments have been A\+C\+Ked, and the congestion control duty is to set
+
+The function is allowed to change directly c\+Wnd and/or ss\+Thresh.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments acked \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classns3_1_1TcpNewReno_a11db8ae90f4cebacc15524a793b0741a}{ns3\+::\+Tcp\+New\+Reno}, \hyperlink{classns3_1_1TcpIllinois_aed96b4a9fcf68ca3c290e4e7114d13c7}{ns3\+::\+Tcp\+Illinois}, \hyperlink{classns3_1_1TcpYeah_aa1efa60adbcb1dfad8d188deef7ed2ea}{ns3\+::\+Tcp\+Yeah}, \hyperlink{classns3_1_1TcpVeno_a5865787a20ea7c2c8beee2df5cefcdaa}{ns3\+::\+Tcp\+Veno}, \hyperlink{classns3_1_1TcpVegas_ae80e9ac677116dada43dacda0f98a8b6}{ns3\+::\+Tcp\+Vegas}, \hyperlink{classns3_1_1TcpLedbat_a9baf3c7c8d5572c3cf7c4249a2833748}{ns3\+::\+Tcp\+Ledbat}, \hyperlink{classns3_1_1TcpBic_a9dbe81be07cbfc1cd16af03deb9ccc34}{ns3\+::\+Tcp\+Bic}, and \hyperlink{classns3_1_1TcpCubic_a34659bfac2129d0c100d96e8ce7b24cd}{ns3\+::\+Tcp\+Cubic}.
+
+\index{ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}!Pkts\+Acked@{Pkts\+Acked}}
+\index{Pkts\+Acked@{Pkts\+Acked}!ns3\+::\+Tcp\+Congestion\+Ops@{ns3\+::\+Tcp\+Congestion\+Ops}}
+\subsubsection[{\texorpdfstring{Pkts\+Acked(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked, const Time \&rtt)}{PktsAcked(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked, const Time &rtt)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Tcp\+Congestion\+Ops\+::\+Pkts\+Acked (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked, }
+\item[{const {\bf Time} \&}]{rtt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpCongestionOps_a76d3ffb7b1a7ba761026e3f94c1f50fa}{}\label{classns3_1_1TcpCongestionOps_a76d3ffb7b1a7ba761026e3f94c1f50fa}
+
+
+Timing information on received A\+CK. 
+
+The function is called every time an A\+CK is received (only one time also for cumulative A\+C\+Ks) and contains timing information. It is optional (congestion controls can not implement it) and the default implementation does nothing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments acked \\
+\hline
+{\em rtt} & last rtt \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{classns3_1_1TcpIllinois_aa6531d04046528431302336d56592e23}{ns3\+::\+Tcp\+Illinois}, \hyperlink{classns3_1_1TcpYeah_a2423d9c6a6aea3c8e58749c9219d2fbd}{ns3\+::\+Tcp\+Yeah}, \hyperlink{classns3_1_1TcpVeno_a8270456c1a00231bd8c2282da8b99561}{ns3\+::\+Tcp\+Veno}, \hyperlink{classDummyCongControl_a13a0fafdaf34d3f77e69d747e4469acc}{Dummy\+Cong\+Control}, \hyperlink{classns3_1_1TcpWestwood_a5e7c9809e45567a0492a685db4b59251}{ns3\+::\+Tcp\+Westwood}, \hyperlink{classns3_1_1TcpVegas_adb646411aad266d6db894b88f2baff0f}{ns3\+::\+Tcp\+Vegas}, \hyperlink{classns3_1_1TcpLedbat_adc44a91826f2080c5551a313648d3848}{ns3\+::\+Tcp\+Ledbat}, \hyperlink{classns3_1_1TcpCubic_abcd72325d169bdd2a3858825aea8ca51}{ns3\+::\+Tcp\+Cubic}, \hyperlink{classns3_1_1TcpHtcp_ad09157c644632f904b019423e0bf555b}{ns3\+::\+Tcp\+Htcp}, and \hyperlink{classns3_1_1TcpHybla_a23e291ec4fe822d1abd9d1810c961cb8}{ns3\+::\+Tcp\+Hybla}.
+
+
+\begin{DoxyCode}
+122   \{
+123   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{tcp-congestion-ops_8h}{tcp-\/congestion-\/ops.\+h}\item 
+internet/model/\hyperlink{tcp-congestion-ops_8cc}{tcp-\/congestion-\/ops.\+cc}\end{DoxyCompactItemize}

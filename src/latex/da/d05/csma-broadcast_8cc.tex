@@ -1,0 +1,132 @@
+\hypertarget{csma-broadcast_8cc}{}\section{csma/examples/csma-\/broadcast.cc File Reference}
+\label{csma-broadcast_8cc}\index{csma/examples/csma-\/broadcast.\+cc@{csma/examples/csma-\/broadcast.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$cassert$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+Include dependency graph for csma-\/broadcast.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{csma-broadcast_8cc_a2e1632a1f29337bafbfa861b5131e5a7}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Csma\+Broadcast\+Example\char`\"{})
+\item 
+int \hyperlink{csma-broadcast_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{csma-\/broadcast.\+cc@{csma-\/broadcast.\+cc}!main@{main}}
+\index{main@{main}!csma-\/broadcast.\+cc@{csma-\/broadcast.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{csma-broadcast_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{csma-broadcast_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+47 \{
+48   \textcolor{comment}{// Users may find it convenient to turn on explicit debugging}
+49   \textcolor{comment}{// for selected modules; the below lines suggest how to do this}
+50 \textcolor{preprocessor}{#if 0}
+51   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"CsmaBroadcastExample"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+52 \textcolor{preprocessor}{#endif}
+53   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"CsmaBroadcastExample"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba2b78ce26a040614a34c7d71db83024b9}{LOG\_PREFIX\_TIME});
+54 
+55   \textcolor{comment}{// Allow the user to override any of the defaults and the above}
+56   \textcolor{comment}{// Bind()s at run-time, via command-line arguments}
+57   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+58   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+59 
+60   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes."});
+61   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+62   c.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (3);
+63   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} c0 = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), c.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+64   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} c1 = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), c.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+65 
+66   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Build Topology."});
+67   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+68   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (
+      \hyperlink{classns3_1_1DataRate}{DataRate} (5000000)));
+69   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+70 
+71   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} n0 = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (c0);
+72   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} n1 = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (c1);
+73 
+74   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+75   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (c);
+76 
+77   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+78   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+79   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.0.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+80   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (n0);
+81   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"192.168.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+82   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (n1);
+83 
+84 
+85   \textcolor{comment}{// RFC 863 discard port ("9") indicates packet should be thrown away}
+86   \textcolor{comment}{// by the system.  We allow this silent discard to be overridden}
+87   \textcolor{comment}{// by the PacketSink application.}
+88   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 9;
+89 
+90   \textcolor{comment}{// Create the OnOff application to send UDP datagrams of size}
+91   \textcolor{comment}{// 512 bytes (default) at a rate of 500 Kb/s (default) from n0}
+92   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Applications."});
+93   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+94                      \hyperlink{classns3_1_1Address}{Address} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"255.255.255.255"}), port)));
+95   onoff.SetConstantRate (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"500kb/s"}));
+96 
+97   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} app = onoff.Install (c0.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+98   \textcolor{comment}{// Start the application}
+99   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+100   app.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+101 
+102   \textcolor{comment}{// Create an optional packet sink to receive these packets}
+103   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sink (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+104                          \hyperlink{classns3_1_1Address}{Address} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port))
+      );
+105   app = sink.Install (c0.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+106   app.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (sink.Install (c1.Get (1)));
+107   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+108   app.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+109 
+110   \textcolor{comment}{// Configure ascii tracing of all enqueue, dequeue, and NetDevice receive }
+111   \textcolor{comment}{// events on all devices.  Trace output will be sent to the file }
+112   \textcolor{comment}{// "csma-one-subnet.tr"}
+113   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+114   csma.\hyperlink{classns3_1_1AsciiTraceHelperForDevice_a63e57c878526c732924e14c1e52cca8b}{EnableAsciiAll} (ascii.\hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (\textcolor{stringliteral}{"csma-broadcast.tr"}));
+115 
+116   \textcolor{comment}{// Also configure some tcpdump traces; each interface will be traced}
+117   \textcolor{comment}{// The output files will be named }
+118   \textcolor{comment}{// csma-broadcast-<nodeId>-<interfaceId>.pcap}
+119   \textcolor{comment}{// and can be read by the "tcpdump -tt -r" command }
+120   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"csma-broadcast"}, \textcolor{keyword}{false});
+121 
+122   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+123   Simulator::Run ();
+124   Simulator::Destroy ();
+125   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+126 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{csma-\/broadcast.\+cc@{csma-\/broadcast.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!csma-\/broadcast.\+cc@{csma-\/broadcast.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Csma\+Broadcast\+Example"")}{NS_LOG_COMPONENT_DEFINE("CsmaBroadcastExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Csma\+Broadcast\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{csma-broadcast_8cc_a2e1632a1f29337bafbfa861b5131e5a7}{}\label{csma-broadcast_8cc_a2e1632a1f29337bafbfa861b5131e5a7}

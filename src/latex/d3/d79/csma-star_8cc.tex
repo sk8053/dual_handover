@@ -1,0 +1,254 @@
+\hypertarget{csma-star_8cc}{}\section{csma-\/layout/examples/csma-\/star.cc File Reference}
+\label{csma-star_8cc}\index{csma-\/layout/examples/csma-\/star.\+cc@{csma-\/layout/examples/csma-\/star.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/star-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv6-\/address-\/generator.\+h\char`\"{}}\\*
+Include dependency graph for csma-\/star.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{csma-star_8cc_a947147e84eaa75c5e83b38cd19e37144}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Csma\+Star\char`\"{})
+\item 
+int \hyperlink{csma-star_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{csma-\/star.\+cc@{csma-\/star.\+cc}!main@{main}}
+\index{main@{main}!csma-\/star.\+cc@{csma-\/star.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{csma-star_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{csma-star_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+51 \{
+52 
+53   \textcolor{comment}{//}
+54   \textcolor{comment}{// Set up some default values for the simulation.}
+55   \textcolor{comment}{//}
+56   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::PacketSize"}, UintegerValue (137));
+57 
+58   \textcolor{comment}{// ??? try and stick 15kb/s into the data rate}
+59   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::DataRate"}, StringValue (\textcolor{stringliteral}{"14kb/s"}));
+60 
+61   \textcolor{comment}{//}
+62   \textcolor{comment}{// Default number of nodes in the star.  Overridable by command line argument.}
+63   \textcolor{comment}{//}
+64   uint32\_t nSpokes = 7;
+65   uint32\_t useIpv6 = 0;
+66   \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} ipv6AddressBase = \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address}(\textcolor{stringliteral}{"2001::"});
+67   \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} ipv6AddressPrefix = \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix}(64);
+68 
+69   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+70   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nSpokes"}, \textcolor{stringliteral}{"Number of spoke nodes to place in the star"}, nSpokes);
+71   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"useIpv6"}, \textcolor{stringliteral}{"Use Ipv6"}, useIpv6);
+72   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+73 
+74   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Build star topology."});
+75   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+76   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"100Mbps"}));
+77   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"1ms"}));
+78   \hyperlink{classns3_1_1CsmaStarHelper}{CsmaStarHelper} star (nSpokes, csma);
+79 
+80   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} fillNodes;
+81 
+82   \textcolor{comment}{//}
+83   \textcolor{comment}{// Just to be nasy, hang some more nodes off of the CSMA channel for each}
+84   \textcolor{comment}{// spoke, so that there are a total of 16 nodes on each channel.  Stash}
+85   \textcolor{comment}{// all of these new devices into a container.}
+86   \textcolor{comment}{//}
+87   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} fillDevices;
+88 
+89   uint32\_t nFill = 14;
+90   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < star.GetSpokeDevices ().GetN (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+91     \{
+92       \hyperlink{classns3_1_1Ptr}{Ptr<Channel>} channel = star.GetSpokeDevices ().Get (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})->GetChannel ();
+93       \hyperlink{classns3_1_1Ptr}{Ptr<CsmaChannel>} csmaChannel = channel->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1CsmaChannel}{CsmaChannel}> ();
+94       \hyperlink{classns3_1_1NodeContainer}{NodeContainer} newNodes;
+95       newNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (nFill);
+96       fillNodes.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (newNodes);
+97       fillDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (newNodes, csmaChannel));
+98     \}
+99 
+100   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Install internet stack on all nodes."});
+101   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+102   star.InstallStack (internet);
+103   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (fillNodes);
+104 
+105   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+106   \textcolor{keywordflow}{if} (useIpv6 == 0)
+107     \{
+108       star.AssignIpv4Addresses (\hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} (\textcolor{stringliteral}{"10.1.0.0"}, \textcolor{stringliteral}{"255.255.255.0"}));
+109     \}
+110   \textcolor{keywordflow}{else}
+111     \{
+112       star.AssignIpv6Addresses (ipv6AddressBase, ipv6AddressPrefix);
+113     \}
+114 
+115   \textcolor{comment}{//}
+116   \textcolor{comment}{// We assigned addresses to the logical hub and the first "drop" of the }
+117   \textcolor{comment}{// CSMA network that acts as the spoke, but we also have a number of fill}
+118   \textcolor{comment}{// devices (nFill) also hanging off the CSMA network.  We have got to }
+119   \textcolor{comment}{// assign addresses to them as well.  We put all of the fill devices into}
+120   \textcolor{comment}{// a single device container, so the first nFill devices are associated}
+121   \textcolor{comment}{// with the channel connected to spokeDevices.Get (0), the second nFill}
+122   \textcolor{comment}{// devices afe associated with the channel connected to spokeDevices.Get (1)}
+123   \textcolor{comment}{// etc.}
+124   \textcolor{comment}{//}
+125   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+126   \hyperlink{classns3_1_1Ipv6AddressHelper}{Ipv6AddressHelper} address6;
+127   \textcolor{keywordflow}{for}(uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < star.SpokeCount (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+128     \{
+129       \textcolor{keywordflow}{if} (useIpv6 == 0)
+130         \{
+131           std::ostringstream subnet;
+132           subnet << \textcolor{stringliteral}{"10.1."} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{".0"};
+133           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses for CSMA subnet "} << subnet.str ());
+134           address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (subnet.str ().c\_str (), \textcolor{stringliteral}{"255.255.255.0"}, \textcolor{stringliteral}{"0.0.0.3"});
+135 
+136           \textcolor{keywordflow}{for} (uint32\_t j = 0; j < nFill; ++j)
+137             \{
+138               address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (fillDevices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (i * nFill + j));
+139             \}
+140         \}
+141       \textcolor{keywordflow}{else}
+142         \{
+143           Ipv6AddressGenerator::Init (ipv6AddressBase, ipv6AddressPrefix);
+144           \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} v6network = Ipv6AddressGenerator::GetNetwork (ipv6AddressPrefix);
+145           address6.\hyperlink{classns3_1_1Ipv6AddressHelper_a13467412e9da6263395c09460681c0f1}{SetBase} (v6network, ipv6AddressPrefix);
+146 
+147           \textcolor{keywordflow}{for} (uint32\_t j = 0; j < nFill; ++j)
+148             \{
+149               address6.\hyperlink{classns3_1_1Ipv6AddressHelper_aad4685588aea1757beaf881bc4157912}{Assign}(fillDevices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (i * nFill + j));
+150             \}
+151         \}
+152     \}
+153 
+154   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create applications."});
+155   \textcolor{comment}{//}
+156   \textcolor{comment}{// Create a packet sink on the star "hub" to receive packets.}
+157   \textcolor{comment}{// }
+158   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 50000;
+159 
+160   \textcolor{keywordflow}{if} (useIpv6 == 0)
+161     \{
+162       \hyperlink{classns3_1_1Address}{Address} hubLocalAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port));
+163       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} packetSinkHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, hubLocalAddress);
+164       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} hubApp = packetSinkHelper.Install (star.GetHub ());
+165       hubApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+166       hubApp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+167     \}
+168   \textcolor{keywordflow}{else} 
+169     \{
+170       \hyperlink{classns3_1_1Address}{Address} hubLocalAddress6 (\hyperlink{classns3_1_1Inet6SocketAddress}{Inet6SocketAddress} (Ipv6Address::GetAny (), port))
+      ;
+171       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} packetSinkHelper6 (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, hubLocalAddress6);
+172       \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} hubApp6 = packetSinkHelper6.Install (star.GetHub ());
+173       hubApp6.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+174       hubApp6.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+175     \}
+176 
+177   \textcolor{comment}{//}
+178   \textcolor{comment}{// Create OnOff applications to send TCP to the hub, one on each spoke node.}
+179   \textcolor{comment}{//}
+180   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onOffHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+181   onOffHelper.SetAttribute (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}));
+182   onOffHelper.SetAttribute (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=0]"}));
+183 
+184   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} spokeApps;
+185 
+186   \textcolor{keywordflow}{for} (uint32\_t i = 0; i < star.SpokeCount (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+187     \{
+188       \textcolor{keywordflow}{if} (useIpv6 == 0)
+189         \{
+190           AddressValue remoteAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (star.GetHubIpv4Address (i), 
+      \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}));
+191           onOffHelper.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+192         \}
+193       \textcolor{keywordflow}{else}
+194         \{
+195           AddressValue remoteAddress (\hyperlink{classns3_1_1Inet6SocketAddress}{Inet6SocketAddress} (star.GetHubIpv6Address (i), 
+      \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}));
+196           onOffHelper.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+197         \}
+198       spokeApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (onOffHelper.Install (star.GetSpokeNode (i)));
+199     \}
+200 
+201   spokeApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+202   spokeApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+203 
+204   \textcolor{comment}{//}
+205   \textcolor{comment}{// Because we are evil, we also add OnOff applications to send TCP to the hub }
+206   \textcolor{comment}{// from the fill devices on each CSMA link.  The first nFill nodes in the }
+207   \textcolor{comment}{// fillNodes container are on the CSMA network talking to the zeroth device}
+208   \textcolor{comment}{// on the hub node.  The next nFill nodes are on the CSMA network talking to}
+209   \textcolor{comment}{// the first device on the hub node, etc.  So the ith fillNode is associated}
+210   \textcolor{comment}{// with the hub address found on the (i / nFill)th device on the hub node.}
+211   \textcolor{comment}{//}
+212   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} fillApps;
+213 
+214   \textcolor{keywordflow}{for} (uint32\_t i = 0; i < fillNodes.\hyperlink{classns3_1_1NodeContainer_aed647ac56d0407a7706aba02eb44b951}{GetN} (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+215     \{
+216       AddressValue remoteAddress;
+217       \textcolor{keywordflow}{if} (useIpv6 == 0)
+218         \{
+219           remoteAddress = AddressValue(\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (star.GetHubIpv4Address (i / 
+      nFill), \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}));
+220         \}
+221       \textcolor{keywordflow}{else}
+222         \{
+223           remoteAddress = AddressValue(\hyperlink{classns3_1_1Inet6SocketAddress}{Inet6SocketAddress} (star.GetHubIpv6Address (i / 
+      nFill), \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}));
+224         \}
+225       onOffHelper.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+226       fillApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (onOffHelper.Install (fillNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (i)));
+227     \}
+228 
+229   fillApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+230   fillApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+231 
+232   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Enable static global routing."});
+233   \textcolor{comment}{//}
+234   \textcolor{comment}{// Turn on global static routing so we can actually be routed across the star.}
+235   \textcolor{comment}{//}
+236   \textcolor{keywordflow}{if} (useIpv6 == 0)
+237     \{
+238       Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+239     \}
+240 
+241   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Enable pcap tracing."});
+242   \textcolor{comment}{//}
+243   \textcolor{comment}{// Do pcap tracing on all devices on all nodes.}
+244   \textcolor{comment}{//}
+245   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"csma-star"}, \textcolor{keyword}{false});
+246 
+247   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+248   Simulator::Run ();
+249   Simulator::Destroy ();
+250   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+251 
+252   \textcolor{keywordflow}{return} 0;
+253 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{csma-\/star.\+cc@{csma-\/star.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!csma-\/star.\+cc@{csma-\/star.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Csma\+Star"")}{NS_LOG_COMPONENT_DEFINE("CsmaStar")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Csma\+Star\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{csma-star_8cc_a947147e84eaa75c5e83b38cd19e37144}{}\label{csma-star_8cc_a947147e84eaa75c5e83b38cd19e37144}

@@ -1,0 +1,256 @@
+\hypertarget{classns3_1_1EpcTftClassifier}{}\section{ns3\+:\+:Epc\+Tft\+Classifier Class Reference}
+\label{classns3_1_1EpcTftClassifier}\index{ns3\+::\+Epc\+Tft\+Classifier@{ns3\+::\+Epc\+Tft\+Classifier}}
+
+
+classifies IP packets accoding to Traffic Flow Templates (T\+F\+Ts)  
+
+
+
+
+{\ttfamily \#include $<$epc-\/tft-\/classifier.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Epc\+Tft\+Classifier\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Epc\+Tft\+Classifier\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1EpcTftClassifier_a7ee3e50eceff5337e9a3baac1c51d686}{Epc\+Tft\+Classifier} ()
+\item 
+void \hyperlink{classns3_1_1EpcTftClassifier_a4a0dd2623dd9bfbfb806183625af74bd}{Add} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1EpcTft}{Epc\+Tft} $>$ tft, uint32\+\_\+t id)
+\item 
+void \hyperlink{classns3_1_1EpcTftClassifier_af09782a28deb918eba9b7b6fad37c05f}{Delete} (uint32\+\_\+t id)
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1EpcTftClassifier_a5db19944027854e4f6f1c7f2ec2ef336}{Classify} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p}, \hyperlink{classns3_1_1EpcTft_a6037510585658e017a8011862ce56946}{Epc\+Tft\+::\+Direction} direction)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ uint32\+\_\+t, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1EpcTft}{Epc\+Tft} $>$ $>$ \hyperlink{classns3_1_1EpcTftClassifier_aa81c06fa8f3716646081c11e821b50e2}{m\+\_\+tft\+Map}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+classifies IP packets accoding to Traffic Flow Templates (T\+F\+Ts) 
+
+\begin{DoxyNote}{Note}
+this implementation works with I\+Pv4 only. 
+\end{DoxyNote}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Epc\+Tft\+Classifier@{ns3\+::\+Epc\+Tft\+Classifier}!Epc\+Tft\+Classifier@{Epc\+Tft\+Classifier}}
+\index{Epc\+Tft\+Classifier@{Epc\+Tft\+Classifier}!ns3\+::\+Epc\+Tft\+Classifier@{ns3\+::\+Epc\+Tft\+Classifier}}
+\subsubsection[{\texorpdfstring{Epc\+Tft\+Classifier()}{EpcTftClassifier()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Epc\+Tft\+Classifier\+::\+Epc\+Tft\+Classifier (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EpcTftClassifier_a7ee3e50eceff5337e9a3baac1c51d686}{}\label{classns3_1_1EpcTftClassifier_a7ee3e50eceff5337e9a3baac1c51d686}
+
+\begin{DoxyCode}
+44 \{
+45   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+46 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Epc\+Tft\+Classifier@{ns3\+::\+Epc\+Tft\+Classifier}!Add@{Add}}
+\index{Add@{Add}!ns3\+::\+Epc\+Tft\+Classifier@{ns3\+::\+Epc\+Tft\+Classifier}}
+\subsubsection[{\texorpdfstring{Add(\+Ptr$<$ Epc\+Tft $>$ tft, uint32\+\_\+t id)}{Add(Ptr< EpcTft > tft, uint32_t id)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Epc\+Tft\+Classifier\+::\+Add (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Epc\+Tft} $>$}]{tft, }
+\item[{uint32\+\_\+t}]{id}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EpcTftClassifier_a4a0dd2623dd9bfbfb806183625af74bd}{}\label{classns3_1_1EpcTftClassifier_a4a0dd2623dd9bfbfb806183625af74bd}
+add a T\+FT to the Classifier
+
+
+\begin{DoxyParams}{Parameters}
+{\em tft} & the T\+FT to be added \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+50 \{
+51   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tft);
+52   
+53   \hyperlink{classns3_1_1EpcTftClassifier_aa81c06fa8f3716646081c11e821b50e2}{m\_tftMap}[id] = tft;  
+54   
+55   \textcolor{comment}{// simple sanity check: there shouldn't be more than 16 bearers (hence TFTs) per UE}
+56   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1EpcTftClassifier_aa81c06fa8f3716646081c11e821b50e2}{m\_tftMap}.size () <= 16);
+57 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Epc\+Tft\+Classifier@{ns3\+::\+Epc\+Tft\+Classifier}!Classify@{Classify}}
+\index{Classify@{Classify}!ns3\+::\+Epc\+Tft\+Classifier@{ns3\+::\+Epc\+Tft\+Classifier}}
+\subsubsection[{\texorpdfstring{Classify(\+Ptr$<$ Packet $>$ p, Epc\+Tft\+::\+Direction direction)}{Classify(Ptr< Packet > p, EpcTft::Direction direction)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Epc\+Tft\+Classifier\+::\+Classify (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Packet} $>$}]{p, }
+\item[{{\bf Epc\+Tft\+::\+Direction}}]{direction}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EpcTftClassifier_a5db19944027854e4f6f1c7f2ec2ef336}{}\label{classns3_1_1EpcTftClassifier_a5db19944027854e4f6f1c7f2ec2ef336}
+classify an IP packet
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & the IP packet. It is assumed that the outmost header is an I\+Pv4 header.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the identifier ($>$0) of the first T\+FT that matches with the IP packet; 0 if no T\+FT matched. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+69 \{
+70   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << p << direction);
+71 
+72   Ptr<Packet> pCopy = p->\hyperlink{classns3_1_1Packet_a5d5c70802a5f77fc5f0001e0cfc1898b}{Copy} ();
+73 
+74   Ipv4Header ipv4Header;
+75   pCopy->\hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{RemoveHeader} (ipv4Header);
+76 
+77   Ipv4Address localAddress;
+78   Ipv4Address remoteAddress;
+79 
+80   
+81   \textcolor{keywordflow}{if} (direction ==  \hyperlink{classns3_1_1EpcTft_a6037510585658e017a8011862ce56946a5327d0aa05b24c5033cf3ae0f5156a26}{EpcTft::UPLINK})
+82     \{
+83       localAddress = ipv4Header.GetSource ();
+84       remoteAddress = ipv4Header.GetDestination ();
+85     \}
+86   \textcolor{keywordflow}{else}
+87     \{ 
+88       \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (direction ==  \hyperlink{classns3_1_1EpcTft_a6037510585658e017a8011862ce56946a2e647a08cf9f96c76b5379e3979f2cad}{EpcTft::DOWNLINK});
+89       remoteAddress = ipv4Header.GetSource ();
+90       localAddress = ipv4Header.GetDestination ();      
+91     \}
+92   
+93   uint8\_t protocol = ipv4Header.GetProtocol ();
+94 
+95   uint8\_t tos = ipv4Header.GetTos ();
+96 
+97   uint16\_t localPort = 0;
+98   uint16\_t remotePort = 0;
+99 
+100   \textcolor{keywordflow}{if} (protocol == \hyperlink{classns3_1_1UdpL4Protocol_ad370801b3d1a166e831020a777c41047}{UdpL4Protocol::PROT\_NUMBER})
+101     \{
+102       UdpHeader udpHeader;
+103       pCopy->RemoveHeader (udpHeader);
+104 
+105       \textcolor{keywordflow}{if} (direction ==  \hyperlink{classns3_1_1EpcTft_a6037510585658e017a8011862ce56946a5327d0aa05b24c5033cf3ae0f5156a26}{EpcTft::UPLINK})
+106         \{
+107           localPort = udpHeader.GetSourcePort ();
+108           remotePort = udpHeader.GetDestinationPort ();
+109         \}
+110       \textcolor{keywordflow}{else}
+111         \{
+112           remotePort = udpHeader.GetSourcePort ();
+113           localPort = udpHeader.GetDestinationPort ();
+114         \}
+115     \}
+116   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (protocol == \hyperlink{classns3_1_1TcpL4Protocol_ac6c1cee44ae21227e755678bb52dbc89}{TcpL4Protocol::PROT\_NUMBER})
+117     \{
+118       TcpHeader tcpHeader;
+119       pCopy->RemoveHeader (tcpHeader);
+120       \textcolor{keywordflow}{if} (direction ==  \hyperlink{classns3_1_1EpcTft_a6037510585658e017a8011862ce56946a5327d0aa05b24c5033cf3ae0f5156a26}{EpcTft::UPLINK})
+121         \{
+122           localPort = tcpHeader.GetSourcePort ();
+123           remotePort = tcpHeader.GetDestinationPort ();
+124         \}
+125       \textcolor{keywordflow}{else}
+126         \{
+127           remotePort = tcpHeader.GetSourcePort ();
+128           localPort = tcpHeader.GetDestinationPort ();
+129         \}
+130     \}
+131   \textcolor{keywordflow}{else}
+132     \{
+133       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Unknown protocol: "} << protocol);
+134       \textcolor{keywordflow}{return} 0;  \textcolor{comment}{// no match}
+135     \}
+136 
+137   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Classifing packet:"}
+138                << \textcolor{stringliteral}{" localAddr="}  << localAddress 
+139                << \textcolor{stringliteral}{" remoteAddr="} << remoteAddress 
+140                << \textcolor{stringliteral}{" localPort="}  << localPort 
+141                << \textcolor{stringliteral}{" remotePort="} << remotePort 
+142                << \textcolor{stringliteral}{" tos=0x"} << (uint16\_t) tos );
+143 
+144   \textcolor{comment}{// now it is possible to classify the packet!}
+145   \textcolor{comment}{// we use a reverse iterator since filter priority is not implemented properly.}
+146   \textcolor{comment}{// This way, since the default bearer is expected to be added first, it will be evaluated last.}
+147   std::map <uint32\_t, Ptr<EpcTft> >::const\_reverse\_iterator it;
+148   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"TFT MAP size: "} << \hyperlink{classns3_1_1EpcTftClassifier_aa81c06fa8f3716646081c11e821b50e2}{m\_tftMap}.size ());
+149 
+150   \textcolor{keywordflow}{for} (it = \hyperlink{classns3_1_1EpcTftClassifier_aa81c06fa8f3716646081c11e821b50e2}{m\_tftMap}.rbegin (); it != \hyperlink{classns3_1_1EpcTftClassifier_aa81c06fa8f3716646081c11e821b50e2}{m\_tftMap}.rend (); ++it)
+151     \{
+152       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"TFT id: "} << it->first );
+153       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{" Ptr<EpcTft>: "} << it->second);
+154       Ptr<EpcTft> tft = it->second;         
+155       \textcolor{keywordflow}{if} (tft->Matches (direction, remoteAddress, localAddress, remotePort, localPort, tos))
+156         \{
+157           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"matches with TFT ID = "} << it->first);
+158           \textcolor{keywordflow}{return} it->first; \textcolor{comment}{// the id of the matching TFT}
+159         \}
+160     \}
+161   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"no match"});
+162   \textcolor{keywordflow}{return} 0;  \textcolor{comment}{// no match}
+163 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Epc\+Tft\+Classifier@{ns3\+::\+Epc\+Tft\+Classifier}!Delete@{Delete}}
+\index{Delete@{Delete}!ns3\+::\+Epc\+Tft\+Classifier@{ns3\+::\+Epc\+Tft\+Classifier}}
+\subsubsection[{\texorpdfstring{Delete(uint32\+\_\+t id)}{Delete(uint32_t id)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Epc\+Tft\+Classifier\+::\+Delete (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{id}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EpcTftClassifier_af09782a28deb918eba9b7b6fad37c05f}{}\label{classns3_1_1EpcTftClassifier_af09782a28deb918eba9b7b6fad37c05f}
+delete an existing T\+FT from the classifier
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the identifier of the T\+FT to be deleted \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+61 \{
+62   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \textcolor{keywordtype}{id});
+63   \hyperlink{classns3_1_1EpcTftClassifier_aa81c06fa8f3716646081c11e821b50e2}{m\_tftMap}.erase (\textcolor{keywordtype}{id});
+64 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Epc\+Tft\+Classifier@{ns3\+::\+Epc\+Tft\+Classifier}!m\+\_\+tft\+Map@{m\+\_\+tft\+Map}}
+\index{m\+\_\+tft\+Map@{m\+\_\+tft\+Map}!ns3\+::\+Epc\+Tft\+Classifier@{ns3\+::\+Epc\+Tft\+Classifier}}
+\subsubsection[{\texorpdfstring{m\+\_\+tft\+Map}{m_tftMap}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$uint32\+\_\+t, {\bf Ptr}$<${\bf Epc\+Tft}$>$ $>$ ns3\+::\+Epc\+Tft\+Classifier\+::m\+\_\+tft\+Map\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classns3_1_1EpcTftClassifier_aa81c06fa8f3716646081c11e821b50e2}{}\label{classns3_1_1EpcTftClassifier_aa81c06fa8f3716646081c11e821b50e2}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lte/model/\hyperlink{epc-tft-classifier_8h}{epc-\/tft-\/classifier.\+h}\item 
+lte/model/\hyperlink{epc-tft-classifier_8cc}{epc-\/tft-\/classifier.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,1102 @@
+\hypertarget{classns3_1_1TcpCubic}{}\section{ns3\+:\+:Tcp\+Cubic Class Reference}
+\label{classns3_1_1TcpCubic}\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+
+
+The Cubic Congestion Control Algorithm.  
+
+
+
+
+{\ttfamily \#include $<$tcp-\/cubic.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Tcp\+Cubic\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Tcp\+Cubic\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1TcpCubic_a1c43c3ed778ae0feb07c505e4dcbeffb}{Tcp\+Cubic} ()
+\item 
+\hyperlink{classns3_1_1TcpCubic_a921d9edef959e2603ae09c43cf8a82da}{Tcp\+Cubic} (const \hyperlink{classns3_1_1TcpCubic}{Tcp\+Cubic} \&sock)
+\item 
+virtual std\+::string \hyperlink{classns3_1_1TcpCubic_ae1e17804b13f8f788ab683fbe0e467bd}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the name of the congestion control algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpCubic_abcd72325d169bdd2a3858825aea8ca51}{Pkts\+Acked} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked, const \hyperlink{classns3_1_1Time}{Time} \&rtt)
+\begin{DoxyCompactList}\small\item\em Timing information on received A\+CK. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpCubic_a34659bfac2129d0c100d96e8ce7b24cd}{Increase\+Window} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked)
+\begin{DoxyCompactList}\small\item\em Congestion avoidance algorithm implementation. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1TcpCubic_adced32f15c635759de55287319ce7936}{Get\+Ss\+Thresh} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)
+\begin{DoxyCompactList}\small\item\em Get the slow start threshold after a loss event. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpCubic_ad7a054cf9c9ebe790d0c347afb1d5193}{Congestion\+State\+Set} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, const \hyperlink{classns3_1_1TcpSocketState_a6fc313945a33d48fd60cbffe0c787b19}{Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t} new\+State)
+\begin{DoxyCompactList}\small\item\em Trigger events/calculations specific to a congestion state. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} $>$ \hyperlink{classns3_1_1TcpCubic_a27dd69b4c42308485dca5f0fa842fe2f}{Fork} ()
+\begin{DoxyCompactList}\small\item\em Copy the congestion control algorithm across socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1TcpCubic_ad27bba0e96569c29fcd76e7926e96e75}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707}{Hybrid\+S\+S\+Detection\+Mode} \{ \hyperlink{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707a635d665963ba728e83d92142682d7e11}{P\+A\+C\+K\+E\+T\+\_\+\+T\+R\+A\+IN} = 0x1, 
+\hyperlink{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707a17ded510b2f8e4fe197ae70dea628aa7}{D\+E\+L\+AY} = 0x2
+ \}\begin{DoxyCompactList}\small\item\em Values to detect the Slow Start mode of Hy\+Start. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1TcpCubic_a041ef065895769c50cfc02d39372d08d}{Hystart\+Reset} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb)
+\begin{DoxyCompactList}\small\item\em Reset Hy\+Start parameters. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1TcpCubic_ad27735b7798af17915ad35602fbe996b}{Cubic\+Reset} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb)
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpCubic_a1676df929585823efe488c35448c69e4}{Update} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb)
+\begin{DoxyCompactList}\small\item\em Cubic window update after a new ack received. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1TcpCubic_ac32cb45bced2f370fe530e307414fb3b}{Hystart\+Update} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, const \hyperlink{classns3_1_1Time}{Time} \&\hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_a7964e6aa8f61a9d28973c8267a606ad8}{delay})
+\begin{DoxyCompactList}\small\item\em Update Hy\+Start parameters. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpCubic_a3c752c5abf71c05783fb947910239902}{Hystart\+Delay\+Thresh} (const \hyperlink{classns3_1_1Time}{Time} \&t) const 
+\begin{DoxyCompactList}\small\item\em Clamp time value in a range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classns3_1_1TcpCubic_a90051598ce6276440db0c3b5c0118ebf}{m\+\_\+fast\+Convergence}
+\begin{DoxyCompactList}\small\item\em Enable or disable fast convergence algorithm. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpCubic_a71879d000e1dcba749c4fae90c8e873d}{m\+\_\+beta}
+\begin{DoxyCompactList}\small\item\em Beta for cubic multiplicative increase. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1TcpCubic_a2df1ddb29a2f2a8e1f1886665a92f687}{m\+\_\+hystart}
+\begin{DoxyCompactList}\small\item\em Enable or disable Hy\+Start algorithm. \end{DoxyCompactList}\item 
+int \hyperlink{classns3_1_1TcpCubic_a34e8c17f1c5c470fa39aa77d6d1bbda5}{m\+\_\+hystart\+Detect}
+\begin{DoxyCompactList}\small\item\em Detect way for Hy\+Start algorithm. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpCubic_af23b1714553886c496927ba6d75269b4}{m\+\_\+hystart\+Low\+Window}
+\begin{DoxyCompactList}\small\item\em Lower bound c\+Wnd for hybrid slow start (segments) \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpCubic_a8aa5da315009dabca1e8136de5e65015}{m\+\_\+hystart\+Ack\+Delta}
+\begin{DoxyCompactList}\small\item\em Spacing between ack\textquotesingle{}s indicating train. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpCubic_a63dffc9a29dc6577a99c4046efcb01f0}{m\+\_\+hystart\+Delay\+Min}
+\begin{DoxyCompactList}\small\item\em Minimum time for hystart algorithm. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpCubic_a1003aa1c760f12195ea62f0e86dbcfb4}{m\+\_\+hystart\+Delay\+Max}
+\begin{DoxyCompactList}\small\item\em Maximum time for hystart algorithm. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{classns3_1_1TcpCubic_ae86cb481bd166effae7227e90e9bafbb}{m\+\_\+hystart\+Min\+Samples}
+\begin{DoxyCompactList}\small\item\em Number of delay samples for detecting the increase of delay. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpCubic_adfc5ffb73bcdeb85814048a2adf01c1e}{m\+\_\+initial\+Cwnd}
+\begin{DoxyCompactList}\small\item\em Initial c\+Wnd. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{classns3_1_1TcpCubic_aafd8945276979821c592ac578746a708}{m\+\_\+cnt\+Clamp}
+\begin{DoxyCompactList}\small\item\em Modulo of the (avoided) float division for c\+Wnd. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpCubic_acb9bb68447f9a9e0eb0cb1f95eb7aca7}{m\+\_\+c}
+\begin{DoxyCompactList}\small\item\em Cubic Scaling factor. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpCubic_a56b424a0e9790d9ef8b2b2ea6b399d49}{m\+\_\+c\+Wnd\+Cnt}
+\begin{DoxyCompactList}\small\item\em c\+Wnd integer-\/to-\/float counter \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{m\+\_\+last\+Max\+Cwnd}
+\begin{DoxyCompactList}\small\item\em Last maximum c\+Wnd. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpCubic_a10fb71cdb4155d6e61174690e6bc295a}{m\+\_\+bic\+Origin\+Point}
+\begin{DoxyCompactList}\small\item\em Origin point of bic function. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}{m\+\_\+bicK}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1Time}{Time} to origin point from the beginning. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}{m\+\_\+delay\+Min}
+\begin{DoxyCompactList}\small\item\em Min delay. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpCubic_aa93581f58a0b6e113d533eda3f86b9a7}{m\+\_\+epoch\+Start}
+\begin{DoxyCompactList}\small\item\em Beginning of an epoch. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1TcpCubic_a63fac9018c36941b4bbc5d5f20f21abf}{m\+\_\+found}
+\begin{DoxyCompactList}\small\item\em The exit point is found? \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpCubic_a9c55defdbfe7bb3e12c6dedaece70434}{m\+\_\+round\+Start}
+\begin{DoxyCompactList}\small\item\em Beginning of each round. \end{DoxyCompactList}\item 
+\hyperlink{group__network_gacb2070e4e98d2d5135c9bede58f07a03}{Sequence\+Number32} \hyperlink{classns3_1_1TcpCubic_a68e4f286739c0436737028bda53f1a48}{m\+\_\+end\+Seq}
+\begin{DoxyCompactList}\small\item\em End sequence of the round. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpCubic_a735cbf51912a83d6c1a75d07879ce69e}{m\+\_\+last\+Ack}
+\begin{DoxyCompactList}\small\item\em Last time when the A\+CK spacing is close. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpCubic_a10b3b2aedb75eb85ecf5e339462def08}{m\+\_\+cubic\+Delta}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1Time}{Time} to wait after recovery before update. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpCubic_a0082d2bc456e29345d611b313091bbab}{m\+\_\+curr\+Rtt}
+\begin{DoxyCompactList}\small\item\em Current Rtt. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpCubic_a189a416124fb57d08f10b40bbdb43394}{m\+\_\+sample\+Cnt}
+\begin{DoxyCompactList}\small\item\em Count of samples for Hy\+Start. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The Cubic Congestion Control Algorithm. 
+
+T\+CP Cubic is a protocol that enhances the fairness property of Bic while retaining its scalability and stability. The main feature is that the window growth function is defined in real time in order to be independent from the R\+TT. More specifically, the congestion window of Cubic is determined by a function of the elapsed time from the last window reduction.
+
+The Cubic code is quite similar to that of Bic. The main difference is located in the method Update, an edit necessary for satisfying the Cubic window growth, that can be tuned with the attribute C (the Cubic scaling factor).
+
+Following the Linux implementation, we included the Hybrid Slow Start, that effectively prevents the overshooting of slow start while maintaining a full utilization of the network. This new type of slow start can be disabled through the \{Hy\+Start\} attribute.
+
+C\+U\+B\+IC T\+CP is implemented and used by default in Linux kernels 2.\+6.\+19 and above; this version follows the implementation in Linux 3.\+14, which slightly differ from the C\+U\+B\+IC paper. It also features Hy\+Start.
+
+Home page\+: \href{http://netsrv.csc.ncsu.edu/twiki/bin/view/Main/BIC}{\tt http\+://netsrv.\+csc.\+ncsu.\+edu/twiki/bin/view/\+Main/\+B\+IC} The work starts from the implementation of C\+U\+B\+IC T\+CP in Sangtae Ha, Injong Rhee and Lisong Xu, \char`\"{}\+C\+U\+B\+I\+C\+: A New T\+C\+P-\/\+Friendly High-\/\+Speed T\+C\+P Variant\char`\"{} in A\+CM S\+I\+G\+O\+PS Operating System Review, July 2008. Available from\+: \href{http://netsrv.csc.ncsu.edu/export/cubic_a_new_tcp_2008.pdf}{\tt http\+://netsrv.\+csc.\+ncsu.\+edu/export/cubic\+\_\+a\+\_\+new\+\_\+tcp\+\_\+2008.\+pdf}
+
+C\+U\+B\+IC integrates a new slow start algorithm, called Hy\+Start. The details of Hy\+Start are presented in Sangtae Ha and Injong Rhee, \char`\"{}\+Taming the Elephants\+: New T\+C\+P Slow Start\char`\"{}, N\+C\+SU Tech\+Report 2008. Available from\+: \href{http://netsrv.csc.ncsu.edu/export/hystart_techreport_2008.pdf}{\tt http\+://netsrv.\+csc.\+ncsu.\+edu/export/hystart\+\_\+techreport\+\_\+2008.\+pdf}
+
+More information on this implementation\+: \href{http://dl.acm.org/citation.cfm?id=2756518}{\tt http\+://dl.\+acm.\+org/citation.\+cfm?id=2756518} 
+
+\subsection{Member Enumeration Documentation}
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Hybrid\+S\+S\+Detection\+Mode@{Hybrid\+S\+S\+Detection\+Mode}}
+\index{Hybrid\+S\+S\+Detection\+Mode@{Hybrid\+S\+S\+Detection\+Mode}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Hybrid\+S\+S\+Detection\+Mode}{HybridSSDetectionMode}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ns3\+::\+Tcp\+Cubic\+::\+Hybrid\+S\+S\+Detection\+Mode}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707}{}\label{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707}
+
+
+Values to detect the Slow Start mode of Hy\+Start. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{P\+A\+C\+K\+E\+T\+\_\+\+T\+R\+A\+IN@{P\+A\+C\+K\+E\+T\+\_\+\+T\+R\+A\+IN}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!P\+A\+C\+K\+E\+T\+\_\+\+T\+R\+A\+IN@{P\+A\+C\+K\+E\+T\+\_\+\+T\+R\+A\+IN}}\item[{\em 
+P\+A\+C\+K\+E\+T\+\_\+\+T\+R\+A\+IN\hypertarget{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707a635d665963ba728e83d92142682d7e11}{}\label{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707a635d665963ba728e83d92142682d7e11}
+}]Detection by trains of packet. \index{D\+E\+L\+AY@{D\+E\+L\+AY}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!D\+E\+L\+AY@{D\+E\+L\+AY}}\item[{\em 
+D\+E\+L\+AY\hypertarget{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707a17ded510b2f8e4fe197ae70dea628aa7}{}\label{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707a17ded510b2f8e4fe197ae70dea628aa7}
+}]Detection by delay value. \end{description}
+\end{Desc}
+
+\begin{DoxyCode}
+96   \{
+97     \hyperlink{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707a635d665963ba728e83d92142682d7e11}{PACKET\_TRAIN} = 0x1, 
+98     \hyperlink{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707a17ded510b2f8e4fe197ae70dea628aa7}{DELAY}        = 0x2  
+99   \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Tcp\+Cubic@{Tcp\+Cubic}}
+\index{Tcp\+Cubic@{Tcp\+Cubic}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Tcp\+Cubic()}{TcpCubic()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Cubic\+::\+Tcp\+Cubic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpCubic_a1c43c3ed778ae0feb07c505e4dcbeffb}{}\label{classns3_1_1TcpCubic_a1c43c3ed778ae0feb07c505e4dcbeffb}
+
+\begin{DoxyCode}
+96   : \hyperlink{classns3_1_1TcpCongestionOps_a044982d009b94a2bbf59ed27cdb14e91}{TcpCongestionOps} (),
+97     \hyperlink{classns3_1_1TcpCubic_a56b424a0e9790d9ef8b2b2ea6b399d49}{m\_cWndCnt} (0),
+98     \hyperlink{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{m\_lastMaxCwnd} (0),
+99     \hyperlink{classns3_1_1TcpCubic_a10fb71cdb4155d6e61174690e6bc295a}{m\_bicOriginPoint} (0),
+100     \hyperlink{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}{m\_bicK} (0.0),
+101     \hyperlink{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}{m\_delayMin} (\hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ()),
+102     \hyperlink{classns3_1_1TcpCubic_aa93581f58a0b6e113d533eda3f86b9a7}{m\_epochStart} (\hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ()),
+103     \hyperlink{classns3_1_1TcpCubic_a63fac9018c36941b4bbc5d5f20f21abf}{m\_found} (\textcolor{keyword}{false}),
+104     \hyperlink{classns3_1_1TcpCubic_a9c55defdbfe7bb3e12c6dedaece70434}{m\_roundStart} (\hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ()),
+105     \hyperlink{classns3_1_1TcpCubic_a68e4f286739c0436737028bda53f1a48}{m\_endSeq} (0),
+106     \hyperlink{classns3_1_1TcpCubic_a735cbf51912a83d6c1a75d07879ce69e}{m\_lastAck} (\hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ()),
+107     \hyperlink{classns3_1_1TcpCubic_a10b3b2aedb75eb85ecf5e339462def08}{m\_cubicDelta} (\hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ()),
+108     \hyperlink{classns3_1_1TcpCubic_a0082d2bc456e29345d611b313091bbab}{m\_currRtt} (\hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ()),
+109     \hyperlink{classns3_1_1TcpCubic_a189a416124fb57d08f10b40bbdb43394}{m\_sampleCnt} (0)
+110 \{
+111   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+112 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Tcp\+Cubic@{Tcp\+Cubic}}
+\index{Tcp\+Cubic@{Tcp\+Cubic}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Tcp\+Cubic(const Tcp\+Cubic \&sock)}{TcpCubic(const TcpCubic &sock)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Cubic\+::\+Tcp\+Cubic (
+\begin{DoxyParamCaption}
+\item[{const {\bf Tcp\+Cubic} \&}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpCubic_a921d9edef959e2603ae09c43cf8a82da}{}\label{classns3_1_1TcpCubic_a921d9edef959e2603ae09c43cf8a82da}
+
+\begin{DoxyCode}
+115   : \hyperlink{classns3_1_1TcpCongestionOps_a044982d009b94a2bbf59ed27cdb14e91}{TcpCongestionOps} (sock),
+116     \hyperlink{classns3_1_1TcpCubic_a90051598ce6276440db0c3b5c0118ebf}{m\_fastConvergence} (sock.m\_fastConvergence),
+117     \hyperlink{classns3_1_1TcpCubic_a71879d000e1dcba749c4fae90c8e873d}{m\_beta} (sock.m\_beta),
+118     \hyperlink{classns3_1_1TcpCubic_a2df1ddb29a2f2a8e1f1886665a92f687}{m\_hystart} (sock.m\_hystart),
+119     \hyperlink{classns3_1_1TcpCubic_a34e8c17f1c5c470fa39aa77d6d1bbda5}{m\_hystartDetect} (sock.m\_hystartDetect),
+120     \hyperlink{classns3_1_1TcpCubic_af23b1714553886c496927ba6d75269b4}{m\_hystartLowWindow} (sock.m\_hystartLowWindow),
+121     \hyperlink{classns3_1_1TcpCubic_a8aa5da315009dabca1e8136de5e65015}{m\_hystartAckDelta} (sock.m\_hystartAckDelta),
+122     \hyperlink{classns3_1_1TcpCubic_a63dffc9a29dc6577a99c4046efcb01f0}{m\_hystartDelayMin} (sock.m\_hystartDelayMin),
+123     \hyperlink{classns3_1_1TcpCubic_a1003aa1c760f12195ea62f0e86dbcfb4}{m\_hystartDelayMax} (sock.m\_hystartDelayMax),
+124     \hyperlink{classns3_1_1TcpCubic_ae86cb481bd166effae7227e90e9bafbb}{m\_hystartMinSamples} (sock.m\_hystartMinSamples),
+125     \hyperlink{classns3_1_1TcpCubic_adfc5ffb73bcdeb85814048a2adf01c1e}{m\_initialCwnd} (sock.m\_initialCwnd),
+126     \hyperlink{classns3_1_1TcpCubic_aafd8945276979821c592ac578746a708}{m\_cntClamp} (sock.m\_cntClamp),
+127     \hyperlink{classns3_1_1TcpCubic_acb9bb68447f9a9e0eb0cb1f95eb7aca7}{m\_c} (sock.m\_c),
+128     \hyperlink{classns3_1_1TcpCubic_a56b424a0e9790d9ef8b2b2ea6b399d49}{m\_cWndCnt} (sock.m\_cWndCnt),
+129     \hyperlink{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{m\_lastMaxCwnd} (sock.m\_lastMaxCwnd),
+130     \hyperlink{classns3_1_1TcpCubic_a10fb71cdb4155d6e61174690e6bc295a}{m\_bicOriginPoint} (sock.m\_bicOriginPoint),
+131     \hyperlink{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}{m\_bicK} (sock.m\_bicK),
+132     \hyperlink{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}{m\_delayMin} (sock.m\_delayMin),
+133     \hyperlink{classns3_1_1TcpCubic_aa93581f58a0b6e113d533eda3f86b9a7}{m\_epochStart} (sock.m\_epochStart),
+134     \hyperlink{classns3_1_1TcpCubic_a63fac9018c36941b4bbc5d5f20f21abf}{m\_found} (sock.m\_found),
+135     \hyperlink{classns3_1_1TcpCubic_a9c55defdbfe7bb3e12c6dedaece70434}{m\_roundStart} (sock.m\_roundStart),
+136     \hyperlink{classns3_1_1TcpCubic_a68e4f286739c0436737028bda53f1a48}{m\_endSeq} (sock.m\_endSeq),
+137     \hyperlink{classns3_1_1TcpCubic_a735cbf51912a83d6c1a75d07879ce69e}{m\_lastAck} (sock.m\_lastAck),
+138     \hyperlink{classns3_1_1TcpCubic_a10b3b2aedb75eb85ecf5e339462def08}{m\_cubicDelta} (sock.m\_cubicDelta),
+139     \hyperlink{classns3_1_1TcpCubic_a0082d2bc456e29345d611b313091bbab}{m\_currRtt} (sock.m\_currRtt),
+140     \hyperlink{classns3_1_1TcpCubic_a189a416124fb57d08f10b40bbdb43394}{m\_sampleCnt} (sock.m\_sampleCnt)
+141 \{
+142   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+143 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Congestion\+State\+Set@{Congestion\+State\+Set}}
+\index{Congestion\+State\+Set@{Congestion\+State\+Set}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Congestion\+State\+Set(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, const Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t new\+State)}{CongestionStateSet(Ptr< TcpSocketState > tcb, const TcpSocketState::TcpCongState_t newState)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Cubic\+::\+Congestion\+State\+Set (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{const {\bf Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t}}]{new\+State}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpCubic_ad7a054cf9c9ebe790d0c347afb1d5193}{}\label{classns3_1_1TcpCubic_ad7a054cf9c9ebe790d0c347afb1d5193}
+
+
+Trigger events/calculations specific to a congestion state. 
+
+This function mimics the function set\+\_\+state in Linux. The function is called before changing congestion state.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em new\+State} & new congestion state to which the T\+CP is going to switch \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpCongestionOps_a2777666dc7df24040d718ddba896928b}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+421 \{
+422   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << newState);
+423 
+424   \textcolor{keywordflow}{if} (newState == \hyperlink{classns3_1_1TcpSocketState_a6fc313945a33d48fd60cbffe0c787b19ad50c191d2648f5472641d8e144ccbf3d}{TcpSocketState::CA\_LOSS})
+425     \{
+426       \hyperlink{classns3_1_1TcpCubic_ad27735b7798af17915ad35602fbe996b}{CubicReset} (tcb);
+427       \hyperlink{classns3_1_1TcpCubic_a041ef065895769c50cfc02d39372d08d}{HystartReset} (tcb);
+428     \}
+429 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Cubic\+Reset@{Cubic\+Reset}}
+\index{Cubic\+Reset@{Cubic\+Reset}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Cubic\+Reset(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb)}{CubicReset(Ptr< const TcpSocketState > tcb)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Cubic\+::\+Cubic\+Reset (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_ad27735b7798af17915ad35602fbe996b}{}\label{classns3_1_1TcpCubic_ad27735b7798af17915ad35602fbe996b}
+
+\begin{DoxyCode}
+433 \{
+434   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb);
+435 
+436   \hyperlink{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{m\_lastMaxCwnd} = 0;
+437   \hyperlink{classns3_1_1TcpCubic_a10fb71cdb4155d6e61174690e6bc295a}{m\_bicOriginPoint} = 0;
+438   \hyperlink{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}{m\_bicK} = 0;
+439   \hyperlink{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}{m\_delayMin} = \hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ();
+440   \hyperlink{classns3_1_1TcpCubic_a63fac9018c36941b4bbc5d5f20f21abf}{m\_found} = \textcolor{keyword}{false};
+441 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Fork@{Fork}}
+\index{Fork@{Fork}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Fork()}{Fork()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Congestion\+Ops} $>$ ns3\+::\+Tcp\+Cubic\+::\+Fork (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpCubic_a27dd69b4c42308485dca5f0fa842fe2f}{}\label{classns3_1_1TcpCubic_a27dd69b4c42308485dca5f0fa842fe2f}
+
+
+Copy the congestion control algorithm across socket. 
+
+\begin{DoxyReturn}{Returns}
+a pointer of the copied object 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1TcpCongestionOps_a328ca18452bca8b4b62217e85fd29ac6}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+445 \{
+446   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+447   \textcolor{keywordflow}{return} CopyObject<TcpCubic> (\textcolor{keyword}{this});
+448 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Tcp\+Cubic\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpCubic_ae1e17804b13f8f788ab683fbe0e467bd}{}\label{classns3_1_1TcpCubic_ae1e17804b13f8f788ab683fbe0e467bd}
+
+
+Get the name of the congestion control algorithm. 
+
+\begin{DoxyReturn}{Returns}
+A string identifying the name 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1TcpCongestionOps_afb778629819ba3dbf7aaf15b0d57e114}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+147 \{
+148   \textcolor{keywordflow}{return} \textcolor{stringliteral}{"TcpCubic"};
+149 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Get\+Ss\+Thresh@{Get\+Ss\+Thresh}}
+\index{Get\+Ss\+Thresh@{Get\+Ss\+Thresh}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Get\+Ss\+Thresh(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)}{GetSsThresh(Ptr< const TcpSocketState > tcb, uint32_t bytesInFlight)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Cubic\+::\+Get\+Ss\+Thresh (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{bytes\+In\+Flight}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpCubic_adced32f15c635759de55287319ce7936}{}\label{classns3_1_1TcpCubic_adced32f15c635759de55287319ce7936}
+
+
+Get the slow start threshold after a loss event. 
+
+Is guaranteed that the congestion control state (Tcp\+Ack\+State\+\_\+t) is changed B\+E\+F\+O\+RE the invocation of this method. The implementator should return the slow start threshold (and not change it directly) because, in the future, the T\+CP implementation may require to instantly recover from a loss event (e.\+g. when there is a network with an high reordering factor).
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em bytes\+In\+Flight} & total bytes in flight \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Slow start threshold 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1TcpCongestionOps_a504ab8e79dbf8e11c1f2b7120977a8c5}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+389 \{
+390   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << bytesInFlight);
+391 
+392   \textcolor{comment}{// Without inflation and deflation, these two are the same}
+393   uint32\_t segInFlight = bytesInFlight / tcb->m\_segmentSize;
+394   uint32\_t segCwnd = tcb->GetCwndInSegments ();
+395   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Loss at cWnd="} << segCwnd << \textcolor{stringliteral}{" in flight="} << segInFlight);
+396 
+397   \textcolor{comment}{/* Wmax and fast convergence */}
+398   \textcolor{keywordflow}{if} (segCwnd < \hyperlink{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{m\_lastMaxCwnd} && \hyperlink{classns3_1_1TcpCubic_a90051598ce6276440db0c3b5c0118ebf}{m\_fastConvergence})
+399     \{
+400       \textcolor{comment}{//m\_lastMaxCwnd = m\_beta * segCwnd;}
+401           \hyperlink{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{m\_lastMaxCwnd} = (1+\hyperlink{classns3_1_1TcpCubic_a71879d000e1dcba749c4fae90c8e873d}{m\_beta}) * segCwnd/2; \textcolor{comment}{//by zml}
+402     \}
+403   \textcolor{keywordflow}{else}
+404     \{
+405       \hyperlink{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{m\_lastMaxCwnd} = segCwnd;
+406     \}
+407 
+408   \hyperlink{classns3_1_1TcpCubic_aa93581f58a0b6e113d533eda3f86b9a7}{m\_epochStart} = \hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ();    \textcolor{comment}{// end of epoch}
+409 
+410   \textcolor{comment}{/* Formula taken from the Linux kernel */}
+411 
+412   \textcolor{comment}{//uint32\_t ssThresh = std::max (static\_cast<uint32\_t> (segInFlight * m\_beta ), 2U) * tcb->m\_segmentSize;}
+413   uint32\_t temp = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (segCwnd, segInFlight);
+414   uint32\_t ssThresh = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (static\_cast<uint32\_t> (temp * \hyperlink{classns3_1_1TcpCubic_a71879d000e1dcba749c4fae90c8e873d}{m\_beta} ), 2U) * tcb->
+      m\_segmentSize;
+415 
+416   \textcolor{keywordflow}{return} ssThresh;
+417 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Tcp\+Cubic\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpCubic_ad27bba0e96569c29fcd76e7926e96e75}{}\label{classns3_1_1TcpCubic_ad27bba0e96569c29fcd76e7926e96e75}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+34 \{
+35   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::TcpCubic"})
+36     .SetParent<TcpSocketBase> ()
+37     .AddConstructor<TcpCubic> ()
+38     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+39     .AddAttribute (\textcolor{stringliteral}{"FastConvergence"}, \textcolor{stringliteral}{"Enable (true) or disable (false) fast convergence"},
+40                    BooleanValue (\textcolor{keyword}{true}),
+41                    MakeBooleanAccessor (&\hyperlink{classns3_1_1TcpCubic_a90051598ce6276440db0c3b5c0118ebf}{TcpCubic::m\_fastConvergence}),
+42                    MakeBooleanChecker ())
+43     .AddAttribute (\textcolor{stringliteral}{"Beta"}, \textcolor{stringliteral}{"Beta for multiplicative decrease"},
+44                    DoubleValue (0.8),
+45                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpCubic_a71879d000e1dcba749c4fae90c8e873d}{TcpCubic::m\_beta}),
+46                    MakeDoubleChecker <double> (0.0))
+47     .AddAttribute (\textcolor{stringliteral}{"HyStart"}, \textcolor{stringliteral}{"Enable (true) or disable (false) hybrid slow start algorithm"},
+48                    BooleanValue (\textcolor{keyword}{true}),
+49                    MakeBooleanAccessor (&\hyperlink{classns3_1_1TcpCubic_a2df1ddb29a2f2a8e1f1886665a92f687}{TcpCubic::m\_hystart}),
+50                    MakeBooleanChecker ())
+51     .AddAttribute (\textcolor{stringliteral}{"HyStartLowWindow"}, \textcolor{stringliteral}{"Lower bound cWnd for hybrid slow start (segments)"},
+52                    UintegerValue (16),
+53                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpCubic_af23b1714553886c496927ba6d75269b4}{TcpCubic::m\_hystartLowWindow}),
+54                    MakeUintegerChecker <uint32\_t> ())
+55     .AddAttribute (\textcolor{stringliteral}{"HyStartDetect"}, \textcolor{stringliteral}{"Hybrid Slow Start detection mechanisms:"} \(\backslash\)
+56                    \textcolor{stringliteral}{"1: packet train, 2: delay, 3: both"},
+57                    IntegerValue (3),
+58                    MakeIntegerAccessor (&\hyperlink{classns3_1_1TcpCubic_a34e8c17f1c5c470fa39aa77d6d1bbda5}{TcpCubic::m\_hystartDetect}),
+59                    MakeIntegerChecker <int> (1,3))
+60     .AddAttribute (\textcolor{stringliteral}{"HyStartMinSamples"}, \textcolor{stringliteral}{"Number of delay samples for detecting the increase of delay"},
+61                    UintegerValue (8),
+62                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpCubic_ae86cb481bd166effae7227e90e9bafbb}{TcpCubic::m\_hystartMinSamples}),
+63                    MakeUintegerChecker <uint8\_t> ())
+64     .AddAttribute (\textcolor{stringliteral}{"HyStartAckDelta"}, \textcolor{stringliteral}{"Spacing between ack's indicating train"},
+65                    TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)),
+66                    MakeTimeAccessor (&\hyperlink{classns3_1_1TcpCubic_a8aa5da315009dabca1e8136de5e65015}{TcpCubic::m\_hystartAckDelta}),
+67                    \hyperlink{group__time_ga7032965bd4afa578691d88c09e4481c1}{MakeTimeChecker} ())
+68     .AddAttribute (\textcolor{stringliteral}{"HyStartDelayMin"}, \textcolor{stringliteral}{"Minimum time for hystart algorithm"},
+69                    TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (4)),
+70                    MakeTimeAccessor (&\hyperlink{classns3_1_1TcpCubic_a63dffc9a29dc6577a99c4046efcb01f0}{TcpCubic::m\_hystartDelayMin}),
+71                    \hyperlink{group__time_ga7032965bd4afa578691d88c09e4481c1}{MakeTimeChecker} ())
+72     .AddAttribute (\textcolor{stringliteral}{"HyStartDelayMax"}, \textcolor{stringliteral}{"Maximum time for hystart algorithm"},
+73                    TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (1000)),
+74                    MakeTimeAccessor (&\hyperlink{classns3_1_1TcpCubic_a1003aa1c760f12195ea62f0e86dbcfb4}{TcpCubic::m\_hystartDelayMax}),
+75                    \hyperlink{group__time_ga7032965bd4afa578691d88c09e4481c1}{MakeTimeChecker} ())
+76     .AddAttribute (\textcolor{stringliteral}{"CubicDelta"}, \textcolor{stringliteral}{"Delta Time to wait after fast recovery before adjusting param"},
+77                    TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (10)),
+78                    MakeTimeAccessor (&\hyperlink{classns3_1_1TcpCubic_a10b3b2aedb75eb85ecf5e339462def08}{TcpCubic::m\_cubicDelta}),
+79                    \hyperlink{group__time_ga7032965bd4afa578691d88c09e4481c1}{MakeTimeChecker} ())
+80     .AddAttribute (\textcolor{stringliteral}{"CntClamp"}, \textcolor{stringliteral}{"Counter value when no losses are detected (counter is used"} \(\backslash\)
+81                    \textcolor{stringliteral}{" when incrementing cWnd in congestion avoidance, to avoid"} \(\backslash\)
+82                    \textcolor{stringliteral}{" floating point arithmetic). It is the modulo of the (avoided)"} \(\backslash\)
+83                    \textcolor{stringliteral}{" division"},
+84                    UintegerValue (20),
+85                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpCubic_aafd8945276979821c592ac578746a708}{TcpCubic::m\_cntClamp}),
+86                    MakeUintegerChecker <uint8\_t> ())
+87     .AddAttribute (\textcolor{stringliteral}{"C"}, \textcolor{stringliteral}{"Cubic Scaling factor"},
+88                    DoubleValue (0.4),
+89                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpCubic_acb9bb68447f9a9e0eb0cb1f95eb7aca7}{TcpCubic::m\_c}),
+90                    MakeDoubleChecker <double> (0.0))
+91   ;
+92   \textcolor{keywordflow}{return} tid;
+93 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Hystart\+Delay\+Thresh@{Hystart\+Delay\+Thresh}}
+\index{Hystart\+Delay\+Thresh@{Hystart\+Delay\+Thresh}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Hystart\+Delay\+Thresh(const Time \&t) const }{HystartDelayThresh(const Time &t) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Cubic\+::\+Hystart\+Delay\+Thresh (
+\begin{DoxyParamCaption}
+\item[{const {\bf Time} \&}]{t}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a3c752c5abf71c05783fb947910239902}{}\label{classns3_1_1TcpCubic_a3c752c5abf71c05783fb947910239902}
+
+
+Clamp time value in a range. 
+
+The returned value is t, clamped in a range specified by attributes (Hystart\+Delay\+Min $<$ t $<$ Hystart\+Delay\+Max)
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & \hyperlink{classns3_1_1Time}{Time} value to clamp \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+t itself if it is in range, otherwise the min or max value 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+371 \{
+372   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << t);
+373 
+374   \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} ret = t;
+375   \textcolor{keywordflow}{if} (t > \hyperlink{classns3_1_1TcpCubic_a1003aa1c760f12195ea62f0e86dbcfb4}{m\_hystartDelayMax})
+376     \{
+377       ret = \hyperlink{classns3_1_1TcpCubic_a1003aa1c760f12195ea62f0e86dbcfb4}{m\_hystartDelayMax};
+378     \}
+379   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (t < \hyperlink{classns3_1_1TcpCubic_a63dffc9a29dc6577a99c4046efcb01f0}{m\_hystartDelayMin})
+380     \{
+381       ret = \hyperlink{classns3_1_1TcpCubic_a63dffc9a29dc6577a99c4046efcb01f0}{m\_hystartDelayMin};
+382     \}
+383 
+384   \textcolor{keywordflow}{return} ret;
+385 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Hystart\+Reset@{Hystart\+Reset}}
+\index{Hystart\+Reset@{Hystart\+Reset}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Hystart\+Reset(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb)}{HystartReset(Ptr< const TcpSocketState > tcb)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Cubic\+::\+Hystart\+Reset (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a041ef065895769c50cfc02d39372d08d}{}\label{classns3_1_1TcpCubic_a041ef065895769c50cfc02d39372d08d}
+
+
+Reset Hy\+Start parameters. 
+
+
+\begin{DoxyCode}
+153 \{
+154   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+155 
+156   \hyperlink{classns3_1_1TcpCubic_a9c55defdbfe7bb3e12c6dedaece70434}{m\_roundStart} = \hyperlink{classns3_1_1TcpCubic_a735cbf51912a83d6c1a75d07879ce69e}{m\_lastAck} = \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} ();
+157   \hyperlink{classns3_1_1TcpCubic_a68e4f286739c0436737028bda53f1a48}{m\_endSeq} = tcb->m\_highTxMark;
+158   \hyperlink{classns3_1_1TcpCubic_a0082d2bc456e29345d611b313091bbab}{m\_currRtt} = \hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ();
+159   \hyperlink{classns3_1_1TcpCubic_a189a416124fb57d08f10b40bbdb43394}{m\_sampleCnt} = 0;
+160 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Hystart\+Update@{Hystart\+Update}}
+\index{Hystart\+Update@{Hystart\+Update}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Hystart\+Update(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, const Time \&delay)}{HystartUpdate(Ptr< TcpSocketState > tcb, const Time &delay)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Cubic\+::\+Hystart\+Update (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{const {\bf Time} \&}]{delay}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_ac32cb45bced2f370fe530e307414fb3b}{}\label{classns3_1_1TcpCubic_ac32cb45bced2f370fe530e307414fb3b}
+
+
+Update Hy\+Start parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & Transmission Control Block of the connection \\
+\hline
+{\em delay} & Delay for Hy\+Start algorithm \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+321 \{
+322   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a7964e6aa8f61a9d28973c8267a606ad8}{delay});
+323 
+324   \textcolor{keywordflow}{if} (!(\hyperlink{classns3_1_1TcpCubic_a63fac9018c36941b4bbc5d5f20f21abf}{m\_found} & \hyperlink{classns3_1_1TcpCubic_a34e8c17f1c5c470fa39aa77d6d1bbda5}{m\_hystartDetect}))
+325     \{
+326       \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} now = \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} ();
+327 
+328       \textcolor{comment}{/* first detection parameter - ack-train detection */}
+329       \textcolor{keywordflow}{if} ((now - \hyperlink{classns3_1_1TcpCubic_a735cbf51912a83d6c1a75d07879ce69e}{m\_lastAck}) <= \hyperlink{classns3_1_1TcpCubic_a8aa5da315009dabca1e8136de5e65015}{m\_hystartAckDelta})
+330         \{
+331           \hyperlink{classns3_1_1TcpCubic_a735cbf51912a83d6c1a75d07879ce69e}{m\_lastAck} = now;
+332 
+333           \textcolor{keywordflow}{if} ((now - \hyperlink{classns3_1_1TcpCubic_a9c55defdbfe7bb3e12c6dedaece70434}{m\_roundStart}) > \hyperlink{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}{m\_delayMin})
+334             \{
+335               \hyperlink{classns3_1_1TcpCubic_a63fac9018c36941b4bbc5d5f20f21abf}{m\_found} |= \hyperlink{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707a635d665963ba728e83d92142682d7e11}{PACKET\_TRAIN};
+336             \}
+337         \}
+338 
+339       \textcolor{comment}{/* obtain the minimum delay of more than sampling packets */}
+340       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpCubic_a189a416124fb57d08f10b40bbdb43394}{m\_sampleCnt} < \hyperlink{classns3_1_1TcpCubic_ae86cb481bd166effae7227e90e9bafbb}{m\_hystartMinSamples})
+341         \{
+342           \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpCubic_a0082d2bc456e29345d611b313091bbab}{m\_currRtt} == \hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} () || \hyperlink{classns3_1_1TcpCubic_a0082d2bc456e29345d611b313091bbab}{m\_currRtt} > 
+      \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a7964e6aa8f61a9d28973c8267a606ad8}{delay})
+343             \{
+344               \hyperlink{classns3_1_1TcpCubic_a0082d2bc456e29345d611b313091bbab}{m\_currRtt} = \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a7964e6aa8f61a9d28973c8267a606ad8}{delay};
+345             \}
+346 
+347           ++\hyperlink{classns3_1_1TcpCubic_a189a416124fb57d08f10b40bbdb43394}{m\_sampleCnt};
+348         \}
+349       \textcolor{keywordflow}{else}
+350         \{
+351           \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpCubic_a0082d2bc456e29345d611b313091bbab}{m\_currRtt} > \hyperlink{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}{m\_delayMin} +
+352               \hyperlink{classns3_1_1TcpCubic_a3c752c5abf71c05783fb947910239902}{HystartDelayThresh} (\hyperlink{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}{m\_delayMin}))
+353             \{
+354               \hyperlink{classns3_1_1TcpCubic_a63fac9018c36941b4bbc5d5f20f21abf}{m\_found} |= \hyperlink{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707a17ded510b2f8e4fe197ae70dea628aa7}{DELAY};
+355             \}
+356         \}
+357       \textcolor{comment}{/*}
+358 \textcolor{comment}{       * Either one of two conditions are met,}
+359 \textcolor{comment}{       * we exit from slow start immediately.}
+360 \textcolor{comment}{       */}
+361       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpCubic_a63fac9018c36941b4bbc5d5f20f21abf}{m\_found} & m\_hystartDetect)
+362         \{
+363           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Exit from SS, immediately :-)"});
+364           tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh} = tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd};
+365         \}
+366     \}
+367 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Increase\+Window@{Increase\+Window}}
+\index{Increase\+Window@{Increase\+Window}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Increase\+Window(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked)}{IncreaseWindow(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Cubic\+::\+Increase\+Window (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpCubic_a34659bfac2129d0c100d96e8ce7b24cd}{}\label{classns3_1_1TcpCubic_a34659bfac2129d0c100d96e8ce7b24cd}
+
+
+Congestion avoidance algorithm implementation. 
+
+Mimic the function cong\+\_\+avoid in Linux. New segments have been A\+C\+Ked, and the congestion control duty is to set
+
+The function is allowed to change directly c\+Wnd and/or ss\+Thresh.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments acked \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classns3_1_1TcpCongestionOps_a3cdceb0ace37bc606d34369ab3f920f0}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+164 \{
+165   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked);
+166 
+167   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} < tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh})
+168     \{
+169 
+170       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpCubic_a2df1ddb29a2f2a8e1f1886665a92f687}{m\_hystart} && tcb->\hyperlink{classns3_1_1TcpSocketState_a7a30ba2b675238429c7fe2f0c8d1ce94}{m\_lastAckedSeq} > \hyperlink{classns3_1_1TcpCubic_a68e4f286739c0436737028bda53f1a48}{m\_endSeq})
+171         \{
+172           \hyperlink{classns3_1_1TcpCubic_a041ef065895769c50cfc02d39372d08d}{HystartReset} (tcb);
+173         \}
+174 
+175       tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} += tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+176       segmentsAcked -= 1;
+177 
+178       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"In SlowStart, updated to cwnd "} << tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <<
+179                    \textcolor{stringliteral}{" ssthresh "} << tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+180     \}
+181 
+182   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} >= tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh} && segmentsAcked > 0)
+183     \{
+184       \hyperlink{classns3_1_1TcpCubic_a56b424a0e9790d9ef8b2b2ea6b399d49}{m\_cWndCnt} += segmentsAcked;
+185       uint32\_t cnt = \hyperlink{classns3_1_1TcpCubic_a1676df929585823efe488c35448c69e4}{Update} (tcb);
+186 
+187       \textcolor{comment}{/* According to RFC 6356 even once the new cwnd is}
+188 \textcolor{comment}{       * calculated you must compare this to the number of ACKs received since}
+189 \textcolor{comment}{       * the last cwnd update. If not enough ACKs have been received then cwnd}
+190 \textcolor{comment}{       * cannot be updated.}
+191 \textcolor{comment}{       */}
+192       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpCubic_a56b424a0e9790d9ef8b2b2ea6b399d49}{m\_cWndCnt} >= cnt)
+193         \{
+194           tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} += tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+195           \hyperlink{classns3_1_1TcpCubic_a56b424a0e9790d9ef8b2b2ea6b399d49}{m\_cWndCnt} -= cnt;
+196           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"In CongAvoid, updated to cwnd "} << tcb->
+      \hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd});
+197         \}
+198       \textcolor{keywordflow}{else}
+199         \{
+200           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Not enough segments have been ACKed to increment cwnd."}
+201                        \textcolor{stringliteral}{"Until now "} << \hyperlink{classns3_1_1TcpCubic_a56b424a0e9790d9ef8b2b2ea6b399d49}{m\_cWndCnt} << \textcolor{stringliteral}{" cnd "} << cnt);
+202         \}
+203     \}
+204 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Pkts\+Acked@{Pkts\+Acked}}
+\index{Pkts\+Acked@{Pkts\+Acked}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Pkts\+Acked(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked, const Time \&rtt)}{PktsAcked(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked, const Time &rtt)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Cubic\+::\+Pkts\+Acked (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked, }
+\item[{const {\bf Time} \&}]{rtt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpCubic_abcd72325d169bdd2a3858825aea8ca51}{}\label{classns3_1_1TcpCubic_abcd72325d169bdd2a3858825aea8ca51}
+
+
+Timing information on received A\+CK. 
+
+The function is called every time an A\+CK is received (only one time also for cumulative A\+C\+Ks) and contains timing information. It is optional (congestion controls can not implement it) and the default implementation does nothing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments acked \\
+\hline
+{\em rtt} & last rtt \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpCongestionOps_a76d3ffb7b1a7ba761026e3f94c1f50fa}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+294 \{
+295   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked << rtt);
+296 
+297   \textcolor{comment}{/* Discard delay samples right after fast recovery */}
+298   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpCubic_aa93581f58a0b6e113d533eda3f86b9a7}{m\_epochStart} != \hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ()
+299       && (\hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} () - \hyperlink{classns3_1_1TcpCubic_aa93581f58a0b6e113d533eda3f86b9a7}{m\_epochStart}) < 
+      \hyperlink{classns3_1_1TcpCubic_a10b3b2aedb75eb85ecf5e339462def08}{m\_cubicDelta})
+300     \{
+301       \textcolor{keywordflow}{return};
+302     \}
+303 
+304   \textcolor{comment}{/* first time call or link delay decreases */}
+305   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}{m\_delayMin} == \hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} () || \hyperlink{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}{m\_delayMin} > rtt)
+306     \{
+307       \hyperlink{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}{m\_delayMin} = rtt;
+308     \}
+309 
+310   \textcolor{comment}{/* hystart triggers when cwnd is larger than some threshold */}
+311   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpCubic_a2df1ddb29a2f2a8e1f1886665a92f687}{m\_hystart}
+312       && tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <= tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh}
+313       && tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} >= \hyperlink{classns3_1_1TcpCubic_af23b1714553886c496927ba6d75269b4}{m\_hystartLowWindow} * tcb->
+      \hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize})
+314     \{
+315       \hyperlink{classns3_1_1TcpCubic_ac32cb45bced2f370fe530e307414fb3b}{HystartUpdate} (tcb, rtt);
+316     \}
+317 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 13
+
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!Update@{Update}}
+\index{Update@{Update}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{Update(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb)}{Update(Ptr< TcpSocketState > tcb)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Cubic\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a1676df929585823efe488c35448c69e4}{}\label{classns3_1_1TcpCubic_a1676df929585823efe488c35448c69e4}
+
+
+Cubic window update after a new ack received. 
+
+
+\begin{DoxyCode}
+208 \{
+209   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+210   \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} t;
+211   uint32\_t delta, bicTarget, cnt = 0;
+212   \textcolor{keywordtype}{double} offs;
+213   uint32\_t segCwnd = tcb->\hyperlink{classns3_1_1TcpSocketState_ab6dfe309ca53fd3207dcafede75ad12d}{GetCwndInSegments} ();
+214 
+215   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpCubic_aa93581f58a0b6e113d533eda3f86b9a7}{m\_epochStart} == \hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ())
+216     \{
+217       \hyperlink{classns3_1_1TcpCubic_aa93581f58a0b6e113d533eda3f86b9a7}{m\_epochStart} = \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} ();   \textcolor{comment}{// record the beginning of an epoch}
+218 
+219       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{m\_lastMaxCwnd} <= segCwnd)
+220         \{
+221           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"lastMaxCwnd <= m\_cWnd. K=0 and origin="} << segCwnd);
+222           \hyperlink{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}{m\_bicK} = 0.0;
+223           \hyperlink{classns3_1_1TcpCubic_a10fb71cdb4155d6e61174690e6bc295a}{m\_bicOriginPoint} = segCwnd;
+224         \}
+225       \textcolor{keywordflow}{else}
+226         \{
+227           \hyperlink{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}{m\_bicK} = std::pow ((\hyperlink{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{m\_lastMaxCwnd} - segCwnd) / \hyperlink{classns3_1_1TcpCubic_acb9bb68447f9a9e0eb0cb1f95eb7aca7}{m\_c}, 1 / 3.);
+228           \hyperlink{classns3_1_1TcpCubic_a10fb71cdb4155d6e61174690e6bc295a}{m\_bicOriginPoint} = \hyperlink{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{m\_lastMaxCwnd};
+229           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"lastMaxCwnd > m\_cWnd. K="} << \hyperlink{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}{m\_bicK} <<
+230                         \textcolor{stringliteral}{" and origin="} << \hyperlink{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{m\_lastMaxCwnd});
+231         \}
+232     \}
+233 
+234   t = \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} () + \hyperlink{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}{m\_delayMin} - \hyperlink{classns3_1_1TcpCubic_aa93581f58a0b6e113d533eda3f86b9a7}{m\_epochStart};
+235 
+236   \textcolor{keywordflow}{if} (t.GetSeconds () < \hyperlink{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}{m\_bicK})       \textcolor{comment}{/* t - K */}
+237     \{
+238       offs = \hyperlink{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}{m\_bicK} - t.GetSeconds ();
+239       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"t="} << t.GetSeconds () << \textcolor{stringliteral}{" <k: offs="} << offs);
+240     \}
+241   \textcolor{keywordflow}{else}
+242     \{
+243       offs = t.GetSeconds () - \hyperlink{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}{m\_bicK};
+244       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"t="} << t.GetSeconds () << \textcolor{stringliteral}{" >= k: offs="} << offs);
+245     \}
+246 
+247 
+248   \textcolor{comment}{/* Constant value taken from Experimental Evaluation of Cubic Tcp, available at}
+249 \textcolor{comment}{   * eprints.nuim.ie/1716/1/Hamiltonpfldnet2007\_cubic\_final.pdf */}
+250   delta = \hyperlink{classns3_1_1TcpCubic_acb9bb68447f9a9e0eb0cb1f95eb7aca7}{m\_c} * std::pow (offs, 3);
+251 
+252   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"delta: "} << delta);
+253 
+254   \textcolor{keywordflow}{if} (t.GetSeconds () < \hyperlink{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}{m\_bicK})
+255     \{
+256       \textcolor{comment}{// below origin}
+257       bicTarget = \hyperlink{classns3_1_1TcpCubic_a10fb71cdb4155d6e61174690e6bc295a}{m\_bicOriginPoint} - delta;
+258       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"t < k: Bic Target: "} << bicTarget);
+259     \}
+260   \textcolor{keywordflow}{else}
+261     \{
+262       \textcolor{comment}{// above origin}
+263       bicTarget = \hyperlink{classns3_1_1TcpCubic_a10fb71cdb4155d6e61174690e6bc295a}{m\_bicOriginPoint} + delta;
+264       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"t >= k: Bic Target: "} << bicTarget);
+265     \}
+266 
+267   \textcolor{comment}{// Next the window target is converted into a cnt or count value. CUBIC will}
+268   \textcolor{comment}{// wait until enough new ACKs have arrived that a counter meets or exceeds}
+269   \textcolor{comment}{// this cnt value. This is how the CUBIC implementation simulates growing}
+270   \textcolor{comment}{// cwnd by values other than 1 segment size.}
+271   \textcolor{keywordflow}{if} (bicTarget > segCwnd)
+272     \{
+273       cnt = segCwnd / (bicTarget - segCwnd);
+274       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"target>cwnd. cnt="} << cnt);
+275     \}
+276   \textcolor{keywordflow}{else}
+277     \{
+278       cnt = 100 * segCwnd;
+279     \}
+280 
+281   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{m\_lastMaxCwnd} == 0 && cnt > \hyperlink{classns3_1_1TcpCubic_aafd8945276979821c592ac578746a708}{m\_cntClamp})
+282     \{
+283       cnt = \hyperlink{classns3_1_1TcpCubic_aafd8945276979821c592ac578746a708}{m\_cntClamp};
+284     \}
+285 
+286   \textcolor{comment}{// The maximum rate of cwnd increase CUBIC allows is 1 packet per}
+287   \textcolor{comment}{// 2 packets ACKed, meaning cwnd grows at 1.5x per RTT.}
+288   \textcolor{keywordflow}{return} \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (cnt, 2U);
+289 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 14
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 15
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+beta@{m\+\_\+beta}}
+\index{m\+\_\+beta@{m\+\_\+beta}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+beta}{m_beta}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Cubic\+::m\+\_\+beta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a71879d000e1dcba749c4fae90c8e873d}{}\label{classns3_1_1TcpCubic_a71879d000e1dcba749c4fae90c8e873d}
+
+
+Beta for cubic multiplicative increase. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+bicK@{m\+\_\+bicK}}
+\index{m\+\_\+bicK@{m\+\_\+bicK}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+bicK}{m_bicK}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Cubic\+::m\+\_\+bicK\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}{}\label{classns3_1_1TcpCubic_a2eb43ad263dbf87c343bbdaeea7eefc7}
+
+
+\hyperlink{classns3_1_1Time}{Time} to origin point from the beginning. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+bic\+Origin\+Point@{m\+\_\+bic\+Origin\+Point}}
+\index{m\+\_\+bic\+Origin\+Point@{m\+\_\+bic\+Origin\+Point}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+bic\+Origin\+Point}{m_bicOriginPoint}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Cubic\+::m\+\_\+bic\+Origin\+Point\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a10fb71cdb4155d6e61174690e6bc295a}{}\label{classns3_1_1TcpCubic_a10fb71cdb4155d6e61174690e6bc295a}
+
+
+Origin point of bic function. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+c@{m\+\_\+c}}
+\index{m\+\_\+c@{m\+\_\+c}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+c}{m_c}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Cubic\+::m\+\_\+c\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_acb9bb68447f9a9e0eb0cb1f95eb7aca7}{}\label{classns3_1_1TcpCubic_acb9bb68447f9a9e0eb0cb1f95eb7aca7}
+
+
+Cubic Scaling factor. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+cnt\+Clamp@{m\+\_\+cnt\+Clamp}}
+\index{m\+\_\+cnt\+Clamp@{m\+\_\+cnt\+Clamp}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+cnt\+Clamp}{m_cntClamp}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t ns3\+::\+Tcp\+Cubic\+::m\+\_\+cnt\+Clamp\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_aafd8945276979821c592ac578746a708}{}\label{classns3_1_1TcpCubic_aafd8945276979821c592ac578746a708}
+
+
+Modulo of the (avoided) float division for c\+Wnd. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+cubic\+Delta@{m\+\_\+cubic\+Delta}}
+\index{m\+\_\+cubic\+Delta@{m\+\_\+cubic\+Delta}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+cubic\+Delta}{m_cubicDelta}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Cubic\+::m\+\_\+cubic\+Delta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a10b3b2aedb75eb85ecf5e339462def08}{}\label{classns3_1_1TcpCubic_a10b3b2aedb75eb85ecf5e339462def08}
+
+
+\hyperlink{classns3_1_1Time}{Time} to wait after recovery before update. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+curr\+Rtt@{m\+\_\+curr\+Rtt}}
+\index{m\+\_\+curr\+Rtt@{m\+\_\+curr\+Rtt}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+curr\+Rtt}{m_currRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Cubic\+::m\+\_\+curr\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a0082d2bc456e29345d611b313091bbab}{}\label{classns3_1_1TcpCubic_a0082d2bc456e29345d611b313091bbab}
+
+
+Current Rtt. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+c\+Wnd\+Cnt@{m\+\_\+c\+Wnd\+Cnt}}
+\index{m\+\_\+c\+Wnd\+Cnt@{m\+\_\+c\+Wnd\+Cnt}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+c\+Wnd\+Cnt}{m_cWndCnt}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Cubic\+::m\+\_\+c\+Wnd\+Cnt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a56b424a0e9790d9ef8b2b2ea6b399d49}{}\label{classns3_1_1TcpCubic_a56b424a0e9790d9ef8b2b2ea6b399d49}
+
+
+c\+Wnd integer-\/to-\/float counter 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+delay\+Min@{m\+\_\+delay\+Min}}
+\index{m\+\_\+delay\+Min@{m\+\_\+delay\+Min}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+delay\+Min}{m_delayMin}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Cubic\+::m\+\_\+delay\+Min\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}{}\label{classns3_1_1TcpCubic_a97143c4377ca57cac3095206a85e8db0}
+
+
+Min delay. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+end\+Seq@{m\+\_\+end\+Seq}}
+\index{m\+\_\+end\+Seq@{m\+\_\+end\+Seq}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+end\+Seq}{m_endSeq}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sequence\+Number32} ns3\+::\+Tcp\+Cubic\+::m\+\_\+end\+Seq\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a68e4f286739c0436737028bda53f1a48}{}\label{classns3_1_1TcpCubic_a68e4f286739c0436737028bda53f1a48}
+
+
+End sequence of the round. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+epoch\+Start@{m\+\_\+epoch\+Start}}
+\index{m\+\_\+epoch\+Start@{m\+\_\+epoch\+Start}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+epoch\+Start}{m_epochStart}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Cubic\+::m\+\_\+epoch\+Start\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_aa93581f58a0b6e113d533eda3f86b9a7}{}\label{classns3_1_1TcpCubic_aa93581f58a0b6e113d533eda3f86b9a7}
+
+
+Beginning of an epoch. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+fast\+Convergence@{m\+\_\+fast\+Convergence}}
+\index{m\+\_\+fast\+Convergence@{m\+\_\+fast\+Convergence}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+fast\+Convergence}{m_fastConvergence}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Tcp\+Cubic\+::m\+\_\+fast\+Convergence\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a90051598ce6276440db0c3b5c0118ebf}{}\label{classns3_1_1TcpCubic_a90051598ce6276440db0c3b5c0118ebf}
+
+
+Enable or disable fast convergence algorithm. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+found@{m\+\_\+found}}
+\index{m\+\_\+found@{m\+\_\+found}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+found}{m_found}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Tcp\+Cubic\+::m\+\_\+found\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a63fac9018c36941b4bbc5d5f20f21abf}{}\label{classns3_1_1TcpCubic_a63fac9018c36941b4bbc5d5f20f21abf}
+
+
+The exit point is found? 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+hystart@{m\+\_\+hystart}}
+\index{m\+\_\+hystart@{m\+\_\+hystart}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+hystart}{m_hystart}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Tcp\+Cubic\+::m\+\_\+hystart\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a2df1ddb29a2f2a8e1f1886665a92f687}{}\label{classns3_1_1TcpCubic_a2df1ddb29a2f2a8e1f1886665a92f687}
+
+
+Enable or disable Hy\+Start algorithm. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+hystart\+Ack\+Delta@{m\+\_\+hystart\+Ack\+Delta}}
+\index{m\+\_\+hystart\+Ack\+Delta@{m\+\_\+hystart\+Ack\+Delta}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+hystart\+Ack\+Delta}{m_hystartAckDelta}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Cubic\+::m\+\_\+hystart\+Ack\+Delta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a8aa5da315009dabca1e8136de5e65015}{}\label{classns3_1_1TcpCubic_a8aa5da315009dabca1e8136de5e65015}
+
+
+Spacing between ack\textquotesingle{}s indicating train. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+hystart\+Delay\+Max@{m\+\_\+hystart\+Delay\+Max}}
+\index{m\+\_\+hystart\+Delay\+Max@{m\+\_\+hystart\+Delay\+Max}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+hystart\+Delay\+Max}{m_hystartDelayMax}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Cubic\+::m\+\_\+hystart\+Delay\+Max\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a1003aa1c760f12195ea62f0e86dbcfb4}{}\label{classns3_1_1TcpCubic_a1003aa1c760f12195ea62f0e86dbcfb4}
+
+
+Maximum time for hystart algorithm. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+hystart\+Delay\+Min@{m\+\_\+hystart\+Delay\+Min}}
+\index{m\+\_\+hystart\+Delay\+Min@{m\+\_\+hystart\+Delay\+Min}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+hystart\+Delay\+Min}{m_hystartDelayMin}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Cubic\+::m\+\_\+hystart\+Delay\+Min\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a63dffc9a29dc6577a99c4046efcb01f0}{}\label{classns3_1_1TcpCubic_a63dffc9a29dc6577a99c4046efcb01f0}
+
+
+Minimum time for hystart algorithm. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+hystart\+Detect@{m\+\_\+hystart\+Detect}}
+\index{m\+\_\+hystart\+Detect@{m\+\_\+hystart\+Detect}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+hystart\+Detect}{m_hystartDetect}}]{\setlength{\rightskip}{0pt plus 5cm}int ns3\+::\+Tcp\+Cubic\+::m\+\_\+hystart\+Detect\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a34e8c17f1c5c470fa39aa77d6d1bbda5}{}\label{classns3_1_1TcpCubic_a34e8c17f1c5c470fa39aa77d6d1bbda5}
+
+
+Detect way for Hy\+Start algorithm. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1TcpCubic_adc8acf4d99d45daa4bff0c47dc9aa707}{Hybrid\+S\+S\+Detection\+Mode} 
+\end{DoxySeeAlso}
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+hystart\+Low\+Window@{m\+\_\+hystart\+Low\+Window}}
+\index{m\+\_\+hystart\+Low\+Window@{m\+\_\+hystart\+Low\+Window}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+hystart\+Low\+Window}{m_hystartLowWindow}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Cubic\+::m\+\_\+hystart\+Low\+Window\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_af23b1714553886c496927ba6d75269b4}{}\label{classns3_1_1TcpCubic_af23b1714553886c496927ba6d75269b4}
+
+
+Lower bound c\+Wnd for hybrid slow start (segments) 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+hystart\+Min\+Samples@{m\+\_\+hystart\+Min\+Samples}}
+\index{m\+\_\+hystart\+Min\+Samples@{m\+\_\+hystart\+Min\+Samples}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+hystart\+Min\+Samples}{m_hystartMinSamples}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t ns3\+::\+Tcp\+Cubic\+::m\+\_\+hystart\+Min\+Samples\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_ae86cb481bd166effae7227e90e9bafbb}{}\label{classns3_1_1TcpCubic_ae86cb481bd166effae7227e90e9bafbb}
+
+
+Number of delay samples for detecting the increase of delay. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+initial\+Cwnd@{m\+\_\+initial\+Cwnd}}
+\index{m\+\_\+initial\+Cwnd@{m\+\_\+initial\+Cwnd}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+initial\+Cwnd}{m_initialCwnd}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Cubic\+::m\+\_\+initial\+Cwnd\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_adfc5ffb73bcdeb85814048a2adf01c1e}{}\label{classns3_1_1TcpCubic_adfc5ffb73bcdeb85814048a2adf01c1e}
+
+
+Initial c\+Wnd. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+last\+Ack@{m\+\_\+last\+Ack}}
+\index{m\+\_\+last\+Ack@{m\+\_\+last\+Ack}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+last\+Ack}{m_lastAck}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Cubic\+::m\+\_\+last\+Ack\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a735cbf51912a83d6c1a75d07879ce69e}{}\label{classns3_1_1TcpCubic_a735cbf51912a83d6c1a75d07879ce69e}
+
+
+Last time when the A\+CK spacing is close. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+last\+Max\+Cwnd@{m\+\_\+last\+Max\+Cwnd}}
+\index{m\+\_\+last\+Max\+Cwnd@{m\+\_\+last\+Max\+Cwnd}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+last\+Max\+Cwnd}{m_lastMaxCwnd}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Cubic\+::m\+\_\+last\+Max\+Cwnd\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}{}\label{classns3_1_1TcpCubic_adce8ab449a7a20e606b9021c4460b956}
+
+
+Last maximum c\+Wnd. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+round\+Start@{m\+\_\+round\+Start}}
+\index{m\+\_\+round\+Start@{m\+\_\+round\+Start}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+round\+Start}{m_roundStart}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Cubic\+::m\+\_\+round\+Start\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a9c55defdbfe7bb3e12c6dedaece70434}{}\label{classns3_1_1TcpCubic_a9c55defdbfe7bb3e12c6dedaece70434}
+
+
+Beginning of each round. 
+
+\index{ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}!m\+\_\+sample\+Cnt@{m\+\_\+sample\+Cnt}}
+\index{m\+\_\+sample\+Cnt@{m\+\_\+sample\+Cnt}!ns3\+::\+Tcp\+Cubic@{ns3\+::\+Tcp\+Cubic}}
+\subsubsection[{\texorpdfstring{m\+\_\+sample\+Cnt}{m_sampleCnt}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Cubic\+::m\+\_\+sample\+Cnt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpCubic_a189a416124fb57d08f10b40bbdb43394}{}\label{classns3_1_1TcpCubic_a189a416124fb57d08f10b40bbdb43394}
+
+
+Count of samples for Hy\+Start. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{tcp-cubic_8h}{tcp-\/cubic.\+h}\item 
+internet/model/\hyperlink{tcp-cubic_8cc}{tcp-\/cubic.\+cc}\end{DoxyCompactItemize}

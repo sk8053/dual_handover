@@ -1,0 +1,119 @@
+\hypertarget{uan-rc-example_8cc}{}\section{uan/examples/uan-\/rc-\/example.cc File Reference}
+\label{uan-rc-example_8cc}\index{uan/examples/uan-\/rc-\/example.\+cc@{uan/examples/uan-\/rc-\/example.\+cc}}
+{\ttfamily \#include \char`\"{}uan-\/rc-\/example.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/callback.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/stats-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+Include dependency graph for uan-\/rc-\/example.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{uan-rc-example_8cc_a6a8f67445888141ee4e4b37eb6a47dea}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Uan\+Rc\+Example\char`\"{})
+\item 
+int \hyperlink{uan-rc-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This example uses Uan\+Mac\+Rc and Uan\+Mac\+Rc\+Gw which combined form a system using what is reffered to as R\+C-\/\+M\+AC. Details of R\+C-\/\+M\+AC will be published soon. In brief terms, R\+C-\/\+M\+AC is a dual channel protocol wherein the available bandwidth is dynamically divided into two channels, a reservation channel and a data channel. The network is assumed to consist of a single gateway node which services several non-\/gateway nodes.
+
+Time is divided into cycles. The non-\/gateway nodes transmit R\+TS packets on the reservation channel in parallel to scheduled data transmissions (scheduled in the previous cycle), and the gateway stores these requests for the duration of the cycle. At the start of the next cycle the gateway node transmits a C\+TS which contains packet transmission times for reserved packets as well as bandwidth allocation information
+
+This script deploys a single gateway node (current Uan\+Mac\+Rc only supports a single gateway) in the center of a region and then distributes non-\/gateway nodes around the gateway with a uniformly distributed range between each node and the gateway.
+
+The script supports two simulation types. By default the gateway dynamically determines the optimal parameter settings and simulations are run with varying number of nodes (Sim\+Min to Sim\+Max as set by the command line). If Do\+Node=0 is given as a command line option then the mac parameter \char`\"{}a\char`\"{} (approximate expected number of successful R\+TS arrivals per cycle) is varied as the simulation parameter.
+
+For questions about this M\+AC protocol email \char`\"{}lentracy@gmail.\+com\char`\"{} 
+
+\subsection{Function Documentation}
+\index{uan-\/rc-\/example.\+cc@{uan-\/rc-\/example.\+cc}!main@{main}}
+\index{main@{main}!uan-\/rc-\/example.\+cc@{uan-\/rc-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{uan-rc-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{uan-rc-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+252 \{
+253 
+254   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"UanRcExample"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+255 
+256   \hyperlink{classExperiment}{Experiment} exp;
+257 
+258   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+259   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"TotalRate"}, \textcolor{stringliteral}{"Total channel capacity"}, exp.\hyperlink{classExperiment_a5259793f074543984f6bcf15b8add220}{m\_totalRate});
+260   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"NumberRates"}, \textcolor{stringliteral}{"Number of divided rates ( (NumberRates+1)%TotalRate should be 0)"}, 
+      exp.\hyperlink{classExperiment_abdde6720121e71224882f7b87536d6ff}{m\_numRates});
+261   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"MaxRange"}, \textcolor{stringliteral}{"Maximum range between gateway and acoustic node"}, exp.
+      \hyperlink{classExperiment_ae46d510ef227a0617af6b665c5ac3d9f}{m\_maxRange});
+262   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"SimMin"}, \textcolor{stringliteral}{"Minimum parameter to test (nodes if DoNode=1, \(\backslash\)"a\(\backslash\)" param otherwise)"}, 
+      exp.\hyperlink{classExperiment_a1e89e71ab70949905316be28953a792e}{m\_simMin});
+263   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"SimMax"}, \textcolor{stringliteral}{"Maximum parameter to test (nodes if DoNode=1, \(\backslash\)"a\(\backslash\)" param otherwise)"}, 
+      exp.\hyperlink{classExperiment_a8eb0623f0942827bc464344394072ebb}{m\_simMax});
+264   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"SimStep"}, \textcolor{stringliteral}{"Amount to increment param per trial"}, exp.
+      \hyperlink{classExperiment_a467fcd8d0cf8bd7a76b399a6cd649a35}{m\_simStep});
+265   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"DataFile"}, \textcolor{stringliteral}{"Filename for GnuPlot"}, exp.\hyperlink{classExperiment_af7aa1ff58f32f02958b76e48bd2e3c6e}{m\_gnuplotfile});
+266   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"NumberNodes"}, \textcolor{stringliteral}{"Number of nodes (invalid for doNode=1)"}, exp.
+      \hyperlink{classExperiment_ac22115998156e9cbf5a2112a1ec9b6bb}{m\_numNodes});
+267   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"SIFS"}, \textcolor{stringliteral}{"SIFS time duration"}, exp.\hyperlink{classExperiment_a4da00b956aa11609381dae2878c61bed}{m\_sifs});
+268   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"PktSize"}, \textcolor{stringliteral}{"Packet size in bytes"}, exp.\hyperlink{classExperiment_ae73c947a54c222644fecfefd6d70b5a4}{m\_pktSize});
+269   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"SimTime"}, \textcolor{stringliteral}{"Simulation time per trial"}, exp.\hyperlink{classExperiment_a3440bfac76174e478b35aa810d17543c}{m\_simTime});
+270   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"DoNode"}, \textcolor{stringliteral}{"1 for do max nodes simulation (invalidates AMin and AMax values)"}, exp.
+      \hyperlink{classExperiment_a7fe0a03d1eb287247ac02760bf3a3dd5}{m\_doNode});
+271   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+272 
+273 
+274 
+275   exp.\hyperlink{classExperiment_ab5cf12c658d459b5d2004c2b432d0e83}{CreateDualModes} (12000);
+276 
+277   ;
+278 
+279   \hyperlink{classns3_1_1Gnuplot2dDataset}{Gnuplot2dDataset} \hyperlink{generate__test__data__lte__sinr_8m_a4ab47e54c2f73ad4c0eb3974709721cd}{ds};
+280   \textcolor{keywordflow}{for} (uint32\_t param=exp.\hyperlink{classExperiment_a1e89e71ab70949905316be28953a792e}{m\_simMin}; param<=exp.\hyperlink{classExperiment_a8eb0623f0942827bc464344394072ebb}{m\_simMax}; param += exp.
+      \hyperlink{classExperiment_a467fcd8d0cf8bd7a76b399a6cd649a35}{m\_simStep})
+281     \{
+282       uint32\_t bytesRx = exp.\hyperlink{classExperiment_a2e7dad008a78e106fdbde1917d0bca1b}{Run} (param);
+283       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"param="} << param << \textcolor{stringliteral}{":  Received "} << bytesRx << \textcolor{stringliteral}{" bytes at sink"});
+284 
+285       \textcolor{keywordtype}{double} util = bytesRx*8.0/(exp.\hyperlink{classExperiment_a3440bfac76174e478b35aa810d17543c}{m\_simTime}.\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} ()*exp.
+      \hyperlink{classExperiment_a5259793f074543984f6bcf15b8add220}{m\_totalRate});
+286 
+287       ds.\hyperlink{classns3_1_1Gnuplot2dDataset_abd93f7c8fa2d1ed643c09d7fb8d5ef27}{Add} (param, util);
+288 
+289       SeedManager::SetRun (SeedManager::GetRun () + 1);
+290     \}
+291 
+292   \hyperlink{classns3_1_1Gnuplot}{Gnuplot} gp;
+293   gp.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} (ds);
+294   std::ofstream of (exp.\hyperlink{classExperiment_af7aa1ff58f32f02958b76e48bd2e3c6e}{m\_gnuplotfile}.c\_str ());
+295   \textcolor{keywordflow}{if} (!of.is\_open ())
+296     \{
+297       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Can not open GNU Plot outfile: "} << exp.
+      \hyperlink{classExperiment_af7aa1ff58f32f02958b76e48bd2e3c6e}{m\_gnuplotfile});
+298     \}
+299   gp.\hyperlink{classns3_1_1Gnuplot_a6cd487453f61e2405cc7cc9c80dc0cf2}{GenerateOutput} (of);
+300 
+301 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{uan-\/rc-\/example.\+cc@{uan-\/rc-\/example.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!uan-\/rc-\/example.\+cc@{uan-\/rc-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Uan\+Rc\+Example"")}{NS_LOG_COMPONENT_DEFINE("UanRcExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Uan\+Rc\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{uan-rc-example_8cc_a6a8f67445888141ee4e4b37eb6a47dea}{}\label{uan-rc-example_8cc_a6a8f67445888141ee4e4b37eb6a47dea}

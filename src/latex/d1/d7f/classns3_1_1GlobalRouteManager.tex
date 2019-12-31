@@ -1,0 +1,208 @@
+\hypertarget{classns3_1_1GlobalRouteManager}{}\section{ns3\+:\+:Global\+Route\+Manager Class Reference}
+\label{classns3_1_1GlobalRouteManager}\index{ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}}
+
+
+A global global router.  
+
+
+
+
+{\ttfamily \#include $<$global-\/route-\/manager.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Global\+Route\+Manager\+:
+% FIG 0
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static uint32\+\_\+t \hyperlink{classns3_1_1GlobalRouteManager_a7d2bab784e14064823d4115d65e949b7}{Allocate\+Router\+Id} ()
+\begin{DoxyCompactList}\small\item\em Allocate a 32-\/bit router ID from monotonically increasing counter. \end{DoxyCompactList}\item 
+static void \hyperlink{classns3_1_1GlobalRouteManager_a046807276556c567868fca992895b695}{Delete\+Global\+Routes} ()
+\begin{DoxyCompactList}\small\item\em Delete all static routes on all nodes that have a Global\+Router\+Interface. \end{DoxyCompactList}\item 
+static void \hyperlink{classns3_1_1GlobalRouteManager_af0d9e010837cc915d430b17f63175910}{Build\+Global\+Routing\+Database} ()
+\begin{DoxyCompactList}\small\item\em Build the routing database by gathering Link State Advertisements from each node exporting a \hyperlink{classns3_1_1GlobalRouter}{Global\+Router} interface. \end{DoxyCompactList}\item 
+static void \hyperlink{classns3_1_1GlobalRouteManager_aea21f6fb4dbecb0d2e3dadc7db1087d3}{Initialize\+Routes} ()
+\begin{DoxyCompactList}\small\item\em Compute routes using a Dijkstra S\+PF computation and populate per-\/node forwarding tables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1GlobalRouteManager_a96c2527a57f934de88689f065ea5a742}{Global\+Route\+Manager} (\hyperlink{classns3_1_1GlobalRouteManager}{Global\+Route\+Manager} \&srm)
+\begin{DoxyCompactList}\small\item\em Global Route Manager copy construction is disallowed. There\textquotesingle{}s no need for it and a compiler provided shallow copy would be wrong. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1GlobalRouteManager}{Global\+Route\+Manager} \& \hyperlink{classns3_1_1GlobalRouteManager_a9b86dc22a0fb5d9f1b9d445d6b9cfff6}{operator=} (\hyperlink{classns3_1_1GlobalRouteManager}{Global\+Route\+Manager} \&srm)
+\begin{DoxyCompactList}\small\item\em Global Router copy assignment operator is disallowed. There\textquotesingle{}s no need for it and a compiler provided shallow copy would be wrong. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A global global router. 
+
+This singleton object can query interface each node in the system for a \hyperlink{classns3_1_1GlobalRouter}{Global\+Router} interface. For those nodes, it fetches one or more Link State Advertisements and stores them in a local database. Then, it can compute shortest paths on a per-\/node basis to all routers, and finally configure each of the node\textquotesingle{}s forwarding tables.
+
+The design is guided by O\+S\+P\+Fv2 \{2328\} section 16.\+1.\+1 and quagga ospfd. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}!Global\+Route\+Manager@{Global\+Route\+Manager}}
+\index{Global\+Route\+Manager@{Global\+Route\+Manager}!ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}}
+\subsubsection[{\texorpdfstring{Global\+Route\+Manager(\+Global\+Route\+Manager \&srm)}{GlobalRouteManager(GlobalRouteManager &srm)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Global\+Route\+Manager\+::\+Global\+Route\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Global\+Route\+Manager} \&}]{srm}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManager_a96c2527a57f934de88689f065ea5a742}{}\label{classns3_1_1GlobalRouteManager_a96c2527a57f934de88689f065ea5a742}
+
+
+Global Route Manager copy construction is disallowed. There\textquotesingle{}s no need for it and a compiler provided shallow copy would be wrong. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em srm} & object to copy from \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}!Allocate\+Router\+Id@{Allocate\+Router\+Id}}
+\index{Allocate\+Router\+Id@{Allocate\+Router\+Id}!ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}}
+\subsubsection[{\texorpdfstring{Allocate\+Router\+Id()}{AllocateRouterId()}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Global\+Route\+Manager\+::\+Allocate\+Router\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1GlobalRouteManager_a7d2bab784e14064823d4115d65e949b7}{}\label{classns3_1_1GlobalRouteManager_a7d2bab784e14064823d4115d65e949b7}
+
+
+Allocate a 32-\/bit router ID from monotonically increasing counter. 
+
+\begin{DoxyReturn}{Returns}
+A new new Router\+Id. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+63 \{
+64   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+65   \textcolor{keyword}{static} uint32\_t routerId = 0;
+66   \textcolor{keywordflow}{return} routerId++;
+67 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}!Build\+Global\+Routing\+Database@{Build\+Global\+Routing\+Database}}
+\index{Build\+Global\+Routing\+Database@{Build\+Global\+Routing\+Database}!ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}}
+\subsubsection[{\texorpdfstring{Build\+Global\+Routing\+Database()}{BuildGlobalRoutingDatabase()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+::\+Build\+Global\+Routing\+Database (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1GlobalRouteManager_af0d9e010837cc915d430b17f63175910}{}\label{classns3_1_1GlobalRouteManager_af0d9e010837cc915d430b17f63175910}
+
+
+Build the routing database by gathering Link State Advertisements from each node exporting a \hyperlink{classns3_1_1GlobalRouter}{Global\+Router} interface. 
+
+
+\begin{DoxyCode}
+47 \{
+48   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+49   \hyperlink{classns3_1_1SimulationSingleton_a35870bf2664aaa6e653ce99fb68fc8fc}{SimulationSingleton<GlobalRouteManagerImpl>::Get} ()->
+50   \hyperlink{classns3_1_1GlobalRouteManager_af0d9e010837cc915d430b17f63175910}{BuildGlobalRoutingDatabase} ();
+51 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}!Delete\+Global\+Routes@{Delete\+Global\+Routes}}
+\index{Delete\+Global\+Routes@{Delete\+Global\+Routes}!ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}}
+\subsubsection[{\texorpdfstring{Delete\+Global\+Routes()}{DeleteGlobalRoutes()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+::\+Delete\+Global\+Routes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1GlobalRouteManager_a046807276556c567868fca992895b695}{}\label{classns3_1_1GlobalRouteManager_a046807276556c567868fca992895b695}
+
+
+Delete all static routes on all nodes that have a Global\+Router\+Interface. 
+
+
+\begin{DoxyCode}
+39 \{
+40   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+41   \hyperlink{classns3_1_1SimulationSingleton_a35870bf2664aaa6e653ce99fb68fc8fc}{SimulationSingleton<GlobalRouteManagerImpl>::Get} ()->
+42   \hyperlink{classns3_1_1GlobalRouteManager_a046807276556c567868fca992895b695}{DeleteGlobalRoutes} ();
+43 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}!Initialize\+Routes@{Initialize\+Routes}}
+\index{Initialize\+Routes@{Initialize\+Routes}!ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}}
+\subsubsection[{\texorpdfstring{Initialize\+Routes()}{InitializeRoutes()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Global\+Route\+Manager\+::\+Initialize\+Routes (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1GlobalRouteManager_aea21f6fb4dbecb0d2e3dadc7db1087d3}{}\label{classns3_1_1GlobalRouteManager_aea21f6fb4dbecb0d2e3dadc7db1087d3}
+
+
+Compute routes using a Dijkstra S\+PF computation and populate per-\/node forwarding tables. 
+
+
+\begin{DoxyCode}
+55 \{
+56   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+57   \hyperlink{classns3_1_1SimulationSingleton_a35870bf2664aaa6e653ce99fb68fc8fc}{SimulationSingleton<GlobalRouteManagerImpl>::Get} ()->
+58   \hyperlink{classns3_1_1GlobalRouteManager_aea21f6fb4dbecb0d2e3dadc7db1087d3}{InitializeRoutes} ();
+59 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}!operator=@{operator=}}
+\index{operator=@{operator=}!ns3\+::\+Global\+Route\+Manager@{ns3\+::\+Global\+Route\+Manager}}
+\subsubsection[{\texorpdfstring{operator=(\+Global\+Route\+Manager \&srm)}{operator=(GlobalRouteManager &srm)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Global\+Route\+Manager}\& ns3\+::\+Global\+Route\+Manager\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Global\+Route\+Manager} \&}]{srm}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GlobalRouteManager_a9b86dc22a0fb5d9f1b9d445d6b9cfff6}{}\label{classns3_1_1GlobalRouteManager_a9b86dc22a0fb5d9f1b9d445d6b9cfff6}
+
+
+Global Router copy assignment operator is disallowed. There\textquotesingle{}s no need for it and a compiler provided shallow copy would be wrong. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em srm} & object to copy from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the copied object 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{global-route-manager_8h}{global-\/route-\/manager.\+h}\item 
+internet/model/\hyperlink{global-route-manager_8cc}{global-\/route-\/manager.\+cc}\end{DoxyCompactItemize}

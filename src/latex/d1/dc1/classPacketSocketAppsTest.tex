@@ -1,0 +1,168 @@
+\hypertarget{classPacketSocketAppsTest}{}\section{Packet\+Socket\+Apps\+Test Class Reference}
+\label{classPacketSocketAppsTest}\index{Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}}
+
+
+Inheritance diagram for Packet\+Socket\+Apps\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Packet\+Socket\+Apps\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classPacketSocketAppsTest_ab2f827993135c4bf011cb6247aed5d43}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+\hyperlink{classPacketSocketAppsTest_ad9dfcd23a9958967fc0edf0a61a7b57e}{Packet\+Socket\+Apps\+Test} ()
+\item 
+void \hyperlink{classPacketSocketAppsTest_a98d4457730e534b516b66db2b1181226}{Receive\+Pkt} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ packet, const \hyperlink{classns3_1_1Address}{Address} \&\hyperlink{lte__amc_8m_a1b4c81ff74eb1a626b5ade44c81004b3}{from})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classPacketSocketAppsTest_a0738bf3e280b06db8467f6b5bf14a6b0}{m\+\_\+received\+Packet\+Size}
+\item 
+uint32\+\_\+t \hyperlink{classPacketSocketAppsTest_a9683f11fc55d39e7e0938d82a11de79c}{m\+\_\+received\+Packet\+Number}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}!Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}}
+\index{Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}!Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}}
+\subsubsection[{\texorpdfstring{Packet\+Socket\+Apps\+Test()}{PacketSocketAppsTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Packet\+Socket\+Apps\+Test\+::\+Packet\+Socket\+Apps\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPacketSocketAppsTest_ad9dfcd23a9958967fc0edf0a61a7b57e}{}\label{classPacketSocketAppsTest_ad9dfcd23a9958967fc0edf0a61a7b57e}
+
+\begin{DoxyCode}
+48   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Packet Socket Apps test"})
+49 \{
+50   \hyperlink{classPacketSocketAppsTest_a0738bf3e280b06db8467f6b5bf14a6b0}{m\_receivedPacketSize} = 0;
+51   \hyperlink{classPacketSocketAppsTest_a9683f11fc55d39e7e0938d82a11de79c}{m\_receivedPacketNumber} = 0;
+52 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Packet\+Socket\+Apps\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPacketSocketAppsTest_ab2f827993135c4bf011cb6247aed5d43}{}\label{classPacketSocketAppsTest_ab2f827993135c4bf011cb6247aed5d43}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+66 \{
+67   \textcolor{comment}{// Create topology}
+68 
+69   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+70   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+71 
+72   \hyperlink{classns3_1_1PacketSocketHelper}{PacketSocketHelper} packetSocket;
+73 
+74   \textcolor{comment}{// give packet socket powers to nodes.}
+75   packetSocket.\hyperlink{classns3_1_1PacketSocketHelper_a33f449fee7fd10411949d17feba6d33e}{Install} (nodes);
+76 
+77   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleNetDevice>} txDev;
+78   txDev = CreateObject<SimpleNetDevice> ();
+79   nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (txDev);
+80 
+81   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleNetDevice>} rxDev;
+82   rxDev = CreateObject<SimpleNetDevice> ();
+83   nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1)->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (rxDev);
+84 
+85   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleChannel>} channel = CreateObject<SimpleChannel> ();
+86   txDev->\hyperlink{classns3_1_1SimpleNetDevice_af9e9828ad584b5ba538f18f645f162e0}{SetChannel} (channel);
+87   rxDev->\hyperlink{classns3_1_1SimpleNetDevice_af9e9828ad584b5ba538f18f645f162e0}{SetChannel} (channel);
+88   txDev->\hyperlink{classns3_1_1SimpleNetDevice_a7b0e64c1e4ee9841de0a892db96ddd68}{SetNode} (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+89   rxDev->\hyperlink{classns3_1_1SimpleNetDevice_a7b0e64c1e4ee9841de0a892db96ddd68}{SetNode} (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+90 
+91 
+92   \hyperlink{classns3_1_1PacketSocketAddress}{PacketSocketAddress} socketAddr;
+93   socketAddr.\hyperlink{classns3_1_1PacketSocketAddress_ad1caa016f4d27c9d5f2c06dbfc53f8a3}{SetSingleDevice} (txDev->\hyperlink{classns3_1_1SimpleNetDevice_ad49c077636c82c11b3d76dcb12dfa203}{GetIfIndex} ());
+94   socketAddr.\hyperlink{classns3_1_1PacketSocketAddress_a9452f9410a97e57344e464e25c2ab0f3}{SetPhysicalAddress} (rxDev->\hyperlink{classns3_1_1SimpleNetDevice_a813ed60e4386e8f46493a575f636606a}{GetAddress} ());
+95   socketAddr.\hyperlink{classns3_1_1PacketSocketAddress_a9020962e39c238277f3b2f0de605647a}{SetProtocol} (1);
+96 
+97   \hyperlink{classns3_1_1Ptr}{Ptr<PacketSocketClient>} client = CreateObject<PacketSocketClient> ();
+98   client->\hyperlink{classns3_1_1PacketSocketClient_ae400727c451d429358b5c85838b901df}{SetRemote} (socketAddr);
+99   client->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (1000));
+100   client->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (3));
+101   nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->\hyperlink{classns3_1_1Node_ab98b4fdc4aadc86366b80e8a79a53f47}{AddApplication} (client);
+102 
+103   \hyperlink{classns3_1_1Ptr}{Ptr<PacketSocketServer>} server = CreateObject<PacketSocketServer> ();
+104   server->\hyperlink{classns3_1_1ObjectBase_a1be45f6fd561e75dcac9dfa81b2b81e4}{TraceConnectWithoutContext} (\textcolor{stringliteral}{"Rx"}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{classPacketSocketAppsTest_a98d4457730e534b516b66db2b1181226}{PacketSocketAppsTest::ReceivePkt}, \textcolor{keyword}{this}));
+105   server->\hyperlink{classns3_1_1PacketSocketServer_a89207b49054571b480ee1d26934907d3}{SetLocal} (socketAddr);
+106   nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1)->\hyperlink{classns3_1_1Node_ab98b4fdc4aadc86366b80e8a79a53f47}{AddApplication} (server);
+107 
+108 
+109   Simulator::Run ();
+110   Simulator::Destroy ();
+111 
+112   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classPacketSocketAppsTest_a9683f11fc55d39e7e0938d82a11de79c}{m\_receivedPacketNumber}, 3, \textcolor{stringliteral}{"Number of
+       packet received"});
+113   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classPacketSocketAppsTest_a0738bf3e280b06db8467f6b5bf14a6b0}{m\_receivedPacketSize}, 1000, \textcolor{stringliteral}{"Size of
+       packet received"});
+114 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}!Receive\+Pkt@{Receive\+Pkt}}
+\index{Receive\+Pkt@{Receive\+Pkt}!Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}}
+\subsubsection[{\texorpdfstring{Receive\+Pkt(\+Ptr$<$ const Packet $>$ packet, const Address \&from)}{ReceivePkt(Ptr< const Packet > packet, const Address &from)}}]{\setlength{\rightskip}{0pt plus 5cm}void Packet\+Socket\+Apps\+Test\+::\+Receive\+Pkt (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Packet} $>$}]{packet, }
+\item[{const {\bf Address} \&}]{from}
+\end{DoxyParamCaption}
+)}\hypertarget{classPacketSocketAppsTest_a98d4457730e534b516b66db2b1181226}{}\label{classPacketSocketAppsTest_a98d4457730e534b516b66db2b1181226}
+
+\begin{DoxyCode}
+55 \{
+56   \textcolor{keywordflow}{if} (packet)
+57     \{
+58       \hyperlink{classPacketSocketAppsTest_a0738bf3e280b06db8467f6b5bf14a6b0}{m\_receivedPacketSize} = packet->\hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} ();
+59       \hyperlink{classPacketSocketAppsTest_a9683f11fc55d39e7e0938d82a11de79c}{m\_receivedPacketNumber}++;
+60     \}
+61 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}!m\+\_\+received\+Packet\+Number@{m\+\_\+received\+Packet\+Number}}
+\index{m\+\_\+received\+Packet\+Number@{m\+\_\+received\+Packet\+Number}!Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+received\+Packet\+Number}{m_receivedPacketNumber}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Packet\+Socket\+Apps\+Test\+::m\+\_\+received\+Packet\+Number\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPacketSocketAppsTest_a9683f11fc55d39e7e0938d82a11de79c}{}\label{classPacketSocketAppsTest_a9683f11fc55d39e7e0938d82a11de79c}
+\index{Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}!m\+\_\+received\+Packet\+Size@{m\+\_\+received\+Packet\+Size}}
+\index{m\+\_\+received\+Packet\+Size@{m\+\_\+received\+Packet\+Size}!Packet\+Socket\+Apps\+Test@{Packet\+Socket\+Apps\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+received\+Packet\+Size}{m_receivedPacketSize}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Packet\+Socket\+Apps\+Test\+::m\+\_\+received\+Packet\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPacketSocketAppsTest_a0738bf3e280b06db8467f6b5bf14a6b0}{}\label{classPacketSocketAppsTest_a0738bf3e280b06db8467f6b5bf14a6b0}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+network/test/\hyperlink{packet-socket-apps-test-suite_8cc}{packet-\/socket-\/apps-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

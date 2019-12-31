@@ -1,0 +1,207 @@
+\hypertarget{lena-cqi-threshold_8cc}{}\section{lte/examples/lena-\/cqi-\/threshold.cc File Reference}
+\label{lena-cqi-threshold_8cc}\index{lte/examples/lena-\/cqi-\/threshold.\+cc@{lte/examples/lena-\/cqi-\/threshold.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/lte-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$ns3/buildings-\/helper.\+h$>$}\\*
+Include dependency graph for lena-\/cqi-\/threshold.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{lena-cqi-threshold_8cc_aac02abe91b3e5592e31bc0f7d844bf4d}{Set\+Position} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Node}{Node} $>$ node, \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} position)
+\item 
+static \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} \hyperlink{lena-cqi-threshold_8cc_acebf763e1a0478cec225f9547941ae54}{Get\+Position} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Node}{Node} $>$ node)
+\item 
+static void \hyperlink{lena-cqi-threshold_8cc_a788bbe00a65fa13f4e4825f94fae3805}{Change\+Position} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Node}{Node} $>$ node)
+\item 
+int \hyperlink{lena-cqi-threshold_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{lena-\/cqi-\/threshold.\+cc@{lena-\/cqi-\/threshold.\+cc}!Change\+Position@{Change\+Position}}
+\index{Change\+Position@{Change\+Position}!lena-\/cqi-\/threshold.\+cc@{lena-\/cqi-\/threshold.\+cc}}
+\subsubsection[{\texorpdfstring{Change\+Position(\+Ptr$<$ Node $>$ node)}{ChangePosition(Ptr< Node > node)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Change\+Position (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Node} $>$}]{node}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{lena-cqi-threshold_8cc_a788bbe00a65fa13f4e4825f94fae3805}{}\label{lena-cqi-threshold_8cc_a788bbe00a65fa13f4e4825f94fae3805}
+
+\begin{DoxyCode}
+49 \{
+50   \hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} pos = \hyperlink{lena-cqi-threshold_8cc_acebf763e1a0478cec225f9547941ae54}{GetPosition} (node);
+51  
+52   \textcolor{keywordflow}{if} (pos.x <= 10.0) 
+53     \{
+54       pos.x = 100000.0; \textcolor{comment}{// force CQI to 0}
+55     \}
+56   \textcolor{keywordflow}{else}
+57     \{
+58       pos.x = 5.0;
+59     \}
+60   \hyperlink{lena-cqi-threshold_8cc_aac02abe91b3e5592e31bc0f7d844bf4d}{SetPosition} (node, pos);
+61   
+62 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{lena-\/cqi-\/threshold.\+cc@{lena-\/cqi-\/threshold.\+cc}!Get\+Position@{Get\+Position}}
+\index{Get\+Position@{Get\+Position}!lena-\/cqi-\/threshold.\+cc@{lena-\/cqi-\/threshold.\+cc}}
+\subsubsection[{\texorpdfstring{Get\+Position(\+Ptr$<$ Node $>$ node)}{GetPosition(Ptr< Node > node)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Vector} Get\+Position (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Node} $>$}]{node}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{lena-cqi-threshold_8cc_acebf763e1a0478cec225f9547941ae54}{}\label{lena-cqi-threshold_8cc_acebf763e1a0478cec225f9547941ae54}
+
+\begin{DoxyCode}
+42 \{
+43   \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} mobility = node->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+44   \textcolor{keywordflow}{return} mobility->\hyperlink{classns3_1_1MobilityModel_aba838f06ec5bbb2d193d94b8c0e4abb4}{GetPosition} ();
+45 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{lena-\/cqi-\/threshold.\+cc@{lena-\/cqi-\/threshold.\+cc}!main@{main}}
+\index{main@{main}!lena-\/cqi-\/threshold.\+cc@{lena-\/cqi-\/threshold.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-cqi-threshold_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{lena-cqi-threshold_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+65 \{       
+66   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+67   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+68         
+69   \textcolor{comment}{// to save a template default attribute file run it like this:}
+70   \textcolor{comment}{// ./waf --command-template="%s --ns3::ConfigStore::Filename=input-defaults.txt
+       --ns3::ConfigStore::Mode=Save --ns3::ConfigStore::FileFormat=RawText" --run src/lte/examples/lena-first-sim}
+71   \textcolor{comment}{//}
+72   \textcolor{comment}{// to load a previously created default attribute file}
+73   \textcolor{comment}{// ./waf --command-template="%s --ns3::ConfigStore::Filename=input-defaults.txt
+       --ns3::ConfigStore::Mode=Load --ns3::ConfigStore::FileFormat=RawText" --run src/lte/examples/lena-first-sim}
+74 
+75   \hyperlink{classns3_1_1ConfigStore}{ConfigStore} inputConfig;
+76   inputConfig.\hyperlink{classns3_1_1ConfigStore_a0a6137574d7c847c3823af8b9d1bb886}{ConfigureDefaults} ();
+77 
+78   \textcolor{comment}{// parse again so you can override default values from the command line}
+79   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+80 
+81   \hyperlink{classns3_1_1Ptr}{Ptr<LteHelper>} lteHelper = CreateObject<LteHelper> ();
+82   lteHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"PathlossModel"}, StringValue (\textcolor{stringliteral}{"
+      ns3::FriisSpectrumPropagationLossModel"}));
+83   \textcolor{comment}{// Uncomment to enable logging}
+84   \textcolor{comment}{//lteHelper->EnableLogComponents ();}
+85 
+86   \textcolor{comment}{// Create Nodes: eNodeB and UE}
+87   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+88   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNodes;
+89   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+90   ueNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+91 
+92   \textcolor{comment}{// Install Mobility Model}
+93   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+94   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+95   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+96   BuildingsHelper::Install (enbNodes);
+97   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+98   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes);
+99   BuildingsHelper::Install (ueNodes);
+100 
+101   \textcolor{comment}{// Create Devices and install them in the Nodes (eNB and UE)}
+102   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbDevs;
+103   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueDevs;
+104 \textcolor{comment}{//   lteHelper->SetSchedulerType ("ns3::RrFfMacScheduler");}
+105   lteHelper->\hyperlink{classns3_1_1LteHelper_a8f86e55b8b80a81732c4b2df00fb25d5}{SetSchedulerType} (\textcolor{stringliteral}{"ns3::PfFfMacScheduler"});
+106   lteHelper->\hyperlink{classns3_1_1LteHelper_a38f8c7f4592b31c0f3dedb53e7909742}{SetSchedulerAttribute} (\textcolor{stringliteral}{"CqiTimerThreshold"}, UintegerValue (3));
+107   enbDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (enbNodes);
+108   ueDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (ueNodes);
+109   
+110   lteHelper->\hyperlink{classns3_1_1LteHelper_abadfdd04d30b261e9b6f0846b4784928}{EnableRlcTraces}();
+111   lteHelper->\hyperlink{classns3_1_1LteHelper_affa3a12841520407d3662417fe41863d}{EnableMacTraces}();
+112 
+113   \textcolor{comment}{// Attach a UE to a eNB}
+114   lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (ueDevs, enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+115   
+116   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.010), &\hyperlink{lena-cqi-threshold_8cc_a788bbe00a65fa13f4e4825f94fae3805}{ChangePosition}, ueNodes.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+117   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.020), &\hyperlink{lena-cqi-threshold_8cc_a788bbe00a65fa13f4e4825f94fae3805}{ChangePosition}, ueNodes.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+118 
+119   \textcolor{comment}{// Activate a data radio bearer}
+120   \textcolor{keyword}{enum} \hyperlink{structns3_1_1EpsBearer_aecf0c67109c5eb4ec0b07226fff5885e}{EpsBearer::Qci} q = EpsBearer::GBR\_CONV\_VOICE;
+121   \hyperlink{structns3_1_1EpsBearer}{EpsBearer} bearer (q);
+122   lteHelper->\hyperlink{classns3_1_1LteHelper_ac896e16cf162e4beeaa292d39ab1b700}{ActivateDataRadioBearer} (ueDevs, bearer);
+123 
+124 
+125   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.030));
+126 
+127   Simulator::Run ();
+128 
+129   \textcolor{comment}{//GtkConfigStore config;}
+130   \textcolor{comment}{//config.ConfigureAttributes ();}
+131 
+132   Simulator::Destroy ();
+133   \textcolor{keywordflow}{return} 0;
+134 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{lena-\/cqi-\/threshold.\+cc@{lena-\/cqi-\/threshold.\+cc}!Set\+Position@{Set\+Position}}
+\index{Set\+Position@{Set\+Position}!lena-\/cqi-\/threshold.\+cc@{lena-\/cqi-\/threshold.\+cc}}
+\subsubsection[{\texorpdfstring{Set\+Position(\+Ptr$<$ Node $>$ node, Vector position)}{SetPosition(Ptr< Node > node, Vector position)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Set\+Position (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Node} $>$}]{node, }
+\item[{{\bf Vector}}]{position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{lena-cqi-threshold_8cc_aac02abe91b3e5592e31bc0f7d844bf4d}{}\label{lena-cqi-threshold_8cc_aac02abe91b3e5592e31bc0f7d844bf4d}
+
+\begin{DoxyCode}
+35 \{
+36   \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} mobility = node->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+37   mobility->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (position);
+38 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+

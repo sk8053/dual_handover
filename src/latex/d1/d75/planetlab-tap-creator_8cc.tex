@@ -1,0 +1,288 @@
+\hypertarget{planetlab-tap-creator_8cc}{}\section{fd-\/net-\/device/helper/planetlab-\/tap-\/creator.cc File Reference}
+\label{planetlab-tap-creator_8cc}\index{fd-\/net-\/device/helper/planetlab-\/tap-\/creator.\+cc@{fd-\/net-\/device/helper/planetlab-\/tap-\/creator.\+cc}}
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$iomanip$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include $<$fcntl.\+h$>$}\\*
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$sys/un.\+h$>$}\\*
+{\ttfamily \#include $<$net/if.\+h$>$}\\*
+{\ttfamily \#include $<$linux/if\+\_\+tun.\+h$>$}\\*
+{\ttfamily \#include $<$net/route.\+h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}creator-\/utils.\+h\char`\"{}}\\*
+Include dependency graph for planetlab-\/tap-\/creator.cc\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{planetlab-tap-creator_8cc_a15008ade4323f5ef598ad5a66b141e42}{P\+L\+A\+N\+E\+T\+L\+A\+B\+\_\+\+M\+A\+G\+IC}~75867
+\item 
+\#define \hyperlink{planetlab-tap-creator_8cc_a7339635e214db22b4901147cb0fff127}{V\+S\+Y\+S\+\_\+\+T\+U\+N\+T\+AP}~\char`\"{}/vsys/fd\+\_\+tuntap.\+control\char`\"{}
+\item 
+\#define \hyperlink{planetlab-tap-creator_8cc_a3aa8cf5ffef50a41424e2be785ce8316}{V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+IN}~\char`\"{}/vsys/vif\+\_\+up.\+in\char`\"{}
+\item 
+\#define \hyperlink{planetlab-tap-creator_8cc_ab0d61c91eabfa43c0e4b7ed6ce85e0b2}{V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+O\+UT}~\char`\"{}/vsys/vif\+\_\+up.\+out\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{planetlab-tap-creator_8cc_af58d35f5ad166008b16a581b7b8671c9}{Receive\+Vif\+Fd} (int \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd}, char $\ast$vif\+\_\+name)
+\item 
+int \hyperlink{planetlab-tap-creator_8cc_a0a931600f9ea85f6e43637c1a1d3eb20}{Tun\+Alloc} (int iftype, char $\ast$if\+\_\+name)
+\item 
+void \hyperlink{planetlab-tap-creator_8cc_a237884a4f069a5e614fdb20b95dd1964}{Set\+Tun\+Up} (const char $\ast$ip, const char $\ast$prefix, const char $\ast$if\+\_\+name)
+\item 
+int \hyperlink{planetlab-tap-creator_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}!P\+L\+A\+N\+E\+T\+L\+A\+B\+\_\+\+M\+A\+G\+IC@{P\+L\+A\+N\+E\+T\+L\+A\+B\+\_\+\+M\+A\+G\+IC}}
+\index{P\+L\+A\+N\+E\+T\+L\+A\+B\+\_\+\+M\+A\+G\+IC@{P\+L\+A\+N\+E\+T\+L\+A\+B\+\_\+\+M\+A\+G\+IC}!planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{P\+L\+A\+N\+E\+T\+L\+A\+B\+\_\+\+M\+A\+G\+IC}{PLANETLAB_MAGIC}}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+L\+A\+N\+E\+T\+L\+A\+B\+\_\+\+M\+A\+G\+IC~75867}\hypertarget{planetlab-tap-creator_8cc_a15008ade4323f5ef598ad5a66b141e42}{}\label{planetlab-tap-creator_8cc_a15008ade4323f5ef598ad5a66b141e42}
+\index{planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}!V\+S\+Y\+S\+\_\+\+T\+U\+N\+T\+AP@{V\+S\+Y\+S\+\_\+\+T\+U\+N\+T\+AP}}
+\index{V\+S\+Y\+S\+\_\+\+T\+U\+N\+T\+AP@{V\+S\+Y\+S\+\_\+\+T\+U\+N\+T\+AP}!planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{V\+S\+Y\+S\+\_\+\+T\+U\+N\+T\+AP}{VSYS_TUNTAP}}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\+S\+Y\+S\+\_\+\+T\+U\+N\+T\+AP~\char`\"{}/vsys/fd\+\_\+tuntap.\+control\char`\"{}}\hypertarget{planetlab-tap-creator_8cc_a7339635e214db22b4901147cb0fff127}{}\label{planetlab-tap-creator_8cc_a7339635e214db22b4901147cb0fff127}
+\index{planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}!V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+IN@{V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+IN}}
+\index{V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+IN@{V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+IN}!planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+IN}{VSYS_VIFUP_IN}}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+IN~\char`\"{}/vsys/vif\+\_\+up.\+in\char`\"{}}\hypertarget{planetlab-tap-creator_8cc_a3aa8cf5ffef50a41424e2be785ce8316}{}\label{planetlab-tap-creator_8cc_a3aa8cf5ffef50a41424e2be785ce8316}
+\index{planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}!V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+O\+UT@{V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+O\+UT}}
+\index{V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+O\+UT@{V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+O\+UT}!planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+O\+UT}{VSYS_VIFUP_OUT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\+S\+Y\+S\+\_\+\+V\+I\+F\+U\+P\+\_\+\+O\+UT~\char`\"{}/vsys/vif\+\_\+up.\+out\char`\"{}}\hypertarget{planetlab-tap-creator_8cc_ab0d61c91eabfa43c0e4b7ed6ce85e0b2}{}\label{planetlab-tap-creator_8cc_ab0d61c91eabfa43c0e4b7ed6ce85e0b2}
+
+
+\subsection{Function Documentation}
+\index{planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}!main@{main}}
+\index{main@{main}!planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{planetlab-tap-creator_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{planetlab-tap-creator_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+178 \{
+179   \textcolor{keywordtype}{int} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+180   \textcolor{keywordtype}{char} *ip = NULL;
+181   \textcolor{keywordtype}{char} *prefix = NULL;
+182   \textcolor{keywordtype}{char} *path = NULL;
+183   \textcolor{keywordtype}{int} iftype = IFF\_TUN;
+184   \textcolor{keywordtype}{char} if\_name[4096];
+185 
+186   memset(if\_name, 0, 4096);
+187   opterr = 0;
+188 
+189   \textcolor{keywordflow}{while} ((c = getopt (argc, argv, \textcolor{stringliteral}{"vi:n:tp:"})) != -1)
+190     \{
+191       \textcolor{keywordflow}{switch} (c)
+192         \{
+193         \textcolor{keywordflow}{case} \textcolor{charliteral}{'i'}:
+194           ip = optarg;            \textcolor{comment}{// ip address of the new device}
+195           \textcolor{keywordflow}{break};
+196         \textcolor{keywordflow}{case} \textcolor{charliteral}{'n'}:
+197           prefix = optarg;        \textcolor{comment}{// prefix for the new device}
+198           \textcolor{keywordflow}{break};
+199         \textcolor{keywordflow}{case} \textcolor{charliteral}{'t'}:
+200           iftype = IFF\_TAP;       \textcolor{comment}{// mode for the device (TAP or TUN)}
+201           \textcolor{keywordflow}{break};
+202         \textcolor{keywordflow}{case} \textcolor{charliteral}{'p'}:
+203           path = optarg;          \textcolor{comment}{// path back to the tap bridge}
+204           \textcolor{keywordflow}{break};
+205         \textcolor{keywordflow}{case} \textcolor{charliteral}{'v'}:
+206           \hyperlink{tap-creator_8cc_a80b7a0563409f3e21c80e0459c85845e}{gVerbose} = \textcolor{keyword}{true};
+207           \textcolor{keywordflow}{break};
+208         \}
+209     \}
+210 
+211   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ip == NULL, \textcolor{stringliteral}{"IP Address is a required argument"}, 0);
+212   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided IP Address is \(\backslash\)""} << ip << \textcolor{stringliteral}{"\(\backslash\)""});
+213 
+214   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (prefix == NULL, \textcolor{stringliteral}{"Prefix is a required argument"}, 0);
+215   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided prefix \(\backslash\)""} << prefix << \textcolor{stringliteral}{"\(\backslash\)""});
+216 
+217   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (path == NULL, \textcolor{stringliteral}{"path is a required argument"}, 0);
+218   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided path is \(\backslash\)""} << path << \textcolor{stringliteral}{"\(\backslash\)""});
+219 
+220   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Creating Tap"});
+221   \textcolor{comment}{// allocate a TAP device in planetLab}
+222   \textcolor{keywordtype}{int} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd} = \hyperlink{planetlab-tap-creator_8cc_a0a931600f9ea85f6e43637c1a1d3eb20}{TunAlloc} (iftype, if\_name);
+223   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (fd == -1, \textcolor{stringliteral}{"main(): Unable to create tap device"}, 1);
+224 
+225   \textcolor{comment}{// set the TAP interface up}
+226   \hyperlink{planetlab-tap-creator_8cc_a237884a4f069a5e614fdb20b95dd1964}{SetTunUp} (ip, prefix, (\textcolor{keyword}{const} \textcolor{keywordtype}{char}*)if\_name);
+227 
+228   \textcolor{comment}{//}
+229   \textcolor{comment}{// Send the socket back to the tap net device so it can go about its business}
+230   \textcolor{comment}{//}
+231   \hyperlink{tap-creator_8cc_a11a114b8401a27939e87a94ade65213a}{SendSocket} (path, fd, \hyperlink{planetlab-tap-creator_8cc_a15008ade4323f5ef598ad5a66b141e42}{PLANETLAB\_MAGIC});
+232 
+233   \textcolor{keywordflow}{return} 0;
+234 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}!Receive\+Vif\+Fd@{Receive\+Vif\+Fd}}
+\index{Receive\+Vif\+Fd@{Receive\+Vif\+Fd}!planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Receive\+Vif\+Fd(int fd, char $\ast$vif\+\_\+name)}{ReceiveVifFd(int fd, char *vif_name)}}]{\setlength{\rightskip}{0pt plus 5cm}int Receive\+Vif\+Fd (
+\begin{DoxyParamCaption}
+\item[{int}]{fd, }
+\item[{char $\ast$}]{vif\+\_\+name}
+\end{DoxyParamCaption}
+)}\hypertarget{planetlab-tap-creator_8cc_af58d35f5ad166008b16a581b7b8671c9}{}\label{planetlab-tap-creator_8cc_af58d35f5ad166008b16a581b7b8671c9}
+Reads vif FD from \char`\"{}fd\char`\"{}, writes interface name to vif\+\_\+name, and returns vif FD. vif\+\_\+name should be I\+F\+N\+A\+M\+S\+IZ chars long. 
+\begin{DoxyCode}
+62 \{
+63   \textcolor{keyword}{struct }msghdr msg;
+64   \textcolor{keyword}{struct }iovec iov;
+65   \textcolor{keywordtype}{int} rv;
+66   \textcolor{keywordtype}{size\_t} ccmsg[CMSG\_SPACE (\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int})) / \textcolor{keyword}{sizeof}(size\_t)];
+67   \textcolor{keyword}{struct }cmsghdr *cmsg;
+68 
+69   \textcolor{comment}{/* Use IOV to read interface name */}
+70   iov.iov\_base = vif\_name;
+71   iov.iov\_len = IFNAMSIZ;
+72 
+73   msg.msg\_name = 0;
+74   msg.msg\_namelen = 0;
+75   msg.msg\_iov = &iov;
+76   msg.msg\_iovlen = 1;
+77   \textcolor{comment}{/* old BSD implementations should use msg\_accrights instead of}
+78 \textcolor{comment}{   * msg\_control; the interface is different. */}
+79   msg.msg\_control = ccmsg;
+80   msg.msg\_controllen = \textcolor{keyword}{sizeof}(ccmsg);
+81 
+82   \textcolor{keywordflow}{while} (((rv = recvmsg (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd}, &msg, 0)) == -1) && errno == EINTR)
+83     \{
+84     \}
+85   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (rv == -1, \textcolor{stringliteral}{"Could not receive fd from Vsys"}, 0);
+86   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (!rv, \textcolor{stringliteral}{"Could not receive fd from Vsys (EOF)"}, 0);
+87 
+88   cmsg = CMSG\_FIRSTHDR (&msg);
+89   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (!cmsg->cmsg\_type == SCM\_RIGHTS, \textcolor{stringliteral}{"got control message of unknown type"} << cmsg->
+      cmsg\_type, 0);
+90 
+91   \textcolor{keywordtype}{int}* retfd  = (\textcolor{keywordtype}{int}*)CMSG\_DATA (cmsg);
+92   \textcolor{keywordflow}{return} *retfd;
+93 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}!Set\+Tun\+Up@{Set\+Tun\+Up}}
+\index{Set\+Tun\+Up@{Set\+Tun\+Up}!planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Set\+Tun\+Up(const char $\ast$ip, const char $\ast$prefix, const char $\ast$if\+\_\+name)}{SetTunUp(const char *ip, const char *prefix, const char *if_name)}}]{\setlength{\rightskip}{0pt plus 5cm}void Set\+Tun\+Up (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{ip, }
+\item[{const char $\ast$}]{prefix, }
+\item[{const char $\ast$}]{if\+\_\+name}
+\end{DoxyParamCaption}
+)}\hypertarget{planetlab-tap-creator_8cc_a237884a4f069a5e614fdb20b95dd1964}{}\label{planetlab-tap-creator_8cc_a237884a4f069a5e614fdb20b95dd1964}
+Sets the T\+A\+P/\+T\+UN interface up. When a T\+A\+P/\+T\+UN device is created on Planet\+Lab it must be set up writing some configuration information to the vsys fifo at /vsys/vif\+\_\+up.in 
+\begin{DoxyCode}
+141 \{
+142   FILE *in;
+143   FILE *out;
+144   \textcolor{keywordtype}{char} errbuff[4096];
+145 
+146   memset(errbuff, 0, 4096);
+147 
+148   in = fopen (\hyperlink{planetlab-tap-creator_8cc_a3aa8cf5ffef50a41424e2be785ce8316}{VSYS\_VIFUP\_IN}, \textcolor{stringliteral}{"a"});
+149 
+150   \textcolor{keywordflow}{if} (in == NULL)
+151     \{
+152       \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (in == NULL, \textcolor{stringliteral}{"Failed to open "} << \hyperlink{planetlab-tap-creator_8cc_a3aa8cf5ffef50a41424e2be785ce8316}{VSYS\_VIFUP\_IN}, 0);
+153     \}
+154 
+155   out = fopen (\hyperlink{planetlab-tap-creator_8cc_ab0d61c91eabfa43c0e4b7ed6ce85e0b2}{VSYS\_VIFUP\_OUT}, \textcolor{stringliteral}{"r"});
+156 
+157   \textcolor{keywordflow}{if} (out == NULL)
+158     \{
+159       \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (out == NULL, \textcolor{stringliteral}{"Failed to open "} << \hyperlink{planetlab-tap-creator_8cc_ab0d61c91eabfa43c0e4b7ed6ce85e0b2}{VSYS\_VIFUP\_OUT}, 0);
+160     \}
+161 
+162   \textcolor{comment}{// send input to process}
+163   fprintf (in, \textcolor{stringliteral}{"%s\(\backslash\)n%s\(\backslash\)n%s\(\backslash\)nsnat=1\(\backslash\)n"}, if\_name, ip, prefix);
+164 
+165   \textcolor{comment}{// close pipe to indicate end parameter passing and flush the fifo}
+166   fclose (in);
+167 
+168   fread((\textcolor{keywordtype}{void}*)errbuff, 4096, 1, out);
+169  
+170   \textcolor{comment}{// the error buffer will not be empty if we read an error}
+171   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (strcmp(errbuff, \textcolor{stringliteral}{""}) != 0, errbuff, 0);
+172 
+173   fclose (out);
+174 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}!Tun\+Alloc@{Tun\+Alloc}}
+\index{Tun\+Alloc@{Tun\+Alloc}!planetlab-\/tap-\/creator.\+cc@{planetlab-\/tap-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Tun\+Alloc(int iftype, char $\ast$if\+\_\+name)}{TunAlloc(int iftype, char *if_name)}}]{\setlength{\rightskip}{0pt plus 5cm}int Tun\+Alloc (
+\begin{DoxyParamCaption}
+\item[{int}]{iftype, }
+\item[{char $\ast$}]{if\+\_\+name}
+\end{DoxyParamCaption}
+)}\hypertarget{planetlab-tap-creator_8cc_a0a931600f9ea85f6e43637c1a1d3eb20}{}\label{planetlab-tap-creator_8cc_a0a931600f9ea85f6e43637c1a1d3eb20}
+Creates a T\+U\+N/\+T\+AP device on a Planet\+Lab virtual machine (sliver). Planet\+Lab provides the Vsys A\+PI to enable privileged operating system calls in an environment with restricted privileges. To create a T\+U\+N/\+T\+AP device the it is necessary to connect to the /vsys/fd\+\_\+tuntap.control socket, and send the device initialization parameters. 
+\begin{DoxyCode}
+106 \{
+107   \textcolor{keywordtype}{int} control\_fd;
+108   \textcolor{keyword}{struct }sockaddr\_un addr;
+109   \textcolor{keywordtype}{int} ret;
+110 
+111   control\_fd = socket (AF\_UNIX, SOCK\_STREAM, 0);
+112   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (control\_fd == -1, \textcolor{stringliteral}{"Could not create UNIX socket"}, 0);
+113 
+114   memset (&addr, 0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} sockaddr\_un));
+115 
+116   \textcolor{comment}{/* Clear structure */}
+117   addr.sun\_family = AF\_UNIX;
+118   strncpy (addr.sun\_path, \hyperlink{planetlab-tap-creator_8cc_a7339635e214db22b4901147cb0fff127}{VSYS\_TUNTAP}, \textcolor{keyword}{sizeof}(addr.sun\_path) - 1);
+119 
+120   ret = connect (control\_fd, (\textcolor{keyword}{struct} sockaddr *) &addr,
+121                  \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} sockaddr\_un));
+122   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ret == -1, \textcolor{stringliteral}{"Could not connect to Vsys control socket"}, 0);
+123 
+124   \textcolor{comment}{/* passing type param */}
+125   ret = send (control\_fd, &iftype, \textcolor{keyword}{sizeof}(iftype), 0);
+126   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ret != \textcolor{keyword}{sizeof}(iftype), \textcolor{stringliteral}{"Could not send paramater to Vsys control socket"}, 0);
+127 
+128   \textcolor{keywordflow}{return} \hyperlink{planetlab-tap-creator_8cc_af58d35f5ad166008b16a581b7b8671c9}{ReceiveVifFd} (control\_fd, if\_name);
+129 
+130 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+

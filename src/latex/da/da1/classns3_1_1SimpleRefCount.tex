@@ -1,0 +1,194 @@
+\hypertarget{classns3_1_1SimpleRefCount}{}\section{ns3\+:\+:Simple\+Ref\+Count$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$ Class Template Reference}
+\label{classns3_1_1SimpleRefCount}\index{ns3\+::\+Simple\+Ref\+Count$<$ T, P\+A\+R\+E\+N\+T, D\+E\+L\+E\+T\+E\+R $>$@{ns3\+::\+Simple\+Ref\+Count$<$ T, P\+A\+R\+E\+N\+T, D\+E\+L\+E\+T\+E\+R $>$}}
+
+
+A template-\/based reference counting class.  
+
+
+
+
+{\ttfamily \#include $<$simple-\/ref-\/count.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Simple\+Ref\+Count$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Simple\+Ref\+Count$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1SimpleRefCount_a63d5f45f3abdac2f6766eded32e37e93}{Simple\+Ref\+Count} ()
+\item 
+\hyperlink{classns3_1_1SimpleRefCount_ac8002cfa9c03b4cae0e0ac38a78cc931}{Simple\+Ref\+Count} (const \hyperlink{classns3_1_1SimpleRefCount}{Simple\+Ref\+Count} \&o)
+\item 
+\hyperlink{classns3_1_1SimpleRefCount}{Simple\+Ref\+Count} \& \hyperlink{classns3_1_1SimpleRefCount_aabdd2ee9bd71a8d7b886cd570a7ffdad}{operator=} (const \hyperlink{classns3_1_1SimpleRefCount}{Simple\+Ref\+Count} \&o)
+\item 
+void \hyperlink{classns3_1_1SimpleRefCount_ab7545a4e56ceef44cb91e2bbf0f26f18}{Ref} (void) const 
+\item 
+void \hyperlink{classns3_1_1SimpleRefCount_aeb8f59b2f744915a64a2271c9e4b5ec0}{Unref} (void) const 
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1SimpleRefCount_a05378396c93bcc7d6bf78a9ee9ae9cca}{Get\+Reference\+Count} (void) const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classns3_1_1SimpleRefCount_aa2018cc60e813893af32650e1e37a857}{Cleanup} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1SimpleRefCount_ae4c6daa11a1ad9add971e129fc31fc85}{m\+\_\+count}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T, typename P\+A\+R\+E\+NT = empty, typename D\+E\+L\+E\+T\+ER = Default\+Deleter$<$\+T$>$$>$\\*
+class ns3\+::\+Simple\+Ref\+Count$<$ T, P\+A\+R\+E\+N\+T, D\+E\+L\+E\+T\+E\+R $>$}
+
+A template-\/based reference counting class. 
+
+This template can be used to give reference-\/counting powers to a class. This template does not require this class to have a virtual destructor or a specific (or any) parent class.
+
+Note\+: if you are moving to this template from the \hyperlink{classns3_1_1RefCountBase}{Ref\+Count\+Base} class, you need to be careful to mark appropriately your destructor virtual if needed. i.\+e., if your class has subclasses, {\itshape do} mark your destructor virtual.
+
+This template takes 3 arguments but only the first argument is mandatory\+:
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The typename of the subclass which derives from this template class. Yes, this is weird but it\textquotesingle{}s a common C++ template pattern whose name is C\+R\+TP (Curiously Recursive Template Pattern) \\
+\hline
+{\em P\+A\+R\+E\+NT} & The typename of the parent of this template. By default, this typename is \char`\"{}\textquotesingle{}ns3\+::empty\textquotesingle{}\char`\"{} which is an empty class\+: compilers which implement the R\+B\+CO optimization (empty base class optimization) will make this a no-\/op \\
+\hline
+{\em D\+E\+L\+E\+T\+ER} & The typename of a class which implements a public static method named \textquotesingle{}Delete\textquotesingle{}. This method will be called whenever the \hyperlink{classns3_1_1SimpleRefCount}{Simple\+Ref\+Count} template detects that no references to the object it manages exist anymore.\\
+\hline
+\end{DoxyTemplParams}
+Interesting users of this class include \hyperlink{classns3_1_1Object}{ns3\+::\+Object} as well as \hyperlink{classns3_1_1Packet}{ns3\+::\+Packet}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}!Simple\+Ref\+Count@{Simple\+Ref\+Count}}
+\index{Simple\+Ref\+Count@{Simple\+Ref\+Count}!ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}}
+\subsubsection[{\texorpdfstring{Simple\+Ref\+Count()}{SimpleRefCount()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, typename P\+A\+R\+E\+NT = empty, typename D\+E\+L\+E\+T\+ER = Default\+Deleter$<$\+T$>$$>$ {\bf ns3\+::\+Simple\+Ref\+Count}$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$\+::{\bf Simple\+Ref\+Count} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1SimpleRefCount_a63d5f45f3abdac2f6766eded32e37e93}{}\label{classns3_1_1SimpleRefCount_a63d5f45f3abdac2f6766eded32e37e93}
+Constructor 
+\begin{DoxyCode}
+79     : \hyperlink{classns3_1_1SimpleRefCount_ae4c6daa11a1ad9add971e129fc31fc85}{m\_count} (1)
+80   \{\}
+\end{DoxyCode}
+\index{ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}!Simple\+Ref\+Count@{Simple\+Ref\+Count}}
+\index{Simple\+Ref\+Count@{Simple\+Ref\+Count}!ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}}
+\subsubsection[{\texorpdfstring{Simple\+Ref\+Count(const Simple\+Ref\+Count \&o)}{SimpleRefCount(const SimpleRefCount &o)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, typename P\+A\+R\+E\+NT = empty, typename D\+E\+L\+E\+T\+ER = Default\+Deleter$<$\+T$>$$>$ {\bf ns3\+::\+Simple\+Ref\+Count}$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$\+::{\bf Simple\+Ref\+Count} (
+\begin{DoxyParamCaption}
+\item[{const {\bf Simple\+Ref\+Count}$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$ \&}]{o}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1SimpleRefCount_ac8002cfa9c03b4cae0e0ac38a78cc931}{}\label{classns3_1_1SimpleRefCount_ac8002cfa9c03b4cae0e0ac38a78cc931}
+Copy constructor 
+\begin{DoxyCode}
+85     : \hyperlink{classns3_1_1SimpleRefCount_ae4c6daa11a1ad9add971e129fc31fc85}{m\_count} (1)
+86   \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}!Cleanup@{Cleanup}}
+\index{Cleanup@{Cleanup}!ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}}
+\subsubsection[{\texorpdfstring{Cleanup(void)}{Cleanup(void)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, typename P\+A\+R\+E\+NT = empty, typename D\+E\+L\+E\+T\+ER = Default\+Deleter$<$\+T$>$$>$ static void {\bf ns3\+::\+Simple\+Ref\+Count}$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$\+::Cleanup (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classns3_1_1SimpleRefCount_aa2018cc60e813893af32650e1e37a857}{}\label{classns3_1_1SimpleRefCount_aa2018cc60e813893af32650e1e37a857}
+Noop 
+\begin{DoxyCode}
+134 \{\}
+\end{DoxyCode}
+\index{ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}!Get\+Reference\+Count@{Get\+Reference\+Count}}
+\index{Get\+Reference\+Count@{Get\+Reference\+Count}!ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}}
+\subsubsection[{\texorpdfstring{Get\+Reference\+Count(void) const }{GetReferenceCount(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, typename P\+A\+R\+E\+NT = empty, typename D\+E\+L\+E\+T\+ER = Default\+Deleter$<$\+T$>$$>$ uint32\+\_\+t {\bf ns3\+::\+Simple\+Ref\+Count}$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$\+::Get\+Reference\+Count (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1SimpleRefCount_a05378396c93bcc7d6bf78a9ee9ae9cca}{}\label{classns3_1_1SimpleRefCount_a05378396c93bcc7d6bf78a9ee9ae9cca}
+Get the reference count of the object. Normally not needed; for language bindings.
+
+\begin{DoxyReturn}{Returns}
+The reference count. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+127   \{
+128     \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SimpleRefCount_ae4c6daa11a1ad9add971e129fc31fc85}{m\_count};
+129   \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}!operator=@{operator=}}
+\index{operator=@{operator=}!ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}}
+\subsubsection[{\texorpdfstring{operator=(const Simple\+Ref\+Count \&o)}{operator=(const SimpleRefCount &o)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, typename P\+A\+R\+E\+NT = empty, typename D\+E\+L\+E\+T\+ER = Default\+Deleter$<$\+T$>$$>$ {\bf Simple\+Ref\+Count}\& {\bf ns3\+::\+Simple\+Ref\+Count}$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Simple\+Ref\+Count}$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$ \&}]{o}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1SimpleRefCount_aabdd2ee9bd71a8d7b886cd570a7ffdad}{}\label{classns3_1_1SimpleRefCount_aabdd2ee9bd71a8d7b886cd570a7ffdad}
+Assignment 
+\begin{DoxyCode}
+91   \{
+92     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+93   \}
+\end{DoxyCode}
+\index{ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}!Ref@{Ref}}
+\index{Ref@{Ref}!ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}}
+\subsubsection[{\texorpdfstring{Ref(void) const }{Ref(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, typename P\+A\+R\+E\+NT = empty, typename D\+E\+L\+E\+T\+ER = Default\+Deleter$<$\+T$>$$>$ void {\bf ns3\+::\+Simple\+Ref\+Count}$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$\+::Ref (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1SimpleRefCount_ab7545a4e56ceef44cb91e2bbf0f26f18}{}\label{classns3_1_1SimpleRefCount_ab7545a4e56ceef44cb91e2bbf0f26f18}
+Increment the reference count. This method should not be called by user code. \hyperlink{classns3_1_1SimpleRefCount}{Simple\+Ref\+Count} instances are expected to be used in conjunction with the \hyperlink{classns3_1_1Ptr}{Ptr} template which would make calling Ref unnecessary and dangerous. 
+\begin{DoxyCode}
+101   \{
+102     \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1SimpleRefCount_ae4c6daa11a1ad9add971e129fc31fc85}{m\_count} < \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::numeric\_limits<uint32\_t>::max}
+      ());
+103     \hyperlink{classns3_1_1SimpleRefCount_ae4c6daa11a1ad9add971e129fc31fc85}{m\_count}++;
+104   \}
+\end{DoxyCode}
+\index{ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}!Unref@{Unref}}
+\index{Unref@{Unref}!ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}}
+\subsubsection[{\texorpdfstring{Unref(void) const }{Unref(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, typename P\+A\+R\+E\+NT = empty, typename D\+E\+L\+E\+T\+ER = Default\+Deleter$<$\+T$>$$>$ void {\bf ns3\+::\+Simple\+Ref\+Count}$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$\+::Unref (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1SimpleRefCount_aeb8f59b2f744915a64a2271c9e4b5ec0}{}\label{classns3_1_1SimpleRefCount_aeb8f59b2f744915a64a2271c9e4b5ec0}
+Decrement the reference count. This method should not be called by user code. \hyperlink{classns3_1_1SimpleRefCount}{Simple\+Ref\+Count} instances are expected to be used in conjunction with the \hyperlink{classns3_1_1Ptr}{Ptr} template which would make calling Ref unnecessary and dangerous. 
+\begin{DoxyCode}
+112   \{
+113     \hyperlink{classns3_1_1SimpleRefCount_ae4c6daa11a1ad9add971e129fc31fc85}{m\_count}--;
+114     \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1SimpleRefCount_ae4c6daa11a1ad9add971e129fc31fc85}{m\_count} == 0)
+115       \{
+116         DELETER::Delete (static\_cast<T*> (const\_cast<SimpleRefCount *> (\textcolor{keyword}{this})));
+117       \}
+118   \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}!m\+\_\+count@{m\+\_\+count}}
+\index{m\+\_\+count@{m\+\_\+count}!ns3\+::\+Simple\+Ref\+Count@{ns3\+::\+Simple\+Ref\+Count}}
+\subsubsection[{\texorpdfstring{m\+\_\+count}{m_count}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, typename P\+A\+R\+E\+NT = empty, typename D\+E\+L\+E\+T\+ER = Default\+Deleter$<$\+T$>$$>$ uint32\+\_\+t {\bf ns3\+::\+Simple\+Ref\+Count}$<$ T, P\+A\+R\+E\+NT, D\+E\+L\+E\+T\+ER $>$\+::m\+\_\+count\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}\hypertarget{classns3_1_1SimpleRefCount_ae4c6daa11a1ad9add971e129fc31fc85}{}\label{classns3_1_1SimpleRefCount_ae4c6daa11a1ad9add971e129fc31fc85}
+The reference count. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{simple-ref-count_8h}{simple-\/ref-\/count.\+h}\end{DoxyCompactItemize}

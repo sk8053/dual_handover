@@ -1,0 +1,181 @@
+\hypertarget{classns3_1_1DrbActivator}{}\section{ns3\+:\+:Drb\+Activator Class Reference}
+\label{classns3_1_1DrbActivator}\index{ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}}
+
+
+Inheritance diagram for ns3\+:\+:Drb\+Activator\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Drb\+Activator\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1DrbActivator_a68c520f74c9eb7ffe2e37ba970cbaf20}{Drb\+Activator} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1NetDevice}{Net\+Device} $>$ ue\+Device, \hyperlink{structns3_1_1EpsBearer}{Eps\+Bearer} bearer)
+\item 
+void \hyperlink{classns3_1_1DrbActivator_ac2083f8538dcb7d2d907c4c503647765}{Activate\+Drb} (uint64\+\_\+t imsi, uint16\+\_\+t cell\+Id, uint16\+\_\+t rnti)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classns3_1_1DrbActivator_aa625d98be8368e95b6fce83ba0e7d867}{Activate\+Callback} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1DrbActivator}{Drb\+Activator} $>$ a, std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cell\+Id, uint16\+\_\+t rnti)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classns3_1_1DrbActivator_ae43059256ef63105b760dc715dafa4cf}{m\+\_\+active}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1NetDevice}{Net\+Device} $>$ \hyperlink{classns3_1_1DrbActivator_aaf698604ccc229d99c944a390222e9b4}{m\+\_\+ue\+Device}
+\item 
+\hyperlink{structns3_1_1EpsBearer}{Eps\+Bearer} \hyperlink{classns3_1_1DrbActivator_a2ff495714c871e28e112fa5d4d8efb53}{m\+\_\+bearer}
+\item 
+uint64\+\_\+t \hyperlink{classns3_1_1DrbActivator_a409d601e99df7e2c18fb827115e52695}{m\+\_\+imsi}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Drb\+Activatior allows user to activate bearers for U\+Es when E\+PC is not used. Activation function is hooked to the Enb R\+RC Connection Estabilished trace source. When UE change its R\+RC state to C\+O\+N\+N\+E\+C\+T\+E\+D\+\_\+\+N\+O\+R\+M\+A\+L\+LY, activation function is called and bearer is activated. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}!Drb\+Activator@{Drb\+Activator}}
+\index{Drb\+Activator@{Drb\+Activator}!ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{Drb\+Activator(\+Ptr$<$ Net\+Device $>$ ue\+Device, Eps\+Bearer bearer)}{DrbActivator(Ptr< NetDevice > ueDevice, EpsBearer bearer)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Drb\+Activator\+::\+Drb\+Activator (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Net\+Device} $>$}]{ue\+Device, }
+\item[{{\bf Eps\+Bearer}}]{bearer}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1DrbActivator_a68c520f74c9eb7ffe2e37ba970cbaf20}{}\label{classns3_1_1DrbActivator_a68c520f74c9eb7ffe2e37ba970cbaf20}
+\hyperlink{classns3_1_1DrbActivator}{Drb\+Activator} Constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em ue\+Device} & the Ue\+Net\+Device for which bearer will be activated \\
+\hline
+{\em bearer} & the bearer configuration \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+913   : \hyperlink{classns3_1_1DrbActivator_ae43059256ef63105b760dc715dafa4cf}{m\_active} (\textcolor{keyword}{false}),
+914     \hyperlink{classns3_1_1DrbActivator_aaf698604ccc229d99c944a390222e9b4}{m\_ueDevice} (ueDevice),
+915     \hyperlink{classns3_1_1DrbActivator_a2ff495714c871e28e112fa5d4d8efb53}{m\_bearer} (bearer),
+916     \hyperlink{classns3_1_1DrbActivator_a409d601e99df7e2c18fb827115e52695}{m\_imsi} (\hyperlink{classns3_1_1DrbActivator_aaf698604ccc229d99c944a390222e9b4}{m\_ueDevice}->GetObject<LteUeNetDevice> ()->GetImsi ())
+917 \{
+918 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}!Activate\+Callback@{Activate\+Callback}}
+\index{Activate\+Callback@{Activate\+Callback}!ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{Activate\+Callback(\+Ptr$<$ Drb\+Activator $>$ a, std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cell\+Id, uint16\+\_\+t rnti)}{ActivateCallback(Ptr< DrbActivator > a, std::string context, uint64_t imsi, uint16_t cellId, uint16_t rnti)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Drb\+Activator\+::\+Activate\+Callback (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Drb\+Activator} $>$}]{a, }
+\item[{std\+::string}]{context, }
+\item[{uint64\+\_\+t}]{imsi, }
+\item[{uint16\+\_\+t}]{cell\+Id, }
+\item[{uint16\+\_\+t}]{rnti}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1DrbActivator_aa625d98be8368e95b6fce83ba0e7d867}{}\label{classns3_1_1DrbActivator_aa625d98be8368e95b6fce83ba0e7d867}
+Function hooked to the Enb R\+RC Connection Established trace source Fired upon successful R\+RC connection establishment.
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \hyperlink{classns3_1_1DrbActivator}{Drb\+Activator} object \\
+\hline
+{\em context} & \\
+\hline
+{\em imsi} & \\
+\hline
+{\em cell\+Id} & \\
+\hline
+{\em rnti} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+922 \{
+923   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (a << context << imsi << cellId << rnti);
+924   a->ActivateDrb (imsi, cellId, rnti);
+925 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}!Activate\+Drb@{Activate\+Drb}}
+\index{Activate\+Drb@{Activate\+Drb}!ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{Activate\+Drb(uint64\+\_\+t imsi, uint16\+\_\+t cell\+Id, uint16\+\_\+t rnti)}{ActivateDrb(uint64_t imsi, uint16_t cellId, uint16_t rnti)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Drb\+Activator\+::\+Activate\+Drb (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{imsi, }
+\item[{uint16\+\_\+t}]{cell\+Id, }
+\item[{uint16\+\_\+t}]{rnti}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1DrbActivator_ac2083f8538dcb7d2d907c4c503647765}{}\label{classns3_1_1DrbActivator_ac2083f8538dcb7d2d907c4c503647765}
+Procedure firstly checks if bearer was not activated, if I\+M\+SI from trace source equals configured one and if UE is really in R\+RC connected state. If all requirements are met, it performs bearer activation.
+
+
+\begin{DoxyParams}{Parameters}
+{\em imsi} & \\
+\hline
+{\em cell\+Id} & \\
+\hline
+{\em rnti} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+929 \{ 
+930   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << imsi << cellId << rnti << \hyperlink{classns3_1_1DrbActivator_ae43059256ef63105b760dc715dafa4cf}{m\_active});
+931   \textcolor{keywordflow}{if} ((!\hyperlink{classns3_1_1DrbActivator_ae43059256ef63105b760dc715dafa4cf}{m\_active}) && (imsi == \hyperlink{classns3_1_1DrbActivator_a409d601e99df7e2c18fb827115e52695}{m\_imsi}))
+932     \{
+933       Ptr<LteUeRrc> ueRrc = \hyperlink{classns3_1_1DrbActivator_aaf698604ccc229d99c944a390222e9b4}{m\_ueDevice}->GetObject<LteUeNetDevice> ()->GetRrc ();
+934       \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (ueRrc->GetState () == \hyperlink{classns3_1_1LteUeRrc_a241012c291e75681150c9214e11f6145a29dc4c52bd374f1b78508fb725de9999}{LteUeRrc::CONNECTED\_NORMALLY});
+935       uint16\_t rnti = ueRrc->GetRnti ();
+936       Ptr<LteEnbNetDevice> enbLteDevice = \hyperlink{classns3_1_1DrbActivator_aaf698604ccc229d99c944a390222e9b4}{m\_ueDevice}->GetObject<LteUeNetDevice> ()->GetTargetEnb 
+      ();
+937       Ptr<LteEnbRrc> enbRrc = enbLteDevice->GetObject<LteEnbNetDevice> ()->GetRrc ();
+938       \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (ueRrc->GetCellId () == enbLteDevice->GetCellId ());
+939       Ptr<UeManager> ueManager = enbRrc->GetUeManager (rnti);
+940       \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (ueManager->GetState () == 
+      \hyperlink{classns3_1_1UeManager_a2f4085fdd18d7125c27da44a5b8b6808a2a1020dce30f19aa9354ba34b2e7c5e0}{UeManager::CONNECTED\_NORMALLY}
+941                  || ueManager->GetState () == 
+      \hyperlink{classns3_1_1UeManager_a2f4085fdd18d7125c27da44a5b8b6808abd13cee86acc2cb3c04241dec919c73f}{UeManager::CONNECTION\_RECONFIGURATION});
+942       EpcEnbS1SapUser::DataRadioBearerSetupRequestParameters params;
+943       params.rnti = rnti;
+944       params.bearer = \hyperlink{classns3_1_1DrbActivator_a2ff495714c871e28e112fa5d4d8efb53}{m\_bearer};
+945       params.bearerId = 0;
+946       params.gtpTeid = 0; \textcolor{comment}{// don't care}
+947       enbRrc->GetS1SapUser ()->DataRadioBearerSetupRequest (params);
+948       \hyperlink{classns3_1_1DrbActivator_ae43059256ef63105b760dc715dafa4cf}{m\_active} = \textcolor{keyword}{true};
+949     \}
+950 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}!m\+\_\+active@{m\+\_\+active}}
+\index{m\+\_\+active@{m\+\_\+active}!ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{m\+\_\+active}{m_active}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Drb\+Activator\+::m\+\_\+active\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1DrbActivator_ae43059256ef63105b760dc715dafa4cf}{}\label{classns3_1_1DrbActivator_ae43059256ef63105b760dc715dafa4cf}
+Bearer can be activated only once. This value stores state of bearer. Initially is set to false and changed to true during bearer activation. \index{ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}!m\+\_\+bearer@{m\+\_\+bearer}}
+\index{m\+\_\+bearer@{m\+\_\+bearer}!ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{m\+\_\+bearer}{m_bearer}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Eps\+Bearer} ns3\+::\+Drb\+Activator\+::m\+\_\+bearer\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1DrbActivator_a2ff495714c871e28e112fa5d4d8efb53}{}\label{classns3_1_1DrbActivator_a2ff495714c871e28e112fa5d4d8efb53}
+Configuration of bearer which will be activated \index{ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}!m\+\_\+imsi@{m\+\_\+imsi}}
+\index{m\+\_\+imsi@{m\+\_\+imsi}!ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{m\+\_\+imsi}{m_imsi}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Drb\+Activator\+::m\+\_\+imsi\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1DrbActivator_a409d601e99df7e2c18fb827115e52695}{}\label{classns3_1_1DrbActivator_a409d601e99df7e2c18fb827115e52695}
+imsi the unique UE identifier \index{ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}!m\+\_\+ue\+Device@{m\+\_\+ue\+Device}}
+\index{m\+\_\+ue\+Device@{m\+\_\+ue\+Device}!ns3\+::\+Drb\+Activator@{ns3\+::\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{m\+\_\+ue\+Device}{m_ueDevice}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Net\+Device}$>$ ns3\+::\+Drb\+Activator\+::m\+\_\+ue\+Device\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1DrbActivator_aaf698604ccc229d99c944a390222e9b4}{}\label{classns3_1_1DrbActivator_aaf698604ccc229d99c944a390222e9b4}
+Ue\+Net\+Device for which bearer will be activated 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lte/helper/\hyperlink{lte-helper_8cc}{lte-\/helper.\+cc}\end{DoxyCompactItemize}

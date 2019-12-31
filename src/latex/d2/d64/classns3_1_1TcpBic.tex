@@ -1,0 +1,642 @@
+\hypertarget{classns3_1_1TcpBic}{}\section{ns3\+:\+:Tcp\+Bic Class Reference}
+\label{classns3_1_1TcpBic}\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+
+
+B\+IC congestion control algorithm.  
+
+
+
+
+{\ttfamily \#include $<$tcp-\/bic.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Tcp\+Bic\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Tcp\+Bic\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1TcpBic_a9d92f8d0eefa602b7c1ce57a6d23e644}{Tcp\+Bic} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1TcpBic_a1a4dc7ff3e9a205cd8735483e7140b85}{Tcp\+Bic} (const \hyperlink{classns3_1_1TcpBic}{Tcp\+Bic} \&sock)
+\item 
+virtual std\+::string \hyperlink{classns3_1_1TcpBic_a9bcd165ebad9933aea1e63ea3c5fe954}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the name of the congestion control algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpBic_a9dbe81be07cbfc1cd16af03deb9ccc34}{Increase\+Window} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked)
+\begin{DoxyCompactList}\small\item\em Congestion avoidance algorithm implementation. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1TcpBic_aaec211ef4f1624860911aaf544ac9650}{Get\+Ss\+Thresh} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)
+\begin{DoxyCompactList}\small\item\em Get the slow start threshold after a loss event. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} $>$ \hyperlink{classns3_1_1TcpBic_aeeae424187b16d5377f88f1efe104c3e}{Fork} ()
+\begin{DoxyCompactList}\small\item\em Copy the congestion control algorithm across socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1TcpBic_af4bcf98492aae31b8cb000b50b4614e5}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1TcpBic_a900818048f6876e8b38f9d9b8257f631}{Update} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb)
+\begin{DoxyCompactList}\small\item\em Bic window update after a new ack received. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classns3_1_1TcpBic_a034d8e16b688a2c58b5d2213aa5c3b7b}{m\+\_\+fast\+Convergence}
+\begin{DoxyCompactList}\small\item\em Enable or disable fast convergence algorithm. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpBic_a899269934e13c92129fec020cc09256e}{m\+\_\+beta}
+\begin{DoxyCompactList}\small\item\em Beta for cubic multiplicative increase. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpBic_a79db4e8443cc0a27388a80566327a5a0}{m\+\_\+max\+Incr}
+\begin{DoxyCompactList}\small\item\em Maximum window increment. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpBic_a1a7a6a7c186075fba672ff3328eb85ec}{m\+\_\+low\+Wnd}
+\begin{DoxyCompactList}\small\item\em Lower bound on congestion window. \end{DoxyCompactList}\item 
+int \hyperlink{classns3_1_1TcpBic_a69437c77ce1d0e51238f51c262d58bf1}{m\+\_\+smooth\+Part}
+\begin{DoxyCompactList}\small\item\em Number of R\+TT needed to reach Wmax from Wmax-\/B. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpBic_ae83b19da3bfd61fd85d71f2f6e39a51b}{m\+\_\+c\+Wnd\+Cnt}
+\begin{DoxyCompactList}\small\item\em c\+Wnd integer-\/to-\/float counter \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\+\_\+last\+Max\+Cwnd}
+\begin{DoxyCompactList}\small\item\em Last maximum c\+Wnd. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpBic_a5014112a75f21b8bc1a0e50b79ab4e31}{m\+\_\+last\+Cwnd}
+\begin{DoxyCompactList}\small\item\em Last c\+Wnd. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpBic_ae0f10aaccd31702d06dc3fb76450ac38}{m\+\_\+epoch\+Start}
+\begin{DoxyCompactList}\small\item\em Beginning of an epoch. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{classns3_1_1TcpBic_a3f94d435d1b4821077da9acb72fd8d5f}{m\+\_\+b}
+\begin{DoxyCompactList}\small\item\em Binary search coefficient. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1TcpBic_a82f141cadbdca4c006cec6e378649e80}{\+::\+Tcp\+Bic\+Increment\+Test}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classTcpBicIncrementTest}{Tcp\+Bic\+Increment\+Test} friend class (for tests). \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1TcpBic_a5350d9423de9d4dc9ea8e8d6212b1f3a}{\+::\+Tcp\+Bic\+Decrement\+Test}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classTcpBicDecrementTest}{Tcp\+Bic\+Decrement\+Test} friend class (for tests). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+B\+IC congestion control algorithm. 
+
+In T\+CP Bic the congestion control problem is viewed as a search problem. Taking as a starting point the current window value and as a target point the last maximum window value (i.\+e. the c\+Wnd value just before the loss event) a binary search technique can be used to update the c\+Wnd value at the midpoint between the two, directly or using an additive increase strategy if the distance from the current window is too large.
+
+This way, assuming a no-\/loss period, the congestion window logarithmically approaches the maximum value of c\+Wnd until the difference between it and c\+Wnd falls below a preset threshold. After reaching such a value (or the maximum window is unknown, i.\+e. the binary search does not start at all) the algorithm switches to probing the new maximum window with a \textquotesingle{}slow start\textquotesingle{} strategy.
+
+If a loss occur in either these phases, the current window (before the loss) can be treated as the new maximum, and the reduced (with a multiplicative decrease factor Beta) window size can be used as the new minimum.
+
+To maintain the performance of T\+CP Bic as close as possible with the Linux implementation, and at the same time maintain the friendliness with other T\+CP flavors, the c\+Wnd is increased only after a certain number of A\+C\+Ks are received, following R\+FC 6356. After the slow start phase, and after each new A\+CK, a value is calculated by the method Update. This number (m\+\_\+cnt in the code) represents the A\+CK packets that should be received before increasing the c\+Wnd by one segment. After a trivial check on the arrived A\+C\+Ks (represented by m\+\_\+c\+Wnd\+Cnt in the code), the c\+Wnd can be increased and m\+\_\+c\+Wnd\+Cnt can be set to zero, or otherwise m\+\_\+c\+Wnd\+Cnt can be increased by one and the c\+Wnd can be left untouched.
+
+The binary search on the c\+Wnd size space is done by varying the returned cnt, depending on the internal state of the class (e.\+g. the last maximum and the current c\+Wnd size).
+
+The reference paper for B\+IC can be found in\+: \href{http://an.kaist.ac.kr/courses/2006/cs540/reading/bic-tcp.pdf}{\tt http\+://an.\+kaist.\+ac.\+kr/courses/2006/cs540/reading/bic-\/tcp.\+pdf}
+
+This model has a number of configurable parameters that are exposed as attributes of the \hyperlink{classns3_1_1TcpBic}{Tcp\+Bic} \hyperlink{classns3_1_1TypeId}{Type\+Id}. This model also exports trace sources, for tracking the congestion window, slow start threshold, and the internal state of the protocol.
+
+More information on this implementation\+: \href{http://dl.acm.org/citation.cfm?id=2756518}{\tt http\+://dl.\+acm.\+org/citation.\+cfm?id=2756518} 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!Tcp\+Bic@{Tcp\+Bic}}
+\index{Tcp\+Bic@{Tcp\+Bic}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{Tcp\+Bic()}{TcpBic()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Bic\+::\+Tcp\+Bic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpBic_a9d92f8d0eefa602b7c1ce57a6d23e644}{}\label{classns3_1_1TcpBic_a9d92f8d0eefa602b7c1ce57a6d23e644}
+
+
+Constructor. 
+
+
+\begin{DoxyCode}
+69   : \hyperlink{classns3_1_1TcpCongestionOps_a044982d009b94a2bbf59ed27cdb14e91}{TcpCongestionOps} (),
+70     \hyperlink{classns3_1_1TcpBic_ae83b19da3bfd61fd85d71f2f6e39a51b}{m\_cWndCnt} (0),
+71     \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd} (0),
+72     \hyperlink{classns3_1_1TcpBic_a5014112a75f21b8bc1a0e50b79ab4e31}{m\_lastCwnd} (0),
+73     \hyperlink{classns3_1_1TcpBic_ae0f10aaccd31702d06dc3fb76450ac38}{m\_epochStart} (\hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ())
+74 \{
+75   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+76 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!Tcp\+Bic@{Tcp\+Bic}}
+\index{Tcp\+Bic@{Tcp\+Bic}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{Tcp\+Bic(const Tcp\+Bic \&sock)}{TcpBic(const TcpBic &sock)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Bic\+::\+Tcp\+Bic (
+\begin{DoxyParamCaption}
+\item[{const {\bf Tcp\+Bic} \&}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpBic_a1a4dc7ff3e9a205cd8735483e7140b85}{}\label{classns3_1_1TcpBic_a1a4dc7ff3e9a205cd8735483e7140b85}
+Copy constructor. 
+\begin{DoxyParams}{Parameters}
+{\em sock} & The socket to copy from. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+79   : \hyperlink{classns3_1_1TcpCongestionOps_a044982d009b94a2bbf59ed27cdb14e91}{TcpCongestionOps} (sock),
+80     \hyperlink{classns3_1_1TcpBic_a034d8e16b688a2c58b5d2213aa5c3b7b}{m\_fastConvergence} (sock.m\_fastConvergence),
+81     \hyperlink{classns3_1_1TcpBic_a899269934e13c92129fec020cc09256e}{m\_beta} (sock.m\_beta),
+82     \hyperlink{classns3_1_1TcpBic_a79db4e8443cc0a27388a80566327a5a0}{m\_maxIncr} (sock.m\_maxIncr),
+83     \hyperlink{classns3_1_1TcpBic_a1a7a6a7c186075fba672ff3328eb85ec}{m\_lowWnd} (sock.m\_lowWnd),
+84     \hyperlink{classns3_1_1TcpBic_a69437c77ce1d0e51238f51c262d58bf1}{m\_smoothPart} (sock.m\_smoothPart),
+85     \hyperlink{classns3_1_1TcpBic_ae83b19da3bfd61fd85d71f2f6e39a51b}{m\_cWndCnt} (sock.m\_cWndCnt),
+86     \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd} (sock.m\_lastMaxCwnd),
+87     \hyperlink{classns3_1_1TcpBic_a5014112a75f21b8bc1a0e50b79ab4e31}{m\_lastCwnd} (sock.m\_lastCwnd),
+88     \hyperlink{classns3_1_1TcpBic_ae0f10aaccd31702d06dc3fb76450ac38}{m\_epochStart} (sock.m\_epochStart),
+89     \hyperlink{classns3_1_1TcpBic_a3f94d435d1b4821077da9acb72fd8d5f}{m\_b} (sock.m\_b)
+90 \{
+91   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+92 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!Fork@{Fork}}
+\index{Fork@{Fork}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{Fork()}{Fork()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Congestion\+Ops} $>$ ns3\+::\+Tcp\+Bic\+::\+Fork (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpBic_aeeae424187b16d5377f88f1efe104c3e}{}\label{classns3_1_1TcpBic_aeeae424187b16d5377f88f1efe104c3e}
+
+
+Copy the congestion control algorithm across socket. 
+
+\begin{DoxyReturn}{Returns}
+a pointer of the copied object 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1TcpCongestionOps_a328ca18452bca8b4b62217e85fd29ac6}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+278 \{
+279   \textcolor{keywordflow}{return} CopyObject<TcpBic> (\textcolor{keyword}{this});
+280 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Tcp\+Bic\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpBic_a9bcd165ebad9933aea1e63ea3c5fe954}{}\label{classns3_1_1TcpBic_a9bcd165ebad9933aea1e63ea3c5fe954}
+
+
+Get the name of the congestion control algorithm. 
+
+\begin{DoxyReturn}{Returns}
+A string identifying the name 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1TcpCongestionOps_afb778629819ba3dbf7aaf15b0d57e114}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+234 \{
+235   \textcolor{keywordflow}{return} \textcolor{stringliteral}{"TcpBic"};
+236 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!Get\+Ss\+Thresh@{Get\+Ss\+Thresh}}
+\index{Get\+Ss\+Thresh@{Get\+Ss\+Thresh}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{Get\+Ss\+Thresh(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)}{GetSsThresh(Ptr< const TcpSocketState > tcb, uint32_t bytesInFlight)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Bic\+::\+Get\+Ss\+Thresh (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{bytes\+In\+Flight}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpBic_aaec211ef4f1624860911aaf544ac9650}{}\label{classns3_1_1TcpBic_aaec211ef4f1624860911aaf544ac9650}
+
+
+Get the slow start threshold after a loss event. 
+
+Is guaranteed that the congestion control state (Tcp\+Ack\+State\+\_\+t) is changed B\+E\+F\+O\+RE the invocation of this method. The implementator should return the slow start threshold (and not change it directly) because, in the future, the T\+CP implementation may require to instantly recover from a loss event (e.\+g. when there is a network with an high reordering factor).
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em bytes\+In\+Flight} & total bytes in flight \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Slow start threshold 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1TcpCongestionOps_a504ab8e79dbf8e11c1f2b7120977a8c5}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+240 \{
+241   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+242 
+243   uint32\_t segCwnd = tcb->GetCwndInSegments ();
+244   uint32\_t ssThresh = 0;
+245 
+246   \hyperlink{classns3_1_1TcpBic_ae0f10aaccd31702d06dc3fb76450ac38}{m\_epochStart} = \hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ();
+247 
+248   \textcolor{comment}{/* Wmax and fast convergence */}
+249   \textcolor{keywordflow}{if} (segCwnd < \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd} && \hyperlink{classns3_1_1TcpBic_a034d8e16b688a2c58b5d2213aa5c3b7b}{m\_fastConvergence})
+250     \{
+251       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Fast Convergence. Last max cwnd: "} << 
+      \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd} <<
+252                    \textcolor{stringliteral}{" updated to "} << (uint32\_t) \hyperlink{classns3_1_1TcpBic_a899269934e13c92129fec020cc09256e}{m\_beta} * segCwnd);
+253       \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd} = \hyperlink{classns3_1_1TcpBic_a899269934e13c92129fec020cc09256e}{m\_beta} * segCwnd;
+254     \}
+255   \textcolor{keywordflow}{else}
+256     \{
+257       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Last max cwnd: "} << \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd} << \textcolor{stringliteral}{" updated to "} <<
+258                    segCwnd);
+259       \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd} = segCwnd;
+260     \}
+261 
+262   \textcolor{keywordflow}{if} (segCwnd < \hyperlink{classns3_1_1TcpBic_a1a7a6a7c186075fba672ff3328eb85ec}{m\_lowWnd})
+263     \{
+264       ssThresh = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (2 * tcb->m\_segmentSize, bytesInFlight / 2);
+265       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Less than lowWindow, ssTh= "} << ssThresh);
+266     \}
+267   \textcolor{keywordflow}{else}
+268     \{
+269       ssThresh = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (segCwnd * \hyperlink{classns3_1_1TcpBic_a899269934e13c92129fec020cc09256e}{m\_beta}, 2.0) * tcb->m\_segmentSize;
+270       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"More than lowWindow, ssTh= "} << ssThresh);
+271     \}
+272 
+273   \textcolor{keywordflow}{return} ssThresh;
+274 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Tcp\+Bic\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpBic_af4bcf98492aae31b8cb000b50b4614e5}{}\label{classns3_1_1TcpBic_af4bcf98492aae31b8cb000b50b4614e5}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+30 \{
+31   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::TcpBic"})
+32     .SetParent<\hyperlink{classns3_1_1TcpCongestionOps_a044982d009b94a2bbf59ed27cdb14e91}{TcpCongestionOps}> ()
+33     .AddConstructor<TcpBic> ()
+34     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+35     .AddAttribute (\textcolor{stringliteral}{"FastConvergence"}, \textcolor{stringliteral}{"Turn on/off fast convergence."},
+36                    BooleanValue (\textcolor{keyword}{true}),
+37                    MakeBooleanAccessor (&\hyperlink{classns3_1_1TcpBic_a034d8e16b688a2c58b5d2213aa5c3b7b}{TcpBic::m\_fastConvergence}),
+38                    MakeBooleanChecker ())
+39     .AddAttribute (\textcolor{stringliteral}{"Beta"}, \textcolor{stringliteral}{"Beta for multiplicative decrease"},
+40                    DoubleValue (0.8),
+41                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpBic_a899269934e13c92129fec020cc09256e}{TcpBic::m\_beta}),
+42                    MakeDoubleChecker <double> (0.0))
+43     .AddAttribute (\textcolor{stringliteral}{"MaxIncr"}, \textcolor{stringliteral}{"Limit on increment allowed during binary search"},
+44                    UintegerValue (16),
+45                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpBic_a79db4e8443cc0a27388a80566327a5a0}{TcpBic::m\_maxIncr}),
+46                    MakeUintegerChecker <uint32\_t> (1))
+47     .AddAttribute (\textcolor{stringliteral}{"LowWnd"}, \textcolor{stringliteral}{"Threshold window size (in segments) for engaging BIC response"},
+48                    UintegerValue (14),
+49                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpBic_a1a7a6a7c186075fba672ff3328eb85ec}{TcpBic::m\_lowWnd}),
+50                    MakeUintegerChecker <uint32\_t> ())
+51     .AddAttribute (\textcolor{stringliteral}{"SmoothPart"}, \textcolor{stringliteral}{"Number of RTT needed to approach cWnd\_max from "}
+52                    \textcolor{stringliteral}{"cWnd\_max-BinarySearchCoefficient. It can be viewed as the gradient "}
+53                    \textcolor{stringliteral}{"of the slow start AIM phase: less this value is, "}
+54                    \textcolor{stringliteral}{"more steep the increment will be."},
+55                    IntegerValue (5),
+56                    MakeIntegerAccessor (&\hyperlink{classns3_1_1TcpBic_a69437c77ce1d0e51238f51c262d58bf1}{TcpBic::m\_smoothPart}),
+57                    MakeIntegerChecker <int> (1))
+58     .AddAttribute (\textcolor{stringliteral}{"BinarySearchCoefficient"}, \textcolor{stringliteral}{"Inverse of the coefficient for the "}
+59                    \textcolor{stringliteral}{"binary search. Default 4, as in Linux"},
+60                    UintegerValue (4),
+61                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpBic_a3f94d435d1b4821077da9acb72fd8d5f}{TcpBic::m\_b}),
+62                    MakeUintegerChecker <uint8\_t> (2))
+63   ;
+64   \textcolor{keywordflow}{return} tid;
+65 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!Increase\+Window@{Increase\+Window}}
+\index{Increase\+Window@{Increase\+Window}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{Increase\+Window(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked)}{IncreaseWindow(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Bic\+::\+Increase\+Window (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpBic_a9dbe81be07cbfc1cd16af03deb9ccc34}{}\label{classns3_1_1TcpBic_a9dbe81be07cbfc1cd16af03deb9ccc34}
+
+
+Congestion avoidance algorithm implementation. 
+
+Mimic the function cong\+\_\+avoid in Linux. New segments have been A\+C\+Ked, and the congestion control duty is to set
+
+The function is allowed to change directly c\+Wnd and/or ss\+Thresh.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments acked \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classns3_1_1TcpCongestionOps_a3cdceb0ace37bc606d34369ab3f920f0}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+97 \{
+98   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked);
+99 
+100   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} < tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh})
+101     \{
+102       tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} += tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+103       segmentsAcked -= 1;
+104 
+105       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"In SlowStart, updated to cwnd "} << tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <<
+106                    \textcolor{stringliteral}{" ssthresh "} << tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+107     \}
+108 
+109   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} >= tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh} && segmentsAcked > 0)
+110     \{
+111       \hyperlink{classns3_1_1TcpBic_ae83b19da3bfd61fd85d71f2f6e39a51b}{m\_cWndCnt} += segmentsAcked;
+112       uint32\_t cnt = \hyperlink{classns3_1_1TcpBic_a900818048f6876e8b38f9d9b8257f631}{Update} (tcb);
+113 
+114       \textcolor{comment}{/* According to the BIC paper and RFC 6356 even once the new cwnd is}
+115 \textcolor{comment}{       * calculated you must compare this to the number of ACKs received since}
+116 \textcolor{comment}{       * the last cwnd update. If not enough ACKs have been received then cwnd}
+117 \textcolor{comment}{       * cannot be updated.}
+118 \textcolor{comment}{       */}
+119       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpBic_ae83b19da3bfd61fd85d71f2f6e39a51b}{m\_cWndCnt} > cnt)
+120         \{
+121           tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} += tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+122           \hyperlink{classns3_1_1TcpBic_ae83b19da3bfd61fd85d71f2f6e39a51b}{m\_cWndCnt} = 0;
+123           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"In CongAvoid, updated to cwnd "} << tcb->
+      \hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd});
+124         \}
+125       \textcolor{keywordflow}{else}
+126         \{
+127           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Not enough segments have been ACKed to increment cwnd."}
+128                        \textcolor{stringliteral}{"Until now "} << \hyperlink{classns3_1_1TcpBic_ae83b19da3bfd61fd85d71f2f6e39a51b}{m\_cWndCnt});
+129         \}
+130     \}
+131 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!Update@{Update}}
+\index{Update@{Update}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{Update(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb)}{Update(Ptr< TcpSocketState > tcb)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Bic\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpBic_a900818048f6876e8b38f9d9b8257f631}{}\label{classns3_1_1TcpBic_a900818048f6876e8b38f9d9b8257f631}
+
+
+Bic window update after a new ack received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & the socket state. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of segments acked since the last cwnd increment. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+135 \{
+136   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb);
+137 
+138   uint32\_t segCwnd = tcb->\hyperlink{classns3_1_1TcpSocketState_ab6dfe309ca53fd3207dcafede75ad12d}{GetCwndInSegments} ();
+139   uint32\_t cnt;
+140 
+141   \hyperlink{classns3_1_1TcpBic_a5014112a75f21b8bc1a0e50b79ab4e31}{m\_lastCwnd} = segCwnd;
+142 
+143   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpBic_ae0f10aaccd31702d06dc3fb76450ac38}{m\_epochStart} == \hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ())
+144     \{
+145       \hyperlink{classns3_1_1TcpBic_ae0f10aaccd31702d06dc3fb76450ac38}{m\_epochStart} = \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} ();   \textcolor{comment}{/* record the beginning of an epoch */}
+146     \}
+147 
+148   \textcolor{keywordflow}{if} (segCwnd < \hyperlink{classns3_1_1TcpBic_a1a7a6a7c186075fba672ff3328eb85ec}{m\_lowWnd})
+149     \{
+150       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Under lowWnd, compatibility mode. Behaving as NewReno"});
+151       cnt = segCwnd;
+152       \textcolor{keywordflow}{return} cnt;
+153     \}
+154 
+155   \textcolor{keywordflow}{if} (segCwnd < \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd})
+156     \{
+157       \textcolor{keywordtype}{double} dist = (\hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd} - segCwnd) / \hyperlink{classns3_1_1TcpBic_a3f94d435d1b4821077da9acb72fd8d5f}{m\_b};
+158 
+159       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"cWnd = "} << segCwnd << \textcolor{stringliteral}{" under lastMax, "} <<
+160                    \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd} << \textcolor{stringliteral}{" and dist="} << dist);
+161       \textcolor{keywordflow}{if} (dist > \hyperlink{classns3_1_1TcpBic_a79db4e8443cc0a27388a80566327a5a0}{m\_maxIncr})
+162         \{
+163           \textcolor{comment}{/* Linear increase */}
+164           cnt = segCwnd / \hyperlink{classns3_1_1TcpBic_a79db4e8443cc0a27388a80566327a5a0}{m\_maxIncr};
+165           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Linear increase (maxIncr="} << \hyperlink{classns3_1_1TcpBic_a79db4e8443cc0a27388a80566327a5a0}{m\_maxIncr} << \textcolor{stringliteral}{"), cnt="} << cnt);
+166         \}
+167       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (dist <= 1)
+168         \{
+169           \textcolor{comment}{/* smoothed binary search increase: when our window is really}
+170 \textcolor{comment}{           * close to the last maximum, we parameterize in m\_smoothPart the number}
+171 \textcolor{comment}{           * of RTT needed to reach that window.}
+172 \textcolor{comment}{           */}
+173           cnt = (segCwnd * \hyperlink{classns3_1_1TcpBic_a69437c77ce1d0e51238f51c262d58bf1}{m\_smoothPart}) / \hyperlink{classns3_1_1TcpBic_a3f94d435d1b4821077da9acb72fd8d5f}{m\_b};
+174 
+175           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Binary search increase (smoothPart="} << 
+      \hyperlink{classns3_1_1TcpBic_a69437c77ce1d0e51238f51c262d58bf1}{m\_smoothPart} <<
+176                        \textcolor{stringliteral}{"), cnt="} << cnt);
+177         \}
+178       \textcolor{keywordflow}{else}
+179         \{
+180           \textcolor{comment}{/* binary search increase */}
+181           cnt = segCwnd / dist;
+182 
+183           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Binary search increase, cnt="} << cnt);
+184         \}
+185     \}
+186   \textcolor{keywordflow}{else}
+187     \{
+188       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"cWnd = "} << segCwnd << \textcolor{stringliteral}{" above last max, "} <<
+189                    \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd});
+190       \textcolor{keywordflow}{if} (segCwnd < \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd} + \hyperlink{classns3_1_1TcpBic_a3f94d435d1b4821077da9acb72fd8d5f}{m\_b})
+191         \{
+192           \textcolor{comment}{/* slow start AMD linear increase */}
+193           cnt = (segCwnd * \hyperlink{classns3_1_1TcpBic_a69437c77ce1d0e51238f51c262d58bf1}{m\_smoothPart}) / \hyperlink{classns3_1_1TcpBic_a3f94d435d1b4821077da9acb72fd8d5f}{m\_b};
+194           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Slow start AMD, cnt="} << cnt);
+195         \}
+196       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (segCwnd < \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd} + \hyperlink{classns3_1_1TcpBic_a79db4e8443cc0a27388a80566327a5a0}{m\_maxIncr} * (\hyperlink{classns3_1_1TcpBic_a3f94d435d1b4821077da9acb72fd8d5f}{m\_b} - 1))
+197         \{
+198           \textcolor{comment}{/* slow start */}
+199           cnt = (segCwnd * (\hyperlink{classns3_1_1TcpBic_a3f94d435d1b4821077da9acb72fd8d5f}{m\_b} - 1)) / (segCwnd - \hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd});
+200 
+201           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Slow start, cnt="} << cnt);
+202         \}
+203       \textcolor{keywordflow}{else}
+204         \{
+205           \textcolor{comment}{/* linear increase */}
+206           cnt = segCwnd / \hyperlink{classns3_1_1TcpBic_a79db4e8443cc0a27388a80566327a5a0}{m\_maxIncr};
+207 
+208           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Linear, cnt="} << cnt);
+209         \}
+210     \}
+211 
+212   \textcolor{comment}{/* if in slow start or link utilization is very low. Code taken from Linux}
+213 \textcolor{comment}{   * kernel, not sure of the source they take it. Usually, it is not reached,}
+214 \textcolor{comment}{   * since if m\_lastMaxCwnd is 0, we are (hopefully) in slow start.}
+215 \textcolor{comment}{   */}
+216   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{m\_lastMaxCwnd} == 0)
+217     \{
+218       \textcolor{keywordflow}{if} (cnt > 20) \textcolor{comment}{/* increase cwnd 5% per RTT */}
+219         \{
+220           cnt = 20;
+221         \}
+222     \}
+223 
+224   \textcolor{keywordflow}{if} (cnt == 0)
+225     \{
+226       cnt = 1;
+227     \}
+228 
+229   \textcolor{keywordflow}{return} cnt;
+230 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+
+
+\subsection{Friends And Related Function Documentation}
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!\+::\+Tcp\+Bic\+Decrement\+Test@{\+::\+Tcp\+Bic\+Decrement\+Test}}
+\index{\+::\+Tcp\+Bic\+Decrement\+Test@{\+::\+Tcp\+Bic\+Decrement\+Test}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{\+::\+Tcp\+Bic\+Decrement\+Test}{::TcpBicDecrementTest}}]{\setlength{\rightskip}{0pt plus 5cm}friend class \+::{\bf Tcp\+Bic\+Decrement\+Test}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classns3_1_1TcpBic_a5350d9423de9d4dc9ea8e8d6212b1f3a}{}\label{classns3_1_1TcpBic_a5350d9423de9d4dc9ea8e8d6212b1f3a}
+
+
+\hyperlink{classTcpBicDecrementTest}{Tcp\+Bic\+Decrement\+Test} friend class (for tests). 
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!\+::\+Tcp\+Bic\+Increment\+Test@{\+::\+Tcp\+Bic\+Increment\+Test}}
+\index{\+::\+Tcp\+Bic\+Increment\+Test@{\+::\+Tcp\+Bic\+Increment\+Test}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{\+::\+Tcp\+Bic\+Increment\+Test}{::TcpBicIncrementTest}}]{\setlength{\rightskip}{0pt plus 5cm}friend class \+::{\bf Tcp\+Bic\+Increment\+Test}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classns3_1_1TcpBic_a82f141cadbdca4c006cec6e378649e80}{}\label{classns3_1_1TcpBic_a82f141cadbdca4c006cec6e378649e80}
+
+
+\hyperlink{classTcpBicIncrementTest}{Tcp\+Bic\+Increment\+Test} friend class (for tests). 
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!m\+\_\+b@{m\+\_\+b}}
+\index{m\+\_\+b@{m\+\_\+b}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{m\+\_\+b}{m_b}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t ns3\+::\+Tcp\+Bic\+::m\+\_\+b\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpBic_a3f94d435d1b4821077da9acb72fd8d5f}{}\label{classns3_1_1TcpBic_a3f94d435d1b4821077da9acb72fd8d5f}
+
+
+Binary search coefficient. 
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!m\+\_\+beta@{m\+\_\+beta}}
+\index{m\+\_\+beta@{m\+\_\+beta}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{m\+\_\+beta}{m_beta}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Bic\+::m\+\_\+beta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpBic_a899269934e13c92129fec020cc09256e}{}\label{classns3_1_1TcpBic_a899269934e13c92129fec020cc09256e}
+
+
+Beta for cubic multiplicative increase. 
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!m\+\_\+c\+Wnd\+Cnt@{m\+\_\+c\+Wnd\+Cnt}}
+\index{m\+\_\+c\+Wnd\+Cnt@{m\+\_\+c\+Wnd\+Cnt}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{m\+\_\+c\+Wnd\+Cnt}{m_cWndCnt}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Bic\+::m\+\_\+c\+Wnd\+Cnt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpBic_ae83b19da3bfd61fd85d71f2f6e39a51b}{}\label{classns3_1_1TcpBic_ae83b19da3bfd61fd85d71f2f6e39a51b}
+
+
+c\+Wnd integer-\/to-\/float counter 
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!m\+\_\+epoch\+Start@{m\+\_\+epoch\+Start}}
+\index{m\+\_\+epoch\+Start@{m\+\_\+epoch\+Start}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{m\+\_\+epoch\+Start}{m_epochStart}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Bic\+::m\+\_\+epoch\+Start\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpBic_ae0f10aaccd31702d06dc3fb76450ac38}{}\label{classns3_1_1TcpBic_ae0f10aaccd31702d06dc3fb76450ac38}
+
+
+Beginning of an epoch. 
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!m\+\_\+fast\+Convergence@{m\+\_\+fast\+Convergence}}
+\index{m\+\_\+fast\+Convergence@{m\+\_\+fast\+Convergence}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{m\+\_\+fast\+Convergence}{m_fastConvergence}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Tcp\+Bic\+::m\+\_\+fast\+Convergence\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpBic_a034d8e16b688a2c58b5d2213aa5c3b7b}{}\label{classns3_1_1TcpBic_a034d8e16b688a2c58b5d2213aa5c3b7b}
+
+
+Enable or disable fast convergence algorithm. 
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!m\+\_\+last\+Cwnd@{m\+\_\+last\+Cwnd}}
+\index{m\+\_\+last\+Cwnd@{m\+\_\+last\+Cwnd}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{m\+\_\+last\+Cwnd}{m_lastCwnd}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Bic\+::m\+\_\+last\+Cwnd\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpBic_a5014112a75f21b8bc1a0e50b79ab4e31}{}\label{classns3_1_1TcpBic_a5014112a75f21b8bc1a0e50b79ab4e31}
+
+
+Last c\+Wnd. 
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!m\+\_\+last\+Max\+Cwnd@{m\+\_\+last\+Max\+Cwnd}}
+\index{m\+\_\+last\+Max\+Cwnd@{m\+\_\+last\+Max\+Cwnd}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{m\+\_\+last\+Max\+Cwnd}{m_lastMaxCwnd}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Bic\+::m\+\_\+last\+Max\+Cwnd\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}{}\label{classns3_1_1TcpBic_a082025c05e83dcddab77a6e3209cd4eb}
+
+
+Last maximum c\+Wnd. 
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!m\+\_\+low\+Wnd@{m\+\_\+low\+Wnd}}
+\index{m\+\_\+low\+Wnd@{m\+\_\+low\+Wnd}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{m\+\_\+low\+Wnd}{m_lowWnd}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Bic\+::m\+\_\+low\+Wnd\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpBic_a1a7a6a7c186075fba672ff3328eb85ec}{}\label{classns3_1_1TcpBic_a1a7a6a7c186075fba672ff3328eb85ec}
+
+
+Lower bound on congestion window. 
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!m\+\_\+max\+Incr@{m\+\_\+max\+Incr}}
+\index{m\+\_\+max\+Incr@{m\+\_\+max\+Incr}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{m\+\_\+max\+Incr}{m_maxIncr}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Bic\+::m\+\_\+max\+Incr\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpBic_a79db4e8443cc0a27388a80566327a5a0}{}\label{classns3_1_1TcpBic_a79db4e8443cc0a27388a80566327a5a0}
+
+
+Maximum window increment. 
+
+\index{ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}!m\+\_\+smooth\+Part@{m\+\_\+smooth\+Part}}
+\index{m\+\_\+smooth\+Part@{m\+\_\+smooth\+Part}!ns3\+::\+Tcp\+Bic@{ns3\+::\+Tcp\+Bic}}
+\subsubsection[{\texorpdfstring{m\+\_\+smooth\+Part}{m_smoothPart}}]{\setlength{\rightskip}{0pt plus 5cm}int ns3\+::\+Tcp\+Bic\+::m\+\_\+smooth\+Part\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpBic_a69437c77ce1d0e51238f51c262d58bf1}{}\label{classns3_1_1TcpBic_a69437c77ce1d0e51238f51c262d58bf1}
+
+
+Number of R\+TT needed to reach Wmax from Wmax-\/B. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{tcp-bic_8h}{tcp-\/bic.\+h}\item 
+internet/model/\hyperlink{tcp-bic_8cc}{tcp-\/bic.\+cc}\end{DoxyCompactItemize}

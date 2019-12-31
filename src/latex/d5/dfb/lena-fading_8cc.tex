@@ -1,0 +1,130 @@
+\hypertarget{lena-fading_8cc}{}\section{lte/examples/lena-\/fading.cc File Reference}
+\label{lena-fading_8cc}\index{lte/examples/lena-\/fading.\+cc@{lte/examples/lena-\/fading.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/lte-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$ns3/string.\+h$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$ns3/buildings-\/helper.\+h$>$}\\*
+Include dependency graph for lena-\/fading.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{lena-fading_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{lena-\/fading.\+cc@{lena-\/fading.\+cc}!main@{main}}
+\index{main@{main}!lena-\/fading.\+cc@{lena-\/fading.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-fading_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{lena-fading_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+35 \{       
+36   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+37   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+38         
+39   \textcolor{comment}{// to save a template default attribute file run it like this:}
+40   \textcolor{comment}{// ./waf --command-template="%s --ns3::ConfigStore::Filename=input-defaults.txt
+       --ns3::ConfigStore::Mode=Save --ns3::ConfigStore::FileFormat=RawText" --run src/lte/examples/lena-first-sim}
+41   \textcolor{comment}{//}
+42   \textcolor{comment}{// to load a previously created default attribute file}
+43   \textcolor{comment}{// ./waf --command-template="%s --ns3::ConfigStore::Filename=input-defaults.txt
+       --ns3::ConfigStore::Mode=Load --ns3::ConfigStore::FileFormat=RawText" --run src/lte/examples/lena-first-sim}
+44 
+45   \textcolor{comment}{//ConfigStore inputConfig;}
+46   \textcolor{comment}{//inputConfig.ConfigureDefaults ();}
+47 
+48   \textcolor{comment}{// parse again so you can override default values from the command line}
+49   \textcolor{comment}{//cmd.Parse (argc, argv);}
+50 
+51   \hyperlink{classns3_1_1Ptr}{Ptr<LteHelper>} lteHelper = CreateObject<LteHelper> ();
+52   \textcolor{comment}{// Uncomment to enable logging}
+53   \textcolor{comment}{//lteHelper->EnableLogComponents ();}
+54   
+55 
+56   lteHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"FadingModel"}, StringValue (\textcolor{stringliteral}{"ns3::TraceFadingLossModel"}));
+57   
+58   std::ifstream ifTraceFile;
+59   ifTraceFile.open (\textcolor{stringliteral}{"../../src/lte/model/fading-traces/fading\_trace\_EPA\_3kmph.fad"}, std::ifstream::in);
+60   \textcolor{keywordflow}{if} (ifTraceFile.good ())
+61     \{
+62       \textcolor{comment}{// script launched by test.py}
+63       lteHelper->\hyperlink{classns3_1_1LteHelper_aedbe5aa68544779474f27d32e4470ada}{SetFadingModelAttribute} (\textcolor{stringliteral}{"TraceFilename"}, StringValue (\textcolor{stringliteral}{"
+      ../../src/lte/model/fading-traces/fading\_trace\_EPA\_3kmph.fad"}));
+64     \}
+65   \textcolor{keywordflow}{else}
+66     \{
+67       \textcolor{comment}{// script launched as an example}
+68       lteHelper->\hyperlink{classns3_1_1LteHelper_aedbe5aa68544779474f27d32e4470ada}{SetFadingModelAttribute} (\textcolor{stringliteral}{"TraceFilename"}, StringValue (\textcolor{stringliteral}{"
+      src/lte/model/fading-traces/fading\_trace\_EPA\_3kmph.fad"}));
+69     \}
+70     
+71   \textcolor{comment}{// these parameters have to setted only in case of the trace format }
+72   \textcolor{comment}{// differs from the standard one, that is}
+73   \textcolor{comment}{// - 10 seconds length trace}
+74   \textcolor{comment}{// - 10,000 samples}
+75   \textcolor{comment}{// - 0.5 seconds for window size}
+76   \textcolor{comment}{// - 100 RB}
+77   lteHelper->\hyperlink{classns3_1_1LteHelper_aedbe5aa68544779474f27d32e4470ada}{SetFadingModelAttribute} (\textcolor{stringliteral}{"TraceLength"}, TimeValue (
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0)));
+78   lteHelper->\hyperlink{classns3_1_1LteHelper_aedbe5aa68544779474f27d32e4470ada}{SetFadingModelAttribute} (\textcolor{stringliteral}{"SamplesNum"}, UintegerValue (10000));
+79   lteHelper->\hyperlink{classns3_1_1LteHelper_aedbe5aa68544779474f27d32e4470ada}{SetFadingModelAttribute} (\textcolor{stringliteral}{"WindowSize"}, TimeValue (
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.5)));
+80   lteHelper->\hyperlink{classns3_1_1LteHelper_aedbe5aa68544779474f27d32e4470ada}{SetFadingModelAttribute} (\textcolor{stringliteral}{"RbNum"}, UintegerValue (100));
+81  
+82   \textcolor{comment}{// Create Nodes: eNodeB and UE}
+83   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+84   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNodes;
+85   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+86   ueNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+87 
+88   \textcolor{comment}{// Install Mobility Model}
+89   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+90   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+91   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+92   BuildingsHelper::Install (enbNodes);
+93   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+94   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes);
+95   BuildingsHelper::Install (ueNodes);
+96 
+97   \textcolor{comment}{// Create Devices and install them in the Nodes (eNB and UE)}
+98   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbDevs;
+99   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueDevs;
+100   enbDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (enbNodes);
+101   ueDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (ueNodes);
+102 
+103   \textcolor{comment}{// Attach a UE to a eNB}
+104   lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (ueDevs, enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+105 
+106   \textcolor{comment}{// Activate an EPS bearer}
+107   \textcolor{keyword}{enum} \hyperlink{structns3_1_1EpsBearer_aecf0c67109c5eb4ec0b07226fff5885e}{EpsBearer::Qci} q = EpsBearer::GBR\_CONV\_VOICE;
+108   \hyperlink{structns3_1_1EpsBearer}{EpsBearer} bearer (q);
+109   lteHelper->\hyperlink{classns3_1_1LteHelper_ac896e16cf162e4beeaa292d39ab1b700}{ActivateDataRadioBearer} (ueDevs, bearer);
+110 
+111 
+112   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.005));
+113 
+114   Simulator::Run ();
+115 
+116   \textcolor{comment}{//GtkConfigStore config;}
+117   \textcolor{comment}{//config.ConfigureAttributes ();}
+118 
+119   Simulator::Destroy ();
+120   \textcolor{keywordflow}{return} 0;
+121 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

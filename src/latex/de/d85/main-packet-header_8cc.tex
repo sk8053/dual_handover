@@ -1,0 +1,67 @@
+\hypertarget{main-packet-header_8cc}{}\section{network/examples/main-\/packet-\/header.cc File Reference}
+\label{main-packet-header_8cc}\index{network/examples/main-\/packet-\/header.\+cc@{network/examples/main-\/packet-\/header.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/ptr.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/packet.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/header.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+Include dependency graph for main-\/packet-\/header.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classMyHeader}{My\+Header}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{main-packet-header_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{main-\/packet-\/header.\+cc@{main-\/packet-\/header.\+cc}!main@{main}}
+\index{main@{main}!main-\/packet-\/header.\+cc@{main-\/packet-\/header.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{main-packet-header_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{main-packet-header_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+102 \{
+103   \textcolor{comment}{// Enable the packet printing through Packet::Print command.}
+104   Packet::EnablePrinting ();
+105 
+106   \textcolor{comment}{// instantiate a header.}
+107   \hyperlink{classMyHeader}{MyHeader} sourceHeader;
+108   sourceHeader.\hyperlink{classMyHeader_ad431310f2204f150d75717882c2bdb84}{SetData} (2);
+109 
+110   \textcolor{comment}{// instantiate a packet}
+111   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = Create<Packet> ();
+112 
+113   \textcolor{comment}{// and store my header into the packet.}
+114   p->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (sourceHeader);
+115 
+116   \textcolor{comment}{// print the content of my packet on the standard output.}
+117   p->\hyperlink{classns3_1_1Packet_aa34058a5cdbf94673531f8c4001ab227}{Print} (std::cout);
+118   std::cout << std::endl;
+119 
+120   \textcolor{comment}{// you can now remove the header from the packet:}
+121   \hyperlink{classMyHeader}{MyHeader} destinationHeader;
+122   p->\hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{RemoveHeader} (destinationHeader);
+123 
+124   \textcolor{comment}{// and check that the destination and source}
+125   \textcolor{comment}{// headers contain the same values.}
+126   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (sourceHeader.\hyperlink{classMyHeader_a84ce206ec1d4c56b0a42b2ae37d74724}{GetData} () == destinationHeader.
+      \hyperlink{classMyHeader_a84ce206ec1d4c56b0a42b2ae37d74724}{GetData} ());
+127 
+128   \textcolor{keywordflow}{return} 0;
+129 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

@@ -1,0 +1,345 @@
+\hypertarget{classns3_1_1LogDistancePropagationLossModel}{}\section{ns3\+:\+:Log\+Distance\+Propagation\+Loss\+Model Class Reference}
+\label{classns3_1_1LogDistancePropagationLossModel}\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+
+
+a log distance propagation model.  
+
+
+
+
+{\ttfamily \#include $<$propagation-\/loss-\/model.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Log\+Distance\+Propagation\+Loss\+Model\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Log\+Distance\+Propagation\+Loss\+Model\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1LogDistancePropagationLossModel_a59b678e1444813c27be674f6ede5a2dc}{Log\+Distance\+Propagation\+Loss\+Model} ()
+\item 
+void \hyperlink{classns3_1_1LogDistancePropagationLossModel_af8d2797bafdf56b2e656d7183fb37169}{Set\+Path\+Loss\+Exponent} (double \hyperlink{lte__link__budget__x2__handover__measures_8m_abdb05bc5a064cf642a06c83b3392f148}{n})
+\item 
+double \hyperlink{classns3_1_1LogDistancePropagationLossModel_ae37b31efb718bc7d4737f54076ab8fe2}{Get\+Path\+Loss\+Exponent} (void) const 
+\item 
+void \hyperlink{classns3_1_1LogDistancePropagationLossModel_a4a5676c5b8a1a56b954ba7f50931acad}{Set\+Reference} (double reference\+Distance, double reference\+Loss)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1LogDistancePropagationLossModel_acda2646fbab6f42502217c957367375c}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1LogDistancePropagationLossModel_ad285db6bdd6cf48e302f563321983dc8}{Log\+Distance\+Propagation\+Loss\+Model} (const \hyperlink{classns3_1_1LogDistancePropagationLossModel}{Log\+Distance\+Propagation\+Loss\+Model} \&)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1LogDistancePropagationLossModel}{Log\+Distance\+Propagation\+Loss\+Model} \& \hyperlink{classns3_1_1LogDistancePropagationLossModel_a0903dc8454d4e8bbd605efb7c56f1bcc}{operator=} (const \hyperlink{classns3_1_1LogDistancePropagationLossModel}{Log\+Distance\+Propagation\+Loss\+Model} \&)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1LogDistancePropagationLossModel_acf6fa322564f60f5140b3e6cc7910581}{Do\+Calc\+Rx\+Power} (double tx\+Power\+Dbm, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ a, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ \hyperlink{lte__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b}) const 
+\item 
+virtual int64\+\_\+t \hyperlink{classns3_1_1LogDistancePropagationLossModel_a6135eec15e56f3193fe8bc79ccd8bb5e}{Do\+Assign\+Streams} (int64\+\_\+t stream)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1PropagationLossModel}{Propagation\+Loss\+Model} $>$ \hyperlink{classns3_1_1LogDistancePropagationLossModel_a100631298bb0d7810be6b970288cfcc5}{Create\+Default\+Reference} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1LogDistancePropagationLossModel_a70538e0d462564ad358ead5ab67aa3db}{m\+\_\+exponent}
+\begin{DoxyCompactList}\small\item\em model exponent \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1LogDistancePropagationLossModel_a1e40651f77e1aa2226eac1668b5bc22c}{m\+\_\+reference\+Distance}
+\begin{DoxyCompactList}\small\item\em reference distance \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1LogDistancePropagationLossModel_ad5065bb57e5dc5863189ab6e014080a0}{m\+\_\+reference\+Loss}
+\begin{DoxyCompactList}\small\item\em reference loss \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+a log distance propagation model. 
+
+This model calculates the reception power with a so-\/called log-\/distance propagation model\+: $ L = L_0 + 10 n log_{10}(\frac{d}{d_0})$
+
+where\+:
+\begin{DoxyItemize}
+\item $ n $ \+: the path loss distance exponent
+\item $ d_0 $ \+: reference distance (m)
+\item $ L_0 $ \+: path loss at reference distance (dB)
+\item $ d $ \+: distance (m)
+\item $ L $ \+: path loss (dB)
+\end{DoxyItemize}
+
+When the path loss is requested at a distance smaller than the reference distance, the tx power is returned. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!Log\+Distance\+Propagation\+Loss\+Model@{Log\+Distance\+Propagation\+Loss\+Model}}
+\index{Log\+Distance\+Propagation\+Loss\+Model@{Log\+Distance\+Propagation\+Loss\+Model}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{Log\+Distance\+Propagation\+Loss\+Model()}{LogDistancePropagationLossModel()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::\+Log\+Distance\+Propagation\+Loss\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LogDistancePropagationLossModel_a59b678e1444813c27be674f6ede5a2dc}{}\label{classns3_1_1LogDistancePropagationLossModel_a59b678e1444813c27be674f6ede5a2dc}
+
+\begin{DoxyCode}
+486 \{
+487 \}
+\end{DoxyCode}
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!Log\+Distance\+Propagation\+Loss\+Model@{Log\+Distance\+Propagation\+Loss\+Model}}
+\index{Log\+Distance\+Propagation\+Loss\+Model@{Log\+Distance\+Propagation\+Loss\+Model}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{Log\+Distance\+Propagation\+Loss\+Model(const Log\+Distance\+Propagation\+Loss\+Model \&)}{LogDistancePropagationLossModel(const LogDistancePropagationLossModel &)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::\+Log\+Distance\+Propagation\+Loss\+Model (
+\begin{DoxyParamCaption}
+\item[{const {\bf Log\+Distance\+Propagation\+Loss\+Model} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1LogDistancePropagationLossModel_ad285db6bdd6cf48e302f563321983dc8}{}\label{classns3_1_1LogDistancePropagationLossModel_ad285db6bdd6cf48e302f563321983dc8}
+
+
+Copy constructor. 
+
+Defined and unimplemented to avoid misuse 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!Create\+Default\+Reference@{Create\+Default\+Reference}}
+\index{Create\+Default\+Reference@{Create\+Default\+Reference}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{Create\+Default\+Reference(void)}{CreateDefaultReference(void)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Ptr}$<${\bf Propagation\+Loss\+Model}$>$ ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::\+Create\+Default\+Reference (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classns3_1_1LogDistancePropagationLossModel_a100631298bb0d7810be6b970288cfcc5}{}\label{classns3_1_1LogDistancePropagationLossModel_a100631298bb0d7810be6b970288cfcc5}
+Creates a default reference loss model \begin{DoxyReturn}{Returns}
+a default reference loss model 
+\end{DoxyReturn}
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!Do\+Assign\+Streams@{Do\+Assign\+Streams}}
+\index{Do\+Assign\+Streams@{Do\+Assign\+Streams}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Assign\+Streams(int64\+\_\+t stream)}{DoAssignStreams(int64_t stream)}}]{\setlength{\rightskip}{0pt plus 5cm}int64\+\_\+t ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::\+Do\+Assign\+Streams (
+\begin{DoxyParamCaption}
+\item[{int64\+\_\+t}]{stream}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1LogDistancePropagationLossModel_a6135eec15e56f3193fe8bc79ccd8bb5e}{}\label{classns3_1_1LogDistancePropagationLossModel_a6135eec15e56f3193fe8bc79ccd8bb5e}
+Subclasses must implement this; those not using random variables can return zero 
+
+Implements \hyperlink{classns3_1_1PropagationLossModel_a1af4724c8961a86455fa381f00d7be11}{ns3\+::\+Propagation\+Loss\+Model}.
+
+
+\begin{DoxyCode}
+539 \{
+540   \textcolor{keywordflow}{return} 0;
+541 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!Do\+Calc\+Rx\+Power@{Do\+Calc\+Rx\+Power}}
+\index{Do\+Calc\+Rx\+Power@{Do\+Calc\+Rx\+Power}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Calc\+Rx\+Power(double tx\+Power\+Dbm, Ptr$<$ Mobility\+Model $>$ a, Ptr$<$ Mobility\+Model $>$ b) const }{DoCalcRxPower(double txPowerDbm, Ptr< MobilityModel > a, Ptr< MobilityModel > b) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::\+Do\+Calc\+Rx\+Power (
+\begin{DoxyParamCaption}
+\item[{double}]{tx\+Power\+Dbm, }
+\item[{{\bf Ptr}$<$ {\bf Mobility\+Model} $>$}]{a, }
+\item[{{\bf Ptr}$<$ {\bf Mobility\+Model} $>$}]{b}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1LogDistancePropagationLossModel_acf6fa322564f60f5140b3e6cc7910581}{}\label{classns3_1_1LogDistancePropagationLossModel_acf6fa322564f60f5140b3e6cc7910581}
+Returns the Rx Power taking into account only the particular Propagatin\+Loss\+Model.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tx\+Power\+Dbm} & current transmission power (in d\+Bm) \\
+\hline
+{\em a} & the mobility model of the source \\
+\hline
+{\em b} & the mobility model of the destination \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the reception power after adding/multiplying propagation loss (in d\+Bm) 
+\end{DoxyReturn}
+The formula is\+: rx = 10 $\ast$ log (Pr0(tx)) -\/ n $\ast$ 10 $\ast$ log (d/d0)
+
+Pr0\+: rx power at reference distance d0 (W) d0\+: reference distance\+: 1.\+0 (m) d\+: distance (m) tx\+: tx power (dB) rx\+: dB
+
+Which, in our case is\+:
+
+rx = rx0(tx) -\/ 10 $\ast$ n $\ast$ log (d/d0)
+
+Implements \hyperlink{classns3_1_1PropagationLossModel_aa6bb73e4132dc5d8e1b49750955838bb}{ns3\+::\+Propagation\+Loss\+Model}.
+
+
+\begin{DoxyCode}
+510 \{
+511   \textcolor{keywordtype}{double} distance = a->\hyperlink{classns3_1_1MobilityModel_afa16c20b3c5fd135be075000f0272f31}{GetDistanceFrom} (b);
+512   \textcolor{keywordflow}{if} (distance <= \hyperlink{classns3_1_1LogDistancePropagationLossModel_a1e40651f77e1aa2226eac1668b5bc22c}{m\_referenceDistance})
+513     \{
+514       \textcolor{keywordflow}{return} txPowerDbm - \hyperlink{classns3_1_1LogDistancePropagationLossModel_ad5065bb57e5dc5863189ab6e014080a0}{m\_referenceLoss};
+515     \}
+530   \textcolor{keywordtype}{double} pathLossDb = 10 * \hyperlink{classns3_1_1LogDistancePropagationLossModel_a70538e0d462564ad358ead5ab67aa3db}{m\_exponent} * std::log10 (distance / 
+      \hyperlink{classns3_1_1LogDistancePropagationLossModel_a1e40651f77e1aa2226eac1668b5bc22c}{m\_referenceDistance});
+531   \textcolor{keywordtype}{double} rxc = -\hyperlink{classns3_1_1LogDistancePropagationLossModel_ad5065bb57e5dc5863189ab6e014080a0}{m\_referenceLoss} - pathLossDb;
+532   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"distance="}<<distance<<\textcolor{stringliteral}{"m, reference-attenuation="}<< -
+      \hyperlink{classns3_1_1LogDistancePropagationLossModel_ad5065bb57e5dc5863189ab6e014080a0}{m\_referenceLoss}<<\textcolor{stringliteral}{"dB, "}<<
+533                 \textcolor{stringliteral}{"attenuation coefficient="}<<rxc<<\textcolor{stringliteral}{"db"});
+534   \textcolor{keywordflow}{return} txPowerDbm + rxc;
+535 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!Get\+Path\+Loss\+Exponent@{Get\+Path\+Loss\+Exponent}}
+\index{Get\+Path\+Loss\+Exponent@{Get\+Path\+Loss\+Exponent}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Path\+Loss\+Exponent(void) const }{GetPathLossExponent(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::\+Get\+Path\+Loss\+Exponent (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1LogDistancePropagationLossModel_ae37b31efb718bc7d4737f54076ab8fe2}{}\label{classns3_1_1LogDistancePropagationLossModel_ae37b31efb718bc7d4737f54076ab8fe2}
+\begin{DoxyReturn}{Returns}
+the current path loss exponent. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+502 \{
+503   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1LogDistancePropagationLossModel_a70538e0d462564ad358ead5ab67aa3db}{m\_exponent};
+504 \}
+\end{DoxyCode}
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1LogDistancePropagationLossModel_acda2646fbab6f42502217c957367375c}{}\label{classns3_1_1LogDistancePropagationLossModel_acda2646fbab6f42502217c957367375c}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+460 \{
+461   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::LogDistancePropagationLossModel"})
+462     .SetParent<\hyperlink{classns3_1_1PropagationLossModel_ace8b78c2c8e805cd0a919d7e3543318c}{PropagationLossModel}> ()
+463     .SetGroupName (\textcolor{stringliteral}{"Propagation"})
+464     .AddConstructor<\hyperlink{classns3_1_1LogDistancePropagationLossModel_a59b678e1444813c27be674f6ede5a2dc}{LogDistancePropagationLossModel}> ()
+465     .AddAttribute (\textcolor{stringliteral}{"Exponent"},
+466                    \textcolor{stringliteral}{"The exponent of the Path Loss propagation model"},
+467                    DoubleValue (3.0),
+468                    MakeDoubleAccessor (&
+      \hyperlink{classns3_1_1LogDistancePropagationLossModel_a70538e0d462564ad358ead5ab67aa3db}{LogDistancePropagationLossModel::m\_exponent}),
+469                    MakeDoubleChecker<double> ())
+470     .AddAttribute (\textcolor{stringliteral}{"ReferenceDistance"},
+471                    \textcolor{stringliteral}{"The distance at which the reference loss is calculated (m)"},
+472                    DoubleValue (1.0),
+473                    MakeDoubleAccessor (&
+      \hyperlink{classns3_1_1LogDistancePropagationLossModel_a1e40651f77e1aa2226eac1668b5bc22c}{LogDistancePropagationLossModel::m\_referenceDistance}),
+474                    MakeDoubleChecker<double> ())
+475     .AddAttribute (\textcolor{stringliteral}{"ReferenceLoss"},
+476                    \textcolor{stringliteral}{"The reference loss at reference distance (dB). (Default is Friis at 1m with 5.15 GHz)"},
+477                    DoubleValue (46.6777),
+478                    MakeDoubleAccessor (&
+      \hyperlink{classns3_1_1LogDistancePropagationLossModel_ad5065bb57e5dc5863189ab6e014080a0}{LogDistancePropagationLossModel::m\_referenceLoss}),
+479                    MakeDoubleChecker<double> ())
+480   ;
+481   \textcolor{keywordflow}{return} tid;
+482 
+483 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!operator=@{operator=}}
+\index{operator=@{operator=}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{operator=(const Log\+Distance\+Propagation\+Loss\+Model \&)}{operator=(const LogDistancePropagationLossModel &)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Log\+Distance\+Propagation\+Loss\+Model}\& ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Log\+Distance\+Propagation\+Loss\+Model} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1LogDistancePropagationLossModel_a0903dc8454d4e8bbd605efb7c56f1bcc}{}\label{classns3_1_1LogDistancePropagationLossModel_a0903dc8454d4e8bbd605efb7c56f1bcc}
+
+
+Copy constructor. 
+
+Defined and unimplemented to avoid misuse \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!Set\+Path\+Loss\+Exponent@{Set\+Path\+Loss\+Exponent}}
+\index{Set\+Path\+Loss\+Exponent@{Set\+Path\+Loss\+Exponent}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Path\+Loss\+Exponent(double n)}{SetPathLossExponent(double n)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::\+Set\+Path\+Loss\+Exponent (
+\begin{DoxyParamCaption}
+\item[{double}]{n}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LogDistancePropagationLossModel_af8d2797bafdf56b2e656d7183fb37169}{}\label{classns3_1_1LogDistancePropagationLossModel_af8d2797bafdf56b2e656d7183fb37169}
+
+\begin{DoxyParams}{Parameters}
+{\em n} & the path loss exponent. Set the path loss exponent. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+491 \{
+492   \hyperlink{classns3_1_1LogDistancePropagationLossModel_a70538e0d462564ad358ead5ab67aa3db}{m\_exponent} = \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n};
+493 \}
+\end{DoxyCode}
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!Set\+Reference@{Set\+Reference}}
+\index{Set\+Reference@{Set\+Reference}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Reference(double reference\+Distance, double reference\+Loss)}{SetReference(double referenceDistance, double referenceLoss)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::\+Set\+Reference (
+\begin{DoxyParamCaption}
+\item[{double}]{reference\+Distance, }
+\item[{double}]{reference\+Loss}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LogDistancePropagationLossModel_a4a5676c5b8a1a56b954ba7f50931acad}{}\label{classns3_1_1LogDistancePropagationLossModel_a4a5676c5b8a1a56b954ba7f50931acad}
+Set the reference path loss at a given distance 
+\begin{DoxyParams}{Parameters}
+{\em reference\+Distance} & reference distance \\
+\hline
+{\em reference\+Loss} & reference path loss \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+496 \{
+497   \hyperlink{classns3_1_1LogDistancePropagationLossModel_a1e40651f77e1aa2226eac1668b5bc22c}{m\_referenceDistance} = referenceDistance;
+498   \hyperlink{classns3_1_1LogDistancePropagationLossModel_ad5065bb57e5dc5863189ab6e014080a0}{m\_referenceLoss} = referenceLoss;
+499 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!m\+\_\+exponent@{m\+\_\+exponent}}
+\index{m\+\_\+exponent@{m\+\_\+exponent}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+exponent}{m_exponent}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::m\+\_\+exponent\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1LogDistancePropagationLossModel_a70538e0d462564ad358ead5ab67aa3db}{}\label{classns3_1_1LogDistancePropagationLossModel_a70538e0d462564ad358ead5ab67aa3db}
+
+
+model exponent 
+
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!m\+\_\+reference\+Distance@{m\+\_\+reference\+Distance}}
+\index{m\+\_\+reference\+Distance@{m\+\_\+reference\+Distance}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+reference\+Distance}{m_referenceDistance}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::m\+\_\+reference\+Distance\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1LogDistancePropagationLossModel_a1e40651f77e1aa2226eac1668b5bc22c}{}\label{classns3_1_1LogDistancePropagationLossModel_a1e40651f77e1aa2226eac1668b5bc22c}
+
+
+reference distance 
+
+\index{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}!m\+\_\+reference\+Loss@{m\+\_\+reference\+Loss}}
+\index{m\+\_\+reference\+Loss@{m\+\_\+reference\+Loss}!ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model@{ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+reference\+Loss}{m_referenceLoss}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Log\+Distance\+Propagation\+Loss\+Model\+::m\+\_\+reference\+Loss\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1LogDistancePropagationLossModel_ad5065bb57e5dc5863189ab6e014080a0}{}\label{classns3_1_1LogDistancePropagationLossModel_ad5065bb57e5dc5863189ab6e014080a0}
+
+
+reference loss 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+propagation/model/\hyperlink{propagation-loss-model_8h}{propagation-\/loss-\/model.\+h}\item 
+propagation/model/\hyperlink{propagation-loss-model_8cc}{propagation-\/loss-\/model.\+cc}\end{DoxyCompactItemize}

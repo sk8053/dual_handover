@@ -1,0 +1,149 @@
+\hypertarget{sample-simulator_8cc}{}\section{core/examples/sample-\/simulator.cc File Reference}
+\label{sample-simulator_8cc}\index{core/examples/sample-\/simulator.\+cc@{core/examples/sample-\/simulator.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/simulator.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/nstime.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/command-\/line.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/double.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/random-\/variable-\/stream.\+h\char`\"{}}\\*
+Include dependency graph for sample-\/simulator.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classMyModel}{My\+Model}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{sample-simulator_8cc_a445145225afdfd0a7f9ec1780b5cd49d}{Example\+Function} (\hyperlink{classMyModel}{My\+Model} $\ast$model)
+\item 
+static void \hyperlink{sample-simulator_8cc_a935efb5a8a96132ec1ba8bd67487b97b}{Random\+Function} (void)
+\item 
+static void \hyperlink{sample-simulator_8cc_a9107e2a62541d0024e401df7e1d3a2b0}{Cancelled\+Event} (void)
+\item 
+int \hyperlink{sample-simulator_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Example program demonstrating use of various Schedule functions. 
+
+\subsection{Function Documentation}
+\index{sample-\/simulator.\+cc@{sample-\/simulator.\+cc}!Cancelled\+Event@{Cancelled\+Event}}
+\index{Cancelled\+Event@{Cancelled\+Event}!sample-\/simulator.\+cc@{sample-\/simulator.\+cc}}
+\subsubsection[{\texorpdfstring{Cancelled\+Event(void)}{CancelledEvent(void)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Cancelled\+Event (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{sample-simulator_8cc_a9107e2a62541d0024e401df7e1d3a2b0}{}\label{sample-simulator_8cc_a9107e2a62541d0024e401df7e1d3a2b0}
+Simple function event handler; the corresponding event is cancelled. 
+\begin{DoxyCode}
+92 \{
+93   std::cout << \textcolor{stringliteral}{"I should never be called... "} << std::endl;
+94 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{sample-\/simulator.\+cc@{sample-\/simulator.\+cc}!Example\+Function@{Example\+Function}}
+\index{Example\+Function@{Example\+Function}!sample-\/simulator.\+cc@{sample-\/simulator.\+cc}}
+\subsubsection[{\texorpdfstring{Example\+Function(\+My\+Model $\ast$model)}{ExampleFunction(MyModel *model)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Example\+Function (
+\begin{DoxyParamCaption}
+\item[{{\bf My\+Model} $\ast$}]{model}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{sample-simulator_8cc_a445145225afdfd0a7f9ec1780b5cd49d}{}\label{sample-simulator_8cc_a445145225afdfd0a7f9ec1780b5cd49d}
+Simple function event handler which Starts a \hyperlink{classMyModel}{My\+Model} object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em model} & The \hyperlink{classMyModel}{My\+Model} object to start. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+73 \{
+74   std::cout << \textcolor{stringliteral}{"ExampleFunction received event at "}
+75             << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{"s"} << std::endl;
+76   model->\hyperlink{classMyModel_abf08683668663b0613f41d5528c9fb78}{Start} ();
+77 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{sample-\/simulator.\+cc@{sample-\/simulator.\+cc}!main@{main}}
+\index{main@{main}!sample-\/simulator.\+cc@{sample-\/simulator.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{sample-simulator_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{sample-simulator_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+97 \{
+98   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+99   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+100 
+101   \hyperlink{classMyModel}{MyModel} model;
+102   \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} v = CreateObject<UniformRandomVariable> ();
+103   v->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (10));
+104   v->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (20));
+105 
+106   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0), &\hyperlink{sample-simulator_8cc_a445145225afdfd0a7f9ec1780b5cd49d}{ExampleFunction}, &model);
+107 
+108   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (v->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ()), &\hyperlink{sample-simulator_8cc_a935efb5a8a96132ec1ba8bd67487b97b}{RandomFunction});
+109 
+110   \hyperlink{classns3_1_1EventId}{EventId} \textcolor{keywordtype}{id} = Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (30.0), &
+      \hyperlink{sample-simulator_8cc_a9107e2a62541d0024e401df7e1d3a2b0}{CancelledEvent});
+111   Simulator::Cancel (\textcolor{keywordtype}{id});
+112 
+113   Simulator::Run ();
+114 
+115   Simulator::Destroy ();
+116 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{sample-\/simulator.\+cc@{sample-\/simulator.\+cc}!Random\+Function@{Random\+Function}}
+\index{Random\+Function@{Random\+Function}!sample-\/simulator.\+cc@{sample-\/simulator.\+cc}}
+\subsubsection[{\texorpdfstring{Random\+Function(void)}{RandomFunction(void)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Random\+Function (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{sample-simulator_8cc_a935efb5a8a96132ec1ba8bd67487b97b}{}\label{sample-simulator_8cc_a935efb5a8a96132ec1ba8bd67487b97b}
+Simple function event handler; this function is called randomly. 
+\begin{DoxyCode}
+84 \{
+85   std::cout << \textcolor{stringliteral}{"RandomFunction received event at "}
+86             << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{"s"} << std::endl;
+87 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+

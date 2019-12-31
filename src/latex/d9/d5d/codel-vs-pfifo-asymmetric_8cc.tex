@@ -1,0 +1,722 @@
+\hypertarget{codel-vs-pfifo-asymmetric_8cc}{}\section{traffic-\/control/examples/codel-\/vs-\/pfifo-\/asymmetric.cc File Reference}
+\label{codel-vs-pfifo-asymmetric_8cc}\index{traffic-\/control/examples/codel-\/vs-\/pfifo-\/asymmetric.\+cc@{traffic-\/control/examples/codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/error-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/tcp-\/header.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/udp-\/header.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/enum.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/event-\/id.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/global-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/traffic-\/control-\/module.\+h\char`\"{}}\\*
+Include dependency graph for codel-\/vs-\/pfifo-\/asymmetric.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{codel-vs-pfifo-asymmetric_8cc_aa27e0ba3b4d4602d11ece90f4a1ee82c}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Co\+Del\+Pfifo\+Fast\+Asymmetric\+Test\char`\"{})
+\item 
+static void \hyperlink{codel-vs-pfifo-asymmetric_8cc_a00b0ede63dc5275483d7e3f7ab0ac706}{Cwnd\+Tracer} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1OutputStreamWrapper}{Output\+Stream\+Wrapper} $>$stream, uint32\+\_\+t oldval, uint32\+\_\+t newval)
+\item 
+static void \hyperlink{codel-vs-pfifo-asymmetric_8cc_a14abe7eeb70cac35caeaf197fff9942d}{Trace\+Cwnd} (std\+::string cwnd\+Tr\+File\+Name)
+\item 
+static void \hyperlink{codel-vs-pfifo-asymmetric_8cc_abe5b5ba0be4971f9a8889b1f517637d9}{Sojourn\+Tracer} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1OutputStreamWrapper}{Output\+Stream\+Wrapper} $>$stream, \hyperlink{classns3_1_1Time}{Time} oldval, \hyperlink{classns3_1_1Time}{Time} newval)
+\item 
+static void \hyperlink{codel-vs-pfifo-asymmetric_8cc_aa8f91732b16706b6be64dda090e6d90e}{Trace\+Sojourn} (std\+::string sojourn\+Tr\+File\+Name)
+\item 
+static void \hyperlink{codel-vs-pfifo-asymmetric_8cc_a2c05f34753510bfc5337c693bc9db6ad}{Queue\+Length\+Tracer} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1OutputStreamWrapper}{Output\+Stream\+Wrapper} $>$stream, uint32\+\_\+t oldval, uint32\+\_\+t newval)
+\item 
+static void \hyperlink{codel-vs-pfifo-asymmetric_8cc_ad42ad75e7dad477cc7b101512f13f0a9}{Trace\+Queue\+Length} (std\+::string queue\+Length\+Tr\+File\+Name)
+\item 
+static void \hyperlink{codel-vs-pfifo-asymmetric_8cc_a3625f5fca3e975c49f2e7643ceb2f55c}{Every\+Drop\+Tracer} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1OutputStreamWrapper}{Output\+Stream\+Wrapper} $>$stream, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1QueueDiscItem}{Queue\+Disc\+Item} $>$ item)
+\item 
+static void \hyperlink{codel-vs-pfifo-asymmetric_8cc_acc8c5885e95cf5d91788a281acfe977f}{Trace\+Every\+Drop} (std\+::string every\+Drop\+Tr\+File\+Name)
+\item 
+static void \hyperlink{codel-vs-pfifo-asymmetric_8cc_a3965538e9e4b5381cb4fe1023ba05e7a}{Dropping\+State\+Tracer} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1OutputStreamWrapper}{Output\+Stream\+Wrapper} $>$stream, bool old\+Val, bool new\+Val)
+\item 
+static void \hyperlink{codel-vs-pfifo-asymmetric_8cc_a20d7d9452b7e5c42ebc464a728682614}{Trace\+Dropping\+State} (std\+::string drop\+State\+Tr\+File\+Name)
+\item 
+void \hyperlink{codel-vs-pfifo-asymmetric_8cc_a4d992db17e839d6d89204a95be422763}{Create\+Bulk\+Flow} (Address\+Value remote\+Address, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Node}{Node} $>$ sender, uint32\+\_\+t pkt\+Size, float stop\+Time)
+\item 
+void \hyperlink{codel-vs-pfifo-asymmetric_8cc_aa3d189125687c5d379924c22326d45eb}{Create\+On\+Off\+Flow} (Address\+Value remote\+Address, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Node}{Node} $>$ sender, float stop\+Time)
+\item 
+int \hyperlink{codel-vs-pfifo-asymmetric_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!Create\+Bulk\+Flow@{Create\+Bulk\+Flow}}
+\index{Create\+Bulk\+Flow@{Create\+Bulk\+Flow}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{Create\+Bulk\+Flow(\+Address\+Value remote\+Address, Ptr$<$ Node $>$ sender, uint32\+\_\+t pkt\+Size, float stop\+Time)}{CreateBulkFlow(AddressValue remoteAddress, Ptr< Node > sender, uint32_t pktSize, float stopTime)}}]{\setlength{\rightskip}{0pt plus 5cm}void Create\+Bulk\+Flow (
+\begin{DoxyParamCaption}
+\item[{Address\+Value}]{remote\+Address, }
+\item[{{\bf Ptr}$<$ {\bf Node} $>$}]{sender, }
+\item[{uint32\+\_\+t}]{pkt\+Size, }
+\item[{float}]{stop\+Time}
+\end{DoxyParamCaption}
+)}\hypertarget{codel-vs-pfifo-asymmetric_8cc_a4d992db17e839d6d89204a95be422763}{}\label{codel-vs-pfifo-asymmetric_8cc_a4d992db17e839d6d89204a95be422763}
+
+\begin{DoxyCode}
+193 \{
+194   \hyperlink{classns3_1_1BulkSendHelper}{BulkSendHelper} sourceHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+195   sourceHelper.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+196   sourceHelper.SetAttribute (\textcolor{stringliteral}{"SendSize"}, UintegerValue (pktSize));
+197   sourceHelper.SetAttribute (\textcolor{stringliteral}{"MaxBytes"}, UintegerValue (0));
+198   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sourceApp = sourceHelper.Install (sender);
+199   sourceApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0));
+200   sourceApp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (stopTime - 3));
+201 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!Create\+On\+Off\+Flow@{Create\+On\+Off\+Flow}}
+\index{Create\+On\+Off\+Flow@{Create\+On\+Off\+Flow}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{Create\+On\+Off\+Flow(\+Address\+Value remote\+Address, Ptr$<$ Node $>$ sender, float stop\+Time)}{CreateOnOffFlow(AddressValue remoteAddress, Ptr< Node > sender, float stopTime)}}]{\setlength{\rightskip}{0pt plus 5cm}void Create\+On\+Off\+Flow (
+\begin{DoxyParamCaption}
+\item[{Address\+Value}]{remote\+Address, }
+\item[{{\bf Ptr}$<$ {\bf Node} $>$}]{sender, }
+\item[{float}]{stop\+Time}
+\end{DoxyParamCaption}
+)}\hypertarget{codel-vs-pfifo-asymmetric_8cc_aa3d189125687c5d379924c22326d45eb}{}\label{codel-vs-pfifo-asymmetric_8cc_aa3d189125687c5d379924c22326d45eb}
+
+\begin{DoxyCode}
+205 \{
+206   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} sourceHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+207   sourceHelper.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (280));
+208   sourceHelper.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+209   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sourceApp = sourceHelper.Install (sender);
+210   sourceApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0));
+211   sourceApp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (stopTime - 3));
+212 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!Cwnd\+Tracer@{Cwnd\+Tracer}}
+\index{Cwnd\+Tracer@{Cwnd\+Tracer}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{Cwnd\+Tracer(\+Ptr$<$ Output\+Stream\+Wrapper $>$stream, uint32\+\_\+t oldval, uint32\+\_\+t newval)}{CwndTracer(Ptr< OutputStreamWrapper >stream, uint32_t oldval, uint32_t newval)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Cwnd\+Tracer (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Output\+Stream\+Wrapper} $>$}]{stream, }
+\item[{uint32\+\_\+t}]{oldval, }
+\item[{uint32\+\_\+t}]{newval}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{codel-vs-pfifo-asymmetric_8cc_a00b0ede63dc5275483d7e3f7ab0ac706}{}\label{codel-vs-pfifo-asymmetric_8cc_a00b0ede63dc5275483d7e3f7ab0ac706}
+
+\begin{DoxyCode}
+74 \{
+75   *stream->\hyperlink{classns3_1_1OutputStreamWrapper_a0cf30a4188ab6fdae2b2ab74db11acc2}{GetStream} () << oldval << \textcolor{stringliteral}{" "} << newval << std::endl;
+76 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!Dropping\+State\+Tracer@{Dropping\+State\+Tracer}}
+\index{Dropping\+State\+Tracer@{Dropping\+State\+Tracer}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{Dropping\+State\+Tracer(\+Ptr$<$ Output\+Stream\+Wrapper $>$stream, bool old\+Val, bool new\+Val)}{DroppingStateTracer(Ptr< OutputStreamWrapper >stream, bool oldVal, bool newVal)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Dropping\+State\+Tracer (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Output\+Stream\+Wrapper} $>$}]{stream, }
+\item[{bool}]{old\+Val, }
+\item[{bool}]{new\+Val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{codel-vs-pfifo-asymmetric_8cc_a3965538e9e4b5381cb4fe1023ba05e7a}{}\label{codel-vs-pfifo-asymmetric_8cc_a3965538e9e4b5381cb4fe1023ba05e7a}
+
+\begin{DoxyCode}
+162 \{
+163   \textcolor{keywordflow}{if} (oldVal == \textcolor{keyword}{false} && newVal == \textcolor{keyword}{true})
+164     \{
+165       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Entering the dropping state"});
+166       *stream->\hyperlink{classns3_1_1OutputStreamWrapper_a0cf30a4188ab6fdae2b2ab74db11acc2}{GetStream} () << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().
+      \hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" "};
+167     \}
+168   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (oldVal == \textcolor{keyword}{true} && newVal == \textcolor{keyword}{false})
+169     \{
+170       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Leaving the dropping state"});
+171       *stream->\hyperlink{classns3_1_1OutputStreamWrapper_a0cf30a4188ab6fdae2b2ab74db11acc2}{GetStream} () << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().
+      \hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} ()  << std::endl;
+172     \}
+173 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!Every\+Drop\+Tracer@{Every\+Drop\+Tracer}}
+\index{Every\+Drop\+Tracer@{Every\+Drop\+Tracer}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{Every\+Drop\+Tracer(\+Ptr$<$ Output\+Stream\+Wrapper $>$stream, Ptr$<$ const Queue\+Disc\+Item $>$ item)}{EveryDropTracer(Ptr< OutputStreamWrapper >stream, Ptr< const QueueDiscItem > item)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Every\+Drop\+Tracer (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Output\+Stream\+Wrapper} $>$}]{stream, }
+\item[{{\bf Ptr}$<$ const {\bf Queue\+Disc\+Item} $>$}]{item}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{codel-vs-pfifo-asymmetric_8cc_a3625f5fca3e975c49f2e7643ceb2f55c}{}\label{codel-vs-pfifo-asymmetric_8cc_a3625f5fca3e975c49f2e7643ceb2f55c}
+
+\begin{DoxyCode}
+140 \{
+141   *stream->\hyperlink{classns3_1_1OutputStreamWrapper_a0cf30a4188ab6fdae2b2ab74db11acc2}{GetStream} () << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" "} << item 
+      << std::endl;
+142 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!main@{main}}
+\index{main@{main}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{codel-vs-pfifo-asymmetric_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{codel-vs-pfifo-asymmetric_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+215 \{
+216   std::string serverCmtsDelay = \textcolor{stringliteral}{"15ms"};
+217   std::string cmtsRouterDelay = \textcolor{stringliteral}{"6ms"};
+218   std::string routerHostDelay = \textcolor{stringliteral}{"0.1ms"};
+219   std::string serverLanDataRate = \textcolor{stringliteral}{"10Gbps"};
+220   std::string cmtsLanDataRate = \textcolor{stringliteral}{"10Gbps"};
+221   std::string cmtsWanDataRate = \textcolor{stringliteral}{"22Mbps"};
+222   std::string routerWanDataRate = \textcolor{stringliteral}{"5Mbps"};
+223   std::string routerLanDataRate = \textcolor{stringliteral}{"10Gbps"};
+224   std::string hostLanDataRate = \textcolor{stringliteral}{"10Gbps"};
+225 
+226   std::string routerWanQueueDiscType = \textcolor{stringliteral}{"CoDel"};           \textcolor{comment}{// outbound cable router queue}
+227   uint32\_t pktSize = 1458;                \textcolor{comment}{// in bytes. 1458 to prevent fragments}
+228   uint32\_t queueSize = 1000;              \textcolor{comment}{// in packets}
+229   uint32\_t numOfUpLoadBulkFlows = 1;      \textcolor{comment}{// # of upload bulk transfer flows}
+230   uint32\_t numOfDownLoadBulkFlows = 1;    \textcolor{comment}{// # of download bulk transfer flows}
+231   uint32\_t numOfUpLoadOnOffFlows = 1;     \textcolor{comment}{// # of upload onoff flows}
+232   uint32\_t numOfDownLoadOnOffFlows = 1;   \textcolor{comment}{// # of download onoff flows}
+233   \textcolor{keywordtype}{bool} isPcapEnabled = \textcolor{keyword}{true};
+234 
+235   \textcolor{keywordtype}{float} startTime = 0.1;
+236   \textcolor{keywordtype}{float} simDuration = 60;        \textcolor{comment}{//in seconds}
+237 
+238   std::string fileNamePrefix = \textcolor{stringliteral}{"codel-vs-pfifo-fast-asymmetric"};
+239   \textcolor{keywordtype}{bool} logging = \textcolor{keyword}{true};
+240 
+241   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+242   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"serverCmtsDelay"}, \textcolor{stringliteral}{"Link delay between server and CMTS"}, serverCmtsDelay);
+243   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"cmtsRouterDelay"}, \textcolor{stringliteral}{"Link delay between CMTS and rounter"}, cmtsRouterDelay);
+244   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"routerHostDelay"}, \textcolor{stringliteral}{"Link delay between router and host"}, routerHostDelay);
+245   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"serverLanDataRate"}, \textcolor{stringliteral}{"Server LAN net device data rate"}, serverLanDataRate);
+246   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"cmtsLanDataRate"}, \textcolor{stringliteral}{"CMTS LAN net device data rate"}, cmtsLanDataRate);
+247   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"cmtsWanDataRate"}, \textcolor{stringliteral}{"CMTS WAN net device data rate"}, cmtsWanDataRate);
+248   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"routerWanDataRate"}, \textcolor{stringliteral}{"Router WAN net device data rate"}, routerWanDataRate);
+249   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"routerLanDataRate"}, \textcolor{stringliteral}{"Router LAN net device data rate"}, routerLanDataRate);
+250   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"hostLanDataRate"}, \textcolor{stringliteral}{"Host LAN net device data rate"}, hostLanDataRate);
+251   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"routerWanQueueDiscType"}, \textcolor{stringliteral}{"Router WAN queue disc type: "}
+252                 \textcolor{stringliteral}{"PfifoFast, CoDel"}, routerWanQueueDiscType);
+253   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"queueSize"}, \textcolor{stringliteral}{"Queue size in packets"}, queueSize);
+254   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"pktSize"}, \textcolor{stringliteral}{"Packet size in bytes"}, pktSize);
+255   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"numOfUpLoadBulkFlows"}, \textcolor{stringliteral}{"Number of upload bulk transfer flows"}, 
+      numOfUpLoadBulkFlows);
+256   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"numOfDownLoadBulkFlows"}, \textcolor{stringliteral}{"Number of download bulk transfer flows"}, 
+      numOfDownLoadBulkFlows);
+257   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"numOfUpLoadOnOffFlows"}, \textcolor{stringliteral}{"Number of upload OnOff flows"}, numOfUpLoadOnOffFlows);
+258   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"numOfDownLoadOnOffFlows"}, \textcolor{stringliteral}{"Number of download OnOff flows"}, 
+      numOfDownLoadOnOffFlows);
+259   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"startTime"}, \textcolor{stringliteral}{"Simulation start time"}, startTime);
+260   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"simDuration"}, \textcolor{stringliteral}{"Simulation duration in seconds"}, simDuration);
+261   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"isPcapEnabled"}, \textcolor{stringliteral}{"Flag to enable/disable pcap"}, isPcapEnabled);
+262   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"logging"}, \textcolor{stringliteral}{"Flag to enable/disable logging"}, logging);
+263   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+264 
+265   \textcolor{keywordtype}{float} stopTime = startTime + simDuration;
+266 
+267   std::string pcapFileName = fileNamePrefix + \textcolor{stringliteral}{"-"} + routerWanQueueDiscType;
+268   std::string cwndTrFileName = fileNamePrefix + \textcolor{stringliteral}{"-"} + routerWanQueueDiscType + \textcolor{stringliteral}{"-cwnd"} + \textcolor{stringliteral}{".tr"};
+269   std::string attributeFileName = fileNamePrefix + \textcolor{stringliteral}{"-"} + routerWanQueueDiscType + \textcolor{stringliteral}{".attr"};
+270   std::string sojournTrFileName = fileNamePrefix + \textcolor{stringliteral}{"-"} + routerWanQueueDiscType + \textcolor{stringliteral}{"-sojourn"} + \textcolor{stringliteral}{".tr"};
+271   std::string queueLengthTrFileName = fileNamePrefix + \textcolor{stringliteral}{"-"} + routerWanQueueDiscType + \textcolor{stringliteral}{"-length"} + \textcolor{stringliteral}{".tr"};
+272   std::string everyDropTrFileName = fileNamePrefix + \textcolor{stringliteral}{"-"} + routerWanQueueDiscType + \textcolor{stringliteral}{"-drop"} + \textcolor{stringliteral}{".tr"};
+273   std::string dropStateTrFileName = fileNamePrefix + \textcolor{stringliteral}{"-"} + routerWanQueueDiscType + \textcolor{stringliteral}{"-drop-state"} + \textcolor{stringliteral}{".tr"};
+274   \textcolor{keywordflow}{if} (logging)
+275     \{
+276       \textcolor{comment}{//LogComponentEnable ("CoDelPfifoFastAsymmetricTest", LOG\_LEVEL\_ALL);}
+277       \textcolor{comment}{//LogComponentEnable ("BulkSendApplication", LOG\_LEVEL\_INFO);}
+278       \textcolor{comment}{//LogComponentEnable ("PfifoFastQueue", LOG\_LEVEL\_ALL);}
+279       \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"CoDelQueueDisc"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba53ab278427c09a0c3bc2cd87b09681dc}{LOG\_LEVEL\_FUNCTION});
+280     \}
+281 
+282   \textcolor{comment}{// Queue defaults}
+283   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::PfifoFastQueueDisc::Limit"}, UintegerValue (queueSize));
+284   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::CoDelQueueDisc::MaxPackets"}, UintegerValue (queueSize));
+285   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::CoDelQueueDisc::Mode"}, StringValue (\textcolor{stringliteral}{"QUEUE\_DISC\_MODE\_PACKETS"}
+      ));
+286 
+287   \textcolor{comment}{// Create the nodes}
+288   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes"});
+289   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+290   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (4);
+291   \textcolor{comment}{// Descriptive names}
+292   Names::Add (\textcolor{stringliteral}{"server"}, nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+293   Names::Add (\textcolor{stringliteral}{"cmts"}, nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+294   Names::Add (\textcolor{stringliteral}{"router"}, nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+295   Names::Add (\textcolor{stringliteral}{"host"}, nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+296   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} serverCmts;
+297   serverCmts = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+298   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} cmtsRouter;
+299   cmtsRouter = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+300   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} routerHost;
+301   routerHost = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2), nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+302 
+303   \textcolor{comment}{// Enable checksum}
+304   \textcolor{keywordflow}{if} (isPcapEnabled)
+305     \{
+306       GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+307     \}
+308 
+309   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::TcpSocket::SegmentSize"}, UintegerValue (pktSize));
+310 
+311   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create channels and install net devices on nodes"});
+312   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} p2p;
+313 
+314   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (serverCmtsDelay));
+315   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} serverCmtsDev = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (serverCmts);
+316   Names::Add (\textcolor{stringliteral}{"server/lan"}, serverCmtsDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+317   Names::Add (\textcolor{stringliteral}{"cmts/lan"}, serverCmtsDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+318   \hyperlink{classns3_1_1Ptr}{Ptr<PointToPointNetDevice>} serverLanDev = DynamicCast<PointToPointNetDevice> (
+      serverCmtsDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+319   serverLanDev->SetAttribute (\textcolor{stringliteral}{"DataRate"}, StringValue (serverLanDataRate));
+320   \hyperlink{classns3_1_1Ptr}{Ptr<PointToPointNetDevice>} cmtsLanDev = DynamicCast<PointToPointNetDevice> (
+      serverCmtsDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+321   cmtsLanDev->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (cmtsLanDataRate));
+322 
+323   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (cmtsRouterDelay));
+324   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} cmtsRouterDev = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (cmtsRouter);
+325   Names::Add (\textcolor{stringliteral}{"cmts/wan"}, cmtsRouterDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+326   Names::Add (\textcolor{stringliteral}{"router/wan"}, cmtsRouterDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+327   \hyperlink{classns3_1_1Ptr}{Ptr<PointToPointNetDevice>} cmtsWanDev = DynamicCast<PointToPointNetDevice> (
+      cmtsRouterDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+328   cmtsWanDev->SetAttribute (\textcolor{stringliteral}{"DataRate"}, StringValue (cmtsWanDataRate));
+329   \hyperlink{classns3_1_1Ptr}{Ptr<PointToPointNetDevice>} routerWanDev = DynamicCast<PointToPointNetDevice> (
+      cmtsRouterDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+330   routerWanDev->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (routerWanDataRate));
+331 
+332   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (routerHostDelay));
+333   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} routerHostDev = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (routerHost);
+334   Names::Add (\textcolor{stringliteral}{"router/lan"}, routerHostDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+335   Names::Add (\textcolor{stringliteral}{"host/lan"}, routerHostDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+336   \hyperlink{classns3_1_1Ptr}{Ptr<PointToPointNetDevice>} routerLanDev = DynamicCast<PointToPointNetDevice> (
+      routerHostDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+337   routerLanDev->SetAttribute (\textcolor{stringliteral}{"DataRate"}, StringValue (routerLanDataRate));
+338   \hyperlink{classns3_1_1Ptr}{Ptr<PointToPointNetDevice>} hostLanDev = DynamicCast<PointToPointNetDevice> (
+      routerHostDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+339   hostLanDev->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (hostLanDataRate));
+340 
+341   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Install Internet stack on all nodes"});
+342   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+343   stack.\hyperlink{classns3_1_1InternetStackHelper_a6cfa73782fd4071c4cfbd73ebf1bbb44}{InstallAll} ();
+344 
+345   \hyperlink{classns3_1_1TrafficControlHelper}{TrafficControlHelper} tchPfifo;
+346   tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a8588aac7a08e4dc4e7bb10fa7b9e25c8}{SetRootQueueDisc} (\textcolor{stringliteral}{"ns3::PfifoFastQueueDisc"});
+347 
+348   \hyperlink{classns3_1_1TrafficControlHelper}{TrafficControlHelper} tchCoDel;
+349   tchCoDel.\hyperlink{classns3_1_1TrafficControlHelper_a8588aac7a08e4dc4e7bb10fa7b9e25c8}{SetRootQueueDisc} (\textcolor{stringliteral}{"ns3::CoDelQueueDisc"});
+350 
+351   tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (serverCmtsDev);
+352   tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (cmtsWanDev);
+353   \textcolor{keywordflow}{if} (routerWanQueueDiscType.compare (\textcolor{stringliteral}{"PfifoFast"}) == 0)
+354     \{
+355       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (routerWanDev);
+356     \}
+357   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (routerWanQueueDiscType.compare (\textcolor{stringliteral}{"CoDel"}) == 0)
+358     \{
+359       tchCoDel.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (routerWanDev);
+360     \}
+361   \textcolor{keywordflow}{else}
+362     \{
+363       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Invalid router WAN queue disc type"});
+364       exit (1);
+365     \}  
+366   tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (routerHostDev);
+367 
+368   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses"});
+369   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+370   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+371   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} serverCmtsInterface = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (serverCmtsDev);
+372   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.2.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+373   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} cmtsRouterInterface = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (cmtsRouterDev);
+374   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.3.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+375   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} routerHostInterface = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (routerHostDev);
+376 
+377   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Initialize Global Routing"});
+378   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+379 
+380   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Configure downstream"});
+381   uint16\_t port1 = 50000;
+382   \hyperlink{classns3_1_1Address}{Address} sinkLocalAddress1 (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port1));
+383   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper1 (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, sinkLocalAddress1);
+384   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp1 = sinkHelper1.Install (routerHost.Get (1));
+385   sinkApp1.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0));
+386   sinkApp1.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (stopTime));
+387   AddressValue remoteAddress1 (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (routerHostInterface.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1), port1));
+388   \textcolor{keywordflow}{while} (numOfDownLoadBulkFlows)
+389     \{
+390       \hyperlink{codel-vs-pfifo-asymmetric_8cc_a4d992db17e839d6d89204a95be422763}{CreateBulkFlow} (remoteAddress1, serverCmts.Get (0), pktSize, stopTime);
+391       numOfDownLoadBulkFlows--;
+392     \}
+393 
+394   \textcolor{keywordflow}{while} (numOfDownLoadOnOffFlows)
+395     \{
+396       \hyperlink{codel-vs-pfifo-asymmetric_8cc_aa3d189125687c5d379924c22326d45eb}{CreateOnOffFlow} (remoteAddress1, serverCmts.Get (0), stopTime);
+397       numOfDownLoadOnOffFlows--;
+398     \}
+399 
+400   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Configure upstream"});
+401   uint16\_t port2 = 50001;
+402   \hyperlink{classns3_1_1Address}{Address} sinkLocalAddress2 (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port2));
+403   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper2 (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, sinkLocalAddress2);
+404   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp2 = sinkHelper2.Install (serverCmts.Get (0));
+405   sinkApp2.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0));
+406   sinkApp2.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (stopTime));
+407   AddressValue remoteAddress2 (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (serverCmtsInterface.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (0), port2));
+408   \textcolor{keywordflow}{while} (numOfUpLoadBulkFlows)
+409     \{
+410       \hyperlink{codel-vs-pfifo-asymmetric_8cc_a4d992db17e839d6d89204a95be422763}{CreateBulkFlow} (remoteAddress2, routerHost.Get (1), pktSize, stopTime);
+411       numOfUpLoadBulkFlows--;
+412     \}
+413 
+414   \textcolor{keywordflow}{while} (numOfUpLoadOnOffFlows)
+415     \{
+416       \hyperlink{codel-vs-pfifo-asymmetric_8cc_aa3d189125687c5d379924c22326d45eb}{CreateOnOffFlow} (remoteAddress2, routerHost.Get (1), stopTime);
+417       numOfUpLoadOnOffFlows--;
+418     \}
+419 
+420   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.00001), &\hyperlink{codel-vs-pfifo-asymmetric_8cc_a14abe7eeb70cac35caeaf197fff9942d}{TraceCwnd}, cwndTrFileName);
+421   \hyperlink{codel-vs-pfifo-asymmetric_8cc_acc8c5885e95cf5d91788a281acfe977f}{TraceEveryDrop} (everyDropTrFileName);
+422   \textcolor{keywordflow}{if} (routerWanQueueDiscType.compare (\textcolor{stringliteral}{"CoDel"}) == 0)
+423     \{
+424       \hyperlink{codel-vs-pfifo-asymmetric_8cc_aa8f91732b16706b6be64dda090e6d90e}{TraceSojourn} (sojournTrFileName);
+425       \hyperlink{codel-vs-pfifo-asymmetric_8cc_ad42ad75e7dad477cc7b101512f13f0a9}{TraceQueueLength} (queueLengthTrFileName);
+426       \hyperlink{codel-vs-pfifo-asymmetric_8cc_a20d7d9452b7e5c42ebc464a728682614}{TraceDroppingState} (dropStateTrFileName);
+427     \}
+428   \textcolor{keywordflow}{if} (isPcapEnabled)
+429     \{
+430       p2p.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (pcapFileName);
+431     \}
+432 
+433   \textcolor{comment}{// Output config store to txt format}
+434   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::ConfigStore::Filename"}, StringValue (attributeFileName));
+435   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::ConfigStore::FileFormat"}, StringValue (\textcolor{stringliteral}{"RawText"}));
+436   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::ConfigStore::Mode"}, StringValue (\textcolor{stringliteral}{"Save"}));
+437   \hyperlink{classns3_1_1ConfigStore}{ConfigStore} outputConfig;
+438   outputConfig.\hyperlink{classns3_1_1ConfigStore_a0a6137574d7c847c3823af8b9d1bb886}{ConfigureDefaults} ();
+439   outputConfig.\hyperlink{classns3_1_1ConfigStore_a3e126c39d420519bd7b1a5f7bca08590}{ConfigureAttributes} ();
+440 
+441   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (stopTime));
+442   Simulator::Run ();
+443 
+444   Simulator::Destroy ();
+445   \textcolor{keywordflow}{return} 0;
+446 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Co\+Del\+Pfifo\+Fast\+Asymmetric\+Test"")}{NS_LOG_COMPONENT_DEFINE("CoDelPfifoFastAsymmetricTest")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Co\+Del\+Pfifo\+Fast\+Asymmetric\+Test\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{codel-vs-pfifo-asymmetric_8cc_aa27e0ba3b4d4602d11ece90f4a1ee82c}{}\label{codel-vs-pfifo-asymmetric_8cc_aa27e0ba3b4d4602d11ece90f4a1ee82c}
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!Queue\+Length\+Tracer@{Queue\+Length\+Tracer}}
+\index{Queue\+Length\+Tracer@{Queue\+Length\+Tracer}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{Queue\+Length\+Tracer(\+Ptr$<$ Output\+Stream\+Wrapper $>$stream, uint32\+\_\+t oldval, uint32\+\_\+t newval)}{QueueLengthTracer(Ptr< OutputStreamWrapper >stream, uint32_t oldval, uint32_t newval)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Queue\+Length\+Tracer (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Output\+Stream\+Wrapper} $>$}]{stream, }
+\item[{uint32\+\_\+t}]{oldval, }
+\item[{uint32\+\_\+t}]{newval}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{codel-vs-pfifo-asymmetric_8cc_a2c05f34753510bfc5337c693bc9db6ad}{}\label{codel-vs-pfifo-asymmetric_8cc_a2c05f34753510bfc5337c693bc9db6ad}
+
+\begin{DoxyCode}
+118 \{
+119   *stream->\hyperlink{classns3_1_1OutputStreamWrapper_a0cf30a4188ab6fdae2b2ab74db11acc2}{GetStream} () << oldval << \textcolor{stringliteral}{" "} << newval << std::endl;
+120 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 13
+
+
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!Sojourn\+Tracer@{Sojourn\+Tracer}}
+\index{Sojourn\+Tracer@{Sojourn\+Tracer}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{Sojourn\+Tracer(\+Ptr$<$ Output\+Stream\+Wrapper $>$stream, Time oldval, Time newval)}{SojournTracer(Ptr< OutputStreamWrapper >stream, Time oldval, Time newval)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Sojourn\+Tracer (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Output\+Stream\+Wrapper} $>$}]{stream, }
+\item[{{\bf Time}}]{oldval, }
+\item[{{\bf Time}}]{newval}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{codel-vs-pfifo-asymmetric_8cc_abe5b5ba0be4971f9a8889b1f517637d9}{}\label{codel-vs-pfifo-asymmetric_8cc_abe5b5ba0be4971f9a8889b1f517637d9}
+
+\begin{DoxyCode}
+96 \{
+97   *stream->\hyperlink{classns3_1_1OutputStreamWrapper_a0cf30a4188ab6fdae2b2ab74db11acc2}{GetStream} () << oldval << \textcolor{stringliteral}{" "} << newval << std::endl;
+98 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 14
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 15
+
+
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!Trace\+Cwnd@{Trace\+Cwnd}}
+\index{Trace\+Cwnd@{Trace\+Cwnd}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{Trace\+Cwnd(std\+::string cwnd\+Tr\+File\+Name)}{TraceCwnd(std::string cwndTrFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Trace\+Cwnd (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{cwnd\+Tr\+File\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{codel-vs-pfifo-asymmetric_8cc_a14abe7eeb70cac35caeaf197fff9942d}{}\label{codel-vs-pfifo-asymmetric_8cc_a14abe7eeb70cac35caeaf197fff9942d}
+
+\begin{DoxyCode}
+80 \{
+81   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+82   \textcolor{keywordflow}{if} (cwndTrFileName.compare (\textcolor{stringliteral}{""}) == 0)
+83     \{
+84       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"No trace file for cwnd provided"});
+85       \textcolor{keywordflow}{return};
+86     \}
+87   \textcolor{keywordflow}{else}
+88     \{
+89       \hyperlink{classns3_1_1Ptr}{Ptr<OutputStreamWrapper>} stream = ascii.
+      \hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (cwndTrFileName.c\_str ());
+90       \hyperlink{group__config_gaa2f896aa7021f95fffabc80b2ec22e08}{Config::ConnectWithoutContext} (\textcolor{stringliteral}{"
+      /NodeList/0/$ns3::TcpL4Protocol/SocketList/0/CongestionWindow"},\hyperlink{group__makeboundcallback_ga1725d6362e6065faa0709f7c93f8d770}{MakeBoundCallback} (&\hyperlink{codel-vs-pfifo-asymmetric_8cc_a00b0ede63dc5275483d7e3f7ab0ac706}{CwndTracer}, stream));
+91     \}
+92 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 16
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 17
+
+
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!Trace\+Dropping\+State@{Trace\+Dropping\+State}}
+\index{Trace\+Dropping\+State@{Trace\+Dropping\+State}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{Trace\+Dropping\+State(std\+::string drop\+State\+Tr\+File\+Name)}{TraceDroppingState(std::string dropStateTrFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Trace\+Dropping\+State (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{drop\+State\+Tr\+File\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{codel-vs-pfifo-asymmetric_8cc_a20d7d9452b7e5c42ebc464a728682614}{}\label{codel-vs-pfifo-asymmetric_8cc_a20d7d9452b7e5c42ebc464a728682614}
+
+\begin{DoxyCode}
+177 \{
+178   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+179   \textcolor{keywordflow}{if} (dropStateTrFileName.compare (\textcolor{stringliteral}{""}) == 0)
+180     \{
+181       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"No trace file for dropping state provided"});
+182       \textcolor{keywordflow}{return};
+183     \}
+184   \textcolor{keywordflow}{else}
+185     \{
+186       \hyperlink{classns3_1_1Ptr}{Ptr<OutputStreamWrapper>} stream = ascii.
+      \hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (dropStateTrFileName.c\_str ());
+187       \hyperlink{group__config_gaa2f896aa7021f95fffabc80b2ec22e08}{Config::ConnectWithoutContext} (\textcolor{stringliteral}{"
+      /NodeList/2/$ns3::TrafficControlLayer/RootQueueDiscList/0/$ns3::CoDelQueueDisc/DropState"}, \hyperlink{group__makeboundcallback_ga1725d6362e6065faa0709f7c93f8d770}{MakeBoundCallback} (&
+      \hyperlink{codel-vs-pfifo-asymmetric_8cc_a3965538e9e4b5381cb4fe1023ba05e7a}{DroppingStateTracer}, stream));
+188     \}
+189 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 18
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 19
+
+
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!Trace\+Every\+Drop@{Trace\+Every\+Drop}}
+\index{Trace\+Every\+Drop@{Trace\+Every\+Drop}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{Trace\+Every\+Drop(std\+::string every\+Drop\+Tr\+File\+Name)}{TraceEveryDrop(std::string everyDropTrFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Trace\+Every\+Drop (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{every\+Drop\+Tr\+File\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{codel-vs-pfifo-asymmetric_8cc_acc8c5885e95cf5d91788a281acfe977f}{}\label{codel-vs-pfifo-asymmetric_8cc_acc8c5885e95cf5d91788a281acfe977f}
+
+\begin{DoxyCode}
+146 \{
+147   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+148   \textcolor{keywordflow}{if} (everyDropTrFileName.compare (\textcolor{stringliteral}{""}) == 0)
+149     \{
+150       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"No trace file for every drop event provided"});
+151       \textcolor{keywordflow}{return};
+152     \}
+153   \textcolor{keywordflow}{else}
+154     \{
+155       \hyperlink{classns3_1_1Ptr}{Ptr<OutputStreamWrapper>} stream = ascii.
+      \hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (everyDropTrFileName.c\_str ());
+156       \hyperlink{group__config_gaa2f896aa7021f95fffabc80b2ec22e08}{Config::ConnectWithoutContext} (\textcolor{stringliteral}{"
+      /NodeList/2/$ns3::TrafficControlLayer/RootQueueDiscList/0/Drop"}, \hyperlink{group__makeboundcallback_ga1725d6362e6065faa0709f7c93f8d770}{MakeBoundCallback} (&\hyperlink{codel-vs-pfifo-asymmetric_8cc_a3625f5fca3e975c49f2e7643ceb2f55c}{EveryDropTracer}, stream));
+157     \}
+158 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 20
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 21
+
+
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!Trace\+Queue\+Length@{Trace\+Queue\+Length}}
+\index{Trace\+Queue\+Length@{Trace\+Queue\+Length}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{Trace\+Queue\+Length(std\+::string queue\+Length\+Tr\+File\+Name)}{TraceQueueLength(std::string queueLengthTrFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Trace\+Queue\+Length (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{queue\+Length\+Tr\+File\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{codel-vs-pfifo-asymmetric_8cc_ad42ad75e7dad477cc7b101512f13f0a9}{}\label{codel-vs-pfifo-asymmetric_8cc_ad42ad75e7dad477cc7b101512f13f0a9}
+
+\begin{DoxyCode}
+124 \{
+125   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+126   \textcolor{keywordflow}{if} (queueLengthTrFileName.compare (\textcolor{stringliteral}{""}) == 0)
+127     \{
+128       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"No trace file for queue length provided"});
+129       \textcolor{keywordflow}{return};
+130     \}
+131   \textcolor{keywordflow}{else}
+132     \{
+133       \hyperlink{classns3_1_1Ptr}{Ptr<OutputStreamWrapper>} stream = ascii.
+      \hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (queueLengthTrFileName.c\_str ());
+134       \hyperlink{group__config_gaa2f896aa7021f95fffabc80b2ec22e08}{Config::ConnectWithoutContext} (\textcolor{stringliteral}{"
+      /NodeList/2/$ns3::TrafficControlLayer/RootQueueDiscList/0/BytesInQueue"}, \hyperlink{group__makeboundcallback_ga1725d6362e6065faa0709f7c93f8d770}{MakeBoundCallback} (&
+      \hyperlink{codel-vs-pfifo-asymmetric_8cc_a2c05f34753510bfc5337c693bc9db6ad}{QueueLengthTracer}, stream));
+135     \}
+136 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 22
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 23
+
+
+\index{codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}!Trace\+Sojourn@{Trace\+Sojourn}}
+\index{Trace\+Sojourn@{Trace\+Sojourn}!codel-\/vs-\/pfifo-\/asymmetric.\+cc@{codel-\/vs-\/pfifo-\/asymmetric.\+cc}}
+\subsubsection[{\texorpdfstring{Trace\+Sojourn(std\+::string sojourn\+Tr\+File\+Name)}{TraceSojourn(std::string sojournTrFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Trace\+Sojourn (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{sojourn\+Tr\+File\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{codel-vs-pfifo-asymmetric_8cc_aa8f91732b16706b6be64dda090e6d90e}{}\label{codel-vs-pfifo-asymmetric_8cc_aa8f91732b16706b6be64dda090e6d90e}
+
+\begin{DoxyCode}
+102 \{
+103   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+104   \textcolor{keywordflow}{if} (sojournTrFileName.compare (\textcolor{stringliteral}{""}) == 0)
+105     \{
+106       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"No trace file for sojourn provided"});
+107       \textcolor{keywordflow}{return};
+108     \}
+109   \textcolor{keywordflow}{else}
+110     \{
+111       \hyperlink{classns3_1_1Ptr}{Ptr<OutputStreamWrapper>} stream = ascii.
+      \hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (sojournTrFileName.c\_str ());
+112       \hyperlink{group__config_gaa2f896aa7021f95fffabc80b2ec22e08}{Config::ConnectWithoutContext} (\textcolor{stringliteral}{"
+      /NodeList/2/$ns3::TrafficControlLayer/RootQueueDiscList/0/$ns3::CoDelQueueDisc/Sojourn"}, \hyperlink{group__makeboundcallback_ga1725d6362e6065faa0709f7c93f8d770}{MakeBoundCallback} (&
+      \hyperlink{codel-vs-pfifo-asymmetric_8cc_abe5b5ba0be4971f9a8889b1f517637d9}{SojournTracer}, stream));
+113     \}
+114 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 24
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 25
+
+

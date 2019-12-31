@@ -1,0 +1,117 @@
+\hypertarget{mmwave-simple-building-obstacle_8cc}{}\section{mmwave/examples/mmwave-\/simple-\/building-\/obstacle.cc File Reference}
+\label{mmwave-simple-building-obstacle_8cc}\index{mmwave/examples/mmwave-\/simple-\/building-\/obstacle.\+cc@{mmwave/examples/mmwave-\/simple-\/building-\/obstacle.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mmwave-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$ns3/buildings-\/helper.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$ns3/buildings-\/module.\+h$>$}\\*
+Include dependency graph for mmwave-\/simple-\/building-\/obstacle.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{mmwave-simple-building-obstacle_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{mmwave-\/simple-\/building-\/obstacle.\+cc@{mmwave-\/simple-\/building-\/obstacle.\+cc}!main@{main}}
+\index{main@{main}!mmwave-\/simple-\/building-\/obstacle.\+cc@{mmwave-\/simple-\/building-\/obstacle.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{mmwave-simple-building-obstacle_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{mmwave-simple-building-obstacle_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+42 \{
+43   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+44   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+45 
+46   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable}(\textcolor{stringliteral}{"LteRlcAm"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba11526a7d4f0e6b4e1bac5754781a4f2a}{LOG\_LEVEL\_LOGIC});
+47 
+48   \textcolor{comment}{/* Information regarding the traces generated:}
+49 \textcolor{comment}{   *}
+50 \textcolor{comment}{   * 1. UE\_1\_SINR.txt : Gives the SINR for each sub-band}
+51 \textcolor{comment}{   *    Subframe no.  | Slot No. | Sub-band  | SINR (db)}
+52 \textcolor{comment}{   *}
+53 \textcolor{comment}{   * 2. UE\_1\_Tb\_size.txt : Allocated transport block size}
+54 \textcolor{comment}{   *    Time (micro-sec)  |  Tb-size in bytes}
+55 \textcolor{comment}{   * */}
+56 
+57   \hyperlink{classns3_1_1Ptr}{Ptr<MmWaveHelper>} ptr\_mmWave = CreateObject<MmWaveHelper> ();
+58   ptr\_mmWave->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"PathlossModel"}, StringValue (\textcolor{stringliteral}{"
+      ns3::BuildingsObstaclePropagationLossModel"}));
+59   ptr\_mmWave->\hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Initialize}();
+60 
+61   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+62   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNodes;
+63   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+64   ueNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+65 
+66   \hyperlink{classns3_1_1Ptr}{Ptr < Building >} building;
+67   building = Create<Building> ();
+68   building->\hyperlink{classns3_1_1Building_a4b69659f05a983f06e33e7db62415915}{SetBoundaries} (\hyperlink{classns3_1_1Box}{Box} (20.0, 40.0,
+69                                 0.0, 20.0,
+70                                 0.0, 20.0));
+71   building->\hyperlink{classns3_1_1Building_a2f193ed27d25ed8bf29962d3c7d77204}{SetBuildingType} (Building::Residential);
+72   building->\hyperlink{classns3_1_1Building_a8084b2aafb9ca8bcb775fad0319d42e8}{SetExtWallsType} (Building::ConcreteWithWindows);
+73   building->\hyperlink{classns3_1_1Building_ae9f97075b5c8bf4685703e30ed049791}{SetNFloors} (1);
+74   building->\hyperlink{classns3_1_1Building_a60eac680f1059fb9d883a659607e2fae}{SetNRoomsX} (1);
+75   building->\hyperlink{classns3_1_1Building_a9103ee5b5edf013624d7e18422c4ba06}{SetNRoomsY} (1);
+76 
+77   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} enbPositionAlloc = 
+      CreateObject<ListPositionAllocator> ();
+78   enbPositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));
+79   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} enbmobility;
+80   enbmobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+81   enbmobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator}(enbPositionAlloc);
+82   enbmobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+83   BuildingsHelper::Install (enbNodes);
+84 
+85 
+86   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} uemobility;
+87   uemobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantVelocityMobilityModel"});
+88   uemobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes);
+89   ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ()->
+      \hyperlink{lena-cqi-threshold_8cc_aac02abe91b3e5592e31bc0f7d844bf4d}{SetPosition} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (60, -20, 0));
+90   ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1ConstantVelocityMobilityModel}{ConstantVelocityMobilityModel}> ()->
+      SetVelocity (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0, 100, 0));
+91   \textcolor{comment}{/*}
+92 \textcolor{comment}{  MobilityHelper uemobility;}
+93 \textcolor{comment}{  Ptr<ListPositionAllocator> uePositionAlloc = CreateObject<ListPositionAllocator> ();}
+94 \textcolor{comment}{  uePositionAlloc->Add (Vector (80.0, -80.0, 0.0));}
+95 \textcolor{comment}{  uemobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");}
+96 \textcolor{comment}{  uemobility.SetPositionAllocator(uePositionAlloc);}
+97 \textcolor{comment}{  uemobility.Install (ueNodes);}
+98 \textcolor{comment}{  */}
+99   BuildingsHelper::Install (ueNodes);
+100 
+101   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbNetDev = ptr\_mmWave->InstallEnbDevice (enbNodes);
+102   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueNetDev = ptr\_mmWave->\hyperlink{classns3_1_1MmWaveHelper_a9311c819d7ee539c8710c5b7e98df37a}{InstallUeDevice} (ueNodes);
+103 
+104 
+105   ptr\_mmWave->\hyperlink{classns3_1_1MmWaveHelper_a202baea67b0af0d4fb6069de73766dc6}{AttachToClosestEnb} (ueNetDev, enbNetDev);
+106   ptr\_mmWave->\hyperlink{classns3_1_1MmWaveHelper_a4eae3871876b62965d612d9a56ed21bc}{EnableTraces}();
+107 
+108   \textcolor{comment}{// Activate a data radio bearer}
+109   \textcolor{keyword}{enum} \hyperlink{structns3_1_1EpsBearer_aecf0c67109c5eb4ec0b07226fff5885e}{EpsBearer::Qci} q = EpsBearer::GBR\_CONV\_VOICE;
+110   \hyperlink{structns3_1_1EpsBearer}{EpsBearer} bearer (q);
+111   ptr\_mmWave->\hyperlink{classns3_1_1MmWaveHelper_a9178ae3493484a9582039bb14edb282a}{ActivateDataRadioBearer} (ueNetDev, bearer);
+112   BuildingsHelper::MakeMobilityModelConsistent ();
+113 
+114   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1));
+115   Simulator::Run ();
+116   Simulator::Destroy ();
+117   \textcolor{keywordflow}{return} 0;
+118 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

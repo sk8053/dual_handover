@@ -1,0 +1,341 @@
+\hypertarget{classns3_1_1BlockAckCache}{}\section{ns3\+:\+:Block\+Ack\+Cache Class Reference}
+\label{classns3_1_1BlockAckCache}\index{ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}}
+
+
+\hyperlink{classns3_1_1BlockAckCache}{Block\+Ack\+Cache} cache.  
+
+
+
+
+{\ttfamily \#include $<$block-\/ack-\/cache.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Block\+Ack\+Cache\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1BlockAckCache_a38bbf9991bacc70374daf9b9f59731e1}{Init} (uint16\+\_\+t win\+Start, uint16\+\_\+t win\+Size)
+\item 
+void \hyperlink{classns3_1_1BlockAckCache_ad53e955bbd3e58e1833a90894e67e6eb}{Update\+With\+Mpdu} (const \hyperlink{classns3_1_1WifiMacHeader}{Wifi\+Mac\+Header} $\ast$hdr)
+\item 
+void \hyperlink{classns3_1_1BlockAckCache_a269acd2840aa5d8eda4ae61ad6e9f441}{Update\+With\+Block\+Ack\+Req} (uint16\+\_\+t starting\+Seq)
+\item 
+uint16\+\_\+t \hyperlink{classns3_1_1BlockAckCache_a1450e20ac2524d4fd57995bf0d8261b4}{Get\+Win\+Start} (void) const 
+\item 
+void \hyperlink{classns3_1_1BlockAckCache_a53f2f4c162a246e6d3f5de4c32f69c01}{Fill\+Block\+Ack\+Bitmap} (\hyperlink{classns3_1_1CtrlBAckResponseHeader}{Ctrl\+B\+Ack\+Response\+Header} $\ast$block\+Ack\+Header)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1BlockAckCache_abe2341db866f7f2f309912da4be34a65}{Reset\+Portion\+Of\+Bitmap} (uint16\+\_\+t start, uint16\+\_\+t end)
+\item 
+bool \hyperlink{classns3_1_1BlockAckCache_a8c39e0d1c19b6f661da5155a0b27283f}{Is\+In\+Window} (uint16\+\_\+t seq) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\+\_\+win\+Start}
+\begin{DoxyCompactList}\small\item\em window start \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{classns3_1_1BlockAckCache_a5470178ccc3e62bd726eddf977a4cb00}{m\+\_\+win\+Size}
+\begin{DoxyCompactList}\small\item\em window size \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classns3_1_1BlockAckCache_ad4e4e1d170e58228b784ce9e4dda90db}{m\+\_\+win\+End}
+\begin{DoxyCompactList}\small\item\em window end \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classns3_1_1BlockAckCache_adb1f98382f23dc2cde731c9d4ddc4d6a}{m\+\_\+bitmap} \mbox{[}4096\mbox{]}
+\begin{DoxyCompactList}\small\item\em bitmap \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classns3_1_1BlockAckCache}{Block\+Ack\+Cache} cache. 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}!Fill\+Block\+Ack\+Bitmap@{Fill\+Block\+Ack\+Bitmap}}
+\index{Fill\+Block\+Ack\+Bitmap@{Fill\+Block\+Ack\+Bitmap}!ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}}
+\subsubsection[{\texorpdfstring{Fill\+Block\+Ack\+Bitmap(\+Ctrl\+B\+Ack\+Response\+Header $\ast$block\+Ack\+Header)}{FillBlockAckBitmap(CtrlBAckResponseHeader *blockAckHeader)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Block\+Ack\+Cache\+::\+Fill\+Block\+Ack\+Bitmap (
+\begin{DoxyParamCaption}
+\item[{{\bf Ctrl\+B\+Ack\+Response\+Header} $\ast$}]{block\+Ack\+Header}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1BlockAckCache_a53f2f4c162a246e6d3f5de4c32f69c01}{}\label{classns3_1_1BlockAckCache_a53f2f4c162a246e6d3f5de4c32f69c01}
+Fill block ack bitmap function 
+\begin{DoxyParams}{Parameters}
+{\em block\+Ack\+Header} & the block ack bitmap \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+122 \{
+123   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << blockAckHeader);
+124   \textcolor{keywordflow}{if} (blockAckHeader->IsBasic ())
+125     \{
+126       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Basic block ack is only partially implemented."});
+127     \}
+128   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (blockAckHeader->IsCompressed ())
+129     \{
+130       uint16\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = blockAckHeader->GetStartingSequence ();
+131       uint16\_t end = (i + \hyperlink{classns3_1_1BlockAckCache_a5470178ccc3e62bd726eddf977a4cb00}{m\_winSize} - 1) % 4096;
+132       \textcolor{keywordflow}{for} (; i != end; i = (i + 1) % 4096)
+133         \{
+134           \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1BlockAckCache_adb1f98382f23dc2cde731c9d4ddc4d6a}{m\_bitmap}[i] == 1)
+135             \{
+136               blockAckHeader->SetReceivedPacket (i);
+137             \}
+138         \}
+139       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1BlockAckCache_adb1f98382f23dc2cde731c9d4ddc4d6a}{m\_bitmap}[i] == 1)
+140         \{
+141           blockAckHeader->SetReceivedPacket (i);
+142         \}
+143     \}
+144   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (blockAckHeader->IsMultiTid ())
+145     \{
+146       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Multi-tid block ack is not supported."});
+147     \}
+148 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}!Get\+Win\+Start@{Get\+Win\+Start}}
+\index{Get\+Win\+Start@{Get\+Win\+Start}!ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}}
+\subsubsection[{\texorpdfstring{Get\+Win\+Start(void) const }{GetWinStart(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Block\+Ack\+Cache\+::\+Get\+Win\+Start (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1BlockAckCache_a1450e20ac2524d4fd57995bf0d8261b4}{}\label{classns3_1_1BlockAckCache_a1450e20ac2524d4fd57995bf0d8261b4}
+When an A-\/\+M\+P\+DU is received, the window start may change to a new value depending on the sequence number of the received M\+P\+DU (standard11n page 134). This function is used to retrieve this value in order to add it to the Block\+Ack. \begin{DoxyReturn}{Returns}
+window start 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+45 \{
+46   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart};
+47 \}
+\end{DoxyCode}
+\index{ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}!Init@{Init}}
+\index{Init@{Init}!ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}}
+\subsubsection[{\texorpdfstring{Init(uint16\+\_\+t win\+Start, uint16\+\_\+t win\+Size)}{Init(uint16_t winStart, uint16_t winSize)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Block\+Ack\+Cache\+::\+Init (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{win\+Start, }
+\item[{uint16\+\_\+t}]{win\+Size}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1BlockAckCache_a38bbf9991bacc70374daf9b9f59731e1}{}\label{classns3_1_1BlockAckCache_a38bbf9991bacc70374daf9b9f59731e1}
+Init function 
+\begin{DoxyParams}{Parameters}
+{\em win\+Start} & the window start \\
+\hline
+{\em win\+Size} & the window size \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+35 \{
+36   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << winStart << winSize);
+37   \hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart} = winStart;
+38   \hyperlink{classns3_1_1BlockAckCache_a5470178ccc3e62bd726eddf977a4cb00}{m\_winSize} = winSize <= 64 ? winSize : 64;
+39   \hyperlink{classns3_1_1BlockAckCache_ad4e4e1d170e58228b784ce9e4dda90db}{m\_winEnd} = (\hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart} + \hyperlink{classns3_1_1BlockAckCache_a5470178ccc3e62bd726eddf977a4cb00}{m\_winSize} - 1) % 4096;
+40   memset (\hyperlink{classns3_1_1BlockAckCache_adb1f98382f23dc2cde731c9d4ddc4d6a}{m\_bitmap}, 0, \textcolor{keyword}{sizeof} (\hyperlink{classns3_1_1BlockAckCache_adb1f98382f23dc2cde731c9d4ddc4d6a}{m\_bitmap}));
+41 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}!Is\+In\+Window@{Is\+In\+Window}}
+\index{Is\+In\+Window@{Is\+In\+Window}!ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}}
+\subsubsection[{\texorpdfstring{Is\+In\+Window(uint16\+\_\+t seq) const }{IsInWindow(uint16_t seq) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Block\+Ack\+Cache\+::\+Is\+In\+Window (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{seq}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1BlockAckCache_a8c39e0d1c19b6f661da5155a0b27283f}{}\label{classns3_1_1BlockAckCache_a8c39e0d1c19b6f661da5155a0b27283f}
+Is in window function 
+\begin{DoxyParams}{Parameters}
+{\em seq} & the sequence \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if is in the window 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+115 \{
+116   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << seq);
+117   \textcolor{keywordflow}{return} ((seq - \hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart} + 4096) % 4096) < \hyperlink{classns3_1_1BlockAckCache_a5470178ccc3e62bd726eddf977a4cb00}{m\_winSize};
+118 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}!Reset\+Portion\+Of\+Bitmap@{Reset\+Portion\+Of\+Bitmap}}
+\index{Reset\+Portion\+Of\+Bitmap@{Reset\+Portion\+Of\+Bitmap}!ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}}
+\subsubsection[{\texorpdfstring{Reset\+Portion\+Of\+Bitmap(uint16\+\_\+t start, uint16\+\_\+t end)}{ResetPortionOfBitmap(uint16_t start, uint16_t end)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Block\+Ack\+Cache\+::\+Reset\+Portion\+Of\+Bitmap (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{start, }
+\item[{uint16\+\_\+t}]{end}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1BlockAckCache_abe2341db866f7f2f309912da4be34a65}{}\label{classns3_1_1BlockAckCache_abe2341db866f7f2f309912da4be34a65}
+Reset portion of bitmap functiion 
+\begin{DoxyParams}{Parameters}
+{\em start} & the starting position \\
+\hline
+{\em end} & the ending position \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+103 \{
+104   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{namespacevisualizer_1_1core_a2a35e5d8a34af358b508dac8635754e0}{start} << end);
+105   uint16\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{namespacevisualizer_1_1core_a2a35e5d8a34af358b508dac8635754e0}{start};
+106   \textcolor{keywordflow}{for} (; i != end; i = (i + 1) % 4096)
+107     \{
+108       \hyperlink{classns3_1_1BlockAckCache_adb1f98382f23dc2cde731c9d4ddc4d6a}{m\_bitmap}[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = 0;
+109     \}
+110   \hyperlink{classns3_1_1BlockAckCache_adb1f98382f23dc2cde731c9d4ddc4d6a}{m\_bitmap}[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = 0;
+111 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}!Update\+With\+Block\+Ack\+Req@{Update\+With\+Block\+Ack\+Req}}
+\index{Update\+With\+Block\+Ack\+Req@{Update\+With\+Block\+Ack\+Req}!ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}}
+\subsubsection[{\texorpdfstring{Update\+With\+Block\+Ack\+Req(uint16\+\_\+t starting\+Seq)}{UpdateWithBlockAckReq(uint16_t startingSeq)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Block\+Ack\+Cache\+::\+Update\+With\+Block\+Ack\+Req (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{starting\+Seq}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1BlockAckCache_a269acd2840aa5d8eda4ae61ad6e9f441}{}\label{classns3_1_1BlockAckCache_a269acd2840aa5d8eda4ae61ad6e9f441}
+Update with block ack request function 
+\begin{DoxyParams}{Parameters}
+{\em starting\+Seq} & the starting sequence \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+74 \{
+75   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << startingSeq);
+76   \textcolor{keywordflow}{if} (!\hyperlink{group__wifi_ga5cb9ea723837c5a036e622612f2d0bb0}{QosUtilsIsOldPacket} (\hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart}, startingSeq))
+77     \{
+78       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1BlockAckCache_a8c39e0d1c19b6f661da5155a0b27283f}{IsInWindow} (startingSeq))
+79         \{
+80           \textcolor{keywordflow}{if} (startingSeq != \hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart})
+81             \{
+82               \hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart} = startingSeq;
+83               uint16\_t newWinEnd = (\hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart} + \hyperlink{classns3_1_1BlockAckCache_a5470178ccc3e62bd726eddf977a4cb00}{m\_winSize} - 1) % 4096;
+84               \hyperlink{classns3_1_1BlockAckCache_abe2341db866f7f2f309912da4be34a65}{ResetPortionOfBitmap} ((\hyperlink{classns3_1_1BlockAckCache_ad4e4e1d170e58228b784ce9e4dda90db}{m\_winEnd} + 1) % 4096, newWinEnd);
+85               \hyperlink{classns3_1_1BlockAckCache_ad4e4e1d170e58228b784ce9e4dda90db}{m\_winEnd} = newWinEnd;
+86 
+87               \hyperlink{block-ack-cache_8cc_afef56394603e35fab34774311bbdc3fa}{WINSIZE\_ASSERT};
+88             \}
+89         \}
+90       \textcolor{keywordflow}{else}
+91         \{
+92           \hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart} = startingSeq;
+93           \hyperlink{classns3_1_1BlockAckCache_ad4e4e1d170e58228b784ce9e4dda90db}{m\_winEnd} = (\hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart} + \hyperlink{classns3_1_1BlockAckCache_a5470178ccc3e62bd726eddf977a4cb00}{m\_winSize} - 1) % 4096;
+94           \hyperlink{classns3_1_1BlockAckCache_abe2341db866f7f2f309912da4be34a65}{ResetPortionOfBitmap} (\hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart}, 
+      \hyperlink{classns3_1_1BlockAckCache_ad4e4e1d170e58228b784ce9e4dda90db}{m\_winEnd});
+95 
+96           \hyperlink{block-ack-cache_8cc_afef56394603e35fab34774311bbdc3fa}{WINSIZE\_ASSERT};
+97         \}
+98     \}
+99 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}!Update\+With\+Mpdu@{Update\+With\+Mpdu}}
+\index{Update\+With\+Mpdu@{Update\+With\+Mpdu}!ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}}
+\subsubsection[{\texorpdfstring{Update\+With\+Mpdu(const Wifi\+Mac\+Header $\ast$hdr)}{UpdateWithMpdu(const WifiMacHeader *hdr)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Block\+Ack\+Cache\+::\+Update\+With\+Mpdu (
+\begin{DoxyParamCaption}
+\item[{const {\bf Wifi\+Mac\+Header} $\ast$}]{hdr}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1BlockAckCache_ad53e955bbd3e58e1833a90894e67e6eb}{}\label{classns3_1_1BlockAckCache_ad53e955bbd3e58e1833a90894e67e6eb}
+Update with M\+P\+DU function 
+\begin{DoxyParams}{Parameters}
+{\em hdr} & the wifi M\+AC header \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+51 \{
+52   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << hdr);
+53   uint16\_t seqNumber = hdr->GetSequenceNumber ();
+54   \textcolor{keywordflow}{if} (!\hyperlink{group__wifi_ga5cb9ea723837c5a036e622612f2d0bb0}{QosUtilsIsOldPacket} (\hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart}, seqNumber))
+55     \{
+56       \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1BlockAckCache_a8c39e0d1c19b6f661da5155a0b27283f}{IsInWindow} (seqNumber))
+57         \{
+58           uint16\_t delta = (seqNumber - \hyperlink{classns3_1_1BlockAckCache_ad4e4e1d170e58228b784ce9e4dda90db}{m\_winEnd} + 4096) % 4096;
+59           \textcolor{keywordflow}{if} (delta > 1)
+60             \{
+61               \hyperlink{classns3_1_1BlockAckCache_abe2341db866f7f2f309912da4be34a65}{ResetPortionOfBitmap} ((\hyperlink{classns3_1_1BlockAckCache_ad4e4e1d170e58228b784ce9e4dda90db}{m\_winEnd} + 1) % 4096, ((seqNumber - 1) + 4
+      096) % 4096);
+62             \}
+63           \hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart} = (\hyperlink{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{m\_winStart} + delta) % 4096;
+64           \hyperlink{classns3_1_1BlockAckCache_ad4e4e1d170e58228b784ce9e4dda90db}{m\_winEnd} = seqNumber;
+65 
+66           \hyperlink{block-ack-cache_8cc_afef56394603e35fab34774311bbdc3fa}{WINSIZE\_ASSERT};
+67         \}
+68       \hyperlink{classns3_1_1BlockAckCache_adb1f98382f23dc2cde731c9d4ddc4d6a}{m\_bitmap}[seqNumber] |= (0x0001 << hdr->GetFragmentNumber ());
+69     \}
+70 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}!m\+\_\+bitmap@{m\+\_\+bitmap}}
+\index{m\+\_\+bitmap@{m\+\_\+bitmap}!ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}}
+\subsubsection[{\texorpdfstring{m\+\_\+bitmap}{m_bitmap}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Block\+Ack\+Cache\+::m\+\_\+bitmap\mbox{[}4096\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1BlockAckCache_adb1f98382f23dc2cde731c9d4ddc4d6a}{}\label{classns3_1_1BlockAckCache_adb1f98382f23dc2cde731c9d4ddc4d6a}
+
+
+bitmap 
+
+\index{ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}!m\+\_\+win\+End@{m\+\_\+win\+End}}
+\index{m\+\_\+win\+End@{m\+\_\+win\+End}!ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}}
+\subsubsection[{\texorpdfstring{m\+\_\+win\+End}{m_winEnd}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Block\+Ack\+Cache\+::m\+\_\+win\+End\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1BlockAckCache_ad4e4e1d170e58228b784ce9e4dda90db}{}\label{classns3_1_1BlockAckCache_ad4e4e1d170e58228b784ce9e4dda90db}
+
+
+window end 
+
+\index{ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}!m\+\_\+win\+Size@{m\+\_\+win\+Size}}
+\index{m\+\_\+win\+Size@{m\+\_\+win\+Size}!ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}}
+\subsubsection[{\texorpdfstring{m\+\_\+win\+Size}{m_winSize}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t ns3\+::\+Block\+Ack\+Cache\+::m\+\_\+win\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1BlockAckCache_a5470178ccc3e62bd726eddf977a4cb00}{}\label{classns3_1_1BlockAckCache_a5470178ccc3e62bd726eddf977a4cb00}
+
+
+window size 
+
+\index{ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}!m\+\_\+win\+Start@{m\+\_\+win\+Start}}
+\index{m\+\_\+win\+Start@{m\+\_\+win\+Start}!ns3\+::\+Block\+Ack\+Cache@{ns3\+::\+Block\+Ack\+Cache}}
+\subsubsection[{\texorpdfstring{m\+\_\+win\+Start}{m_winStart}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Block\+Ack\+Cache\+::m\+\_\+win\+Start\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}{}\label{classns3_1_1BlockAckCache_a9504918377f4305f833737fcd62b45e6}
+
+
+window start 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+wifi/model/\hyperlink{block-ack-cache_8h}{block-\/ack-\/cache.\+h}\item 
+wifi/model/\hyperlink{block-ack-cache_8cc}{block-\/ack-\/cache.\+cc}\end{DoxyCompactItemize}

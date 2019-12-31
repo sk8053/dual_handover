@@ -1,0 +1,310 @@
+\hypertarget{mmwave-amc-test_8cc}{}\section{mmwave/examples/mmwave-\/amc-\/test.cc File Reference}
+\label{mmwave-amc-test_8cc}\index{mmwave/examples/mmwave-\/amc-\/test.\+cc@{mmwave/examples/mmwave-\/amc-\/test.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mmwave-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$ns3/buildings-\/helper.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/global-\/route-\/manager.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/global-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mmwave-\/propagation-\/loss-\/model.\+h\char`\"{}}\\*
+Include dependency graph for mmwave-\/amc-\/test.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{mmwave-amc-test_8cc_acbc789d09623d926a18a031079a40297}{update\+Snr} (double snr\+Init, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MmWaveEnbNetDevice}{Mm\+Wave\+Enb\+Net\+Device} $>$ enb\+Dev, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1SpectrumModel}{Spectrum\+Model} $>$ model, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MmWaveAmc}{Mm\+Wave\+Amc} $>$ amc)
+\item 
+int \hyperlink{mmwave-amc-test_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{mmwave-amc-test_8cc_a04a74f2767b0e0197ef30e53be3181a9}{snr\+Update\+Interval\+Ms} = 100.\+0
+\item 
+double \hyperlink{mmwave-amc-test_8cc_aaffcb1b1d69f1704e78ffb9b13f3fcca}{snr\+Inc\+Db} = 0.\+1
+\item 
+double \hyperlink{mmwave-amc-test_8cc_af0063dbe3d5a0aed58f51664f3dbf7c5}{snr\+Min\+Db} = -\/7.\+0
+\item 
+double \hyperlink{mmwave-amc-test_8cc_aecdd0377f0cae12a929e008201da235d}{snr\+Max\+Db} = 30
+\item 
+bool \hyperlink{mmwave-amc-test_8cc_a204169f2af2a5f81da1189ea236307c8}{small\+Scale} = true
+\item 
+double \hyperlink{mmwave-amc-test_8cc_a6dc6e6f3c75c509ce943163afb5dade7}{speed} = 1.\+0
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}!main@{main}}
+\index{main@{main}!mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{mmwave-amc-test_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{mmwave-amc-test_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+106 \{
+107   \textcolor{comment}{/* Information regarding the traces generated:}
+108 \textcolor{comment}{   *}
+109 \textcolor{comment}{   * 1. UE\_1\_SINR.txt : Gives the SINR for each sub-band}
+110 \textcolor{comment}{   *    Subframe no.  | Slot No. | Sub-band  | SINR (db)}
+111 \textcolor{comment}{   *}
+112 \textcolor{comment}{   * 2. UE\_1\_Tb\_size.txt : Allocated transport block size}
+113 \textcolor{comment}{   *    Time (micro-sec)  |  Tb-size in bytes}
+114 \textcolor{comment}{   * */}
+115 
+116 \textcolor{comment}{//      LogComponentEnable ("MmWaveSpectrumPhy", LOG\_LEVEL\_DEBUG);}
+117 \textcolor{comment}{//      LogComponentEnable ("MmWaveBeamforming", LOG\_LEVEL\_DEBUG);}
+118 \textcolor{comment}{//      LogComponentEnable ("MmWaveUePhy", LOG\_LEVEL\_DEBUG);}
+119 \textcolor{comment}{//      LogComponentEnable ("MmWaveEnbPhy", LOG\_LEVEL\_DEBUG);}
+120 \textcolor{comment}{//      LogComponentEnable ("MmWaveFlexTtiMacScheduler", LOG\_LEVEL\_DEBUG);}
+121         \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"MmWavePhyRxTrace"}, 
+      \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbabc85ae851e992c4d8577705c712061ef}{LOG\_LEVEL\_DEBUG});
+122         \textcolor{comment}{//LogComponentEnable ("LteRlcUm", LOG\_LEVEL\_LOGIC);}
+123         \textcolor{comment}{//LogComponentEnable ("MmWaveUeMac", LOG\_LEVEL\_LOGIC);}
+124         \textcolor{comment}{//LogComponentEnable ("UdpClient", LOG\_LEVEL\_INFO);}
+125         \textcolor{comment}{//LogComponentEnable ("PacketSink", LOG\_LEVEL\_INFO);}
+126         \textcolor{comment}{//LogComponentEnable("PropagationLossModel",LOG\_LEVEL\_ALL);}
+127 
+128         uint16\_t numEnb = 1;
+129         uint16\_t numUe = 1;
+130 
+131         \textcolor{keywordtype}{double} simTime = 1.0;
+132         \textcolor{keywordtype}{bool} harqEnabled = \textcolor{keyword}{true};
+133         \textcolor{keywordtype}{int} mcsDl = 28;
+134         std::string channelState = \textcolor{stringliteral}{"n"};
+135 
+136         \textcolor{comment}{// Command line arguments}
+137         \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+138         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"numEnb"}, \textcolor{stringliteral}{"Number of eNBs"}, numEnb);
+139         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"numUe"}, \textcolor{stringliteral}{"Number of UEs per eNB"}, numUe);
+140         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"simTime"}, \textcolor{stringliteral}{"Total duration of the simulation [s])"}, simTime);
+141         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"harq"}, \textcolor{stringliteral}{"Enable Hybrid ARQ"}, harqEnabled);
+142         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"mcsDl"}, \textcolor{stringliteral}{"Fixed DL MCS"}, mcsDl);
+143         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"channelState"}, \textcolor{stringliteral}{"Channel state 'l'=LOS, 'n'=NLOS, 'a'=all"}, channelState);
+144         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"snrMinDb"}, \textcolor{stringliteral}{"Minimum (final) SNR"}, \hyperlink{mmwave-amc-test_8cc_af0063dbe3d5a0aed58f51664f3dbf7c5}{snrMinDb});
+145         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"snrMaxDb"}, \textcolor{stringliteral}{"Maximum (initial) SNR"}, \hyperlink{mmwave-amc-test_8cc_aecdd0377f0cae12a929e008201da235d}{snrMaxDb});
+146         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"snrIncDb"}, \textcolor{stringliteral}{"SNR increment"}, \hyperlink{mmwave-amc-test_8cc_aaffcb1b1d69f1704e78ffb9b13f3fcca}{snrIncDb});
+147         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"snrUpdateIntervalMs"}, \textcolor{stringliteral}{"Period after which distance is updated"}, 
+      \hyperlink{mmwave-amc-test_8cc_a04a74f2767b0e0197ef30e53be3181a9}{snrUpdateIntervalMs});
+148         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"smallScale"}, \textcolor{stringliteral}{"Enable small scale fading"}, 
+      \hyperlink{mmwave-amc-test_8cc_a204169f2af2a5f81da1189ea236307c8}{smallScale});
+149         cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse}(argc, argv);
+150 
+151         simTime = ((\hyperlink{mmwave-amc-test_8cc_aecdd0377f0cae12a929e008201da235d}{snrMaxDb} - \hyperlink{mmwave-amc-test_8cc_af0063dbe3d5a0aed58f51664f3dbf7c5}{snrMinDb}) / \hyperlink{mmwave-amc-test_8cc_aaffcb1b1d69f1704e78ffb9b13f3fcca}{snrIncDb}) * (
+      \hyperlink{mmwave-amc-test_8cc_a04a74f2767b0e0197ef30e53be3181a9}{snrUpdateIntervalMs}/1000.0) + 1;
+152 
+153         \textcolor{keywordflow}{if} (mcsDl >= 0 && mcsDl < 29)
+154         \{
+155                 \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveFlexTtiMacScheduler::FixedMcsUl"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue}(\textcolor{keyword}{true}));
+156                 \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveFlexTtiMacScheduler::McsDefaultUl"}, 
+      UintegerValue(mcsDl));
+157         \}
+158 
+159         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveFlexTtiMacScheduler::HarqEnabled"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue}(harqEnabled));
+160         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveFlexTtiMacScheduler::UlSchedOnly"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue}(\textcolor{keyword}{true}));
+161         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWavePhyMacCommon::ResourceBlockNum"}, UintegerValue(1)
+      );
+162         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWavePhyMacCommon::ChunkPerRB"}, UintegerValue(72));
+163         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveBeamforming::LongTermUpdatePeriod"}, TimeValue (
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2*simTime)));
+164         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteEnbRrc::SystemInformationPeriodicity"}, TimeValue (
+      \hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (1.0)));
+165         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveAmc::Ber"}, DoubleValue (0.001));
+166         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveBeamforming::SmallScaleFading"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\hyperlink{mmwave-amc-test_8cc_a204169f2af2a5f81da1189ea236307c8}{smallScale}));
+167         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveBeamforming::FixSpeed"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+168         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveBeamforming::UeSpeed"}, DoubleValue (
+      \hyperlink{mmwave-amc-test_8cc_a6dc6e6f3c75c509ce943163afb5dade7}{speed}));
+169         \textcolor{comment}{//Config::SetDefault ("ns3::MmWavePropagationLossModel::ChannelStates", StringValue
+       (channelState));}
+170         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWavePropagationLossModel::FixedLossTst"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+171         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWavePropagationLossModel::LossFixedDb"}, DoubleValue (
+      100.0));
+172 
+173   \hyperlink{classns3_1_1Ptr}{Ptr<MmWaveHelper>} mmwHelper = CreateObject<MmWaveHelper> ();
+174 
+175   mmwHelper->\hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Initialize}();
+176   mmwHelper->\hyperlink{classns3_1_1MmWaveHelper_af211a02952ab5f4eabe0219cf53e7e1c}{SetHarqEnabled} (harqEnabled);
+177   mmwHelper->\hyperlink{classns3_1_1MmWaveHelper_ac25fffd187a813ecbf1922adcf050001}{SetSnrTest} (\textcolor{keyword}{true});
+178  \textcolor{comment}{// Ptr<MmWavePropagationLossModel> lossModel = mmwHelper->GetPathLossModel
+       ()->GetObject<MmWavePropagationLossModel> ();}
+179 
+180   \textcolor{comment}{/* A configuration example.}
+181 \textcolor{comment}{   * mmwHelper->GetPhyMacConfigurable ()->SetAttribute("SymbolPerSlot", UintegerValue(30)); */}
+182 
+183   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+184   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNodes;
+185   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (numEnb);
+186   ueNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (numUe);
+187 
+188   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} enbPositionAlloc = 
+      CreateObject<ListPositionAllocator> ();
+189   enbPositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));
+190 
+191   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} enbmobility;
+192   enbmobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+193   enbmobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator}(enbPositionAlloc);
+194   enbmobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+195   BuildingsHelper::Install (enbNodes);
+196 
+197   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} uemobility;
+198   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} uePositionAlloc = 
+      CreateObject<ListPositionAllocator> ();
+199   uePositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (\hyperlink{mmwave-amc-test_8cc_af0063dbe3d5a0aed58f51664f3dbf7c5}{snrMinDb}, 0.0, 0.0));
+200 
+201   uemobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+202   uemobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator}(uePositionAlloc);
+203   uemobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes);
+204   BuildingsHelper::Install (ueNodes);
+205 
+206   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbNetDev = mmwHelper->InstallEnbDevice (enbNodes);
+207   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueNetDev = mmwHelper->\hyperlink{classns3_1_1MmWaveHelper_a9311c819d7ee539c8710c5b7e98df37a}{InstallUeDevice} (ueNodes);
+208 
+209   mmwHelper->\hyperlink{classns3_1_1MmWaveHelper_a202baea67b0af0d4fb6069de73766dc6}{AttachToClosestEnb} (ueNetDev, enbNetDev);
+210   mmwHelper->\hyperlink{classns3_1_1MmWaveHelper_a4eae3871876b62965d612d9a56ed21bc}{EnableTraces}();
+211 
+212   \textcolor{comment}{// Activate a data radio bearer}
+213   \textcolor{keyword}{enum} \hyperlink{structns3_1_1EpsBearer_aecf0c67109c5eb4ec0b07226fff5885e}{EpsBearer::Qci} q = EpsBearer::GBR\_CONV\_VOICE;
+214   \hyperlink{structns3_1_1EpsBearer}{EpsBearer} bearer (q);
+215   mmwHelper->\hyperlink{classns3_1_1MmWaveHelper_a9178ae3493484a9582039bb14edb282a}{ActivateDataRadioBearer} (ueNetDev, bearer);
+216   \hyperlink{classns3_1_1Ptr}{Ptr<MmWaveEnbNetDevice>} enbMmwDev = enbNetDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get}(0)->GetObject<
+      \hyperlink{classns3_1_1MmWaveEnbNetDevice}{MmWaveEnbNetDevice}> ();
+217 
+218 
+219         \hyperlink{classns3_1_1Ptr}{Ptr<MmWaveAmc>} amc = CreateObject <MmWaveAmc> (mmwHelper->
+      \hyperlink{classns3_1_1MmWaveHelper_ab4f7b3fad4e6c58765c1023e36952c1b}{GetPhyMacConfigurable} ());
+220 
+221   Simulator::Schedule (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds}(0), &\hyperlink{mmwave-amc-test_8cc_acbc789d09623d926a18a031079a40297}{updateSnr}, 
+      \hyperlink{mmwave-amc-test_8cc_af0063dbe3d5a0aed58f51664f3dbf7c5}{snrMinDb},
+222                                                                                          enbMmwDev,
+223                                                                                          
+      MmWaveSpectrumValueHelper::GetSpectrumModel (mmwHelper->\hyperlink{classns3_1_1MmWaveHelper_ab4f7b3fad4e6c58765c1023e36952c1b}{GetPhyMacConfigurable} ()),
+224                                                                                          amc);
+225 
+226   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (simTime));
+227         \hyperlink{log-macros-disabled_8h_a0b36e5e182b37194f85ef1c5e979fb2e}{NS\_LOG\_UNCOND} (\textcolor{stringliteral}{"Simulation running for "} << simTime << \textcolor{stringliteral}{" seconds"});
+228   Simulator::Run ();
+229   Simulator::Destroy ();
+230   \textcolor{keywordflow}{return} 0;
+231 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}!update\+Snr@{update\+Snr}}
+\index{update\+Snr@{update\+Snr}!mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{update\+Snr(double snr\+Init, Ptr$<$ Mm\+Wave\+Enb\+Net\+Device $>$ enb\+Dev, Ptr$<$ Spectrum\+Model $>$ model, Ptr$<$ Mm\+Wave\+Amc $>$ amc)}{updateSnr(double snrInit, Ptr< MmWaveEnbNetDevice > enbDev, Ptr< SpectrumModel > model, Ptr< MmWaveAmc > amc)}}]{\setlength{\rightskip}{0pt plus 5cm}void update\+Snr (
+\begin{DoxyParamCaption}
+\item[{double}]{snr\+Init, }
+\item[{{\bf Ptr}$<$ {\bf Mm\+Wave\+Enb\+Net\+Device} $>$}]{enb\+Dev, }
+\item[{{\bf Ptr}$<$ {\bf Spectrum\+Model} $>$}]{model, }
+\item[{{\bf Ptr}$<$ {\bf Mm\+Wave\+Amc} $>$}]{amc}
+\end{DoxyParamCaption}
+)}\hypertarget{mmwave-amc-test_8cc_acbc789d09623d926a18a031079a40297}{}\label{mmwave-amc-test_8cc_acbc789d09623d926a18a031079a40297}
+
+\begin{DoxyCode}
+54 \{
+55 \textcolor{comment}{//  std::cout << "************* distance changing to " << dist << " *************" << std::endl;}
+56 \textcolor{comment}{//  Ptr<MobilityModel> mobModel = ue->GetObject<MobilityModel> ();}
+57 \textcolor{comment}{//  mobModel->SetPosition (Vector (dist, 0.0, 0.0));}
+58 
+59         \hyperlink{classns3_1_1Ptr}{Ptr<MmWavePhyMacCommon>} config = enbDev->\hyperlink{classns3_1_1MmWaveEnbNetDevice_a66bf394e8d7f7c853f4fc6b671f188ca}{GetPhy} ()->
+      GetConfigurationParameters ();
+60 
+61         \hyperlink{classns3_1_1SpectrumValue}{SpectrumValue} specVals (model);
+62         Values::iterator specIt = specVals.ValuesBegin();
+63         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ichunk = 0; ichunk < model->\hyperlink{classns3_1_1SpectrumModel_a07c4a1c2f963885dd7fef7f82b20e90b}{GetNumBands}(); ichunk++)
+64         \{
+65                 \textcolor{comment}{//double sinrLin = std::pow (10, itCqi->second.m\_ueUlCqi.at (ichunk) / 10);}
+66                 \textcolor{comment}{//                                              double se1 = log2 ( 1 + (std::pow (10,
+       sinrLin / 10 )  /}
+67                 \textcolor{comment}{//                                                              ( (-std::log (5.0 * m\_berDl
+       )) / 1.5) ));}
+68                 \textcolor{comment}{//                                              cqi += m\_amc->GetCqiFromSpectralEfficiency
+       (se1);}
+69                 \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (specIt != specVals.ValuesEnd());
+70                 *specIt = std::pow (10, snrInit/10); \textcolor{comment}{//sinrLin;}
+71                 specIt++;
+72         \}
+73 
+74   \textcolor{keywordtype}{int} mcsTmp = 28;
+75   \textcolor{keywordtype}{int} mcs = 0;
+76   \textcolor{keywordtype}{int} mcsOrig = 0;
+77   \textcolor{keywordflow}{while} (\textcolor{keyword}{true})
+78   \{
+79         \textcolor{keywordtype}{int} tbs = amc->\hyperlink{classns3_1_1MmWaveAmc_a7e972b1d61df4f0236301ecb24f13447}{GetTbSizeFromMcsSymbols} (mcsTmp, 22) / 8;
+80         amc->\hyperlink{classns3_1_1MmWaveAmc_a692293fdeba014cbaa8e316bd12a6fd0}{CreateCqiFeedbackWbTdma} (specVals, 22, tbs, mcs);
+81         \textcolor{keywordflow}{if} (mcs == mcsTmp || mcs == mcsOrig)
+82         \{
+83                 \textcolor{keywordflow}{break};
+84         \}
+85         mcsOrig = mcsTmp;
+86         mcsTmp = mcs;
+87   \}
+88   enbDev->\hyperlink{classns3_1_1MmWaveEnbNetDevice_aa32992373e5de4c6228a793b345b3479}{GetMac}()->SetMcs (mcs);
+89   std::cout << \textcolor{stringliteral}{"************* SINR changing to "} << snrInit << \textcolor{stringliteral}{" (MCS = "} << mcs << \textcolor{stringliteral}{" ) *************"} << 
+      std::endl;
+90 
+91   Simulator::Schedule (\hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds}(3*100), &MmWaveSpectrumPhy::UpdateSinrPerceived,
+92                                                                                          enbDev->
+      \hyperlink{classns3_1_1MmWaveEnbNetDevice_a66bf394e8d7f7c853f4fc6b671f188ca}{GetPhy}()->GetDlSpectrumPhy (), specVals);
+93 
+94   \textcolor{comment}{//enbPhy->GenerateDataCqiReport(specVals);}
+95 
+96   \textcolor{keywordflow}{if} (snrInit > \hyperlink{mmwave-amc-test_8cc_aecdd0377f0cae12a929e008201da235d}{snrMaxDb})
+97   \{
+98         \textcolor{keywordflow}{return};
+99   \}
+100 
+101         Simulator::Schedule (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds}(\hyperlink{mmwave-amc-test_8cc_a04a74f2767b0e0197ef30e53be3181a9}{snrUpdateIntervalMs}), &
+      \hyperlink{mmwave-amc-test_8cc_acbc789d09623d926a18a031079a40297}{updateSnr}, snrInit+0.1, enbDev, model, amc);
+102 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Variable Documentation}
+\index{mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}!small\+Scale@{small\+Scale}}
+\index{small\+Scale@{small\+Scale}!mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{small\+Scale}{smallScale}}]{\setlength{\rightskip}{0pt plus 5cm}bool small\+Scale = true}\hypertarget{mmwave-amc-test_8cc_a204169f2af2a5f81da1189ea236307c8}{}\label{mmwave-amc-test_8cc_a204169f2af2a5f81da1189ea236307c8}
+\index{mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}!snr\+Inc\+Db@{snr\+Inc\+Db}}
+\index{snr\+Inc\+Db@{snr\+Inc\+Db}!mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{snr\+Inc\+Db}{snrIncDb}}]{\setlength{\rightskip}{0pt plus 5cm}double snr\+Inc\+Db = 0.\+1}\hypertarget{mmwave-amc-test_8cc_aaffcb1b1d69f1704e78ffb9b13f3fcca}{}\label{mmwave-amc-test_8cc_aaffcb1b1d69f1704e78ffb9b13f3fcca}
+\index{mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}!snr\+Max\+Db@{snr\+Max\+Db}}
+\index{snr\+Max\+Db@{snr\+Max\+Db}!mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{snr\+Max\+Db}{snrMaxDb}}]{\setlength{\rightskip}{0pt plus 5cm}double snr\+Max\+Db = 30}\hypertarget{mmwave-amc-test_8cc_aecdd0377f0cae12a929e008201da235d}{}\label{mmwave-amc-test_8cc_aecdd0377f0cae12a929e008201da235d}
+\index{mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}!snr\+Min\+Db@{snr\+Min\+Db}}
+\index{snr\+Min\+Db@{snr\+Min\+Db}!mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{snr\+Min\+Db}{snrMinDb}}]{\setlength{\rightskip}{0pt plus 5cm}double snr\+Min\+Db = -\/7.\+0}\hypertarget{mmwave-amc-test_8cc_af0063dbe3d5a0aed58f51664f3dbf7c5}{}\label{mmwave-amc-test_8cc_af0063dbe3d5a0aed58f51664f3dbf7c5}
+\index{mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}!snr\+Update\+Interval\+Ms@{snr\+Update\+Interval\+Ms}}
+\index{snr\+Update\+Interval\+Ms@{snr\+Update\+Interval\+Ms}!mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{snr\+Update\+Interval\+Ms}{snrUpdateIntervalMs}}]{\setlength{\rightskip}{0pt plus 5cm}double snr\+Update\+Interval\+Ms = 100.\+0}\hypertarget{mmwave-amc-test_8cc_a04a74f2767b0e0197ef30e53be3181a9}{}\label{mmwave-amc-test_8cc_a04a74f2767b0e0197ef30e53be3181a9}
+\index{mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}!speed@{speed}}
+\index{speed@{speed}!mmwave-\/amc-\/test.\+cc@{mmwave-\/amc-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{speed}{speed}}]{\setlength{\rightskip}{0pt plus 5cm}double speed = 1.\+0}\hypertarget{mmwave-amc-test_8cc_a6dc6e6f3c75c509ce943163afb5dade7}{}\label{mmwave-amc-test_8cc_a6dc6e6f3c75c509ce943163afb5dade7}

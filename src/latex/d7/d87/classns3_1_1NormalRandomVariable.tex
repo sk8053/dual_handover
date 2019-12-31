@@ -1,0 +1,464 @@
+\hypertarget{classns3_1_1NormalRandomVariable}{}\section{ns3\+:\+:Normal\+Random\+Variable Class Reference}
+\label{classns3_1_1NormalRandomVariable}\index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+
+
+The normal (Gaussian) distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically.  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Normal\+Random\+Variable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Normal\+Random\+Variable\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1NormalRandomVariable_af741336427b831b41a5e1595156aeb39}{Normal\+Random\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Creates a normal distribution R\+NG with the default values for the mean, variance, and bound. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1NormalRandomVariable_a4855e57cd04c880a79b4139defbe1f25}{Get\+Mean} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the mean value for the normal distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1NormalRandomVariable_a3792b2cf1093c17ecf92a43e6894124e}{Get\+Variance} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the variance value for the normal distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1NormalRandomVariable_af145cba3b62a35bc5878a02b1d782ff5}{Get\+Bound} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the bound on values that can be returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1NormalRandomVariable_a0134d131477bc439cc6ff7cbe84b03a9}{Get\+Value} (double mean, double variance, double bound=\hyperlink{classns3_1_1NormalRandomVariable_a813486b91a0d043421a54e47f112b343}{Normal\+Random\+Variable\+::\+I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+V\+A\+L\+UE})
+\begin{DoxyCompactList}\small\item\em Returns a random double from a normal distribution with the specified mean, variance, and bound. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1NormalRandomVariable_aed34239c507694029afc7af98eab0672}{Get\+Integer} (uint32\+\_\+t mean, uint32\+\_\+t variance, uint32\+\_\+t bound)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a normal distribution with the specified mean, variance, and bound. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1NormalRandomVariable_ab2a04ca1bd9177ecdc7530e525c216e3}{Get\+Value} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random double from a normal distribution with the current mean, variance, and bound. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1NormalRandomVariable_a3e23038dcec647c9ae4f4bd457384040}{Get\+Integer} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a normal distribution with the current mean, variance, and bound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1NormalRandomVariable_a413de1185269692d092ff5e3fa5b6878}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const double \hyperlink{classns3_1_1NormalRandomVariable_a813486b91a0d043421a54e47f112b343}{I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+V\+A\+L\+UE} = 1e307
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1NormalRandomVariable_a6a4930dc7c730451277d9889f5b1a0d9}{m\+\_\+mean}
+\item 
+double \hyperlink{classns3_1_1NormalRandomVariable_aa61551cf5da3b7e76d6df6295129e399}{m\+\_\+variance}
+\item 
+double \hyperlink{classns3_1_1NormalRandomVariable_ad173b135405ef0f2b7a2a94f7befe9fd}{m\+\_\+bound}
+\item 
+bool \hyperlink{classns3_1_1NormalRandomVariable_ae8b5000e4f79215ff7e52ef3d4ac1f18}{m\+\_\+next\+Valid}
+\item 
+double \hyperlink{classns3_1_1NormalRandomVariable_af0098cd1acde38a476badc5a1e307a7c}{m\+\_\+next}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The normal (Gaussian) distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically. 
+
+This class supports the creation of objects that return random numbers from a fixed normal distribution. It also supports the generation of single random numbers from various normal distributions.
+
+The density probability function is defined over the interval ( $-\infty$, $+\infty$) as\+: $ \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{s\sigma^2}}$ where $ mean = \mu $ and $ variance = \sigma^2 $
+
+Since normal distributions can theoretically return unbounded values, it is sometimes useful to specify a fixed bound. The \hyperlink{classns3_1_1NormalRandomVariable}{Normal\+Random\+Variable} is bounded symmetrically about the mean by this bound, i.\+e. its values are confined to the interval \mbox{[} $mean-bound$, $mean+bound$\mbox{]}.
+
+Here is an example of how to use this class\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{double} mean = 5.0;
+\textcolor{keywordtype}{double} variance = 2.0;
+
+Ptr<NormalRandomVariable> \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x} = CreateObject<NormalRandomVariable> ();
+x->SetAttribute (\textcolor{stringliteral}{"Mean"}, DoubleValue (mean));
+x->SetAttribute (\textcolor{stringliteral}{"Variance"}, DoubleValue (variance));
+
+\textcolor{comment}{// The expected value for the mean of the values returned by a}
+\textcolor{comment}{// normally distributed random variable is equal to mean.}
+\textcolor{keywordtype}{double} value = x->GetValue ();
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!Normal\+Random\+Variable@{Normal\+Random\+Variable}}
+\index{Normal\+Random\+Variable@{Normal\+Random\+Variable}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Normal\+Random\+Variable()}{NormalRandomVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Normal\+Random\+Variable\+::\+Normal\+Random\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1NormalRandomVariable_af741336427b831b41a5e1595156aeb39}{}\label{classns3_1_1NormalRandomVariable_af741336427b831b41a5e1595156aeb39}
+
+
+Creates a normal distribution R\+NG with the default values for the mean, variance, and bound. 
+
+
+\begin{DoxyCode}
+689   :
+690   \hyperlink{classns3_1_1NormalRandomVariable_ae8b5000e4f79215ff7e52ef3d4ac1f18}{m\_nextValid} (\textcolor{keyword}{false})
+691 \{
+692   \textcolor{comment}{// m\_mean, m\_variance, and m\_bound are initialized after constructor}
+693   \textcolor{comment}{// by attributes}
+694   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+695 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!Get\+Bound@{Get\+Bound}}
+\index{Get\+Bound@{Get\+Bound}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Bound(void) const }{GetBound(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Normal\+Random\+Variable\+::\+Get\+Bound (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1NormalRandomVariable_af145cba3b62a35bc5878a02b1d782ff5}{}\label{classns3_1_1NormalRandomVariable_af145cba3b62a35bc5878a02b1d782ff5}
+
+
+Returns the bound on values that can be returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The bound on values that can be returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+711 \{
+712   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+713   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1NormalRandomVariable_ad173b135405ef0f2b7a2a94f7befe9fd}{m\_bound};
+714 \}
+\end{DoxyCode}
+\index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(uint32\+\_\+t mean, uint32\+\_\+t variance, uint32\+\_\+t bound)}{GetInteger(uint32_t mean, uint32_t variance, uint32_t bound)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Normal\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{mean, }
+\item[{uint32\+\_\+t}]{variance, }
+\item[{uint32\+\_\+t}]{bound}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1NormalRandomVariable_aed34239c507694029afc7af98eab0672}{}\label{classns3_1_1NormalRandomVariable_aed34239c507694029afc7af98eab0672}
+
+
+Returns a random unsigned integer from a normal distribution with the specified mean, variance, and bound. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mean} & Mean value for the normal distribution. \\
+\hline
+\mbox{\tt in}  & {\em variance} & Variance value for the normal distribution. \\
+\hline
+\mbox{\tt in}  & {\em bound} & Bound on values returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u1$ and $u2$ are uniform variables over \mbox{[}0,1\mbox{]}, then the values that would be returned normally, $x1$ and $x2$, are calculated as follows\+:
+
+\begin{eqnarray*} v1 & = & 2 * u1 - 1 \\ v2 & = & 2 * u2 - 1 \\ w & = & v1 * v1 + v2 * v2 \\ y & = & \sqrt{\frac{-2 * \log(w)}{w}} \\ x1 & = & mean + v1 * y * \sqrt{variance} \\ x2 & = & mean + v2 * y * \sqrt{variance} . \end{eqnarray*}
+
+For the antithetic case, $(1 - u1$) and $(1 - u2$) are the distances that $u1$ and $u2$ would be from $1$. The antithetic values returned, $x1'$ and $x2'$, are calculated as follows\+:
+
+\begin{eqnarray*} v1' & = & 2 * (1 - u1) - 1 \\ v2' & = & 2 * (1 - u2) - 1 \\ w' & = & v1' * v1' + v2' * v2' \\ y' & = & \sqrt{\frac{-2 * \log(w')}{w'}} \\ x1' & = & mean + v1' * y' * \sqrt{variance} \\ x2' & = & mean + v2' * y' * \sqrt{variance} , \end{eqnarray*}
+
+which now involves the distances $u1$ and $u2$ are from 1. 
+\begin{DoxyCode}
+764 \{
+765   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mean << variance << bound);
+766   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>} ( \hyperlink{classns3_1_1NormalRandomVariable_ab2a04ca1bd9177ecdc7530e525c216e3}{GetValue} (mean, variance, bound) );
+767 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(void)}{GetInteger(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Normal\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1NormalRandomVariable_a3e23038dcec647c9ae4f4bd457384040}{}\label{classns3_1_1NormalRandomVariable_a3e23038dcec647c9ae4f4bd457384040}
+
+
+Returns a random unsigned integer from a normal distribution with the current mean, variance, and bound. 
+
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u1$ and $u2$ are uniform variables over \mbox{[}0,1\mbox{]}, then the values that would be returned normally, $x1$ and $x2$, are calculated as follows\+:
+
+\begin{eqnarray*} v1 & = & 2 * u1 - 1 \\ v2 & = & 2 * u2 - 1 \\ w & = & v1 * v1 + v2 * v2 \\ y & = & \sqrt{\frac{-2 * \log(w)}{w}} \\ x1 & = & mean + v1 * y * \sqrt{variance} \\ x2 & = & mean + v2 * y * \sqrt{variance} . \end{eqnarray*}
+
+For the antithetic case, $(1 - u1$) and $(1 - u2$) are the distances that $u1$ and $u2$ would be from $1$. The antithetic values returned, $x1'$ and $x2'$, are calculated as follows\+:
+
+\begin{eqnarray*} v1' & = & 2 * (1 - u1) - 1 \\ v2' & = & 2 * (1 - u2) - 1 \\ w' & = & v1' * v1' + v2' * v2' \\ y' & = & \sqrt{\frac{-2 * \log(w')}{w'}} \\ x1' & = & mean + v1' * y' * \sqrt{variance} \\ x2' & = & mean + v2' * y' * \sqrt{variance} , \end{eqnarray*}
+
+which now involves the distances $u1$ and $u2$ are from 1. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+777 \{
+778   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+779   \textcolor{keywordflow}{return} (uint32\_t)\hyperlink{classns3_1_1NormalRandomVariable_ab2a04ca1bd9177ecdc7530e525c216e3}{GetValue} (\hyperlink{classns3_1_1NormalRandomVariable_a6a4930dc7c730451277d9889f5b1a0d9}{m\_mean}, \hyperlink{classns3_1_1NormalRandomVariable_aa61551cf5da3b7e76d6df6295129e399}{m\_variance}, \hyperlink{classns3_1_1NormalRandomVariable_ad173b135405ef0f2b7a2a94f7befe9fd}{m\_bound});
+780 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!Get\+Mean@{Get\+Mean}}
+\index{Get\+Mean@{Get\+Mean}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Mean(void) const }{GetMean(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Normal\+Random\+Variable\+::\+Get\+Mean (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1NormalRandomVariable_a4855e57cd04c880a79b4139defbe1f25}{}\label{classns3_1_1NormalRandomVariable_a4855e57cd04c880a79b4139defbe1f25}
+
+
+Returns the mean value for the normal distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The mean value for the normal distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+699 \{
+700   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+701   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1NormalRandomVariable_a6a4930dc7c730451277d9889f5b1a0d9}{m\_mean};
+702 \}
+\end{DoxyCode}
+\index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Normal\+Random\+Variable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1NormalRandomVariable_a413de1185269692d092ff5e3fa5b6878}{}\label{classns3_1_1NormalRandomVariable_a413de1185269692d092ff5e3fa5b6878}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+668 \{
+669   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::NormalRandomVariable"})
+670     .SetParent<\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{RandomVariableStream}>()
+671     .SetGroupName (\textcolor{stringliteral}{"Core"})
+672     .AddConstructor<\hyperlink{classns3_1_1NormalRandomVariable_af741336427b831b41a5e1595156aeb39}{NormalRandomVariable}> ()
+673     .AddAttribute(\textcolor{stringliteral}{"Mean"}, \textcolor{stringliteral}{"The mean value for the normal distribution returned by this RNG stream."},
+674                   DoubleValue(0.0),
+675                   MakeDoubleAccessor(&\hyperlink{classns3_1_1NormalRandomVariable_a6a4930dc7c730451277d9889f5b1a0d9}{NormalRandomVariable::m\_mean}),
+676                   MakeDoubleChecker<double>())
+677     .AddAttribute(\textcolor{stringliteral}{"Variance"}, \textcolor{stringliteral}{"The variance value for the normal distribution returned by this RNG stream."}
+      ,
+678                   DoubleValue(1.0),
+679                   MakeDoubleAccessor(&\hyperlink{classns3_1_1NormalRandomVariable_aa61551cf5da3b7e76d6df6295129e399}{NormalRandomVariable::m\_variance}),
+680                   MakeDoubleChecker<double>())
+681     .AddAttribute(\textcolor{stringliteral}{"Bound"}, \textcolor{stringliteral}{"The bound on the values returned by this RNG stream."},
+682                   DoubleValue(\hyperlink{classns3_1_1NormalRandomVariable_a813486b91a0d043421a54e47f112b343}{INFINITE\_VALUE}),
+683                   MakeDoubleAccessor(&\hyperlink{classns3_1_1NormalRandomVariable_ad173b135405ef0f2b7a2a94f7befe9fd}{NormalRandomVariable::m\_bound}),
+684                   MakeDoubleChecker<double>())
+685     ;
+686   \textcolor{keywordflow}{return} tid;
+687 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(double mean, double variance, double bound=\+Normal\+Random\+Variable\+::\+I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+V\+A\+L\+U\+E)}{GetValue(double mean, double variance, double bound=NormalRandomVariable::INFINITE_VALUE)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Normal\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{double}]{mean, }
+\item[{double}]{variance, }
+\item[{double}]{bound = {\ttfamily {\bf Normal\+Random\+Variable\+::\+I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+V\+A\+L\+UE}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1NormalRandomVariable_a0134d131477bc439cc6ff7cbe84b03a9}{}\label{classns3_1_1NormalRandomVariable_a0134d131477bc439cc6ff7cbe84b03a9}
+
+
+Returns a random double from a normal distribution with the specified mean, variance, and bound. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mean} & Mean value for the normal distribution. \\
+\hline
+\mbox{\tt in}  & {\em variance} & Variance value for the normal distribution. \\
+\hline
+\mbox{\tt in}  & {\em bound} & Bound on values returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u1$ and $u2$ are uniform variables over \mbox{[}0,1\mbox{]}, then the values that would be returned normally, $x1$ and $x2$, are calculated as follows\+:
+
+\begin{eqnarray*} v1 & = & 2 * u1 - 1 \\ v2 & = & 2 * u2 - 1 \\ w & = & v1 * v1 + v2 * v2 \\ y & = & \sqrt{\frac{-2 * \log(w)}{w}} \\ x1 & = & mean + v1 * y * \sqrt{variance} \\ x2 & = & mean + v2 * y * \sqrt{variance} . \end{eqnarray*}
+
+For the antithetic case, $(1 - u1$) and $(1 - u2$) are the distances that $u1$ and $u2$ would be from $1$. The antithetic values returned, $x1'$ and $x2'$, are calculated as follows\+:
+
+\begin{eqnarray*} v1' & = & 2 * (1 - u1) - 1 \\ v2' & = & 2 * (1 - u2) - 1 \\ w' & = & v1' * v1' + v2' * v2' \\ y' & = & \sqrt{\frac{-2 * \log(w')}{w'}} \\ x1' & = & mean + v1' * y' * \sqrt{variance} \\ x2' & = & mean + v2' * y' * \sqrt{variance} , \end{eqnarray*}
+
+which now involves the distances $u1$ and $u2$ are from 1. 
+\begin{DoxyCode}
+718 \{
+719   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mean << variance << bound);
+720   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1NormalRandomVariable_ae8b5000e4f79215ff7e52ef3d4ac1f18}{m\_nextValid})
+721     \{ \textcolor{comment}{// use previously generated}
+722       \hyperlink{classns3_1_1NormalRandomVariable_ae8b5000e4f79215ff7e52ef3d4ac1f18}{m\_nextValid} = \textcolor{keyword}{false};
+723       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1NormalRandomVariable_af0098cd1acde38a476badc5a1e307a7c}{m\_next};
+724     \}
+725   \textcolor{keywordflow}{while} (1)
+726     \{ \textcolor{comment}{// See Simulation Modeling and Analysis p. 466 (Averill Law)}
+727       \textcolor{comment}{// for algorithm; basically a Box-Muller transform:}
+728       \textcolor{comment}{// http://en.wikipedia.org/wiki/Box-Muller\_transform}
+729       \textcolor{keywordtype}{double} u1 = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+730       \textcolor{keywordtype}{double} u2 = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+731       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+732         \{
+733           u1 = (1 - u1);
+734           u2 = (1 - u2);
+735         \}
+736       \textcolor{keywordtype}{double} v1 = 2 * u1 - 1;
+737       \textcolor{keywordtype}{double} v2 = 2 * u2 - 1;
+738       \textcolor{keywordtype}{double} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} = v1 * v1 + v2 * v2;
+739       \textcolor{keywordflow}{if} (w <= 1.0)
+740         \{ \textcolor{comment}{// Got good pair}
+741           \textcolor{keywordtype}{double} y = std::sqrt ((-2 * std::log (w)) / w);
+742           \hyperlink{classns3_1_1NormalRandomVariable_af0098cd1acde38a476badc5a1e307a7c}{m\_next} = mean + v2 * y * std::sqrt (variance);
+743           \textcolor{comment}{// if next is in bounds, it is valid}
+744           \hyperlink{classns3_1_1NormalRandomVariable_ae8b5000e4f79215ff7e52ef3d4ac1f18}{m\_nextValid} = std::fabs (\hyperlink{classns3_1_1NormalRandomVariable_af0098cd1acde38a476badc5a1e307a7c}{m\_next} - mean) <= bound;
+745           \textcolor{keywordtype}{double} x1 = mean + v1 * y * std::sqrt (variance);
+746           \textcolor{comment}{// if x1 is in bounds, return it}
+747           \textcolor{keywordflow}{if} (std::fabs (x1 - mean) <= bound)
+748             \{
+749               \textcolor{keywordflow}{return} x1;
+750             \}
+751           \textcolor{comment}{// otherwise try and return m\_next if it is valid}
+752           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1NormalRandomVariable_ae8b5000e4f79215ff7e52ef3d4ac1f18}{m\_nextValid})
+753             \{
+754               \hyperlink{classns3_1_1NormalRandomVariable_ae8b5000e4f79215ff7e52ef3d4ac1f18}{m\_nextValid} = \textcolor{keyword}{false};
+755               \textcolor{keywordflow}{return} \hyperlink{classns3_1_1NormalRandomVariable_af0098cd1acde38a476badc5a1e307a7c}{m\_next};
+756             \}
+757           \textcolor{comment}{// otherwise, just run this loop again}
+758         \}
+759     \}
+760 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(void)}{GetValue(void)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Normal\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1NormalRandomVariable_ab2a04ca1bd9177ecdc7530e525c216e3}{}\label{classns3_1_1NormalRandomVariable_ab2a04ca1bd9177ecdc7530e525c216e3}
+
+
+Returns a random double from a normal distribution with the current mean, variance, and bound. 
+
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u1$ and $u2$ are uniform variables over \mbox{[}0,1\mbox{]}, then the values that would be returned normally, $x1$ and $x2$, are calculated as follows\+:
+
+\begin{eqnarray*} v1 & = & 2 * u1 - 1 \\ v2 & = & 2 * u2 - 1 \\ w & = & v1 * v1 + v2 * v2 \\ y & = & \sqrt{\frac{-2 * \log(w)}{w}} \\ x1 & = & mean + v1 * y * \sqrt{variance} \\ x2 & = & mean + v2 * y * \sqrt{variance} . \end{eqnarray*}
+
+For the antithetic case, $(1 - u1$) and $(1 - u2$) are the distances that $u1$ and $u2$ would be from $1$. The antithetic values returned, $x1'$ and $x2'$, are calculated as follows\+:
+
+\begin{eqnarray*} v1' & = & 2 * (1 - u1) - 1 \\ v2' & = & 2 * (1 - u2) - 1 \\ w' & = & v1' * v1' + v2' * v2' \\ y' & = & \sqrt{\frac{-2 * \log(w')}{w'}} \\ x1' & = & mean + v1' * y' * \sqrt{variance} \\ x2' & = & mean + v2' * y' * \sqrt{variance} , \end{eqnarray*}
+
+which now involves the distances $u1$ and $u2$ are from 1.
+
+Note that we have to re-\/implement this method here because the method is overloaded above for the three-\/argument variant and the c++ name resolution rules don\textquotesingle{}t work well with overloads split between parent and child classes. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+771 \{
+772   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+773   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1NormalRandomVariable_ab2a04ca1bd9177ecdc7530e525c216e3}{GetValue} (\hyperlink{classns3_1_1NormalRandomVariable_a6a4930dc7c730451277d9889f5b1a0d9}{m\_mean}, \hyperlink{classns3_1_1NormalRandomVariable_aa61551cf5da3b7e76d6df6295129e399}{m\_variance}, \hyperlink{classns3_1_1NormalRandomVariable_ad173b135405ef0f2b7a2a94f7befe9fd}{m\_bound});
+774 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!Get\+Variance@{Get\+Variance}}
+\index{Get\+Variance@{Get\+Variance}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Variance(void) const }{GetVariance(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Normal\+Random\+Variable\+::\+Get\+Variance (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1NormalRandomVariable_a3792b2cf1093c17ecf92a43e6894124e}{}\label{classns3_1_1NormalRandomVariable_a3792b2cf1093c17ecf92a43e6894124e}
+
+
+Returns the variance value for the normal distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The variance value for the normal distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+705 \{
+706   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+707   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1NormalRandomVariable_aa61551cf5da3b7e76d6df6295129e399}{m\_variance};
+708 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+V\+A\+L\+UE@{I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+V\+A\+L\+UE}}
+\index{I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+V\+A\+L\+UE@{I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+V\+A\+L\+UE}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+V\+A\+L\+UE}{INFINITE_VALUE}}]{\setlength{\rightskip}{0pt plus 5cm}const double ns3\+::\+Normal\+Random\+Variable\+::\+I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+V\+A\+L\+UE = 1e307\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1NormalRandomVariable_a813486b91a0d043421a54e47f112b343}{}\label{classns3_1_1NormalRandomVariable_a813486b91a0d043421a54e47f112b343}
+Large constant to bound the range. \index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!m\+\_\+bound@{m\+\_\+bound}}
+\index{m\+\_\+bound@{m\+\_\+bound}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+bound}{m_bound}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Normal\+Random\+Variable\+::m\+\_\+bound\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1NormalRandomVariable_ad173b135405ef0f2b7a2a94f7befe9fd}{}\label{classns3_1_1NormalRandomVariable_ad173b135405ef0f2b7a2a94f7befe9fd}
+The bound on values that can be returned by this R\+NG stream. \index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!m\+\_\+mean@{m\+\_\+mean}}
+\index{m\+\_\+mean@{m\+\_\+mean}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+mean}{m_mean}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Normal\+Random\+Variable\+::m\+\_\+mean\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1NormalRandomVariable_a6a4930dc7c730451277d9889f5b1a0d9}{}\label{classns3_1_1NormalRandomVariable_a6a4930dc7c730451277d9889f5b1a0d9}
+The mean value for the normal distribution returned by this R\+NG stream. \index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!m\+\_\+next@{m\+\_\+next}}
+\index{m\+\_\+next@{m\+\_\+next}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+next}{m_next}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Normal\+Random\+Variable\+::m\+\_\+next\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1NormalRandomVariable_af0098cd1acde38a476badc5a1e307a7c}{}\label{classns3_1_1NormalRandomVariable_af0098cd1acde38a476badc5a1e307a7c}
+The algorithm produces two values at a time. \index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!m\+\_\+next\+Valid@{m\+\_\+next\+Valid}}
+\index{m\+\_\+next\+Valid@{m\+\_\+next\+Valid}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+next\+Valid}{m_nextValid}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Normal\+Random\+Variable\+::m\+\_\+next\+Valid\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1NormalRandomVariable_ae8b5000e4f79215ff7e52ef3d4ac1f18}{}\label{classns3_1_1NormalRandomVariable_ae8b5000e4f79215ff7e52ef3d4ac1f18}
+True if the next value is valid. \index{ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}!m\+\_\+variance@{m\+\_\+variance}}
+\index{m\+\_\+variance@{m\+\_\+variance}!ns3\+::\+Normal\+Random\+Variable@{ns3\+::\+Normal\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+variance}{m_variance}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Normal\+Random\+Variable\+::m\+\_\+variance\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1NormalRandomVariable_aa61551cf5da3b7e76d6df6295129e399}{}\label{classns3_1_1NormalRandomVariable_aa61551cf5da3b7e76d6df6295129e399}
+The variance value for the normal distribution returned by this R\+NG stream. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

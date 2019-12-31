@@ -1,0 +1,98 @@
+\hypertarget{namespaceflowmon-parse-results}{}\section{flowmon-\/parse-\/results Namespace Reference}
+\label{namespaceflowmon-parse-results}\index{flowmon-\/parse-\/results@{flowmon-\/parse-\/results}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classflowmon-parse-results_1_1FiveTuple}{Five\+Tuple}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classflowmon-parse-results_1_1FiveTuple}{Five\+Tuple}. \end{DoxyCompactList}\item 
+class \hyperlink{classflowmon-parse-results_1_1Flow}{Flow}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classflowmon-parse-results_1_1Flow}{Flow}. \end{DoxyCompactList}\item 
+class \hyperlink{classflowmon-parse-results_1_1Histogram}{Histogram}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classflowmon-parse-results_1_1Histogram}{Histogram}. \end{DoxyCompactList}\item 
+class \hyperlink{classflowmon-parse-results_1_1ProbeFlowStats}{Probe\+Flow\+Stats}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classflowmon-parse-results_1_1ProbeFlowStats}{Probe\+Flow\+Stats}. \end{DoxyCompactList}\item 
+class \hyperlink{classflowmon-parse-results_1_1Simulation}{Simulation}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classflowmon-parse-results_1_1Simulation}{Simulation}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceflowmon-parse-results_a5612b6aed0ce819ee4f6fd3dbe251622}{parse\+\_\+time\+\_\+ns} (tm)
+\item 
+def \hyperlink{namespaceflowmon-parse-results_a5d1c01dbc9b4217383d9b577f790496a}{main} (argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{flowmon-\/parse-\/results@{flowmon-\/parse-\/results}!main@{main}}
+\index{main@{main}!flowmon-\/parse-\/results@{flowmon-\/parse-\/results}}
+\subsubsection[{\texorpdfstring{main(argv)}{main(argv)}}]{\setlength{\rightskip}{0pt plus 5cm}def flowmon-\/parse-\/results.\+main (
+\begin{DoxyParamCaption}
+\item[{}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceflowmon-parse-results_a5d1c01dbc9b4217383d9b577f790496a}{}\label{namespaceflowmon-parse-results_a5d1c01dbc9b4217383d9b577f790496a}
+
+\begin{DoxyCode}
+190 \textcolor{keyword}{def }\hyperlink{namespaceflowmon-parse-results_a5d1c01dbc9b4217383d9b577f790496a}{main}(argv):
+191     file\_obj = open(argv[1])
+192     \textcolor{keywordflow}{print} \textcolor{stringliteral}{"Reading XML file "},
+193  
+194     sys.stdout.flush()        
+195     level = 0
+196     sim\_list = []
+197     \textcolor{keywordflow}{for} event, elem \textcolor{keywordflow}{in} ElementTree.iterparse(file\_obj, events=(\textcolor{stringliteral}{"start"}, \textcolor{stringliteral}{"end"})):
+198         \textcolor{keywordflow}{if} event == \textcolor{stringliteral}{"start"}:
+199             level += 1
+200         \textcolor{keywordflow}{if} event == \textcolor{stringliteral}{"end"}:
+201             level -= 1
+202             \textcolor{keywordflow}{if} level == 0 \textcolor{keywordflow}{and} elem.tag == \textcolor{stringliteral}{'FlowMonitor'}:
+203                 sim = \hyperlink{classflowmon-parse-results_1_1Simulation}{Simulation}(elem)
+204                 sim\_list.append(sim)
+205                 elem.clear() \textcolor{comment}{# won't need this any more}
+206                 sys.stdout.write(\textcolor{stringliteral}{"."})
+207                 sys.stdout.flush()
+208     \textcolor{keywordflow}{print} \textcolor{stringliteral}{" done."}
+209 
+210 
+211     \textcolor{keywordflow}{for} sim \textcolor{keywordflow}{in} sim\_list:
+212         \textcolor{keywordflow}{for} flow \textcolor{keywordflow}{in} sim.flows:
+213             t = flow.fiveTuple
+214             proto = \{6: \textcolor{stringliteral}{'TCP'}, 17: \textcolor{stringliteral}{'UDP'}\} [t.protocol]
+215             \textcolor{keywordflow}{print} \textcolor{stringliteral}{"FlowID: %i (%s %s/%s --> %s/%i)"} % \(\backslash\)
+216                 (flow.flowId, proto, t.sourceAddress, t.sourcePort, t.destinationAddress, t.destinationPort
+      )
+217             \textcolor{keywordflow}{if} flow.txBitrate \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+218                 \textcolor{keywordflow}{print} \textcolor{stringliteral}{"\(\backslash\)tTX bitrate: None"}
+219             \textcolor{keywordflow}{else}:
+220                 \textcolor{keywordflow}{print} \textcolor{stringliteral}{"\(\backslash\)tTX bitrate: %.2f kbit/s"} % (flow.txBitrate*1e-3,)
+221             \textcolor{keywordflow}{if} flow.rxBitrate \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+222                 \textcolor{keywordflow}{print} \textcolor{stringliteral}{"\(\backslash\)tRX bitrate: None"}
+223             \textcolor{keywordflow}{else}:
+224                 \textcolor{keywordflow}{print} \textcolor{stringliteral}{"\(\backslash\)tRX bitrate: %.2f kbit/s"} % (flow.rxBitrate*1e-3,)
+225             \textcolor{keywordflow}{if} flow.delayMean \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+226                 \textcolor{keywordflow}{print} \textcolor{stringliteral}{"\(\backslash\)tMean Delay: None"}
+227             \textcolor{keywordflow}{else}:
+228                 \textcolor{keywordflow}{print} \textcolor{stringliteral}{"\(\backslash\)tMean Delay: %.2f ms"} % (flow.delayMean*1e3,)
+229             \textcolor{keywordflow}{if} flow.packetLossRatio \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+230                 \textcolor{keywordflow}{print} \textcolor{stringliteral}{"\(\backslash\)tPacket Loss Ratio: None"}
+231             \textcolor{keywordflow}{else}:
+232                 \textcolor{keywordflow}{print} \textcolor{stringliteral}{"\(\backslash\)tPacket Loss Ratio: %.2f %%"} % (flow.packetLossRatio*100)
+233 
+234 
+\end{DoxyCode}
+\index{flowmon-\/parse-\/results@{flowmon-\/parse-\/results}!parse\+\_\+time\+\_\+ns@{parse\+\_\+time\+\_\+ns}}
+\index{parse\+\_\+time\+\_\+ns@{parse\+\_\+time\+\_\+ns}!flowmon-\/parse-\/results@{flowmon-\/parse-\/results}}
+\subsubsection[{\texorpdfstring{parse\+\_\+time\+\_\+ns(tm)}{parse_time_ns(tm)}}]{\setlength{\rightskip}{0pt plus 5cm}def flowmon-\/parse-\/results.\+parse\+\_\+time\+\_\+ns (
+\begin{DoxyParamCaption}
+\item[{}]{tm}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceflowmon-parse-results_a5612b6aed0ce819ee4f6fd3dbe251622}{}\label{namespaceflowmon-parse-results_a5612b6aed0ce819ee4f6fd3dbe251622}
+
+\begin{DoxyCode}
+9 \textcolor{keyword}{def }\hyperlink{namespaceflowmon-parse-results_a5612b6aed0ce819ee4f6fd3dbe251622}{parse\_time\_ns}(tm):
+10     \textcolor{keywordflow}{if} tm.endswith(\textcolor{stringliteral}{'ns'}):
+11         \textcolor{keywordflow}{return} \hyperlink{generate__test__data__lte__sinr_8m_a0eab6be67e93c3411f7a8b53cc297285}{long}(tm[:-4])
+12     \textcolor{keywordflow}{raise} ValueError(tm)
+13 
+14 
+15 
+\end{DoxyCode}

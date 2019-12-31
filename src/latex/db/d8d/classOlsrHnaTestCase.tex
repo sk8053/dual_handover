@@ -1,0 +1,99 @@
+\hypertarget{classOlsrHnaTestCase}{}\section{Olsr\+Hna\+Test\+Case Class Reference}
+\label{classOlsrHnaTestCase}\index{Olsr\+Hna\+Test\+Case@{Olsr\+Hna\+Test\+Case}}
+
+
+Inheritance diagram for Olsr\+Hna\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Olsr\+Hna\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classOlsrHnaTestCase_a1a3ecf12ebccd9dfc02afc68e0bf72ea}{Olsr\+Hna\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classOlsrHnaTestCase_a15a5f2a60731d73ca2cc8f7e1a8f90d5}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Olsr\+Hna\+Test\+Case@{Olsr\+Hna\+Test\+Case}!Olsr\+Hna\+Test\+Case@{Olsr\+Hna\+Test\+Case}}
+\index{Olsr\+Hna\+Test\+Case@{Olsr\+Hna\+Test\+Case}!Olsr\+Hna\+Test\+Case@{Olsr\+Hna\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Olsr\+Hna\+Test\+Case()}{OlsrHnaTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Olsr\+Hna\+Test\+Case\+::\+Olsr\+Hna\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classOlsrHnaTestCase_a1a3ecf12ebccd9dfc02afc68e0bf72ea}{}\label{classOlsrHnaTestCase_a1a3ecf12ebccd9dfc02afc68e0bf72ea}
+
+\begin{DoxyCode}
+266   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check Hna olsr messages"})
+267 \{
+268 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Olsr\+Hna\+Test\+Case@{Olsr\+Hna\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Olsr\+Hna\+Test\+Case@{Olsr\+Hna\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Olsr\+Hna\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOlsrHnaTestCase_a15a5f2a60731d73ca2cc8f7e1a8f90d5}{}\label{classOlsrHnaTestCase_a15a5f2a60731d73ca2cc8f7e1a8f90d5}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+272 \{
+273   \hyperlink{classns3_1_1Packet}{Packet} packet;
+274   olsr::MessageHeader msgIn;
+275   \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Hna}{olsr::MessageHeader::Hna} &hnaIn = msgIn.GetHna ();
+276 
+277   hnaIn.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Hna_a3989e2a5026258e7cbde6d7795aa9c9f}{associations}.push\_back ((
+      \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Hna_1_1Association}{olsr::MessageHeader::Hna::Association})
+278                                 \{ \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.2.3.4"}), \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"})\});
+279   hnaIn.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Hna_a3989e2a5026258e7cbde6d7795aa9c9f}{associations}.push\_back ((
+      \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Hna_1_1Association}{olsr::MessageHeader::Hna::Association})
+280                                 \{ \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.2.3.5"}), \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.0.0"})\});
+281   packet.\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (msgIn);
+282 
+283   olsr::MessageHeader msgOut;
+284   packet.\hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{RemoveHeader} (msgOut);
+285   \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Hna}{olsr::MessageHeader::Hna} &hnaOut = msgOut.GetHna ();
+286 
+287   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (hnaOut.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Hna_a3989e2a5026258e7cbde6d7795aa9c9f}{associations}.size (), 2, \textcolor{stringliteral}{"500"});
+288 
+289   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (hnaOut.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Hna_a3989e2a5026258e7cbde6d7795aa9c9f}{associations}[0].address,
+290                          \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.2.3.4"}), \textcolor{stringliteral}{"501"});
+291   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (hnaOut.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Hna_a3989e2a5026258e7cbde6d7795aa9c9f}{associations}[0].mask,
+292                          \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"}), \textcolor{stringliteral}{"502"});
+293 
+294   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (hnaOut.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Hna_a3989e2a5026258e7cbde6d7795aa9c9f}{associations}[1].address,
+295                          \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.2.3.5"}), \textcolor{stringliteral}{"503"});
+296   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (hnaOut.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Hna_a3989e2a5026258e7cbde6d7795aa9c9f}{associations}[1].mask,
+297                          \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.0.0"}), \textcolor{stringliteral}{"504"});
+298 
+299   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (packet.\hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} (), 0, \textcolor{stringliteral}{"All bytes in packet were not
+       read"});
+300 
+301 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+olsr/test/\hyperlink{olsr-header-test-suite_8cc}{olsr-\/header-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

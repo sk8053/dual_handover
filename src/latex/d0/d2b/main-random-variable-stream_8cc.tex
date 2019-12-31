@@ -1,0 +1,592 @@
+\hypertarget{main-random-variable-stream_8cc}{}\section{core/examples/main-\/random-\/variable-\/stream.cc File Reference}
+\label{main-random-variable-stream_8cc}\index{core/examples/main-\/random-\/variable-\/stream.\+cc@{core/examples/main-\/random-\/variable-\/stream.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/random-\/variable-\/stream.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ptr.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/double.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/string.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/integer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/gnuplot.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+Include dependency graph for main-\/random-\/variable-\/stream.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{main-random-variable-stream_8cc_a03c6ffa77bf73ef1606f168290f71948}{dround} (double number, double precision)
+\item 
+static \hyperlink{classns3_1_1GnuplotDataset}{Gnuplot\+Dataset} \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} $>$ rndvar, unsigned int probes, double precision, const std\+::string \&\hyperlink{lte__link__budget__x2__handover__measures_8m_a3f4b991df405379f6917e1683ed5a8c8}{title}, bool notcontinous=\hyperlink{lte__cqi__generation_8m_ab1bef239d413c4da139c4bac92cd657a}{false})
+\item 
+int \hyperlink{main-random-variable-stream_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{main-\/random-\/variable-\/stream.\+cc@{main-\/random-\/variable-\/stream.\+cc}!dround@{dround}}
+\index{dround@{dround}!main-\/random-\/variable-\/stream.\+cc@{main-\/random-\/variable-\/stream.\+cc}}
+\subsubsection[{\texorpdfstring{dround(double number, double precision)}{dround(double number, double precision)}}]{\setlength{\rightskip}{0pt plus 5cm}double dround (
+\begin{DoxyParamCaption}
+\item[{double}]{number, }
+\item[{double}]{precision}
+\end{DoxyParamCaption}
+)}\hypertarget{main-random-variable-stream_8cc_a03c6ffa77bf73ef1606f168290f71948}{}\label{main-random-variable-stream_8cc_a03c6ffa77bf73ef1606f168290f71948}
+Round a double number to the given precision. e.\+g. dround(0.\+234, 0.\+1) = 0.\+2 and dround(0.\+257, 0.\+1) = 0.\+3 
+\begin{DoxyCode}
+34 \{
+35   number /= precision;
+36   \textcolor{keywordflow}{if} (number >= 0)
+37     number = std::floor (number + 0.5);
+38   \textcolor{keywordflow}{else}
+39     number = std::ceil (number - 0.5);
+40   number *= precision;
+41   \textcolor{keywordflow}{return} number;
+42 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{main-\/random-\/variable-\/stream.\+cc@{main-\/random-\/variable-\/stream.\+cc}!Histogramm@{Histogramm}}
+\index{Histogramm@{Histogramm}!main-\/random-\/variable-\/stream.\+cc@{main-\/random-\/variable-\/stream.\+cc}}
+\subsubsection[{\texorpdfstring{Histogramm(\+Ptr$<$ Random\+Variable\+Stream $>$ rndvar, unsigned int probes, double precision, const std\+::string \&title, bool notcontinous=false)}{Histogramm(Ptr< RandomVariableStream > rndvar, unsigned int probes, double precision, const std::string &title, bool notcontinous=false)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Gnuplot\+Dataset} Histogramm (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Random\+Variable\+Stream} $>$}]{rndvar, }
+\item[{unsigned int}]{probes, }
+\item[{double}]{precision, }
+\item[{const std\+::string \&}]{title, }
+\item[{bool}]{notcontinous = {\ttfamily {\bf false}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{}\label{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}
+
+\begin{DoxyCode}
+46 \{
+47   \textcolor{keyword}{typedef} std::map<double, unsigned int> histogramm\_maptype;
+48   histogramm\_maptype histogramm;
+49 
+50   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < probes; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+51     \{
+52       \textcolor{keywordtype}{double} val = \hyperlink{main-random-variable-stream_8cc_a03c6ffa77bf73ef1606f168290f71948}{dround} ( rndvar->\hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{GetValue} (), precision );
+53 
+54       ++histogramm[val];
+55     \}
+56 
+57   \hyperlink{classns3_1_1Gnuplot2dDataset}{Gnuplot2dDataset} \hyperlink{topology-example-sim_8cc_a26c65296e316af77b787dc77469bb2a4}{data};
+58   data.\hyperlink{classns3_1_1GnuplotDataset_add68db1296fcadff7255633c0df96e08}{SetTitle} (\hyperlink{lte__link__budget_8m_a5b09b57ee35b13a452f0c089c0709f8b}{title});
+59 
+60   \textcolor{keywordflow}{if} (notcontinous)
+61     \{
+62       data.\hyperlink{classns3_1_1Gnuplot2dDataset_a7a3d6b6c2bd7d32a82f5715bae37c886}{SetStyle} (Gnuplot2dDataset::IMPULSES);
+63     \}
+64 
+65   \textcolor{keywordflow}{for}(histogramm\_maptype::const\_iterator hi = histogramm.begin ();
+66       hi != histogramm.end (); ++hi)
+67     \{
+68       data.\hyperlink{classns3_1_1Gnuplot2dDataset_abd93f7c8fa2d1ed643c09d7fb8d5ef27}{Add} (hi->first, (\textcolor{keywordtype}{double})hi->second / (\textcolor{keywordtype}{double})probes / precision);
+69     \}
+70 
+71   \textcolor{keywordflow}{return} \hyperlink{topology-example-sim_8cc_a26c65296e316af77b787dc77469bb2a4}{data};
+72 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{main-\/random-\/variable-\/stream.\+cc@{main-\/random-\/variable-\/stream.\+cc}!main@{main}}
+\index{main@{main}!main-\/random-\/variable-\/stream.\+cc@{main-\/random-\/variable-\/stream.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{main-random-variable-stream_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{main-random-variable-stream_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000002}{Todo}]Turn this plot back on once its distribution has been finished. \end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000003}{Todo}]Turn this plot back on once its distribution has been finished. \end{DoxyRefDesc}
+
+\begin{DoxyCode}
+75 \{
+76   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} probes = 1000000;
+77   \textcolor{keywordtype}{double} precision = 0.01;
+78 
+79   \hyperlink{classns3_1_1GnuplotCollection}{GnuplotCollection} gnuplots (\textcolor{stringliteral}{"main-random-variables.pdf"});
+80   gnuplots.SetTerminal (\textcolor{stringliteral}{"pdf enhanced"});
+81 
+82   \{
+83     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+84     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"UniformRandomVariable"});
+85     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"set yrange [0:]"});
+86 
+87     \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x} = CreateObject<UniformRandomVariable> ();
+88     x->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (0.0));
+89     x->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (1.0));
+90 
+91     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x, probes, precision,
+92                                   \textcolor{stringliteral}{"UniformRandomVariable [0.0 .. 1.0)"}) );
+93     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"1.0"},
+94                                          \textcolor{stringliteral}{"0 <= x && x <= 1 ? 1.0 : 0"}) );
+95 
+96     gnuplots.AddPlot (plot);
+97   \}
+98 
+99   \{
+100     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+101     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"ExponentialRandomVariable"});
+102     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"set xrange [0:8]"});
+103     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"ExpDist(x,l) = 1/l * exp(-1/l * x)"});
+104 
+105     \hyperlink{classns3_1_1Ptr}{Ptr<ExponentialRandomVariable>} x1 = 
+      CreateObject<ExponentialRandomVariable> ();
+106     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mean"}, DoubleValue (0.5));
+107 
+108     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x1, probes, precision,
+109                                   \textcolor{stringliteral}{"ExponentialRandomVariable m=0.5"}) );
+110 
+111     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"ExponentialDistribution mean 0.5"},
+112                                          \textcolor{stringliteral}{"ExpDist(x, 0.5)"}) );
+113 
+114     \hyperlink{classns3_1_1Ptr}{Ptr<ExponentialRandomVariable>} x2 = 
+      CreateObject<ExponentialRandomVariable> ();
+115     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mean"}, DoubleValue (1.0));
+116 
+117     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x2, probes, precision,
+118                                   \textcolor{stringliteral}{"ExponentialRandomVariable m=1"}) );
+119 
+120     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"ExponentialDistribution mean 1.0"},
+121                                          \textcolor{stringliteral}{"ExpDist(x, 1.0)"}) );
+122 
+123     \hyperlink{classns3_1_1Ptr}{Ptr<ExponentialRandomVariable>} x3 = 
+      CreateObject<ExponentialRandomVariable> ();
+124     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mean"}, DoubleValue (1.5));
+125 
+126     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x3, probes, precision,
+127                                   \textcolor{stringliteral}{"ExponentialRandomVariable m=1.5"}) );
+128 
+129     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"ExponentialDistribution mean 1.5"},
+130                                          \textcolor{stringliteral}{"ExpDist(x, 1.5)"}) );
+131 
+132     gnuplots.AddPlot (plot);
+133   \}
+134 
+135   \{
+136     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+137     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"ParetoRandomVariable"});
+138     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"set xrange [0:2]"});
+139 
+140     \hyperlink{classns3_1_1Ptr}{Ptr<ParetoRandomVariable>} x1 = CreateObject<ParetoRandomVariable> ();
+141     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Scale"}, DoubleValue (1.0));
+142     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Shape"}, DoubleValue (1.5));
+143 
+144     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x1, probes, precision,
+145                                   \textcolor{stringliteral}{"ParetoRandomVariable scale=1.0 shape=1.5"}) );
+146 
+147     \hyperlink{classns3_1_1Ptr}{Ptr<ParetoRandomVariable>} x2 = CreateObject<ParetoRandomVariable> ();
+148     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Scale"}, DoubleValue (1.0));
+149     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Shape"}, DoubleValue (2.0));
+150 
+151     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x2, probes, precision,
+152                                   \textcolor{stringliteral}{"ParetoRandomVariable scale=1.0 shape=2.0"}) );
+153 
+154     \hyperlink{classns3_1_1Ptr}{Ptr<ParetoRandomVariable>} x3 = CreateObject<ParetoRandomVariable> ();
+155     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Scale"}, DoubleValue (1.0));
+156     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Shape"}, DoubleValue (2.5));
+157 
+158     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x3, probes, precision,
+159                                   \textcolor{stringliteral}{"ParetoRandomVariable scale=1.0 shape=2.5"}) );
+160 
+161     gnuplots.AddPlot (plot);
+162   \}
+163 
+164   \{
+165     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+166     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"WeibullRandomVariable"});
+167     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"set xrange [0:3]"});
+168 
+169     \hyperlink{classns3_1_1Ptr}{Ptr<WeibullRandomVariable>} x1 = CreateObject<WeibullRandomVariable> ();
+170     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Scale"}, DoubleValue (1.0));
+171     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Shape"}, DoubleValue (1.0));
+172 
+173     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x1, probes, precision,
+174                                   \textcolor{stringliteral}{"WeibullRandomVariable scale=1.0 shape=1.0"}) );
+175 
+176     \hyperlink{classns3_1_1Ptr}{Ptr<WeibullRandomVariable>} x2 = CreateObject<WeibullRandomVariable> ();
+177     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Scale"}, DoubleValue (1.0));
+178     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Shape"}, DoubleValue (2.0));
+179 
+180     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x2, probes, precision,
+181                                   \textcolor{stringliteral}{"WeibullRandomVariable scale=1.0 shape=2.0"}) );
+182 
+183     \hyperlink{classns3_1_1Ptr}{Ptr<WeibullRandomVariable>} x3 = CreateObject<WeibullRandomVariable> ();
+184     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Scale"}, DoubleValue (1.0));
+185     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Shape"}, DoubleValue (3.0));
+186 
+187     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x3, probes, precision,
+188                                   \textcolor{stringliteral}{"WeibullRandomVariable scale=1.0 shape=3.0"}) );
+189 
+190     gnuplots.AddPlot (plot);
+191   \}
+192 
+193   \{
+194     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+195     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"NormalRandomVariable"});
+196     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"set xrange [-3:3]"});
+197     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"NormalDist(x,m,s) = 1 / (s * sqrt(2*pi)) * exp(-1.0 / 2.0 * ((x-m) /
+       s)**2)"});
+198 
+199     \hyperlink{classns3_1_1Ptr}{Ptr<NormalRandomVariable>} x1 = CreateObject<NormalRandomVariable> ();
+200     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mean"}, DoubleValue (0.0));
+201     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Variance"}, DoubleValue (1.0));
+202 
+203     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x1, probes, precision,
+204                                   \textcolor{stringliteral}{"NormalRandomVariable m=0.0 v=1.0"}) );
+205 
+206     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"NormalDist \{/Symbol m\}=0.0 \{/Symbol
+       s\}=1.0"},
+207                                          \textcolor{stringliteral}{"NormalDist(x,0.0,1.0)"}) );
+208 
+209     \hyperlink{classns3_1_1Ptr}{Ptr<NormalRandomVariable>} x2 = CreateObject<NormalRandomVariable> ();
+210     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mean"}, DoubleValue (0.0));
+211     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Variance"}, DoubleValue (2.0));
+212 
+213     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x2, probes, precision,
+214                                   \textcolor{stringliteral}{"NormalRandomVariable m=0.0 v=2.0"}) );
+215 
+216     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"NormalDist \{/Symbol m\}=0.0 \{/Symbol
+       s\}=sqrt(2.0)"},
+217                                          \textcolor{stringliteral}{"NormalDist(x,0.0,sqrt(2.0))"}) );
+218 
+219     \hyperlink{classns3_1_1Ptr}{Ptr<NormalRandomVariable>} x3 = CreateObject<NormalRandomVariable> ();
+220     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mean"}, DoubleValue (0.0));
+221     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Variance"}, DoubleValue (3.0));
+222 
+223     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x3, probes, precision,
+224                                   \textcolor{stringliteral}{"NormalRandomVariable m=0.0 v=3.0"}) );
+225 
+226     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"NormalDist \{/Symbol m\}=0.0 \{/Symbol
+       s\}=sqrt(3.0)"},
+227                                          \textcolor{stringliteral}{"NormalDist(x,0.0,sqrt(3.0))"}) );
+228 
+229     gnuplots.AddPlot (plot);
+230   \}
+231 
+233   \textcolor{comment}{/*}
+234 \textcolor{comment}{  \{}
+235 \textcolor{comment}{    Gnuplot plot;}
+236 \textcolor{comment}{    plot.SetTitle ("EmpiricalRandomVariable");}
+237 \textcolor{comment}{    plot.AppendExtra ("set xrange [*:*]");}
+238 \textcolor{comment}{}
+239 \textcolor{comment}{    EmpiricalRandomVariable emp1;}
+240 \textcolor{comment}{    emp1.CDF (0.0,  0.0 / 15.0);}
+241 \textcolor{comment}{    emp1.CDF (0.2,  1.0 / 15.0);}
+242 \textcolor{comment}{    emp1.CDF (0.4,  3.0 / 15.0);}
+243 \textcolor{comment}{    emp1.CDF (0.6,  6.0 / 15.0);}
+244 \textcolor{comment}{    emp1.CDF (0.8, 10.0 / 15.0);}
+245 \textcolor{comment}{    emp1.CDF (1.0, 15.0 / 15.0);}
+246 \textcolor{comment}{}
+247 \textcolor{comment}{    plot.AddDataset ( Histogramm (emp1, probes, precision,}
+248 \textcolor{comment}{                                  "EmpiricalRandomVariable (Stairs)") );}
+249 \textcolor{comment}{}
+250 \textcolor{comment}{    gnuplots.AddPlot (plot);}
+251 \textcolor{comment}{  \}}
+252 \textcolor{comment}{  */}
+253 
+255   \textcolor{comment}{/*}
+256 \textcolor{comment}{  \{}
+257 \textcolor{comment}{    Gnuplot plot;}
+258 \textcolor{comment}{    plot.SetTitle ("DeterministicRandomVariable");}
+259 \textcolor{comment}{    plot.AppendExtra ("set xrange [*:*]");}
+260 \textcolor{comment}{}
+261 \textcolor{comment}{    double values[] = \{ 0.0, 0.2, 0.2, 0.4, 0.2, 0.6, 0.8, 0.8, 1.0 \};}
+262 \textcolor{comment}{    DeterministicRandomVariable det1 (values, sizeof(values) / sizeof(values[0]));}
+263 \textcolor{comment}{}
+264 \textcolor{comment}{    plot.AddDataset ( Histogramm (det1, probes, precision,}
+265 \textcolor{comment}{                                  "DeterministicRandomVariable", true) );}
+266 \textcolor{comment}{}
+267 \textcolor{comment}{    gnuplots.AddPlot (plot);}
+268 \textcolor{comment}{  \}}
+269 \textcolor{comment}{  */}
+270 
+271   \{
+272     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+273     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"LogNormalRandomVariable"});
+274     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"set xrange [0:3]"});
+275 
+276     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"LogNormalDist(x,m,s) = 1.0/x * NormalDist(log(x), m, s)"});
+277 
+278     \hyperlink{classns3_1_1Ptr}{Ptr<LogNormalRandomVariable>} x1 = CreateObject<LogNormalRandomVariable> ();
+279     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mu"}, DoubleValue (0.0));
+280     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Sigma"}, DoubleValue (1.0));
+281 
+282     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x1, probes, precision,
+283                                   \textcolor{stringliteral}{"LogNormalRandomVariable m=0.0 s=1.0"}) );
+284 
+285     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"LogNormalDist(x, 0.0, 1.0)"},
+286                                          \textcolor{stringliteral}{"LogNormalDist(x, 0.0, 1.0)"}) );
+287 
+288     \hyperlink{classns3_1_1Ptr}{Ptr<LogNormalRandomVariable>} x2 = CreateObject<LogNormalRandomVariable> ();
+289     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mu"}, DoubleValue (0.0));
+290     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Sigma"}, DoubleValue (0.5));
+291 
+292     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x2, probes, precision,
+293                                   \textcolor{stringliteral}{"LogNormalRandomVariable m=0.0 s=0.5"}) );
+294 
+295     \hyperlink{classns3_1_1Ptr}{Ptr<LogNormalRandomVariable>} x3 = CreateObject<LogNormalRandomVariable> ();
+296     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mu"}, DoubleValue (0.0));
+297     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Sigma"}, DoubleValue (0.25));
+298 
+299     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x3, probes, precision,
+300                                   \textcolor{stringliteral}{"LogNormalRandomVariable m=0.0 s=0.25"}) );
+301 
+302     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"LogNormalDist(x, 0.0, 0.25)"},
+303                                          \textcolor{stringliteral}{"LogNormalDist(x, 0.0, 0.25)"}) );
+304 
+305     \hyperlink{classns3_1_1Ptr}{Ptr<LogNormalRandomVariable>} x4 = CreateObject<LogNormalRandomVariable> ();
+306     x4->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mu"}, DoubleValue (0.0));
+307     x4->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Sigma"}, DoubleValue (0.125));
+308 
+309     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x4, probes, precision,
+310                                   \textcolor{stringliteral}{"LogNormalRandomVariable m=0.0 s=0.125"}) );
+311 
+312     \hyperlink{classns3_1_1Ptr}{Ptr<LogNormalRandomVariable>} x5 = CreateObject<LogNormalRandomVariable> ();
+313     x5->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mu"}, DoubleValue (0.0));
+314     x5->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Sigma"}, DoubleValue (2.0));
+315 
+316     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x5, probes, precision,
+317                                   \textcolor{stringliteral}{"LogNormalRandomVariable m=0.0 s=2.0"}) );
+318 
+319     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"LogNormalDist(x, 0.0, 2.0)"},
+320                                          \textcolor{stringliteral}{"LogNormalDist(x, 0.0, 2.0)"}) );
+321 
+322     \hyperlink{classns3_1_1Ptr}{Ptr<LogNormalRandomVariable>} x6 = CreateObject<LogNormalRandomVariable> ();
+323     x6->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mu"}, DoubleValue (0.0));
+324     x6->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Sigma"}, DoubleValue (2.5));
+325 
+326     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x6, probes, precision,
+327                                   \textcolor{stringliteral}{"LogNormalRandomVariable m=0.0 s=2.5"}) );
+328 
+329     gnuplots.AddPlot (plot);
+330   \}
+331 
+332   \{
+333     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+334     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"TriangularRandomVariable"});
+335     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"set xrange [*:*]"});
+336 
+337     \hyperlink{classns3_1_1Ptr}{Ptr<TriangularRandomVariable>} x1 = CreateObject<TriangularRandomVariable> 
+      ();
+338     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (0.0));
+339     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (1.0));
+340     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mean"}, DoubleValue (0.5));
+341 
+342     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x1, probes, precision,
+343                                   \textcolor{stringliteral}{"TriangularRandomVariable [0.0 .. 1.0) m=0.5"}) );
+344 
+345     \hyperlink{classns3_1_1Ptr}{Ptr<TriangularRandomVariable>} x2 = CreateObject<TriangularRandomVariable> 
+      ();
+346     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (0.0));
+347     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (1.0));
+348     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mean"}, DoubleValue (0.4));
+349 
+350     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x2, probes, precision,
+351                                   \textcolor{stringliteral}{"TriangularRandomVariable [0.0 .. 1.0) m=0.4"}) );
+352 
+353     \hyperlink{classns3_1_1Ptr}{Ptr<TriangularRandomVariable>} x3 = CreateObject<TriangularRandomVariable> 
+      ();
+354     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (0.0));
+355     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (1.0));
+356     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Mean"}, DoubleValue (0.65));
+357 
+358     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x3, probes, precision,
+359                                   \textcolor{stringliteral}{"TriangularRandomVariable [0.0 .. 1.0) m=0.65"}) );
+360 
+361     gnuplots.AddPlot (plot);
+362   \}
+363 
+364   \{
+365     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+366     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"GammaRandomVariable"});
+367     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"set xrange [0:10]"});
+368     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"set yrange [0:1]"});
+369     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"GammaDist(x,a,b) = x**(a-1) * 1/b**a * exp(-x/b) / gamma(a)"});
+370 
+371     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"set label 1 '\{/Symbol g\}(x,\{/Symbol a\},\{/Symbol b\}) = x^\{/Symbol a-1\}
+       e^\{-x \{/Symbol b\}^\{-1\}\} ( \{/Symbol b\}^\{/Symbol a\} \{/Symbol G\}(\{/Symbol a\}) )^\{-1\}' at 0.7, 0.9"});
+372 
+373     \hyperlink{classns3_1_1Ptr}{Ptr<GammaRandomVariable>} x1 = CreateObject<GammaRandomVariable> ();
+374     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Alpha"}, DoubleValue (1.0));
+375     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Beta"}, DoubleValue (1.0));
+376 
+377     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x1, probes, precision,
+378                                   \textcolor{stringliteral}{"GammaRandomVariable a=1.0 b=1.0"}) );
+379 
+380     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"\{/Symbol g\}(x, 1.0, 1.0)"},
+381                                          \textcolor{stringliteral}{"GammaDist(x, 1.0, 1.0)"}) );
+382 
+383     \hyperlink{classns3_1_1Ptr}{Ptr<GammaRandomVariable>} x2 = CreateObject<GammaRandomVariable> ();
+384     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Alpha"}, DoubleValue (1.5));
+385     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Beta"}, DoubleValue (1.0));
+386 
+387     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x2, probes, precision,
+388                                   \textcolor{stringliteral}{"GammaRandomVariable a=1.5 b=1.0"}) );
+389 
+390     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"\{/Symbol g\}(x, 1.5, 1.0)"},
+391                                          \textcolor{stringliteral}{"GammaDist(x, 1.5, 1.0)"}) );
+392 
+393     \hyperlink{classns3_1_1Ptr}{Ptr<GammaRandomVariable>} x3 = CreateObject<GammaRandomVariable> ();
+394     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Alpha"}, DoubleValue (2.0));
+395     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Beta"}, DoubleValue (1.0));
+396 
+397     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x3, probes, precision,
+398                                   \textcolor{stringliteral}{"GammaRandomVariable a=2.0 b=1.0"}) );
+399 
+400     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"\{/Symbol g\}(x, 2.0, 1.0)"},
+401                                          \textcolor{stringliteral}{"GammaDist(x, 2.0, 1.0)"}) );
+402 
+403     \hyperlink{classns3_1_1Ptr}{Ptr<GammaRandomVariable>} x4 = CreateObject<GammaRandomVariable> ();
+404     x4->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Alpha"}, DoubleValue (4.0));
+405     x4->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Beta"}, DoubleValue (1.0));
+406 
+407     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x4, probes, precision,
+408                                   \textcolor{stringliteral}{"GammaRandomVariable a=4.0 b=1.0"}) );
+409 
+410     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"\{/Symbol g\}(x, 4.0, 1.0)"},
+411                                          \textcolor{stringliteral}{"GammaDist(x, 4.0, 1.0)"}) );
+412 
+413     \hyperlink{classns3_1_1Ptr}{Ptr<GammaRandomVariable>} x5 = CreateObject<GammaRandomVariable> ();
+414     x5->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Alpha"}, DoubleValue (2.0));
+415     x5->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Beta"}, DoubleValue (2.0));
+416 
+417     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x5, probes, precision,
+418                                   \textcolor{stringliteral}{"GammaRandomVariable a=2.0 b=2.0"}) );
+419 
+420     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"\{/Symbol g\}(x, 2.0, 2.0)"},
+421                                          \textcolor{stringliteral}{"GammaDist(x, 2.0, 2.0)"}) );
+422 
+423     \hyperlink{classns3_1_1Ptr}{Ptr<GammaRandomVariable>} x6 = CreateObject<GammaRandomVariable> ();
+424     x6->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Alpha"}, DoubleValue (2.5));
+425     x6->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Beta"}, DoubleValue (3.0));
+426 
+427     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x6, probes, precision,
+428                                   \textcolor{stringliteral}{"GammaRandomVariable a=2.5 b=3.0"}) );
+429 
+430     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"\{/Symbol g\}(x, 2.5, 3.0)"},
+431                                          \textcolor{stringliteral}{"GammaDist(x, 2.5, 3.0)"}) );
+432 
+433     \hyperlink{classns3_1_1Ptr}{Ptr<GammaRandomVariable>} x7 = CreateObject<GammaRandomVariable> ();
+434     x7->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Alpha"}, DoubleValue (2.5));
+435     x7->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Beta"}, DoubleValue (4.5));
+436 
+437     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x7, probes, precision,
+438                                   \textcolor{stringliteral}{"GammaRandomVariable a=2.5 b=4.5"}) );
+439 
+440     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"\{/Symbol g\}(x, 2.5, 4.5)"},
+441                                          \textcolor{stringliteral}{"GammaDist(x, 2.5, 4.5)"}) );
+442 
+443     gnuplots.AddPlot (plot);
+444   \}
+445 
+446   \{
+447     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+448     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"ErlangRandomVariable"});
+449     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"set xrange [0:10]"});
+450     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"ErlangDist(x,k,l) = x**(k-1) * 1/l**k * exp(-x/l) / (k-1)!"});
+451 
+452     plot.\hyperlink{classns3_1_1Gnuplot_a649a3041b9d0ea21a212b5ad9b28ecbf}{AppendExtra} (\textcolor{stringliteral}{"set label 1 'Erlang(x,k,\{/Symbol l\}) = x^\{k-1\} e^\{-x \{/Symbol l\}^\{-1\}\} (
+       \{/Symbol l\}^k (k-1)! )^\{-1\}' at 0.7, 0.9"});
+453 
+454     \hyperlink{classns3_1_1Ptr}{Ptr<ErlangRandomVariable>} x1 = CreateObject<ErlangRandomVariable> ();
+455     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"K"}, IntegerValue (1));
+456     x1->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Lambda"}, DoubleValue (1.0));
+457 
+458     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x1, probes, precision,
+459                                   \textcolor{stringliteral}{"ErlangRandomVariable k=1 \{/Symbol l\}=1.0"}) );
+460 
+461     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"Erlang(x, 1, 1.0)"},
+462                                          \textcolor{stringliteral}{"ErlangDist(x, 1, 1.0)"}) );
+463 
+464     \hyperlink{classns3_1_1Ptr}{Ptr<ErlangRandomVariable>} x2 = CreateObject<ErlangRandomVariable> ();
+465     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"K"}, IntegerValue (2));
+466     x2->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Lambda"}, DoubleValue (1.0));
+467 
+468     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x2, probes, precision,
+469                                   \textcolor{stringliteral}{"ErlangRandomVariable k=2 \{/Symbol l\}=1.0"}) );
+470 
+471     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"Erlang(x, 2, 1.0)"},
+472                                          \textcolor{stringliteral}{"ErlangDist(x, 2, 1.0)"}) );
+473 
+474     \hyperlink{classns3_1_1Ptr}{Ptr<ErlangRandomVariable>} x3 = CreateObject<ErlangRandomVariable> ();
+475     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"K"}, IntegerValue (3));
+476     x3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Lambda"}, DoubleValue (1.0));
+477 
+478     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x3, probes, precision,
+479                                   \textcolor{stringliteral}{"ErlangRandomVariable k=3 \{/Symbol l\}=1.0"}) );
+480 
+481     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"Erlang(x, 3, 1.0)"},
+482                                          \textcolor{stringliteral}{"ErlangDist(x, 3, 1.0)"}) );
+483 
+484     \hyperlink{classns3_1_1Ptr}{Ptr<ErlangRandomVariable>} x4 = CreateObject<ErlangRandomVariable> ();
+485     x4->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"K"}, IntegerValue (5));
+486     x4->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Lambda"}, DoubleValue (1.0));
+487 
+488     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x4, probes, precision,
+489                                   \textcolor{stringliteral}{"ErlangRandomVariable k=5 \{/Symbol l\}=1.0"}) );
+490 
+491     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"Erlang(x, 5, 1.0)"},
+492                                          \textcolor{stringliteral}{"ErlangDist(x, 5, 1.0)"}) );
+493 
+494     \hyperlink{classns3_1_1Ptr}{Ptr<ErlangRandomVariable>} x5 = CreateObject<ErlangRandomVariable> ();
+495     x5->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"K"}, IntegerValue (2));
+496     x5->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Lambda"}, DoubleValue (2.0));
+497 
+498     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x5, probes, precision,
+499                                   \textcolor{stringliteral}{"ErlangRandomVariable k=2 \{/Symbol l\}=2.0"}) );
+500 
+501     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"Erlang(x, 2, 2.0)"},
+502                                          \textcolor{stringliteral}{"ErlangDist(x, 2, 2.0)"}) );
+503 
+504     \hyperlink{classns3_1_1Ptr}{Ptr<ErlangRandomVariable>} x6 = CreateObject<ErlangRandomVariable> ();
+505     x6->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"K"}, IntegerValue (2));
+506     x6->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Lambda"}, DoubleValue (3.0));
+507 
+508     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x6, probes, precision,
+509                                   \textcolor{stringliteral}{"ErlangRandomVariable k=2 \{/Symbol l\}=3.0"}) );
+510 
+511     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"Erlang(x, 2, 3.0)"},
+512                                          \textcolor{stringliteral}{"ErlangDist(x, 2, 3.0)"}) );
+513 
+514     \hyperlink{classns3_1_1Ptr}{Ptr<ErlangRandomVariable>} x7 = CreateObject<ErlangRandomVariable> ();
+515     x7->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"K"}, IntegerValue (2));
+516     x7->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Lambda"}, DoubleValue (5.0));
+517 
+518     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{main-random-variable-stream_8cc_a2cfd3837ab3f2e816cf53486d7a186b5}{Histogramm} (x7, probes, precision,
+519                                   \textcolor{stringliteral}{"ErlangRandomVariable k=2 \{/Symbol l\}=5.0"}) );
+520 
+521     plot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"Erlang(x, 2, 5.0)"},
+522                                          \textcolor{stringliteral}{"ErlangDist(x, 2, 5.0)"}) );
+523 
+524     gnuplots.AddPlot (plot);
+525   \}
+526 
+527   gnuplots.GenerateOutput (std::cout);
+528 
+529   \textcolor{keywordflow}{return} 0;
+530 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+

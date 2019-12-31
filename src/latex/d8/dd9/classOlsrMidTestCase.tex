@@ -1,0 +1,164 @@
+\hypertarget{classOlsrMidTestCase}{}\section{Olsr\+Mid\+Test\+Case Class Reference}
+\label{classOlsrMidTestCase}\index{Olsr\+Mid\+Test\+Case@{Olsr\+Mid\+Test\+Case}}
+
+
+Inheritance diagram for Olsr\+Mid\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Olsr\+Mid\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classOlsrMidTestCase_a205d6def354f09c5635a3afd2ddade4b}{Olsr\+Mid\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classOlsrMidTestCase_a38dcf7317eeb0bbc5437a04671fc1c34}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Olsr\+Mid\+Test\+Case@{Olsr\+Mid\+Test\+Case}!Olsr\+Mid\+Test\+Case@{Olsr\+Mid\+Test\+Case}}
+\index{Olsr\+Mid\+Test\+Case@{Olsr\+Mid\+Test\+Case}!Olsr\+Mid\+Test\+Case@{Olsr\+Mid\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Olsr\+Mid\+Test\+Case()}{OlsrMidTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Olsr\+Mid\+Test\+Case\+::\+Olsr\+Mid\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classOlsrMidTestCase_a205d6def354f09c5635a3afd2ddade4b}{}\label{classOlsrMidTestCase_a205d6def354f09c5635a3afd2ddade4b}
+
+\begin{DoxyCode}
+59   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check Mid olsr messages"})
+60 \{
+61 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Olsr\+Mid\+Test\+Case@{Olsr\+Mid\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Olsr\+Mid\+Test\+Case@{Olsr\+Mid\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Olsr\+Mid\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOlsrMidTestCase_a38dcf7317eeb0bbc5437a04671fc1c34}{}\label{classOlsrMidTestCase_a38dcf7317eeb0bbc5437a04671fc1c34}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+64 \{
+65   \hyperlink{classns3_1_1Packet}{Packet} packet;
+66 
+67   \{
+68     olsr::PacketHeader hdr;
+69     olsr::MessageHeader msg1;
+70     \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid}{olsr::MessageHeader::Mid} &mid1 = msg1.GetMid ();
+71     olsr::MessageHeader msg2;
+72     \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid}{olsr::MessageHeader::Mid} &mid2 = msg2.GetMid ();
+73 
+74     \textcolor{comment}{// MID message #1}
+75     \{
+76       std::vector<Ipv4Address> &addresses = mid1.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}{interfaceAddresses};
+77       addresses.clear ();
+78       addresses.push\_back (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.2.3.4"}));
+79       addresses.push\_back (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.2.3.5"}));
+80     \}
+81 
+82     msg1.SetTimeToLive (255);
+83     msg1.SetOriginatorAddress (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"11.22.33.44"}));
+84     msg1.SetVTime (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (9));
+85     msg1.SetMessageSequenceNumber (7);
+86 
+87     \textcolor{comment}{// MID message #2}
+88     \{
+89       std::vector<Ipv4Address> &addresses = mid2.\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}{interfaceAddresses};
+90       addresses.clear ();
+91       addresses.push\_back (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"2.2.3.4"}));
+92       addresses.push\_back (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"2.2.3.5"}));
+93     \}
+94 
+95     msg2.SetTimeToLive (254);
+96     msg2.SetOriginatorAddress (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"12.22.33.44"}));
+97     msg2.SetVTime (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10));
+98     msg2.SetMessageType (olsr::MessageHeader::MID\_MESSAGE);
+99     msg2.SetMessageSequenceNumber (7);
+100 
+101     \textcolor{comment}{// Build an OLSR packet header}
+102     hdr.SetPacketLength (hdr.GetSerializedSize () + msg1.GetSerializedSize () + msg2.GetSerializedSize ());
+103     hdr.SetPacketSequenceNumber (123);
+104 
+105 
+106     \textcolor{comment}{// Now add all the headers in the correct order}
+107     packet.\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (msg2);
+108     packet.\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (msg1);
+109     packet.\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (hdr);
+110   \}
+111 
+112   \{
+113     olsr::PacketHeader hdr;
+114     packet.\hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{RemoveHeader} (hdr);
+115     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (hdr.GetPacketSequenceNumber (), 123, \textcolor{stringliteral}{"200"});
+116     uint32\_t sizeLeft = hdr.GetPacketLength () - hdr.GetSerializedSize ();
+117     \{
+118       olsr::MessageHeader msg1;
+119 
+120       packet.\hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{RemoveHeader} (msg1);
+121 
+122       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (msg1.GetTimeToLive (),  255, \textcolor{stringliteral}{"201"});
+123       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (msg1.GetOriginatorAddress (), 
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"11.22.33.44"}), \textcolor{stringliteral}{"202"});
+124       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (msg1.GetVTime (), \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (9), \textcolor{stringliteral}{"203"});
+125       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (msg1.GetMessageType (), olsr::MessageHeader::MID\_MESSAGE,
+       \textcolor{stringliteral}{"204"});
+126       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (msg1.GetMessageSequenceNumber (), 7, \textcolor{stringliteral}{"205"});
+127 
+128       \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid}{olsr::MessageHeader::Mid} &mid1 = msg1.GetMid ();
+129       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mid1.interfaceAddresses.size (), 2, \textcolor{stringliteral}{"206"});
+130       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (*mid1.interfaceAddresses.begin (), 
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.2.3.4"}), \textcolor{stringliteral}{"207"});
+131 
+132       sizeLeft -= msg1.GetSerializedSize ();
+133       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} ((sizeLeft > 0), \textcolor{keyword}{true}, \textcolor{stringliteral}{"208"});
+134     \}
+135     \{
+136       \textcolor{comment}{// now read the second message}
+137       olsr::MessageHeader msg2;
+138 
+139       packet.\hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{RemoveHeader} (msg2);
+140 
+141       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (msg2.GetTimeToLive (),  254, \textcolor{stringliteral}{"209"});
+142       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (msg2.GetOriginatorAddress (), 
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"12.22.33.44"}), \textcolor{stringliteral}{"210"});
+143       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (msg2.GetVTime (), \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10), \textcolor{stringliteral}{"211"});
+144       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (msg2.GetMessageType (), olsr::MessageHeader::MID\_MESSAGE,
+       \textcolor{stringliteral}{"212"});
+145       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (msg2.GetMessageSequenceNumber (), 7, \textcolor{stringliteral}{"213"});
+146 
+147       \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid}{olsr::MessageHeader::Mid} mid2 = msg2.GetMid ();
+148       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (mid2.interfaceAddresses.size (), 2, \textcolor{stringliteral}{"214"});
+149       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (*mid2.interfaceAddresses.begin (), 
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"2.2.3.4"}), \textcolor{stringliteral}{"215"});
+150 
+151       sizeLeft -= msg2.GetSerializedSize ();
+152       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (sizeLeft, 0, \textcolor{stringliteral}{"216"});
+153     \}
+154   \}
+155 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+olsr/test/\hyperlink{olsr-header-test-suite_8cc}{olsr-\/header-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

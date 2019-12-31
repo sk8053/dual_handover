@@ -1,0 +1,497 @@
+\hypertarget{classWaveNetDeviceExample}{}\section{Wave\+Net\+Device\+Example Class Reference}
+\label{classWaveNetDeviceExample}\index{Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}}
+
+
+Collaboration diagram for Wave\+Net\+Device\+Example\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classWaveNetDeviceExample_ad36808acd544ff68268912c9386213fe}{Send\+Wsmp\+Example} (void)
+\begin{DoxyCompactList}\small\item\em Send W\+S\+MP example function. \end{DoxyCompactList}\item 
+void \hyperlink{classWaveNetDeviceExample_a97da76e52cd76f5054e8c92cfae01a9e}{Send\+Ip\+Example} (void)
+\begin{DoxyCompactList}\small\item\em Send IP example function. \end{DoxyCompactList}\item 
+void \hyperlink{classWaveNetDeviceExample_ac1725733b797a26cd3655b58adad965e}{Send\+Wsa\+Example} (void)
+\begin{DoxyCompactList}\small\item\em Send W\+SA example. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classWaveNetDeviceExample_a2dc13b30baad7f9e0a3f23d3dc60557c}{Send\+One\+Wsmp\+Packet} (uint32\+\_\+t channel, uint32\+\_\+t seq)
+\item 
+void \hyperlink{classWaveNetDeviceExample_a555b10fdbbaa27f47dc1f3487e1dcf0d}{Send\+Ip\+Packet} (uint32\+\_\+t seq, bool ipv6)
+\item 
+bool \hyperlink{classWaveNetDeviceExample_a2c05ff92e57bc7f5fe4e4417e8e7afe5}{Receive} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1NetDevice}{Net\+Device} $>$ dev, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ pkt, uint16\+\_\+t mode, const \hyperlink{classns3_1_1Address}{Address} \&sender)
+\item 
+bool \hyperlink{classWaveNetDeviceExample_aec850cc02853faa2ae58442f7b4ea939}{Receive\+Vsa} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ pkt, const \hyperlink{classns3_1_1Address}{Address} \&address, uint32\+\_\+t, uint32\+\_\+t)
+\item 
+void \hyperlink{classWaveNetDeviceExample_a825285810121c865230f6fafe6428081}{Create\+Wave\+Nodes} (void)
+\begin{DoxyCompactList}\small\item\em Create W\+A\+VE nodes function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{classWaveNetDeviceExample_a8a97f5513275ce36c7f3f8d0dabd5a68}{nodes}
+\begin{DoxyCompactList}\small\item\em the nodes \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1NetDeviceContainer}{Net\+Device\+Container} \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}
+\begin{DoxyCompactList}\small\item\em the devices \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This simulation is to show the routing service of Wave\+Net\+Device described in I\+E\+EE 09.\+4.
+
+note\+: although tx\+Power\+Level is supported now, the \char`\"{}\+Tx\+Power\+Levels\char`\"{} attribute of Yans\+Wifi\+Phy is 1 which means phy devices only support 1 levels. Thus, if users want to control tx\+Power\+Level, they should set these attributes of Yans\+Wifi\+Phy by themselves.. 
+
+\subsection{Member Function Documentation}
+\index{Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}!Create\+Wave\+Nodes@{Create\+Wave\+Nodes}}
+\index{Create\+Wave\+Nodes@{Create\+Wave\+Nodes}!Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}}
+\subsubsection[{\texorpdfstring{Create\+Wave\+Nodes(void)}{CreateWaveNodes(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Wave\+Net\+Device\+Example\+::\+Create\+Wave\+Nodes (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classWaveNetDeviceExample_a825285810121c865230f6fafe6428081}{}\label{classWaveNetDeviceExample_a825285810121c865230f6fafe6428081}
+
+
+Create W\+A\+VE nodes function. 
+
+
+\begin{DoxyCode}
+89 \{
+90   \hyperlink{classWaveNetDeviceExample_a8a97f5513275ce36c7f3f8d0dabd5a68}{nodes} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ();
+91   \hyperlink{classWaveNetDeviceExample_a8a97f5513275ce36c7f3f8d0dabd5a68}{nodes}.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+92 
+93   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+94   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} positionAlloc = CreateObject<ListPositionAllocator> 
+      ();
+95   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (Vector (0.0, 0.0, 0.0));
+96   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (Vector (5.0, 0.0, 0.0));
+97   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+98   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+99   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (\hyperlink{classWaveNetDeviceExample_a8a97f5513275ce36c7f3f8d0dabd5a68}{nodes});
+100 
+101   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} waveChannel = YansWifiChannelHelper::Default ();
+102   \hyperlink{classns3_1_1YansWavePhyHelper}{YansWavePhyHelper} wavePhy =  YansWavePhyHelper::Default ();
+103   wavePhy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (waveChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ());
+104   wavePhy.\hyperlink{classns3_1_1WifiPhyHelper_ae4b90e90f6e78a19c1b7fdf08b270218}{SetPcapDataLinkType} (YansWifiPhyHelper::DLT\_IEEE802\_11);
+105   \hyperlink{classns3_1_1QosWaveMacHelper}{QosWaveMacHelper} waveMac = QosWaveMacHelper::Default ();
+106   \hyperlink{classns3_1_1WaveHelper}{WaveHelper} waveHelper = WaveHelper::Default ();
+107   \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices} = waveHelper.\hyperlink{classns3_1_1WaveHelper_aed0008e7f56ba14868356b45dd4eab81}{Install} (wavePhy, waveMac, \hyperlink{classWaveNetDeviceExample_a8a97f5513275ce36c7f3f8d0dabd5a68}{nodes});
+108 
+109   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}.\hyperlink{classns3_1_1NetDeviceContainer_a74cafc212479bc38976bebd118e856b9}{GetN} (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+110     \{
+111       \hyperlink{classns3_1_1Ptr}{Ptr<WaveNetDevice>} device = DynamicCast<WaveNetDevice> (
+      \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+112       device->\hyperlink{classns3_1_1WaveNetDevice_a98a6505182abba177a0ab348356301d8}{SetReceiveCallback} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classWaveNetDeviceExample_a2c05ff92e57bc7f5fe4e4417e8e7afe5}{WaveNetDeviceExample::Receive}, \textcolor{keyword}{this}));
+113       device->\hyperlink{classns3_1_1WaveNetDevice_ab728ae9b274726d36112367b59a3906d}{SetWaveVsaCallback} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback}  (&
+      \hyperlink{classWaveNetDeviceExample_aec850cc02853faa2ae58442f7b4ea939}{WaveNetDeviceExample::ReceiveVsa}, \textcolor{keyword}{this}));
+114     \}
+115 
+116   \textcolor{comment}{// Tracing}
+117   wavePhy.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"wave-simple-device"}, \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices});
+118 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}!Receive@{Receive}}
+\index{Receive@{Receive}!Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}}
+\subsubsection[{\texorpdfstring{Receive(\+Ptr$<$ Net\+Device $>$ dev, Ptr$<$ const Packet $>$ pkt, uint16\+\_\+t mode, const Address \&sender)}{Receive(Ptr< NetDevice > dev, Ptr< const Packet > pkt, uint16_t mode, const Address &sender)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Wave\+Net\+Device\+Example\+::\+Receive (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Net\+Device} $>$}]{dev, }
+\item[{{\bf Ptr}$<$ const {\bf Packet} $>$}]{pkt, }
+\item[{uint16\+\_\+t}]{mode, }
+\item[{const {\bf Address} \&}]{sender}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classWaveNetDeviceExample_a2c05ff92e57bc7f5fe4e4417e8e7afe5}{}\label{classWaveNetDeviceExample_a2c05ff92e57bc7f5fe4e4417e8e7afe5}
+Receive function 
+\begin{DoxyParams}{Parameters}
+{\em dev} & the device \\
+\hline
+{\em pkt} & the packet \\
+\hline
+{\em mode} & the mode \\
+\hline
+{\em sender} & the sender address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+122 \{
+123   \hyperlink{classns3_1_1SeqTsHeader}{SeqTsHeader} seqTs;
+124   pkt->\hyperlink{classns3_1_1Packet_aadc63487bea70945c418f4c3e9b81964}{PeekHeader} (seqTs);
+125   std::cout << \textcolor{stringliteral}{"receive a packet: "} << std::endl
+126             << \textcolor{stringliteral}{"  sequence = "} << seqTs.\hyperlink{classns3_1_1SeqTsHeader_a9ee81d0e571a6b94da1b5026b498850e}{GetSeq} () << \textcolor{stringliteral}{","} << std::endl
+127             << \textcolor{stringliteral}{"  sendTime = "} << seqTs.\hyperlink{classns3_1_1SeqTsHeader_adce83d0ce48fcf1c35b587631471b162}{GetTs} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{"s,"} << std::endl
+128             << \textcolor{stringliteral}{"  recvTime = "} << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{"s,"} << std::endl
+129             << \textcolor{stringliteral}{"  protocol = 0x"} << std::hex << mode << std::dec  << std::endl;
+130   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+131 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}!Receive\+Vsa@{Receive\+Vsa}}
+\index{Receive\+Vsa@{Receive\+Vsa}!Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}}
+\subsubsection[{\texorpdfstring{Receive\+Vsa(\+Ptr$<$ const Packet $>$ pkt, const Address \&address, uint32\+\_\+t, uint32\+\_\+t)}{ReceiveVsa(Ptr< const Packet > pkt, const Address &address, uint32_t, uint32_t)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Wave\+Net\+Device\+Example\+::\+Receive\+Vsa (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Packet} $>$}]{pkt, }
+\item[{const {\bf Address} \&}]{address, }
+\item[{uint32\+\_\+t}]{, }
+\item[{uint32\+\_\+t}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classWaveNetDeviceExample_aec850cc02853faa2ae58442f7b4ea939}{}\label{classWaveNetDeviceExample_aec850cc02853faa2ae58442f7b4ea939}
+Receive V\+SA functon 
+\begin{DoxyParams}{Parameters}
+{\em pkt} & the packet \\
+\hline
+{\em address} & the address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+240 \{
+241   std::cout << \textcolor{stringliteral}{"receive a VSA management frame: recvTime = "} << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Now} ().
+      \hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{"s."} << std::endl;
+242   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+243 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}!Send\+Ip\+Example@{Send\+Ip\+Example}}
+\index{Send\+Ip\+Example@{Send\+Ip\+Example}!Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}}
+\subsubsection[{\texorpdfstring{Send\+Ip\+Example(void)}{SendIpExample(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Wave\+Net\+Device\+Example\+::\+Send\+Ip\+Example (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classWaveNetDeviceExample_a97da76e52cd76f5054e8c92cfae01a9e}{}\label{classWaveNetDeviceExample_a97da76e52cd76f5054e8c92cfae01a9e}
+
+
+Send IP example function. 
+
+
+\begin{DoxyCode}
+203 \{
+204   \hyperlink{classWaveNetDeviceExample_a825285810121c865230f6fafe6428081}{CreateWaveNodes} ();
+205   \hyperlink{classns3_1_1Ptr}{Ptr<WaveNetDevice>}  sender = DynamicCast<WaveNetDevice> (
+      \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+206   \hyperlink{classns3_1_1Ptr}{Ptr<WaveNetDevice>}  receiver = DynamicCast<WaveNetDevice> (
+      \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+207 
+208   \textcolor{comment}{// Alternating access without immediate channel switch}
+209   \textcolor{keyword}{const} \hyperlink{structns3_1_1SchInfo}{SchInfo} schInfo = \hyperlink{structns3_1_1SchInfo}{SchInfo} (\hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1}, \textcolor{keyword}{false}, 
+      \hyperlink{channel-scheduler_8h_a0e1f74c3cb8f78904dd1ae957412392e}{EXTENDED\_ALTERNATING});
+210   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0), &WaveNetDevice::StartSch, sender, schInfo);
+211   \textcolor{comment}{// An important point is that the receiver should also be assigned channel}
+212   \textcolor{comment}{// access for the same channel to receive packets.}
+213   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0), &WaveNetDevice::StartSch, receiver, schInfo);
+214 
+215   \textcolor{comment}{// both IPv4 and IPv6 packets below will not be inserted to internal queue because of no tx profile
+       registered}
+216   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0), &\hyperlink{classWaveNetDeviceExample_a555b10fdbbaa27f47dc1f3487e1dcf0d}{WaveNetDeviceExample::SendIpPacket}
+      , \textcolor{keyword}{this}, 1, \textcolor{keyword}{true});
+217   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.050), &
+      \hyperlink{classWaveNetDeviceExample_a555b10fdbbaa27f47dc1f3487e1dcf0d}{WaveNetDeviceExample::SendIpPacket}, \textcolor{keyword}{this}, 2, \textcolor{keyword}{false});
+218   \textcolor{comment}{//register txprofile}
+219   \textcolor{comment}{// IP packets will automatically be sent with txprofile parameter}
+220   \textcolor{keyword}{const} \hyperlink{structns3_1_1TxProfile}{TxProfile} txProfile = \hyperlink{structns3_1_1TxProfile}{TxProfile} (\hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1});
+221   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0), &WaveNetDevice::RegisterTxProfile, sender, txProfile);
+222   \textcolor{comment}{// both IPv4 and IPv6 packet are transmitted successfully}
+223   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (3.0), &\hyperlink{classWaveNetDeviceExample_a555b10fdbbaa27f47dc1f3487e1dcf0d}{WaveNetDeviceExample::SendIpPacket}
+      , \textcolor{keyword}{this}, 3, \textcolor{keyword}{true});
+224   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (3.050), &
+      \hyperlink{classWaveNetDeviceExample_a555b10fdbbaa27f47dc1f3487e1dcf0d}{WaveNetDeviceExample::SendIpPacket}, \textcolor{keyword}{this}, 4, \textcolor{keyword}{false});
+225   \textcolor{comment}{// unregister TxProfile or release channel access}
+226   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (4.0),&WaveNetDevice::DeleteTxProfile, sender,
+      \hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1});
+227   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (4.0),&WaveNetDevice::StopSch, sender,\hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1});
+228   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (4.0),&WaveNetDevice::StopSch, receiver, 
+      \hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1});
+229   \textcolor{comment}{// these packets will be dropped again because of no channel access assigned and no tx profile registered}
+230   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5.0), &\hyperlink{classWaveNetDeviceExample_a555b10fdbbaa27f47dc1f3487e1dcf0d}{WaveNetDeviceExample::SendIpPacket}
+      , \textcolor{keyword}{this}, 5, \textcolor{keyword}{true});
+231   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5.050), &
+      \hyperlink{classWaveNetDeviceExample_a555b10fdbbaa27f47dc1f3487e1dcf0d}{WaveNetDeviceExample::SendIpPacket}, \textcolor{keyword}{this}, 6, \textcolor{keyword}{false});
+232 
+233   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (6.0));
+234   Simulator::Run ();
+235   Simulator::Destroy ();
+236 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}!Send\+Ip\+Packet@{Send\+Ip\+Packet}}
+\index{Send\+Ip\+Packet@{Send\+Ip\+Packet}!Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}}
+\subsubsection[{\texorpdfstring{Send\+Ip\+Packet(uint32\+\_\+t seq, bool ipv6)}{SendIpPacket(uint32_t seq, bool ipv6)}}]{\setlength{\rightskip}{0pt plus 5cm}void Wave\+Net\+Device\+Example\+::\+Send\+Ip\+Packet (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{seq, }
+\item[{bool}]{ipv6}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classWaveNetDeviceExample_a555b10fdbbaa27f47dc1f3487e1dcf0d}{}\label{classWaveNetDeviceExample_a555b10fdbbaa27f47dc1f3487e1dcf0d}
+Send IP packet function 
+\begin{DoxyParams}{Parameters}
+{\em seq} & the sequence \\
+\hline
+{\em ipv6} & true if I\+P\+V6 \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+186 \{
+187   \hyperlink{classns3_1_1Ptr}{Ptr<WaveNetDevice>}  sender = DynamicCast<WaveNetDevice> (
+      \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+188   \hyperlink{classns3_1_1Ptr}{Ptr<WaveNetDevice>}  receiver = DynamicCast<WaveNetDevice> (
+      \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+189   \textcolor{keyword}{const} \hyperlink{classns3_1_1Address}{Address} dest = receiver->GetAddress ();
+190   \textcolor{comment}{// send IPv4 packet or IPv6 packet}
+191   \textcolor{keyword}{const} \textcolor{keyword}{static} uint16\_t IPv4\_PROT\_NUMBER = 0x0800;
+192   \textcolor{keyword}{const} \textcolor{keyword}{static} uint16\_t IPv6\_PROT\_NUMBER = 0x86DD;
+193   uint16\_t protocol = ipv6 ? IPv6\_PROT\_NUMBER : IPv4\_PROT\_NUMBER;
+194   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p}  = Create<Packet> (100);
+195   \hyperlink{classns3_1_1SeqTsHeader}{SeqTsHeader} seqTs;
+196   seqTs.\hyperlink{classns3_1_1SeqTsHeader_a75c153fa59e4f93b1015d1176e6ec01e}{SetSeq} (seq);
+197   p->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (seqTs);
+198   sender->\hyperlink{classns3_1_1WaveNetDevice_a21f1928cbc917375a79cb6ed48f4db3e}{Send} (p, dest, protocol);
+199 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}!Send\+One\+Wsmp\+Packet@{Send\+One\+Wsmp\+Packet}}
+\index{Send\+One\+Wsmp\+Packet@{Send\+One\+Wsmp\+Packet}!Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}}
+\subsubsection[{\texorpdfstring{Send\+One\+Wsmp\+Packet(uint32\+\_\+t channel, uint32\+\_\+t seq)}{SendOneWsmpPacket(uint32_t channel, uint32_t seq)}}]{\setlength{\rightskip}{0pt plus 5cm}void Wave\+Net\+Device\+Example\+::\+Send\+One\+Wsmp\+Packet (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{channel, }
+\item[{uint32\+\_\+t}]{seq}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classWaveNetDeviceExample_a2dc13b30baad7f9e0a3f23d3dc60557c}{}\label{classWaveNetDeviceExample_a2dc13b30baad7f9e0a3f23d3dc60557c}
+Send one W\+S\+MP packet function 
+\begin{DoxyParams}{Parameters}
+{\em channel} & the channel to use \\
+\hline
+{\em seq} & the sequence \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+135 \{
+136   \hyperlink{classns3_1_1Ptr}{Ptr<WaveNetDevice>}  sender = DynamicCast<WaveNetDevice> (
+      \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+137   \hyperlink{classns3_1_1Ptr}{Ptr<WaveNetDevice>}  receiver = DynamicCast<WaveNetDevice> (
+      \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+138   \textcolor{keyword}{const} \textcolor{keyword}{static} uint16\_t WSMP\_PROT\_NUMBER = 0x88DC;
+139   \hyperlink{classns3_1_1Mac48Address}{Mac48Address} bssWildcard = Mac48Address::GetBroadcast ();
+140 
+141   \textcolor{keyword}{const} \hyperlink{structns3_1_1TxInfo}{TxInfo} txInfo = \hyperlink{structns3_1_1TxInfo}{TxInfo} (channel);
+142   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p}  = Create<Packet> (100);
+143   \hyperlink{classns3_1_1SeqTsHeader}{SeqTsHeader} seqTs;
+144   seqTs.\hyperlink{classns3_1_1SeqTsHeader_a75c153fa59e4f93b1015d1176e6ec01e}{SetSeq} (seq);
+145   p->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (seqTs);
+146   sender->\hyperlink{classns3_1_1WaveNetDevice_a99ec2b781006c6011a9667e064843b38}{SendX}  (p, bssWildcard, WSMP\_PROT\_NUMBER, txInfo);
+147 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}!Send\+Wsa\+Example@{Send\+Wsa\+Example}}
+\index{Send\+Wsa\+Example@{Send\+Wsa\+Example}!Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}}
+\subsubsection[{\texorpdfstring{Send\+Wsa\+Example(void)}{SendWsaExample(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Wave\+Net\+Device\+Example\+::\+Send\+Wsa\+Example (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classWaveNetDeviceExample_ac1725733b797a26cd3655b58adad965e}{}\label{classWaveNetDeviceExample_ac1725733b797a26cd3655b58adad965e}
+
+
+Send W\+SA example. 
+
+
+\begin{DoxyCode}
+247 \{
+248   \hyperlink{classWaveNetDeviceExample_a825285810121c865230f6fafe6428081}{CreateWaveNodes} ();
+249   \hyperlink{classns3_1_1Ptr}{Ptr<WaveNetDevice>}  sender = DynamicCast<WaveNetDevice> (
+      \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+250   \hyperlink{classns3_1_1Ptr}{Ptr<WaveNetDevice>}  receiver = DynamicCast<WaveNetDevice> (
+      \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+251 
+252 \textcolor{comment}{// Alternating access without immediate channel switch for sender and receiver}
+253   \textcolor{keyword}{const} \hyperlink{structns3_1_1SchInfo}{SchInfo} schInfo = \hyperlink{structns3_1_1SchInfo}{SchInfo} (\hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1}, \textcolor{keyword}{false}, 
+      \hyperlink{channel-scheduler_8h_a0e1f74c3cb8f78904dd1ae957412392e}{EXTENDED\_ALTERNATING});
+254   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0), &WaveNetDevice::StartSch, sender, schInfo);
+255   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0), &WaveNetDevice::StartSch, receiver, schInfo);
+256 
+257 \textcolor{comment}{// the peer address of VSA is broadcast address, and the repeat rate}
+258 \textcolor{comment}{// of VsaInfo is 100 per 5s, the VSA frame will be sent repeatedly.}
+259   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} wsaPacket = Create<Packet> (100);
+260   \hyperlink{classns3_1_1Mac48Address}{Mac48Address} dest = Mac48Address::GetBroadcast ();
+261   \textcolor{keyword}{const} \hyperlink{structns3_1_1VsaInfo}{VsaInfo} vsaInfo = \hyperlink{structns3_1_1VsaInfo}{VsaInfo} (dest, \hyperlink{classns3_1_1OrganizationIdentifier}{OrganizationIdentifier} (), 0, 
+      wsaPacket, \hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1}, 100, \hyperlink{namespacens3_a417ab130a77d452a8b5014090665bcc1aae42365483bb4ad44a43f5e31f4a3495}{VSA\_TRANSMIT\_IN\_BOTHI});
+262   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0), &WaveNetDevice::StartVsa, sender, vsaInfo);
+263   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (3.0), &WaveNetDevice::StopVsa, sender, 
+      \hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1});
+264 
+265 \textcolor{comment}{// release alternating access}
+266   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (4.0), &WaveNetDevice::StopSch, sender, 
+      \hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1});
+267   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (4.0), &WaveNetDevice::StopSch, receiver, 
+      \hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1});
+268 
+269 \textcolor{comment}{// these WSA packets cannot be transmitted because of no channel access assigned}
+270   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5.0), &WaveNetDevice::StartVsa, sender, vsaInfo);
+271   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (6.0), &WaveNetDevice::StopVsa, sender, 
+      \hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1});
+272 
+273   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (6.0));
+274   Simulator::Run ();
+275   Simulator::Destroy ();
+276 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+\index{Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}!Send\+Wsmp\+Example@{Send\+Wsmp\+Example}}
+\index{Send\+Wsmp\+Example@{Send\+Wsmp\+Example}!Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}}
+\subsubsection[{\texorpdfstring{Send\+Wsmp\+Example(void)}{SendWsmpExample(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Wave\+Net\+Device\+Example\+::\+Send\+Wsmp\+Example (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classWaveNetDeviceExample_ad36808acd544ff68268912c9386213fe}{}\label{classWaveNetDeviceExample_ad36808acd544ff68268912c9386213fe}
+
+
+Send W\+S\+MP example function. 
+
+
+\begin{DoxyCode}
+151 \{
+152   \hyperlink{classWaveNetDeviceExample_a825285810121c865230f6fafe6428081}{CreateWaveNodes} ();
+153   \hyperlink{classns3_1_1Ptr}{Ptr<WaveNetDevice>}  sender = DynamicCast<WaveNetDevice> (
+      \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+154   \hyperlink{classns3_1_1Ptr}{Ptr<WaveNetDevice>}  receiver = DynamicCast<WaveNetDevice> (
+      \hyperlink{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{devices}.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+155 
+156   \textcolor{comment}{// Alternating access without immediate channel switch}
+157   \textcolor{keyword}{const} \hyperlink{structns3_1_1SchInfo}{SchInfo} schInfo = \hyperlink{structns3_1_1SchInfo}{SchInfo} (\hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1}, \textcolor{keyword}{false}, 
+      \hyperlink{channel-scheduler_8h_a0e1f74c3cb8f78904dd1ae957412392e}{EXTENDED\_ALTERNATING});
+158   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0), &WaveNetDevice::StartSch,sender,schInfo);
+159   \textcolor{comment}{// An important point is that the receiver should also be assigned channel}
+160   \textcolor{comment}{// access for the same channel to receive packets.}
+161   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0), &WaveNetDevice::StartSch, receiver, schInfo);
+162 
+163   \textcolor{comment}{// send WSMP packets}
+164   \textcolor{comment}{// the first packet will be queued currently and be transmitted in next SCH interval}
+165   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0), &
+      \hyperlink{classWaveNetDeviceExample_a2dc13b30baad7f9e0a3f23d3dc60557c}{WaveNetDeviceExample::SendOneWsmpPacket},  \textcolor{keyword}{this}, 
+      \hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1}, 1);
+166   \textcolor{comment}{// the second packet will be queued currently and then be transmitted , because of in the CCH interval.}
+167   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0), &
+      \hyperlink{classWaveNetDeviceExample_a2dc13b30baad7f9e0a3f23d3dc60557c}{WaveNetDeviceExample::SendOneWsmpPacket},  \textcolor{keyword}{this}, 
+      \hyperlink{channel-manager_8h_a52d2f169cde2f6abe66ecc83f0d7ad80}{CCH}, 2);
+168   \textcolor{comment}{// the third packet will be dropped because of no channel access for SCH2.}
+169   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0), &
+      \hyperlink{classWaveNetDeviceExample_a2dc13b30baad7f9e0a3f23d3dc60557c}{WaveNetDeviceExample::SendOneWsmpPacket},  \textcolor{keyword}{this}, 
+      \hyperlink{channel-manager_8h_a07a0bff852fe2b8538a46d6e779546b6}{SCH2}, 3);
+170 
+171   \textcolor{comment}{// release SCH access}
+172   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0), &WaveNetDevice::StopSch, sender, 
+      \hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1});
+173   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0), &WaveNetDevice::StopSch, receiver, 
+      \hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1});
+174   \textcolor{comment}{// the fourth packet will be queued and be transmitted because of default CCH access assigned
+       automatically.}
+175   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (3.0), &
+      \hyperlink{classWaveNetDeviceExample_a2dc13b30baad7f9e0a3f23d3dc60557c}{WaveNetDeviceExample::SendOneWsmpPacket},  \textcolor{keyword}{this}, 
+      \hyperlink{channel-manager_8h_a52d2f169cde2f6abe66ecc83f0d7ad80}{CCH}, 4);
+176   \textcolor{comment}{// the fifth packet will be dropped because of no SCH1 access assigned}
+177   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (3.0), &
+      \hyperlink{classWaveNetDeviceExample_a2dc13b30baad7f9e0a3f23d3dc60557c}{WaveNetDeviceExample::SendOneWsmpPacket},  \textcolor{keyword}{this}, 
+      \hyperlink{channel-manager_8h_a456a1b730523e5d3b8a29fb227d10028}{SCH1}, 5);
+178 
+179   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5.0));
+180   Simulator::Run ();
+181   Simulator::Destroy ();
+182 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 13
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}!devices@{devices}}
+\index{devices@{devices}!Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}}
+\subsubsection[{\texorpdfstring{devices}{devices}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Net\+Device\+Container} Wave\+Net\+Device\+Example\+::devices\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}{}\label{classWaveNetDeviceExample_a4b88c787809e6171c04eba282d1a1715}
+
+
+the devices 
+
+\index{Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}!nodes@{nodes}}
+\index{nodes@{nodes}!Wave\+Net\+Device\+Example@{Wave\+Net\+Device\+Example}}
+\subsubsection[{\texorpdfstring{nodes}{nodes}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} Wave\+Net\+Device\+Example\+::nodes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classWaveNetDeviceExample_a8a97f5513275ce36c7f3f8d0dabd5a68}{}\label{classWaveNetDeviceExample_a8a97f5513275ce36c7f3f8d0dabd5a68}
+
+
+the nodes 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+wave/examples/\hyperlink{wave-simple-device_8cc}{wave-\/simple-\/device.\+cc}\end{DoxyCompactItemize}

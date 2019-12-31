@@ -1,0 +1,475 @@
+\hypertarget{classns3_1_1MmWaveMiErrorModel}{}\section{ns3\+:\+:Mm\+Wave\+Mi\+Error\+Model Class Reference}
+\label{classns3_1_1MmWaveMiErrorModel}\index{ns3\+::\+Mm\+Wave\+Mi\+Error\+Model@{ns3\+::\+Mm\+Wave\+Mi\+Error\+Model}}
+
+
+{\ttfamily \#include $<$mmwave-\/mi-\/error-\/model.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Mm\+Wave\+Mi\+Error\+Model\+:
+% FIG 0
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \hyperlink{classns3_1_1MmWaveMiErrorModel_aace9efaf2ef6d1dfbbfa3fb49c29a977}{Mib} (const \hyperlink{classns3_1_1SpectrumValue}{Spectrum\+Value} \&sinr, const std\+::vector$<$ int $>$ \&map, uint8\+\_\+t mcs)
+\begin{DoxyCompactList}\small\item\em find the mmib (mean mutual information per bit) for different modulations of the specified TB \end{DoxyCompactList}\item 
+static double \hyperlink{classns3_1_1MmWaveMiErrorModel_affc0eda2aaaa9f5a8bbc8f532ae7adfb}{Mapping\+Mi\+Bler} (double mib, uint8\+\_\+t ecr\+Id, uint32\+\_\+t cb\+Size)
+\begin{DoxyCompactList}\small\item\em map the mmib (mean mutual information per bit) for different M\+CS \end{DoxyCompactList}\item 
+static \hyperlink{structns3_1_1MmWaveTbStats__t}{Mm\+Wave\+Tb\+Stats\+\_\+t} \hyperlink{classns3_1_1MmWaveMiErrorModel_a82a14ebf85ae03a7815215c3c1a96cc7}{Get\+Tb\+Decodification\+Stats} (const \hyperlink{classns3_1_1SpectrumValue}{Spectrum\+Value} \&sinr, const std\+::vector$<$ int $>$ \&map, uint32\+\_\+t size, uint8\+\_\+t mcs, \hyperlink{namespacens3_aca7c6bab455c2515f3e437749b5e904d}{Mm\+Wave\+Harq\+Process\+Info\+List\+\_\+t} mi\+History)
+\begin{DoxyCompactList}\small\item\em run the error-\/model algorithm for the specified TB \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class provides the B\+L\+ER estimation based on mutual information metrics 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Mm\+Wave\+Mi\+Error\+Model@{ns3\+::\+Mm\+Wave\+Mi\+Error\+Model}!Get\+Tb\+Decodification\+Stats@{Get\+Tb\+Decodification\+Stats}}
+\index{Get\+Tb\+Decodification\+Stats@{Get\+Tb\+Decodification\+Stats}!ns3\+::\+Mm\+Wave\+Mi\+Error\+Model@{ns3\+::\+Mm\+Wave\+Mi\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Tb\+Decodification\+Stats(const Spectrum\+Value \&sinr, const std\+::vector$<$ int $>$ \&map, uint32\+\_\+t size, uint8\+\_\+t mcs, Mm\+Wave\+Harq\+Process\+Info\+List\+\_\+t mi\+History)}{GetTbDecodificationStats(const SpectrumValue &sinr, const std::vector< int > &map, uint32_t size, uint8_t mcs, MmWaveHarqProcessInfoList_t miHistory)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mm\+Wave\+Tb\+Stats\+\_\+t} ns3\+::\+Mm\+Wave\+Mi\+Error\+Model\+::\+Get\+Tb\+Decodification\+Stats (
+\begin{DoxyParamCaption}
+\item[{const {\bf Spectrum\+Value} \&}]{sinr, }
+\item[{const std\+::vector$<$ int $>$ \&}]{map, }
+\item[{uint32\+\_\+t}]{size, }
+\item[{uint8\+\_\+t}]{mcs, }
+\item[{{\bf Mm\+Wave\+Harq\+Process\+Info\+List\+\_\+t}}]{mi\+History}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MmWaveMiErrorModel_a82a14ebf85ae03a7815215c3c1a96cc7}{}\label{classns3_1_1MmWaveMiErrorModel_a82a14ebf85ae03a7815215c3c1a96cc7}
+
+
+run the error-\/model algorithm for the specified TB 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sinr} & the perceived sinrs in the whole bandwidth \\
+\hline
+{\em map} & the actives R\+Bs for the TB \\
+\hline
+{\em size} & the size in bytes of the TB \\
+\hline
+{\em mcs} & the M\+CS of the TB \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the TB error rate and MI 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+184 \{
+185   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (sinr << &map << (uint32\_t) size << (uint32\_t) mcs);
+186 
+187   \textcolor{keywordtype}{double} tbMi = \hyperlink{classns3_1_1MmWaveMiErrorModel_aace9efaf2ef6d1dfbbfa3fb49c29a977}{Mib}(sinr, map, mcs);
+188   \textcolor{keywordtype}{double} MI = 0.0;
+189   \textcolor{keywordtype}{double} Reff = 0.0;
+190   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (mcs < 29);
+191   \textcolor{keywordflow}{if} (miHistory.size ()>0)
+192     \{
+193       \textcolor{comment}{// evaluate R\_eff and MI\_eff}
+194       uint32\_t codeBitsSum = 0;
+195       \textcolor{keywordtype}{double} miSum = 0.0;
+196       \textcolor{keywordflow}{for} (uint16\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < miHistory.size (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+197         \{
+198           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{" Sum MI "} << miHistory.at (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).m\_mi << \textcolor{stringliteral}{" Ci "} << miHistory.at (
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).m\_codeBits);
+199           codeBitsSum += miHistory.at (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).m\_codeBits;
+200           miSum += (miHistory.at (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).m\_mi*miHistory.at (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}).m\_codeBits);
+201         \}
+202       codeBitsSum += (((double)size*8.0) / \hyperlink{namespacens3_a5e80c75db664b51189d262e55aba06be}{McsEcrTable} [mcs]);
+203       miSum += (tbMi*(((double)size*8.0) / \hyperlink{namespacens3_a5e80c75db664b51189d262e55aba06be}{McsEcrTable} [mcs]));
+204       Reff = miHistory.at (0).m\_infoBits / (double)codeBitsSum; \textcolor{comment}{// information bits are the size of the
+       first TB}
+205       MI = miSum / (double)codeBitsSum;
+206     \}
+207   \textcolor{keywordflow}{else}
+208     \{
+209       MI = tbMi;
+210     \}
+211   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{" MI "} << MI << \textcolor{stringliteral}{" Reff "} << Reff << \textcolor{stringliteral}{" HARQ "} << miHistory.size ());
+212   \textcolor{comment}{// estimate CB size (according to sec 5.1.2 of TS 36.212)}
+213   uint16\_t Z = 6144; \textcolor{comment}{// max size of a codeblock (including CRC)}
+214   uint32\_t \hyperlink{generate__test__data__lte__sinr_8m_abccb2cfa2bf43e135bc0e10740453f8c}{B} = size * 8;
+215 \textcolor{comment}{//   B = 1234;}
+216   uint32\_t \hyperlink{loss__ITU1411__NLOS__over__rooftop_8m_a0f93e2c2e7c447b4dfc5bcac7e346da1}{L} = 0;
+217   uint32\_t \hyperlink{generate__test__data__lte__sinr_8m_ae24bb667d5023e5aaa1e71c3a15e447e}{C} = 0; \textcolor{comment}{// no. of codeblocks}
+218   uint32\_t Cplus = 0; \textcolor{comment}{// no. of codeblocks with size K+}
+219   uint32\_t Kplus = 0; \textcolor{comment}{// no. of codeblocks with size K+}
+220   uint32\_t Cminus = 0; \textcolor{comment}{// no. of codeblocks with size K+}
+221   uint32\_t Kminus = 0; \textcolor{comment}{// no. of codeblocks with size K+}
+222   uint32\_t B1 = 0;
+223   uint32\_t deltaK = 0;
+224   \textcolor{keywordflow}{if} (B <= Z)
+225     \{
+226       \textcolor{comment}{// only one codeblock}
+227       L = 0;
+228       C = 1;
+229       B1 = \hyperlink{generate__test__data__lte__sinr_8m_abccb2cfa2bf43e135bc0e10740453f8c}{B};
+230     \}
+231   \textcolor{keywordflow}{else}
+232     \{
+233       L = 24;
+234       C = ceil ((\textcolor{keywordtype}{double})B / ((\textcolor{keywordtype}{double})(Z-L)));
+235       B1 = B + C * \hyperlink{loss__ITU1411__NLOS__over__rooftop_8m_a0f93e2c2e7c447b4dfc5bcac7e346da1}{L};
+236     \}
+237   \textcolor{comment}{// first segmentation: K+ = minimum K in table such that C * K >= B1}
+238 \textcolor{comment}{//   uint i = 0;}
+239 \textcolor{comment}{//   while (B1 > cbSizeTable[i] * C)}
+240 \textcolor{comment}{//     \{}
+241 \textcolor{comment}{// //       NS\_LOG\_INFO (" K+ " << cbSizeTable[i] << " means " << cbSizeTable[i] * C);}
+242 \textcolor{comment}{//       i++;}
+243 \textcolor{comment}{//     \}}
+244 \textcolor{comment}{//   uint32\_t KplusId = i;}
+245 \textcolor{comment}{//   Kplus = cbSizeTable[i];}
+246 
+247   \textcolor{comment}{// implement a modified binary search}
+248   \textcolor{keywordtype}{int} \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min} = 0;
+249   \textcolor{keywordtype}{int} \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max} = 187;
+250   \textcolor{keywordtype}{int} mid = 0;
+251   \textcolor{keywordflow}{do}
+252     \{
+253       mid = (min+\hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max}) / 2;
+254       \textcolor{keywordflow}{if} (B1 > \hyperlink{namespacens3_a14a1917c5d5a089d32d5d29e3c380ab9}{cbSizeTable}[mid]*C)
+255         \{
+256           \textcolor{keywordflow}{if} (B1 < \hyperlink{namespacens3_a14a1917c5d5a089d32d5d29e3c380ab9}{cbSizeTable}[mid+1]*C)
+257             \{
+258               \textcolor{keywordflow}{break};
+259             \}
+260           \textcolor{keywordflow}{else}
+261             \{
+262               min = mid + 1;
+263             \}
+264         \}
+265       \textcolor{keywordflow}{else}
+266         \{
+267           \textcolor{keywordflow}{if} (B1 > \hyperlink{namespacens3_a14a1917c5d5a089d32d5d29e3c380ab9}{cbSizeTable}[mid-1]*C)
+268             \{
+269               \textcolor{keywordflow}{break};
+270             \}
+271           \textcolor{keywordflow}{else}
+272             \{
+273               max = mid - 1;
+274             \}
+275         \}
+276   \} \textcolor{keywordflow}{while} ((\hyperlink{namespacens3_a14a1917c5d5a089d32d5d29e3c380ab9}{cbSizeTable}[mid]*C != B1) && (min < \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max}));
+277   \textcolor{comment}{// adjust binary search to the largest integer value of K containing B1}
+278   \textcolor{keywordflow}{if} (B1 > \hyperlink{namespacens3_a14a1917c5d5a089d32d5d29e3c380ab9}{cbSizeTable}[mid]*C)
+279     \{
+280       mid ++;
+281     \}
+282 
+283   uint32\_t KplusId = mid;
+284   Kplus = \hyperlink{namespacens3_a14a1917c5d5a089d32d5d29e3c380ab9}{cbSizeTable}[mid];
+285 
+286 
+287   \textcolor{keywordflow}{if} (C==1)
+288     \{
+289       Cplus = 1;
+290       Cminus = 0;
+291       Kminus = 0;
+292     \}
+293   \textcolor{keywordflow}{else}
+294     \{
+295       \textcolor{comment}{// second segmentation size: K- = maximum K in table such that K < K+}
+296       \textcolor{comment}{// -fstrict-overflow sensitive, see bug 1868}
+297       Kminus = \hyperlink{namespacens3_a14a1917c5d5a089d32d5d29e3c380ab9}{cbSizeTable}[ KplusId > 1 ? KplusId - 1 : 0];
+298       deltaK = Kplus - Kminus;
+299       Cminus = floor ((((\textcolor{keywordtype}{double}) C * Kplus) - (\textcolor{keywordtype}{double})B1) / (\textcolor{keywordtype}{double})deltaK);
+300       Cplus = C - Cminus;
+301     \}
+302   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"--------------------LteMiErrorModel: TB size of "} << B << \textcolor{stringliteral}{" needs of "} << B1 << \textcolor{stringliteral}{
+      " bits reparted in "} << C << \textcolor{stringliteral}{" CBs as "}<< Cplus << \textcolor{stringliteral}{" block(s) of "} << Kplus << \textcolor{stringliteral}{" and "} << Cminus << \textcolor{stringliteral}{" of "} 
+      << Kminus);
+303 
+304   \textcolor{keywordtype}{double} errorRate = 1.0;
+305   uint8\_t ecrId = 0;
+306   \textcolor{keywordflow}{if} (miHistory.size ()==0)
+307     \{
+308       \textcolor{comment}{// first tx -> get ECR from MCS}
+309       ecrId = \hyperlink{namespacens3_ad41f52d74f41546bde1a5d00c1eed016}{McsEcrBlerTableMapping}[mcs];
+310       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"NO HARQ MCS "} << (uint16\_t)mcs << \textcolor{stringliteral}{" ECR id "} << (uint16\_t)ecrId);
+311     \}
+312   \textcolor{keywordflow}{else}
+313     \{
+314       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"HARQ block no. "} << miHistory.size ());
+315       \textcolor{comment}{// harq retx -> get closest ECR to Reff from available ones}
+316       \textcolor{keywordflow}{if} (mcs <= \hyperlink{namespacens3_a08725fa6d069486f1625e23b79f05327}{MMWAVE\_MI\_QPSK\_MAX\_ID})
+317         \{
+318           \textcolor{comment}{// Modulation order 2}
+319           uint8\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{namespacens3_ac41c162344e2a292e1ffec45a90018d5}{MMWAVE\_MI\_QPSK\_BLER\_MAX\_ID};
+320           \textcolor{keywordflow}{while} ((\hyperlink{namespacens3_aea9df233b95c667ad4b2249bfb203f64}{BlerCurvesEcrMap}[i]>Reff)&&(i>0))
+321             \{
+322               i--;
+323             \}
+324           ecrId = \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+325         \}
+326       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (mcs <= \hyperlink{namespacens3_accc1be2d986d75b75bfc1e6ab577d74a}{MMWAVE\_MI\_16QAM\_MAX\_ID})
+327         \{
+328           \textcolor{comment}{// Modulation order 4}
+329           uint8\_t i = \hyperlink{namespacens3_aef6c2aa1bc5c09f0f18e7dfcf548516a}{MMWAVE\_MI\_16QAM\_BLER\_MAX\_ID};
+330           \textcolor{keywordflow}{while} ((\hyperlink{namespacens3_aea9df233b95c667ad4b2249bfb203f64}{BlerCurvesEcrMap}[i]>Reff)&&(i>
+      \hyperlink{namespacens3_ac41c162344e2a292e1ffec45a90018d5}{MMWAVE\_MI\_QPSK\_BLER\_MAX\_ID} + 1))
+331             \{
+332               i--;
+333             \}
+334           ecrId = \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+335         \}
+336       \textcolor{keywordflow}{else}
+337         \{
+338           \textcolor{comment}{// Modulation order 6}
+339           uint8\_t i = \hyperlink{namespacens3_afe698c6008741230916101525da201c3}{MMWAVE\_MI\_64QAM\_BLER\_MAX\_ID};
+340           \textcolor{keywordflow}{while} ((\hyperlink{namespacens3_aea9df233b95c667ad4b2249bfb203f64}{BlerCurvesEcrMap}[i]>Reff)&&(i>
+      \hyperlink{namespacens3_aef6c2aa1bc5c09f0f18e7dfcf548516a}{MMWAVE\_MI\_16QAM\_BLER\_MAX\_ID} + 1))
+341             \{
+342               i--;
+343             \}
+344           ecrId = \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+345         \}
+346       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"HARQ ECR "} << (uint16\_t)ecrId);
+347     \}
+348 
+349   \textcolor{keywordflow}{if} (C!=1)
+350     \{
+351       \textcolor{keywordtype}{double} cbler = \hyperlink{classns3_1_1MmWaveMiErrorModel_affc0eda2aaaa9f5a8bbc8f532ae7adfb}{MappingMiBler} (MI, ecrId, Kplus);
+352       errorRate *= pow (1.0 - cbler, Cplus);
+353       cbler = \hyperlink{classns3_1_1MmWaveMiErrorModel_affc0eda2aaaa9f5a8bbc8f532ae7adfb}{MappingMiBler} (MI, ecrId, Kminus);
+354       errorRate *= pow (1.0 - cbler, Cminus);
+355       errorRate = 1.0 - errorRate;
+356     \}
+357   \textcolor{keywordflow}{else}
+358     \{
+359       errorRate = \hyperlink{classns3_1_1MmWaveMiErrorModel_affc0eda2aaaa9f5a8bbc8f532ae7adfb}{MappingMiBler} (MI, ecrId, Kplus);
+360     \}
+361 
+362   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{" Error rate "} << errorRate);
+363   MmWaveTbStats\_t ret;
+364   ret.tbler = errorRate;
+365   ret.mi = tbMi;
+366   ret.miTotal = MI;
+367   \textcolor{keywordflow}{return} ret;
+368 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Mm\+Wave\+Mi\+Error\+Model@{ns3\+::\+Mm\+Wave\+Mi\+Error\+Model}!Mapping\+Mi\+Bler@{Mapping\+Mi\+Bler}}
+\index{Mapping\+Mi\+Bler@{Mapping\+Mi\+Bler}!ns3\+::\+Mm\+Wave\+Mi\+Error\+Model@{ns3\+::\+Mm\+Wave\+Mi\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Mapping\+Mi\+Bler(double mib, uint8\+\_\+t ecr\+Id, uint32\+\_\+t cb\+Size)}{MappingMiBler(double mib, uint8_t ecrId, uint32_t cbSize)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Mm\+Wave\+Mi\+Error\+Model\+::\+Mapping\+Mi\+Bler (
+\begin{DoxyParamCaption}
+\item[{double}]{mib, }
+\item[{uint8\+\_\+t}]{ecr\+Id, }
+\item[{uint32\+\_\+t}]{cb\+Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MmWaveMiErrorModel_affc0eda2aaaa9f5a8bbc8f532ae7adfb}{}\label{classns3_1_1MmWaveMiErrorModel_affc0eda2aaaa9f5a8bbc8f532ae7adfb}
+
+
+map the mmib (mean mutual information per bit) for different M\+CS 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mib} & mean mutual information per bit of a code-\/block \\
+\hline
+{\em ecr\+Id} & Effective Code Rate ID \\
+\hline
+{\em cb\+Size} & the size of the CB \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the code block error rate 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+140 \{
+141   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (mib << (uint32\_t) ecrId << (uint32\_t) cbSize);
+142   \textcolor{keywordtype}{double} \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b} = 0;
+143   \textcolor{keywordtype}{double} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} = 0;
+144 
+145   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (ecrId <= \hyperlink{namespacens3_afe698c6008741230916101525da201c3}{MMWAVE\_MI\_64QAM\_BLER\_MAX\_ID}, \textcolor{stringliteral}{"ECR out of
+       range [0..37]: "} << (uint16\_t) ecrId);
+146   \textcolor{keywordtype}{int} cbIndex = 1;
+147   \textcolor{keywordflow}{while} ((cbIndex < 9)&&(\hyperlink{namespacens3_a466a5fd8f869eb3630151a510d79c5e0}{cbMiSizeTable}[cbIndex]<= cbSize))
+148     \{
+149       cbIndex++;
+150     \}
+151   cbIndex--;
+152   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{" ECRid "} << (uint16\_t)ecrId << \textcolor{stringliteral}{" ECR "} << 
+      \hyperlink{namespacens3_aea9df233b95c667ad4b2249bfb203f64}{BlerCurvesEcrMap}[ecrId] << \textcolor{stringliteral}{" CB size "} << cbSize << \textcolor{stringliteral}{" CB size curve "} << 
+      \hyperlink{namespacens3_a466a5fd8f869eb3630151a510d79c5e0}{cbMiSizeTable}[cbIndex]);
+153 
+154   b = \hyperlink{namespacens3_aa3d7232f450cb4b832a47c4df5175c4d}{bEcrTable}[cbIndex][ecrId];
+155   \textcolor{keywordflow}{if} (b<0.0)
+156     \{
+157       \textcolor{comment}{//take the lowest CB size including this CB for removing CB size}
+158       \textcolor{comment}{//quatization errors}
+159       \textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = cbIndex;
+160       \textcolor{keywordflow}{while} ((i<9)&&(b<0))
+161         \{
+162           b = \hyperlink{namespacens3_aa3d7232f450cb4b832a47c4df5175c4d}{bEcrTable}[i++][ecrId];
+163         \}
+164     \}
+165   c = \hyperlink{namespacens3_a3905bbb06635b77635374f14d2458705}{cEcrTable}[cbIndex][ecrId];
+166   \textcolor{keywordflow}{if} (c<0.0)
+167     \{
+168       \textcolor{comment}{//take the lowest CB size including this CB for removing CB size}
+169       \textcolor{comment}{//quatization errors}
+170       \textcolor{keywordtype}{int} i = cbIndex;
+171       \textcolor{keywordflow}{while} ((i<9)&&(c<0))
+172         \{
+173           c = \hyperlink{namespacens3_a3905bbb06635b77635374f14d2458705}{cEcrTable}[i++][ecrId];
+174         \}
+175     \}
+176   \textcolor{comment}{// see IEEE802.16m EMD formula 55 of section 4.3.2.1}
+177   \textcolor{keywordtype}{double} bler = 0.5*( 1 - erf((mib-b)/(sqrt(2)*c)) );
+178   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"MIB: "} << mib << \textcolor{stringliteral}{" BLER:"} << bler << \textcolor{stringliteral}{" b:"} << b << \textcolor{stringliteral}{" c:"} << c);
+179   \textcolor{keywordflow}{return} bler;
+180 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Mm\+Wave\+Mi\+Error\+Model@{ns3\+::\+Mm\+Wave\+Mi\+Error\+Model}!Mib@{Mib}}
+\index{Mib@{Mib}!ns3\+::\+Mm\+Wave\+Mi\+Error\+Model@{ns3\+::\+Mm\+Wave\+Mi\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Mib(const Spectrum\+Value \&sinr, const std\+::vector$<$ int $>$ \&map, uint8\+\_\+t mcs)}{Mib(const SpectrumValue &sinr, const std::vector< int > &map, uint8_t mcs)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Mm\+Wave\+Mi\+Error\+Model\+::\+Mib (
+\begin{DoxyParamCaption}
+\item[{const {\bf Spectrum\+Value} \&}]{sinr, }
+\item[{const std\+::vector$<$ int $>$ \&}]{map, }
+\item[{uint8\+\_\+t}]{mcs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MmWaveMiErrorModel_aace9efaf2ef6d1dfbbfa3fb49c29a977}{}\label{classns3_1_1MmWaveMiErrorModel_aace9efaf2ef6d1dfbbfa3fb49c29a977}
+
+
+find the mmib (mean mutual information per bit) for different modulations of the specified TB 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sinr} & the perceived sinrs in the whole bandwidth \\
+\hline
+{\em map} & the actives R\+Bs for the TB \\
+\hline
+{\em mcs} & the M\+CS of the TB \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the mmib 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+55 \{
+56   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (sinr << &map << (uint32\_t) mcs);
+57   
+58   \textcolor{keywordtype}{double} MI;
+59   \textcolor{keywordtype}{double} MIsum = 0.0;
+60   SpectrumValue sinrCopy = sinr;
+61   
+62   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < map.size (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+63     \{
+64       \textcolor{keywordtype}{double} sinrLin = sinrCopy[map.at (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})];
+65       \textcolor{keywordflow}{if} (mcs <= \hyperlink{namespacens3_a08725fa6d069486f1625e23b79f05327}{MMWAVE\_MI\_QPSK\_MAX\_ID}) \textcolor{comment}{// QPSK}
+66         \{
+67 
+68           \textcolor{keywordflow}{if} (sinrLin > \hyperlink{namespacens3_a8170078bba1537f2165fdd97e9a49d0f}{MI\_map\_qpsk\_axis}[\hyperlink{namespacens3_a95f85ca0d071fe6fd4c1a5b731d945c8}{MMWAVE\_MI\_MAP\_QPSK\_SIZE}-1])
+69             \{
+70               MI = 1;
+71             \}
+72           \textcolor{keywordflow}{else} 
+73             \{ 
+74               \textcolor{comment}{// since the values in MI\_map\_qpsk\_axis are uniformly spaced, we have}
+75               \textcolor{comment}{// index = ((sinrLin - value[0]) / (value[SIZE-1] - value[0])) * (SIZE-1)}
+76               \textcolor{comment}{// the scaling coefficient is always the same, so we use a static const}
+77               \textcolor{comment}{// to speed up the calculation}
+78               \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{double} scalingCoeffQpsk = 
+79                 (\hyperlink{namespacens3_a95f85ca0d071fe6fd4c1a5b731d945c8}{MMWAVE\_MI\_MAP\_QPSK\_SIZE} - 1) / (
+      \hyperlink{namespacens3_a8170078bba1537f2165fdd97e9a49d0f}{MI\_map\_qpsk\_axis}[\hyperlink{namespacens3_a95f85ca0d071fe6fd4c1a5b731d945c8}{MMWAVE\_MI\_MAP\_QPSK\_SIZE}-1] - 
+      \hyperlink{namespacens3_a8170078bba1537f2165fdd97e9a49d0f}{MI\_map\_qpsk\_axis}[0]);
+80               \textcolor{keywordtype}{double} sinrIndexDouble = (sinrLin -  \hyperlink{namespacens3_a8170078bba1537f2165fdd97e9a49d0f}{MI\_map\_qpsk\_axis}[0]) * scalingCoeffQpsk 
+      + 1;
+81               uint32\_t sinrIndex = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max}(0.0, std::floor (sinrIndexDouble));
+82               \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (sinrIndex < \hyperlink{namespacens3_a95f85ca0d071fe6fd4c1a5b731d945c8}{MMWAVE\_MI\_MAP\_QPSK\_SIZE}, \textcolor{stringliteral}{"MI
+       map out of data"});
+83               MI = \hyperlink{namespacens3_a033a4853fbafa2f0685cfc40fafedac1}{MI\_map\_qpsk}[sinrIndex];
+84             \}
+85         \}
+86       \textcolor{keywordflow}{else}
+87         \{
+88           \textcolor{keywordflow}{if} (mcs > \hyperlink{namespacens3_a08725fa6d069486f1625e23b79f05327}{MMWAVE\_MI\_QPSK\_MAX\_ID} && mcs <= 
+      \hyperlink{namespacens3_accc1be2d986d75b75bfc1e6ab577d74a}{MMWAVE\_MI\_16QAM\_MAX\_ID} )  \textcolor{comment}{// 16-QAM}
+89             \{
+90               \textcolor{keywordflow}{if} (sinrLin > \hyperlink{namespacens3_a57654bbd0e78a79e8e20a7af14abe6c4}{MI\_map\_16qam\_axis}[
+      \hyperlink{namespacens3_ae8c5f0c3c246a80749c417de3d0cbadc}{MMWAVE\_MI\_MAP\_16QAM\_SIZE}-1])
+91                 \{
+92                   MI = 1;
+93                 \}
+94               \textcolor{keywordflow}{else} 
+95                 \{
+96                   \textcolor{comment}{// since the values in MI\_map\_16QAM\_axis are uniformly spaced, we have}
+97                   \textcolor{comment}{// index = ((sinrLin - value[0]) / (value[SIZE-1] - value[0])) * (SIZE-1)}
+98                   \textcolor{comment}{// the scaling coefficient is always the same, so we use a static const}
+99                   \textcolor{comment}{// to speed up the calculation}
+100                   \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{double} scalingCoeff16qam = 
+101                     (\hyperlink{namespacens3_ae8c5f0c3c246a80749c417de3d0cbadc}{MMWAVE\_MI\_MAP\_16QAM\_SIZE} - 1) / (
+      \hyperlink{namespacens3_a57654bbd0e78a79e8e20a7af14abe6c4}{MI\_map\_16qam\_axis}[\hyperlink{namespacens3_ae8c5f0c3c246a80749c417de3d0cbadc}{MMWAVE\_MI\_MAP\_16QAM\_SIZE}-1] - 
+      \hyperlink{namespacens3_a57654bbd0e78a79e8e20a7af14abe6c4}{MI\_map\_16qam\_axis}[0]);
+102                   \textcolor{keywordtype}{double} sinrIndexDouble = (sinrLin -  \hyperlink{namespacens3_a57654bbd0e78a79e8e20a7af14abe6c4}{MI\_map\_16qam\_axis}[0]) * 
+      scalingCoeff16qam + 1;
+103                   uint32\_t sinrIndex = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max}(0.0, std::floor (sinrIndexDouble));
+104                   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (sinrIndex < 
+      \hyperlink{namespacens3_ae8c5f0c3c246a80749c417de3d0cbadc}{MMWAVE\_MI\_MAP\_16QAM\_SIZE}, \textcolor{stringliteral}{"MI map out of data"});
+105                   MI = \hyperlink{namespacens3_aafdcfd17fee25ba8ea143f2b73d1791a}{MI\_map\_16qam}[sinrIndex];
+106                 \}
+107             \}
+108           \textcolor{keywordflow}{else} \textcolor{comment}{// 64-QAM}
+109             \{
+110               \textcolor{keywordflow}{if} (sinrLin > \hyperlink{namespacens3_adbc6d60f5cb8deb6378e7e066a537238}{MI\_map\_64qam\_axis}[
+      \hyperlink{namespacens3_a693bce071814cd94149a8f263633e038}{MMWAVE\_MI\_MAP\_64QAM\_SIZE}-1])
+111                 \{
+112                   MI = 1;
+113                 \}
+114               \textcolor{keywordflow}{else}
+115                 \{
+116                   \textcolor{comment}{// since the values in MI\_map\_64QAM\_axis are uniformly spaced, we have}
+117                   \textcolor{comment}{// index = ((sinrLin - value[0]) / (value[SIZE-1] - value[0])) * (SIZE-1)}
+118                   \textcolor{comment}{// the scaling coefficient is always the same, so we use a static const}
+119                   \textcolor{comment}{// to speed up the calculation}
+120                   \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{double} scalingCoeff64qam = 
+121                     (\hyperlink{namespacens3_a693bce071814cd94149a8f263633e038}{MMWAVE\_MI\_MAP\_64QAM\_SIZE} - 1) / (
+      \hyperlink{namespacens3_adbc6d60f5cb8deb6378e7e066a537238}{MI\_map\_64qam\_axis}[\hyperlink{namespacens3_a693bce071814cd94149a8f263633e038}{MMWAVE\_MI\_MAP\_64QAM\_SIZE}-1] - 
+      \hyperlink{namespacens3_adbc6d60f5cb8deb6378e7e066a537238}{MI\_map\_64qam\_axis}[0]);
+122                   \textcolor{keywordtype}{double} sinrIndexDouble = (sinrLin -  \hyperlink{namespacens3_adbc6d60f5cb8deb6378e7e066a537238}{MI\_map\_64qam\_axis}[0]) * 
+      scalingCoeff64qam + 1;
+123                   uint32\_t sinrIndex = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max}(0.0, std::floor (sinrIndexDouble));
+124                   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (sinrIndex < 
+      \hyperlink{namespacens3_a693bce071814cd94149a8f263633e038}{MMWAVE\_MI\_MAP\_64QAM\_SIZE}, \textcolor{stringliteral}{"MI map out of data"});
+125                   MI = \hyperlink{namespacens3_addf441339cfdc6e9de9389d58269c19a}{MI\_map\_64qam}[sinrIndex];
+126                 \}
+127             \}
+128         \}
+129       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{" RB "} << map.at (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}) << \textcolor{stringliteral}{"Minimum SNR = "} << 10 * std::log10 (sinrLin) << \textcolor{stringliteral}{"
+       dB, "} << sinrLin << \textcolor{stringliteral}{" V, MCS = "} << (uint16\_t)mcs << \textcolor{stringliteral}{", MI = "} << MI);
+130       MIsum += MI;
+131     \}
+132   MI = MIsum / map.size ();
+133   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{" MI = "} << MI);
+134   \textcolor{keywordflow}{return} MI;
+135 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mmwave/model/\hyperlink{mmwave-mi-error-model_8h}{mmwave-\/mi-\/error-\/model.\+h}\item 
+mmwave/model/\hyperlink{mmwave-mi-error-model_8cc}{mmwave-\/mi-\/error-\/model.\+cc}\end{DoxyCompactItemize}

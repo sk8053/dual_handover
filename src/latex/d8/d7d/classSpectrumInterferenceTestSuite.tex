@@ -1,0 +1,105 @@
+\hypertarget{classSpectrumInterferenceTestSuite}{}\section{Spectrum\+Interference\+Test\+Suite Class Reference}
+\label{classSpectrumInterferenceTestSuite}\index{Spectrum\+Interference\+Test\+Suite@{Spectrum\+Interference\+Test\+Suite}}
+
+
+Inheritance diagram for Spectrum\+Interference\+Test\+Suite\+:
+% FIG 0
+
+
+Collaboration diagram for Spectrum\+Interference\+Test\+Suite\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpectrumInterferenceTestSuite_a3b728370e4a8c10acd8bb7d02dcf46f9}{Spectrum\+Interference\+Test\+Suite} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Spectrum\+Interference\+Test\+Suite@{Spectrum\+Interference\+Test\+Suite}!Spectrum\+Interference\+Test\+Suite@{Spectrum\+Interference\+Test\+Suite}}
+\index{Spectrum\+Interference\+Test\+Suite@{Spectrum\+Interference\+Test\+Suite}!Spectrum\+Interference\+Test\+Suite@{Spectrum\+Interference\+Test\+Suite}}
+\subsubsection[{\texorpdfstring{Spectrum\+Interference\+Test\+Suite()}{SpectrumInterferenceTestSuite()}}]{\setlength{\rightskip}{0pt plus 5cm}Spectrum\+Interference\+Test\+Suite\+::\+Spectrum\+Interference\+Test\+Suite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSpectrumInterferenceTestSuite_a3b728370e4a8c10acd8bb7d02dcf46f9}{}\label{classSpectrumInterferenceTestSuite_a3b728370e4a8c10acd8bb7d02dcf46f9}
+
+\begin{DoxyCode}
+140   : \hyperlink{classns3_1_1TestSuite_a904b0c40583b744d30908aeb94636d1a}{TestSuite} (\textcolor{stringliteral}{"spectrum-interference"}, \hyperlink{classns3_1_1TestSuite_a1ebfcab34ec8161e085e8e3a1855eae0a3885375a3787abf60431f8454b3cadbd}{UNIT})
+141 \{
+142 
+143   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"creating SpectrumInterferenceTestSuite"});
+144 
+145   \hyperlink{classns3_1_1Ptr}{Ptr<const SpectrumModel>} m;
+146 
+147   \hyperlink{namespacens3_a46ac9188e5cf43bd5292f7b67451246e}{Bands} bands;
+148   \textcolor{keyword}{struct }\hyperlink{structns3_1_1BandInfo}{BandInfo} bi;
+149 
+150   bi.\hyperlink{structns3_1_1BandInfo_a5e9018ae65c7625cc6d5c3c0067a9104}{fl} = 2.400e9;
+151   bi.fc = 2.410e9;
+152   bi.fh = 2.420e9;
+153   bands.push\_back (bi);
+154 
+155   bi.fl = 2.420e9;
+156   bi.fc = 2.431e9;
+157   bi.fh = 2.442e9;
+158   bands.push\_back (bi);
+159 
+160   m = Create<SpectrumModel> (bands);
+161 
+162 
+163   \textcolor{keywordtype}{double} \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b}; \textcolor{comment}{// max deliverable bytes}
+164 
+165   \textcolor{keyword}{const} \textcolor{keywordtype}{double} e = 1e-5; \textcolor{comment}{// max tolerated relative error for}
+166                          \textcolor{comment}{// deliverable bytes}
+167 
+168   \textcolor{comment}{// Power Spectral Density of the signal of interest  = [-46 -48] dBm;}
+169   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} s1  = Create<SpectrumValue> (m);
+170   (*s1)[0] = 1.255943215755e-15;
+171   (*s1)[1] = 7.204059965732e-16;
+172   b = 10067205.5632012;
+173   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumInterferenceTestCase}{SpectrumInterferenceTestCase} (s1,   0, \textcolor{keyword}{true},     
+             \textcolor{stringliteral}{"sdBm  = [-46 -48]  tx bytes: 1"}), TestCase::QUICK);
+174   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumInterferenceTestCase}{SpectrumInterferenceTestCase} (s1, 
+      static\_cast<uint32\_t> (b * 0.5 + 0.5), \textcolor{keyword}{true},   \textcolor{stringliteral}{"sdBm  = [-46 -48]  tx bytes: b*0.5"}), TestCase::QUICK);
+175   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumInterferenceTestCase}{SpectrumInterferenceTestCase} (s1, 
+      static\_cast<uint32\_t> (b * (1 - e) + 0.5), \textcolor{keyword}{true}, \textcolor{stringliteral}{"sdBm  = [-46 -48]  tx bytes: b*(1-e)"}), TestCase::QUICK);
+176   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumInterferenceTestCase}{SpectrumInterferenceTestCase} (s1, 
+      static\_cast<uint32\_t> (b * (1 + e) + 0.5), \textcolor{keyword}{false}, \textcolor{stringliteral}{"sdBm  = [-46 -48]  tx bytes: b*(1+e)"}), TestCase::QUICK);
+177   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumInterferenceTestCase}{SpectrumInterferenceTestCase} (s1, 
+      static\_cast<uint32\_t> (b * 1.5 + 0.5), \textcolor{keyword}{false},   \textcolor{stringliteral}{"sdBm  = [-46 -48]  tx bytes: b*1.5"}), TestCase::QUICK);
+178   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumInterferenceTestCase}{SpectrumInterferenceTestCase} (s1, 0xffffffff, \textcolor{keyword}{
+      false},     \textcolor{stringliteral}{"sdBm  = [-46 -48]  tx bytes: 2^32-1"}), TestCase::QUICK);
+179 
+180   \textcolor{comment}{// Power Spectral Density of the signal of interest  =  [-63 -61] dBm;}
+181   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} s2  = Create<SpectrumValue> (m);
+182   (*s2)[0] = 2.505936168136e-17;
+183   (*s2)[1] = 3.610582885110e-17;
+184   b = 882401.591840728;
+185   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumInterferenceTestCase}{SpectrumInterferenceTestCase} (s2,   1, \textcolor{keyword}{true},     
+             \textcolor{stringliteral}{"sdBm  = [-63 -61]  tx bytes: 1"}), TestCase::QUICK);
+186   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumInterferenceTestCase}{SpectrumInterferenceTestCase} (s2, 
+      static\_cast<uint32\_t> (b * 0.5 + 0.5), \textcolor{keyword}{true},   \textcolor{stringliteral}{"sdBm  = [-63 -61]  tx bytes: b*0.5"}), TestCase::QUICK);
+187   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumInterferenceTestCase}{SpectrumInterferenceTestCase} (s2, 
+      static\_cast<uint32\_t> (b * (1 - e) + 0.5), \textcolor{keyword}{true}, \textcolor{stringliteral}{"sdBm  = [-63 -61]  tx bytes: b*(1-e)"}), TestCase::QUICK);
+188   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumInterferenceTestCase}{SpectrumInterferenceTestCase} (s2, 
+      static\_cast<uint32\_t> (b * (1 + e) + 0.5), \textcolor{keyword}{false}, \textcolor{stringliteral}{"sdBm  = [-63 -61]  tx bytes: b*(1+e)"}), TestCase::QUICK);
+189   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumInterferenceTestCase}{SpectrumInterferenceTestCase} (s2, 
+      static\_cast<uint32\_t> (b * 1.5 + 0.5), \textcolor{keyword}{false},   \textcolor{stringliteral}{"sdBm  = [-63 -61]  tx bytes: b*1.5"}), TestCase::QUICK);
+190   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classSpectrumInterferenceTestCase}{SpectrumInterferenceTestCase} (s2, 0xffffffff, \textcolor{keyword}{
+      false},     \textcolor{stringliteral}{"sdBm  = [-63 -61]  tx bytes: 2^32-1"}), TestCase::QUICK);
+191 
+192 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+spectrum/test/\hyperlink{spectrum-interference-test_8cc}{spectrum-\/interference-\/test.\+cc}\end{DoxyCompactItemize}

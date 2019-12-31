@@ -1,0 +1,107 @@
+\hypertarget{namespacetap-wifi-virtual-machine}{}\section{tap-\/wifi-\/virtual-\/machine Namespace Reference}
+\label{namespacetap-wifi-virtual-machine}\index{tap-\/wifi-\/virtual-\/machine@{tap-\/wifi-\/virtual-\/machine}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacetap-wifi-virtual-machine_ab59779626af8925d05c112e49231cab9}{main} (argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{tap-\/wifi-\/virtual-\/machine@{tap-\/wifi-\/virtual-\/machine}!main@{main}}
+\index{main@{main}!tap-\/wifi-\/virtual-\/machine@{tap-\/wifi-\/virtual-\/machine}}
+\subsubsection[{\texorpdfstring{main(argv)}{main(argv)}}]{\setlength{\rightskip}{0pt plus 5cm}def tap-\/wifi-\/virtual-\/machine.\+main (
+\begin{DoxyParamCaption}
+\item[{}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacetap-wifi-virtual-machine_ab59779626af8925d05c112e49231cab9}{}\label{namespacetap-wifi-virtual-machine_ab59779626af8925d05c112e49231cab9}
+
+\begin{DoxyCode}
+27 \textcolor{keyword}{def }\hyperlink{namespacetap-wifi-virtual-machine_ab59779626af8925d05c112e49231cab9}{main}(argv):
+28 
+29     ns.core.CommandLine().Parse(argv)
+30     
+31     \textcolor{comment}{#}
+32     \textcolor{comment}{# We are interacting with the outside, real, world.  This means we have to }
+33     \textcolor{comment}{# interact in real-time and therefore we have to use the real-time simulator}
+34     \textcolor{comment}{# and take the time to calculate checksums.}
+35     \textcolor{comment}{#}
+36     ns.core.GlobalValue.Bind(\textcolor{stringliteral}{"SimulatorImplementationType"}, ns.core.StringValue(\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl
+      "}))
+37     ns.core.GlobalValue.Bind(\textcolor{stringliteral}{"ChecksumEnabled"}, ns.core.BooleanValue(\textcolor{stringliteral}{"true"}))
+38 
+39     \textcolor{comment}{#}
+40     \textcolor{comment}{# Create two ghost nodes.  The first will represent the virtual machine host}
+41     \textcolor{comment}{# on the left side of the network; and the second will represent the VM on }
+42     \textcolor{comment}{# the right side.}
+43     \textcolor{comment}{#}
+44     nodes = ns.network.NodeContainer()
+45     nodes.Create (2);
+46 
+47     \textcolor{comment}{#}
+48     \textcolor{comment}{# We're going to use 802.11 A so set up a wifi helper to reflect that.}
+49     \textcolor{comment}{#}
+50     wifi = ns.wifi.WifiHelper()
+51     wifi.SetStandard (ns.wifi.WIFI\_PHY\_STANDARD\_80211a);
+52     wifi.SetRemoteStationManager (\textcolor{stringliteral}{"ns3::ConstantRateWifiManager"}, \textcolor{stringliteral}{"DataMode"}, ns.core.StringValue (\textcolor{stringliteral}{"
+      OfdmRate54Mbps"}));
+53 
+54     \textcolor{comment}{#}
+55     \textcolor{comment}{# No reason for pesky access points, so we'll use an ad-hoc network.}
+56     \textcolor{comment}{#}
+57     wifiMac = ns.wifi.WifiMacHelper
+58     wifiMac.SetType (\textcolor{stringliteral}{"ns3::AdhocWifiMac"});
+59 
+60     \textcolor{comment}{#}
+61     \textcolor{comment}{# Configure the physcial layer.}
+62     \textcolor{comment}{#}
+63     wifiChannel = ns.wifi.YansWifiChannelHelper.Default()
+64     wifiPhy = ns.wifi.YansWifiPhyHelper.Default()
+65     wifiPhy.SetChannel(wifiChannel.Create())
+66 
+67     \textcolor{comment}{#}
+68     \textcolor{comment}{# Install the wireless devices onto our ghost nodes.}
+69     \textcolor{comment}{#}
+70     devices = wifi.Install(wifiPhy, wifiMac, nodes)
+71 
+72     \textcolor{comment}{#}
+73     \textcolor{comment}{# We need location information since we are talking about wifi, so add a}
+74     \textcolor{comment}{# constant position to the ghost nodes.}
+75     \textcolor{comment}{#}
+76     mobility = ns.mobility.MobilityHelper()
+77     positionAlloc = ns.mobility.ListPositionAllocator()
+78     positionAlloc.Add(ns.core.Vector(0.0, 0.0, 0.0))
+79     positionAlloc.Add(ns.core.Vector(5.0, 0.0, 0.0))
+80     mobility.SetPositionAllocator(positionAlloc)
+81     mobility.SetMobilityModel (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"})
+82     mobility.Install(nodes)
+83 
+84     \textcolor{comment}{#}
+85     \textcolor{comment}{# Use the TapBridgeHelper to connect to the pre-configured tap devices for }
+86     \textcolor{comment}{# the left side.  We go with "UseLocal" mode since the wifi devices do not}
+87     \textcolor{comment}{# support promiscuous mode (because of their natures0.  This is a special}
+88     \textcolor{comment}{# case mode that allows us to extend a linux bridge into ns-3 IFF we will}
+89     \textcolor{comment}{# only see traffic from one other device on that bridge.  That is the case}
+90     \textcolor{comment}{# for this configuration.}
+91     \textcolor{comment}{#}
+92     tapBridge = ns.tap\_bridge.TapBridgeHelper()
+93     tapBridge.SetAttribute (\textcolor{stringliteral}{"Mode"}, ns.core.StringValue (\textcolor{stringliteral}{"UseLocal"}));
+94     tapBridge.SetAttribute (\textcolor{stringliteral}{"DeviceName"}, ns.core.StringValue (\textcolor{stringliteral}{"tap-left"}));
+95     tapBridge.Install (nodes.Get (0), devices.Get (0));
+96 
+97     \textcolor{comment}{#}
+98     \textcolor{comment}{# Connect the right side tap to the right side wifi device on the right-side}
+99     \textcolor{comment}{# ghost node.}
+100     \textcolor{comment}{#}
+101     tapBridge.SetAttribute (\textcolor{stringliteral}{"DeviceName"}, ns.core.StringValue (\textcolor{stringliteral}{"tap-right"}));
+102     tapBridge.Install (nodes.Get (1), devices.Get (1));
+103 
+104     \textcolor{comment}{#}
+105     \textcolor{comment}{# Run the simulation for ten minutes to give the user time to play around}
+106     \textcolor{comment}{#}
+107     ns.core.Simulator.Stop (ns.core.Seconds (600));
+108     ns.core.Simulator.Run(signal\_check\_frequency = -1)
+109     ns.core.Simulator.Destroy()
+110     \textcolor{keywordflow}{return} 0
+111 
+\end{DoxyCode}

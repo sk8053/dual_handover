@@ -1,0 +1,212 @@
+\hypertarget{classWifiAcMappingTest}{}\section{Wifi\+Ac\+Mapping\+Test Class Reference}
+\label{classWifiAcMappingTest}\index{Wifi\+Ac\+Mapping\+Test@{Wifi\+Ac\+Mapping\+Test}}
+
+
+Inheritance diagram for Wifi\+Ac\+Mapping\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Wifi\+Ac\+Mapping\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classWifiAcMappingTest_a82f6248f01d164ec9a62633ba49f6e77}{Wifi\+Ac\+Mapping\+Test} (uint8\+\_\+t tos, uint8\+\_\+t expected\+Queue)
+\item 
+virtual void \hyperlink{classWifiAcMappingTest_ae0d828d29768d59590210d2f1bf8a552}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \hyperlink{classWifiAcMappingTest_a9e987a3d809f54cf531580fbad93e08c}{m\+\_\+tos}
+\item 
+uint8\+\_\+t \hyperlink{classWifiAcMappingTest_a8f3ed274153f2ff1568b9fedb07a1185}{m\+\_\+expected\+Queue}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Wifi\+Ac\+Mapping\+Test@{Wifi\+Ac\+Mapping\+Test}!Wifi\+Ac\+Mapping\+Test@{Wifi\+Ac\+Mapping\+Test}}
+\index{Wifi\+Ac\+Mapping\+Test@{Wifi\+Ac\+Mapping\+Test}!Wifi\+Ac\+Mapping\+Test@{Wifi\+Ac\+Mapping\+Test}}
+\subsubsection[{\texorpdfstring{Wifi\+Ac\+Mapping\+Test(uint8\+\_\+t tos, uint8\+\_\+t expected\+Queue)}{WifiAcMappingTest(uint8_t tos, uint8_t expectedQueue)}}]{\setlength{\rightskip}{0pt plus 5cm}Wifi\+Ac\+Mapping\+Test\+::\+Wifi\+Ac\+Mapping\+Test (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{tos, }
+\item[{uint8\+\_\+t}]{expected\+Queue}
+\end{DoxyParamCaption}
+)}\hypertarget{classWifiAcMappingTest_a82f6248f01d164ec9a62633ba49f6e77}{}\label{classWifiAcMappingTest_a82f6248f01d164ec9a62633ba49f6e77}
+
+\begin{DoxyCode}
+61   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"User priority to Access Category mapping test"}),
+62     \hyperlink{classWifiAcMappingTest_a9e987a3d809f54cf531580fbad93e08c}{m\_tos} (tos),
+63     \hyperlink{classWifiAcMappingTest_a8f3ed274153f2ff1568b9fedb07a1185}{m\_expectedQueue} (expectedQueue)
+64 \{
+65 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Wifi\+Ac\+Mapping\+Test@{Wifi\+Ac\+Mapping\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Wifi\+Ac\+Mapping\+Test@{Wifi\+Ac\+Mapping\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Wifi\+Ac\+Mapping\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classWifiAcMappingTest_ae0d828d29768d59590210d2f1bf8a552}{}\label{classWifiAcMappingTest_ae0d828d29768d59590210d2f1bf8a552}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+69 \{
+70   \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+71   \hyperlink{classns3_1_1WifiMacHelper}{WifiMacHelper} wifiMac;
+72   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} wifiPhy = YansWifiPhyHelper::Default ();
+73   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} wifiChannel = YansWifiChannelHelper::Default ();
+74   wifiPhy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ());
+75 
+76   \hyperlink{classns3_1_1Ssid}{Ssid} ssid = \hyperlink{classns3_1_1Ssid}{Ssid} (\textcolor{stringliteral}{"wifi-ac-mapping"});
+77   wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::ArfWifiManager"});
+78 
+79   \textcolor{comment}{// Setup the AP, which will be the source of traffic for this test}
+80   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ap;
+81   ap.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+82   wifiMac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::ApWifiMac"},
+83                    \textcolor{stringliteral}{"QosSupported"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}),
+84                    \textcolor{stringliteral}{"Ssid"}, SsidValue (ssid));
+85 
+86   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} apDev = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (wifiPhy, wifiMac, ap);
+87 
+88   \textcolor{comment}{// Setup one STA, which will be the sink for traffic in this test.}
+89   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} sta;
+90   sta.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+91   wifiMac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::StaWifiMac"},
+92                    \textcolor{stringliteral}{"QosSupported"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}),
+93                    \textcolor{stringliteral}{"Ssid"}, SsidValue (ssid));
+94   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} staDev = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (wifiPhy, wifiMac, sta);
+95 
+96   \textcolor{comment}{// Our devices will have fixed positions}
+97   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+98   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+99   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (\textcolor{stringliteral}{"ns3::GridPositionAllocator"},
+100                                  \textcolor{stringliteral}{"MinX"}, DoubleValue (0.0),
+101                                  \textcolor{stringliteral}{"MinY"}, DoubleValue (0.0),
+102                                  \textcolor{stringliteral}{"DeltaX"}, DoubleValue (5.0),
+103                                  \textcolor{stringliteral}{"DeltaY"}, DoubleValue (10.0),
+104                                  \textcolor{stringliteral}{"GridWidth"}, UintegerValue (2),
+105                                  \textcolor{stringliteral}{"LayoutType"}, StringValue (\textcolor{stringliteral}{"RowFirst"}));
+106   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (sta);
+107   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ap);
+108 
+109   \textcolor{comment}{// Now we install internet stacks on our devices}
+110   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+111   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (ap);
+112   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (sta);
+113 
+114   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+115   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"192.168.0.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+116   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} staNodeInterface, apNodeInterface;
+117   staNodeInterface = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (staDev);
+118   apNodeInterface = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (apDev);
+119 
+120   uint16\_t udpPort = 50000;
+121 
+122   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} packetSink (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+123                                \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), udpPort));
+124   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp = packetSink.Install (sta.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+125   sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0));
+126   sinkApp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (3.0));
+127 
+128   \textcolor{comment}{// The packet source is an on-off application on the AP device}
+129   \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} dest (staNodeInterface.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (0), udpPort);
+130   dest.\hyperlink{classns3_1_1InetSocketAddress_a574001030dfb21d2963b2b4da081889d}{SetTos} (\hyperlink{classWifiAcMappingTest_a9e987a3d809f54cf531580fbad93e08c}{m\_tos});
+131   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, dest);
+132   onoff.SetConstantRate (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"5kbps"}), 500);
+133   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sourceApp = onoff.Install (ap.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+134   sourceApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+135   sourceApp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (3.0));
+136 
+137   \textcolor{comment}{// The first packet will be transmitted at time 1+(500*8)/5000 = 1.8s.}
+138   \textcolor{comment}{// Let this packet be transmitted successfully, so that the AP can resolve}
+139   \textcolor{comment}{// the IP address of the station and get its MAC address.}
+140   \textcolor{comment}{// The second packet will be transmitted at time 1.8+(500*8)/5000 = 2.6s.}
+141   \textcolor{comment}{// Put the AP in sleep mode at time 2.0s, so that the second packet remains}
+142   \textcolor{comment}{// in a wifi mac queue and we can discover the queue it has been sent to.}
+143   \hyperlink{classns3_1_1Ptr}{Ptr<WifiPhy>} apPhy = DynamicCast<WifiNetDevice> (apDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0))->GetPhy ();
+144   Simulator::ScheduleWithContext (ap.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->\hyperlink{classns3_1_1Node_aaf49b64a843565ce3812326313b370ac}{GetId} (), \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0),
+145                                   &WifiPhy::SetSleepMode, apPhy);
+146 
+147   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (4.0));
+148 
+149   \hyperlink{classns3_1_1Ptr}{Ptr<WifiMac>} apMac = DynamicCast<WifiNetDevice> (apDev.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0))->GetMac ();
+150   \hyperlink{classns3_1_1PointerValue}{PointerValue} ptr;
+151   \hyperlink{classns3_1_1Ptr}{Ptr<WifiMacQueue>} queues[4];
+152   \textcolor{comment}{// Get the four wifi mac queues and set their MaxDelay attribute to a large}
+153   \textcolor{comment}{// value, so that packets are not removed by the Cleanup method}
+154   apMac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"BE\_EdcaTxopN"}, ptr);
+155   queues[0] = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1EdcaTxopN}{EdcaTxopN}> ()->GetQueue ();
+156   queues[0]->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"MaxDelay"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0)));
+157 
+158   apMac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"BK\_EdcaTxopN"}, ptr);
+159   queues[1] = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1EdcaTxopN}{EdcaTxopN}> ()->GetQueue ();
+160   queues[1]->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"MaxDelay"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0)));
+161 
+162   apMac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"VI\_EdcaTxopN"}, ptr);
+163   queues[2] = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1EdcaTxopN}{EdcaTxopN}> ()->GetQueue ();
+164   queues[2]->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"MaxDelay"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0)));
+165 
+166   apMac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"VO\_EdcaTxopN"}, ptr);
+167   queues[3] = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1EdcaTxopN}{EdcaTxopN}> ()->GetQueue ();
+168   queues[3]->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"MaxDelay"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0)));
+169 
+170 
+171   Simulator::Run ();
+172 
+173   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 4; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+174     \{
+175       \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} == \hyperlink{classWifiAcMappingTest_a8f3ed274153f2ff1568b9fedb07a1185}{m\_expectedQueue})
+176         \{
+177           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (queues[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]->GetNPackets (), 1, \textcolor{stringliteral}{"There is no packet in
+       the expected queue "} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+178         \}
+179       \textcolor{keywordflow}{else}
+180         \{
+181           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (queues[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]->GetNPackets (), 0, \textcolor{stringliteral}{"Unexpectedly, there
+       is a packet in queue "} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+182         \}
+183     \}
+184 
+185   uint32\_t totalOctetsThrough =
+186     DynamicCast<PacketSink> (sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a9e565807abd4213a56566a7ccd8d7509}{Get} (0))->GetTotalRx ();
+187 
+188   \textcolor{comment}{// Check that the first packet has been received}
+189   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (totalOctetsThrough, 500, \textcolor{stringliteral}{"A single packet should have been
+       received"});
+190 
+191   Simulator::Destroy ();
+192 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Wifi\+Ac\+Mapping\+Test@{Wifi\+Ac\+Mapping\+Test}!m\+\_\+expected\+Queue@{m\+\_\+expected\+Queue}}
+\index{m\+\_\+expected\+Queue@{m\+\_\+expected\+Queue}!Wifi\+Ac\+Mapping\+Test@{Wifi\+Ac\+Mapping\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+expected\+Queue}{m_expectedQueue}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Wifi\+Ac\+Mapping\+Test\+::m\+\_\+expected\+Queue\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classWifiAcMappingTest_a8f3ed274153f2ff1568b9fedb07a1185}{}\label{classWifiAcMappingTest_a8f3ed274153f2ff1568b9fedb07a1185}
+\index{Wifi\+Ac\+Mapping\+Test@{Wifi\+Ac\+Mapping\+Test}!m\+\_\+tos@{m\+\_\+tos}}
+\index{m\+\_\+tos@{m\+\_\+tos}!Wifi\+Ac\+Mapping\+Test@{Wifi\+Ac\+Mapping\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+tos}{m_tos}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Wifi\+Ac\+Mapping\+Test\+::m\+\_\+tos\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classWifiAcMappingTest_a9e987a3d809f54cf531580fbad93e08c}{}\label{classWifiAcMappingTest_a9e987a3d809f54cf531580fbad93e08c}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+test/ns3wifi/\hyperlink{wifi-ac-mapping-test-suite_8cc}{wifi-\/ac-\/mapping-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

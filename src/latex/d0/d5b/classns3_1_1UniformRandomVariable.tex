@@ -1,0 +1,236 @@
+\hypertarget{classns3_1_1UniformRandomVariable}{}\section{ns3\+:\+:Uniform\+Random\+Variable Class Reference}
+\label{classns3_1_1UniformRandomVariable}\index{ns3\+::\+Uniform\+Random\+Variable@{ns3\+::\+Uniform\+Random\+Variable}}
+
+
+The uniform distribution Random Number Generator (R\+NG).  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Uniform\+Random\+Variable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Uniform\+Random\+Variable\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1UniformRandomVariable_a1615d3acd6f76293f3fdc7f7f66c68a5}{Uniform\+Random\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Creates a uniform distribution R\+NG with the default range. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1UniformRandomVariable_af4eb895e8b31b635543f9e6680737b73}{Get\+Min} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the lower bound on randoms returned by \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{Get\+Value(void)}. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1UniformRandomVariable_a58bec07858aab80e0f71ae4472a43c3e}{Get\+Max} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the upper bound on values returned by \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{Get\+Value(void)}. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{Get\+Value} (double \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min}, double \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max})
+\begin{DoxyCompactList}\small\item\em Get the next random value, as a double in the specified range $[min, max)$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1UniformRandomVariable_a972caf9fb5d1cdde200ba9cf7307c73e}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The uniform distribution Random Number Generator (R\+NG). 
+
+This class supports the creation of objects that return random numbers from a fixed uniform distribution. It also supports the generation of single random numbers from various uniform distributions.
+
+The output range is $[min, max)$ for floating point values, ({\ttfamily max} {\itshape excluded}), and $[min, max]$ ({\ttfamily max} {\itshape included}) for integral values.
+
+\begin{DoxyParagraph}{Example}
+
+\end{DoxyParagraph}
+Here is an example of how to use this class\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{double} \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min} = 0.0;
+\textcolor{keywordtype}{double} \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max} = 10.0;
+
+Ptr<UniformRandomVariable> \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x} = CreateObject<UniformRandomVariable> ();
+x->SetAttribute (\textcolor{stringliteral}{"Min"}, DoubleValue (min));
+x->SetAttribute (\textcolor{stringliteral}{"Max"}, DoubleValue (max));
+
+\textcolor{comment}{// The values returned by a uniformly distributed random}
+\textcolor{comment}{// variable should always be within the range}
+\textcolor{comment}{//}
+\textcolor{comment}{//     [min, max)  .}
+\textcolor{comment}{//}
+\textcolor{keywordtype}{double} value = x->GetValue ();
+\end{DoxyCode}
+
+
+\begin{DoxyParagraph}{Antithetic Values.}
+
+\end{DoxyParagraph}
+Normally this R\+NG returns values $x$ in the interval $[min,max)$. If an instance of this R\+NG is configured to return antithetic values, the actual value returned is calculated as follows\+:
+
+
+\begin{DoxyItemize}
+\item Compute the initial random value $x$ as normal.
+\item Compute the distance from the maximum, $y = max - x$
+\item Return $x' = min + y = min + (max - x)$\+: 
+\end{DoxyItemize}
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Uniform\+Random\+Variable@{ns3\+::\+Uniform\+Random\+Variable}!Uniform\+Random\+Variable@{Uniform\+Random\+Variable}}
+\index{Uniform\+Random\+Variable@{Uniform\+Random\+Variable}!ns3\+::\+Uniform\+Random\+Variable@{ns3\+::\+Uniform\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Uniform\+Random\+Variable()}{UniformRandomVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Uniform\+Random\+Variable\+::\+Uniform\+Random\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1UniformRandomVariable_a1615d3acd6f76293f3fdc7f7f66c68a5}{}\label{classns3_1_1UniformRandomVariable_a1615d3acd6f76293f3fdc7f7f66c68a5}
+
+
+Creates a uniform distribution R\+NG with the default range. 
+
+
+\begin{DoxyCode}
+162 \{
+163   \textcolor{comment}{// m\_min and m\_max are initialized after constructor by attributes}
+164   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+165 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Uniform\+Random\+Variable@{ns3\+::\+Uniform\+Random\+Variable}!Get\+Max@{Get\+Max}}
+\index{Get\+Max@{Get\+Max}!ns3\+::\+Uniform\+Random\+Variable@{ns3\+::\+Uniform\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Max(void) const }{GetMax(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Uniform\+Random\+Variable\+::\+Get\+Max (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1UniformRandomVariable_a58bec07858aab80e0f71ae4472a43c3e}{}\label{classns3_1_1UniformRandomVariable_a58bec07858aab80e0f71ae4472a43c3e}
+
+
+Get the upper bound on values returned by \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{Get\+Value(void)}. 
+
+\begin{DoxyReturn}{Returns}
+The upper bound on values from \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{Get\+Value(void)}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+175 \{
+176   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+177   \textcolor{keywordflow}{return} m\_max;
+178 \}
+\end{DoxyCode}
+\index{ns3\+::\+Uniform\+Random\+Variable@{ns3\+::\+Uniform\+Random\+Variable}!Get\+Min@{Get\+Min}}
+\index{Get\+Min@{Get\+Min}!ns3\+::\+Uniform\+Random\+Variable@{ns3\+::\+Uniform\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Min(void) const }{GetMin(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Uniform\+Random\+Variable\+::\+Get\+Min (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1UniformRandomVariable_af4eb895e8b31b635543f9e6680737b73}{}\label{classns3_1_1UniformRandomVariable_af4eb895e8b31b635543f9e6680737b73}
+
+
+Get the lower bound on randoms returned by \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{Get\+Value(void)}. 
+
+\begin{DoxyReturn}{Returns}
+The lower bound on values from \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{Get\+Value(void)}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+169 \{
+170   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+171   \textcolor{keywordflow}{return} m\_min;
+172 \}
+\end{DoxyCode}
+\index{ns3\+::\+Uniform\+Random\+Variable@{ns3\+::\+Uniform\+Random\+Variable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Uniform\+Random\+Variable@{ns3\+::\+Uniform\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Uniform\+Random\+Variable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1UniformRandomVariable_a972caf9fb5d1cdde200ba9cf7307c73e}{}\label{classns3_1_1UniformRandomVariable_a972caf9fb5d1cdde200ba9cf7307c73e}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+145 \{
+146   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::UniformRandomVariable"})
+147     .SetParent<\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{RandomVariableStream}>()
+148     .SetGroupName (\textcolor{stringliteral}{"Core"})
+149     .AddConstructor<\hyperlink{classns3_1_1UniformRandomVariable_a1615d3acd6f76293f3fdc7f7f66c68a5}{UniformRandomVariable}> ()
+150     .AddAttribute(\textcolor{stringliteral}{"Min"}, \textcolor{stringliteral}{"The lower bound on the values returned by this RNG stream."},
+151                   DoubleValue(0),
+152                   MakeDoubleAccessor(&UniformRandomVariable::m\_min),
+153                   MakeDoubleChecker<double>())
+154     .AddAttribute(\textcolor{stringliteral}{"Max"}, \textcolor{stringliteral}{"The upper bound on the values returned by this RNG stream."},
+155                   DoubleValue(1.0),
+156                   MakeDoubleAccessor(&UniformRandomVariable::m\_max),
+157                   MakeDoubleChecker<double>())
+158     ;
+159   \textcolor{keywordflow}{return} tid;
+160 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Uniform\+Random\+Variable@{ns3\+::\+Uniform\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Uniform\+Random\+Variable@{ns3\+::\+Uniform\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(double min, double max)}{GetValue(double min, double max)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Uniform\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{double}]{min, }
+\item[{double}]{max}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{}\label{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}
+
+
+Get the next random value, as a double in the specified range $[min, max)$. 
+
+\begin{DoxyNote}{Note}
+The upper limit is excluded from the output range.
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em min} & Low end of the range (included). \\
+\hline
+\mbox{\tt in}  & {\em max} & High end of the range (excluded). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A floating point random value. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+182 \{
+183   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min} << \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max});
+184   \textcolor{keywordtype}{double} v = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min} + \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} () * (\hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max} - \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min});
+185   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+186     \{
+187       v = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min} + (\hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max} - v);
+188     \}
+189   \textcolor{keywordflow}{return} v;
+190 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

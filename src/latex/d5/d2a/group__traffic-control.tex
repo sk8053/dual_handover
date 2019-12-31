@@ -1,0 +1,74 @@
+\hypertarget{group__traffic-control}{}\section{Traffic-\/control}
+\label{group__traffic-control}\index{Traffic-\/control@{Traffic-\/control}}
+
+
+Traffic control layer class.  
+
+
+Collaboration diagram for Traffic-\/control\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1Ipv4PacketFilter}{ns3\+::\+Ipv4\+Packet\+Filter}
+\item 
+class \hyperlink{classns3_1_1Ipv4QueueDiscItem}{ns3\+::\+Ipv4\+Queue\+Disc\+Item}
+\item 
+class \hyperlink{classns3_1_1Ipv6PacketFilter}{ns3\+::\+Ipv6\+Packet\+Filter}
+\item 
+class \hyperlink{classns3_1_1Ipv6QueueDiscItem}{ns3\+::\+Ipv6\+Queue\+Disc\+Item}
+\item 
+class \hyperlink{classns3_1_1QueueDiscContainer}{ns3\+::\+Queue\+Disc\+Container}
+\begin{DoxyCompactList}\small\item\em Holds a vector of \hyperlink{classns3_1_1QueueDisc}{ns3\+::\+Queue\+Disc} pointers. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1QueueDiscFactory}{ns3\+::\+Queue\+Disc\+Factory}
+\item 
+class \hyperlink{classns3_1_1TrafficControlHelper}{ns3\+::\+Traffic\+Control\+Helper}
+\begin{DoxyCompactList}\small\item\em Build a set of \hyperlink{classns3_1_1QueueDisc}{Queue\+Disc} objects. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1CoDelQueueDisc}{ns3\+::\+Co\+Del\+Queue\+Disc}
+\begin{DoxyCompactList}\small\item\em A Co\+Del packet queue disc. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1FqCoDelFlow}{ns3\+::\+Fq\+Co\+Del\+Flow}
+\begin{DoxyCompactList}\small\item\em A flow queue used by the Fq\+Co\+Del queue disc. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1FqCoDelQueueDisc}{ns3\+::\+Fq\+Co\+Del\+Queue\+Disc}
+\begin{DoxyCompactList}\small\item\em A Fq\+Co\+Del packet queue disc. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1PacketFilter}{ns3\+::\+Packet\+Filter}
+\item 
+class \hyperlink{classns3_1_1PfifoFastQueueDisc}{ns3\+::\+Pfifo\+Fast\+Queue\+Disc}
+\item 
+class \hyperlink{classns3_1_1PieQueueDisc}{ns3\+::\+Pie\+Queue\+Disc}
+\begin{DoxyCompactList}\small\item\em Implements P\+IE Active \hyperlink{classns3_1_1Queue}{Queue} Management discipline. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1QueueDiscClass}{ns3\+::\+Queue\+Disc\+Class}
+\item 
+class \hyperlink{classns3_1_1QueueDisc}{ns3\+::\+Queue\+Disc}
+\item 
+class \hyperlink{classns3_1_1RedQueueDisc}{ns3\+::\+Red\+Queue\+Disc}
+\begin{DoxyCompactList}\small\item\em A R\+ED packet queue disc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Traffic control layer class. 
+
+The Traffic Control layer aims at introducing an equivalent of the Linux Traffic Control infrastructure into ns-\/3. The Traffic Control layer sits in between the Net\+Devices (L2) and any network protocol (e.\+g., IP). It is in charge of processing packets and performing actions on them\+: scheduling, dropping, marking, policing, etc.
+
+This object represents the main interface of the Traffic Control Module. Basically, we manage both IN and O\+UT directions (sometimes called RX and TX, respectively). The O\+UT direction is easy to follow, since it involves direct calls\+: upper layer (e.\+g. IP) calls the Send method on an instance of this class, which then calls the Enqueue method of the \hyperlink{classns3_1_1QueueDisc}{Queue\+Disc} associated with the device. The Dequeue method of the \hyperlink{classns3_1_1QueueDisc}{Queue\+Disc} finally calls the Send method of the \hyperlink{classns3_1_1NetDevice}{Net\+Device}.
+
+The IN direction uses a little trick to reduce dependencies between modules. In simple words, we use Callbacks to connect upper layer (which should register their Receive callback through Register\+Protocol\+Handler) and Net\+Devices.
+
+An example of the IN connection between this layer and IP layer is the following\+: \begin{DoxyVerb}Ptr<TrafficControlLayer> tc = m_node->GetObject<TrafficControlLayer> ();
+
+NS_ASSERT (tc != 0);
+
+m_node->RegisterProtocolHandler (MakeCallback (&TrafficControlLayer::Receive, tc),
+                                 Ipv4L3Protocol::PROT_NUMBER, device);
+m_node->RegisterProtocolHandler (MakeCallback (&TrafficControlLayer::Receive, tc),
+                                 ArpL3Protocol::PROT_NUMBER, device);
+
+tc->RegisterProtocolHandler (MakeCallback (&Ipv4L3Protocol::Receive, this),
+                             Ipv4L3Protocol::PROT_NUMBER, device);
+tc->RegisterProtocolHandler (MakeCallback (&ArpL3Protocol::Receive, PeekPointer (GetObject<ArpL3Protocol> ())),
+                             ArpL3Protocol::PROT_NUMBER, device);
+\end{DoxyVerb}
+ On the node, for I\+Pv4 and A\+RP packet, is registered the \hyperlink{classns3_1_1TrafficControlLayer_ac8d6ccbab480b6b288aa155b8485e178}{Traffic\+Control\+Layer\+::\+Receive} callback. At the same time, on the \hyperlink{classns3_1_1TrafficControlLayer}{Traffic\+Control\+Layer} object, is registered the callbacks associated to the upper layers (I\+Pv4 or A\+RP).
+
+When the node receives an I\+Pv4 or A\+RP packet, it calls the Receive method on \hyperlink{classns3_1_1TrafficControlLayer}{Traffic\+Control\+Layer}, that calls the right upper-\/layer callback once it finishes the operations on the packet received.
+
+Discrimination through callbacks (in other words\+: what is the right upper-\/layer callback for this packet?) is done through checks over the device and the protocol number. 

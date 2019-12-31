@@ -1,0 +1,70 @@
+\hypertarget{jakes-propagation-model-example_8cc}{}\section{propagation/examples/jakes-\/propagation-\/model-\/example.cc File Reference}
+\label{jakes-propagation-model-example_8cc}\index{propagation/examples/jakes-\/propagation-\/model-\/example.\+cc@{propagation/examples/jakes-\/propagation-\/model-\/example.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/jakes-\/propagation-\/loss-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+Include dependency graph for jakes-\/propagation-\/model-\/example.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classJakesPropagationExample}{Jakes\+Propagation\+Example}
+\begin{DoxyCompactList}\small\item\em Constructs a Jakes\+Propagationloss\+Model and print the loss value as a function of time into std\+::cout. Distribution and correlation statistics is compared woth a theoretical ones using R package (\href{http://www.r-project.org/}{\tt http\+://www.\+r-\/project.\+org/}). Scripts are presented within comments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{jakes-propagation-model-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{jakes-\/propagation-\/model-\/example.\+cc@{jakes-\/propagation-\/model-\/example.\+cc}!main@{main}}
+\index{main@{main}!jakes-\/propagation-\/model-\/example.\+cc@{jakes-\/propagation-\/model-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{jakes-propagation-model-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{jakes-propagation-model-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+70 \{
+71   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::JakesProcess::NumberOfOscillators"}, UintegerValue (100));
+72   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+73   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+74   \hyperlink{classJakesPropagationExample}{JakesPropagationExample} \hyperlink{examples_2readme_8txt_a6cdb5cec86b870240bdc6ba183c19d4e}{example};
+75   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1000));
+76   Simulator::Run ();
+77   Simulator::Destroy ();
+78   \textcolor{comment}{/*}
+79 \textcolor{comment}{   * R script for plotting a distribution:}
+80 \textcolor{comment}{   data<-read.table ("data")}
+81 \textcolor{comment}{   rayleigh<-(rnorm(1e6)^2+rnorm(1e6)^2)/2}
+82 \textcolor{comment}{   qqplot(10*log10(rayleigh), data$V2, main="QQ-plot for improved Jakes model", xlab="Reference Rayleigh
+       distribution [power, dB]", ylab="Sum-of-sinusoids distribution [power, dB]", xlim=c(-45, 10), ylim=c(-45, 10))}
+83 \textcolor{comment}{   lines (c(-50, 50), c(-50, 50))}
+84 \textcolor{comment}{   abline (v=-50:50*2, h=-50:50*2, col="light grey")}
+85 \textcolor{comment}{   */}
+86 
+87   \textcolor{comment}{/*}
+88 \textcolor{comment}{   * R script to plot autocorrelation function:}
+89 \textcolor{comment}{   # Read amplitude distribution:}
+90 \textcolor{comment}{   data<-10^(read.table ("data")$V2/20)}
+91 \textcolor{comment}{   x<-1:2000/10}
+92 \textcolor{comment}{   acf (data, lag.max=200, main="Autocorrelation function of the improved Jakes model", xlab="Time x200
+       microseconds ", ylab="Autocorrelation")}
+93 \textcolor{comment}{   # If we have a delta T = 1/5000 part of the second and doppler freq = 80 Hz}
+94 \textcolor{comment}{   lines (x, besselJ(x*80*2*pi/5000, 0)^2)}
+95 \textcolor{comment}{   abline (h=0:10/10, col="light grey")}
+96 \textcolor{comment}{   */}
+97   \textcolor{keywordflow}{return} 0;
+98 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

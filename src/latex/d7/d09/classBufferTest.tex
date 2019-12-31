@@ -1,0 +1,399 @@
+\hypertarget{classBufferTest}{}\section{Buffer\+Test Class Reference}
+\label{classBufferTest}\index{Buffer\+Test@{Buffer\+Test}}
+
+
+Inheritance diagram for Buffer\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Buffer\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classBufferTest_a4ffd025f50c962366167daef7df0ac58}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+\hyperlink{classBufferTest_ad54a22df69092315fefc6d563a94da35}{Buffer\+Test} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classBufferTest_a482291760a8b3a0716e1a28bb51e7a69}{Ensure\+Written\+Bytes} (\hyperlink{classns3_1_1Buffer}{Buffer} \hyperlink{lte__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b}, uint32\+\_\+t \hyperlink{lte__link__budget__x2__handover__measures_8m_abdb05bc5a064cf642a06c83b3392f148}{n}, uint8\+\_\+t array\mbox{[}$\,$\mbox{]}, const char $\ast$file, int line)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Buffer\+Test@{Buffer\+Test}!Buffer\+Test@{Buffer\+Test}}
+\index{Buffer\+Test@{Buffer\+Test}!Buffer\+Test@{Buffer\+Test}}
+\subsubsection[{\texorpdfstring{Buffer\+Test()}{BufferTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Buffer\+Test\+::\+Buffer\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBufferTest_ad54a22df69092315fefc6d563a94da35}{}\label{classBufferTest_ad54a22df69092315fefc6d563a94da35}
+
+\begin{DoxyCode}
+41   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Buffer"}) \{
+42 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Buffer\+Test@{Buffer\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Buffer\+Test@{Buffer\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Buffer\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classBufferTest_a4ffd025f50c962366167daef7df0ac58}{}\label{classBufferTest_a4ffd025f50c962366167daef7df0ac58}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+92 \{
+93   \hyperlink{classns3_1_1Buffer}{Buffer} buffer;
+94   \hyperlink{classns3_1_1Buffer_1_1Iterator}{Buffer::Iterator} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+95   buffer.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (6);
+96   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+97   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a3c7bacca6cbb821c9d14fa4626b7ae16}{WriteU8} (0x66);
+98   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 1, 0x66);
+99   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+100   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a3c7bacca6cbb821c9d14fa4626b7ae16}{WriteU8} (0x67);
+101   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 1, 0x67);
+102   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a97ea9c86cfe87b516efc28faa7dfdf21}{WriteHtonU16} (0x6568);
+103   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+104   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 3, 0x67, 0x65, 0x68);
+105   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a97ea9c86cfe87b516efc28faa7dfdf21}{WriteHtonU16} (0x6369);
+106   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 3, 0x63, 0x69, 0x68);
+107   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_ac8a95d099acc1fa0e699200b4de82173}{WriteHtonU32} (0xdeadbeaf);
+108   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 6, 0x63, 0x69, 0xde, 0xad, 0xbe, 0xaf);
+109   buffer.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (2);
+110   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+111   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a67fdfa2b4295a6f807b9670c7c8e4c0b}{WriteU16} (0);
+112   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 8, 0, 0, 0x63, 0x69, 0xde, 0xad, 0xbe, 0xaf);
+113   buffer.\hyperlink{classns3_1_1Buffer_a92dd87809af24fb10696fee9a9cb56cf}{AddAtEnd} (2);
+114   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+115   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a5eaa564bdc98d063b7e94b1768aeed6b}{Next} (8);
+116   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a67fdfa2b4295a6f807b9670c7c8e4c0b}{WriteU16} (0);
+117   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 10, 0, 0, 0x63, 0x69, 0xde, 0xad, 0xbe, 0xaf, 0, 0);
+118   buffer.\hyperlink{classns3_1_1Buffer_adeecbb3e8f518aec6fee0437578ade4b}{RemoveAtStart} (3);
+119   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+120   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 7, 0x69, 0xde, 0xad, 0xbe, 0xaf, 0, 0);
+121   buffer.\hyperlink{classns3_1_1Buffer_a83b30fd8e1202e778fb471757b800d47}{RemoveAtEnd} (4);
+122   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+123   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 3, 0x69, 0xde, 0xad);
+124   buffer.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (1);
+125   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+126   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a3c7bacca6cbb821c9d14fa4626b7ae16}{WriteU8} (0xff);
+127   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 4, 0xff, 0x69, 0xde, 0xad);
+128   buffer.\hyperlink{classns3_1_1Buffer_a92dd87809af24fb10696fee9a9cb56cf}{AddAtEnd} (1);
+129   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+130   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a5eaa564bdc98d063b7e94b1768aeed6b}{Next} (4);
+131   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a3c7bacca6cbb821c9d14fa4626b7ae16}{WriteU8} (0xff);
+132   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a9913fb3b506a9f6efe46060531f051d8}{Prev} (2);
+133   uint16\_t saved = i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a73b0df87d8f3ca52c6c87898d420da13}{ReadU16} ();
+134   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a9913fb3b506a9f6efe46060531f051d8}{Prev} (2);
+135   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a97ea9c86cfe87b516efc28faa7dfdf21}{WriteHtonU16} (0xff00);
+136   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a9913fb3b506a9f6efe46060531f051d8}{Prev} (2);
+137   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a14d63ac76497032a473d99cc8458608e}{ReadNtohU16} (), 0xff00, \textcolor{stringliteral}{"Could not read expected
+       value"});
+138   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a9913fb3b506a9f6efe46060531f051d8}{Prev} (2);
+139   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a67fdfa2b4295a6f807b9670c7c8e4c0b}{WriteU16} (saved);
+140   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 5, 0xff, 0x69, 0xde, 0xad, 0xff);
+141   \hyperlink{classns3_1_1Buffer}{Buffer} o = buffer;
+142   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (o, 5, 0xff, 0x69, 0xde, 0xad, 0xff);
+143   o.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (1);
+144   i = o.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+145   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a3c7bacca6cbb821c9d14fa4626b7ae16}{WriteU8} (0xfe);
+146   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (o, 6, 0xfe, 0xff, 0x69, 0xde, 0xad, 0xff);
+147   buffer.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (2);
+148   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+149   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a3c7bacca6cbb821c9d14fa4626b7ae16}{WriteU8} (0xfd);
+150   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a3c7bacca6cbb821c9d14fa4626b7ae16}{WriteU8} (0xfd);
+151   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (o, 6, 0xfe, 0xff, 0x69, 0xde, 0xad, 0xff);
+152   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 7, 0xfd, 0xfd, 0xff, 0x69, 0xde, 0xad, 0xff);
+153 
+154   \textcolor{comment}{// test 64-bit read/write}
+155   \hyperlink{classns3_1_1Buffer}{Buffer} buff64;
+156   buff64.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (8);
+157   i = buff64.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+158   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a013618ba6e5a062d1b097a6109572783}{WriteU64} (0x0123456789ABCDEFllu);
+159   i = buff64.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+160   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (i.\hyperlink{classns3_1_1Buffer_1_1Iterator_aba1fa5272c0fa3455f59a70db5c9d976}{ReadU64} (), 0x0123456789abcdefllu, \textcolor{stringliteral}{"Could not read
+       expected value"});
+161   i = buff64.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+162   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a930c087b76db8b535f224b4eb916c359}{WriteHtolsbU64} (0x0123456789ABCDEFllu);
+163   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buff64, 8, 0xef, 0xcd, 0xab, 0x89, 0x67, 0x45, 0x23, 0x01);
+164   i = buff64.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+165   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (i.ReadLsbtohU64 (), 0x0123456789abcdefllu, \textcolor{stringliteral}{"Could not read
+       expected value"});
+166   i = buff64.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+167   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a2d6eb710a2300eabe1dd0e9698770966}{WriteHtonU64} (0x0123456789ABCDEFllu);
+168   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buff64, 8, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef);
+169   i = buff64.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+170   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (i.ReadNtohU64 (), 0x0123456789abcdefllu, \textcolor{stringliteral}{"could not read
+       expected value"});
+171 
+172   \textcolor{comment}{// test self-assignment}
+173   \{
+174     \hyperlink{classns3_1_1Buffer}{Buffer} a = o;
+175     a = a;
+176   \}
+177 
+178   \textcolor{comment}{// test Remove start.}
+179   buffer = \hyperlink{classns3_1_1Buffer}{Buffer} (5);
+180   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 5, 0, 0, 0, 0, 0);
+181   buffer.\hyperlink{classns3_1_1Buffer_adeecbb3e8f518aec6fee0437578ade4b}{RemoveAtStart} (1);
+182   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 4, 0, 0, 0, 0);
+183   buffer.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (1);
+184   buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ().\hyperlink{classns3_1_1Buffer_1_1Iterator_a3c7bacca6cbb821c9d14fa4626b7ae16}{WriteU8} (0xff);
+185   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 5, 0xff, 0, 0, 0, 0);
+186   buffer.\hyperlink{classns3_1_1Buffer_adeecbb3e8f518aec6fee0437578ade4b}{RemoveAtStart} (3);
+187   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 2, 0, 0);
+188   buffer.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (4);
+189   buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ().\hyperlink{classns3_1_1Buffer_1_1Iterator_ac8a95d099acc1fa0e699200b4de82173}{WriteHtonU32} (0xdeadbeaf);
+190   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 6,  0xde, 0xad, 0xbe, 0xaf, 0, 0);
+191   buffer.\hyperlink{classns3_1_1Buffer_adeecbb3e8f518aec6fee0437578ade4b}{RemoveAtStart} (2);
+192   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 4,  0xbe, 0xaf, 0, 0);
+193   buffer.\hyperlink{classns3_1_1Buffer_a92dd87809af24fb10696fee9a9cb56cf}{AddAtEnd} (4);
+194   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+195   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a5eaa564bdc98d063b7e94b1768aeed6b}{Next} (4);
+196   i.WriteHtonU32 (0xdeadbeaf);
+197   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 8,  0xbe, 0xaf, 0, 0, 0xde, 0xad, 0xbe, 0xaf);
+198   buffer.\hyperlink{classns3_1_1Buffer_adeecbb3e8f518aec6fee0437578ade4b}{RemoveAtStart} (5);
+199   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 3,  0xad, 0xbe, 0xaf);
+200   \textcolor{comment}{// test Remove end}
+201   buffer = \hyperlink{classns3_1_1Buffer}{Buffer} (5);
+202   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 5, 0, 0, 0, 0, 0);
+203   buffer.\hyperlink{classns3_1_1Buffer_a83b30fd8e1202e778fb471757b800d47}{RemoveAtEnd} (1);
+204   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 4, 0, 0, 0, 0);
+205   buffer.\hyperlink{classns3_1_1Buffer_a92dd87809af24fb10696fee9a9cb56cf}{AddAtEnd} (2);
+206   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+207   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a5eaa564bdc98d063b7e94b1768aeed6b}{Next} (4);
+208   i.WriteU8 (0xab);
+209   i.WriteU8 (0xac);
+210   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 6, 0, 0, 0, 0, 0xab, 0xac);
+211   buffer.\hyperlink{classns3_1_1Buffer_a83b30fd8e1202e778fb471757b800d47}{RemoveAtEnd} (1);
+212   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 5, 0, 0, 0, 0, 0xab);
+213   buffer.\hyperlink{classns3_1_1Buffer_a83b30fd8e1202e778fb471757b800d47}{RemoveAtEnd} (3);
+214   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 2, 0, 0);
+215   buffer.\hyperlink{classns3_1_1Buffer_a92dd87809af24fb10696fee9a9cb56cf}{AddAtEnd} (6);
+216   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+217   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a5eaa564bdc98d063b7e94b1768aeed6b}{Next} (2);
+218   i.WriteU8 (0xac);
+219   i.WriteU8 (0xad);
+220   i.WriteU8 (0xae);
+221   i.WriteU8 (0xaf);
+222   i.WriteU8 (0xba);
+223   i.WriteU8 (0xbb);
+224   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 8, 0, 0, 0xac, 0xad, 0xae, 0xaf, 0xba, 0xbb);
+225   buffer.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (3);
+226   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+227   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a3c7bacca6cbb821c9d14fa4626b7ae16}{WriteU8} (0x30);
+228   i.WriteU8 (0x31);
+229   i.WriteU8 (0x32);
+230   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 11, 0x30, 0x31, 0x32, 0, 0, 0xac, 0xad, 0xae, 0xaf, 0
+      xba, 0xbb);
+231   buffer.\hyperlink{classns3_1_1Buffer_a83b30fd8e1202e778fb471757b800d47}{RemoveAtEnd} (9);
+232   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 2, 0x30, 0x31);
+233   buffer = \hyperlink{classns3_1_1Buffer}{Buffer} (3);
+234   buffer.\hyperlink{classns3_1_1Buffer_a92dd87809af24fb10696fee9a9cb56cf}{AddAtEnd} (2);
+235   i = buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+236   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a5eaa564bdc98d063b7e94b1768aeed6b}{Next} (3);
+237   i.WriteHtonU16 (0xabcd);
+238   buffer.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (1);
+239   buffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ().\hyperlink{classns3_1_1Buffer_1_1Iterator_a3c7bacca6cbb821c9d14fa4626b7ae16}{WriteU8} (0x21);
+240   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 6, 0x21, 0, 0, 0, 0xab, 0xcd);
+241   buffer.\hyperlink{classns3_1_1Buffer_a83b30fd8e1202e778fb471757b800d47}{RemoveAtEnd} (8);
+242   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (buffer.\hyperlink{classns3_1_1Buffer_a3047b8f2dad303c6370695122f1884f0}{GetSize} (), 0, \textcolor{stringliteral}{"Buffer size not zero"});
+243 
+244   buffer = \hyperlink{classns3_1_1Buffer}{Buffer} (6);
+245   buffer.AddAtStart (9);
+246   buffer.AddAtEnd (3);
+247   i = buffer.End ();
+248   i.Prev (1);
+249   i.WriteU8 (1, 1);
+250 
+251   buffer = \hyperlink{classns3_1_1Buffer}{Buffer} (6);
+252   buffer.AddAtStart (3);
+253   buffer.RemoveAtEnd (8);
+254   buffer.AddAtEnd (4);
+255   i = buffer.End ();
+256   i.Prev (4);
+257   i.WriteU8 (1, 4);
+258 
+259   buffer = \hyperlink{classns3_1_1Buffer}{Buffer} (1);
+260   buffer.AddAtEnd (100);
+261   i = buffer.End ();
+262   i.Prev (100);
+263   i.WriteU8 (1, 100);
+264 
+267   \{
+268     \textcolor{keyword}{const} uint32\_t actualSize = 72602;
+269     \textcolor{keyword}{const} uint32\_t chunkSize = 67624;
+270     \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} bytesRng = CreateObject<UniformRandomVariable> ();
+271     bytesRng->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (0));
+272     bytesRng->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (256));
+273 
+274     \hyperlink{classns3_1_1Buffer}{Buffer} inputBuffer;
+275     \hyperlink{classns3_1_1Buffer}{Buffer} outputBuffer;
+276 
+277     inputBuffer.\hyperlink{classns3_1_1Buffer_a92dd87809af24fb10696fee9a9cb56cf}{AddAtEnd} (actualSize);
+278     \{
+279       \hyperlink{classns3_1_1Buffer_1_1Iterator}{Buffer::Iterator} iter = inputBuffer.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+280       \textcolor{keywordflow}{for} (uint32\_t i = 0; i < actualSize; i++)
+281         iter.\hyperlink{classns3_1_1Buffer_1_1Iterator_a3c7bacca6cbb821c9d14fa4626b7ae16}{WriteU8} (static\_cast<uint8\_t> (bytesRng->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ()));
+282     \}
+283 
+284     outputBuffer.\hyperlink{classns3_1_1Buffer_a92dd87809af24fb10696fee9a9cb56cf}{AddAtEnd} (chunkSize);
+285     \hyperlink{classns3_1_1Buffer_1_1Iterator}{Buffer::Iterator} iter = outputBuffer.\hyperlink{classns3_1_1Buffer_a52207c7aed7bae89fba2f9e997c82724}{End} ();
+286     iter.\hyperlink{classns3_1_1Buffer_1_1Iterator_a9913fb3b506a9f6efe46060531f051d8}{Prev} (chunkSize);
+287     iter.\hyperlink{classns3_1_1Buffer_1_1Iterator_a087b4e6b5d038544c750c741e8932d69}{Write} (inputBuffer.\hyperlink{classns3_1_1Buffer_a07800b41f95ec9c5bfdfae624b9351b0}{PeekData} (), chunkSize);
+288 
+289     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (memcmp (inputBuffer.\hyperlink{classns3_1_1Buffer_a07800b41f95ec9c5bfdfae624b9351b0}{PeekData} (), outputBuffer.
+      \hyperlink{classns3_1_1Buffer_a07800b41f95ec9c5bfdfae624b9351b0}{PeekData} (), chunkSize), 0, \textcolor{stringliteral}{"memcp works"});
+290   \}
+291 
+292   buffer = \hyperlink{classns3_1_1Buffer}{Buffer} (5);
+293   buffer.AddAtEnd (2);
+294   i = buffer.End ();
+295   i.Prev (2);
+296   i.WriteU8 (0);
+297   i.WriteU8 (0x66);
+298   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 7, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x66);
+299   \hyperlink{classns3_1_1Buffer}{Buffer} frag0 = buffer.\hyperlink{classns3_1_1Buffer_a9285016f38b451c65edb50196ef817f8}{CreateFragment} (0, 2);
+300   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (frag0, 2, 0x00, 0x00);
+301   \hyperlink{classns3_1_1Buffer}{Buffer} frag1 = buffer.\hyperlink{classns3_1_1Buffer_a9285016f38b451c65edb50196ef817f8}{CreateFragment} (2, 5);
+302   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (frag1, 5, 0x00, 0x00, 0x00, 0x00, 0x66);
+303   frag0.\hyperlink{classns3_1_1Buffer_a92dd87809af24fb10696fee9a9cb56cf}{AddAtEnd} (frag1);
+304   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 7, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x66);
+305   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (frag0, 7, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x66);
+306 
+307   buffer = \hyperlink{classns3_1_1Buffer}{Buffer} (5);
+308   buffer.AddAtStart (2);
+309   i = buffer.Begin ();
+310   i.WriteU8 (0x1);
+311   i.WriteU8 (0x2);
+312   buffer.AddAtEnd (2);
+313   i = buffer.End ();
+314   i.Prev (2);
+315   i.WriteU8 (0x3);
+316   i.WriteU8 (0x4);
+317   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 9, 0x1, 0x2, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3, 0x4);
+318   \hyperlink{classns3_1_1Buffer}{Buffer} other;
+319   other.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (9);
+320   i = other.\hyperlink{classns3_1_1Buffer_a893d4bf50df13e730b6cd0fda91b967f}{Begin} ();
+321   i.\hyperlink{classns3_1_1Buffer_1_1Iterator_a087b4e6b5d038544c750c741e8932d69}{Write} (buffer.Begin (), buffer.End ());
+322   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (other, 9, 0x1, 0x2, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3, 0x4);
+323 
+325   std::string ct (\textcolor{stringliteral}{"This is the next content of the buffer."});
+326   buffer = \hyperlink{classns3_1_1Buffer}{Buffer} ();
+327   buffer.AddAtStart (ct.size ());
+328   i = buffer.Begin ();
+329   i.Write ((\textcolor{keyword}{const} uint8\_t*)ct.c\_str (), ct.size ());
+330   uint32\_t sizeBuffer = buffer.GetSize ();
+331   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (sizeBuffer, ct.size(), \textcolor{stringliteral}{"Buffer bad size"});
+332   uint8\_t \textcolor{keyword}{const}* evilBuffer = buffer.PeekData ();
+333   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE}( evilBuffer, 0, \textcolor{stringliteral}{"Buffer PeekData failed"});
+334   uint8\_t *cBuf = (uint8\_t*) malloc ( sizeBuffer );
+335   uint32\_t copyLen = buffer.CopyData (cBuf, sizeBuffer);
+336   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (copyLen, sizeBuffer, \textcolor{stringliteral}{"CopyData return bad size"});
+337   \textcolor{keywordflow}{for} (uint8\_t i=0; i < sizeBuffer ; i++ )
+338     \{
+339       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} ( cBuf [i], *(((\textcolor{keyword}{const} uint8\_t*)ct.c\_str ()) + i), \textcolor{stringliteral}{"Bad
+       buffer copied data"});
+340       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} ( evilBuffer [i], cBuf [i] , \textcolor{stringliteral}{"Bad buffer peeked"});
+341     \}
+342   free (cBuf);
+343 
+345   buffer = \hyperlink{classns3_1_1Buffer}{Buffer} (1);
+346   buffer.AddAtEnd (2);
+347   i = buffer.Begin ();
+348   i.Next (1);
+349   i.WriteU8 (0x77);
+350   i.WriteU8 (0x66);
+351   \hyperlink{buffer-test_8cc_adb8db1b0f6eec9da1f9f6d8b9f1e4ba8}{ENSURE\_WRITTEN\_BYTES} (buffer, 3, 0x00, 0x77, 0x66);
+352   i = buffer.Begin ();
+353   i.ReadU8 ();
+354   uint16\_t val1 = i.ReadNtohU16 ();
+355   i = buffer.Begin ();
+356   i.ReadU8 ();
+357   uint16\_t val2 = 0;
+358   val2 |= i.ReadU8 ();
+359   val2 <<= 8;
+360   val2 |= i.ReadU8 ();
+361   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (val1, val2, \textcolor{stringliteral}{"Bad ReadNtohU16()"});
+362 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Buffer\+Test@{Buffer\+Test}!Ensure\+Written\+Bytes@{Ensure\+Written\+Bytes}}
+\index{Ensure\+Written\+Bytes@{Ensure\+Written\+Bytes}!Buffer\+Test@{Buffer\+Test}}
+\subsubsection[{\texorpdfstring{Ensure\+Written\+Bytes(\+Buffer b, uint32\+\_\+t n, uint8\+\_\+t array[], const char $\ast$file, int line)}{EnsureWrittenBytes(Buffer b, uint32_t n, uint8_t array[], const char *file, int line)}}]{\setlength{\rightskip}{0pt plus 5cm}void Buffer\+Test\+::\+Ensure\+Written\+Bytes (
+\begin{DoxyParamCaption}
+\item[{{\bf Buffer}}]{b, }
+\item[{uint32\+\_\+t}]{n, }
+\item[{uint8\+\_\+t}]{array\mbox{[}$\,$\mbox{]}, }
+\item[{const char $\ast$}]{file, }
+\item[{int}]{line}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classBufferTest_a482291760a8b3a0716e1a28bb51e7a69}{}\label{classBufferTest_a482291760a8b3a0716e1a28bb51e7a69}
+
+\begin{DoxyCode}
+46 \{
+47   \textcolor{keywordtype}{bool} success = \textcolor{keyword}{true};
+48   uint8\_t *expected = array;
+49   uint8\_t \textcolor{keyword}{const}*got;
+50   got = b.\hyperlink{classns3_1_1Buffer_a07800b41f95ec9c5bfdfae624b9351b0}{PeekData} ();
+51   \textcolor{keywordflow}{for} (uint32\_t j = 0; j < \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n}; j++) 
+52     \{
+53       \textcolor{keywordflow}{if} (got[j] != expected[j]) 
+54         \{
+55           success = \textcolor{keyword}{false};
+56         \}
+57     \}
+58   \textcolor{keywordflow}{if} (!success) 
+59     \{
+60       std::ostringstream failure;
+61       failure << \textcolor{stringliteral}{"Buffer -- "};
+62       failure << \textcolor{stringliteral}{"expected: n="};
+63       failure << n << \textcolor{stringliteral}{", "};
+64       failure.setf (std::ios::hex, std::ios::basefield);
+65       \textcolor{keywordflow}{for} (uint32\_t j = 0; j < \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n}; j++) 
+66         \{
+67           failure << (uint16\_t)expected[j] << \textcolor{stringliteral}{" "};
+68         \}
+69       failure.setf (std::ios::dec, std::ios::basefield);
+70       failure << \textcolor{stringliteral}{"got: "};
+71       failure.setf (std::ios::hex, std::ios::basefield);
+72       \textcolor{keywordflow}{for} (uint32\_t j = 0; j < \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n}; j++) 
+73         \{
+74           failure << (uint16\_t)got[j] << \textcolor{stringliteral}{" "};
+75         \}
+76       failure << std::endl;
+77       \hyperlink{group__testingimpl_gaa9d54a0bd3ffaa7f4db82c4a6c1fb83b}{NS\_TEST\_ASSERT\_MSG\_EQ\_INTERNAL} (\textcolor{keyword}{true}, \textcolor{keyword}{false}, failure.str (), file, line
+      );
+78     \}
+79 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+network/test/\hyperlink{buffer-test_8cc}{buffer-\/test.\+cc}\end{DoxyCompactItemize}

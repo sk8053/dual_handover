@@ -1,0 +1,140 @@
+\hypertarget{classRandomRoomPositionAllocatorTestCase}{}\section{Random\+Room\+Position\+Allocator\+Test\+Case Class Reference}
+\label{classRandomRoomPositionAllocatorTestCase}\index{Random\+Room\+Position\+Allocator\+Test\+Case@{Random\+Room\+Position\+Allocator\+Test\+Case}}
+
+
+Inheritance diagram for Random\+Room\+Position\+Allocator\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Random\+Room\+Position\+Allocator\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRandomRoomPositionAllocatorTestCase_ade4a42534b714efc2d5d46362181957f}{Random\+Room\+Position\+Allocator\+Test\+Case} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classRandomRoomPositionAllocatorTestCase_ae386f6e4ee1b786b018786ee9be7e969}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Random\+Room\+Position\+Allocator\+Test\+Case@{Random\+Room\+Position\+Allocator\+Test\+Case}!Random\+Room\+Position\+Allocator\+Test\+Case@{Random\+Room\+Position\+Allocator\+Test\+Case}}
+\index{Random\+Room\+Position\+Allocator\+Test\+Case@{Random\+Room\+Position\+Allocator\+Test\+Case}!Random\+Room\+Position\+Allocator\+Test\+Case@{Random\+Room\+Position\+Allocator\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Random\+Room\+Position\+Allocator\+Test\+Case()}{RandomRoomPositionAllocatorTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Random\+Room\+Position\+Allocator\+Test\+Case\+::\+Random\+Room\+Position\+Allocator\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classRandomRoomPositionAllocatorTestCase_ade4a42534b714efc2d5d46362181957f}{}\label{classRandomRoomPositionAllocatorTestCase_ade4a42534b714efc2d5d46362181957f}
+
+\begin{DoxyCode}
+76   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"RandomRoom, 12 rooms, 24 nodes"})
+77 \{
+78 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Random\+Room\+Position\+Allocator\+Test\+Case@{Random\+Room\+Position\+Allocator\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Random\+Room\+Position\+Allocator\+Test\+Case@{Random\+Room\+Position\+Allocator\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Random\+Room\+Position\+Allocator\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classRandomRoomPositionAllocatorTestCase_ae386f6e4ee1b786b018786ee9be7e969}{}\label{classRandomRoomPositionAllocatorTestCase_ae386f6e4ee1b786b018786ee9be7e969}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+82 \{
+83   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+84 
+85  
+86 
+87   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"create building"});
+88   \hyperlink{classns3_1_1Ptr}{Ptr<Building>} \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b} = CreateObject<Building> ();
+89   b->\hyperlink{classns3_1_1Building_a4b69659f05a983f06e33e7db62415915}{SetBoundaries} (\hyperlink{classns3_1_1Box}{Box} (1, 3, 1, 4, 1, 3));
+90   b->\hyperlink{classns3_1_1Building_ae9f97075b5c8bf4685703e30ed049791}{SetNFloors} (2);
+91   b->\hyperlink{classns3_1_1Building_a60eac680f1059fb9d883a659607e2fae}{SetNRoomsX} (2);
+92   b->\hyperlink{classns3_1_1Building_a9103ee5b5edf013624d7e18422c4ba06}{SetNRoomsY} (3);
+93 
+94   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+95   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (24);
+96 
+97   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+98   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+99   \hyperlink{classns3_1_1Ptr}{Ptr<PositionAllocator>} positionAlloc = CreateObject<RandomRoomPositionAllocator> ()
+      ;
+100   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+101   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (nodes);
+102   BuildingsHelper::Install (nodes);
+103 
+104   BuildingsHelper::MakeMobilityModelConsistent ();
+105 
+106   std::map<Room, uint32\_t> roomCounter;
+107 
+108   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1NodeContainer_aa1a9f2d2b09bfef7d066d3974bca2cc4}{NodeContainer::Iterator} it = nodes.\hyperlink{classns3_1_1NodeContainer_adf0f639aff139db107526288777eb533}{Begin} (); it != nodes.
+      \hyperlink{classns3_1_1NodeContainer_a8ea0bcac137597d192c5e6b95ca60464}{End} (); ++it)
+109     \{
+110       \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} mm = (*it)->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+111       \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (mm, \textcolor{stringliteral}{"no mobility model aggregated to this node"});
+112       \hyperlink{classns3_1_1Ptr}{Ptr<MobilityBuildingInfo>} bmm = mm->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1MobilityBuildingInfo}{MobilityBuildingInfo}> ();
+113       \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (bmm, \textcolor{stringliteral}{"MobilityBuildingInfo has not been aggregated to this node mobility
+       model"});
+114 
+115       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (bmm->\hyperlink{classns3_1_1MobilityBuildingInfo_a2bba20054cc48efcca2d5e0c46f8171c}{IsIndoor} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{"node should be indoor"});
+116       \hyperlink{structRoom}{Room} r (bmm->\hyperlink{classns3_1_1MobilityBuildingInfo_ad40faf32d419734e8c86f630e66ab18d}{GetRoomNumberX} (), bmm->\hyperlink{classns3_1_1MobilityBuildingInfo_a5297704859be8e1d3ad22ea3f5f93dbd}{GetRoomNumberY} (), bmm->
+      \hyperlink{classns3_1_1MobilityBuildingInfo_aedb2647206f2dae0aa98ec9ac11873c7}{GetFloorNumber} ());
+117       ++(roomCounter[r]);
+118 
+119       Vector \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = mm->\hyperlink{classns3_1_1MobilityModel_aba838f06ec5bbb2d193d94b8c0e4abb4}{GetPosition} ();
+120       \hyperlink{group__testing_ga868cfb773df312b867a506bdd2e3cbef}{NS\_TEST\_ASSERT\_MSG\_GT} (p.x, bmm->\hyperlink{classns3_1_1MobilityBuildingInfo_ad40faf32d419734e8c86f630e66ab18d}{GetRoomNumberX} (), \textcolor{stringliteral}{"wrong x value
+      "});
+121       \hyperlink{group__testing_ga1d96848b91407c9a0b36583e8b0ad7ae}{NS\_TEST\_ASSERT\_MSG\_LT} (p.x, bmm->\hyperlink{classns3_1_1MobilityBuildingInfo_ad40faf32d419734e8c86f630e66ab18d}{GetRoomNumberX} () + 1, \textcolor{stringliteral}{"wrong x
+       value"});
+122       \hyperlink{group__testing_ga868cfb773df312b867a506bdd2e3cbef}{NS\_TEST\_ASSERT\_MSG\_GT} (p.y, bmm->\hyperlink{classns3_1_1MobilityBuildingInfo_a5297704859be8e1d3ad22ea3f5f93dbd}{GetRoomNumberY} (), \textcolor{stringliteral}{"wrong y value
+      "});
+123       \hyperlink{group__testing_ga1d96848b91407c9a0b36583e8b0ad7ae}{NS\_TEST\_ASSERT\_MSG\_LT} (p.y, bmm->\hyperlink{classns3_1_1MobilityBuildingInfo_a5297704859be8e1d3ad22ea3f5f93dbd}{GetRoomNumberY} () + 1, \textcolor{stringliteral}{"wrong y
+       value"});
+124       \hyperlink{group__testing_ga868cfb773df312b867a506bdd2e3cbef}{NS\_TEST\_ASSERT\_MSG\_GT} (p.z, bmm->\hyperlink{classns3_1_1MobilityBuildingInfo_aedb2647206f2dae0aa98ec9ac11873c7}{GetFloorNumber} (), \textcolor{stringliteral}{"wrong z value
+      "});
+125       \hyperlink{group__testing_ga1d96848b91407c9a0b36583e8b0ad7ae}{NS\_TEST\_ASSERT\_MSG\_LT} (p.z, bmm->\hyperlink{classns3_1_1MobilityBuildingInfo_aedb2647206f2dae0aa98ec9ac11873c7}{GetFloorNumber} () + 1, \textcolor{stringliteral}{"wrong z
+       value"});
+126 
+127     \}
+128 
+129   \textcolor{keywordflow}{for} (std::map<Room, uint32\_t>::iterator it = roomCounter.begin (); it != roomCounter.end (); ++it)
+130     \{
+131       \textcolor{comment}{// random selection is done without replacement until the set of}
+132       \textcolor{comment}{// eligible room is empty, at which point the set is filled}
+133       \textcolor{comment}{// again. Hence with 24 nodes and 12 rooms we expect 2 nodes per room}
+134       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (it->second, 2, \textcolor{stringliteral}{"expected 2 nodes per room"});
+135     \}
+136 
+137   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (roomCounter.size (), 12, \textcolor{stringliteral}{"expected 12 rooms allocated"});
+138 
+139   Simulator::Destroy ();
+140 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+buildings/test/\hyperlink{building-position-allocator-test_8cc}{building-\/position-\/allocator-\/test.\+cc}\end{DoxyCompactItemize}

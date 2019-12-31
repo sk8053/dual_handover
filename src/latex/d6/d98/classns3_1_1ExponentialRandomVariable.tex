@@ -1,0 +1,381 @@
+\hypertarget{classns3_1_1ExponentialRandomVariable}{}\section{ns3\+:\+:Exponential\+Random\+Variable Class Reference}
+\label{classns3_1_1ExponentialRandomVariable}\index{ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}}
+
+
+The exponential distribution Random Number Generator (R\+NG).  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Exponential\+Random\+Variable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Exponential\+Random\+Variable\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1ExponentialRandomVariable_a2c74e018af3a86bce27f4858770095be}{Exponential\+Random\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Creates an exponential distribution R\+NG with the default values for the mean and upper bound. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ExponentialRandomVariable_ac0ad103cc60e19a890828470a05c8751}{Get\+Mean} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the configured mean value of this R\+NG. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ExponentialRandomVariable_aa51f27340bdcfb17364d8981bfa4c66a}{Get\+Bound} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the configured upper bound of this R\+NG. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1ExponentialRandomVariable_a5d7a50466c0b0f036ec0fc1aa478f2c3}{Get\+Value} (double mean, double bound)
+\begin{DoxyCompactList}\small\item\em Get the next random value, as a double from the exponential distribution with the specified mean and upper bound. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1ExponentialRandomVariable_ae872cfc2ae263cb38d0a14b6d8102492}{Get\+Integer} (uint32\+\_\+t mean, uint32\+\_\+t bound)
+\begin{DoxyCompactList}\small\item\em Get the next random value, as an unsigned integer from the exponential distribution with the specified mean and upper bound. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1ExponentialRandomVariable_acac3b8014e1ae17e009ceb876d733c5f}{Get\+Value} (void)
+\begin{DoxyCompactList}\small\item\em Get the next random value as a double drawn from the distribution. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1ExponentialRandomVariable_afcc9f25011bd3fbe0b69c4e31cf212fc}{Get\+Integer} (void)
+\begin{DoxyCompactList}\small\item\em Get the next random value as an integer drawn from the distribution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1ExponentialRandomVariable_ad5fe09ca96d45ee9e10b88bdb7f747bf}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1ExponentialRandomVariable_a8af9234fcf986a6dfe67e43c3b83db1d}{m\+\_\+mean}
+\item 
+double \hyperlink{classns3_1_1ExponentialRandomVariable_a90e6d366c4a2c66ccf78268f75112290}{m\+\_\+bound}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The exponential distribution Random Number Generator (R\+NG). 
+
+This class supports the creation of objects that return random numbers from a fixed exponential distribution. It also supports the generation of single random numbers from various exponential distributions.
+
+The probability density function of an exponential variable is defined as\+: \[ P(x) dx = \alpha e^{-\alpha x} dx, \quad x \in [0, +\infty) \] over the interval $[0, +\infty)$, where $ \alpha = \frac{1}{Mean} $ and {\ttfamily Mean} is a configurable attribute.
+
+The normal R\+NG value $x$ is calculated by
+
+\[ x = - 1/\alpha \log(u) \]
+
+where $u$ is a uniform random variable on $[0,1)$.
+
+\begin{DoxyParagraph}{Bounded Distribution}
+
+\end{DoxyParagraph}
+Since exponential distributions can theoretically return unbounded values, it is sometimes useful to specify a fixed upper limit. The bounded version is defined over the interval $[0,b]$ as\+:
+
+\[ P(x; b) dx = \alpha e^{-\alpha x} dx \quad x \in [0,b] \]
+
+where the {\ttfamily Bound} $b$ is a configurable attribute.
+
+Note that in this case the true mean of the distribution is smaller than the nominal mean value\+:
+
+\[ <X: P(x; b)> = 1/\alpha - b/(e^{\alpha \, b} -1) \]
+
+\begin{DoxyParagraph}{Example}
+
+\end{DoxyParagraph}
+Here is an example of how to use this class\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{double} mean = 3.14;
+\textcolor{keywordtype}{double} bound = 0.0;
+
+Ptr<ExponentialRandomVariable> \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x} = CreateObject<ExponentialRandomVariable> ();
+x->SetAttribute (\textcolor{stringliteral}{"Mean"}, DoubleValue (mean));
+x->SetAttribute (\textcolor{stringliteral}{"Bound"}, DoubleValue (bound));
+
+\textcolor{comment}{// The expected value for the mean of the values returned by an}
+\textcolor{comment}{// exponentially distributed random variable is equal to mean.}
+\textcolor{keywordtype}{double} value = x->GetValue ();
+\end{DoxyCode}
+
+
+\begin{DoxyParagraph}{Antithetic Values.}
+
+\end{DoxyParagraph}
+The antithetic value is calculated from
+
+\[ x' = - mean * \log(1 - u), \]
+
+where again $u$ is a uniform random variable on $[0,1)$. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}!Exponential\+Random\+Variable@{Exponential\+Random\+Variable}}
+\index{Exponential\+Random\+Variable@{Exponential\+Random\+Variable}!ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Exponential\+Random\+Variable()}{ExponentialRandomVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Exponential\+Random\+Variable\+::\+Exponential\+Random\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ExponentialRandomVariable_a2c74e018af3a86bce27f4858770095be}{}\label{classns3_1_1ExponentialRandomVariable_a2c74e018af3a86bce27f4858770095be}
+
+
+Creates an exponential distribution R\+NG with the default values for the mean and upper bound. 
+
+
+\begin{DoxyCode}
+388 \{
+389   \textcolor{comment}{// m\_mean and m\_bound are initialized after constructor by attributes}
+390   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+391 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}!Get\+Bound@{Get\+Bound}}
+\index{Get\+Bound@{Get\+Bound}!ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Bound(void) const }{GetBound(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Exponential\+Random\+Variable\+::\+Get\+Bound (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ExponentialRandomVariable_aa51f27340bdcfb17364d8981bfa4c66a}{}\label{classns3_1_1ExponentialRandomVariable_aa51f27340bdcfb17364d8981bfa4c66a}
+
+
+Get the configured upper bound of this R\+NG. 
+
+\begin{DoxyReturn}{Returns}
+The upper bound. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+401 \{
+402   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+403   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ExponentialRandomVariable_a90e6d366c4a2c66ccf78268f75112290}{m\_bound};
+404 \}
+\end{DoxyCode}
+\index{ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(uint32\+\_\+t mean, uint32\+\_\+t bound)}{GetInteger(uint32_t mean, uint32_t bound)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Exponential\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{mean, }
+\item[{uint32\+\_\+t}]{bound}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ExponentialRandomVariable_ae872cfc2ae263cb38d0a14b6d8102492}{}\label{classns3_1_1ExponentialRandomVariable_ae872cfc2ae263cb38d0a14b6d8102492}
+
+
+Get the next random value, as an unsigned integer from the exponential distribution with the specified mean and upper bound. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mean} & Mean value of the unbounded exponential distribution. \\
+\hline
+\mbox{\tt in}  & {\em bound} & Upper bound on values returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+431 \{
+432   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mean << bound);
+433   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>} ( \hyperlink{classns3_1_1ExponentialRandomVariable_acac3b8014e1ae17e009ceb876d733c5f}{GetValue} (mean, bound) );
+434 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(void)}{GetInteger(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Exponential\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1ExponentialRandomVariable_afcc9f25011bd3fbe0b69c4e31cf212fc}{}\label{classns3_1_1ExponentialRandomVariable_afcc9f25011bd3fbe0b69c4e31cf212fc}
+
+
+Get the next random value as an integer drawn from the distribution. 
+
+\begin{DoxyReturn}{Returns}
+An integer random value. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+444 \{
+445   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+446   \textcolor{keywordflow}{return} (uint32\_t)\hyperlink{classns3_1_1ExponentialRandomVariable_acac3b8014e1ae17e009ceb876d733c5f}{GetValue} (\hyperlink{classns3_1_1ExponentialRandomVariable_a8af9234fcf986a6dfe67e43c3b83db1d}{m\_mean}, \hyperlink{classns3_1_1ExponentialRandomVariable_a90e6d366c4a2c66ccf78268f75112290}{m\_bound});
+447 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}!Get\+Mean@{Get\+Mean}}
+\index{Get\+Mean@{Get\+Mean}!ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Mean(void) const }{GetMean(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Exponential\+Random\+Variable\+::\+Get\+Mean (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ExponentialRandomVariable_ac0ad103cc60e19a890828470a05c8751}{}\label{classns3_1_1ExponentialRandomVariable_ac0ad103cc60e19a890828470a05c8751}
+
+
+Get the configured mean value of this R\+NG. 
+
+\begin{DoxyNote}{Note}
+This will not be the actual mean if the distribution is truncated by a bound. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+The configured mean value. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+395 \{
+396   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+397   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ExponentialRandomVariable_a8af9234fcf986a6dfe67e43c3b83db1d}{m\_mean};
+398 \}
+\end{DoxyCode}
+\index{ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Exponential\+Random\+Variable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1ExponentialRandomVariable_ad5fe09ca96d45ee9e10b88bdb7f747bf}{}\label{classns3_1_1ExponentialRandomVariable_ad5fe09ca96d45ee9e10b88bdb7f747bf}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+371 \{
+372   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::ExponentialRandomVariable"})
+373     .SetParent<\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{RandomVariableStream}>()
+374     .SetGroupName (\textcolor{stringliteral}{"Core"})
+375     .AddConstructor<\hyperlink{classns3_1_1ExponentialRandomVariable_a2c74e018af3a86bce27f4858770095be}{ExponentialRandomVariable}> ()
+376     .AddAttribute(\textcolor{stringliteral}{"Mean"}, \textcolor{stringliteral}{"The mean of the values returned by this RNG stream."},
+377                   DoubleValue(1.0),
+378                   MakeDoubleAccessor(&\hyperlink{classns3_1_1ExponentialRandomVariable_a8af9234fcf986a6dfe67e43c3b83db1d}{ExponentialRandomVariable::m\_mean}),
+379                   MakeDoubleChecker<double>())
+380     .AddAttribute(\textcolor{stringliteral}{"Bound"}, \textcolor{stringliteral}{"The upper bound on the values returned by this RNG stream."},
+381                   DoubleValue(0.0),
+382                   MakeDoubleAccessor(&\hyperlink{classns3_1_1ExponentialRandomVariable_a90e6d366c4a2c66ccf78268f75112290}{ExponentialRandomVariable::m\_bound})
+      ,
+383                   MakeDoubleChecker<double>())
+384     ;
+385   \textcolor{keywordflow}{return} tid;
+386 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(double mean, double bound)}{GetValue(double mean, double bound)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Exponential\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{double}]{mean, }
+\item[{double}]{bound}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ExponentialRandomVariable_a5d7a50466c0b0f036ec0fc1aa478f2c3}{}\label{classns3_1_1ExponentialRandomVariable_a5d7a50466c0b0f036ec0fc1aa478f2c3}
+
+
+Get the next random value, as a double from the exponential distribution with the specified mean and upper bound. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mean} & Mean value of the unbounded exponential distribution. \\
+\hline
+\mbox{\tt in}  & {\em bound} & Upper bound on values returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A floating point random value. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+408 \{
+409   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mean << bound);
+410   \textcolor{keywordflow}{while} (1)
+411     \{
+412       \textcolor{comment}{// Get a uniform random variable in [0,1].}
+413       \textcolor{keywordtype}{double} v = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+414       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+415         \{
+416           v = (1 - v);
+417         \}
+418 
+419       \textcolor{comment}{// Calculate the exponential random variable.}
+420       \textcolor{keywordtype}{double} r = -mean*std::log (v);
+421 
+422       \textcolor{comment}{// Use this value if it's acceptable.}
+423       \textcolor{keywordflow}{if} (bound == 0 || r <= bound)
+424         \{
+425           \textcolor{keywordflow}{return} r;
+426         \}
+427     \}
+428 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(void)}{GetValue(void)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Exponential\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1ExponentialRandomVariable_acac3b8014e1ae17e009ceb876d733c5f}{}\label{classns3_1_1ExponentialRandomVariable_acac3b8014e1ae17e009ceb876d733c5f}
+
+
+Get the next random value as a double drawn from the distribution. 
+
+\begin{DoxyReturn}{Returns}
+A floating point random value. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+438 \{
+439   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+440   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ExponentialRandomVariable_acac3b8014e1ae17e009ceb876d733c5f}{GetValue} (\hyperlink{classns3_1_1ExponentialRandomVariable_a8af9234fcf986a6dfe67e43c3b83db1d}{m\_mean}, \hyperlink{classns3_1_1ExponentialRandomVariable_a90e6d366c4a2c66ccf78268f75112290}{m\_bound});
+441 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}!m\+\_\+bound@{m\+\_\+bound}}
+\index{m\+\_\+bound@{m\+\_\+bound}!ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+bound}{m_bound}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Exponential\+Random\+Variable\+::m\+\_\+bound\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ExponentialRandomVariable_a90e6d366c4a2c66ccf78268f75112290}{}\label{classns3_1_1ExponentialRandomVariable_a90e6d366c4a2c66ccf78268f75112290}
+The upper bound on values that can be returned by this R\+NG stream. \index{ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}!m\+\_\+mean@{m\+\_\+mean}}
+\index{m\+\_\+mean@{m\+\_\+mean}!ns3\+::\+Exponential\+Random\+Variable@{ns3\+::\+Exponential\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+mean}{m_mean}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Exponential\+Random\+Variable\+::m\+\_\+mean\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ExponentialRandomVariable_a8af9234fcf986a6dfe67e43c3b83db1d}{}\label{classns3_1_1ExponentialRandomVariable_a8af9234fcf986a6dfe67e43c3b83db1d}
+The mean value of the unbounded exponential distribution. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

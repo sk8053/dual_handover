@@ -1,0 +1,95 @@
+\hypertarget{config-store-save_8cc}{}\section{config-\/store/examples/config-\/store-\/save.cc File Reference}
+\label{config-store-save_8cc}\index{config-\/store/examples/config-\/store-\/save.\+cc@{config-\/store/examples/config-\/store-\/save.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+Include dependency graph for config-\/store-\/save.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classConfigExample}{Config\+Example}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{config-store-save_8cc_a30b7bce756bdd4eebe20438f7e7fcb5c}{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED} (\hyperlink{classConfigExample}{Config\+Example})
+\item 
+int \hyperlink{config-store-save_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{config-\/store-\/save.\+cc@{config-\/store-\/save.\+cc}!main@{main}}
+\index{main@{main}!config-\/store-\/save.\+cc@{config-\/store-\/save.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{config-store-save_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{config-store-save_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+32 \{
+33   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+34   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+35   
+36   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::ConfigExample::TestInt16"}, IntegerValue (-5));
+37 
+38   \hyperlink{classns3_1_1Ptr}{Ptr<ConfigExample>} a\_obj = CreateObject<ConfigExample> ();
+39   \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} (a\_obj->\hyperlink{classConfigExample_a6811c9cb03e7c3f04090bb1fd20861c0}{m\_int16} == -5, \textcolor{stringliteral}{"Cannot set ConfigExample's integer
+       attribute via Config::SetDefault"});
+40 
+41   \hyperlink{classns3_1_1Ptr}{Ptr<ConfigExample>} b\_obj = CreateObject<ConfigExample> ();
+42   b\_obj->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"TestInt16"}, IntegerValue (-3));
+43   IntegerValue iv;
+44   b\_obj->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"TestInt16"}, iv);
+45   \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} (iv.Get () == -3, \textcolor{stringliteral}{"Cannot set ConfigExample's integer attribute
+       via SetAttribute"});
+46 
+47   \textcolor{comment}{// These test objects are not rooted in any ns-3 configuration namespace.}
+48   \textcolor{comment}{// This is usually done automatically for ns3 nodes and channels, but}
+49   \textcolor{comment}{// we can establish a new root and anchor one of them there (note; we }
+50   \textcolor{comment}{// can't use two objects of the same type as roots).  Rooting one of these}
+51   \textcolor{comment}{// is necessary for it to show up in the config namespace so that}
+52   \textcolor{comment}{// ConfigureAttributes() will work below.}
+53   \hyperlink{group__config_gadf663c596f54bed678e83cccd4e3d9d5}{Config::RegisterRootNamespaceObject} (b\_obj);
+54   
+55 \textcolor{preprocessor}{#ifdef HAVE\_LIBXML2}
+56   \textcolor{comment}{// Output config store to XML format}
+57   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::ConfigStore::Filename"}, StringValue (\textcolor{stringliteral}{"output-attributes.xml"})
+      );
+58   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::ConfigStore::FileFormat"}, StringValue (\textcolor{stringliteral}{"Xml"}));
+59   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::ConfigStore::Mode"}, StringValue (\textcolor{stringliteral}{"Save"}));
+60   \hyperlink{classns3_1_1ConfigStore}{ConfigStore} outputConfig;
+61   outputConfig.\hyperlink{classns3_1_1ConfigStore_a0a6137574d7c847c3823af8b9d1bb886}{ConfigureDefaults} ();
+62   outputConfig.\hyperlink{classns3_1_1ConfigStore_a3e126c39d420519bd7b1a5f7bca08590}{ConfigureAttributes} ();
+63 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* HAVE\_LIBXML2 */}\textcolor{preprocessor}{}
+64 
+65   \textcolor{comment}{// Output config store to txt format}
+66   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::ConfigStore::Filename"}, StringValue (\textcolor{stringliteral}{"output-attributes.txt"})
+      );
+67   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::ConfigStore::FileFormat"}, StringValue (\textcolor{stringliteral}{"RawText"}));
+68   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::ConfigStore::Mode"}, StringValue (\textcolor{stringliteral}{"Save"}));
+69   \hyperlink{classns3_1_1ConfigStore}{ConfigStore} outputConfig2;
+70   outputConfig2.\hyperlink{classns3_1_1ConfigStore_a0a6137574d7c847c3823af8b9d1bb886}{ConfigureDefaults} ();
+71   outputConfig2.\hyperlink{classns3_1_1ConfigStore_a3e126c39d420519bd7b1a5f7bca08590}{ConfigureAttributes} ();
+72  
+73   Simulator::Run ();
+74 
+75   Simulator::Destroy ();
+76 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{config-\/store-\/save.\+cc@{config-\/store-\/save.\+cc}!N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED@{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED}}
+\index{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED@{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED}!config-\/store-\/save.\+cc@{config-\/store-\/save.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+E\+D(\+Config\+Example)}{NS_OBJECT_ENSURE_REGISTERED(ConfigExample)}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED (
+\begin{DoxyParamCaption}
+\item[{{\bf Config\+Example}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{config-store-save_8cc_a30b7bce756bdd4eebe20438f7e7fcb5c}{}\label{config-store-save_8cc_a30b7bce756bdd4eebe20438f7e7fcb5c}

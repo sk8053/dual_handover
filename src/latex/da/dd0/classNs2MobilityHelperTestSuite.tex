@@ -1,0 +1,328 @@
+\hypertarget{classNs2MobilityHelperTestSuite}{}\section{Ns2\+Mobility\+Helper\+Test\+Suite Class Reference}
+\label{classNs2MobilityHelperTestSuite}\index{Ns2\+Mobility\+Helper\+Test\+Suite@{Ns2\+Mobility\+Helper\+Test\+Suite}}
+
+
+The test suite.  
+
+
+
+
+Inheritance diagram for Ns2\+Mobility\+Helper\+Test\+Suite\+:
+% FIG 0
+
+
+Collaboration diagram for Ns2\+Mobility\+Helper\+Test\+Suite\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classNs2MobilityHelperTestSuite_a948880f0823bd308c926b705411b8b46}{Ns2\+Mobility\+Helper\+Test\+Suite} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The test suite. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Ns2\+Mobility\+Helper\+Test\+Suite@{Ns2\+Mobility\+Helper\+Test\+Suite}!Ns2\+Mobility\+Helper\+Test\+Suite@{Ns2\+Mobility\+Helper\+Test\+Suite}}
+\index{Ns2\+Mobility\+Helper\+Test\+Suite@{Ns2\+Mobility\+Helper\+Test\+Suite}!Ns2\+Mobility\+Helper\+Test\+Suite@{Ns2\+Mobility\+Helper\+Test\+Suite}}
+\subsubsection[{\texorpdfstring{Ns2\+Mobility\+Helper\+Test\+Suite()}{Ns2MobilityHelperTestSuite()}}]{\setlength{\rightskip}{0pt plus 5cm}Ns2\+Mobility\+Helper\+Test\+Suite\+::\+Ns2\+Mobility\+Helper\+Test\+Suite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classNs2MobilityHelperTestSuite_a948880f0823bd308c926b705411b8b46}{}\label{classNs2MobilityHelperTestSuite_a948880f0823bd308c926b705411b8b46}
+
+\begin{DoxyCode}
+278                                 : \hyperlink{classns3_1_1TestSuite_a904b0c40583b744d30908aeb94636d1a}{TestSuite} (\textcolor{stringliteral}{"mobility-ns2-trace-helper"}, 
+      \hyperlink{classns3_1_1TestSuite_a1ebfcab34ec8161e085e8e3a1855eae0a3885375a3787abf60431f8454b3cadbd}{UNIT})
+279   \{
+280     \hyperlink{classns3_1_1TestCase_ab002fb0e5071fcde71a92ca9e8224b23}{SetDataDir} (NS\_TEST\_SOURCEDIR);
+281 
+282     \textcolor{comment}{// to be used as temporary variable for test cases.}
+283     \textcolor{comment}{// Note that test suite takes care of deleting all test cases.}
+284     \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} * t (0);
+285 
+286     \textcolor{comment}{// Initial position}
+287     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"initial position"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1));
+288     t->SetTrace (\textcolor{stringliteral}{"$node\_(0) set X\_ 1.0\(\backslash\)n"}
+289                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 2.0\(\backslash\)n"}
+290                  \textcolor{stringliteral}{"$node\_(0) set Z\_ 3.0\(\backslash\)n"}
+291                  );
+292     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (1, 2, 3), Vector (0, 0, 0));
+293     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+294 
+295     \textcolor{comment}{// Check parsing comments, empty lines and no EOF at the end of file}
+296     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"comments"}, \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1));
+297     t->SetTrace (\textcolor{stringliteral}{"# comment\(\backslash\)n"}
+298                  \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n"} \textcolor{comment}{// empty lines}
+299                  \textcolor{stringliteral}{"$node\_(0) set X\_ 1.0 # comment \(\backslash\)n"}
+300                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 2.0 ### \(\backslash\)n"}
+301                  \textcolor{stringliteral}{"$node\_(0) set Z\_ 3.0 # $node\_(0) set Z\_ 3.0\(\backslash\)n"}
+302                  \textcolor{stringliteral}{"#$node\_(0) set Z\_ 100 #"}
+303                  );
+304     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (1, 2, 3), Vector (0, 0, 0));
+305     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+306 
+307     \textcolor{comment}{// Simple setdest. Arguments are interpreted as x, y, speed by default}
+308     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"simple setdest"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10));
+309     t->SetTrace (\textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(0) setdest 25 0 5\(\backslash\)""});
+310     \textcolor{comment}{//                     id  t  position         velocity}
+311     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (0, 0, 0), Vector (0, 0, 0));
+312     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 1, Vector (0, 0, 0), Vector (5, 0, 0));
+313     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 6, Vector (25, 0, 0), Vector (0, 0, 0));
+314     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+315 
+316     \textcolor{comment}{// Several set and setdest. Arguments are interpreted as x, y, speed by default}
+317     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"square setdest"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (6));
+318     t->SetTrace (\textcolor{stringliteral}{"$node\_(0) set X\_ 0.0\(\backslash\)n"}
+319                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 0.0\(\backslash\)n"}
+320                  \textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(0) setdest 5  0  5\(\backslash\)"\(\backslash\)n"}
+321                  \textcolor{stringliteral}{"$ns\_ at 2.0 \(\backslash\)"$node\_(0) setdest 5  5  5\(\backslash\)"\(\backslash\)n"}
+322                  \textcolor{stringliteral}{"$ns\_ at 3.0 \(\backslash\)"$node\_(0) setdest 0  5  5\(\backslash\)"\(\backslash\)n"}
+323                  \textcolor{stringliteral}{"$ns\_ at 4.0 \(\backslash\)"$node\_(0) setdest 0  0  5\(\backslash\)"\(\backslash\)n"}
+324                  );
+325     \textcolor{comment}{//                     id  t  position         velocity}
+326     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (0, 0, 0), Vector (0,  0, 0));
+327     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 1, Vector (0, 0, 0), Vector (5,  0, 0));
+328     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 2, Vector (5, 0, 0), Vector (0,  0, 0));
+329     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 2, Vector (5, 0, 0), Vector (0,  5, 0));
+330     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 3, Vector (5, 5, 0), Vector (0,  0, 0));
+331     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 3, Vector (5, 5, 0), Vector (-5, 0, 0));
+332     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 4, Vector (0, 5, 0), Vector (0, 0, 0));
+333     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 4, Vector (0, 5, 0), Vector (0, -5, 0));
+334     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 5, Vector (0, 0, 0), Vector (0,  0, 0));
+335     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+336 
+337     \textcolor{comment}{// Copy of previous test case but with the initial positions at}
+338     \textcolor{comment}{// the end of the trace rather than at the beginning.}
+339     \textcolor{comment}{//}
+340     \textcolor{comment}{// Several set and setdest. Arguments are interpreted as x, y, speed by default}
+341     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"square setdest (initial positions at end)"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (6));
+342     t->SetTrace (\textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(0) setdest 15  10  5\(\backslash\)"\(\backslash\)n"}
+343                  \textcolor{stringliteral}{"$ns\_ at 2.0 \(\backslash\)"$node\_(0) setdest 15  15  5\(\backslash\)"\(\backslash\)n"}
+344                  \textcolor{stringliteral}{"$ns\_ at 3.0 \(\backslash\)"$node\_(0) setdest 10  15  5\(\backslash\)"\(\backslash\)n"}
+345                  \textcolor{stringliteral}{"$ns\_ at 4.0 \(\backslash\)"$node\_(0) setdest 10  10  5\(\backslash\)"\(\backslash\)n"}
+346                  \textcolor{stringliteral}{"$node\_(0) set X\_ 10.0\(\backslash\)n"}
+347                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 10.0\(\backslash\)n"}
+348                  );
+349     \textcolor{comment}{//                     id  t  position         velocity}
+350     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (10, 10, 0), Vector (0,  0, 0));
+351     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 1, Vector (10, 10, 0), Vector (5,  0, 0));
+352     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 2, Vector (15, 10, 0), Vector (0,  0, 0));
+353     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 2, Vector (15, 10, 0), Vector (0,  5, 0));
+354     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 3, Vector (15, 15, 0), Vector (0,  0, 0));
+355     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 3, Vector (15, 15, 0), Vector (-5, 0, 0));
+356     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 4, Vector (10, 15, 0), Vector (0, 0, 0));
+357     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 4, Vector (10, 15, 0), Vector (0, -5, 0));
+358     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 5, Vector (10, 10, 0), Vector (0,  0, 0));
+359     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+360 
+361     \textcolor{comment}{// Scheduled set position}
+362     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"scheduled set position"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2));
+363     t->SetTrace (\textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(0) set X\_ 10\(\backslash\)"\(\backslash\)n"}
+364                  \textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(0) set Z\_ 10\(\backslash\)"\(\backslash\)n"}
+365                  \textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(0) set Y\_ 10\(\backslash\)""});
+366     \textcolor{comment}{//                     id  t  position         velocity}
+367     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 1, Vector (10, 0, 0), Vector (0, 0, 0));
+368     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 1, Vector (10, 0, 10), Vector (0, 0, 0));
+369     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 1, Vector (10, 10, 10), Vector (0, 0, 0));
+370     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+371 
+372     \textcolor{comment}{// Malformed lines}
+373     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"malformed lines"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2));
+374     t->SetTrace (\textcolor{stringliteral}{"$node() set X\_ 1 # node id is not present\(\backslash\)n"}
+375                  \textcolor{stringliteral}{"$node # incoplete line\(\backslash\)"\(\backslash\)n"}
+376                  \textcolor{stringliteral}{"$node this line is not correct\(\backslash\)n"}
+377                  \textcolor{stringliteral}{"$node\_(0) set X\_ 1 # line OK \(\backslash\)n"}
+378                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 2 # line OK \(\backslash\)n"}
+379                  \textcolor{stringliteral}{"$node\_(0) set Z\_ 3 # line OK \(\backslash\)n"}
+380                  \textcolor{stringliteral}{"$ns\_ at  \(\backslash\)"$node\_(0) setdest 4 4 4\(\backslash\)" # time not present\(\backslash\)n"}
+381                  \textcolor{stringliteral}{"$ns\_ at 1 \(\backslash\)"$node\_(0) setdest 2 2 1   \(\backslash\)" # line OK \(\backslash\)n"});
+382     \textcolor{comment}{//                     id  t  position         velocity}
+383     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (1, 2, 3), Vector (0, 0, 0));
+384     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 1, Vector (1, 2, 3), Vector (1, 0, 0));
+385     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 2, Vector (2, 2, 3), Vector (0, 0, 0));
+386     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+387 
+388     \textcolor{comment}{// Non possible values}
+389     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"non possible values"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2));
+390     t->SetTrace (\textcolor{stringliteral}{"$node\_(0) set X\_ 1 # line OK \(\backslash\)n"}
+391                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 2 # line OK \(\backslash\)n"}
+392                  \textcolor{stringliteral}{"$node\_(0) set Z\_ 3 # line OK \(\backslash\)n"}
+393                  \textcolor{stringliteral}{"$node\_(-22) set Y\_ 3 # node id not correct\(\backslash\)n"}
+394                  \textcolor{stringliteral}{"$node\_(3.3) set Y\_ 1111 # node id not correct\(\backslash\)n"}
+395                  \textcolor{stringliteral}{"$ns\_ at sss \(\backslash\)"$node\_(0) setdest 5 5 5\(\backslash\)" # time is not a number\(\backslash\)n"}
+396                  \textcolor{stringliteral}{"$ns\_ at 1 \(\backslash\)"$node\_(0) setdest 2 2 1\(\backslash\)" # line OK \(\backslash\)n"}
+397                  \textcolor{stringliteral}{"$ns\_ at 1 \(\backslash\)"$node\_(0) setdest 2 2 -1\(\backslash\)" # negative speed is not correct\(\backslash\)n"}
+398                  \textcolor{stringliteral}{"$ns\_ at 1 \(\backslash\)"$node\_(0) setdest 2 2 sdfs\(\backslash\)"    # speed is not a number\(\backslash\)n"}
+399                  \textcolor{stringliteral}{"$ns\_ at 1 \(\backslash\)"$node\_(0) setdest 2 2 s232dfs\(\backslash\)" # speed is not a number\(\backslash\)n"}
+400                  \textcolor{stringliteral}{"$ns\_ at 1 \(\backslash\)"$node\_(0) setdest 233 2.. s232dfs\(\backslash\)"   # more than one non numbers\(\backslash\)n"}
+401                  \textcolor{stringliteral}{"$ns\_ at -12 \(\backslash\)"$node\_(0) setdest 11 22 33\(\backslash\)" # time should not be negative\(\backslash\)n"});
+402     \textcolor{comment}{//                     id  t  position         velocity}
+403     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (1, 2, 3), Vector (0, 0, 0));
+404     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 1, Vector (1, 2, 3), Vector (1, 0, 0));
+405     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 2, Vector (2, 2, 3), Vector (0, 0, 0));
+406     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+407 
+408     \textcolor{comment}{// More than one node}
+409     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"few nodes, combinations of set and setdest"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10), 3);
+410     t->SetTrace (\textcolor{stringliteral}{"$node\_(0) set X\_ 1.0\(\backslash\)n"}
+411                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 2.0\(\backslash\)n"}
+412                  \textcolor{stringliteral}{"$node\_(0) set Z\_ 3.0\(\backslash\)n"}
+413                  \textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(1) setdest 25 0 5\(\backslash\)"\(\backslash\)n"}
+414                  \textcolor{stringliteral}{"$node\_(2) set X\_ 0.0\(\backslash\)n"}
+415                  \textcolor{stringliteral}{"$node\_(2) set Y\_ 0.0\(\backslash\)n"}
+416                  \textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(2) setdest 5  0  5\(\backslash\)"\(\backslash\)n"}
+417                  \textcolor{stringliteral}{"$ns\_ at 2.0 \(\backslash\)"$node\_(2) setdest 5  5  5\(\backslash\)"\(\backslash\)n"}
+418                  \textcolor{stringliteral}{"$ns\_ at 3.0 \(\backslash\)"$node\_(2) setdest 0  5  5\(\backslash\)"\(\backslash\)n"}
+419                  \textcolor{stringliteral}{"$ns\_ at 4.0 \(\backslash\)"$node\_(2) setdest 0  0  5\(\backslash\)"\(\backslash\)n"});
+420     \textcolor{comment}{//                     id  t  position         velocity}
+421     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (1, 2, 3), Vector (0, 0, 0));
+422     t->AddReferencePoint (\textcolor{stringliteral}{"1"}, 0, Vector (0, 0, 0), Vector (0, 0, 0));
+423     t->AddReferencePoint (\textcolor{stringliteral}{"1"}, 1, Vector (0, 0, 0), Vector (5, 0, 0));
+424     t->AddReferencePoint (\textcolor{stringliteral}{"1"}, 6, Vector (25, 0, 0), Vector (0, 0, 0));
+425     t->AddReferencePoint (\textcolor{stringliteral}{"2"}, 0, Vector (0, 0, 0), Vector (0,  0, 0));
+426     t->AddReferencePoint (\textcolor{stringliteral}{"2"}, 1, Vector (0, 0, 0), Vector (5,  0, 0));
+427     t->AddReferencePoint (\textcolor{stringliteral}{"2"}, 2, Vector (5, 0, 0), Vector (0,  0, 0));
+428     t->AddReferencePoint (\textcolor{stringliteral}{"2"}, 2, Vector (5, 0, 0), Vector (0,  5, 0));
+429     t->AddReferencePoint (\textcolor{stringliteral}{"2"}, 3, Vector (5, 5, 0), Vector (0,  0, 0));
+430     t->AddReferencePoint (\textcolor{stringliteral}{"2"}, 3, Vector (5, 5, 0), Vector (-5, 0, 0));
+431     t->AddReferencePoint (\textcolor{stringliteral}{"2"}, 4, Vector (0, 5, 0), Vector (0, 0, 0));
+432     t->AddReferencePoint (\textcolor{stringliteral}{"2"}, 4, Vector (0, 5, 0), Vector (0, -5, 0));
+433     t->AddReferencePoint (\textcolor{stringliteral}{"2"}, 5, Vector (0, 0, 0), Vector (0,  0, 0));
+434     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+435 
+436     \textcolor{comment}{// Test for Speed == 0, that acts as stop the node.}
+437     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"setdest with speed cero"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10));
+438     t->SetTrace (\textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(0) setdest 25 0 5\(\backslash\)"\(\backslash\)n"}
+439                  \textcolor{stringliteral}{"$ns\_ at 7.0 \(\backslash\)"$node\_(0) setdest 11  22  0\(\backslash\)"\(\backslash\)n"});
+440     \textcolor{comment}{//                     id  t  position         velocity}
+441     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (0, 0, 0), Vector (0, 0, 0));
+442     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 1, Vector (0, 0, 0), Vector (5, 0, 0));
+443     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 6, Vector (25, 0, 0), Vector (0, 0, 0));
+444     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 7, Vector (25, 0, 0), Vector (0, 0, 0));
+445     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+446 
+447 
+448     \textcolor{comment}{// Test negative positions}
+449     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"test negative positions"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10));
+450     t->SetTrace (\textcolor{stringliteral}{"$node\_(0) set X\_ -1.0\(\backslash\)n"}
+451                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 0\(\backslash\)n"}
+452                  \textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(0) setdest 0 0 1\(\backslash\)"\(\backslash\)n"}
+453                  \textcolor{stringliteral}{"$ns\_ at 2.0 \(\backslash\)"$node\_(0) setdest 0  -1  1\(\backslash\)"\(\backslash\)n"});
+454     \textcolor{comment}{//                     id  t  position         velocity}
+455     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (-1, 0, 0), Vector (0, 0, 0));
+456     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 1, Vector (-1, 0, 0), Vector (1, 0, 0));
+457     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 2, Vector (0, 0, 0), Vector (0, 0, 0));
+458     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 2, Vector (0, 0, 0), Vector (0, -1, 0));
+459     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 3, Vector (0, -1, 0), Vector (0, 0, 0));
+460     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+461 
+462     \textcolor{comment}{// Sqare setdest with values in the form 1.0e+2}
+463     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"Foalt numbers in 1.0e+2 format"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (6));
+464     t->SetTrace (\textcolor{stringliteral}{"$node\_(0) set X\_ 0.0\(\backslash\)n"}
+465                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 0.0\(\backslash\)n"}
+466                  \textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(0) setdest 1.0e+2  0       1.0e+2\(\backslash\)"\(\backslash\)n"}
+467                  \textcolor{stringliteral}{"$ns\_ at 2.0 \(\backslash\)"$node\_(0) setdest 1.0e+2  1.0e+2  1.0e+2\(\backslash\)"\(\backslash\)n"}
+468                  \textcolor{stringliteral}{"$ns\_ at 3.0 \(\backslash\)"$node\_(0) setdest 0       1.0e+2  1.0e+2\(\backslash\)"\(\backslash\)n"}
+469                  \textcolor{stringliteral}{"$ns\_ at 4.0 \(\backslash\)"$node\_(0) setdest 0       0       1.0e+2\(\backslash\)"\(\backslash\)n"});
+470     \textcolor{comment}{//                     id  t  position         velocity}
+471     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (0, 0, 0), Vector (0,  0, 0));
+472     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 1, Vector (0, 0, 0), Vector (100,  0, 0));
+473     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 2, Vector (100, 0, 0), Vector (0,  0, 0));
+474     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 2, Vector (100, 0, 0), Vector (0,  100, 0));
+475     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 3, Vector (100, 100, 0), Vector (0,  0, 0));
+476     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 3, Vector (100, 100, 0), Vector (-100, 0, 0));
+477     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 4, Vector (0, 100, 0), Vector (0, 0, 0));
+478     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 4, Vector (0, 100, 0), Vector (0, -100, 0));
+479     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 5, Vector (0, 0, 0), Vector (0,  0, 0));
+480     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+481     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"Bug 1219 testcase"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (16));
+482     t->SetTrace (\textcolor{stringliteral}{"$node\_(0) set X\_ 0.0\(\backslash\)n"}
+483                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 0.0\(\backslash\)n"}
+484                  \textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(0) setdest 0  10       1\(\backslash\)"\(\backslash\)n"}
+485                  \textcolor{stringliteral}{"$ns\_ at 6.0 \(\backslash\)"$node\_(0) setdest 0  -10       1\(\backslash\)"\(\backslash\)n"}
+486                  );
+487     \textcolor{comment}{//                     id  t  position         velocity}
+488     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (0, 0, 0), Vector (0,  0, 0));
+489     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 1, Vector (0, 0, 0), Vector (0,  1, 0));
+490     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 6, Vector (0, 5, 0), Vector (0,  -1, 0));
+491     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 16, Vector (0, -10, 0), Vector (0, 0, 0));
+492     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+493     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"Bug 1059 testcase"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (16));
+494     t->SetTrace (\textcolor{stringliteral}{"$node\_(0) set X\_ 10.0\(\backslash\)r\(\backslash\)n"}
+495                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 0.0\(\backslash\)r\(\backslash\)n"}
+496                  );
+497     \textcolor{comment}{//                     id  t  position         velocity}
+498     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (10, 0, 0), Vector (0,  0, 0));
+499     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+500     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"Bug 1301 testcase"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (16));
+501     t->SetTrace (\textcolor{stringliteral}{"$node\_(0) set X\_ 10.0\(\backslash\)n"}
+502                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 0.0\(\backslash\)n"}
+503                  \textcolor{stringliteral}{"$ns\_ at 1.0 \(\backslash\)"$node\_(0) setdest 10  0       1\(\backslash\)"\(\backslash\)n"}
+504                  );
+505     \textcolor{comment}{//                     id  t  position         velocity}
+506     \textcolor{comment}{// Moving to the current position must change nothing. No NaN}
+507     \textcolor{comment}{// speed must be.}
+508     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0, Vector (10, 0, 0), Vector (0,  0, 0));
+509     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+510 
+511     t = \textcolor{keyword}{new} \hyperlink{classNs2MobilityHelperTest}{Ns2MobilityHelperTest} (\textcolor{stringliteral}{"Bug 1316 testcase"}, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1000));
+512     t->SetTrace (\textcolor{stringliteral}{"$node\_(0) set X\_ 350.00000000000000\(\backslash\)n"}
+513                  \textcolor{stringliteral}{"$node\_(0) set Y\_ 50.00000000000000\(\backslash\)n"}
+514                  \textcolor{stringliteral}{"$ns\_ at 50.00000000000000  \(\backslash\)"$node\_(0) setdest 400.00000000000000 50.00000000000000
+       1.00000000000000\(\backslash\)"\(\backslash\)n"}
+515                  \textcolor{stringliteral}{"$ns\_ at 150.00000000000000 \(\backslash\)"$node\_(0) setdest 400.00000000000000 150.00000000000000
+       4.00000000000000\(\backslash\)"\(\backslash\)n"}
+516                  \textcolor{stringliteral}{"$ns\_ at 300.00000000000000 \(\backslash\)"$node\_(0) setdest 250.00000000000000 150.00000000000000
+       3.00000000000000\(\backslash\)"\(\backslash\)n"}
+517                  \textcolor{stringliteral}{"$ns\_ at 350.00000000000000 \(\backslash\)"$node\_(0) setdest 250.00000000000000 50.00000000000000
+       1.00000000000000\(\backslash\)"\(\backslash\)n"}
+518                  \textcolor{stringliteral}{"$ns\_ at 600.00000000000000 \(\backslash\)"$node\_(0) setdest 250.00000000000000 1050.00000000000000
+       2.00000000000000\(\backslash\)"\(\backslash\)n"}
+519                  \textcolor{stringliteral}{"$ns\_ at 900.00000000000000 \(\backslash\)"$node\_(0) setdest 300.00000000000000 650.00000000000000
+       2.50000000000000\(\backslash\)"\(\backslash\)n"}
+520                  );
+521     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 0.000, Vector (350.000, 50.000, 0.000), Vector (0.000, 0.000, 0.000));
+522     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 50.000, Vector (350.000, 50.000, 0.000), Vector (1.000, 0.000, 0.000));
+523     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 100.000, Vector (400.000, 50.000, 0.000), Vector (0.000, 0.000, 0.000));
+524     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 150.000, Vector (400.000, 50.000, 0.000), Vector (0.000, 4.000, 0.000));
+525     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 175.000, Vector (400.000, 150.000, 0.000), Vector (0.000, 0.000, 0.000));
+526     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 300.000, Vector (400.000, 150.000, 0.000), Vector (-3.000, 0.000, 0.000));
+527     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 350.000, Vector (250.000, 150.000, 0.000), Vector (0.000, 0.000, 0.000));
+528     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 350.000, Vector (250.000, 150.000, 0.000), Vector (0.000, -1.000, 0.000));
+529     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 450.000, Vector (250.000,  50.000, 0.000), Vector (0.000, 0.000, 0.000));
+530     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 600.000, Vector (250.000,  50.000, 0.000), Vector (0.000, 2.000, 0.000));
+531     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 900.000, Vector (250.000,  650.000, 0.000), Vector (2.500, 0.000, 0.000));
+532     t->AddReferencePoint (\textcolor{stringliteral}{"0"}, 920.000, Vector (300.000,  650.000, 0.000), Vector (0.000, 0.000, 0.000));
+533     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (t, TestCase::QUICK);
+534 
+535   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+mobility/test/\hyperlink{ns2-mobility-helper-test-suite_8cc}{ns2-\/mobility-\/helper-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

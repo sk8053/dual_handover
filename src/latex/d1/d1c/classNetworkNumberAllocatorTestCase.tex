@@ -1,0 +1,127 @@
+\hypertarget{classNetworkNumberAllocatorTestCase}{}\section{Network\+Number\+Allocator\+Test\+Case Class Reference}
+\label{classNetworkNumberAllocatorTestCase}\index{Network\+Number\+Allocator\+Test\+Case@{Network\+Number\+Allocator\+Test\+Case}}
+
+
+I\+Pv4 network number Test.  
+
+
+
+
+Inheritance diagram for Network\+Number\+Allocator\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Network\+Number\+Allocator\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classNetworkNumberAllocatorTestCase_a7a13d9c6e2a17af97402dc246114caaa}{Network\+Number\+Allocator\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classNetworkNumberAllocatorTestCase_a85100fbfe328f2eb43b3dd959926cbc0}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classNetworkNumberAllocatorTestCase_a078c6ba36a63f866b595b1491dbf1564}{Do\+Teardown} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to do any local setup required for this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+I\+Pv4 network number Test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Network\+Number\+Allocator\+Test\+Case@{Network\+Number\+Allocator\+Test\+Case}!Network\+Number\+Allocator\+Test\+Case@{Network\+Number\+Allocator\+Test\+Case}}
+\index{Network\+Number\+Allocator\+Test\+Case@{Network\+Number\+Allocator\+Test\+Case}!Network\+Number\+Allocator\+Test\+Case@{Network\+Number\+Allocator\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Network\+Number\+Allocator\+Test\+Case()}{NetworkNumberAllocatorTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Network\+Number\+Allocator\+Test\+Case\+::\+Network\+Number\+Allocator\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classNetworkNumberAllocatorTestCase_a7a13d9c6e2a17af97402dc246114caaa}{}\label{classNetworkNumberAllocatorTestCase_a7a13d9c6e2a17af97402dc246114caaa}
+
+\begin{DoxyCode}
+40   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Make sure the network number allocator is working on some of network prefixes."})
+41 \{
+42 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Network\+Number\+Allocator\+Test\+Case@{Network\+Number\+Allocator\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Network\+Number\+Allocator\+Test\+Case@{Network\+Number\+Allocator\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Network\+Number\+Allocator\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classNetworkNumberAllocatorTestCase_a85100fbfe328f2eb43b3dd959926cbc0}{}\label{classNetworkNumberAllocatorTestCase_a85100fbfe328f2eb43b3dd959926cbc0}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+50 \{
+51   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} network;
+52   Ipv4AddressGenerator::Init (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.0.0.0"}), \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.0.0.0"}),
+53                               \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.0.0"}));
+54   network = Ipv4AddressGenerator::GetNetwork (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.0.0.0"}));
+55   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (network, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"1.0.0.0"}), \textcolor{stringliteral}{"001"});
+56   network = Ipv4AddressGenerator::NextNetwork (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.0.0.0"}));
+57   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (network, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"2.0.0.0"}), \textcolor{stringliteral}{"001"});
+58 
+59   Ipv4AddressGenerator::Init (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.1.0.0"}),
+60                               \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.0.0"}), \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.0.0"}));
+61   network = Ipv4AddressGenerator::GetNetwork (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.0.0"}));
+62   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (network, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.1.0.0"}), \textcolor{stringliteral}{"003"});
+63   network = Ipv4AddressGenerator::NextNetwork (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.0.0"}));
+64   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (network, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.2.0.0"}), \textcolor{stringliteral}{"004"});
+65 
+66   Ipv4AddressGenerator::Init (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.1.0"}),
+67                               \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"}), \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.0.0"}));
+68   network = Ipv4AddressGenerator::GetNetwork (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"}));
+69   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (network, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.1.0"}), \textcolor{stringliteral}{"005"});
+70   network = Ipv4AddressGenerator::NextNetwork (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"}));
+71   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (network, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.2.0"}), \textcolor{stringliteral}{"006"});
+72 
+73   network = Ipv4AddressGenerator::NextNetwork (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.0.0.0"}));
+74   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (network, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"3.0.0.0"}), \textcolor{stringliteral}{"007"});
+75   network = Ipv4AddressGenerator::NextNetwork (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.0.0"}));
+76   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (network, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.3.0.0"}), \textcolor{stringliteral}{"008"});
+77   network = Ipv4AddressGenerator::NextNetwork (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"}));
+78   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (network, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.3.0"}), \textcolor{stringliteral}{"009"});
+79 \}
+\end{DoxyCode}
+\index{Network\+Number\+Allocator\+Test\+Case@{Network\+Number\+Allocator\+Test\+Case}!Do\+Teardown@{Do\+Teardown}}
+\index{Do\+Teardown@{Do\+Teardown}!Network\+Number\+Allocator\+Test\+Case@{Network\+Number\+Allocator\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Teardown(void)}{DoTeardown(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Network\+Number\+Allocator\+Test\+Case\+::\+Do\+Teardown (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classNetworkNumberAllocatorTestCase_a078c6ba36a63f866b595b1491dbf1564}{}\label{classNetworkNumberAllocatorTestCase_a078c6ba36a63f866b595b1491dbf1564}
+
+
+Implementation to do any local setup required for this Test\+Case. 
+
+Subclasses should override this method to perform any costly per-\/test teardown 
+
+Reimplemented from \hyperlink{classns3_1_1TestCase_a8917f1604e28d312a8086f76291e3c46}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+45 \{
+46   \hyperlink{group__config_ga2c1b65724f42f8c72276d7e7ad6df6db}{Ipv4AddressGenerator::Reset} ();
+47 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{ipv4-address-generator-test-suite_8cc}{ipv4-\/address-\/generator-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

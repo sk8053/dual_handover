@@ -1,0 +1,200 @@
+\hypertarget{classOlsrMprTestCase}{}\section{Olsr\+Mpr\+Test\+Case Class Reference}
+\label{classOlsrMprTestCase}\index{Olsr\+Mpr\+Test\+Case@{Olsr\+Mpr\+Test\+Case}}
+
+
+Testcase for M\+PR computation mechanism.  
+
+
+
+
+Inheritance diagram for Olsr\+Mpr\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Olsr\+Mpr\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classOlsrMprTestCase_a52a36a2e3db74830b2880df1b7798d3e}{Olsr\+Mpr\+Test\+Case} ()
+\item 
+\hyperlink{classOlsrMprTestCase_ad9f2dea5fd2b8bd3337d44f3cfaf326f}{$\sim$\+Olsr\+Mpr\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classOlsrMprTestCase_acd5935a465f013ea7c015bb790fe3500}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Run test case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Testcase for M\+PR computation mechanism. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Olsr\+Mpr\+Test\+Case@{Olsr\+Mpr\+Test\+Case}!Olsr\+Mpr\+Test\+Case@{Olsr\+Mpr\+Test\+Case}}
+\index{Olsr\+Mpr\+Test\+Case@{Olsr\+Mpr\+Test\+Case}!Olsr\+Mpr\+Test\+Case@{Olsr\+Mpr\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Olsr\+Mpr\+Test\+Case()}{OlsrMprTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Olsr\+Mpr\+Test\+Case\+::\+Olsr\+Mpr\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classOlsrMprTestCase_a52a36a2e3db74830b2880df1b7798d3e}{}\label{classOlsrMprTestCase_a52a36a2e3db74830b2880df1b7798d3e}
+
+\begin{DoxyCode}
+55   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check OLSR MPR computing mechanism"})
+56 \{
+57 \}
+\end{DoxyCode}
+\index{Olsr\+Mpr\+Test\+Case@{Olsr\+Mpr\+Test\+Case}!````~Olsr\+Mpr\+Test\+Case@{$\sim$\+Olsr\+Mpr\+Test\+Case}}
+\index{````~Olsr\+Mpr\+Test\+Case@{$\sim$\+Olsr\+Mpr\+Test\+Case}!Olsr\+Mpr\+Test\+Case@{Olsr\+Mpr\+Test\+Case}}
+\subsubsection[{\texorpdfstring{$\sim$\+Olsr\+Mpr\+Test\+Case()}{~OlsrMprTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Olsr\+Mpr\+Test\+Case\+::$\sim$\+Olsr\+Mpr\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classOlsrMprTestCase_ad9f2dea5fd2b8bd3337d44f3cfaf326f}{}\label{classOlsrMprTestCase_ad9f2dea5fd2b8bd3337d44f3cfaf326f}
+
+\begin{DoxyCode}
+59 \{
+60 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Olsr\+Mpr\+Test\+Case@{Olsr\+Mpr\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Olsr\+Mpr\+Test\+Case@{Olsr\+Mpr\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Olsr\+Mpr\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOlsrMprTestCase_acd5935a465f013ea7c015bb790fe3500}{}\label{classOlsrMprTestCase_acd5935a465f013ea7c015bb790fe3500}
+
+
+Run test case. 
+
+
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+63 \{
+64   \hyperlink{classns3_1_1Ptr}{Ptr<RoutingProtocol>} protocol = CreateObject<RoutingProtocol> ();
+65   protocol->m\_mainAddress = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.1"});
+66   OlsrState & state = protocol->m\_state;
+67 
+68   \textcolor{comment}{/*}
+69 \textcolor{comment}{   *  1 -- 2}
+70 \textcolor{comment}{   *  |    |}
+71 \textcolor{comment}{   *  3 -- 4}
+72 \textcolor{comment}{   *}
+73 \textcolor{comment}{   * Node 1 must select only one MPR (2 or 3, doesn't matter)}
+74 \textcolor{comment}{   */}
+75   NeighborTuple neigbor;
+76   neigbor.status = NeighborTuple::STATUS\_SYM;
+77   neigbor.willingness = \hyperlink{olsr-routing-protocol-test-suite_8cc_a0b87d49ad8114eabe8dd6eecfb6858e1}{OLSR\_WILL\_DEFAULT};
+78   neigbor.neighborMainAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.2"});
+79   protocol->m\_state.InsertNeighborTuple (neigbor);
+80   neigbor.neighborMainAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.3"});
+81   protocol->m\_state.InsertNeighborTuple (neigbor);
+82   TwoHopNeighborTuple tuple;
+83   tuple.expirationTime = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (3600);
+84   tuple.neighborMainAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.2"});
+85   tuple.twoHopNeighborAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.4"});
+86   protocol->m\_state.InsertTwoHopNeighborTuple (tuple);
+87   tuple.neighborMainAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.3"});
+88   tuple.twoHopNeighborAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.4"});
+89   protocol->m\_state.InsertTwoHopNeighborTuple (tuple);
+90 
+91   protocol->MprComputation ();
+92   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (state.GetMprSet ().size (), 1, \textcolor{stringliteral}{"An only address must be
+       chosen."});
+93   \textcolor{comment}{/*}
+94 \textcolor{comment}{   *  1 -- 2 -- 5}
+95 \textcolor{comment}{   *  |    |}
+96 \textcolor{comment}{   *  3 -- 4}
+97 \textcolor{comment}{   *}
+98 \textcolor{comment}{   * Node 1 must select node 2 as MPR.}
+99 \textcolor{comment}{   */}
+100   tuple.neighborMainAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.2"});
+101   tuple.twoHopNeighborAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.5"});
+102   protocol->m\_state.InsertTwoHopNeighborTuple (tuple);
+103 
+104   protocol->MprComputation ();
+105   \hyperlink{namespacens3_1_1olsr_aa7c4ede0ba85f0ea9da6e6699525bd4a}{MprSet} mpr = state.GetMprSet ();
+106   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (mpr.size (), 1, \textcolor{stringliteral}{"An only address must be chosen."});
+107   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} ((mpr.find (\textcolor{stringliteral}{"10.0.0.2"}) != mpr.end ()), \textcolor{keyword}{true}, \textcolor{stringliteral}{"Node 1 must
+       select node 2 as MPR"});
+108   \textcolor{comment}{/*}
+109 \textcolor{comment}{   *  1 -- 2 -- 5}
+110 \textcolor{comment}{   *  |    |}
+111 \textcolor{comment}{   *  3 -- 4}
+112 \textcolor{comment}{   *  |}
+113 \textcolor{comment}{   *  6}
+114 \textcolor{comment}{   *}
+115 \textcolor{comment}{   * Node 1 must select nodes 2 and 3 as MPRs.}
+116 \textcolor{comment}{   */}
+117   tuple.neighborMainAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.3"});
+118   tuple.twoHopNeighborAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.6"});
+119   protocol->m\_state.InsertTwoHopNeighborTuple (tuple);
+120 
+121   protocol->MprComputation ();
+122   mpr = state.GetMprSet ();
+123   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (mpr.size (), 2, \textcolor{stringliteral}{"An only address must be chosen."});
+124   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} ((mpr.find (\textcolor{stringliteral}{"10.0.0.2"}) != mpr.end ()), \textcolor{keyword}{true}, \textcolor{stringliteral}{"Node 1 must
+       select node 2 as MPR"});
+125   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} ((mpr.find (\textcolor{stringliteral}{"10.0.0.3"}) != mpr.end ()), \textcolor{keyword}{true}, \textcolor{stringliteral}{"Node 1 must
+       select node 3 as MPR"});
+126   \textcolor{comment}{/*}
+127 \textcolor{comment}{   *  7 (OLSR\_WILL\_ALWAYS)}
+128 \textcolor{comment}{   *  |}
+129 \textcolor{comment}{   *  1 -- 2 -- 5}
+130 \textcolor{comment}{   *  |    |}
+131 \textcolor{comment}{   *  3 -- 4}
+132 \textcolor{comment}{   *  |}
+133 \textcolor{comment}{   *  6}
+134 \textcolor{comment}{   *}
+135 \textcolor{comment}{   * Node 1 must select nodes 2, 3 and 7 (since it is WILL\_ALWAYS) as MPRs.}
+136 \textcolor{comment}{   */}
+137   neigbor.willingness = \hyperlink{olsr-routing-protocol-test-suite_8cc_a47254d140ed26351d672c338a8cda435}{OLSR\_WILL\_ALWAYS};
+138   neigbor.neighborMainAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.7"});
+139   protocol->m\_state.InsertNeighborTuple (neigbor);
+140 
+141   protocol->MprComputation ();
+142   mpr = state.GetMprSet ();
+143   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (mpr.size (), 3, \textcolor{stringliteral}{"An only address must be chosen."});
+144   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} ((mpr.find (\textcolor{stringliteral}{"10.0.0.7"}) != mpr.end ()), \textcolor{keyword}{true}, \textcolor{stringliteral}{"Node 1 must
+       select node 7 as MPR"});
+145   \textcolor{comment}{/*}
+146 \textcolor{comment}{   *                7 <- WILL\_ALWAYS}
+147 \textcolor{comment}{   *                |}
+148 \textcolor{comment}{   *      9 -- 8 -- 1 -- 2 -- 5}
+149 \textcolor{comment}{   *                |    |}
+150 \textcolor{comment}{   *           ^    3 -- 4}
+151 \textcolor{comment}{   *           |    |}
+152 \textcolor{comment}{   *   WILL\_NEVER   6}
+153 \textcolor{comment}{   *}
+154 \textcolor{comment}{   * Node 1 must select nodes 2, 3 and 7 (since it is WILL\_ALWAYS) as MPRs.}
+155 \textcolor{comment}{   * Node 1 must NOT select node 8 as MPR since it is WILL\_NEVER}
+156 \textcolor{comment}{   */}
+157   neigbor.willingness = \hyperlink{olsr-routing-protocol-test-suite_8cc_a146d2c103abd49bdfad44b4424769696}{OLSR\_WILL\_NEVER};
+158   neigbor.neighborMainAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.8"});
+159   protocol->m\_state.InsertNeighborTuple (neigbor);
+160   tuple.neighborMainAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.8"});
+161   tuple.twoHopNeighborAddr = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.9"});
+162   protocol->m\_state.InsertTwoHopNeighborTuple (tuple);
+163 
+164   protocol->MprComputation ();
+165   mpr = state.GetMprSet ();
+166   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (mpr.size (), 3, \textcolor{stringliteral}{"An only address must be chosen."});
+167   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} ((mpr.find (\textcolor{stringliteral}{"10.0.0.9"}) == mpr.end ()), \textcolor{keyword}{true}, \textcolor{stringliteral}{"Node 1 must NOT
+       select node 8 as MPR"});
+168 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+olsr/test/\hyperlink{olsr-routing-protocol-test-suite_8cc}{olsr-\/routing-\/protocol-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,216 @@
+\hypertarget{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc}{}\section{spectrum/examples/adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.cc File Reference}
+\label{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc}\index{spectrum/examples/adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc@{spectrum/examples/adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$ns3/core-\/module.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/network-\/module.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/spectrum-\/model-\/ism2400\+M\+Hz-\/res1\+M\+Hz.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/spectrum-\/model-\/300k\+Hz-\/300\+G\+Hz-\/log.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/wifi-\/spectrum-\/value-\/helper.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/single-\/model-\/spectrum-\/channel.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/waveform-\/generator.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/spectrum-\/analyzer.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/log.\+h$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$iomanip$>$}\\*
+{\ttfamily \#include $<$ns3/friis-\/spectrum-\/propagation-\/loss.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/propagation-\/delay-\/model.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/mobility-\/module.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/spectrum-\/helper.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/applications-\/module.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/adhoc-\/aloha-\/noack-\/ideal-\/phy-\/helper.\+h$>$}\\*
+Include dependency graph for adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classGlobalPathlossDatabase}{Global\+Pathloss\+Database}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_a45f038bb3b5482b2b7f9f5d78d81273b}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Test\+Adhoc\+Ofdm\+Aloha\char`\"{})
+\item 
+void \hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_abe11a97645f01a1213944fb2cbabeb1a}{Phy\+Rx\+End\+Ok\+Trace} (std\+::string context, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p})
+\item 
+int \hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_a817b47f52eeb5f98e32ce7d19a86aa7e}{g\+\_\+verbose} = \hyperlink{lte__cqi__generation_8m_ab1bef239d413c4da139c4bac92cd657a}{false}
+\item 
+static uint64\+\_\+t \hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_af09b60ca0cfec21bd5d0aff8f44eb19c}{g\+\_\+rx\+Bytes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc@{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc}!main@{main}}
+\index{main@{main}!adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc@{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_a3c04138a5bfe5d72780bb7e82a18e627}
+
+\begin{DoxyCode}
+125 \{
+126   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+127   \textcolor{keywordtype}{double} lossDb = 130;
+128   \textcolor{keywordtype}{double} txPowerW = 0.1; 
+129   uint64\_t phyRate = 500000;
+130   uint32\_t pktSize = 1000;
+131   \textcolor{keywordtype}{double} simDuration = 0.5;
+132   std::string channelType (\textcolor{stringliteral}{"ns3::SingleModelSpectrumChannel"});
+133   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"verbose"}, \textcolor{stringliteral}{"Print trace information if true"}, \hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_a817b47f52eeb5f98e32ce7d19a86aa7e}{g\_verbose});
+134   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"lossDb"}, \textcolor{stringliteral}{"link loss in dB"}, lossDb);
+135   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"txPowerW"}, \textcolor{stringliteral}{"txPower in Watts"}, txPowerW);
+136   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"phyRate"}, \textcolor{stringliteral}{"PHY rate in bps"}, phyRate);
+137   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"pktSize"}, \textcolor{stringliteral}{"packet size in bytes"}, pktSize);
+138   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"simDuration"}, \textcolor{stringliteral}{"duration of the simulation in seconds"}, simDuration);
+139   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"channelType"}, \textcolor{stringliteral}{"which SpectrumChannel implementation to be used"}, channelType);
+140   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+141 
+142   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+143   c.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+144 
+145   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+146   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+147   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (c);
+148   \textcolor{comment}{// the actual positions are irrelevant, since we use MatrixPropagationLossModel}
+149 
+150 
+151   \hyperlink{classns3_1_1SpectrumChannelHelper}{SpectrumChannelHelper} channelHelper;
+152   channelHelper.\hyperlink{classns3_1_1SpectrumChannelHelper_a11ffe86edea8cdd30f181e41c0e3e29f}{SetChannel} (channelType);
+153   channelHelper.\hyperlink{classns3_1_1SpectrumChannelHelper_a61788598e0bcb0ac0d0530970a0fca2c}{SetPropagationDelay} (\textcolor{stringliteral}{"ns3::ConstantSpeedPropagationDelayModel"});
+154   \hyperlink{classns3_1_1Ptr}{Ptr<MatrixPropagationLossModel>} propLoss = 
+      CreateObject<MatrixPropagationLossModel> ();
+155   propLoss->\hyperlink{classns3_1_1MatrixPropagationLossModel_a16fd1f9be7b7246423818632d710947d}{SetLoss} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1MobilityModel}{MobilityModel}> (), c.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1)->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1MobilityModel}{MobilityModel}> (), lossDb, \textcolor{keyword}{true});
+156   channelHelper.\hyperlink{classns3_1_1SpectrumChannelHelper_ab23845170770bda5be7ee8a2b42c452b}{AddPropagationLoss} (propLoss);
+157   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumChannel>} channel = channelHelper.\hyperlink{classns3_1_1SpectrumChannelHelper_a419ea84f5046763085f94f38af319fb9}{Create} ();
+158 
+159 
+160   \hyperlink{classns3_1_1WifiSpectrumValue5MhzFactory}{WifiSpectrumValue5MhzFactory} sf;
+161 
+162   uint32\_t channelNumber = 1;
+163   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} \hyperlink{lte__link__budget_8m_a684fe3101a5e48a5fcc57cab8dbcd1aa}{txPsd} =  sf.
+      \hyperlink{classns3_1_1WifiSpectrumValue5MhzFactory_aa3045151889d535e6e7bf40e0855a92f}{CreateTxPowerSpectralDensity} (txPowerW, channelNumber);
+164 
+165   \textcolor{comment}{// for the noise, we use the Power Spectral Density of thermal noise}
+166   \textcolor{comment}{// at room temperature. The value of the PSD will be constant over the band of interest.}
+167   \textcolor{keyword}{const} \textcolor{keywordtype}{double} k = 1.381e-23; \textcolor{comment}{//Boltzmann's constant}
+168   \textcolor{keyword}{const} \textcolor{keywordtype}{double} T = 290; \textcolor{comment}{// temperature in Kelvin}
+169   \textcolor{keywordtype}{double} noisePsdValue = k * T; \textcolor{comment}{// watts per hertz}
+170   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumValue>} noisePsd = sf.\hyperlink{classns3_1_1WifiSpectrumValue5MhzFactory_a32a04dc83a836da0fcfcc387cabc097f}{CreateConstant} (noisePsdValue);
+171 
+172   \hyperlink{classns3_1_1AdhocAlohaNoackIdealPhyHelper}{AdhocAlohaNoackIdealPhyHelper} deviceHelper;
+173   deviceHelper.\hyperlink{classns3_1_1AdhocAlohaNoackIdealPhyHelper_a9d2c05e23d722e63dafa2d083313ecdb}{SetChannel} (channel);
+174   deviceHelper.\hyperlink{classns3_1_1AdhocAlohaNoackIdealPhyHelper_a3acada700018db8e04a7a209e4cdf94e}{SetTxPowerSpectralDensity} (txPsd);
+175   deviceHelper.\hyperlink{classns3_1_1AdhocAlohaNoackIdealPhyHelper_a6a5f5df28a9bddbe04e8e4815bdce244}{SetNoisePowerSpectralDensity} (noisePsd);
+176   deviceHelper.\hyperlink{classns3_1_1AdhocAlohaNoackIdealPhyHelper_a073f6728abd6e3880475b29cbc415792}{SetPhyAttribute} (\textcolor{stringliteral}{"Rate"}, DataRateValue (\hyperlink{classns3_1_1DataRate}{DataRate} (phyRate)));
+177   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = deviceHelper.\hyperlink{classns3_1_1AdhocAlohaNoackIdealPhyHelper_a0b9cb9d602fd1027f7f39a776e745abe}{Install} (c);
+178 
+179   \hyperlink{classns3_1_1PacketSocketHelper}{PacketSocketHelper} packetSocket;
+180   packetSocket.\hyperlink{classns3_1_1PacketSocketHelper_a33f449fee7fd10411949d17feba6d33e}{Install} (c);
+181 
+182   \hyperlink{classns3_1_1PacketSocketAddress}{PacketSocketAddress} socket;
+183   socket.\hyperlink{classns3_1_1PacketSocketAddress_ad1caa016f4d27c9d5f2c06dbfc53f8a3}{SetSingleDevice} (devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0)->GetIfIndex ());
+184   socket.\hyperlink{classns3_1_1PacketSocketAddress_a9452f9410a97e57344e464e25c2ab0f3}{SetPhysicalAddress} (devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1)->GetAddress ());
+185   socket.\hyperlink{classns3_1_1PacketSocketAddress_a9020962e39c238277f3b2f0de605647a}{SetProtocol} (1);
+186 
+187   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff (\textcolor{stringliteral}{"ns3::PacketSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} (socket));
+188   onoff.SetConstantRate (\hyperlink{classns3_1_1DataRate}{DataRate} (2*phyRate));
+189   onoff.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (pktSize));
+190 
+191   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} apps = onoff.Install (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+192   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+193   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (simDuration));
+194 
+195   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/NodeList/*/DeviceList/*/Phy/RxEndOk"}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_abe11a97645f01a1213944fb2cbabeb1a}{PhyRxEndOkTrace}));
+196 
+197   \hyperlink{classGlobalPathlossDatabase}{GlobalPathlossDatabase} globalPathlossDatabase;
+198   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/ChannelList/*/PropagationLoss"},
+199                    \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classGlobalPathlossDatabase_abbd4ad9e4abc663e21fab239a89e934f}{GlobalPathlossDatabase::UpdatePathloss}, &globalPathlossDatabase));
+200 
+201   \hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_af09b60ca0cfec21bd5d0aff8f44eb19c}{g\_rxBytes} = 0;
+202   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (simDuration + 0.000001));
+203   Simulator::Run ();
+204 
+205   \textcolor{keywordflow}{if} (\hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_a817b47f52eeb5f98e32ce7d19a86aa7e}{g\_verbose})
+206     \{
+207       globalPathlossDatabase.\hyperlink{classGlobalPathlossDatabase_acab59595a8e9daca4de05c5bee4c4d38}{Print} ();
+208 
+209       \textcolor{keywordtype}{double} throughputBps = (\hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_af09b60ca0cfec21bd5d0aff8f44eb19c}{g\_rxBytes} * 8.0) / simDuration;
+210       std::cout << \textcolor{stringliteral}{"throughput:       "} << throughputBps << std::endl;
+211       std::cout << \textcolor{stringliteral}{"throughput:       "} << std::setw (20) << std::fixed << throughputBps << \textcolor{stringliteral}{" bps"} << 
+      std::endl;
+212       std::cout << \textcolor{stringliteral}{"phy rate  :       "}   << std::setw (20) << std::fixed << phyRate*1.0 << \textcolor{stringliteral}{" bps"} << 
+      std::endl; 
+213       \textcolor{keywordtype}{double} rxPowerW = txPowerW / (std::pow (10.0, lossDb/10.0));
+214       \textcolor{keywordtype}{double} capacity = 20e6*log2 (1.0 + (rxPowerW/20.0e6)/noisePsdValue);
+215       std::cout << \textcolor{stringliteral}{"shannon capacity: "}   << std::setw (20) << std::fixed << capacity <<  \textcolor{stringliteral}{" bps"} << 
+      std::endl; 
+216 
+217     \}
+218 
+219 
+220 
+221   Simulator::Destroy ();
+222   \textcolor{keywordflow}{return} 0;
+223 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc@{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc@{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Test\+Adhoc\+Ofdm\+Aloha"")}{NS_LOG_COMPONENT_DEFINE("TestAdhocOfdmAloha")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Test\+Adhoc\+Ofdm\+Aloha\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_a45f038bb3b5482b2b7f9f5d78d81273b}{}\label{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_a45f038bb3b5482b2b7f9f5d78d81273b}
+\index{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc@{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc}!Phy\+Rx\+End\+Ok\+Trace@{Phy\+Rx\+End\+Ok\+Trace}}
+\index{Phy\+Rx\+End\+Ok\+Trace@{Phy\+Rx\+End\+Ok\+Trace}!adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc@{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc}}
+\subsubsection[{\texorpdfstring{Phy\+Rx\+End\+Ok\+Trace(std\+::string context, Ptr$<$ const Packet $>$ p)}{PhyRxEndOkTrace(std::string context, Ptr< const Packet > p)}}]{\setlength{\rightskip}{0pt plus 5cm}void Phy\+Rx\+End\+Ok\+Trace (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{{\bf Ptr}$<$ const {\bf Packet} $>$}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_abe11a97645f01a1213944fb2cbabeb1a}{}\label{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_abe11a97645f01a1213944fb2cbabeb1a}
+
+\begin{DoxyCode}
+53 \{
+54   \textcolor{keywordflow}{if} (\hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_a817b47f52eeb5f98e32ce7d19a86aa7e}{g\_verbose})
+55     \{
+56       std::cout << context << \textcolor{stringliteral}{" PHY RX END OK p:"} << p << std::endl;
+57     \}
+58   \hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_af09b60ca0cfec21bd5d0aff8f44eb19c}{g\_rxBytes} += p->\hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} ();
+59 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Variable Documentation}
+\index{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc@{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc}!g\+\_\+rx\+Bytes@{g\+\_\+rx\+Bytes}}
+\index{g\+\_\+rx\+Bytes@{g\+\_\+rx\+Bytes}!adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc@{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc}}
+\subsubsection[{\texorpdfstring{g\+\_\+rx\+Bytes}{g_rxBytes}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t g\+\_\+rx\+Bytes\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_af09b60ca0cfec21bd5d0aff8f44eb19c}{}\label{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_af09b60ca0cfec21bd5d0aff8f44eb19c}
+\index{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc@{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc}!g\+\_\+verbose@{g\+\_\+verbose}}
+\index{g\+\_\+verbose@{g\+\_\+verbose}!adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc@{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc}}
+\subsubsection[{\texorpdfstring{g\+\_\+verbose}{g_verbose}}]{\setlength{\rightskip}{0pt plus 5cm}bool g\+\_\+verbose = {\bf false}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_a817b47f52eeb5f98e32ce7d19a86aa7e}{}\label{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc_a817b47f52eeb5f98e32ce7d19a86aa7e}

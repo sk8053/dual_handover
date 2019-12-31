@@ -1,0 +1,495 @@
+\hypertarget{classSetChannelFrequencyTest}{}\section{Set\+Channel\+Frequency\+Test Class Reference}
+\label{classSetChannelFrequencyTest}\index{Set\+Channel\+Frequency\+Test@{Set\+Channel\+Frequency\+Test}}
+
+
+Set Channel Frequency Test.  
+
+
+
+
+Inheritance diagram for Set\+Channel\+Frequency\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Set\+Channel\+Frequency\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSetChannelFrequencyTest_a8f9dc4d7ff55fc179105bf2a706a914e}{Set\+Channel\+Frequency\+Test} ()
+\item 
+virtual void \hyperlink{classSetChannelFrequencyTest_a05984ce2c264229592bed4981ff05518}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1YansWifiPhy}{Yans\+Wifi\+Phy} $>$ \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{Get\+Yans\+Wifi\+Phy\+Ptr} (const \hyperlink{classns3_1_1NetDeviceContainer}{Net\+Device\+Container} \&nc) const 
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Set Channel Frequency Test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Set\+Channel\+Frequency\+Test@{Set\+Channel\+Frequency\+Test}!Set\+Channel\+Frequency\+Test@{Set\+Channel\+Frequency\+Test}}
+\index{Set\+Channel\+Frequency\+Test@{Set\+Channel\+Frequency\+Test}!Set\+Channel\+Frequency\+Test@{Set\+Channel\+Frequency\+Test}}
+\subsubsection[{\texorpdfstring{Set\+Channel\+Frequency\+Test()}{SetChannelFrequencyTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Set\+Channel\+Frequency\+Test\+::\+Set\+Channel\+Frequency\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSetChannelFrequencyTest_a8f9dc4d7ff55fc179105bf2a706a914e}{}\label{classSetChannelFrequencyTest_a8f9dc4d7ff55fc179105bf2a706a914e}
+
+\begin{DoxyCode}
+707   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Test case for setting WifiPhy channel and frequency"})
+708 \{
+709 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Set\+Channel\+Frequency\+Test@{Set\+Channel\+Frequency\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Set\+Channel\+Frequency\+Test@{Set\+Channel\+Frequency\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Set\+Channel\+Frequency\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSetChannelFrequencyTest_a05984ce2c264229592bed4981ff05518}{}\label{classSetChannelFrequencyTest_a05984ce2c264229592bed4981ff05518}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+721 \{
+722   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} wifiStaNode;
+723   wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+724   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} wifiApNode;
+725   wifiApNode.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+726 
+727   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} channel = YansWifiChannelHelper::Default ();
+728   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} phy = YansWifiPhyHelper::Default ();
+729   phy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (channel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ());
+730 
+731   \textcolor{comment}{// Configure and declare other generic components of this example}
+732   \hyperlink{classns3_1_1Ssid}{Ssid} ssid;
+733   ssid = \hyperlink{classns3_1_1Ssid}{Ssid} (\textcolor{stringliteral}{"wifi-phy-configuration"});
+734   \hyperlink{classns3_1_1WifiMacHelper}{WifiMacHelper} macSta;
+735   macSta.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::StaWifiMac"},
+736                   \textcolor{stringliteral}{"Ssid"}, SsidValue (ssid),
+737                   \textcolor{stringliteral}{"ActiveProbing"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+738   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} staDevice;
+739   \hyperlink{classns3_1_1Ptr}{Ptr<YansWifiPhy>} phySta;
+740 
+741   \textcolor{comment}{// Cases taken from src/wifi/examples/wifi-phy-configuration.cc example}
+742   \{
+743     \textcolor{comment}{// case 0}
+744     \textcolor{comment}{// Default configuration, without WifiHelper::SetStandard or WifiHelper}
+745     phySta = CreateObject<YansWifiPhy> ();
+746     \textcolor{comment}{// The default results in an invalid configuration of channel 0,}
+747     \textcolor{comment}{// width 20, and frequency 0 MHz}
+748     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 0, \textcolor{stringliteral}{"default
+       configuration"});
+749     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"default
+       configuration"});
+750     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 0, \textcolor{stringliteral}{"default
+       configuration"});
+751   \}
+752   \{
+753     \textcolor{comment}{// case 1}
+754     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+755     \textcolor{comment}{// By default, WifiHelper will use WIFI\_PHY\_STANDARD\_80211a}
+756     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+757     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+758     \textcolor{comment}{// We expect channel 36, width 20, frequency 5180}
+759     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 36, \textcolor{stringliteral}{"default
+       configuration"});
+760     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"default
+       configuration"});
+761     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5180, \textcolor{stringliteral}{"default
+       configuration"});
+762   \}
+763   \{
+764     \textcolor{comment}{// case 2}
+765     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+766     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a77e1cc9f77a0bce8e2bc82cbef437b5a}{WIFI\_PHY\_STANDARD\_80211b});
+767     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+768     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+769     \textcolor{comment}{// We expect channel 1, width 22, frequency 2412}
+770     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 1, \textcolor{stringliteral}{"802.11b
+       configuration"});
+771     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 22, \textcolor{stringliteral}{"802.11b
+       configuration"});
+772     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 2412, \textcolor{stringliteral}{"802.11b
+       configuration"});
+773   \}
+774   \{
+775     \textcolor{comment}{// case 3}
+776     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+777     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aeda6d90f260393ce003ec4765d8100af}{WIFI\_PHY\_STANDARD\_80211g});
+778     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+779     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+780     \textcolor{comment}{// We expect channel 1, width 20, frequency 2412}
+781     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 1, \textcolor{stringliteral}{"802.11g
+       configuration"});
+782     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11g
+       configuration"});
+783     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 2412, \textcolor{stringliteral}{"802.11g
+       configuration"});
+784   \}
+785   \{
+786     \textcolor{comment}{// case 4}
+787     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+788     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+789     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aaabe94a0be4668583c42595437b4a6c0}{WIFI\_PHY\_STANDARD\_80211n\_5GHZ});
+790     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+791     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+792     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 36, \textcolor{stringliteral}{"
+      802.11n-5GHz configuration"});
+793     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"
+      802.11n-5GHz configuration"});
+794     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5180, \textcolor{stringliteral}{"802.11n-5GHz
+       configuration"});
+795   \}
+796   \{
+797     \textcolor{comment}{// case 5}
+798     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+799     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+800     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a6e449a5ca14fc7c0eb36064ce04a5192}{WIFI\_PHY\_STANDARD\_80211n\_2\_4GHZ});
+801     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+802     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+803     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 1, \textcolor{stringliteral}{"
+      802.11n-2.4GHz configuration"});
+804     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"
+      802.11n-2.4GHz configuration"});
+805     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 2412, \textcolor{stringliteral}{"802.11n-2.4GHz
+       configuration"});
+806   \}
+807   \{
+808     \textcolor{comment}{// case 6}
+809     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+810     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+811     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a7c078959de635b84fb280a955dcfb27e}{WIFI\_PHY\_STANDARD\_80211ac});
+812     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+813     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+814     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 42, \textcolor{stringliteral}{"802.11ac
+       configuration"});
+815     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 80, \textcolor{stringliteral}{"802.11ac
+       configuration"});
+816     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5210, \textcolor{stringliteral}{"802.11ac
+       configuration"});
+817   \}
+818   \{
+819     \textcolor{comment}{// case 7}
+820     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+821     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+822     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aff863c98db467eb76170dc8bbe743de7}{WIFI\_PHY\_STANDARD\_80211\_10MHZ});
+823     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+824     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+825     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 172, \textcolor{stringliteral}{"802.11
+       10Mhz configuration"});
+826     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 10, \textcolor{stringliteral}{"802.11
+       10Mhz configuration"});
+827     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5860, \textcolor{stringliteral}{"802.11 10Mhz
+       configuration"});
+828   \}
+829   \{
+830     \textcolor{comment}{// case 8}
+831     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+832     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+833     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a8311083bdd8ae58e73ab6e81a53fd7be}{WIFI\_PHY\_STANDARD\_80211\_5MHZ});
+834     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+835     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+836     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 0, \textcolor{stringliteral}{"802.11
+       5Mhz configuration"});
+837     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 5, \textcolor{stringliteral}{"802.11 5Mhz
+       configuration"});
+838     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5860, \textcolor{stringliteral}{"802.11 5Mhz
+       configuration"});
+839   \}
+840   \{
+841     \textcolor{comment}{// case 9}
+842     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+843     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+844     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aca926d77ddca0fc6d8cdcb190b2e520e}{WIFI\_PHY\_STANDARD\_holland});
+845     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+846     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+847     \textcolor{comment}{// We expect channel 36, width 20, frequency 5180}
+848     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 36, \textcolor{stringliteral}{"802.11
+       5Mhz configuration"});
+849     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5Mhz
+       configuration"});
+850     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5180, \textcolor{stringliteral}{"802.11 5Mhz
+       configuration"});
+851   \}
+852   \{
+853     \textcolor{comment}{// case 10}
+854     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+855     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+856     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aaabe94a0be4668583c42595437b4a6c0}{WIFI\_PHY\_STANDARD\_80211n\_5GHZ});
+857     phy.\hyperlink{classns3_1_1WifiPhyHelper_a2527d6d7b29f717fd7436166c5f05f1a}{Set} (\textcolor{stringliteral}{"ChannelNumber"}, UintegerValue (44));
+858     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+859     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+860     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 44, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+861     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+862     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5220, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+863   \}
+864   \{
+865     \textcolor{comment}{// case 11}
+866     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+867     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+868     phy.\hyperlink{classns3_1_1WifiPhyHelper_a2527d6d7b29f717fd7436166c5f05f1a}{Set} (\textcolor{stringliteral}{"ChannelNumber"}, UintegerValue (44));
+869     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+870     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+871     \textcolor{comment}{// Post-install reconfiguration to channel number 40}
+872     \hyperlink{group__config_gadce03667ec621d64ce4aace85d9bcfd0}{Config::Set} (\textcolor{stringliteral}{"
+      /NodeList/*/DeviceList/*/$ns3::WifiNetDevice/Phy/$ns3::YansWifiPhy/ChannelNumber"}, UintegerValue (40));
+873     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 40, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+874     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+875     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5200, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+876   \}
+877   \{
+878     \textcolor{comment}{// case 12}
+879     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+880     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+881     phy.\hyperlink{classns3_1_1WifiPhyHelper_a2527d6d7b29f717fd7436166c5f05f1a}{Set} (\textcolor{stringliteral}{"ChannelNumber"}, UintegerValue (44));
+882     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+883     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+884     \textcolor{comment}{// Post-install reconfiguration to channel width 40 MHz}
+885     \hyperlink{group__config_gadce03667ec621d64ce4aace85d9bcfd0}{Config::Set} (\textcolor{stringliteral}{"
+      /NodeList/*/DeviceList/*/$ns3::WifiNetDevice/Phy/$ns3::YansWifiPhy/ChannelWidth"}, UintegerValue (40));
+886     \textcolor{comment}{// Although channel 44 is configured originally for 20 MHz, we}
+887     \textcolor{comment}{// allow it to be used for 40 MHz here}
+888     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 44, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+889     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 40, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+890     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5220, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+891   \}
+892   \textcolor{comment}{// modify cases 13 and 14 to avoid Config::SetDefault ()}
+893   \{
+894     \textcolor{comment}{// case 13}
+895     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+896     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+897     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aaabe94a0be4668583c42595437b4a6c0}{WIFI\_PHY\_STANDARD\_80211n\_5GHZ});
+898     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+899     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+900     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ChannelNumber"}, UintegerValue (44));
+901     \textcolor{comment}{// Post-install reconfiguration to channel width 40 MHz}
+902     \hyperlink{group__config_gadce03667ec621d64ce4aace85d9bcfd0}{Config::Set} (\textcolor{stringliteral}{"
+      /NodeList/*/DeviceList/*/$ns3::WifiNetDevice/Phy/$ns3::YansWifiPhy/ChannelWidth"}, UintegerValue (40));
+903     \textcolor{comment}{// Although channel 44 is configured originally for 20 MHz, we}
+904     \textcolor{comment}{// allow it to be used for 40 MHz here}
+905     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 44, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+906     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 40, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+907     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5220, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+908   \}
+909   \{
+910     \textcolor{comment}{// case 14}
+911     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+912     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+913     \textcolor{comment}{// Test that setting Frequency to a non-standard value will zero the}
+914     \textcolor{comment}{// channel number}
+915     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aaabe94a0be4668583c42595437b4a6c0}{WIFI\_PHY\_STANDARD\_80211n\_5GHZ});
+916     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+917     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+918     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Frequency"}, UintegerValue (5281));
+919     \textcolor{comment}{// We expect channel number to be zero since frequency doesn't match}
+920     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 0, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+921     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+922     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5281, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+923   \}
+924   \{
+925     \textcolor{comment}{// case 15:}
+926     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+927     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+928     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aaabe94a0be4668583c42595437b4a6c0}{WIFI\_PHY\_STANDARD\_80211n\_5GHZ});
+929     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+930     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+931     \textcolor{comment}{// Test that setting Frequency to a standard value will set the}
+932     \textcolor{comment}{// channel number correctly}
+933     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Frequency"}, UintegerValue (5500));
+934     \textcolor{comment}{// We expect channel number to be 100 due to frequency 5500}
+935     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 100, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+936     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+937     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5500, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+938   \}
+939   \{
+940     \textcolor{comment}{// case 16:}
+941     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+942     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+943     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aaabe94a0be4668583c42595437b4a6c0}{WIFI\_PHY\_STANDARD\_80211n\_5GHZ});
+944     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+945     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+946     \textcolor{comment}{// This case will error exit due to invalid channel number unless}
+947     \textcolor{comment}{// we provide the DefineChannelNumber() below}
+948     phySta->\hyperlink{classns3_1_1WifiPhy_a98bb7224e78132362285630d3c0597c9}{DefineChannelNumber} (99, 
+      \hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aaabe94a0be4668583c42595437b4a6c0}{WIFI\_PHY\_STANDARD\_80211n\_5GHZ}, 5185, 40);
+949     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ChannelNumber"}, UintegerValue (99));
+950   \}
+951   \{
+952     \textcolor{comment}{// case 17:}
+953     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+954     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+955     \textcolor{comment}{// Test how channel number behaves when frequency is non-standard}
+956     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aaabe94a0be4668583c42595437b4a6c0}{WIFI\_PHY\_STANDARD\_80211n\_5GHZ});
+957     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+958     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+959     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Frequency"}, UintegerValue (5181));
+960     \textcolor{comment}{// We expect channel number to be 0 due to unknown center frequency 5181}
+961     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 0, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+962     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+963     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5181, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+964     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Frequency"}, UintegerValue (5180));
+965     \textcolor{comment}{// We expect channel number to be 36 due to known center frequency 5180}
+966     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 36, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+967     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+968     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5180, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+969     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Frequency"}, UintegerValue (5179));
+970     \textcolor{comment}{// We expect channel number to be 0 due to unknown center frequency 5179}
+971     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 0, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+972     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+973     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5179, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+974     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ChannelNumber"}, UintegerValue (36));
+975     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 36, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+976     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+977     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5180, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+978   \}
+979   \{
+980     \textcolor{comment}{// case 18:}
+981     \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+982     wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::IdealWifiManager"});
+983     \textcolor{comment}{// Set both channel and frequency to consistent values}
+984     wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49aaabe94a0be4668583c42595437b4a6c0}{WIFI\_PHY\_STANDARD\_80211n\_5GHZ});
+985     staDevice = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, macSta, wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+986     phySta = \hyperlink{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{GetYansWifiPhyPtr} (staDevice);
+987     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Frequency"}, UintegerValue (5200));
+988     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ChannelNumber"}, UintegerValue (40));
+989     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 40, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+990     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+991     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5200, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+992     \textcolor{comment}{// Set both channel and frequency to inconsistent values}
+993     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Frequency"}, UintegerValue (5200));
+994     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ChannelNumber"}, UintegerValue (36));
+995     \textcolor{comment}{// We expect channel number to be 36}
+996     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 36, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+997     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+998     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5180, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+999     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ChannelNumber"}, UintegerValue (36));
+1000     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Frequency"}, UintegerValue (5200));
+1001     \textcolor{comment}{// We expect channel number to be 40}
+1002     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 40, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+1003     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+1004     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5200, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+1005     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Frequency"}, UintegerValue (5179));
+1006     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ChannelNumber"}, UintegerValue (36));
+1007     \textcolor{comment}{// We expect channel number to be 36}
+1008     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 36, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+1009     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+1010     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5180, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+1011     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ChannelNumber"}, UintegerValue (36));
+1012     phySta->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Frequency"}, UintegerValue (5179));
+1013     \textcolor{comment}{// We expect channel number to be 0}
+1014     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a5cf0ccf06109ace61db51c83e91b7e8d}{GetChannelNumber} (), 0, \textcolor{stringliteral}{"802.11
+       5GHz configuration"});
+1015     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_a4a5d5009b3b3308f2baeed42a2007189}{GetChannelWidth} (), 20, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+1016     \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (phySta->\hyperlink{classns3_1_1WifiPhy_ad2508d94faf22d690d6b8b4367934fd1}{GetFrequency} (), 5179, \textcolor{stringliteral}{"802.11 5GHz
+       configuration"});
+1017   \}
+1018 
+1019   Simulator::Destroy ();
+1020 
+1021 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Set\+Channel\+Frequency\+Test@{Set\+Channel\+Frequency\+Test}!Get\+Yans\+Wifi\+Phy\+Ptr@{Get\+Yans\+Wifi\+Phy\+Ptr}}
+\index{Get\+Yans\+Wifi\+Phy\+Ptr@{Get\+Yans\+Wifi\+Phy\+Ptr}!Set\+Channel\+Frequency\+Test@{Set\+Channel\+Frequency\+Test}}
+\subsubsection[{\texorpdfstring{Get\+Yans\+Wifi\+Phy\+Ptr(const Net\+Device\+Container \&nc) const }{GetYansWifiPhyPtr(const NetDeviceContainer &nc) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Yans\+Wifi\+Phy} $>$ Set\+Channel\+Frequency\+Test\+::\+Get\+Yans\+Wifi\+Phy\+Ptr (
+\begin{DoxyParamCaption}
+\item[{const {\bf Net\+Device\+Container} \&}]{nc}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}{}\label{classSetChannelFrequencyTest_aa30a0a39f98c2d825152681ba8b9f4e1}
+Get yans wifi phy function 
+\begin{DoxyParams}{Parameters}
+{\em nc} & the device collection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the wifi phy 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+713 \{
+714   \hyperlink{classns3_1_1Ptr}{Ptr<WifiNetDevice>} wnd = nc.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0)->GetObject<
+      \hyperlink{classns3_1_1WifiNetDevice}{WifiNetDevice}> ();
+715   \hyperlink{classns3_1_1Ptr}{Ptr<WifiPhy>} wp = wnd->\hyperlink{classns3_1_1WifiNetDevice_a6a752f4afd2e28b04c83ba26568efd78}{GetPhy} ();
+716   \textcolor{keywordflow}{return} wp->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1YansWifiPhy}{YansWifiPhy}> ();
+717 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+wifi/test/\hyperlink{wifi-test_8cc}{wifi-\/test.\+cc}\end{DoxyCompactItemize}

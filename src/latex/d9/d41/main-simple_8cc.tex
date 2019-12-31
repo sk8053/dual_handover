@@ -1,0 +1,190 @@
+\hypertarget{main-simple_8cc}{}\section{internet/examples/main-\/simple.cc File Reference}
+\label{main-simple_8cc}\index{internet/examples/main-\/simple.\+cc@{internet/examples/main-\/simple.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+Include dependency graph for main-\/simple.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{main-simple_8cc_a56b0a2c40ec28496e4ff380c68b676f3}{Generate\+Traffic} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket, uint32\+\_\+t size)
+\item 
+static void \hyperlink{main-simple_8cc_acce2c9a2db7d3bf40642912ba18879a2}{Socket\+Printer} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\item 
+static void \hyperlink{main-simple_8cc_a40304eb8f75bad7bdc7e6a619f55e266}{Print\+Traffic} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\item 
+void \hyperlink{main-simple_8cc_aae4a035f2107d100249164fe508bac66}{Run\+Simulation} (void)
+\item 
+int \hyperlink{main-simple_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{main-\/simple.\+cc@{main-\/simple.\+cc}!Generate\+Traffic@{Generate\+Traffic}}
+\index{Generate\+Traffic@{Generate\+Traffic}!main-\/simple.\+cc@{main-\/simple.\+cc}}
+\subsubsection[{\texorpdfstring{Generate\+Traffic(\+Ptr$<$ Socket $>$ socket, uint32\+\_\+t size)}{GenerateTraffic(Ptr< Socket > socket, uint32_t size)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Generate\+Traffic (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket, }
+\item[{uint32\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-simple_8cc_a56b0a2c40ec28496e4ff380c68b676f3}{}\label{main-simple_8cc_a56b0a2c40ec28496e4ff380c68b676f3}
+
+\begin{DoxyCode}
+31 \{
+32   std::cout << \textcolor{stringliteral}{"at="} << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{"s, tx bytes="} << size <
+      < std::endl;
+33   socket->\hyperlink{classns3_1_1Socket_a036901c8f485fe5b6eab93b7f2ec289d}{Send} (Create<Packet> (size));
+34   \textcolor{keywordflow}{if} (size > 0)
+35     \{
+36       Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.5), &\hyperlink{main-simple_8cc_a56b0a2c40ec28496e4ff380c68b676f3}{GenerateTraffic}, socket, size - 50);
+37     \}
+38   \textcolor{keywordflow}{else}
+39     \{
+40       socket->\hyperlink{classns3_1_1Socket_abdac6e2498c5aa2963ef361d4200ddf3}{Close} ();
+41     \}
+42 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{main-\/simple.\+cc@{main-\/simple.\+cc}!main@{main}}
+\index{main@{main}!main-\/simple.\+cc@{main-\/simple.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{main-simple_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{main-simple_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+89 \{
+90   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+91   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+92   
+93   \hyperlink{main-simple_8cc_aae4a035f2107d100249164fe508bac66}{RunSimulation} ();
+94 
+95   \textcolor{keywordflow}{return} 0;
+96 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{main-\/simple.\+cc@{main-\/simple.\+cc}!Print\+Traffic@{Print\+Traffic}}
+\index{Print\+Traffic@{Print\+Traffic}!main-\/simple.\+cc@{main-\/simple.\+cc}}
+\subsubsection[{\texorpdfstring{Print\+Traffic(\+Ptr$<$ Socket $>$ socket)}{PrintTraffic(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Print\+Traffic (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-simple_8cc_a40304eb8f75bad7bdc7e6a619f55e266}{}\label{main-simple_8cc_a40304eb8f75bad7bdc7e6a619f55e266}
+
+\begin{DoxyCode}
+56 \{
+57   socket->\hyperlink{classns3_1_1Socket_a243f7835ef1a85f9270fd3577e3a40da}{SetRecvCallback} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{main-simple_8cc_acce2c9a2db7d3bf40642912ba18879a2}{SocketPrinter}));
+58 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{main-\/simple.\+cc@{main-\/simple.\+cc}!Run\+Simulation@{Run\+Simulation}}
+\index{Run\+Simulation@{Run\+Simulation}!main-\/simple.\+cc@{main-\/simple.\+cc}}
+\subsubsection[{\texorpdfstring{Run\+Simulation(void)}{RunSimulation(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Run\+Simulation (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{main-simple_8cc_aae4a035f2107d100249164fe508bac66}{}\label{main-simple_8cc_aae4a035f2107d100249164fe508bac66}
+
+\begin{DoxyCode}
+62 \{
+63   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+64   c.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+65 
+66   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+67   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (c);
+68 
+69 
+70   \hyperlink{classns3_1_1TypeId}{TypeId} tid = TypeId::LookupByName (\textcolor{stringliteral}{"ns3::UdpSocketFactory"});
+71   \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} sink = Socket::CreateSocket (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), tid);
+72   \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} local = \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 80
+      );
+73   sink->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} (local);
+74 
+75   \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} source = Socket::CreateSocket (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), tid);
+76   \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} remote = \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetLoopback 
+      (), 80);
+77   source->\hyperlink{classns3_1_1Socket_a97f08aaf37b8fd7d4b5cad4dfdd4022a}{Connect} (remote);
+78 
+79   \hyperlink{main-simple_8cc_a56b0a2c40ec28496e4ff380c68b676f3}{GenerateTraffic} (source, 500);
+80   \hyperlink{main-simple_8cc_a40304eb8f75bad7bdc7e6a619f55e266}{PrintTraffic} (sink);
+81 
+82 
+83   Simulator::Run ();
+84 
+85   Simulator::Destroy ();
+86 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{main-\/simple.\+cc@{main-\/simple.\+cc}!Socket\+Printer@{Socket\+Printer}}
+\index{Socket\+Printer@{Socket\+Printer}!main-\/simple.\+cc@{main-\/simple.\+cc}}
+\subsubsection[{\texorpdfstring{Socket\+Printer(\+Ptr$<$ Socket $>$ socket)}{SocketPrinter(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Socket\+Printer (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-simple_8cc_acce2c9a2db7d3bf40642912ba18879a2}{}\label{main-simple_8cc_acce2c9a2db7d3bf40642912ba18879a2}
+
+\begin{DoxyCode}
+46 \{
+47   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} packet;
+48   \textcolor{keywordflow}{while} ((packet = socket->\hyperlink{classns3_1_1Socket_a8949b1f844aae563446f2f4c5be8827a}{Recv} ()))
+49     \{ 
+50       std::cout << \textcolor{stringliteral}{"at="} << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{"s, rx bytes="} << 
+      packet->\hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} () << std::endl;
+51     \}
+52 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+

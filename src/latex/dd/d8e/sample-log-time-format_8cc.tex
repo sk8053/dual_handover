@@ -1,0 +1,128 @@
+\hypertarget{sample-log-time-format_8cc}{}\section{core/examples/sample-\/log-\/time-\/format.cc File Reference}
+\label{sample-log-time-format_8cc}\index{core/examples/sample-\/log-\/time-\/format.\+cc@{core/examples/sample-\/log-\/time-\/format.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/simulator.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/nstime.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/command-\/line.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/random-\/variable-\/stream.\+h\char`\"{}}\\*
+Include dependency graph for sample-\/log-\/time-\/format.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{sample-log-time-format_8cc_a88ecb1122aacd8f4e9f8a7c8319dc180}{Replacement\+Time\+Printer} (std\+::ostream \&os)
+\item 
+void \hyperlink{sample-log-time-format_8cc_a27a66c094f2b03c9ec552bec80ba840b}{Replace\+Time\+Printer} (void)
+\item 
+int \hyperlink{sample-log-time-format_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{sample-\/log-\/time-\/format.\+cc@{sample-\/log-\/time-\/format.\+cc}!main@{main}}
+\index{main@{main}!sample-\/log-\/time-\/format.\+cc@{sample-\/log-\/time-\/format.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{sample-log-time-format_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{sample-log-time-format_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+105 \{
+106   \textcolor{keywordtype}{bool} replaceTimePrinter = \textcolor{keyword}{false};
+107   std::string resolution = \textcolor{stringliteral}{"Time::NS"};
+108   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"RandomVariableStream"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+109   \hyperlink{namespacens3_aef610a7dcaaa6c20499283526b538582}{LogComponentEnableAll} (\hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba2b78ce26a040614a34c7d71db83024b9}{LOG\_PREFIX\_TIME});
+110 
+111   std::map<std::string, Time::Unit> resolutionMap = \{\{\textcolor{stringliteral}{"Time::US"}, Time::US\}, \{\textcolor{stringliteral}{"Time::NS"}, Time::NS\}, \{\textcolor{stringliteral}{"
+      Time::PS"}, Time::PS\}, \{\textcolor{stringliteral}{"Time::FS"}, Time::FS\}\};
+112 
+113   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+114   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"replaceTimePrinter"}, \textcolor{stringliteral}{"replace time printing function"}, replaceTimePrinter);
+115   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"resolution"}, \textcolor{stringliteral}{"time resolution"}, resolution);
+116   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+117 
+118   \textcolor{keyword}{auto} search = resolutionMap.find (resolution);
+119   \textcolor{keywordflow}{if} (search != resolutionMap.end ())
+120     \{
+121       Time::SetResolution (search->second);
+122     \}
+123 
+124   \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} uniformRv = CreateObject<UniformRandomVariable> ();
+125 
+126   \textcolor{keywordflow}{if} (replaceTimePrinter)
+127     \{
+128       Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0), &\hyperlink{sample-log-time-format_8cc_a27a66c094f2b03c9ec552bec80ba840b}{ReplaceTimePrinter});
+129     \}
+130 
+131   Simulator::Schedule (\hyperlink{group__timecivil_ga281d64bcb4dad96267d83c7688ec433f}{NanoSeconds} (1), &UniformRandomVariable::SetAntithetic, uniformRv, \textcolor{keyword}{false})
+      ;
+132   Simulator::Schedule (\hyperlink{group__timecivil_ga281d64bcb4dad96267d83c7688ec433f}{NanoSeconds} (123), &UniformRandomVariable::SetAntithetic, uniformRv, \textcolor{keyword}{
+      false});
+133   Simulator::Schedule (\hyperlink{group__timecivil_ga281d64bcb4dad96267d83c7688ec433f}{NanoSeconds} (123456), &UniformRandomVariable::SetAntithetic, uniformRv, \textcolor{keyword}{
+      false});
+134   Simulator::Schedule (\hyperlink{group__timecivil_ga281d64bcb4dad96267d83c7688ec433f}{NanoSeconds} (123456789), &UniformRandomVariable::SetAntithetic, uniformRv
+      , \textcolor{keyword}{false});
+135 
+136   Simulator::Run ();
+137   Simulator::Destroy ();
+138 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{sample-\/log-\/time-\/format.\+cc@{sample-\/log-\/time-\/format.\+cc}!Replacement\+Time\+Printer@{Replacement\+Time\+Printer}}
+\index{Replacement\+Time\+Printer@{Replacement\+Time\+Printer}!sample-\/log-\/time-\/format.\+cc@{sample-\/log-\/time-\/format.\+cc}}
+\subsubsection[{\texorpdfstring{Replacement\+Time\+Printer(std\+::ostream \&os)}{ReplacementTimePrinter(std::ostream &os)}}]{\setlength{\rightskip}{0pt plus 5cm}void Replacement\+Time\+Printer (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os}
+\end{DoxyParamCaption}
+)}\hypertarget{sample-log-time-format_8cc_a88ecb1122aacd8f4e9f8a7c8319dc180}{}\label{sample-log-time-format_8cc_a88ecb1122aacd8f4e9f8a7c8319dc180}
+
+\begin{DoxyCode}
+92 \{
+93   os << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{"s"};
+94 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{sample-\/log-\/time-\/format.\+cc@{sample-\/log-\/time-\/format.\+cc}!Replace\+Time\+Printer@{Replace\+Time\+Printer}}
+\index{Replace\+Time\+Printer@{Replace\+Time\+Printer}!sample-\/log-\/time-\/format.\+cc@{sample-\/log-\/time-\/format.\+cc}}
+\subsubsection[{\texorpdfstring{Replace\+Time\+Printer(void)}{ReplaceTimePrinter(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Replace\+Time\+Printer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{sample-log-time-format_8cc_a27a66c094f2b03c9ec552bec80ba840b}{}\label{sample-log-time-format_8cc_a27a66c094f2b03c9ec552bec80ba840b}
+
+\begin{DoxyCode}
+98 \{
+99   std::cout << \textcolor{stringliteral}{"Replacing time printer function after Simulator::Run ()"} << std::endl;
+100   \hyperlink{namespacens3_acf6a1749b3febc5a6a5b2b8620138d80}{LogSetTimePrinter} (&\hyperlink{sample-log-time-format_8cc_a88ecb1122aacd8f4e9f8a7c8319dc180}{ReplacementTimePrinter});
+101 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+

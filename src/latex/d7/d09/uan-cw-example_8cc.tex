@@ -1,0 +1,118 @@
+\hypertarget{uan-cw-example_8cc}{}\section{uan/examples/uan-\/cw-\/example.cc File Reference}
+\label{uan-cw-example_8cc}\index{uan/examples/uan-\/cw-\/example.\+cc@{uan/examples/uan-\/cw-\/example.\+cc}}
+{\ttfamily \#include \char`\"{}uan-\/cw-\/example.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/stats-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+Include dependency graph for uan-\/cw-\/example.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{uan-cw-example_8cc_a02739e5591c200568f56ba0c60dcab1a}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Uan\+Cw\+Example\char`\"{})
+\item 
+int \hyperlink{uan-cw-example_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This example showcases the \char`\"{}\+C\+W-\/\+M\+A\+C\char`\"{} described in System Design Considerations for Undersea Networks article in the I\+E\+EE Journal on Selected Areas of Communications 2008 by Nathan Parrish, Leonard Tracy and Sumit Roy. The M\+AC protocol is implemented in the class Uan\+Mac\+Cw. C\+W-\/\+M\+AC is similar in nature to the I\+E\+EE 802.\+11 D\+CF with a constant backoff window. It requires two parameters to be set, the slot time and the contention window size. The contention window size is the backoff window size in slots, and the slot time is the duration of each slot. These parameters should be set according to the overall network size, internode spacing and the number of nodes in the network.
+
+This example deploys nodes randomly (according to R\+NG seed of course) in a finite square region with the X and Y coordinates of the nodes distributed uniformly. The CW parameter is varied throughout the simulation in order to show the variation in throughput with respect to changes in CW. 
+
+\subsection{Function Documentation}
+\index{uan-\/cw-\/example.\+cc@{uan-\/cw-\/example.\+cc}!main@{main}}
+\index{main@{main}!uan-\/cw-\/example.\+cc@{uan-\/cw-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{uan-cw-example_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{uan-cw-example_8cc_a3c04138a5bfe5d72780bb7e82a18e627}
+
+\begin{DoxyCode}
+267 \{
+268 
+269   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"UanCwExample"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+270 
+271   \hyperlink{classExperiment}{Experiment} exp;
+272 
+273   std::string gnudatfile (\textcolor{stringliteral}{"cwexpgnuout.dat"});
+274   std::string perModel = \textcolor{stringliteral}{"ns3::UanPhyPerGenDefault"};
+275   std::string sinrModel = \textcolor{stringliteral}{"ns3::UanPhyCalcSinrDefault"};
+276 
+277   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+278   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"NumNodes"}, \textcolor{stringliteral}{"Number of transmitting nodes"}, exp.
+      \hyperlink{classExperiment_ac22115998156e9cbf5a2112a1ec9b6bb}{m\_numNodes});
+279   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"Depth"}, \textcolor{stringliteral}{"Depth of transmitting and sink nodes"}, exp.
+      \hyperlink{classExperiment_a15a89f9eb4b0e8ca6e640208c89126eb}{m\_depth});
+280   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"RegionSize"}, \textcolor{stringliteral}{"Size of boundary in meters"}, exp.
+      \hyperlink{classExperiment_add5ef2ea8606e6b0f640d46cae90106f}{m\_boundary});
+281   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"PacketSize"}, \textcolor{stringliteral}{"Generated packet size in bytes"}, exp.
+      \hyperlink{classExperiment_a1562acfc7bc2cbd4c5f995b7c4ef01d0}{m\_packetSize});
+282   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"DataRate"}, \textcolor{stringliteral}{"DataRate in bps"}, exp.\hyperlink{classExperiment_a5b781fcc8b0242604e4378c1df035228}{m\_dataRate});
+283   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"CwMin"}, \textcolor{stringliteral}{"Min CW to simulate"}, exp.\hyperlink{classExperiment_a2dbf3ad2a9b3a535c8bb9bb128e47ad3}{m\_cwMin});
+284   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"CwMax"}, \textcolor{stringliteral}{"Max CW to simulate"}, exp.\hyperlink{classExperiment_a3be9291afcc8b97db510b56314701946}{m\_cwMax});
+285   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"SlotTime"}, \textcolor{stringliteral}{"Slot time duration"}, exp.\hyperlink{classExperiment_a72df8f8bffaba83db6821d0cf5b593fb}{m\_slotTime});
+286   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"Averages"}, \textcolor{stringliteral}{"Number of topologies to test for each cw point"}, exp.
+      \hyperlink{classExperiment_a51ad00a867fb74254c5ec3d4e0e34272}{m\_avgs});
+287   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"GnuFile"}, \textcolor{stringliteral}{"Name for GNU Plot output"}, exp.\hyperlink{classExperiment_aaa700bd4f3a5f4cf40c866b38ea106e4}{m\_gnudatfile});
+288   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"PerModel"}, \textcolor{stringliteral}{"PER model name"}, perModel);
+289   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"SinrModel"}, \textcolor{stringliteral}{"SINR model name"}, sinrModel);
+290   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+291 
+292   \hyperlink{classns3_1_1ObjectFactory}{ObjectFactory} obf;
+293   obf.\hyperlink{classns3_1_1ObjectFactory_a77dcd099064038a1eb7a6b8251229ec3}{SetTypeId} (perModel);
+294   \hyperlink{classns3_1_1Ptr}{Ptr<UanPhyPer>} per = obf.\hyperlink{classns3_1_1ObjectFactory_a18152e93f0a6fe184ed7300cb31e9896}{Create}<\hyperlink{classns3_1_1UanPhyPer}{UanPhyPer}> ();
+295   obf.\hyperlink{classns3_1_1ObjectFactory_a77dcd099064038a1eb7a6b8251229ec3}{SetTypeId} (sinrModel);
+296   \hyperlink{classns3_1_1Ptr}{Ptr<UanPhyCalcSinr>} sinr = obf.\hyperlink{classns3_1_1ObjectFactory_a18152e93f0a6fe184ed7300cb31e9896}{Create}<\hyperlink{classns3_1_1UanPhyCalcSinr}{UanPhyCalcSinr}> ();
+297 
+298   \hyperlink{classns3_1_1UanHelper}{UanHelper} uan;
+299   \hyperlink{classns3_1_1UanTxMode}{UanTxMode} mode;
+300   mode = UanTxModeFactory::CreateMode (UanTxMode::FSK, exp.\hyperlink{classExperiment_a5b781fcc8b0242604e4378c1df035228}{m\_dataRate},
+301                                        exp.\hyperlink{classExperiment_a5b781fcc8b0242604e4378c1df035228}{m\_dataRate}, 12000,
+302                                        exp.\hyperlink{classExperiment_a5b781fcc8b0242604e4378c1df035228}{m\_dataRate}, 2,
+303                                        \textcolor{stringliteral}{"Default mode"});
+304   \hyperlink{classns3_1_1UanModesList}{UanModesList} myModes;
+305   myModes.\hyperlink{classns3_1_1UanModesList_ae47998ab8ad053aecd5f2849043ec403}{AppendMode} (mode);
+306 
+307   uan.SetPhy (\textcolor{stringliteral}{"ns3::UanPhyGen"},
+308               \textcolor{stringliteral}{"PerModel"}, \hyperlink{classns3_1_1PointerValue}{PointerValue} (per),
+309               \textcolor{stringliteral}{"SinrModel"}, \hyperlink{classns3_1_1PointerValue}{PointerValue} (sinr),
+310               \textcolor{stringliteral}{"SupportedModes"}, UanModesListValue (myModes));
+311 
+312   \hyperlink{classns3_1_1Gnuplot}{Gnuplot} gp;
+313   \hyperlink{classns3_1_1Gnuplot2dDataset}{Gnuplot2dDataset} \hyperlink{generate__test__data__lte__sinr_8m_a4ab47e54c2f73ad4c0eb3974709721cd}{ds};
+314   ds = exp.\hyperlink{classExperiment_a2e7dad008a78e106fdbde1917d0bca1b}{Run} (uan);
+315 
+316   gp.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} (ds);
+317 
+318   std::ofstream of (exp.\hyperlink{classExperiment_aaa700bd4f3a5f4cf40c866b38ea106e4}{m\_gnudatfile}.c\_str ());
+319   \textcolor{keywordflow}{if} (!of.is\_open ())
+320     \{
+321       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Can not open GNU Plot outfile: "} << exp.
+      \hyperlink{classExperiment_aaa700bd4f3a5f4cf40c866b38ea106e4}{m\_gnudatfile});
+322     \}
+323   gp.\hyperlink{classns3_1_1Gnuplot_a6cd487453f61e2405cc7cc9c80dc0cf2}{GenerateOutput} (of);
+324 
+325   per = 0;
+326   sinr = 0;
+327 
+328 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{uan-\/cw-\/example.\+cc@{uan-\/cw-\/example.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!uan-\/cw-\/example.\+cc@{uan-\/cw-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Uan\+Cw\+Example"")}{NS_LOG_COMPONENT_DEFINE("UanCwExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Uan\+Cw\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{uan-cw-example_8cc_a02739e5591c200568f56ba0c60dcab1a}{}\label{uan-cw-example_8cc_a02739e5591c200568f56ba0c60dcab1a}

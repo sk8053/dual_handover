@@ -1,0 +1,195 @@
+\hypertarget{fd-emu-udp-echo_8cc}{}\section{fd-\/net-\/device/examples/fd-\/emu-\/udp-\/echo.cc File Reference}
+\label{fd-emu-udp-echo_8cc}\index{fd-\/net-\/device/examples/fd-\/emu-\/udp-\/echo.\+cc@{fd-\/net-\/device/examples/fd-\/emu-\/udp-\/echo.\+cc}}
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/fd-\/net-\/device-\/module.\+h\char`\"{}}\\*
+Include dependency graph for fd-\/emu-\/udp-\/echo.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{fd-emu-udp-echo_8cc_a2b0687c3f4920648f55f556e56c11e7c}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Emulated\+Udp\+Echo\+Example\char`\"{})
+\item 
+int \hyperlink{fd-emu-udp-echo_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{fd-\/emu-\/udp-\/echo.\+cc@{fd-\/emu-\/udp-\/echo.\+cc}!main@{main}}
+\index{main@{main}!fd-\/emu-\/udp-\/echo.\+cc@{fd-\/emu-\/udp-\/echo.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{fd-emu-udp-echo_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{fd-emu-udp-echo_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+88 \{
+89   std::string deviceName (\textcolor{stringliteral}{"eth1"});
+90   std::string encapMode (\textcolor{stringliteral}{"Dix"});
+91   \textcolor{keywordtype}{bool} clientMode = \textcolor{keyword}{false};
+92   \textcolor{keywordtype}{bool} serverMode = \textcolor{keyword}{false};
+93   \textcolor{keywordtype}{double} stopTime = 10;
+94   uint32\_t nNodes = 2;
+95 
+96   \textcolor{comment}{//}
+97   \textcolor{comment}{// Allow the user to override any of the defaults at run-time, via command-line}
+98   \textcolor{comment}{// arguments}
+99   \textcolor{comment}{//}
+100   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+101   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"client"}, \textcolor{stringliteral}{"client mode"}, clientMode);
+102   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"server"}, \textcolor{stringliteral}{"server mode"}, serverMode);
+103   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"deviceName"}, \textcolor{stringliteral}{"device name"}, deviceName);
+104   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"stopTime"}, \textcolor{stringliteral}{"stop time (seconds)"}, stopTime);
+105   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"encapsulationMode"}, \textcolor{stringliteral}{"encapsulation mode of emu device (\(\backslash\)"Dix\(\backslash\)" [default] or \(\backslash\)"Llc
+      \(\backslash\)")"}, encapMode);
+106   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nNodes"}, \textcolor{stringliteral}{"number of nodes to create (>= 2)"}, nNodes);
+107 
+108   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+109 
+110   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"},
+111                      StringValue (\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl"}));
+112 
+113   GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+114 
+115   \textcolor{keywordflow}{if} (clientMode && serverMode)
+116     \{
+117       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR}(\textcolor{stringliteral}{"Error, both client and server options cannot be enabled."});
+118     \}
+119   \textcolor{comment}{//}
+120   \textcolor{comment}{// need at least two nodes}
+121   \textcolor{comment}{//}
+122   nNodes = nNodes < 2 ? 2 : nNodes;
+123 
+124   \textcolor{comment}{//}
+125   \textcolor{comment}{// Explicitly create the nodes required by the topology (shown above).}
+126   \textcolor{comment}{//}
+127   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes."});
+128   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n};
+129   n.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (nNodes);
+130 
+131   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+132   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (n);
+133 
+134   \textcolor{comment}{//}
+135   \textcolor{comment}{// Explicitly create the channels required by the topology (shown above).}
+136   \textcolor{comment}{//}
+137   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create channels."});
+138   \hyperlink{classns3_1_1EmuFdNetDeviceHelper}{EmuFdNetDeviceHelper} emu;
+139   emu.\hyperlink{classns3_1_1EmuFdNetDeviceHelper_aa5c26a78442e507ba969f28ffa5f748e}{SetDeviceName} (deviceName);
+140   emu.\hyperlink{classns3_1_1FdNetDeviceHelper_a0274f52a7b4288ca58f04fc2ac31d398}{SetAttribute} (\textcolor{stringliteral}{"EncapsulationMode"}, StringValue (encapMode));
+141 
+142   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d};
+143   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+144   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+145   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} apps;
+146 
+147   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+148   \textcolor{keywordflow}{if} (clientMode)
+149     \{
+150       d = emu.\hyperlink{classns3_1_1FdNetDeviceHelper_af70d55cbb4f6411c33cacb84eb651ad5}{Install} (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+151       \textcolor{comment}{// Note:  incorrect MAC address assignments are one of the confounding}
+152       \textcolor{comment}{// aspects of network emulation experiments.  Here, we assume that there}
+153       \textcolor{comment}{// will be a server mode taking the first MAC address, so we need to}
+154       \textcolor{comment}{// force the MAC address to be one higher (just like IP address below)}
+155       \hyperlink{classns3_1_1Ptr}{Ptr<FdNetDevice>} dev = d.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0)->GetObject<\hyperlink{classns3_1_1FdNetDevice}{FdNetDevice}> ();
+156       dev->\hyperlink{classns3_1_1FdNetDevice_a7fd0f69ac39428a18e354ffe21d15d6c}{SetAddress} (\hyperlink{classns3_1_1Mac48Address}{Mac48Address} (\textcolor{stringliteral}{"00:00:00:00:00:02"}));
+157       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+158       ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_a9d6bc3cd8def204f9c253fce666b2edd}{NewAddress} ();  \textcolor{comment}{// burn the 10.1.1.1 address so that 10.1.1.2 is next}
+159       i = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (d);
+160     \}
+161   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (serverMode)
+162     \{
+163       d = emu.\hyperlink{classns3_1_1FdNetDeviceHelper_af70d55cbb4f6411c33cacb84eb651ad5}{Install} (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+164       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+165       i = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (d);
+166     \}
+167   \textcolor{keywordflow}{else}
+168     \{
+169       d = emu.\hyperlink{classns3_1_1FdNetDeviceHelper_af70d55cbb4f6411c33cacb84eb651ad5}{Install} (n);
+170       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+171       i = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (d);
+172     \}
+173     
+174   \textcolor{keywordflow}{if} (serverMode)
+175     \{
+176       \textcolor{comment}{//}
+177       \textcolor{comment}{// Create a UdpEchoServer application }
+178       \textcolor{comment}{//}
+179       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Applications."});
+180       \hyperlink{classns3_1_1UdpEchoServerHelper}{UdpEchoServerHelper} server (9);
+181       apps = server.Install (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+182       apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+183       apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (stopTime));
+184     \}
+185   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (clientMode)
+186     \{
+187       \textcolor{comment}{//}
+188       \textcolor{comment}{// Create a UdpEchoClient application to send UDP datagrams }
+189       \textcolor{comment}{//}
+190       uint32\_t packetSize = 1024;
+191       uint32\_t maxPacketCount = 20;
+192       \hyperlink{classns3_1_1Time}{Time} interPacketInterval = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.1);
+193       \hyperlink{classns3_1_1UdpEchoClientHelper}{UdpEchoClientHelper} client (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.1.1"}), 9);
+194       client.SetAttribute (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (maxPacketCount));
+195       client.SetAttribute (\textcolor{stringliteral}{"Interval"}, TimeValue (interPacketInterval));
+196       client.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (packetSize));
+197       apps = client.Install (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+198       apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0));
+199       apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (stopTime));
+200     \}
+201   \textcolor{keywordflow}{else}
+202     \{
+203       \textcolor{comment}{//}
+204       \textcolor{comment}{// Create a UdpEchoServer application on node one.}
+205       \textcolor{comment}{//}
+206       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Applications."});
+207       \hyperlink{classns3_1_1UdpEchoServerHelper}{UdpEchoServerHelper} server (9);
+208       apps = server.Install (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+209       apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+210       apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (stopTime));
+211     
+212       \textcolor{comment}{//}
+213       \textcolor{comment}{// Create a UdpEchoClient application to send UDP datagrams from node zero to node one.}
+214       \textcolor{comment}{//}
+215       uint32\_t packetSize = 1024;
+216       uint32\_t maxPacketCount = 20;
+217       \hyperlink{classns3_1_1Time}{Time} interPacketInterval = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.1);
+218       \hyperlink{classns3_1_1UdpEchoClientHelper}{UdpEchoClientHelper} client (i.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1), 9);
+219       client.\hyperlink{classns3_1_1UdpEchoClientHelper_a11228c069ad896f8ed13f4d37c13f51d}{SetAttribute} (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (maxPacketCount));
+220       client.SetAttribute (\textcolor{stringliteral}{"Interval"}, TimeValue (interPacketInterval));
+221       client.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (packetSize));
+222       apps = client.Install (n.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+223       apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0));
+224       apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (stopTime));
+225     \}
+226 
+227   emu.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"fd-emu-udp-echo"}, \textcolor{keyword}{true});
+228   emu.\hyperlink{classns3_1_1AsciiTraceHelperForDevice_a63e57c878526c732924e14c1e52cca8b}{EnableAsciiAll} (\textcolor{stringliteral}{"fd-emu-udp-echo.tr"});
+229 
+230   \textcolor{comment}{//}
+231   \textcolor{comment}{// Now, do the actual simulation.}
+232   \textcolor{comment}{//}
+233   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+234   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (stopTime + 2));
+235   Simulator::Run ();
+236   Simulator::Destroy ();
+237   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+238 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{fd-\/emu-\/udp-\/echo.\+cc@{fd-\/emu-\/udp-\/echo.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!fd-\/emu-\/udp-\/echo.\+cc@{fd-\/emu-\/udp-\/echo.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Emulated\+Udp\+Echo\+Example"")}{NS_LOG_COMPONENT_DEFINE("EmulatedUdpEchoExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Emulated\+Udp\+Echo\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{fd-emu-udp-echo_8cc_a2b0687c3f4920648f55f556e56c11e7c}{}\label{fd-emu-udp-echo_8cc_a2b0687c3f4920648f55f556e56c11e7c}

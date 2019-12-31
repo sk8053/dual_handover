@@ -1,0 +1,99 @@
+\hypertarget{classCoDelQueueDiscNewtonStepTest}{}\section{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test Class Reference}
+\label{classCoDelQueueDiscNewtonStepTest}\index{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test@{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test}}
+
+
+Test 3\+: Newton\+Step unit test -\/ test against explicit port of Linux implementation.  
+
+
+
+
+Inheritance diagram for Co\+Del\+Queue\+Disc\+Newton\+Step\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Co\+Del\+Queue\+Disc\+Newton\+Step\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCoDelQueueDiscNewtonStepTest_aa652101a80893994d7b1186f8adcb306}{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test} ()
+\item 
+virtual void \hyperlink{classCoDelQueueDiscNewtonStepTest_a9c0c31481838de1692b31a59b24026b3}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Test 3\+: Newton\+Step unit test -\/ test against explicit port of Linux implementation. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test@{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test}!Co\+Del\+Queue\+Disc\+Newton\+Step\+Test@{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test}}
+\index{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test@{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test}!Co\+Del\+Queue\+Disc\+Newton\+Step\+Test@{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test}}
+\subsubsection[{\texorpdfstring{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test()}{CoDelQueueDiscNewtonStepTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Co\+Del\+Queue\+Disc\+Newton\+Step\+Test\+::\+Co\+Del\+Queue\+Disc\+Newton\+Step\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCoDelQueueDiscNewtonStepTest_aa652101a80893994d7b1186f8adcb306}{}\label{classCoDelQueueDiscNewtonStepTest_aa652101a80893994d7b1186f8adcb306}
+
+\begin{DoxyCode}
+376   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"NewtonStep arithmetic unit test"})
+377 \{
+378 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test@{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Co\+Del\+Queue\+Disc\+Newton\+Step\+Test@{Co\+Del\+Queue\+Disc\+Newton\+Step\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Co\+Del\+Queue\+Disc\+Newton\+Step\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classCoDelQueueDiscNewtonStepTest_a9c0c31481838de1692b31a59b24026b3}{}\label{classCoDelQueueDiscNewtonStepTest_a9c0c31481838de1692b31a59b24026b3}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+382 \{
+383   \hyperlink{classns3_1_1Ptr}{Ptr<CoDelQueueDisc>} queue = CreateObject<CoDelQueueDisc> ();
+384 
+385   \textcolor{comment}{// Spot check a few points in the expected operational range of}
+386   \textcolor{comment}{// CoDelQueueDisc's m\_count and m\_recInvSqrt variables}
+387   uint32\_t count = 2;
+388   uint16\_t recInvSqrt = 65535;
+389   queue->\hyperlink{classns3_1_1CoDelQueueDisc_a87a17c1b3df276df0a43a4270ee6515c}{m\_count} = count;
+390   queue->\hyperlink{classns3_1_1CoDelQueueDisc_a348cfedf39aedbc10137a50c991df6fa}{m\_recInvSqrt} = recInvSqrt;
+391   queue->\hyperlink{classns3_1_1CoDelQueueDisc_acca9bb0949833fbd55afe6591d017e18}{NewtonStep} ();
+392   \textcolor{comment}{// Test that ns-3 value is exactly the same as the Linux value}
+393   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{codel-queue-disc-test-suite_8cc_a3ba0818891ce32832dc51eceff6b9f41}{\_codel\_Newton\_step} (count, recInvSqrt), 
+      queue->\hyperlink{classns3_1_1CoDelQueueDisc_a348cfedf39aedbc10137a50c991df6fa}{m\_recInvSqrt},
+394                          \textcolor{stringliteral}{"ns-3 NewtonStep() fails to match Linux equivalent"});
+395 
+396   count = 4;
+397   recInvSqrt = 36864;
+398   queue->\hyperlink{classns3_1_1CoDelQueueDisc_a87a17c1b3df276df0a43a4270ee6515c}{m\_count} = count;
+399   queue->\hyperlink{classns3_1_1CoDelQueueDisc_a348cfedf39aedbc10137a50c991df6fa}{m\_recInvSqrt} = recInvSqrt;
+400   queue->\hyperlink{classns3_1_1CoDelQueueDisc_acca9bb0949833fbd55afe6591d017e18}{NewtonStep} ();
+401   \textcolor{comment}{// Test that ns-3 value is exactly the same as the Linux value}
+402   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{codel-queue-disc-test-suite_8cc_a3ba0818891ce32832dc51eceff6b9f41}{\_codel\_Newton\_step} (count, recInvSqrt), 
+      queue->\hyperlink{classns3_1_1CoDelQueueDisc_a348cfedf39aedbc10137a50c991df6fa}{m\_recInvSqrt},
+403                          \textcolor{stringliteral}{"ns-3 NewtonStep() fails to match Linux equivalent"});
+404 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+traffic-\/control/test/\hyperlink{codel-queue-disc-test-suite_8cc}{codel-\/queue-\/disc-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

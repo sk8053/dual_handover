@@ -1,0 +1,95 @@
+\hypertarget{classIpv6ListRoutingPositiveTestCase}{}\section{Ipv6\+List\+Routing\+Positive\+Test\+Case Class Reference}
+\label{classIpv6ListRoutingPositiveTestCase}\index{Ipv6\+List\+Routing\+Positive\+Test\+Case@{Ipv6\+List\+Routing\+Positive\+Test\+Case}}
+
+
+I\+Pv6 List\+Routing positive test.  
+
+
+
+
+Inheritance diagram for Ipv6\+List\+Routing\+Positive\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Ipv6\+List\+Routing\+Positive\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIpv6ListRoutingPositiveTestCase_a8e3c5254a89977c21c114014b377158b}{Ipv6\+List\+Routing\+Positive\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classIpv6ListRoutingPositiveTestCase_a146815e516bd42a6ba2a38ad5d12b686}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+I\+Pv6 List\+Routing positive test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Ipv6\+List\+Routing\+Positive\+Test\+Case@{Ipv6\+List\+Routing\+Positive\+Test\+Case}!Ipv6\+List\+Routing\+Positive\+Test\+Case@{Ipv6\+List\+Routing\+Positive\+Test\+Case}}
+\index{Ipv6\+List\+Routing\+Positive\+Test\+Case@{Ipv6\+List\+Routing\+Positive\+Test\+Case}!Ipv6\+List\+Routing\+Positive\+Test\+Case@{Ipv6\+List\+Routing\+Positive\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Ipv6\+List\+Routing\+Positive\+Test\+Case()}{Ipv6ListRoutingPositiveTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Ipv6\+List\+Routing\+Positive\+Test\+Case\+::\+Ipv6\+List\+Routing\+Positive\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classIpv6ListRoutingPositiveTestCase_a8e3c5254a89977c21c114014b377158b}{}\label{classIpv6ListRoutingPositiveTestCase_a8e3c5254a89977c21c114014b377158b}
+
+\begin{DoxyCode}
+121   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check positive priorities"})
+122 \{
+123 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Ipv6\+List\+Routing\+Positive\+Test\+Case@{Ipv6\+List\+Routing\+Positive\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Ipv6\+List\+Routing\+Positive\+Test\+Case@{Ipv6\+List\+Routing\+Positive\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ipv6\+List\+Routing\+Positive\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classIpv6ListRoutingPositiveTestCase_a146815e516bd42a6ba2a38ad5d12b686}{}\label{classIpv6ListRoutingPositiveTestCase_a146815e516bd42a6ba2a38ad5d12b686}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+126 \{
+127   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv6ListRouting>} lr = CreateObject<Ipv6ListRouting> ();
+128   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv6RoutingProtocol>} aRouting = CreateObject<Ipv6ARouting> ();
+129   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv6RoutingProtocol>} bRouting = CreateObject<Ipv6BRouting> ();
+130   \textcolor{comment}{// The Ipv6ARouting should be added with higher priority (larger integer}
+131   \textcolor{comment}{// value) and will be fetched first below}
+132   lr->\hyperlink{classns3_1_1Ipv6ListRouting_af2f9faf061ec907349d7287475fe73bc}{AddRoutingProtocol} (aRouting, 10);
+133   lr->\hyperlink{classns3_1_1Ipv6ListRouting_af2f9faf061ec907349d7287475fe73bc}{AddRoutingProtocol} (bRouting, 5);
+134   int16\_t first = 3;
+135   int16\_t second = 3;
+136   uint32\_t num = lr->\hyperlink{classns3_1_1Ipv6ListRouting_a7aa04efd7a6833dddcebe061bcbb0e78}{GetNRoutingProtocols} ();
+137   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (num, 2, \textcolor{stringliteral}{"200"});
+138   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv6RoutingProtocol>} firstRp = lr->
+      \hyperlink{classns3_1_1Ipv6ListRouting_ac57acbccab04b57ffb62a8bd9d40d506}{GetRoutingProtocol} (0, first);
+139   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (10, first, \textcolor{stringliteral}{"201"});
+140   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (firstRp, aRouting, \textcolor{stringliteral}{"202"});
+141   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv6RoutingProtocol>} secondRp = lr->
+      \hyperlink{classns3_1_1Ipv6ListRouting_ac57acbccab04b57ffb62a8bd9d40d506}{GetRoutingProtocol} (1, second);
+142   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (5, second, \textcolor{stringliteral}{"203"});
+143   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (secondRp, bRouting, \textcolor{stringliteral}{"204"});
+144 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{ipv6-list-routing-test-suite_8cc}{ipv6-\/list-\/routing-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

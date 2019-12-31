@@ -1,0 +1,187 @@
+\hypertarget{double-probe-example_8cc}{}\section{stats/examples/double-\/probe-\/example.cc File Reference}
+\label{double-probe-example_8cc}\index{stats/examples/double-\/probe-\/example.\+cc@{stats/examples/double-\/probe-\/example.\+cc}}
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/double-\/probe.\+h\char`\"{}}\\*
+Include dependency graph for double-\/probe-\/example.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classEmitter}{Emitter}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{double-probe-example_8cc_a4221fc0a2b6bdcba051c86d8e8f9b248}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Double\+Probe\+Example\char`\"{})
+\item 
+\hyperlink{double-probe-example_8cc_a02543ef64adac04c3ef2c7c137ee4d9f}{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED} (\hyperlink{classEmitter}{Emitter})
+\item 
+void \hyperlink{double-probe-example_8cc_aa6eb1c76f6ae41b129d9e94734c64824}{Notify\+Via\+Trace\+Source} (std\+::string context, double old\+Val, double new\+Val)
+\item 
+void \hyperlink{double-probe-example_8cc_a2b89eb6cf8dc830f27ce00766bf62c68}{Notify\+Via\+Probe} (std\+::string context, double old\+Val, double new\+Val)
+\item 
+int \hyperlink{double-probe-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{double-\/probe-\/example.\+cc@{double-\/probe-\/example.\+cc}!main@{main}}
+\index{main@{main}!double-\/probe-\/example.\+cc@{double-\/probe-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{double-probe-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{double-probe-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+122 \{
+123   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+124   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+125   \textcolor{keywordtype}{bool} connected;
+126 
+127   \hyperlink{classns3_1_1Ptr}{Ptr<Emitter>} emitter = CreateObject<Emitter> ();
+128   Names::Add (\textcolor{stringliteral}{"/Names/Emitter"}, emitter);
+129 
+130   \textcolor{comment}{//}
+131   \textcolor{comment}{// The below shows typical functionality without a probe}
+132   \textcolor{comment}{// (connect a sink function to a trace source)}
+133   \textcolor{comment}{//}
+134   connected = emitter->\hyperlink{classns3_1_1ObjectBase_ada3a45b34bc23114a25e0ab19188276e}{TraceConnect} (\textcolor{stringliteral}{"Counter"}, \textcolor{stringliteral}{"sample context"}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{double-probe-example_8cc_aa6eb1c76f6ae41b129d9e94734c64824}{NotifyViaTraceSource}));
+135   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (connected, \textcolor{stringliteral}{"Trace source not connected"});
+136 
+137   \textcolor{comment}{//}
+138   \textcolor{comment}{// Next, we'll show several use cases of using a Probe to access and}
+139   \textcolor{comment}{// filter the values of the underlying trace source}
+140   \textcolor{comment}{//}
+141 
+142   \textcolor{comment}{//}
+143   \textcolor{comment}{// Probe1 will be hooked directly to the Emitter trace source object}
+144   \textcolor{comment}{//}
+145 
+146   \textcolor{comment}{// probe1 will be hooked to the Emitter trace source}
+147   \hyperlink{classns3_1_1Ptr}{Ptr<DoubleProbe>} probe1 = CreateObject<DoubleProbe> ();
+148   \textcolor{comment}{// the probe's name can serve as its context in the tracing}
+149   probe1->\hyperlink{classns3_1_1DataCollectionObject_a9bf5a3af1190f7efadb1baae36889eaa}{SetName} (\textcolor{stringliteral}{"ObjectProbe"});
+150 
+151   \textcolor{comment}{// Connect the probe to the emitter's Counter}
+152   connected = probe1->\hyperlink{classns3_1_1DoubleProbe_a595c0fdc7e7c2e466cc8e9fc847580b0}{ConnectByObject} (\textcolor{stringliteral}{"Counter"}, emitter);
+153   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (connected, \textcolor{stringliteral}{"Trace source not connected to probe1"});
+154 
+155   \textcolor{comment}{// The probe itself should generate output.  The context that we provide}
+156   \textcolor{comment}{// to this probe (in this case, the probe name) will help to disambiguate}
+157   \textcolor{comment}{// the source of the trace}
+158   connected = probe1->\hyperlink{classns3_1_1ObjectBase_ada3a45b34bc23114a25e0ab19188276e}{TraceConnect} (\textcolor{stringliteral}{"Output"}, probe1->\hyperlink{classns3_1_1DataCollectionObject_a2e37eac50a8ff0b7d3030ed82132afdd}{GetName} (), 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{double-probe-example_8cc_a2b89eb6cf8dc830f27ce00766bf62c68}{NotifyViaProbe}));
+159   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (connected, \textcolor{stringliteral}{"Trace source not connected to probe1 Output"});
+160 
+161   \textcolor{comment}{//}
+162   \textcolor{comment}{// Probe2 will be hooked to the Emitter trace source object by}
+163   \textcolor{comment}{// accessing it by path name in the Config database}
+164   \textcolor{comment}{//}
+165 
+166   \textcolor{comment}{// Create another similar probe; this will hook up via a Config path}
+167   \hyperlink{classns3_1_1Ptr}{Ptr<DoubleProbe>} probe2 = CreateObject<DoubleProbe> ();
+168   probe2->\hyperlink{classns3_1_1DataCollectionObject_a9bf5a3af1190f7efadb1baae36889eaa}{SetName} (\textcolor{stringliteral}{"PathProbe"});
+169 
+170   \textcolor{comment}{// Note, no return value is checked here}
+171   probe2->\hyperlink{classns3_1_1DoubleProbe_a0f34962630dbb3af28c74c8b517824a7}{ConnectByPath} (\textcolor{stringliteral}{"/Names/Emitter/Counter"});
+172 
+173   \textcolor{comment}{// The probe itself should generate output.  The context that we provide}
+174   \textcolor{comment}{// to this probe (in this case, the probe name) will help to disambiguate}
+175   \textcolor{comment}{// the source of the trace}
+176   connected = probe2->\hyperlink{classns3_1_1ObjectBase_ada3a45b34bc23114a25e0ab19188276e}{TraceConnect} (\textcolor{stringliteral}{"Output"}, \textcolor{stringliteral}{"/Names/Probes/PathProbe/Output"}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{double-probe-example_8cc_a2b89eb6cf8dc830f27ce00766bf62c68}{NotifyViaProbe}));
+177   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (connected, \textcolor{stringliteral}{"Trace source not connected to probe2 Output"});
+178 
+179   \textcolor{comment}{//}
+180   \textcolor{comment}{// Probe3 will be called by the emitter directly through the}
+181   \textcolor{comment}{// static method SetValueByPath().}
+182   \textcolor{comment}{//}
+183   \hyperlink{classns3_1_1Ptr}{Ptr<DoubleProbe>} probe3 = CreateObject<DoubleProbe> ();
+184   probe3->\hyperlink{classns3_1_1DataCollectionObject_a9bf5a3af1190f7efadb1baae36889eaa}{SetName} (\textcolor{stringliteral}{"StaticallyAccessedProbe"});
+185   \textcolor{comment}{// We must add it to the config database}
+186   Names::Add (\textcolor{stringliteral}{"/Names/Probes"}, probe3->\hyperlink{classns3_1_1DataCollectionObject_a2e37eac50a8ff0b7d3030ed82132afdd}{GetName} (), probe3);
+187 
+188   \textcolor{comment}{// The probe itself should generate output.  The context that we provide}
+189   \textcolor{comment}{// to this probe (in this case, the probe name) will help to disambiguate}
+190   \textcolor{comment}{// the source of the trace}
+191   connected = probe3->\hyperlink{classns3_1_1ObjectBase_ada3a45b34bc23114a25e0ab19188276e}{TraceConnect} (\textcolor{stringliteral}{"Output"}, \textcolor{stringliteral}{"/Names/Probes/StaticallyAccessedProbe/Output"}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{double-probe-example_8cc_a2b89eb6cf8dc830f27ce00766bf62c68}{NotifyViaProbe}));
+192   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (connected, \textcolor{stringliteral}{"Trace source not connected to probe3 Output"});
+193 
+194   \textcolor{comment}{// The Emitter object is not associated with an ns-3 node, so}
+195   \textcolor{comment}{// it won't get started automatically, so we need to do this ourselves}
+196   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0), &\hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Emitter::Initialize}, emitter);
+197 
+198   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (100.0));
+199   Simulator::Run ();
+200   Simulator::Destroy ();
+201 
+202   \textcolor{keywordflow}{return} 0;
+203 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{double-\/probe-\/example.\+cc@{double-\/probe-\/example.\+cc}!Notify\+Via\+Probe@{Notify\+Via\+Probe}}
+\index{Notify\+Via\+Probe@{Notify\+Via\+Probe}!double-\/probe-\/example.\+cc@{double-\/probe-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{Notify\+Via\+Probe(std\+::string context, double old\+Val, double new\+Val)}{NotifyViaProbe(std::string context, double oldVal, double newVal)}}]{\setlength{\rightskip}{0pt plus 5cm}void Notify\+Via\+Probe (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{double}]{old\+Val, }
+\item[{double}]{new\+Val}
+\end{DoxyParamCaption}
+)}\hypertarget{double-probe-example_8cc_a2b89eb6cf8dc830f27ce00766bf62c68}{}\label{double-probe-example_8cc_a2b89eb6cf8dc830f27ce00766bf62c68}
+
+\begin{DoxyCode}
+117 \{
+118   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"context: "} << context << \textcolor{stringliteral}{" old "} << oldVal << \textcolor{stringliteral}{" new "} << newVal);
+119 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{double-\/probe-\/example.\+cc@{double-\/probe-\/example.\+cc}!Notify\+Via\+Trace\+Source@{Notify\+Via\+Trace\+Source}}
+\index{Notify\+Via\+Trace\+Source@{Notify\+Via\+Trace\+Source}!double-\/probe-\/example.\+cc@{double-\/probe-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{Notify\+Via\+Trace\+Source(std\+::string context, double old\+Val, double new\+Val)}{NotifyViaTraceSource(std::string context, double oldVal, double newVal)}}]{\setlength{\rightskip}{0pt plus 5cm}void Notify\+Via\+Trace\+Source (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{double}]{old\+Val, }
+\item[{double}]{new\+Val}
+\end{DoxyParamCaption}
+)}\hypertarget{double-probe-example_8cc_aa6eb1c76f6ae41b129d9e94734c64824}{}\label{double-probe-example_8cc_aa6eb1c76f6ae41b129d9e94734c64824}
+
+\begin{DoxyCode}
+110 \{
+111   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"context: "} << context << \textcolor{stringliteral}{" old "} << oldVal << \textcolor{stringliteral}{" new "} << newVal);
+112 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{double-\/probe-\/example.\+cc@{double-\/probe-\/example.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!double-\/probe-\/example.\+cc@{double-\/probe-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Double\+Probe\+Example"")}{NS_LOG_COMPONENT_DEFINE("DoubleProbeExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Double\+Probe\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{double-probe-example_8cc_a4221fc0a2b6bdcba051c86d8e8f9b248}{}\label{double-probe-example_8cc_a4221fc0a2b6bdcba051c86d8e8f9b248}
+\index{double-\/probe-\/example.\+cc@{double-\/probe-\/example.\+cc}!N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED@{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED}}
+\index{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED@{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED}!double-\/probe-\/example.\+cc@{double-\/probe-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+E\+D(\+Emitter)}{NS_OBJECT_ENSURE_REGISTERED(Emitter)}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED (
+\begin{DoxyParamCaption}
+\item[{{\bf Emitter}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{double-probe-example_8cc_a02543ef64adac04c3ef2c7c137ee4d9f}{}\label{double-probe-example_8cc_a02543ef64adac04c3ef2c7c137ee4d9f}

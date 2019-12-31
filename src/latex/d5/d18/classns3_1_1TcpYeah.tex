@@ -1,0 +1,846 @@
+\hypertarget{classns3_1_1TcpYeah}{}\section{ns3\+:\+:Tcp\+Yeah Class Reference}
+\label{classns3_1_1TcpYeah}\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+
+
+An implementation of T\+CP Ye\+AH.  
+
+
+
+
+{\ttfamily \#include $<$tcp-\/yeah.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Tcp\+Yeah\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Tcp\+Yeah\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1TcpYeah_aaf679301f97e5643af990b13976ea8db}{Tcp\+Yeah} (void)
+\item 
+\hyperlink{classns3_1_1TcpYeah_aa0688d231652a75d221b328cd8c79dec}{Tcp\+Yeah} (const \hyperlink{classns3_1_1TcpYeah}{Tcp\+Yeah} \&sock)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1TcpYeah_a87d4bf666bcc5e3f69474335ab499fde}{$\sim$\+Tcp\+Yeah} (void)
+\item 
+virtual std\+::string \hyperlink{classns3_1_1TcpYeah_a55437380bf00da00ede56cc44be0b5d2}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the name of the congestion control algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpYeah_a2423d9c6a6aea3c8e58749c9219d2fbd}{Pkts\+Acked} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked, const \hyperlink{classns3_1_1Time}{Time} \&rtt)
+\begin{DoxyCompactList}\small\item\em Compute R\+T\+Ts needed to execute Ye\+AH algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpYeah_ad3d8b9d44b3a29ab9f30aabc4af9c08a}{Congestion\+State\+Set} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, const \hyperlink{classns3_1_1TcpSocketState_a6fc313945a33d48fd60cbffe0c787b19}{Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t} new\+State)
+\begin{DoxyCompactList}\small\item\em Enable/disable Ye\+AH algorithm depending on the congestion state. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpYeah_aa1efa60adbcb1dfad8d188deef7ed2ea}{Increase\+Window} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked)
+\begin{DoxyCompactList}\small\item\em Adjust cwnd following Ye\+AH dual-\/mode algorithm. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_a08fe03bc4dca7f6c36f40ac770335c1a}{Get\+Ss\+Thresh} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)
+\begin{DoxyCompactList}\small\item\em Get slow start threshold upon the receipt of 3 dup\+A\+C\+Ks. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} $>$ \hyperlink{classns3_1_1TcpYeah_a2e1b0c15fd6c8128cceb7fa395f49892}{Fork} ()
+\begin{DoxyCompactList}\small\item\em Copy the congestion control algorithm across socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1TcpYeah_a4dec0c17fd88e785bec82271b5eae162}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1TcpYeah_ad2f91d04a90f689b9cfd05a26de6472e}{Enable\+Yeah} (const \hyperlink{group__network_gacb2070e4e98d2d5135c9bede58f07a03}{Sequence\+Number32} \&next\+Tx\+Sequence)
+\begin{DoxyCompactList}\small\item\em Enable Ye\+AH algorithm to start taking Ye\+AH samples. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1TcpYeah_adc197c96e9d2c942f9a2b1c599c73f73}{Disable\+Yeah} ()
+\begin{DoxyCompactList}\small\item\em Stop taking Ye\+AH samples. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_aa61ce240a53170a18b44144abe864def}{m\+\_\+alpha}
+\begin{DoxyCompactList}\small\item\em Maximum backlog allowed at the bottleneck queue; Q\+\_\+max in the paper. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_ae9bf0e2021209e59fe5fddd2afff6c22}{m\+\_\+gamma}
+\begin{DoxyCompactList}\small\item\em Fraction of queue to be removed per R\+TT when precautionary decongestion executed. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_af36b0f4c1017a437469d909a22650f84}{m\+\_\+delta}
+\begin{DoxyCompactList}\small\item\em Log minimum fraction of cwnd to be removed on loss. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_acd0da743a9c773afb1f4e295bc95b22c}{m\+\_\+epsilon}
+\begin{DoxyCompactList}\small\item\em Log maximum fraction to be removed on early decongestion. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_abcb83c9c36e0dbc75a19c4af8e08f8ad}{m\+\_\+phy}
+\begin{DoxyCompactList}\small\item\em Maximum delta from base. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_ada328f61ed71f07744835de4bf78927c}{m\+\_\+rho}
+\begin{DoxyCompactList}\small\item\em Minimum number of consecutive R\+TT to consider competition with Reno flows on loss. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_a03fb40380c411b1f33f4669907e1712b}{m\+\_\+zeta}
+\begin{DoxyCompactList}\small\item\em Minimum number of state switches to reset m\+\_\+reno\+Count. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_a9eab73e1bb55aa7664fb054973e75d49}{m\+\_\+stcp\+Ai\+Factor}
+\begin{DoxyCompactList}\small\item\em S\+T\+CP additive increase parameter. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpScalable}{Tcp\+Scalable} $>$ \hyperlink{classns3_1_1TcpYeah_aa02909129f868dc1b58ade0efa826ff3}{m\+\_\+stcp}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1TcpScalable}{Tcp\+Scalable} object. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpYeah_ae5be5385c3024374ff24843e70cde080}{m\+\_\+base\+Rtt}
+\begin{DoxyCompactList}\small\item\em Minimum of all Ye\+AH R\+TT measurements seen during connection. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{m\+\_\+min\+Rtt}
+\begin{DoxyCompactList}\small\item\em Minimum of all R\+T\+Ts measured within last R\+TT. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_a3040af9006b6237f1c5aa012aba3858a}{m\+\_\+cnt\+Rtt}
+\begin{DoxyCompactList}\small\item\em Number of R\+TT measurements during last R\+TT. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1TcpYeah_a25cd1e84b0c21841c03a0c9b539f1006}{m\+\_\+doing\+Yeah\+Now}
+\begin{DoxyCompactList}\small\item\em If true, do Ye\+AH for this R\+TT. \end{DoxyCompactList}\item 
+\hyperlink{group__network_gacb2070e4e98d2d5135c9bede58f07a03}{Sequence\+Number32} \hyperlink{classns3_1_1TcpYeah_a8e8f91c5e0b2706f00c89d76563e83fb}{m\+\_\+beg\+Snd\+Nxt}
+\begin{DoxyCompactList}\small\item\em Right edge during last R\+TT. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_a6bea8f785d16df35d447ba70b4464fb9}{m\+\_\+lastQ}
+\begin{DoxyCompactList}\small\item\em Last number of packets in the bottleneck queue. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_ad70d5e4310bd47c13bdfe5a665a4a911}{m\+\_\+doing\+Reno\+Now}
+\begin{DoxyCompactList}\small\item\em Number of R\+T\+Ts in \char`\"{}\+Slow\char`\"{} mode. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\+\_\+reno\+Count}
+\begin{DoxyCompactList}\small\item\em Estimated cwnd of competing Reno flow. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpYeah_adec63c13d5f8b6677008aa5209437483}{m\+\_\+fast\+Count}
+\begin{DoxyCompactList}\small\item\em Number of R\+T\+Ts in \char`\"{}\+Fast\char`\"{} mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An implementation of T\+CP Ye\+AH. 
+
+Ye\+A\+H-\/\+T\+CP (Yet Another High\+Speed T\+CP) is a heuristic designed to balance various requirements of a state-\/of-\/the-\/art congestion control algorithm\+: 1) fully exploit the link capacity of high B\+DP networks while inducing a small number of congestion events 2) compete friendly with Reno flows 3) achieve intra and R\+TT fairness 4) robust to random losses 5) achieve high performance regardless of buffer size
+
+Ye\+AH operates between 2 modes\+: Fast and Slow mode. In the Fast mode when the queue occupancy is small and the network congestion level is low, Ye\+AH increments its congestion window according to the aggressive S\+T\+CP rule. When the number of packets in the queue grows beyond a threshold and the network congestion level is high, Ye\+AH enters its Slow mode, acting as Reno with a decongestion algorithm. Ye\+AH employs Vegas\textquotesingle{} mechanism for calculating the backlog as in Equation (1). The estimation of the network congestion level is shown in Equation (2). \begin{DoxyVerb}                 Q = (RTT - BaseRTT) (cwnd / RTT)    (1)
+                 L = (RTT - BaseRTT) / BaseRTT       (2)
+\end{DoxyVerb}
+
+
+To ensure T\+CP friendliness, Ye\+AH also implements an algorithm to detect the presence of legacy Reno flows. Upon the receipt of 3 duplicate A\+C\+Ks, Ye\+AH decreases its slow start threshold according to Equation (3) if it\textquotesingle{}s not competing with Reno flows. Otherwise, the ssthresh is halved as in Reno. \begin{DoxyVerb}                 ssthresh = min{max{cwnd/8, Q}, cwnd/2}
+\end{DoxyVerb}
+
+
+More information\+: \href{http://www.csc.lsu.edu/~sjpark/cs7601/4-YeAH_TCP.pdf}{\tt http\+://www.\+csc.\+lsu.\+edu/$\sim$sjpark/cs7601/4-\/\+Ye\+A\+H\+\_\+\+T\+C\+P.\+pdf} 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!Tcp\+Yeah@{Tcp\+Yeah}}
+\index{Tcp\+Yeah@{Tcp\+Yeah}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{Tcp\+Yeah(void)}{TcpYeah(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Yeah\+::\+Tcp\+Yeah (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpYeah_aaf679301f97e5643af990b13976ea8db}{}\label{classns3_1_1TcpYeah_aaf679301f97e5643af990b13976ea8db}
+Create an unbound tcp socket. 
+\begin{DoxyCode}
+81   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (),
+82     \hyperlink{classns3_1_1TcpYeah_aa61ce240a53170a18b44144abe864def}{m\_alpha} (80),
+83     \hyperlink{classns3_1_1TcpYeah_ae9bf0e2021209e59fe5fddd2afff6c22}{m\_gamma} (1),
+84     \hyperlink{classns3_1_1TcpYeah_af36b0f4c1017a437469d909a22650f84}{m\_delta} (3),
+85     \hyperlink{classns3_1_1TcpYeah_acd0da743a9c773afb1f4e295bc95b22c}{m\_epsilon} (1),
+86     \hyperlink{classns3_1_1TcpYeah_abcb83c9c36e0dbc75a19c4af8e08f8ad}{m\_phy} (8),
+87     \hyperlink{classns3_1_1TcpYeah_ada328f61ed71f07744835de4bf78927c}{m\_rho} (16),
+88     \hyperlink{classns3_1_1TcpYeah_a03fb40380c411b1f33f4669907e1712b}{m\_zeta} (50),
+89     \hyperlink{classns3_1_1TcpYeah_a9eab73e1bb55aa7664fb054973e75d49}{m\_stcpAiFactor} (100),
+90     \hyperlink{classns3_1_1TcpYeah_aa02909129f868dc1b58ade0efa826ff3}{m\_stcp} (0),
+91     \hyperlink{classns3_1_1TcpYeah_ae5be5385c3024374ff24843e70cde080}{m\_baseRtt} (\hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ()),
+92     \hyperlink{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{m\_minRtt} (\hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ()),
+93     \hyperlink{classns3_1_1TcpYeah_a3040af9006b6237f1c5aa012aba3858a}{m\_cntRtt} (0),
+94     \hyperlink{classns3_1_1TcpYeah_a25cd1e84b0c21841c03a0c9b539f1006}{m\_doingYeahNow} (\textcolor{keyword}{true}),
+95     \hyperlink{classns3_1_1TcpYeah_a8e8f91c5e0b2706f00c89d76563e83fb}{m\_begSndNxt} (0),
+96     \hyperlink{classns3_1_1TcpYeah_a6bea8f785d16df35d447ba70b4464fb9}{m\_lastQ} (0),
+97     \hyperlink{classns3_1_1TcpYeah_ad70d5e4310bd47c13bdfe5a665a4a911}{m\_doingRenoNow} (0),
+98     \hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\_renoCount} (2),
+99     \hyperlink{classns3_1_1TcpYeah_adec63c13d5f8b6677008aa5209437483}{m\_fastCount} (0)
+100 \{
+101   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+102   \hyperlink{classns3_1_1TcpYeah_aa02909129f868dc1b58ade0efa826ff3}{m\_stcp} = CreateObject <TcpScalable> ();
+103   \hyperlink{classns3_1_1TcpYeah_aa02909129f868dc1b58ade0efa826ff3}{m\_stcp}->SetAttribute (\textcolor{stringliteral}{"AIFactor"}, (UintegerValue) \hyperlink{classns3_1_1TcpYeah_a9eab73e1bb55aa7664fb054973e75d49}{m\_stcpAiFactor});
+104 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!Tcp\+Yeah@{Tcp\+Yeah}}
+\index{Tcp\+Yeah@{Tcp\+Yeah}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{Tcp\+Yeah(const Tcp\+Yeah \&sock)}{TcpYeah(const TcpYeah &sock)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Yeah\+::\+Tcp\+Yeah (
+\begin{DoxyParamCaption}
+\item[{const {\bf Tcp\+Yeah} \&}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpYeah_aa0688d231652a75d221b328cd8c79dec}{}\label{classns3_1_1TcpYeah_aa0688d231652a75d221b328cd8c79dec}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & the object to copy \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+107   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (sock),
+108     \hyperlink{classns3_1_1TcpYeah_aa61ce240a53170a18b44144abe864def}{m\_alpha} (sock.m\_alpha),
+109     \hyperlink{classns3_1_1TcpYeah_ae9bf0e2021209e59fe5fddd2afff6c22}{m\_gamma} (sock.m\_gamma),
+110     \hyperlink{classns3_1_1TcpYeah_af36b0f4c1017a437469d909a22650f84}{m\_delta} (sock.m\_delta),
+111     \hyperlink{classns3_1_1TcpYeah_acd0da743a9c773afb1f4e295bc95b22c}{m\_epsilon} (sock.m\_epsilon),
+112     \hyperlink{classns3_1_1TcpYeah_abcb83c9c36e0dbc75a19c4af8e08f8ad}{m\_phy} (sock.m\_phy),
+113     \hyperlink{classns3_1_1TcpYeah_ada328f61ed71f07744835de4bf78927c}{m\_rho} (sock.m\_rho),
+114     \hyperlink{classns3_1_1TcpYeah_a03fb40380c411b1f33f4669907e1712b}{m\_zeta} (sock.m\_zeta),
+115     \hyperlink{classns3_1_1TcpYeah_a9eab73e1bb55aa7664fb054973e75d49}{m\_stcpAiFactor} (sock.m\_stcpAiFactor),
+116     \hyperlink{classns3_1_1TcpYeah_ae5be5385c3024374ff24843e70cde080}{m\_baseRtt} (sock.m\_baseRtt),
+117     \hyperlink{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{m\_minRtt} (sock.m\_minRtt),
+118     \hyperlink{classns3_1_1TcpYeah_a3040af9006b6237f1c5aa012aba3858a}{m\_cntRtt} (sock.m\_cntRtt),
+119     \hyperlink{classns3_1_1TcpYeah_a25cd1e84b0c21841c03a0c9b539f1006}{m\_doingYeahNow} (sock.m\_doingYeahNow),
+120     \hyperlink{classns3_1_1TcpYeah_a8e8f91c5e0b2706f00c89d76563e83fb}{m\_begSndNxt} (sock.m\_begSndNxt),
+121     \hyperlink{classns3_1_1TcpYeah_a6bea8f785d16df35d447ba70b4464fb9}{m\_lastQ} (sock.m\_lastQ),
+122     \hyperlink{classns3_1_1TcpYeah_ad70d5e4310bd47c13bdfe5a665a4a911}{m\_doingRenoNow} (sock.m\_doingRenoNow),
+123     \hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\_renoCount} (sock.m\_renoCount),
+124     \hyperlink{classns3_1_1TcpYeah_adec63c13d5f8b6677008aa5209437483}{m\_fastCount} (sock.m\_fastCount)
+125 \{
+126   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+127   \hyperlink{classns3_1_1TcpYeah_aa02909129f868dc1b58ade0efa826ff3}{m\_stcp} = \hyperlink{classns3_1_1Object_ae13320b2910618312ecdb81e62e0cff6}{CopyObject} (sock.m\_stcp);
+128 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!````~Tcp\+Yeah@{$\sim$\+Tcp\+Yeah}}
+\index{````~Tcp\+Yeah@{$\sim$\+Tcp\+Yeah}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{$\sim$\+Tcp\+Yeah(void)}{~TcpYeah(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Yeah\+::$\sim$\+Tcp\+Yeah (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpYeah_a87d4bf666bcc5e3f69474335ab499fde}{}\label{classns3_1_1TcpYeah_a87d4bf666bcc5e3f69474335ab499fde}
+
+\begin{DoxyCode}
+131 \{
+132   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+133 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!Congestion\+State\+Set@{Congestion\+State\+Set}}
+\index{Congestion\+State\+Set@{Congestion\+State\+Set}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{Congestion\+State\+Set(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, const Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t new\+State)}{CongestionStateSet(Ptr< TcpSocketState > tcb, const TcpSocketState::TcpCongState_t newState)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Yeah\+::\+Congestion\+State\+Set (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{const {\bf Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t}}]{new\+State}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpYeah_ad3d8b9d44b3a29ab9f30aabc4af9c08a}{}\label{classns3_1_1TcpYeah_ad3d8b9d44b3a29ab9f30aabc4af9c08a}
+
+
+Enable/disable Ye\+AH algorithm depending on the congestion state. 
+
+We only start a Ye\+AH cycle when we are in normal congestion state (C\+A\+\_\+\+O\+P\+EN state).
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em new\+State} & new congestion state to which the T\+CP is going to switch \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpCongestionOps_a2777666dc7df24040d718ddba896928b}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+185 \{
+186   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << newState);
+187 
+188   \textcolor{keywordflow}{if} (newState == \hyperlink{classns3_1_1TcpSocketState_a6fc313945a33d48fd60cbffe0c787b19af2d22f02a77b603394c34d4968bad142}{TcpSocketState::CA\_OPEN})
+189     \{
+190       \hyperlink{classns3_1_1TcpYeah_ad2f91d04a90f689b9cfd05a26de6472e}{EnableYeah} (tcb->\hyperlink{classns3_1_1TcpSocketState_ad1f77b1cbdb9267a89ebb6f16ac76892}{m\_nextTxSequence});
+191     \}
+192   \textcolor{keywordflow}{else}
+193     \{
+194       \hyperlink{classns3_1_1TcpYeah_adc197c96e9d2c942f9a2b1c599c73f73}{DisableYeah} ();
+195     \}
+196 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!Disable\+Yeah@{Disable\+Yeah}}
+\index{Disable\+Yeah@{Disable\+Yeah}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{Disable\+Yeah()}{DisableYeah()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Yeah\+::\+Disable\+Yeah (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_adc197c96e9d2c942f9a2b1c599c73f73}{}\label{classns3_1_1TcpYeah_adc197c96e9d2c942f9a2b1c599c73f73}
+
+
+Stop taking Ye\+AH samples. 
+
+
+\begin{DoxyCode}
+176 \{
+177   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+178 
+179   \hyperlink{classns3_1_1TcpYeah_a25cd1e84b0c21841c03a0c9b539f1006}{m\_doingYeahNow} = \textcolor{keyword}{false};
+180 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!Enable\+Yeah@{Enable\+Yeah}}
+\index{Enable\+Yeah@{Enable\+Yeah}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{Enable\+Yeah(const Sequence\+Number32 \&next\+Tx\+Sequence)}{EnableYeah(const SequenceNumber32 &nextTxSequence)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Yeah\+::\+Enable\+Yeah (
+\begin{DoxyParamCaption}
+\item[{const {\bf Sequence\+Number32} \&}]{next\+Tx\+Sequence}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_ad2f91d04a90f689b9cfd05a26de6472e}{}\label{classns3_1_1TcpYeah_ad2f91d04a90f689b9cfd05a26de6472e}
+
+
+Enable Ye\+AH algorithm to start taking Ye\+AH samples. 
+
+Ye\+AH algorithm is enabled in the following situations\+:
+\begin{DoxyEnumerate}
+\item at the establishment of a connection
+\item after an R\+TO
+\item after fast recovery
+\item when an idle connection is restarted
+\end{DoxyEnumerate}
+
+
+\begin{DoxyParams}{Parameters}
+{\em next\+Tx\+Sequence} & Sequence to transmit next \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+165 \{
+166   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << nextTxSequence);
+167 
+168   \hyperlink{classns3_1_1TcpYeah_a25cd1e84b0c21841c03a0c9b539f1006}{m\_doingYeahNow} = \textcolor{keyword}{true};
+169   \hyperlink{classns3_1_1TcpYeah_a8e8f91c5e0b2706f00c89d76563e83fb}{m\_begSndNxt} = nextTxSequence;
+170   \hyperlink{classns3_1_1TcpYeah_a3040af9006b6237f1c5aa012aba3858a}{m\_cntRtt} = 0;
+171   \hyperlink{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{m\_minRtt} = \hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ();
+172 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!Fork@{Fork}}
+\index{Fork@{Fork}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{Fork()}{Fork()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Congestion\+Ops} $>$ ns3\+::\+Tcp\+Yeah\+::\+Fork (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpYeah_a2e1b0c15fd6c8128cceb7fa395f49892}{}\label{classns3_1_1TcpYeah_a2e1b0c15fd6c8128cceb7fa395f49892}
+
+
+Copy the congestion control algorithm across socket. 
+
+\begin{DoxyReturn}{Returns}
+a pointer of the copied object 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a2606d5fcd01a1eb4d5f4e6beb7a33192}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+137 \{
+138   \textcolor{keywordflow}{return} CopyObject<TcpYeah> (\textcolor{keyword}{this});
+139 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Tcp\+Yeah\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpYeah_a55437380bf00da00ede56cc44be0b5d2}{}\label{classns3_1_1TcpYeah_a55437380bf00da00ede56cc44be0b5d2}
+
+
+Get the name of the congestion control algorithm. 
+
+\begin{DoxyReturn}{Returns}
+A string identifying the name 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a0ecf92cb36c236c70e0ecaedfff6609e}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+312 \{
+313   \textcolor{keywordflow}{return} \textcolor{stringliteral}{"TcpYeah"};
+314 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!Get\+Ss\+Thresh@{Get\+Ss\+Thresh}}
+\index{Get\+Ss\+Thresh@{Get\+Ss\+Thresh}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{Get\+Ss\+Thresh(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)}{GetSsThresh(Ptr< const TcpSocketState > tcb, uint32_t bytesInFlight)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::\+Get\+Ss\+Thresh (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{bytes\+In\+Flight}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpYeah_a08fe03bc4dca7f6c36f40ac770335c1a}{}\label{classns3_1_1TcpYeah_a08fe03bc4dca7f6c36f40ac770335c1a}
+
+
+Get slow start threshold upon the receipt of 3 dup\+A\+C\+Ks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em bytes\+In\+Flight} & number of outstanding bytes\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the slow start threshold value 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a1cb467aaa4960dfe10b963ed9f3d5aa2}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+319 \{
+320   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << bytesInFlight);
+321   uint32\_t reduction;
+322   uint32\_t segBytesInFlight = bytesInFlight / tcb->m\_segmentSize;
+323 
+324   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpYeah_ad70d5e4310bd47c13bdfe5a665a4a911}{m\_doingRenoNow} < \hyperlink{classns3_1_1TcpYeah_ada328f61ed71f07744835de4bf78927c}{m\_rho})
+325     \{ \textcolor{comment}{// Not competing with Reno flows}
+326       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Not competing with Reno flows upon loss"});
+327       reduction = \hyperlink{classns3_1_1TcpYeah_a6bea8f785d16df35d447ba70b4464fb9}{m\_lastQ};
+328       reduction = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (reduction, segBytesInFlight >> \hyperlink{classns3_1_1TcpYeah_af36b0f4c1017a437469d909a22650f84}{m\_delta});
+329       reduction = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (reduction, \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (segBytesInFlight >> 1, (uint32\_t) 2));
+330     \}
+331   \textcolor{keywordflow}{else}
+332     \{ \textcolor{comment}{// Competing with Reno flows}
+333       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Competing with Reno flows upon loss"});
+334       reduction = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (segBytesInFlight >> 1, (uint32\_t) 2);
+335     \}
+336 
+337   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Reduction amount upon loss = "} << reduction);
+338 
+339   \hyperlink{classns3_1_1TcpYeah_adec63c13d5f8b6677008aa5209437483}{m\_fastCount} = 0;
+340   \hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\_renoCount} = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (\hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\_renoCount} >> 1, (uint32\_t) 2);
+341 
+342   \textcolor{keywordflow}{return} (bytesInFlight - (reduction * tcb->m\_segmentSize));
+343 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Tcp\+Yeah\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpYeah_a4dec0c17fd88e785bec82271b5eae162}{}\label{classns3_1_1TcpYeah_a4dec0c17fd88e785bec82271b5eae162}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+39 \{
+40   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::TcpYeah"})
+41     .SetParent<\hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno}> ()
+42     .AddConstructor<TcpYeah> ()
+43     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+44     .AddAttribute (\textcolor{stringliteral}{"Alpha"}, \textcolor{stringliteral}{"Maximum backlog allowed at the bottleneck queue"},
+45                    UintegerValue (80),
+46                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpYeah_aa61ce240a53170a18b44144abe864def}{TcpYeah::m\_alpha}),
+47                    MakeUintegerChecker<uint32\_t> ())
+48     .AddAttribute (\textcolor{stringliteral}{"Gamma"}, \textcolor{stringliteral}{"Fraction of queue to be removed per RTT"},
+49                    UintegerValue (1),
+50                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpYeah_ae9bf0e2021209e59fe5fddd2afff6c22}{TcpYeah::m\_gamma}),
+51                    MakeUintegerChecker<uint32\_t> ())
+52     .AddAttribute (\textcolor{stringliteral}{"Delta"}, \textcolor{stringliteral}{"Log minimum fraction of cwnd to be removed on loss"},
+53                    UintegerValue (3),
+54                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpYeah_af36b0f4c1017a437469d909a22650f84}{TcpYeah::m\_delta}),
+55                    MakeUintegerChecker<uint32\_t> ())
+56     .AddAttribute (\textcolor{stringliteral}{"Epsilon"}, \textcolor{stringliteral}{"Log maximum fraction to be removed on early decongestion"},
+57                    UintegerValue (1),
+58                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpYeah_acd0da743a9c773afb1f4e295bc95b22c}{TcpYeah::m\_epsilon}),
+59                    MakeUintegerChecker<uint32\_t> ())
+60     .AddAttribute (\textcolor{stringliteral}{"Phy"}, \textcolor{stringliteral}{"Maximum delta from base"},
+61                    UintegerValue (8),
+62                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpYeah_abcb83c9c36e0dbc75a19c4af8e08f8ad}{TcpYeah::m\_phy}),
+63                    MakeUintegerChecker<uint32\_t> ())
+64     .AddAttribute (\textcolor{stringliteral}{"Rho"}, \textcolor{stringliteral}{"Minimum # of consecutive RTT to consider competition on loss"},
+65                    UintegerValue (16),
+66                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpYeah_ada328f61ed71f07744835de4bf78927c}{TcpYeah::m\_rho}),
+67                    MakeUintegerChecker<uint32\_t> ())
+68     .AddAttribute (\textcolor{stringliteral}{"Zeta"}, \textcolor{stringliteral}{"Minimum # of state switches to reset m\_renoCount"},
+69                    UintegerValue (50),
+70                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpYeah_a03fb40380c411b1f33f4669907e1712b}{TcpYeah::m\_zeta}),
+71                    MakeUintegerChecker<uint32\_t> ())
+72     .AddAttribute (\textcolor{stringliteral}{"StcpAiFactor"}, \textcolor{stringliteral}{"STCP additive increase factor"},
+73                    UintegerValue (100),
+74                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpYeah_a9eab73e1bb55aa7664fb054973e75d49}{TcpYeah::m\_stcpAiFactor}),
+75                    MakeUintegerChecker<uint32\_t> ())
+76   ;
+77   \textcolor{keywordflow}{return} tid;
+78 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!Increase\+Window@{Increase\+Window}}
+\index{Increase\+Window@{Increase\+Window}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{Increase\+Window(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked)}{IncreaseWindow(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Yeah\+::\+Increase\+Window (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpYeah_aa1efa60adbcb1dfad8d188deef7ed2ea}{}\label{classns3_1_1TcpYeah_aa1efa60adbcb1dfad8d188deef7ed2ea}
+
+
+Adjust cwnd following Ye\+AH dual-\/mode algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments A\+C\+Ked \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a11db8ae90f4cebacc15524a793b0741a}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+200 \{
+201   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked);
+202 
+203   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} < tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh})
+204     \{
+205       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"In slow start, invoke NewReno slow start."});
+206       \hyperlink{classns3_1_1TcpNewReno_a1cf5fd9585eb3b745727f4f5beae0706}{TcpNewReno::SlowStart} (tcb, segmentsAcked);
+207     \}
+208   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1TcpYeah_ad70d5e4310bd47c13bdfe5a665a4a911}{m\_doingRenoNow})
+209     \{ \textcolor{comment}{// Fast mode}
+210       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"In Fast mode, increment cwnd according to STCP rule."});
+211       \hyperlink{classns3_1_1TcpYeah_aa02909129f868dc1b58ade0efa826ff3}{m\_stcp}->IncreaseWindow (tcb, segmentsAcked);
+212       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"In Fast mode, updated to cwnd "} << tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <<
+213                    \textcolor{stringliteral}{" ssthresh "} << tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+214     \}
+215   \textcolor{keywordflow}{else}
+216     \{ \textcolor{comment}{// Behave like NewReno}
+217       \hyperlink{classns3_1_1TcpNewReno_a34a5eec0649a7b485852c74c825e14ba}{TcpNewReno::CongestionAvoidance} (tcb, segmentsAcked);
+218     \}
+219 
+220   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7a30ba2b675238429c7fe2f0c8d1ce94}{m\_lastAckedSeq} >= \hyperlink{classns3_1_1TcpYeah_a8e8f91c5e0b2706f00c89d76563e83fb}{m\_begSndNxt})
+221     \{ \textcolor{comment}{// A YeAH cycle has finished, we do YeAH cwnd adjustment every RTT.}
+222 
+223       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"A YeAH cycle has finished, check if enough RTT samples."});
+224       \textcolor{comment}{/*}
+225 \textcolor{comment}{       * We perform YeAH calculations only if we got enough RTT samples to}
+226 \textcolor{comment}{       * insure that at least 1 of those samples wasn't from a delayed ACK.}
+227 \textcolor{comment}{       */}
+228       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpYeah_a3040af9006b6237f1c5aa012aba3858a}{m\_cntRtt} > 2)
+229         \{
+230           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Enough RTT samples to perform YeAH calculations"});
+231           \textcolor{comment}{/*}
+232 \textcolor{comment}{           * We have enough RTT samples to perform YeAH algorithm.}
+233 \textcolor{comment}{           * Now we need to determine if we should operate in Fast or Slow mode,}
+234 \textcolor{comment}{           * and if we should execute the precautionary decongestion algorithm.}
+235 \textcolor{comment}{           */}
+236 
+237           uint32\_t segCwnd = tcb->\hyperlink{classns3_1_1TcpSocketState_ab6dfe309ca53fd3207dcafede75ad12d}{GetCwndInSegments} ();
+238 
+239           \textcolor{comment}{// Calculate the extra number of packets in queue}
+240           \textcolor{comment}{// Naming convention: minRtt is the minimum RTT of this round,}
+241           \textcolor{comment}{// baseRtt is the minimum RTT of the entire transmission.}
+242           \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{m\_minRtt} >= \hyperlink{classns3_1_1TcpYeah_ae5be5385c3024374ff24843e70cde080}{m\_baseRtt});
+243           \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} rttQueue =  \hyperlink{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{m\_minRtt} - \hyperlink{classns3_1_1TcpYeah_ae5be5385c3024374ff24843e70cde080}{m\_baseRtt};
+244 
+245           \textcolor{comment}{// queue = rttQueue * bw = rttQueue * (cwnd/RTTmin)}
+246           \textcolor{keywordtype}{double} \hyperlink{generate__test__data__lte__spectrum__model_8m_a3f7228a3941f19f282647a09dd494528}{bw} = segCwnd / \hyperlink{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{m\_minRtt}.\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} ();
+247           uint32\_t queue = bw * rttQueue.GetSeconds ();
+248           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Queue backlog = "} << queue <<
+249                         \textcolor{stringliteral}{" given by cwnd = "} << segCwnd <<
+250                         \textcolor{stringliteral}{", minRtt = "} << \hyperlink{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{m\_minRtt}.\hyperlink{classns3_1_1Time_aba3428a8b6c4c8d9014ce44145081f34}{GetMilliSeconds} () <<
+251                         \textcolor{stringliteral}{" ms, baseRtt = "} << m\_baseRtt.GetMilliSeconds () <<
+252                         \textcolor{stringliteral}{" ms"});
+253 
+254           \textcolor{keywordtype}{double} \hyperlink{loss__ITU1411__NLOS__over__rooftop_8m_a0f93e2c2e7c447b4dfc5bcac7e346da1}{L} = rttQueue.GetSeconds () / m\_baseRtt.GetSeconds ();
+255           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Network congestion level = "} << L);
+256 
+257           \textcolor{keywordflow}{if} (queue > \hyperlink{classns3_1_1TcpYeah_aa61ce240a53170a18b44144abe864def}{m\_alpha} || L > (1 / \hyperlink{classns3_1_1TcpYeah_abcb83c9c36e0dbc75a19c4af8e08f8ad}{m\_phy}) )
+258             \{  \textcolor{comment}{// Slow mode}
+259               \textcolor{keywordflow}{if} (queue > \hyperlink{classns3_1_1TcpYeah_aa61ce240a53170a18b44144abe864def}{m\_alpha} && segCwnd > \hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\_renoCount})
+260                 \{ \textcolor{comment}{// Precautionary decongestion}
+261                   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Execute the precautionary decongestion."});
+262                   uint32\_t reduction = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (queue / \hyperlink{classns3_1_1TcpYeah_ae9bf0e2021209e59fe5fddd2afff6c22}{m\_gamma}, segCwnd >> 
+      \hyperlink{classns3_1_1TcpYeah_acd0da743a9c773afb1f4e295bc95b22c}{m\_epsilon});
+263                   segCwnd -= reduction;
+264                   segCwnd = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (segCwnd, \hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\_renoCount});
+265                   tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} = segCwnd * tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+266                   tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh} = tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd};
+267 
+268                   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"In Slow mode, after precautionary decongestion, "}
+269                                \textcolor{stringliteral}{"updated to cwnd "} << tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <<
+270                                \textcolor{stringliteral}{" ssthresh "} << tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+271                 \}
+272 
+273               \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\_renoCount} <= 2)
+274                 \{
+275                   \hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\_renoCount} = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (segCwnd >> 1, (uint32\_t) 2);
+276                 \}
+277               \textcolor{keywordflow}{else}
+278                 \{
+279                   \hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\_renoCount}++;
+280                 \}
+281 
+282               \hyperlink{classns3_1_1TcpYeah_ad70d5e4310bd47c13bdfe5a665a4a911}{m\_doingRenoNow} = \hyperlink{classns3_1_1TcpYeah_ad70d5e4310bd47c13bdfe5a665a4a911}{m\_doingRenoNow} + 1;
+283               \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"In Slow mode, updated to m\_renoCount = "} <<
+284                             \hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\_renoCount} << \textcolor{stringliteral}{" m\_doingRenoNow = "} << 
+      \hyperlink{classns3_1_1TcpYeah_ad70d5e4310bd47c13bdfe5a665a4a911}{m\_doingRenoNow});
+285             \}
+286           \textcolor{keywordflow}{else}
+287             \{ \textcolor{comment}{// Fast mode}
+288               \hyperlink{classns3_1_1TcpYeah_adec63c13d5f8b6677008aa5209437483}{m\_fastCount}++;
+289               \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpYeah_adec63c13d5f8b6677008aa5209437483}{m\_fastCount} > \hyperlink{classns3_1_1TcpYeah_a03fb40380c411b1f33f4669907e1712b}{m\_zeta})
+290                 \{ \textcolor{comment}{// Reset renoCount}
+291                   \hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\_renoCount} = 2;
+292                   \hyperlink{classns3_1_1TcpYeah_adec63c13d5f8b6677008aa5209437483}{m\_fastCount} = 0;
+293                 \}
+294               \hyperlink{classns3_1_1TcpYeah_ad70d5e4310bd47c13bdfe5a665a4a911}{m\_doingRenoNow} = 0;
+295               \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"In Fast mode, updated to m\_renoCount = "} <<
+296                             \hyperlink{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{m\_renoCount} << \textcolor{stringliteral}{" m\_doingRenoNow = "} << 
+      \hyperlink{classns3_1_1TcpYeah_ad70d5e4310bd47c13bdfe5a665a4a911}{m\_doingRenoNow});
+297             \}
+298           \hyperlink{classns3_1_1TcpYeah_a6bea8f785d16df35d447ba70b4464fb9}{m\_lastQ} = queue;
+299         \}
+300 
+301       \textcolor{comment}{// Save the current right edge for next Yeah cycle}
+302       \hyperlink{classns3_1_1TcpYeah_a8e8f91c5e0b2706f00c89d76563e83fb}{m\_begSndNxt} = tcb->\hyperlink{classns3_1_1TcpSocketState_ad1f77b1cbdb9267a89ebb6f16ac76892}{m\_nextTxSequence};
+303 
+304       \textcolor{comment}{// Reset cntRtt & minRtt}
+305       \hyperlink{classns3_1_1TcpYeah_a3040af9006b6237f1c5aa012aba3858a}{m\_cntRtt} = 0;
+306       \hyperlink{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{m\_minRtt} = \hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ();
+307     \}
+308 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!Pkts\+Acked@{Pkts\+Acked}}
+\index{Pkts\+Acked@{Pkts\+Acked}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{Pkts\+Acked(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked, const Time \&rtt)}{PktsAcked(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked, const Time &rtt)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Yeah\+::\+Pkts\+Acked (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked, }
+\item[{const {\bf Time} \&}]{rtt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpYeah_a2423d9c6a6aea3c8e58749c9219d2fbd}{}\label{classns3_1_1TcpYeah_a2423d9c6a6aea3c8e58749c9219d2fbd}
+
+
+Compute R\+T\+Ts needed to execute Ye\+AH algorithm. 
+
+The function filters R\+TT samples from the last R\+TT to find the current smallest propagation delay + queueing delay (min\+Rtt). We take the minimum to avoid the effects of delayed A\+C\+Ks.
+
+The function also min-\/filters all R\+TT measurements seen to find the propagation delay (base\+Rtt).
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments A\+C\+Ked \\
+\hline
+{\em rtt} & last R\+TT \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpCongestionOps_a76d3ffb7b1a7ba761026e3f94c1f50fa}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+144 \{
+145   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked << rtt);
+146 
+147   \textcolor{keywordflow}{if} (rtt.IsZero ())
+148     \{
+149       \textcolor{keywordflow}{return};
+150     \}
+151 
+152   \hyperlink{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{m\_minRtt} = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (\hyperlink{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{m\_minRtt}, rtt);
+153   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_minRtt = "} << \hyperlink{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{m\_minRtt}.
+      \hyperlink{classns3_1_1Time_aba3428a8b6c4c8d9014ce44145081f34}{GetMilliSeconds} () << \textcolor{stringliteral}{" ms"});
+154 
+155   \hyperlink{classns3_1_1TcpYeah_ae5be5385c3024374ff24843e70cde080}{m\_baseRtt} = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (m\_baseRtt, rtt);
+156   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_baseRtt = "} << m\_baseRtt.GetMilliSeconds () << \textcolor{stringliteral}{" ms"});
+157 
+158   \textcolor{comment}{// Update RTT counter}
+159   \hyperlink{classns3_1_1TcpYeah_a3040af9006b6237f1c5aa012aba3858a}{m\_cntRtt}++;
+160   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_cntRtt = "} << m\_cntRtt);
+161 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 12
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+alpha@{m\+\_\+alpha}}
+\index{m\+\_\+alpha@{m\+\_\+alpha}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+alpha}{m_alpha}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+alpha\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_aa61ce240a53170a18b44144abe864def}{}\label{classns3_1_1TcpYeah_aa61ce240a53170a18b44144abe864def}
+
+
+Maximum backlog allowed at the bottleneck queue; Q\+\_\+max in the paper. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+base\+Rtt@{m\+\_\+base\+Rtt}}
+\index{m\+\_\+base\+Rtt@{m\+\_\+base\+Rtt}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+base\+Rtt}{m_baseRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Yeah\+::m\+\_\+base\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_ae5be5385c3024374ff24843e70cde080}{}\label{classns3_1_1TcpYeah_ae5be5385c3024374ff24843e70cde080}
+
+
+Minimum of all Ye\+AH R\+TT measurements seen during connection. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+beg\+Snd\+Nxt@{m\+\_\+beg\+Snd\+Nxt}}
+\index{m\+\_\+beg\+Snd\+Nxt@{m\+\_\+beg\+Snd\+Nxt}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+beg\+Snd\+Nxt}{m_begSndNxt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sequence\+Number32} ns3\+::\+Tcp\+Yeah\+::m\+\_\+beg\+Snd\+Nxt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_a8e8f91c5e0b2706f00c89d76563e83fb}{}\label{classns3_1_1TcpYeah_a8e8f91c5e0b2706f00c89d76563e83fb}
+
+
+Right edge during last R\+TT. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+cnt\+Rtt@{m\+\_\+cnt\+Rtt}}
+\index{m\+\_\+cnt\+Rtt@{m\+\_\+cnt\+Rtt}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+cnt\+Rtt}{m_cntRtt}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+cnt\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_a3040af9006b6237f1c5aa012aba3858a}{}\label{classns3_1_1TcpYeah_a3040af9006b6237f1c5aa012aba3858a}
+
+
+Number of R\+TT measurements during last R\+TT. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+delta@{m\+\_\+delta}}
+\index{m\+\_\+delta@{m\+\_\+delta}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+delta}{m_delta}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+delta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_af36b0f4c1017a437469d909a22650f84}{}\label{classns3_1_1TcpYeah_af36b0f4c1017a437469d909a22650f84}
+
+
+Log minimum fraction of cwnd to be removed on loss. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+doing\+Reno\+Now@{m\+\_\+doing\+Reno\+Now}}
+\index{m\+\_\+doing\+Reno\+Now@{m\+\_\+doing\+Reno\+Now}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+doing\+Reno\+Now}{m_doingRenoNow}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+doing\+Reno\+Now\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_ad70d5e4310bd47c13bdfe5a665a4a911}{}\label{classns3_1_1TcpYeah_ad70d5e4310bd47c13bdfe5a665a4a911}
+
+
+Number of R\+T\+Ts in \char`\"{}\+Slow\char`\"{} mode. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+doing\+Yeah\+Now@{m\+\_\+doing\+Yeah\+Now}}
+\index{m\+\_\+doing\+Yeah\+Now@{m\+\_\+doing\+Yeah\+Now}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+doing\+Yeah\+Now}{m_doingYeahNow}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Tcp\+Yeah\+::m\+\_\+doing\+Yeah\+Now\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_a25cd1e84b0c21841c03a0c9b539f1006}{}\label{classns3_1_1TcpYeah_a25cd1e84b0c21841c03a0c9b539f1006}
+
+
+If true, do Ye\+AH for this R\+TT. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+epsilon@{m\+\_\+epsilon}}
+\index{m\+\_\+epsilon@{m\+\_\+epsilon}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+epsilon}{m_epsilon}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+epsilon\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_acd0da743a9c773afb1f4e295bc95b22c}{}\label{classns3_1_1TcpYeah_acd0da743a9c773afb1f4e295bc95b22c}
+
+
+Log maximum fraction to be removed on early decongestion. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+fast\+Count@{m\+\_\+fast\+Count}}
+\index{m\+\_\+fast\+Count@{m\+\_\+fast\+Count}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+fast\+Count}{m_fastCount}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+fast\+Count\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_adec63c13d5f8b6677008aa5209437483}{}\label{classns3_1_1TcpYeah_adec63c13d5f8b6677008aa5209437483}
+
+
+Number of R\+T\+Ts in \char`\"{}\+Fast\char`\"{} mode. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+gamma@{m\+\_\+gamma}}
+\index{m\+\_\+gamma@{m\+\_\+gamma}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+gamma}{m_gamma}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+gamma\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_ae9bf0e2021209e59fe5fddd2afff6c22}{}\label{classns3_1_1TcpYeah_ae9bf0e2021209e59fe5fddd2afff6c22}
+
+
+Fraction of queue to be removed per R\+TT when precautionary decongestion executed. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+lastQ@{m\+\_\+lastQ}}
+\index{m\+\_\+lastQ@{m\+\_\+lastQ}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+lastQ}{m_lastQ}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+lastQ\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_a6bea8f785d16df35d447ba70b4464fb9}{}\label{classns3_1_1TcpYeah_a6bea8f785d16df35d447ba70b4464fb9}
+
+
+Last number of packets in the bottleneck queue. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+min\+Rtt@{m\+\_\+min\+Rtt}}
+\index{m\+\_\+min\+Rtt@{m\+\_\+min\+Rtt}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+min\+Rtt}{m_minRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Yeah\+::m\+\_\+min\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}{}\label{classns3_1_1TcpYeah_a03797ee01437476f042a2532916eeb34}
+
+
+Minimum of all R\+T\+Ts measured within last R\+TT. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+phy@{m\+\_\+phy}}
+\index{m\+\_\+phy@{m\+\_\+phy}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+phy}{m_phy}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+phy\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_abcb83c9c36e0dbc75a19c4af8e08f8ad}{}\label{classns3_1_1TcpYeah_abcb83c9c36e0dbc75a19c4af8e08f8ad}
+
+
+Maximum delta from base. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+reno\+Count@{m\+\_\+reno\+Count}}
+\index{m\+\_\+reno\+Count@{m\+\_\+reno\+Count}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+reno\+Count}{m_renoCount}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+reno\+Count\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}{}\label{classns3_1_1TcpYeah_a23724f2976fedf0c221ebad49a54487c}
+
+
+Estimated cwnd of competing Reno flow. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+rho@{m\+\_\+rho}}
+\index{m\+\_\+rho@{m\+\_\+rho}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+rho}{m_rho}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+rho\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_ada328f61ed71f07744835de4bf78927c}{}\label{classns3_1_1TcpYeah_ada328f61ed71f07744835de4bf78927c}
+
+
+Minimum number of consecutive R\+TT to consider competition with Reno flows on loss. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+stcp@{m\+\_\+stcp}}
+\index{m\+\_\+stcp@{m\+\_\+stcp}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+stcp}{m_stcp}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Tcp\+Scalable}$>$ ns3\+::\+Tcp\+Yeah\+::m\+\_\+stcp\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_aa02909129f868dc1b58ade0efa826ff3}{}\label{classns3_1_1TcpYeah_aa02909129f868dc1b58ade0efa826ff3}
+
+
+\hyperlink{classns3_1_1TcpScalable}{Tcp\+Scalable} object. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+stcp\+Ai\+Factor@{m\+\_\+stcp\+Ai\+Factor}}
+\index{m\+\_\+stcp\+Ai\+Factor@{m\+\_\+stcp\+Ai\+Factor}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+stcp\+Ai\+Factor}{m_stcpAiFactor}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+stcp\+Ai\+Factor\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_a9eab73e1bb55aa7664fb054973e75d49}{}\label{classns3_1_1TcpYeah_a9eab73e1bb55aa7664fb054973e75d49}
+
+
+S\+T\+CP additive increase parameter. 
+
+\index{ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}!m\+\_\+zeta@{m\+\_\+zeta}}
+\index{m\+\_\+zeta@{m\+\_\+zeta}!ns3\+::\+Tcp\+Yeah@{ns3\+::\+Tcp\+Yeah}}
+\subsubsection[{\texorpdfstring{m\+\_\+zeta}{m_zeta}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Yeah\+::m\+\_\+zeta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpYeah_a03fb40380c411b1f33f4669907e1712b}{}\label{classns3_1_1TcpYeah_a03fb40380c411b1f33f4669907e1712b}
+
+
+Minimum number of state switches to reset m\+\_\+reno\+Count. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{tcp-yeah_8h}{tcp-\/yeah.\+h}\item 
+internet/model/\hyperlink{tcp-yeah_8cc}{tcp-\/yeah.\+cc}\end{DoxyCompactItemize}

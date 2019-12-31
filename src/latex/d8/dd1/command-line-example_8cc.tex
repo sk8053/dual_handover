@@ -1,0 +1,173 @@
+\hypertarget{command-line-example_8cc}{}\section{core/examples/command-\/line-\/example.cc File Reference}
+\label{command-line-example_8cc}\index{core/examples/command-\/line-\/example.\+cc@{core/examples/command-\/line-\/example.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$iomanip$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+Include dependency graph for command-\/line-\/example.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{command-line-example_8cc_adeee81f82b40e460fd3e5165bac7d91f}{Set\+Cb\+Arg} (std\+::string val)
+\item 
+int \hyperlink{command-line-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{command-line-example_8cc_a99e375de1019bb4a4246819f47a4cbdc}{g\+\_\+cb\+Arg} = \char`\"{}cb\+Arg default\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Example program illustrating use of \hyperlink{classns3_1_1CommandLine}{ns3\+::\+Command\+Line}. 
+
+\subsection{Function Documentation}
+\index{command-\/line-\/example.\+cc@{command-\/line-\/example.\+cc}!main@{main}}
+\index{main@{main}!command-\/line-\/example.\+cc@{command-\/line-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{command-line-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{command-line-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+57 \{
+58 
+59   \textcolor{keywordtype}{int}         intArg  = 1;
+60   \textcolor{keywordtype}{bool}        boolArg = \textcolor{keyword}{false};
+61   std::string strArg  = \textcolor{stringliteral}{"strArg default"};
+62   \textcolor{comment}{// Attribute path}
+63   \textcolor{keyword}{const} std::string attrClass = \textcolor{stringliteral}{"ns3::RandomVariableStream"};
+64   \textcolor{keyword}{const} std::string attrName  = \textcolor{stringliteral}{"Antithetic"};
+65   \textcolor{keyword}{const} std::string attrPath  = attrClass + \textcolor{stringliteral}{"::"} + attrName;
+66  
+67   \textcolor{comment}{// Cache the initial values.  Normally one wouldn't do this,}
+68   \textcolor{comment}{// but we want to demonstrate that CommandLine has changed them.}
+69   \textcolor{keyword}{const} \textcolor{keywordtype}{int} intDef = intArg;
+70   \textcolor{keyword}{const} \textcolor{keywordtype}{bool} boolDef = boolArg;
+71   \textcolor{keyword}{const} std::string strDef = strArg;
+72   \textcolor{keyword}{const} std::string cbDef  = \hyperlink{command-line-example_8cc_a99e375de1019bb4a4246819f47a4cbdc}{g\_cbArg};
+73   \textcolor{comment}{// Look up default value for attribute}
+74   \textcolor{keyword}{const} \hyperlink{classns3_1_1TypeId}{TypeId} tid = TypeId::LookupByName (attrClass);
+75   std::string attrDef;
+76   \{
+77     \textcolor{keyword}{struct }\hyperlink{structns3_1_1TypeId_1_1AttributeInformation}{TypeId::AttributeInformation} info;
+78     tid.\hyperlink{classns3_1_1TypeId_ac0a446957d516129937e2f2285aab58b}{LookupAttributeByName} (attrName, &info);
+79     attrDef = info.originalInitialValue->SerializeToString (info.checker);
+80   \}
+81   
+82   
+83   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+84   cmd.\hyperlink{classns3_1_1CommandLine_a9db9facadd99f6dfe78e39e22d5db3c0}{Usage} (\textcolor{stringliteral}{"CommandLine example program.\(\backslash\)n"}
+85              \textcolor{stringliteral}{"\(\backslash\)n"}
+86              \textcolor{stringliteral}{"This little program demonstrates how to use CommandLine."});
+87   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"intArg"},  \textcolor{stringliteral}{"an int argument"},       intArg);
+88   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"boolArg"}, \textcolor{stringliteral}{"a bool argument"},       boolArg);
+89   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"strArg"},  \textcolor{stringliteral}{"a string argument"},     strArg);
+90   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"anti"},    attrPath);
+91   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"cbArg"},   \textcolor{stringliteral}{"a string via callback"}, \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (
+      \hyperlink{command-line-example_8cc_adeee81f82b40e460fd3e5165bac7d91f}{SetCbArg}));
+92   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+93 
+94   \textcolor{comment}{// Show initial values:}
+95   std::cout << std::endl;
+96   std::cout << cmd.\hyperlink{classns3_1_1CommandLine_a114d7e6bddf575e40f7b62573a73c573}{GetName} () << \textcolor{stringliteral}{":"} << std::endl;
+97   std::cout << \textcolor{stringliteral}{"Initial values:"} << std::endl;
+98   
+99   std::cout << std::left << std::setw (10) << \textcolor{stringliteral}{"intArg:"}
+100             <<                    intDef
+101             << std::endl;
+102   std::cout << std::setw (10)              << \textcolor{stringliteral}{"boolArg:"}
+103             << std::boolalpha  << boolDef  << std::noboolalpha
+104             << std::endl;
+105   
+106   std::cout << std::setw (10)              << \textcolor{stringliteral}{"strArg:"}
+107             << \textcolor{stringliteral}{"\(\backslash\)""}            << strDef   << \textcolor{stringliteral}{"\(\backslash\)""}
+108             << std::endl;
+109   std::cout << std::setw (10)              << \textcolor{stringliteral}{"anti:"}
+110             << \textcolor{stringliteral}{"\(\backslash\)""}            << attrDef  << \textcolor{stringliteral}{"\(\backslash\)""}
+111             << std::endl;
+112   std::cout << std::setw (10)              << \textcolor{stringliteral}{"cbArg:"}
+113             << \textcolor{stringliteral}{"\(\backslash\)""}            << cbDef    << \textcolor{stringliteral}{"\(\backslash\)""}
+114             << std::endl;
+115   std::cout << std::endl;
+116 
+117 
+118   \textcolor{comment}{// Show final values}
+119   std::cout << \textcolor{stringliteral}{"Final values:"} << std::endl;
+120   std::cout << std::left << std::setw (10) << \textcolor{stringliteral}{"intArg:"}
+121             <<                    intArg
+122             << std::endl;
+123   std::cout << std::setw (10)              << \textcolor{stringliteral}{"boolArg:"}
+124             << std::boolalpha  << boolArg
+125             << std::noboolalpha
+126             << std::endl;
+127   
+128   std::cout << std::setw (10)              << \textcolor{stringliteral}{"strArg:"}
+129             << \textcolor{stringliteral}{"\(\backslash\)""}            << strArg   << \textcolor{stringliteral}{"\(\backslash\)""}
+130             << std::endl;
+131 
+132   \textcolor{comment}{// Look up new default value for attribute}
+133   \{
+134     \textcolor{keyword}{struct }\hyperlink{structns3_1_1TypeId_1_1AttributeInformation}{TypeId::AttributeInformation} info;
+135     tid.\hyperlink{classns3_1_1TypeId_ac0a446957d516129937e2f2285aab58b}{LookupAttributeByName} (attrName, &info);
+136   
+137     std::cout << std::setw (10)            << \textcolor{stringliteral}{"anti:"}
+138               << \textcolor{stringliteral}{"\(\backslash\)""}
+139               << info.initialValue->SerializeToString (info.checker)
+140               << \textcolor{stringliteral}{"\(\backslash\)""}
+141               << std::endl;
+142   \}
+143   std::cout << std::setw (10)              << \textcolor{stringliteral}{"cbArg:"}
+144             << \textcolor{stringliteral}{"\(\backslash\)""}            << \hyperlink{command-line-example_8cc_a99e375de1019bb4a4246819f47a4cbdc}{g\_cbArg}  << \textcolor{stringliteral}{"\(\backslash\)""}
+145             << std::endl;
+146 
+147   \textcolor{keywordflow}{return} 0;
+148 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{command-\/line-\/example.\+cc@{command-\/line-\/example.\+cc}!Set\+Cb\+Arg@{Set\+Cb\+Arg}}
+\index{Set\+Cb\+Arg@{Set\+Cb\+Arg}!command-\/line-\/example.\+cc@{command-\/line-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{Set\+Cb\+Arg(std\+::string val)}{SetCbArg(std::string val)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Set\+Cb\+Arg (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{val}
+\end{DoxyParamCaption}
+)}\hypertarget{command-line-example_8cc_adeee81f82b40e460fd3e5165bac7d91f}{}\label{command-line-example_8cc_adeee81f82b40e460fd3e5165bac7d91f}
+Function to illustrate command line arguments handled by a Callback function.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em val} & New value for {\ttfamily g\+\_\+cb\+Arg}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+50 \{
+51   \hyperlink{command-line-example_8cc_a99e375de1019bb4a4246819f47a4cbdc}{g\_cbArg} = val;
+52   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+53 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Variable Documentation}
+\index{command-\/line-\/example.\+cc@{command-\/line-\/example.\+cc}!g\+\_\+cb\+Arg@{g\+\_\+cb\+Arg}}
+\index{g\+\_\+cb\+Arg@{g\+\_\+cb\+Arg}!command-\/line-\/example.\+cc@{command-\/line-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{g\+\_\+cb\+Arg}{g_cbArg}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string g\+\_\+cb\+Arg = \char`\"{}cb\+Arg default\char`\"{}}\hypertarget{command-line-example_8cc_a99e375de1019bb4a4246819f47a4cbdc}{}\label{command-line-example_8cc_a99e375de1019bb4a4246819f47a4cbdc}
+Global variable to illustrate command line arguments handled by a Callback function. 

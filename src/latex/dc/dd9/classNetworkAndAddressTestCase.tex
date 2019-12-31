@@ -1,0 +1,138 @@
+\hypertarget{classNetworkAndAddressTestCase}{}\section{Network\+And\+Address\+Test\+Case Class Reference}
+\label{classNetworkAndAddressTestCase}\index{Network\+And\+Address\+Test\+Case@{Network\+And\+Address\+Test\+Case}}
+
+
+I\+Pv4 network and address allocator Test.  
+
+
+
+
+Inheritance diagram for Network\+And\+Address\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Network\+And\+Address\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classNetworkAndAddressTestCase_a515cae516dc92caeb3e93cf654d0e3cc}{Network\+And\+Address\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classNetworkAndAddressTestCase_ad98288b2e8ea829fe09a01bba3396e8b}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classNetworkAndAddressTestCase_a047d961acbef00d3553530de20724ab5}{Do\+Teardown} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to do any local setup required for this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+I\+Pv4 network and address allocator Test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Network\+And\+Address\+Test\+Case@{Network\+And\+Address\+Test\+Case}!Network\+And\+Address\+Test\+Case@{Network\+And\+Address\+Test\+Case}}
+\index{Network\+And\+Address\+Test\+Case@{Network\+And\+Address\+Test\+Case}!Network\+And\+Address\+Test\+Case@{Network\+And\+Address\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Network\+And\+Address\+Test\+Case()}{NetworkAndAddressTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Network\+And\+Address\+Test\+Case\+::\+Network\+And\+Address\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classNetworkAndAddressTestCase_a515cae516dc92caeb3e93cf654d0e3cc}{}\label{classNetworkAndAddressTestCase_a515cae516dc92caeb3e93cf654d0e3cc}
+
+\begin{DoxyCode}
+151   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Make sure Network and address allocation play together."})
+152 \{
+153 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Network\+And\+Address\+Test\+Case@{Network\+And\+Address\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Network\+And\+Address\+Test\+Case@{Network\+And\+Address\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Network\+And\+Address\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classNetworkAndAddressTestCase_ad98288b2e8ea829fe09a01bba3396e8b}{}\label{classNetworkAndAddressTestCase_ad98288b2e8ea829fe09a01bba3396e8b}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+164 \{
+165   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} address;
+166   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} network;
+167 
+168   Ipv4AddressGenerator::Init (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"3.0.0.0"}), \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.0.0.0"}),
+169                               \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.0.3"}));
+170   address = Ipv4AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.0.0.0"}));
+171   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"3.0.0.3"}), \textcolor{stringliteral}{"200"});
+172   address = Ipv4AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.0.0.0"}));
+173   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"3.0.0.4"}), \textcolor{stringliteral}{"201"});
+174 
+175   network = Ipv4AddressGenerator::NextNetwork (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.0.0.0"}));
+176   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (network, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"4.0.0.0"}), \textcolor{stringliteral}{"202"});
+177   address = Ipv4AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.0.0.0"}));
+178   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"4.0.0.5"}), \textcolor{stringliteral}{"203"});
+179 
+180   Ipv4AddressGenerator::Init (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.3.0.0"}), 
+181                               \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.0.0"}), \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.0.3"}));
+182   address = Ipv4AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.0.0"}));
+183   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.3.0.3"}), \textcolor{stringliteral}{"204"});
+184   address = Ipv4AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.0.0"}));
+185   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.3.0.4"}), \textcolor{stringliteral}{"205"});
+186 
+187   network = Ipv4AddressGenerator::NextNetwork (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.0.0"}));
+188   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (network, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.4.0.0"}), \textcolor{stringliteral}{"206"});
+189   address = Ipv4AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.0.0"}));
+190   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.4.0.5"}), \textcolor{stringliteral}{"207"});
+191 
+192   Ipv4AddressGenerator::Init (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.3.0"}),
+193                               \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"}), \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.0.3"}));
+194   address = Ipv4AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"}));
+195   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.3.3"}), \textcolor{stringliteral}{"208"});
+196   address = Ipv4AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"}));
+197   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.3.4"}), \textcolor{stringliteral}{"209"});
+198 
+199   network = Ipv4AddressGenerator::NextNetwork (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"}));
+200   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (network, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.4.0"}), \textcolor{stringliteral}{"210"});
+201   address = Ipv4AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"}));
+202   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.4.5"}), \textcolor{stringliteral}{"211"});
+203 \}
+\end{DoxyCode}
+\index{Network\+And\+Address\+Test\+Case@{Network\+And\+Address\+Test\+Case}!Do\+Teardown@{Do\+Teardown}}
+\index{Do\+Teardown@{Do\+Teardown}!Network\+And\+Address\+Test\+Case@{Network\+And\+Address\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Teardown(void)}{DoTeardown(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Network\+And\+Address\+Test\+Case\+::\+Do\+Teardown (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classNetworkAndAddressTestCase_a047d961acbef00d3553530de20724ab5}{}\label{classNetworkAndAddressTestCase_a047d961acbef00d3553530de20724ab5}
+
+
+Implementation to do any local setup required for this Test\+Case. 
+
+Subclasses should override this method to perform any costly per-\/test teardown 
+
+Reimplemented from \hyperlink{classns3_1_1TestCase_a8917f1604e28d312a8086f76291e3c46}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+157 \{
+158   \hyperlink{group__config_ga2c1b65724f42f8c72276d7e7ad6df6db}{Ipv4AddressGenerator::Reset} ();
+159   Simulator::Destroy ();
+160 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{ipv4-address-generator-test-suite_8cc}{ipv4-\/address-\/generator-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

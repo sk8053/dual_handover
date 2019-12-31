@@ -1,0 +1,595 @@
+\hypertarget{tap-device-creator_8cc}{}\section{fd-\/net-\/device/helper/tap-\/device-\/creator.cc File Reference}
+\label{tap-device-creator_8cc}\index{fd-\/net-\/device/helper/tap-\/device-\/creator.\+cc@{fd-\/net-\/device/helper/tap-\/device-\/creator.\+cc}}
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$iomanip$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include $<$fcntl.\+h$>$}\\*
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$sys/un.\+h$>$}\\*
+{\ttfamily \#include $<$net/if.\+h$>$}\\*
+{\ttfamily \#include $<$linux/if\+\_\+tun.\+h$>$}\\*
+{\ttfamily \#include $<$net/route.\+h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}creator-\/utils.\+h\char`\"{}}\\*
+Include dependency graph for tap-\/device-\/creator.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structin6__ifreq}{in6\+\_\+ifreq}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{tap-device-creator_8cc_af9ac95d538205da6013d79a63fee2bd7}{T\+A\+P\+\_\+\+M\+A\+G\+IC}~95549
+\item 
+\#define \hyperlink{tap-device-creator_8cc_a6ec0f0cb1e0c4e317469e4103bec5fd5}{A\+S\+C\+I\+I\+\_\+\+D\+OT}~(0x2e)
+\item 
+\#define \hyperlink{tap-device-creator_8cc_abde11a6ee98560227d0d3889da0408e4}{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}~(0x30)
+\item 
+\#define \hyperlink{tap-device-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}{A\+S\+C\+I\+I\+\_\+a}~(0x41)
+\item 
+\#define \hyperlink{tap-device-creator_8cc_a76cb409bf2d31112b1bec0056271e3ce}{A\+S\+C\+I\+I\+\_\+z}~(0x5a)
+\item 
+\#define \hyperlink{tap-device-creator_8cc_a6ccdee41712ed103021e82cb944f47e6}{A\+S\+C\+I\+I\+\_\+A}~(0x61)
+\item 
+\#define \hyperlink{tap-device-creator_8cc_a282e9a9765b0ae5f0a4aa813c3a4932c}{A\+S\+C\+I\+I\+\_\+Z}~(0x7a)
+\item 
+\#define \hyperlink{tap-device-creator_8cc_aa13140b716dfb153353b2bf8be77d3f5}{A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON}~(0x3a)
+\item 
+\#define \hyperlink{tap-device-creator_8cc_abde11a6ee98560227d0d3889da0408e4}{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}~(0x30)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{tap-device-creator_8cc_ab8379009ba610cccb1b541338521de6c}{Ascii\+To\+Low\+Case} (char \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c})
+\item 
+void \hyperlink{tap-device-creator_8cc_a9c187f003617baea6ff2ded1043595c4}{Ascii\+To\+Mac48} (const char $\ast$str, uint8\+\_\+t addr\mbox{[}6\mbox{]})
+\item 
+void \hyperlink{tap-device-creator_8cc_a44a9cb13d1cbecebf361fd7ccd1a374b}{Set\+Ipv4} (const char $\ast$device\+Name, const char $\ast$ip, const char $\ast$netmask)
+\item 
+void \hyperlink{tap-device-creator_8cc_a102f6f0b268284e9849b029966bdff56}{Set\+Ipv6} (const char $\ast$device\+Name, const char $\ast$ip, int netprefix)
+\item 
+void \hyperlink{tap-device-creator_8cc_ace2e6e4957bebb5dd5d93dcaa917cc19}{Set\+Mac\+Address} (int \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd}, const char $\ast$mac)
+\item 
+void \hyperlink{tap-device-creator_8cc_ab1a65327983ffdcbff3023b6fed670b9}{Set\+Up} (char $\ast$device\+Name)
+\item 
+int \hyperlink{tap-device-creator_8cc_adfa72932b0318d125690937ebc451338}{Create\+Tap} (char $\ast$device\+Name, const char $\ast$mac, const int ifftap, const int iffpi, const char $\ast$ip4, const char $\ast$netmask, const char $\ast$ip6, const int netprefix)
+\item 
+int \hyperlink{tap-device-creator_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+a@{A\+S\+C\+I\+I\+\_\+a}}
+\index{A\+S\+C\+I\+I\+\_\+a@{A\+S\+C\+I\+I\+\_\+a}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+a}{ASCII_a}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+a~(0x41)}\hypertarget{tap-device-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}{}\label{tap-device-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+A@{A\+S\+C\+I\+I\+\_\+A}}
+\index{A\+S\+C\+I\+I\+\_\+A@{A\+S\+C\+I\+I\+\_\+A}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+A}{ASCII_A}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+A~(0x61)}\hypertarget{tap-device-creator_8cc_a6ccdee41712ed103021e82cb944f47e6}{}\label{tap-device-creator_8cc_a6ccdee41712ed103021e82cb944f47e6}
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON@{A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON}}
+\index{A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON@{A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON}{ASCII_COLON}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+\+C\+O\+L\+ON~(0x3a)}\hypertarget{tap-device-creator_8cc_aa13140b716dfb153353b2bf8be77d3f5}{}\label{tap-device-creator_8cc_aa13140b716dfb153353b2bf8be77d3f5}
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+\+D\+OT@{A\+S\+C\+I\+I\+\_\+\+D\+OT}}
+\index{A\+S\+C\+I\+I\+\_\+\+D\+OT@{A\+S\+C\+I\+I\+\_\+\+D\+OT}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+\+D\+OT}{ASCII_DOT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+\+D\+OT~(0x2e)}\hypertarget{tap-device-creator_8cc_a6ec0f0cb1e0c4e317469e4103bec5fd5}{}\label{tap-device-creator_8cc_a6ec0f0cb1e0c4e317469e4103bec5fd5}
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+z@{A\+S\+C\+I\+I\+\_\+z}}
+\index{A\+S\+C\+I\+I\+\_\+z@{A\+S\+C\+I\+I\+\_\+z}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+z}{ASCII_z}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+z~(0x5a)}\hypertarget{tap-device-creator_8cc_a76cb409bf2d31112b1bec0056271e3ce}{}\label{tap-device-creator_8cc_a76cb409bf2d31112b1bec0056271e3ce}
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+Z@{A\+S\+C\+I\+I\+\_\+Z}}
+\index{A\+S\+C\+I\+I\+\_\+Z@{A\+S\+C\+I\+I\+\_\+Z}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+Z}{ASCII_Z}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+Z~(0x7a)}\hypertarget{tap-device-creator_8cc_a282e9a9765b0ae5f0a4aa813c3a4932c}{}\label{tap-device-creator_8cc_a282e9a9765b0ae5f0a4aa813c3a4932c}
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO@{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}}
+\index{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO@{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}{ASCII_ZERO}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO~(0x30)}\hypertarget{tap-device-creator_8cc_abde11a6ee98560227d0d3889da0408e4}{}\label{tap-device-creator_8cc_abde11a6ee98560227d0d3889da0408e4}
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO@{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}}
+\index{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO@{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO}{ASCII_ZERO}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+S\+C\+I\+I\+\_\+\+Z\+E\+RO~(0x30)}\hypertarget{tap-device-creator_8cc_abde11a6ee98560227d0d3889da0408e4}{}\label{tap-device-creator_8cc_abde11a6ee98560227d0d3889da0408e4}
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!T\+A\+P\+\_\+\+M\+A\+G\+IC@{T\+A\+P\+\_\+\+M\+A\+G\+IC}}
+\index{T\+A\+P\+\_\+\+M\+A\+G\+IC@{T\+A\+P\+\_\+\+M\+A\+G\+IC}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{T\+A\+P\+\_\+\+M\+A\+G\+IC}{TAP_MAGIC}}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+A\+P\+\_\+\+M\+A\+G\+IC~95549}\hypertarget{tap-device-creator_8cc_af9ac95d538205da6013d79a63fee2bd7}{}\label{tap-device-creator_8cc_af9ac95d538205da6013d79a63fee2bd7}
+
+
+\subsection{Function Documentation}
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!Ascii\+To\+Low\+Case@{Ascii\+To\+Low\+Case}}
+\index{Ascii\+To\+Low\+Case@{Ascii\+To\+Low\+Case}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Ascii\+To\+Low\+Case(char c)}{AsciiToLowCase(char c)}}]{\setlength{\rightskip}{0pt plus 5cm}char Ascii\+To\+Low\+Case (
+\begin{DoxyParamCaption}
+\item[{char}]{c}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-device-creator_8cc_ab8379009ba610cccb1b541338521de6c}{}\label{tap-device-creator_8cc_ab8379009ba610cccb1b541338521de6c}
+
+\begin{DoxyCode}
+66 \{
+67   \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} >= \hyperlink{tap-device-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}{ASCII\_a} && \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} <= \hyperlink{tap-device-creator_8cc_a76cb409bf2d31112b1bec0056271e3ce}{ASCII\_z})
+68     \{
+69       \textcolor{keywordflow}{return} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+70     \}
+71   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} >= \hyperlink{tap-device-creator_8cc_a6ccdee41712ed103021e82cb944f47e6}{ASCII\_A} && \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} <= \hyperlink{tap-device-creator_8cc_a282e9a9765b0ae5f0a4aa813c3a4932c}{ASCII\_Z})
+72     \{
+73       \textcolor{keywordflow}{return} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} + (\hyperlink{tap-device-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}{ASCII\_a} - \hyperlink{tap-device-creator_8cc_a6ccdee41712ed103021e82cb944f47e6}{ASCII\_A});
+74     \}
+75   \textcolor{keywordflow}{else}
+76     \{
+77       \textcolor{keywordflow}{return} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+78     \}
+79 \}
+\end{DoxyCode}
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!Ascii\+To\+Mac48@{Ascii\+To\+Mac48}}
+\index{Ascii\+To\+Mac48@{Ascii\+To\+Mac48}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Ascii\+To\+Mac48(const char $\ast$str, uint8\+\_\+t addr[6])}{AsciiToMac48(const char *str, uint8_t addr[6])}}]{\setlength{\rightskip}{0pt plus 5cm}void Ascii\+To\+Mac48 (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{str, }
+\item[{uint8\+\_\+t}]{addr\mbox{[}6\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-device-creator_8cc_a9c187f003617baea6ff2ded1043595c4}{}\label{tap-device-creator_8cc_a9c187f003617baea6ff2ded1043595c4}
+
+\begin{DoxyCode}
+83 \{
+84   \textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0;
+85   \textcolor{keywordflow}{while} (*str != 0 && i < 6)
+86     \{
+87       uint8\_t byte = 0;
+88       \textcolor{keywordflow}{while} (*str != \hyperlink{tap-device-creator_8cc_aa13140b716dfb153353b2bf8be77d3f5}{ASCII\_COLON} && *str != 0)
+89         \{
+90           byte <<= 4;
+91           \textcolor{keywordtype}{char} low = \hyperlink{tap-device-creator_8cc_ab8379009ba610cccb1b541338521de6c}{AsciiToLowCase} (*str);
+92           \textcolor{keywordflow}{if} (low >= \hyperlink{tap-device-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}{ASCII\_a})
+93             \{
+94               byte |= low - \hyperlink{tap-device-creator_8cc_acb0c7653dabe53da8a7fb03bcad505e7}{ASCII\_a} + 10;
+95             \}
+96           \textcolor{keywordflow}{else}
+97             \{
+98               byte |= low - \hyperlink{tap-device-creator_8cc_abde11a6ee98560227d0d3889da0408e4}{ASCII\_ZERO};
+99             \}
+100           str++;
+101         \}
+102       addr[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = byte;
+103       i++;
+104       \textcolor{keywordflow}{if} (*str == 0)
+105         \{
+106           \textcolor{keywordflow}{break};
+107         \}
+108       str++;
+109     \}
+110 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!Create\+Tap@{Create\+Tap}}
+\index{Create\+Tap@{Create\+Tap}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Create\+Tap(char $\ast$device\+Name, const char $\ast$mac, const int ifftap, const int iffpi, const char $\ast$ip4, const char $\ast$netmask, const char $\ast$ip6, const int netprefix)}{CreateTap(char *deviceName, const char *mac, const int ifftap, const int iffpi, const char *ip4, const char *netmask, const char *ip6, const int netprefix)}}]{\setlength{\rightskip}{0pt plus 5cm}int Create\+Tap (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{device\+Name, }
+\item[{const char $\ast$}]{mac, }
+\item[{const int}]{ifftap, }
+\item[{const int}]{iffpi, }
+\item[{const char $\ast$}]{ip4, }
+\item[{const char $\ast$}]{netmask, }
+\item[{const char $\ast$}]{ip6, }
+\item[{const int}]{netprefix}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-device-creator_8cc_adfa72932b0318d125690937ebc451338}{}\label{tap-device-creator_8cc_adfa72932b0318d125690937ebc451338}
+
+\begin{DoxyCode}
+225 \{
+226 
+227   \textcolor{comment}{//}
+228   \textcolor{comment}{// Creation and management of Tap devices is done via the tun device}
+229   \textcolor{comment}{//}
+230   \textcolor{keywordtype}{int} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd} = open (\textcolor{stringliteral}{"/dev/net/tun"}, O\_RDWR);
+231   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (fd == -1, \textcolor{stringliteral}{"Could not open /dev/net/tun"}, \textcolor{keyword}{true});
+232 
+233   \textcolor{comment}{//}
+234   \textcolor{comment}{// Set flags for device type and PI header.}
+235   \textcolor{comment}{//}
+236   \textcolor{keyword}{struct }ifreq ifr;
+237 
+238   memset(&ifr,  0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} ifreq));
+239 
+240   ifr.ifr\_flags = (ifftap ? IFF\_TAP : IFF\_TUN);
+241   \textcolor{keywordflow}{if} (!iffpi)
+242     \{
+243        ifr.ifr\_flags |= IFF\_NO\_PI;
+244     \}
+245 
+246   \textcolor{comment}{//}
+247   \textcolor{comment}{// If device name is not specified, the kernel chooses one.}
+248   \textcolor{comment}{//}
+249   \textcolor{keywordflow}{if} (*deviceName) 
+250     \{
+251        strncpy(ifr.ifr\_name, deviceName, IFNAMSIZ);
+252     \}
+253 
+254   
+255   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ioctl (fd, TUNSETIFF, (\textcolor{keywordtype}{void} *) &ifr) == -1, 
+256           \textcolor{stringliteral}{"Could not allocate tap device"}, \textcolor{keyword}{true});
+257 
+258   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Allocated TAP device "} << deviceName);
+259 
+260   \textcolor{comment}{//}
+261   \textcolor{comment}{// Set the hardware (MAC) address of the new device}
+262   \textcolor{comment}{//}
+263   \textcolor{keywordflow}{if} (ifftap)
+264     \{
+265       \hyperlink{tap-device-creator_8cc_ace2e6e4957bebb5dd5d93dcaa917cc19}{SetMacAddress}(fd, mac);
+266     \}
+267 
+268   \textcolor{comment}{//}
+269   \textcolor{comment}{// Set the IP address and netmask of the new interface/device.}
+270   \textcolor{comment}{//}
+271   \textcolor{keywordflow}{if} (ip4)
+272     \{
+273       \hyperlink{tap-device-creator_8cc_a44a9cb13d1cbecebf361fd7ccd1a374b}{SetIpv4}(deviceName, ip4, netmask);
+274     \}
+275 
+276   \textcolor{keywordflow}{if} (ip6)
+277     \{
+278       \hyperlink{tap-device-creator_8cc_a102f6f0b268284e9849b029966bdff56}{SetIpv6}(deviceName, ip6, netprefix);
+279     \}
+280 
+281   \textcolor{comment}{//}
+282   \textcolor{comment}{// Bring the interface up.}
+283   \textcolor{comment}{//}
+284   \hyperlink{tap-device-creator_8cc_ab1a65327983ffdcbff3023b6fed670b9}{SetUp}(deviceName);
+285 
+286   \textcolor{keywordflow}{return} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd};
+287 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!main@{main}}
+\index{main@{main}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-device-creator_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{tap-device-creator_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+292 \{
+293   \textcolor{keywordtype}{int} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+294   \textcolor{keywordtype}{char} *dev = NULL;
+295   \textcolor{keywordtype}{char} *ip4 = NULL;
+296   \textcolor{keywordtype}{char} *ip6 = NULL;
+297   \textcolor{keywordtype}{char} *mac = NULL;
+298   \textcolor{keywordtype}{char} *netmask = NULL;
+299   \textcolor{keywordtype}{char} *path = NULL;
+300   \textcolor{keywordtype}{int} tap = \textcolor{keyword}{false};
+301   \textcolor{keywordtype}{int} pi = \textcolor{keyword}{false};
+302   \textcolor{keywordtype}{int} prefix = -1;
+303 
+304   \textcolor{keywordflow}{while} ((c = getopt (argc, argv, \textcolor{stringliteral}{"vd:i:m:n:I:P:thp:"})) != -1)
+305     \{
+306       \textcolor{keywordflow}{switch} (c)
+307         \{
+308         \textcolor{keywordflow}{case} \textcolor{charliteral}{'d'}:
+309           dev = optarg;           \textcolor{comment}{// name of the new tap device}
+310           \textcolor{keywordflow}{break};
+311         \textcolor{keywordflow}{case} \textcolor{charliteral}{'i'}:
+312           ip4 = optarg;            \textcolor{comment}{// ip v4 address of the new device}
+313           \textcolor{keywordflow}{break};
+314         \textcolor{keywordflow}{case} \textcolor{charliteral}{'I'}:
+315           ip6 = optarg;            \textcolor{comment}{// ip v6 address of the new device}
+316           \textcolor{keywordflow}{break};
+317         \textcolor{keywordflow}{case} \textcolor{charliteral}{'m'}:
+318           mac = optarg;           \textcolor{comment}{// mac address of the new device}
+319           \textcolor{keywordflow}{break};
+320         \textcolor{keywordflow}{case} \textcolor{charliteral}{'n'}:
+321           netmask = optarg;       \textcolor{comment}{// ip v4 net mask for the new device}
+322           \textcolor{keywordflow}{break};
+323         \textcolor{keywordflow}{case} \textcolor{charliteral}{'P'}:
+324           prefix = atoi(optarg);         \textcolor{comment}{// ip v6 prefix for the new device}
+325           \textcolor{keywordflow}{break};
+326         \textcolor{keywordflow}{case} \textcolor{charliteral}{'t'}:
+327           tap = \textcolor{keyword}{true};             \textcolor{comment}{// mode for the device (TAP or TUN)}
+328           \textcolor{keywordflow}{break};
+329         \textcolor{keywordflow}{case} \textcolor{charliteral}{'h'}:
+330           pi = \textcolor{keyword}{true};              \textcolor{comment}{// set the IFF\_NO\_PI flag}
+331           \textcolor{keywordflow}{break};
+332         \textcolor{keywordflow}{case} \textcolor{charliteral}{'p'}:
+333           path = optarg;          \textcolor{comment}{// path back to the tap bridge}
+334           \textcolor{keywordflow}{break};
+335         \textcolor{keywordflow}{case} \textcolor{charliteral}{'v'}:
+336           \hyperlink{tap-creator_8cc_a80b7a0563409f3e21c80e0459c85845e}{gVerbose} = \textcolor{keyword}{true};
+337           \textcolor{keywordflow}{break};
+338         \}
+339     \}
+340 
+341   \textcolor{comment}{//}
+342   \textcolor{comment}{// We have got to be able to coordinate the name of the tap device we are}
+343   \textcolor{comment}{// going to create and or open with the device that an external Linux host}
+344   \textcolor{comment}{// will use.  If this name is provided we use it.  If not we let the system}
+345   \textcolor{comment}{// create the device for us.  This name is given in dev}
+346   \textcolor{comment}{//}
+347   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided Device Name is \(\backslash\)""} << dev << \textcolor{stringliteral}{"\(\backslash\)""});
+348 
+349   \textcolor{comment}{//}
+350   \textcolor{comment}{// We have got to be able to assign an IP address to the tap device we are}
+351   \textcolor{comment}{// allocating.  This address is allocated in the simulation and assigned to}
+352   \textcolor{comment}{// the tap bridge.  This address is given in ip.}
+353   \textcolor{comment}{//}
+354   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ip4 == NULL && ip6 == NULL, \textcolor{stringliteral}{"IP Address is a required argument"}, 0);
+355   \textcolor{keywordflow}{if} (ip4)
+356     \{
+357       \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (netmask == NULL, \textcolor{stringliteral}{"Net mask is a required argument"}, 0);
+358       \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided IP v4 Address is \(\backslash\)""} << ip4 << \textcolor{stringliteral}{"\(\backslash\)""});
+359       \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided IP v4 Net Mask is \(\backslash\)""} << netmask << \textcolor{stringliteral}{"\(\backslash\)""});
+360     \}
+361   \textcolor{keywordflow}{if} (ip6)
+362     \{
+363       \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (prefix == -1, \textcolor{stringliteral}{"Prefix is a required argument"}, 0);
+364       \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided IP v6 Address is \(\backslash\)""} << ip6 << \textcolor{stringliteral}{"\(\backslash\)""});
+365       \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided IP v6 Prefix is \(\backslash\)""} << prefix << \textcolor{stringliteral}{"\(\backslash\)""});
+366     \}
+367 
+368   \textcolor{comment}{//}
+369   \textcolor{comment}{// We have got to be able to assign a Mac address to the tap device we are}
+370   \textcolor{comment}{// allocating.  This address is allocated in the simulation and assigned to}
+371   \textcolor{comment}{// the bridged device.  This allows packets addressed to the bridged device}
+372   \textcolor{comment}{// to appear in the Linux host as if they were received there.}
+373   \textcolor{comment}{//}
+374   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (mac == NULL, \textcolor{stringliteral}{"MAC Address is a required argument"}, 0);
+375   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided MAC Address is \(\backslash\)""} << mac << \textcolor{stringliteral}{"\(\backslash\)""});
+376 
+377   \textcolor{comment}{//}
+378   \textcolor{comment}{// We have got to know whether or not to create the TAP.}
+379   \textcolor{comment}{//}
+380   \textcolor{keywordflow}{if} (tap)
+381     \{
+382       \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided device Mode is TAP"});
+383     \}
+384   \textcolor{keywordflow}{else}
+385     \{
+386       \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided device Mode is TUN"});
+387     \}
+388 
+389   \textcolor{comment}{//}
+390   \textcolor{comment}{// IFF\_NO\_PI flag.}
+391   \textcolor{comment}{//}
+392   \textcolor{keywordflow}{if} (pi)
+393     \{
+394       \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"IFF\_NO\_PI flag set. Packet Information will be present in the traffic"});
+395     \}
+396 
+397   \textcolor{comment}{//}
+398   \textcolor{comment}{// This program is spawned by a tap bridge running in a simulation.  It}
+399   \textcolor{comment}{// wants to create a socket as described below.  We are going to do the}
+400   \textcolor{comment}{// work here since we're running suid root.  Once we create the socket,}
+401   \textcolor{comment}{// we have to send it back to the tap bridge.  We do that over a Unix}
+402   \textcolor{comment}{// (local interprocess) socket.  The tap bridge created a socket to}
+403   \textcolor{comment}{// listen for our response on, and it is expected to have encoded the address}
+404   \textcolor{comment}{// information as a string and to have passed that string as an argument to}
+405   \textcolor{comment}{// us.  We see it here as the "path" string.  We can't do anything useful}
+406   \textcolor{comment}{// unless we have that string.}
+407   \textcolor{comment}{//}
+408   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (path == NULL, \textcolor{stringliteral}{"path is a required argument"}, 0);
+409   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Provided path is \(\backslash\)""} << path << \textcolor{stringliteral}{"\(\backslash\)""});
+410 
+411   \textcolor{comment}{//}
+412   \textcolor{comment}{// The whole reason for all of the hoops we went through to call out to this}
+413   \textcolor{comment}{// program will pay off here.  We created this program to run as suid root}
+414   \textcolor{comment}{// in order to keep the main simulation program from having to be run with}
+415   \textcolor{comment}{// root privileges.  We need root privileges to be able to futz with the}
+416   \textcolor{comment}{// Tap device underlying all of this.  So all of these hoops are to allow}
+417   \textcolor{comment}{// us to execute the following code:}
+418   \textcolor{comment}{//}
+419   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Creating Tap"});
+420   \textcolor{keywordtype}{int} sock = \hyperlink{tap-device-creator_8cc_adfa72932b0318d125690937ebc451338}{CreateTap} (dev, mac, tap, pi, ip4, netmask, ip6, prefix);
+421   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (sock == -1, \textcolor{stringliteral}{"main(): Unable to create tap socket"}, 1);
+422 
+423   \textcolor{comment}{//}
+424   \textcolor{comment}{// Send the socket back to the tap net device so it can go about its business}
+425   \textcolor{comment}{//}
+426   \hyperlink{tap-creator_8cc_a11a114b8401a27939e87a94ade65213a}{SendSocket} (path, sock, \hyperlink{tap-device-creator_8cc_af9ac95d538205da6013d79a63fee2bd7}{TAP\_MAGIC});
+427 
+428   \textcolor{keywordflow}{return} 0;
+429 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!Set\+Ipv4@{Set\+Ipv4}}
+\index{Set\+Ipv4@{Set\+Ipv4}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Set\+Ipv4(const char $\ast$device\+Name, const char $\ast$ip, const char $\ast$netmask)}{SetIpv4(const char *deviceName, const char *ip, const char *netmask)}}]{\setlength{\rightskip}{0pt plus 5cm}void Set\+Ipv4 (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{device\+Name, }
+\item[{const char $\ast$}]{ip, }
+\item[{const char $\ast$}]{netmask}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-device-creator_8cc_a44a9cb13d1cbecebf361fd7ccd1a374b}{}\label{tap-device-creator_8cc_a44a9cb13d1cbecebf361fd7ccd1a374b}
+
+\begin{DoxyCode}
+114 \{
+115   \textcolor{keyword}{struct }ifreq ifr;
+116   \textcolor{keyword}{struct }sockaddr\_in *sin;
+117 
+118   \textcolor{keywordtype}{int} sock = socket(AF\_INET, SOCK\_DGRAM, 0);
+119 
+120   \textcolor{comment}{//}
+121   \textcolor{comment}{// Set the IP address of the new interface/device.}
+122   \textcolor{comment}{//}
+123   memset(&ifr,  0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} ifreq));
+124   strncpy(ifr.ifr\_name, deviceName, IFNAMSIZ);
+125 
+126   sin = (\textcolor{keyword}{struct }sockaddr\_in*) &ifr.ifr\_addr;
+127   inet\_pton(AF\_INET, ip, &sin->sin\_addr);
+128   ifr.ifr\_addr.sa\_family = AF\_INET;
+129 
+130   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ioctl (sock, SIOCSIFADDR, &ifr) == -1, 
+131           \textcolor{stringliteral}{"Could not set IP address"}, \textcolor{keyword}{true});
+132 
+133   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Set device IP address to "} << ip);
+134 
+135   \textcolor{comment}{//}
+136   \textcolor{comment}{// Set the net mask of the new interface/device}
+137   \textcolor{comment}{//}
+138   memset(&ifr,  0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} ifreq));
+139   strncpy(ifr.ifr\_name, deviceName, IFNAMSIZ);
+140 
+141   sin = (\textcolor{keyword}{struct }sockaddr\_in*) &ifr.ifr\_netmask;
+142   inet\_pton(AF\_INET, netmask, &sin->sin\_addr);
+143   ifr.ifr\_addr.sa\_family = AF\_INET;
+144 
+145   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ioctl (sock, SIOCSIFNETMASK, &ifr) == -1, 
+146           \textcolor{stringliteral}{"Could not set net mask"}, \textcolor{keyword}{true});
+147 
+148   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Set device Net Mask to "} << netmask);
+149   close(sock);
+150 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!Set\+Ipv6@{Set\+Ipv6}}
+\index{Set\+Ipv6@{Set\+Ipv6}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Set\+Ipv6(const char $\ast$device\+Name, const char $\ast$ip, int netprefix)}{SetIpv6(const char *deviceName, const char *ip, int netprefix)}}]{\setlength{\rightskip}{0pt plus 5cm}void Set\+Ipv6 (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{device\+Name, }
+\item[{const char $\ast$}]{ip, }
+\item[{int}]{netprefix}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-device-creator_8cc_a102f6f0b268284e9849b029966bdff56}{}\label{tap-device-creator_8cc_a102f6f0b268284e9849b029966bdff56}
+
+\begin{DoxyCode}
+154 \{
+155   \textcolor{keyword}{struct }ifreq ifr;
+156   \textcolor{keyword}{struct }sockaddr\_in6 sin;
+157   \textcolor{keyword}{struct }\hyperlink{structin6__ifreq}{in6\_ifreq} ifr6;
+158 
+159   \textcolor{keywordtype}{int} sock = socket(AF\_INET6, SOCK\_DGRAM, 0);
+160   memset(&ifr,  0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} ifreq));
+161   strncpy(ifr.ifr\_name, deviceName, IFNAMSIZ);
+162 
+163   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ioctl (sock, SIOGIFINDEX, &ifr) == -1, 
+164           \textcolor{stringliteral}{"Could not get interface index"}, \textcolor{keyword}{true});
+165 
+166   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Set device IP v6 address to "} << ip);
+167 
+168   memset(&sin, 0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} sockaddr\_in6));
+169   sin.sin6\_family = AF\_INET6;
+170   inet\_pton(AF\_INET6, ip, (\textcolor{keywordtype}{void} *) &sin.sin6\_addr);
+171   
+172   memset(&ifr6, 0, \textcolor{keyword}{sizeof}(\hyperlink{structin6__ifreq}{in6\_ifreq}));
+173   memcpy((\textcolor{keywordtype}{char} *) &ifr6.ifr6\_addr, (\textcolor{keywordtype}{char} *) &sin.sin6\_addr, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} in6\_addr));
+174 
+175   ifr6.ifr6\_ifindex = ifr.ifr\_ifindex;
+176   ifr6.ifr6\_prefixlen = netprefix;
+177 
+178   \textcolor{comment}{//}
+179   \textcolor{comment}{// Set the IP address of the new interface/device.}
+180   \textcolor{comment}{//}
+181   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ioctl (sock, SIOCSIFADDR, &ifr6) == -1, 
+182           \textcolor{stringliteral}{"Could not set IP v6 address"}, \textcolor{keyword}{true});
+183 
+184   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Set device IP v6 address to "} << ip);
+185   close (sock);
+186 
+187 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!Set\+Mac\+Address@{Set\+Mac\+Address}}
+\index{Set\+Mac\+Address@{Set\+Mac\+Address}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Set\+Mac\+Address(int fd, const char $\ast$mac)}{SetMacAddress(int fd, const char *mac)}}]{\setlength{\rightskip}{0pt plus 5cm}void Set\+Mac\+Address (
+\begin{DoxyParamCaption}
+\item[{int}]{fd, }
+\item[{const char $\ast$}]{mac}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-device-creator_8cc_ace2e6e4957bebb5dd5d93dcaa917cc19}{}\label{tap-device-creator_8cc_ace2e6e4957bebb5dd5d93dcaa917cc19}
+
+\begin{DoxyCode}
+191 \{
+192   \textcolor{keyword}{struct }ifreq ifr;
+193   memset(&ifr,  0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} ifreq));
+194 
+195   ifr.ifr\_hwaddr.sa\_family = 1; \textcolor{comment}{// this is ARPHRD\_ETHER from if\_arp.h}
+196   \hyperlink{tap-device-creator_8cc_a9c187f003617baea6ff2ded1043595c4}{AsciiToMac48} (mac, (uint8\_t*)ifr.ifr\_hwaddr.sa\_data);
+197   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ioctl (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a44f21d5190b5a6df8089f54799628d7e}{fd}, SIOCSIFHWADDR, &ifr) == -1, \textcolor{stringliteral}{"Could not set MAC address"}, \textcolor{keyword}{true});
+198   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Set device MAC address to "} << mac);
+199 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}!Set\+Up@{Set\+Up}}
+\index{Set\+Up@{Set\+Up}!tap-\/device-\/creator.\+cc@{tap-\/device-\/creator.\+cc}}
+\subsubsection[{\texorpdfstring{Set\+Up(char $\ast$device\+Name)}{SetUp(char *deviceName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Set\+Up (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{device\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{tap-device-creator_8cc_ab1a65327983ffdcbff3023b6fed670b9}{}\label{tap-device-creator_8cc_ab1a65327983ffdcbff3023b6fed670b9}
+
+\begin{DoxyCode}
+203 \{
+204   \textcolor{keyword}{struct }ifreq ifr;
+205 
+206   \textcolor{keywordtype}{int} sock = socket(AF\_INET, SOCK\_DGRAM, 0);
+207 
+208   memset(&ifr,  0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} ifreq));
+209   strncpy(ifr.ifr\_name, deviceName, IFNAMSIZ);
+210 
+211   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ioctl (sock, SIOCGIFFLAGS, &ifr) == -1, 
+212           \textcolor{stringliteral}{"Could not get flags for interface"}, \textcolor{keyword}{true});
+213   ifr.ifr\_flags |= IFF\_UP | IFF\_RUNNING;
+214 
+215   \hyperlink{creator-utils_8h_a91c11c90ad2f1672fbd3c031038dce16}{ABORT\_IF} (ioctl (sock, SIOCSIFFLAGS, &ifr) == -1, 
+216           \textcolor{stringliteral}{"Could not bring interface up"}, \textcolor{keyword}{true});
+217 
+218   \hyperlink{creator-utils_8h_a158a8c64f24645c7478298399825737f}{LOG} (\textcolor{stringliteral}{"Device is up"});
+219   close (sock);
+220 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+

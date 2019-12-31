@@ -1,0 +1,195 @@
+\hypertarget{classns3_1_1Scheduler}{}\section{ns3\+:\+:Scheduler Class Reference}
+\label{classns3_1_1Scheduler}\index{ns3\+::\+Scheduler@{ns3\+::\+Scheduler}}
+
+
+Maintain the event list.  
+
+
+
+
+{\ttfamily \#include $<$scheduler.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Scheduler\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Scheduler\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structns3_1_1Scheduler_1_1Event}{Event}
+\item 
+struct \hyperlink{structns3_1_1Scheduler_1_1EventKey}{Event\+Key}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classns3_1_1Scheduler_a7aead526c54e11c0df76af0b9bd18af6}{$\sim$\+Scheduler} ()=0
+\item 
+virtual void \hyperlink{classns3_1_1Scheduler_a9982bffa716e430ba599ded998b77d90}{Insert} (const \hyperlink{structns3_1_1Scheduler_1_1Event}{Event} \&ev)=0
+\item 
+virtual bool \hyperlink{classns3_1_1Scheduler_a503d02afa89722af78dc9746c5208d47}{Is\+Empty} (void) const =0
+\item 
+virtual \hyperlink{structns3_1_1Scheduler_1_1Event}{Event} \hyperlink{classns3_1_1Scheduler_a734576c6f195c51c552389d692b362cf}{Peek\+Next} (void) const =0
+\item 
+virtual \hyperlink{structns3_1_1Scheduler_1_1Event}{Event} \hyperlink{classns3_1_1Scheduler_acc5e570b9be6952fb1f349476dd8cc89}{Remove\+Next} (void)=0
+\item 
+virtual void \hyperlink{classns3_1_1Scheduler_a481d54e1b0e3c777629fd775862c66ca}{Remove} (const \hyperlink{structns3_1_1Scheduler_1_1Event}{Event} \&ev)=0
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1Scheduler_a2d21ad2604832ea471952b2c5d51ba6c}{Get\+Type\+Id} (void)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Maintain the event list. 
+
+This base class specifies the interface used to maintain the event list. If you want to provide a new event list scheduler, you need to create a subclass of this base class and implement all the pure virtual methods defined here.
+
+The only tricky aspect of this A\+PI is the memory management of the \hyperlink{classns3_1_1EventImpl}{Event\+Impl} pointer which is a member of the \hyperlink{structns3_1_1Scheduler_1_1Event}{Event} data structure. The lifetime of this pointer is assumed to always be longer than the lifetime of the \hyperlink{classns3_1_1Scheduler}{Scheduler} class which means that the caller is responsible for ensuring that this invariant holds through calling Event\+Id\+::\+Ref and \hyperlink{classns3_1_1SimpleRefCount_aeb8f59b2f744915a64a2271c9e4b5ec0}{Simple\+Ref\+Count\+::\+Unref} at the right time. Typically, Event\+Id\+::\+Ref is called before Insert and \hyperlink{classns3_1_1SimpleRefCount_aeb8f59b2f744915a64a2271c9e4b5ec0}{Simple\+Ref\+Count\+::\+Unref} is called after a call to one of the Remove methods. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Scheduler@{ns3\+::\+Scheduler}!````~Scheduler@{$\sim$\+Scheduler}}
+\index{````~Scheduler@{$\sim$\+Scheduler}!ns3\+::\+Scheduler@{ns3\+::\+Scheduler}}
+\subsubsection[{\texorpdfstring{$\sim$\+Scheduler()=0}{~Scheduler()=0}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Scheduler\+::$\sim$\+Scheduler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Scheduler_a7aead526c54e11c0df76af0b9bd18af6}{}\label{classns3_1_1Scheduler_a7aead526c54e11c0df76af0b9bd18af6}
+Destructor. 
+\begin{DoxyCode}
+38 \{
+39   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+40 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Scheduler@{ns3\+::\+Scheduler}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Scheduler@{ns3\+::\+Scheduler}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Scheduler\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1Scheduler_a2d21ad2604832ea471952b2c5d51ba6c}{}\label{classns3_1_1Scheduler_a2d21ad2604832ea471952b2c5d51ba6c}
+Register this type. \begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+44 \{
+45   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::Scheduler"})
+46     .SetParent<\hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object}> ()
+47     .SetGroupName (\textcolor{stringliteral}{"Core"})
+48   ;
+49   \textcolor{keywordflow}{return} tid;
+50 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Scheduler@{ns3\+::\+Scheduler}!Insert@{Insert}}
+\index{Insert@{Insert}!ns3\+::\+Scheduler@{ns3\+::\+Scheduler}}
+\subsubsection[{\texorpdfstring{Insert(const Event \&ev)=0}{Insert(const Event &ev)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Scheduler\+::\+Insert (
+\begin{DoxyParamCaption}
+\item[{const {\bf Event} \&}]{ev}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Scheduler_a9982bffa716e430ba599ded998b77d90}{}\label{classns3_1_1Scheduler_a9982bffa716e430ba599ded998b77d90}
+Insert a new \hyperlink{structns3_1_1Scheduler_1_1Event}{Event} in the schedule.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ev} & \hyperlink{structns3_1_1Scheduler_1_1Event}{Event} to store in the event list \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classns3_1_1CalendarScheduler_aaf70c05e7468c8c232d4a309ce7c52c3}{ns3\+::\+Calendar\+Scheduler}, \hyperlink{classns3_1_1HeapScheduler_ac30b67c69e468683bfc7e32f71bfc152}{ns3\+::\+Heap\+Scheduler}, \hyperlink{classns3_1_1ListScheduler_a30da19f72a5d50d07592642b55bb6487}{ns3\+::\+List\+Scheduler}, and \hyperlink{classns3_1_1MapScheduler_aa980b7cd4f3f7d2f71c6fe6a4de814bb}{ns3\+::\+Map\+Scheduler}.
+
+\index{ns3\+::\+Scheduler@{ns3\+::\+Scheduler}!Is\+Empty@{Is\+Empty}}
+\index{Is\+Empty@{Is\+Empty}!ns3\+::\+Scheduler@{ns3\+::\+Scheduler}}
+\subsubsection[{\texorpdfstring{Is\+Empty(void) const =0}{IsEmpty(void) const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool ns3\+::\+Scheduler\+::\+Is\+Empty (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Scheduler_a503d02afa89722af78dc9746c5208d47}{}\label{classns3_1_1Scheduler_a503d02afa89722af78dc9746c5208d47}
+Test if the schedule is empty.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the event list is empty and {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1CalendarScheduler_a3b77785ce158cd5c3979acf5ed0ae7a0}{ns3\+::\+Calendar\+Scheduler}, \hyperlink{classns3_1_1HeapScheduler_a7299577be6a009c7ca718bfd26f2ff31}{ns3\+::\+Heap\+Scheduler}, \hyperlink{classns3_1_1ListScheduler_ae12296e36bc504d92b4c255fbd8faf36}{ns3\+::\+List\+Scheduler}, and \hyperlink{classns3_1_1MapScheduler_a9522bb68ce8c8c1eb4c621d2a8cb3c38}{ns3\+::\+Map\+Scheduler}.
+
+\index{ns3\+::\+Scheduler@{ns3\+::\+Scheduler}!Peek\+Next@{Peek\+Next}}
+\index{Peek\+Next@{Peek\+Next}!ns3\+::\+Scheduler@{ns3\+::\+Scheduler}}
+\subsubsection[{\texorpdfstring{Peek\+Next(void) const =0}{PeekNext(void) const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Event} ns3\+::\+Scheduler\+::\+Peek\+Next (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Scheduler_a734576c6f195c51c552389d692b362cf}{}\label{classns3_1_1Scheduler_a734576c6f195c51c552389d692b362cf}
+Get a pointer to the next event.
+
+This method cannot be invoked if the list is empty.
+
+\begin{DoxyReturn}{Returns}
+A pointer to the next earliest event. The caller takes ownership of the returned pointer. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1CalendarScheduler_ab96cc3ce6187e5cf2f28fbcc944f6b0c}{ns3\+::\+Calendar\+Scheduler}, \hyperlink{classns3_1_1HeapScheduler_a103fb21c3f2baa2f908516e831a3e674}{ns3\+::\+Heap\+Scheduler}, \hyperlink{classns3_1_1ListScheduler_aa94f662834df4ddebf7a0935fc28b9d4}{ns3\+::\+List\+Scheduler}, and \hyperlink{classns3_1_1MapScheduler_a466bd1c7f6826b053da5b825016ab4f6}{ns3\+::\+Map\+Scheduler}.
+
+\index{ns3\+::\+Scheduler@{ns3\+::\+Scheduler}!Remove@{Remove}}
+\index{Remove@{Remove}!ns3\+::\+Scheduler@{ns3\+::\+Scheduler}}
+\subsubsection[{\texorpdfstring{Remove(const Event \&ev)=0}{Remove(const Event &ev)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Scheduler\+::\+Remove (
+\begin{DoxyParamCaption}
+\item[{const {\bf Event} \&}]{ev}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Scheduler_a481d54e1b0e3c777629fd775862c66ca}{}\label{classns3_1_1Scheduler_a481d54e1b0e3c777629fd775862c66ca}
+Remove a specific event from the event list.
+
+This method cannot be invoked if the list is empty.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ev} & The event to remove \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classns3_1_1CalendarScheduler_aee9db8a165f257bc94b51ffedc9b98d8}{ns3\+::\+Calendar\+Scheduler}, \hyperlink{classns3_1_1HeapScheduler_a81d475b379794f8c4f257d7a506ac372}{ns3\+::\+Heap\+Scheduler}, \hyperlink{classns3_1_1ListScheduler_af944b2a342f0a8ca1ebef0f387c19ecf}{ns3\+::\+List\+Scheduler}, and \hyperlink{classns3_1_1MapScheduler_aa5a93d600ff5a8b4d1f79181b71cb397}{ns3\+::\+Map\+Scheduler}.
+
+\index{ns3\+::\+Scheduler@{ns3\+::\+Scheduler}!Remove\+Next@{Remove\+Next}}
+\index{Remove\+Next@{Remove\+Next}!ns3\+::\+Scheduler@{ns3\+::\+Scheduler}}
+\subsubsection[{\texorpdfstring{Remove\+Next(void)=0}{RemoveNext(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Event} ns3\+::\+Scheduler\+::\+Remove\+Next (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Scheduler_acc5e570b9be6952fb1f349476dd8cc89}{}\label{classns3_1_1Scheduler_acc5e570b9be6952fb1f349476dd8cc89}
+Remove the earliest event from the event list.
+
+This method cannot be invoked if the list is empty.
+
+\begin{DoxyReturn}{Returns}
+The \hyperlink{structns3_1_1Scheduler_1_1Event}{Event}. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1CalendarScheduler_ad86df04ee956851c73dfcc38d0fb3ac6}{ns3\+::\+Calendar\+Scheduler}, \hyperlink{classns3_1_1HeapScheduler_a97e15b27a21ddedd4346d66b21d97144}{ns3\+::\+Heap\+Scheduler}, \hyperlink{classns3_1_1ListScheduler_a3504eb24949d1656d73da9bfc38a2773}{ns3\+::\+List\+Scheduler}, and \hyperlink{classns3_1_1MapScheduler_a0fff1cb7fcb512e768f3d22898c20f08}{ns3\+::\+Map\+Scheduler}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{scheduler_8h}{scheduler.\+h}\item 
+core/model/\hyperlink{scheduler_8cc}{scheduler.\+cc}\end{DoxyCompactItemize}

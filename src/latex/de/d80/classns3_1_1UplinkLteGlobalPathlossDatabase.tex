@@ -1,0 +1,74 @@
+\hypertarget{classns3_1_1UplinkLteGlobalPathlossDatabase}{}\section{ns3\+:\+:Uplink\+Lte\+Global\+Pathloss\+Database Class Reference}
+\label{classns3_1_1UplinkLteGlobalPathlossDatabase}\index{ns3\+::\+Uplink\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Uplink\+Lte\+Global\+Pathloss\+Database}}
+
+
+{\ttfamily \#include $<$lte-\/global-\/pathloss-\/database.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Uplink\+Lte\+Global\+Pathloss\+Database\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Uplink\+Lte\+Global\+Pathloss\+Database\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classns3_1_1UplinkLteGlobalPathlossDatabase_a28ac651fd5a7e525095a3ffa117725d8}{Update\+Pathloss} (std\+::string context, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1SpectrumPhy}{Spectrum\+Phy} $>$ tx\+Phy, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1SpectrumPhy}{Spectrum\+Phy} $>$ rx\+Phy, double loss\+Db)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Store the last pathloss value for each T\+X-\/\+RX pair for uplink 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Uplink\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Uplink\+Lte\+Global\+Pathloss\+Database}!Update\+Pathloss@{Update\+Pathloss}}
+\index{Update\+Pathloss@{Update\+Pathloss}!ns3\+::\+Uplink\+Lte\+Global\+Pathloss\+Database@{ns3\+::\+Uplink\+Lte\+Global\+Pathloss\+Database}}
+\subsubsection[{\texorpdfstring{Update\+Pathloss(std\+::string context, Ptr$<$ Spectrum\+Phy $>$ tx\+Phy, Ptr$<$ Spectrum\+Phy $>$ rx\+Phy, double loss\+Db)}{UpdatePathloss(std::string context, Ptr< SpectrumPhy > txPhy, Ptr< SpectrumPhy > rxPhy, double lossDb)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Uplink\+Lte\+Global\+Pathloss\+Database\+::\+Update\+Pathloss (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{{\bf Ptr}$<$ {\bf Spectrum\+Phy} $>$}]{tx\+Phy, }
+\item[{{\bf Ptr}$<$ {\bf Spectrum\+Phy} $>$}]{rx\+Phy, }
+\item[{double}]{loss\+Db}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1UplinkLteGlobalPathlossDatabase_a28ac651fd5a7e525095a3ffa117725d8}{}\label{classns3_1_1UplinkLteGlobalPathlossDatabase_a28ac651fd5a7e525095a3ffa117725d8}
+update the pathloss value
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & \\
+\hline
+{\em tx\+Phy} & the transmitting P\+HY \\
+\hline
+{\em rx\+Phy} & the receiving P\+HY \\
+\hline
+{\em loss\+Db} & the loss in dB \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classns3_1_1LteGlobalPathlossDatabase_ad787865c41ddf1ff7a8a269afba7ccfc}{ns3\+::\+Lte\+Global\+Pathloss\+Database}.
+
+
+\begin{DoxyCode}
+91 \{
+92   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << lossDb);
+93   uint16\_t imsi = txPhy->GetDevice ()->GetObject<LteUeNetDevice> ()->GetImsi ();
+94   uint16\_t cellId = rxPhy->GetDevice ()->GetObject<LteEnbNetDevice> ()->GetCellId ();
+95   \hyperlink{classns3_1_1LteGlobalPathlossDatabase_a3a193fa1babca27aa0a2dfccebf8c0ab}{m\_pathlossMap}[cellId][imsi] = lossDb;
+96 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lte/helper/\hyperlink{lte-global-pathloss-database_8h}{lte-\/global-\/pathloss-\/database.\+h}\item 
+lte/helper/\hyperlink{lte-global-pathloss-database_8cc}{lte-\/global-\/pathloss-\/database.\+cc}\end{DoxyCompactItemize}

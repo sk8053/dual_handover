@@ -1,0 +1,326 @@
+\hypertarget{wimax-multicast_8cc}{}\section{wimax/examples/wimax-\/multicast.cc File Reference}
+\label{wimax-multicast_8cc}\index{wimax/examples/wimax-\/multicast.\+cc@{wimax/examples/wimax-\/multicast.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wimax-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/global-\/route-\/manager.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/vector.\+h\char`\"{}}\\*
+Include dependency graph for wimax-\/multicast.cc\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{wimax-multicast_8cc_a70d6b107a3aed69eb4a4b5d94cfc81cb}{M\+A\+X\+SS}~1000
+\item 
+\#define \hyperlink{wimax-multicast_8cc_ad20257241c97c3e731b64608dcdc5096}{M\+A\+X\+D\+I\+ST}~10
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{wimax-multicast_8cc_a25d9464217f7d545ec3344fb08d615e7}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Wimax\+Multicast\+Simulation\char`\"{})
+\item 
+int \hyperlink{wimax-multicast_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{wimax-\/multicast.\+cc@{wimax-\/multicast.\+cc}!M\+A\+X\+D\+I\+ST@{M\+A\+X\+D\+I\+ST}}
+\index{M\+A\+X\+D\+I\+ST@{M\+A\+X\+D\+I\+ST}!wimax-\/multicast.\+cc@{wimax-\/multicast.\+cc}}
+\subsubsection[{\texorpdfstring{M\+A\+X\+D\+I\+ST}{MAXDIST}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+D\+I\+ST~10}\hypertarget{wimax-multicast_8cc_ad20257241c97c3e731b64608dcdc5096}{}\label{wimax-multicast_8cc_ad20257241c97c3e731b64608dcdc5096}
+\index{wimax-\/multicast.\+cc@{wimax-\/multicast.\+cc}!M\+A\+X\+SS@{M\+A\+X\+SS}}
+\index{M\+A\+X\+SS@{M\+A\+X\+SS}!wimax-\/multicast.\+cc@{wimax-\/multicast.\+cc}}
+\subsubsection[{\texorpdfstring{M\+A\+X\+SS}{MAXSS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+SS~1000}\hypertarget{wimax-multicast_8cc_a70d6b107a3aed69eb4a4b5d94cfc81cb}{}\label{wimax-multicast_8cc_a70d6b107a3aed69eb4a4b5d94cfc81cb}
+
+
+\subsection{Function Documentation}
+\index{wimax-\/multicast.\+cc@{wimax-\/multicast.\+cc}!main@{main}}
+\index{main@{main}!wimax-\/multicast.\+cc@{wimax-\/multicast.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{wimax-multicast_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{wimax-multicast_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+74 \{
+75   \textcolor{keywordtype}{bool} \hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose} = \textcolor{keyword}{false};
+76 
+77   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ssNodes;
+78   \hyperlink{classns3_1_1Ptr}{Ptr<SubscriberStationNetDevice>} ss[\hyperlink{wimax-multicast_8cc_a70d6b107a3aed69eb4a4b5d94cfc81cb}{MAXSS}];
+79   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ssDevs;
+80   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} SSinterfaces;
+81 
+82   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} bsNodes;
+83   \hyperlink{classns3_1_1Ptr}{Ptr<BaseStationNetDevice>} bs;
+84   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} bsDevs, bsDevsOne;
+85   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} BSinterfaces;
+86 
+87   \hyperlink{classns3_1_1UdpServerHelper}{UdpServerHelper} udpServer[\hyperlink{wimax-multicast_8cc_a70d6b107a3aed69eb4a4b5d94cfc81cb}{MAXSS}];
+88   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} serverApps[\hyperlink{wimax-multicast_8cc_a70d6b107a3aed69eb4a4b5d94cfc81cb}{MAXSS}];
+89   \hyperlink{classns3_1_1UdpTraceClientHelper}{UdpTraceClientHelper} udpClient;
+90   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps;
+91 
+92   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleOfdmWimaxChannel>} channel;
+93   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} Streamer\_Node;
+94   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ASNGW\_Node;
+95 
+96   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} BSPosition;
+97   \hyperlink{classns3_1_1Ptr}{Ptr<RandomWaypointMobilityModel>} SSPosition[
+      \hyperlink{wimax-multicast_8cc_a70d6b107a3aed69eb4a4b5d94cfc81cb}{MAXSS}];
+98   \hyperlink{classns3_1_1Ptr}{Ptr<RandomRectanglePositionAllocator>} SSPosAllocator[
+      \hyperlink{wimax-multicast_8cc_a70d6b107a3aed69eb4a4b5d94cfc81cb}{MAXSS}];
+99 
+100   \textcolor{comment}{// default values}
+101   \textcolor{keywordtype}{int} nbSS = 10, duration = 7, schedType = 0;
+102   \hyperlink{classns3_1_1WimaxHelper_a27a40a8f601900126156781c2ca79406}{WimaxHelper::SchedulerType} scheduler = WimaxHelper::SCHED\_TYPE\_SIMPLE;
+103 
+104   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+105   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nbSS"}, \textcolor{stringliteral}{"number of subscriber station to create"}, nbSS);
+106   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"scheduler"}, \textcolor{stringliteral}{"type of scheduler to use with the netdevices"}, schedType);
+107   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"duration"}, \textcolor{stringliteral}{"duration of the simulation in seconds"}, duration);
+108   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"verbose"}, \textcolor{stringliteral}{"turn on all WimaxNetDevice log components"}, verbose);
+109   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+110 
+111   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"UdpTraceClient"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+112   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"UdpServer"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+113 
+114   \textcolor{keywordflow}{switch} (schedType)
+115     \{
+116     \textcolor{keywordflow}{case} 0:
+117       scheduler = WimaxHelper::SCHED\_TYPE\_SIMPLE;
+118       \textcolor{keywordflow}{break};
+119     \textcolor{keywordflow}{case} 1:
+120       scheduler = WimaxHelper::SCHED\_TYPE\_MBQOS;
+121       \textcolor{keywordflow}{break};
+122     \textcolor{keywordflow}{case} 2:
+123       scheduler = WimaxHelper::SCHED\_TYPE\_RTPS;
+124       \textcolor{keywordflow}{break};
+125     \textcolor{keywordflow}{default}:
+126       scheduler = WimaxHelper::SCHED\_TYPE\_SIMPLE;
+127     \}
+128 
+129   ssNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (nbSS);
+130   bsNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+131 
+132   Streamer\_Node.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+133   ASNGW\_Node.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+134 
+135   \hyperlink{classns3_1_1WimaxHelper}{WimaxHelper} wimax;
+136 
+137   channel = CreateObject<SimpleOfdmWimaxChannel> ();
+138   channel->\hyperlink{classns3_1_1SimpleOfdmWimaxChannel_a1b502ad69b48d137a2938c708341a128}{SetPropagationModel} (SimpleOfdmWimaxChannel::COST231\_PROPAGATION);
+139   ssDevs = wimax.\hyperlink{classns3_1_1WimaxHelper_a9f0848e09c4b6db9cdde9872b38f6349}{Install} (ssNodes,
+140                           WimaxHelper::DEVICE\_TYPE\_SUBSCRIBER\_STATION,
+141                           WimaxHelper::SIMPLE\_PHY\_TYPE\_OFDM,
+142                           channel,
+143                           scheduler);
+144   \hyperlink{classns3_1_1Ptr}{Ptr<WimaxNetDevice>} dev = wimax.\hyperlink{classns3_1_1WimaxHelper_a9f0848e09c4b6db9cdde9872b38f6349}{Install} (bsNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0),
+145                                            WimaxHelper::DEVICE\_TYPE\_BASE\_STATION,
+146                                            WimaxHelper::SIMPLE\_PHY\_TYPE\_OFDM,
+147                                            channel,
+148                                            scheduler);
+149 
+150   BSPosition = CreateObject<ConstantPositionMobilityModel> ();
+151 
+152   BSPosition->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (1000, 0, 0));
+153   bsNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->\hyperlink{classns3_1_1Object_a79dd435d300f3deca814553f561a2922}{AggregateObject} (BSPosition);
+154   bsDevs.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (dev);
+155   \textcolor{keywordflow}{if} (verbose)
+156     \{
+157       wimax.\hyperlink{classns3_1_1WimaxHelper_a31da3d96f3aa8d48749625ee8e148af7}{EnableLogComponents} ();  \textcolor{comment}{// Turn on all wimax logging}
+158     \}
+159 
+160   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < nbSS; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+161     \{
+162       SSPosition[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = CreateObject<RandomWaypointMobilityModel> ();
+163       SSPosAllocator[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = CreateObject<RandomRectanglePositionAllocator> ();
+164       \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} xVar = CreateObject<UniformRandomVariable> ();
+165       xVar->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue ((\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} / 40.0) * 2000));
+166       xVar->SetAttribute (\textcolor{stringliteral}{"Max"}, DoubleValue ((\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} / 40.0 + 1) * 2000));
+167       SSPosAllocator[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]->SetX (xVar);
+168       \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} yVar = CreateObject<UniformRandomVariable> ();
+169       yVar->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue ((\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} / 40.0) * 2000));
+170       yVar->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue ((\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} / 40.0 + 1) * 2000));
+171       SSPosAllocator[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]->SetY (yVar);
+172       SSPosition[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"PositionAllocator"}, 
+      \hyperlink{classns3_1_1PointerValue}{PointerValue} (SSPosAllocator[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]));
+173       SSPosition[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Speed"}, StringValue (\textcolor{stringliteral}{"
+      ns3::UniformRandomVariable[Min=10.3|Max=40.7]"}));
+174       SSPosition[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Pause"}, StringValue (\textcolor{stringliteral}{"
+      ns3::ConstantRandomVariable[Constant=0.01]"}));
+175 
+176       ss[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = ssDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (i)->GetObject<\hyperlink{classns3_1_1SubscriberStationNetDevice}{SubscriberStationNetDevice}> ();
+177       ss[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}]->\hyperlink{classns3_1_1SubscriberStationNetDevice_af6d2d096d7cac7ab7c9a08d0133c64e1}{SetModulationType} (WimaxPhy::MODULATION\_TYPE\_QAM16\_12);
+178       ssNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (i)->\hyperlink{classns3_1_1Object_a79dd435d300f3deca814553f561a2922}{AggregateObject} (SSPosition[i]);
+179 
+180     \}
+181 
+182   bs = bsDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0)->GetObject<\hyperlink{classns3_1_1BaseStationNetDevice}{BaseStationNetDevice}> ();
+183 
+184   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csmaASN\_BS;
+185   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csmaStreamer\_ASN;
+186 
+187   \textcolor{comment}{// First LAN BS and ASN}
+188   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} LAN\_ASN\_BS;
+189 
+190   LAN\_ASN\_BS.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (bsNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+191 
+192   LAN\_ASN\_BS.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (ASNGW\_Node.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+193 
+194   csmaASN\_BS.SetChannelAttribute (\textcolor{stringliteral}{"DataRate"}, DataRateValue (\hyperlink{classns3_1_1DataRate}{DataRate} (10000000)));
+195   csmaASN\_BS.SetChannelAttribute (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+196   csmaASN\_BS.SetDeviceAttribute (\textcolor{stringliteral}{"Mtu"}, UintegerValue (1500));
+197   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} LAN\_ASN\_BS\_Devs = csmaASN\_BS.Install (LAN\_ASN\_BS);
+198 
+199   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} BS\_CSMADevs;
+200 
+201   BS\_CSMADevs.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (LAN\_ASN\_BS\_Devs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+202 
+203   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ASN\_Devs1;
+204   ASN\_Devs1.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (LAN\_ASN\_BS\_Devs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+205 
+206   \textcolor{comment}{// Second LAN ASN-GW and Streamer}
+207 
+208   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} LAN\_ASN\_STREAMER;
+209   LAN\_ASN\_STREAMER.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (ASNGW\_Node.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+210   LAN\_ASN\_STREAMER.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (Streamer\_Node.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+211 
+212   csmaStreamer\_ASN.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (
+      \hyperlink{classns3_1_1DataRate}{DataRate} (10000000)));
+213   csmaStreamer\_ASN.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (
+      \hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+214   csmaStreamer\_ASN.\hyperlink{classns3_1_1CsmaHelper_a741c31b2526e3570cc62c9d7d9667ca9}{SetDeviceAttribute} (\textcolor{stringliteral}{"Mtu"}, UintegerValue (1500));
+215 
+216   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} LAN\_ASN\_STREAMER\_Devs = csmaStreamer\_ASN.
+      \hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (LAN\_ASN\_STREAMER);
+217 
+218   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} STREAMER\_Devs;
+219   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ASN\_Devs2;
+220   ASN\_Devs2.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (LAN\_ASN\_STREAMER\_Devs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+221   STREAMER\_Devs.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (LAN\_ASN\_STREAMER\_Devs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (1));
+222 
+223   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+224   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+225   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (bsNodes);
+226   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (bsNodes);
+227   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ssNodes);
+228   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (ssNodes);
+229   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (Streamer\_Node);
+230   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (ASNGW\_Node);
+231 
+232   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+233 
+234   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.0.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+235   bsDevsOne.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (bs);
+236   BSinterfaces = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (bsDevsOne);
+237   SSinterfaces = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ssDevs);
+238 
+239   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"11.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+240   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} BSCSMAInterfaces = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (BS\_CSMADevs);
+241   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} ASNCSMAInterfaces1 = address.
+      \hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ASN\_Devs1);
+242 
+243   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"12.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+244   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} ASNCSMAInterfaces2 = address.
+      \hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (ASN\_Devs2);
+245   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} StreamerCSMAInterfaces = address.
+      \hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (STREAMER\_Devs);
+246 
+247   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} multicastSource (\textcolor{stringliteral}{"12.1.1.2"});
+248   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} multicastGroup (\textcolor{stringliteral}{"224.30.10.81"});
+249 
+250   \hyperlink{classns3_1_1Ipv4StaticRoutingHelper}{Ipv4StaticRoutingHelper} multicast;
+251   \textcolor{comment}{// 1) Configure a (static) multicast route on ASNGW (multicastRouter)}
+252   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} multicastRouter = ASNGW\_Node.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0); \textcolor{comment}{// The node in question}
+253   \hyperlink{classns3_1_1Ptr}{Ptr<NetDevice>} inputIf = ASN\_Devs2.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0); \textcolor{comment}{// The input NetDevice}
+254 
+255 
+256   multicast.\hyperlink{classns3_1_1Ipv4StaticRoutingHelper_aa8d55f28361e24aefb961fe2eddc2192}{AddMulticastRoute} (multicastRouter, multicastSource, multicastGroup, inputIf, 
+      ASN\_Devs1);
+257 
+258   \textcolor{comment}{// 2) Set up a default multicast route on the sender n0}
+259   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} sender = Streamer\_Node.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0);
+260   \hyperlink{classns3_1_1Ptr}{Ptr<NetDevice>} senderIf = STREAMER\_Devs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0);
+261   multicast.\hyperlink{classns3_1_1Ipv4StaticRoutingHelper_ae69a07ded3139dfd4e21bb7c10eba416}{SetDefaultMulticastRoute} (sender, senderIf);
+262 
+263   \textcolor{comment}{// 1) Configure a (static) multicast route on ASNGW (multicastRouter)}
+264   multicastRouter = bsNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0); \textcolor{comment}{// The node in question}
+265   inputIf = BS\_CSMADevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0); \textcolor{comment}{// The input NetDevice}
+266 
+267   multicast.\hyperlink{classns3_1_1Ipv4StaticRoutingHelper_aa8d55f28361e24aefb961fe2eddc2192}{AddMulticastRoute} (multicastRouter, multicastSource, multicastGroup, inputIf, 
+      bsDevsOne);
+268 
+269   uint16\_t multicast\_port = 100;
+270 
+271   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < nbSS; i++)
+272     \{
+273       udpServer[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = \hyperlink{classns3_1_1UdpServerHelper}{UdpServerHelper} (multicast\_port);
+274       serverApps[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = udpServer[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].\hyperlink{classns3_1_1UdpServerHelper_a7a92fc7bb7f29540ede727090de225b1}{Install} (ssNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (i));
+275       serverApps[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (6));
+276       serverApps[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}].\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (duration));
+277     \}
+278 
+279   udpClient = \hyperlink{classns3_1_1UdpTraceClientHelper}{UdpTraceClientHelper} (multicastGroup, multicast\_port, \textcolor{stringliteral}{""});
+280 
+281   clientApps = udpClient.\hyperlink{classns3_1_1UdpTraceClientHelper_a4fcfaf13cf6c34bd5742f3a8d29ab8b7}{Install} (Streamer\_Node.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+282   clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (6));
+283   clientApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (duration));
+284 
+285   \hyperlink{classns3_1_1IpcsClassifierRecord}{IpcsClassifierRecord} MulticastClassifier (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"0.0.0.0"}),
+286                                             \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"0.0.0.0"}),
+287                                             multicastGroup,
+288                                             \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.255"}),
+289                                             0,
+290                                             65000,
+291                                             multicast\_port,
+292                                             multicast\_port,
+293                                             17,
+294                                             1);
+295 
+296   \hyperlink{classns3_1_1ServiceFlow}{ServiceFlow} MulticastServiceFlow = wimax.\hyperlink{classns3_1_1WimaxHelper_aed0c1ffdcd62234c14965f899efc88c1}{CreateServiceFlow} (
+      ServiceFlow::SF\_DIRECTION\_DOWN,
+297                                                               ServiceFlow::SF\_TYPE\_UGS,
+298                                                               MulticastClassifier);
+299 
+300   bs->\hyperlink{classns3_1_1BaseStationNetDevice_a16a12a1027391156e044a28534c0eaf2}{GetServiceFlowManager} ()->AddMulticastServiceFlow (MulticastServiceFlow, 
+      WimaxPhy::MODULATION\_TYPE\_QPSK\_12);
+301 
+302   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (duration + 0.1));
+303   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Starting simulation....."});
+304   Simulator::Run ();
+305 
+306   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < nbSS; i++)
+307     \{
+308       ss[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = 0;
+309       SSPosition[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = 0;
+310       SSPosAllocator[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = 0;
+311     \}
+312 
+313   bs = 0;
+314 
+315   Simulator::Destroy ();
+316   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+317 
+318   \textcolor{keywordflow}{return} 0;
+319 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{wimax-\/multicast.\+cc@{wimax-\/multicast.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!wimax-\/multicast.\+cc@{wimax-\/multicast.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Wimax\+Multicast\+Simulation"")}{NS_LOG_COMPONENT_DEFINE("WimaxMulticastSimulation")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Wimax\+Multicast\+Simulation\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{wimax-multicast_8cc_a25d9464217f7d545ec3344fb08d615e7}{}\label{wimax-multicast_8cc_a25d9464217f7d545ec3344fb08d615e7}

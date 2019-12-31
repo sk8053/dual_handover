@@ -1,0 +1,171 @@
+\hypertarget{structns3_1_1olsr_1_1MessageHeader_1_1Mid}{}\section{ns3\+:\+:olsr\+:\+:Message\+Header\+:\+:Mid Struct Reference}
+\label{structns3_1_1olsr_1_1MessageHeader_1_1Mid}\index{ns3\+::olsr\+::\+Message\+Header\+::\+Mid@{ns3\+::olsr\+::\+Message\+Header\+::\+Mid}}
+
+
+{\ttfamily \#include $<$olsr-\/header.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:olsr\+:\+:Message\+Header\+:\+:Mid\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a9c1c45246bf52f930c948d686a3d3ea4}{Print} (std\+::ostream \&os) const 
+\item 
+uint32\+\_\+t \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_ab70aab8fd068a394e6688f534cc1499c}{Get\+Serialized\+Size} (void) const 
+\item 
+void \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a06cabc96f3b838fa14608ce4d481a732}{Serialize} (\hyperlink{classns3_1_1Buffer_1_1Iterator}{Buffer\+::\+Iterator} start) const 
+\item 
+uint32\+\_\+t \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_aedc7c6336a7552477f77c3ade8f68b5c}{Deserialize} (\hyperlink{classns3_1_1Buffer_1_1Iterator}{Buffer\+::\+Iterator} start, uint32\+\_\+t message\+Size)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} $>$ \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}{interface\+Addresses}
+\begin{DoxyCompactList}\small\item\em Interface \hyperlink{classns3_1_1Address}{Address} container. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+M\+ID Message Format
+
+\begin{DoxyVerb}  0                   1                   2                   3
+  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |                    OLSR Interface Address                     |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |                    OLSR Interface Address                     |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |                              ...                              |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+\end{DoxyVerb}
+ 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::olsr\+::\+Message\+Header\+::\+Mid@{ns3\+::olsr\+::\+Message\+Header\+::\+Mid}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!ns3\+::olsr\+::\+Message\+Header\+::\+Mid@{ns3\+::olsr\+::\+Message\+Header\+::\+Mid}}
+\subsubsection[{\texorpdfstring{Deserialize(\+Buffer\+::\+Iterator start, uint32\+\_\+t message\+Size)}{Deserialize(Buffer::Iterator start, uint32_t messageSize)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::olsr\+::\+Message\+Header\+::\+Mid\+::\+Deserialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Buffer\+::\+Iterator}}]{start, }
+\item[{uint32\+\_\+t}]{message\+Size}
+\end{DoxyParamCaption}
+)}\hypertarget{structns3_1_1olsr_1_1MessageHeader_1_1Mid_aedc7c6336a7552477f77c3ade8f68b5c}{}\label{structns3_1_1olsr_1_1MessageHeader_1_1Mid_aedc7c6336a7552477f77c3ade8f68b5c}
+This method is used by \hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{Packet\+::\+Remove\+Header} to re-\/create a header from the byte buffer of a packet.
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & an iterator which points to where the header should read from. \\
+\hline
+{\em message\+Size} & the message size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of bytes read. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+314 \{
+315   Buffer::Iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{namespacevisualizer_1_1core_a2a35e5d8a34af358b508dac8635754e0}{start};
+316 
+317   this->\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}{interfaceAddresses}.clear ();
+318   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (messageSize % \hyperlink{olsr-header_8cc_a78eabd4fb6c036f7de9b598066b3c39e}{IPV4\_ADDRESS\_SIZE} == 0);
+319 
+320   \textcolor{keywordtype}{int} numAddresses = messageSize / \hyperlink{olsr-header_8cc_a78eabd4fb6c036f7de9b598066b3c39e}{IPV4\_ADDRESS\_SIZE};
+321   this->\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}{interfaceAddresses}.erase (this->\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}{interfaceAddresses}.begin (),
+322                                   this->\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}{interfaceAddresses}.end ());
+323   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n} = 0; \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n} < numAddresses; ++\hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n})
+324     \{
+325       this->\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}{interfaceAddresses}.push\_back (Ipv4Address (i.ReadNtohU32 ()));
+326     \}
+327   \textcolor{keywordflow}{return} \hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_ab70aab8fd068a394e6688f534cc1499c}{GetSerializedSize} ();
+328 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::olsr\+::\+Message\+Header\+::\+Mid@{ns3\+::olsr\+::\+Message\+Header\+::\+Mid}!Get\+Serialized\+Size@{Get\+Serialized\+Size}}
+\index{Get\+Serialized\+Size@{Get\+Serialized\+Size}!ns3\+::olsr\+::\+Message\+Header\+::\+Mid@{ns3\+::olsr\+::\+Message\+Header\+::\+Mid}}
+\subsubsection[{\texorpdfstring{Get\+Serialized\+Size(void) const }{GetSerializedSize(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::olsr\+::\+Message\+Header\+::\+Mid\+::\+Get\+Serialized\+Size (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{structns3_1_1olsr_1_1MessageHeader_1_1Mid_ab70aab8fd068a394e6688f534cc1499c}{}\label{structns3_1_1olsr_1_1MessageHeader_1_1Mid_ab70aab8fd068a394e6688f534cc1499c}
+Returns the expected size of the header. \begin{DoxyReturn}{Returns}
+the expected size of the header. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+290 \{
+291   \textcolor{keywordflow}{return} this->\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}{interfaceAddresses}.size () * \hyperlink{olsr-header_8cc_a78eabd4fb6c036f7de9b598066b3c39e}{IPV4\_ADDRESS\_SIZE};
+292 \}
+\end{DoxyCode}
+\index{ns3\+::olsr\+::\+Message\+Header\+::\+Mid@{ns3\+::olsr\+::\+Message\+Header\+::\+Mid}!Print@{Print}}
+\index{Print@{Print}!ns3\+::olsr\+::\+Message\+Header\+::\+Mid@{ns3\+::olsr\+::\+Message\+Header\+::\+Mid}}
+\subsubsection[{\texorpdfstring{Print(std\+::ostream \&os) const }{Print(std::ostream &os) const }}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::olsr\+::\+Message\+Header\+::\+Mid\+::\+Print (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os}
+\end{DoxyParamCaption}
+) const}\hypertarget{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a9c1c45246bf52f930c948d686a3d3ea4}{}\label{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a9c1c45246bf52f930c948d686a3d3ea4}
+This method is used to print the content of a M\+ID message. 
+\begin{DoxyParams}{Parameters}
+{\em os} & output stream \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000152}{Todo}]\end{DoxyRefDesc}
+
+\begin{DoxyCode}
+296 \{
+298 \}
+\end{DoxyCode}
+\index{ns3\+::olsr\+::\+Message\+Header\+::\+Mid@{ns3\+::olsr\+::\+Message\+Header\+::\+Mid}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!ns3\+::olsr\+::\+Message\+Header\+::\+Mid@{ns3\+::olsr\+::\+Message\+Header\+::\+Mid}}
+\subsubsection[{\texorpdfstring{Serialize(\+Buffer\+::\+Iterator start) const }{Serialize(Buffer::Iterator start) const }}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::olsr\+::\+Message\+Header\+::\+Mid\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Buffer\+::\+Iterator}}]{start}
+\end{DoxyParamCaption}
+) const}\hypertarget{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a06cabc96f3b838fa14608ce4d481a732}{}\label{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a06cabc96f3b838fa14608ce4d481a732}
+This method is used by \hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{Packet\+::\+Add\+Header} to store a header into the byte buffer of a packet.
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & an iterator which points to where the header should be written. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+302 \{
+303   Buffer::Iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{namespacevisualizer_1_1core_a2a35e5d8a34af358b508dac8635754e0}{start};
+304 
+305   \textcolor{keywordflow}{for} (std::vector<Ipv4Address>::const\_iterator iter = this->\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}{interfaceAddresses}.begin ();
+306        iter != this->\hyperlink{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}{interfaceAddresses}.end (); iter++)
+307     \{
+308       i.WriteHtonU32 (iter->Get ());
+309     \}
+310 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::olsr\+::\+Message\+Header\+::\+Mid@{ns3\+::olsr\+::\+Message\+Header\+::\+Mid}!interface\+Addresses@{interface\+Addresses}}
+\index{interface\+Addresses@{interface\+Addresses}!ns3\+::olsr\+::\+Message\+Header\+::\+Mid@{ns3\+::olsr\+::\+Message\+Header\+::\+Mid}}
+\subsubsection[{\texorpdfstring{interface\+Addresses}{interfaceAddresses}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Ipv4\+Address}$>$ ns3\+::olsr\+::\+Message\+Header\+::\+Mid\+::interface\+Addresses}\hypertarget{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}{}\label{structns3_1_1olsr_1_1MessageHeader_1_1Mid_a44009554c4ed0aeb139f7273d42abc68}
+
+
+Interface \hyperlink{classns3_1_1Address}{Address} container. 
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+olsr/model/\hyperlink{olsr-header_8h}{olsr-\/header.\+h}\item 
+olsr/model/\hyperlink{olsr-header_8cc}{olsr-\/header.\+cc}\end{DoxyCompactItemize}

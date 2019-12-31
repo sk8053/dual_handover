@@ -1,0 +1,180 @@
+\hypertarget{classns3_1_1GtkConfigStore}{}\section{ns3\+:\+:Gtk\+Config\+Store Class Reference}
+\label{classns3_1_1GtkConfigStore}\index{ns3\+::\+Gtk\+Config\+Store@{ns3\+::\+Gtk\+Config\+Store}}
+
+
+A class that provides a G\+T\+K-\/based front end to \hyperlink{classns3_1_1ConfigStore}{ns3\+::\+Config\+Store}.  
+
+
+
+
+{\ttfamily \#include $<$gtk-\/config-\/store.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Gtk\+Config\+Store\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1GtkConfigStore_a9977d0f617e68d45b0c60df61ecbe5eb}{Gtk\+Config\+Store} ()
+\item 
+void \hyperlink{classns3_1_1GtkConfigStore_aa6bc1c922ac60a9cef7134875f98bd24}{Configure\+Defaults} (void)
+\item 
+void \hyperlink{classns3_1_1GtkConfigStore_a95d2d8169cd6a9770af48f7cf62d24fb}{Configure\+Attributes} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class that provides a G\+T\+K-\/based front end to \hyperlink{classns3_1_1ConfigStore}{ns3\+::\+Config\+Store}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Gtk\+Config\+Store@{ns3\+::\+Gtk\+Config\+Store}!Gtk\+Config\+Store@{Gtk\+Config\+Store}}
+\index{Gtk\+Config\+Store@{Gtk\+Config\+Store}!ns3\+::\+Gtk\+Config\+Store@{ns3\+::\+Gtk\+Config\+Store}}
+\subsubsection[{\texorpdfstring{Gtk\+Config\+Store()}{GtkConfigStore()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Gtk\+Config\+Store\+::\+Gtk\+Config\+Store (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1GtkConfigStore_a9977d0f617e68d45b0c60df61ecbe5eb}{}\label{classns3_1_1GtkConfigStore_a9977d0f617e68d45b0c60df61ecbe5eb}
+
+\begin{DoxyCode}
+32 \{
+33 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Gtk\+Config\+Store@{ns3\+::\+Gtk\+Config\+Store}!Configure\+Attributes@{Configure\+Attributes}}
+\index{Configure\+Attributes@{Configure\+Attributes}!ns3\+::\+Gtk\+Config\+Store@{ns3\+::\+Gtk\+Config\+Store}}
+\subsubsection[{\texorpdfstring{Configure\+Attributes(void)}{ConfigureAttributes(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Gtk\+Config\+Store\+::\+Configure\+Attributes (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1GtkConfigStore_a95d2d8169cd6a9770af48f7cf62d24fb}{}\label{classns3_1_1GtkConfigStore_a95d2d8169cd6a9770af48f7cf62d24fb}
+
+\begin{DoxyCode}
+88 \{
+89   GtkWidget *\hyperlink{namespacevisualizer_1_1ipython__view_ae2c349e0d13465bcd100c8bad952117f}{window};
+90   GtkWidget *view;
+91   GtkWidget *scroll;
+92 
+93   gtk\_init (0, 0);
+94 
+95   window = gtk\_window\_new (GTK\_WINDOW\_TOPLEVEL);
+96   gtk\_window\_set\_title (GTK\_WINDOW (window), \textcolor{stringliteral}{"ns-3 Object attributes."});
+97   gtk\_window\_set\_default\_size (GTK\_WINDOW (window), 600, 600);
+98 
+99   g\_signal\_connect (window, \textcolor{stringliteral}{"delete\_event"}, (GCallback)\hyperlink{namespacens3_a6b4c03fb0d3d8513e740dd12b7033c2b}{delete\_event\_callback}, window);
+100 
+101 
+102   GtkTreeStore *model = gtk\_tree\_store\_new (\hyperlink{namespacens3_a6e83be9a9c7a487ef6583e1c7b5db333a7d7fad15f1c717d9de73f71dca0f4966}{COL\_LAST}, G\_TYPE\_POINTER);
+103   ModelCreator creator;
+104   creator.Build (model);
+105 
+106   view = \hyperlink{namespacens3_ab9bcfcefc473e60e32d1fe4d08431dab}{create\_view} (model);
+107   scroll = gtk\_scrolled\_window\_new (0, 0);
+108   gtk\_container\_add (GTK\_CONTAINER (scroll), view);
+109 
+110   GtkWidget *vbox = gtk\_vbox\_new (FALSE, 5);
+111   gtk\_box\_pack\_start (GTK\_BOX (vbox), scroll, TRUE, TRUE, 0);
+112   gtk\_box\_pack\_end (GTK\_BOX (vbox), gtk\_hseparator\_new (), FALSE, FALSE, 0);
+113   GtkWidget *hbox = gtk\_hbox\_new (FALSE, 5);
+114   gtk\_box\_pack\_end (GTK\_BOX (vbox), hbox, FALSE, FALSE, 0);
+115   GtkWidget *save = gtk\_button\_new\_with\_label (\textcolor{stringliteral}{"Save"});
+116   g\_signal\_connect (save, \textcolor{stringliteral}{"clicked"},  (GCallback) \hyperlink{namespacens3_a963273e5e65bfa7288d4645d4f2ec607}{save\_clicked}, window);
+117   gtk\_box\_pack\_end (GTK\_BOX (hbox), save, FALSE, FALSE, 0);
+118   GtkWidget *load = gtk\_button\_new\_with\_label (\textcolor{stringliteral}{"Load"});
+119   g\_signal\_connect (load, \textcolor{stringliteral}{"clicked"},  (GCallback) \hyperlink{namespacens3_af9d871af0ea7b7c0992c485a09016e08}{load\_clicked}, window);
+120   gtk\_box\_pack\_end (GTK\_BOX (hbox), load, FALSE, FALSE, 0);
+121   GtkWidget *exit = gtk\_button\_new\_with\_label (\textcolor{stringliteral}{"Run Simulation"});
+122   g\_signal\_connect (exit, \textcolor{stringliteral}{"clicked"},  (GCallback) \hyperlink{namespacens3_a7f3b1dcf03a7f3a2f0d97a6ccf87fa62}{exit\_clicked\_callback}, window);
+123   gtk\_box\_pack\_end (GTK\_BOX (hbox), exit, FALSE, FALSE, 0);
+124 
+125   gtk\_container\_add (GTK\_CONTAINER (window), vbox);
+126 
+127   gtk\_widget\_show\_all (window);
+128 
+129   gtk\_main ();
+130 
+131   gtk\_tree\_model\_foreach (GTK\_TREE\_MODEL (model), 
+132                           \hyperlink{namespacens3_a12e280cbcb12ad1955d5ee0cca1cff47}{clean\_model\_callback},
+133                           0);
+134 
+135   gtk\_widget\_destroy (window);
+136 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Gtk\+Config\+Store@{ns3\+::\+Gtk\+Config\+Store}!Configure\+Defaults@{Configure\+Defaults}}
+\index{Configure\+Defaults@{Configure\+Defaults}!ns3\+::\+Gtk\+Config\+Store@{ns3\+::\+Gtk\+Config\+Store}}
+\subsubsection[{\texorpdfstring{Configure\+Defaults(void)}{ConfigureDefaults(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Gtk\+Config\+Store\+::\+Configure\+Defaults (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1GtkConfigStore_aa6bc1c922ac60a9cef7134875f98bd24}{}\label{classns3_1_1GtkConfigStore_aa6bc1c922ac60a9cef7134875f98bd24}
+
+\begin{DoxyCode}
+37 \{
+38   \textcolor{comment}{//this function should be called before running the script to enable the user}
+39   \textcolor{comment}{//to configure the default values for the objects he wants to use}
+40   GtkWidget *\hyperlink{namespacevisualizer_1_1ipython__view_ae2c349e0d13465bcd100c8bad952117f}{window};
+41   GtkWidget *view;
+42   GtkWidget *scroll;
+43 
+44   gtk\_init (0, 0);
+45   window = gtk\_window\_new (GTK\_WINDOW\_TOPLEVEL);
+46   gtk\_window\_set\_title (GTK\_WINDOW (window), \textcolor{stringliteral}{"ns-3 Default attributes."});
+47   gtk\_window\_set\_default\_size (GTK\_WINDOW (window), 600, 600);
+48 
+49   g\_signal\_connect (window, \textcolor{stringliteral}{"delete\_event"}, (GCallback)\hyperlink{namespacens3_a6b4c03fb0d3d8513e740dd12b7033c2b}{delete\_event\_callback}, window);
+50   GtkTreeStore *model = gtk\_tree\_store\_new (\hyperlink{namespacens3_a6e83be9a9c7a487ef6583e1c7b5db333a7d7fad15f1c717d9de73f71dca0f4966}{COL\_LAST}, G\_TYPE\_POINTER);
+51   ModelTypeidCreator creator;
+52   creator.Build (model);
+53 
+54   view = \hyperlink{namespacens3_a9b0de38431169a0ec08415d6f1a2fa67}{create\_view\_config\_default} (model);
+55   scroll = gtk\_scrolled\_window\_new (0, 0);
+56   gtk\_container\_add (GTK\_CONTAINER (scroll), view);
+57 
+58   GtkWidget *vbox = gtk\_vbox\_new (FALSE, 5);
+59   gtk\_box\_pack\_start (GTK\_BOX (vbox), scroll, TRUE, TRUE, 0);
+60   gtk\_box\_pack\_end (GTK\_BOX (vbox), gtk\_hseparator\_new (), FALSE, FALSE, 0);
+61   GtkWidget *hbox = gtk\_hbox\_new (FALSE, 5);
+62   gtk\_box\_pack\_end (GTK\_BOX (vbox), hbox, FALSE, FALSE, 0);
+63   GtkWidget *save = gtk\_button\_new\_with\_label (\textcolor{stringliteral}{"Save"});
+64   g\_signal\_connect (save, \textcolor{stringliteral}{"clicked"},  (GCallback) \hyperlink{namespacens3_ae70b84ab7090f1eaa73e7209be9400d2}{save\_clicked\_default}, window);
+65   gtk\_box\_pack\_end (GTK\_BOX (hbox), save, FALSE, FALSE, 0);
+66   GtkWidget *load = gtk\_button\_new\_with\_label (\textcolor{stringliteral}{"Load"});
+67   g\_signal\_connect (load, \textcolor{stringliteral}{"clicked"},  (GCallback) \hyperlink{namespacens3_af500ab6459ed7099c0e403a504f9339e}{load\_clicked\_default}, window);
+68   gtk\_box\_pack\_end (GTK\_BOX (hbox), load, FALSE, FALSE, 0);
+69   GtkWidget *exit = gtk\_button\_new\_with\_label (\textcolor{stringliteral}{"Run Simulation"});
+70   g\_signal\_connect (exit, \textcolor{stringliteral}{"clicked"},  (GCallback) \hyperlink{namespacens3_a7f3b1dcf03a7f3a2f0d97a6ccf87fa62}{exit\_clicked\_callback}, window);
+71   gtk\_box\_pack\_end (GTK\_BOX (hbox), exit, FALSE, FALSE, 0);
+72 
+73   gtk\_container\_add (GTK\_CONTAINER (window), vbox);
+74 
+75   gtk\_widget\_show\_all (window);
+76 
+77   gtk\_main ();
+78 
+79   gtk\_tree\_model\_foreach (GTK\_TREE\_MODEL (model), 
+80                           \hyperlink{namespacens3_a9c65740963efd473d9039ae16aa3a408}{clean\_model\_callback\_config\_default},
+81                           0);
+82 
+83   gtk\_widget\_destroy (window); 
+84 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+config-\/store/model/\hyperlink{gtk-config-store_8h}{gtk-\/config-\/store.\+h}\item 
+config-\/store/model/\hyperlink{gtk-config-store_8cc}{gtk-\/config-\/store.\+cc}\end{DoxyCompactItemize}

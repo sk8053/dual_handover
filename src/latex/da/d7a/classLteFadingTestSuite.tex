@@ -1,0 +1,114 @@
+\hypertarget{classLteFadingTestSuite}{}\section{Lte\+Fading\+Test\+Suite Class Reference}
+\label{classLteFadingTestSuite}\index{Lte\+Fading\+Test\+Suite@{Lte\+Fading\+Test\+Suite}}
+
+
+{\ttfamily \#include $<$lte-\/test-\/fading.\+h$>$}
+
+
+
+Inheritance diagram for Lte\+Fading\+Test\+Suite\+:
+% FIG 0
+
+
+Collaboration diagram for Lte\+Fading\+Test\+Suite\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLteFadingTestSuite_aa8f5d146edf68b18fe52196168dcbf90}{Lte\+Fading\+Test\+Suite} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Test 1.\+1 fading model 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Lte\+Fading\+Test\+Suite@{Lte\+Fading\+Test\+Suite}!Lte\+Fading\+Test\+Suite@{Lte\+Fading\+Test\+Suite}}
+\index{Lte\+Fading\+Test\+Suite@{Lte\+Fading\+Test\+Suite}!Lte\+Fading\+Test\+Suite@{Lte\+Fading\+Test\+Suite}}
+\subsubsection[{\texorpdfstring{Lte\+Fading\+Test\+Suite()}{LteFadingTestSuite()}}]{\setlength{\rightskip}{0pt plus 5cm}Lte\+Fading\+Test\+Suite\+::\+Lte\+Fading\+Test\+Suite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLteFadingTestSuite_aa8f5d146edf68b18fe52196168dcbf90}{}\label{classLteFadingTestSuite_aa8f5d146edf68b18fe52196168dcbf90}
+Test 1.\+1 Fading compound test This Test\+Suite tests the fading model... 
+\begin{DoxyCode}
+68 : \hyperlink{classns3_1_1TestSuite_a904b0c40583b744d30908aeb94636d1a}{TestSuite} (\textcolor{stringliteral}{"lte-fading-model"}, \hyperlink{classns3_1_1TestSuite_a1ebfcab34ec8161e085e8e3a1855eae0a90c5529a26ab3a5ffcc6e57040dbd82e}{SYSTEM})
+69 \{
+70   
+71   
+72   \textcolor{comment}{// -------------- COMPOUND TESTS ----------------------------------}
+73   
+74   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"LteFadingTest"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+75   
+76   \textcolor{comment}{// NS\_LOG\_INFO ("Creating LteDownlinkSinrTestSuite");}
+77   
+78   \hyperlink{classns3_1_1Ptr}{Ptr<LteHelper>} lteHelper = CreateObject<LteHelper> ();
+79   
+80   lteHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"PathlossModel"}, StringValue (\textcolor{stringliteral}{"ns3::BuildingsPropagationLossModel"}))
+      ;
+81   
+82   \textcolor{comment}{// Create Nodes: eNodeB, home eNB, UE and home UE (UE attached to HeNB)}
+83   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+84   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} henbNodes;
+85   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNodes;
+86   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} hueNodes;
+87   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+88   henbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+89   ueNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (5);
+90   hueNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (3);
+91   
+92   \textcolor{comment}{// Install Mobility Model}
+93   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+94   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::BuildingsMobilityModel"});
+95   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+96   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (henbNodes);
+97   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes);
+98   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (hueNodes);
+99   
+100   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbDevs;
+101   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} henbDevs;
+102   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueDevs;
+103   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} hueDevs;
+104   enbDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (enbNodes);
+105   ueDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (ueNodes);
+106   henbDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (henbNodes);
+107   hueDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (hueNodes);
+108   
+109   
+110   
+111   lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (ueDevs, enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+112   lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (hueDevs, henbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+113   
+114   \textcolor{comment}{// Test #1 Okumura Hata Model (150 < freq < 1500 MHz) (Macro<->UE)}
+115   
+116   \textcolor{keywordtype}{double} distance = 2000;
+117   \textcolor{keywordtype}{double} \hyperlink{buildings__pathloss_8m_adf48bfd0f3afa8972e753a0f895b0a51}{hm} = 1;
+118   \textcolor{keywordtype}{double} \hyperlink{buildings__pathloss_8m_a2893d16f4bf2bcf4555002c045e565b9}{hb} = 30;
+119 \textcolor{comment}{//   double freq = 869e6; // E\_UTRA BAND #5 see table 5.5-1 of 36.101}
+120   \hyperlink{classns3_1_1Ptr}{Ptr<BuildingsMobilityModel>} mm1 = enbNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<BuildingsMobilityModel> ();
+121   mm1->SetPosition (Vector (0.0, 0.0, hb));
+122   
+123   \hyperlink{classns3_1_1Ptr}{Ptr<BuildingsMobilityModel>} mm2 = ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<BuildingsMobilityModel> ();
+124   mm2->SetPosition (Vector (distance, 0.0, hm));
+125   
+126   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteFadingTestCase}{LteFadingTestCase} (mm1, mm2, 137.93, \textcolor{stringliteral}{"OH Urban Large city"}),
+       TestCase::QUICK);
+127     
+128   
+129 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lte/test/\hyperlink{lte-test-fading_8h}{lte-\/test-\/fading.\+h}\item 
+lte/test/\hyperlink{lte-test-fading_8cc}{lte-\/test-\/fading.\+cc}\end{DoxyCompactItemize}

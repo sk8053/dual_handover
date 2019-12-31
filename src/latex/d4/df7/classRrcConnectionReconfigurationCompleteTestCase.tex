@@ -1,0 +1,98 @@
+\hypertarget{classRrcConnectionReconfigurationCompleteTestCase}{}\section{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case Class Reference}
+\label{classRrcConnectionReconfigurationCompleteTestCase}\index{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case@{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case}}
+
+
+Inheritance diagram for Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRrcConnectionReconfigurationCompleteTestCase_ac96efdf52b121318568a0a38d71812be}{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classRrcConnectionReconfigurationCompleteTestCase_a811358e619874b2e388db76d924a0574}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case@{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case}!Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case@{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case}}
+\index{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case@{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case}!Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case@{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case()}{RrcConnectionReconfigurationCompleteTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case\+::\+Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classRrcConnectionReconfigurationCompleteTestCase_ac96efdf52b121318568a0a38d71812be}{}\label{classRrcConnectionReconfigurationCompleteTestCase_ac96efdf52b121318568a0a38d71812be}
+
+\begin{DoxyCode}
+407   : \hyperlink{classRrcHeaderTestCase_a59d334d21492c281b877a73bb0ac2a03}{RrcHeaderTestCase} (\textcolor{stringliteral}{"Testing RrcConnectionReconfigurationCompleteTestCase"})
+408 \{
+409 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case@{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case@{Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Rrc\+Connection\+Reconfiguration\+Complete\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classRrcConnectionReconfigurationCompleteTestCase_a811358e619874b2e388db76d924a0574}{}\label{classRrcConnectionReconfigurationCompleteTestCase_a811358e619874b2e388db76d924a0574}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classRrcHeaderTestCase_ab72ac5cd07c4359237c8e36ab16f5414}{Rrc\+Header\+Test\+Case}.
+
+
+\begin{DoxyCode}
+413 \{
+414   \hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet} = Create<Packet> ();
+415   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"============= RrcConnectionReconfigurationCompleteTestCase ==========="});
+416 
+417   \hyperlink{structns3_1_1LteRrcSap_1_1RrcConnectionReconfigurationCompleted}{LteRrcSap::RrcConnectionReconfigurationCompleted} msg;
+418   msg.\hyperlink{structns3_1_1LteRrcSap_1_1RrcConnectionReconfigurationCompleted_ae3ed8902fd06c26f99b18dc481fa65d9}{rrcTransactionIdentifier} = 2;
+419 
+420   \hyperlink{classns3_1_1RrcConnectionReconfigurationCompleteHeader}{RrcConnectionReconfigurationCompleteHeader} source;
+421   source.\hyperlink{classns3_1_1RrcConnectionReconfigurationCompleteHeader_addcb9537ee64f4f528ce817069836ba8}{SetMessage} (msg);
+422 
+423   \textcolor{comment}{// Log source info}
+424   TestUtils::LogPacketInfo<RrcConnectionReconfigurationCompleteHeader> (source,\textcolor{stringliteral}{"SOURCE"});
+425 
+426   \textcolor{comment}{// Add header}
+427   \hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet}->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (source);
+428 
+429   \textcolor{comment}{// Log serialized packet contents}
+430   \hyperlink{classTestUtils_a9391dac3282094e6e57c0052d88a086f}{TestUtils::LogPacketContents} (\hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet});
+431 
+432   \textcolor{comment}{// remove header}
+433   \hyperlink{classns3_1_1RrcConnectionReconfigurationCompleteHeader}{RrcConnectionReconfigurationCompleteHeader} destination;
+434   \hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet}->\hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{RemoveHeader} (destination);
+435 
+436   \textcolor{comment}{// Log destination info}
+437   TestUtils::LogPacketInfo<RrcConnectionReconfigurationCompleteHeader> (destination,\textcolor{stringliteral}{"DESTINATION"});
+438 
+439   \textcolor{comment}{// Check that the destination and source headers contain the same values}
+440   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (source.GetRrcTransactionIdentifier (),destination.
+      GetRrcTransactionIdentifier (), \textcolor{stringliteral}{"RrcTransactionIdentifier"});
+441 
+442   \hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet} = 0;
+443 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lte/test/\hyperlink{test-asn1-encoding_8cc}{test-\/asn1-\/encoding.\+cc}\end{DoxyCompactItemize}

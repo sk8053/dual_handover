@@ -1,0 +1,137 @@
+\hypertarget{classns3_1_1FdNetDeviceFdReader}{}\section{ns3\+:\+:Fd\+Net\+Device\+Fd\+Reader Class Reference}
+\label{classns3_1_1FdNetDeviceFdReader}\index{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader@{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader}}
+
+
+This class performs the actual data reading from the sockets.  
+
+
+
+
+{\ttfamily \#include $<$fd-\/net-\/device.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Fd\+Net\+Device\+Fd\+Reader\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Fd\+Net\+Device\+Fd\+Reader\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1FdNetDeviceFdReader_a0de5d6328ff506512d71764bf567abfa}{Fd\+Net\+Device\+Fd\+Reader} ()
+\item 
+void \hyperlink{classns3_1_1FdNetDeviceFdReader_a3de964a4bb9349d573febd3f0b14d8aa}{Set\+Buffer\+Size} (uint32\+\_\+t buffer\+Size)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structns3_1_1FdReader_1_1Data}{Fd\+Reader\+::\+Data} \hyperlink{classns3_1_1FdNetDeviceFdReader_accdcf64286ebf82623e99c0073c933df}{Do\+Read} (void)
+\begin{DoxyCompactList}\small\item\em The read implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1FdNetDeviceFdReader_a12388cd870f27e4b6b99525faf45a25e}{m\+\_\+buffer\+Size}
+\begin{DoxyCompactList}\small\item\em size of the read buffer \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This class performs the actual data reading from the sockets. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader@{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader}!Fd\+Net\+Device\+Fd\+Reader@{Fd\+Net\+Device\+Fd\+Reader}}
+\index{Fd\+Net\+Device\+Fd\+Reader@{Fd\+Net\+Device\+Fd\+Reader}!ns3\+::\+Fd\+Net\+Device\+Fd\+Reader@{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{Fd\+Net\+Device\+Fd\+Reader()}{FdNetDeviceFdReader()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Fd\+Net\+Device\+Fd\+Reader\+::\+Fd\+Net\+Device\+Fd\+Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1FdNetDeviceFdReader_a0de5d6328ff506512d71764bf567abfa}{}\label{classns3_1_1FdNetDeviceFdReader_a0de5d6328ff506512d71764bf567abfa}
+
+\begin{DoxyCode}
+48   : \hyperlink{classns3_1_1FdNetDeviceFdReader_a12388cd870f27e4b6b99525faf45a25e}{m\_bufferSize} (65536) \textcolor{comment}{// Defaults to maximum TCP window size}
+49 \{
+50 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader@{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader}!Do\+Read@{Do\+Read}}
+\index{Do\+Read@{Do\+Read}!ns3\+::\+Fd\+Net\+Device\+Fd\+Reader@{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{Do\+Read(void)}{DoRead(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Fd\+Reader\+::\+Data} ns3\+::\+Fd\+Net\+Device\+Fd\+Reader\+::\+Do\+Read (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1FdNetDeviceFdReader_accdcf64286ebf82623e99c0073c933df}{}\label{classns3_1_1FdNetDeviceFdReader_accdcf64286ebf82623e99c0073c933df}
+
+
+The read implementation. 
+
+The value of {\ttfamily m\+\_\+len} returned controls further processing. The callback function is only invoked when {\ttfamily m\+\_\+len} is positive; any data read is not processed when {\ttfamily m\+\_\+len} is negative; reading stops when {\ttfamily m\+\_\+len} is zero.
+
+The management of memory associated with {\ttfamily m\+\_\+buf} must be compatible with the read callback.
+
+\begin{DoxyReturn}{Returns}
+A structure representing what was read. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1FdReader_a5d622d726859828ba7bc557b57689b1b}{ns3\+::\+Fd\+Reader}.
+
+
+\begin{DoxyCode}
+60 \{
+61   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+62 
+63   uint8\_t *buf = (uint8\_t *)malloc (\hyperlink{classns3_1_1FdNetDeviceFdReader_a12388cd870f27e4b6b99525faf45a25e}{m\_bufferSize});
+64   \hyperlink{group__fatal_ga6653324225bc139e46deea177614ceee}{NS\_ABORT\_MSG\_IF} (buf == 0, \textcolor{stringliteral}{"malloc() failed"});
+65 
+66   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Calling read on fd "} << \hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\_fd});
+67   ssize\_t len = read (\hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\_fd}, buf, \hyperlink{classns3_1_1FdNetDeviceFdReader_a12388cd870f27e4b6b99525faf45a25e}{m\_bufferSize});
+68   \textcolor{keywordflow}{if} (len <= 0)
+69     \{
+70       free (buf);
+71       buf = 0;
+72       len = 0;
+73     \}
+74   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Read "} << len << \textcolor{stringliteral}{" bytes on fd "} << \hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\_fd});
+75   \textcolor{keywordflow}{return} FdReader::Data (buf, len);
+76 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader@{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader}!Set\+Buffer\+Size@{Set\+Buffer\+Size}}
+\index{Set\+Buffer\+Size@{Set\+Buffer\+Size}!ns3\+::\+Fd\+Net\+Device\+Fd\+Reader@{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{Set\+Buffer\+Size(uint32\+\_\+t buffer\+Size)}{SetBufferSize(uint32_t bufferSize)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Fd\+Net\+Device\+Fd\+Reader\+::\+Set\+Buffer\+Size (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{buffer\+Size}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1FdNetDeviceFdReader_a3de964a4bb9349d573febd3f0b14d8aa}{}\label{classns3_1_1FdNetDeviceFdReader_a3de964a4bb9349d573febd3f0b14d8aa}
+Set size of the read buffer. 
+\begin{DoxyCode}
+54 \{
+55   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << bufferSize);
+56   \hyperlink{classns3_1_1FdNetDeviceFdReader_a12388cd870f27e4b6b99525faf45a25e}{m\_bufferSize} = bufferSize;
+57 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader@{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader}!m\+\_\+buffer\+Size@{m\+\_\+buffer\+Size}}
+\index{m\+\_\+buffer\+Size@{m\+\_\+buffer\+Size}!ns3\+::\+Fd\+Net\+Device\+Fd\+Reader@{ns3\+::\+Fd\+Net\+Device\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{m\+\_\+buffer\+Size}{m_bufferSize}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Fd\+Net\+Device\+Fd\+Reader\+::m\+\_\+buffer\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1FdNetDeviceFdReader_a12388cd870f27e4b6b99525faf45a25e}{}\label{classns3_1_1FdNetDeviceFdReader_a12388cd870f27e4b6b99525faf45a25e}
+
+
+size of the read buffer 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+fd-\/net-\/device/model/\hyperlink{fd-net-device_8h}{fd-\/net-\/device.\+h}\item 
+fd-\/net-\/device/model/\hyperlink{fd-net-device_8cc}{fd-\/net-\/device.\+cc}\end{DoxyCompactItemize}

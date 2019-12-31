@@ -1,0 +1,92 @@
+\hypertarget{classns3_1_1LteFfConverter}{}\section{ns3\+:\+:Lte\+Ff\+Converter Class Reference}
+\label{classns3_1_1LteFfConverter}\index{ns3\+::\+Lte\+Ff\+Converter@{ns3\+::\+Lte\+Ff\+Converter}}
+
+
+{\ttfamily \#include $<$lte-\/common.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Lte\+Ff\+Converter\+:
+% FIG 0
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static uint16\+\_\+t \hyperlink{classns3_1_1LteFfConverter_a56e66da296e4328530c22036b3549b70}{double2fp\+S11dot3} (double val)
+\item 
+static double \hyperlink{classns3_1_1LteFfConverter_aa5d8c2a8f988dbd63da91818c18666eb}{fp\+S11dot3to\+Double} (uint16\+\_\+t val)
+\item 
+static double \hyperlink{classns3_1_1LteFfConverter_a37d1519834cb8a4c907c3c0ed1a690bc}{get\+Min\+Fp\+S11dot3\+Value} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Lte\+Ff\+Converter@{ns3\+::\+Lte\+Ff\+Converter}!double2fp\+S11dot3@{double2fp\+S11dot3}}
+\index{double2fp\+S11dot3@{double2fp\+S11dot3}!ns3\+::\+Lte\+Ff\+Converter@{ns3\+::\+Lte\+Ff\+Converter}}
+\subsubsection[{\texorpdfstring{double2fp\+S11dot3(double val)}{double2fpS11dot3(double val)}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Lte\+Ff\+Converter\+::double2fp\+S11dot3 (
+\begin{DoxyParamCaption}
+\item[{double}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1LteFfConverter_a56e66da296e4328530c22036b3549b70}{}\label{classns3_1_1LteFfConverter_a56e66da296e4328530c22036b3549b70}
+
+\begin{DoxyCode}
+97 \{
+98   \textcolor{comment}{// convert from double to fixed point notation Sxxxxxxxxxxx.xxx}
+99   \textcolor{comment}{// truncate val to notation limits}
+100   \textcolor{keywordflow}{if} (val > 4095.88)
+101     \{
+102       val = 4095.88;
+103     \}
+104   \textcolor{keywordflow}{if} (val < -4096)
+105     \{
+106       val = -4096;
+107     \}
+108   int16\_t valFp = (int16\_t)(val * 8);
+109   \textcolor{keywordflow}{return} (valFp);
+110 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Lte\+Ff\+Converter@{ns3\+::\+Lte\+Ff\+Converter}!fp\+S11dot3to\+Double@{fp\+S11dot3to\+Double}}
+\index{fp\+S11dot3to\+Double@{fp\+S11dot3to\+Double}!ns3\+::\+Lte\+Ff\+Converter@{ns3\+::\+Lte\+Ff\+Converter}}
+\subsubsection[{\texorpdfstring{fp\+S11dot3to\+Double(uint16\+\_\+t val)}{fpS11dot3toDouble(uint16_t val)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Lte\+Ff\+Converter\+::fp\+S11dot3to\+Double (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1LteFfConverter_aa5d8c2a8f988dbd63da91818c18666eb}{}\label{classns3_1_1LteFfConverter_aa5d8c2a8f988dbd63da91818c18666eb}
+
+\begin{DoxyCode}
+114 \{
+115   \textcolor{comment}{// convert from fixed point notation Sxxxxxxxxxxx.xxx to double}
+116   \textcolor{keywordtype}{double} valD = ((int16\_t)val) / 8.0;
+117   \textcolor{keywordflow}{return} (valD);
+118 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Lte\+Ff\+Converter@{ns3\+::\+Lte\+Ff\+Converter}!get\+Min\+Fp\+S11dot3\+Value@{get\+Min\+Fp\+S11dot3\+Value}}
+\index{get\+Min\+Fp\+S11dot3\+Value@{get\+Min\+Fp\+S11dot3\+Value}!ns3\+::\+Lte\+Ff\+Converter@{ns3\+::\+Lte\+Ff\+Converter}}
+\subsubsection[{\texorpdfstring{get\+Min\+Fp\+S11dot3\+Value()}{getMinFpS11dot3Value()}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Lte\+Ff\+Converter\+::get\+Min\+Fp\+S11dot3\+Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1LteFfConverter_a37d1519834cb8a4c907c3c0ed1a690bc}{}\label{classns3_1_1LteFfConverter_a37d1519834cb8a4c907c3c0ed1a690bc}
+
+\begin{DoxyCode}
+122 \{
+123   \textcolor{keywordflow}{return} (-4096);        \textcolor{comment}{// -4096 = 0x8000 = 1000 0000 0000 0000 b}
+124 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lte/model/\hyperlink{lte-common_8h}{lte-\/common.\+h}\item 
+lte/model/\hyperlink{lte-common_8cc}{lte-\/common.\+cc}\end{DoxyCompactItemize}

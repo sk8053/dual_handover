@@ -1,0 +1,149 @@
+\hypertarget{csma-one-subnet_8cc}{}\section{csma/examples/csma-\/one-\/subnet.cc File Reference}
+\label{csma-one-subnet_8cc}\index{csma/examples/csma-\/one-\/subnet.\+cc@{csma/examples/csma-\/one-\/subnet.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+Include dependency graph for csma-\/one-\/subnet.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{csma-one-subnet_8cc_a4150a00bba92c3fb8ea9f0da14becb98}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Csma\+One\+Subnet\+Example\char`\"{})
+\item 
+int \hyperlink{csma-one-subnet_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{csma-\/one-\/subnet.\+cc@{csma-\/one-\/subnet.\+cc}!main@{main}}
+\index{main@{main}!csma-\/one-\/subnet.\+cc@{csma-\/one-\/subnet.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{csma-one-subnet_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{csma-one-subnet_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+43 \{
+44 \textcolor{comment}{//}
+45 \textcolor{comment}{// Users may find it convenient to turn on explicit debugging}
+46 \textcolor{comment}{// for selected modules; the below lines suggest how to do this}
+47 \textcolor{comment}{//}
+48 \textcolor{preprocessor}{#if 0 }
+49   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"CsmaOneSubnetExample"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+50 \textcolor{preprocessor}{#endif}
+51 \textcolor{comment}{//}
+52 \textcolor{comment}{// Allow the user to override any of the defaults and the above Bind() at}
+53 \textcolor{comment}{// run-time, via command-line arguments}
+54 \textcolor{comment}{//}
+55   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+56   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+57 \textcolor{comment}{//}
+58 \textcolor{comment}{// Explicitly create the nodes required by the topology (shown above).}
+59 \textcolor{comment}{//}
+60   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes."});
+61   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+62   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (4);
+63 
+64   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Build Topology"});
+65   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+66   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (5000000));
+67   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+68 \textcolor{comment}{//}
+69 \textcolor{comment}{// Now fill out the topology by creating the net devices required to connect}
+70 \textcolor{comment}{// the nodes to the channels and hooking them up.}
+71 \textcolor{comment}{//}
+72   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (nodes);
+73 
+74   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+75   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodes);
+76 
+77 \textcolor{comment}{// We've got the "hardware" in place.  Now we need to add IP addresses.}
+78 \textcolor{comment}{//}
+79   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+80   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+81   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+82   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} interfaces = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devices);
+83 
+84 \textcolor{comment}{//}
+85 \textcolor{comment}{// Create an OnOff application to send UDP datagrams from node zero to node 1.}
+86 \textcolor{comment}{//}
+87   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Applications."});
+88   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 9;   \textcolor{comment}{// Discard port (RFC 863)}
+89 
+90   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+91                      \hyperlink{classns3_1_1Address}{Address} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (interfaces.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1), \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port})));
+92   onoff.\hyperlink{classns3_1_1OnOffHelper_a73526acef24a4559fb50db9f7c1c10ef}{SetConstantRate} (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"500kb/s"}));
+93 
+94   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} app = onoff.Install (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+95   \textcolor{comment}{// Start the application}
+96   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+97   app.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+98 
+99   \textcolor{comment}{// Create an optional packet sink to receive these packets}
+100   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sink (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+101                          \hyperlink{classns3_1_1Address}{Address} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port))
+      );
+102   app = sink.Install (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+103   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+104 
+105 \textcolor{comment}{// }
+106 \textcolor{comment}{// Create a similar flow from n3 to n0, starting at time 1.1 seconds}
+107 \textcolor{comment}{//}
+108   onoff.SetAttribute (\textcolor{stringliteral}{"Remote"}, 
+109                       AddressValue (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (interfaces.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (0), \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port})));
+110   app = onoff.Install (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+111   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.1));
+112   app.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+113 
+114   app = sink.Install (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+115   app.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+116 
+117   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Configure Tracing."});
+118 \textcolor{comment}{//}
+119 \textcolor{comment}{// Configure ascii tracing of all enqueue, dequeue, and NetDevice receive }
+120 \textcolor{comment}{// events on all devices.  Trace output will be sent to the file }
+121 \textcolor{comment}{// "csma-one-subnet.tr"}
+122 \textcolor{comment}{//}
+123   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+124   csma.\hyperlink{classns3_1_1AsciiTraceHelperForDevice_a63e57c878526c732924e14c1e52cca8b}{EnableAsciiAll} (ascii.\hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (\textcolor{stringliteral}{"csma-one-subnet.tr"}));
+125 
+126 \textcolor{comment}{//}
+127 \textcolor{comment}{// Also configure some tcpdump traces; each interface will be traced.}
+128 \textcolor{comment}{// The output files will be named:}
+129 \textcolor{comment}{//}
+130 \textcolor{comment}{//     csma-one-subnet-<node ID>-<device's interface index>.pcap}
+131 \textcolor{comment}{//}
+132 \textcolor{comment}{// and can be read by the "tcpdump -r" command (use "-tt" option to}
+133 \textcolor{comment}{// display timestamps correctly)}
+134 \textcolor{comment}{//}
+135   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"csma-one-subnet"}, \textcolor{keyword}{false});
+136 \textcolor{comment}{//}
+137 \textcolor{comment}{// Now, do the actual simulation.}
+138 \textcolor{comment}{//}
+139   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+140   Simulator::Run ();
+141   Simulator::Destroy ();
+142   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+143 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{csma-\/one-\/subnet.\+cc@{csma-\/one-\/subnet.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!csma-\/one-\/subnet.\+cc@{csma-\/one-\/subnet.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Csma\+One\+Subnet\+Example"")}{NS_LOG_COMPONENT_DEFINE("CsmaOneSubnetExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Csma\+One\+Subnet\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{csma-one-subnet_8cc_a4150a00bba92c3fb8ea9f0da14becb98}{}\label{csma-one-subnet_8cc_a4150a00bba92c3fb8ea9f0da14becb98}

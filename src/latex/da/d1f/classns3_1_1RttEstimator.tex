@@ -1,0 +1,415 @@
+\hypertarget{classns3_1_1RttEstimator}{}\section{ns3\+:\+:Rtt\+Estimator Class Reference}
+\label{classns3_1_1RttEstimator}\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+
+
+Base class for all R\+TT Estimators.  
+
+
+
+
+{\ttfamily \#include $<$rtt-\/estimator.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Rtt\+Estimator\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Rtt\+Estimator\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1RttEstimator_a86696ed57483bf9e19abbf6978c46581}{Rtt\+Estimator} ()
+\item 
+\hyperlink{classns3_1_1RttEstimator_ad930878f171838109f6e4e991d6eda2c}{Rtt\+Estimator} (const \hyperlink{classns3_1_1RttEstimator}{Rtt\+Estimator} \&r)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1RttEstimator_aa2a0212e139816215f223c6adbed9328}{$\sim$\+Rtt\+Estimator} ()
+\item 
+virtual \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1RttEstimator_a8fe4674f7c7b45efb439ae72fe4749db}{Get\+Instance\+Type\+Id} (void) const 
+\item 
+virtual void \hyperlink{classns3_1_1RttEstimator_ae880d548218990b21b4270424621a784}{Measurement} (\hyperlink{classns3_1_1Time}{Time} t)=0
+\begin{DoxyCompactList}\small\item\em Add a new measurement to the estimator. Pure virtual function. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1RttEstimator}{Rtt\+Estimator} $>$ \hyperlink{classns3_1_1RttEstimator_ae4697bf310299db205837e7454627273}{Copy} () const =0
+\begin{DoxyCompactList}\small\item\em Copy object (including current internal state) \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1RttEstimator_a53237f5f20e3515f284cfc68b02cf45d}{Reset} ()
+\begin{DoxyCompactList}\small\item\em Resets the estimation to its initial state. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1RttEstimator_a11f575ae2d843d2f9d94842dd739e3d3}{Get\+Estimate} (void) const 
+\begin{DoxyCompactList}\small\item\em gets the R\+TT estimate. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1RttEstimator_a48b42289cba668b30d69bfe384d37d25}{Get\+Variation} (void) const 
+\begin{DoxyCompactList}\small\item\em gets the R\+TT estimate variation. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1RttEstimator_a56d664ff2d402087e6eaccada7eee6af}{Get\+N\+Samples} (void) const 
+\begin{DoxyCompactList}\small\item\em gets the number of samples used in the estimates \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1RttEstimator_ad07777f199907e2a96d2cd5cb8539cbc}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{m\+\_\+estimated\+Rtt}
+\begin{DoxyCompactList}\small\item\em Current estimate. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}{m\+\_\+estimated\+Variation}
+\begin{DoxyCompactList}\small\item\em Current estimate variation. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1RttEstimator_a6a70cc48220dae4db259cb5cfee86cf5}{m\+\_\+n\+Samples}
+\begin{DoxyCompactList}\small\item\em Number of samples. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1RttEstimator_a2885f370c9d2ca8ec352de341c065497}{m\+\_\+initial\+Estimated\+Rtt}
+\begin{DoxyCompactList}\small\item\em Initial R\+TT estimation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Base class for all R\+TT Estimators. 
+
+The R\+TT Estimator class computes an estimate of the round trip time observed in a series of \hyperlink{classns3_1_1Time}{Time} measurements. The estimate is provided in the form of an estimate and a sample variation. Subclasses can implement different algorithms to provide values for the estimate and variation. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!Rtt\+Estimator@{Rtt\+Estimator}}
+\index{Rtt\+Estimator@{Rtt\+Estimator}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{Rtt\+Estimator()}{RttEstimator()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Rtt\+Estimator\+::\+Rtt\+Estimator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1RttEstimator_a86696ed57483bf9e19abbf6978c46581}{}\label{classns3_1_1RttEstimator_a86696ed57483bf9e19abbf6978c46581}
+
+\begin{DoxyCode}
+75   : \hyperlink{classns3_1_1RttEstimator_a6a70cc48220dae4db259cb5cfee86cf5}{m\_nSamples} (0)
+76 \{ 
+77   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+78   
+79   \textcolor{comment}{// We need attributes initialized here, not later, so use the }
+80   \textcolor{comment}{// ConstructSelf() technique documented in the manual}
+81   \hyperlink{classns3_1_1ObjectBase_a5cda18dec6d0744cb652a3ed60056958}{ObjectBase::ConstructSelf} (AttributeConstructionList ());
+82   \hyperlink{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{m\_estimatedRtt} = \hyperlink{classns3_1_1RttEstimator_a2885f370c9d2ca8ec352de341c065497}{m\_initialEstimatedRtt};
+83   \hyperlink{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}{m\_estimatedVariation} = \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} (0);
+84   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Initialize m\_estimatedRtt to "} << \hyperlink{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{m\_estimatedRtt}.
+      \hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" sec."});
+85 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!Rtt\+Estimator@{Rtt\+Estimator}}
+\index{Rtt\+Estimator@{Rtt\+Estimator}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{Rtt\+Estimator(const Rtt\+Estimator \&r)}{RttEstimator(const RttEstimator &r)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Rtt\+Estimator\+::\+Rtt\+Estimator (
+\begin{DoxyParamCaption}
+\item[{const {\bf Rtt\+Estimator} \&}]{r}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1RttEstimator_ad930878f171838109f6e4e991d6eda2c}{}\label{classns3_1_1RttEstimator_ad930878f171838109f6e4e991d6eda2c}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & the object to copy \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+88   : \hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}),
+89     \hyperlink{classns3_1_1RttEstimator_a2885f370c9d2ca8ec352de341c065497}{m\_initialEstimatedRtt} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}.m\_initialEstimatedRtt),
+90     \hyperlink{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{m\_estimatedRtt} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}.m\_estimatedRtt),
+91     \hyperlink{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}{m\_estimatedVariation} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}.m\_estimatedVariation),
+92     \hyperlink{classns3_1_1RttEstimator_a6a70cc48220dae4db259cb5cfee86cf5}{m\_nSamples} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}.m\_nSamples)
+93 \{
+94   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+95 \}
+\end{DoxyCode}
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!````~Rtt\+Estimator@{$\sim$\+Rtt\+Estimator}}
+\index{````~Rtt\+Estimator@{$\sim$\+Rtt\+Estimator}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{$\sim$\+Rtt\+Estimator()}{~RttEstimator()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Rtt\+Estimator\+::$\sim$\+Rtt\+Estimator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1RttEstimator_aa2a0212e139816215f223c6adbed9328}{}\label{classns3_1_1RttEstimator_aa2a0212e139816215f223c6adbed9328}
+
+\begin{DoxyCode}
+98 \{
+99   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+100 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!Copy@{Copy}}
+\index{Copy@{Copy}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{Copy() const =0}{Copy() const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Ptr}$<${\bf Rtt\+Estimator}$>$ ns3\+::\+Rtt\+Estimator\+::\+Copy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1RttEstimator_ae4697bf310299db205837e7454627273}{}\label{classns3_1_1RttEstimator_ae4697bf310299db205837e7454627273}
+
+
+Copy object (including current internal state) 
+
+\begin{DoxyReturn}{Returns}
+a copy of itself 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1RttMeanDeviation_af5c036fd0092fbb7f19cb5cc5646d505}{ns3\+::\+Rtt\+Mean\+Deviation}.
+
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!Get\+Estimate@{Get\+Estimate}}
+\index{Get\+Estimate@{Get\+Estimate}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{Get\+Estimate(void) const }{GetEstimate(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Rtt\+Estimator\+::\+Get\+Estimate (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1RttEstimator_a11f575ae2d843d2f9d94842dd739e3d3}{}\label{classns3_1_1RttEstimator_a11f575ae2d843d2f9d94842dd739e3d3}
+
+
+gets the R\+TT estimate. 
+
+\begin{DoxyReturn}{Returns}
+The R\+TT estimate. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+61 \{
+62   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{m\_estimatedRtt};
+63 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!Get\+Instance\+Type\+Id@{Get\+Instance\+Type\+Id}}
+\index{Get\+Instance\+Type\+Id@{Get\+Instance\+Type\+Id}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{Get\+Instance\+Type\+Id(void) const }{GetInstanceTypeId(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Rtt\+Estimator\+::\+Get\+Instance\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1RttEstimator_a8fe4674f7c7b45efb439ae72fe4749db}{}\label{classns3_1_1RttEstimator_a8fe4674f7c7b45efb439ae72fe4749db}
+Get the most derived \hyperlink{classns3_1_1TypeId}{Type\+Id} for this \hyperlink{classns3_1_1Object}{Object}.
+
+This method is typically implemented by \hyperlink{classns3_1_1Object_a51e5994fa4b6eae32d719ad69f8fcbf5}{ns3\+::\+Object\+::\+Get\+Instance\+Type\+Id} but some classes which derive from \hyperlink{classns3_1_1ObjectBase}{ns3\+::\+Object\+Base} directly have to implement it themselves.
+
+\begin{DoxyReturn}{Returns}
+The \hyperlink{classns3_1_1TypeId}{Type\+Id} associated to the most-\/derived type of this instance. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1Object_a51e5994fa4b6eae32d719ad69f8fcbf5}{ns3\+::\+Object}.
+
+
+
+Reimplemented in \hyperlink{classns3_1_1RttMeanDeviation_a241d420c7ad132a39bd7901de8c63ade}{ns3\+::\+Rtt\+Mean\+Deviation}.
+
+
+\begin{DoxyCode}
+104 \{
+105   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1RttEstimator_ad07777f199907e2a96d2cd5cb8539cbc}{GetTypeId} ();
+106 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!Get\+N\+Samples@{Get\+N\+Samples}}
+\index{Get\+N\+Samples@{Get\+N\+Samples}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{Get\+N\+Samples(void) const }{GetNSamples(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Rtt\+Estimator\+::\+Get\+N\+Samples (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1RttEstimator_a56d664ff2d402087e6eaccada7eee6af}{}\label{classns3_1_1RttEstimator_a56d664ff2d402087e6eaccada7eee6af}
+
+
+gets the number of samples used in the estimates 
+
+\begin{DoxyReturn}{Returns}
+the number of samples used in the estimates 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+119 \{
+120   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1RttEstimator_a6a70cc48220dae4db259cb5cfee86cf5}{m\_nSamples};
+121 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Rtt\+Estimator\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1RttEstimator_ad07777f199907e2a96d2cd5cb8539cbc}{}\label{classns3_1_1RttEstimator_ad07777f199907e2a96d2cd5cb8539cbc}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+46 \{
+47   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::RttEstimator"})
+48     .SetParent<\hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object}> ()
+49     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+50     .AddAttribute (\textcolor{stringliteral}{"InitialEstimation"}, 
+51                    \textcolor{stringliteral}{"Initial RTT estimate"},
+52                    TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0)),
+53                    MakeTimeAccessor (&\hyperlink{classns3_1_1RttEstimator_a2885f370c9d2ca8ec352de341c065497}{RttEstimator::m\_initialEstimatedRtt}
+      ),
+54                    \hyperlink{group__time_ga7032965bd4afa578691d88c09e4481c1}{MakeTimeChecker} ())
+55   ;
+56   \textcolor{keywordflow}{return} tid;
+57 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!Get\+Variation@{Get\+Variation}}
+\index{Get\+Variation@{Get\+Variation}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{Get\+Variation(void) const }{GetVariation(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Rtt\+Estimator\+::\+Get\+Variation (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1RttEstimator_a48b42289cba668b30d69bfe384d37d25}{}\label{classns3_1_1RttEstimator_a48b42289cba668b30d69bfe384d37d25}
+
+
+gets the R\+TT estimate variation. 
+
+Note that this is not a formal statistical variance; it has the the same units as the estimate. Mean deviation or standard deviation are example quantities that could be provided here.
+
+\begin{DoxyReturn}{Returns}
+The R\+TT estimate variation. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+67 \{
+68   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}{m\_estimatedVariation};
+69 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!Measurement@{Measurement}}
+\index{Measurement@{Measurement}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{Measurement(\+Time t)=0}{Measurement(Time t)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Rtt\+Estimator\+::\+Measurement (
+\begin{DoxyParamCaption}
+\item[{{\bf Time}}]{t}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1RttEstimator_ae880d548218990b21b4270424621a784}{}\label{classns3_1_1RttEstimator_ae880d548218990b21b4270424621a784}
+
+
+Add a new measurement to the estimator. Pure virtual function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & the new R\+TT measure. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classns3_1_1RttMeanDeviation_a3e727dacebe30903b9c7ea084564c4e8}{ns3\+::\+Rtt\+Mean\+Deviation}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!Reset@{Reset}}
+\index{Reset@{Reset}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{Reset()}{Reset()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Rtt\+Estimator\+::\+Reset (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1RttEstimator_a53237f5f20e3515f284cfc68b02cf45d}{}\label{classns3_1_1RttEstimator_a53237f5f20e3515f284cfc68b02cf45d}
+
+
+Resets the estimation to its initial state. 
+
+
+
+Reimplemented in \hyperlink{classns3_1_1RttMeanDeviation_a5a215a2ed1380c064cb38dbd09c88677}{ns3\+::\+Rtt\+Mean\+Deviation}.
+
+
+\begin{DoxyCode}
+109 \{ 
+110   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+111   \textcolor{comment}{// Reset to initial state}
+112   \hyperlink{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{m\_estimatedRtt} = \hyperlink{classns3_1_1RttEstimator_a2885f370c9d2ca8ec352de341c065497}{m\_initialEstimatedRtt};
+113   \hyperlink{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}{m\_estimatedVariation} = \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} (0);
+114   \hyperlink{classns3_1_1RttEstimator_a6a70cc48220dae4db259cb5cfee86cf5}{m\_nSamples} = 0;
+115 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!m\+\_\+estimated\+Rtt@{m\+\_\+estimated\+Rtt}}
+\index{m\+\_\+estimated\+Rtt@{m\+\_\+estimated\+Rtt}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{m\+\_\+estimated\+Rtt}{m_estimatedRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Rtt\+Estimator\+::m\+\_\+estimated\+Rtt\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{}\label{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}
+
+
+Current estimate. 
+
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!m\+\_\+estimated\+Variation@{m\+\_\+estimated\+Variation}}
+\index{m\+\_\+estimated\+Variation@{m\+\_\+estimated\+Variation}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{m\+\_\+estimated\+Variation}{m_estimatedVariation}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Rtt\+Estimator\+::m\+\_\+estimated\+Variation\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}{}\label{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}
+
+
+Current estimate variation. 
+
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!m\+\_\+initial\+Estimated\+Rtt@{m\+\_\+initial\+Estimated\+Rtt}}
+\index{m\+\_\+initial\+Estimated\+Rtt@{m\+\_\+initial\+Estimated\+Rtt}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{m\+\_\+initial\+Estimated\+Rtt}{m_initialEstimatedRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Rtt\+Estimator\+::m\+\_\+initial\+Estimated\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RttEstimator_a2885f370c9d2ca8ec352de341c065497}{}\label{classns3_1_1RttEstimator_a2885f370c9d2ca8ec352de341c065497}
+
+
+Initial R\+TT estimation. 
+
+\index{ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}!m\+\_\+n\+Samples@{m\+\_\+n\+Samples}}
+\index{m\+\_\+n\+Samples@{m\+\_\+n\+Samples}!ns3\+::\+Rtt\+Estimator@{ns3\+::\+Rtt\+Estimator}}
+\subsubsection[{\texorpdfstring{m\+\_\+n\+Samples}{m_nSamples}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Rtt\+Estimator\+::m\+\_\+n\+Samples\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classns3_1_1RttEstimator_a6a70cc48220dae4db259cb5cfee86cf5}{}\label{classns3_1_1RttEstimator_a6a70cc48220dae4db259cb5cfee86cf5}
+
+
+Number of samples. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{rtt-estimator_8h}{rtt-\/estimator.\+h}\item 
+internet/model/\hyperlink{rtt-estimator_8cc}{rtt-\/estimator.\+cc}\end{DoxyCompactItemize}

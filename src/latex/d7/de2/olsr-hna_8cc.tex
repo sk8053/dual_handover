@@ -1,0 +1,296 @@
+\hypertarget{olsr-hna_8cc}{}\section{olsr/examples/olsr-\/hna.cc File Reference}
+\label{olsr-hna_8cc}\index{olsr/examples/olsr-\/hna.\+cc@{olsr/examples/olsr-\/hna.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wifi-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/olsr-\/routing-\/protocol.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/olsr-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+Include dependency graph for olsr-\/hna.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{olsr-hna_8cc_a903d75511f2ecbacf489f86e8322b43f}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Olsr\+Hna\char`\"{})
+\item 
+void \hyperlink{olsr-hna_8cc_a80dc0d980be124d8d5c4ee0b7943bfae}{Receive\+Packet} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\item 
+static void \hyperlink{olsr-hna_8cc_a9215c0692f5b30471001df4ee488ac6f}{Generate\+Traffic} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket, uint32\+\_\+t pkt\+Size, uint32\+\_\+t pkt\+Count, \hyperlink{classns3_1_1Time}{Time} pkt\+Interval)
+\item 
+int \hyperlink{olsr-hna_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{olsr-\/hna.\+cc@{olsr-\/hna.\+cc}!Generate\+Traffic@{Generate\+Traffic}}
+\index{Generate\+Traffic@{Generate\+Traffic}!olsr-\/hna.\+cc@{olsr-\/hna.\+cc}}
+\subsubsection[{\texorpdfstring{Generate\+Traffic(\+Ptr$<$ Socket $>$ socket, uint32\+\_\+t pkt\+Size, uint32\+\_\+t pkt\+Count, Time pkt\+Interval)}{GenerateTraffic(Ptr< Socket > socket, uint32_t pktSize, uint32_t pktCount, Time pktInterval)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Generate\+Traffic (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket, }
+\item[{uint32\+\_\+t}]{pkt\+Size, }
+\item[{uint32\+\_\+t}]{pkt\+Count, }
+\item[{{\bf Time}}]{pkt\+Interval}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{olsr-hna_8cc_a9215c0692f5b30471001df4ee488ac6f}{}\label{olsr-hna_8cc_a9215c0692f5b30471001df4ee488ac6f}
+
+\begin{DoxyCode}
+79 \{
+80   \textcolor{keywordflow}{if} (pktCount > 0)
+81     \{
+82       socket->\hyperlink{classns3_1_1Socket_a036901c8f485fe5b6eab93b7f2ec289d}{Send} (Create<Packet> (pktSize));
+83       Simulator::Schedule (pktInterval, &\hyperlink{olsr-hna_8cc_a9215c0692f5b30471001df4ee488ac6f}{GenerateTraffic},
+84                            socket, pktSize,pktCount - 1, pktInterval);
+85     \}
+86   \textcolor{keywordflow}{else}
+87     \{
+88       socket->\hyperlink{classns3_1_1Socket_abdac6e2498c5aa2963ef361d4200ddf3}{Close} ();
+89     \}
+90 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{olsr-\/hna.\+cc@{olsr-\/hna.\+cc}!main@{main}}
+\index{main@{main}!olsr-\/hna.\+cc@{olsr-\/hna.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{olsr-hna_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{olsr-hna_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+94 \{
+95   std::string phyMode (\textcolor{stringliteral}{"DsssRate1Mbps"});
+96   \textcolor{keywordtype}{double} rss = -80;  \textcolor{comment}{// -dBm}
+97   uint32\_t packetSize = 1000; \textcolor{comment}{// bytes}
+98   uint32\_t numPackets = 1;
+99   \textcolor{keywordtype}{double} interval = 1.0; \textcolor{comment}{// seconds}
+100   \textcolor{keywordtype}{bool} \hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose} = \textcolor{keyword}{false};
+101   \textcolor{keywordtype}{bool} assocMethod1 = \textcolor{keyword}{false};
+102   \textcolor{keywordtype}{bool} assocMethod2 = \textcolor{keyword}{false};
+103 
+104   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+105 
+106   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"phyMode"}, \textcolor{stringliteral}{"Wifi Phy mode"}, phyMode);
+107   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"rss"}, \textcolor{stringliteral}{"received signal strength"}, rss);
+108   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"packetSize"}, \textcolor{stringliteral}{"size of application packet sent"}, packetSize);
+109   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"numPackets"}, \textcolor{stringliteral}{"number of packets generated"}, numPackets);
+110   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"interval"}, \textcolor{stringliteral}{"interval (seconds) between packets"}, interval);
+111   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"verbose"}, \textcolor{stringliteral}{"turn on all WifiNetDevice log components"}, verbose);
+112   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"assocMethod1"}, \textcolor{stringliteral}{"Use SetRoutingTableAssociation () method"}, assocMethod1);
+113   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"assocMethod2"}, \textcolor{stringliteral}{"Use AddHostNetworkAssociation () method"}, assocMethod2);
+114 
+115   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+116   \textcolor{comment}{// Convert to time object}
+117   \hyperlink{classns3_1_1Time}{Time} interPacketInterval = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (interval);
+118 
+119   \textcolor{comment}{// disable fragmentation for frames below 2200 bytes}
+120   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::WifiRemoteStationManager::FragmentationThreshold"}, 
+      StringValue (\textcolor{stringliteral}{"2200"}));
+121   \textcolor{comment}{// turn off RTS/CTS for frames below 2200 bytes}
+122   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::WifiRemoteStationManager::RtsCtsThreshold"}, StringValue (\textcolor{stringliteral}{"
+      2200"}));
+123   \textcolor{comment}{// Fix non-unicast data rate to be the same as that of unicast}
+124   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::WifiRemoteStationManager::NonUnicastMode"},
+125                       StringValue (phyMode));
+126 
+127   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} olsrNodes;
+128   olsrNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+129 
+130   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} csmaNodes;
+131   csmaNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+132 
+133   \textcolor{comment}{// The below set of helpers will help us to put together the wifi NICs we want}
+134   \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+135   \textcolor{keywordflow}{if} (verbose)
+136     \{
+137       wifi.\hyperlink{classns3_1_1WifiHelper_a9dcf143d52642e94606a9e0f228da2d2}{EnableLogComponents} ();  \textcolor{comment}{// Turn on all Wifi logging}
+138     \}
+139   wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a77e1cc9f77a0bce8e2bc82cbef437b5a}{WIFI\_PHY\_STANDARD\_80211b});
+140 
+141   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} wifiPhy =  YansWifiPhyHelper::Default ();
+142   \textcolor{comment}{// This is one parameter that matters when using FixedRssLossModel}
+143   \textcolor{comment}{// set it to zero; otherwise, gain will be added}
+144   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_a2527d6d7b29f717fd7436166c5f05f1a}{Set} (\textcolor{stringliteral}{"RxGain"}, DoubleValue (0) );
+145   \textcolor{comment}{// ns-3 supports RadioTap and Prism tracing extensions for 802.11b}
+146   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_ae4b90e90f6e78a19c1b7fdf08b270218}{SetPcapDataLinkType} (YansWifiPhyHelper::DLT\_IEEE802\_11\_RADIO);
+147 
+148   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} wifiChannel;
+149   wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a6b452ba53ccaee6ca000cc72ed9ea0fa}{SetPropagationDelay} (\textcolor{stringliteral}{"ns3::ConstantSpeedPropagationDelayModel"});
+150   \textcolor{comment}{// The below FixedRssLossModel will cause the rss to be fixed regardless}
+151   \textcolor{comment}{// of the distance between the two stations, and the transmit power}
+152   wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a71c64d54e148b43698c65736e1c77156}{AddPropagationLoss} (\textcolor{stringliteral}{"ns3::FixedRssLossModel"},\textcolor{stringliteral}{"Rss"},DoubleValue (rss));
+153   wifiPhy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ());
+154 
+155   \textcolor{comment}{// Add a mac and disable rate control}
+156   \hyperlink{classns3_1_1WifiMacHelper}{WifiMacHelper} wifiMac;
+157   wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::ConstantRateWifiManager"},
+158                                 \textcolor{stringliteral}{"DataMode"},StringValue (phyMode),
+159                                 \textcolor{stringliteral}{"ControlMode"},StringValue (phyMode));
+160   \textcolor{comment}{// Set it to adhoc mode}
+161   wifiMac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::AdhocWifiMac"});
+162   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (wifiPhy, wifiMac, olsrNodes);
+163 
+164   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+165   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (
+      \hyperlink{classns3_1_1DataRate}{DataRate} (5000000)));
+166   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+167   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} csmaDevices = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (
+      \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (csmaNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), olsrNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1)));
+168 
+169   \textcolor{comment}{// Note that with FixedRssLossModel, the positions below are not}
+170   \textcolor{comment}{// used for received signal strength.}
+171   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+172   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} positionAlloc = CreateObject<ListPositionAllocator> 
+      ();
+173   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));
+174   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (5.0, 0.0, 0.0));
+175   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+176   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+177   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (olsrNodes);
+178 
+179   \hyperlink{classns3_1_1OlsrHelper}{OlsrHelper} \hyperlink{namespaceolsr}{olsr};
+180 
+181   \textcolor{comment}{// Specify Node B's csma device as a non-OLSR device.}
+182   olsr.\hyperlink{classns3_1_1OlsrHelper_a22808d14d002eb691aef05b4d20e997b}{ExcludeInterface} (olsrNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), 2);
+183 
+184   \hyperlink{classns3_1_1Ipv4StaticRoutingHelper}{Ipv4StaticRoutingHelper} staticRouting;
+185 
+186   \hyperlink{classns3_1_1Ipv4ListRoutingHelper}{Ipv4ListRoutingHelper} \hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{list};
+187   list.\hyperlink{classns3_1_1Ipv4ListRoutingHelper_a697287d45297478735082f691ad06fa3}{Add} (staticRouting, 0);
+188   list.\hyperlink{classns3_1_1Ipv4ListRoutingHelper_a697287d45297478735082f691ad06fa3}{Add} (olsr, 10);
+189 
+190   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet\_olsr;
+191   internet\_olsr.\hyperlink{classns3_1_1InternetStackHelper_a3e382c02df022dec79952a7eca8cd5ba}{SetRoutingHelper} (list); \textcolor{comment}{// has effect on the next Install ()}
+192   internet\_olsr.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (olsrNodes);
+193 
+194   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet\_csma;
+195   internet\_csma.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (csmaNodes);
+196 
+197   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+198   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+199   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+200   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devices);
+201 
+202   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"172.16.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+203   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (csmaDevices);
+204 
+205   \hyperlink{classns3_1_1TypeId}{TypeId} tid = TypeId::LookupByName (\textcolor{stringliteral}{"ns3::UdpSocketFactory"});
+206   \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} recvSink = Socket::CreateSocket (csmaNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), tid);
+207   \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} local = \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 80
+      );
+208   recvSink->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} (local);
+209   recvSink->\hyperlink{classns3_1_1Socket_a243f7835ef1a85f9270fd3577e3a40da}{SetRecvCallback} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{olsr-hna_8cc_a80dc0d980be124d8d5c4ee0b7943bfae}{ReceivePacket}));
+210 
+211   \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} source = Socket::CreateSocket (olsrNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), tid);
+212   \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} remote = \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"172.16.1.1"}), 80);
+213   source->\hyperlink{classns3_1_1Socket_a97f08aaf37b8fd7d4b5cad4dfdd4022a}{Connect} (remote);
+214 
+215   \textcolor{comment}{// Obtain olsr::RoutingProtocol instance of gateway node}
+216   \textcolor{comment}{// (namely, node B) and add the required association}
+217   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4>} stack = olsrNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1)->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ();
+218   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4RoutingProtocol>} rp\_Gw = (stack->
+      \hyperlink{classns3_1_1Ipv4_a62b179607cbea43b510447c422186da1}{GetRoutingProtocol} ());
+219   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4ListRouting>} lrp\_Gw = DynamicCast<Ipv4ListRouting> (rp\_Gw);
+220 
+221   \hyperlink{classns3_1_1Ptr}{Ptr<olsr::RoutingProtocol>} olsrrp\_Gw;
+222 
+223   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < lrp\_Gw->\hyperlink{classns3_1_1Ipv4ListRouting_ace90506497803859bebb5cbfa04b56ce}{GetNRoutingProtocols} ();  
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+224     \{
+225       int16\_t priority;
+226       \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4RoutingProtocol>} temp = lrp\_Gw->
+      \hyperlink{classns3_1_1Ipv4ListRouting_a1c47488f8ed4775ff5c33add867652b9}{GetRoutingProtocol} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}, priority);
+227       \textcolor{keywordflow}{if} (DynamicCast<olsr::RoutingProtocol> (temp))
+228         \{
+229           olsrrp\_Gw = DynamicCast<olsr::RoutingProtocol> (temp);
+230         \}
+231     \}
+232 
+233   \textcolor{keywordflow}{if} (assocMethod1)
+234     \{
+235       \textcolor{comment}{// Create a special Ipv4StaticRouting instance for RoutingTableAssociation}
+236       \textcolor{comment}{// Even the Ipv4StaticRouting instance added to list may be used}
+237       \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4StaticRouting>} hnaEntries = Create<Ipv4StaticRouting> ();
+238 
+239       \textcolor{comment}{// Add the required routes into the Ipv4StaticRouting Protocol instance}
+240       \textcolor{comment}{// and have the node generate HNA messages for all these routes}
+241       \textcolor{comment}{// which are associated with non-OLSR interfaces specified above.}
+242       hnaEntries->\hyperlink{classns3_1_1Ipv4StaticRouting_a8bf5eaa7ba49fe33c78c70d5560b6c39}{AddNetworkRouteTo} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"172.16.1.0"}), 
+      \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"}), uint32\_t (2), uint32\_t (1));
+243       olsrrp\_Gw->SetRoutingTableAssociation (hnaEntries);
+244     \}
+245 
+246   \textcolor{keywordflow}{if} (assocMethod2)
+247     \{
+248       \textcolor{comment}{// Specify the required associations directly.}
+249       olsrrp\_Gw->AddHostNetworkAssociation (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"172.16.1.0"}), 
+      \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.255.255.0"}));
+250     \}
+251 
+252   \textcolor{comment}{// Tracing}
+253   wifiPhy.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"olsr-hna"}, devices);
+254   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"olsr-hna"}, csmaDevices, \textcolor{keyword}{false});
+255 
+256   Simulator::ScheduleWithContext (source->\hyperlink{classns3_1_1Socket_aba642ad4301c1df47befc0aa9afa2e48}{GetNode} ()->\hyperlink{classns3_1_1Node_aaf49b64a843565ce3812326313b370ac}{GetId} (),
+257                                   \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (15.0), &\hyperlink{olsr-hna_8cc_a9215c0692f5b30471001df4ee488ac6f}{GenerateTraffic},
+258                                   source, packetSize, numPackets, interPacketInterval);
+259 
+260   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (20.0));
+261   Simulator::Run ();
+262   Simulator::Destroy ();
+263 
+264   \textcolor{keywordflow}{return} 0;
+265 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{olsr-\/hna.\+cc@{olsr-\/hna.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!olsr-\/hna.\+cc@{olsr-\/hna.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Olsr\+Hna"")}{NS_LOG_COMPONENT_DEFINE("OlsrHna")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Olsr\+Hna\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{olsr-hna_8cc_a903d75511f2ecbacf489f86e8322b43f}{}\label{olsr-hna_8cc_a903d75511f2ecbacf489f86e8322b43f}
+\index{olsr-\/hna.\+cc@{olsr-\/hna.\+cc}!Receive\+Packet@{Receive\+Packet}}
+\index{Receive\+Packet@{Receive\+Packet}!olsr-\/hna.\+cc@{olsr-\/hna.\+cc}}
+\subsubsection[{\texorpdfstring{Receive\+Packet(\+Ptr$<$ Socket $>$ socket)}{ReceivePacket(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Receive\+Packet (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)}\hypertarget{olsr-hna_8cc_a80dc0d980be124d8d5c4ee0b7943bfae}{}\label{olsr-hna_8cc_a80dc0d980be124d8d5c4ee0b7943bfae}
+
+\begin{DoxyCode}
+73 \{
+74   \hyperlink{log-macros-disabled_8h_a0b36e5e182b37194f85ef1c5e979fb2e}{NS\_LOG\_UNCOND} (\textcolor{stringliteral}{"Received one packet!"});
+75 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+

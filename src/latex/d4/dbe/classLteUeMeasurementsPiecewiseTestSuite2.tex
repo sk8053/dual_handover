@@ -1,0 +1,433 @@
+\hypertarget{classLteUeMeasurementsPiecewiseTestSuite2}{}\section{Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2 Class Reference}
+\label{classLteUeMeasurementsPiecewiseTestSuite2}\index{Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2@{Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2}}
+
+
+Test suite for generating calls to UE measurements test case ns3\+::\+Lte\+Ue\+Measurements\+Piecewise\+Test\+Case2.  
+
+
+
+
+{\ttfamily \#include $<$lte-\/test-\/ue-\/measurements.\+h$>$}
+
+
+
+Inheritance diagram for Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2\+:
+% FIG 0
+
+
+Collaboration diagram for Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLteUeMeasurementsPiecewiseTestSuite2_a21bc4c093f462de42c1856cd5385280a}{Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Test suite for generating calls to UE measurements test case ns3\+::\+Lte\+Ue\+Measurements\+Piecewise\+Test\+Case2. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2@{Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2}!Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2@{Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2}}
+\index{Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2@{Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2}!Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2@{Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2}}
+\subsubsection[{\texorpdfstring{Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2()}{LteUeMeasurementsPiecewiseTestSuite2()}}]{\setlength{\rightskip}{0pt plus 5cm}Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2\+::\+Lte\+Ue\+Measurements\+Piecewise\+Test\+Suite2 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLteUeMeasurementsPiecewiseTestSuite2_a21bc4c093f462de42c1856cd5385280a}{}\label{classLteUeMeasurementsPiecewiseTestSuite2_a21bc4c093f462de42c1856cd5385280a}
+
+\begin{DoxyCode}
+751   : \hyperlink{classns3_1_1TestSuite_a904b0c40583b744d30908aeb94636d1a}{TestSuite} (\textcolor{stringliteral}{"lte-ue-measurements-piecewise-2"}, \hyperlink{classns3_1_1TestSuite_a1ebfcab34ec8161e085e8e3a1855eae0a90c5529a26ab3a5ffcc6e57040dbd82e}{SYSTEM})
+752 \{
+753   std::vector<Time> expectedTime;
+754   std::vector<uint8\_t> expectedRsrp;
+755 
+756   \textcolor{comment}{/*}
+757 \textcolor{comment}{   * Higher level of fullness/duration are given to Event A1 and A2 because they}
+758 \textcolor{comment}{   * are supposed to be more intensively tested in Piecewise configuration #1.}
+759 \textcolor{comment}{   */}
+760 
+761   \textcolor{comment}{// === Event A1 (serving cell becomes better than threshold) ===}
+762 
+763   \textcolor{comment}{// With very low threshold}
+764   \hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra}{LteRrcSap::ReportConfigEutra} config;
+765   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a502800e0549f5ed2fe9f0cd7b8ee3415}{triggerType} = LteRrcSap::ReportConfigEutra::EVENT;
+766   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fbe931cc9584614d20f4affbce70d8a}{eventId} = LteRrcSap::ReportConfigEutra::EVENT\_A1;
+767   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_a4c7eed6102d1cd143c063ac845095f75}{choice} = LteRrcSap::ThresholdEutra::THRESHOLD\_RSRP;
+768   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 0;
+769   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a735700933e50f1b4680f856d37c777f9}{triggerQuantity} = \hyperlink{lte__ue__measurements_8m_a4365fe76972c942aa409d50c57f9fc3e}{LteRrcSap::ReportConfigEutra::RSRP}
+      ;
+770   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8688bf528a9f1a027fe8570965adacdb}{reportInterval} = LteRrcSap::ReportConfigEutra::MS240;
+771   expectedTime.clear ();
+772   expectedTime << 200 << 440 << 680 << 920 << 1160 << 1400 << 1640 << 1880 << 2120;
+773   expectedRsrp.clear ();
+774   expectedRsrp << 73 << 63 << 72 << 52 << 72 << 56 << 52 << 56 << 59;
+775   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A1 with very low threshold"},
+776                                                         config, expectedTime, expectedRsrp),
+777                TestCase::EXTENSIVE);
+778 
+779   \textcolor{comment}{// With normal threshold}
+780   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 58;
+781   expectedTime.clear ();
+782   expectedTime << 200 << 440 << 680 << 1000 << 1240 << 2000;
+783   expectedRsrp.clear ();
+784   expectedRsrp << 73 << 63 << 72 << 72 << 59 << 59;
+785   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A1 with normal threshold"},
+786                                                         config, expectedTime, expectedRsrp),
+787                TestCase::TAKES\_FOREVER);
+788 
+789   \textcolor{comment}{// With hysteresis}
+790   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fb9169ea261ba20af6a0c18fcc04fa9}{hysteresis} = 6;
+791   expectedTime.clear ();
+792   expectedTime << 200 << 440 << 680 << 1000 << 1240 << 1480 << 2200;
+793   expectedRsrp.clear ();
+794   expectedRsrp << 73 << 63 << 72 << 72 << 59 << 56 << 72;
+795   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A1 with hysteresis"},
+796                                                         config, expectedTime, expectedRsrp),
+797                TestCase::EXTENSIVE);
+798 
+799   \textcolor{comment}{// With very high threshold}
+800   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 97;
+801   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fb9169ea261ba20af6a0c18fcc04fa9}{hysteresis} = 0;
+802   expectedTime.clear ();
+803   expectedRsrp.clear ();
+804   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A1 with very high threshold"},
+805                                                         config, expectedTime, expectedRsrp),
+806                TestCase::TAKES\_FOREVER);
+807 
+808   \textcolor{comment}{// === Event A2 (serving cell becomes worse than threshold) ===}
+809 
+810   \textcolor{comment}{// With very low threshold}
+811   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fbe931cc9584614d20f4affbce70d8a}{eventId} = LteRrcSap::ReportConfigEutra::EVENT\_A2;
+812   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 0;
+813   expectedTime.clear ();
+814   expectedRsrp.clear ();
+815   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A2 with very low threshold"},
+816                                                         config, expectedTime, expectedRsrp),
+817                TestCase::TAKES\_FOREVER);
+818 
+819   \textcolor{comment}{// With normal threshold}
+820   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 58;
+821   expectedTime.clear ();
+822   expectedTime << 800 << 1400 << 1640 << 1880;
+823   expectedRsrp.clear ();
+824   expectedRsrp << 52 << 56 << 52 << 56;
+825   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A2 with normal threshold"},
+826                                                         config, expectedTime, expectedRsrp),
+827                TestCase::TAKES\_FOREVER);
+828 
+829   \textcolor{comment}{// With hysteresis}
+830   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fb9169ea261ba20af6a0c18fcc04fa9}{hysteresis} = 6;
+831   expectedTime.clear ();
+832   expectedTime << 800 << 1600 << 1840 << 2080;
+833   expectedRsrp.clear ();
+834   expectedRsrp << 52 << 52 << 56 << 59;
+835   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A2 with hysteresis"},
+836                                                         config, expectedTime, expectedRsrp),
+837                TestCase::EXTENSIVE);
+838 
+839   \textcolor{comment}{// With very high threshold}
+840   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 97;
+841   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fb9169ea261ba20af6a0c18fcc04fa9}{hysteresis} = 0;
+842   expectedTime.clear ();
+843   expectedTime << 200 << 440 << 680 << 920 << 1160 << 1400 << 1640 << 1880 << 2120;
+844   expectedRsrp.clear ();
+845   expectedRsrp << 73 << 63 << 72 << 52 << 72 << 56 << 52 << 56 << 59;
+846   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A2 with very high threshold"},
+847                                                         config, expectedTime, expectedRsrp),
+848                TestCase::TAKES\_FOREVER);
+849 
+850   \textcolor{comment}{// === Event A3 (neighbour becomes offset better than PCell) ===}
+851 
+852   \textcolor{comment}{// With positive offset}
+853   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fbe931cc9584614d20f4affbce70d8a}{eventId} = LteRrcSap::ReportConfigEutra::EVENT\_A3;
+854   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 0;
+855   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_ae3226d3c9ec9988fefee04790ac6c9f6}{a3Offset} = 7;
+856   expectedTime.clear ();
+857   expectedTime << 800 << 1600;
+858   expectedRsrp.clear ();
+859   expectedRsrp << 52 << 52;
+860   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A3 with positive offset"},
+861                                                         config, expectedTime, expectedRsrp),
+862                TestCase::QUICK);
+863 
+864   \textcolor{comment}{// With zero offset}
+865   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_ae3226d3c9ec9988fefee04790ac6c9f6}{a3Offset} = 0;
+866   expectedTime.clear ();
+867   expectedTime << 800 << 1400 << 1640 << 1880;
+868   expectedRsrp.clear ();
+869   expectedRsrp << 52 << 56 << 52 << 56;
+870   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A3 with zero offset"},
+871                                                         config, expectedTime, expectedRsrp),
+872                TestCase::EXTENSIVE);
+873 
+874   \textcolor{comment}{// With short time-to-trigger}
+875   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_aee64b76b166b1beda5bbe1760363ed24}{timeToTrigger} = 160;
+876   expectedTime.clear ();
+877   expectedTime << 960 << 1560 << 1800 << 2040;
+878   expectedRsrp.clear ();
+879   expectedRsrp << 52 << 56 << 56 << 59;
+880   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A3 with short time-to-trigger"},
+881                                                         config, expectedTime, expectedRsrp),
+882                TestCase::EXTENSIVE);
+883 
+884   \textcolor{comment}{// With super time-to-trigger}
+885   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_aee64b76b166b1beda5bbe1760363ed24}{timeToTrigger} = 320;
+886   expectedTime.clear ();
+887   expectedTime << 1720 << 1960 << 2200;
+888   expectedRsrp.clear ();
+889   expectedRsrp << 52 << 56 << 72;
+890   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A3 with super time-to-trigger"},
+891                                                         config, expectedTime, expectedRsrp),
+892                TestCase::QUICK);
+893 
+894   \textcolor{comment}{// With hysteresis and reportOnLeave}
+895   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fb9169ea261ba20af6a0c18fcc04fa9}{hysteresis} = 6;
+896   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1463979cc3e1e6165cfd1ed8d5bc8547}{reportOnLeave} = \textcolor{keyword}{true};
+897   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_aee64b76b166b1beda5bbe1760363ed24}{timeToTrigger} = 0;
+898   expectedTime.clear ();
+899   expectedTime << 800 << 1000 << 1600 << 1840 << 2080 << 2200;
+900   expectedRsrp.clear ();
+901   expectedRsrp << 52 << 72 << 52 << 56 << 59 << 72;
+902   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A3 with hysteresis"},
+903                                                         config, expectedTime, expectedRsrp),
+904                TestCase::QUICK);
+905 
+906   \textcolor{comment}{// With negative offset}
+907   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_ae3226d3c9ec9988fefee04790ac6c9f6}{a3Offset} = -7;
+908   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fb9169ea261ba20af6a0c18fcc04fa9}{hysteresis} = 0;
+909   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1463979cc3e1e6165cfd1ed8d5bc8547}{reportOnLeave} = \textcolor{keyword}{false};
+910   expectedTime.clear ();
+911   expectedTime << 400 << 800 << 1200 << 1440 << 1680 << 1920 << 2160;
+912   expectedRsrp.clear ();
+913   expectedRsrp << 63 << 52 << 59 << 56 << 52 << 56 << 59;
+914   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A3 with negative offset"},
+915                                                         config, expectedTime, expectedRsrp),
+916                TestCase::EXTENSIVE);
+917 
+918   \textcolor{comment}{// === Event A4 (neighbour becomes better than threshold) ===}
+919 
+920   \textcolor{comment}{// With very low threshold}
+921   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fbe931cc9584614d20f4affbce70d8a}{eventId} = LteRrcSap::ReportConfigEutra::EVENT\_A4;
+922   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 0;
+923   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_ae3226d3c9ec9988fefee04790ac6c9f6}{a3Offset} = 0;
+924   expectedTime.clear ();
+925   expectedTime << 200 << 440 << 680 << 920 << 1160 << 1400 << 1640 << 1880 << 2120;
+926   expectedRsrp.clear ();
+927   expectedRsrp << 73 << 63 << 72 << 52 << 72 << 56 << 52 << 56 << 59;
+928   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A4 with very low threshold"},
+929                                                         config, expectedTime, expectedRsrp),
+930                TestCase::QUICK);
+931 
+932   \textcolor{comment}{// With normal threshold}
+933   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 58;
+934   expectedTime.clear ();
+935   expectedTime << 400 << 800 << 1400 << 1640 << 1880;
+936   expectedRsrp.clear ();
+937   expectedRsrp << 63 << 52 << 56 << 52 << 56;
+938   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A4 with normal threshold"},
+939                                                         config, expectedTime, expectedRsrp),
+940                TestCase::EXTENSIVE);
+941 
+942   \textcolor{comment}{// With short time-to-trigger}
+943   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_aee64b76b166b1beda5bbe1760363ed24}{timeToTrigger} = 160;
+944   expectedTime.clear ();
+945   expectedTime << 560 << 960 << 1560 << 1800 << 2040;
+946   expectedRsrp.clear ();
+947   expectedRsrp << 63 << 52 << 56 << 56 << 59;
+948   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A4 with short time-to-trigger"},
+949                                                         config, expectedTime, expectedRsrp),
+950                TestCase::QUICK);
+951 
+952   \textcolor{comment}{// With super time-to-trigger}
+953   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_aee64b76b166b1beda5bbe1760363ed24}{timeToTrigger} = 320;
+954   expectedTime.clear ();
+955   expectedTime << 1720 << 1960 << 2200;
+956   expectedRsrp.clear ();
+957   expectedRsrp << 52 << 56 << 72;
+958   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A4 with super time-to-trigger"},
+959                                                         config, expectedTime, expectedRsrp),
+960                TestCase::TAKES\_FOREVER);
+961 
+962   \textcolor{comment}{// With hysteresis}
+963   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fb9169ea261ba20af6a0c18fcc04fa9}{hysteresis} = 6;
+964   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_aee64b76b166b1beda5bbe1760363ed24}{timeToTrigger} = 0;
+965   expectedTime.clear ();
+966   expectedTime << 400 << 800 << 1600 << 1840 << 2080;
+967   expectedRsrp.clear ();
+968   expectedRsrp << 63 << 52 << 52 << 56 << 59;
+969   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A4 with hysteresis"},
+970                                                         config, expectedTime, expectedRsrp),
+971                TestCase::QUICK);
+972 
+973   \textcolor{comment}{// With very high threshold}
+974   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 97;
+975   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fb9169ea261ba20af6a0c18fcc04fa9}{hysteresis} = 0;
+976   expectedTime.clear ();
+977   expectedRsrp.clear ();
+978   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A4 with very high threshold"},
+979                                                         config, expectedTime, expectedRsrp),
+980                TestCase::TAKES\_FOREVER);
+981 
+982   \textcolor{comment}{// === Event A5 (PCell becomes worse than absolute threshold1 AND neighbour becomes better than another
+       absolute threshold2) ===}
+983 
+984   \textcolor{comment}{// With low-low threshold}
+985   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fbe931cc9584614d20f4affbce70d8a}{eventId} = LteRrcSap::ReportConfigEutra::EVENT\_A5;
+986   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 0;
+987   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a4c76552279ea09626d15b48b341bfbd1}{threshold2}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 0;
+988   expectedTime.clear ();
+989   expectedRsrp.clear ();
+990   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A5 with low-low threshold"},
+991                                                         config, expectedTime, expectedRsrp),
+992                TestCase::EXTENSIVE);
+993 
+994   \textcolor{comment}{// With low-normal threshold}
+995   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a4c76552279ea09626d15b48b341bfbd1}{threshold2}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 58;
+996   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A5 with low-normal threshold"},
+997                                                         config, expectedTime, expectedRsrp),
+998                TestCase::TAKES\_FOREVER);
+999 
+1000   \textcolor{comment}{// With low-high threshold}
+1001   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a4c76552279ea09626d15b48b341bfbd1}{threshold2}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 97;
+1002   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A5 with low-high threshold"},
+1003                                                         config, expectedTime, expectedRsrp),
+1004                TestCase::TAKES\_FOREVER);
+1005 
+1006   \textcolor{comment}{// With normal-low threshold}
+1007   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 58;
+1008   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a4c76552279ea09626d15b48b341bfbd1}{threshold2}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 0;
+1009   expectedTime.clear ();
+1010   expectedTime << 800 << 1400 << 1640 << 1880;
+1011   expectedRsrp.clear ();
+1012   expectedRsrp << 52 << 56 << 52 << 56;
+1013   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A5 with normal-low threshold"},
+1014                                                         config, expectedTime, expectedRsrp),
+1015                TestCase::EXTENSIVE);
+1016 
+1017   \textcolor{comment}{// With normal-normal threshold}
+1018   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a4c76552279ea09626d15b48b341bfbd1}{threshold2}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 58;
+1019   expectedTime.clear ();
+1020   expectedTime << 800 << 1400 << 1640 << 1880;
+1021   expectedRsrp.clear ();
+1022   expectedRsrp << 52 << 56 << 52 << 56;
+1023   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A5 with normal-normal threshold"},
+1024                                                         config, expectedTime, expectedRsrp),
+1025                TestCase::EXTENSIVE);
+1026 
+1027   \textcolor{comment}{// With short time-to-trigger}
+1028   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_aee64b76b166b1beda5bbe1760363ed24}{timeToTrigger} = 160;
+1029   expectedTime.clear ();
+1030   expectedTime << 960 << 1560 << 1800 << 2040;
+1031   expectedRsrp.clear ();
+1032   expectedRsrp << 52 << 56 << 56 << 59;
+1033   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A5 with short time-to-trigger"},
+1034                                                         config, expectedTime, expectedRsrp),
+1035                TestCase::TAKES\_FOREVER);
+1036 
+1037   \textcolor{comment}{// With super time-to-trigger}
+1038   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_aee64b76b166b1beda5bbe1760363ed24}{timeToTrigger} = 320;
+1039   expectedTime.clear ();
+1040   expectedTime << 1720 << 1960 << 2200;
+1041   expectedRsrp.clear ();
+1042   expectedRsrp << 52 << 56 << 72;
+1043   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A5 with super time-to-trigger"},
+1044                                                         config, expectedTime, expectedRsrp),
+1045                TestCase::QUICK);
+1046 
+1047   \textcolor{comment}{// With hysteresis}
+1048   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fb9169ea261ba20af6a0c18fcc04fa9}{hysteresis} = 6;
+1049   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_aee64b76b166b1beda5bbe1760363ed24}{timeToTrigger} = 0;
+1050   expectedTime.clear ();
+1051   expectedTime << 800 << 1600 << 1840 << 2080;
+1052   expectedRsrp.clear ();
+1053   expectedRsrp << 52 << 52 << 56 << 59;
+1054   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A5 with hysteresis"},
+1055                                                         config, expectedTime, expectedRsrp),
+1056                TestCase::QUICK);
+1057 
+1058   \textcolor{comment}{// With normal-high threshold}
+1059   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a4c76552279ea09626d15b48b341bfbd1}{threshold2}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 97;
+1060   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a1fb9169ea261ba20af6a0c18fcc04fa9}{hysteresis} = 0;
+1061   expectedTime.clear ();
+1062   expectedRsrp.clear ();
+1063   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A5 with normal-high threshold"},
+1064                                                         config, expectedTime, expectedRsrp),
+1065                TestCase::TAKES\_FOREVER);
+1066 
+1067   \textcolor{comment}{// With high-low threshold}
+1068   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a8f36bc45a61054920e490be8bf33b4ca}{threshold1}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 97;
+1069   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a4c76552279ea09626d15b48b341bfbd1}{threshold2}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 0;
+1070   expectedTime.clear ();
+1071   expectedTime << 200 << 440 << 680 << 920 << 1160 << 1400 << 1640 << 1880 << 2120;
+1072   expectedRsrp.clear ();
+1073   expectedRsrp << 73 << 63 << 72 << 52 << 72 << 56 << 52 << 56 << 59;
+1074   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A5 with high-low threshold"},
+1075                                                         config, expectedTime, expectedRsrp),
+1076                TestCase::EXTENSIVE);
+1077 
+1078   \textcolor{comment}{// With high-normal threshold}
+1079   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a4c76552279ea09626d15b48b341bfbd1}{threshold2}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 58;
+1080   expectedTime.clear ();
+1081   expectedTime << 400 << 800 << 1400 << 1640 << 1880;
+1082   expectedRsrp.clear ();
+1083   expectedRsrp << 63 << 52 << 56 << 52 << 56;
+1084   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A5 with high-normal threshold"},
+1085                                                         config, expectedTime, expectedRsrp),
+1086                TestCase::TAKES\_FOREVER);
+1087 
+1088   \textcolor{comment}{// With high-high threshold}
+1089   config.\hyperlink{structns3_1_1LteRrcSap_1_1ReportConfigEutra_a4c76552279ea09626d15b48b341bfbd1}{threshold2}.\hyperlink{structns3_1_1LteRrcSap_1_1ThresholdEutra_abd4950e20a1a93727535e8364bf85b03}{range} = 97;
+1090   expectedTime.clear ();
+1091   expectedRsrp.clear ();
+1092   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteUeMeasurementsPiecewiseTestCase2}{LteUeMeasurementsPiecewiseTestCase2} (\textcolor{stringliteral}{"
+      Piecewise test case 2 - Event A5 with high-high threshold"},
+1093                                                         config, expectedTime, expectedRsrp),
+1094                TestCase::EXTENSIVE);
+1095 
+1096 \} \textcolor{comment}{// end of LteUeMeasurementsPiecewiseTestSuite2::LteUeMeasurementsPiecewiseTestSuite2}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lte/test/\hyperlink{lte-test-ue-measurements_8h}{lte-\/test-\/ue-\/measurements.\+h}\item 
+lte/test/\hyperlink{lte-test-ue-measurements_8cc}{lte-\/test-\/ue-\/measurements.\+cc}\end{DoxyCompactItemize}

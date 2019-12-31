@@ -1,0 +1,258 @@
+\hypertarget{classns3_1_1MeshL2RoutingProtocol}{}\section{ns3\+:\+:Mesh\+L2\+Routing\+Protocol Class Reference}
+\label{classns3_1_1MeshL2RoutingProtocol}\index{ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}}
+
+
+Interface for L2 mesh routing protocol and mesh point communication.  
+
+
+
+
+{\ttfamily \#include $<$mesh-\/l2-\/routing-\/protocol.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Mesh\+L2\+Routing\+Protocol\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Mesh\+L2\+Routing\+Protocol\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{classns3_1_1Callback}{Callback}$<$ void, bool, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Packet}{Packet} $>$, \hyperlink{classns3_1_1Mac48Address}{Mac48\+Address}, \hyperlink{classns3_1_1Mac48Address}{Mac48\+Address}, uint16\+\_\+t, uint32\+\_\+t $>$ \hyperlink{classns3_1_1MeshL2RoutingProtocol_a4c415efa22789b3a3bb5538b8fcf3e6a}{Route\+Reply\+Callback}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classns3_1_1MeshL2RoutingProtocol_ad438f0734c0146f48a14363672f51879}{$\sim$\+Mesh\+L2\+Routing\+Protocol} ()
+\begin{DoxyCompactList}\small\item\em virtual D-\/tor for subclasses \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classns3_1_1MeshL2RoutingProtocol_a978b19cfc40272f5c39ed5e1999f9c8c}{Request\+Route} (uint32\+\_\+t source\+Iface, const \hyperlink{classns3_1_1Mac48Address}{Mac48\+Address} source, const \hyperlink{classns3_1_1Mac48Address}{Mac48\+Address} destination, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ packet, uint16\+\_\+t protocol\+Type, \hyperlink{classns3_1_1MeshL2RoutingProtocol_a4c415efa22789b3a3bb5538b8fcf3e6a}{Route\+Reply\+Callback} route\+Reply)=0
+\item 
+virtual bool \hyperlink{classns3_1_1MeshL2RoutingProtocol_ae110ac0c9b8f81cb2a05940b385e7f08}{Remove\+Routing\+Stuff} (uint32\+\_\+t from\+Iface, const \hyperlink{classns3_1_1Mac48Address}{Mac48\+Address} source, const \hyperlink{classns3_1_1Mac48Address}{Mac48\+Address} destination, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Packet}{Packet} $>$ packet, uint16\+\_\+t \&protocol\+Type)=0
+\begin{DoxyCompactList}\small\item\em When packet is ready to go to upper layer, protocol must remove all its information\+: tags, header, etc. So, \hyperlink{classns3_1_1MeshPointDevice}{Mesh\+Point\+Device} must call this method when passing a packet to upper layer. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1MeshL2RoutingProtocol_a77a122b1cfbe10f5bf2b6c61fbd85b60}{Set\+Mesh\+Point} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MeshPointDevice}{Mesh\+Point\+Device} $>$ mp)
+\begin{DoxyCompactList}\small\item\em Set host mesh point, analog of Set\+Node (...) methods for upper layer protocols. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MeshPointDevice}{Mesh\+Point\+Device} $>$ \hyperlink{classns3_1_1MeshL2RoutingProtocol_a630575428f626e58f0c8ac3fae24007e}{Get\+Mesh\+Point} () const 
+\begin{DoxyCompactList}\small\item\em Each mesh protocol must be installed on the mesh point to work. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1MeshL2RoutingProtocol_aa859288b78b73dd02758ca3fcc49187d}{Get\+Type\+Id} ()
+\begin{DoxyCompactList}\small\item\em Never forget to support N\+S3 object model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MeshPointDevice}{Mesh\+Point\+Device} $>$ \hyperlink{classns3_1_1MeshL2RoutingProtocol_af4ebb2340b72dfc607ddf3c1ae65b54a}{m\+\_\+mp}
+\begin{DoxyCompactList}\small\item\em Host mesh point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Interface for L2 mesh routing protocol and mesh point communication. 
+
+Every mesh routing protocol must implement this interface. Each mesh point (\hyperlink{classns3_1_1MeshPointDevice}{Mesh\+Point\+Device}) is supposed to know single L2\+Routing\+Protocol to work with, see \hyperlink{classns3_1_1MeshPointDevice_a2f487dde5dd7b11b13ad8617c7172d16}{Mesh\+Point\+Device\+::\+Set\+Routing\+Protocol} ().
+
+This interface is similar to ipv4 routing protocol base class. 
+
+\subsection{Member Typedef Documentation}
+\index{ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}!Route\+Reply\+Callback@{Route\+Reply\+Callback}}
+\index{Route\+Reply\+Callback@{Route\+Reply\+Callback}!ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}}
+\subsubsection[{\texorpdfstring{Route\+Reply\+Callback}{RouteReplyCallback}}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Callback}$<$void, bool, {\bf Ptr}$<${\bf Packet}$>$, {\bf Mac48\+Address}, {\bf Mac48\+Address}, uint16\+\_\+t, uint32\+\_\+t $>$ {\bf ns3\+::\+Mesh\+L2\+Routing\+Protocol\+::\+Route\+Reply\+Callback}}\hypertarget{classns3_1_1MeshL2RoutingProtocol_a4c415efa22789b3a3bb5538b8fcf3e6a}{}\label{classns3_1_1MeshL2RoutingProtocol_a4c415efa22789b3a3bb5538b8fcf3e6a}
+\hyperlink{classns3_1_1Callback}{Callback} to be invoked when route discovery procedure is completed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em flag} & indicating whether a route was actually found and all needed information is added to the packet successfully\\
+\hline
+{\em packet} & for which the route was resolved. All routing information for M\+AC layer must be stored in proper tags (like in case of H\+W\+MP, when \hyperlink{classns3_1_1WifiMacHeader}{Wifi\+Mac\+Header} needs address of next hop), or must be added as a packet header (if M\+AC does not need any additional information). So, the packet is returned back to \hyperlink{classns3_1_1MeshPointDevice}{Mesh\+Point\+Device} looks like a pure packet with ethernet header (i.\+e data + src +dst + protocol). The only special information addressed to \hyperlink{classns3_1_1MeshPointDevice}{Mesh\+Point\+Device} is an outcoming interface ID.\\
+\hline
+{\em src} & source address of the packet\\
+\hline
+{\em dst} & destination address of the packet\\
+\hline
+{\em protocol} & ethernet \textquotesingle{}Protocol\textquotesingle{} field, needed to form a proper M\+A\+C-\/layer header\\
+\hline
+{\em uint32\+\_\+t} & outcoming interface to use or 0xffffffff if packet should be sent by A\+LL interfaces \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}!````~Mesh\+L2\+Routing\+Protocol@{$\sim$\+Mesh\+L2\+Routing\+Protocol}}
+\index{````~Mesh\+L2\+Routing\+Protocol@{$\sim$\+Mesh\+L2\+Routing\+Protocol}!ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}}
+\subsubsection[{\texorpdfstring{$\sim$\+Mesh\+L2\+Routing\+Protocol()}{~MeshL2RoutingProtocol()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Mesh\+L2\+Routing\+Protocol\+::$\sim$\+Mesh\+L2\+Routing\+Protocol (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1MeshL2RoutingProtocol_ad438f0734c0146f48a14363672f51879}{}\label{classns3_1_1MeshL2RoutingProtocol_ad438f0734c0146f48a14363672f51879}
+
+
+virtual D-\/tor for subclasses 
+
+
+\begin{DoxyCode}
+43 \{
+44   \hyperlink{classns3_1_1MeshL2RoutingProtocol_af4ebb2340b72dfc607ddf3c1ae65b54a}{m\_mp} = 0;
+45 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}!Get\+Mesh\+Point@{Get\+Mesh\+Point}}
+\index{Get\+Mesh\+Point@{Get\+Mesh\+Point}!ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}}
+\subsubsection[{\texorpdfstring{Get\+Mesh\+Point() const }{GetMeshPoint() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Mesh\+Point\+Device} $>$ ns3\+::\+Mesh\+L2\+Routing\+Protocol\+::\+Get\+Mesh\+Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1MeshL2RoutingProtocol_a630575428f626e58f0c8ac3fae24007e}{}\label{classns3_1_1MeshL2RoutingProtocol_a630575428f626e58f0c8ac3fae24007e}
+
+
+Each mesh protocol must be installed on the mesh point to work. 
+
+
+\begin{DoxyCode}
+55 \{
+56   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1MeshL2RoutingProtocol_af4ebb2340b72dfc607ddf3c1ae65b54a}{m\_mp};
+57 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id()}{GetTypeId()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Mesh\+L2\+Routing\+Protocol\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MeshL2RoutingProtocol_aa859288b78b73dd02758ca3fcc49187d}{}\label{classns3_1_1MeshL2RoutingProtocol_aa859288b78b73dd02758ca3fcc49187d}
+
+
+Never forget to support N\+S3 object model. 
+
+
+\begin{DoxyCode}
+34 \{
+35   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::MeshL2RoutingProtocol"})
+36     .SetParent<\hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object}> ()
+37     .SetGroupName (\textcolor{stringliteral}{"Mesh"})
+38   ;
+39   \textcolor{keywordflow}{return} tid;
+40 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}!Remove\+Routing\+Stuff@{Remove\+Routing\+Stuff}}
+\index{Remove\+Routing\+Stuff@{Remove\+Routing\+Stuff}!ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}}
+\subsubsection[{\texorpdfstring{Remove\+Routing\+Stuff(uint32\+\_\+t from\+Iface, const Mac48\+Address source, const Mac48\+Address destination, Ptr$<$ Packet $>$ packet, uint16\+\_\+t \&protocol\+Type)=0}{RemoveRoutingStuff(uint32_t fromIface, const Mac48Address source, const Mac48Address destination, Ptr< Packet > packet, uint16_t &protocolType)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool ns3\+::\+Mesh\+L2\+Routing\+Protocol\+::\+Remove\+Routing\+Stuff (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{from\+Iface, }
+\item[{const {\bf Mac48\+Address}}]{source, }
+\item[{const {\bf Mac48\+Address}}]{destination, }
+\item[{{\bf Ptr}$<$ {\bf Packet} $>$}]{packet, }
+\item[{uint16\+\_\+t \&}]{protocol\+Type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1MeshL2RoutingProtocol_ae110ac0c9b8f81cb2a05940b385e7f08}{}\label{classns3_1_1MeshL2RoutingProtocol_ae110ac0c9b8f81cb2a05940b385e7f08}
+
+
+When packet is ready to go to upper layer, protocol must remove all its information\+: tags, header, etc. So, \hyperlink{classns3_1_1MeshPointDevice}{Mesh\+Point\+Device} must call this method when passing a packet to upper layer. 
+
+\begin{DoxyReturn}{Returns}
+true if packet shall not be dropped, false otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em from\+Iface} & the incoming interface of the packet \\
+\hline
+{\em source} & source address \\
+\hline
+{\em destination} & destination address \\
+\hline
+{\em packet} & the packet to be handled \\
+\hline
+{\em protocol\+Type} & protocol ID, needed to form a proper M\+A\+C-\/layer header \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{Attention}
+protocol type is passed by reference, because may be changed 
+\end{DoxyAttention}
+
+
+Implemented in \hyperlink{classns3_1_1flame_1_1FlameProtocol_ad0b9c31eff724dcd0916a1985c351db1}{ns3\+::flame\+::\+Flame\+Protocol}, and \hyperlink{classns3_1_1dot11s_1_1HwmpProtocol_a582849ca436be390570c98267d512972}{ns3\+::dot11s\+::\+Hwmp\+Protocol}.
+
+\index{ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}!Request\+Route@{Request\+Route}}
+\index{Request\+Route@{Request\+Route}!ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}}
+\subsubsection[{\texorpdfstring{Request\+Route(uint32\+\_\+t source\+Iface, const Mac48\+Address source, const Mac48\+Address destination, Ptr$<$ const Packet $>$ packet, uint16\+\_\+t protocol\+Type, Route\+Reply\+Callback route\+Reply)=0}{RequestRoute(uint32_t sourceIface, const Mac48Address source, const Mac48Address destination, Ptr< const Packet > packet, uint16_t protocolType, RouteReplyCallback routeReply)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool ns3\+::\+Mesh\+L2\+Routing\+Protocol\+::\+Request\+Route (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{source\+Iface, }
+\item[{const {\bf Mac48\+Address}}]{source, }
+\item[{const {\bf Mac48\+Address}}]{destination, }
+\item[{{\bf Ptr}$<$ const {\bf Packet} $>$}]{packet, }
+\item[{uint16\+\_\+t}]{protocol\+Type, }
+\item[{{\bf Route\+Reply\+Callback}}]{route\+Reply}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1MeshL2RoutingProtocol_a978b19cfc40272f5c39ed5e1999f9c8c}{}\label{classns3_1_1MeshL2RoutingProtocol_a978b19cfc40272f5c39ed5e1999f9c8c}
+Request routing information, all packets must go through this request.
+
+Note that route discovery works async. -- Request\+Route returns immediately, while reply callback will be called when routing information will be available. \begin{DoxyReturn}{Returns}
+true if valid route is already known 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em source\+Iface} & the incoming interface of the packet \\
+\hline
+{\em source} & source address \\
+\hline
+{\em destination} & destination address \\
+\hline
+{\em packet} & the packet to be resolved (needed the whole packet, because routing information is added as tags or headers). The packet will be returned to reply callback. \\
+\hline
+{\em protocol\+Type} & protocol ID, needed to form a proper M\+A\+C-\/layer header \\
+\hline
+{\em route\+Reply} & callback to be invoked after route discovery procedure, supposed to really send packet using routing information. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classns3_1_1flame_1_1FlameProtocol_a70087b7d1cd62978882df6599f56bf29}{ns3\+::flame\+::\+Flame\+Protocol}, and \hyperlink{classns3_1_1dot11s_1_1HwmpProtocol_aedaf2770cdde104e445b870fd9b37617}{ns3\+::dot11s\+::\+Hwmp\+Protocol}.
+
+\index{ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}!Set\+Mesh\+Point@{Set\+Mesh\+Point}}
+\index{Set\+Mesh\+Point@{Set\+Mesh\+Point}!ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}}
+\subsubsection[{\texorpdfstring{Set\+Mesh\+Point(\+Ptr$<$ Mesh\+Point\+Device $>$ mp)}{SetMeshPoint(Ptr< MeshPointDevice > mp)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Mesh\+L2\+Routing\+Protocol\+::\+Set\+Mesh\+Point (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Mesh\+Point\+Device} $>$}]{mp}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1MeshL2RoutingProtocol_a77a122b1cfbe10f5bf2b6c61fbd85b60}{}\label{classns3_1_1MeshL2RoutingProtocol_a77a122b1cfbe10f5bf2b6c61fbd85b60}
+
+
+Set host mesh point, analog of Set\+Node (...) methods for upper layer protocols. 
+
+
+\begin{DoxyCode}
+49 \{
+50   \hyperlink{classns3_1_1MeshL2RoutingProtocol_af4ebb2340b72dfc607ddf3c1ae65b54a}{m\_mp} = mp;
+51 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}!m\+\_\+mp@{m\+\_\+mp}}
+\index{m\+\_\+mp@{m\+\_\+mp}!ns3\+::\+Mesh\+L2\+Routing\+Protocol@{ns3\+::\+Mesh\+L2\+Routing\+Protocol}}
+\subsubsection[{\texorpdfstring{m\+\_\+mp}{m_mp}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Mesh\+Point\+Device}$>$ ns3\+::\+Mesh\+L2\+Routing\+Protocol\+::m\+\_\+mp\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classns3_1_1MeshL2RoutingProtocol_af4ebb2340b72dfc607ddf3c1ae65b54a}{}\label{classns3_1_1MeshL2RoutingProtocol_af4ebb2340b72dfc607ddf3c1ae65b54a}
+
+
+Host mesh point. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mesh/model/\hyperlink{mesh-l2-routing-protocol_8h}{mesh-\/l2-\/routing-\/protocol.\+h}\item 
+mesh/model/\hyperlink{mesh-l2-routing-protocol_8cc}{mesh-\/l2-\/routing-\/protocol.\+cc}\end{DoxyCompactItemize}

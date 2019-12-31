@@ -1,0 +1,179 @@
+\hypertarget{classLanTest}{}\section{Lan\+Test Class Reference}
+\label{classLanTest}\index{Lan\+Test@{Lan\+Test}}
+
+
+I\+Pv4 Global\+Routing L\+AN test.  
+
+
+
+
+Inheritance diagram for Lan\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Lan\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classLanTest_a1e5e94be4456c27e8aca1cc16a3491f2}{Do\+Setup} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to do any local setup required for this Test\+Case. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classLanTest_a559d2aaff52c1d25c0ec95ac5688d331}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+\hyperlink{classLanTest_a6d4665a686fa7e51d398deb0ead2cd3d}{Lan\+Test} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{classLanTest_aa89c8886b5180249409317603fe09577}{m\+\_\+nodes}
+\begin{DoxyCompactList}\small\item\em Nodes used in the test. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+I\+Pv4 Global\+Routing L\+AN test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Lan\+Test@{Lan\+Test}!Lan\+Test@{Lan\+Test}}
+\index{Lan\+Test@{Lan\+Test}!Lan\+Test@{Lan\+Test}}
+\subsubsection[{\texorpdfstring{Lan\+Test()}{LanTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Lan\+Test\+::\+Lan\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLanTest_a6d4665a686fa7e51d398deb0ead2cd3d}{}\label{classLanTest_a6d4665a686fa7e51d398deb0ead2cd3d}
+
+\begin{DoxyCode}
+221   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Global routing on broadcast link"})
+222 \{
+223 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Lan\+Test@{Lan\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Lan\+Test@{Lan\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Lan\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classLanTest_a559d2aaff52c1d25c0ec95ac5688d331}{}\label{classLanTest_a559d2aaff52c1d25c0ec95ac5688d331}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+248 \{
+249   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+250 
+251   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4L3Protocol>} ip0 = \hyperlink{classLanTest_aa89c8886b5180249409317603fe09577}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4L3Protocol}{Ipv4L3Protocol}> ();
+252   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (ip0, 0, \textcolor{stringliteral}{"Error-- no Ipv4 object"});  
+253   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4L3Protocol>} ip1 = \hyperlink{classLanTest_aa89c8886b5180249409317603fe09577}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1)->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4L3Protocol}{Ipv4L3Protocol}> ();
+254   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (ip1, 0, \textcolor{stringliteral}{"Error-- no Ipv4 object"});  
+255   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4RoutingProtocol>} routing0 = ip0->
+      \hyperlink{classns3_1_1Ipv4L3Protocol_aa1e4efbf4978299e47406895c3f4b41d}{GetRoutingProtocol} ();
+256   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4GlobalRouting>} globalRouting0 = routing0->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject} <\hyperlink{classns3_1_1Ipv4GlobalRouting}{Ipv4GlobalRouting}> ();
+257   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (globalRouting0, 0, \textcolor{stringliteral}{"Error-- no Ipv4GlobalRouting object"});  
+258   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4RoutingProtocol>} routing1 = ip1->
+      \hyperlink{classns3_1_1Ipv4L3Protocol_aa1e4efbf4978299e47406895c3f4b41d}{GetRoutingProtocol} ();
+259   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4GlobalRouting>} globalRouting1 = routing1->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject} <\hyperlink{classns3_1_1Ipv4GlobalRouting}{Ipv4GlobalRouting}> ();
+260   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (globalRouting1, 0, \textcolor{stringliteral}{"Error-- no Ipv4GlobalRouting object"});  
+261 
+262   \textcolor{comment}{// Test that the right number of routes found}
+263   uint32\_t nRoutes0 = globalRouting0->\hyperlink{classns3_1_1Ipv4GlobalRouting_abb9d2b3642272b9bd2697a5699922fa7}{GetNRoutes} ();
+264   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"LanTest nRoutes0 "} << nRoutes0);
+265   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (nRoutes0, 1, \textcolor{stringliteral}{"Error-- more than one entry"});
+266   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < globalRouting0->\hyperlink{classns3_1_1Ipv4GlobalRouting_abb9d2b3642272b9bd2697a5699922fa7}{GetNRoutes} (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+267     \{
+268       \hyperlink{classns3_1_1Ipv4RoutingTableEntry}{Ipv4RoutingTableEntry}* route = globalRouting0->
+      \hyperlink{classns3_1_1Ipv4GlobalRouting_accd518b9888908dbea189c1d1c73dcf1}{GetRoute} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+269       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"entry dest "} << route->\hyperlink{classns3_1_1Ipv4RoutingTableEntry_adcd2084c5f0261c43c059c2b981e91fa}{GetDest} () << \textcolor{stringliteral}{" gw "} << route->
+      \hyperlink{classns3_1_1Ipv4RoutingTableEntry_a49dda51e0ba3c78bc969a9378bd15893}{GetGateway} ());
+270     \}
+271 
+272   \textcolor{comment}{// Test that the right number of routes found}
+273   uint32\_t nRoutes1 = globalRouting1->\hyperlink{classns3_1_1Ipv4GlobalRouting_abb9d2b3642272b9bd2697a5699922fa7}{GetNRoutes} ();
+274   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"LanTest nRoutes1 "} << nRoutes1);
+275   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (nRoutes1, 1, \textcolor{stringliteral}{"Error-- more than one entry"});
+276   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < globalRouting0->\hyperlink{classns3_1_1Ipv4GlobalRouting_abb9d2b3642272b9bd2697a5699922fa7}{GetNRoutes} (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+277     \{
+278       \hyperlink{classns3_1_1Ipv4RoutingTableEntry}{Ipv4RoutingTableEntry}* route = globalRouting1->
+      \hyperlink{classns3_1_1Ipv4GlobalRouting_accd518b9888908dbea189c1d1c73dcf1}{GetRoute} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+279       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"entry dest "} << route->\hyperlink{classns3_1_1Ipv4RoutingTableEntry_adcd2084c5f0261c43c059c2b981e91fa}{GetDest} () << \textcolor{stringliteral}{" gw "} << route->
+      \hyperlink{classns3_1_1Ipv4RoutingTableEntry_a49dda51e0ba3c78bc969a9378bd15893}{GetGateway} ());
+280     \}
+281 
+282   Simulator::Destroy ();
+283 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Lan\+Test@{Lan\+Test}!Do\+Setup@{Do\+Setup}}
+\index{Do\+Setup@{Do\+Setup}!Lan\+Test@{Lan\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Setup(void)}{DoSetup(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Lan\+Test\+::\+Do\+Setup (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classLanTest_a1e5e94be4456c27e8aca1cc16a3491f2}{}\label{classLanTest_a1e5e94be4456c27e8aca1cc16a3491f2}
+
+
+Implementation to do any local setup required for this Test\+Case. 
+
+Subclasses should override this method to perform any costly per-\/test setup before Do\+Run is invoked. 
+
+Reimplemented from \hyperlink{classns3_1_1TestCase_a4a7e32ad32a10a508910815cd38e9177}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+227 \{
+228   \hyperlink{classLanTest_aa89c8886b5180249409317603fe09577}{m\_nodes}.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+229 
+230   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleChannel>} channel = CreateObject <SimpleChannel> ();
+231   \hyperlink{classns3_1_1SimpleNetDeviceHelper}{SimpleNetDeviceHelper} simpleHelper;
+232   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} net = simpleHelper.Install (\hyperlink{classLanTest_aa89c8886b5180249409317603fe09577}{m\_nodes}, channel);
+233 
+234   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+235   \textcolor{comment}{// By default, InternetStackHelper adds a static and global routing}
+236   \textcolor{comment}{// implementation.  We just want the global for this test.}
+237   \hyperlink{classns3_1_1Ipv4GlobalRoutingHelper}{Ipv4GlobalRoutingHelper} ipv4RoutingHelper;
+238   internet.\hyperlink{classns3_1_1InternetStackHelper_a3e382c02df022dec79952a7eca8cd5ba}{SetRoutingHelper} (ipv4RoutingHelper);
+239   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (\hyperlink{classLanTest_aa89c8886b5180249409317603fe09577}{m\_nodes});
+240 
+241   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+242   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+243   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (net);
+244 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Lan\+Test@{Lan\+Test}!m\+\_\+nodes@{m\+\_\+nodes}}
+\index{m\+\_\+nodes@{m\+\_\+nodes}!Lan\+Test@{Lan\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+nodes}{m_nodes}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} Lan\+Test\+::m\+\_\+nodes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLanTest_aa89c8886b5180249409317603fe09577}{}\label{classLanTest_aa89c8886b5180249409317603fe09577}
+
+
+Nodes used in the test. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{ipv4-global-routing-test-suite_8cc}{ipv4-\/global-\/routing-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

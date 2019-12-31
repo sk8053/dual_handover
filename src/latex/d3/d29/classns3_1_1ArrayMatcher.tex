@@ -1,0 +1,199 @@
+\hypertarget{classns3_1_1ArrayMatcher}{}\section{ns3\+:\+:Array\+Matcher Class Reference}
+\label{classns3_1_1ArrayMatcher}\index{ns3\+::\+Array\+Matcher@{ns3\+::\+Array\+Matcher}}
+
+
+Collaboration diagram for ns3\+:\+:Array\+Matcher\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1ArrayMatcher_af739906ed10dd878d793ece4ac8a16f4}{Array\+Matcher} (std\+::string element)
+\item 
+bool \hyperlink{classns3_1_1ArrayMatcher_a844f379ae141a473fd28829995e97507}{Matches} (uint32\+\_\+t \hyperlink{lte__uplink__power__control_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classns3_1_1ArrayMatcher_aa6d9360027fc1c10911e8ce81c18291f}{String\+To\+Uint32} (std\+::string str, uint32\+\_\+t $\ast$value) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\+\_\+element}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helper to test if an array entry matches a config path specification. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Array\+Matcher@{ns3\+::\+Array\+Matcher}!Array\+Matcher@{Array\+Matcher}}
+\index{Array\+Matcher@{Array\+Matcher}!ns3\+::\+Array\+Matcher@{ns3\+::\+Array\+Matcher}}
+\subsubsection[{\texorpdfstring{Array\+Matcher(std\+::string element)}{ArrayMatcher(std::string element)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Array\+Matcher\+::\+Array\+Matcher (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{element}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ArrayMatcher_af739906ed10dd878d793ece4ac8a16f4}{}\label{classns3_1_1ArrayMatcher_af739906ed10dd878d793ece4ac8a16f4}
+Construct from a \hyperlink{namespacens3_1_1Config}{Config} path specification.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em element} & The \hyperlink{namespacens3_1_1Config}{Config} path specification. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+184   : \hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element} (element)
+185 \{
+186   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << element);
+187 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Array\+Matcher@{ns3\+::\+Array\+Matcher}!Matches@{Matches}}
+\index{Matches@{Matches}!ns3\+::\+Array\+Matcher@{ns3\+::\+Array\+Matcher}}
+\subsubsection[{\texorpdfstring{Matches(uint32\+\_\+t i) const }{Matches(uint32_t i) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Array\+Matcher\+::\+Matches (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{i}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ArrayMatcher_a844f379ae141a473fd28829995e97507}{}\label{classns3_1_1ArrayMatcher_a844f379ae141a473fd28829995e97507}
+Test if a specific index matches the \hyperlink{namespacens3_1_1Config}{Config} Path.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the index matches the \hyperlink{namespacens3_1_1Config}{Config} Path. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+190 \{
+191   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+192   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element} == \textcolor{stringliteral}{"*"})
+193     \{
+194       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Array "}<<\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<<\textcolor{stringliteral}{" matches *"});
+195       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+196     \}
+197   std::string::size\_type tmp;
+198   tmp = \hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element}.find (\textcolor{stringliteral}{"|"});
+199   \textcolor{keywordflow}{if} (tmp != std::string::npos)
+200     \{
+201       std::string left = \hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element}.substr (0, tmp-0);
+202       std::string right = \hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element}.substr (tmp+1, \hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element}.size () - (tmp + 1));
+203       \hyperlink{classns3_1_1ArrayMatcher_af739906ed10dd878d793ece4ac8a16f4}{ArrayMatcher} matcher = \hyperlink{classns3_1_1ArrayMatcher_af739906ed10dd878d793ece4ac8a16f4}{ArrayMatcher} (left);
+204       \textcolor{keywordflow}{if} (matcher.Matches (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}))
+205         \{
+206           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Array "}<<\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<<\textcolor{stringliteral}{" matches "}<<left);
+207           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+208         \}
+209       matcher = \hyperlink{classns3_1_1ArrayMatcher_af739906ed10dd878d793ece4ac8a16f4}{ArrayMatcher} (right);
+210       \textcolor{keywordflow}{if} (matcher.Matches (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}))
+211         \{
+212           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Array "}<<\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<<\textcolor{stringliteral}{" matches "}<<right);
+213           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+214         \}
+215       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Array "}<<\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<<\textcolor{stringliteral}{" does not match "}<<\hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element});
+216       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+217     \}
+218   std::string::size\_type leftBracket = \hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element}.find (\textcolor{stringliteral}{"["});
+219   std::string::size\_type rightBracket = \hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element}.find (\textcolor{stringliteral}{"]"});
+220   std::string::size\_type dash = \hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element}.find (\textcolor{stringliteral}{"-"});
+221   \textcolor{keywordflow}{if} (leftBracket == 0 && rightBracket == \hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element}.size () - 1 &&
+222       dash > leftBracket && dash < rightBracket)
+223     \{
+224       std::string lowerBound = \hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element}.substr (leftBracket + 1, dash - (leftBracket + 1));
+225       std::string upperBound = \hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element}.substr (dash + 1, rightBracket - (dash + 1));
+226       uint32\_t \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{min};
+227       uint32\_t \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{max};
+228       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1ArrayMatcher_aa6d9360027fc1c10911e8ce81c18291f}{StringToUint32} (lowerBound, &min) && 
+229           \hyperlink{classns3_1_1ArrayMatcher_aa6d9360027fc1c10911e8ce81c18291f}{StringToUint32} (upperBound, &max) &&
+230           \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} >= min && \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} <= max)
+231         \{
+232           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Array "}<<\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<<\textcolor{stringliteral}{" matches "}<<\hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element});
+233           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+234         \}
+235       \textcolor{keywordflow}{else}
+236         \{
+237           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Array "}<<\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<<\textcolor{stringliteral}{" does not "}<<\hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element});
+238           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+239         \}
+240     \}
+241   uint32\_t value;
+242   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1ArrayMatcher_aa6d9360027fc1c10911e8ce81c18291f}{StringToUint32} (\hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element}, &value) &&
+243       \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} == value)
+244     \{
+245       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Array "}<<\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<<\textcolor{stringliteral}{" matches "}<<\hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element});
+246       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+247     \}
+248   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Array "}<<\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<<\textcolor{stringliteral}{" does not match "}<<\hyperlink{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{m\_element});
+249   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+250 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Array\+Matcher@{ns3\+::\+Array\+Matcher}!String\+To\+Uint32@{String\+To\+Uint32}}
+\index{String\+To\+Uint32@{String\+To\+Uint32}!ns3\+::\+Array\+Matcher@{ns3\+::\+Array\+Matcher}}
+\subsubsection[{\texorpdfstring{String\+To\+Uint32(std\+::string str, uint32\+\_\+t $\ast$value) const }{StringToUint32(std::string str, uint32_t *value) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Array\+Matcher\+::\+String\+To\+Uint32 (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{str, }
+\item[{uint32\+\_\+t $\ast$}]{value}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ArrayMatcher_aa6d9360027fc1c10911e8ce81c18291f}{}\label{classns3_1_1ArrayMatcher_aa6d9360027fc1c10911e8ce81c18291f}
+Convert a string to an {\ttfamily uint32\+\_\+t}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em str} & The string. \\
+\hline
+\mbox{\tt in}  & {\em value} & The location to store the {\ttfamily uint32\+\_\+t}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the string could be converted. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+254 \{
+255   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << str << value);
+256   std::istringstream iss;
+257   iss.str (str);
+258   iss >> (*value);
+259   \textcolor{keywordflow}{return} !iss.bad () && !iss.fail ();
+260 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Array\+Matcher@{ns3\+::\+Array\+Matcher}!m\+\_\+element@{m\+\_\+element}}
+\index{m\+\_\+element@{m\+\_\+element}!ns3\+::\+Array\+Matcher@{ns3\+::\+Array\+Matcher}}
+\subsubsection[{\texorpdfstring{m\+\_\+element}{m_element}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Array\+Matcher\+::m\+\_\+element\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}{}\label{classns3_1_1ArrayMatcher_ad9d28e2e5604f925a9281af1927e3749}
+The \hyperlink{namespacens3_1_1Config}{Config} path element. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{config_8cc}{config.\+cc}\end{DoxyCompactItemize}

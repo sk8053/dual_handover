@@ -1,0 +1,121 @@
+\hypertarget{examples_2li-ion-energy-source_8cc}{}\section{energy/examples/li-\/ion-\/energy-\/source.cc File Reference}
+\label{examples_2li-ion-energy-source_8cc}\index{energy/examples/li-\/ion-\/energy-\/source.\+cc@{energy/examples/li-\/ion-\/energy-\/source.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/simulator.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/command-\/line.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/simple-\/device-\/energy-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/li-\/ion-\/energy-\/source.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/energy-\/source-\/container.\+h\char`\"{}}\\*
+Include dependency graph for li-\/ion-\/energy-\/source.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{examples_2li-ion-energy-source_8cc_a5a233214e03143292862c2a936b073eb}{Print\+Cell\+Info} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1LiIonEnergySource}{Li\+Ion\+Energy\+Source} $>$ es)
+\item 
+int \hyperlink{examples_2li-ion-energy-source_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{examples/li-\/ion-\/energy-\/source.\+cc@{examples/li-\/ion-\/energy-\/source.\+cc}!main@{main}}
+\index{main@{main}!examples/li-\/ion-\/energy-\/source.\+cc@{examples/li-\/ion-\/energy-\/source.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{examples_2li-ion-energy-source_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{examples_2li-ion-energy-source_8cc_a3c04138a5bfe5d72780bb7e82a18e627}
+
+\begin{DoxyCode}
+63 \{
+64   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+65   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+66   
+67     \textcolor{comment}{// uncomment below to see the energy consumption details}
+68   \textcolor{comment}{// LogComponentEnable ("LiIonEnergySource", LOG\_LEVEL\_DEBUG);}
+69 
+70   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = CreateObject<Node> ();
+71 
+72   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleDeviceEnergyModel>} sem = CreateObject<SimpleDeviceEnergyModel> ();
+73   \hyperlink{classns3_1_1Ptr}{Ptr<EnergySourceContainer>} esCont = CreateObject<EnergySourceContainer> ();
+74   \hyperlink{classns3_1_1Ptr}{Ptr<LiIonEnergySource>} es = CreateObject<LiIonEnergySource> ();
+75   esCont->Add (es);
+76   es->SetNode (node);
+77   sem->SetEnergySource (es);
+78   es->AppendDeviceEnergyModel (sem);
+79   sem->SetNode (node);
+80   node->\hyperlink{classns3_1_1Object_a79dd435d300f3deca814553f561a2922}{AggregateObject} (esCont);
+81 
+82   \hyperlink{classns3_1_1Time}{Time} now = \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ();
+83 
+84   \textcolor{comment}{// discharge at 2.33 A for 1700 seconds}
+85   sem->SetCurrentA (2.33);
+86   now += \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1701);
+87 
+88 
+89   \textcolor{comment}{// discharge at 4.66 A for 628 seconds}
+90   Simulator::Schedule (now,
+91                        &SimpleDeviceEnergyModel::SetCurrentA,
+92                        sem,
+93                        4.66);
+94   now += \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (600);
+95 
+96   \hyperlink{examples_2li-ion-energy-source_8cc_a5a233214e03143292862c2a936b073eb}{PrintCellInfo} (es);
+97 
+98   Simulator::Stop (now);
+99   Simulator::Run ();
+100   Simulator::Destroy ();
+101 
+102   \textcolor{comment}{// the cell voltage should be under 3.3v}
+103   DoubleValue v;
+104   es->GetAttribute (\textcolor{stringliteral}{"ThresholdVoltage"}, v);
+105   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (es->GetSupplyVoltage () <= v.Get ());
+106 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{examples/li-\/ion-\/energy-\/source.\+cc@{examples/li-\/ion-\/energy-\/source.\+cc}!Print\+Cell\+Info@{Print\+Cell\+Info}}
+\index{Print\+Cell\+Info@{Print\+Cell\+Info}!examples/li-\/ion-\/energy-\/source.\+cc@{examples/li-\/ion-\/energy-\/source.\+cc}}
+\subsubsection[{\texorpdfstring{Print\+Cell\+Info(\+Ptr$<$ Li\+Ion\+Energy\+Source $>$ es)}{PrintCellInfo(Ptr< LiIonEnergySource > es)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Print\+Cell\+Info (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Li\+Ion\+Energy\+Source} $>$}]{es}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{examples_2li-ion-energy-source_8cc_a5a233214e03143292862c2a936b073eb}{}\label{examples_2li-ion-energy-source_8cc_a5a233214e03143292862c2a936b073eb}
+In this simple example, we show how to create and drain energy from a Li\+Ion\+Energy\+Source. We make a series of discharge calls to the energy source class with different current drain and duration until all the energy is depleted from the cell.
+
+Every 20 seconds it is printed out the actual cell voltage to verify that it follows the discharge curve of the datasheet \mbox{[}1\mbox{]}.
+
+At the end of the example it is verified that after the energy depletion call, the cell voltage is below the threshold voltage.
+
+References\+: \mbox{[}1\mbox{]} Panasonic C\+G\+R18650\+DA Datasheet, \href{http://www.panasonic.com/industrial/includes/pdf/Panasonic_LiIon_CGR18650DA.pdf}{\tt http\+://www.\+panasonic.\+com/industrial/includes/pdf/\+Panasonic\+\_\+\+Li\+Ion\+\_\+\+C\+G\+R18650\+D\+A.\+pdf} 
+\begin{DoxyCode}
+49 \{
+50   std::cout << \textcolor{stringliteral}{"At "} << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" Cell voltage: "} << es
+      ->\hyperlink{classns3_1_1LiIonEnergySource_a48b2c773b3a8aaf1e95bccfa851ededb}{GetSupplyVoltage} () << \textcolor{stringliteral}{" V Remaining Capacity: "} <<
+51   es->\hyperlink{classns3_1_1LiIonEnergySource_a519935a69b4b4b3f347855cee794d4d8}{GetRemainingEnergy} () / (3.6 * 3600) << \textcolor{stringliteral}{" Ah"} << std::endl;
+52 
+53   \textcolor{keywordflow}{if} (!Simulator::IsFinished ())
+54     \{
+55       Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (20),
+56                            &\hyperlink{examples_2li-ion-energy-source_8cc_a5a233214e03143292862c2a936b073eb}{PrintCellInfo},
+57                            es);
+58     \}
+59 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+

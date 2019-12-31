@@ -1,0 +1,551 @@
+\hypertarget{classChainRegressionTest}{}\section{Chain\+Regression\+Test Class Reference}
+\label{classChainRegressionTest}\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+
+
+A\+O\+DV chain regression test.  
+
+
+
+
+{\ttfamily \#include $<$aodv-\/regression.\+h$>$}
+
+
+
+Inheritance diagram for Chain\+Regression\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Chain\+Regression\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classChainRegressionTest_a8a8ec4fcbd87704170cfd1480d94f78f}{Chain\+Regression\+Test} (const char $\ast$const prefix, \hyperlink{classns3_1_1Time}{Time} time=Seconds(10), uint32\+\_\+t size=5, \hyperlink{classns3_1_1Time}{Time} arp\+Alive\+Timeout=Seconds(120))
+\item 
+\hyperlink{classChainRegressionTest_a937f02ea087e319697e192f1c7ee5123}{$\sim$\+Chain\+Regression\+Test} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classChainRegressionTest_a3e368f839e9527ba7bde784258c31792}{Create\+Nodes} ()
+\begin{DoxyCompactList}\small\item\em Create test topology. \end{DoxyCompactList}\item 
+void \hyperlink{classChainRegressionTest_ae8b1dd906e3d52a223122c63d236bb19}{Create\+Devices} ()
+\begin{DoxyCompactList}\small\item\em Create devices, install T\+C\+P/\+IP stack and applications. \end{DoxyCompactList}\item 
+void \hyperlink{classChainRegressionTest_aa865609268ade23e85e6560912fefb57}{Check\+Results} ()
+\begin{DoxyCompactList}\small\item\em Compare traces with reference ones. \end{DoxyCompactList}\item 
+void \hyperlink{classChainRegressionTest_a51aa3cae551407ee6a6f346c30e3cc43}{Do\+Run} ()
+\begin{DoxyCompactList}\small\item\em Go. \end{DoxyCompactList}\item 
+void \hyperlink{classChainRegressionTest_a7282b25c193b2b0f237263616b10f251}{Send\+Ping} ()
+\begin{DoxyCompactList}\small\item\em Send one ping. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} $\ast$ \hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\+\_\+nodes}
+\item 
+const std\+::string \hyperlink{classChainRegressionTest_ac11ece02445e290f10eef8c73542b60a}{m\+\_\+prefix}
+\begin{DoxyCompactList}\small\item\em P\+C\+AP file names prefix. \end{DoxyCompactList}\item 
+const \hyperlink{classns3_1_1Time}{Time} \hyperlink{classChainRegressionTest_aaba809877469a5652b1b62461744e2c7}{m\+\_\+time}
+\begin{DoxyCompactList}\small\item\em Total simulation time. \end{DoxyCompactList}\item 
+const uint32\+\_\+t \hyperlink{classChainRegressionTest_a0b140f49f0f8bad41cba6bd2c68c11b8}{m\+\_\+size}
+\begin{DoxyCompactList}\small\item\em Chain size. \end{DoxyCompactList}\item 
+const double \hyperlink{classChainRegressionTest_a9700cff3675b8d166d41e4d479a1c3ac}{m\+\_\+step}
+\begin{DoxyCompactList}\small\item\em Chain step, meters. \end{DoxyCompactList}\item 
+const \hyperlink{classns3_1_1Time}{Time} \hyperlink{classChainRegressionTest_a7dda0494d54670d515ff7821993710de}{m\+\_\+arp\+Alive\+Timeout}
+\begin{DoxyCompactList}\small\item\em A\+RP alive timeout. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ \hyperlink{classChainRegressionTest_ad5f524009bcd54ac069a4a6b9d58bcd0}{m\+\_\+socket}
+\begin{DoxyCompactList}\small\item\em Socket. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classChainRegressionTest_a4b038b8f43087a96aaa1b94d6f351733}{m\+\_\+seq}
+\begin{DoxyCompactList}\small\item\em Sequence number. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A\+O\+DV chain regression test. 
+
+This script creates 1-\/dimensional grid topology and then ping last node from the first one\+:
+
+\mbox{[}10.\+1.\+1.\+1\mbox{]} $<$-- step --$>$ \mbox{[}10.\+1.\+1.\+2\mbox{]} $<$-- step --$>$ \mbox{[}10.\+1.\+1.\+3\mbox{]} $<$-- step --$>$ \mbox{[}10.\+1.\+1.\+4\mbox{]} $<$-- step --$>$ \mbox{[}10.\+1.\+1.\+5\mbox{]}
+
+Each node can hear only his right and his left neighbor, if they exist. When one third of total time expired, central node moves away. After this, node 3 doesn\textquotesingle{}t hear any packets from other nodes and nobody hears his packets. We want to demonstrate in this script 1) route establishing 2) broken link detection both from layer 2 information and hello messages.
+
+\begin{DoxyVerb} Expected packets time diagram.
+           1       2       3       4       5
+    <------|------>|       |       |       |        RREQ (orig 10.1.1.1, dst 10.1.1.5, G=1, U=1, hop=0, ID=1, org_seqno=1) src = 10.1.1.1
+           |<------|------>|       |       |        RREQ (orig 10.1.1.1, dst 10.1.1.5, G=1, U=1, hop=1, ID=1, org_seqno=1) src = 10.1.1.2
+           |       |<------|------>|       |        RREQ (orig 10.1.1.1, dst 10.1.1.5, G=1, U=1, hop=2, ID=1, org_seqno=1) src = 10.1.1.3
+           |       |       |<------|------>|        RREQ (orig 10.1.1.1, dst 10.1.1.5, G=1, U=1, hop=3, ID=1, org_seqno=1) src = 10.1.1.4
+           |       |       |       |<------|------> ARP request. Who has 10.1.1.4? Tell 10.1.1.5
+           |       |       |       |======>|        ARP reply
+           |       |       |       |<======|        RREP (orig 10.1.1.1, dst 10.1.1.5, hop=0, dst_seqno=0) src=10.1.1.5
+           |       |       |<------|------>|        ARP request. Who has 10.1.1.3? Tell 10.1.1.4
+           |       |       |======>|       |        ARP reply
+           |       |       |<======|       |        RREP (orig 10.1.1.1, dst 10.1.1.5, hop=1, dst_seqno=0) src=10.1.1.4
+           |       |<------|------>|       |        ARP request. Who has 10.1.1.2? Tell 10.1.1.3
+           |       |======>|       |       |        ARP reply
+           |       |<======|       |       |        RREP (orig 10.1.1.1, dst 10.1.1.5, hop=2, dst_seqno=0) src=10.1.1.3
+           |<------|------>|       |       |        ARP request. Who has 10.1.1.1? Tell 10.1.1.2
+           |======>|       |       |       |        ARP reply
+           |<======|       |       |       |        RREP (orig 10.1.1.1, dst 10.1.1.5, hop=3, dst_seqno=0) src=10.1.1.2
+   <-------|------>|       |       |       |        ARP request. Who has 10.1.1.2? Tell 10.1.1.1
+           |<======|       |       |       |
+           |======>|       |       |       |        ICMP (ping) request 0 from 10.1.1.1 to 10.1.1.5; src=10.1.1.1 next_hop=10.1.1.2
+           |<------|------>|       |       |        ARP request. Who has 10.1.1.3? Tell 10.1.1.2
+           |       |<======|       |       |        ARP reply
+           |       |======>|       |       |        ICMP (ping) request 0 from 10.1.1.1 to 10.1.1.5; src=10.1.1.2 next_hop=10.1.1.3
+           |       |<------|------>|       |        ARP request. Who has 10.1.1.4? Tell 10.1.1.3
+           |       |       |<======|       |        ARP reply
+           |       |       |======>|       |        ICMP (ping) request 0 from 10.1.1.1 to 10.1.1.5; src=10.1.1.3 next_hop=10.1.1.4
+           |       |       |<------|------>|        ARP request. Who has 10.1.1.5? Tell 10.1.1.4
+           |       |       |       |<======|        ARP reply
+           |       |       |       |======>|        ICMP (ping) request 0; src=10.1.1.4 next_hop=10.1.1.5
+           |       |       |       |<======|        ICMP (ping) reply 0; src=10.1.1.5 next_hop=10.1.1.4
+           |       |       |<======|       |        ICMP (ping) reply 0; src=10.1.1.4 next_hop=10.1.1.3
+           |       |<======|       |       |        ICMP (ping) reply 0; src=10.1.1.3 next_hop=10.1.1.2
+           |<======|       |       |       |        ICMP (ping) reply 0; src=10.1.1.2 next_hop=10.1.1.1
+           |       |       |       |<------|------> Hello
+           |<------|------>|       |       |        Hello
+    <------|------>|       |       |       |        Hello
+           |       |<------|------>|       |        Hello
+           |======>|       |       |       |        ICMP (ping) request 1; src=10.1.1.1 next_hop=10.1.1.2
+           |       |       |<------|------>|        Hello
+           |       |======>|       |       |        ICMP (ping) request 1; src=10.1.1.2 next_hop=10.1.1.3
+           |       |       |======>|       |        ICMP (ping) request 1; src=10.1.1.3 next_hop=10.1.1.4
+           |       |       |       |======>|        ICMP (ping) request 1; src=10.1.1.4 next_hop=10.1.1.5
+           |       |       |       |<======|        ICMP (ping) reply 1; src=10.1.1.5 next_hop=10.1.1.4
+           |       |       |<======|       |        ICMP (ping) reply 1; src=10.1.1.4 next_hop=10.1.1.3
+           |       |<======|       |       |        ICMP (ping) reply 11; src=10.1.1.3 next_hop=10.1.1.2
+           |<======|       |       |       |        ICMP (ping) reply 1; src=10.1.1.2 next_hop=10.1.1.1
+           |       |       |       |<------|------> Hello
+           |<------|------>|       |       |        Hello
+    <------|------>|       |       |       |        Hello
+           |       |       |<------|------>|        Hello
+           |       |<------|------>|       |        Hello
+           |======>|       |       |       |        ICMP (ping) request 2; src=10.1.1.1 next_hop=10.1.1.2
+           |       |======>|       |       |        ICMP (ping) request 2; src=10.1.1.2 next_hop=10.1.1.3
+           |       |       |======>|       |        ICMP (ping) request 2; src=10.1.1.3 next_hop=10.1.1.4
+           |       |       |       |======>|        ICMP (ping) request 2; src=10.1.1.4 next_hop=10.1.1.5
+           |       |       |       |<======|        ICMP (ping) reply 2; src=10.1.1.5 next_hop=10.1.1.4
+           |       |       |<======|       |        ICMP (ping) reply 2; src=10.1.1.4 next_hop=10.1.1.3
+           |       |<======|       |       |        ICMP (ping) reply 2; src=10.1.1.3 next_hop=10.1.1.2
+           |<======|       |       |       |        ICMP (ping) reply 2; src=10.1.1.2 next_hop=10.1.1.1
+           |       |       |       |<------|------> Hello
+    <------|------>|       |       |       |        Hello
+           |       |<------|------>|       |        Hello
+           |<------|------>|       |       |        Hello
+           |       |       |<------|------>|        Hello
+           |======>|       |       |       |        ICMP (ping) request 3; src=10.1.1.1 next_hop=10.1.1.2
+           |       |======>|       |       |        ICMP (ping) request 3; src=10.1.1.2 next_hop=10.1.1.3
+           |       |       |======>|       |        ICMP (ping) request 3; src=10.1.1.3 next_hop=10.1.1.4
+           |       |       |       |======>|        ICMP (ping) request 3; src=10.1.1.4 next_hop=10.1.1.5
+           |       |       |       |<======|        ICMP (ping) reply 3; src=10.1.1.5 next_hop=10.1.1.4
+           |       |       |<======|       |        ICMP (ping) reply 3; src=10.1.1.4 next_hop=10.1.1.3
+           |       |<======|       |       |        ICMP (ping) reply 3; src=10.1.1.3 next_hop=10.1.1.2
+           |<======|       |       |       |        ICMP (ping) reply 3; src=10.1.1.2 next_hop=10.1.1.1
+           |       |       |       |<------|------> Hello
+    <------|------>|       |       |       |        Hello
+           |<------|-->    |       |       |        Hello   |
+           |       |    <--|-->    |       |        Hello   |Node 3 move away => nobody hear his packets and node 3 doesn't hear anything !
+           |       |       |    <--|------>|        Hello   |
+           |======>|       |       |       |        ICMP (ping) request 4; src=10.1.1.1 next_hop=10.1.1.2
+           |       |==>    |       |       |        ICMP (ping) request 4; src=10.1.1.2 next_hop=10.1.1.3.   7 retries.
+           |<======|       |       |       |        RERR (unreachable dst 10.1.1.3 & 10.1.1.5) src=10.1.1.2
+           |       |       |       |<------|------> Hello
+    <------|------>|       |       |       |        Hello
+           |<------|-->    |       |       |        Hello
+           |       |    <--|-->    |       |        Hello
+           |       |       |    <--|------>|        Hello
+    <------|------>|       |       |       |        RREQ (orig 10.1.1.1, dst 10.1.1.5, G=1, hop=0, ID=2, org_seqno=2) src = 10.1.1.1
+           |<------|-->    |       |       |        RREQ (orig 10.1.1.1, dst 10.1.1.5, G=1, hop=1, ID=2, org_seqno=2) src = 10.1.1.2
+           |       |       |       |<------|------> Hello
+           |       |       |    <--|------>|        Hello
+           |       |    <--|-->    |       |        Hello
+           |<------|-->    |       |       |        Hello
+    <------|------>|       |       |       |        Hello
+           |       |       |       |======>|        RERR (unreachable dst 10.1.1.1 & 10.1.1.3) src=10.1.1.4
+           |       |       |       |<------|------> Hello
+           |       |       |    <--|------>|        Hello
+           |       |    <--|-->    |       |        Hello
+           |<------|-->    |       |       |        Hello
+    <------|------>|       |       |       |        Hello
+           |       |       |       |<------|------> Hello
+    <------|------>|       |       |       |        RREQ (orig 10.1.1.1, dst 10.1.1.5, G=1, hop=0, ID=4, org_seqno=3) src = 10.1.1.1
+           |<------|-->    |       |       |        RREQ (orig 10.1.1.1, dst 10.1.1.5, G=1, hop=1, ID=4, org_seqno=3) src = 10.1.1.2
+
+..................................................................
+ * \end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Chain\+Regression\+Test(const char $\ast$const prefix, Time time=\+Seconds(10), uint32\+\_\+t size=5, Time arp\+Alive\+Timeout=\+Seconds(120))}{ChainRegressionTest(const char *const prefix, Time time=Seconds(10), uint32_t size=5, Time arpAliveTimeout=Seconds(120))}}]{\setlength{\rightskip}{0pt plus 5cm}Chain\+Regression\+Test\+::\+Chain\+Regression\+Test (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$const}]{prefix, }
+\item[{{\bf Time}}]{time = {\ttfamily Seconds~(10)}, }
+\item[{uint32\+\_\+t}]{size = {\ttfamily 5}, }
+\item[{{\bf Time}}]{arp\+Alive\+Timeout = {\ttfamily Seconds~(120)}}
+\end{DoxyParamCaption}
+)}\hypertarget{classChainRegressionTest_a8a8ec4fcbd87704170cfd1480d94f78f}{}\label{classChainRegressionTest_a8a8ec4fcbd87704170cfd1480d94f78f}
+Create test case
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & Unique file names prefix \\
+\hline
+{\em size} & Number of nodes in the chain \\
+\hline
+{\em time} & Simulation time \\
+\hline
+{\em arp\+Alive\+Timeout} & A\+RP alive timeout, this is used to check that A\+RP and routing do not interfere \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+67                                                                                                            
+           : 
+68   \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"AODV chain regression test"}),
+69   \hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes} (0),
+70   \hyperlink{classChainRegressionTest_ac11ece02445e290f10eef8c73542b60a}{m\_prefix} (prefix),
+71   \hyperlink{classChainRegressionTest_aaba809877469a5652b1b62461744e2c7}{m\_time} (t),
+72   \hyperlink{classChainRegressionTest_a0b140f49f0f8bad41cba6bd2c68c11b8}{m\_size} (size),
+73   \hyperlink{classChainRegressionTest_a9700cff3675b8d166d41e4d479a1c3ac}{m\_step} (120),
+74   \hyperlink{classChainRegressionTest_a7dda0494d54670d515ff7821993710de}{m\_arpAliveTimeout} (arpAliveTimeout),
+75   \hyperlink{classChainRegressionTest_a4b038b8f43087a96aaa1b94d6f351733}{m\_seq} (0)
+76 \{
+77 \}
+\end{DoxyCode}
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!````~Chain\+Regression\+Test@{$\sim$\+Chain\+Regression\+Test}}
+\index{````~Chain\+Regression\+Test@{$\sim$\+Chain\+Regression\+Test}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{$\sim$\+Chain\+Regression\+Test()}{~ChainRegressionTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Chain\+Regression\+Test\+::$\sim$\+Chain\+Regression\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classChainRegressionTest_a937f02ea087e319697e192f1c7ee5123}{}\label{classChainRegressionTest_a937f02ea087e319697e192f1c7ee5123}
+
+\begin{DoxyCode}
+80 \{
+81   \textcolor{keyword}{delete} \hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes};
+82 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!Check\+Results@{Check\+Results}}
+\index{Check\+Results@{Check\+Results}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Check\+Results()}{CheckResults()}}]{\setlength{\rightskip}{0pt plus 5cm}void Chain\+Regression\+Test\+::\+Check\+Results (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChainRegressionTest_aa865609268ade23e85e6560912fefb57}{}\label{classChainRegressionTest_aa865609268ade23e85e6560912fefb57}
+
+
+Compare traces with reference ones. 
+
+
+\begin{DoxyCode}
+213 \{
+214   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{classChainRegressionTest_a0b140f49f0f8bad41cba6bd2c68c11b8}{m\_size}; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+215     \{
+216       \hyperlink{pcap-test_8h_a38f2c17a62d8613f78ec2dd7b638d329}{NS\_PCAP\_TEST\_EXPECT\_EQ} (\hyperlink{classChainRegressionTest_ac11ece02445e290f10eef8c73542b60a}{m\_prefix} << \textcolor{stringliteral}{"-"} << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{"-0.pcap"});
+217     \}
+218 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!Create\+Devices@{Create\+Devices}}
+\index{Create\+Devices@{Create\+Devices}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Create\+Devices()}{CreateDevices()}}]{\setlength{\rightskip}{0pt plus 5cm}void Chain\+Regression\+Test\+::\+Create\+Devices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChainRegressionTest_ae8b1dd906e3d52a223122c63d236bb19}{}\label{classChainRegressionTest_ae8b1dd906e3d52a223122c63d236bb19}
+
+
+Create devices, install T\+C\+P/\+IP stack and applications. 
+
+
+\begin{DoxyCode}
+156 \{
+157   \textcolor{comment}{// 1. Setup WiFi}
+158   int64\_t streamsUsed = 0;
+159   \hyperlink{classns3_1_1WifiMacHelper}{WifiMacHelper} wifiMac;
+160   wifiMac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::AdhocWifiMac"});
+161   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} wifiPhy = YansWifiPhyHelper::Default ();
+162   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} wifiChannel = YansWifiChannelHelper::Default ();
+163   \hyperlink{classns3_1_1Ptr}{Ptr<YansWifiChannel>} chan = wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ();
+164   wifiPhy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (chan);
+165   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_a2527d6d7b29f717fd7436166c5f05f1a}{Set} (\textcolor{stringliteral}{"TxGain"}, DoubleValue (1.0)); \textcolor{comment}{//this configuration should go away in future revision to
+       the test}
+166   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_a2527d6d7b29f717fd7436166c5f05f1a}{Set} (\textcolor{stringliteral}{"RxGain"}, DoubleValue (1.0)); \textcolor{comment}{//this configuration should go away in future revision to
+       the test}
+167   \textcolor{comment}{// This test suite output was originally based on YansErrorRateModel}
+168   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_a219d3ae5881842aa42ea341b985ce114}{SetErrorRateModel} (\textcolor{stringliteral}{"ns3::YansErrorRateModel"}); 
+169   \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+170   wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::ConstantRateWifiManager"}, \textcolor{stringliteral}{"DataMode"}, 
+      StringValue (\textcolor{stringliteral}{"OfdmRate6Mbps"}), \textcolor{stringliteral}{"RtsCtsThreshold"}, StringValue (\textcolor{stringliteral}{"2200"}));
+171   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (wifiPhy, wifiMac, *
+      \hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes}); 
+172 
+173   \textcolor{comment}{// Assign fixed stream numbers to wifi and channel random variables}
+174   streamsUsed += wifi.\hyperlink{classns3_1_1WifiHelper_ab29bf13f8726c2e0807a583bfea79777}{AssignStreams} (devices, streamsUsed);
+175   \textcolor{comment}{// Assign 6 streams per device}
+176   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (streamsUsed, (devices.\hyperlink{classns3_1_1NetDeviceContainer_a74cafc212479bc38976bebd118e856b9}{GetN} () * 6), \textcolor{stringliteral}{"Stream assignment
+       mismatch"});
+177   streamsUsed += wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_ab409a15cfb8abb5195177625191e2584}{AssignStreams} (chan, streamsUsed);
+178   \textcolor{comment}{// Assign 0 streams per channel for this configuration }
+179   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (streamsUsed, (devices.\hyperlink{classns3_1_1NetDeviceContainer_a74cafc212479bc38976bebd118e856b9}{GetN} () * 6), \textcolor{stringliteral}{"Stream assignment
+       mismatch"});
+180 
+181   \textcolor{comment}{// 2. Setup TCP/IP & AODV}
+182   \hyperlink{classns3_1_1AodvHelper}{AodvHelper} aodv; \textcolor{comment}{// Use default parameters here}
+183   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internetStack;
+184   internetStack.\hyperlink{classns3_1_1InternetStackHelper_a3e382c02df022dec79952a7eca8cd5ba}{SetRoutingHelper} (aodv);
+185   internetStack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (*\hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes});
+186   streamsUsed += internetStack.\hyperlink{classns3_1_1InternetStackHelper_a63c904e832a2f17e036338db4aa2f1b8}{AssignStreams} (*\hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes}, streamsUsed);
+187   \textcolor{comment}{// InternetStack uses m\_size more streams}
+188   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (streamsUsed, (devices.\hyperlink{classns3_1_1NetDeviceContainer_a74cafc212479bc38976bebd118e856b9}{GetN} () * 8) + 
+      \hyperlink{classChainRegressionTest_a0b140f49f0f8bad41cba6bd2c68c11b8}{m\_size}, \textcolor{stringliteral}{"Stream assignment mismatch"});
+189   streamsUsed += aodv.\hyperlink{classns3_1_1AodvHelper_a478d356b61ddc4a3384bd50153113f74}{AssignStreams} (*\hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes}, streamsUsed);
+190   \textcolor{comment}{// AODV uses m\_size more streams}
+191   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (streamsUsed, ((devices.\hyperlink{classns3_1_1NetDeviceContainer_a74cafc212479bc38976bebd118e856b9}{GetN} () * 8) + (2*
+      \hyperlink{classChainRegressionTest_a0b140f49f0f8bad41cba6bd2c68c11b8}{m\_size})), \textcolor{stringliteral}{"Stream assignment mismatch"});
+192 
+193   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+194   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+195   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} interfaces = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devices);
+196 
+197   \textcolor{comment}{// 3. Setup ping}
+198   \hyperlink{classChainRegressionTest_ad5f524009bcd54ac069a4a6b9d58bcd0}{m\_socket} = Socket::CreateSocket (\hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes}->\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), TypeId::LookupByName (\textcolor{stringliteral}{"
+      ns3::Ipv4RawSocketFactory"}));
+199   \hyperlink{classChainRegressionTest_ad5f524009bcd54ac069a4a6b9d58bcd0}{m\_socket}->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Protocol"}, UintegerValue (1)); \textcolor{comment}{// icmp}
+200   \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} src = \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 0);
+201   \hyperlink{classChainRegressionTest_ad5f524009bcd54ac069a4a6b9d58bcd0}{m\_socket}->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} (src);
+202   \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} dst = \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (interfaces.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (\hyperlink{classChainRegressionTest_a0b140f49f0f8bad41cba6bd2c68c11b8}{m\_size} - 1), 0);
+203   \hyperlink{classChainRegressionTest_ad5f524009bcd54ac069a4a6b9d58bcd0}{m\_socket}->\hyperlink{classns3_1_1Socket_a97f08aaf37b8fd7d4b5cad4dfdd4022a}{Connect} (dst);
+204 
+205   \hyperlink{classChainRegressionTest_a7282b25c193b2b0f237263616b10f251}{SendPing} ();
+206 
+207   \textcolor{comment}{// 4. write PCAP}
+208   wifiPhy.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\hyperlink{classns3_1_1TestCase_a8a04695a6fb9ba0f89e28e9523963f88}{CreateTempDirFilename} (
+      \hyperlink{classChainRegressionTest_ac11ece02445e290f10eef8c73542b60a}{m\_prefix}));
+209 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!Create\+Nodes@{Create\+Nodes}}
+\index{Create\+Nodes@{Create\+Nodes}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Create\+Nodes()}{CreateNodes()}}]{\setlength{\rightskip}{0pt plus 5cm}void Chain\+Regression\+Test\+::\+Create\+Nodes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChainRegressionTest_a3e368f839e9527ba7bde784258c31792}{}\label{classChainRegressionTest_a3e368f839e9527ba7bde784258c31792}
+
+
+Create test topology. 
+
+
+\begin{DoxyCode}
+139 \{
+140   \hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes} = \textcolor{keyword}{new} \hyperlink{classns3_1_1NodeContainer}{NodeContainer};
+141   \hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes}->\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (\hyperlink{classChainRegressionTest_a0b140f49f0f8bad41cba6bd2c68c11b8}{m\_size});
+142   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+143   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (\textcolor{stringliteral}{"ns3::GridPositionAllocator"},
+144                                  \textcolor{stringliteral}{"MinX"}, DoubleValue (0.0),
+145                                  \textcolor{stringliteral}{"MinY"}, DoubleValue (0.0),
+146                                  \textcolor{stringliteral}{"DeltaX"}, DoubleValue (\hyperlink{classChainRegressionTest_a9700cff3675b8d166d41e4d479a1c3ac}{m\_step}),
+147                                  \textcolor{stringliteral}{"DeltaY"}, DoubleValue (0),
+148                                  \textcolor{stringliteral}{"GridWidth"}, UintegerValue (\hyperlink{classChainRegressionTest_a0b140f49f0f8bad41cba6bd2c68c11b8}{m\_size}),
+149                                  \textcolor{stringliteral}{"LayoutType"}, StringValue (\textcolor{stringliteral}{"RowFirst"}));
+150   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+151   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (*\hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes});
+152 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run()}{DoRun()}}]{\setlength{\rightskip}{0pt plus 5cm}void Chain\+Regression\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classChainRegressionTest_a51aa3cae551407ee6a6f346c30e3cc43}{}\label{classChainRegressionTest_a51aa3cae551407ee6a6f346c30e3cc43}
+
+
+Go. 
+
+
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+115 \{
+116   RngSeedManager::SetSeed (12345);
+117   RngSeedManager::SetRun (7);
+118   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::ArpCache::AliveTimeout"}, TimeValue (
+      \hyperlink{classChainRegressionTest_a7dda0494d54670d515ff7821993710de}{m\_arpAliveTimeout}));
+119 
+120   \hyperlink{classChainRegressionTest_a3e368f839e9527ba7bde784258c31792}{CreateNodes} ();
+121   \hyperlink{classChainRegressionTest_ae8b1dd906e3d52a223122c63d236bb19}{CreateDevices} ();
+122 
+123   \textcolor{comment}{// At m\_time / 3 move central node away and see what will happen}
+124   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = \hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes}->\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (\hyperlink{classChainRegressionTest_a0b140f49f0f8bad41cba6bd2c68c11b8}{m\_size} / 2);
+125   \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} mob = node->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+126   Simulator::Schedule (\hyperlink{classns3_1_1Time}{Time} (\hyperlink{classChainRegressionTest_aaba809877469a5652b1b62461744e2c7}{m\_time} / 3), &\hyperlink{lena-cqi-threshold_8cc_aac02abe91b3e5592e31bc0f7d844bf4d}{MobilityModel::SetPosition}, 
+      mob, Vector (1e5, 1e5, 1e5));
+127 
+128   Simulator::Stop (\hyperlink{classChainRegressionTest_aaba809877469a5652b1b62461744e2c7}{m\_time});
+129   Simulator::Run ();
+130   Simulator::Destroy ();
+131 
+132   \hyperlink{classChainRegressionTest_aa865609268ade23e85e6560912fefb57}{CheckResults} ();
+133 
+134   \textcolor{keyword}{delete} \hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes}, \hyperlink{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{m\_nodes} = 0;
+135 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!Send\+Ping@{Send\+Ping}}
+\index{Send\+Ping@{Send\+Ping}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{Send\+Ping()}{SendPing()}}]{\setlength{\rightskip}{0pt plus 5cm}void Chain\+Regression\+Test\+::\+Send\+Ping (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChainRegressionTest_a7282b25c193b2b0f237263616b10f251}{}\label{classChainRegressionTest_a7282b25c193b2b0f237263616b10f251}
+
+
+Send one ping. 
+
+
+\begin{DoxyCode}
+86 \{
+87   \textcolor{keywordflow}{if} (\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} () >= \hyperlink{classChainRegressionTest_aaba809877469a5652b1b62461744e2c7}{m\_time})
+88     \{
+89       \textcolor{keywordflow}{return};
+90     \}
+91 
+92   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = Create<Packet> ();
+93   \hyperlink{classns3_1_1Icmpv4Echo}{Icmpv4Echo} echo;
+94   echo.\hyperlink{classns3_1_1Icmpv4Echo_acb08fd7a4a626ed59528d0e2a3b50feb}{SetSequenceNumber} (\hyperlink{classChainRegressionTest_a4b038b8f43087a96aaa1b94d6f351733}{m\_seq});
+95   \hyperlink{classChainRegressionTest_a4b038b8f43087a96aaa1b94d6f351733}{m\_seq}++;
+96   echo.SetIdentifier (0);
+97 
+98   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} dataPacket = Create<Packet> (56);
+99   echo.SetData (dataPacket);
+100   p->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (echo);
+101   \hyperlink{classns3_1_1Icmpv4Header}{Icmpv4Header} header;
+102   header.\hyperlink{classns3_1_1Icmpv4Header_a48c46557787fac004f0de959294ad959}{SetType} (Icmpv4Header::ECHO);
+103   header.\hyperlink{classns3_1_1Icmpv4Header_a283ff70177edcb108317263ba2924a5b}{SetCode} (0);
+104   \textcolor{keywordflow}{if} (Node::ChecksumEnabled ())
+105     \{
+106       header.\hyperlink{classns3_1_1Icmpv4Header_ac4b154ae9b6e2a151a2d0f42a491d3b9}{EnableChecksum} ();
+107     \}
+108   p->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (header);
+109   \hyperlink{classChainRegressionTest_ad5f524009bcd54ac069a4a6b9d58bcd0}{m\_socket}->\hyperlink{classns3_1_1Socket_a036901c8f485fe5b6eab93b7f2ec289d}{Send} (p, 0);
+110   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1), &\hyperlink{classChainRegressionTest_a7282b25c193b2b0f237263616b10f251}{ChainRegressionTest::SendPing}, \textcolor{keyword}{
+      this});
+111 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!m\+\_\+arp\+Alive\+Timeout@{m\+\_\+arp\+Alive\+Timeout}}
+\index{m\+\_\+arp\+Alive\+Timeout@{m\+\_\+arp\+Alive\+Timeout}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+arp\+Alive\+Timeout}{m_arpAliveTimeout}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Time} Chain\+Regression\+Test\+::m\+\_\+arp\+Alive\+Timeout\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChainRegressionTest_a7dda0494d54670d515ff7821993710de}{}\label{classChainRegressionTest_a7dda0494d54670d515ff7821993710de}
+
+
+A\+RP alive timeout. 
+
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!m\+\_\+nodes@{m\+\_\+nodes}}
+\index{m\+\_\+nodes@{m\+\_\+nodes}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+nodes}{m_nodes}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container}$\ast$ Chain\+Regression\+Test\+::m\+\_\+nodes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}{}\label{classChainRegressionTest_a9df3157b70f521bddeb6184f0e7c48a3}
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!m\+\_\+prefix@{m\+\_\+prefix}}
+\index{m\+\_\+prefix@{m\+\_\+prefix}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+prefix}{m_prefix}}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string Chain\+Regression\+Test\+::m\+\_\+prefix\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChainRegressionTest_ac11ece02445e290f10eef8c73542b60a}{}\label{classChainRegressionTest_ac11ece02445e290f10eef8c73542b60a}
+
+
+P\+C\+AP file names prefix. 
+
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!m\+\_\+seq@{m\+\_\+seq}}
+\index{m\+\_\+seq@{m\+\_\+seq}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+seq}{m_seq}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Chain\+Regression\+Test\+::m\+\_\+seq\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChainRegressionTest_a4b038b8f43087a96aaa1b94d6f351733}{}\label{classChainRegressionTest_a4b038b8f43087a96aaa1b94d6f351733}
+
+
+Sequence number. 
+
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!m\+\_\+size@{m\+\_\+size}}
+\index{m\+\_\+size@{m\+\_\+size}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+size}{m_size}}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t Chain\+Regression\+Test\+::m\+\_\+size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChainRegressionTest_a0b140f49f0f8bad41cba6bd2c68c11b8}{}\label{classChainRegressionTest_a0b140f49f0f8bad41cba6bd2c68c11b8}
+
+
+Chain size. 
+
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!m\+\_\+socket@{m\+\_\+socket}}
+\index{m\+\_\+socket@{m\+\_\+socket}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+socket}{m_socket}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Socket}$>$ Chain\+Regression\+Test\+::m\+\_\+socket\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChainRegressionTest_ad5f524009bcd54ac069a4a6b9d58bcd0}{}\label{classChainRegressionTest_ad5f524009bcd54ac069a4a6b9d58bcd0}
+
+
+Socket. 
+
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!m\+\_\+step@{m\+\_\+step}}
+\index{m\+\_\+step@{m\+\_\+step}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+step}{m_step}}]{\setlength{\rightskip}{0pt plus 5cm}const double Chain\+Regression\+Test\+::m\+\_\+step\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChainRegressionTest_a9700cff3675b8d166d41e4d479a1c3ac}{}\label{classChainRegressionTest_a9700cff3675b8d166d41e4d479a1c3ac}
+
+
+Chain step, meters. 
+
+\index{Chain\+Regression\+Test@{Chain\+Regression\+Test}!m\+\_\+time@{m\+\_\+time}}
+\index{m\+\_\+time@{m\+\_\+time}!Chain\+Regression\+Test@{Chain\+Regression\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+time}{m_time}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Time} Chain\+Regression\+Test\+::m\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChainRegressionTest_aaba809877469a5652b1b62461744e2c7}{}\label{classChainRegressionTest_aaba809877469a5652b1b62461744e2c7}
+
+
+Total simulation time. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+aodv/test/\hyperlink{aodv-regression_8h}{aodv-\/regression.\+h}\item 
+aodv/test/\hyperlink{aodv-regression_8cc}{aodv-\/regression.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,119 @@
+\hypertarget{example-ping-lr-wpan_8cc}{}\section{sixlowpan/examples/example-\/ping-\/lr-\/wpan.cc File Reference}
+\label{example-ping-lr-wpan_8cc}\index{sixlowpan/examples/example-\/ping-\/lr-\/wpan.\+cc@{sixlowpan/examples/example-\/ping-\/lr-\/wpan.\+cc}}
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/apps-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv6-\/static-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/spectrum-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/propagation-\/loss-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv6-\/routing-\/table-\/entry.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/sixlowpan-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/lr-\/wpan-\/module.\+h\char`\"{}}\\*
+Include dependency graph for example-\/ping-\/lr-\/wpan.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{example-ping-lr-wpan_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{example-\/ping-\/lr-\/wpan.\+cc@{example-\/ping-\/lr-\/wpan.\+cc}!main@{main}}
+\index{main@{main}!example-\/ping-\/lr-\/wpan.\+cc@{example-\/ping-\/lr-\/wpan.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{example-ping-lr-wpan_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{example-ping-lr-wpan_8cc_a3c04138a5bfe5d72780bb7e82a18e627}
+
+\begin{DoxyCode}
+40 \{
+41   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+42   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+43   
+44 \textcolor{preprocessor}{#if 0}
+45   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"Ping6Application"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+46   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"LrWpanMac"},\hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+47   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"LrWpanPhy"},\hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+48   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"LrWpanNetDevice"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+49   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"SixLowPanNetDevice"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+50 \textcolor{preprocessor}{#endif}
+51 
+52   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+53   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create}(2);
+54 
+55   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+56   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+57   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (\textcolor{stringliteral}{"ns3::GridPositionAllocator"},
+58                                  \textcolor{stringliteral}{"MinX"}, DoubleValue (0.0),
+59                                  \textcolor{stringliteral}{"MinY"}, DoubleValue (0.0),
+60                                  \textcolor{stringliteral}{"DeltaX"}, DoubleValue (20),
+61                                  \textcolor{stringliteral}{"DeltaY"}, DoubleValue (20),
+62                                  \textcolor{stringliteral}{"GridWidth"}, UintegerValue (3),
+63                                  \textcolor{stringliteral}{"LayoutType"}, StringValue (\textcolor{stringliteral}{"RowFirst"}));
+64   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+65   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (nodes);
+66   
+67   \hyperlink{classns3_1_1LrWpanHelper}{LrWpanHelper} lrWpanHelper;
+68   \textcolor{comment}{// Add and install the LrWpanNetDevice for each node}
+69   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} lrwpanDevices = lrWpanHelper.\hyperlink{classns3_1_1LrWpanHelper_a7863b7b79168f747197faf479e4951fe}{Install}(nodes);
+70 
+71   \textcolor{comment}{// Fake PAN association and short address assignment.}
+72   lrWpanHelper.\hyperlink{classns3_1_1LrWpanHelper_a3721e2624f82dfe56f03f1764afe3a07}{AssociateToPan} (lrwpanDevices, 0);
+73 
+74   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internetv6;
+75   internetv6.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (nodes);
+76 
+77   \hyperlink{classns3_1_1SixLowPanHelper}{SixLowPanHelper} sixlowpan;
+78   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = sixlowpan.\hyperlink{classns3_1_1SixLowPanHelper_a638d855fa28d59736b59446aefccf7b3}{Install} (lrwpanDevices); 
+79  
+80   \hyperlink{classns3_1_1Ipv6AddressHelper}{Ipv6AddressHelper} ipv6;
+81   ipv6.\hyperlink{classns3_1_1Ipv6AddressHelper_a13467412e9da6263395c09460681c0f1}{SetBase} (\hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"2001:2::"}), \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (64));
+82   \hyperlink{classns3_1_1Ipv6InterfaceContainer}{Ipv6InterfaceContainer} deviceInterfaces;
+83   deviceInterfaces = ipv6.\hyperlink{classns3_1_1Ipv6AddressHelper_aad4685588aea1757beaf881bc4157912}{Assign} (devices);
+84   \textcolor{comment}{// check if adresses are assigned}
+85   \textcolor{comment}{//std::cout<< deviceInterfaces.GetAddress(0,1)<<std::endl;}
+86   \textcolor{comment}{//std::cout<< deviceInterfaces.GetAddress(1,1)<<std::endl;}
+87 
+88 
+89    
+90   uint32\_t packetSize = 10;
+91   uint32\_t maxPacketCount = 5;
+92   \hyperlink{classns3_1_1Time}{Time} interPacketInterval = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.);
+93   \hyperlink{classns3_1_1Ping6Helper}{Ping6Helper} ping6;
+94 
+95   ping6.\hyperlink{classns3_1_1Ping6Helper_aa1453d2ea29e762a3ae161a8099192e2}{SetLocal} (deviceInterfaces.\hyperlink{classns3_1_1Ipv6InterfaceContainer_ac888a9b8e70b501e44fdb12e4adc7d79}{GetAddress} (0, 1));
+96   ping6.\hyperlink{classns3_1_1Ping6Helper_a1a2aaa6931daf3c493ceae3138f26072}{SetRemote} (deviceInterfaces.\hyperlink{classns3_1_1Ipv6InterfaceContainer_ac888a9b8e70b501e44fdb12e4adc7d79}{GetAddress} (1, 1));
+97 
+98   ping6.\hyperlink{classns3_1_1Ping6Helper_aa049dde33bc4f712b7bf79e16da1243e}{SetAttribute} (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (maxPacketCount));
+99   ping6.\hyperlink{classns3_1_1Ping6Helper_aa049dde33bc4f712b7bf79e16da1243e}{SetAttribute} (\textcolor{stringliteral}{"Interval"}, TimeValue (interPacketInterval));
+100   ping6.\hyperlink{classns3_1_1Ping6Helper_aa049dde33bc4f712b7bf79e16da1243e}{SetAttribute} (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (packetSize));
+101   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} apps = ping6.\hyperlink{classns3_1_1Ping6Helper_a3f450b54b353b5181dec6c6d69733e0a}{Install} (nodes.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+102 
+103   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+104   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+105 
+106   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+107   lrWpanHelper.\hyperlink{classns3_1_1AsciiTraceHelperForDevice_a63e57c878526c732924e14c1e52cca8b}{EnableAsciiAll} (ascii.\hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (\textcolor{stringliteral}{"Ping-6LoW-lr-wpan.tr"}
+      ));
+108   lrWpanHelper.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (std::string (\textcolor{stringliteral}{"Ping-6LoW-lr-wpan"}), \textcolor{keyword}{true});
+109   
+110   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10));
+111   
+112   Simulator::Run ();
+113   Simulator::Destroy ();
+114 
+115 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

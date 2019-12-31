@@ -1,0 +1,95 @@
+\hypertarget{classDsrFsHeaderTest}{}\section{Dsr\+Fs\+Header\+Test Class Reference}
+\label{classDsrFsHeaderTest}\index{Dsr\+Fs\+Header\+Test@{Dsr\+Fs\+Header\+Test}}
+
+
+Inheritance diagram for Dsr\+Fs\+Header\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Dsr\+Fs\+Header\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDsrFsHeaderTest_acd148fe41cbad270ba0692d761df8845}{Dsr\+Fs\+Header\+Test} ()
+\item 
+\hyperlink{classDsrFsHeaderTest_a3da692acc3d37727fb09d14ffdd5f091}{$\sim$\+Dsr\+Fs\+Header\+Test} ()
+\item 
+virtual void \hyperlink{classDsrFsHeaderTest_ac2495c11d1b567cebc81c0b0668f88b6}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Dsr\+Fs\+Header\+Test@{Dsr\+Fs\+Header\+Test}!Dsr\+Fs\+Header\+Test@{Dsr\+Fs\+Header\+Test}}
+\index{Dsr\+Fs\+Header\+Test@{Dsr\+Fs\+Header\+Test}!Dsr\+Fs\+Header\+Test@{Dsr\+Fs\+Header\+Test}}
+\subsubsection[{\texorpdfstring{Dsr\+Fs\+Header\+Test()}{DsrFsHeaderTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Dsr\+Fs\+Header\+Test\+::\+Dsr\+Fs\+Header\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classDsrFsHeaderTest_acd148fe41cbad270ba0692d761df8845}{}\label{classDsrFsHeaderTest_acd148fe41cbad270ba0692d761df8845}
+
+\begin{DoxyCode}
+66   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"DSR Fixed size Header"})
+67 \{
+68 \}
+\end{DoxyCode}
+\index{Dsr\+Fs\+Header\+Test@{Dsr\+Fs\+Header\+Test}!````~Dsr\+Fs\+Header\+Test@{$\sim$\+Dsr\+Fs\+Header\+Test}}
+\index{````~Dsr\+Fs\+Header\+Test@{$\sim$\+Dsr\+Fs\+Header\+Test}!Dsr\+Fs\+Header\+Test@{Dsr\+Fs\+Header\+Test}}
+\subsubsection[{\texorpdfstring{$\sim$\+Dsr\+Fs\+Header\+Test()}{~DsrFsHeaderTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Dsr\+Fs\+Header\+Test\+::$\sim$\+Dsr\+Fs\+Header\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classDsrFsHeaderTest_a3da692acc3d37727fb09d14ffdd5f091}{}\label{classDsrFsHeaderTest_a3da692acc3d37727fb09d14ffdd5f091}
+
+\begin{DoxyCode}
+70 \{
+71 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Dsr\+Fs\+Header\+Test@{Dsr\+Fs\+Header\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Dsr\+Fs\+Header\+Test@{Dsr\+Fs\+Header\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Dsr\+Fs\+Header\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classDsrFsHeaderTest_ac2495c11d1b567cebc81c0b0668f88b6}{}\label{classDsrFsHeaderTest_ac2495c11d1b567cebc81c0b0668f88b6}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+74 \{
+75   \hyperlink{classns3_1_1dsr_1_1DsrRoutingHeader}{dsr::DsrRoutingHeader} header;
+76   \hyperlink{classns3_1_1dsr_1_1DsrOptionRreqHeader}{dsr::DsrOptionRreqHeader} rreqHeader;
+77   header.\hyperlink{classns3_1_1dsr_1_1DsrOptionField_acd03d07018e22f5e2b23975fae84fb3c}{AddDsrOption} (rreqHeader); \textcolor{comment}{// has an alignment of 4n+0}
+78 
+79   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (header.\hyperlink{classns3_1_1dsr_1_1DsrRoutingHeader_a652e3ee1f4ecbe29aac2b5e3f7d81820}{GetSerializedSize} () % 2, 0, \textcolor{stringliteral}{"length
+       of routing header is not a multiple of 4"});
+80   \hyperlink{classns3_1_1Buffer}{Buffer} buf;
+81   buf.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (header.\hyperlink{classns3_1_1dsr_1_1DsrRoutingHeader_a652e3ee1f4ecbe29aac2b5e3f7d81820}{GetSerializedSize} ());
+82   header.\hyperlink{classns3_1_1dsr_1_1DsrRoutingHeader_aab7d92809ad6ad560f4297653e7ae2cc}{Serialize} (buf.Begin ());
+83 
+84   \textcolor{keyword}{const} uint8\_t* \hyperlink{topology-example-sim_8cc_a26c65296e316af77b787dc77469bb2a4}{data} = buf.PeekData ();
+85   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (*(data + 8), rreqHeader.\hyperlink{classns3_1_1dsr_1_1DsrOptionHeader_a1f45f05b6f07be23f84dfd90fca2519f}{GetType} (), \textcolor{stringliteral}{"expect the
+       rreqHeader after fixed size header"});
+86 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+dsr/test/\hyperlink{dsr-test-suite_8cc}{dsr-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

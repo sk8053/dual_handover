@@ -1,0 +1,472 @@
+\hypertarget{classTcpTimeRtoTest}{}\section{Tcp\+Time\+Rto\+Test Class Reference}
+\label{classTcpTimeRtoTest}\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+
+
+Testing the timing of R\+TO.  
+
+
+
+
+Inheritance diagram for Tcp\+Time\+Rto\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Tcp\+Time\+Rto\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTcpTimeRtoTest_aacb6556df47cc733b6342ae48ca70b16}{Tcp\+Time\+Rto\+Test} (\hyperlink{classns3_1_1TypeId}{Type\+Id} \&cong\+Control, const std\+::string \&msg)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketMsgBase}{Tcp\+Socket\+Msg\+Base} $>$ \hyperlink{classTcpTimeRtoTest_a1de56f4678c729df31417a732dadac91}{Create\+Sender\+Socket} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Node}{Node} $>$ node)
+\begin{DoxyCompactList}\small\item\em Create and install the socket to install on the sender. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1ErrorModel}{Error\+Model} $>$ \hyperlink{classTcpTimeRtoTest_ab9f68845369259b334d796ce9f92c7cd}{Create\+Receiver\+Error\+Model} ()
+\begin{DoxyCompactList}\small\item\em Create and return the error model to install in the receiver node. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpTimeRtoTest_af928664828409543ac2e0bf4a129bb60}{Error\+Close} (\hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6ee}{Socket\+Who} who)
+\begin{DoxyCompactList}\small\item\em Socket closed with an error. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpTimeRtoTest_a6df1dee158b75cb0e8dff8dd0603ab1b}{After\+R\+T\+O\+Expired} (const \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6ee}{Socket\+Who} who)
+\begin{DoxyCompactList}\small\item\em Rto has expired. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpTimeRtoTest_ae8f215f01bf8d8f198c5701029f60b1e}{Tx} (const \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p}, const \hyperlink{classns3_1_1TcpHeader}{Tcp\+Header} \&h, \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6ee}{Socket\+Who} who)
+\begin{DoxyCompactList}\small\item\em Packet transmitted down to IP layer. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpTimeRtoTest_a4ffa81fada70ab736194ec6df9f8865b}{Final\+Checks} ()
+\begin{DoxyCompactList}\small\item\em Performs the (eventual) final checks through test asserts. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpTimeRtoTest_abb6359ae69a3852ca98c3683e359de82}{Configure\+Environment} ()
+\begin{DoxyCompactList}\small\item\em Change the configuration of the evironment. \end{DoxyCompactList}\item 
+void \hyperlink{classTcpTimeRtoTest_a38be3854a77fe9188a792cd1172ba88c}{Pkt\+Dropped} (const \hyperlink{classns3_1_1Ipv4Header}{Ipv4\+Header} \&ipH, const \hyperlink{classns3_1_1TcpHeader}{Tcp\+Header} \&tcpH, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p})
+\begin{DoxyCompactList}\small\item\em Called when a packet has been dropped. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classTcpTimeRtoTest_a186a4f5d05d6419be25d9de538848fab}{m\+\_\+sender\+Sent\+Segments}
+\begin{DoxyCompactList}\small\item\em Number of segments sent. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{m\+\_\+previous\+R\+TO}
+\begin{DoxyCompactList}\small\item\em Previous R\+TO. \end{DoxyCompactList}\item 
+bool \hyperlink{classTcpTimeRtoTest_a9328545b0ec2c15fa47feb028120baea}{m\+\_\+closed}
+\begin{DoxyCompactList}\small\item\em True if the connection is closed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Testing the timing of R\+TO. 
+
+Checking if R\+TO is doubled O\+N\+LY after a retransmission. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Tcp\+Time\+Rto\+Test(\+Type\+Id \&cong\+Control, const std\+::string \&msg)}{TcpTimeRtoTest(TypeId &congControl, const std::string &msg)}}]{\setlength{\rightskip}{0pt plus 5cm}Tcp\+Time\+Rto\+Test\+::\+Tcp\+Time\+Rto\+Test (
+\begin{DoxyParamCaption}
+\item[{{\bf Type\+Id} \&}]{cong\+Control, }
+\item[{const std\+::string \&}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{classTcpTimeRtoTest_aacb6556df47cc733b6342ae48ca70b16}{}\label{classTcpTimeRtoTest_aacb6556df47cc733b6342ae48ca70b16}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cong\+Control} & Congestion control type. \\
+\hline
+{\em msg} & Test description. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+215   :   \hyperlink{classns3_1_1TcpGeneralTest_aed700e733bc50b1e736cb52c0b71f3f8}{TcpGeneralTest} (desc),
+216     \hyperlink{classTcpTimeRtoTest_a186a4f5d05d6419be25d9de538848fab}{m\_senderSentSegments} (0),
+217     \hyperlink{classTcpTimeRtoTest_a9328545b0ec2c15fa47feb028120baea}{m\_closed} (\textcolor{keyword}{false})
+218 \{
+219   \hyperlink{classns3_1_1TcpGeneralTest_aa85b87bfde4d43e1f799f297fe689a8d}{m\_congControlTypeId} = congControl;
+220 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!After\+R\+T\+O\+Expired@{After\+R\+T\+O\+Expired}}
+\index{After\+R\+T\+O\+Expired@{After\+R\+T\+O\+Expired}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{After\+R\+T\+O\+Expired(const Ptr$<$ const Tcp\+Socket\+State $>$ tcb, Socket\+Who who)}{AfterRTOExpired(const Ptr< const TcpSocketState > tcb, SocketWho who)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Time\+Rto\+Test\+::\+After\+R\+T\+O\+Expired (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{{\bf Socket\+Who}}]{who}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpTimeRtoTest_a6df1dee158b75cb0e8dff8dd0603ab1b}{}\label{classTcpTimeRtoTest_a6df1dee158b75cb0e8dff8dd0603ab1b}
+
+
+Rto has expired. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & Transmission control block \\
+\hline
+{\em who} & where the R\+TO has expired (S\+E\+N\+D\+ER or R\+E\+C\+E\+I\+V\+ER) \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_acbfa9bd62fbc144349b1dddc6b21c855}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+332 \{
+333   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (who, \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER}, \textcolor{stringliteral}{"RTO in Receiver. That's unexpected"});
+334 
+335   \hyperlink{classns3_1_1Time}{Time} actualRto = \hyperlink{classns3_1_1TcpGeneralTest_a9e657804bde27d35cfd99186e25f6145}{GetRto} (\hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER});
+336 
+337   \textcolor{keywordflow}{if} (actualRto < \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (60))
+338     \{
+339       \hyperlink{group__testing_ga9e7861b56b4e70db3b56044cb7a28e41}{NS\_TEST\_ASSERT\_MSG\_EQ\_TOL} (actualRto, 
+      \hyperlink{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{m\_previousRTO}+\hyperlink{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{m\_previousRTO}, \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.01),
+340                                  \textcolor{stringliteral}{"RTO has not doubled after an expiration"});
+341       \hyperlink{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{m\_previousRTO} += \hyperlink{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{m\_previousRTO};
+342     \}
+343   \textcolor{keywordflow}{else}
+344     \{
+345       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (actualRto, \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (60),
+346                              \textcolor{stringliteral}{"RTO goes beyond 60 second limit"});
+347     \}
+348 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!Configure\+Environment@{Configure\+Environment}}
+\index{Configure\+Environment@{Configure\+Environment}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Configure\+Environment()}{ConfigureEnvironment()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Time\+Rto\+Test\+::\+Configure\+Environment (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpTimeRtoTest_abb6359ae69a3852ca98c3683e359de82}{}\label{classTcpTimeRtoTest_abb6359ae69a3852ca98c3683e359de82}
+
+
+Change the configuration of the evironment. 
+
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_abd4e42807a8d2b13dcd207131af12c3b}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+224 \{
+225   TcpGeneralTest::ConfigureEnvironment ();
+226   \hyperlink{classns3_1_1TcpGeneralTest_a256c8df5966f89ed0acfc966cd5d3898}{SetAppPktCount} (100);
+227 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!Create\+Receiver\+Error\+Model@{Create\+Receiver\+Error\+Model}}
+\index{Create\+Receiver\+Error\+Model@{Create\+Receiver\+Error\+Model}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Create\+Receiver\+Error\+Model()}{CreateReceiverErrorModel()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Error\+Model} $>$ Tcp\+Time\+Rto\+Test\+::\+Create\+Receiver\+Error\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpTimeRtoTest_ab9f68845369259b334d796ce9f92c7cd}{}\label{classTcpTimeRtoTest_ab9f68845369259b334d796ce9f92c7cd}
+
+
+Create and return the error model to install in the receiver node. 
+
+\begin{DoxyReturn}{Returns}
+receiver error model 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_a256082023d4a67738c946d66c175a6d9}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+241 \{
+242   \hyperlink{classns3_1_1Ptr}{Ptr<TcpSeqErrorModel>} errorModel = CreateObject<TcpSeqErrorModel> ();
+243 
+244   \textcolor{comment}{// Drop packet for 7 times. At the 7th, the connection should be dropped.}
+245   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<7; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+246     \{
+247       errorModel->\hyperlink{classns3_1_1TcpSeqErrorModel_a5c414ce6277ae9ff84decb83a0847386}{AddSeqToKill} (\hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (1));
+248     \}
+249 
+250   errorModel->\hyperlink{classns3_1_1TcpGeneralErrorModel_a812f8d0b0eaf4508efd44be00028673f}{SetDropCallback} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classTcpTimeRtoTest_a38be3854a77fe9188a792cd1172ba88c}{TcpTimeRtoTest::PktDropped}, \textcolor{keyword}{this}));
+251 
+252   \textcolor{keywordflow}{return} errorModel;
+253 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!Create\+Sender\+Socket@{Create\+Sender\+Socket}}
+\index{Create\+Sender\+Socket@{Create\+Sender\+Socket}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Create\+Sender\+Socket(\+Ptr$<$ Node $>$ node)}{CreateSenderSocket(Ptr< Node > node)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Socket\+Msg\+Base} $>$ Tcp\+Time\+Rto\+Test\+::\+Create\+Sender\+Socket (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Node} $>$}]{node}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpTimeRtoTest_a1de56f4678c729df31417a732dadac91}{}\label{classTcpTimeRtoTest_a1de56f4678c729df31417a732dadac91}
+
+
+Create and install the socket to install on the sender. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & sender node pointer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the socket to be installed in the sender 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_a0476c37d8a08b42d42f6ea2634eece70}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+232 \{
+233   \hyperlink{classns3_1_1Ptr}{Ptr<TcpSocketMsgBase>} \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s} = TcpGeneralTest::CreateSenderSocket (node);
+234   s->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"DataRetries"}, UintegerValue (6));
+235 
+236   \textcolor{keywordflow}{return} \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s};
+237 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!Error\+Close@{Error\+Close}}
+\index{Error\+Close@{Error\+Close}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Error\+Close(\+Socket\+Who who)}{ErrorClose(SocketWho who)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Time\+Rto\+Test\+::\+Error\+Close (
+\begin{DoxyParamCaption}
+\item[{{\bf Socket\+Who}}]{who}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpTimeRtoTest_af928664828409543ac2e0bf4a129bb60}{}\label{classTcpTimeRtoTest_af928664828409543ac2e0bf4a129bb60}
+
+
+Socket closed with an error. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em who} & the socket closed (S\+E\+N\+D\+ER or R\+E\+C\+E\+I\+V\+ER) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000069}{Todo}]indicate the error \end{DoxyRefDesc}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_a7094bdc5082e1d76ef84afb8ee11268f}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+326 \{
+327   \hyperlink{classTcpTimeRtoTest_a9328545b0ec2c15fa47feb028120baea}{m\_closed} = \textcolor{keyword}{true};
+328 \}
+\end{DoxyCode}
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!Final\+Checks@{Final\+Checks}}
+\index{Final\+Checks@{Final\+Checks}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Final\+Checks()}{FinalChecks()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Time\+Rto\+Test\+::\+Final\+Checks (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpTimeRtoTest_a4ffa81fada70ab736194ec6df9f8865b}{}\label{classTcpTimeRtoTest_a4ffa81fada70ab736194ec6df9f8865b}
+
+
+Performs the (eventual) final checks through test asserts. 
+
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_ada871cedd37de404288f163b6f8dea39}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+359 \{
+360   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{classTcpTimeRtoTest_a9328545b0ec2c15fa47feb028120baea}{m\_closed}, \textcolor{keyword}{true},
+361                          \textcolor{stringliteral}{"Socket has not been closed after retrying data retransmissions"});
+362 \}
+\end{DoxyCode}
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!Pkt\+Dropped@{Pkt\+Dropped}}
+\index{Pkt\+Dropped@{Pkt\+Dropped}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Pkt\+Dropped(const Ipv4\+Header \&ip\+H, const Tcp\+Header \&tcp\+H, Ptr$<$ const Packet $>$ p)}{PktDropped(const Ipv4Header &ipH, const TcpHeader &tcpH, Ptr< const Packet > p)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Time\+Rto\+Test\+::\+Pkt\+Dropped (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv4\+Header} \&}]{ipH, }
+\item[{const {\bf Tcp\+Header} \&}]{tcpH, }
+\item[{{\bf Ptr}$<$ const {\bf Packet} $>$}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classTcpTimeRtoTest_a38be3854a77fe9188a792cd1172ba88c}{}\label{classTcpTimeRtoTest_a38be3854a77fe9188a792cd1172ba88c}
+
+
+Called when a packet has been dropped. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ipH} & I\+Pv4 header. \\
+\hline
+{\em tcpH} & T\+CP header. \\
+\hline
+{\em p} & The packet. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+353 \{
+354   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().GetSeconds () << \textcolor{stringliteral}{"\(\backslash\)tDROPPED! "} << tcpH);
+355 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!Tx@{Tx}}
+\index{Tx@{Tx}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Tx(const Ptr$<$ const Packet $>$ p, const Tcp\+Header \&h, Socket\+Who who)}{Tx(const Ptr< const Packet > p, const TcpHeader &h, SocketWho who)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Time\+Rto\+Test\+::\+Tx (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ptr}$<$ const {\bf Packet} $>$}]{p, }
+\item[{const {\bf Tcp\+Header} \&}]{h, }
+\item[{{\bf Socket\+Who}}]{who}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpTimeRtoTest_ae8f215f01bf8d8f198c5701029f60b1e}{}\label{classTcpTimeRtoTest_ae8f215f01bf8d8f198c5701029f60b1e}
+
+
+Packet transmitted down to IP layer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & packet \\
+\hline
+{\em h} & header \\
+\hline
+{\em who} & the socket which has received the packet (S\+E\+N\+D\+ER or R\+E\+C\+E\+I\+V\+ER) \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_ae3ae1d4a08bd0337cf66ef34d4771d89}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+257 \{
+258   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << p << h << who);
+259 
+260   \textcolor{keywordflow}{if} (who == \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER})
+261     \{
+262       ++\hyperlink{classTcpTimeRtoTest_a186a4f5d05d6419be25d9de538848fab}{m\_senderSentSegments};
+263       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().GetSeconds () << \textcolor{stringliteral}{"\(\backslash\)tMeasured RTO:"} <<
+264                    \hyperlink{classns3_1_1TcpGeneralTest_a9e657804bde27d35cfd99186e25f6145}{GetRto} (\hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER}).GetSeconds ());
+265 
+266       \textcolor{keywordflow}{if} (h.\hyperlink{classns3_1_1TcpHeader_a0d04c5620ee147d4e01d56b9530e8db1}{GetFlags} () & TcpHeader::SYN)
+267         \{
+268           \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (\hyperlink{classTcpTimeRtoTest_a186a4f5d05d6419be25d9de538848fab}{m\_senderSentSegments} == 1);
+269 
+270           \hyperlink{classns3_1_1Time}{Time} s\_rto = \hyperlink{classns3_1_1TcpGeneralTest_a9e657804bde27d35cfd99186e25f6145}{GetRto} (\hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER});
+271           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (s\_rto, \hyperlink{classns3_1_1TcpGeneralTest_a9e834d14ecf4e277fddee020f33b944a}{GetConnTimeout} (
+      \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER}),
+272                                  \textcolor{stringliteral}{"SYN packet sent without respecting "}
+273                                  \textcolor{stringliteral}{"ConnTimeout attribute"});
+274         \}
+275       \textcolor{keywordflow}{else}
+276         \{
+277           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().GetSeconds () << \textcolor{stringliteral}{"\(\backslash\)tTX: "} << h <<
+278                        \hyperlink{classTcpTimeRtoTest_a186a4f5d05d6419be25d9de538848fab}{m\_senderSentSegments});
+279 
+280           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (h.\hyperlink{classns3_1_1TcpHeader_a1081077eaf9bc64e9af909cebd128ae5}{GetSequenceNumber} ().
+      \hyperlink{classns3_1_1SequenceNumber_ad1dc215eb95f5371596af8ec914d3e72}{GetValue} (), 1,
+281                                  \textcolor{stringliteral}{"First packet has been correctly sent"});
+282 
+283           \textcolor{comment}{// Remember, from RFC:}
+284           \textcolor{comment}{// m\_rto = Max (m\_rtt->GetEstimate () +}
+285           \textcolor{comment}{//              Max (m\_clockGranularity, m\_rtt->GetVariation ()*4), m\_minRto);}
+286 
+287           \textcolor{keywordflow}{if} (\hyperlink{classTcpTimeRtoTest_a186a4f5d05d6419be25d9de538848fab}{m\_senderSentSegments} == 2)
+288             \{ \textcolor{comment}{// ACK of SYN-ACK, rto set for the first time, since now we have}
+289               \textcolor{comment}{// an estimation of RTT}
+290 
+291               \hyperlink{classns3_1_1Ptr}{Ptr<RttEstimator>} rttEstimator = \hyperlink{classns3_1_1TcpGeneralTest_a046965a7dd34cdb77c1403a3fb55ba54}{GetRttEstimator} (
+      \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER});
+292               \hyperlink{classns3_1_1Time}{Time} clockGranularity = \hyperlink{classns3_1_1TcpGeneralTest_a8e63caf6d2424c2523ae996a545f2c9c}{GetClockGranularity} (
+      \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER});
+293               \hyperlink{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{m\_previousRTO} = rttEstimator->\hyperlink{classns3_1_1RttEstimator_a11f575ae2d843d2f9d94842dd739e3d3}{GetEstimate} ();
+294 
+295               \textcolor{keywordflow}{if} (clockGranularity > rttEstimator->\hyperlink{classns3_1_1RttEstimator_a48b42289cba668b30d69bfe384d37d25}{GetVariation} ()*4)
+296                 \{
+297                   \hyperlink{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{m\_previousRTO} += clockGranularity;
+298                 \}
+299               \textcolor{keywordflow}{else}
+300                 \{
+301                   \hyperlink{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{m\_previousRTO} += rttEstimator->\hyperlink{classns3_1_1RttEstimator_a48b42289cba668b30d69bfe384d37d25}{GetVariation} ()*4;
+302                 \}
+303 
+304               \hyperlink{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{m\_previousRTO} = \hyperlink{aarf-wifi-manager_8cc_a4886a8f966a69949cefc46a6a3468006}{Max} (\hyperlink{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{m\_previousRTO}, 
+      \hyperlink{classns3_1_1TcpGeneralTest_a3e84cd4e8c38a2fe6077fcbf26ec729e}{GetMinRto} (\hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER}));
+305 
+306               \hyperlink{group__testing_ga9e7861b56b4e70db3b56044cb7a28e41}{NS\_TEST\_ASSERT\_MSG\_EQ\_TOL} (\hyperlink{classns3_1_1TcpGeneralTest_a9e657804bde27d35cfd99186e25f6145}{GetRto} (
+      \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER}), \hyperlink{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{m\_previousRTO}, \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.01),
+307                                          \textcolor{stringliteral}{"RTO value differs from calculation"});
+308             \}
+309           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classTcpTimeRtoTest_a186a4f5d05d6419be25d9de538848fab}{m\_senderSentSegments} == 3)
+310             \{ \textcolor{comment}{// First data packet. RTO should be the same as before}
+311 
+312               \hyperlink{group__testing_ga9e7861b56b4e70db3b56044cb7a28e41}{NS\_TEST\_ASSERT\_MSG\_EQ\_TOL} (\hyperlink{classns3_1_1TcpGeneralTest_a9e657804bde27d35cfd99186e25f6145}{GetRto} (
+      \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER}), \hyperlink{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{m\_previousRTO}, \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.01),
+313                                          \textcolor{stringliteral}{"RTO value has changed unexpectedly"});
+314 
+315             \}
+316         \}
+317     \}
+318   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (who == \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea2a9a39a8fe1edd25b643a48956b8ecff}{RECEIVER})
+319     \{
+320 
+321     \}
+322 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!m\+\_\+closed@{m\+\_\+closed}}
+\index{m\+\_\+closed@{m\+\_\+closed}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+closed}{m_closed}}]{\setlength{\rightskip}{0pt plus 5cm}bool Tcp\+Time\+Rto\+Test\+::m\+\_\+closed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpTimeRtoTest_a9328545b0ec2c15fa47feb028120baea}{}\label{classTcpTimeRtoTest_a9328545b0ec2c15fa47feb028120baea}
+
+
+True if the connection is closed. 
+
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!m\+\_\+previous\+R\+TO@{m\+\_\+previous\+R\+TO}}
+\index{m\+\_\+previous\+R\+TO@{m\+\_\+previous\+R\+TO}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+previous\+R\+TO}{m_previousRTO}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} Tcp\+Time\+Rto\+Test\+::m\+\_\+previous\+R\+TO\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}{}\label{classTcpTimeRtoTest_a783e8a412243d5c091ace7b2e252789b}
+
+
+Previous R\+TO. 
+
+\index{Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}!m\+\_\+sender\+Sent\+Segments@{m\+\_\+sender\+Sent\+Segments}}
+\index{m\+\_\+sender\+Sent\+Segments@{m\+\_\+sender\+Sent\+Segments}!Tcp\+Time\+Rto\+Test@{Tcp\+Time\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+sender\+Sent\+Segments}{m_senderSentSegments}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Tcp\+Time\+Rto\+Test\+::m\+\_\+sender\+Sent\+Segments\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpTimeRtoTest_a186a4f5d05d6419be25d9de538848fab}{}\label{classTcpTimeRtoTest_a186a4f5d05d6419be25d9de538848fab}
+
+
+Number of segments sent. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{tcp-rto-test_8cc}{tcp-\/rto-\/test.\+cc}\end{DoxyCompactItemize}

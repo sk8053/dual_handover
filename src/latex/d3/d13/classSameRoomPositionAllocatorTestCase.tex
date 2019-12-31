@@ -1,0 +1,130 @@
+\hypertarget{classSameRoomPositionAllocatorTestCase}{}\section{Same\+Room\+Position\+Allocator\+Test\+Case Class Reference}
+\label{classSameRoomPositionAllocatorTestCase}\index{Same\+Room\+Position\+Allocator\+Test\+Case@{Same\+Room\+Position\+Allocator\+Test\+Case}}
+
+
+Inheritance diagram for Same\+Room\+Position\+Allocator\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Same\+Room\+Position\+Allocator\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSameRoomPositionAllocatorTestCase_a451ed3da5f21b5b4879a7e38851c5ce8}{Same\+Room\+Position\+Allocator\+Test\+Case} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classSameRoomPositionAllocatorTestCase_a1c65ff018a0af3cd828b7c52d8a484f1}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Same\+Room\+Position\+Allocator\+Test\+Case@{Same\+Room\+Position\+Allocator\+Test\+Case}!Same\+Room\+Position\+Allocator\+Test\+Case@{Same\+Room\+Position\+Allocator\+Test\+Case}}
+\index{Same\+Room\+Position\+Allocator\+Test\+Case@{Same\+Room\+Position\+Allocator\+Test\+Case}!Same\+Room\+Position\+Allocator\+Test\+Case@{Same\+Room\+Position\+Allocator\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Same\+Room\+Position\+Allocator\+Test\+Case()}{SameRoomPositionAllocatorTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Same\+Room\+Position\+Allocator\+Test\+Case\+::\+Same\+Room\+Position\+Allocator\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSameRoomPositionAllocatorTestCase_a451ed3da5f21b5b4879a7e38851c5ce8}{}\label{classSameRoomPositionAllocatorTestCase_a451ed3da5f21b5b4879a7e38851c5ce8}
+
+\begin{DoxyCode}
+158   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"SameRoom 48 nodes"})
+159 \{
+160 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Same\+Room\+Position\+Allocator\+Test\+Case@{Same\+Room\+Position\+Allocator\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Same\+Room\+Position\+Allocator\+Test\+Case@{Same\+Room\+Position\+Allocator\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Same\+Room\+Position\+Allocator\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classSameRoomPositionAllocatorTestCase_a1c65ff018a0af3cd828b7c52d8a484f1}{}\label{classSameRoomPositionAllocatorTestCase_a1c65ff018a0af3cd828b7c52d8a484f1}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+164 \{
+165   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+166 
+167  
+168 
+169   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"create building"});
+170   \hyperlink{classns3_1_1Ptr}{Ptr<Building>} \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b} = CreateObject<Building> ();
+171   b->\hyperlink{classns3_1_1Building_a4b69659f05a983f06e33e7db62415915}{SetBoundaries} (\hyperlink{classns3_1_1Box}{Box} (-10, -6, 20, 26, -1, 5));
+172   b->\hyperlink{classns3_1_1Building_ae9f97075b5c8bf4685703e30ed049791}{SetNFloors} (2);
+173   b->\hyperlink{classns3_1_1Building_a60eac680f1059fb9d883a659607e2fae}{SetNRoomsX} (2);
+174   b->\hyperlink{classns3_1_1Building_a9103ee5b5edf013624d7e18422c4ba06}{SetNRoomsY} (3);
+175 
+176   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+177   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (24);
+178 
+179   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+180   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+181   \hyperlink{classns3_1_1Ptr}{Ptr<PositionAllocator>} positionAlloc = CreateObject<RandomRoomPositionAllocator> ()
+      ;
+182   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+183   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (nodes);
+184   BuildingsHelper::Install (nodes);
+185 
+186   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} copyNodes;
+187   copyNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (48);
+188   positionAlloc = CreateObject<SameRoomPositionAllocator> (\hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes});
+189   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+190   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (copyNodes);
+191   BuildingsHelper::Install (copyNodes);
+192 
+193   BuildingsHelper::MakeMobilityModelConsistent ();
+194 
+195   std::map<Room, uint32\_t> roomCounter;
+196 
+197   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1NodeContainer_aa1a9f2d2b09bfef7d066d3974bca2cc4}{NodeContainer::Iterator} it = copyNodes.\hyperlink{classns3_1_1NodeContainer_adf0f639aff139db107526288777eb533}{Begin} (); it != copyNodes.
+      \hyperlink{classns3_1_1NodeContainer_a8ea0bcac137597d192c5e6b95ca60464}{End} (); ++it)
+198     \{
+199       \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} mm = (*it)->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1MobilityModel}{MobilityModel}> ();
+200       \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (mm, \textcolor{stringliteral}{"no mobility model aggregated to this node"});
+201       \hyperlink{classns3_1_1Ptr}{Ptr<MobilityBuildingInfo>} bmm = mm->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1MobilityBuildingInfo}{MobilityBuildingInfo}> ();
+202       \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (bmm, \textcolor{stringliteral}{"MobilityBuildingInfo has not been aggregated to this node mobility
+       model"});
+203 
+204       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (bmm->\hyperlink{classns3_1_1MobilityBuildingInfo_a2bba20054cc48efcca2d5e0c46f8171c}{IsIndoor} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{"node should be indoor"});
+205       \hyperlink{structRoom}{Room} r (bmm->\hyperlink{classns3_1_1MobilityBuildingInfo_ad40faf32d419734e8c86f630e66ab18d}{GetRoomNumberX} (), bmm->\hyperlink{classns3_1_1MobilityBuildingInfo_a5297704859be8e1d3ad22ea3f5f93dbd}{GetRoomNumberY} (), bmm->
+      \hyperlink{classns3_1_1MobilityBuildingInfo_aedb2647206f2dae0aa98ec9ac11873c7}{GetFloorNumber} ());
+206       ++(roomCounter[r]);
+207     \}
+208 
+209   \textcolor{keywordflow}{for} (std::map<Room, uint32\_t>::iterator it = roomCounter.begin (); it != roomCounter.end (); ++it)
+210     \{
+211 
+212       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (it->second, 4, \textcolor{stringliteral}{"expected 4 nodes per room"});
+213     \}
+214 
+215   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (roomCounter.size (), 12, \textcolor{stringliteral}{"expected 12 rooms allocated"});
+216 
+217   Simulator::Destroy ();
+218 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+buildings/test/\hyperlink{building-position-allocator-test_8cc}{building-\/position-\/allocator-\/test.\+cc}\end{DoxyCompactItemize}

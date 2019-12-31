@@ -1,0 +1,90 @@
+\hypertarget{packet-socket-apps_8cc}{}\section{network/examples/packet-\/socket-\/apps.cc File Reference}
+\label{packet-socket-apps_8cc}\index{network/examples/packet-\/socket-\/apps.\+cc@{network/examples/packet-\/socket-\/apps.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+Include dependency graph for packet-\/socket-\/apps.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{packet-socket-apps_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{packet-\/socket-\/apps.\+cc@{packet-\/socket-\/apps.\+cc}!main@{main}}
+\index{main@{main}!packet-\/socket-\/apps.\+cc@{packet-\/socket-\/apps.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{packet-socket-apps_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{packet-socket-apps_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+40 \{
+41   \textcolor{keywordtype}{bool} \hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose} = \textcolor{keyword}{false};
+42 
+43   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+44   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"verbose"}, \textcolor{stringliteral}{"turn on log components"}, verbose);
+45   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse}(argc, argv);
+46 
+47   \textcolor{keywordflow}{if} (verbose)
+48     \{
+49       \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"PacketSocketServer"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+50       \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"PacketSocketClient"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+51       \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"SimpleNetDevice"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+52     \}
+53 
+54   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{visualizer-ideas_8txt_a3e1b3808014a2c68ab0cd0182e041be2}{nodes};
+55   nodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+56 
+57   \hyperlink{classns3_1_1PacketMetadata_addee67896039c1a356ee47698b04e953}{ns3::PacketMetadata::Enable}();
+58 
+59   \hyperlink{classns3_1_1PacketSocketHelper}{PacketSocketHelper} packetSocket;
+60 
+61   \textcolor{comment}{// give packet socket powers to nodes.}
+62   packetSocket.\hyperlink{classns3_1_1PacketSocketHelper_a33f449fee7fd10411949d17feba6d33e}{Install} (nodes);
+63 
+64   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleNetDevice>} txDev;
+65   txDev = CreateObject<SimpleNetDevice> ();
+66   nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (txDev);
+67 
+68   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleNetDevice>} rxDev;
+69   rxDev = CreateObject<SimpleNetDevice> ();
+70   nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1)->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (rxDev);
+71 
+72   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleChannel>} channel = CreateObject<SimpleChannel> ();
+73   txDev->\hyperlink{classns3_1_1SimpleNetDevice_af9e9828ad584b5ba538f18f645f162e0}{SetChannel} (channel);
+74   rxDev->\hyperlink{classns3_1_1SimpleNetDevice_af9e9828ad584b5ba538f18f645f162e0}{SetChannel} (channel);
+75   txDev->\hyperlink{classns3_1_1SimpleNetDevice_a7b0e64c1e4ee9841de0a892db96ddd68}{SetNode} (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+76   rxDev->\hyperlink{classns3_1_1SimpleNetDevice_a7b0e64c1e4ee9841de0a892db96ddd68}{SetNode} (nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+77 
+78 
+79   \hyperlink{classns3_1_1PacketSocketAddress}{PacketSocketAddress} socketAddr;
+80   socketAddr.\hyperlink{classns3_1_1PacketSocketAddress_ad1caa016f4d27c9d5f2c06dbfc53f8a3}{SetSingleDevice} (txDev->\hyperlink{classns3_1_1SimpleNetDevice_ad49c077636c82c11b3d76dcb12dfa203}{GetIfIndex} ());
+81   socketAddr.\hyperlink{classns3_1_1PacketSocketAddress_a9452f9410a97e57344e464e25c2ab0f3}{SetPhysicalAddress} (rxDev->\hyperlink{classns3_1_1SimpleNetDevice_a813ed60e4386e8f46493a575f636606a}{GetAddress} ());
+82   \textcolor{comment}{// Arbitrary protocol type.}
+83   \textcolor{comment}{// Note: PacketSocket doesn't have any L4 multiplexing or demultiplexing}
+84   \textcolor{comment}{//       The only mux/demux is based on the protocol field}
+85   socketAddr.\hyperlink{classns3_1_1PacketSocketAddress_a9020962e39c238277f3b2f0de605647a}{SetProtocol} (1);
+86 
+87   \hyperlink{classns3_1_1Ptr}{Ptr<PacketSocketClient>} client = CreateObject<PacketSocketClient> ();
+88   client->\hyperlink{classns3_1_1PacketSocketClient_ae400727c451d429358b5c85838b901df}{SetRemote} (socketAddr);
+89   nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->\hyperlink{classns3_1_1Node_ab98b4fdc4aadc86366b80e8a79a53f47}{AddApplication} (client);
+90 
+91   \hyperlink{classns3_1_1Ptr}{Ptr<PacketSocketServer>} server = CreateObject<PacketSocketServer> ();
+92   server->\hyperlink{classns3_1_1PacketSocketServer_a89207b49054571b480ee1d26934907d3}{SetLocal} (socketAddr);
+93   nodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1)->\hyperlink{classns3_1_1Node_ab98b4fdc4aadc86366b80e8a79a53f47}{AddApplication} (server);
+94 
+95   Simulator::Run ();
+96   Simulator::Destroy ();
+97   \textcolor{keywordflow}{return} 0;
+98 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

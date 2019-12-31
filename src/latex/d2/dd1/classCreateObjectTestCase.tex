@@ -1,0 +1,125 @@
+\hypertarget{classCreateObjectTestCase}{}\section{Create\+Object\+Test\+Case Class Reference}
+\label{classCreateObjectTestCase}\index{Create\+Object\+Test\+Case@{Create\+Object\+Test\+Case}}
+
+
+Inheritance diagram for Create\+Object\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Create\+Object\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCreateObjectTestCase_a157d7e1a333a0ab32f6f8c9666c42bfb}{Create\+Object\+Test\+Case} ()
+\item 
+virtual \hyperlink{classCreateObjectTestCase_a95fa1edf59c16d8785b092a973ac9036}{$\sim$\+Create\+Object\+Test\+Case} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classCreateObjectTestCase_a562bfbe5de0afb55e775e4b4e28767f5}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Create\+Object\+Test\+Case@{Create\+Object\+Test\+Case}!Create\+Object\+Test\+Case@{Create\+Object\+Test\+Case}}
+\index{Create\+Object\+Test\+Case@{Create\+Object\+Test\+Case}!Create\+Object\+Test\+Case@{Create\+Object\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Create\+Object\+Test\+Case()}{CreateObjectTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Create\+Object\+Test\+Case\+::\+Create\+Object\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCreateObjectTestCase_a157d7e1a333a0ab32f6f8c9666c42bfb}{}\label{classCreateObjectTestCase_a157d7e1a333a0ab32f6f8c9666c42bfb}
+
+\begin{DoxyCode}
+139   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check CreateObject<Type> template function"})
+140 \{
+141 \}
+\end{DoxyCode}
+\index{Create\+Object\+Test\+Case@{Create\+Object\+Test\+Case}!````~Create\+Object\+Test\+Case@{$\sim$\+Create\+Object\+Test\+Case}}
+\index{````~Create\+Object\+Test\+Case@{$\sim$\+Create\+Object\+Test\+Case}!Create\+Object\+Test\+Case@{Create\+Object\+Test\+Case}}
+\subsubsection[{\texorpdfstring{$\sim$\+Create\+Object\+Test\+Case()}{~CreateObjectTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Create\+Object\+Test\+Case\+::$\sim$\+Create\+Object\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classCreateObjectTestCase_a95fa1edf59c16d8785b092a973ac9036}{}\label{classCreateObjectTestCase_a95fa1edf59c16d8785b092a973ac9036}
+
+\begin{DoxyCode}
+144 \{
+145 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Create\+Object\+Test\+Case@{Create\+Object\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Create\+Object\+Test\+Case@{Create\+Object\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Create\+Object\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classCreateObjectTestCase_a562bfbe5de0afb55e775e4b4e28767f5}{}\label{classCreateObjectTestCase_a562bfbe5de0afb55e775e4b4e28767f5}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+149 \{
+150   \hyperlink{classns3_1_1Ptr}{Ptr<BaseA>} baseA = CreateObject<BaseA> ();
+151   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseA, 0, \textcolor{stringliteral}{"Unable to CreateObject<BaseA>"});
+152 
+153   \textcolor{comment}{//}
+154   \textcolor{comment}{// Since baseA is a BaseA, we must be able to successfully ask for a BaseA.}
+155   \textcolor{comment}{//}
+156   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (baseA->GetObject<BaseA> (), baseA, \textcolor{stringliteral}{"GetObject() of same type
+       returns different Ptr"});
+157 
+158   \textcolor{comment}{//}
+159   \textcolor{comment}{// Since BaseA is a BaseA and not a DerivedA, we must not find a DerivedA if we look.}
+160   \textcolor{comment}{//}
+161   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (baseA->GetObject<DerivedA> (), 0, \textcolor{stringliteral}{"GetObject() of unrelated
+       type returns nonzero pointer"});
+162 
+163   \textcolor{comment}{//}
+164   \textcolor{comment}{// Since baseA is not a BaseA, we must not be able to ask for a DerivedA even if we}
+165   \textcolor{comment}{// try an implied cast back to a BaseA.}
+166   \textcolor{comment}{//}
+167   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (baseA->GetObject<BaseA> (DerivedA::GetTypeId ()), 0, \textcolor{stringliteral}{"
+      GetObject() of unrelated returns nonzero Ptr"});
+168 
+169   baseA = CreateObject<DerivedA> ();
+170   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseA, 0, \textcolor{stringliteral}{"Unable to CreateObject<DerivedA> with implicit
+       cast to BaseA"});
+171 
+172   \textcolor{comment}{//}
+173   \textcolor{comment}{// If we create a DerivedA and cast it to a BaseA, then if we do a GetObject for}
+174   \textcolor{comment}{// that BaseA we should get the same address (same Object).}
+175   \textcolor{comment}{//}
+176   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (baseA->GetObject<BaseA> (), baseA, \textcolor{stringliteral}{"Unable to
+       GetObject<BaseA> on BaseA"});
+177 
+178   \textcolor{comment}{//}
+179   \textcolor{comment}{// Since we created a DerivedA and cast it to a BaseA, we should be able to }
+180   \textcolor{comment}{// get back a DerivedA and it should be the original Ptr.}
+181   \textcolor{comment}{//}
+182   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (baseA->GetObject<DerivedA> (), baseA, \textcolor{stringliteral}{"GetObject() of the
+       original type returns different Ptr"});
+183 
+184   \textcolor{comment}{// If we created a DerivedA and cast it to a BaseA, then we GetObject for the }
+185   \textcolor{comment}{// same DerivedA and cast it back to the same BaseA, we should get the same }
+186   \textcolor{comment}{// object.}
+187   \textcolor{comment}{//}
+188   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (baseA->GetObject<BaseA> (DerivedA::GetTypeId ()), baseA, \textcolor{stringliteral}{"
+      GetObject returns different Ptr"});
+189 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/test/\hyperlink{object-test-suite_8cc}{object-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

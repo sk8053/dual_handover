@@ -1,0 +1,32 @@
+\hypertarget{group__packetperf}{}\section{Packet Performance}
+\label{group__packetperf}\index{Packet Performance@{Packet Performance}}
+Collaboration diagram for Packet Performance\+:
+% FIG 0
+The current implementation of the byte buffers and tag list is based on C\+OW (Copy On Write. An introduction to C\+OW can be found in Scott Meyer\textquotesingle{}s \char`\"{}\+More Effective C++\char`\"{}, items 17 and 29). What this means is that copying packets without modifying them is very cheap (in terms of cpu and memory usage) and modifying them can be also very cheap. What is key for proper C\+OW implementations is being able to detect when a given modification of the state of a packet triggers a full copy of the data prior to the modification\+: C\+OW systems need to detect when an operation is \char`\"{}dirty\char`\"{}.
+
+Dirty operations\+:
+\begin{DoxyItemize}
+\item \hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{ns3\+::\+Packet\+::\+Add\+Header}
+\item \hyperlink{classns3_1_1Packet_ae26b490c30ae5bc98be5181ec6e06db8}{ns3\+::\+Packet\+::\+Add\+Trailer}
+\item both versions of \hyperlink{classns3_1_1Packet_a14ec3d4250b425468764de58f5837b6b}{ns3\+::\+Packet\+::\+Add\+At\+End}
+\item \hyperlink{classns3_1_1Packet_a078fe922d976a417ab25ba2f3c2fd667}{ns3\+::\+Packet\+::\+Remove\+Packet\+Tag}
+\item \hyperlink{classns3_1_1Packet_afb014ae9f4adddbfc51c64b085bfd405}{ns3\+::\+Packet\+::\+Replace\+Packet\+Tag}
+\end{DoxyItemize}
+
+Non-\/dirty operations\+:
+\begin{DoxyItemize}
+\item \hyperlink{classns3_1_1Packet_a7400b8655852f5271c5957250d0141af}{ns3\+::\+Packet\+::\+Add\+Packet\+Tag}
+\item \hyperlink{classns3_1_1Packet_a1734de11f2ca1e78a7872461a0625168}{ns3\+::\+Packet\+::\+Peek\+Packet\+Tag}
+\item \hyperlink{classns3_1_1Packet_a6c7bc5d1067c1d7fbd0fd70289182e8b}{ns3\+::\+Packet\+::\+Remove\+All\+Packet\+Tags}
+\item \hyperlink{classns3_1_1Packet_ad5997caea8c22757acade2fcb4d7daca}{ns3\+::\+Packet\+::\+Add\+Byte\+Tag}
+\item \hyperlink{classns3_1_1Packet_a2e1403c2411495827012fe000823c16a}{ns3\+::\+Packet\+::\+Find\+First\+Matching\+Byte\+Tag}
+\item \hyperlink{classns3_1_1Packet_a083f54c9db31aeff30551a9e20fcda42}{ns3\+::\+Packet\+::\+Remove\+All\+Byte\+Tags}
+\item \hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{ns3\+::\+Packet\+::\+Remove\+Header}
+\item \hyperlink{classns3_1_1Packet_a2155e042083e9a17ad3b33f9fecb4be4}{ns3\+::\+Packet\+::\+Remove\+Trailer}
+\item \hyperlink{classns3_1_1Packet_a16f6113606b355b2b346e2245fa2a3d0}{ns3\+::\+Packet\+::\+Create\+Fragment}
+\item \hyperlink{classns3_1_1Packet_a78aa207e7921dd2f9f7e0d0b7a1c730a}{ns3\+::\+Packet\+::\+Remove\+At\+Start}
+\item \hyperlink{classns3_1_1Packet_a607de6c1abda2a960e99a3b59fd35d14}{ns3\+::\+Packet\+::\+Remove\+At\+End}
+\item \hyperlink{classns3_1_1Packet_a5a6d304b9e0d90733919ffe224b98f0d}{ns3\+::\+Packet\+::\+Copy\+Data}
+\end{DoxyItemize}
+
+Dirty operations will always be slower than non-\/dirty operations, sometimes by several orders of magnitude. However, even the dirty operations have been optimized for common use-\/cases which means that most of the time, these operations will not trigger data copies and will thus be still very fast. 

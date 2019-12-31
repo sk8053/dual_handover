@@ -1,0 +1,507 @@
+\hypertarget{classns3_1_1Resolver}{}\section{ns3\+:\+:Resolver Class Reference}
+\label{classns3_1_1Resolver}\index{ns3\+::\+Resolver@{ns3\+::\+Resolver}}
+
+
+Collaboration diagram for ns3\+:\+:Resolver\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Resolver_aacc39f1f92a6a127e71210936f7f7d35}{Resolver} (std\+::string path)
+\item 
+virtual \hyperlink{classns3_1_1Resolver_a535b2ed38f99035190ed86b28b139aa4}{$\sim$\+Resolver} ()
+\item 
+void \hyperlink{classns3_1_1Resolver_ac3768bb1d9c145634bebc378cc5bb4fd}{Resolve} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Object}{Object} $>$ root)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1Resolver_a17e3b2dbd56da7d36782f3926713b48f}{Canonicalize} (void)
+\item 
+void \hyperlink{classns3_1_1Resolver_ae91ec5c188ee8da874e4915193efb000}{Do\+Resolve} (std\+::string path, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Object}{Object} $>$ root)
+\item 
+void \hyperlink{classns3_1_1Resolver_a09cf9f78d05d8734280769d3daa5d8cc}{Do\+Array\+Resolve} (std\+::string path, const \hyperlink{classns3_1_1ObjectPtrContainerValue}{Object\+Ptr\+Container\+Value} \&vector)
+\item 
+void \hyperlink{classns3_1_1Resolver_afec0017d66e82c51303cb200273108dc}{Do\+Resolve\+One} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Object}{Object} $>$ object)
+\item 
+std\+::string \hyperlink{classns3_1_1Resolver_a0788cf21229e40fba6219ec44b9148bb}{Get\+Resolved\+Path} (void) const 
+\item 
+virtual void \hyperlink{classns3_1_1Resolver_afba9f35df8976f26b6de7be7350a49d4}{Do\+One} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Object}{Object} $>$ object, std\+::string path)=0
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\+\_\+work\+Stack}
+\item 
+std\+::string \hyperlink{classns3_1_1Resolver_a483b28047bff087a1d81b4d649f11bd7}{m\+\_\+path}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract class to parse \hyperlink{namespacens3_1_1Config}{Config} paths into object references. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Resolver@{ns3\+::\+Resolver}!Resolver@{Resolver}}
+\index{Resolver@{Resolver}!ns3\+::\+Resolver@{ns3\+::\+Resolver}}
+\subsubsection[{\texorpdfstring{Resolver(std\+::string path)}{Resolver(std::string path)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Resolver\+::\+Resolver (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Resolver_aacc39f1f92a6a127e71210936f7f7d35}{}\label{classns3_1_1Resolver_aacc39f1f92a6a127e71210936f7f7d35}
+Construct from a base \hyperlink{namespacens3_1_1Config}{Config} path.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & The \hyperlink{namespacens3_1_1Config}{Config} path. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+331   : \hyperlink{classns3_1_1Resolver_a483b28047bff087a1d81b4d649f11bd7}{m\_path} (path)
+332 \{
+333   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << path);
+334   \hyperlink{classns3_1_1Resolver_a17e3b2dbd56da7d36782f3926713b48f}{Canonicalize} ();
+335 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Resolver@{ns3\+::\+Resolver}!````~Resolver@{$\sim$\+Resolver}}
+\index{````~Resolver@{$\sim$\+Resolver}!ns3\+::\+Resolver@{ns3\+::\+Resolver}}
+\subsubsection[{\texorpdfstring{$\sim$\+Resolver()}{~Resolver()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Resolver\+::$\sim$\+Resolver (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1Resolver_a535b2ed38f99035190ed86b28b139aa4}{}\label{classns3_1_1Resolver_a535b2ed38f99035190ed86b28b139aa4}
+Destructor. 
+\begin{DoxyCode}
+337 \{
+338   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+339 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Resolver@{ns3\+::\+Resolver}!Canonicalize@{Canonicalize}}
+\index{Canonicalize@{Canonicalize}!ns3\+::\+Resolver@{ns3\+::\+Resolver}}
+\subsubsection[{\texorpdfstring{Canonicalize(void)}{Canonicalize(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Resolver\+::\+Canonicalize (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Resolver_a17e3b2dbd56da7d36782f3926713b48f}{}\label{classns3_1_1Resolver_a17e3b2dbd56da7d36782f3926713b48f}
+Ensure the \hyperlink{namespacens3_1_1Config}{Config} path starts and ends with a \textquotesingle{}/\textquotesingle{}. 
+\begin{DoxyCode}
+342 \{
+343   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+344 
+345   \textcolor{comment}{// ensure that we start and end with a '/'}
+346   std::string::size\_type tmp = \hyperlink{classns3_1_1Resolver_a483b28047bff087a1d81b4d649f11bd7}{m\_path}.find (\textcolor{stringliteral}{"/"});
+347   \textcolor{keywordflow}{if} (tmp != 0)
+348     \{
+349       \textcolor{comment}{// no slash at start}
+350       \hyperlink{classns3_1_1Resolver_a483b28047bff087a1d81b4d649f11bd7}{m\_path} = \textcolor{stringliteral}{"/"} + \hyperlink{classns3_1_1Resolver_a483b28047bff087a1d81b4d649f11bd7}{m\_path};
+351     \}
+352   tmp = \hyperlink{classns3_1_1Resolver_a483b28047bff087a1d81b4d649f11bd7}{m\_path}.find\_last\_of (\textcolor{stringliteral}{"/"});
+353   \textcolor{keywordflow}{if} (tmp != (\hyperlink{classns3_1_1Resolver_a483b28047bff087a1d81b4d649f11bd7}{m\_path}.size () - 1))
+354     \{
+355       \textcolor{comment}{// no slash at end}
+356       \hyperlink{classns3_1_1Resolver_a483b28047bff087a1d81b4d649f11bd7}{m\_path} = \hyperlink{classns3_1_1Resolver_a483b28047bff087a1d81b4d649f11bd7}{m\_path} + \textcolor{stringliteral}{"/"};
+357     \}
+358 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Resolver@{ns3\+::\+Resolver}!Do\+Array\+Resolve@{Do\+Array\+Resolve}}
+\index{Do\+Array\+Resolve@{Do\+Array\+Resolve}!ns3\+::\+Resolver@{ns3\+::\+Resolver}}
+\subsubsection[{\texorpdfstring{Do\+Array\+Resolve(std\+::string path, const Object\+Ptr\+Container\+Value \&vector)}{DoArrayResolve(std::string path, const ObjectPtrContainerValue &vector)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Resolver\+::\+Do\+Array\+Resolve (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path, }
+\item[{const {\bf Object\+Ptr\+Container\+Value} \&}]{vector}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Resolver_a09cf9f78d05d8734280769d3daa5d8cc}{}\label{classns3_1_1Resolver_a09cf9f78d05d8734280769d3daa5d8cc}
+Parse an index on the \hyperlink{namespacens3_1_1Config}{Config} path.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & The remaining \hyperlink{namespacens3_1_1Config}{Config} path. \\
+\hline
+\mbox{\tt in,out}  & {\em vector} & The resulting list of matching objects. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+548 \{
+549   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION}(\textcolor{keyword}{this} << path << &container);
+550   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (path != \textcolor{stringliteral}{""});
+551   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} ((path.find (\textcolor{stringliteral}{"/"})) == 0);
+552   std::string::size\_type next = path.find (\textcolor{stringliteral}{"/"}, 1);
+553   \textcolor{keywordflow}{if} (next == std::string::npos)
+554     \{
+555       \textcolor{keywordflow}{return};
+556     \}
+557   std::string item = path.substr (1, next-1);
+558   std::string pathLeft = path.substr (next, path.size ()-next);
+559 
+560   ArrayMatcher matcher = ArrayMatcher (item);
+561   \hyperlink{classns3_1_1ObjectPtrContainerValue_a1f0661f9cf3626d62a4623f36b672876}{ObjectPtrContainerValue::Iterator} it;
+562   \textcolor{keywordflow}{for} (it = container.Begin (); it != container.End (); ++it)
+563     \{
+564       \textcolor{keywordflow}{if} (matcher.Matches ((*it).first))
+565         \{
+566           std::ostringstream oss;
+567           oss << (*it).first;
+568           \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.push\_back (oss.str ());
+569           \hyperlink{classns3_1_1Resolver_ae91ec5c188ee8da874e4915193efb000}{DoResolve} (pathLeft, (*it).second);
+570           \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.pop\_back ();
+571         \}
+572     \}
+573 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Resolver@{ns3\+::\+Resolver}!Do\+One@{Do\+One}}
+\index{Do\+One@{Do\+One}!ns3\+::\+Resolver@{ns3\+::\+Resolver}}
+\subsubsection[{\texorpdfstring{Do\+One(\+Ptr$<$ Object $>$ object, std\+::string path)=0}{DoOne(Ptr< Object > object, std::string path)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Resolver\+::\+Do\+One (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Object} $>$}]{object, }
+\item[{std\+::string}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1Resolver_afba9f35df8976f26b6de7be7350a49d4}{}\label{classns3_1_1Resolver_afba9f35df8976f26b6de7be7350a49d4}
+Handle one found object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & The found object. \\
+\hline
+\mbox{\tt in}  & {\em path} & The matching \hyperlink{namespacens3_1_1Config}{Config} path context. \\
+\hline
+\end{DoxyParams}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Resolver@{ns3\+::\+Resolver}!Do\+Resolve@{Do\+Resolve}}
+\index{Do\+Resolve@{Do\+Resolve}!ns3\+::\+Resolver@{ns3\+::\+Resolver}}
+\subsubsection[{\texorpdfstring{Do\+Resolve(std\+::string path, Ptr$<$ Object $>$ root)}{DoResolve(std::string path, Ptr< Object > root)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Resolver\+::\+Do\+Resolve (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path, }
+\item[{{\bf Ptr}$<$ {\bf Object} $>$}]{root}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Resolver_ae91ec5c188ee8da874e4915193efb000}{}\label{classns3_1_1Resolver_ae91ec5c188ee8da874e4915193efb000}
+Parse the next element in the \hyperlink{namespacens3_1_1Config}{Config} path.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & The remaining portion of the \hyperlink{namespacens3_1_1Config}{Config} path. \\
+\hline
+\mbox{\tt in}  & {\em root} & The object corresponding to the current positon in the \hyperlink{namespacens3_1_1Config}{Config} path. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+392 \{
+393   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << path << root);
+394   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} ((path.find (\textcolor{stringliteral}{"/"})) == 0);
+395   std::string::size\_type next = path.find (\textcolor{stringliteral}{"/"}, 1);
+396 
+397   \textcolor{keywordflow}{if} (next == std::string::npos)
+398     \{
+399       \textcolor{comment}{//}
+400       \textcolor{comment}{// If root is zero, we're beginning to see if we can use the object name }
+401       \textcolor{comment}{// service to resolve this path.  It is impossible to have a object name }
+402       \textcolor{comment}{// associated with the root of the object name service since that root}
+403       \textcolor{comment}{// is not an object.  This path must be referring to something in another}
+404       \textcolor{comment}{// namespace and it will have been found already since the name service}
+405       \textcolor{comment}{// is always consulted last.}
+406       \textcolor{comment}{// }
+407       \textcolor{keywordflow}{if} (root)
+408         \{
+409           \hyperlink{classns3_1_1Resolver_afec0017d66e82c51303cb200273108dc}{DoResolveOne} (root);
+410         \}
+411       \textcolor{keywordflow}{return};
+412     \}
+413   std::string item = path.substr (1, next-1);
+414   std::string pathLeft = path.substr (next, path.size ()-next);
+415 
+416   \textcolor{comment}{//}
+417   \textcolor{comment}{// If root is zero, we're beginning to see if we can use the object name }
+418   \textcolor{comment}{// service to resolve this path.  In this case, we must see the name space }
+419   \textcolor{comment}{// "/Names" on the front of this path.  There is no object associated with }
+420   \textcolor{comment}{// the root of the "/Names" namespace, so we just ignore it and move on to }
+421   \textcolor{comment}{// the next segment.}
+422   \textcolor{comment}{//}
+423   \textcolor{keywordflow}{if} (root == 0)
+424     \{
+425       std::string::size\_type offset = path.find (\textcolor{stringliteral}{"/Names"});
+426       \textcolor{keywordflow}{if} (offset == 0)
+427         \{
+428           \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.push\_back (item);
+429           \hyperlink{classns3_1_1Resolver_ae91ec5c188ee8da874e4915193efb000}{DoResolve} (pathLeft, root);
+430           \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.pop\_back ();
+431           \textcolor{keywordflow}{return};
+432         \}
+433     \}
+434 
+435   \textcolor{comment}{//}
+436   \textcolor{comment}{// We have an item (possibly a segment of a namespace path.  Check to see if}
+437   \textcolor{comment}{// we can determine that this segment refers to a named object.  If root is}
+438   \textcolor{comment}{// zero, this means to look in the root of the "/Names" name space, otherwise}
+439   \textcolor{comment}{// it refers to a name space context (level).}
+440   \textcolor{comment}{//}
+441   Ptr<Object> namedObject = Names::Find<Object> (root, item);
+442   \textcolor{keywordflow}{if} (namedObject)
+443     \{
+444       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Name system resolved item = "} << item << \textcolor{stringliteral}{" to "} << namedObject);
+445       \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.push\_back (item);
+446       \hyperlink{classns3_1_1Resolver_ae91ec5c188ee8da874e4915193efb000}{DoResolve} (pathLeft, namedObject);
+447       \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.pop\_back ();
+448       \textcolor{keywordflow}{return};
+449     \}
+450 
+451   \textcolor{comment}{//}
+452   \textcolor{comment}{// We're done with the object name service hooks, so proceed down the path}
+453   \textcolor{comment}{// of types and attributes; but only if root is nonzero.  If root is zero}
+454   \textcolor{comment}{// and we find ourselves here, we are trying to check in the namespace for}
+455   \textcolor{comment}{// a path that is not in the "/Names" namespace.  We will have previously}
+456   \textcolor{comment}{// found any matches, so we just bail out.}
+457   \textcolor{comment}{//}
+458   \textcolor{keywordflow}{if} (root == 0)
+459     \{
+460       \textcolor{keywordflow}{return};
+461     \}
+462   std::string::size\_type dollarPos = item.find (\textcolor{stringliteral}{"$"});
+463   \textcolor{keywordflow}{if} (dollarPos == 0)
+464     \{
+465       \textcolor{comment}{// This is a call to GetObject}
+466       std::string tidString = item.substr (1, item.size () - 1);
+467       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"GetObject="}<<tidString<<\textcolor{stringliteral}{" on path="}<<
+      \hyperlink{classns3_1_1Resolver_a0788cf21229e40fba6219ec44b9148bb}{GetResolvedPath} ());
+468       TypeId tid = \hyperlink{classns3_1_1TypeId_a119cf99c20931fdc294602cd360b180e}{TypeId::LookupByName} (tidString);
+469       Ptr<Object> \textcolor{keywordtype}{object} = root->GetObject<Object> (tid);
+470       \textcolor{keywordflow}{if} (\textcolor{keywordtype}{object} == 0)
+471         \{
+472           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"GetObject ("}<<tidString<<\textcolor{stringliteral}{") failed on path="}<<
+      \hyperlink{classns3_1_1Resolver_a0788cf21229e40fba6219ec44b9148bb}{GetResolvedPath} ());
+473           \textcolor{keywordflow}{return};
+474         \}
+475       \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.push\_back (item);
+476       \hyperlink{classns3_1_1Resolver_ae91ec5c188ee8da874e4915193efb000}{DoResolve} (pathLeft, \textcolor{keywordtype}{object});
+477       \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.pop\_back ();
+478     \}
+479   \textcolor{keywordflow}{else} 
+480     \{
+481       \textcolor{comment}{// this is a normal attribute.}
+482       TypeId tid;
+483       TypeId nextTid = root->GetInstanceTypeId ();
+484       \textcolor{keywordtype}{bool} foundMatch = \textcolor{keyword}{false};
+485       
+486       \textcolor{keywordflow}{do}
+487         \{
+488           tid = nextTid;
+489           
+490           \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < tid.GetAttributeN(); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+491             \{
+492               \textcolor{keyword}{struct }TypeId::AttributeInformation info;
+493               info = tid.GetAttribute(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+494               \textcolor{keywordflow}{if} (info.name != item && item != \textcolor{stringliteral}{"*"})
+495                 \{
+496                   \textcolor{keywordflow}{continue};
+497                 \}
+498               \textcolor{comment}{// attempt to cast to a pointer checker.}
+499               \textcolor{keyword}{const} PointerChecker *ptr = \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const }PointerChecker *\textcolor{keyword}{>} (
+      \hyperlink{namespacens3_af2a7557fe9afdd98d8f6f8f6e412cf5a}{PeekPointer} (info.checker));
+500               \textcolor{keywordflow}{if} (ptr != 0)
+501                 \{
+502                   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"GetAttribute(ptr)="}<<info.name<<\textcolor{stringliteral}{" on path="}<<
+      \hyperlink{classns3_1_1Resolver_a0788cf21229e40fba6219ec44b9148bb}{GetResolvedPath} ());
+503                   PointerValue ptr;
+504                   root->GetAttribute (info.name, ptr);
+505                   Ptr<Object> \textcolor{keywordtype}{object} = ptr.Get<Object> ();
+506                   \textcolor{keywordflow}{if} (\textcolor{keywordtype}{object} == 0)
+507                     \{
+508                       \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"Requested object name=\(\backslash\)""}<<item<<
+509                                     \textcolor{stringliteral}{"\(\backslash\)" exists on path=\(\backslash\)""}<<\hyperlink{classns3_1_1Resolver_a0788cf21229e40fba6219ec44b9148bb}{GetResolvedPath} ()<<\textcolor{stringliteral}{"\(\backslash\)""}
+510                                     \textcolor{stringliteral}{" but is null."});
+511                       \textcolor{keywordflow}{continue};
+512                     \}
+513                   foundMatch = \textcolor{keyword}{true};
+514                   \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.push\_back (info.name);
+515                   \hyperlink{classns3_1_1Resolver_ae91ec5c188ee8da874e4915193efb000}{DoResolve} (pathLeft, \textcolor{keywordtype}{object});
+516                   \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.pop\_back ();
+517                 \}
+518               \textcolor{comment}{// attempt to cast to an object vector.}
+519               \textcolor{keyword}{const} ObjectPtrContainerChecker *vectorChecker = 
+520                 \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const }ObjectPtrContainerChecker *\textcolor{keyword}{>} (\hyperlink{namespacens3_af2a7557fe9afdd98d8f6f8f6e412cf5a}{PeekPointer} (info.checker));
+521               \textcolor{keywordflow}{if} (vectorChecker != 0)
+522                 \{
+523                   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"GetAttribute(vector)="}<<info.name<<\textcolor{stringliteral}{" on path="}<<
+      \hyperlink{classns3_1_1Resolver_a0788cf21229e40fba6219ec44b9148bb}{GetResolvedPath} () << pathLeft);
+524                   foundMatch = \textcolor{keyword}{true};
+525                   ObjectPtrContainerValue vector;
+526                   root->GetAttribute (info.name, vector);
+527                   \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.push\_back (info.name);
+528                   \hyperlink{classns3_1_1Resolver_a09cf9f78d05d8734280769d3daa5d8cc}{DoArrayResolve} (pathLeft, vector);
+529                   \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.pop\_back ();
+530                 \}
+531               \textcolor{comment}{// this could be anything else and we don't know what to do with it.}
+532               \textcolor{comment}{// So, we just ignore it.}
+533             \}
+534 
+535           nextTid = tid.GetParent ();
+536         \} \textcolor{keywordflow}{while} (nextTid != tid);
+537       
+538       \textcolor{keywordflow}{if} (!foundMatch)
+539         \{
+540           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Requested item="}<<item<<\textcolor{stringliteral}{" does not exist on path="}<<
+      \hyperlink{classns3_1_1Resolver_a0788cf21229e40fba6219ec44b9148bb}{GetResolvedPath} ());
+541           \textcolor{keywordflow}{return};
+542         \}
+543     \}
+544 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Resolver@{ns3\+::\+Resolver}!Do\+Resolve\+One@{Do\+Resolve\+One}}
+\index{Do\+Resolve\+One@{Do\+Resolve\+One}!ns3\+::\+Resolver@{ns3\+::\+Resolver}}
+\subsubsection[{\texorpdfstring{Do\+Resolve\+One(\+Ptr$<$ Object $>$ object)}{DoResolveOne(Ptr< Object > object)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Resolver\+::\+Do\+Resolve\+One (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Object} $>$}]{object}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Resolver_afec0017d66e82c51303cb200273108dc}{}\label{classns3_1_1Resolver_afec0017d66e82c51303cb200273108dc}
+Handle one object found on the path.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & The current object on the \hyperlink{namespacens3_1_1Config}{Config} path. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+383 \{
+384   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \textcolor{keywordtype}{object});
+385 
+386   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"resolved="}<<\hyperlink{classns3_1_1Resolver_a0788cf21229e40fba6219ec44b9148bb}{GetResolvedPath} ());
+387   \hyperlink{classns3_1_1Resolver_afba9f35df8976f26b6de7be7350a49d4}{DoOne} (\textcolor{keywordtype}{object}, \hyperlink{classns3_1_1Resolver_a0788cf21229e40fba6219ec44b9148bb}{GetResolvedPath} ());
+388 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Resolver@{ns3\+::\+Resolver}!Get\+Resolved\+Path@{Get\+Resolved\+Path}}
+\index{Get\+Resolved\+Path@{Get\+Resolved\+Path}!ns3\+::\+Resolver@{ns3\+::\+Resolver}}
+\subsubsection[{\texorpdfstring{Get\+Resolved\+Path(void) const }{GetResolvedPath(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Resolver\+::\+Get\+Resolved\+Path (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Resolver_a0788cf21229e40fba6219ec44b9148bb}{}\label{classns3_1_1Resolver_a0788cf21229e40fba6219ec44b9148bb}
+Get the current \hyperlink{namespacens3_1_1Config}{Config} path.
+
+\begin{DoxyReturn}{Returns}
+The current \hyperlink{namespacens3_1_1Config}{Config} path. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+370 \{
+371   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+372 
+373   std::string fullPath = \textcolor{stringliteral}{"/"};
+374   \textcolor{keywordflow}{for} (std::vector<std::string>::const\_iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.begin (); 
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != \hyperlink{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{m\_workStack}.end (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+375     \{
+376       fullPath += *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} + \textcolor{stringliteral}{"/"};
+377     \}
+378   \textcolor{keywordflow}{return} fullPath;
+379 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+\index{ns3\+::\+Resolver@{ns3\+::\+Resolver}!Resolve@{Resolve}}
+\index{Resolve@{Resolve}!ns3\+::\+Resolver@{ns3\+::\+Resolver}}
+\subsubsection[{\texorpdfstring{Resolve(\+Ptr$<$ Object $>$ root)}{Resolve(Ptr< Object > root)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Resolver\+::\+Resolve (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Object} $>$}]{root}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Resolver_ac3768bb1d9c145634bebc378cc5bb4fd}{}\label{classns3_1_1Resolver_ac3768bb1d9c145634bebc378cc5bb4fd}
+Parse the stored \hyperlink{namespacens3_1_1Config}{Config} path into an object reference, beginning at the indicated root object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em root} & The object corresponding to the current position in in the \hyperlink{namespacens3_1_1Config}{Config} path. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+362 \{
+363   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << root);
+364 
+365   \hyperlink{classns3_1_1Resolver_ae91ec5c188ee8da874e4915193efb000}{DoResolve} (\hyperlink{classns3_1_1Resolver_a483b28047bff087a1d81b4d649f11bd7}{m\_path}, root);
+366 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Resolver@{ns3\+::\+Resolver}!m\+\_\+path@{m\+\_\+path}}
+\index{m\+\_\+path@{m\+\_\+path}!ns3\+::\+Resolver@{ns3\+::\+Resolver}}
+\subsubsection[{\texorpdfstring{m\+\_\+path}{m_path}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Resolver\+::m\+\_\+path\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Resolver_a483b28047bff087a1d81b4d649f11bd7}{}\label{classns3_1_1Resolver_a483b28047bff087a1d81b4d649f11bd7}
+The \hyperlink{namespacens3_1_1Config}{Config} path. \index{ns3\+::\+Resolver@{ns3\+::\+Resolver}!m\+\_\+work\+Stack@{m\+\_\+work\+Stack}}
+\index{m\+\_\+work\+Stack@{m\+\_\+work\+Stack}!ns3\+::\+Resolver@{ns3\+::\+Resolver}}
+\subsubsection[{\texorpdfstring{m\+\_\+work\+Stack}{m_workStack}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::string$>$ ns3\+::\+Resolver\+::m\+\_\+work\+Stack\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}{}\label{classns3_1_1Resolver_a7b3477fa2e0e29524a56740f1d13fe96}
+Current list of path tokens. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{config_8cc}{config.\+cc}\end{DoxyCompactItemize}

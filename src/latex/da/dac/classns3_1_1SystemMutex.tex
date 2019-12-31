@@ -1,0 +1,141 @@
+\hypertarget{classns3_1_1SystemMutex}{}\section{ns3\+:\+:System\+Mutex Class Reference}
+\label{classns3_1_1SystemMutex}\index{ns3\+::\+System\+Mutex@{ns3\+::\+System\+Mutex}}
+
+
+A class which provides a relatively platform-\/independent Mutual Exclusion thread synchronization primitive.  
+
+
+
+
+{\ttfamily \#include $<$system-\/mutex.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:System\+Mutex\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1SystemMutex_adecc3fb6a8d2829963cb18de461a436c}{System\+Mutex} ()
+\item 
+\hyperlink{classns3_1_1SystemMutex_a75b5d7bff7d20548bfc7cbb930e27fe2}{$\sim$\+System\+Mutex} ()
+\item 
+void \hyperlink{classns3_1_1SystemMutex_a28900ef4479f872b78eb3467ad27157a}{Lock} ()
+\item 
+void \hyperlink{classns3_1_1SystemMutex_a8004da6c8f1904efb14161455e0e06bc}{Unlock} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1SystemMutexPrivate}{System\+Mutex\+Private} $\ast$ \hyperlink{classns3_1_1SystemMutex_a1c11198da714f582c6540f0dd9385650}{m\+\_\+priv}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class which provides a relatively platform-\/independent Mutual Exclusion thread synchronization primitive. 
+
+When more than one thread needs to access a shared resource (data structure or device), the system needs to provide a way to serialize access to the resource. An operating system will typically provide a Mutual Exclusion primitive to provide that capability. We provide plattorm-\/independent access to the O\+S-\/dependent capability with the \hyperlink{classns3_1_1SystemMutex}{System\+Mutex} class.
+
+There are two operations\+: Lock and Unlock. Lock allows an executing \hyperlink{classns3_1_1SystemThread}{System\+Thread} to attempt to acquire ownership of the Mutual Exclusion object. If the \hyperlink{classns3_1_1SystemMutex}{System\+Mutex} object is not owned by another thread, then ownership is granted to the calling \hyperlink{classns3_1_1SystemThread}{System\+Thread} and Lock returns immediately, However, if the \hyperlink{classns3_1_1SystemMutex}{System\+Mutex} is already owned by another \hyperlink{classns3_1_1SystemThread}{System\+Thread}, the calling \hyperlink{classns3_1_1SystemThread}{System\+Thread} is blocked until the current owner releases the \hyperlink{classns3_1_1SystemMutex}{System\+Mutex} by calling Unlock.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1CriticalSection}{Critical\+Section} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+System\+Mutex@{ns3\+::\+System\+Mutex}!System\+Mutex@{System\+Mutex}}
+\index{System\+Mutex@{System\+Mutex}!ns3\+::\+System\+Mutex@{ns3\+::\+System\+Mutex}}
+\subsubsection[{\texorpdfstring{System\+Mutex()}{SystemMutex()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+System\+Mutex\+::\+System\+Mutex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemMutex_adecc3fb6a8d2829963cb18de461a436c}{}\label{classns3_1_1SystemMutex_adecc3fb6a8d2829963cb18de461a436c}
+
+\begin{DoxyCode}
+110   : \hyperlink{classns3_1_1SystemMutex_a1c11198da714f582c6540f0dd9385650}{m\_priv} (\textcolor{keyword}{new} SystemMutexPrivate ())
+111 \{
+112   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+113 \}
+\end{DoxyCode}
+\index{ns3\+::\+System\+Mutex@{ns3\+::\+System\+Mutex}!````~System\+Mutex@{$\sim$\+System\+Mutex}}
+\index{````~System\+Mutex@{$\sim$\+System\+Mutex}!ns3\+::\+System\+Mutex@{ns3\+::\+System\+Mutex}}
+\subsubsection[{\texorpdfstring{$\sim$\+System\+Mutex()}{~SystemMutex()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+System\+Mutex\+::$\sim$\+System\+Mutex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemMutex_a75b5d7bff7d20548bfc7cbb930e27fe2}{}\label{classns3_1_1SystemMutex_a75b5d7bff7d20548bfc7cbb930e27fe2}
+
+\begin{DoxyCode}
+116 \{
+117   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+118   \textcolor{keyword}{delete} \hyperlink{classns3_1_1SystemMutex_a1c11198da714f582c6540f0dd9385650}{m\_priv};
+119 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+System\+Mutex@{ns3\+::\+System\+Mutex}!Lock@{Lock}}
+\index{Lock@{Lock}!ns3\+::\+System\+Mutex@{ns3\+::\+System\+Mutex}}
+\subsubsection[{\texorpdfstring{Lock()}{Lock()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Mutex\+::\+Lock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemMutex_a28900ef4479f872b78eb3467ad27157a}{}\label{classns3_1_1SystemMutex_a28900ef4479f872b78eb3467ad27157a}
+Acquire ownership of the Mutual Exclusion object. 
+\begin{DoxyCode}
+123 \{
+124   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+125   \hyperlink{classns3_1_1SystemMutex_a1c11198da714f582c6540f0dd9385650}{m\_priv}->\hyperlink{classns3_1_1SystemMutexPrivate_a683dab8c78c48119cfab8168296f4942}{Lock} ();
+126 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+System\+Mutex@{ns3\+::\+System\+Mutex}!Unlock@{Unlock}}
+\index{Unlock@{Unlock}!ns3\+::\+System\+Mutex@{ns3\+::\+System\+Mutex}}
+\subsubsection[{\texorpdfstring{Unlock()}{Unlock()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Mutex\+::\+Unlock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemMutex_a8004da6c8f1904efb14161455e0e06bc}{}\label{classns3_1_1SystemMutex_a8004da6c8f1904efb14161455e0e06bc}
+Release ownership of the Mutual Exclusion object. 
+\begin{DoxyCode}
+130 \{
+131   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+132   \hyperlink{classns3_1_1SystemMutex_a1c11198da714f582c6540f0dd9385650}{m\_priv}->\hyperlink{classns3_1_1SystemMutexPrivate_a1c3cca1467f9fbd050d044cd85fa9716}{Unlock} ();
+133 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+System\+Mutex@{ns3\+::\+System\+Mutex}!m\+\_\+priv@{m\+\_\+priv}}
+\index{m\+\_\+priv@{m\+\_\+priv}!ns3\+::\+System\+Mutex@{ns3\+::\+System\+Mutex}}
+\subsubsection[{\texorpdfstring{m\+\_\+priv}{m_priv}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf System\+Mutex\+Private}$\ast$ ns3\+::\+System\+Mutex\+::m\+\_\+priv\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SystemMutex_a1c11198da714f582c6540f0dd9385650}{}\label{classns3_1_1SystemMutex_a1c11198da714f582c6540f0dd9385650}
+The (system-\/dependent) implementation. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{system-mutex_8h}{system-\/mutex.\+h}\item 
+core/model/\hyperlink{unix-system-mutex_8cc}{unix-\/system-\/mutex.\+cc}\end{DoxyCompactItemize}

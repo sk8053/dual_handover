@@ -1,0 +1,638 @@
+\hypertarget{adaptive-red-tests_8cc}{}\section{traffic-\/control/examples/adaptive-\/red-\/tests.cc File Reference}
+\label{adaptive-red-tests_8cc}\index{traffic-\/control/examples/adaptive-\/red-\/tests.\+cc@{traffic-\/control/examples/adaptive-\/red-\/tests.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/flow-\/monitor-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/traffic-\/control-\/module.\+h\char`\"{}}\\*
+Include dependency graph for adaptive-\/red-\/tests.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{adaptive-red-tests_8cc_ac25688e23dcd99ad74a29ea6fde9a015}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Adaptive\+Red\+Tests\char`\"{})
+\item 
+void \hyperlink{adaptive-red-tests_8cc_a64451d920062e967d2c0fa8b6ae85911}{Check\+Queue\+Disc\+Size} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1QueueDisc}{Queue\+Disc} $>$ queue)
+\item 
+void \hyperlink{adaptive-red-tests_8cc_a10c553e45f82b05b5cb70aaa433308b0}{Build\+Apps\+Test} (uint32\+\_\+t \hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test})
+\item 
+int \hyperlink{adaptive-red-tests_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{adaptive-red-tests_8cc_aeea215f1e5c3568bca85c126b9870c09}{check\+Times}
+\item 
+double \hyperlink{adaptive-red-tests_8cc_a7058a9ca1256be97bd01c637ff170dc2}{avg\+Queue\+Disc\+Size}
+\item 
+double \hyperlink{adaptive-red-tests_8cc_ab3a0ca969f11332a6b4ca8bc81e19ba7}{global\+\_\+start\+\_\+time}
+\item 
+double \hyperlink{adaptive-red-tests_8cc_a374328526043935f11841a7ec7e396d5}{global\+\_\+stop\+\_\+time}
+\item 
+double \hyperlink{adaptive-red-tests_8cc_a2c56dc9b543a4442a7edd8d680c4a1bc}{sink\+\_\+start\+\_\+time}
+\item 
+double \hyperlink{adaptive-red-tests_8cc_a2462eef540f5b896f14d4ea7b7bb6214}{sink\+\_\+stop\+\_\+time}
+\item 
+double \hyperlink{adaptive-red-tests_8cc_a18ff86acaf663200fbedb1f77d03b515}{client\+\_\+start\+\_\+time}
+\item 
+double \hyperlink{adaptive-red-tests_8cc_aee714f5dcf74da2f73bcdd66c8a9e265}{client\+\_\+stop\+\_\+time}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{adaptive-red-tests_8cc_aeaa87dbd052b50719525adea0f586b36}{n0n2}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{adaptive-red-tests_8cc_a68f69f65725cbe7529e8b594708b8fc0}{n1n2}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{adaptive-red-tests_8cc_a4bc708159d3ec761080f4639c1c8f409}{n2n3}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{adaptive-red-tests_8cc_a71269c713841141f40860e991d435588}{n3n4}
+\item 
+\hyperlink{classns3_1_1NodeContainer}{Node\+Container} \hyperlink{adaptive-red-tests_8cc_af4c498a2bfb720685107e00e03067e31}{n3n5}
+\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{adaptive-red-tests_8cc_a04048bb862423a1ed10deed33021fe0c}{i0i2}
+\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{adaptive-red-tests_8cc_abe23af3b1cb569ee9ee4ed7370791041}{i1i2}
+\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{adaptive-red-tests_8cc_affe7f66c0345fed19eab1e55824055e3}{i2i3}
+\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{adaptive-red-tests_8cc_ae521eb38559954aa9357fa662c3bb76e}{i3i4}
+\item 
+\hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4\+Interface\+Container} \hyperlink{adaptive-red-tests_8cc_afd160932e196777fd40772bb913a63f5}{i3i5}
+\item 
+std\+::stringstream \hyperlink{adaptive-red-tests_8cc_a06d9ff5c07ecb984ef94ad415abd87b5}{file\+Plot\+Queue\+Disc}
+\item 
+std\+::stringstream \hyperlink{adaptive-red-tests_8cc_a4164ee3b210acca3b1e1c45ad2bac980}{file\+Plot\+Queue\+Disc\+Avg}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!Build\+Apps\+Test@{Build\+Apps\+Test}}
+\index{Build\+Apps\+Test@{Build\+Apps\+Test}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{Build\+Apps\+Test(uint32\+\_\+t test)}{BuildAppsTest(uint32_t test)}}]{\setlength{\rightskip}{0pt plus 5cm}void Build\+Apps\+Test (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{test}
+\end{DoxyParamCaption}
+)}\hypertarget{adaptive-red-tests_8cc_a10c553e45f82b05b5cb70aaa433308b0}{}\label{adaptive-red-tests_8cc_a10c553e45f82b05b5cb70aaa433308b0}
+
+\begin{DoxyCode}
+126 \{
+127   \textcolor{comment}{// SINK is in the right side}
+128   uint16\_t \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port} = 50000;
+129   \hyperlink{classns3_1_1Address}{Address} sinkLocalAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), port));
+130   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, sinkLocalAddress);
+131   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp = sinkHelper.Install (\hyperlink{adaptive-red-tests_8cc_a71269c713841141f40860e991d435588}{n3n4}.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+132   sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{adaptive-red-tests_8cc_a2c56dc9b543a4442a7edd8d680c4a1bc}{sink\_start\_time}));
+133   sinkApp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{adaptive-red-tests_8cc_a2462eef540f5b896f14d4ea7b7bb6214}{sink\_stop\_time}));
+134 
+135   \textcolor{comment}{// Connection one}
+136   \textcolor{comment}{// Clients are in left side}
+137   \textcolor{comment}{/*}
+138 \textcolor{comment}{   * Create the OnOff applications to send TCP to the server}
+139 \textcolor{comment}{   * onoffhelper is a client that send data to TCP destination}
+140 \textcolor{comment}{  */}
+141   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} clientHelper1 (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+142   clientHelper1.SetAttribute (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}));
+143   clientHelper1.SetAttribute (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=0]"}));
+144   clientHelper1.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (1000));
+145 
+146   \textcolor{comment}{// Connection two}
+147   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} clientHelper2 (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+148   clientHelper2.SetAttribute (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}));
+149   clientHelper2.SetAttribute (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=0]"}));
+150   clientHelper2.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (1000));
+151 
+152   \textcolor{keywordflow}{if} (\hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test} == 6 || \hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test} == 7 || \hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test} == 8 || \hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test} == 9 || \hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test} == 10 || 
+      \hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test} == 12)
+153     \{
+154       clientHelper1.SetAttribute (\textcolor{stringliteral}{"DataRate"}, DataRateValue (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"100Mb/s"})));
+155       clientHelper2.SetAttribute (\textcolor{stringliteral}{"DataRate"}, DataRateValue (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"100Mb/s"})));
+156     \}
+157   \textcolor{keywordflow}{else}
+158     \{
+159       clientHelper1.SetAttribute (\textcolor{stringliteral}{"DataRate"}, DataRateValue (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"10Mb/s"})));
+160       clientHelper2.SetAttribute (\textcolor{stringliteral}{"DataRate"}, DataRateValue (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"10Mb/s"})));
+161     \}
+162 
+163   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps1;
+164   AddressValue remoteAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (\hyperlink{adaptive-red-tests_8cc_ae521eb38559954aa9357fa662c3bb76e}{i3i4}.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1), \hyperlink{dsdv-manet_8cc_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}));
+165   clientHelper1.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+166   clientApps1.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (clientHelper1.Install (\hyperlink{adaptive-red-tests_8cc_aeaa87dbd052b50719525adea0f586b36}{n0n2}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)));
+167   clientApps1.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{adaptive-red-tests_8cc_a18ff86acaf663200fbedb1f77d03b515}{client\_start\_time}));
+168   clientApps1.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{adaptive-red-tests_8cc_aee714f5dcf74da2f73bcdd66c8a9e265}{client\_stop\_time}));
+169 
+170   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps2;
+171   clientHelper2.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+172   clientApps2.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (clientHelper2.Install (\hyperlink{adaptive-red-tests_8cc_a68f69f65725cbe7529e8b594708b8fc0}{n1n2}.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)));
+173   clientApps2.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{adaptive-red-tests_8cc_a18ff86acaf663200fbedb1f77d03b515}{client\_start\_time}));
+174   clientApps2.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{adaptive-red-tests_8cc_aee714f5dcf74da2f73bcdd66c8a9e265}{client\_stop\_time}));
+175 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!Check\+Queue\+Disc\+Size@{Check\+Queue\+Disc\+Size}}
+\index{Check\+Queue\+Disc\+Size@{Check\+Queue\+Disc\+Size}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{Check\+Queue\+Disc\+Size(\+Ptr$<$ Queue\+Disc $>$ queue)}{CheckQueueDiscSize(Ptr< QueueDisc > queue)}}]{\setlength{\rightskip}{0pt plus 5cm}void Check\+Queue\+Disc\+Size (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Queue\+Disc} $>$}]{queue}
+\end{DoxyParamCaption}
+)}\hypertarget{adaptive-red-tests_8cc_a64451d920062e967d2c0fa8b6ae85911}{}\label{adaptive-red-tests_8cc_a64451d920062e967d2c0fa8b6ae85911}
+
+\begin{DoxyCode}
+106 \{
+107   uint32\_t qSize = StaticCast<RedQueueDisc> (queue)->GetQueueSize ();
+108 
+109   \hyperlink{adaptive-red-tests_8cc_a7058a9ca1256be97bd01c637ff170dc2}{avgQueueDiscSize} += qSize;
+110   \hyperlink{adaptive-red-tests_8cc_aeea215f1e5c3568bca85c126b9870c09}{checkTimes}++;
+111 
+112   \textcolor{comment}{// check queue disc size every 1/100 of a second}
+113   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.01), &\hyperlink{adaptive-red-tests_8cc_a64451d920062e967d2c0fa8b6ae85911}{CheckQueueDiscSize}, queue);
+114 
+115   std::ofstream fPlotQueueDisc (\hyperlink{adaptive-red-tests_8cc_a06d9ff5c07ecb984ef94ad415abd87b5}{filePlotQueueDisc}.str ().c\_str (), std::ios::out | 
+      std::ios::app);
+116   fPlotQueueDisc << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" "} << qSize << std::endl;
+117   fPlotQueueDisc.close ();
+118 
+119   std::ofstream fPlotQueueDiscAvg (\hyperlink{adaptive-red-tests_8cc_a4164ee3b210acca3b1e1c45ad2bac980}{filePlotQueueDiscAvg}.str ().c\_str (), std::ios::out 
+      | std::ios::app);
+120   fPlotQueueDiscAvg << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" "} << 
+      \hyperlink{adaptive-red-tests_8cc_a7058a9ca1256be97bd01c637ff170dc2}{avgQueueDiscSize} / \hyperlink{adaptive-red-tests_8cc_aeea215f1e5c3568bca85c126b9870c09}{checkTimes} << std::endl;
+121   fPlotQueueDiscAvg.close ();
+122 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!main@{main}}
+\index{main@{main}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{adaptive-red-tests_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{adaptive-red-tests_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+179 \{
+180   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"RedQueueDisc"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+181 
+182   uint32\_t aredTest;
+183   std::string aredLinkDataRate = \textcolor{stringliteral}{"1.5Mbps"};
+184   std::string aredLinkDelay = \textcolor{stringliteral}{"20ms"};
+185 
+186   std::string pathOut;
+187   \textcolor{keywordtype}{bool} writeForPlot = \textcolor{keyword}{false};
+188   \textcolor{keywordtype}{bool} writePcap = \textcolor{keyword}{false};
+189   \textcolor{keywordtype}{bool} flowMonitor = \textcolor{keyword}{false};
+190 
+191   \textcolor{keywordtype}{bool} printAredStats = \textcolor{keyword}{true};
+192 
+193   \hyperlink{adaptive-red-tests_8cc_ab3a0ca969f11332a6b4ca8bc81e19ba7}{global\_start\_time} = 0.0;
+194   \hyperlink{adaptive-red-tests_8cc_a2c56dc9b543a4442a7edd8d680c4a1bc}{sink\_start\_time} = \hyperlink{adaptive-red-tests_8cc_ab3a0ca969f11332a6b4ca8bc81e19ba7}{global\_start\_time};
+195   \hyperlink{adaptive-red-tests_8cc_a18ff86acaf663200fbedb1f77d03b515}{client\_start\_time} = \hyperlink{adaptive-red-tests_8cc_ab3a0ca969f11332a6b4ca8bc81e19ba7}{global\_start\_time} + 1.5;
+196   \hyperlink{adaptive-red-tests_8cc_a374328526043935f11841a7ec7e396d5}{global\_stop\_time} = 7.0;
+197   \hyperlink{adaptive-red-tests_8cc_a2462eef540f5b896f14d4ea7b7bb6214}{sink\_stop\_time} = \hyperlink{adaptive-red-tests_8cc_a374328526043935f11841a7ec7e396d5}{global\_stop\_time} + 3.0;
+198   \hyperlink{adaptive-red-tests_8cc_aee714f5dcf74da2f73bcdd66c8a9e265}{client\_stop\_time} = \hyperlink{adaptive-red-tests_8cc_a374328526043935f11841a7ec7e396d5}{global\_stop\_time} - 2.0;
+199 
+200   \textcolor{comment}{// Configuration and command line parameter parsing}
+201   aredTest = 1;
+202   \textcolor{comment}{// Will only save in the directory if enable opts below}
+203   pathOut = \textcolor{stringliteral}{"."}; \textcolor{comment}{// Current directory}
+204   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+205   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"testNumber"}, \textcolor{stringliteral}{"Run test 1, 2, 6, 7, 8, 9, 10, 12, 13, 14 or 15"}, aredTest);
+206   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"pathOut"}, \textcolor{stringliteral}{"Path to save results from --writeForPlot/--writePcap/--writeFlowMonitor
+      "}, pathOut);
+207   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"writeForPlot"}, \textcolor{stringliteral}{"<0/1> to write results for plot (gnuplot)"}, writeForPlot);
+208   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"writePcap"}, \textcolor{stringliteral}{"<0/1> to write results in pcapfile"}, writePcap);
+209   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"writeFlowMonitor"}, \textcolor{stringliteral}{"<0/1> to enable Flow Monitor and write their results"}, 
+      flowMonitor);
+210 
+211   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+212   \textcolor{keywordflow}{if} ( (aredTest != 1) && (aredTest != 2) && (aredTest != 6) && (aredTest != 7) && (aredTest != 8) && (
+      aredTest != 9) && (aredTest != 10) && (aredTest != 12) && (aredTest != 13) && (aredTest != 14) && (aredTest != 1
+      5) )
+213     \{
+214       std::cout << \textcolor{stringliteral}{"Invalid test number. Supported tests are 1, 2, 6, 7, 8, 9, 10, 12, 13, 14 or 15"} << 
+      std::endl;
+215       exit (1);
+216     \}
+217 
+218   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes"});
+219   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+220   c.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (6);
+221   Names::Add ( \textcolor{stringliteral}{"N0"}, c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+222   Names::Add ( \textcolor{stringliteral}{"N1"}, c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+223   Names::Add ( \textcolor{stringliteral}{"N2"}, c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+224   Names::Add ( \textcolor{stringliteral}{"N3"}, c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+225   Names::Add ( \textcolor{stringliteral}{"N4"}, c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (4));
+226   Names::Add ( \textcolor{stringliteral}{"N5"}, c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (5));
+227   \hyperlink{adaptive-red-tests_8cc_aeaa87dbd052b50719525adea0f586b36}{n0n2} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+228   \hyperlink{adaptive-red-tests_8cc_a68f69f65725cbe7529e8b594708b8fc0}{n1n2} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+229   \hyperlink{adaptive-red-tests_8cc_a4bc708159d3ec761080f4639c1c8f409}{n2n3} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+230   \hyperlink{adaptive-red-tests_8cc_a71269c713841141f40860e991d435588}{n3n4} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (4));
+231   \hyperlink{adaptive-red-tests_8cc_af4c498a2bfb720685107e00e03067e31}{n3n5} = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (5));
+232 
+233   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::TcpL4Protocol::SocketType"}, StringValue (\textcolor{stringliteral}{"ns3::TcpNewReno"}));
+234   \textcolor{comment}{// 42 = headers size}
+235   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::TcpSocket::SegmentSize"}, UintegerValue (1000 - 42));
+236   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::TcpSocket::DelAckCount"}, UintegerValue (1));
+237   GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+238 
+239   uint32\_t meanPktSize = 1000;
+240 
+241   \textcolor{comment}{// RED params}
+242   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Set RED params"});
+243   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::Mode"}, StringValue (\textcolor{stringliteral}{"QUEUE\_DISC\_MODE\_PACKETS"}))
+      ;
+244   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::MeanPktSize"}, UintegerValue (meanPktSize));
+245   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::Wait"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+246   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::Gentle"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+247   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::QW"}, DoubleValue (0.002));
+248   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::MinTh"}, DoubleValue (5));
+249   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::MaxTh"}, DoubleValue (15));
+250   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::QueueLimit"}, UintegerValue (1000));
+251 
+252   \textcolor{keywordflow}{if} (aredTest == 1) \textcolor{comment}{// test 1: red1}
+253     \{
+254       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::QueueLimit"}, UintegerValue (25));
+255     \}
+256   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (aredTest == 2) \textcolor{comment}{// test 2: red1Adapt}
+257     \{
+258       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::ARED"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+259       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::LInterm"}, DoubleValue (10));
+260       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::QueueLimit"}, UintegerValue (25));
+261     \}
+262   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (aredTest == 7) \textcolor{comment}{// test 7: fastlinkAutowq}
+263     \{
+264       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::QW"}, DoubleValue (0.0));
+265     \}
+266   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (aredTest == 8) \textcolor{comment}{// test 8: fastlinkAutothresh}
+267     \{
+268       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::MinTh"}, DoubleValue (0));
+269       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::MaxTh"}, DoubleValue (0));
+270     \}
+271   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (aredTest == 9) \textcolor{comment}{// test 9: fastlinkAdaptive}
+272     \{
+273       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::AdaptMaxP"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+274       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::LInterm"}, DoubleValue (10));
+275     \}
+276   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (aredTest == 10) \textcolor{comment}{// test 10: fastlinkAllAdapt}
+277     \{
+278       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::ARED"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+279       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::LInterm"}, DoubleValue (10));
+280     \}
+281   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (aredTest == 12) \textcolor{comment}{// test 12: fastlinkAllAdapt1}
+282     \{
+283       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::ARED"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+284       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::LInterm"}, DoubleValue (10));
+285       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::TargetDelay"}, TimeValue (
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.2)));
+286     \}
+287   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (aredTest == 13) \textcolor{comment}{// test 13: longlink}
+288     \{
+289       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::QueueLimit"}, UintegerValue (100));
+290     \}
+291   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (aredTest == 14) \textcolor{comment}{// test 14: longlinkAdapt}
+292     \{
+293       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::ARED"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+294       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::LInterm"}, DoubleValue (10));
+295       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::QueueLimit"}, UintegerValue (100));
+296     \}
+297   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (aredTest == 15) \textcolor{comment}{// test 15: longlinkAdapt1}
+298     \{
+299       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::QW"}, DoubleValue (-1.0));
+300       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::MinTh"}, DoubleValue (0));
+301       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::MaxTh"}, DoubleValue (0));
+302       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::AdaptMaxP"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+303       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::LInterm"}, DoubleValue (10));
+304       \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RedQueueDisc::QueueLimit"}, UintegerValue (100));
+305     \}
+306 
+307   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Install internet stack on all nodes."});
+308   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+309   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (c);
+310 
+311   \hyperlink{classns3_1_1TrafficControlHelper}{TrafficControlHelper} tchPfifo;
+312   uint16\_t handle = tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a8588aac7a08e4dc4e7bb10fa7b9e25c8}{SetRootQueueDisc} (\textcolor{stringliteral}{"ns3::PfifoFastQueueDisc"});
+313   tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_aefc1be32222be2d9aa714367552c7179}{AddInternalQueues} (handle, 3, \textcolor{stringliteral}{"ns3::DropTailQueue"}, \textcolor{stringliteral}{"MaxPackets"}, UintegerValue
+       (1000));
+314 
+315   \hyperlink{classns3_1_1TrafficControlHelper}{TrafficControlHelper} tchRed;
+316   tchRed.\hyperlink{classns3_1_1TrafficControlHelper_a8588aac7a08e4dc4e7bb10fa7b9e25c8}{SetRootQueueDisc} (\textcolor{stringliteral}{"ns3::RedQueueDisc"}, \textcolor{stringliteral}{"LinkBandwidth"}, StringValue (
+      aredLinkDataRate),
+317                            \textcolor{stringliteral}{"LinkDelay"}, StringValue (aredLinkDelay));
+318 
+319   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create channels"});
+320   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} p2p;
+321 
+322   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devn0n2;
+323   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devn1n2;
+324   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devn2n3;
+325   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devn3n4;
+326   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devn3n5;
+327 
+328   \hyperlink{classns3_1_1QueueDiscContainer}{QueueDiscContainer} queueDiscs;
+329 
+330   \textcolor{keywordflow}{if} (aredTest == 1 || aredTest == 2)
+331     \{
+332       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+333       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+334       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"2ms"}));
+335       devn0n2 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n0n2);
+336       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn0n2);
+337 
+338       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+339       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+340       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"3ms"}));
+341       devn1n2 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n1n2);
+342       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn1n2);
+343 
+344       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+345       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (aredLinkDataRate));
+346       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (aredLinkDelay));
+347       devn2n3 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n2n3);
+348       \textcolor{comment}{// only backbone link has ARED queue disc}
+349       queueDiscs = tchRed.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn2n3);
+350 
+351       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+352       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+353       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"4ms"}));
+354       devn3n4 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n3n4);
+355       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn3n4);
+356 
+357       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+358       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+359       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"5ms"}));
+360       devn3n5 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n3n5);
+361       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn3n5);
+362     \}
+363   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (aredTest == 13 || aredTest == 14 || aredTest == 15)
+364     \{
+365       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+366       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+367       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"0ms"}));
+368       devn0n2 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n0n2);
+369       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn0n2);
+370 
+371       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+372       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+373       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"1ms"}));
+374       devn1n2 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n1n2);
+375       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn1n2);
+376 
+377       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+378       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (aredLinkDataRate));
+379       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"100ms"}));
+380       devn2n3 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n2n3);
+381       \textcolor{comment}{// only backbone link has ARED queue disc}
+382       queueDiscs = tchRed.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn2n3);
+383 
+384       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+385       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+386       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"2ms"}));
+387       devn3n4 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n3n4);
+388       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn3n4);
+389 
+390       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+391       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+392       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"3ms"}));
+393       devn3n5 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n3n5);
+394       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn3n5);
+395     \}
+396   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (aredTest == 6 || aredTest == 7 || aredTest == 8 || aredTest == 9 || aredTest == 10 || aredTest 
+      == 12)
+397     \{
+398       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+399       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"100Mbps"}));
+400       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"2ms"}));
+401       devn0n2 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n0n2);
+402       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn0n2);
+403 
+404       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+405       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"100Mbps"}));
+406       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"3ms"}));
+407       devn1n2 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n1n2);
+408       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn1n2);
+409 
+410       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+411       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"15Mbps"}));
+412       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (aredLinkDelay));
+413       devn2n3 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n2n3);
+414       \textcolor{comment}{// only backbone link has ARED queue disc}
+415       queueDiscs = tchRed.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn2n3);
+416 
+417       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+418       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"100Mbps"}));
+419       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"4ms"}));
+420       devn3n4 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n3n4);
+421       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn3n4);
+422 
+423       p2p.\hyperlink{classns3_1_1PointToPointHelper_a546a5c9ae3c9eab0ea98b25fd41e3c95}{SetQueue} (\textcolor{stringliteral}{"ns3::DropTailQueue"});
+424       p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"100Mbps"}));
+425       p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"5ms"}));
+426       devn3n5 = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (n3n5);
+427       tchPfifo.\hyperlink{classns3_1_1TrafficControlHelper_a0aa6a8e2fbb1c196589e16f48c99f0b9}{Install} (devn3n5);
+428     \}
+429 
+430   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses"});
+431   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+432 
+433   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+434   \hyperlink{adaptive-red-tests_8cc_a04048bb862423a1ed10deed33021fe0c}{i0i2} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devn0n2);
+435 
+436   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.2.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+437   \hyperlink{adaptive-red-tests_8cc_abe23af3b1cb569ee9ee4ed7370791041}{i1i2} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devn1n2);
+438 
+439   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.3.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+440   \hyperlink{adaptive-red-tests_8cc_affe7f66c0345fed19eab1e55824055e3}{i2i3} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devn2n3);
+441 
+442   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.4.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+443   \hyperlink{adaptive-red-tests_8cc_ae521eb38559954aa9357fa662c3bb76e}{i3i4} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devn3n4);
+444 
+445   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.5.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+446   \hyperlink{adaptive-red-tests_8cc_afd160932e196777fd40772bb913a63f5}{i3i5} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devn3n5);
+447 
+448   \textcolor{comment}{// Set up the routing}
+449   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+450 
+451   \hyperlink{adaptive-red-tests_8cc_a10c553e45f82b05b5cb70aaa433308b0}{BuildAppsTest} (aredTest);
+452 
+453   \textcolor{keywordflow}{if} (writePcap)
+454     \{
+455       \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} ptp;
+456       std::stringstream stmp;
+457       stmp << pathOut << \textcolor{stringliteral}{"/ared"};
+458       ptp.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (stmp.str ().c\_str ());
+459     \}
+460 
+461   \hyperlink{classns3_1_1Ptr}{Ptr<FlowMonitor>} flowmon;
+462   \textcolor{keywordflow}{if} (flowMonitor)
+463     \{
+464       \hyperlink{classns3_1_1FlowMonitorHelper}{FlowMonitorHelper} flowmonHelper;
+465       flowmon = flowmonHelper.\hyperlink{classns3_1_1FlowMonitorHelper_a722b383a10c5a959576f3bfee8d4374f}{InstallAll} ();
+466     \}
+467 
+468   \textcolor{keywordflow}{if} (writeForPlot)
+469     \{
+470       \hyperlink{adaptive-red-tests_8cc_a06d9ff5c07ecb984ef94ad415abd87b5}{filePlotQueueDisc} << pathOut << \textcolor{stringliteral}{"/"} << \textcolor{stringliteral}{"ared-queue-disc.plotme"};
+471       \hyperlink{adaptive-red-tests_8cc_a4164ee3b210acca3b1e1c45ad2bac980}{filePlotQueueDiscAvg} << pathOut << \textcolor{stringliteral}{"/"} << \textcolor{stringliteral}{"ared-queue-disc\_avg.plotme"};
+472 
+473       \textcolor{keyword}{remove} (\hyperlink{adaptive-red-tests_8cc_a06d9ff5c07ecb984ef94ad415abd87b5}{filePlotQueueDisc}.str ().c\_str ());
+474       \textcolor{keyword}{remove} (\hyperlink{adaptive-red-tests_8cc_a4164ee3b210acca3b1e1c45ad2bac980}{filePlotQueueDiscAvg}.str ().c\_str ());
+475       \hyperlink{classns3_1_1Ptr}{Ptr<QueueDisc>} queue = queueDiscs.\hyperlink{classns3_1_1QueueDiscContainer_a236064f6321b5f0d32561bb2a14e74af}{Get} (0);
+476       Simulator::ScheduleNow (&\hyperlink{adaptive-red-tests_8cc_a64451d920062e967d2c0fa8b6ae85911}{CheckQueueDiscSize}, queue);
+477     \}
+478 
+479   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (\hyperlink{adaptive-red-tests_8cc_a2462eef540f5b896f14d4ea7b7bb6214}{sink\_stop\_time}));
+480   Simulator::Run ();
+481 
+482   \hyperlink{structns3_1_1RedQueueDisc_1_1Stats}{RedQueueDisc::Stats} st = StaticCast<RedQueueDisc> (queueDiscs.
+      \hyperlink{classns3_1_1QueueDiscContainer_a236064f6321b5f0d32561bb2a14e74af}{Get} (0))->GetStats ();
+483 
+484   \textcolor{keywordflow}{if} (st.\hyperlink{structns3_1_1RedQueueDisc_1_1Stats_a242027f6eb7d30e2cd636c52080e2c73}{unforcedDrop} == 0)
+485     \{
+486       std::cout << \textcolor{stringliteral}{"There should be some unforced drops"} << std::endl;
+487       exit (1);
+488     \}
+489 
+490   \textcolor{keywordflow}{if} (aredTest == 1 || aredTest == 2 || aredTest == 13)
+491     \{
+492       \textcolor{keywordflow}{if} (st.\hyperlink{structns3_1_1RedQueueDisc_1_1Stats_a2374b8b8386ad6e42435bf1b29109bad}{qLimDrop} == 0)
+493         \{
+494           std::cout << \textcolor{stringliteral}{"There should be some drops due to queue full"} << std::endl;
+495           exit (1);
+496         \}
+497     \}
+498   \textcolor{keywordflow}{else}
+499     \{
+500       \textcolor{keywordflow}{if} (st.\hyperlink{structns3_1_1RedQueueDisc_1_1Stats_a2374b8b8386ad6e42435bf1b29109bad}{qLimDrop} != 0)
+501         \{
+502           std::cout << \textcolor{stringliteral}{"There should be zero drops due to queue full"} << std::endl;
+503           exit (1);
+504         \}
+505     \}
+506 
+507   \textcolor{keywordflow}{if} (flowMonitor)
+508     \{
+509       std::stringstream stmp;
+510       stmp << pathOut << \textcolor{stringliteral}{"/ared.flowmon"};
+511 
+512       flowmon->\hyperlink{classns3_1_1FlowMonitor_a4c92ccb32c95122857aefbcfc82d6746}{SerializeToXmlFile} (stmp.str ().c\_str (), \textcolor{keyword}{false}, \textcolor{keyword}{false});
+513     \}
+514 
+515   \textcolor{keywordflow}{if} (printAredStats)
+516     \{
+517       std::cout << \textcolor{stringliteral}{"*** ARED stats from Node 2 queue ***"} << std::endl;
+518       std::cout << \textcolor{stringliteral}{"\(\backslash\)t "} << st.\hyperlink{structns3_1_1RedQueueDisc_1_1Stats_a242027f6eb7d30e2cd636c52080e2c73}{unforcedDrop} << \textcolor{stringliteral}{" drops due to prob mark"} << std::endl;
+519       std::cout << \textcolor{stringliteral}{"\(\backslash\)t "} << st.\hyperlink{structns3_1_1RedQueueDisc_1_1Stats_a56951fa215564c8d2e59aa046dc3e494}{forcedDrop} << \textcolor{stringliteral}{" drops due to hard mark"} << std::endl;
+520       std::cout << \textcolor{stringliteral}{"\(\backslash\)t "} << st.\hyperlink{structns3_1_1RedQueueDisc_1_1Stats_a2374b8b8386ad6e42435bf1b29109bad}{qLimDrop} << \textcolor{stringliteral}{" drops due to queue full"} << std::endl;
+521     \}
+522 
+523   Simulator::Destroy ();
+524 
+525   \textcolor{keywordflow}{return} 0;
+526 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Adaptive\+Red\+Tests"")}{NS_LOG_COMPONENT_DEFINE("AdaptiveRedTests")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Adaptive\+Red\+Tests\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{adaptive-red-tests_8cc_ac25688e23dcd99ad74a29ea6fde9a015}{}\label{adaptive-red-tests_8cc_ac25688e23dcd99ad74a29ea6fde9a015}
+
+
+\subsection{Variable Documentation}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!avg\+Queue\+Disc\+Size@{avg\+Queue\+Disc\+Size}}
+\index{avg\+Queue\+Disc\+Size@{avg\+Queue\+Disc\+Size}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{avg\+Queue\+Disc\+Size}{avgQueueDiscSize}}]{\setlength{\rightskip}{0pt plus 5cm}double avg\+Queue\+Disc\+Size}\hypertarget{adaptive-red-tests_8cc_a7058a9ca1256be97bd01c637ff170dc2}{}\label{adaptive-red-tests_8cc_a7058a9ca1256be97bd01c637ff170dc2}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!check\+Times@{check\+Times}}
+\index{check\+Times@{check\+Times}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{check\+Times}{checkTimes}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t check\+Times}\hypertarget{adaptive-red-tests_8cc_aeea215f1e5c3568bca85c126b9870c09}{}\label{adaptive-red-tests_8cc_aeea215f1e5c3568bca85c126b9870c09}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!client\+\_\+start\+\_\+time@{client\+\_\+start\+\_\+time}}
+\index{client\+\_\+start\+\_\+time@{client\+\_\+start\+\_\+time}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{client\+\_\+start\+\_\+time}{client_start_time}}]{\setlength{\rightskip}{0pt plus 5cm}double client\+\_\+start\+\_\+time}\hypertarget{adaptive-red-tests_8cc_a18ff86acaf663200fbedb1f77d03b515}{}\label{adaptive-red-tests_8cc_a18ff86acaf663200fbedb1f77d03b515}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!client\+\_\+stop\+\_\+time@{client\+\_\+stop\+\_\+time}}
+\index{client\+\_\+stop\+\_\+time@{client\+\_\+stop\+\_\+time}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{client\+\_\+stop\+\_\+time}{client_stop_time}}]{\setlength{\rightskip}{0pt plus 5cm}double client\+\_\+stop\+\_\+time}\hypertarget{adaptive-red-tests_8cc_aee714f5dcf74da2f73bcdd66c8a9e265}{}\label{adaptive-red-tests_8cc_aee714f5dcf74da2f73bcdd66c8a9e265}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!file\+Plot\+Queue\+Disc@{file\+Plot\+Queue\+Disc}}
+\index{file\+Plot\+Queue\+Disc@{file\+Plot\+Queue\+Disc}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{file\+Plot\+Queue\+Disc}{filePlotQueueDisc}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::stringstream file\+Plot\+Queue\+Disc}\hypertarget{adaptive-red-tests_8cc_a06d9ff5c07ecb984ef94ad415abd87b5}{}\label{adaptive-red-tests_8cc_a06d9ff5c07ecb984ef94ad415abd87b5}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!file\+Plot\+Queue\+Disc\+Avg@{file\+Plot\+Queue\+Disc\+Avg}}
+\index{file\+Plot\+Queue\+Disc\+Avg@{file\+Plot\+Queue\+Disc\+Avg}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{file\+Plot\+Queue\+Disc\+Avg}{filePlotQueueDiscAvg}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::stringstream file\+Plot\+Queue\+Disc\+Avg}\hypertarget{adaptive-red-tests_8cc_a4164ee3b210acca3b1e1c45ad2bac980}{}\label{adaptive-red-tests_8cc_a4164ee3b210acca3b1e1c45ad2bac980}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!global\+\_\+start\+\_\+time@{global\+\_\+start\+\_\+time}}
+\index{global\+\_\+start\+\_\+time@{global\+\_\+start\+\_\+time}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{global\+\_\+start\+\_\+time}{global_start_time}}]{\setlength{\rightskip}{0pt plus 5cm}double global\+\_\+start\+\_\+time}\hypertarget{adaptive-red-tests_8cc_ab3a0ca969f11332a6b4ca8bc81e19ba7}{}\label{adaptive-red-tests_8cc_ab3a0ca969f11332a6b4ca8bc81e19ba7}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!global\+\_\+stop\+\_\+time@{global\+\_\+stop\+\_\+time}}
+\index{global\+\_\+stop\+\_\+time@{global\+\_\+stop\+\_\+time}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{global\+\_\+stop\+\_\+time}{global_stop_time}}]{\setlength{\rightskip}{0pt plus 5cm}double global\+\_\+stop\+\_\+time}\hypertarget{adaptive-red-tests_8cc_a374328526043935f11841a7ec7e396d5}{}\label{adaptive-red-tests_8cc_a374328526043935f11841a7ec7e396d5}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!i0i2@{i0i2}}
+\index{i0i2@{i0i2}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{i0i2}{i0i2}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} i0i2}\hypertarget{adaptive-red-tests_8cc_a04048bb862423a1ed10deed33021fe0c}{}\label{adaptive-red-tests_8cc_a04048bb862423a1ed10deed33021fe0c}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!i1i2@{i1i2}}
+\index{i1i2@{i1i2}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{i1i2}{i1i2}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} i1i2}\hypertarget{adaptive-red-tests_8cc_abe23af3b1cb569ee9ee4ed7370791041}{}\label{adaptive-red-tests_8cc_abe23af3b1cb569ee9ee4ed7370791041}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!i2i3@{i2i3}}
+\index{i2i3@{i2i3}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{i2i3}{i2i3}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} i2i3}\hypertarget{adaptive-red-tests_8cc_affe7f66c0345fed19eab1e55824055e3}{}\label{adaptive-red-tests_8cc_affe7f66c0345fed19eab1e55824055e3}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!i3i4@{i3i4}}
+\index{i3i4@{i3i4}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{i3i4}{i3i4}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} i3i4}\hypertarget{adaptive-red-tests_8cc_ae521eb38559954aa9357fa662c3bb76e}{}\label{adaptive-red-tests_8cc_ae521eb38559954aa9357fa662c3bb76e}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!i3i5@{i3i5}}
+\index{i3i5@{i3i5}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{i3i5}{i3i5}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Interface\+Container} i3i5}\hypertarget{adaptive-red-tests_8cc_afd160932e196777fd40772bb913a63f5}{}\label{adaptive-red-tests_8cc_afd160932e196777fd40772bb913a63f5}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!n0n2@{n0n2}}
+\index{n0n2@{n0n2}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{n0n2}{n0n2}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} n0n2}\hypertarget{adaptive-red-tests_8cc_aeaa87dbd052b50719525adea0f586b36}{}\label{adaptive-red-tests_8cc_aeaa87dbd052b50719525adea0f586b36}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!n1n2@{n1n2}}
+\index{n1n2@{n1n2}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{n1n2}{n1n2}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} n1n2}\hypertarget{adaptive-red-tests_8cc_a68f69f65725cbe7529e8b594708b8fc0}{}\label{adaptive-red-tests_8cc_a68f69f65725cbe7529e8b594708b8fc0}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!n2n3@{n2n3}}
+\index{n2n3@{n2n3}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{n2n3}{n2n3}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} n2n3}\hypertarget{adaptive-red-tests_8cc_a4bc708159d3ec761080f4639c1c8f409}{}\label{adaptive-red-tests_8cc_a4bc708159d3ec761080f4639c1c8f409}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!n3n4@{n3n4}}
+\index{n3n4@{n3n4}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{n3n4}{n3n4}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} n3n4}\hypertarget{adaptive-red-tests_8cc_a71269c713841141f40860e991d435588}{}\label{adaptive-red-tests_8cc_a71269c713841141f40860e991d435588}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!n3n5@{n3n5}}
+\index{n3n5@{n3n5}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{n3n5}{n3n5}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Container} n3n5}\hypertarget{adaptive-red-tests_8cc_af4c498a2bfb720685107e00e03067e31}{}\label{adaptive-red-tests_8cc_af4c498a2bfb720685107e00e03067e31}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!sink\+\_\+start\+\_\+time@{sink\+\_\+start\+\_\+time}}
+\index{sink\+\_\+start\+\_\+time@{sink\+\_\+start\+\_\+time}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{sink\+\_\+start\+\_\+time}{sink_start_time}}]{\setlength{\rightskip}{0pt plus 5cm}double sink\+\_\+start\+\_\+time}\hypertarget{adaptive-red-tests_8cc_a2c56dc9b543a4442a7edd8d680c4a1bc}{}\label{adaptive-red-tests_8cc_a2c56dc9b543a4442a7edd8d680c4a1bc}
+\index{adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}!sink\+\_\+stop\+\_\+time@{sink\+\_\+stop\+\_\+time}}
+\index{sink\+\_\+stop\+\_\+time@{sink\+\_\+stop\+\_\+time}!adaptive-\/red-\/tests.\+cc@{adaptive-\/red-\/tests.\+cc}}
+\subsubsection[{\texorpdfstring{sink\+\_\+stop\+\_\+time}{sink_stop_time}}]{\setlength{\rightskip}{0pt plus 5cm}double sink\+\_\+stop\+\_\+time}\hypertarget{adaptive-red-tests_8cc_a2462eef540f5b896f14d4ea7b7bb6214}{}\label{adaptive-red-tests_8cc_a2462eef540f5b896f14d4ea7b7bb6214}

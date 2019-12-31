@@ -1,0 +1,163 @@
+\hypertarget{classns3_1_1ErrorRateModel}{}\section{ns3\+:\+:Error\+Rate\+Model Class Reference}
+\label{classns3_1_1ErrorRateModel}\index{ns3\+::\+Error\+Rate\+Model@{ns3\+::\+Error\+Rate\+Model}}
+
+
+the interface for Wifi\textquotesingle{}s error models  
+
+
+
+
+{\ttfamily \#include $<$error-\/rate-\/model.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Error\+Rate\+Model\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Error\+Rate\+Model\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1ErrorRateModel_af52cfcaec5a3da44df8517bb7bb71cad}{Calculate\+Snr} (\hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} tx\+Vector, double \hyperlink{lte__ue__measurements_8m_a8320b665cd9f5639cb929c78d5a41af7}{ber}) const 
+\item 
+virtual double \hyperlink{classns3_1_1ErrorRateModel_a7cb1aac92893c17de908eaad7c8ef989}{Get\+Chunk\+Success\+Rate} (\hyperlink{classns3_1_1WifiMode}{Wifi\+Mode} mode, \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} tx\+Vector, double \hyperlink{lte__pathloss_8m_ae6e82a215dff6b79fb6e9952a1b78453}{snr}, uint32\+\_\+t nbits) const =0
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1ErrorRateModel_adc42c625045c25aafbe4d6b3f829c3fe}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+the interface for Wifi\textquotesingle{}s error models 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Error\+Rate\+Model@{ns3\+::\+Error\+Rate\+Model}!Calculate\+Snr@{Calculate\+Snr}}
+\index{Calculate\+Snr@{Calculate\+Snr}!ns3\+::\+Error\+Rate\+Model@{ns3\+::\+Error\+Rate\+Model}}
+\subsubsection[{\texorpdfstring{Calculate\+Snr(\+Wifi\+Tx\+Vector tx\+Vector, double ber) const }{CalculateSnr(WifiTxVector txVector, double ber) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Error\+Rate\+Model\+::\+Calculate\+Snr (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Tx\+Vector}}]{tx\+Vector, }
+\item[{double}]{ber}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ErrorRateModel_af52cfcaec5a3da44df8517bb7bb71cad}{}\label{classns3_1_1ErrorRateModel_af52cfcaec5a3da44df8517bb7bb71cad}
+
+\begin{DoxyParams}{Parameters}
+{\em tx\+Vector} & a specific transmission vector including \hyperlink{classns3_1_1WifiMode}{Wifi\+Mode} \\
+\hline
+{\em ber} & a target ber\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the snr which corresponds to the requested ber 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+38 \{
+39   \textcolor{comment}{//This is a very simple binary search.}
+40   \textcolor{keywordtype}{double} low, high, precision;
+41   low = 1e-25;
+42   high = 1e25;
+43   precision = 1e-12;
+44   \textcolor{keywordflow}{while} (high - low > precision)
+45     \{
+46       \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (high >= low);
+47       \textcolor{keywordtype}{double} middle = low + (high - low) / 2;
+48       \textcolor{keywordflow}{if} ((1 - \hyperlink{classns3_1_1ErrorRateModel_a7cb1aac92893c17de908eaad7c8ef989}{GetChunkSuccessRate} (txVector.GetMode (), txVector, middle, 1)) > 
+      \hyperlink{lte__cqi__generation_8m_a197619a3539acfc577325d6e41b6ce95}{ber})
+49         \{
+50           low = middle;
+51         \}
+52       \textcolor{keywordflow}{else}
+53         \{
+54           high = middle;
+55         \}
+56     \}
+57   \textcolor{keywordflow}{return} low;
+58 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Error\+Rate\+Model@{ns3\+::\+Error\+Rate\+Model}!Get\+Chunk\+Success\+Rate@{Get\+Chunk\+Success\+Rate}}
+\index{Get\+Chunk\+Success\+Rate@{Get\+Chunk\+Success\+Rate}!ns3\+::\+Error\+Rate\+Model@{ns3\+::\+Error\+Rate\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Chunk\+Success\+Rate(\+Wifi\+Mode mode, Wifi\+Tx\+Vector tx\+Vector, double snr, uint32\+\_\+t nbits) const =0}{GetChunkSuccessRate(WifiMode mode, WifiTxVector txVector, double snr, uint32_t nbits) const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual double ns3\+::\+Error\+Rate\+Model\+::\+Get\+Chunk\+Success\+Rate (
+\begin{DoxyParamCaption}
+\item[{{\bf Wifi\+Mode}}]{mode, }
+\item[{{\bf Wifi\+Tx\+Vector}}]{tx\+Vector, }
+\item[{double}]{snr, }
+\item[{uint32\+\_\+t}]{nbits}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1ErrorRateModel_a7cb1aac92893c17de908eaad7c8ef989}{}\label{classns3_1_1ErrorRateModel_a7cb1aac92893c17de908eaad7c8ef989}
+A pure virtual method that must be implemented in the subclass. This method returns the probability that the given \textquotesingle{}chunk\textquotesingle{} of the packet will be successfully received by the P\+HY.
+
+A chunk can be viewed as a part of a packet with equal S\+NR. The probability of successfully receiving the chunk depends on the mode, the S\+NR, and the size of the chunk.
+
+Note that both a \hyperlink{classns3_1_1WifiMode}{Wifi\+Mode} and a \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} (which contains a \hyperlink{classns3_1_1WifiMode}{Wifi\+Mode}) are passed into this method. The \hyperlink{classns3_1_1WifiTxVector}{Wifi\+Tx\+Vector} may be from a signal that contains multiple modes (e.\+g. P\+L\+CP header sent differently from P\+L\+CP payload). Consequently, the mode parameter is what the method uses to calculate the chunk error rate, and the tx\+Vector is used for other information as needed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & the Wi-\/\+Fi mode applicable to this chunk \\
+\hline
+{\em tx\+Vector} & T\+X\+V\+E\+C\+T\+OR of the overall transmission \\
+\hline
+{\em snr} & the S\+NR of the chunk \\
+\hline
+{\em nbits} & the number of bits in this chunk\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+probability of successfully receiving the chunk 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1YansErrorRateModel_a9ee90c83f09b4a0a6d53e4df536beee1}{ns3\+::\+Yans\+Error\+Rate\+Model}, and \hyperlink{classns3_1_1NistErrorRateModel_a2316a2c287485d7cc81198c90b246bc0}{ns3\+::\+Nist\+Error\+Rate\+Model}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Error\+Rate\+Model@{ns3\+::\+Error\+Rate\+Model}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Error\+Rate\+Model@{ns3\+::\+Error\+Rate\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Error\+Rate\+Model\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1ErrorRateModel_adc42c625045c25aafbe4d6b3f829c3fe}{}\label{classns3_1_1ErrorRateModel_adc42c625045c25aafbe4d6b3f829c3fe}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+28 \{
+29   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::ErrorRateModel"})
+30     .SetParent<\hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object}> ()
+31     .SetGroupName (\textcolor{stringliteral}{"Wifi"})
+32   ;
+33   \textcolor{keywordflow}{return} tid;
+34 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+wifi/model/\hyperlink{error-rate-model_8h}{error-\/rate-\/model.\+h}\item 
+wifi/model/\hyperlink{error-rate-model_8cc}{error-\/rate-\/model.\+cc}\end{DoxyCompactItemize}

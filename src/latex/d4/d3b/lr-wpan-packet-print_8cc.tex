@@ -1,0 +1,58 @@
+\hypertarget{lr-wpan-packet-print_8cc}{}\section{lr-\/wpan/examples/lr-\/wpan-\/packet-\/print.cc File Reference}
+\label{lr-wpan-packet-print_8cc}\index{lr-\/wpan/examples/lr-\/wpan-\/packet-\/print.\+cc@{lr-\/wpan/examples/lr-\/wpan-\/packet-\/print.\+cc}}
+{\ttfamily \#include $<$ns3/core-\/module.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/lr-\/wpan-\/module.\+h$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+Include dependency graph for lr-\/wpan-\/packet-\/print.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{lr-wpan-packet-print_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{lr-\/wpan-\/packet-\/print.\+cc@{lr-\/wpan-\/packet-\/print.\+cc}!main@{main}}
+\index{main@{main}!lr-\/wpan-\/packet-\/print.\+cc@{lr-\/wpan-\/packet-\/print.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lr-wpan-packet-print_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{lr-wpan-packet-print_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+28 \{
+29   Packet::EnablePrinting ();
+30   Packet::EnableChecking ();
+31   \hyperlink{classns3_1_1LrWpanMacHeader}{LrWpanMacHeader} macHdr (LrWpanMacHeader::LRWPAN\_MAC\_BEACON, 0);        \textcolor{comment}{//sequence number
+       set to 0}
+32   macHdr.SetSrcAddrMode (2);                                             \textcolor{comment}{// short addr}
+33   macHdr.SetDstAddrMode (0);                                             \textcolor{comment}{// no addr}
+34   \textcolor{comment}{// ... other setters}
+35 
+36   uint16\_t srcPanId = 100;
+37   \hyperlink{classns3_1_1Mac16Address}{Mac16Address} srcWpanAddr (\textcolor{stringliteral}{"00:11"});
+38 
+39   macHdr.SetSrcAddrFields (srcPanId,srcWpanAddr );
+40 
+41   \hyperlink{classns3_1_1LrWpanMacTrailer}{LrWpanMacTrailer} macTrailer;
+42 
+43   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = Create<Packet> (20);  \textcolor{comment}{// 20 bytes of dummy data}
+44 
+45   p->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (macHdr);
+46   p->\hyperlink{classns3_1_1Packet_ae26b490c30ae5bc98be5181ec6e06db8}{AddTrailer} (macTrailer);
+47 
+48   p->\hyperlink{classns3_1_1Packet_aa34058a5cdbf94673531f8c4001ab227}{Print} (std::cout);
+49   std::cout << std::endl;
+50   \textcolor{keywordflow}{return} 0;
+51 
+52 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

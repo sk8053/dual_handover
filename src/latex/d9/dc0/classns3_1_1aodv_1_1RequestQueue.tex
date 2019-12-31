@@ -1,0 +1,442 @@
+\hypertarget{classns3_1_1aodv_1_1RequestQueue}{}\section{ns3\+:\+:aodv\+:\+:Request\+Queue Class Reference}
+\label{classns3_1_1aodv_1_1RequestQueue}\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+
+
+A\+O\+DV route request queue.  
+
+
+
+
+{\ttfamily \#include $<$aodv-\/rqueue.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:aodv\+:\+:Request\+Queue\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1aodv_1_1RequestQueue_ac4d5b008b8daeb70d0ababd5695401da}{Request\+Queue} (uint32\+\_\+t max\+Len, \hyperlink{classns3_1_1Time}{Time} route\+To\+Queue\+Timeout)
+\begin{DoxyCompactList}\small\item\em Default c-\/tor. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1aodv_1_1RequestQueue_ac48ac1f8e19e35f239176e1f3ff038ec}{Enqueue} (\hyperlink{classns3_1_1aodv_1_1QueueEntry}{Queue\+Entry} \&entry)
+\begin{DoxyCompactList}\small\item\em Push entry in queue, if there is no entry with the same packet and destination address in queue. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1aodv_1_1RequestQueue_a1711433b4999cfd7ee30dd88103a2555}{Dequeue} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} dst, \hyperlink{classns3_1_1aodv_1_1QueueEntry}{Queue\+Entry} \&entry)
+\begin{DoxyCompactList}\small\item\em Return first found (the earliest) entry for given destination. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1aodv_1_1RequestQueue_ac133e18007238865cda0bc74b6b59f50}{Drop\+Packet\+With\+Dst} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} dst)
+\begin{DoxyCompactList}\small\item\em Remove all packets with destination IP address dst. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1aodv_1_1RequestQueue_a5ab010b36f59a67d05d55fde75a50461}{Find} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} dst)
+\begin{DoxyCompactList}\small\item\em Finds whether a packet with destination dst exists in the queue. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1aodv_1_1RequestQueue_ac4775afbe477b1cfe41fa83c7bf113aa}{Get\+Size} ()
+\begin{DoxyCompactList}\small\item\em Number of entries. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1aodv_1_1RequestQueue_a37817b918ae1ffd1c346898ab0b02eef}{Get\+Max\+Queue\+Len} () const 
+\item 
+void \hyperlink{classns3_1_1aodv_1_1RequestQueue_a4a71c31d25dfe0f97e970938076c00c5}{Set\+Max\+Queue\+Len} (uint32\+\_\+t len)
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1aodv_1_1RequestQueue_aab629edc7ccd1daf4b98d5bbdfcbdf1d}{Get\+Queue\+Timeout} () const 
+\item 
+void \hyperlink{classns3_1_1aodv_1_1RequestQueue_a9f81ff4709cfe0f0e88438a820c308f7}{Set\+Queue\+Timeout} (\hyperlink{classns3_1_1Time}{Time} t)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1aodv_1_1RequestQueue_a6ed74cff072d572de14a87a5aaef2831}{Purge} ()
+\begin{DoxyCompactList}\small\item\em Remove all expired entries. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1aodv_1_1RequestQueue_af39cbe0d1f9ed4cbe14355b6a3b594e6}{Drop} (\hyperlink{classns3_1_1aodv_1_1QueueEntry}{Queue\+Entry} en, std\+::string reason)
+\begin{DoxyCompactList}\small\item\em Notify that packet is dropped from queue by timeout. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classns3_1_1aodv_1_1RequestQueue_a435a4bd8dd298a8387ba1a8ac4cdfe42}{Is\+Equal} (\hyperlink{classns3_1_1aodv_1_1QueueEntry}{Queue\+Entry} en, const \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} dst)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{classns3_1_1aodv_1_1QueueEntry}{Queue\+Entry} $>$ \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\+\_\+queue}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1aodv_1_1RequestQueue_a1d6c29b548a3a63d4702e6f1b62e08ae}{m\+\_\+max\+Len}
+\begin{DoxyCompactList}\small\item\em The maximum number of packets that we allow a routing protocol to buffer. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1aodv_1_1RequestQueue_aa6026890dfa99e5104d035cf9aedbc28}{m\+\_\+queue\+Timeout}
+\begin{DoxyCompactList}\small\item\em The maximum period of time that a routing protocol is allowed to buffer a packet for, seconds. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A\+O\+DV route request queue. 
+
+Since A\+O\+DV is an on demand routing we queue requests while looking for route. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Request\+Queue@{Request\+Queue}}
+\index{Request\+Queue@{Request\+Queue}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Request\+Queue(uint32\+\_\+t max\+Len, Time route\+To\+Queue\+Timeout)}{RequestQueue(uint32_t maxLen, Time routeToQueueTimeout)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::aodv\+::\+Request\+Queue\+::\+Request\+Queue (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{max\+Len, }
+\item[{{\bf Time}}]{route\+To\+Queue\+Timeout}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1aodv_1_1RequestQueue_ac4d5b008b8daeb70d0ababd5695401da}{}\label{classns3_1_1aodv_1_1RequestQueue_ac4d5b008b8daeb70d0ababd5695401da}
+
+
+Default c-\/tor. 
+
+
+\begin{DoxyCode}
+100                                                            :
+101     \hyperlink{classns3_1_1aodv_1_1RequestQueue_a1d6c29b548a3a63d4702e6f1b62e08ae}{m\_maxLen} (maxLen), \hyperlink{classns3_1_1aodv_1_1RequestQueue_aa6026890dfa99e5104d035cf9aedbc28}{m\_queueTimeout} (routeToQueueTimeout)
+102   \{
+103   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Dequeue@{Dequeue}}
+\index{Dequeue@{Dequeue}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Dequeue(\+Ipv4\+Address dst, Queue\+Entry \&entry)}{Dequeue(Ipv4Address dst, QueueEntry &entry)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::aodv\+::\+Request\+Queue\+::\+Dequeue (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Address}}]{dst, }
+\item[{{\bf Queue\+Entry} \&}]{entry}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1aodv_1_1RequestQueue_a1711433b4999cfd7ee30dd88103a2555}{}\label{classns3_1_1aodv_1_1RequestQueue_a1711433b4999cfd7ee30dd88103a2555}
+
+
+Return first found (the earliest) entry for given destination. 
+
+
+\begin{DoxyCode}
+90 \{
+91   \hyperlink{classns3_1_1aodv_1_1RequestQueue_a6ed74cff072d572de14a87a5aaef2831}{Purge} ();
+92   \textcolor{keywordflow}{for} (std::vector<QueueEntry>::iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.begin (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != 
+      \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.end (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+93     \{
+94       \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->GetIpv4Header ().GetDestination () == dst)
+95         \{
+96           entry = *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+97           \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.erase (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+98           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+99         \}
+100     \}
+101   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+102 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Drop@{Drop}}
+\index{Drop@{Drop}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Drop(\+Queue\+Entry en, std\+::string reason)}{Drop(QueueEntry en, std::string reason)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::aodv\+::\+Request\+Queue\+::\+Drop (
+\begin{DoxyParamCaption}
+\item[{{\bf Queue\+Entry}}]{en, }
+\item[{std\+::string}]{reason}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1aodv_1_1RequestQueue_af39cbe0d1f9ed4cbe14355b6a3b594e6}{}\label{classns3_1_1aodv_1_1RequestQueue_af39cbe0d1f9ed4cbe14355b6a3b594e6}
+
+
+Notify that packet is dropped from queue by timeout. 
+
+
+\begin{DoxyCode}
+143 \{
+144   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (reason << en.GetPacket ()->GetUid () << \textcolor{stringliteral}{" "} << en.GetIpv4Header ().
+      GetDestination ());
+145   en.GetErrorCallback () (en.GetPacket (), en.GetIpv4Header (),
+146                           \hyperlink{classns3_1_1Socket_ada1328c5ae0c28cb2a982caf8f6d6ccaa0f8ecb5a4ddbce3bade35fa12c3d49e8}{Socket::ERROR\_NOROUTETOHOST});
+147   \textcolor{keywordflow}{return};
+148 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Drop\+Packet\+With\+Dst@{Drop\+Packet\+With\+Dst}}
+\index{Drop\+Packet\+With\+Dst@{Drop\+Packet\+With\+Dst}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Drop\+Packet\+With\+Dst(\+Ipv4\+Address dst)}{DropPacketWithDst(Ipv4Address dst)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::aodv\+::\+Request\+Queue\+::\+Drop\+Packet\+With\+Dst (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Address}}]{dst}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1aodv_1_1RequestQueue_ac133e18007238865cda0bc74b6b59f50}{}\label{classns3_1_1aodv_1_1RequestQueue_ac133e18007238865cda0bc74b6b59f50}
+
+
+Remove all packets with destination IP address dst. 
+
+
+\begin{DoxyCode}
+73 \{
+74   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << dst);
+75   \hyperlink{classns3_1_1aodv_1_1RequestQueue_a6ed74cff072d572de14a87a5aaef2831}{Purge} ();
+76   \textcolor{keywordflow}{for} (std::vector<QueueEntry>::iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.begin (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}
+77        != \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.end (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+78     \{
+79       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1aodv_1_1RequestQueue_a435a4bd8dd298a8387ba1a8ac4cdfe42}{IsEqual} (*\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}, dst))
+80         \{
+81           \hyperlink{classns3_1_1aodv_1_1RequestQueue_af39cbe0d1f9ed4cbe14355b6a3b594e6}{Drop} (*\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}, \textcolor{stringliteral}{"DropPacketWithDst "});
+82         \}
+83     \}
+84   \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.erase (std::remove\_if (\hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.begin (), \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.end (),
+85                                  std::bind2nd (std::ptr\_fun (
+      \hyperlink{classns3_1_1aodv_1_1RequestQueue_a435a4bd8dd298a8387ba1a8ac4cdfe42}{RequestQueue::IsEqual}), dst)), \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.end ());
+86 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Enqueue@{Enqueue}}
+\index{Enqueue@{Enqueue}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Enqueue(\+Queue\+Entry \&entry)}{Enqueue(QueueEntry &entry)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::aodv\+::\+Request\+Queue\+::\+Enqueue (
+\begin{DoxyParamCaption}
+\item[{{\bf Queue\+Entry} \&}]{entry}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1aodv_1_1RequestQueue_ac48ac1f8e19e35f239176e1f3ff038ec}{}\label{classns3_1_1aodv_1_1RequestQueue_ac48ac1f8e19e35f239176e1f3ff038ec}
+
+
+Push entry in queue, if there is no entry with the same packet and destination address in queue. 
+
+
+\begin{DoxyCode}
+51 \{
+52   \hyperlink{classns3_1_1aodv_1_1RequestQueue_a6ed74cff072d572de14a87a5aaef2831}{Purge} ();
+53   \textcolor{keywordflow}{for} (std::vector<QueueEntry>::const\_iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.begin (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}
+54        != \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.end (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+55     \{
+56       \textcolor{keywordflow}{if} ((\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->GetPacket ()->GetUid () == entry.GetPacket ()->GetUid ())
+57           && (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->GetIpv4Header ().GetDestination ()
+58               == entry.GetIpv4Header ().GetDestination ()))
+59         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+60     \}
+61   entry.SetExpireTime (\hyperlink{classns3_1_1aodv_1_1RequestQueue_aa6026890dfa99e5104d035cf9aedbc28}{m\_queueTimeout});
+62   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.size () == \hyperlink{classns3_1_1aodv_1_1RequestQueue_a1d6c29b548a3a63d4702e6f1b62e08ae}{m\_maxLen})
+63     \{
+64       \hyperlink{classns3_1_1aodv_1_1RequestQueue_af39cbe0d1f9ed4cbe14355b6a3b594e6}{Drop} (\hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.front (), \textcolor{stringliteral}{"Drop the most aged packet"}); \textcolor{comment}{// Drop the most aged packet}
+65       \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.erase (\hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.begin ());
+66     \}
+67   \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.push\_back (entry);
+68   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+69 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Find@{Find}}
+\index{Find@{Find}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Find(\+Ipv4\+Address dst)}{Find(Ipv4Address dst)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::aodv\+::\+Request\+Queue\+::\+Find (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Address}}]{dst}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1aodv_1_1RequestQueue_a5ab010b36f59a67d05d55fde75a50461}{}\label{classns3_1_1aodv_1_1RequestQueue_a5ab010b36f59a67d05d55fde75a50461}
+
+
+Finds whether a packet with destination dst exists in the queue. 
+
+
+\begin{DoxyCode}
+106 \{
+107   \textcolor{keywordflow}{for} (std::vector<QueueEntry>::const\_iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.begin (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}
+108        != \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.end (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+109     \{
+110       \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->GetIpv4Header ().GetDestination () == dst)
+111         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+112     \}
+113   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+114 \}
+\end{DoxyCode}
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Get\+Max\+Queue\+Len@{Get\+Max\+Queue\+Len}}
+\index{Get\+Max\+Queue\+Len@{Get\+Max\+Queue\+Len}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Get\+Max\+Queue\+Len() const }{GetMaxQueueLen() const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::aodv\+::\+Request\+Queue\+::\+Get\+Max\+Queue\+Len (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1aodv_1_1RequestQueue_a37817b918ae1ffd1c346898ab0b02eef}{}\label{classns3_1_1aodv_1_1RequestQueue_a37817b918ae1ffd1c346898ab0b02eef}
+
+\begin{DoxyCode}
+116 \{ \textcolor{keywordflow}{return} \hyperlink{classns3_1_1aodv_1_1RequestQueue_a1d6c29b548a3a63d4702e6f1b62e08ae}{m\_maxLen}; \}
+\end{DoxyCode}
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Get\+Queue\+Timeout@{Get\+Queue\+Timeout}}
+\index{Get\+Queue\+Timeout@{Get\+Queue\+Timeout}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Get\+Queue\+Timeout() const }{GetQueueTimeout() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::aodv\+::\+Request\+Queue\+::\+Get\+Queue\+Timeout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1aodv_1_1RequestQueue_aab629edc7ccd1daf4b98d5bbdfcbdf1d}{}\label{classns3_1_1aodv_1_1RequestQueue_aab629edc7ccd1daf4b98d5bbdfcbdf1d}
+
+\begin{DoxyCode}
+118 \{ \textcolor{keywordflow}{return} \hyperlink{classns3_1_1aodv_1_1RequestQueue_aa6026890dfa99e5104d035cf9aedbc28}{m\_queueTimeout}; \}
+\end{DoxyCode}
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Get\+Size@{Get\+Size}}
+\index{Get\+Size@{Get\+Size}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Get\+Size()}{GetSize()}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::aodv\+::\+Request\+Queue\+::\+Get\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1aodv_1_1RequestQueue_ac4775afbe477b1cfe41fa83c7bf113aa}{}\label{classns3_1_1aodv_1_1RequestQueue_ac4775afbe477b1cfe41fa83c7bf113aa}
+
+
+Number of entries. 
+
+
+\begin{DoxyCode}
+44 \{
+45   \hyperlink{classns3_1_1aodv_1_1RequestQueue_a6ed74cff072d572de14a87a5aaef2831}{Purge} ();
+46   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.size ();
+47 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Is\+Equal@{Is\+Equal}}
+\index{Is\+Equal@{Is\+Equal}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Is\+Equal(\+Queue\+Entry en, const Ipv4\+Address dst)}{IsEqual(QueueEntry en, const Ipv4Address dst)}}]{\setlength{\rightskip}{0pt plus 5cm}static bool ns3\+::aodv\+::\+Request\+Queue\+::\+Is\+Equal (
+\begin{DoxyParamCaption}
+\item[{{\bf Queue\+Entry}}]{en, }
+\item[{const {\bf Ipv4\+Address}}]{dst}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classns3_1_1aodv_1_1RequestQueue_a435a4bd8dd298a8387ba1a8ac4cdfe42}{}\label{classns3_1_1aodv_1_1RequestQueue_a435a4bd8dd298a8387ba1a8ac4cdfe42}
+
+\begin{DoxyCode}
+132 \{ \textcolor{keywordflow}{return} (en.GetIpv4Header ().GetDestination () == dst); \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Purge@{Purge}}
+\index{Purge@{Purge}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Purge()}{Purge()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::aodv\+::\+Request\+Queue\+::\+Purge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1aodv_1_1RequestQueue_a6ed74cff072d572de14a87a5aaef2831}{}\label{classns3_1_1aodv_1_1RequestQueue_a6ed74cff072d572de14a87a5aaef2831}
+
+
+Remove all expired entries. 
+
+
+\begin{DoxyCode}
+127 \{
+128   IsExpired pred;
+129   \textcolor{keywordflow}{for} (std::vector<QueueEntry>::iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.begin (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}
+130        != \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.end (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+131     \{
+132       \textcolor{keywordflow}{if} (pred (*\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}))
+133         \{
+134           \hyperlink{classns3_1_1aodv_1_1RequestQueue_af39cbe0d1f9ed4cbe14355b6a3b594e6}{Drop} (*\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}, \textcolor{stringliteral}{"Drop outdated packet "});
+135         \}
+136     \}
+137   \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.erase (std::remove\_if (\hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.begin (), \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.end (), pred),
+138                  \hyperlink{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{m\_queue}.end ());
+139 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 13
+
+
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Set\+Max\+Queue\+Len@{Set\+Max\+Queue\+Len}}
+\index{Set\+Max\+Queue\+Len@{Set\+Max\+Queue\+Len}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Set\+Max\+Queue\+Len(uint32\+\_\+t len)}{SetMaxQueueLen(uint32_t len)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::aodv\+::\+Request\+Queue\+::\+Set\+Max\+Queue\+Len (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1aodv_1_1RequestQueue_a4a71c31d25dfe0f97e970938076c00c5}{}\label{classns3_1_1aodv_1_1RequestQueue_a4a71c31d25dfe0f97e970938076c00c5}
+
+\begin{DoxyCode}
+117 \{ \hyperlink{classns3_1_1aodv_1_1RequestQueue_a1d6c29b548a3a63d4702e6f1b62e08ae}{m\_maxLen} = len; \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 14
+
+
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!Set\+Queue\+Timeout@{Set\+Queue\+Timeout}}
+\index{Set\+Queue\+Timeout@{Set\+Queue\+Timeout}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{Set\+Queue\+Timeout(\+Time t)}{SetQueueTimeout(Time t)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::aodv\+::\+Request\+Queue\+::\+Set\+Queue\+Timeout (
+\begin{DoxyParamCaption}
+\item[{{\bf Time}}]{t}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1aodv_1_1RequestQueue_a9f81ff4709cfe0f0e88438a820c308f7}{}\label{classns3_1_1aodv_1_1RequestQueue_a9f81ff4709cfe0f0e88438a820c308f7}
+
+\begin{DoxyCode}
+119 \{ \hyperlink{classns3_1_1aodv_1_1RequestQueue_aa6026890dfa99e5104d035cf9aedbc28}{m\_queueTimeout} = t; \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 15
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!m\+\_\+max\+Len@{m\+\_\+max\+Len}}
+\index{m\+\_\+max\+Len@{m\+\_\+max\+Len}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{m\+\_\+max\+Len}{m_maxLen}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::aodv\+::\+Request\+Queue\+::m\+\_\+max\+Len\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1aodv_1_1RequestQueue_a1d6c29b548a3a63d4702e6f1b62e08ae}{}\label{classns3_1_1aodv_1_1RequestQueue_a1d6c29b548a3a63d4702e6f1b62e08ae}
+
+
+The maximum number of packets that we allow a routing protocol to buffer. 
+
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!m\+\_\+queue@{m\+\_\+queue}}
+\index{m\+\_\+queue@{m\+\_\+queue}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{m\+\_\+queue}{m_queue}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Queue\+Entry}$>$ ns3\+::aodv\+::\+Request\+Queue\+::m\+\_\+queue\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}{}\label{classns3_1_1aodv_1_1RequestQueue_a82316614d880a232fd2ad5fc2067088a}
+\index{ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}!m\+\_\+queue\+Timeout@{m\+\_\+queue\+Timeout}}
+\index{m\+\_\+queue\+Timeout@{m\+\_\+queue\+Timeout}!ns3\+::aodv\+::\+Request\+Queue@{ns3\+::aodv\+::\+Request\+Queue}}
+\subsubsection[{\texorpdfstring{m\+\_\+queue\+Timeout}{m_queueTimeout}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::aodv\+::\+Request\+Queue\+::m\+\_\+queue\+Timeout\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1aodv_1_1RequestQueue_aa6026890dfa99e5104d035cf9aedbc28}{}\label{classns3_1_1aodv_1_1RequestQueue_aa6026890dfa99e5104d035cf9aedbc28}
+
+
+The maximum period of time that a routing protocol is allowed to buffer a packet for, seconds. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+aodv/model/\hyperlink{aodv-rqueue_8h}{aodv-\/rqueue.\+h}\item 
+aodv/model/\hyperlink{aodv-rqueue_8cc}{aodv-\/rqueue.\+cc}\end{DoxyCompactItemize}

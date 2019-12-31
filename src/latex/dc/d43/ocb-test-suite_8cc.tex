@@ -1,0 +1,104 @@
+\hypertarget{ocb-test-suite_8cc}{}\section{wave/test/ocb-\/test-\/suite.cc File Reference}
+\label{ocb-test-suite_8cc}\index{wave/test/ocb-\/test-\/suite.\+cc@{wave/test/ocb-\/test-\/suite.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/test.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/rng-\/seed-\/manager.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/data-\/rate.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/vector.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/string.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ssid.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/packet-\/socket-\/address.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/yans-\/wifi-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/position-\/allocator.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/packet-\/socket-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wifi-\/net-\/device.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/packet-\/socket-\/server.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/packet-\/socket-\/client.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/ocb-\/wifi-\/mac.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wifi-\/80211p-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wave-\/mac-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for ocb-\/test-\/suite.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classOcbWifiMacTestCase}{Ocb\+Wifi\+Mac\+Test\+Case}
+\begin{DoxyCompactList}\small\item\em Ocb Wifi Mac Test Case. \end{DoxyCompactList}\item 
+class \hyperlink{classOcbTestSuite}{Ocb\+Test\+Suite}
+\begin{DoxyCompactList}\small\item\em Ocb Test Suite. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{ocb-test-suite_8cc_a27e1dfc9840ff9d220527fa04cbd65de}{Assign\+Wifi\+Random\+Streams} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1WifiMac}{Wifi\+Mac} $>$ mac, int64\+\_\+t stream)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classOcbTestSuite}{Ocb\+Test\+Suite} \hyperlink{ocb-test-suite_8cc_ac027b902bb590530fbce2aa41a84e649}{ocb\+Test\+Suite}
+\begin{DoxyCompactList}\small\item\em the test suite \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{ocb-\/test-\/suite.\+cc@{ocb-\/test-\/suite.\+cc}!Assign\+Wifi\+Random\+Streams@{Assign\+Wifi\+Random\+Streams}}
+\index{Assign\+Wifi\+Random\+Streams@{Assign\+Wifi\+Random\+Streams}!ocb-\/test-\/suite.\+cc@{ocb-\/test-\/suite.\+cc}}
+\subsubsection[{\texorpdfstring{Assign\+Wifi\+Random\+Streams(\+Ptr$<$ Wifi\+Mac $>$ mac, int64\+\_\+t stream)}{AssignWifiRandomStreams(Ptr< WifiMac > mac, int64_t stream)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Assign\+Wifi\+Random\+Streams (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Wifi\+Mac} $>$}]{mac, }
+\item[{int64\+\_\+t}]{stream}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{ocb-test-suite_8cc_a27e1dfc9840ff9d220527fa04cbd65de}{}\label{ocb-test-suite_8cc_a27e1dfc9840ff9d220527fa04cbd65de}
+
+\begin{DoxyCode}
+47 \{
+48   int64\_t currentStream = stream;
+49   \hyperlink{classns3_1_1Ptr}{Ptr<RegularWifiMac>} rmac = DynamicCast<RegularWifiMac> (mac);
+50   \textcolor{keywordflow}{if} (rmac)
+51     \{
+52       \hyperlink{classns3_1_1PointerValue}{PointerValue} ptr;
+53       rmac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"DcaTxop"}, ptr);
+54       \hyperlink{classns3_1_1Ptr}{Ptr<DcaTxop>} dcaTxop = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1DcaTxop}{DcaTxop}> ();
+55       currentStream += dcaTxop->\hyperlink{classns3_1_1DcaTxop_a2a883932e6a255a5478c9594974dcdaa}{AssignStreams} (currentStream);
+56 
+57       rmac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"VO\_EdcaTxopN"}, ptr);
+58       \hyperlink{classns3_1_1Ptr}{Ptr<EdcaTxopN>} vo\_edcaTxopN = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1EdcaTxopN}{EdcaTxopN}> ();
+59       currentStream += vo\_edcaTxopN->\hyperlink{classns3_1_1DcaTxop_a2a883932e6a255a5478c9594974dcdaa}{AssignStreams} (currentStream);
+60 
+61       rmac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"VI\_EdcaTxopN"}, ptr);
+62       \hyperlink{classns3_1_1Ptr}{Ptr<EdcaTxopN>} vi\_edcaTxopN = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1EdcaTxopN}{EdcaTxopN}> ();
+63       currentStream += vi\_edcaTxopN->\hyperlink{classns3_1_1DcaTxop_a2a883932e6a255a5478c9594974dcdaa}{AssignStreams} (currentStream);
+64 
+65       rmac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"BE\_EdcaTxopN"}, ptr);
+66       \hyperlink{classns3_1_1Ptr}{Ptr<EdcaTxopN>} be\_edcaTxopN = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1EdcaTxopN}{EdcaTxopN}> ();
+67       currentStream += be\_edcaTxopN->\hyperlink{classns3_1_1DcaTxop_a2a883932e6a255a5478c9594974dcdaa}{AssignStreams} (currentStream);
+68 
+69       rmac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"BK\_EdcaTxopN"}, ptr);
+70       \hyperlink{classns3_1_1Ptr}{Ptr<EdcaTxopN>} bk\_edcaTxopN = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1EdcaTxopN}{EdcaTxopN}> ();
+71       currentStream += bk\_edcaTxopN->\hyperlink{classns3_1_1DcaTxop_a2a883932e6a255a5478c9594974dcdaa}{AssignStreams} (currentStream);
+72     \}
+73 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Variable Documentation}
+\index{ocb-\/test-\/suite.\+cc@{ocb-\/test-\/suite.\+cc}!ocb\+Test\+Suite@{ocb\+Test\+Suite}}
+\index{ocb\+Test\+Suite@{ocb\+Test\+Suite}!ocb-\/test-\/suite.\+cc@{ocb-\/test-\/suite.\+cc}}
+\subsubsection[{\texorpdfstring{ocb\+Test\+Suite}{ocbTestSuite}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ocb\+Test\+Suite} ocb\+Test\+Suite\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{ocb-test-suite_8cc_ac027b902bb590530fbce2aa41a84e649}{}\label{ocb-test-suite_8cc_ac027b902bb590530fbce2aa41a84e649}
+
+
+the test suite 
+

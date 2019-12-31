@@ -1,0 +1,97 @@
+\hypertarget{classTimerStateTestCase}{}\section{Timer\+State\+Test\+Case Class Reference}
+\label{classTimerStateTestCase}\index{Timer\+State\+Test\+Case@{Timer\+State\+Test\+Case}}
+
+
+Inheritance diagram for Timer\+State\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Timer\+State\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTimerStateTestCase_a5ee31f32afb150a9fd53c4d450b48e0c}{Timer\+State\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classTimerStateTestCase_a879d8ef21299859ba79ae1179024991e}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Timer\+State\+Test\+Case@{Timer\+State\+Test\+Case}!Timer\+State\+Test\+Case@{Timer\+State\+Test\+Case}}
+\index{Timer\+State\+Test\+Case@{Timer\+State\+Test\+Case}!Timer\+State\+Test\+Case@{Timer\+State\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Timer\+State\+Test\+Case()}{TimerStateTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Timer\+State\+Test\+Case\+::\+Timer\+State\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTimerStateTestCase_a5ee31f32afb150a9fd53c4d450b48e0c}{}\label{classTimerStateTestCase_a5ee31f32afb150a9fd53c4d450b48e0c}
+
+\begin{DoxyCode}
+59   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check correct state transitions"})
+60 \{
+61 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Timer\+State\+Test\+Case@{Timer\+State\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Timer\+State\+Test\+Case@{Timer\+State\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Timer\+State\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTimerStateTestCase_a879d8ef21299859ba79ae1179024991e}{}\label{classTimerStateTestCase_a879d8ef21299859ba79ae1179024991e}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+64 \{
+65   \hyperlink{classns3_1_1Timer}{Timer} timer = \hyperlink{classns3_1_1Timer}{Timer} (Timer::CANCEL\_ON\_DESTROY);
+66 
+67   timer.\hyperlink{classns3_1_1Timer_a044b29030c9de99298d51ac0ccfc104c}{SetFunction} (&bari);
+68   timer.\hyperlink{classns3_1_1Timer_a39c525dcde3109fb4d95737de3bdf85a}{SetArguments} (1);
+69   timer.\hyperlink{classns3_1_1Timer_a02ac85f61e64a2bc3a104914859504c9}{SetDelay} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+70   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (!timer.\hyperlink{classns3_1_1Timer_addbc6c740f21ddeb6ad358557962b24c}{IsRunning} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+71   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (timer.\hyperlink{classns3_1_1Timer_ab1de3f9236e67c0d83c061c19c607c6c}{IsExpired} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+72   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (!timer.\hyperlink{classns3_1_1Timer_a6eaea57766ec5e85023264fe2fb69066}{IsSuspended} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+73   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (timer.\hyperlink{classns3_1_1Timer_ad8dbc96d811f55126b76de228d260eab}{GetState} (), Timer::EXPIRED, \textcolor{stringliteral}{""});
+74   timer.\hyperlink{classns3_1_1Timer_ac3345d696887578f518b19f359f7f94b}{Schedule} ();
+75   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (timer.\hyperlink{classns3_1_1Timer_addbc6c740f21ddeb6ad358557962b24c}{IsRunning} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+76   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (!timer.\hyperlink{classns3_1_1Timer_ab1de3f9236e67c0d83c061c19c607c6c}{IsExpired} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+77   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (!timer.\hyperlink{classns3_1_1Timer_a6eaea57766ec5e85023264fe2fb69066}{IsSuspended} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+78   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (timer.\hyperlink{classns3_1_1Timer_ad8dbc96d811f55126b76de228d260eab}{GetState} (), Timer::RUNNING, \textcolor{stringliteral}{""});
+79   timer.\hyperlink{classns3_1_1Timer_a168f973f4c60fbeb1580d4734f91e049}{Suspend} ();
+80   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (!timer.\hyperlink{classns3_1_1Timer_addbc6c740f21ddeb6ad358557962b24c}{IsRunning} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+81   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (!timer.\hyperlink{classns3_1_1Timer_ab1de3f9236e67c0d83c061c19c607c6c}{IsExpired} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+82   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (timer.\hyperlink{classns3_1_1Timer_a6eaea57766ec5e85023264fe2fb69066}{IsSuspended} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+83   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (timer.\hyperlink{classns3_1_1Timer_ad8dbc96d811f55126b76de228d260eab}{GetState} (), Timer::SUSPENDED, \textcolor{stringliteral}{""});
+84   timer.\hyperlink{classns3_1_1Timer_ac09edfb12f9b4ef8fe582f1cd210b6fc}{Resume} ();
+85   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (timer.\hyperlink{classns3_1_1Timer_addbc6c740f21ddeb6ad358557962b24c}{IsRunning} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+86   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (!timer.\hyperlink{classns3_1_1Timer_ab1de3f9236e67c0d83c061c19c607c6c}{IsExpired} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+87   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (!timer.\hyperlink{classns3_1_1Timer_a6eaea57766ec5e85023264fe2fb69066}{IsSuspended} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+88   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (timer.\hyperlink{classns3_1_1Timer_ad8dbc96d811f55126b76de228d260eab}{GetState} (), Timer::RUNNING, \textcolor{stringliteral}{""});
+89   timer.\hyperlink{classns3_1_1Timer_ac8261489cfc3361ab869ea2387cfc841}{Cancel} ();
+90   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (!timer.\hyperlink{classns3_1_1Timer_addbc6c740f21ddeb6ad358557962b24c}{IsRunning} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+91   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (timer.\hyperlink{classns3_1_1Timer_ab1de3f9236e67c0d83c061c19c607c6c}{IsExpired} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+92   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (!timer.\hyperlink{classns3_1_1Timer_a6eaea57766ec5e85023264fe2fb69066}{IsSuspended} (), \textcolor{keyword}{true}, \textcolor{stringliteral}{""});
+93   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (timer.\hyperlink{classns3_1_1Timer_ad8dbc96d811f55126b76de228d260eab}{GetState} (), Timer::EXPIRED, \textcolor{stringliteral}{""});
+94 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/test/\hyperlink{timer-test-suite_8cc}{timer-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

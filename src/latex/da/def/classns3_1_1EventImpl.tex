@@ -1,0 +1,174 @@
+\hypertarget{classns3_1_1EventImpl}{}\section{ns3\+:\+:Event\+Impl Class Reference}
+\label{classns3_1_1EventImpl}\index{ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}}
+
+
+A simulation event.  
+
+
+
+
+{\ttfamily \#include $<$event-\/impl.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Event\+Impl\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Event\+Impl\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1EventImpl_a26ff70b19449c64310a6c36569086eee}{Event\+Impl} ()
+\item 
+virtual \hyperlink{classns3_1_1EventImpl_a9971bf52cdfa7f70c9119cbefaa81198}{$\sim$\+Event\+Impl} ()=0
+\item 
+void \hyperlink{classns3_1_1EventImpl_a5ce561412ea89951be67fc19d389df32}{Invoke} (void)
+\item 
+void \hyperlink{classns3_1_1EventImpl_a9685fbe7005b7087653f6dcda96047dd}{Cancel} (void)
+\item 
+bool \hyperlink{classns3_1_1EventImpl_a0f9aaefb05ad36ba65a5ee3181fd1305}{Is\+Cancelled} (void)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classns3_1_1EventImpl_aa2bee27987ecafb67ea493f9fc6047a6}{Notify} (void)=0
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classns3_1_1EventImpl_ab2efa97367b1e26055ed01f86b00be4e}{m\+\_\+cancel}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A simulation event. 
+
+Each subclass of this base class represents a simulation event. The \hyperlink{classns3_1_1EventImpl_a5ce561412ea89951be67fc19d389df32}{Invoke()} method will be called by the simulation engine when it reaches the time associated to this event. Most subclasses are usually created by one of the many \hyperlink{classns3_1_1Simulator_a671882c894a08af4a5e91181bf1eec13}{Simulator\+::\+Schedule} methods. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}!Event\+Impl@{Event\+Impl}}
+\index{Event\+Impl@{Event\+Impl}!ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}}
+\subsubsection[{\texorpdfstring{Event\+Impl()}{EventImpl()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Event\+Impl\+::\+Event\+Impl (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EventImpl_a26ff70b19449c64310a6c36569086eee}{}\label{classns3_1_1EventImpl_a26ff70b19449c64310a6c36569086eee}
+Default constructor. 
+\begin{DoxyCode}
+40   : \hyperlink{classns3_1_1EventImpl_ab2efa97367b1e26055ed01f86b00be4e}{m\_cancel} (\textcolor{keyword}{false})
+41 \{
+42   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+43 \}
+\end{DoxyCode}
+\index{ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}!````~Event\+Impl@{$\sim$\+Event\+Impl}}
+\index{````~Event\+Impl@{$\sim$\+Event\+Impl}!ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}}
+\subsubsection[{\texorpdfstring{$\sim$\+Event\+Impl()=0}{~EventImpl()=0}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Event\+Impl\+::$\sim$\+Event\+Impl (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classns3_1_1EventImpl_a9971bf52cdfa7f70c9119cbefaa81198}{}\label{classns3_1_1EventImpl_a9971bf52cdfa7f70c9119cbefaa81198}
+Destructor. 
+\begin{DoxyCode}
+35 \{
+36   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+37 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}!Cancel@{Cancel}}
+\index{Cancel@{Cancel}!ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}}
+\subsubsection[{\texorpdfstring{Cancel(void)}{Cancel(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Event\+Impl\+::\+Cancel (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EventImpl_a9685fbe7005b7087653f6dcda96047dd}{}\label{classns3_1_1EventImpl_a9685fbe7005b7087653f6dcda96047dd}
+Marks the event as \textquotesingle{}canceled\textquotesingle{}. The event is not removed from the event list but the simulation engine will check its canceled status before calling \hyperlink{classns3_1_1EventImpl_a5ce561412ea89951be67fc19d389df32}{Invoke()}. 
+\begin{DoxyCode}
+57 \{
+58   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+59   \hyperlink{classns3_1_1EventImpl_ab2efa97367b1e26055ed01f86b00be4e}{m\_cancel} = \textcolor{keyword}{true};
+60 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}!Invoke@{Invoke}}
+\index{Invoke@{Invoke}!ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}}
+\subsubsection[{\texorpdfstring{Invoke(void)}{Invoke(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Event\+Impl\+::\+Invoke (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EventImpl_a5ce561412ea89951be67fc19d389df32}{}\label{classns3_1_1EventImpl_a5ce561412ea89951be67fc19d389df32}
+Called by the simulation engine to notify the event that it is time to execute. 
+\begin{DoxyCode}
+47 \{
+48   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+49   \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1EventImpl_ab2efa97367b1e26055ed01f86b00be4e}{m\_cancel})
+50     \{
+51       \hyperlink{classns3_1_1EventImpl_aa2bee27987ecafb67ea493f9fc6047a6}{Notify} ();
+52     \}
+53 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}!Is\+Cancelled@{Is\+Cancelled}}
+\index{Is\+Cancelled@{Is\+Cancelled}!ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}}
+\subsubsection[{\texorpdfstring{Is\+Cancelled(void)}{IsCancelled(void)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Event\+Impl\+::\+Is\+Cancelled (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EventImpl_a0f9aaefb05ad36ba65a5ee3181fd1305}{}\label{classns3_1_1EventImpl_a0f9aaefb05ad36ba65a5ee3181fd1305}
+\begin{DoxyReturn}{Returns}
+true if the event has been canceled.
+\end{DoxyReturn}
+Checked by the simulation engine before calling \hyperlink{classns3_1_1EventImpl_a5ce561412ea89951be67fc19d389df32}{Invoke()}. 
+\begin{DoxyCode}
+64 \{
+65   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+66   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1EventImpl_ab2efa97367b1e26055ed01f86b00be4e}{m\_cancel};
+67 \}
+\end{DoxyCode}
+\index{ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}!Notify@{Notify}}
+\index{Notify@{Notify}!ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}}
+\subsubsection[{\texorpdfstring{Notify(void)=0}{Notify(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Event\+Impl\+::\+Notify (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1EventImpl_aa2bee27987ecafb67ea493f9fc6047a6}{}\label{classns3_1_1EventImpl_aa2bee27987ecafb67ea493f9fc6047a6}
+Implementation for \hyperlink{classns3_1_1EventImpl_a5ce561412ea89951be67fc19d389df32}{Invoke()}.
+
+This typically calls a method or function pointer with the arguments bound by a call to one of the \hyperlink{group__makeeventfnptr_ga289a28a2497c18a9bd299e5e2014094b}{Make\+Event()} functions. 
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}!m\+\_\+cancel@{m\+\_\+cancel}}
+\index{m\+\_\+cancel@{m\+\_\+cancel}!ns3\+::\+Event\+Impl@{ns3\+::\+Event\+Impl}}
+\subsubsection[{\texorpdfstring{m\+\_\+cancel}{m_cancel}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Event\+Impl\+::m\+\_\+cancel\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EventImpl_ab2efa97367b1e26055ed01f86b00be4e}{}\label{classns3_1_1EventImpl_ab2efa97367b1e26055ed01f86b00be4e}
+Has this event been cancelled. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{event-impl_8h}{event-\/impl.\+h}\item 
+core/model/\hyperlink{event-impl_8cc}{event-\/impl.\+cc}\end{DoxyCompactItemize}

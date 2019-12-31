@@ -1,0 +1,331 @@
+\hypertarget{classIpv4ForwardingTest}{}\section{Ipv4\+Forwarding\+Test Class Reference}
+\label{classIpv4ForwardingTest}\index{Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}}
+
+
+I\+Pv4 Forwarding Test.  
+
+
+
+
+Inheritance diagram for Ipv4\+Forwarding\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Ipv4\+Forwarding\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classIpv4ForwardingTest_aa3735e1731b087938e97f39b7d90dd35}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+\hyperlink{classIpv4ForwardingTest_a864827a9a881afd45bb73a2d8b18f1be}{Ipv4\+Forwarding\+Test} ()
+\item 
+void \hyperlink{classIpv4ForwardingTest_a1dd225798eccb21f72d5f2e64765e89b}{Receive\+Pkt} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\begin{DoxyCompactList}\small\item\em Receive data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classIpv4ForwardingTest_a5e8130dfa935063f0a76b6b016ed5afd}{Do\+Send\+Data} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket, std\+::string to)
+\begin{DoxyCompactList}\small\item\em Send data. \end{DoxyCompactList}\item 
+void \hyperlink{classIpv4ForwardingTest_acd13baacd68bf31bb1ecae14cc1fa42d}{Send\+Data} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket, std\+::string to)
+\begin{DoxyCompactList}\small\item\em Send data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{classIpv4ForwardingTest_a141945edb766e36419cb71037dc01017}{m\+\_\+received\+Packet}
+\begin{DoxyCompactList}\small\item\em Received packet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+I\+Pv4 Forwarding Test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}!Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}}
+\index{Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}!Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}}
+\subsubsection[{\texorpdfstring{Ipv4\+Forwarding\+Test()}{Ipv4ForwardingTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Ipv4\+Forwarding\+Test\+::\+Ipv4\+Forwarding\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classIpv4ForwardingTest_a864827a9a881afd45bb73a2d8b18f1be}{}\label{classIpv4ForwardingTest_a864827a9a881afd45bb73a2d8b18f1be}
+
+\begin{DoxyCode}
+85   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"UDP socket implementation"})
+86 \{
+87 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ipv4\+Forwarding\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classIpv4ForwardingTest_aa3735e1731b087938e97f39b7d90dd35}{}\label{classIpv4ForwardingTest_aa3735e1731b087938e97f39b7d90dd35}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+116 \{
+117   \textcolor{comment}{// Create topology}
+118 
+119   \textcolor{comment}{// Receiver Node}
+120   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} rxNode = CreateObject<Node> ();
+121 
+122   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+123   internet.\hyperlink{classns3_1_1InternetStackHelper_a5fa8d34e5834305b6aa1b0fe43e1132b}{SetIpv6StackInstall} (\textcolor{keyword}{false});
+124 
+125   internet.Install (rxNode);
+126   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleNetDevice>} rxDev;
+127   \{ \textcolor{comment}{// first interface}
+128     rxDev = CreateObject<SimpleNetDevice> ();
+129     rxDev->\hyperlink{classns3_1_1SimpleNetDevice_a968ef3e7318bac29d5f1d7d977029af4}{SetAddress} (Mac48Address::ConvertFrom (Mac48Address::Allocate ()));
+130     rxNode->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (rxDev);
+131     \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4>} ipv4 = rxNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ();
+132     uint32\_t netdev\_idx = ipv4->\hyperlink{classns3_1_1Ipv4_a637354128b71bc587ea5a6eeaef42469}{AddInterface} (rxDev);
+133     \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} ipv4Addr = \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.2"}), \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (0xffff0000U));
+134     ipv4->\hyperlink{classns3_1_1Ipv4_ad203526cae6a4b86f1bb89e44d2b62f7}{AddAddress} (netdev\_idx, ipv4Addr);
+135     ipv4->\hyperlink{classns3_1_1Ipv4_a71b2f8acca4923aef907b50b3196bf23}{SetUp} (netdev\_idx);
+136   \}
+137 
+138   \textcolor{comment}{// Forwarding Node}
+139   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} fwNode = CreateObject<Node> ();
+140 
+141   internet.Install (fwNode);
+142   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleNetDevice>} fwDev1, fwDev2;
+143   \{ \textcolor{comment}{// first interface}
+144     fwDev1 = CreateObject<SimpleNetDevice> ();
+145     fwDev1->\hyperlink{classns3_1_1SimpleNetDevice_a968ef3e7318bac29d5f1d7d977029af4}{SetAddress} (Mac48Address::ConvertFrom (Mac48Address::Allocate ()));
+146     fwNode->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (fwDev1);
+147     \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4>} ipv4 = fwNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ();
+148     uint32\_t netdev\_idx = ipv4->\hyperlink{classns3_1_1Ipv4_a637354128b71bc587ea5a6eeaef42469}{AddInterface} (fwDev1);
+149     \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} ipv4Addr = \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.1"}), \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (0xffff0000U));
+150     ipv4->\hyperlink{classns3_1_1Ipv4_ad203526cae6a4b86f1bb89e44d2b62f7}{AddAddress} (netdev\_idx, ipv4Addr);
+151     ipv4->\hyperlink{classns3_1_1Ipv4_a71b2f8acca4923aef907b50b3196bf23}{SetUp} (netdev\_idx);
+152   \}
+153 
+154   \{ \textcolor{comment}{// second interface}
+155     fwDev2 = CreateObject<SimpleNetDevice> ();
+156     fwDev2->\hyperlink{classns3_1_1SimpleNetDevice_a968ef3e7318bac29d5f1d7d977029af4}{SetAddress} (Mac48Address::ConvertFrom (Mac48Address::Allocate ()));
+157     fwNode->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (fwDev2);
+158     \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4>} ipv4 = fwNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ();
+159     uint32\_t netdev\_idx = ipv4->\hyperlink{classns3_1_1Ipv4_a637354128b71bc587ea5a6eeaef42469}{AddInterface} (fwDev2);
+160     \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} ipv4Addr = \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.0.1"}), \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (0xffff0000U));
+161     ipv4->\hyperlink{classns3_1_1Ipv4_ad203526cae6a4b86f1bb89e44d2b62f7}{AddAddress} (netdev\_idx, ipv4Addr);
+162     ipv4->\hyperlink{classns3_1_1Ipv4_a71b2f8acca4923aef907b50b3196bf23}{SetUp} (netdev\_idx);
+163   \}
+164 
+165   \textcolor{comment}{// Sender Node}
+166   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} txNode = CreateObject<Node> ();
+167 
+168   internet.Install (txNode);
+169   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleNetDevice>} txDev;
+170   \{
+171     txDev = CreateObject<SimpleNetDevice> ();
+172     txDev->\hyperlink{classns3_1_1SimpleNetDevice_a968ef3e7318bac29d5f1d7d977029af4}{SetAddress} (Mac48Address::ConvertFrom (Mac48Address::Allocate ()));
+173     txNode->\hyperlink{classns3_1_1Node_a42ff83ee1d5d1649c770d3f5b62375de}{AddDevice} (txDev);
+174     \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4>} ipv4 = txNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ();
+175     uint32\_t netdev\_idx = ipv4->\hyperlink{classns3_1_1Ipv4_a637354128b71bc587ea5a6eeaef42469}{AddInterface} (txDev);
+176     \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} ipv4Addr = \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.1.0.2"}), \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (0xffff0000U));
+177     ipv4->\hyperlink{classns3_1_1Ipv4_ad203526cae6a4b86f1bb89e44d2b62f7}{AddAddress} (netdev\_idx, ipv4Addr);
+178     ipv4->\hyperlink{classns3_1_1Ipv4_a71b2f8acca4923aef907b50b3196bf23}{SetUp} (netdev\_idx);
+179     \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4StaticRouting>} ipv4StaticRouting = Ipv4RoutingHelper::GetRouting
+       <Ipv4StaticRouting> (txNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ()->GetRoutingProtocol ());
+180     ipv4StaticRouting->\hyperlink{classns3_1_1Ipv4StaticRouting_aee30fa3246c2b42f122dabdff2725331}{SetDefaultRoute}(\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address}(\textcolor{stringliteral}{"10.1.0.1"}), netdev\_idx);
+181   \}
+182 
+183   \textcolor{comment}{// link the two nodes}
+184   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleChannel>} channel1 = CreateObject<SimpleChannel> ();
+185   rxDev->\hyperlink{classns3_1_1SimpleNetDevice_af9e9828ad584b5ba538f18f645f162e0}{SetChannel} (channel1);
+186   fwDev1->\hyperlink{classns3_1_1SimpleNetDevice_af9e9828ad584b5ba538f18f645f162e0}{SetChannel} (channel1);
+187 
+188   \hyperlink{classns3_1_1Ptr}{Ptr<SimpleChannel>} channel2 = CreateObject<SimpleChannel> ();
+189   fwDev2->\hyperlink{classns3_1_1SimpleNetDevice_af9e9828ad584b5ba538f18f645f162e0}{SetChannel} (channel2);
+190   txDev->\hyperlink{classns3_1_1SimpleNetDevice_af9e9828ad584b5ba538f18f645f162e0}{SetChannel} (channel2);
+191 
+192   \textcolor{comment}{// Create the UDP sockets}
+193   \hyperlink{classns3_1_1Ptr}{Ptr<SocketFactory>} rxSocketFactory = rxNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1UdpSocketFactory}{UdpSocketFactory}> ();
+194   \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} rxSocket = rxSocketFactory->\hyperlink{classns3_1_1SocketFactory_a97351e6e7860503a4912042530449f62}{CreateSocket} ();
+195   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (rxSocket->Bind (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"10.0.0.2"}), 1234)), 0, \textcolor{stringliteral}{"trivial"});
+196   rxSocket->SetRecvCallback (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classIpv4ForwardingTest_a1dd225798eccb21f72d5f2e64765e89b}{Ipv4ForwardingTest::ReceivePkt}, \textcolor{keyword}{this}));
+197 
+198   \hyperlink{classns3_1_1Ptr}{Ptr<SocketFactory>} txSocketFactory = txNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1UdpSocketFactory}{UdpSocketFactory}> ();
+199   \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} txSocket = txSocketFactory->\hyperlink{classns3_1_1SocketFactory_a97351e6e7860503a4912042530449f62}{CreateSocket} ();
+200   txSocket->\hyperlink{classns3_1_1Socket_a32b4fa27b732a63207c8d9054a817ed5}{SetAllowBroadcast} (\textcolor{keyword}{true});
+201 
+202   \textcolor{comment}{// ------ Now the tests ------------}
+203 
+204   \textcolor{comment}{// Unicast test}
+205   \hyperlink{classIpv4ForwardingTest_acd13baacd68bf31bb1ecae14cc1fa42d}{SendData} (txSocket, \textcolor{stringliteral}{"10.0.0.2"});
+206   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classIpv4ForwardingTest_a141945edb766e36419cb71037dc01017}{m\_receivedPacket}->
+      \hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} (), 123, \textcolor{stringliteral}{"IPv4 Forwarding on"});
+207 
+208   \hyperlink{classIpv4ForwardingTest_a141945edb766e36419cb71037dc01017}{m\_receivedPacket}->\hyperlink{classns3_1_1Packet_a083f54c9db31aeff30551a9e20fcda42}{RemoveAllByteTags} ();
+209   \hyperlink{classIpv4ForwardingTest_a141945edb766e36419cb71037dc01017}{m\_receivedPacket} = 0;
+210 
+211   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4>} ipv4 = fwNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ();
+212   ipv4->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute}(\textcolor{stringliteral}{"IpForward"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+213   \hyperlink{classIpv4ForwardingTest_acd13baacd68bf31bb1ecae14cc1fa42d}{SendData} (txSocket, \textcolor{stringliteral}{"10.0.0.2"});
+214   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classIpv4ForwardingTest_a141945edb766e36419cb71037dc01017}{m\_receivedPacket}->
+      \hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} (), 0, \textcolor{stringliteral}{"IPv4 Forwarding off"});
+215 
+216   Simulator::Destroy ();
+217 
+218 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}!Do\+Send\+Data@{Do\+Send\+Data}}
+\index{Do\+Send\+Data@{Do\+Send\+Data}!Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Send\+Data(\+Ptr$<$ Socket $>$ socket, std\+::string to)}{DoSendData(Ptr< Socket > socket, std::string to)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ipv4\+Forwarding\+Test\+::\+Do\+Send\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket, }
+\item[{std\+::string}]{to}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classIpv4ForwardingTest_a5e8130dfa935063f0a76b6b016ed5afd}{}\label{classIpv4ForwardingTest_a5e8130dfa935063f0a76b6b016ed5afd}
+
+
+Send data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & The sending socket. \\
+\hline
+{\em to} & Destination address. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+99 \{
+100   \hyperlink{classns3_1_1Address}{Address} realTo = \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (to.c\_str ()), 1234);
+101   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (socket->\hyperlink{classns3_1_1Socket_af898fce6a58e0dbba23c1c6de1d4220e}{SendTo} (Create<Packet> (123), 0, realTo),
+102                          123, \textcolor{stringliteral}{"100"});
+103 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}!Receive\+Pkt@{Receive\+Pkt}}
+\index{Receive\+Pkt@{Receive\+Pkt}!Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}}
+\subsubsection[{\texorpdfstring{Receive\+Pkt(\+Ptr$<$ Socket $>$ socket)}{ReceivePkt(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ipv4\+Forwarding\+Test\+::\+Receive\+Pkt (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)}\hypertarget{classIpv4ForwardingTest_a1dd225798eccb21f72d5f2e64765e89b}{}\label{classIpv4ForwardingTest_a1dd225798eccb21f72d5f2e64765e89b}
+
+
+Receive data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & The receiving socket. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+90 \{
+91   uint32\_t availableData;
+92   availableData = socket->\hyperlink{classns3_1_1Socket_ad35d8931e53ae0754ee864acb1cecd0e}{GetRxAvailable} ();
+93   \hyperlink{classIpv4ForwardingTest_a141945edb766e36419cb71037dc01017}{m\_receivedPacket} = socket->\hyperlink{classns3_1_1Socket_a8949b1f844aae563446f2f4c5be8827a}{Recv} (
+      \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::numeric\_limits<uint32\_t>::max} (), 0);
+94   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (availableData == \hyperlink{classIpv4ForwardingTest_a141945edb766e36419cb71037dc01017}{m\_receivedPacket}->\hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} ());
+95 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}!Send\+Data@{Send\+Data}}
+\index{Send\+Data@{Send\+Data}!Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}}
+\subsubsection[{\texorpdfstring{Send\+Data(\+Ptr$<$ Socket $>$ socket, std\+::string to)}{SendData(Ptr< Socket > socket, std::string to)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ipv4\+Forwarding\+Test\+::\+Send\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket, }
+\item[{std\+::string}]{to}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classIpv4ForwardingTest_acd13baacd68bf31bb1ecae14cc1fa42d}{}\label{classIpv4ForwardingTest_acd13baacd68bf31bb1ecae14cc1fa42d}
+
+
+Send data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & The sending socket. \\
+\hline
+{\em to} & Destination address. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+107 \{
+108   \hyperlink{classIpv4ForwardingTest_a141945edb766e36419cb71037dc01017}{m\_receivedPacket} = Create<Packet> ();
+109   Simulator::ScheduleWithContext (socket->\hyperlink{classns3_1_1Socket_aba642ad4301c1df47befc0aa9afa2e48}{GetNode} ()->\hyperlink{classns3_1_1Node_aaf49b64a843565ce3812326313b370ac}{GetId} (), 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0),
+110                                   &\hyperlink{classIpv4ForwardingTest_a5e8130dfa935063f0a76b6b016ed5afd}{Ipv4ForwardingTest::DoSendData}, \textcolor{keyword}{this}, 
+      socket, to);
+111   Simulator::Run ();
+112 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}!m\+\_\+received\+Packet@{m\+\_\+received\+Packet}}
+\index{m\+\_\+received\+Packet@{m\+\_\+received\+Packet}!Ipv4\+Forwarding\+Test@{Ipv4\+Forwarding\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+received\+Packet}{m_receivedPacket}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Packet}$>$ Ipv4\+Forwarding\+Test\+::m\+\_\+received\+Packet\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classIpv4ForwardingTest_a141945edb766e36419cb71037dc01017}{}\label{classIpv4ForwardingTest_a141945edb766e36419cb71037dc01017}
+
+
+Received packet. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{ipv4-forwarding-test_8cc}{ipv4-\/forwarding-\/test.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,485 @@
+\hypertarget{classns3_1_1RttMeanDeviation}{}\section{ns3\+:\+:Rtt\+Mean\+Deviation Class Reference}
+\label{classns3_1_1RttMeanDeviation}\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+
+
+The \char`\"{}\+Mean-\/-\/\+Deviation\char`\"{} R\+TT estimator, as discussed by Van Jacobson.  
+
+
+
+
+{\ttfamily \#include $<$rtt-\/estimator.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Rtt\+Mean\+Deviation\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Rtt\+Mean\+Deviation\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1RttMeanDeviation_a64572fa6806f3da4cf044339c451076e}{Rtt\+Mean\+Deviation} ()
+\item 
+\hyperlink{classns3_1_1RttMeanDeviation_a9adcf6cb394eb2b5b7169f2fcf0085e6}{Rtt\+Mean\+Deviation} (const \hyperlink{classns3_1_1RttMeanDeviation}{Rtt\+Mean\+Deviation} \&r)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1RttMeanDeviation_a241d420c7ad132a39bd7901de8c63ade}{Get\+Instance\+Type\+Id} (void) const 
+\item 
+void \hyperlink{classns3_1_1RttMeanDeviation_a3e727dacebe30903b9c7ea084564c4e8}{Measurement} (\hyperlink{classns3_1_1Time}{Time} measure)
+\begin{DoxyCompactList}\small\item\em Add a new measurement to the estimator. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1RttEstimator}{Rtt\+Estimator} $>$ \hyperlink{classns3_1_1RttMeanDeviation_af5c036fd0092fbb7f19cb5cc5646d505}{Copy} () const 
+\begin{DoxyCompactList}\small\item\em Copy object (including current internal state) \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1RttMeanDeviation_a5a215a2ed1380c064cb38dbd09c88677}{Reset} ()
+\begin{DoxyCompactList}\small\item\em Resets the estimator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1RttMeanDeviation_a23fc3e702e6d7290bf5fcd53d36e0aa2}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1RttMeanDeviation_a5b8a85f3cdb9d8c9cb438e7f2027bd8f}{Check\+For\+Reciprocal\+Power\+Of\+Two} (double val) const 
+\item 
+void \hyperlink{classns3_1_1RttMeanDeviation_af64f76fb0e39c735425f56add7e6bdd0}{Integer\+Update} (\hyperlink{classns3_1_1Time}{Time} m, uint32\+\_\+t rtt\+Shift, uint32\+\_\+t variation\+Shift)
+\item 
+void \hyperlink{classns3_1_1RttMeanDeviation_a6d3dc77a91e8c9aa23d912f2574111db}{Floating\+Point\+Update} (\hyperlink{classns3_1_1Time}{Time} m)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1RttMeanDeviation_abc5474d0966c77bd5ae5631e60c885dd}{m\+\_\+alpha}
+\begin{DoxyCompactList}\small\item\em Filter gain for average. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1RttMeanDeviation_a38c17beed105df7cadd05207774f2147}{m\+\_\+beta}
+\begin{DoxyCompactList}\small\item\em Filter gain for variation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The \char`\"{}\+Mean-\/-\/\+Deviation\char`\"{} R\+TT estimator, as discussed by Van Jacobson. 
+
+This class implements the \char`\"{}\+Mean-\/-\/\+Deviation\char`\"{} R\+TT estimator, as discussed by Van Jacobson and Michael J. Karels, in \char`\"{}\+Congestion Avoidance and Control\char`\"{}, S\+I\+G\+C\+O\+MM 88, Appendix A
+
+The default values for the gain (alpha and beta) are set as documented in R\+FC 6298. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}!Rtt\+Mean\+Deviation@{Rtt\+Mean\+Deviation}}
+\index{Rtt\+Mean\+Deviation@{Rtt\+Mean\+Deviation}!ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+\subsubsection[{\texorpdfstring{Rtt\+Mean\+Deviation()}{RttMeanDeviation()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Rtt\+Mean\+Deviation\+::\+Rtt\+Mean\+Deviation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1RttMeanDeviation_a64572fa6806f3da4cf044339c451076e}{}\label{classns3_1_1RttMeanDeviation_a64572fa6806f3da4cf044339c451076e}
+
+\begin{DoxyCode}
+151 \{
+152   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+153 \}
+\end{DoxyCode}
+\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}!Rtt\+Mean\+Deviation@{Rtt\+Mean\+Deviation}}
+\index{Rtt\+Mean\+Deviation@{Rtt\+Mean\+Deviation}!ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+\subsubsection[{\texorpdfstring{Rtt\+Mean\+Deviation(const Rtt\+Mean\+Deviation \&r)}{RttMeanDeviation(const RttMeanDeviation &r)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Rtt\+Mean\+Deviation\+::\+Rtt\+Mean\+Deviation (
+\begin{DoxyParamCaption}
+\item[{const {\bf Rtt\+Mean\+Deviation} \&}]{r}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1RttMeanDeviation_a9adcf6cb394eb2b5b7169f2fcf0085e6}{}\label{classns3_1_1RttMeanDeviation_a9adcf6cb394eb2b5b7169f2fcf0085e6}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & the object to copy \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+156   : \hyperlink{classns3_1_1RttEstimator_a86696ed57483bf9e19abbf6978c46581}{RttEstimator} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}), \hyperlink{classns3_1_1RttMeanDeviation_abc5474d0966c77bd5ae5631e60c885dd}{m\_alpha} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}.m\_alpha), \hyperlink{classns3_1_1RttMeanDeviation_a38c17beed105df7cadd05207774f2147}{m\_beta} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}.m\_beta)
+157 \{
+158   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+159 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}!Check\+For\+Reciprocal\+Power\+Of\+Two@{Check\+For\+Reciprocal\+Power\+Of\+Two}}
+\index{Check\+For\+Reciprocal\+Power\+Of\+Two@{Check\+For\+Reciprocal\+Power\+Of\+Two}!ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+\subsubsection[{\texorpdfstring{Check\+For\+Reciprocal\+Power\+Of\+Two(double val) const }{CheckForReciprocalPowerOfTwo(double val) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Rtt\+Mean\+Deviation\+::\+Check\+For\+Reciprocal\+Power\+Of\+Two (
+\begin{DoxyParamCaption}
+\item[{double}]{val}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RttMeanDeviation_a5b8a85f3cdb9d8c9cb438e7f2027bd8f}{}\label{classns3_1_1RttMeanDeviation_a5b8a85f3cdb9d8c9cb438e7f2027bd8f}
+Utility function to check for possible conversion of a double value (0 $<$ value $<$ 1) to a reciprocal power of two
+
+Values of 1/32, 1/16, 1/8, 1/4, and 1/2 (i.\+e., within the possible range of experimentation for this estimator) are supported.
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & value to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+log base 2 (1/val) if reciprocal power of 2, or zero if not 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+169 \{
+170   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << val);
+171   \textcolor{keywordflow}{if} (val < \hyperlink{namespacens3_ada892a04090e9c8aba4285b9c6f7008a}{TOLERANCE})
+172     \{
+173       \textcolor{keywordflow}{return} 0;
+174     \}
+175   \textcolor{comment}{// supports 1/32, 1/16, 1/8, 1/4, 1/2}
+176   \textcolor{keywordflow}{if} (std::abs (1/val - 8) < \hyperlink{namespacens3_ada892a04090e9c8aba4285b9c6f7008a}{TOLERANCE})
+177     \{
+178       \textcolor{keywordflow}{return} 3;
+179     \}
+180   \textcolor{keywordflow}{if} (std::abs (1/val - 4) < \hyperlink{namespacens3_ada892a04090e9c8aba4285b9c6f7008a}{TOLERANCE})
+181     \{
+182       \textcolor{keywordflow}{return} 2;
+183     \}
+184   \textcolor{keywordflow}{if} (std::abs (1/val - 32) < \hyperlink{namespacens3_ada892a04090e9c8aba4285b9c6f7008a}{TOLERANCE})
+185     \{
+186       \textcolor{keywordflow}{return} 5;
+187     \}
+188   \textcolor{keywordflow}{if} (std::abs (1/val - 16) < \hyperlink{namespacens3_ada892a04090e9c8aba4285b9c6f7008a}{TOLERANCE})
+189     \{
+190       \textcolor{keywordflow}{return} 4;
+191     \}
+192   \textcolor{keywordflow}{if} (std::abs (1/val - 2) < \hyperlink{namespacens3_ada892a04090e9c8aba4285b9c6f7008a}{TOLERANCE})
+193     \{
+194       \textcolor{keywordflow}{return} 1;
+195     \}
+196   \textcolor{keywordflow}{return} 0;
+197 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}!Copy@{Copy}}
+\index{Copy@{Copy}!ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+\subsubsection[{\texorpdfstring{Copy() const }{Copy() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Rtt\+Estimator} $>$ ns3\+::\+Rtt\+Mean\+Deviation\+::\+Copy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1RttMeanDeviation_af5c036fd0092fbb7f19cb5cc5646d505}{}\label{classns3_1_1RttMeanDeviation_af5c036fd0092fbb7f19cb5cc5646d505}
+
+
+Copy object (including current internal state) 
+
+\begin{DoxyReturn}{Returns}
+a copy of itself 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1RttEstimator_ae4697bf310299db205837e7454627273}{ns3\+::\+Rtt\+Estimator}.
+
+
+\begin{DoxyCode}
+271 \{
+272   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+273   \textcolor{keywordflow}{return} CopyObject<RttMeanDeviation> (\textcolor{keyword}{this});
+274 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}!Floating\+Point\+Update@{Floating\+Point\+Update}}
+\index{Floating\+Point\+Update@{Floating\+Point\+Update}!ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+\subsubsection[{\texorpdfstring{Floating\+Point\+Update(\+Time m)}{FloatingPointUpdate(Time m)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Rtt\+Mean\+Deviation\+::\+Floating\+Point\+Update (
+\begin{DoxyParamCaption}
+\item[{{\bf Time}}]{m}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RttMeanDeviation_a6d3dc77a91e8c9aa23d912f2574111db}{}\label{classns3_1_1RttMeanDeviation_a6d3dc77a91e8c9aa23d912f2574111db}
+Method to update the rtt and variation estimates using floating point arithmetic, used when the values of Alpha and Beta are not both a reciprocal power of two.
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & time measurement \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+201 \{
+202   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << m);
+203 
+204   \textcolor{comment}{// EWMA formulas are implemented as suggested in}
+205   \textcolor{comment}{// Jacobson/Karels paper appendix A.2}
+206 
+207   \textcolor{comment}{// SRTT <- (1 - alpha) * SRTT + alpha *  R'}
+208   \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} err (m - \hyperlink{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{m\_estimatedRtt});
+209   \textcolor{keywordtype}{double} gErr = err.ToDouble (\hyperlink{classns3_1_1Time_a87a7f4d29c68b047a72d291ad660295aade8622b06524a328cd3a59db6ccf76af}{Time::S}) * \hyperlink{classns3_1_1RttMeanDeviation_abc5474d0966c77bd5ae5631e60c885dd}{m\_alpha};
+210   \hyperlink{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{m\_estimatedRtt} += \hyperlink{classns3_1_1Time_a60e845f4a74e62495b86356afe604cb4}{Time::FromDouble} (gErr, 
+      \hyperlink{classns3_1_1Time_a87a7f4d29c68b047a72d291ad660295aade8622b06524a328cd3a59db6ccf76af}{Time::S});
+211 
+212   \textcolor{comment}{// RTTVAR <- (1 - beta) * RTTVAR + beta * |SRTT - R'|}
+213   \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} difference = \hyperlink{group__highprec_gabf87260a0ba68d152ae95568b2ef58fe}{Abs} (err) - \hyperlink{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}{m\_estimatedVariation};
+214   \hyperlink{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}{m\_estimatedVariation} += \hyperlink{classns3_1_1Time_a60e845f4a74e62495b86356afe604cb4}{Time::FromDouble} (difference.ToDouble (
+      \hyperlink{classns3_1_1Time_a87a7f4d29c68b047a72d291ad660295aade8622b06524a328cd3a59db6ccf76af}{Time::S}) * \hyperlink{classns3_1_1RttMeanDeviation_a38c17beed105df7cadd05207774f2147}{m\_beta}, \hyperlink{classns3_1_1Time_a87a7f4d29c68b047a72d291ad660295aade8622b06524a328cd3a59db6ccf76af}{Time::S});
+215 
+216   \textcolor{keywordflow}{return};
+217 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}!Get\+Instance\+Type\+Id@{Get\+Instance\+Type\+Id}}
+\index{Get\+Instance\+Type\+Id@{Get\+Instance\+Type\+Id}!ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+\subsubsection[{\texorpdfstring{Get\+Instance\+Type\+Id(void) const }{GetInstanceTypeId(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Rtt\+Mean\+Deviation\+::\+Get\+Instance\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1RttMeanDeviation_a241d420c7ad132a39bd7901de8c63ade}{}\label{classns3_1_1RttMeanDeviation_a241d420c7ad132a39bd7901de8c63ade}
+Get the most derived \hyperlink{classns3_1_1TypeId}{Type\+Id} for this \hyperlink{classns3_1_1Object}{Object}.
+
+This method is typically implemented by \hyperlink{classns3_1_1Object_a51e5994fa4b6eae32d719ad69f8fcbf5}{ns3\+::\+Object\+::\+Get\+Instance\+Type\+Id} but some classes which derive from \hyperlink{classns3_1_1ObjectBase}{ns3\+::\+Object\+Base} directly have to implement it themselves.
+
+\begin{DoxyReturn}{Returns}
+The \hyperlink{classns3_1_1TypeId}{Type\+Id} associated to the most-\/derived type of this instance. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1RttEstimator_a8fe4674f7c7b45efb439ae72fe4749db}{ns3\+::\+Rtt\+Estimator}.
+
+
+\begin{DoxyCode}
+163 \{
+164   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1RttMeanDeviation_a23fc3e702e6d7290bf5fcd53d36e0aa2}{GetTypeId} ();
+165 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Rtt\+Mean\+Deviation\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1RttMeanDeviation_a23fc3e702e6d7290bf5fcd53d36e0aa2}{}\label{classns3_1_1RttMeanDeviation_a23fc3e702e6d7290bf5fcd53d36e0aa2}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+131 \{
+132   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::RttMeanDeviation"})
+133     .SetParent<\hyperlink{classns3_1_1RttEstimator_a86696ed57483bf9e19abbf6978c46581}{RttEstimator}> ()
+134     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+135     .AddConstructor<\hyperlink{classns3_1_1RttMeanDeviation_a64572fa6806f3da4cf044339c451076e}{RttMeanDeviation}> ()
+136     .AddAttribute (\textcolor{stringliteral}{"Alpha"},
+137                    \textcolor{stringliteral}{"Gain used in estimating the RTT, must be 0 <= alpha <= 1"},
+138                    DoubleValue (0.125),
+139                    MakeDoubleAccessor (&\hyperlink{classns3_1_1RttMeanDeviation_abc5474d0966c77bd5ae5631e60c885dd}{RttMeanDeviation::m\_alpha}),
+140                    MakeDoubleChecker<double> (0, 1))
+141     .AddAttribute (\textcolor{stringliteral}{"Beta"},
+142                    \textcolor{stringliteral}{"Gain used in estimating the RTT variation, must be 0 <= beta <= 1"},
+143                    DoubleValue (0.25),
+144                    MakeDoubleAccessor (&\hyperlink{classns3_1_1RttMeanDeviation_a38c17beed105df7cadd05207774f2147}{RttMeanDeviation::m\_beta}),
+145                    MakeDoubleChecker<double> (0, 1))
+146   ;
+147   \textcolor{keywordflow}{return} tid;
+148 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}!Integer\+Update@{Integer\+Update}}
+\index{Integer\+Update@{Integer\+Update}!ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+\subsubsection[{\texorpdfstring{Integer\+Update(\+Time m, uint32\+\_\+t rtt\+Shift, uint32\+\_\+t variation\+Shift)}{IntegerUpdate(Time m, uint32_t rttShift, uint32_t variationShift)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Rtt\+Mean\+Deviation\+::\+Integer\+Update (
+\begin{DoxyParamCaption}
+\item[{{\bf Time}}]{m, }
+\item[{uint32\+\_\+t}]{rtt\+Shift, }
+\item[{uint32\+\_\+t}]{variation\+Shift}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RttMeanDeviation_af64f76fb0e39c735425f56add7e6bdd0}{}\label{classns3_1_1RttMeanDeviation_af64f76fb0e39c735425f56add7e6bdd0}
+Method to update the rtt and variation estimates using integer arithmetic, used when the values of Alpha and Beta support the integer conversion.
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & time measurement \\
+\hline
+{\em rtt\+Shift} & value corresponding to log base 2 (1/alpha) \\
+\hline
+{\em variation\+Shift} & value corresponding to log base 2 (1/beta) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+221 \{
+222   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << m << rttShift << variationShift);
+223   \textcolor{comment}{// Jacobson/Karels paper appendix A.2}
+224   int64\_t meas = m.GetInteger ();
+225   int64\_t delta = meas - \hyperlink{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{m\_estimatedRtt}.\hyperlink{classns3_1_1Time_a8c88e10860be3bc0cfabdbd92df42cff}{GetInteger} ();
+226   int64\_t srtt = (\hyperlink{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{m\_estimatedRtt}.\hyperlink{classns3_1_1Time_a8c88e10860be3bc0cfabdbd92df42cff}{GetInteger} () << rttShift) + delta;
+227   \hyperlink{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{m\_estimatedRtt} = \hyperlink{classns3_1_1Time_a34e4acc13d0e08cc8cb9cd3b838b9baf}{Time::From} (srtt >> rttShift);
+228   \textcolor{keywordflow}{if} (delta < 0)
+229     \{
+230       delta = -delta;
+231     \}
+232   delta -= \hyperlink{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}{m\_estimatedVariation}.\hyperlink{classns3_1_1Time_a8c88e10860be3bc0cfabdbd92df42cff}{GetInteger} ();
+233   int64\_t rttvar = \hyperlink{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}{m\_estimatedVariation}.\hyperlink{classns3_1_1Time_a8c88e10860be3bc0cfabdbd92df42cff}{GetInteger} () << variationShift;
+234   rttvar += delta;
+235   \hyperlink{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}{m\_estimatedVariation} = \hyperlink{classns3_1_1Time_a34e4acc13d0e08cc8cb9cd3b838b9baf}{Time::From} (rttvar >> variationShift);
+236   \textcolor{keywordflow}{return};
+237 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}!Measurement@{Measurement}}
+\index{Measurement@{Measurement}!ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+\subsubsection[{\texorpdfstring{Measurement(\+Time measure)}{Measurement(Time measure)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Rtt\+Mean\+Deviation\+::\+Measurement (
+\begin{DoxyParamCaption}
+\item[{{\bf Time}}]{measure}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1RttMeanDeviation_a3e727dacebe30903b9c7ea084564c4e8}{}\label{classns3_1_1RttMeanDeviation_a3e727dacebe30903b9c7ea084564c4e8}
+
+
+Add a new measurement to the estimator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em measure} & the new R\+TT measure. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classns3_1_1RttEstimator_ae880d548218990b21b4270424621a784}{ns3\+::\+Rtt\+Estimator}.
+
+
+\begin{DoxyCode}
+241 \{
+242   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << m);
+243   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RttEstimator_a6a70cc48220dae4db259cb5cfee86cf5}{m\_nSamples})
+244     \{ 
+245       \textcolor{comment}{// If both alpha and beta are reciprocal powers of two, updating can}
+246       \textcolor{comment}{// be done with integer arithmetic according to Jacobson/Karels paper.}
+247       \textcolor{comment}{// If not, since class Time only supports integer multiplication,}
+248       \textcolor{comment}{// must convert Time to floating point and back again}
+249       uint32\_t rttShift = \hyperlink{classns3_1_1RttMeanDeviation_a5b8a85f3cdb9d8c9cb438e7f2027bd8f}{CheckForReciprocalPowerOfTwo} (
+      \hyperlink{classns3_1_1RttMeanDeviation_abc5474d0966c77bd5ae5631e60c885dd}{m\_alpha});
+250       uint32\_t variationShift = \hyperlink{classns3_1_1RttMeanDeviation_a5b8a85f3cdb9d8c9cb438e7f2027bd8f}{CheckForReciprocalPowerOfTwo} (
+      \hyperlink{classns3_1_1RttMeanDeviation_a38c17beed105df7cadd05207774f2147}{m\_beta});
+251       \textcolor{keywordflow}{if} (rttShift && variationShift)
+252         \{
+253           \hyperlink{classns3_1_1RttMeanDeviation_af64f76fb0e39c735425f56add7e6bdd0}{IntegerUpdate} (m, rttShift, variationShift);
+254         \}
+255       \textcolor{keywordflow}{else}
+256         \{
+257           \hyperlink{classns3_1_1RttMeanDeviation_a6d3dc77a91e8c9aa23d912f2574111db}{FloatingPointUpdate} (m);
+258         \}
+259     \}
+260   \textcolor{keywordflow}{else}
+261     \{ \textcolor{comment}{// First sample}
+262       \hyperlink{classns3_1_1RttEstimator_ac39ddf21dd9bd99416704b83650d2812}{m\_estimatedRtt} = m;               \textcolor{comment}{// Set estimate to current}
+263       \hyperlink{classns3_1_1RttEstimator_a5519242fbbbf189c996e7fd7da2d7085}{m\_estimatedVariation} = m / 2;  \textcolor{comment}{// And variation to current / 2}
+264       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"(first sample) m\_estimatedVariation += "} << m);
+265     \}
+266   \hyperlink{classns3_1_1RttEstimator_a6a70cc48220dae4db259cb5cfee86cf5}{m\_nSamples}++;
+267 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}!Reset@{Reset}}
+\index{Reset@{Reset}!ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+\subsubsection[{\texorpdfstring{Reset()}{Reset()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Rtt\+Mean\+Deviation\+::\+Reset (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1RttMeanDeviation_a5a215a2ed1380c064cb38dbd09c88677}{}\label{classns3_1_1RttMeanDeviation_a5a215a2ed1380c064cb38dbd09c88677}
+
+
+Resets the estimator. 
+
+
+
+Reimplemented from \hyperlink{classns3_1_1RttEstimator_a53237f5f20e3515f284cfc68b02cf45d}{ns3\+::\+Rtt\+Estimator}.
+
+
+\begin{DoxyCode}
+278 \{ 
+279   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+280   \hyperlink{classns3_1_1RttEstimator_a53237f5f20e3515f284cfc68b02cf45d}{RttEstimator::Reset} ();
+281 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 13
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}!m\+\_\+alpha@{m\+\_\+alpha}}
+\index{m\+\_\+alpha@{m\+\_\+alpha}!ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+\subsubsection[{\texorpdfstring{m\+\_\+alpha}{m_alpha}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Rtt\+Mean\+Deviation\+::m\+\_\+alpha\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RttMeanDeviation_abc5474d0966c77bd5ae5631e60c885dd}{}\label{classns3_1_1RttMeanDeviation_abc5474d0966c77bd5ae5631e60c885dd}
+
+
+Filter gain for average. 
+
+\index{ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}!m\+\_\+beta@{m\+\_\+beta}}
+\index{m\+\_\+beta@{m\+\_\+beta}!ns3\+::\+Rtt\+Mean\+Deviation@{ns3\+::\+Rtt\+Mean\+Deviation}}
+\subsubsection[{\texorpdfstring{m\+\_\+beta}{m_beta}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Rtt\+Mean\+Deviation\+::m\+\_\+beta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RttMeanDeviation_a38c17beed105df7cadd05207774f2147}{}\label{classns3_1_1RttMeanDeviation_a38c17beed105df7cadd05207774f2147}
+
+
+Filter gain for variation. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{rtt-estimator_8h}{rtt-\/estimator.\+h}\item 
+internet/model/\hyperlink{rtt-estimator_8cc}{rtt-\/estimator.\+cc}\end{DoxyCompactItemize}

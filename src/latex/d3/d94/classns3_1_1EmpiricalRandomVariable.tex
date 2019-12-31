@@ -1,0 +1,387 @@
+\hypertarget{classns3_1_1EmpiricalRandomVariable}{}\section{ns3\+:\+:Empirical\+Random\+Variable Class Reference}
+\label{classns3_1_1EmpiricalRandomVariable}\index{ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}}
+
+
+The Random Number Generator (R\+NG) that has a specified empirical distribution.  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Empirical\+Random\+Variable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Empirical\+Random\+Variable\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1EmpiricalRandomVariable_1_1ValueCDF}{Value\+C\+DF}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1EmpiricalRandomVariable_aaaf3433d97766c310c556a0b7aedd226}{Empirical\+Random\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Creates an empirical R\+NG that has a specified, empirical distribution. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1EmpiricalRandomVariable_a1f85096a98576ebe48417698f191805d}{C\+DF} (double v, double \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c})
+\begin{DoxyCompactList}\small\item\em Specifies a point in the empirical distribution. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1EmpiricalRandomVariable_a1a2d5b20db4509d1518727eb725672f7}{Get\+Value} (void)
+\begin{DoxyCompactList}\small\item\em Returns the next value in the empirical distribution. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1EmpiricalRandomVariable_a4612a2e68540ffa6393d418f8edccbf3}{Get\+Integer} (void)
+\begin{DoxyCompactList}\small\item\em Returns the next value in the empirical distribution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1EmpiricalRandomVariable_a7a93b59104ee4825114eb27d95225b09}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classns3_1_1EmpiricalRandomVariable_aacabb8ee16c8f172683052abd7a1f8cd}{Validate} ()
+\item 
+virtual double \hyperlink{classns3_1_1EmpiricalRandomVariable_a8e0a52a108ccb100a56e380c4b2ab102}{Interpolate} (double c1, double c2, double v1, double v2, double r)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classns3_1_1EmpiricalRandomVariable_aa3038da76db39faac73ceb5445791205}{m\+\_\+validated}
+\item 
+std\+::vector$<$ \hyperlink{classns3_1_1EmpiricalRandomVariable_1_1ValueCDF}{Value\+C\+DF} $>$ \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\+\_\+emp}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The Random Number Generator (R\+NG) that has a specified empirical distribution. 
+
+Defines a random variable that has a specified, empirical distribution. The distribution is specified by a series of calls to the C\+DF member function, specifying a value and the probability that the function value is less than the specified value. When values are requested, a uniform random variable is used to select a probability, and the return value is interpreted linearly between the two appropriate points in the C\+DF. The method is known as inverse transform sampling\+: (\href{http://en.wikipedia.org/wiki/Inverse_transform_sampling}{\tt http\+://en.\+wikipedia.\+org/wiki/\+Inverse\+\_\+transform\+\_\+sampling}).
+
+Here is an example of how to use this class\+: 
+\begin{DoxyCode}
+\textcolor{comment}{// Create the RNG with a uniform distribution between 0 and 10.}
+Ptr<EmpiricalRandomVariable> x = CreateObject<EmpiricalRandomVariable> ();
+x->CDF ( 0.0,  0.0);
+x->CDF ( 5.0,  0.5);
+x->CDF (10.0,  1.0);
+
+\textcolor{comment}{// The expected value for the mean of the values returned by this}
+\textcolor{comment}{// empirical distribution is the midpoint of the distribution}
+\textcolor{comment}{//}
+\textcolor{comment}{//     E[value]  =  5 .}
+\textcolor{comment}{//                          }
+\textcolor{keywordtype}{double} value = x->GetValue ();
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}!Empirical\+Random\+Variable@{Empirical\+Random\+Variable}}
+\index{Empirical\+Random\+Variable@{Empirical\+Random\+Variable}!ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Empirical\+Random\+Variable()}{EmpiricalRandomVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Empirical\+Random\+Variable\+::\+Empirical\+Random\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EmpiricalRandomVariable_aaaf3433d97766c310c556a0b7aedd226}{}\label{classns3_1_1EmpiricalRandomVariable_aaaf3433d97766c310c556a0b7aedd226}
+
+
+Creates an empirical R\+NG that has a specified, empirical distribution. 
+
+
+\begin{DoxyCode}
+1567   :
+1568   \hyperlink{classns3_1_1EmpiricalRandomVariable_aa3038da76db39faac73ceb5445791205}{m\_validated} (\textcolor{keyword}{false})
+1569 \{
+1570   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1571 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}!C\+DF@{C\+DF}}
+\index{C\+DF@{C\+DF}!ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{C\+D\+F(double v, double c)}{CDF(double v, double c)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Empirical\+Random\+Variable\+::\+C\+DF (
+\begin{DoxyParamCaption}
+\item[{double}]{v, }
+\item[{double}]{c}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EmpiricalRandomVariable_a1f85096a98576ebe48417698f191805d}{}\label{classns3_1_1EmpiricalRandomVariable_a1f85096a98576ebe48417698f191805d}
+
+
+Specifies a point in the empirical distribution. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em v} & The function value for this point \\
+\hline
+\mbox{\tt in}  & {\em c} & Probability that the function is less than or equal to v \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+1631 \{ \textcolor{comment}{// Add a new empirical datapoint to the empirical cdf}
+1632   \textcolor{comment}{// NOTE.   These MUST be inserted in non-decreasing order}
+1633   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << v << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c});
+1634   \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}.push\_back (ValueCDF (v, \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c}));
+1635 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(void)}{GetInteger(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Empirical\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1EmpiricalRandomVariable_a4612a2e68540ffa6393d418f8edccbf3}{}\label{classns3_1_1EmpiricalRandomVariable_a4612a2e68540ffa6393d418f8edccbf3}
+
+
+Returns the next value in the empirical distribution. 
+
+\begin{DoxyReturn}{Returns}
+The integer next value in the empirical distribution.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+1625 \{
+1626   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1627   \textcolor{keywordflow}{return} (uint32\_t)\hyperlink{classns3_1_1EmpiricalRandomVariable_a1a2d5b20db4509d1518727eb725672f7}{GetValue} ();
+1628 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Empirical\+Random\+Variable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1EmpiricalRandomVariable_a7a93b59104ee4825114eb27d95225b09}{}\label{classns3_1_1EmpiricalRandomVariable_a7a93b59104ee4825114eb27d95225b09}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1558 \{
+1559   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::EmpiricalRandomVariable"})
+1560     .SetParent<\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{RandomVariableStream}>()
+1561     .SetGroupName (\textcolor{stringliteral}{"Core"})
+1562     .AddConstructor<\hyperlink{classns3_1_1EmpiricalRandomVariable_aaaf3433d97766c310c556a0b7aedd226}{EmpiricalRandomVariable}> ()
+1563     ;
+1564   \textcolor{keywordflow}{return} tid;
+1565 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(void)}{GetValue(void)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Empirical\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1EmpiricalRandomVariable_a1a2d5b20db4509d1518727eb725672f7}{}\label{classns3_1_1EmpiricalRandomVariable_a1a2d5b20db4509d1518727eb725672f7}
+
+
+Returns the next value in the empirical distribution. 
+
+\begin{DoxyReturn}{Returns}
+The floating point next value in the empirical distribution.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+1575 \{
+1576   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1577   \textcolor{comment}{// Return a value from the empirical distribution}
+1578   \textcolor{comment}{// This code based (loosely) on code by Bruce Mah (Thanks Bruce!)}
+1579   \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1EmpiricalRandomVariable_aa3038da76db39faac73ceb5445791205}{m\_validated})
+1580     \{
+1581       \hyperlink{classns3_1_1EmpiricalRandomVariable_aacabb8ee16c8f172683052abd7a1f8cd}{Validate} ();
+1582     \}
+1583 
+1584   \textcolor{comment}{// Get a uniform random variable in [0,1].}
+1585   \textcolor{keywordtype}{double} r = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+1586   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+1587     \{
+1588       r = (1 - r);
+1589     \}
+1590 
+1591   \textcolor{keywordflow}{if} (r <= \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}.front ().cdf)
+1592     \{
+1593       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}.front ().value; \textcolor{comment}{// Less than first}
+1594     \}
+1595   \textcolor{keywordflow}{if} (r >= \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}.back ().cdf)
+1596     \{
+1597       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}.back ().value;  \textcolor{comment}{// Greater than last}
+1598     \}
+1599   \textcolor{comment}{// Binary search}
+1600   std::vector<ValueCDF>::size\_type bottom = 0;
+1601   std::vector<ValueCDF>::size\_type top = \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}.size () - 1;
+1602   \textcolor{keywordflow}{while} (1)
+1603     \{
+1604       std::vector<ValueCDF>::size\_type \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} = (top + bottom) / 2;
+1605       \textcolor{keywordflow}{if} (r >= \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}[c].\hyperlink{bernuolliDistribution_8m_a12d6c6a5e6d1fb75c27515d30a048b05}{cdf} && r < \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}[c + 1].\hyperlink{bernuolliDistribution_8m_a12d6c6a5e6d1fb75c27515d30a048b05}{cdf})
+1606         \{ \textcolor{comment}{// Found it}
+1607           \textcolor{keywordflow}{return} \hyperlink{classns3_1_1EmpiricalRandomVariable_a8e0a52a108ccb100a56e380c4b2ab102}{Interpolate} (\hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}[c].\hyperlink{bernuolliDistribution_8m_a12d6c6a5e6d1fb75c27515d30a048b05}{cdf}, \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}[c + 1].cdf,
+1608                               \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}[c].value, \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}[c + 1].value,
+1609                               r);
+1610         \}
+1611       \textcolor{comment}{// Not here, adjust bounds}
+1612       \textcolor{keywordflow}{if} (r < \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}[c].\hyperlink{bernuolliDistribution_8m_a12d6c6a5e6d1fb75c27515d30a048b05}{cdf})
+1613         \{
+1614           top    = c - 1;
+1615         \}
+1616       \textcolor{keywordflow}{else}
+1617         \{
+1618           bottom = c + 1;
+1619         \}
+1620     \}
+1621 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}!Interpolate@{Interpolate}}
+\index{Interpolate@{Interpolate}!ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Interpolate(double c1, double c2, double v1, double v2, double r)}{Interpolate(double c1, double c2, double v1, double v2, double r)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Empirical\+Random\+Variable\+::\+Interpolate (
+\begin{DoxyParamCaption}
+\item[{double}]{c1, }
+\item[{double}]{c2, }
+\item[{double}]{v1, }
+\item[{double}]{v2, }
+\item[{double}]{r}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1EmpiricalRandomVariable_a8e0a52a108ccb100a56e380c4b2ab102}{}\label{classns3_1_1EmpiricalRandomVariable_a8e0a52a108ccb100a56e380c4b2ab102}
+Linear nterpolation between two points on the C\+DF to estimate the value at {\ttfamily r}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em c1} & The first argument value. \\
+\hline
+\mbox{\tt in}  & {\em c2} & The secong argument value. \\
+\hline
+\mbox{\tt in}  & {\em v1} & The first C\+DF value. \\
+\hline
+\mbox{\tt in}  & {\em v2} & The secong C\+DF value. \\
+\hline
+\mbox{\tt in}  & {\em r} & The argument value to interpolate to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The interpolated C\+DF at {\ttfamily r}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1668 \{ \textcolor{comment}{// Interpolate random value in range [v1..v2) based on [c1 .. r .. c2)}
+1669   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << c1 << c2 << v1 << v2 << r);
+1670   \textcolor{keywordflow}{return} (v1 + ((v2 - v1) / (c2 - c1)) * (r - c1));
+1671 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}!Validate@{Validate}}
+\index{Validate@{Validate}!ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Validate()}{Validate()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Empirical\+Random\+Variable\+::\+Validate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1EmpiricalRandomVariable_aacabb8ee16c8f172683052abd7a1f8cd}{}\label{classns3_1_1EmpiricalRandomVariable_aacabb8ee16c8f172683052abd7a1f8cd}
+Check that the C\+DF is valid.
+
+A valid C\+DF has
+
+
+\begin{DoxyItemize}
+\item Strictly increasing arguments, and
+\item Strictly increasing C\+DF.
+\end{DoxyItemize}
+
+It is a fatal error to fail validation. 
+\begin{DoxyCode}
+1638 \{
+1639   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1640   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}.empty ())
+1641     \{
+1642       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"CDF is not initialized"});
+1643     \}
+1644   ValueCDF prior = \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}[0];
+1645   \textcolor{keywordflow}{for} (std::vector<ValueCDF>::size\_type \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}.size (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+1646     \{
+1647       ValueCDF& current = \hyperlink{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{m\_emp}[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}];
+1648       \textcolor{keywordflow}{if} (current.value < prior.value || current.cdf < prior.cdf)
+1649         \{ \textcolor{comment}{// Error}
+1650           std::cerr << \textcolor{stringliteral}{"Empirical Dist error,"}
+1651                << \textcolor{stringliteral}{" current value "} << current.value
+1652                << \textcolor{stringliteral}{" prior value "}   << prior.value
+1653                << \textcolor{stringliteral}{" current cdf "}   << current.cdf
+1654                     << \textcolor{stringliteral}{" prior cdf "}     << prior.cdf << std::endl;
+1655           \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Empirical Dist error"});
+1656         \}
+1657       prior = current;
+1658     \}
+1659   \textcolor{keywordflow}{if} (prior.cdf != 1.0)
+1660     \{
+1661       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"CDF does not cover the whole distribution"});
+1662     \}
+1663   \hyperlink{classns3_1_1EmpiricalRandomVariable_aa3038da76db39faac73ceb5445791205}{m\_validated} = \textcolor{keyword}{true};
+1664 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}!m\+\_\+emp@{m\+\_\+emp}}
+\index{m\+\_\+emp@{m\+\_\+emp}!ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+emp}{m_emp}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Value\+C\+DF}$>$ ns3\+::\+Empirical\+Random\+Variable\+::m\+\_\+emp\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}{}\label{classns3_1_1EmpiricalRandomVariable_aab4864cc028da8bb0c4bd8cfdd723fc7}
+The vector of C\+DF points. \index{ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}!m\+\_\+validated@{m\+\_\+validated}}
+\index{m\+\_\+validated@{m\+\_\+validated}!ns3\+::\+Empirical\+Random\+Variable@{ns3\+::\+Empirical\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+validated}{m_validated}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Empirical\+Random\+Variable\+::m\+\_\+validated\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EmpiricalRandomVariable_aa3038da76db39faac73ceb5445791205}{}\label{classns3_1_1EmpiricalRandomVariable_aa3038da76db39faac73ceb5445791205}
+{\ttfamily true} once the C\+DF has been validated. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

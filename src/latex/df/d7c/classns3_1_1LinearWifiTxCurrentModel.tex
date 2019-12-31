@@ -1,0 +1,354 @@
+\hypertarget{classns3_1_1LinearWifiTxCurrentModel}{}\section{ns3\+:\+:Linear\+Wifi\+Tx\+Current\+Model Class Reference}
+\label{classns3_1_1LinearWifiTxCurrentModel}\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+
+
+a linear model of the Wifi transmit current  
+
+
+
+
+{\ttfamily \#include $<$wifi-\/tx-\/current-\/model.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Linear\+Wifi\+Tx\+Current\+Model\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Linear\+Wifi\+Tx\+Current\+Model\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1LinearWifiTxCurrentModel_a17ea1b5907a8d6cdfd07997487cd9893}{Linear\+Wifi\+Tx\+Current\+Model} ()
+\item 
+virtual \hyperlink{classns3_1_1LinearWifiTxCurrentModel_a8d81d2ce8bd3cc3fe72a4879e1403ef4}{$\sim$\+Linear\+Wifi\+Tx\+Current\+Model} ()
+\item 
+void \hyperlink{classns3_1_1LinearWifiTxCurrentModel_a6b5834040f52b26470904a5d0ad1f11d}{Set\+Eta} (double eta)
+\item 
+void \hyperlink{classns3_1_1LinearWifiTxCurrentModel_a329854d859903929d47933920df8b1a0}{Set\+Voltage} (double voltage)
+\item 
+void \hyperlink{classns3_1_1LinearWifiTxCurrentModel_ada72e108df30ab42cde59ed5aeb87846}{Set\+Idle\+Current} (double idle\+Current)
+\item 
+double \hyperlink{classns3_1_1LinearWifiTxCurrentModel_a5cc5bbbe7161bba9a13f1ee5a3e249bc}{Get\+Eta} (void) const 
+\item 
+double \hyperlink{classns3_1_1LinearWifiTxCurrentModel_a2f197328c785ab3e7c915f6388ad8933}{Get\+Voltage} (void) const 
+\item 
+double \hyperlink{classns3_1_1LinearWifiTxCurrentModel_a604f7ed3cd2adc7134d7f6a42591819c}{Get\+Idle\+Current} (void) const 
+\item 
+double \hyperlink{classns3_1_1LinearWifiTxCurrentModel_a433af3e97b24d40d4fd36529cbbede3f}{Calc\+Tx\+Current} (double tx\+Power\+Dbm) const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1LinearWifiTxCurrentModel_ae72c4be07ce37aae16821c2140f376bd}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1LinearWifiTxCurrentModel_a20a1e937625160bbeea19c57cfd85e2b}{m\+\_\+eta}
+\begin{DoxyCompactList}\small\item\em E\+TA. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1LinearWifiTxCurrentModel_ab6d30871bdd27d1e1539c3e40e447339}{m\+\_\+voltage}
+\begin{DoxyCompactList}\small\item\em voltage \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1LinearWifiTxCurrentModel_ac5dd2a8974fa09aa72e7e4b26dee9f94}{m\+\_\+idle\+Current}
+\begin{DoxyCompactList}\small\item\em idle current \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+a linear model of the Wifi transmit current 
+
+This model assumes that the transmit current is a linear function of the nominal transmit power used to send the frame. In particular, the power absorbed during the transmission of a frame $ W_{tx} $ is given by the power absorbed by the power amplifier $ W_{pa} $ plus the power absorbed by the RF subsystem. The latter is assumed to be the same as the power absorbed in the I\+D\+LE state $ W_{idle} $.
+
+The efficiency $ \eta $ of the power amplifier is given by $ \eta = \frac{P_{tx}}{W_{pa}} $, where $ P_{tx} $ is the output power, i.\+e., the nominal transmit power. Hence, $ W_{pa} = \frac{P_{tx}}{\eta} $
+
+It turns out that $ W_{tx} = \frac{P_{tx}}{\eta} + W_{idle} $. By dividing both sides by the supply voltage $ V $\+: $ I_{tx} = \frac{P_{tx}}{V \cdot \eta} + I_{idle} $, where $ I_{tx} $ and $ I_{idle} $ are, respectively, the transmit current and the idle current.
+
+For more information, refer to\+: Francesco Ivan Di Piazza, Stefano Mangione, and Ilenia Tinnirello. \char`\"{}\+On the Effects of Transmit Power Control on the Energy Consumption of Wi\+Fi Network Cards\char`\"{}, Proceedings of I\+C\+ST Q\+Shine 2009, pp. 463--475
+
+If the tx current corresponding to a given nominal transmit power is known, the efficiency of the power amplifier is given by the above formula\+: $ \eta = \frac{P_{tx}}{(I_{tx}-I_{idle})\cdot V} $ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!Linear\+Wifi\+Tx\+Current\+Model@{Linear\+Wifi\+Tx\+Current\+Model}}
+\index{Linear\+Wifi\+Tx\+Current\+Model@{Linear\+Wifi\+Tx\+Current\+Model}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{Linear\+Wifi\+Tx\+Current\+Model()}{LinearWifiTxCurrentModel()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::\+Linear\+Wifi\+Tx\+Current\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_a17ea1b5907a8d6cdfd07997487cd9893}{}\label{classns3_1_1LinearWifiTxCurrentModel_a17ea1b5907a8d6cdfd07997487cd9893}
+
+\begin{DoxyCode}
+79 \{
+80   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+81 \}
+\end{DoxyCode}
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!````~Linear\+Wifi\+Tx\+Current\+Model@{$\sim$\+Linear\+Wifi\+Tx\+Current\+Model}}
+\index{````~Linear\+Wifi\+Tx\+Current\+Model@{$\sim$\+Linear\+Wifi\+Tx\+Current\+Model}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{$\sim$\+Linear\+Wifi\+Tx\+Current\+Model()}{~LinearWifiTxCurrentModel()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::$\sim$\+Linear\+Wifi\+Tx\+Current\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_a8d81d2ce8bd3cc3fe72a4879e1403ef4}{}\label{classns3_1_1LinearWifiTxCurrentModel_a8d81d2ce8bd3cc3fe72a4879e1403ef4}
+
+\begin{DoxyCode}
+84 \{
+85   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+86 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!Calc\+Tx\+Current@{Calc\+Tx\+Current}}
+\index{Calc\+Tx\+Current@{Calc\+Tx\+Current}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{Calc\+Tx\+Current(double tx\+Power\+Dbm) const }{CalcTxCurrent(double txPowerDbm) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::\+Calc\+Tx\+Current (
+\begin{DoxyParamCaption}
+\item[{double}]{tx\+Power\+Dbm}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_a433af3e97b24d40d4fd36529cbbede3f}{}\label{classns3_1_1LinearWifiTxCurrentModel_a433af3e97b24d40d4fd36529cbbede3f}
+
+\begin{DoxyParams}{Parameters}
+{\em tx\+Power\+Dbm} & the nominal tx power in d\+Bm \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the transmit current (in Ampere) 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1WifiTxCurrentModel_ae3073f42e7026eecba2286da4c1be18f}{ns3\+::\+Wifi\+Tx\+Current\+Model}.
+
+
+\begin{DoxyCode}
+129 \{
+130   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << txPowerDbm);
+131   \textcolor{keywordflow}{return} \hyperlink{namespacens3_a0a3361f0554b892e3c6389256f5429b7}{DbmToW} (txPowerDbm) / (\hyperlink{classns3_1_1LinearWifiTxCurrentModel_ab6d30871bdd27d1e1539c3e40e447339}{m\_voltage} * \hyperlink{classns3_1_1LinearWifiTxCurrentModel_a20a1e937625160bbeea19c57cfd85e2b}{m\_eta}) + 
+      \hyperlink{classns3_1_1LinearWifiTxCurrentModel_ac5dd2a8974fa09aa72e7e4b26dee9f94}{m\_idleCurrent};
+132 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!Get\+Eta@{Get\+Eta}}
+\index{Get\+Eta@{Get\+Eta}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Eta(void) const }{GetEta(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::\+Get\+Eta (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_a5cc5bbbe7161bba9a13f1ee5a3e249bc}{}\label{classns3_1_1LinearWifiTxCurrentModel_a5cc5bbbe7161bba9a13f1ee5a3e249bc}
+\begin{DoxyReturn}{Returns}
+the power amplifier efficiency. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+111 \{
+112   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1LinearWifiTxCurrentModel_a20a1e937625160bbeea19c57cfd85e2b}{m\_eta};
+113 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!Get\+Idle\+Current@{Get\+Idle\+Current}}
+\index{Get\+Idle\+Current@{Get\+Idle\+Current}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Idle\+Current(void) const }{GetIdleCurrent(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::\+Get\+Idle\+Current (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_a604f7ed3cd2adc7134d7f6a42591819c}{}\label{classns3_1_1LinearWifiTxCurrentModel_a604f7ed3cd2adc7134d7f6a42591819c}
+\begin{DoxyReturn}{Returns}
+the current in the I\+D\+LE state. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+123 \{
+124   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1LinearWifiTxCurrentModel_ac5dd2a8974fa09aa72e7e4b26dee9f94}{m\_idleCurrent};
+125 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_ae72c4be07ce37aae16821c2140f376bd}{}\label{classns3_1_1LinearWifiTxCurrentModel_ae72c4be07ce37aae16821c2140f376bd}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+54 \{
+55   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::LinearWifiTxCurrentModel"})
+56     .SetParent<\hyperlink{classns3_1_1WifiTxCurrentModel_a28f4130afdaa514c8010b8f17d0c53de}{WifiTxCurrentModel}> ()
+57     .SetGroupName (\textcolor{stringliteral}{"Wifi"})
+58     .AddConstructor<\hyperlink{classns3_1_1LinearWifiTxCurrentModel_a17ea1b5907a8d6cdfd07997487cd9893}{LinearWifiTxCurrentModel}> ()
+59     .AddAttribute (\textcolor{stringliteral}{"Eta"}, \textcolor{stringliteral}{"The efficiency of the power amplifier."},
+60                    DoubleValue (0.10),
+61                    MakeDoubleAccessor (&\hyperlink{classns3_1_1LinearWifiTxCurrentModel_a6b5834040f52b26470904a5d0ad1f11d}{LinearWifiTxCurrentModel::SetEta},
+62                                        &\hyperlink{classns3_1_1LinearWifiTxCurrentModel_a5cc5bbbe7161bba9a13f1ee5a3e249bc}{LinearWifiTxCurrentModel::GetEta}),
+63                    MakeDoubleChecker<double> ())
+64     .AddAttribute (\textcolor{stringliteral}{"Voltage"}, \textcolor{stringliteral}{"The supply voltage (in Volts)."},
+65                    DoubleValue (3.0),
+66                    MakeDoubleAccessor (&\hyperlink{classns3_1_1LinearWifiTxCurrentModel_a329854d859903929d47933920df8b1a0}{LinearWifiTxCurrentModel::SetVoltage}
+      ,
+67                                        &\hyperlink{classns3_1_1LinearWifiTxCurrentModel_a2f197328c785ab3e7c915f6388ad8933}{LinearWifiTxCurrentModel::GetVoltage}
+      ),
+68                    MakeDoubleChecker<double> ())
+69     .AddAttribute (\textcolor{stringliteral}{"IdleCurrent"}, \textcolor{stringliteral}{"The current in the IDLE state (in Watts)."},
+70                    DoubleValue (0.273333),
+71                    MakeDoubleAccessor (&\hyperlink{classns3_1_1LinearWifiTxCurrentModel_ada72e108df30ab42cde59ed5aeb87846}{LinearWifiTxCurrentModel::SetIdleCurrent}
+      ,
+72                                        &\hyperlink{classns3_1_1LinearWifiTxCurrentModel_a604f7ed3cd2adc7134d7f6a42591819c}{LinearWifiTxCurrentModel::GetIdleCurrent}
+      ),
+73                    MakeDoubleChecker<double> ())
+74   ;
+75   \textcolor{keywordflow}{return} tid;
+76 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!Get\+Voltage@{Get\+Voltage}}
+\index{Get\+Voltage@{Get\+Voltage}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Voltage(void) const }{GetVoltage(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::\+Get\+Voltage (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_a2f197328c785ab3e7c915f6388ad8933}{}\label{classns3_1_1LinearWifiTxCurrentModel_a2f197328c785ab3e7c915f6388ad8933}
+\begin{DoxyReturn}{Returns}
+the supply voltage. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+117 \{
+118   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1LinearWifiTxCurrentModel_ab6d30871bdd27d1e1539c3e40e447339}{m\_voltage};
+119 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!Set\+Eta@{Set\+Eta}}
+\index{Set\+Eta@{Set\+Eta}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Eta(double eta)}{SetEta(double eta)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::\+Set\+Eta (
+\begin{DoxyParamCaption}
+\item[{double}]{eta}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_a6b5834040f52b26470904a5d0ad1f11d}{}\label{classns3_1_1LinearWifiTxCurrentModel_a6b5834040f52b26470904a5d0ad1f11d}
+
+\begin{DoxyParams}{Parameters}
+{\em eta} & (dimension-\/less)\\
+\hline
+\end{DoxyParams}
+Set the power amplifier efficiency. 
+\begin{DoxyCode}
+90 \{
+91   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << eta);
+92   \hyperlink{classns3_1_1LinearWifiTxCurrentModel_a20a1e937625160bbeea19c57cfd85e2b}{m\_eta} = eta;
+93 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!Set\+Idle\+Current@{Set\+Idle\+Current}}
+\index{Set\+Idle\+Current@{Set\+Idle\+Current}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Idle\+Current(double idle\+Current)}{SetIdleCurrent(double idleCurrent)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::\+Set\+Idle\+Current (
+\begin{DoxyParamCaption}
+\item[{double}]{idle\+Current}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_ada72e108df30ab42cde59ed5aeb87846}{}\label{classns3_1_1LinearWifiTxCurrentModel_ada72e108df30ab42cde59ed5aeb87846}
+
+\begin{DoxyParams}{Parameters}
+{\em idle\+Current} & (Ampere)\\
+\hline
+\end{DoxyParams}
+Set the current in the I\+D\+LE state. 
+\begin{DoxyCode}
+104 \{
+105   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << idleCurrent);
+106   \hyperlink{classns3_1_1LinearWifiTxCurrentModel_ac5dd2a8974fa09aa72e7e4b26dee9f94}{m\_idleCurrent} = idleCurrent;
+107 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!Set\+Voltage@{Set\+Voltage}}
+\index{Set\+Voltage@{Set\+Voltage}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Voltage(double voltage)}{SetVoltage(double voltage)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::\+Set\+Voltage (
+\begin{DoxyParamCaption}
+\item[{double}]{voltage}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_a329854d859903929d47933920df8b1a0}{}\label{classns3_1_1LinearWifiTxCurrentModel_a329854d859903929d47933920df8b1a0}
+
+\begin{DoxyParams}{Parameters}
+{\em voltage} & (Volts)\\
+\hline
+\end{DoxyParams}
+Set the supply voltage. 
+\begin{DoxyCode}
+97 \{
+98   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << voltage);
+99   \hyperlink{classns3_1_1LinearWifiTxCurrentModel_ab6d30871bdd27d1e1539c3e40e447339}{m\_voltage} = voltage;
+100 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!m\+\_\+eta@{m\+\_\+eta}}
+\index{m\+\_\+eta@{m\+\_\+eta}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+eta}{m_eta}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::m\+\_\+eta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_a20a1e937625160bbeea19c57cfd85e2b}{}\label{classns3_1_1LinearWifiTxCurrentModel_a20a1e937625160bbeea19c57cfd85e2b}
+
+
+E\+TA. 
+
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!m\+\_\+idle\+Current@{m\+\_\+idle\+Current}}
+\index{m\+\_\+idle\+Current@{m\+\_\+idle\+Current}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+idle\+Current}{m_idleCurrent}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::m\+\_\+idle\+Current\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_ac5dd2a8974fa09aa72e7e4b26dee9f94}{}\label{classns3_1_1LinearWifiTxCurrentModel_ac5dd2a8974fa09aa72e7e4b26dee9f94}
+
+
+idle current 
+
+\index{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}!m\+\_\+voltage@{m\+\_\+voltage}}
+\index{m\+\_\+voltage@{m\+\_\+voltage}!ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model@{ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+voltage}{m_voltage}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Linear\+Wifi\+Tx\+Current\+Model\+::m\+\_\+voltage\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1LinearWifiTxCurrentModel_ab6d30871bdd27d1e1539c3e40e447339}{}\label{classns3_1_1LinearWifiTxCurrentModel_ab6d30871bdd27d1e1539c3e40e447339}
+
+
+voltage 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+wifi/model/\hyperlink{wifi-tx-current-model_8h}{wifi-\/tx-\/current-\/model.\+h}\item 
+wifi/model/\hyperlink{wifi-tx-current-model_8cc}{wifi-\/tx-\/current-\/model.\+cc}\end{DoxyCompactItemize}

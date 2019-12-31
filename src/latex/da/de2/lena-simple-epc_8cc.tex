@@ -1,0 +1,207 @@
+\hypertarget{lena-simple-epc_8cc}{}\section{lte/examples/lena-\/simple-\/epc.cc File Reference}
+\label{lena-simple-epc_8cc}\index{lte/examples/lena-\/simple-\/epc.\+cc@{lte/examples/lena-\/simple-\/epc.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/lte-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/epc-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/global-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/lte-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store.\+h\char`\"{}}\\*
+Include dependency graph for lena-\/simple-\/epc.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{lena-simple-epc_8cc_ab5b2d5577332f9a2c1d6b2d32293401e}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Epc\+First\+Example\char`\"{})
+\item 
+int \hyperlink{lena-simple-epc_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{lena-\/simple-\/epc.\+cc@{lena-\/simple-\/epc.\+cc}!main@{main}}
+\index{main@{main}!lena-\/simple-\/epc.\+cc@{lena-\/simple-\/epc.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-simple-epc_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{lena-simple-epc_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+46 \{
+47 
+48   uint16\_t numberOfNodes = 2;
+49   \textcolor{keywordtype}{double} simTime = 1.1;
+50   \textcolor{keywordtype}{double} distance = 60.0;
+51   \textcolor{keywordtype}{double} interPacketInterval = 100;
+52 
+53   \textcolor{comment}{// Command line arguments}
+54   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+55   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"numberOfNodes"}, \textcolor{stringliteral}{"Number of eNodeBs + UE pairs"}, numberOfNodes);
+56   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"simTime"}, \textcolor{stringliteral}{"Total duration of the simulation [s])"}, simTime);
+57   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"distance"}, \textcolor{stringliteral}{"Distance between eNBs [m]"}, distance);
+58   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"interPacketInterval"}, \textcolor{stringliteral}{"Inter packet interval [ms])"}, interPacketInterval);
+59   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse}(argc, argv);
+60 
+61   \hyperlink{classns3_1_1Ptr}{Ptr<LteHelper>} lteHelper = CreateObject<LteHelper> ();
+62   \hyperlink{classns3_1_1Ptr}{Ptr<PointToPointEpcHelper>}  epcHelper = CreateObject<PointToPointEpcHelper> ();
+63   lteHelper->\hyperlink{classns3_1_1LteHelper_a324079a1ccd54ce949786b83d6b95915}{SetEpcHelper} (epcHelper);
+64 
+65   \hyperlink{classns3_1_1ConfigStore}{ConfigStore} inputConfig;
+66   inputConfig.\hyperlink{classns3_1_1ConfigStore_a0a6137574d7c847c3823af8b9d1bb886}{ConfigureDefaults}();
+67 
+68   \textcolor{comment}{// parse again so you can override default values from the command line}
+69   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse}(argc, argv);
+70 
+71   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} pgw = epcHelper->GetPgwNode ();
+72 
+73    \textcolor{comment}{// Create a single RemoteHost}
+74   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} remoteHostContainer;
+75   remoteHostContainer.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+76   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} remoteHost = remoteHostContainer.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0);
+77   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+78   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (remoteHostContainer);
+79 
+80   \textcolor{comment}{// Create the Internet}
+81   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} p2ph;
+82   p2ph.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"100Gb/s"})));
+83   p2ph.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"Mtu"}, UintegerValue (1500));
+84   p2ph.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.010)));
+85   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} internetDevices = p2ph.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (pgw, remoteHost);
+86   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4h;
+87   ipv4h.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"1.0.0.0"}, \textcolor{stringliteral}{"255.0.0.0"});
+88   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} internetIpIfaces = ipv4h.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (internetDevices);
+89   \textcolor{comment}{// interface 0 is localhost, 1 is the p2p device}
+90   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} remoteHostAddr = internetIpIfaces.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1);
+91 
+92   \hyperlink{classns3_1_1Ipv4StaticRoutingHelper}{Ipv4StaticRoutingHelper} ipv4RoutingHelper;
+93   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4StaticRouting>} remoteHostStaticRouting = ipv4RoutingHelper.
+      \hyperlink{classns3_1_1Ipv4StaticRoutingHelper_a731206e50d305695dac7fb2ef963a4bb}{GetStaticRouting} (remoteHost->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ());
+94   remoteHostStaticRouting->\hyperlink{classns3_1_1Ipv4StaticRouting_a8bf5eaa7ba49fe33c78c70d5560b6c39}{AddNetworkRouteTo} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"7.0.0.0"}), 
+      \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.0.0.0"}), 1);
+95 
+96   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNodes;
+97   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+98   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create}(numberOfNodes);
+99   ueNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create}(numberOfNodes);
+100 
+101   \textcolor{comment}{// Install Mobility Model}
+102   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} positionAlloc = CreateObject<ListPositionAllocator> 
+      ();
+103   \textcolor{keywordflow}{for} (uint16\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < numberOfNodes; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+104     \{
+105       positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector}(distance * \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}, 0, 0));
+106     \}
+107   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+108   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel}(\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+109   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator}(positionAlloc);
+110   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install}(enbNodes);
+111   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install}(ueNodes);
+112 
+113   \textcolor{comment}{// Install LTE Devices to the nodes}
+114   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbLteDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (enbNodes);
+115   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueLteDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (ueNodes);
+116 
+117   \textcolor{comment}{// Install the IP stack on the UEs}
+118   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (ueNodes);
+119   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} ueIpIface;
+120   ueIpIface = epcHelper->AssignUeIpv4Address (\hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} (ueLteDevs));
+121   \textcolor{comment}{// Assign IP address to UEs, and install applications}
+122   \textcolor{keywordflow}{for} (uint32\_t u = 0; u < ueNodes.\hyperlink{classns3_1_1NodeContainer_aed647ac56d0407a7706aba02eb44b951}{GetN} (); ++u)
+123     \{
+124       \hyperlink{classns3_1_1Ptr}{Ptr<Node>} ueNode = ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (u);
+125       \textcolor{comment}{// Set the default gateway for the UE}
+126       \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4StaticRouting>} ueStaticRouting = ipv4RoutingHelper.
+      \hyperlink{classns3_1_1Ipv4StaticRoutingHelper_a731206e50d305695dac7fb2ef963a4bb}{GetStaticRouting} (ueNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ());
+127       ueStaticRouting->\hyperlink{classns3_1_1Ipv4StaticRouting_aee30fa3246c2b42f122dabdff2725331}{SetDefaultRoute} (epcHelper->GetUeDefaultGatewayAddress (), 1);
+128     \}
+129 
+130   \textcolor{comment}{// Attach one UE per eNodeB}
+131   \textcolor{keywordflow}{for} (uint16\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < numberOfNodes; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+132       \{
+133         lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (ueLteDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get}(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), enbLteDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get}(\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+134         \textcolor{comment}{// side effect: the default EPS bearer will be activated}
+135       \}
+136 
+137 
+138   \textcolor{comment}{// Install and start applications on UEs and remote host}
+139   uint16\_t dlPort = 1234;
+140   uint16\_t ulPort = 2000;
+141   uint16\_t otherPort = 3000;
+142   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps;
+143   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} serverApps;
+144   \textcolor{keywordflow}{for} (uint32\_t u = 0; u < ueNodes.\hyperlink{classns3_1_1NodeContainer_aed647ac56d0407a7706aba02eb44b951}{GetN} (); ++u)
+145     \{
+146       ++ulPort;
+147       ++otherPort;
+148       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} dlPacketSinkHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+      \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), dlPort));
+149       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} ulPacketSinkHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+      \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), ulPort));
+150       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} packetSinkHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+      \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), otherPort));
+151       serverApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (dlPacketSinkHelper.Install (ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get}(u)));
+152       serverApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (ulPacketSinkHelper.Install (remoteHost));
+153       serverApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (packetSinkHelper.Install (ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get}(u)));
+154 
+155       \hyperlink{classns3_1_1UdpClientHelper}{UdpClientHelper} dlClient (ueIpIface.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (u), dlPort);
+156       dlClient.\hyperlink{classns3_1_1UdpClientHelper_a8bbae16a28f85ab3f3b5aa4642edfeae}{SetAttribute} (\textcolor{stringliteral}{"Interval"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds}(
+      interPacketInterval)));
+157       dlClient.SetAttribute (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue(1000000));
+158 
+159       \hyperlink{classns3_1_1UdpClientHelper}{UdpClientHelper} ulClient (remoteHostAddr, ulPort);
+160       ulClient.SetAttribute (\textcolor{stringliteral}{"Interval"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds}(interPacketInterval)));
+161       ulClient.SetAttribute (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue(1000000));
+162 
+163       \hyperlink{classns3_1_1UdpClientHelper}{UdpClientHelper} client (ueIpIface.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (u), otherPort);
+164       client.\hyperlink{classns3_1_1UdpClientHelper_a8bbae16a28f85ab3f3b5aa4642edfeae}{SetAttribute} (\textcolor{stringliteral}{"Interval"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds}(interPacketInterval)
+      ));
+165       client.SetAttribute (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue(1000000));
+166 
+167       clientApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (dlClient.Install (remoteHost));
+168       clientApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (ulClient.Install (ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get}(u)));
+169       \textcolor{keywordflow}{if} (u+1 < ueNodes.\hyperlink{classns3_1_1NodeContainer_aed647ac56d0407a7706aba02eb44b951}{GetN} ())
+170         \{
+171           clientApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (client.Install (ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get}(u+1)));
+172         \}
+173       \textcolor{keywordflow}{else}
+174         \{
+175           clientApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (client.Install (ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get}(0)));
+176         \}
+177     \}
+178   serverApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.01));
+179   clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.01));
+180   lteHelper->\hyperlink{classns3_1_1LteHelper_aeb70fd96f1c58806a5b7ad9f68a795e0}{EnableTraces} ();
+181   \textcolor{comment}{// Uncomment to enable PCAP tracing}
+182   \textcolor{comment}{//p2ph.EnablePcapAll("lena-epc-first");}
+183 
+184   Simulator::Stop(\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds}(simTime));
+185   Simulator::Run();
+186 
+187   \textcolor{comment}{/*GtkConfigStore config;}
+188 \textcolor{comment}{  config.ConfigureAttributes();*/}
+189 
+190   Simulator::Destroy();
+191   \textcolor{keywordflow}{return} 0;
+192 
+193 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{lena-\/simple-\/epc.\+cc@{lena-\/simple-\/epc.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!lena-\/simple-\/epc.\+cc@{lena-\/simple-\/epc.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Epc\+First\+Example"")}{NS_LOG_COMPONENT_DEFINE("EpcFirstExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Epc\+First\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-simple-epc_8cc_ab5b2d5577332f9a2c1d6b2d32293401e}{}\label{lena-simple-epc_8cc_ab5b2d5577332f9a2c1d6b2d32293401e}
+Sample simulation script for L\+T\+E+\+E\+PC. It instantiates several e\+NodeB, attaches one UE per e\+NodeB starts a flow for each UE to and from a remote host. It also starts yet another flow between each UE pair. 

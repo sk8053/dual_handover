@@ -1,0 +1,134 @@
+\hypertarget{hash-test-suite_8cc}{}\section{core/test/hash-\/test-\/suite.cc File Reference}
+\label{hash-test-suite_8cc}\index{core/test/hash-\/test-\/suite.\+cc@{core/test/hash-\/test-\/suite.\+cc}}
+{\ttfamily \#include $<$iomanip$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/test.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/hash.\+h\char`\"{}}\\*
+Include dependency graph for hash-\/test-\/suite.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classHashTestCase}{Hash\+Test\+Case}
+\item 
+class \hyperlink{classDefaultHashTestCase}{Default\+Hash\+Test\+Case}
+\item 
+class \hyperlink{classFnv1aTestCase}{Fnv1a\+Test\+Case}
+\item 
+class \hyperlink{classMurmur3TestCase}{Murmur3\+Test\+Case}
+\item 
+class \hyperlink{classHash32FunctionPtrTestCase}{Hash32\+Function\+Ptr\+Test\+Case}
+\item 
+class \hyperlink{classHash64FunctionPtrTestCase}{Hash64\+Function\+Ptr\+Test\+Case}
+\item 
+class \hyperlink{classIncrementalTestCase}{Incremental\+Test\+Case}
+\item 
+class \hyperlink{classHashTestSuite}{Hash\+Test\+Suite}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{hash-test-suite_8cc_aaa2b6cb610fd97901f69f713d1e34238}{gnu\+\_\+sum} (const char $\ast$buffer, const size\+\_\+t size)
+\item 
+uint32\+\_\+t \hyperlink{hash-test-suite_8cc_a31fea16bc13f0960dc1fa95592bde055}{gnu\+\_\+sum32} (const char $\ast$buffer, const size\+\_\+t size)
+\item 
+uint64\+\_\+t \hyperlink{hash-test-suite_8cc_a514822542f656473e568e95575b2d346}{gnu\+\_\+sum64} (const char $\ast$buffer, const size\+\_\+t size)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classHashTestSuite}{Hash\+Test\+Suite} \hyperlink{hash-test-suite_8cc_a321101b76857d96930ef20eefcabdf58}{g\+\_\+hash\+Test\+Suite}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{hash-\/test-\/suite.\+cc@{hash-\/test-\/suite.\+cc}!gnu\+\_\+sum@{gnu\+\_\+sum}}
+\index{gnu\+\_\+sum@{gnu\+\_\+sum}!hash-\/test-\/suite.\+cc@{hash-\/test-\/suite.\+cc}}
+\subsubsection[{\texorpdfstring{gnu\+\_\+sum(const char $\ast$buffer, const size\+\_\+t size)}{gnu_sum(const char *buffer, const size_t size)}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t gnu\+\_\+sum (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{buffer, }
+\item[{const size\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)}\hypertarget{hash-test-suite_8cc_aaa2b6cb610fd97901f69f713d1e34238}{}\label{hash-test-suite_8cc_aaa2b6cb610fd97901f69f713d1e34238}
+
+\begin{DoxyCode}
+222 \{
+223   \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = buffer;
+224   \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} pend = p + size;
+225 
+226   uint16\_t checksum = 0;     \textcolor{comment}{/* The checksum mod 2^16. */}
+227 
+228   \textcolor{keywordflow}{while} (p != pend)
+229     \{
+230       checksum = (checksum >> 1) + ((checksum & 1) << 15);  \textcolor{comment}{// barrel shift}
+231       checksum += *p++;
+232     \}
+233   \textcolor{keywordflow}{return} checksum;
+234 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{hash-\/test-\/suite.\+cc@{hash-\/test-\/suite.\+cc}!gnu\+\_\+sum32@{gnu\+\_\+sum32}}
+\index{gnu\+\_\+sum32@{gnu\+\_\+sum32}!hash-\/test-\/suite.\+cc@{hash-\/test-\/suite.\+cc}}
+\subsubsection[{\texorpdfstring{gnu\+\_\+sum32(const char $\ast$buffer, const size\+\_\+t size)}{gnu_sum32(const char *buffer, const size_t size)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t gnu\+\_\+sum32 (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{buffer, }
+\item[{const size\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)}\hypertarget{hash-test-suite_8cc_a31fea16bc13f0960dc1fa95592bde055}{}\label{hash-test-suite_8cc_a31fea16bc13f0960dc1fa95592bde055}
+
+\begin{DoxyCode}
+239 \{
+240   uint32\_t h = \hyperlink{hash-test-suite_8cc_aaa2b6cb610fd97901f69f713d1e34238}{gnu\_sum} (buffer, size);
+241   \textcolor{keywordflow}{return} (uint32\_t)( (h << 16) + h);
+242 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{hash-\/test-\/suite.\+cc@{hash-\/test-\/suite.\+cc}!gnu\+\_\+sum64@{gnu\+\_\+sum64}}
+\index{gnu\+\_\+sum64@{gnu\+\_\+sum64}!hash-\/test-\/suite.\+cc@{hash-\/test-\/suite.\+cc}}
+\subsubsection[{\texorpdfstring{gnu\+\_\+sum64(const char $\ast$buffer, const size\+\_\+t size)}{gnu_sum64(const char *buffer, const size_t size)}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t gnu\+\_\+sum64 (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{buffer, }
+\item[{const size\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)}\hypertarget{hash-test-suite_8cc_a514822542f656473e568e95575b2d346}{}\label{hash-test-suite_8cc_a514822542f656473e568e95575b2d346}
+
+\begin{DoxyCode}
+247 \{
+248   uint64\_t h = \hyperlink{hash-test-suite_8cc_a31fea16bc13f0960dc1fa95592bde055}{gnu\_sum32} (buffer, size);
+249   \textcolor{keywordflow}{return} (uint64\_t)( (h << 32) + h);
+250 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+
+
+\subsection{Variable Documentation}
+\index{hash-\/test-\/suite.\+cc@{hash-\/test-\/suite.\+cc}!g\+\_\+hash\+Test\+Suite@{g\+\_\+hash\+Test\+Suite}}
+\index{g\+\_\+hash\+Test\+Suite@{g\+\_\+hash\+Test\+Suite}!hash-\/test-\/suite.\+cc@{hash-\/test-\/suite.\+cc}}
+\subsubsection[{\texorpdfstring{g\+\_\+hash\+Test\+Suite}{g_hashTestSuite}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+Test\+Suite} g\+\_\+hash\+Test\+Suite\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{hash-test-suite_8cc_a321101b76857d96930ef20eefcabdf58}{}\label{hash-test-suite_8cc_a321101b76857d96930ef20eefcabdf58}

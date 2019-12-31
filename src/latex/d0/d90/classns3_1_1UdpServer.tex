@@ -1,0 +1,514 @@
+\hypertarget{classns3_1_1UdpServer}{}\section{ns3\+:\+:Udp\+Server Class Reference}
+\label{classns3_1_1UdpServer}\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+
+
+A U\+DP server, receives U\+DP packets from a remote host.  
+
+
+
+
+{\ttfamily \#include $<$udp-\/server.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Udp\+Server\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Udp\+Server\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1UdpServer_aa76d63101cbf7ed83745c55dadc033ce}{Udp\+Server} ()
+\item 
+virtual \hyperlink{classns3_1_1UdpServer_a26b1cd0ad57e598e815fac2abbd1ef97}{$\sim$\+Udp\+Server} ()
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1UdpServer_ae4702ca7e022bf5e960fce26c1198b8e}{Get\+Lost} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the number of lost packets. \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{classns3_1_1UdpServer_a679b871e557f7743e390d5adea8f2d48}{Get\+Received} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the number of received packets. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classns3_1_1UdpServer_a385b6184e0b3fde69ecf1c72b38b3ad8}{Get\+Packet\+Window\+Size} () const 
+\begin{DoxyCompactList}\small\item\em Returns the size of the window used for checking loss. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1UdpServer_a9ec06834b376c13c9f5888ccd7ed2d51}{Set\+Packet\+Window\+Size} (uint16\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Set the size of the window used for checking loss. This value should be a multiple of 8. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1UdpServer_a61864021612e37496fa36d5574934ad0}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classns3_1_1UdpServer_ad71ef84dbd09cd3356c007cbfecf660e}{Do\+Dispose} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classns3_1_1UdpServer_a784bd9b3274fc411c042b3502dacb3fa}{Start\+Application} (void)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1Application}{Application} specific startup code. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1UdpServer_adb29aa59623e5baa7f42642c3f811a72}{Stop\+Application} (void)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1Application}{Application} specific shutdown code. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1UdpServer_a65a01672657a4a49f65cd3c3bb1ee420}{Handle\+Read} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\begin{DoxyCompactList}\small\item\em Handle a packet reception. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{classns3_1_1UdpServer_a2b8a2fdb49222a11c987c346cb84e5ee}{m\+\_\+port}
+\begin{DoxyCompactList}\small\item\em Port on which we listen for incoming packets. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ \hyperlink{classns3_1_1UdpServer_a5420784fc2d236829a7ccec205fe09fc}{m\+\_\+socket}
+\begin{DoxyCompactList}\small\item\em I\+Pv4 \hyperlink{classns3_1_1Socket}{Socket}. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ \hyperlink{classns3_1_1UdpServer_a08570b8278b2cf8a0b02a40bbae1dc79}{m\+\_\+socket6}
+\begin{DoxyCompactList}\small\item\em I\+Pv6 \hyperlink{classns3_1_1Socket}{Socket}. \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{classns3_1_1UdpServer_ac4e5a1da93444bc7b0a8bcdf66337518}{m\+\_\+received}
+\begin{DoxyCompactList}\small\item\em Number of received packets. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1PacketLossCounter}{Packet\+Loss\+Counter} \hyperlink{classns3_1_1UdpServer_a8b6e5ac841368b11e9458045fc4896b0}{m\+\_\+loss\+Counter}
+\begin{DoxyCompactList}\small\item\em Lost packet counter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A U\+DP server, receives U\+DP packets from a remote host. 
+
+U\+DP packets carry a 32bits sequence number followed by a 64bits time stamp in their payloads. The application uses the sequence number to determine if a packet is lost, and the time stamp to compute the delay. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!Udp\+Server@{Udp\+Server}}
+\index{Udp\+Server@{Udp\+Server}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{Udp\+Server()}{UdpServer()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Udp\+Server\+::\+Udp\+Server (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1UdpServer_aa76d63101cbf7ed83745c55dadc033ce}{}\label{classns3_1_1UdpServer_aa76d63101cbf7ed83745c55dadc033ce}
+
+\begin{DoxyCode}
+67   : \hyperlink{classns3_1_1UdpServer_a8b6e5ac841368b11e9458045fc4896b0}{m\_lossCounter} (0)
+68 \{
+69   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+70   \hyperlink{classns3_1_1UdpServer_ac4e5a1da93444bc7b0a8bcdf66337518}{m\_received}=0;
+71 \}
+\end{DoxyCode}
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!````~Udp\+Server@{$\sim$\+Udp\+Server}}
+\index{````~Udp\+Server@{$\sim$\+Udp\+Server}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{$\sim$\+Udp\+Server()}{~UdpServer()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Udp\+Server\+::$\sim$\+Udp\+Server (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1UdpServer_a26b1cd0ad57e598e815fac2abbd1ef97}{}\label{classns3_1_1UdpServer_a26b1cd0ad57e598e815fac2abbd1ef97}
+
+\begin{DoxyCode}
+74 \{
+75   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+76 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!Do\+Dispose@{Do\+Dispose}}
+\index{Do\+Dispose@{Do\+Dispose}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{Do\+Dispose(void)}{DoDispose(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Udp\+Server\+::\+Do\+Dispose (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1UdpServer_ad71ef84dbd09cd3356c007cbfecf660e}{}\label{classns3_1_1UdpServer_ad71ef84dbd09cd3356c007cbfecf660e}
+Destructor implementation.
+
+This method is called by \hyperlink{classns3_1_1Object_aa90ae598863f6c251cdab3c3722afdaf}{Dispose()} or by the \hyperlink{classns3_1_1Object}{Object}\textquotesingle{}s destructor, whichever comes first.
+
+Subclasses are expected to implement their real destruction code in an overriden version of this method and chain up to their parent\textquotesingle{}s implementation once they are done. {\itshape i.\+e}, for simplicity, the destructor of every subclass should be empty and its content should be moved to the associated \hyperlink{classns3_1_1UdpServer_ad71ef84dbd09cd3356c007cbfecf660e}{Do\+Dispose()} method.
+
+It is safe to call \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{Get\+Object()} from within this method. 
+
+Reimplemented from \hyperlink{classns3_1_1Application_a89f6c9454532d62600251872bede6d04}{ns3\+::\+Application}.
+
+
+\begin{DoxyCode}
+108 \{
+109   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+110   \hyperlink{classns3_1_1Application_a89f6c9454532d62600251872bede6d04}{Application::DoDispose} ();
+111 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!Get\+Lost@{Get\+Lost}}
+\index{Get\+Lost@{Get\+Lost}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{Get\+Lost(void) const }{GetLost(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Udp\+Server\+::\+Get\+Lost (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1UdpServer_ae4702ca7e022bf5e960fce26c1198b8e}{}\label{classns3_1_1UdpServer_ae4702ca7e022bf5e960fce26c1198b8e}
+
+
+Returns the number of lost packets. 
+
+\begin{DoxyReturn}{Returns}
+the number of lost packets 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+94 \{
+95   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+96   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1UdpServer_a8b6e5ac841368b11e9458045fc4896b0}{m\_lossCounter}.\hyperlink{classns3_1_1PacketLossCounter_a604d5fe48945a46d0d84328e53baa935}{GetLost} ();
+97 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!Get\+Packet\+Window\+Size@{Get\+Packet\+Window\+Size}}
+\index{Get\+Packet\+Window\+Size@{Get\+Packet\+Window\+Size}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{Get\+Packet\+Window\+Size() const }{GetPacketWindowSize() const }}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Udp\+Server\+::\+Get\+Packet\+Window\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1UdpServer_a385b6184e0b3fde69ecf1c72b38b3ad8}{}\label{classns3_1_1UdpServer_a385b6184e0b3fde69ecf1c72b38b3ad8}
+
+
+Returns the size of the window used for checking loss. 
+
+\begin{DoxyReturn}{Returns}
+the size of the window used for checking loss. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+80 \{
+81   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+82   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1UdpServer_a8b6e5ac841368b11e9458045fc4896b0}{m\_lossCounter}.\hyperlink{classns3_1_1PacketLossCounter_ab180f3dac45da2d2e8575c1b93bd8606}{GetBitMapSize} ();
+83 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!Get\+Received@{Get\+Received}}
+\index{Get\+Received@{Get\+Received}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{Get\+Received(void) const }{GetReceived(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Udp\+Server\+::\+Get\+Received (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1UdpServer_a679b871e557f7743e390d5adea8f2d48}{}\label{classns3_1_1UdpServer_a679b871e557f7743e390d5adea8f2d48}
+
+
+Returns the number of received packets. 
+
+\begin{DoxyReturn}{Returns}
+the number of received packets 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+101 \{
+102   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+103   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1UdpServer_ac4e5a1da93444bc7b0a8bcdf66337518}{m\_received};
+104 \}
+\end{DoxyCode}
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Udp\+Server\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1UdpServer_a61864021612e37496fa36d5574934ad0}{}\label{classns3_1_1UdpServer_a61864021612e37496fa36d5574934ad0}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+46 \{
+47   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::UdpServer"})
+48     .SetParent<\hyperlink{classns3_1_1Application_acd261926c72b02cdb48fc7f8838ee173}{Application}> ()
+49     .SetGroupName(\textcolor{stringliteral}{"Applications"})
+50     .AddConstructor<\hyperlink{classns3_1_1UdpServer_aa76d63101cbf7ed83745c55dadc033ce}{UdpServer}> ()
+51     .AddAttribute (\textcolor{stringliteral}{"Port"},
+52                    \textcolor{stringliteral}{"Port on which we listen for incoming packets."},
+53                    UintegerValue (100),
+54                    MakeUintegerAccessor (&\hyperlink{classns3_1_1UdpServer_a2b8a2fdb49222a11c987c346cb84e5ee}{UdpServer::m\_port}),
+55                    MakeUintegerChecker<uint16\_t> ())
+56     .AddAttribute (\textcolor{stringliteral}{"PacketWindowSize"},
+57                    \textcolor{stringliteral}{"The size of the window used to compute the packet loss. This value should be a multiple
+       of 8."},
+58                    UintegerValue (32),
+59                    MakeUintegerAccessor (&\hyperlink{classns3_1_1UdpServer_a385b6184e0b3fde69ecf1c72b38b3ad8}{UdpServer::GetPacketWindowSize},
+60                                          &\hyperlink{classns3_1_1UdpServer_a9ec06834b376c13c9f5888ccd7ed2d51}{UdpServer::SetPacketWindowSize}),
+61                    MakeUintegerChecker<uint16\_t> (8,256))
+62   ;
+63   \textcolor{keywordflow}{return} tid;
+64 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!Handle\+Read@{Handle\+Read}}
+\index{Handle\+Read@{Handle\+Read}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{Handle\+Read(\+Ptr$<$ Socket $>$ socket)}{HandleRead(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Udp\+Server\+::\+Handle\+Read (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1UdpServer_a65a01672657a4a49f65cd3c3bb1ee420}{}\label{classns3_1_1UdpServer_a65a01672657a4a49f65cd3c3bb1ee420}
+
+
+Handle a packet reception. 
+
+This function is called by lower layers.
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & the socket the packet was received to. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+161 \{
+162   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << socket);
+163   Ptr<Packet> packet;
+164   Address \hyperlink{lte__amc_8m_a1b4c81ff74eb1a626b5ade44c81004b3}{from};
+165   \textcolor{keywordflow}{while} ((packet = socket->\hyperlink{classns3_1_1Socket_af22378d7af9a2745a9eada20210da215}{RecvFrom} (from)))
+166     \{
+167       \textcolor{keywordflow}{if} (packet->GetSize () > 0)
+168         \{
+169           SeqTsHeader seqTs;
+170           packet->RemoveHeader (seqTs);
+171           uint32\_t currentSequenceNumber = seqTs.GetSeq ();
+172           \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1InetSocketAddress_a9426766e34e928ce5dbdbeb9563a10df}{InetSocketAddress::IsMatchingType} (from))
+173             \{
+174               \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"TraceDelay: RX "} << packet->GetSize () <<
+175                            \textcolor{stringliteral}{" bytes from "}<< \hyperlink{classns3_1_1InetSocketAddress_ade776b1109e7b9a7be0b22ced49931e3}{InetSocketAddress::ConvertFrom} (
+      from).\hyperlink{classns3_1_1InetSocketAddress_a925d5288448467062884ce0363a63658}{GetIpv4} () <<
+176                            \textcolor{stringliteral}{" Sequence Number: "} << currentSequenceNumber <<
+177                            \textcolor{stringliteral}{" Uid: "} << packet->GetUid () <<
+178                            \textcolor{stringliteral}{" TXtime: "} << seqTs.GetTs () <<
+179                            \textcolor{stringliteral}{" RXtime: "} << \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} () <<
+180                            \textcolor{stringliteral}{" Delay: "} << \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} () - seqTs.GetTs ());
+181             \}
+182           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Inet6SocketAddress_a4d928c54affbfb530a12076d6d7e0540}{Inet6SocketAddress::IsMatchingType} (from))
+183             \{
+184               \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"TraceDelay: RX "} << packet->GetSize () <<
+185                            \textcolor{stringliteral}{" bytes from "}<< \hyperlink{classns3_1_1Inet6SocketAddress_a2177c66e1bcf17c85dcffb9d2a971f5a}{Inet6SocketAddress::ConvertFrom} 
+      (from).\hyperlink{classns3_1_1Inet6SocketAddress_a19c83458e1e61d5accd19bec5afb254e}{GetIpv6} () <<
+186                            \textcolor{stringliteral}{" Sequence Number: "} << currentSequenceNumber <<
+187                            \textcolor{stringliteral}{" Uid: "} << packet->GetUid () <<
+188                            \textcolor{stringliteral}{" TXtime: "} << seqTs.GetTs () <<
+189                            \textcolor{stringliteral}{" RXtime: "} << \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} () <<
+190                            \textcolor{stringliteral}{" Delay: "} << \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} () - seqTs.GetTs ());
+191             \}
+192 
+193           \hyperlink{classns3_1_1UdpServer_a8b6e5ac841368b11e9458045fc4896b0}{m\_lossCounter}.\hyperlink{classns3_1_1PacketLossCounter_a3ad5968a1f30dd3d0ca79051f07ba72a}{NotifyReceived} (currentSequenceNumber);
+194           \hyperlink{classns3_1_1UdpServer_ac4e5a1da93444bc7b0a8bcdf66337518}{m\_received}++;
+195         \}
+196     \}
+197 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!Set\+Packet\+Window\+Size@{Set\+Packet\+Window\+Size}}
+\index{Set\+Packet\+Window\+Size@{Set\+Packet\+Window\+Size}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{Set\+Packet\+Window\+Size(uint16\+\_\+t size)}{SetPacketWindowSize(uint16_t size)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Udp\+Server\+::\+Set\+Packet\+Window\+Size (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1UdpServer_a9ec06834b376c13c9f5888ccd7ed2d51}{}\label{classns3_1_1UdpServer_a9ec06834b376c13c9f5888ccd7ed2d51}
+
+
+Set the size of the window used for checking loss. This value should be a multiple of 8. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & the size of the window used for checking loss. This value should be a multiple of 8 \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+87 \{
+88   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << size);
+89   \hyperlink{classns3_1_1UdpServer_a8b6e5ac841368b11e9458045fc4896b0}{m\_lossCounter}.\hyperlink{classns3_1_1PacketLossCounter_a7dac1fee51b61a546554d0e816c142df}{SetBitMapSize} (size);
+90 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 12
+
+
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!Start\+Application@{Start\+Application}}
+\index{Start\+Application@{Start\+Application}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{Start\+Application(void)}{StartApplication(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Udp\+Server\+::\+Start\+Application (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1UdpServer_a784bd9b3274fc411c042b3502dacb3fa}{}\label{classns3_1_1UdpServer_a784bd9b3274fc411c042b3502dacb3fa}
+
+
+\hyperlink{classns3_1_1Application}{Application} specific startup code. 
+
+The Start\+Application method is called at the start time specified by Start This method should be overridden by all or most application subclasses. 
+
+Reimplemented from \hyperlink{classns3_1_1Application_a3405dd01508beacce8ed6e3a20bdf05a}{ns3\+::\+Application}.
+
+
+\begin{DoxyCode}
+115 \{
+116   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+117 
+118   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1UdpServer_a5420784fc2d236829a7ccec205fe09fc}{m\_socket} == 0)
+119     \{
+120       TypeId tid = \hyperlink{classns3_1_1TypeId_a119cf99c20931fdc294602cd360b180e}{TypeId::LookupByName} (\textcolor{stringliteral}{"ns3::UdpSocketFactory"});
+121       \hyperlink{classns3_1_1UdpServer_a5420784fc2d236829a7ccec205fe09fc}{m\_socket} = \hyperlink{classns3_1_1Socket_ad448a62bb50ad3dbac59c879a885a8d2}{Socket::CreateSocket} (\hyperlink{classns3_1_1Application_a664b15088389bec8e35b35742138f097}{GetNode} (), tid);
+122       InetSocketAddress local = InetSocketAddress (\hyperlink{classns3_1_1Ipv4Address_a7a39b330c8e701183a411d5779fca1a4}{Ipv4Address::GetAny} (),
+123                                                    \hyperlink{classns3_1_1UdpServer_a2b8a2fdb49222a11c987c346cb84e5ee}{m\_port});
+124       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1UdpServer_a5420784fc2d236829a7ccec205fe09fc}{m\_socket}->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} (local) == -1)
+125         \{
+126           \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Failed to bind socket"});
+127         \}
+128     \}
+129 
+130   \hyperlink{classns3_1_1UdpServer_a5420784fc2d236829a7ccec205fe09fc}{m\_socket}->\hyperlink{classns3_1_1Socket_a243f7835ef1a85f9270fd3577e3a40da}{SetRecvCallback} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classns3_1_1UdpServer_a65a01672657a4a49f65cd3c3bb1ee420}{UdpServer::HandleRead}, \textcolor{keyword}{this}));
+131 
+132   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1UdpServer_a08570b8278b2cf8a0b02a40bbae1dc79}{m\_socket6} == 0)
+133     \{
+134       TypeId tid = \hyperlink{classns3_1_1TypeId_a119cf99c20931fdc294602cd360b180e}{TypeId::LookupByName} (\textcolor{stringliteral}{"ns3::UdpSocketFactory"});
+135       \hyperlink{classns3_1_1UdpServer_a08570b8278b2cf8a0b02a40bbae1dc79}{m\_socket6} = \hyperlink{classns3_1_1Socket_ad448a62bb50ad3dbac59c879a885a8d2}{Socket::CreateSocket} (\hyperlink{classns3_1_1Application_a664b15088389bec8e35b35742138f097}{GetNode} (), tid);
+136       Inet6SocketAddress local = Inet6SocketAddress (\hyperlink{classns3_1_1Ipv6Address_a2783e8badfc98c8b0a8508bba6e1b91e}{Ipv6Address::GetAny} (),
+137                                                    \hyperlink{classns3_1_1UdpServer_a2b8a2fdb49222a11c987c346cb84e5ee}{m\_port});
+138       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1UdpServer_a08570b8278b2cf8a0b02a40bbae1dc79}{m\_socket6}->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} (local) == -1)
+139         \{
+140           \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Failed to bind socket"});
+141         \}
+142     \}
+143 
+144   \hyperlink{classns3_1_1UdpServer_a08570b8278b2cf8a0b02a40bbae1dc79}{m\_socket6}->\hyperlink{classns3_1_1Socket_a243f7835ef1a85f9270fd3577e3a40da}{SetRecvCallback} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classns3_1_1UdpServer_a65a01672657a4a49f65cd3c3bb1ee420}{UdpServer::HandleRead}, \textcolor{keyword}{this}));
+145 
+146 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 13
+
+
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!Stop\+Application@{Stop\+Application}}
+\index{Stop\+Application@{Stop\+Application}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{Stop\+Application(void)}{StopApplication(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Udp\+Server\+::\+Stop\+Application (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1UdpServer_adb29aa59623e5baa7f42642c3f811a72}{}\label{classns3_1_1UdpServer_adb29aa59623e5baa7f42642c3f811a72}
+
+
+\hyperlink{classns3_1_1Application}{Application} specific shutdown code. 
+
+The Stop\+Application method is called at the stop time specified by Stop This method should be overridden by all or most application subclasses. 
+
+Reimplemented from \hyperlink{classns3_1_1Application_aea844f3c114b1faf8de1faf5127ea8b4}{ns3\+::\+Application}.
+
+
+\begin{DoxyCode}
+150 \{
+151   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+152 
+153   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1UdpServer_a5420784fc2d236829a7ccec205fe09fc}{m\_socket} != 0)
+154     \{
+155       \hyperlink{classns3_1_1UdpServer_a5420784fc2d236829a7ccec205fe09fc}{m\_socket}->\hyperlink{classns3_1_1Socket_a243f7835ef1a85f9270fd3577e3a40da}{SetRecvCallback} (\hyperlink{group__makenullcallback_ga7e3cd6816f63ea9112c04b0086c2c65a}{MakeNullCallback}<\textcolor{keywordtype}{void}, Ptr<Socket> 
+      > ());
+156     \}
+157 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 14
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!m\+\_\+loss\+Counter@{m\+\_\+loss\+Counter}}
+\index{m\+\_\+loss\+Counter@{m\+\_\+loss\+Counter}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{m\+\_\+loss\+Counter}{m_lossCounter}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Packet\+Loss\+Counter} ns3\+::\+Udp\+Server\+::m\+\_\+loss\+Counter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1UdpServer_a8b6e5ac841368b11e9458045fc4896b0}{}\label{classns3_1_1UdpServer_a8b6e5ac841368b11e9458045fc4896b0}
+
+
+Lost packet counter. 
+
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!m\+\_\+port@{m\+\_\+port}}
+\index{m\+\_\+port@{m\+\_\+port}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{m\+\_\+port}{m_port}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t ns3\+::\+Udp\+Server\+::m\+\_\+port\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1UdpServer_a2b8a2fdb49222a11c987c346cb84e5ee}{}\label{classns3_1_1UdpServer_a2b8a2fdb49222a11c987c346cb84e5ee}
+
+
+Port on which we listen for incoming packets. 
+
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!m\+\_\+received@{m\+\_\+received}}
+\index{m\+\_\+received@{m\+\_\+received}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{m\+\_\+received}{m_received}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Udp\+Server\+::m\+\_\+received\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1UdpServer_ac4e5a1da93444bc7b0a8bcdf66337518}{}\label{classns3_1_1UdpServer_ac4e5a1da93444bc7b0a8bcdf66337518}
+
+
+Number of received packets. 
+
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!m\+\_\+socket@{m\+\_\+socket}}
+\index{m\+\_\+socket@{m\+\_\+socket}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{m\+\_\+socket}{m_socket}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Socket}$>$ ns3\+::\+Udp\+Server\+::m\+\_\+socket\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1UdpServer_a5420784fc2d236829a7ccec205fe09fc}{}\label{classns3_1_1UdpServer_a5420784fc2d236829a7ccec205fe09fc}
+
+
+I\+Pv4 \hyperlink{classns3_1_1Socket}{Socket}. 
+
+\index{ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}!m\+\_\+socket6@{m\+\_\+socket6}}
+\index{m\+\_\+socket6@{m\+\_\+socket6}!ns3\+::\+Udp\+Server@{ns3\+::\+Udp\+Server}}
+\subsubsection[{\texorpdfstring{m\+\_\+socket6}{m_socket6}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Socket}$>$ ns3\+::\+Udp\+Server\+::m\+\_\+socket6\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1UdpServer_a08570b8278b2cf8a0b02a40bbae1dc79}{}\label{classns3_1_1UdpServer_a08570b8278b2cf8a0b02a40bbae1dc79}
+
+
+I\+Pv6 \hyperlink{classns3_1_1Socket}{Socket}. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+applications/model/\hyperlink{udp-server_8h}{udp-\/server.\+h}\item 
+applications/model/\hyperlink{udp-server_8cc}{udp-\/server.\+cc}\end{DoxyCompactItemize}

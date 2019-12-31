@@ -1,0 +1,181 @@
+\hypertarget{csma-multicast_8cc}{}\section{csma/examples/csma-\/multicast.cc File Reference}
+\label{csma-multicast_8cc}\index{csma/examples/csma-\/multicast.\+cc@{csma/examples/csma-\/multicast.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+Include dependency graph for csma-\/multicast.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{csma-multicast_8cc_a8aac03c41259e1ebe3e06988b43adfbc}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Csma\+Multicast\+Example\char`\"{})
+\item 
+int \hyperlink{csma-multicast_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{csma-\/multicast.\+cc@{csma-\/multicast.\+cc}!main@{main}}
+\index{main@{main}!csma-\/multicast.\+cc@{csma-\/multicast.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{csma-multicast_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{csma-multicast_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+47 \{
+48   \textcolor{comment}{//}
+49   \textcolor{comment}{// Users may find it convenient to turn on explicit debugging}
+50   \textcolor{comment}{// for selected modules; the below lines suggest how to do this}
+51   \textcolor{comment}{//}
+52   \textcolor{comment}{// LogComponentEnable ("CsmaMulticastExample", LOG\_LEVEL\_INFO);}
+53 
+54   \textcolor{comment}{//}
+55   \textcolor{comment}{// Set up default values for the simulation.}
+56   \textcolor{comment}{//}
+57   \textcolor{comment}{// Select DIX/Ethernet II-style encapsulation (no LLC/Snap header)}
+58   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::CsmaNetDevice::EncapsulationMode"}, StringValue (\textcolor{stringliteral}{"Dix"}));
+59 
+60   \textcolor{comment}{// Allow the user to override any of the defaults at}
+61   \textcolor{comment}{// run-time, via command-line arguments}
+62   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+63   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+64 
+65   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes."});
+66   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+67   c.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (5);
+68   \textcolor{comment}{// We will later want two subcontainers of these nodes, for the two LANs}
+69   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} c0 = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), c.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2));
+70   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} c1 = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2), c.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3), c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (4));
+71 
+72   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Build Topology."});
+73   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+74   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (
+      \hyperlink{classns3_1_1DataRate}{DataRate} (5000000)));
+75   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+76  
+77   \textcolor{comment}{// We will use these NetDevice containers later, for IP addressing}
+78   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} nd0 = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (c0);  \textcolor{comment}{// First LAN}
+79   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} nd1 = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (c1);  \textcolor{comment}{// Second LAN}
+80 
+81   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Add IP Stack."});
+82   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+83   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (c);
+84 
+85   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+86   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4Addr;
+87   ipv4Addr.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+88   ipv4Addr.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (nd0);
+89   ipv4Addr.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.2.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+90   ipv4Addr.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (nd1);
+91 
+92   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Configure multicasting."});
+93   \textcolor{comment}{//}
+94   \textcolor{comment}{// Now we can configure multicasting.  As described above, the multicast }
+95   \textcolor{comment}{// source is at node zero, which we assigned the IP address of 10.1.1.1 }
+96   \textcolor{comment}{// earlier.  We need to define a multicast group to send packets to.  This}
+97   \textcolor{comment}{// can be any multicast address from 224.0.0.0 through 239.255.255.255}
+98   \textcolor{comment}{// (avoiding the reserved routing protocol addresses).}
+99   \textcolor{comment}{//}
+100 
+101   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} multicastSource (\textcolor{stringliteral}{"10.1.1.1"});
+102   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} multicastGroup (\textcolor{stringliteral}{"225.1.2.4"});
+103 
+104   \textcolor{comment}{// Now, we will set up multicast routing.  We need to do three things:}
+105   \textcolor{comment}{// 1) Configure a (static) multicast route on node n2}
+106   \textcolor{comment}{// 2) Set up a default multicast route on the sender n0 }
+107   \textcolor{comment}{// 3) Have node n4 join the multicast group}
+108   \textcolor{comment}{// We have a helper that can help us with static multicast}
+109   \hyperlink{classns3_1_1Ipv4StaticRoutingHelper}{Ipv4StaticRoutingHelper} multicast;
+110 
+111   \textcolor{comment}{// 1) Configure a (static) multicast route on node n2 (multicastRouter)}
+112   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} multicastRouter = c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (2);  \textcolor{comment}{// The node in question}
+113   \hyperlink{classns3_1_1Ptr}{Ptr<NetDevice>} inputIf = nd0.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (2);  \textcolor{comment}{// The input NetDevice}
+114   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} outputDevices;  \textcolor{comment}{// A container of output NetDevices}
+115   outputDevices.\hyperlink{classns3_1_1NetDeviceContainer_a7ca8bc1d7ec00fd4fcc63869987fbda5}{Add} (nd1.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));  \textcolor{comment}{// (we only need one NetDevice here)}
+116 
+117   multicast.\hyperlink{classns3_1_1Ipv4StaticRoutingHelper_aa8d55f28361e24aefb961fe2eddc2192}{AddMulticastRoute} (multicastRouter, multicastSource, 
+118                                multicastGroup, inputIf, outputDevices);
+119 
+120   \textcolor{comment}{// 2) Set up a default multicast route on the sender n0 }
+121   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} sender = c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0);
+122   \hyperlink{classns3_1_1Ptr}{Ptr<NetDevice>} senderIf = nd0.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0);
+123   multicast.\hyperlink{classns3_1_1Ipv4StaticRoutingHelper_ae69a07ded3139dfd4e21bb7c10eba416}{SetDefaultMulticastRoute} (sender, senderIf);
+124 
+125   \textcolor{comment}{//}
+126   \textcolor{comment}{// Create an OnOff application to send UDP datagrams from node zero to the}
+127   \textcolor{comment}{// multicast group (node four will be listening).}
+128   \textcolor{comment}{//}
+129   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Applications."});
+130 
+131   uint16\_t multicastPort = 9;   \textcolor{comment}{// Discard port (RFC 863)}
+132 
+133   \textcolor{comment}{// Configure a multicast packet generator that generates a packet}
+134   \textcolor{comment}{// every few seconds}
+135   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+136                      \hyperlink{classns3_1_1Address}{Address} (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (multicastGroup, multicastPort)));
+137   onoff.SetConstantRate (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"255b/s"}));
+138   onoff.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (128));
+139 
+140   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} srcC = onoff.Install (c0.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+141 
+142   \textcolor{comment}{//}
+143   \textcolor{comment}{// Tell the application when to start and stop.}
+144   \textcolor{comment}{//}
+145   srcC.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.));
+146   srcC.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.));
+147 
+148   \textcolor{comment}{// Create an optional packet sink to receive these packets}
+149   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sink (\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+150                          \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), multicastPort));
+151 
+152   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkC = sink.Install (c1.Get (2)); \textcolor{comment}{// Node n4 }
+153   \textcolor{comment}{// Start the sink}
+154   sinkC.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+155   sinkC.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+156 
+157   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Configure Tracing."});
+158   \textcolor{comment}{//}
+159   \textcolor{comment}{// Configure tracing of all enqueue, dequeue, and NetDevice receive events.}
+160   \textcolor{comment}{// Ascii trace output will be sent to the file "csma-multicast.tr"}
+161   \textcolor{comment}{//}
+162   \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+163   csma.\hyperlink{classns3_1_1AsciiTraceHelperForDevice_a63e57c878526c732924e14c1e52cca8b}{EnableAsciiAll} (ascii.\hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (\textcolor{stringliteral}{"csma-multicast.tr"}));
+164 
+165   \textcolor{comment}{// Also configure some tcpdump traces; each interface will be traced.}
+166   \textcolor{comment}{// The output files will be named:}
+167   \textcolor{comment}{//     csma-multicast-<nodeId>-<interfaceId>.pcap}
+168   \textcolor{comment}{// and can be read by the "tcpdump -r" command (use "-tt" option to}
+169   \textcolor{comment}{// display timestamps correctly)}
+170   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"csma-multicast"}, \textcolor{keyword}{false});
+171 
+172   \textcolor{comment}{//}
+173   \textcolor{comment}{// Now, do the actual simulation.}
+174   \textcolor{comment}{//}
+175   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+176   Simulator::Run ();
+177   Simulator::Destroy ();
+178   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+179 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{csma-\/multicast.\+cc@{csma-\/multicast.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!csma-\/multicast.\+cc@{csma-\/multicast.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Csma\+Multicast\+Example"")}{NS_LOG_COMPONENT_DEFINE("CsmaMulticastExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Csma\+Multicast\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{csma-multicast_8cc_a8aac03c41259e1ebe3e06988b43adfbc}{}\label{csma-multicast_8cc_a8aac03c41259e1ebe3e06988b43adfbc}

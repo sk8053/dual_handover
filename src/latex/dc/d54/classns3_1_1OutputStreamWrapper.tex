@@ -1,0 +1,201 @@
+\hypertarget{classns3_1_1OutputStreamWrapper}{}\section{ns3\+:\+:Output\+Stream\+Wrapper Class Reference}
+\label{classns3_1_1OutputStreamWrapper}\index{ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}}
+
+
+A class encapsulating an output stream.  
+
+
+
+
+{\ttfamily \#include $<$output-\/stream-\/wrapper.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Output\+Stream\+Wrapper\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Output\+Stream\+Wrapper\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1OutputStreamWrapper_a5cfd62599f52939b4cda27c8078bb142}{Output\+Stream\+Wrapper} (std\+::string filename, std\+::ios\+::openmode filemode)
+\item 
+\hyperlink{classns3_1_1OutputStreamWrapper_acbc77326b02ffdecfe22f6f3e13383f2}{Output\+Stream\+Wrapper} (std\+::ostream $\ast$os)
+\item 
+\hyperlink{classns3_1_1OutputStreamWrapper_a1cddf8cd86371273d1dee475c7aae1dc}{$\sim$\+Output\+Stream\+Wrapper} ()
+\item 
+std\+::ostream $\ast$ \hyperlink{classns3_1_1OutputStreamWrapper_a0cf30a4188ab6fdae2b2ab74db11acc2}{Get\+Stream} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream $\ast$ \hyperlink{classns3_1_1OutputStreamWrapper_ae89f82c0a92ac9f9a2edca6d28f6b528}{m\+\_\+ostream}
+\begin{DoxyCompactList}\small\item\em The output stream. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1OutputStreamWrapper_aaaae2b2be1294f3ad89ab02e8913b5d0}{m\+\_\+destroyable}
+\begin{DoxyCompactList}\small\item\em Can be destroyed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A class encapsulating an output stream. 
+
+This class wraps a pointer to a C++ std\+::ostream and provides reference counting of the object. This class is recommended for users who want to pass output streams in the ns-\/3 A\+P\+Is, such as in callbacks or tracing.
+
+This class is motivated by the fact that in C++, copy and assignment of iostreams is forbidden by std\+::basic\+\_\+ios$<$$>$, because it is not possible to predict the semantics of the stream desired by a user.
+
+When writing traced information to a file, the tempting ns-\/3 idiom is to create a bound callback with an ofstream as the bound object. Unfortunately, this implies a copy construction in order to get the ofstream object into the callback. This operation, as mentioned above, is forbidden by the S\+TL. Using this class in ns-\/3 A\+P\+Is is generally preferable to passing global pointers to ostream objects, or passing a pointer to a stack allocated ostream (which creates object lifetime issues).
+
+One could imagine having this object inherit from stream to get the various overloaded operator$<$$<$ defined, but we\textquotesingle{}re going to be using a \hyperlink{classns3_1_1Ptr}{Ptr$<$\+Output\+Stream\+Wrapper$>$} when passing this object around. In this case, the Ptr$<$$>$ wouldn\textquotesingle{}t understand the operators and we would have to dereference it to access the underlying object methods. Since we would have to dereference the Ptr$<$$>$, we don\textquotesingle{}t bother and just expect the user to Get a saved pointer to an ostream and dereference it him or herself. As in\+:
+
+\begin{DoxyVerb}*   void 
+*   TraceSink (Ptr<OutputStreamWrapper> streamWrapper, Ptr<const Packet> packet)
+*   {
+*     std::ostream *stream = streamWrapper->GetStream ();
+*     *stream << "got packet" << std::endl;
+*   }
+* \end{DoxyVerb}
+
+
+This class uses a basic ns-\/3 reference counting base class but is not an \hyperlink{classns3_1_1Object}{ns3\+::\+Object} with attributes, \hyperlink{classns3_1_1TypeId}{Type\+Id}, or aggregation. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}!Output\+Stream\+Wrapper@{Output\+Stream\+Wrapper}}
+\index{Output\+Stream\+Wrapper@{Output\+Stream\+Wrapper}!ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}}
+\subsubsection[{\texorpdfstring{Output\+Stream\+Wrapper(std\+::string filename, std\+::ios\+::openmode filemode)}{OutputStreamWrapper(std::string filename, std::ios::openmode filemode)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Output\+Stream\+Wrapper\+::\+Output\+Stream\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{filename, }
+\item[{std\+::ios\+::openmode}]{filemode}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1OutputStreamWrapper_a5cfd62599f52939b4cda27c8078bb142}{}\label{classns3_1_1OutputStreamWrapper_a5cfd62599f52939b4cda27c8078bb142}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em filename} & file name \\
+\hline
+{\em filemode} & std\+::ios\+::openmode flags \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+30   : \hyperlink{classns3_1_1OutputStreamWrapper_aaaae2b2be1294f3ad89ab02e8913b5d0}{m\_destroyable} (\textcolor{keyword}{true})
+31 \{
+32   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << filename << filemode);
+33   std::ofstream* os = \textcolor{keyword}{new} std::ofstream ();
+34   os->open (filename.c\_str (), filemode);
+35   \hyperlink{classns3_1_1OutputStreamWrapper_ae89f82c0a92ac9f9a2edca6d28f6b528}{m\_ostream} = os;
+36   \hyperlink{group__fatalimpl_gad552ca3d6d85b95147b8c6a2eb4d4579}{FatalImpl::RegisterStream} (\hyperlink{classns3_1_1OutputStreamWrapper_ae89f82c0a92ac9f9a2edca6d28f6b528}{m\_ostream});
+37   \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} (os->is\_open (), \textcolor{stringliteral}{"AsciiTraceHelper::CreateFileStream():  "} <<
+38                        \textcolor{stringliteral}{"Unable to Open "} << filename << \textcolor{stringliteral}{" for mode "} << filemode);
+39 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}!Output\+Stream\+Wrapper@{Output\+Stream\+Wrapper}}
+\index{Output\+Stream\+Wrapper@{Output\+Stream\+Wrapper}!ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}}
+\subsubsection[{\texorpdfstring{Output\+Stream\+Wrapper(std\+::ostream $\ast$os)}{OutputStreamWrapper(std::ostream *os)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Output\+Stream\+Wrapper\+::\+Output\+Stream\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream $\ast$}]{os}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1OutputStreamWrapper_acbc77326b02ffdecfe22f6f3e13383f2}{}\label{classns3_1_1OutputStreamWrapper_acbc77326b02ffdecfe22f6f3e13383f2}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em os} & output stream \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+42   : \hyperlink{classns3_1_1OutputStreamWrapper_ae89f82c0a92ac9f9a2edca6d28f6b528}{m\_ostream} (os), \hyperlink{classns3_1_1OutputStreamWrapper_aaaae2b2be1294f3ad89ab02e8913b5d0}{m\_destroyable} (\textcolor{keyword}{false})
+43 \{
+44   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << os);
+45   \hyperlink{group__fatalimpl_gad552ca3d6d85b95147b8c6a2eb4d4579}{FatalImpl::RegisterStream} (\hyperlink{classns3_1_1OutputStreamWrapper_ae89f82c0a92ac9f9a2edca6d28f6b528}{m\_ostream});
+46   \hyperlink{group__fatal_ga0bd3f62c55e7347ff814572f3aaa3864}{NS\_ABORT\_MSG\_UNLESS} (\hyperlink{classns3_1_1OutputStreamWrapper_ae89f82c0a92ac9f9a2edca6d28f6b528}{m\_ostream}->good (), \textcolor{stringliteral}{"Output stream is not vaild for
+       writing."});
+47 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}!````~Output\+Stream\+Wrapper@{$\sim$\+Output\+Stream\+Wrapper}}
+\index{````~Output\+Stream\+Wrapper@{$\sim$\+Output\+Stream\+Wrapper}!ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}}
+\subsubsection[{\texorpdfstring{$\sim$\+Output\+Stream\+Wrapper()}{~OutputStreamWrapper()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Output\+Stream\+Wrapper\+::$\sim$\+Output\+Stream\+Wrapper (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1OutputStreamWrapper_a1cddf8cd86371273d1dee475c7aae1dc}{}\label{classns3_1_1OutputStreamWrapper_a1cddf8cd86371273d1dee475c7aae1dc}
+
+\begin{DoxyCode}
+50 \{
+51   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+52   \hyperlink{group__fatalimpl_ga2bf70e98e990f01912527b4ccfac27d0}{FatalImpl::UnregisterStream} (\hyperlink{classns3_1_1OutputStreamWrapper_ae89f82c0a92ac9f9a2edca6d28f6b528}{m\_ostream});
+53   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1OutputStreamWrapper_aaaae2b2be1294f3ad89ab02e8913b5d0}{m\_destroyable}) \textcolor{keyword}{delete} \hyperlink{classns3_1_1OutputStreamWrapper_ae89f82c0a92ac9f9a2edca6d28f6b528}{m\_ostream};
+54   \hyperlink{classns3_1_1OutputStreamWrapper_ae89f82c0a92ac9f9a2edca6d28f6b528}{m\_ostream} = 0;
+55 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}!Get\+Stream@{Get\+Stream}}
+\index{Get\+Stream@{Get\+Stream}!ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}}
+\subsubsection[{\texorpdfstring{Get\+Stream(void)}{GetStream(void)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream $\ast$ ns3\+::\+Output\+Stream\+Wrapper\+::\+Get\+Stream (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1OutputStreamWrapper_a0cf30a4188ab6fdae2b2ab74db11acc2}{}\label{classns3_1_1OutputStreamWrapper_a0cf30a4188ab6fdae2b2ab74db11acc2}
+Return a pointer to an ostream previously set in the wrapper.
+
+\begin{DoxySeeAlso}{See also}
+Set\+Stream
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+a pointer to the encapsulated std\+::ostream 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+59 \{
+60   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+61   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1OutputStreamWrapper_ae89f82c0a92ac9f9a2edca6d28f6b528}{m\_ostream};
+62 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}!m\+\_\+destroyable@{m\+\_\+destroyable}}
+\index{m\+\_\+destroyable@{m\+\_\+destroyable}!ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}}
+\subsubsection[{\texorpdfstring{m\+\_\+destroyable}{m_destroyable}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Output\+Stream\+Wrapper\+::m\+\_\+destroyable\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1OutputStreamWrapper_aaaae2b2be1294f3ad89ab02e8913b5d0}{}\label{classns3_1_1OutputStreamWrapper_aaaae2b2be1294f3ad89ab02e8913b5d0}
+
+
+Can be destroyed. 
+
+\index{ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}!m\+\_\+ostream@{m\+\_\+ostream}}
+\index{m\+\_\+ostream@{m\+\_\+ostream}!ns3\+::\+Output\+Stream\+Wrapper@{ns3\+::\+Output\+Stream\+Wrapper}}
+\subsubsection[{\texorpdfstring{m\+\_\+ostream}{m_ostream}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream$\ast$ ns3\+::\+Output\+Stream\+Wrapper\+::m\+\_\+ostream\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1OutputStreamWrapper_ae89f82c0a92ac9f9a2edca6d28f6b528}{}\label{classns3_1_1OutputStreamWrapper_ae89f82c0a92ac9f9a2edca6d28f6b528}
+
+
+The output stream. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+network/utils/\hyperlink{output-stream-wrapper_8h}{output-\/stream-\/wrapper.\+h}\item 
+network/utils/\hyperlink{output-stream-wrapper_8cc}{output-\/stream-\/wrapper.\+cc}\end{DoxyCompactItemize}

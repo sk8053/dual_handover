@@ -1,0 +1,231 @@
+\hypertarget{classInterferenceExperiment}{}\section{Interference\+Experiment Class Reference}
+\label{classInterferenceExperiment}\index{Interference\+Experiment@{Interference\+Experiment}}
+
+
+\hyperlink{classInterferenceExperiment}{Interference\+Experiment}.  
+
+
+
+
+Collaboration diagram for Interference\+Experiment\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structInterferenceExperiment_1_1Input}{Input}
+\begin{DoxyCompactList}\small\item\em \hyperlink{structInterferenceExperiment_1_1Input}{Input} atructure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classInterferenceExperiment_aee21bb8de20e5363a217e869279f7834}{Interference\+Experiment} ()
+\item 
+void \hyperlink{classInterferenceExperiment_ae31524d224c311c36d8b1dd5fcc9f269}{Run} (struct \hyperlink{structInterferenceExperiment_1_1Input}{Interference\+Experiment\+::\+Input} input)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classInterferenceExperiment_a00ae0f5dac9b45b1175d5c6572013332}{SendA} (void) const 
+\begin{DoxyCompactList}\small\item\em Send A function. \end{DoxyCompactList}\item 
+void \hyperlink{classInterferenceExperiment_a8e3713c24b3231831e6fcb347e568df8}{SendB} (void) const 
+\begin{DoxyCompactList}\small\item\em Send B function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1YansWifiPhy}{Yans\+Wifi\+Phy} $>$ \hyperlink{classInterferenceExperiment_aac9b38170603ebf4d3c4565deaa8f0a7}{m\+\_\+txA}
+\begin{DoxyCompactList}\small\item\em transmit A function \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1YansWifiPhy}{Yans\+Wifi\+Phy} $>$ \hyperlink{classInterferenceExperiment_ac2071a3bf35e68a316a7d251327d5708}{m\+\_\+txB}
+\begin{DoxyCompactList}\small\item\em transmit B function \end{DoxyCompactList}\item 
+struct \hyperlink{structInterferenceExperiment_1_1Input}{Input} \hyperlink{classInterferenceExperiment_a36c38e073c0d336135f6ff16b0cdaeac}{m\+\_\+input}
+\begin{DoxyCompactList}\small\item\em input \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classInterferenceExperiment}{Interference\+Experiment}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Interference\+Experiment@{Interference\+Experiment}!Interference\+Experiment@{Interference\+Experiment}}
+\index{Interference\+Experiment@{Interference\+Experiment}!Interference\+Experiment@{Interference\+Experiment}}
+\subsubsection[{\texorpdfstring{Interference\+Experiment()}{InterferenceExperiment()}}]{\setlength{\rightskip}{0pt plus 5cm}Interference\+Experiment\+::\+Interference\+Experiment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classInterferenceExperiment_aee21bb8de20e5363a217e869279f7834}{}\label{classInterferenceExperiment_aee21bb8de20e5363a217e869279f7834}
+
+\begin{DoxyCode}
+122 \{
+123 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Interference\+Experiment@{Interference\+Experiment}!Run@{Run}}
+\index{Run@{Run}!Interference\+Experiment@{Interference\+Experiment}}
+\subsubsection[{\texorpdfstring{Run(struct Interference\+Experiment\+::\+Input input)}{Run(struct InterferenceExperiment::Input input)}}]{\setlength{\rightskip}{0pt plus 5cm}void Interference\+Experiment\+::\+Run (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Interference\+Experiment\+::\+Input}}]{input}
+\end{DoxyParamCaption}
+)}\hypertarget{classInterferenceExperiment_ae31524d224c311c36d8b1dd5fcc9f269}{}\label{classInterferenceExperiment_ae31524d224c311c36d8b1dd5fcc9f269}
+Run function 
+\begin{DoxyParams}{Parameters}
+{\em input} & the interference experiment data \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+141 \{
+142   \hyperlink{classInterferenceExperiment_a36c38e073c0d336135f6ff16b0cdaeac}{m\_input} = input;
+143 
+144   \textcolor{keywordtype}{double} range = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (std::abs (input.\hyperlink{structInterferenceExperiment_1_1Input_a6af2867adbbc4728d94b1a2591b8e12d}{xA}), input.\hyperlink{structInterferenceExperiment_1_1Input_a87cb6a23e8a0cd61578537cc093acba5}{xB});
+145   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::RangePropagationLossModel::MaxRange"}, DoubleValue (range));
+146 
+147   \hyperlink{classns3_1_1Ptr}{Ptr<YansWifiChannel>} channel = CreateObject<YansWifiChannel> ();
+148   channel->\hyperlink{classns3_1_1YansWifiChannel_a51ebdd5a1d897dc46cf9783ac2879b98}{SetPropagationDelayModel} (
+      CreateObject<ConstantSpeedPropagationDelayModel> ());
+149   \hyperlink{classns3_1_1Ptr}{Ptr<RangePropagationLossModel>} loss = 
+      CreateObject<RangePropagationLossModel> ();
+150   channel->\hyperlink{classns3_1_1YansWifiChannel_ad2f92be1fb34be0075141cbb4f779191}{SetPropagationLossModel} (loss);
+151 
+152   \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} posTxA = CreateObject<ConstantPositionMobilityModel> ();
+153   posTxA->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (Vector (input.\hyperlink{structInterferenceExperiment_1_1Input_a6af2867adbbc4728d94b1a2591b8e12d}{xA}, 0.0, 0.0));
+154   \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} posTxB = CreateObject<ConstantPositionMobilityModel> ();
+155   posTxB->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (Vector (input.\hyperlink{structInterferenceExperiment_1_1Input_a87cb6a23e8a0cd61578537cc093acba5}{xB}, 0.0, 0.0));
+156   \hyperlink{classns3_1_1Ptr}{Ptr<MobilityModel>} posRx = CreateObject<ConstantPositionMobilityModel> ();
+157   posRx->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (Vector (0.0, 0.0, 0.0));
+158 
+159   \hyperlink{classInterferenceExperiment_aac9b38170603ebf4d3c4565deaa8f0a7}{m\_txA} = CreateObject<YansWifiPhy> ();
+160   \hyperlink{classInterferenceExperiment_ac2071a3bf35e68a316a7d251327d5708}{m\_txB} = CreateObject<YansWifiPhy> ();
+161   \hyperlink{classns3_1_1Ptr}{Ptr<YansWifiPhy>} rx = CreateObject<YansWifiPhy> ();
+162 
+163   \hyperlink{classns3_1_1Ptr}{Ptr<ErrorRateModel>} error = CreateObject<NistErrorRateModel> ();
+164   \hyperlink{classInterferenceExperiment_aac9b38170603ebf4d3c4565deaa8f0a7}{m\_txA}->\hyperlink{classns3_1_1WifiPhy_ac363f667899a813bb1331225bc1c1474}{SetErrorRateModel} (error);
+165   m\_txB->SetErrorRateModel (error);
+166   rx->SetErrorRateModel (error);
+167   \hyperlink{classInterferenceExperiment_aac9b38170603ebf4d3c4565deaa8f0a7}{m\_txA}->\hyperlink{classns3_1_1YansWifiPhy_ad2eeb0ab17ef01b26436f7110cccff1d}{SetChannel} (channel);
+168   m\_txB->SetChannel (channel);
+169   rx->SetChannel (channel);
+170   \hyperlink{classInterferenceExperiment_aac9b38170603ebf4d3c4565deaa8f0a7}{m\_txA}->\hyperlink{classns3_1_1WifiPhy_a5bbd6f88cf0a8ac6c7437b278a17a582}{SetMobility} (posTxA);
+171   m\_txB->SetMobility (posTxB);
+172   rx->SetMobility (posRx);
+173 
+174   \hyperlink{classInterferenceExperiment_aac9b38170603ebf4d3c4565deaa8f0a7}{m\_txA}->\hyperlink{classns3_1_1WifiPhy_aeafbea9bd8c1ae20f85584f55d868d23}{ConfigureStandard} (input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard});
+175   m\_txB->ConfigureStandard (input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard});
+176   rx->ConfigureStandard (input.\hyperlink{structInterferenceExperiment_1_1Input_a5c307c4b93ca1d8b5f06a0a143638e1b}{standard});
+177 
+178   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0), &\hyperlink{classInterferenceExperiment_a00ae0f5dac9b45b1175d5c6572013332}{InterferenceExperiment::SendA}, \textcolor{keyword}{
+      this});
+179   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0) + input.\hyperlink{structInterferenceExperiment_1_1Input_adecd5b2b5c7c4d2e30195d44487a8a45}{interval}, &
+      \hyperlink{classInterferenceExperiment_a8e3713c24b3231831e6fcb347e568df8}{InterferenceExperiment::SendB}, \textcolor{keyword}{this});
+180 
+181   Simulator::Run ();
+182   Simulator::Destroy ();
+183 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{Interference\+Experiment@{Interference\+Experiment}!SendA@{SendA}}
+\index{SendA@{SendA}!Interference\+Experiment@{Interference\+Experiment}}
+\subsubsection[{\texorpdfstring{Send\+A(void) const }{SendA(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Interference\+Experiment\+::\+SendA (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classInterferenceExperiment_a00ae0f5dac9b45b1175d5c6572013332}{}\label{classInterferenceExperiment_a00ae0f5dac9b45b1175d5c6572013332}
+
+
+Send A function. 
+
+
+\begin{DoxyCode}
+101 \{
+102   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = Create<Packet> (\hyperlink{classInterferenceExperiment_a36c38e073c0d336135f6ff16b0cdaeac}{m\_input}.\hyperlink{structInterferenceExperiment_1_1Input_a7df4f4dd944497911f94525571426713}{packetSizeA});
+103   \hyperlink{classns3_1_1WifiTxVector}{WifiTxVector} txVector;
+104   txVector.\hyperlink{classns3_1_1WifiTxVector_a25743cd89a5cb95ec22a9e584fa044f3}{SetTxPowerLevel} (\hyperlink{classInterferenceExperiment_a36c38e073c0d336135f6ff16b0cdaeac}{m\_input}.\hyperlink{structInterferenceExperiment_1_1Input_a51a113cf642b065436543568a64d1c25}{txPowerLevelA});
+105   txVector.SetMode (\hyperlink{classns3_1_1WifiMode}{WifiMode} (\hyperlink{classInterferenceExperiment_a36c38e073c0d336135f6ff16b0cdaeac}{m\_input}.\hyperlink{structInterferenceExperiment_1_1Input_a45a8de8e6656eb04108d500707f2827d}{txModeA}));
+106   txVector.SetPreambleType (\hyperlink{classInterferenceExperiment_a36c38e073c0d336135f6ff16b0cdaeac}{m\_input}.\hyperlink{structInterferenceExperiment_1_1Input_aa65f6eed675014431f9750aa15197edc}{preamble});
+107   \hyperlink{classInterferenceExperiment_aac9b38170603ebf4d3c4565deaa8f0a7}{m\_txA}->\hyperlink{classns3_1_1WifiPhy_a4caf22eb334a9caca21ec37d90a74ce2}{SendPacket} (p, txVector);
+108 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{Interference\+Experiment@{Interference\+Experiment}!SendB@{SendB}}
+\index{SendB@{SendB}!Interference\+Experiment@{Interference\+Experiment}}
+\subsubsection[{\texorpdfstring{Send\+B(void) const }{SendB(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Interference\+Experiment\+::\+SendB (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classInterferenceExperiment_a8e3713c24b3231831e6fcb347e568df8}{}\label{classInterferenceExperiment_a8e3713c24b3231831e6fcb347e568df8}
+
+
+Send B function. 
+
+
+\begin{DoxyCode}
+112 \{
+113   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = Create<Packet> (\hyperlink{classInterferenceExperiment_a36c38e073c0d336135f6ff16b0cdaeac}{m\_input}.\hyperlink{structInterferenceExperiment_1_1Input_af43818556e8f08c6e85b4aff90c00c41}{packetSizeB});
+114   \hyperlink{classns3_1_1WifiTxVector}{WifiTxVector} txVector;
+115   txVector.\hyperlink{classns3_1_1WifiTxVector_a25743cd89a5cb95ec22a9e584fa044f3}{SetTxPowerLevel} (\hyperlink{classInterferenceExperiment_a36c38e073c0d336135f6ff16b0cdaeac}{m\_input}.\hyperlink{structInterferenceExperiment_1_1Input_a4acd70506b27a4c59504e68639101fd1}{txPowerLevelB});
+116   txVector.SetMode (\hyperlink{classns3_1_1WifiMode}{WifiMode} (\hyperlink{classInterferenceExperiment_a36c38e073c0d336135f6ff16b0cdaeac}{m\_input}.\hyperlink{structInterferenceExperiment_1_1Input_a79f27f84600607d35444fb9840b5b3ef}{txModeB}));
+117   txVector.SetPreambleType (\hyperlink{classInterferenceExperiment_a36c38e073c0d336135f6ff16b0cdaeac}{m\_input}.\hyperlink{structInterferenceExperiment_1_1Input_aa65f6eed675014431f9750aa15197edc}{preamble});
+118   \hyperlink{classInterferenceExperiment_ac2071a3bf35e68a316a7d251327d5708}{m\_txB}->\hyperlink{classns3_1_1WifiPhy_a4caf22eb334a9caca21ec37d90a74ce2}{SendPacket} (p, txVector);
+119 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Interference\+Experiment@{Interference\+Experiment}!m\+\_\+input@{m\+\_\+input}}
+\index{m\+\_\+input@{m\+\_\+input}!Interference\+Experiment@{Interference\+Experiment}}
+\subsubsection[{\texorpdfstring{m\+\_\+input}{m_input}}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Input} Interference\+Experiment\+::m\+\_\+input\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classInterferenceExperiment_a36c38e073c0d336135f6ff16b0cdaeac}{}\label{classInterferenceExperiment_a36c38e073c0d336135f6ff16b0cdaeac}
+
+
+input 
+
+\index{Interference\+Experiment@{Interference\+Experiment}!m\+\_\+txA@{m\+\_\+txA}}
+\index{m\+\_\+txA@{m\+\_\+txA}!Interference\+Experiment@{Interference\+Experiment}}
+\subsubsection[{\texorpdfstring{m\+\_\+txA}{m_txA}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Yans\+Wifi\+Phy}$>$ Interference\+Experiment\+::m\+\_\+txA\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classInterferenceExperiment_aac9b38170603ebf4d3c4565deaa8f0a7}{}\label{classInterferenceExperiment_aac9b38170603ebf4d3c4565deaa8f0a7}
+
+
+transmit A function 
+
+\index{Interference\+Experiment@{Interference\+Experiment}!m\+\_\+txB@{m\+\_\+txB}}
+\index{m\+\_\+txB@{m\+\_\+txB}!Interference\+Experiment@{Interference\+Experiment}}
+\subsubsection[{\texorpdfstring{m\+\_\+txB}{m_txB}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Yans\+Wifi\+Phy}$>$ Interference\+Experiment\+::m\+\_\+txB\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classInterferenceExperiment_ac2071a3bf35e68a316a7d251327d5708}{}\label{classInterferenceExperiment_ac2071a3bf35e68a316a7d251327d5708}
+
+
+transmit B function 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+wifi/examples/\hyperlink{test-interference-helper_8cc}{test-\/interference-\/helper.\+cc}\end{DoxyCompactItemize}

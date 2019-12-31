@@ -1,0 +1,76 @@
+\hypertarget{classns3_1_1TapBridgeFdReader}{}\section{ns3\+:\+:Tap\+Bridge\+Fd\+Reader Class Reference}
+\label{classns3_1_1TapBridgeFdReader}\index{ns3\+::\+Tap\+Bridge\+Fd\+Reader@{ns3\+::\+Tap\+Bridge\+Fd\+Reader}}
+
+
+{\ttfamily \#include $<$tap-\/bridge.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Tap\+Bridge\+Fd\+Reader\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Tap\+Bridge\+Fd\+Reader\+:
+% FIG 1
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structns3_1_1FdReader_1_1Data}{Fd\+Reader\+::\+Data} \hyperlink{classns3_1_1TapBridgeFdReader_a15e2178765f12e4f8d043205e02fb9d0}{Do\+Read} (void)
+\begin{DoxyCompactList}\small\item\em The read implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Class to perform the actual reading from a socket 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Tap\+Bridge\+Fd\+Reader@{ns3\+::\+Tap\+Bridge\+Fd\+Reader}!Do\+Read@{Do\+Read}}
+\index{Do\+Read@{Do\+Read}!ns3\+::\+Tap\+Bridge\+Fd\+Reader@{ns3\+::\+Tap\+Bridge\+Fd\+Reader}}
+\subsubsection[{\texorpdfstring{Do\+Read(void)}{DoRead(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Fd\+Reader\+::\+Data} ns3\+::\+Tap\+Bridge\+Fd\+Reader\+::\+Do\+Read (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1TapBridgeFdReader_a15e2178765f12e4f8d043205e02fb9d0}{}\label{classns3_1_1TapBridgeFdReader_a15e2178765f12e4f8d043205e02fb9d0}
+
+
+The read implementation. 
+
+The value of {\ttfamily m\+\_\+len} returned controls further processing. The callback function is only invoked when {\ttfamily m\+\_\+len} is positive; any data read is not processed when {\ttfamily m\+\_\+len} is negative; reading stops when {\ttfamily m\+\_\+len} is zero.
+
+The management of memory associated with {\ttfamily m\+\_\+buf} must be compatible with the read callback.
+
+\begin{DoxyReturn}{Returns}
+A structure representing what was read. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1FdReader_a5d622d726859828ba7bc557b57689b1b}{ns3\+::\+Fd\+Reader}.
+
+
+\begin{DoxyCode}
+54 \{
+55   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+56 
+57   uint32\_t bufferSize = 65536;
+58   uint8\_t *buf = (uint8\_t *)std::malloc (bufferSize);
+59   \hyperlink{group__fatal_ga6653324225bc139e46deea177614ceee}{NS\_ABORT\_MSG\_IF} (buf == 0, \textcolor{stringliteral}{"malloc() failed"});
+60 
+61   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Calling read on tap device fd "} << \hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\_fd});
+62   ssize\_t len = read (\hyperlink{classns3_1_1FdReader_ad0883be1c0ebac30885c17c0cc17076d}{m\_fd}, buf, bufferSize);
+63   \textcolor{keywordflow}{if} (len <= 0)
+64     \{
+65       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"TapBridgeFdReader::DoRead(): done"});
+66       std::free (buf);
+67       buf = 0;
+68       len = 0;
+69     \}
+70 
+71   \textcolor{keywordflow}{return} FdReader::Data (buf, len);
+72 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+tap-\/bridge/model/\hyperlink{tap-bridge_8h}{tap-\/bridge.\+h}\item 
+tap-\/bridge/model/\hyperlink{tap-bridge_8cc}{tap-\/bridge.\+cc}\end{DoxyCompactItemize}

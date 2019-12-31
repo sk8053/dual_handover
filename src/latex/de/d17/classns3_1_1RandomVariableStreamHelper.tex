@@ -1,0 +1,99 @@
+\hypertarget{classns3_1_1RandomVariableStreamHelper}{}\section{ns3\+:\+:Random\+Variable\+Stream\+Helper Class Reference}
+\label{classns3_1_1RandomVariableStreamHelper}\index{ns3\+::\+Random\+Variable\+Stream\+Helper@{ns3\+::\+Random\+Variable\+Stream\+Helper}}
+
+
+Helper class for static methods involving \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream}.  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream-\/helper.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Random\+Variable\+Stream\+Helper\+:
+% FIG 0
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int64\+\_\+t \hyperlink{classns3_1_1RandomVariableStreamHelper_aec2ca1fc9e0321d77f1abd9c56b55cd0}{Assign\+Streams} (std\+::string path, int64\+\_\+t stream)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helper class for static methods involving \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream}. 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Random\+Variable\+Stream\+Helper@{ns3\+::\+Random\+Variable\+Stream\+Helper}!Assign\+Streams@{Assign\+Streams}}
+\index{Assign\+Streams@{Assign\+Streams}!ns3\+::\+Random\+Variable\+Stream\+Helper@{ns3\+::\+Random\+Variable\+Stream\+Helper}}
+\subsubsection[{\texorpdfstring{Assign\+Streams(std\+::string path, int64\+\_\+t stream)}{AssignStreams(std::string path, int64_t stream)}}]{\setlength{\rightskip}{0pt plus 5cm}int64\+\_\+t ns3\+::\+Random\+Variable\+Stream\+Helper\+::\+Assign\+Streams (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path, }
+\item[{int64\+\_\+t}]{stream}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1RandomVariableStreamHelper_aec2ca1fc9e0321d77f1abd9c56b55cd0}{}\label{classns3_1_1RandomVariableStreamHelper_aec2ca1fc9e0321d77f1abd9c56b55cd0}
+This helper method can be used to configure the stream number for one or more R\+NG streams. The path passed in should correspond to an attribute path in the configuration system. It may contain wildcards and may ultimately match zero, one, or more than one objects.
+
+The objects to match are of type \hyperlink{classns3_1_1PointerValue}{Pointer\+Value} where the underlying type is of type \hyperlink{classns3_1_1Ptr}{Ptr$<$\+Random\+Variable\+Stream$>$}.
+
+
+\begin{DoxyCode}
+.AddAttribute (\textcolor{stringliteral}{"Speed"},
+            \textcolor{stringliteral}{"A random variable used to pick the speed of a random waypoint model."},
+            StringValue(\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=0.3|Max=0.7]"}),
+            MakePointerAccessor (&\hyperlink{classns3_1_1RandomWaypointMobilityModel_a573f6a14ec00b07199fa6445f006f4ba}{RandomWaypointMobilityModel::m\_speed})
+      ,
+            MakePointerChecker<RandomVariableStream> ())
+\end{DoxyCode}
+
+
+Usage would look (for node 3) like this\+: 
+\begin{DoxyCode}
+std::string path (\textcolor{stringliteral}{"
+      /$ns3::NodeListPriv/NodeList/3/$ns3::Node/$ns3::RandomWaypointMobilityModel/Speed/$ns3::UniformRandomVariable"});
+int64\_t retVal = \hyperlink{classns3_1_1RandomVariableStreamHelper_aec2ca1fc9e0321d77f1abd9c56b55cd0}{RandomVariableStreamHelper::AssignStreams} (path, 
+      0);
+\end{DoxyCode}
+
+
+\begin{DoxyReturn}{Returns}
+The number of streams set 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em path} & (possibly wildcarded) path to a \hyperlink{classns3_1_1RandomVariableStream}{Random\+Variable\+Stream} \hyperlink{classns3_1_1PointerValue}{Pointer\+Value} \\
+\hline
+{\em stream} & stream number to set; must be non-\/negative \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+31 \{
+32   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+33   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (stream >= 0);
+34   Config::MatchContainer mc = \hyperlink{group__config_ga74aeb63f8f50b4a98043351552ef7db6}{Config::LookupMatches} (path);
+35   int64\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0;
+36   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1Config_1_1MatchContainer_a00de4b7cc8ea02e8e33209f92e65fa0f}{Config::MatchContainer::Iterator} mci = mc.Begin (); mci != mc.End ()
+      ; ++mci, ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+37     \{
+38       PointerValue ptr = mc.Get (i);
+39       Ptr<RandomVariableStream> rvs = ptr.Get<RandomVariableStream> ();
+40       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"RandomVariableStream found: "} << rvs << \textcolor{stringliteral}{"; setting stream to "} << (stream 
+      + i));
+41       rvs->SetStream (stream + i);
+42     \}
+43   \textcolor{keywordflow}{return} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+44 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/helper/\hyperlink{random-variable-stream-helper_8h}{random-\/variable-\/stream-\/helper.\+h}\item 
+core/helper/\hyperlink{random-variable-stream-helper_8cc}{random-\/variable-\/stream-\/helper.\+cc}\end{DoxyCompactItemize}

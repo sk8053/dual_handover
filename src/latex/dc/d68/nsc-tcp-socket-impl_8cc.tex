@@ -1,0 +1,44 @@
+\hypertarget{nsc-tcp-socket-impl_8cc}{}\section{internet/model/nsc-\/tcp-\/socket-\/impl.cc File Reference}
+\label{nsc-tcp-socket-impl_8cc}\index{internet/model/nsc-\/tcp-\/socket-\/impl.\+cc@{internet/model/nsc-\/tcp-\/socket-\/impl.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/node.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/inet-\/socket-\/address.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ipv4-\/end-\/point.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}nsc-\/tcp-\/l4-\/protocol.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}nsc-\/tcp-\/socket-\/impl.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/simulation-\/singleton.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/simulator.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/packet.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/uinteger.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/trace-\/source-\/accessor.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}sim\+\_\+interface.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sim\+\_\+errno.\+h\char`\"{}}\\*
+Include dependency graph for nsc-\/tcp-\/socket-\/impl.cc\+:
+% FIG 0
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacens3}{ns3}
+\begin{DoxyCompactList}\small\item\em Here are defined all data structures needed by an O\+L\+SR node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{nsc-tcp-socket-impl_8cc_abe50035652d407c40bdaef78214c4955}{N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT}~\hyperlink{loss__OH__large__cities__urban_8m_ac77b6cfa3068152087725fe54b4ae8c8}{if} (m\+\_\+node) \{ std\+::clog $<$$<$ Simulator\+::\+Now ().Get\+Seconds () $<$$<$ \char`\"{} \mbox{[}node \char`\"{} $<$$<$ m\+\_\+node-\/$>$Get\+Id () $<$$<$ \char`\"{}\mbox{]} \char`\"{}; \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacens3_a654e86c2a7f75cc9ded91e4164572afe}{ns3\+::\+N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Nsc\+Tcp\+Socket\+Impl\char`\"{})
+\item 
+\hyperlink{namespacens3_ac19af2855e0c17d4e31e8ff9d36f5caf}{ns3\+::\+N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED} (\hyperlink{classns3_1_1NscTcpL4Protocol_ae004dd5b6155dc0a19b62d246b3b015e}{Nsc\+Tcp\+Socket\+Impl})
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{nsc-\/tcp-\/socket-\/impl.\+cc@{nsc-\/tcp-\/socket-\/impl.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT@{N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT@{N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT}!nsc-\/tcp-\/socket-\/impl.\+cc@{nsc-\/tcp-\/socket-\/impl.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT}{NS_LOG_APPEND_CONTEXT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+L\+O\+G\+\_\+\+A\+P\+P\+E\+N\+D\+\_\+\+C\+O\+N\+T\+E\+XT~{\bf if} (m\+\_\+node) \{ std\+::clog $<$$<$ Simulator\+::\+Now ().Get\+Seconds () $<$$<$ \char`\"{} \mbox{[}node \char`\"{} $<$$<$ m\+\_\+node-\/$>$Get\+Id () $<$$<$ \char`\"{}\mbox{]} \char`\"{}; \}}\hypertarget{nsc-tcp-socket-impl_8cc_abe50035652d407c40bdaef78214c4955}{}\label{nsc-tcp-socket-impl_8cc_abe50035652d407c40bdaef78214c4955}

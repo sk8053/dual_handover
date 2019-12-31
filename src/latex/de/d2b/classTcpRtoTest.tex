@@ -1,0 +1,381 @@
+\hypertarget{classTcpRtoTest}{}\section{Tcp\+Rto\+Test Class Reference}
+\label{classTcpRtoTest}\index{Tcp\+Rto\+Test@{Tcp\+Rto\+Test}}
+
+
+Testing the moments after an R\+TO expiration.  
+
+
+
+
+Inheritance diagram for Tcp\+Rto\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Tcp\+Rto\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTcpRtoTest_a883308e5e69a8ffa4cf49430afca1467}{Tcp\+Rto\+Test} (\hyperlink{classns3_1_1TypeId}{Type\+Id} \&cong\+Control, const std\+::string \&msg)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketMsgBase}{Tcp\+Socket\+Msg\+Base} $>$ \hyperlink{classTcpRtoTest_ab2403191ee2bca4b03bd7d9f1fd5c832}{Create\+Sender\+Socket} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Node}{Node} $>$ node)
+\begin{DoxyCompactList}\small\item\em Create and install the socket to install on the sender. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpRtoTest_a8e8c0a4c42dc7c023bc01c7238158a2b}{After\+R\+T\+O\+Expired} (const \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6ee}{Socket\+Who} who)
+\begin{DoxyCompactList}\small\item\em Rto has expired. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpRtoTest_a9ce3525fe6eef86d0744eb1cfe9c1a4d}{Rcv\+Ack} (const \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, const \hyperlink{classns3_1_1TcpHeader}{Tcp\+Header} \&h, \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6ee}{Socket\+Who} who)
+\begin{DoxyCompactList}\small\item\em Received ack. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpRtoTest_afd084dc540658016007b73c94f00e927}{Processed\+Ack} (const \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, const \hyperlink{classns3_1_1TcpHeader}{Tcp\+Header} \&h, \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6ee}{Socket\+Who} who)
+\begin{DoxyCompactList}\small\item\em Processed ack. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpRtoTest_af762d4eb10f65f55518a307dc352ae41}{Final\+Checks} ()
+\begin{DoxyCompactList}\small\item\em Performs the (eventual) final checks through test asserts. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpRtoTest_ae777449b8b22f9ac512728584647e997}{Configure\+Properties} ()
+\begin{DoxyCompactList}\small\item\em Change the configuration of the socket properties. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpRtoTest_a0dfc73de2b55e3b66bf3e911be8b4150}{Configure\+Environment} ()
+\begin{DoxyCompactList}\small\item\em Change the configuration of the evironment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classTcpRtoTest_a776fcdaa63e6e9d277ed0544ccd9e56d}{m\+\_\+after\+R\+T\+O\+Expired}
+\begin{DoxyCompactList}\small\item\em True if R\+TO is expired. \end{DoxyCompactList}\item 
+bool \hyperlink{classTcpRtoTest_a39388469b1d3059f808e554e309cf40d}{m\+\_\+segment\+Received}
+\begin{DoxyCompactList}\small\item\em True if segments have been received. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Testing the moments after an R\+TO expiration. 
+
+The scope of this test is to be sure that, after an R\+TO expiration, the T\+CP implementation set the correct state in the A\+CK state machine, and marks the lost segment as lost; then, after the retransmission, the state is fully recovered. This is the base check, where only one segment (the first) is lost and retransmitted. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Tcp\+Rto\+Test@{Tcp\+Rto\+Test}!Tcp\+Rto\+Test@{Tcp\+Rto\+Test}}
+\index{Tcp\+Rto\+Test@{Tcp\+Rto\+Test}!Tcp\+Rto\+Test@{Tcp\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Tcp\+Rto\+Test(\+Type\+Id \&cong\+Control, const std\+::string \&msg)}{TcpRtoTest(TypeId &congControl, const std::string &msg)}}]{\setlength{\rightskip}{0pt plus 5cm}Tcp\+Rto\+Test\+::\+Tcp\+Rto\+Test (
+\begin{DoxyParamCaption}
+\item[{{\bf Type\+Id} \&}]{cong\+Control, }
+\item[{const std\+::string \&}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{classTcpRtoTest_a883308e5e69a8ffa4cf49430afca1467}{}\label{classTcpRtoTest_a883308e5e69a8ffa4cf49430afca1467}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cong\+Control} & Congestion control type. \\
+\hline
+{\em msg} & Test description. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+73   : \hyperlink{classns3_1_1TcpGeneralTest_aed700e733bc50b1e736cb52c0b71f3f8}{TcpGeneralTest} (desc),
+74     \hyperlink{classTcpRtoTest_a776fcdaa63e6e9d277ed0544ccd9e56d}{m\_afterRTOExpired} (\textcolor{keyword}{false}),
+75     \hyperlink{classTcpRtoTest_a39388469b1d3059f808e554e309cf40d}{m\_segmentReceived} (\textcolor{keyword}{false})
+76 \{
+77   \hyperlink{classns3_1_1TcpGeneralTest_aa85b87bfde4d43e1f799f297fe689a8d}{m\_congControlTypeId} = congControl;
+78 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Tcp\+Rto\+Test@{Tcp\+Rto\+Test}!After\+R\+T\+O\+Expired@{After\+R\+T\+O\+Expired}}
+\index{After\+R\+T\+O\+Expired@{After\+R\+T\+O\+Expired}!Tcp\+Rto\+Test@{Tcp\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{After\+R\+T\+O\+Expired(const Ptr$<$ const Tcp\+Socket\+State $>$ tcb, Socket\+Who who)}{AfterRTOExpired(const Ptr< const TcpSocketState > tcb, SocketWho who)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Rto\+Test\+::\+After\+R\+T\+O\+Expired (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{{\bf Socket\+Who}}]{who}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpRtoTest_a8e8c0a4c42dc7c023bc01c7238158a2b}{}\label{classTcpRtoTest_a8e8c0a4c42dc7c023bc01c7238158a2b}
+
+
+Rto has expired. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & Transmission control block \\
+\hline
+{\em who} & where the R\+TO has expired (S\+E\+N\+D\+ER or R\+E\+C\+E\+I\+V\+ER) \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_acbfa9bd62fbc144349b1dddc6b21c855}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+107 \{
+108   \textcolor{comment}{// In this test, the RTO fires for the first segment (and no more).}
+109   \textcolor{comment}{// This function is called after the management of the RTO expiration,}
+110   \textcolor{comment}{// and because of this we must check all the involved variables.}
+111   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{classTcpRtoTest_a776fcdaa63e6e9d277ed0544ccd9e56d}{m\_afterRTOExpired}, \textcolor{keyword}{false},
+112                          \textcolor{stringliteral}{"Second RTO expired"});
+113   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{group__internet-test_ga754ba534fba0aeb1e923326d7c49a7d3}{GetCongStateFrom} (tcb), 
+      TcpSocketState::CA\_LOSS,
+114                          \textcolor{stringliteral}{"Ack state machine not in LOSS state after a loss"});
+115 
+116   \hyperlink{classTcpRtoTest_a776fcdaa63e6e9d277ed0544ccd9e56d}{m\_afterRTOExpired} = \textcolor{keyword}{true};
+117 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Tcp\+Rto\+Test@{Tcp\+Rto\+Test}!Configure\+Environment@{Configure\+Environment}}
+\index{Configure\+Environment@{Configure\+Environment}!Tcp\+Rto\+Test@{Tcp\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Configure\+Environment()}{ConfigureEnvironment()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Rto\+Test\+::\+Configure\+Environment (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpRtoTest_a0dfc73de2b55e3b66bf3e911be8b4150}{}\label{classTcpRtoTest_a0dfc73de2b55e3b66bf3e911be8b4150}
+
+
+Change the configuration of the evironment. 
+
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_abd4e42807a8d2b13dcd207131af12c3b}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+82 \{
+83   TcpGeneralTest::ConfigureEnvironment ();
+84   \hyperlink{classns3_1_1TcpGeneralTest_a256c8df5966f89ed0acfc966cd5d3898}{SetAppPktCount} (100);
+85 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{Tcp\+Rto\+Test@{Tcp\+Rto\+Test}!Configure\+Properties@{Configure\+Properties}}
+\index{Configure\+Properties@{Configure\+Properties}!Tcp\+Rto\+Test@{Tcp\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Configure\+Properties()}{ConfigureProperties()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Rto\+Test\+::\+Configure\+Properties (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpRtoTest_ae777449b8b22f9ac512728584647e997}{}\label{classTcpRtoTest_ae777449b8b22f9ac512728584647e997}
+
+
+Change the configuration of the socket properties. 
+
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_a48b3f15add5cb4b3a9906bd5240e64be}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+89 \{
+90   TcpGeneralTest::ConfigureProperties ();
+91   \hyperlink{classns3_1_1TcpGeneralTest_ad5df8836a27fe3c7fa0719c51b2c13d5}{SetInitialSsThresh} (\hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER}, 0);
+92 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{Tcp\+Rto\+Test@{Tcp\+Rto\+Test}!Create\+Sender\+Socket@{Create\+Sender\+Socket}}
+\index{Create\+Sender\+Socket@{Create\+Sender\+Socket}!Tcp\+Rto\+Test@{Tcp\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Create\+Sender\+Socket(\+Ptr$<$ Node $>$ node)}{CreateSenderSocket(Ptr< Node > node)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Socket\+Msg\+Base} $>$ Tcp\+Rto\+Test\+::\+Create\+Sender\+Socket (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Node} $>$}]{node}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpRtoTest_ab2403191ee2bca4b03bd7d9f1fd5c832}{}\label{classTcpRtoTest_ab2403191ee2bca4b03bd7d9f1fd5c832}
+
+
+Create and install the socket to install on the sender. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & sender node pointer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the socket to be installed in the sender 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_a0476c37d8a08b42d42f6ea2634eece70}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+96 \{
+97   \textcolor{comment}{// Get a really low RTO, and let them fire as soon as possible since}
+98   \textcolor{comment}{// we are interested only in what happen after it expires}
+99   \hyperlink{classns3_1_1Ptr}{Ptr<TcpSocketMsgBase>} socket = TcpGeneralTest::CreateSenderSocket (node);
+100   socket->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"MinRto"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.5)));
+101 
+102   \textcolor{keywordflow}{return} socket;
+103 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{Tcp\+Rto\+Test@{Tcp\+Rto\+Test}!Final\+Checks@{Final\+Checks}}
+\index{Final\+Checks@{Final\+Checks}!Tcp\+Rto\+Test@{Tcp\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Final\+Checks()}{FinalChecks()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Rto\+Test\+::\+Final\+Checks (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpRtoTest_af762d4eb10f65f55518a307dc352ae41}{}\label{classTcpRtoTest_af762d4eb10f65f55518a307dc352ae41}
+
+
+Performs the (eventual) final checks through test asserts. 
+
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_ada871cedd37de404288f163b6f8dea39}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+162 \{
+163   \textcolor{comment}{// At least one time we should process an ACK; otherwise, the segment}
+164   \textcolor{comment}{// has not been retransmitted, and this is bad}
+165 
+166   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{classTcpRtoTest_a39388469b1d3059f808e554e309cf40d}{m\_segmentReceived}, \textcolor{keyword}{true},
+167                          \textcolor{stringliteral}{"Retransmission has not been done"});
+168 \}
+\end{DoxyCode}
+\index{Tcp\+Rto\+Test@{Tcp\+Rto\+Test}!Processed\+Ack@{Processed\+Ack}}
+\index{Processed\+Ack@{Processed\+Ack}!Tcp\+Rto\+Test@{Tcp\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Processed\+Ack(const Ptr$<$ const Tcp\+Socket\+State $>$ tcb, const Tcp\+Header \&h, Socket\+Who who)}{ProcessedAck(const Ptr< const TcpSocketState > tcb, const TcpHeader &h, SocketWho who)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Rto\+Test\+::\+Processed\+Ack (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{const {\bf Tcp\+Header} \&}]{h, }
+\item[{{\bf Socket\+Who}}]{who}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpRtoTest_afd084dc540658016007b73c94f00e927}{}\label{classTcpRtoTest_afd084dc540658016007b73c94f00e927}
+
+
+Processed ack. 
+
+Invoked after the processing of the A\+CK
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & Transmission Control Block \\
+\hline
+{\em h} & the header of segment \\
+\hline
+{\em who} & the socket which has processed the A\+CK (S\+E\+N\+D\+ER or R\+E\+C\+E\+I\+V\+ER) \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_aaf6040114684686637a68e26a736f63d}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+145 \{
+146   \textcolor{comment}{// Called after the ACK processing. Every time we should be in OPEN state,}
+147   \textcolor{comment}{// without any packet lost or marked as retransmitted, in both the sockets}
+148 
+149   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{group__internet-test_ga754ba534fba0aeb1e923326d7c49a7d3}{GetCongStateFrom} (tcb), 
+      TcpSocketState::CA\_OPEN,
+150                          \textcolor{stringliteral}{"Ack state machine not in OPEN state after recovering "}
+151                          \textcolor{stringliteral}{"from loss"});
+152 
+153   \textcolor{keywordflow}{if} (who == \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER})
+154     \{
+155       \hyperlink{classTcpRtoTest_a776fcdaa63e6e9d277ed0544ccd9e56d}{m\_afterRTOExpired} = \textcolor{keyword}{false};
+156       \hyperlink{classTcpRtoTest_a39388469b1d3059f808e554e309cf40d}{m\_segmentReceived} = \textcolor{keyword}{true};
+157     \}
+158 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{Tcp\+Rto\+Test@{Tcp\+Rto\+Test}!Rcv\+Ack@{Rcv\+Ack}}
+\index{Rcv\+Ack@{Rcv\+Ack}!Tcp\+Rto\+Test@{Tcp\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{Rcv\+Ack(const Ptr$<$ const Tcp\+Socket\+State $>$ tcb, const Tcp\+Header \&h, Socket\+Who who)}{RcvAck(const Ptr< const TcpSocketState > tcb, const TcpHeader &h, SocketWho who)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Rto\+Test\+::\+Rcv\+Ack (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{const {\bf Tcp\+Header} \&}]{h, }
+\item[{{\bf Socket\+Who}}]{who}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpRtoTest_a9ce3525fe6eef86d0744eb1cfe9c1a4d}{}\label{classTcpRtoTest_a9ce3525fe6eef86d0744eb1cfe9c1a4d}
+
+
+Received ack. 
+
+Invoked when an A\+CK is received (no processing is done yet)
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & Transmission Control Block \\
+\hline
+{\em h} & the header of segment \\
+\hline
+{\em who} & the socket which has received the A\+CK (S\+E\+N\+D\+ER or R\+E\+C\+E\+I\+V\+ER) \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_a3cea13990a8e0032cf2abe25f2409092}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+122 \{
+123   \textcolor{comment}{// Called after the first ack is received (the lost segment has been}
+124   \textcolor{comment}{// successfully retransmitted. We must check on the sender that variables}
+125   \textcolor{comment}{// are in the same state as they where after AfterRTOExpired if it is the first}
+126   \textcolor{comment}{// ACK after the loss; in every other case, all must be OPEN and the counter}
+127   \textcolor{comment}{// set to 0.}
+128 
+129   \textcolor{keywordflow}{if} (\hyperlink{classTcpRtoTest_a776fcdaa63e6e9d277ed0544ccd9e56d}{m\_afterRTOExpired} && who == \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER})
+130     \{
+131       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{group__internet-test_ga754ba534fba0aeb1e923326d7c49a7d3}{GetCongStateFrom} (tcb), 
+      TcpSocketState::CA\_LOSS,
+132                              \textcolor{stringliteral}{"Ack state machine not in LOSS state after a loss"});
+133     \}
+134   \textcolor{keywordflow}{else}
+135     \{
+136       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\hyperlink{group__internet-test_ga754ba534fba0aeb1e923326d7c49a7d3}{GetCongStateFrom} (tcb), 
+      TcpSocketState::CA\_OPEN,
+137                              \textcolor{stringliteral}{"Ack state machine not in OPEN state after recovering "}
+138                              \textcolor{stringliteral}{"from loss"});
+139     \}
+140 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Tcp\+Rto\+Test@{Tcp\+Rto\+Test}!m\+\_\+after\+R\+T\+O\+Expired@{m\+\_\+after\+R\+T\+O\+Expired}}
+\index{m\+\_\+after\+R\+T\+O\+Expired@{m\+\_\+after\+R\+T\+O\+Expired}!Tcp\+Rto\+Test@{Tcp\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+after\+R\+T\+O\+Expired}{m_afterRTOExpired}}]{\setlength{\rightskip}{0pt plus 5cm}bool Tcp\+Rto\+Test\+::m\+\_\+after\+R\+T\+O\+Expired\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpRtoTest_a776fcdaa63e6e9d277ed0544ccd9e56d}{}\label{classTcpRtoTest_a776fcdaa63e6e9d277ed0544ccd9e56d}
+
+
+True if R\+TO is expired. 
+
+\index{Tcp\+Rto\+Test@{Tcp\+Rto\+Test}!m\+\_\+segment\+Received@{m\+\_\+segment\+Received}}
+\index{m\+\_\+segment\+Received@{m\+\_\+segment\+Received}!Tcp\+Rto\+Test@{Tcp\+Rto\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+segment\+Received}{m_segmentReceived}}]{\setlength{\rightskip}{0pt plus 5cm}bool Tcp\+Rto\+Test\+::m\+\_\+segment\+Received\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpRtoTest_a39388469b1d3059f808e554e309cf40d}{}\label{classTcpRtoTest_a39388469b1d3059f808e554e309cf40d}
+
+
+True if segments have been received. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{tcp-rto-test_8cc}{tcp-\/rto-\/test.\+cc}\end{DoxyCompactItemize}

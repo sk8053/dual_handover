@@ -1,0 +1,560 @@
+\hypertarget{classTcpTxBufferTestCase}{}\section{Tcp\+Tx\+Buffer\+Test\+Case Class Reference}
+\label{classTcpTxBufferTestCase}\index{Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}}
+
+
+The Tcp\+Tx\+Buffer Test.  
+
+
+
+
+Inheritance diagram for Tcp\+Tx\+Buffer\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Tcp\+Tx\+Buffer\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTcpTxBufferTestCase_ad6ae95846a4022a456b3db31e92ba951}{Tcp\+Tx\+Buffer\+Test\+Case} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classTcpTxBufferTestCase_a004312af9ed95478a651632f8e5a7181}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpTxBufferTestCase_a5a55b6f1bc9b85f091dd7c9a10fbc1bb}{Do\+Teardown} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to do any local setup required for this Test\+Case. \end{DoxyCompactList}\item 
+void \hyperlink{classTcpTxBufferTestCase_a2b058225bf6a55a7e80bca5d1dc93f7a}{Test\+New\+Block} ()
+\begin{DoxyCompactList}\small\item\em Test the generation of an unsent block. \end{DoxyCompactList}\item 
+void \hyperlink{classTcpTxBufferTestCase_a088069951796a97ab17f7a6a9996034d}{Test\+Transmitted\+Block} ()
+\begin{DoxyCompactList}\small\item\em Test the generation of a previously sent block. \end{DoxyCompactList}\item 
+void \hyperlink{classTcpTxBufferTestCase_a87a6f679a0da25966b57cd415b03a268}{Test\+Next\+Seg} ()
+\begin{DoxyCompactList}\small\item\em Test the generation of the \char`\"{}next\char`\"{} block. \end{DoxyCompactList}\item 
+void \hyperlink{classTcpTxBufferTestCase_ad18852b35db54711dd66d6738a9e5604}{Test\+Update\+Scoreboard\+With\+Crafted\+S\+A\+CK} ()
+\begin{DoxyCompactList}\small\item\em Test the scoreboard with emulated S\+A\+CK. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The Tcp\+Tx\+Buffer Test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}!Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}}
+\index{Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}!Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Tcp\+Tx\+Buffer\+Test\+Case()}{TcpTxBufferTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Tcp\+Tx\+Buffer\+Test\+Case\+::\+Tcp\+Tx\+Buffer\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTcpTxBufferTestCase_ad6ae95846a4022a456b3db31e92ba951}{}\label{classTcpTxBufferTestCase_ad6ae95846a4022a456b3db31e92ba951}
+
+
+Constructor. 
+
+
+\begin{DoxyCode}
+55   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"TcpTxBuffer Test"})
+56 \{
+57 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Tx\+Buffer\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classTcpTxBufferTestCase_a004312af9ed95478a651632f8e5a7181}{}\label{classTcpTxBufferTestCase_a004312af9ed95478a651632f8e5a7181}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+61 \{
+62   \textcolor{comment}{/*}
+63 \textcolor{comment}{   * Cases for new block:}
+64 \textcolor{comment}{   * -> is exactly the same as stored}
+65 \textcolor{comment}{   * -> starts over the boundary, but ends earlier}
+66 \textcolor{comment}{   * -> starts over the boundary, but ends after}
+67 \textcolor{comment}{   */}
+68   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0), &\hyperlink{classTcpTxBufferTestCase_a2b058225bf6a55a7e80bca5d1dc93f7a}{TcpTxBufferTestCase::TestNewBlock}
+      , \textcolor{keyword}{this});
+69 
+70   \textcolor{comment}{/*}
+71 \textcolor{comment}{   * Cases for transmitted block:}
+72 \textcolor{comment}{   * -> is exactly the same as previous}
+73 \textcolor{comment}{   * -> starts over the boundary, but ends earlier}
+74 \textcolor{comment}{   * -> starts over the boundary, but ends after}
+75 \textcolor{comment}{   * -> starts inside a packet, ends right}
+76 \textcolor{comment}{   * -> starts inside a packet, ends earlier in the same packet}
+77 \textcolor{comment}{   * -> starts inside a packet, ends in another packet}
+78 \textcolor{comment}{   */}
+79   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0),
+80                        &\hyperlink{classTcpTxBufferTestCase_a088069951796a97ab17f7a6a9996034d}{TcpTxBufferTestCase::TestTransmittedBlock},
+       \textcolor{keyword}{this});
+81   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0),
+82                        &\hyperlink{classTcpTxBufferTestCase_a87a6f679a0da25966b57cd415b03a268}{TcpTxBufferTestCase::TestNextSeg}, \textcolor{keyword}{this});
+83   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0),
+84                        &\hyperlink{classTcpTxBufferTestCase_ad18852b35db54711dd66d6738a9e5604}{TcpTxBufferTestCase::TestUpdateScoreboardWithCraftedSACK}
+      , \textcolor{keyword}{this});
+85 
+86   Simulator::Run ();
+87   Simulator::Destroy ();
+88 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}!Do\+Teardown@{Do\+Teardown}}
+\index{Do\+Teardown@{Do\+Teardown}!Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Teardown(void)}{DoTeardown(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Tx\+Buffer\+Test\+Case\+::\+Do\+Teardown (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classTcpTxBufferTestCase_a5a55b6f1bc9b85f091dd7c9a10fbc1bb}{}\label{classTcpTxBufferTestCase_a5a55b6f1bc9b85f091dd7c9a10fbc1bb}
+
+
+Implementation to do any local setup required for this Test\+Case. 
+
+Subclasses should override this method to perform any costly per-\/test teardown 
+
+Reimplemented from \hyperlink{classns3_1_1TestCase_a8917f1604e28d312a8086f76291e3c46}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+400 \{
+401 \}
+\end{DoxyCode}
+\index{Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}!Test\+New\+Block@{Test\+New\+Block}}
+\index{Test\+New\+Block@{Test\+New\+Block}!Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Test\+New\+Block()}{TestNewBlock()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Tx\+Buffer\+Test\+Case\+::\+Test\+New\+Block (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpTxBufferTestCase_a2b058225bf6a55a7e80bca5d1dc93f7a}{}\label{classTcpTxBufferTestCase_a2b058225bf6a55a7e80bca5d1dc93f7a}
+
+
+Test the generation of an unsent block. 
+
+
+\begin{DoxyCode}
+223 \{
+224   \textcolor{comment}{// Manually recreating all the conditions}
+225   \hyperlink{classns3_1_1TcpTxBuffer}{TcpTxBuffer} txBuf;
+226   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ae9d25292f14d338abe26a2657e103921}{SetHeadSequence} (\hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (1));
+227 
+228   \textcolor{comment}{// get a packet which is exactly the same stored}
+229   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} p1 = Create<Packet> (100);
+230   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a275d96f2c58333c9e7c5fe0f1fa152e1}{Add} (p1);
+231 
+232   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a6e44c34fdb2c14dcc11dbbe86d8b328a}{SizeFromSequence} (
+      \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (1)), 100,
+233                          \textcolor{stringliteral}{"TxBuf miscalculates size"});
+234   \textcolor{comment}{//NS\_TEST\_ASSERT\_MSG\_EQ (txBuf.BytesInFlight (), 0,}
+235   \textcolor{comment}{//                       "TxBuf miscalculates size of in flight segments");}
+236 
+237   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} ret = txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a5eb9c889cfad2cd11a5ccf996c506fd3}{CopyFromSequence} (100, 
+      \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (1));
+238   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (ret->GetSize (), 100,
+239                          \textcolor{stringliteral}{"Returned packet has different size than requested"});
+240   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a6e44c34fdb2c14dcc11dbbe86d8b328a}{SizeFromSequence} (
+      \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (1)), 100,
+241                          \textcolor{stringliteral}{"TxBuf miscalculates size"});
+242   \textcolor{comment}{//NS\_TEST\_ASSERT\_MSG\_EQ (txBuf.BytesInFlight (), 100,}
+243   \textcolor{comment}{//                       "TxBuf miscalculates size of in flight segments");}
+244 
+245   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad145a6de0122b3400fcbbff030d2acea}{DiscardUpTo} (\hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (101));
+246   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a6e44c34fdb2c14dcc11dbbe86d8b328a}{SizeFromSequence} (
+      \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (101)), 0,
+247                          \textcolor{stringliteral}{"TxBuf miscalculates size"});
+248   \textcolor{comment}{//NS\_TEST\_ASSERT\_MSG\_EQ (txBuf.BytesInFlight (), 0,}
+249   \textcolor{comment}{//                       "TxBuf miscalculates size of in flight segments");}
+250 
+251   \textcolor{comment}{// starts over the boundary, but ends earlier}
+252 
+253   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} p2 = Create<Packet> (100);
+254   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a275d96f2c58333c9e7c5fe0f1fa152e1}{Add} (p2);
+255 
+256   ret = txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a5eb9c889cfad2cd11a5ccf996c506fd3}{CopyFromSequence} (50, \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (101));
+257   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (ret->GetSize (), 50,
+258                          \textcolor{stringliteral}{"Returned packet has different size than requested"});
+259   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a6e44c34fdb2c14dcc11dbbe86d8b328a}{SizeFromSequence} (
+      \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (151)), 50,
+260                          \textcolor{stringliteral}{"TxBuf miscalculates size"});
+261   \textcolor{comment}{//NS\_TEST\_ASSERT\_MSG\_EQ (txBuf.BytesInFlight (), 50,}
+262   \textcolor{comment}{//                       "TxBuf miscalculates size of in flight segments");}
+263 
+264   \textcolor{comment}{// starts over the boundary, but ends after}
+265   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} p3 = Create<Packet> (100);
+266   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a275d96f2c58333c9e7c5fe0f1fa152e1}{Add} (p3);
+267 
+268   ret = txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a5eb9c889cfad2cd11a5ccf996c506fd3}{CopyFromSequence} (70, \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (151));
+269   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (ret->GetSize (), 70,
+270                          \textcolor{stringliteral}{"Returned packet has different size than requested"});
+271   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a6e44c34fdb2c14dcc11dbbe86d8b328a}{SizeFromSequence} (
+      \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (221)), 80,
+272                          \textcolor{stringliteral}{"TxBuf miscalculates size"});
+273   \textcolor{comment}{//NS\_TEST\_ASSERT\_MSG\_EQ (txBuf.BytesInFlight (), 120,}
+274   \textcolor{comment}{//                       "TxBuf miscalculates size of in flight segments");}
+275 
+276   ret = txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a5eb9c889cfad2cd11a5ccf996c506fd3}{CopyFromSequence} (3000, \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (221));
+277   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (ret->GetSize (), 80,
+278                          \textcolor{stringliteral}{"Returned packet has different size than requested"});
+279   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a6e44c34fdb2c14dcc11dbbe86d8b328a}{SizeFromSequence} (
+      \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (301)), 0,
+280                          \textcolor{stringliteral}{"TxBuf miscalculates size"});
+281   \textcolor{comment}{//NS\_TEST\_ASSERT\_MSG\_EQ (txBuf.BytesInFlight (), 200,}
+282   \textcolor{comment}{//                       "TxBuf miscalculates size of in flight segments");}
+283 
+284   \textcolor{comment}{// Clear everything}
+285   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad145a6de0122b3400fcbbff030d2acea}{DiscardUpTo} (\hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (381));
+286   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a24621b9d6f583bbbe4567b239901176b}{Size} (), 0,
+287                          \textcolor{stringliteral}{"Size is different than expected"});
+288 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}!Test\+Next\+Seg@{Test\+Next\+Seg}}
+\index{Test\+Next\+Seg@{Test\+Next\+Seg}!Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Test\+Next\+Seg()}{TestNextSeg()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Tx\+Buffer\+Test\+Case\+::\+Test\+Next\+Seg (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpTxBufferTestCase_a87a6f679a0da25966b57cd415b03a268}{}\label{classTcpTxBufferTestCase_a87a6f679a0da25966b57cd415b03a268}
+
+
+Test the generation of the \char`\"{}next\char`\"{} block. 
+
+
+\begin{DoxyCode}
+92 \{
+93   \hyperlink{classns3_1_1TcpTxBuffer}{TcpTxBuffer} txBuf;
+94   \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} head (1);
+95   \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} ret;
+96   uint32\_t dupThresh = 3;
+97   uint32\_t segmentSize = 150;
+98   \hyperlink{classns3_1_1Ptr}{Ptr<TcpOptionSack>} sack = CreateObject<TcpOptionSack> ();
+99 
+100   \textcolor{comment}{// At the beginning the values of dupThresh and segmentSize don't matter}
+101   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad08eadd0ba92849a4c4a6920b72acb69}{NextSeg} (&ret, 0, 0, \textcolor{keyword}{false}), \textcolor{keyword}{false},
+102                          \textcolor{stringliteral}{"NextSeq should not be returned at the beginning"});
+103 
+104   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ae9d25292f14d338abe26a2657e103921}{SetHeadSequence} (head);
+105   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad08eadd0ba92849a4c4a6920b72acb69}{NextSeg} (&ret, 0, 0, \textcolor{keyword}{false}), \textcolor{keyword}{false},
+106                          \textcolor{stringliteral}{"NextSeq should not be returned with no data"});
+107 
+108   \textcolor{comment}{// Add a single, 3000-bytes long, packet}
+109   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a275d96f2c58333c9e7c5fe0f1fa152e1}{Add} (Create<Packet> (30000));
+110   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad08eadd0ba92849a4c4a6920b72acb69}{NextSeg} (&ret, 0, 0, \textcolor{keyword}{false}), \textcolor{keyword}{true},
+111                          \textcolor{stringliteral}{"No NextSeq with data at beginning"});
+112   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (ret.\hyperlink{classns3_1_1SequenceNumber_ad1dc215eb95f5371596af8ec914d3e72}{GetValue} (), head.GetValue (),
+113                          \textcolor{stringliteral}{"Different NextSeq than expected at the beginning"});
+114 
+115   \textcolor{comment}{// Simulate sending 100 packets, 150 bytes long each, from seq 1}
+116   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}=0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<100; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+117     \{
+118       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad08eadd0ba92849a4c4a6920b72acb69}{NextSeg} (&ret, dupThresh, segmentSize, \textcolor{keyword}{false}
+      ), \textcolor{keyword}{true},
+119                              \textcolor{stringliteral}{"No NextSeq with data while \(\backslash\)"transmitting\(\backslash\)""});
+120       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (ret, head + (segmentSize * \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}),
+121                              \textcolor{stringliteral}{"Different NextSeq than expected while \(\backslash\)"transmitting\(\backslash\)""});
+122       txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a5eb9c889cfad2cd11a5ccf996c506fd3}{CopyFromSequence} (segmentSize, ret);
+123     \}
+124 
+125   \textcolor{comment}{// Ok, now simulate we lost the first segment [1;151], and that we have}
+126   \textcolor{comment}{// limited transmit. NextSeg should return (up to dupThresh-1) new pieces of data}
+127   \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} lastRet = ret; \textcolor{comment}{// This is like m\_highTx}
+128   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}=1; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<dupThresh; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}) \textcolor{comment}{// iterate dupThresh-1 times (limited transmit)}
+129     \{
+130       \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} begin = head + (segmentSize * \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+131       \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} end = begin + segmentSize;
+132       sack->\hyperlink{classns3_1_1TcpOptionSack_ab7fe631445815bbb5f5bd2e7d6fd2662}{AddSackBlock} (\hyperlink{classns3_1_1TcpOptionSack_a9e1d07d8729fd3ac5ead7305794675c3}{TcpOptionSack::SackBlock} (begin, end));
+133       txBuf.\hyperlink{classns3_1_1TcpTxBuffer_abed2d31821b2d946068c517195f5cc61}{Update} (sack->\hyperlink{classns3_1_1TcpOptionSack_a08840a554682aeb3aadbccfbb1f6b6fa}{GetSackList} ());
+134 
+135       \textcolor{comment}{// new data expected and sent}
+136       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad08eadd0ba92849a4c4a6920b72acb69}{NextSeg} (&ret, dupThresh, segmentSize, \textcolor{keyword}{false}
+      ), \textcolor{keyword}{true},
+137                              \textcolor{stringliteral}{"No NextSeq with SACK block while \(\backslash\)"transmitting\(\backslash\)""});
+138       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (ret, lastRet + segmentSize,
+139                              \textcolor{stringliteral}{"Different NextSeq than expected in limited transmit"});
+140       txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a5eb9c889cfad2cd11a5ccf996c506fd3}{CopyFromSequence} (segmentSize, ret);
+141       sack->\hyperlink{classns3_1_1TcpOptionSack_ab5f3634e6e86fa9df061596696d130c5}{ClearSackList} ();
+142       lastRet = ret;
+143     \}
+144 
+145   \textcolor{comment}{// Limited transmit was ok; now there is the dupThresh-th dupack.}
+146   \textcolor{comment}{// Now we need to retransmit the first block..}
+147   sack->\hyperlink{classns3_1_1TcpOptionSack_ab7fe631445815bbb5f5bd2e7d6fd2662}{AddSackBlock} (\hyperlink{classns3_1_1TcpOptionSack_a9e1d07d8729fd3ac5ead7305794675c3}{TcpOptionSack::SackBlock} (head + (segmentSize * (
+      dupThresh)),
+148                                                 head + (segmentSize * (dupThresh)) + segmentSize));
+149   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_abed2d31821b2d946068c517195f5cc61}{Update} (sack->\hyperlink{classns3_1_1TcpOptionSack_a08840a554682aeb3aadbccfbb1f6b6fa}{GetSackList} ());
+150   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad08eadd0ba92849a4c4a6920b72acb69}{NextSeg} (&ret, dupThresh, segmentSize, \textcolor{keyword}{false}), \textcolor{keyword}{
+      true},
+151                          \textcolor{stringliteral}{"No NextSeq with SACK block for Fast Recovery"});
+152   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (ret, head,
+153                          \textcolor{stringliteral}{"Different NextSeq than expected for Fast Recovery"});
+154   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a5eb9c889cfad2cd11a5ccf996c506fd3}{CopyFromSequence} (segmentSize, ret);
+155   sack->\hyperlink{classns3_1_1TcpOptionSack_ab5f3634e6e86fa9df061596696d130c5}{ClearSackList} ();
+156 
+157   \textcolor{comment}{// Fast Retransmission was ok; now check some additional dupacks.}
+158   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}=1; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<=4; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+159     \{
+160       sack->\hyperlink{classns3_1_1TcpOptionSack_ab7fe631445815bbb5f5bd2e7d6fd2662}{AddSackBlock} (\hyperlink{classns3_1_1TcpOptionSack_a9e1d07d8729fd3ac5ead7305794675c3}{TcpOptionSack::SackBlock} (head + (segmentSize
+       * (dupThresh+\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})),
+161                                                     head + (segmentSize * (dupThresh+
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})) + segmentSize));
+162       txBuf.\hyperlink{classns3_1_1TcpTxBuffer_abed2d31821b2d946068c517195f5cc61}{Update} (sack->\hyperlink{classns3_1_1TcpOptionSack_a08840a554682aeb3aadbccfbb1f6b6fa}{GetSackList} ());
+163       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad08eadd0ba92849a4c4a6920b72acb69}{NextSeg} (&ret, dupThresh, segmentSize, \textcolor{keyword}{false}
+      ), \textcolor{keyword}{true},
+164                              \textcolor{stringliteral}{"No NextSeq with SACK block after recv dupacks in FR"});
+165       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (ret, lastRet + segmentSize,
+166                              \textcolor{stringliteral}{"Different NextSeq than expected after recv dupacks in FR"});
+167       txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a5eb9c889cfad2cd11a5ccf996c506fd3}{CopyFromSequence} (segmentSize, ret);
+168       sack->\hyperlink{classns3_1_1TcpOptionSack_ab5f3634e6e86fa9df061596696d130c5}{ClearSackList} ();
+169       lastRet = ret;
+170     \}
+171 
+172   \textcolor{comment}{// Well now we receive a partial ACK, corresponding to the segment we retransmitted.}
+173   \textcolor{comment}{// Unfortunately, the next one is lost as well; but NextSeg should be smart enough}
+174   \textcolor{comment}{// to give us the next segment (head + segmentSize) to retransmit.}
+175   \textcolor{comment}{/* In this particular case, we are checking the fact that we have badly crafted}
+176 \textcolor{comment}{   * the SACK blocks. Talking in segment, we transmitted 1,2,3,4,5 ... and then}
+177 \textcolor{comment}{   * received dupack for 1. While receiving these, we crafted SACK block in the}
+178 \textcolor{comment}{   * way that 2,3,4,... were correctly received. Now, if we receive an ACK for 2,}
+179 \textcolor{comment}{   * we clearly crafted the corresponding ACK wrongly. TcpTxBuffer should be able}
+180 \textcolor{comment}{   * to "backoff" that flag on its HEAD (segment 2). We still don't know for segment}
+181 \textcolor{comment}{   * 3,4 .. so keep them.}
+182 \textcolor{comment}{   */}
+183   head = head + segmentSize;
+184   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad145a6de0122b3400fcbbff030d2acea}{DiscardUpTo} (head);
+185   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad08eadd0ba92849a4c4a6920b72acb69}{NextSeg} (&ret, dupThresh, segmentSize, \textcolor{keyword}{false}), \textcolor{keyword}{
+      true},
+186                          \textcolor{stringliteral}{"No NextSeq with SACK block after receiving partial ACK"});
+187   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (ret, head,
+188                          \textcolor{stringliteral}{"Different NextSeq than expected after receiving partial ACK"});
+189   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a5eb9c889cfad2cd11a5ccf996c506fd3}{CopyFromSequence} (segmentSize, ret);
+190 
+191   \textcolor{comment}{// Now, check for one more dupack...}
+192   sack->\hyperlink{classns3_1_1TcpOptionSack_ab7fe631445815bbb5f5bd2e7d6fd2662}{AddSackBlock} (\hyperlink{classns3_1_1TcpOptionSack_a9e1d07d8729fd3ac5ead7305794675c3}{TcpOptionSack::SackBlock} (head + (segmentSize * (
+      dupThresh+6)),
+193                                                 head + (segmentSize * (dupThresh+6)) + segmentSize));
+194   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_abed2d31821b2d946068c517195f5cc61}{Update} (sack->\hyperlink{classns3_1_1TcpOptionSack_a08840a554682aeb3aadbccfbb1f6b6fa}{GetSackList} ());
+195   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad08eadd0ba92849a4c4a6920b72acb69}{NextSeg} (&ret, dupThresh, segmentSize, \textcolor{keyword}{false}), \textcolor{keyword}{
+      true},
+196                          \textcolor{stringliteral}{"No NextSeq with SACK block after recv dupacks after partial ack"});
+197   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (ret, lastRet + segmentSize,
+198                          \textcolor{stringliteral}{"Different NextSeq than expected after recv dupacks after partial ack"});
+199   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a5eb9c889cfad2cd11a5ccf996c506fd3}{CopyFromSequence} (segmentSize, ret);
+200   sack->\hyperlink{classns3_1_1TcpOptionSack_ab5f3634e6e86fa9df061596696d130c5}{ClearSackList} ();
+201   head = lastRet = ret + segmentSize;
+202 
+203   \textcolor{comment}{// And now ack everything we sent to date!}
+204   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad145a6de0122b3400fcbbff030d2acea}{DiscardUpTo} (head);
+205 
+206   \textcolor{comment}{// And continue normally until the end}
+207   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}=0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<93; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+208     \{
+209       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad08eadd0ba92849a4c4a6920b72acb69}{NextSeg} (&ret, dupThresh, segmentSize, \textcolor{keyword}{false}
+      ), \textcolor{keyword}{true},
+210                              \textcolor{stringliteral}{"No NextSeq with data while \(\backslash\)"transmitting\(\backslash\)""});
+211       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (ret, head + (segmentSize * \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}),
+212                              \textcolor{stringliteral}{"Different NextSeq than expected while \(\backslash\)"transmitting\(\backslash\)""});
+213       txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a5eb9c889cfad2cd11a5ccf996c506fd3}{CopyFromSequence} (segmentSize, ret);
+214     \}
+215 
+216   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad145a6de0122b3400fcbbff030d2acea}{DiscardUpTo} (ret+segmentSize);
+217   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a24621b9d6f583bbbe4567b239901176b}{Size} (), 0,
+218                          \textcolor{stringliteral}{"Data inside the buffer"});
+219 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}!Test\+Transmitted\+Block@{Test\+Transmitted\+Block}}
+\index{Test\+Transmitted\+Block@{Test\+Transmitted\+Block}!Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Test\+Transmitted\+Block()}{TestTransmittedBlock()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Tx\+Buffer\+Test\+Case\+::\+Test\+Transmitted\+Block (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpTxBufferTestCase_a088069951796a97ab17f7a6a9996034d}{}\label{classTcpTxBufferTestCase_a088069951796a97ab17f7a6a9996034d}
+
+
+Test the generation of a previously sent block. 
+
+
+\begin{DoxyCode}
+395 \{
+396 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}!Test\+Update\+Scoreboard\+With\+Crafted\+S\+A\+CK@{Test\+Update\+Scoreboard\+With\+Crafted\+S\+A\+CK}}
+\index{Test\+Update\+Scoreboard\+With\+Crafted\+S\+A\+CK@{Test\+Update\+Scoreboard\+With\+Crafted\+S\+A\+CK}!Tcp\+Tx\+Buffer\+Test\+Case@{Tcp\+Tx\+Buffer\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Test\+Update\+Scoreboard\+With\+Crafted\+S\+A\+C\+K()}{TestUpdateScoreboardWithCraftedSACK()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Tx\+Buffer\+Test\+Case\+::\+Test\+Update\+Scoreboard\+With\+Crafted\+S\+A\+CK (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpTxBufferTestCase_ad18852b35db54711dd66d6738a9e5604}{}\label{classTcpTxBufferTestCase_ad18852b35db54711dd66d6738a9e5604}
+
+
+Test the scoreboard with emulated S\+A\+CK. 
+
+
+\begin{DoxyCode}
+292 \{
+293   \hyperlink{classns3_1_1TcpTxBuffer}{TcpTxBuffer} txBuf;
+294   \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} head (1);
+295   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ae9d25292f14d338abe26a2657e103921}{SetHeadSequence} (head);
+296 
+297   \textcolor{comment}{// Add a single, 3000-bytes long, packet}
+298   txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a275d96f2c58333c9e7c5fe0f1fa152e1}{Add} (Create<Packet> (30000));
+299 
+300   \textcolor{comment}{// Simulate sending 100 packets, 150 bytes long each, from seq 1}
+301   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}=0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<100; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+302     \{
+303       txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a5eb9c889cfad2cd11a5ccf996c506fd3}{CopyFromSequence} (150, head + (150 * \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+304     \}
+305 
+306   \textcolor{comment}{// Now we have 100 packets sent, 100 waiting (well, that 100 are condensed in one)}
+307 
+308   \textcolor{comment}{// Suppose now we receive 99 dupacks, because the first was lost.}
+309   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}=0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<99; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+310     \{
+311       \hyperlink{classns3_1_1Ptr}{Ptr<const TcpOptionSack>} sack = txBuf.
+      \hyperlink{classns3_1_1TcpTxBuffer_af49d6395ebebed5e4ca8697e7331b79e}{CraftSackOption} (head, 32); \textcolor{comment}{// 3 maximum sack block}
+312 
+313       \textcolor{comment}{// For iteration 0 and 1 we have 1 and 2 sack blocks, respectively.}
+314       \textcolor{comment}{// For all others, maximum 3}
+315       \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} == 0)
+316         \{
+317           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (sack->\hyperlink{classns3_1_1TcpOptionSack_a4700d3fed6cd67def0c18ce47298e767}{GetNumSackBlocks} (), 1,
+318                                  \textcolor{stringliteral}{"Different block number than expected"});
+319         \}
+320       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} == 1)
+321         \{
+322           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (sack->\hyperlink{classns3_1_1TcpOptionSack_a4700d3fed6cd67def0c18ce47298e767}{GetNumSackBlocks} (), 2,
+323                                  \textcolor{stringliteral}{"Different block number than expected"});
+324         \}
+325       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} >= 2)
+326         \{
+327           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (sack->\hyperlink{classns3_1_1TcpOptionSack_a4700d3fed6cd67def0c18ce47298e767}{GetNumSackBlocks} (), 3,
+328                                  \textcolor{stringliteral}{"More blocks than expected"});
+329         \}
+330 
+331       \hyperlink{classns3_1_1TcpOptionSack_a2aa2d721c71424680d79ebaa079f264a}{TcpOptionSack::SackList} sackList = sack->
+      \hyperlink{classns3_1_1TcpOptionSack_a08840a554682aeb3aadbccfbb1f6b6fa}{GetSackList} ();
+332       \hyperlink{classns3_1_1TcpOptionSack_a9e1d07d8729fd3ac5ead7305794675c3}{TcpOptionSack::SackBlock} block = sackList.front ();
+333       sackList.pop\_front ();
+334 
+335       \textcolor{comment}{// The first block, assuming all the other are SACKed in order (from 2nd}
+336       \textcolor{comment}{// onward) has seq = 1 + (150 * (i+1)) --> i+1 because the first sent}
+337       \textcolor{comment}{// block cannot be SACKed}
+338       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (block.first, \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (1 + (150*(
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}+1))),
+339                              \textcolor{stringliteral}{"First sack block is wrong (on the left)"});
+340       \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (block.second, block.first + 150,
+341                              \textcolor{stringliteral}{"First sack block is wrong (on the right)"});
+342 
+343       \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} left = block.first;
+344       \textcolor{keywordflow}{for} (TcpOptionSack::SackList::iterator it = sackList.begin (); it != sackList.end (); ++it)
+345         \{
+346           block = (*it);
+347 
+348           \textcolor{comment}{// the blocks go backwards here. To understand better, an example}
+349           \textcolor{comment}{// of SACK option list: [1351;1501], [1201;1351], [1051;1201]}
+350           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (block.first, left - 150,
+351                                  \textcolor{stringliteral}{"First sack block is wrong (on the left)"});
+352           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (block.second, left,
+353                                  \textcolor{stringliteral}{"First sack block is wrong (on the right)"});
+354           left -= 150;
+355         \}
+356 
+357       txBuf.\hyperlink{classns3_1_1TcpTxBuffer_abed2d31821b2d946068c517195f5cc61}{Update} (sack->\hyperlink{classns3_1_1TcpOptionSack_a08840a554682aeb3aadbccfbb1f6b6fa}{GetSackList} ());
+358 
+359       \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} == 0)
+360         \{
+361           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\textcolor{keyword}{false}, txBuf.\hyperlink{classns3_1_1TcpTxBuffer_add55043ebbafc30ba4e48d3f8aa9f064}{IsLost} (
+      \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (1), 3, 150),
+362                                  \textcolor{stringliteral}{"SequenceNumber 1 isLost, but for RFC 6675 is not"});
+363         \}
+364       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} == 1)
+365         \{
+366           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\textcolor{keyword}{false}, txBuf.\hyperlink{classns3_1_1TcpTxBuffer_add55043ebbafc30ba4e48d3f8aa9f064}{IsLost} (
+      \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (1), 3, 150),
+367                                  \textcolor{stringliteral}{"SequenceNumber 1 isLost, but for RFC 6675 is not"});
+368           \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} lost (1 + (150 * \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+369           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\textcolor{keyword}{false}, txBuf.\hyperlink{classns3_1_1TcpTxBuffer_add55043ebbafc30ba4e48d3f8aa9f064}{IsLost} (lost, 3, 150),
+370                                  \textcolor{stringliteral}{"SequenceNumber "} << lost <<
+371                                  \textcolor{stringliteral}{"isLost, but for RFC 6675 is because is SACKed"});
+372         \}
+373       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} >= 2)
+374         \{
+375           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\textcolor{keyword}{true}, txBuf.\hyperlink{classns3_1_1TcpTxBuffer_add55043ebbafc30ba4e48d3f8aa9f064}{IsLost} (
+      \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (1), 3, 150),
+376                                  \textcolor{stringliteral}{"SequenceNumber 1 ! isLost, but for RFC 6675 is"});
+377           \hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} lost (1 + (150 * \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}));
+378           \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (\textcolor{keyword}{false}, txBuf.\hyperlink{classns3_1_1TcpTxBuffer_add55043ebbafc30ba4e48d3f8aa9f064}{IsLost} (lost, 3, 150),
+379                                  \textcolor{stringliteral}{"SequenceNumber "} << lost <<
+380                                  \textcolor{stringliteral}{"isLost, but for RFC 6675 is because is SACKed"});
+381         \}
+382     \}
+383 
+384   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}=0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}<100; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+385     \{
+386       txBuf.\hyperlink{classns3_1_1TcpTxBuffer_ad145a6de0122b3400fcbbff030d2acea}{DiscardUpTo} (\hyperlink{classns3_1_1SequenceNumber}{SequenceNumber32} (30001));
+387     \}
+388 
+389   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (txBuf.\hyperlink{classns3_1_1TcpTxBuffer_a24621b9d6f583bbbe4567b239901176b}{Size} (), 0,
+390                          \textcolor{stringliteral}{"Data inside the buffer"});
+391 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{tcp-tx-buffer-test_8cc}{tcp-\/tx-\/buffer-\/test.\+cc}\end{DoxyCompactItemize}

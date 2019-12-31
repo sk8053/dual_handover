@@ -1,0 +1,352 @@
+\hypertarget{classns3_1_1Ipv4FlowClassifier}{}\section{ns3\+:\+:Ipv4\+Flow\+Classifier Class Reference}
+\label{classns3_1_1Ipv4FlowClassifier}\index{ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}}
+
+
+{\ttfamily \#include $<$ipv4-\/flow-\/classifier.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Ipv4\+Flow\+Classifier\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Ipv4\+Flow\+Classifier\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structns3_1_1Ipv4FlowClassifier_1_1FiveTuple}{Five\+Tuple}
+\begin{DoxyCompactList}\small\item\em Structure to classify a packet. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1Ipv4FlowClassifier_1_1SortByCount}{Sort\+By\+Count}
+\begin{DoxyCompactList}\small\item\em Comparator used to sort the vector of D\+S\+CP values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ipv4FlowClassifier_aaba5c92c15d17bca35196a62ecebcb4e}{Ipv4\+Flow\+Classifier} ()
+\item 
+bool \hyperlink{classns3_1_1Ipv4FlowClassifier_ac91b7a15892c52b4361de76eaf8411b7}{Classify} (const \hyperlink{classns3_1_1Ipv4Header}{Ipv4\+Header} \&ip\+Header, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ ip\+Payload, uint32\+\_\+t $\ast$out\+\_\+flow\+Id, uint32\+\_\+t $\ast$out\+\_\+packet\+Id)
+\begin{DoxyCompactList}\small\item\em try to classify the packet into flow-\/id and packet-\/id \end{DoxyCompactList}\item 
+\hyperlink{structns3_1_1Ipv4FlowClassifier_1_1FiveTuple}{Five\+Tuple} \hyperlink{classns3_1_1Ipv4FlowClassifier_acebbcaa758340552bb0dbde00d7963ae}{Find\+Flow} (\hyperlink{group__flow-monitor_ga39a766c4a370cdb9ab8ac85da4b288e9}{Flow\+Id} flow\+Id) const 
+\item 
+std\+::vector$<$ std\+::pair$<$ \hyperlink{classns3_1_1Ipv4Header_aaa17802e7732a689311b72d48d1a3450}{Ipv4\+Header\+::\+Dscp\+Type}, uint32\+\_\+t $>$ $>$ \hyperlink{classns3_1_1Ipv4FlowClassifier_a6aeabcfb07444976713b0c89f8922fb7}{Get\+Dscp\+Counts} (\hyperlink{group__flow-monitor_ga39a766c4a370cdb9ab8ac85da4b288e9}{Flow\+Id} flow\+Id) const 
+\begin{DoxyCompactList}\small\item\em get the D\+S\+CP values of the packets belonging to the flow with the given Flow\+Id, sorted in decreasing order of number of packets seen with that D\+S\+CP value \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1Ipv4FlowClassifier_a84c7125c44d6e6cf1de03f0fc1e345aa}{Serialize\+To\+Xml\+Stream} (std\+::ostream \&os, uint16\+\_\+t indent) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \hyperlink{structns3_1_1Ipv4FlowClassifier_1_1FiveTuple}{Five\+Tuple}, \hyperlink{group__flow-monitor_ga39a766c4a370cdb9ab8ac85da4b288e9}{Flow\+Id} $>$ \hyperlink{classns3_1_1Ipv4FlowClassifier_abd62b87d946068783f98976126e131b6}{m\+\_\+flow\+Map}
+\begin{DoxyCompactList}\small\item\em Map to Flows Identifiers to Flow\+Ids. \end{DoxyCompactList}\item 
+std\+::map$<$ \hyperlink{group__flow-monitor_ga39a766c4a370cdb9ab8ac85da4b288e9}{Flow\+Id}, \hyperlink{group__flow-monitor_gaa1cb18250e1672975204f1254b8aa2ae}{Flow\+Packet\+Id} $>$ \hyperlink{classns3_1_1Ipv4FlowClassifier_a330e21b9b9926ab76ff354aa8ce8e2be}{m\+\_\+flow\+Pkt\+Id\+Map}
+\begin{DoxyCompactList}\small\item\em Map to Flow\+Ids to Flow\+Packet\+Id. \end{DoxyCompactList}\item 
+std\+::map$<$ \hyperlink{group__flow-monitor_ga39a766c4a370cdb9ab8ac85da4b288e9}{Flow\+Id}, std\+::map$<$ \hyperlink{classns3_1_1Ipv4Header_aaa17802e7732a689311b72d48d1a3450}{Ipv4\+Header\+::\+Dscp\+Type}, uint32\+\_\+t $>$ $>$ \hyperlink{classns3_1_1Ipv4FlowClassifier_ab4fecdf812fb864667d27d028e184784}{m\+\_\+flow\+Dscp\+Map}
+\begin{DoxyCompactList}\small\item\em Map Flow\+Ids to (D\+S\+CP value, packet count) pairs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Classifies packets by looking at their IP and T\+C\+P/\+U\+DP headers. From these packet headers, a tuple (source-\/ip, destination-\/ip, protocol, source-\/port, destination-\/port) is created, and a unique flow identifier is assigned for each different tuple combination 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}!Ipv4\+Flow\+Classifier@{Ipv4\+Flow\+Classifier}}
+\index{Ipv4\+Flow\+Classifier@{Ipv4\+Flow\+Classifier}!ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}}
+\subsubsection[{\texorpdfstring{Ipv4\+Flow\+Classifier()}{Ipv4FlowClassifier()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Ipv4\+Flow\+Classifier\+::\+Ipv4\+Flow\+Classifier (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4FlowClassifier_aaba5c92c15d17bca35196a62ecebcb4e}{}\label{classns3_1_1Ipv4FlowClassifier_aaba5c92c15d17bca35196a62ecebcb4e}
+
+\begin{DoxyCode}
+100 \{
+101 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}!Classify@{Classify}}
+\index{Classify@{Classify}!ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}}
+\subsubsection[{\texorpdfstring{Classify(const Ipv4\+Header \&ip\+Header, Ptr$<$ const Packet $>$ ip\+Payload, uint32\+\_\+t $\ast$out\+\_\+flow\+Id, uint32\+\_\+t $\ast$out\+\_\+packet\+Id)}{Classify(const Ipv4Header &ipHeader, Ptr< const Packet > ipPayload, uint32_t *out_flowId, uint32_t *out_packetId)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Ipv4\+Flow\+Classifier\+::\+Classify (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ipv4\+Header} \&}]{ip\+Header, }
+\item[{{\bf Ptr}$<$ const {\bf Packet} $>$}]{ip\+Payload, }
+\item[{uint32\+\_\+t $\ast$}]{out\+\_\+flow\+Id, }
+\item[{uint32\+\_\+t $\ast$}]{out\+\_\+packet\+Id}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ipv4FlowClassifier_ac91b7a15892c52b4361de76eaf8411b7}{}\label{classns3_1_1Ipv4FlowClassifier_ac91b7a15892c52b4361de76eaf8411b7}
+
+
+try to classify the packet into flow-\/id and packet-\/id 
+
+\begin{DoxyWarning}{Warning}
+\+: it must be called only once per packet, from Send\+Outgoing\+Logger.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+true if the packet was classified, false if not (i.\+e. it does not appear to be part of a flow). 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em ip\+Header} & packet\textquotesingle{}s IP header \\
+\hline
+{\em ip\+Payload} & packet\textquotesingle{}s IP payload \\
+\hline
+{\em out\+\_\+flow\+Id} & packet\textquotesingle{}s Flow\+Id \\
+\hline
+{\em out\+\_\+packet\+Id} & packet\textquotesingle{}s identifier \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+106 \{
+107   \textcolor{keywordflow}{if} (ipHeader.GetFragmentOffset () > 0 )
+108     \{
+109       \textcolor{comment}{// Ignore fragments: they don't carry a valid L4 header}
+110       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+111     \}
+112 
+113   FiveTuple tuple;
+114   tuple.sourceAddress = ipHeader.GetSource ();
+115   tuple.destinationAddress = ipHeader.GetDestination ();
+116   tuple.protocol = ipHeader.GetProtocol ();
+117 
+118   \textcolor{keywordflow}{if} ((tuple.protocol != \hyperlink{namespacens3_ae787098cbb0a3e8f6a17d9249e88a77f}{UDP\_PROT\_NUMBER}) && (tuple.protocol != 
+      \hyperlink{namespacens3_a203a34fc0e042720ce1a0a754e270646}{TCP\_PROT\_NUMBER}))
+119     \{
+120       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+121     \}
+122 
+123   \textcolor{keywordflow}{if} (ipPayload->GetSize () < 4)
+124     \{
+125       \textcolor{comment}{// the packet doesn't carry enough bytes}
+126       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+127     \}
+128 
+129   \textcolor{comment}{// we rely on the fact that for both TCP and UDP the ports are}
+130   \textcolor{comment}{// carried in the first 4 octects.}
+131   \textcolor{comment}{// This allows to read the ports even on fragmented packets}
+132   \textcolor{comment}{// not carrying a full TCP or UDP header.}
+133 
+134   uint8\_t \hyperlink{topology-example-sim_8cc_a26c65296e316af77b787dc77469bb2a4}{data}[4];
+135   ipPayload->CopyData (data, 4);
+136 
+137   uint16\_t srcPort = 0;
+138   srcPort |= data[0];
+139   srcPort <<= 8;
+140   srcPort |= data[1];
+141 
+142   uint16\_t dstPort = 0;
+143   dstPort |= data[2];
+144   dstPort <<= 8;
+145   dstPort |= data[3];
+146 
+147   tuple.sourcePort = srcPort;
+148   tuple.destinationPort = dstPort;
+149 
+150   \textcolor{comment}{// try to insert the tuple, but check if it already exists}
+151   std::pair<std::map<FiveTuple, FlowId>::iterator, \textcolor{keywordtype}{bool}> insert
+152     = \hyperlink{classns3_1_1Ipv4FlowClassifier_abd62b87d946068783f98976126e131b6}{m\_flowMap}.insert (std::pair<FiveTuple, FlowId> (tuple, 0));
+153 
+154   \textcolor{comment}{// if the insertion succeeded, we need to assign this tuple a new flow identifier}
+155   \textcolor{keywordflow}{if} (insert.second)
+156     \{
+157       \hyperlink{group__flow-monitor_ga39a766c4a370cdb9ab8ac85da4b288e9}{FlowId} newFlowId = \hyperlink{classns3_1_1FlowClassifier_a5469e94282efde8b8212e20995c6cccd}{GetNewFlowId} ();
+158       insert.first->second = newFlowId;
+159       \hyperlink{classns3_1_1Ipv4FlowClassifier_a330e21b9b9926ab76ff354aa8ce8e2be}{m\_flowPktIdMap}[newFlowId] = 0;
+160       \hyperlink{classns3_1_1Ipv4FlowClassifier_ab4fecdf812fb864667d27d028e184784}{m\_flowDscpMap}[newFlowId];
+161     \}
+162   \textcolor{keywordflow}{else}
+163     \{
+164       \hyperlink{classns3_1_1Ipv4FlowClassifier_a330e21b9b9926ab76ff354aa8ce8e2be}{m\_flowPktIdMap}[insert.first->second] ++;
+165     \}
+166 
+167   \textcolor{comment}{// increment the counter of packets with the same DSCP value}
+168   \hyperlink{classns3_1_1Ipv4Header_aaa17802e7732a689311b72d48d1a3450}{Ipv4Header::DscpType} dscp = ipHeader.GetDscp ();
+169   std::pair<std::map<Ipv4Header::DscpType, uint32\_t>::iterator, \textcolor{keywordtype}{bool}> dscpInserter
+170     = \hyperlink{classns3_1_1Ipv4FlowClassifier_ab4fecdf812fb864667d27d028e184784}{m\_flowDscpMap}[insert.first->second].insert (std::pair<Ipv4Header::DscpType, uint32\_t> (
+      dscp, 1));
+171 
+172   \textcolor{comment}{// if the insertion did not succeed, we need to increment the counter}
+173   \textcolor{keywordflow}{if} (!dscpInserter.second)
+174     \{
+175       \hyperlink{classns3_1_1Ipv4FlowClassifier_ab4fecdf812fb864667d27d028e184784}{m\_flowDscpMap}[insert.first->second][dscp] ++;
+176     \}
+177 
+178   *out\_flowId = insert.first->second;
+179   *out\_packetId = \hyperlink{classns3_1_1Ipv4FlowClassifier_a330e21b9b9926ab76ff354aa8ce8e2be}{m\_flowPktIdMap}[*out\_flowId];
+180 
+181   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+182 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}!Find\+Flow@{Find\+Flow}}
+\index{Find\+Flow@{Find\+Flow}!ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}}
+\subsubsection[{\texorpdfstring{Find\+Flow(\+Flow\+Id flow\+Id) const }{FindFlow(FlowId flowId) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ipv4\+Flow\+Classifier\+::\+Five\+Tuple} ns3\+::\+Ipv4\+Flow\+Classifier\+::\+Find\+Flow (
+\begin{DoxyParamCaption}
+\item[{{\bf Flow\+Id}}]{flow\+Id}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1Ipv4FlowClassifier_acebbcaa758340552bb0dbde00d7963ae}{}\label{classns3_1_1Ipv4FlowClassifier_acebbcaa758340552bb0dbde00d7963ae}
+Searches for the \hyperlink{structns3_1_1Ipv4FlowClassifier_1_1FiveTuple}{Five\+Tuple} corresponding to the given flow\+Id 
+\begin{DoxyParams}{Parameters}
+{\em flow\+Id} & the Flow\+Id to search for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the \hyperlink{structns3_1_1Ipv4FlowClassifier_1_1FiveTuple}{Five\+Tuple} corresponding to flow\+Id 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+187 \{
+188   \textcolor{keywordflow}{for} (std::map<FiveTuple, FlowId>::const\_iterator
+189        iter = \hyperlink{classns3_1_1Ipv4FlowClassifier_abd62b87d946068783f98976126e131b6}{m\_flowMap}.begin (); iter != \hyperlink{classns3_1_1Ipv4FlowClassifier_abd62b87d946068783f98976126e131b6}{m\_flowMap}.end (); iter++)
+190     \{
+191       \textcolor{keywordflow}{if} (iter->second == flowId)
+192         \{
+193           \textcolor{keywordflow}{return} iter->first;
+194         \}
+195     \}
+196   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Could not find the flow with ID "} << flowId);
+197   FiveTuple retval = \{ \hyperlink{classns3_1_1Ipv4Address_aeeb1c76b35d4ab612fda7bc51e99c5db}{Ipv4Address::GetZero} (), 
+      \hyperlink{classns3_1_1Ipv4Address_aeeb1c76b35d4ab612fda7bc51e99c5db}{Ipv4Address::GetZero} (), 0, 0, 0 \};
+198   \textcolor{keywordflow}{return} retval;
+199 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}!Get\+Dscp\+Counts@{Get\+Dscp\+Counts}}
+\index{Get\+Dscp\+Counts@{Get\+Dscp\+Counts}!ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}}
+\subsubsection[{\texorpdfstring{Get\+Dscp\+Counts(\+Flow\+Id flow\+Id) const }{GetDscpCounts(FlowId flowId) const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::pair$<$ {\bf Ipv4\+Header\+::\+Dscp\+Type}, uint32\+\_\+t $>$ $>$ ns3\+::\+Ipv4\+Flow\+Classifier\+::\+Get\+Dscp\+Counts (
+\begin{DoxyParamCaption}
+\item[{{\bf Flow\+Id}}]{flow\+Id}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1Ipv4FlowClassifier_a6aeabcfb07444976713b0c89f8922fb7}{}\label{classns3_1_1Ipv4FlowClassifier_a6aeabcfb07444976713b0c89f8922fb7}
+
+
+get the D\+S\+CP values of the packets belonging to the flow with the given Flow\+Id, sorted in decreasing order of number of packets seen with that D\+S\+CP value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flow\+Id} & the identifier of the flow of interest \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the vector of D\+S\+CP values 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+210 \{
+211   std::map<FlowId, std::map<Ipv4Header::DscpType, uint32\_t> >::const\_iterator flow
+212     = \hyperlink{classns3_1_1Ipv4FlowClassifier_ab4fecdf812fb864667d27d028e184784}{m\_flowDscpMap}.find (flowId);
+213 
+214   \textcolor{keywordflow}{if} (flow == \hyperlink{classns3_1_1Ipv4FlowClassifier_ab4fecdf812fb864667d27d028e184784}{m\_flowDscpMap}.end ())
+215     \{
+216       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Could not find the flow with ID "} << flowId);
+217     \}
+218 
+219   std::vector<std::pair<Ipv4Header::DscpType, uint32\_t> > v (flow->second.begin (), flow->second.end ());
+220   std::sort (v.begin (), v.end (), SortByCount ());
+221   \textcolor{keywordflow}{return} v;
+222 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}!Serialize\+To\+Xml\+Stream@{Serialize\+To\+Xml\+Stream}}
+\index{Serialize\+To\+Xml\+Stream@{Serialize\+To\+Xml\+Stream}!ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}}
+\subsubsection[{\texorpdfstring{Serialize\+To\+Xml\+Stream(std\+::ostream \&os, uint16\+\_\+t indent) const }{SerializeToXmlStream(std::ostream &os, uint16_t indent) const }}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Ipv4\+Flow\+Classifier\+::\+Serialize\+To\+Xml\+Stream (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os, }
+\item[{uint16\+\_\+t}]{indent}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1Ipv4FlowClassifier_a84c7125c44d6e6cf1de03f0fc1e345aa}{}\label{classns3_1_1Ipv4FlowClassifier_a84c7125c44d6e6cf1de03f0fc1e345aa}
+Serializes the results to an std\+::ostream in X\+ML format 
+\begin{DoxyParams}{Parameters}
+{\em os} & the output stream \\
+\hline
+{\em indent} & number of spaces to use as base indentation level \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classns3_1_1FlowClassifier_aeb06e447fa079fcedc7c9745c23958b3}{ns3\+::\+Flow\+Classifier}.
+
+
+\begin{DoxyCode}
+226 \{
+227   \hyperlink{classns3_1_1FlowClassifier_adc5d8694d3c9059b5ac2c664e5897088}{Indent} (os, indent); os << \textcolor{stringliteral}{"<Ipv4FlowClassifier>\(\backslash\)n"};
+228 
+229   indent += 2;
+230   \textcolor{keywordflow}{for} (std::map<FiveTuple, FlowId>::const\_iterator
+231        iter = \hyperlink{classns3_1_1Ipv4FlowClassifier_abd62b87d946068783f98976126e131b6}{m\_flowMap}.begin (); iter != \hyperlink{classns3_1_1Ipv4FlowClassifier_abd62b87d946068783f98976126e131b6}{m\_flowMap}.end (); iter++)
+232     \{
+233       \hyperlink{classns3_1_1FlowClassifier_adc5d8694d3c9059b5ac2c664e5897088}{Indent} (os, indent);
+234       os << \textcolor{stringliteral}{"<Flow flowId=\(\backslash\)""} << iter->second << \textcolor{stringliteral}{"\(\backslash\)""}
+235          << \textcolor{stringliteral}{" sourceAddress=\(\backslash\)""} << iter->first.sourceAddress << \textcolor{stringliteral}{"\(\backslash\)""}
+236          << \textcolor{stringliteral}{" destinationAddress=\(\backslash\)""} << iter->first.destinationAddress << \textcolor{stringliteral}{"\(\backslash\)""}
+237          << \textcolor{stringliteral}{" protocol=\(\backslash\)""} << int(iter->first.protocol) << \textcolor{stringliteral}{"\(\backslash\)""}
+238          << \textcolor{stringliteral}{" sourcePort=\(\backslash\)""} << iter->first.sourcePort << \textcolor{stringliteral}{"\(\backslash\)""}
+239          << \textcolor{stringliteral}{" destinationPort=\(\backslash\)""} << iter->first.destinationPort << \textcolor{stringliteral}{"\(\backslash\)">\(\backslash\)n"};
+240 
+241       indent += 2;
+242       std::map<FlowId, std::map<Ipv4Header::DscpType, uint32\_t> >::const\_iterator flow
+243         = \hyperlink{classns3_1_1Ipv4FlowClassifier_ab4fecdf812fb864667d27d028e184784}{m\_flowDscpMap}.find (iter->second);
+244 
+245       \textcolor{keywordflow}{if} (flow != \hyperlink{classns3_1_1Ipv4FlowClassifier_ab4fecdf812fb864667d27d028e184784}{m\_flowDscpMap}.end ())
+246         \{
+247           \textcolor{keywordflow}{for} (std::map<Ipv4Header::DscpType, uint32\_t>::const\_iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = flow->second.begin (); 
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != flow->second.end (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+248             \{
+249               \hyperlink{classns3_1_1FlowClassifier_adc5d8694d3c9059b5ac2c664e5897088}{Indent} (os, indent);
+250               os << \textcolor{stringliteral}{"<Dscp value=\(\backslash\)"0x"} << std::hex << static\_cast<uint32\_t> (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->first) << \textcolor{stringliteral}{"\(\backslash\)""}
+251                  << \textcolor{stringliteral}{" packets=\(\backslash\)""} << std::dec << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->second << \textcolor{stringliteral}{"\(\backslash\)" />\(\backslash\)n"};
+252             \}
+253         \}
+254 
+255       indent -= 2;
+256       \hyperlink{classns3_1_1FlowClassifier_adc5d8694d3c9059b5ac2c664e5897088}{Indent} (os, indent); os << \textcolor{stringliteral}{"</Flow>\(\backslash\)n"};
+257     \}
+258 
+259   indent -= 2;
+260   \hyperlink{classns3_1_1FlowClassifier_adc5d8694d3c9059b5ac2c664e5897088}{Indent} (os, indent); os << \textcolor{stringliteral}{"</Ipv4FlowClassifier>\(\backslash\)n"};
+261 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}!m\+\_\+flow\+Dscp\+Map@{m\+\_\+flow\+Dscp\+Map}}
+\index{m\+\_\+flow\+Dscp\+Map@{m\+\_\+flow\+Dscp\+Map}!ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}}
+\subsubsection[{\texorpdfstring{m\+\_\+flow\+Dscp\+Map}{m_flowDscpMap}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf Flow\+Id}, std\+::map$<${\bf Ipv4\+Header\+::\+Dscp\+Type}, uint32\+\_\+t$>$ $>$ ns3\+::\+Ipv4\+Flow\+Classifier\+::m\+\_\+flow\+Dscp\+Map\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4FlowClassifier_ab4fecdf812fb864667d27d028e184784}{}\label{classns3_1_1Ipv4FlowClassifier_ab4fecdf812fb864667d27d028e184784}
+
+
+Map Flow\+Ids to (D\+S\+CP value, packet count) pairs. 
+
+\index{ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}!m\+\_\+flow\+Map@{m\+\_\+flow\+Map}}
+\index{m\+\_\+flow\+Map@{m\+\_\+flow\+Map}!ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}}
+\subsubsection[{\texorpdfstring{m\+\_\+flow\+Map}{m_flowMap}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf Five\+Tuple}, {\bf Flow\+Id}$>$ ns3\+::\+Ipv4\+Flow\+Classifier\+::m\+\_\+flow\+Map\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4FlowClassifier_abd62b87d946068783f98976126e131b6}{}\label{classns3_1_1Ipv4FlowClassifier_abd62b87d946068783f98976126e131b6}
+
+
+Map to Flows Identifiers to Flow\+Ids. 
+
+\index{ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}!m\+\_\+flow\+Pkt\+Id\+Map@{m\+\_\+flow\+Pkt\+Id\+Map}}
+\index{m\+\_\+flow\+Pkt\+Id\+Map@{m\+\_\+flow\+Pkt\+Id\+Map}!ns3\+::\+Ipv4\+Flow\+Classifier@{ns3\+::\+Ipv4\+Flow\+Classifier}}
+\subsubsection[{\texorpdfstring{m\+\_\+flow\+Pkt\+Id\+Map}{m_flowPktIdMap}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf Flow\+Id}, {\bf Flow\+Packet\+Id}$>$ ns3\+::\+Ipv4\+Flow\+Classifier\+::m\+\_\+flow\+Pkt\+Id\+Map\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ipv4FlowClassifier_a330e21b9b9926ab76ff354aa8ce8e2be}{}\label{classns3_1_1Ipv4FlowClassifier_a330e21b9b9926ab76ff354aa8ce8e2be}
+
+
+Map to Flow\+Ids to Flow\+Packet\+Id. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+flow-\/monitor/model/\hyperlink{ipv4-flow-classifier_8h}{ipv4-\/flow-\/classifier.\+h}\item 
+flow-\/monitor/model/\hyperlink{ipv4-flow-classifier_8cc}{ipv4-\/flow-\/classifier.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,108 @@
+\hypertarget{classDiffTestCase}{}\section{Diff\+Test\+Case Class Reference}
+\label{classDiffTestCase}\index{Diff\+Test\+Case@{Diff\+Test\+Case}}
+
+
+Inheritance diagram for Diff\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Diff\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDiffTestCase_a719762014856553f2f2178e2ffe750fa}{Diff\+Test\+Case} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classDiffTestCase_aa6e6da63a68b54ea86a6172337d1e5a6}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Diff\+Test\+Case@{Diff\+Test\+Case}!Diff\+Test\+Case@{Diff\+Test\+Case}}
+\index{Diff\+Test\+Case@{Diff\+Test\+Case}!Diff\+Test\+Case@{Diff\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Diff\+Test\+Case()}{DiffTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Diff\+Test\+Case\+::\+Diff\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classDiffTestCase_a719762014856553f2f2178e2ffe750fa}{}\label{classDiffTestCase_a719762014856553f2f2178e2ffe750fa}
+
+\begin{DoxyCode}
+1082   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check that PcapFile::Diff works as expected"})
+1083 \{
+1084 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Diff\+Test\+Case@{Diff\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Diff\+Test\+Case@{Diff\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Diff\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classDiffTestCase_aa6e6da63a68b54ea86a6172337d1e5a6}{}\label{classDiffTestCase_aa6e6da63a68b54ea86a6172337d1e5a6}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+1088 \{
+1089   \textcolor{comment}{//}
+1090   \textcolor{comment}{// Check that PcapDiff(file, file) is false}
+1091   \textcolor{comment}{//}
+1092   std::string filename = \hyperlink{classns3_1_1TestCase_a3e4d216ff392a43418f26bb3e5b0f16d}{CreateDataDirFilename} (\textcolor{stringliteral}{"known.pcap"});
+1093   uint32\_t sec (0), usec (0), packets (0);
+1094   \textcolor{keywordtype}{bool} diff = PcapFile::Diff (filename, filename, sec, usec, packets);
+1095   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (diff, \textcolor{keyword}{false}, \textcolor{stringliteral}{"PcapDiff(file, file) must always be false"});
+1096 
+1097   \textcolor{comment}{//}
+1098   \textcolor{comment}{// Create different PCAP file (with the same timestamps, but different packets) and check that it is
+       indeed different }
+1099   \textcolor{comment}{//}
+1100   std::string filename2 = \textcolor{stringliteral}{"different.pcap"};
+1101   \hyperlink{classns3_1_1PcapFile}{PcapFile} \hyperlink{buildings__pathloss_8m_aa52d3a6e3de5a80a97c12364caeaa125}{f};
+1102 
+1103   f.\hyperlink{classns3_1_1PcapFile_a064e8494e28e823d0bb4e40549f9f483}{Open} (filename2, std::ios::out);
+1104   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (f.\hyperlink{classns3_1_1PcapFile_a2e00aa080890a0c9c3e9f5bd2d6c21d5}{Fail} (), \textcolor{keyword}{false}, \textcolor{stringliteral}{"Open ("} << filename2 << \textcolor{stringliteral}{", \(\backslash\)"
+      std::ios::out\(\backslash\)") returns error"});
+1105   f.\hyperlink{classns3_1_1PcapFile_a80c8adea1baa66e3f730df2927b0fc9b}{Init} (1, \hyperlink{pcap-file-test-suite_8cc_afbd70e37403299f8c72166deb34c04c3}{N\_PACKET\_BYTES});
+1106   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (f.\hyperlink{classns3_1_1PcapFile_a2e00aa080890a0c9c3e9f5bd2d6c21d5}{Fail} (), \textcolor{keyword}{false}, \textcolor{stringliteral}{"Init (1, "} << 
+      \hyperlink{pcap-file-test-suite_8cc_afbd70e37403299f8c72166deb34c04c3}{N\_PACKET\_BYTES} << \textcolor{stringliteral}{") returns error"});
+1107 
+1108   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{pcap-file-test-suite_8cc_a368109b7271b955012621f214217cc55}{N\_KNOWN\_PACKETS}; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+1109     \{
+1110       \hyperlink{structPACKET__ENTRY}{PacketEntry} \textcolor{keyword}{const} & \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = \hyperlink{pcap-file-test-suite_8cc_acfb9111e8cf0f99feb122526fba2c98d}{knownPackets}[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}];
+1111 
+1112       f.\hyperlink{classns3_1_1PcapFile_a3920f5bae95ca0021875e6e9c2630ccf}{Write} (p.\hyperlink{structPACKET__ENTRY_abea31e5c174a03ab6359271d6f63a648}{tsSec}, p.\hyperlink{structPACKET__ENTRY_a0c46e357bf2e2eec6d097408062f3cf1}{tsUsec}, (uint8\_t \textcolor{keyword}{const} *)p.\hyperlink{structPACKET__ENTRY_a44b794b18286d3bd159417ad67597e6f}{data}, p.
+      \hyperlink{structPACKET__ENTRY_a2eb0d1882b86fd106ad82d3138273004}{origLen});
+1113       \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (f.\hyperlink{classns3_1_1PcapFile_a2e00aa080890a0c9c3e9f5bd2d6c21d5}{Fail} (), \textcolor{keyword}{false}, \textcolor{stringliteral}{"Write must not fail"});
+1114     \}
+1115   f.\hyperlink{classns3_1_1PcapFile_ad3b6c28d464742ee1fa3a64628339a5b}{Close} ();
+1116 
+1117   packets = 0;
+1118   diff = PcapFile::Diff (filename, filename2, sec, usec, packets);
+1119   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (diff, \textcolor{keyword}{true}, \textcolor{stringliteral}{"PcapDiff(file, file2) must be true"});
+1120   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (sec,  2, \textcolor{stringliteral}{"Files are different from 2.3696 seconds"});
+1121   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (usec, 3696, \textcolor{stringliteral}{"Files are different from 2.3696 seconds"});
+1122 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+network/test/\hyperlink{pcap-file-test-suite_8cc}{pcap-\/file-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,113 @@
+\hypertarget{buildings-pathloss-profiler_8cc}{}\section{buildings/examples/buildings-\/pathloss-\/profiler.cc File Reference}
+\label{buildings-pathloss-profiler_8cc}\index{buildings/examples/buildings-\/pathloss-\/profiler.\+cc@{buildings/examples/buildings-\/pathloss-\/profiler.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$ns3/buildings-\/helper.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/hybrid-\/buildings-\/propagation-\/loss-\/model.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/constant-\/position-\/mobility-\/model.\+h$>$}\\*
+{\ttfamily \#include $<$iomanip$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+Include dependency graph for buildings-\/pathloss-\/profiler.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{buildings-pathloss-profiler_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{buildings-\/pathloss-\/profiler.\+cc@{buildings-\/pathloss-\/profiler.\+cc}!main@{main}}
+\index{main@{main}!buildings-\/pathloss-\/profiler.\+cc@{buildings-\/pathloss-\/profiler.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{buildings-pathloss-profiler_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{buildings-pathloss-profiler_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+38 \{
+39   
+40   \textcolor{keywordtype}{double} hEnb = 30.0;
+41   \textcolor{keywordtype}{double} hUe = 1.0;
+42   \textcolor{keywordtype}{bool} enbIndoor = \textcolor{keyword}{false};
+43   \textcolor{keywordtype}{bool} ueIndoor = \textcolor{keyword}{false};
+44   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+45   
+46   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"hEnb"}, \textcolor{stringliteral}{"Height of the eNB"}, hEnb);
+47   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"hUe"}, \textcolor{stringliteral}{"Height of UE"}, hUe);
+48   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"enbIndoor"}, \textcolor{stringliteral}{"Boolean for eNB Indoor/Outdoor selection"},               enbIndoor);
+49   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"ueIndoor"}, \textcolor{stringliteral}{"Boolean for UE Indoor/Outdoor selection"},               ueIndoor);
+50   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse}(argc, argv);
+51   
+52   \hyperlink{classns3_1_1ConfigStore}{ConfigStore} inputConfig;
+53   inputConfig.\hyperlink{classns3_1_1ConfigStore_a0a6137574d7c847c3823af8b9d1bb886}{ConfigureDefaults} ();
+54   
+55   
+56   \textcolor{comment}{// parse again so you can override default values from the command line}
+57   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+58   
+59   
+60   std::ofstream outFile;
+61   outFile.open (\textcolor{stringliteral}{"buildings-pathloss-profiler.out"});
+62   \textcolor{keywordflow}{if} (!outFile.is\_open ())
+63   \{
+64     \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Can't open output file"});
+65   \}
+66   
+67   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} mmEnb = 
+      CreateObject<ConstantPositionMobilityModel> ();
+68   mmEnb->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, hEnb));
+69   \textcolor{keywordflow}{if} (enbIndoor)
+70     \{
+71       \hyperlink{classns3_1_1Ptr}{Ptr<Building>} building1 = CreateObject<Building> (-2, 2, -2, 2, 0.0, 20.0);
+72       building1->SetBuildingType (Building::Residential);
+73       building1->SetExtWallsType (Building::ConcreteWithWindows);
+74     \}
+75   
+76   \hyperlink{classns3_1_1Ptr}{Ptr<MobilityBuildingInfo>} buildingInfoEnb = CreateObject<MobilityBuildingInfo> (
+      );
+77   mmEnb->\hyperlink{classns3_1_1Object_a79dd435d300f3deca814553f561a2922}{AggregateObject} (buildingInfoEnb); \textcolor{comment}{// operation usually done by
+       BuildingsHelper::Install}
+78   BuildingsHelper::MakeConsistent (mmEnb);
+79   
+80   \hyperlink{classns3_1_1Ptr}{Ptr<HybridBuildingsPropagationLossModel>} propagationLossModel = 
+      CreateObject<HybridBuildingsPropagationLossModel> ();
+81   \textcolor{comment}{// cancel shadowing effect}
+82   propagationLossModel->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ShadowSigmaOutdoor"}, DoubleValue (0.0));
+83   propagationLossModel->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ShadowSigmaIndoor"}, DoubleValue (0.0));
+84   propagationLossModel->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"ShadowSigmaExtWalls"}, DoubleValue (0.0));
+85   
+86 \textcolor{comment}{//   propagationLossModel->SetAttribute ("Los2NlosThr", DoubleValue (1550.0));}
+87   
+88   \textcolor{comment}{//for (uint8\_t i = 0; i < 23; i++)}
+89   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 1; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 2300; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+90     \{
+91       \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} mmUe = 
+      CreateObject<ConstantPositionMobilityModel> ();
+92       mmUe->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}, 0.0, hUe));
+93       \hyperlink{classns3_1_1Ptr}{Ptr<MobilityBuildingInfo>} buildingInfoUe = 
+      CreateObject<MobilityBuildingInfo> ();
+94       mmUe->\hyperlink{classns3_1_1Object_a79dd435d300f3deca814553f561a2922}{AggregateObject} (buildingInfoUe); \textcolor{comment}{// operation usually done by
+       BuildingsHelper::Install}
+95       BuildingsHelper::MakeConsistent (mmUe);
+96       \textcolor{keywordtype}{double} loss = propagationLossModel->\hyperlink{classns3_1_1HybridBuildingsPropagationLossModel_a241f98b865eb28321e724c6963ba4f83}{GetLoss} (mmEnb, mmUe);
+97       outFile << \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} << \textcolor{stringliteral}{"\(\backslash\)t"}
+98               << loss 
+99               << std::endl;
+100     \}
+101     
+102   Simulator::Destroy ();
+103   
+104 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

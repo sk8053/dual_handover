@@ -1,0 +1,77 @@
+\hypertarget{namespacetap-csma-virtual-machine}{}\section{tap-\/csma-\/virtual-\/machine Namespace Reference}
+\label{namespacetap-csma-virtual-machine}\index{tap-\/csma-\/virtual-\/machine@{tap-\/csma-\/virtual-\/machine}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacetap-csma-virtual-machine_a3ca74b02f38b0617a7152031aef45429}{main} (argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{tap-\/csma-\/virtual-\/machine@{tap-\/csma-\/virtual-\/machine}!main@{main}}
+\index{main@{main}!tap-\/csma-\/virtual-\/machine@{tap-\/csma-\/virtual-\/machine}}
+\subsubsection[{\texorpdfstring{main(argv)}{main(argv)}}]{\setlength{\rightskip}{0pt plus 5cm}def tap-\/csma-\/virtual-\/machine.\+main (
+\begin{DoxyParamCaption}
+\item[{}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacetap-csma-virtual-machine_a3ca74b02f38b0617a7152031aef45429}{}\label{namespacetap-csma-virtual-machine_a3ca74b02f38b0617a7152031aef45429}
+
+\begin{DoxyCode}
+27 \textcolor{keyword}{def }\hyperlink{namespacetap-csma-virtual-machine_a3ca74b02f38b0617a7152031aef45429}{main}(argv):
+28 
+29     ns.core.CommandLine().Parse(argv)
+30 
+31     \textcolor{comment}{#}
+32     \textcolor{comment}{# We are interacting with the outside, real, world.  This means we have to }
+33     \textcolor{comment}{# interact in real-time and therefore we have to use the real-time simulator}
+34     \textcolor{comment}{# and take the time to calculate checksums.}
+35     \textcolor{comment}{#}
+36     ns.core.GlobalValue.Bind(\textcolor{stringliteral}{"SimulatorImplementationType"}, ns.core.StringValue(\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl
+      "}))
+37     ns.core.GlobalValue.Bind(\textcolor{stringliteral}{"ChecksumEnabled"}, ns.core.BooleanValue(\textcolor{stringliteral}{"true"}))
+38 
+39     \textcolor{comment}{#}
+40     \textcolor{comment}{# Create two ghost nodes.  The first will represent the virtual machine host}
+41     \textcolor{comment}{# on the left side of the network; and the second will represent the VM on }
+42     \textcolor{comment}{# the right side.}
+43     \textcolor{comment}{#}
+44     nodes = ns.network.NodeContainer()
+45     nodes.Create (2)
+46 
+47     \textcolor{comment}{#}
+48     \textcolor{comment}{# Use a CsmaHelper to get a CSMA channel created, and the needed net }
+49     \textcolor{comment}{# devices installed on both of the nodes.  The data rate and delay for the}
+50     \textcolor{comment}{# channel can be set through the command-line parser.}
+51     \textcolor{comment}{#}
+52     csma = ns.csma.CsmaHelper()
+53     devices = csma.Install(nodes)
+54 
+55     \textcolor{comment}{#}
+56     \textcolor{comment}{# Use the TapBridgeHelper to connect to the pre-configured tap devices for }
+57     \textcolor{comment}{# the left side.  We go with "UseLocal" mode since the wifi devices do not}
+58     \textcolor{comment}{# support promiscuous mode (because of their natures0.  This is a special}
+59     \textcolor{comment}{# case mode that allows us to extend a linux bridge into ns-3 IFF we will}
+60     \textcolor{comment}{# only see traffic from one other device on that bridge.  That is the case}
+61     \textcolor{comment}{# for this configuration.}
+62     \textcolor{comment}{#}
+63     tapBridge = ns.tap\_bridge.TapBridgeHelper()
+64     tapBridge.SetAttribute (\textcolor{stringliteral}{"Mode"}, ns.core.StringValue (\textcolor{stringliteral}{"UseLocal"}))
+65     tapBridge.SetAttribute (\textcolor{stringliteral}{"DeviceName"}, ns.core.StringValue (\textcolor{stringliteral}{"tap-left"}))
+66     tapBridge.Install (nodes.Get (0), devices.Get (0))
+67 
+68     \textcolor{comment}{#}
+69     \textcolor{comment}{# Connect the right side tap to the right side wifi device on the right-side}
+70     \textcolor{comment}{# ghost node.}
+71     \textcolor{comment}{#}
+72     tapBridge.SetAttribute (\textcolor{stringliteral}{"DeviceName"}, ns.core.StringValue (\textcolor{stringliteral}{"tap-right"}))
+73     tapBridge.Install (nodes.Get (1), devices.Get (1))
+74 
+75     \textcolor{comment}{#}
+76     \textcolor{comment}{# Run the simulation for ten minutes to give the user time to play around}
+77     \textcolor{comment}{#}
+78     ns.core.Simulator.Stop (ns.core.Seconds (600))
+79     ns.core.Simulator.Run(signal\_check\_frequency = -1)
+80     ns.core.Simulator.Destroy()
+81     \textcolor{keywordflow}{return} 0
+82 
+\end{DoxyCode}

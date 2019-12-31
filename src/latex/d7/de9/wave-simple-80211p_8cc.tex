@@ -1,0 +1,209 @@
+\hypertarget{wave-simple-80211p_8cc}{}\section{wave/examples/wave-\/simple-\/80211p.cc File Reference}
+\label{wave-simple-80211p_8cc}\index{wave/examples/wave-\/simple-\/80211p.\+cc@{wave/examples/wave-\/simple-\/80211p.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/vector.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/string.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/socket.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/double.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/log.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/command-\/line.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/yans-\/wifi-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/position-\/allocator.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/stack-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/address-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/interface-\/container.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/ocb-\/wifi-\/mac.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wifi-\/80211p-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wave-\/mac-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for wave-\/simple-\/80211p.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{wave-simple-80211p_8cc_a3193ae4443b3aa79d642ca74050fc81e}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Wifi\+Simple\+Ocb\char`\"{})
+\item 
+void \hyperlink{wave-simple-80211p_8cc_a80dc0d980be124d8d5c4ee0b7943bfae}{Receive\+Packet} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\item 
+static void \hyperlink{wave-simple-80211p_8cc_a9215c0692f5b30471001df4ee488ac6f}{Generate\+Traffic} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket, uint32\+\_\+t pkt\+Size, uint32\+\_\+t pkt\+Count, \hyperlink{classns3_1_1Time}{Time} pkt\+Interval)
+\item 
+int \hyperlink{wave-simple-80211p_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{wave-\/simple-\/80211p.\+cc@{wave-\/simple-\/80211p.\+cc}!Generate\+Traffic@{Generate\+Traffic}}
+\index{Generate\+Traffic@{Generate\+Traffic}!wave-\/simple-\/80211p.\+cc@{wave-\/simple-\/80211p.\+cc}}
+\subsubsection[{\texorpdfstring{Generate\+Traffic(\+Ptr$<$ Socket $>$ socket, uint32\+\_\+t pkt\+Size, uint32\+\_\+t pkt\+Count, Time pkt\+Interval)}{GenerateTraffic(Ptr< Socket > socket, uint32_t pktSize, uint32_t pktCount, Time pktInterval)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Generate\+Traffic (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket, }
+\item[{uint32\+\_\+t}]{pkt\+Size, }
+\item[{uint32\+\_\+t}]{pkt\+Count, }
+\item[{{\bf Time}}]{pkt\+Interval}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{wave-simple-80211p_8cc_a9215c0692f5b30471001df4ee488ac6f}{}\label{wave-simple-80211p_8cc_a9215c0692f5b30471001df4ee488ac6f}
+
+\begin{DoxyCode}
+87 \{
+88   \textcolor{keywordflow}{if} (pktCount > 0)
+89     \{
+90       socket->\hyperlink{classns3_1_1Socket_a036901c8f485fe5b6eab93b7f2ec289d}{Send} (Create<Packet> (pktSize));
+91       Simulator::Schedule (pktInterval, &\hyperlink{wave-simple-80211p_8cc_a9215c0692f5b30471001df4ee488ac6f}{GenerateTraffic},
+92                            socket, pktSize,pktCount - 1, pktInterval);
+93     \}
+94   \textcolor{keywordflow}{else}
+95     \{
+96       socket->\hyperlink{classns3_1_1Socket_abdac6e2498c5aa2963ef361d4200ddf3}{Close} ();
+97     \}
+98 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{wave-\/simple-\/80211p.\+cc@{wave-\/simple-\/80211p.\+cc}!main@{main}}
+\index{main@{main}!wave-\/simple-\/80211p.\+cc@{wave-\/simple-\/80211p.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{wave-simple-80211p_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{wave-simple-80211p_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+101 \{
+102   std::string phyMode (\textcolor{stringliteral}{"OfdmRate6MbpsBW10MHz"});
+103   uint32\_t packetSize = 1000; \textcolor{comment}{// bytes}
+104   uint32\_t numPackets = 1;
+105   \textcolor{keywordtype}{double} interval = 1.0; \textcolor{comment}{// seconds}
+106   \textcolor{keywordtype}{bool} \hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose} = \textcolor{keyword}{false};
+107 
+108   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+109 
+110   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"phyMode"}, \textcolor{stringliteral}{"Wifi Phy mode"}, phyMode);
+111   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"packetSize"}, \textcolor{stringliteral}{"size of application packet sent"}, packetSize);
+112   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"numPackets"}, \textcolor{stringliteral}{"number of packets generated"}, numPackets);
+113   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"interval"}, \textcolor{stringliteral}{"interval (seconds) between packets"}, interval);
+114   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"verbose"}, \textcolor{stringliteral}{"turn on all WifiNetDevice log components"}, verbose);
+115   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+116   \textcolor{comment}{// Convert to time object}
+117   \hyperlink{classns3_1_1Time}{Time} interPacketInterval = \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (interval);
+118 
+119 
+120   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+121   c.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+122 
+123   \textcolor{comment}{// The below set of helpers will help us to put together the wifi NICs we want}
+124   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} wifiPhy =  YansWifiPhyHelper::Default ();
+125   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} wifiChannel = YansWifiChannelHelper::Default ();
+126   \hyperlink{classns3_1_1Ptr}{Ptr<YansWifiChannel>} channel = wifiChannel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ();
+127   wifiPhy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (channel);
+128   \textcolor{comment}{// ns-3 supports generate a pcap trace}
+129   wifiPhy.\hyperlink{classns3_1_1WifiPhyHelper_ae4b90e90f6e78a19c1b7fdf08b270218}{SetPcapDataLinkType} (YansWifiPhyHelper::DLT\_IEEE802\_11);
+130   \hyperlink{classns3_1_1NqosWaveMacHelper}{NqosWaveMacHelper} wifi80211pMac = NqosWaveMacHelper::Default ();
+131   \hyperlink{classns3_1_1Wifi80211pHelper}{Wifi80211pHelper} wifi80211p = Wifi80211pHelper::Default ();
+132   \textcolor{keywordflow}{if} (verbose)
+133     \{
+134       wifi80211p.\hyperlink{classns3_1_1Wifi80211pHelper_a159fbdfa2402e78aebb00e7042ecfa08}{EnableLogComponents} ();      \textcolor{comment}{// Turn on all Wifi 802.11p logging}
+135     \}
+136 
+137   wifi80211p.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::ConstantRateWifiManager"},
+138                                       \textcolor{stringliteral}{"DataMode"},StringValue (phyMode),
+139                                       \textcolor{stringliteral}{"ControlMode"},StringValue (phyMode));
+140   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = wifi80211p.\hyperlink{classns3_1_1Wifi80211pHelper_a7c72c82947837e274fb09c36dec75d21}{Install} (wifiPhy, wifi80211pMac, c);
+141 
+142   \textcolor{comment}{// Tracing}
+143   wifiPhy.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"wave-simple-80211p"}, devices);
+144 
+145   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+146   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} positionAlloc = CreateObject<ListPositionAllocator> 
+      ();
+147   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));
+148   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (5.0, 0.0, 0.0));
+149   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+150   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+151   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (c);
+152 
+153   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+154   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (c);
+155 
+156   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4;
+157   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign IP Addresses."});
+158   ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+159   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = ipv4.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devices);
+160 
+161   \hyperlink{classns3_1_1TypeId}{TypeId} tid = TypeId::LookupByName (\textcolor{stringliteral}{"ns3::UdpSocketFactory"});
+162   \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} recvSink = Socket::CreateSocket (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0), tid);
+163   \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} local = \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), 80
+      );
+164   recvSink->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} (local);
+165   recvSink->\hyperlink{classns3_1_1Socket_a243f7835ef1a85f9270fd3577e3a40da}{SetRecvCallback} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{wave-simple-80211p_8cc_a80dc0d980be124d8d5c4ee0b7943bfae}{ReceivePacket}));
+166 
+167   \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} source = Socket::CreateSocket (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), tid);
+168   \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} remote = \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (
+      \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"255.255.255.255"}), 80);
+169   source->\hyperlink{classns3_1_1Socket_a32b4fa27b732a63207c8d9054a817ed5}{SetAllowBroadcast} (\textcolor{keyword}{true});
+170   source->\hyperlink{classns3_1_1Socket_a97f08aaf37b8fd7d4b5cad4dfdd4022a}{Connect} (remote);
+171 
+172   Simulator::ScheduleWithContext (source->\hyperlink{classns3_1_1Socket_aba642ad4301c1df47befc0aa9afa2e48}{GetNode} ()->\hyperlink{classns3_1_1Node_aaf49b64a843565ce3812326313b370ac}{GetId} (),
+173                                   \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0), &\hyperlink{wave-simple-80211p_8cc_a9215c0692f5b30471001df4ee488ac6f}{GenerateTraffic},
+174                                   source, packetSize, numPackets, interPacketInterval);
+175 
+176   Simulator::Run ();
+177   Simulator::Destroy ();
+178 
+179   \textcolor{keywordflow}{return} 0;
+180 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{wave-\/simple-\/80211p.\+cc@{wave-\/simple-\/80211p.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!wave-\/simple-\/80211p.\+cc@{wave-\/simple-\/80211p.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Wifi\+Simple\+Ocb"")}{NS_LOG_COMPONENT_DEFINE("WifiSimpleOcb")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Wifi\+Simple\+Ocb\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{wave-simple-80211p_8cc_a3193ae4443b3aa79d642ca74050fc81e}{}\label{wave-simple-80211p_8cc_a3193ae4443b3aa79d642ca74050fc81e}
+\index{wave-\/simple-\/80211p.\+cc@{wave-\/simple-\/80211p.\+cc}!Receive\+Packet@{Receive\+Packet}}
+\index{Receive\+Packet@{Receive\+Packet}!wave-\/simple-\/80211p.\+cc@{wave-\/simple-\/80211p.\+cc}}
+\subsubsection[{\texorpdfstring{Receive\+Packet(\+Ptr$<$ Socket $>$ socket)}{ReceivePacket(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Receive\+Packet (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)}\hypertarget{wave-simple-80211p_8cc_a80dc0d980be124d8d5c4ee0b7943bfae}{}\label{wave-simple-80211p_8cc_a80dc0d980be124d8d5c4ee0b7943bfae}
+
+\begin{DoxyCode}
+78 \{
+79   \textcolor{keywordflow}{while} (socket->\hyperlink{classns3_1_1Socket_a8949b1f844aae563446f2f4c5be8827a}{Recv} ())
+80     \{
+81       \hyperlink{log-macros-disabled_8h_a0b36e5e182b37194f85ef1c5e979fb2e}{NS\_LOG\_UNCOND} (\textcolor{stringliteral}{"Received one packet!"});
+82     \}
+83 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+

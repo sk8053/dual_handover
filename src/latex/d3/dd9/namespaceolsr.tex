@@ -1,0 +1,57 @@
+\hypertarget{namespaceolsr}{}\section{olsr Namespace Reference}
+\label{namespaceolsr}\index{olsr@{olsr}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classolsr_1_1ShowOlsrRoutingTable}{Show\+Olsr\+Routing\+Table}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classolsr_1_1ShowOlsrRoutingTable}{Show\+Olsr\+Routing\+Table} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceolsr_a45e15df1495bdd24970a6577df558066}{populate\+\_\+node\+\_\+menu} (viz, node, menu)
+\item 
+def \hyperlink{namespaceolsr_a6a59ba6ef94ebcababd01e11a5585eb4}{register} (viz)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{olsr@{olsr}!populate\+\_\+node\+\_\+menu@{populate\+\_\+node\+\_\+menu}}
+\index{populate\+\_\+node\+\_\+menu@{populate\+\_\+node\+\_\+menu}!olsr@{olsr}}
+\subsubsection[{\texorpdfstring{populate\+\_\+node\+\_\+menu(viz, node, menu)}{populate_node_menu(viz, node, menu)}}]{\setlength{\rightskip}{0pt plus 5cm}def olsr.\+populate\+\_\+node\+\_\+menu (
+\begin{DoxyParamCaption}
+\item[{}]{viz, }
+\item[{}]{node, }
+\item[{}]{menu}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceolsr_a45e15df1495bdd24970a6577df558066}{}\label{namespaceolsr_a45e15df1495bdd24970a6577df558066}
+
+\begin{DoxyCode}
+118 \textcolor{keyword}{def }\hyperlink{namespaceolsr_a45e15df1495bdd24970a6577df558066}{populate\_node\_menu}(viz, node, menu):
+119     ns3\_node = ns.network.NodeList.GetNode(node.node\_index)
+120     olsr = ns3\_node.GetObject(ns.olsr.olsr.RoutingProtocol.GetTypeId())
+121     \textcolor{keywordflow}{if} olsr \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+122         \textcolor{keywordflow}{print} \textcolor{stringliteral}{"No OLSR"}
+123         \textcolor{keywordflow}{return}
+124     
+125     menu\_item = gtk.MenuItem(\textcolor{stringliteral}{"Show OLSR Routing Table"})
+126     menu\_item.show()
+127 
+128     \textcolor{keyword}{def }\_show\_ipv4\_routing\_table(dummy\_menu\_item):
+129         \hyperlink{classolsr_1_1ShowOlsrRoutingTable}{ShowOlsrRoutingTable}(viz, node.node\_index)
+130 
+131     menu\_item.connect(\textcolor{stringliteral}{"activate"}, \_show\_ipv4\_routing\_table)
+132     menu.add(menu\_item)
+133 
+\end{DoxyCode}
+\index{olsr@{olsr}!register@{register}}
+\index{register@{register}!olsr@{olsr}}
+\subsubsection[{\texorpdfstring{register(viz)}{register(viz)}}]{\setlength{\rightskip}{0pt plus 5cm}def olsr.\+register (
+\begin{DoxyParamCaption}
+\item[{}]{viz}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceolsr_a6a59ba6ef94ebcababd01e11a5585eb4}{}\label{namespaceolsr_a6a59ba6ef94ebcababd01e11a5585eb4}
+
+\begin{DoxyCode}
+134 \textcolor{keyword}{def }\hyperlink{namespaceolsr_a6a59ba6ef94ebcababd01e11a5585eb4}{register}(viz):
+135     viz.connect(\textcolor{stringliteral}{"populate-node-menu"}, populate\_node\_menu)
+136 \end{DoxyCode}

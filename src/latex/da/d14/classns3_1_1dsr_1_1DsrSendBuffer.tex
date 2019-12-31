@@ -1,0 +1,590 @@
+\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer}{}\section{ns3\+:\+:dsr\+:\+:Dsr\+Send\+Buffer Class Reference}
+\label{classns3_1_1dsr_1_1DsrSendBuffer}\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+
+
+D\+SR send buffer.  
+
+
+
+
+{\ttfamily \#include $<$dsr-\/rsendbuff.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:dsr\+:\+:Dsr\+Send\+Buffer\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_af2f4882bbeff675ff66b2e72d5f6c451}{Dsr\+Send\+Buffer} ()
+\item 
+bool \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_aac846f6a38f6fc6431c8483103ed5121}{Enqueue} (\hyperlink{classns3_1_1dsr_1_1DsrSendBuffEntry}{Dsr\+Send\+Buff\+Entry} \&entry)
+\item 
+bool \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a31b49398ddb6a97b6ef27daa0d4ff6d7}{Dequeue} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} dst, \hyperlink{classns3_1_1dsr_1_1DsrSendBuffEntry}{Dsr\+Send\+Buff\+Entry} \&entry)
+\item 
+void \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_af20f9ff303a1099f3568254d4c58e829}{Drop\+Packet\+With\+Dst} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} dst)
+\item 
+bool \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_acf27d9e92a1d1960b9094c4108724a53}{Find} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} dst)
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a0ecf75786eef7193fa5a5d84b2b7a1f0}{Get\+Size} ()
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a34ad8ca421a6ba506b3b76bcf0bfb2ea}{Get\+Max\+Queue\+Len} () const 
+\item 
+void \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a01d2c15d2f020c8f46b628426a98450f}{Set\+Max\+Queue\+Len} (uint32\+\_\+t len)
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a72dfd7d7334d0f6ca0064ce807f9a938}{Get\+Send\+Buffer\+Timeout} () const 
+\item 
+void \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a3b036f56c257571ae3fa5b5a49b2a57b}{Set\+Send\+Buffer\+Timeout} (\hyperlink{classns3_1_1Time}{Time} t)
+\item 
+std\+::vector$<$ \hyperlink{classns3_1_1dsr_1_1DsrSendBuffEntry}{Dsr\+Send\+Buff\+Entry} $>$ \& \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_ad21223587fd6ae3a42b124416e877305}{Get\+Buffer} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a4fc2bdaf29505ff9ec26f75b2e387e29}{Purge} ()
+\begin{DoxyCompactList}\small\item\em Remove all expired entries. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_ae076b4ebb909c5dc7deda45d905b8e97}{Drop} (\hyperlink{classns3_1_1dsr_1_1DsrSendBuffEntry}{Dsr\+Send\+Buff\+Entry} en, std\+::string reason)
+\begin{DoxyCompactList}\small\item\em Notify that packet is dropped from queue by timeout. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_aa087dc663e99a56ecf337cd43d5e4df4}{Is\+Equal} (\hyperlink{classns3_1_1dsr_1_1DsrSendBuffEntry}{Dsr\+Send\+Buff\+Entry} en, const \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} dst)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{classns3_1_1dsr_1_1DsrSendBuffEntry}{Dsr\+Send\+Buff\+Entry} $>$ \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\+\_\+send\+Buffer}
+\begin{DoxyCompactList}\small\item\em The send buffer to cache unsent packet. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_ad42bfd04653608404029c7a2554fd963}{m\+\_\+max\+Len}
+\begin{DoxyCompactList}\small\item\em The maximum number of packets that we allow a routing protocol to buffer. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a69009e6cefeda83be7eada52fdc8680e}{m\+\_\+send\+Buffer\+Timeout}
+\begin{DoxyCompactList}\small\item\em The maximum period of time that a routing protocol is allowed to buffer a packet for, seconds. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+D\+SR send buffer. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Dsr\+Send\+Buffer@{Dsr\+Send\+Buffer}}
+\index{Dsr\+Send\+Buffer@{Dsr\+Send\+Buffer}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Dsr\+Send\+Buffer()}{DsrSendBuffer()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Dsr\+Send\+Buffer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_af2f4882bbeff675ff66b2e72d5f6c451}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_af2f4882bbeff675ff66b2e72d5f6c451}
+Default constructor 
+\begin{DoxyCode}
+131   \{
+132   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Dequeue@{Dequeue}}
+\index{Dequeue@{Dequeue}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Dequeue(\+Ipv4\+Address dst, Dsr\+Send\+Buff\+Entry \&entry)}{Dequeue(Ipv4Address dst, DsrSendBuffEntry &entry)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Dequeue (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Address}}]{dst, }
+\item[{{\bf Dsr\+Send\+Buff\+Entry} \&}]{entry}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_a31b49398ddb6a97b6ef27daa0d4ff6d7}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_a31b49398ddb6a97b6ef27daa0d4ff6d7}
+Return first found (the earliest) entry for the given destination.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dst} & I\+Pv4 address of the destination \\
+\hline
+{\em entry} & pointer to entry to return \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successfully dequeued, false otherwise 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+105 \{
+106   \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a4fc2bdaf29505ff9ec26f75b2e387e29}{Purge} ();
+107   \textcolor{comment}{/*}
+108 \textcolor{comment}{   * Dequeue the entry with destination address dst}
+109 \textcolor{comment}{   */}
+110   \textcolor{keywordflow}{for} (std::vector<DsrSendBuffEntry>::iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.begin (); 
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.end (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+111     \{
+112       \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->GetDestination () == dst)
+113         \{
+114           entry = *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+115           \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.erase (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+116           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Packet size while dequeuing "} << entry.GetPacket ()->GetSize ());
+117           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+118         \}
+119     \}
+120   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+121 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Drop@{Drop}}
+\index{Drop@{Drop}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Drop(\+Dsr\+Send\+Buff\+Entry en, std\+::string reason)}{Drop(DsrSendBuffEntry en, std::string reason)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Drop (
+\begin{DoxyParamCaption}
+\item[{{\bf Dsr\+Send\+Buff\+Entry}}]{en, }
+\item[{std\+::string}]{reason}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_ae076b4ebb909c5dc7deda45d905b8e97}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_ae076b4ebb909c5dc7deda45d905b8e97}
+
+
+Notify that packet is dropped from queue by timeout. 
+
+
+\begin{DoxyCode}
+174 \{
+175   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (reason << en.GetPacket ()->GetUid () << \textcolor{stringliteral}{" "} << en.GetDestination ());
+176 \textcolor{comment}{//  en.GetErrorCallback () (en.GetPacket (), en.GetDestination (),}
+177 \textcolor{comment}{//     Socket::ERROR\_NOROUTETOHOST);}
+178   \textcolor{keywordflow}{return};
+179 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Drop\+Packet\+With\+Dst@{Drop\+Packet\+With\+Dst}}
+\index{Drop\+Packet\+With\+Dst@{Drop\+Packet\+With\+Dst}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Drop\+Packet\+With\+Dst(\+Ipv4\+Address dst)}{DropPacketWithDst(Ipv4Address dst)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Drop\+Packet\+With\+Dst (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Address}}]{dst}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_af20f9ff303a1099f3568254d4c58e829}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_af20f9ff303a1099f3568254d4c58e829}
+Remove all packets with destination IP address dst
+
+
+\begin{DoxyParams}{Parameters}
+{\em dst} & I\+Pv4 address of the destination \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+85 \{
+86   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << dst);
+87   \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a4fc2bdaf29505ff9ec26f75b2e387e29}{Purge} ();
+88   \textcolor{comment}{/*}
+89 \textcolor{comment}{   * Drop the packet with destination address dst}
+90 \textcolor{comment}{   */}
+91   \textcolor{keywordflow}{for} (std::vector<DsrSendBuffEntry>::iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.begin (); 
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}
+92        != \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.end (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+93     \{
+94       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_aa087dc663e99a56ecf337cd43d5e4df4}{IsEqual} (*\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}, dst))
+95         \{
+96           \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_ae076b4ebb909c5dc7deda45d905b8e97}{Drop} (*\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}, \textcolor{stringliteral}{"DropPacketWithDst"});
+97         \}
+98     \}
+99   \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.erase (std::remove\_if (\hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.begin (), 
+      \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.end (),
+100                                       std::bind2nd (std::ptr\_fun (
+      \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_aa087dc663e99a56ecf337cd43d5e4df4}{DsrSendBuffer::IsEqual}), dst)), \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.end ());
+101 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Enqueue@{Enqueue}}
+\index{Enqueue@{Enqueue}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Enqueue(\+Dsr\+Send\+Buff\+Entry \&entry)}{Enqueue(DsrSendBuffEntry &entry)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Enqueue (
+\begin{DoxyParamCaption}
+\item[{{\bf Dsr\+Send\+Buff\+Entry} \&}]{entry}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_aac846f6a38f6fc6431c8483103ed5121}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_aac846f6a38f6fc6431c8483103ed5121}
+Push entry in queue, if there is no entry with the same packet and destination address in queue.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entry} & \hyperlink{classns3_1_1dsr_1_1DsrSendBuffEntry}{Dsr\+Send\+Buff\+Entry} to put in the queue \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successfully enqueued, false otherwise 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+54 \{
+55   \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a4fc2bdaf29505ff9ec26f75b2e387e29}{Purge} ();
+56   \textcolor{keywordflow}{for} (std::vector<DsrSendBuffEntry>::const\_iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.begin (); 
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}
+57        != \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.end (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+58     \{
+59 \textcolor{comment}{//      NS\_LOG\_DEBUG ("packet id " << i->GetPacket ()->GetUid () << " " << entry.GetPacket ()->GetUid ()}
+60 \textcolor{comment}{//                                << " dst " << i->GetDestination () << " " << entry.GetDestination ());}
+61 
+62       \textcolor{keywordflow}{if} ((\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->GetPacket ()->GetUid () == entry.GetPacket ()->GetUid ())
+63           && (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->GetDestination () == entry.GetDestination ()))
+64         \{
+65           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+66         \}
+67     \}
+68 
+69   entry.SetExpireTime (\hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a69009e6cefeda83be7eada52fdc8680e}{m\_sendBufferTimeout});     \textcolor{comment}{// Initialize the send buffer timeout}
+70   \textcolor{comment}{/*}
+71 \textcolor{comment}{   * Drop the most aged packet when buffer reaches to max}
+72 \textcolor{comment}{   */}
+73   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.size () >= \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_ad42bfd04653608404029c7a2554fd963}{m\_maxLen})
+74     \{
+75       \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_ae076b4ebb909c5dc7deda45d905b8e97}{Drop} (\hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.front (), \textcolor{stringliteral}{"Drop the most aged packet"});         \textcolor{comment}{// Drop the most
+       aged packet}
+76       \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.erase (\hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.begin ());
+77     \}
+78   \textcolor{comment}{// enqueue the entry}
+79   \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.push\_back (entry);
+80   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+81 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Find@{Find}}
+\index{Find@{Find}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Find(\+Ipv4\+Address dst)}{Find(Ipv4Address dst)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Find (
+\begin{DoxyParamCaption}
+\item[{{\bf Ipv4\+Address}}]{dst}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_acf27d9e92a1d1960b9094c4108724a53}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_acf27d9e92a1d1960b9094c4108724a53}
+Check if a packet with destination dst exists in the queue
+
+
+\begin{DoxyParams}{Parameters}
+{\em dst} & I\+Pv4 address of the destination \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if found, false otherwise 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+125 \{
+126   \textcolor{comment}{/*}
+127 \textcolor{comment}{   * Make sure if the send buffer contains entry with certain dst}
+128 \textcolor{comment}{   */}
+129   \textcolor{keywordflow}{for} (std::vector<DsrSendBuffEntry>::const\_iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.begin (); 
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}
+130        != \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.end (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+131     \{
+132       \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->GetDestination () == dst)
+133         \{
+134           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Found the packet"});
+135           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+136         \}
+137     \}
+138   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+139 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Get\+Buffer@{Get\+Buffer}}
+\index{Get\+Buffer@{Get\+Buffer}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Get\+Buffer()}{GetBuffer()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Dsr\+Send\+Buff\+Entry}$>$\& ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Get\+Buffer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_ad21223587fd6ae3a42b124416e877305}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_ad21223587fd6ae3a42b124416e877305}
+Return a pointer to the internal queue
+
+\begin{DoxyReturn}{Returns}
+a pointer to the internal queue 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+215   \{
+216     \textcolor{keywordflow}{return} \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer};
+217   \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Get\+Max\+Queue\+Len@{Get\+Max\+Queue\+Len}}
+\index{Get\+Max\+Queue\+Len@{Get\+Max\+Queue\+Len}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Get\+Max\+Queue\+Len() const }{GetMaxQueueLen() const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Get\+Max\+Queue\+Len (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_a34ad8ca421a6ba506b3b76bcf0bfb2ea}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_a34ad8ca421a6ba506b3b76bcf0bfb2ea}
+Return the maximum queue length
+
+\begin{DoxyReturn}{Returns}
+the maximum queue length 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+177   \{
+178     \textcolor{keywordflow}{return} \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_ad42bfd04653608404029c7a2554fd963}{m\_maxLen};
+179   \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Get\+Send\+Buffer\+Timeout@{Get\+Send\+Buffer\+Timeout}}
+\index{Get\+Send\+Buffer\+Timeout@{Get\+Send\+Buffer\+Timeout}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Get\+Send\+Buffer\+Timeout() const }{GetSendBufferTimeout() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Get\+Send\+Buffer\+Timeout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_a72dfd7d7334d0f6ca0064ce807f9a938}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_a72dfd7d7334d0f6ca0064ce807f9a938}
+Return the entry lifetime in the queue
+
+\begin{DoxyReturn}{Returns}
+the entry lifetime in the queue 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+195   \{
+196     \textcolor{keywordflow}{return} \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a69009e6cefeda83be7eada52fdc8680e}{m\_sendBufferTimeout};
+197   \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 12
+
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Get\+Size@{Get\+Size}}
+\index{Get\+Size@{Get\+Size}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Get\+Size()}{GetSize()}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Get\+Size (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_a0ecf75786eef7193fa5a5d84b2b7a1f0}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_a0ecf75786eef7193fa5a5d84b2b7a1f0}
+Number of entries
+
+\begin{DoxyReturn}{Returns}
+the number of entries in the queue 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+47 \{
+48   \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a4fc2bdaf29505ff9ec26f75b2e387e29}{Purge} ();
+49   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.size ();
+50 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 13
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 14
+
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Is\+Equal@{Is\+Equal}}
+\index{Is\+Equal@{Is\+Equal}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Is\+Equal(\+Dsr\+Send\+Buff\+Entry en, const Ipv4\+Address dst)}{IsEqual(DsrSendBuffEntry en, const Ipv4Address dst)}}]{\setlength{\rightskip}{0pt plus 5cm}static bool ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Is\+Equal (
+\begin{DoxyParamCaption}
+\item[{{\bf Dsr\+Send\+Buff\+Entry}}]{en, }
+\item[{const {\bf Ipv4\+Address}}]{dst}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_aa087dc663e99a56ecf337cd43d5e4df4}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_aa087dc663e99a56ecf337cd43d5e4df4}
+Check if the send buffer entry is the same or not
+
+
+\begin{DoxyParams}{Parameters}
+{\em en} & Send\+Buffer\+Entry \\
+\hline
+{\em dst} & I\+Pv4 address to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the Send\+Buffer\+Entry destination is the same, false otherwise 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+235   \{
+236     \textcolor{keywordflow}{return} (en.GetDestination () == dst);
+237   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 15
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 16
+
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Purge@{Purge}}
+\index{Purge@{Purge}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Purge()}{Purge()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Purge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_a4fc2bdaf29505ff9ec26f75b2e387e29}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_a4fc2bdaf29505ff9ec26f75b2e387e29}
+
+
+Remove all expired entries. 
+
+
+\begin{DoxyCode}
+153 \{
+154   \textcolor{comment}{/*}
+155 \textcolor{comment}{   * Purge the buffer to eliminate expired entries}
+156 \textcolor{comment}{   */}
+157   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"The send buffer size "} << \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.size ());
+158   IsExpired pred;
+159   \textcolor{keywordflow}{for} (std::vector<DsrSendBuffEntry>::iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.begin (); 
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}
+160        != \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.end (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+161     \{
+162       \textcolor{keywordflow}{if} (pred (*\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}))
+163         \{
+164           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Dropping Queue Packets"});
+165           \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_ae076b4ebb909c5dc7deda45d905b8e97}{Drop} (*\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}, \textcolor{stringliteral}{"Drop out-dated packet "});
+166         \}
+167     \}
+168   \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.erase (std::remove\_if (\hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.begin (), 
+      \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.end (), pred),
+169                       \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{m\_sendBuffer}.end ());
+170 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 17
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 18
+
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Set\+Max\+Queue\+Len@{Set\+Max\+Queue\+Len}}
+\index{Set\+Max\+Queue\+Len@{Set\+Max\+Queue\+Len}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Set\+Max\+Queue\+Len(uint32\+\_\+t len)}{SetMaxQueueLen(uint32_t len)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Set\+Max\+Queue\+Len (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_a01d2c15d2f020c8f46b628426a98450f}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_a01d2c15d2f020c8f46b628426a98450f}
+Set the maximum queue length
+
+
+\begin{DoxyParams}{Parameters}
+{\em len} & the maximum queue length \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+186   \{
+187     \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_ad42bfd04653608404029c7a2554fd963}{m\_maxLen} = len;
+188   \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 19
+
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!Set\+Send\+Buffer\+Timeout@{Set\+Send\+Buffer\+Timeout}}
+\index{Set\+Send\+Buffer\+Timeout@{Set\+Send\+Buffer\+Timeout}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{Set\+Send\+Buffer\+Timeout(\+Time t)}{SetSendBufferTimeout(Time t)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::\+Set\+Send\+Buffer\+Timeout (
+\begin{DoxyParamCaption}
+\item[{{\bf Time}}]{t}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_a3b036f56c257571ae3fa5b5a49b2a57b}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_a3b036f56c257571ae3fa5b5a49b2a57b}
+Set the entry lifetime in the queue
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & the entry lifetime in the queue \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+204   \{
+205     \hyperlink{classns3_1_1dsr_1_1DsrSendBuffer_a69009e6cefeda83be7eada52fdc8680e}{m\_sendBufferTimeout} = t;
+206   \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 20
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!m\+\_\+max\+Len@{m\+\_\+max\+Len}}
+\index{m\+\_\+max\+Len@{m\+\_\+max\+Len}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{m\+\_\+max\+Len}{m_maxLen}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::m\+\_\+max\+Len\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_ad42bfd04653608404029c7a2554fd963}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_ad42bfd04653608404029c7a2554fd963}
+
+
+The maximum number of packets that we allow a routing protocol to buffer. 
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!m\+\_\+send\+Buffer@{m\+\_\+send\+Buffer}}
+\index{m\+\_\+send\+Buffer@{m\+\_\+send\+Buffer}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{m\+\_\+send\+Buffer}{m_sendBuffer}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Dsr\+Send\+Buff\+Entry}$>$ ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::m\+\_\+send\+Buffer\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_a7ce6425b23f8949a515f5624031e5fd7}
+
+
+The send buffer to cache unsent packet. 
+
+\index{ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}!m\+\_\+send\+Buffer\+Timeout@{m\+\_\+send\+Buffer\+Timeout}}
+\index{m\+\_\+send\+Buffer\+Timeout@{m\+\_\+send\+Buffer\+Timeout}!ns3\+::dsr\+::\+Dsr\+Send\+Buffer@{ns3\+::dsr\+::\+Dsr\+Send\+Buffer}}
+\subsubsection[{\texorpdfstring{m\+\_\+send\+Buffer\+Timeout}{m_sendBufferTimeout}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::dsr\+::\+Dsr\+Send\+Buffer\+::m\+\_\+send\+Buffer\+Timeout\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1dsr_1_1DsrSendBuffer_a69009e6cefeda83be7eada52fdc8680e}{}\label{classns3_1_1dsr_1_1DsrSendBuffer_a69009e6cefeda83be7eada52fdc8680e}
+
+
+The maximum period of time that a routing protocol is allowed to buffer a packet for, seconds. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+dsr/model/\hyperlink{dsr-rsendbuff_8h}{dsr-\/rsendbuff.\+h}\item 
+dsr/model/\hyperlink{dsr-rsendbuff_8cc}{dsr-\/rsendbuff.\+cc}\end{DoxyCompactItemize}

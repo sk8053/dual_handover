@@ -1,0 +1,442 @@
+\hypertarget{classns3_1_1WeibullRandomVariable}{}\section{ns3\+:\+:Weibull\+Random\+Variable Class Reference}
+\label{classns3_1_1WeibullRandomVariable}\index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+
+
+The Weibull distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically.  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Weibull\+Random\+Variable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Weibull\+Random\+Variable\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1WeibullRandomVariable_a9d3b8bdd7b1ae5f09a9a06285d67df52}{Weibull\+Random\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Creates a Weibull distribution R\+NG with the default values for the scale, shape, and upper bound. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1WeibullRandomVariable_a61c82717ad8c06c8f098ab88f37a6c54}{Get\+Scale} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the scale parameter for the Weibull distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1WeibullRandomVariable_a3e71221cc1305f8d01b3057317be2ff8}{Get\+Shape} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the shape parameter for the Weibull distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1WeibullRandomVariable_a1920053804effdc2c378c47aecc56bbc}{Get\+Bound} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the upper bound on values that can be returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1WeibullRandomVariable_af64818134b6b7734f33a81bca8d15023}{Get\+Value} (double scale, double shape, double bound)
+\begin{DoxyCompactList}\small\item\em Returns a random double from a Weibull distribution with the specified scale, shape, and upper bound. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1WeibullRandomVariable_aec7fac5766cf96f4a089b4dcae9a39fc}{Get\+Integer} (uint32\+\_\+t scale, uint32\+\_\+t shape, uint32\+\_\+t bound)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a Weibull distribution with the specified scale, shape, and upper bound. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1WeibullRandomVariable_a2575524b816f29677d0ad6e0a57a3833}{Get\+Value} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random double from a Weibull distribution with the current scale, shape, and upper bound. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1WeibullRandomVariable_a44967586ae8623eba6a0855f93abb1f2}{Get\+Integer} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a Weibull distribution with the current scale, shape, and upper bound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1WeibullRandomVariable_aab32ae576b15af76429351cfedf590a5}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1WeibullRandomVariable_a6129dc5c27fb0bce38643c21e3fbac1f}{m\+\_\+scale}
+\item 
+double \hyperlink{classns3_1_1WeibullRandomVariable_a2bdace237fb231000449198efd0f9c01}{m\+\_\+shape}
+\item 
+double \hyperlink{classns3_1_1WeibullRandomVariable_a5ddde1ec27e5c9c3091d5474af911cbb}{m\+\_\+bound}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The Weibull distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically. 
+
+This class supports the creation of objects that return random numbers from a fixed Weibull distribution. It also supports the generation of single random numbers from various Weibull distributions.
+
+The probability density function is defined over the interval \mbox{[}0, $+\infty$\mbox{]} as\+: $ \frac{k}{\lambda}\left(\frac{x}{\lambda}\right)^{k-1}e^{-\left(\frac{x}{\lambda}\right)^k} $ where $ k > 0$ is the shape parameter and $ \lambda > 0$ is the scale parameter. The specified mean is related to the scale and shape parameters by the following relation\+: $ mean = \lambda\Gamma\left(1+\frac{1}{k}\right) $ where $ \Gamma $ is the Gamma function.
+
+Since Weibull distributions can theoretically return unbounded values, it is sometimes useful to specify a fixed upper limit. Note however when the upper limit is specified, the true mean of the distribution is slightly smaller than the mean value specified.
+
+Here is an example of how to use this class\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{double} scale = 5.0;
+\textcolor{keywordtype}{double} shape = 1.0;
+
+Ptr<WeibullRandomVariable> x = CreateObject<WeibullRandomVariable> ();
+x->SetAttribute (\textcolor{stringliteral}{"Scale"}, DoubleValue (scale));
+x->SetAttribute (\textcolor{stringliteral}{"Shape"}, DoubleValue (shape));
+
+\textcolor{comment}{// The expected value for the mean of the values returned by a}
+\textcolor{comment}{// Weibull distributed random variable is}
+\textcolor{comment}{//}
+\textcolor{comment}{//     E[value]  =  scale * Gamma(1 + 1 / shape)  ,}
+\textcolor{comment}{//               }
+\textcolor{comment}{// where Gamma() is the Gamma function.  Note that }
+\textcolor{comment}{//               }
+\textcolor{comment}{//     Gamma(n)  =  (n - 1)!}
+\textcolor{comment}{//               }
+\textcolor{comment}{// if n is a positive integer.}
+\textcolor{comment}{//}
+\textcolor{comment}{// For this example,}
+\textcolor{comment}{//}
+\textcolor{comment}{//     Gamma(1 + 1 / shape)  =  Gamma(1 + 1 / 1)}
+\textcolor{comment}{//                           =  Gamma(2)}
+\textcolor{comment}{//                           =  (2 - 1)!}
+\textcolor{comment}{//                           =  1}
+\textcolor{comment}{//}
+\textcolor{comment}{// which means}
+\textcolor{comment}{//}
+\textcolor{comment}{//     E[value]  =  scale  .}
+\textcolor{comment}{//               }
+\textcolor{keywordtype}{double} value = x->GetValue ();
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}!Weibull\+Random\+Variable@{Weibull\+Random\+Variable}}
+\index{Weibull\+Random\+Variable@{Weibull\+Random\+Variable}!ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Weibull\+Random\+Variable()}{WeibullRandomVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Weibull\+Random\+Variable\+::\+Weibull\+Random\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1WeibullRandomVariable_a9d3b8bdd7b1ae5f09a9a06285d67df52}{}\label{classns3_1_1WeibullRandomVariable_a9d3b8bdd7b1ae5f09a9a06285d67df52}
+
+
+Creates a Weibull distribution R\+NG with the default values for the scale, shape, and upper bound. 
+
+
+\begin{DoxyCode}
+593 \{
+594   \textcolor{comment}{// m\_scale, m\_shape, and m\_bound are initialized after constructor}
+595   \textcolor{comment}{// by attributes}
+596   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+597 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}!Get\+Bound@{Get\+Bound}}
+\index{Get\+Bound@{Get\+Bound}!ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Bound(void) const }{GetBound(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Weibull\+Random\+Variable\+::\+Get\+Bound (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1WeibullRandomVariable_a1920053804effdc2c378c47aecc56bbc}{}\label{classns3_1_1WeibullRandomVariable_a1920053804effdc2c378c47aecc56bbc}
+
+
+Returns the upper bound on values that can be returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The upper bound on values that can be returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+613 \{
+614   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+615   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1WeibullRandomVariable_a5ddde1ec27e5c9c3091d5474af911cbb}{m\_bound};
+616 \}
+\end{DoxyCode}
+\index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(uint32\+\_\+t scale, uint32\+\_\+t shape, uint32\+\_\+t bound)}{GetInteger(uint32_t scale, uint32_t shape, uint32_t bound)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Weibull\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{scale, }
+\item[{uint32\+\_\+t}]{shape, }
+\item[{uint32\+\_\+t}]{bound}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1WeibullRandomVariable_aec7fac5766cf96f4a089b4dcae9a39fc}{}\label{classns3_1_1WeibullRandomVariable_aec7fac5766cf96f4a089b4dcae9a39fc}
+
+
+Returns a random unsigned integer from a Weibull distribution with the specified scale, shape, and upper bound. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em scale} & Scale parameter for the Weibull distribution. \\
+\hline
+\mbox{\tt in}  & {\em shape} & Shape parameter for the Weibull distribution. \\
+\hline
+\mbox{\tt in}  & {\em bound} & Upper bound on values returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and
+
+\[ x = scale * {(-\log(u))}^{\frac{1}{shape}} \]
+
+is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, is calculated as
+
+\[ x' = scale * {(-\log(1 - u))}^{\frac{1}{shape}} , \]
+
+which now involves the log of the distance $u$ is from 1. 
+\begin{DoxyCode}
+644 \{
+645   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << scale << shape << bound);
+646   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>} ( \hyperlink{classns3_1_1WeibullRandomVariable_a2575524b816f29677d0ad6e0a57a3833}{GetValue} (scale, shape, bound) );
+647 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(void)}{GetInteger(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Weibull\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1WeibullRandomVariable_a44967586ae8623eba6a0855f93abb1f2}{}\label{classns3_1_1WeibullRandomVariable_a44967586ae8623eba6a0855f93abb1f2}
+
+
+Returns a random unsigned integer from a Weibull distribution with the current scale, shape, and upper bound. 
+
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and
+
+\[ x = scale * {(-\log(u))}^{\frac{1}{shape}} \]
+
+is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, is calculated as
+
+\[ x' = scale * {(-\log(1 - u))}^{\frac{1}{shape}} , \]
+
+which now involves the log of the distance $u$ is from 1. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+657 \{
+658   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+659   \textcolor{keywordflow}{return} (uint32\_t)\hyperlink{classns3_1_1WeibullRandomVariable_a2575524b816f29677d0ad6e0a57a3833}{GetValue} (\hyperlink{classns3_1_1WeibullRandomVariable_a6129dc5c27fb0bce38643c21e3fbac1f}{m\_scale}, \hyperlink{classns3_1_1WeibullRandomVariable_a2bdace237fb231000449198efd0f9c01}{m\_shape}, \hyperlink{classns3_1_1WeibullRandomVariable_a5ddde1ec27e5c9c3091d5474af911cbb}{m\_bound});
+660 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}!Get\+Scale@{Get\+Scale}}
+\index{Get\+Scale@{Get\+Scale}!ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Scale(void) const }{GetScale(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Weibull\+Random\+Variable\+::\+Get\+Scale (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1WeibullRandomVariable_a61c82717ad8c06c8f098ab88f37a6c54}{}\label{classns3_1_1WeibullRandomVariable_a61c82717ad8c06c8f098ab88f37a6c54}
+
+
+Returns the scale parameter for the Weibull distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The scale parameter for the Weibull distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+601 \{
+602   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+603   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1WeibullRandomVariable_a6129dc5c27fb0bce38643c21e3fbac1f}{m\_scale};
+604 \}
+\end{DoxyCode}
+\index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}!Get\+Shape@{Get\+Shape}}
+\index{Get\+Shape@{Get\+Shape}!ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Shape(void) const }{GetShape(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Weibull\+Random\+Variable\+::\+Get\+Shape (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1WeibullRandomVariable_a3e71221cc1305f8d01b3057317be2ff8}{}\label{classns3_1_1WeibullRandomVariable_a3e71221cc1305f8d01b3057317be2ff8}
+
+
+Returns the shape parameter for the Weibull distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The shape parameter for the Weibull distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+607 \{
+608   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+609   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1WeibullRandomVariable_a2bdace237fb231000449198efd0f9c01}{m\_shape};
+610 \}
+\end{DoxyCode}
+\index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Weibull\+Random\+Variable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1WeibullRandomVariable_aab32ae576b15af76429351cfedf590a5}{}\label{classns3_1_1WeibullRandomVariable_aab32ae576b15af76429351cfedf590a5}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+572 \{
+573   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::WeibullRandomVariable"})
+574     .SetParent<\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{RandomVariableStream}>()
+575     .SetGroupName (\textcolor{stringliteral}{"Core"})
+576     .AddConstructor<\hyperlink{classns3_1_1WeibullRandomVariable_a9d3b8bdd7b1ae5f09a9a06285d67df52}{WeibullRandomVariable}> ()
+577     .AddAttribute(\textcolor{stringliteral}{"Scale"}, \textcolor{stringliteral}{"The scale parameter for the Weibull distribution returned by this RNG stream."},
+578                   DoubleValue(1.0),
+579                   MakeDoubleAccessor(&\hyperlink{classns3_1_1WeibullRandomVariable_a6129dc5c27fb0bce38643c21e3fbac1f}{WeibullRandomVariable::m\_scale}),
+580                   MakeDoubleChecker<double>())
+581     .AddAttribute(\textcolor{stringliteral}{"Shape"}, \textcolor{stringliteral}{"The shape parameter for the Weibull distribution returned by this RNG stream."},
+582                   DoubleValue(1),
+583                   MakeDoubleAccessor(&\hyperlink{classns3_1_1WeibullRandomVariable_a2bdace237fb231000449198efd0f9c01}{WeibullRandomVariable::m\_shape}),
+584                   MakeDoubleChecker<double>())
+585     .AddAttribute(\textcolor{stringliteral}{"Bound"}, \textcolor{stringliteral}{"The upper bound on the values returned by this RNG stream."},
+586                   DoubleValue(0.0),
+587                   MakeDoubleAccessor(&\hyperlink{classns3_1_1WeibullRandomVariable_a5ddde1ec27e5c9c3091d5474af911cbb}{WeibullRandomVariable::m\_bound}),
+588                   MakeDoubleChecker<double>())
+589     ;
+590   \textcolor{keywordflow}{return} tid;
+591 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(double scale, double shape, double bound)}{GetValue(double scale, double shape, double bound)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Weibull\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{double}]{scale, }
+\item[{double}]{shape, }
+\item[{double}]{bound}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1WeibullRandomVariable_af64818134b6b7734f33a81bca8d15023}{}\label{classns3_1_1WeibullRandomVariable_af64818134b6b7734f33a81bca8d15023}
+
+
+Returns a random double from a Weibull distribution with the specified scale, shape, and upper bound. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em scale} & Scale parameter for the Weibull distribution. \\
+\hline
+\mbox{\tt in}  & {\em shape} & Shape parameter for the Weibull distribution. \\
+\hline
+\mbox{\tt in}  & {\em bound} & Upper bound on values returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and
+
+\[ x = scale * {(-\log(u))}^{\frac{1}{shape}} \]
+
+is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, is calculated as
+
+\[ x' = scale * {(-\log(1 - u))}^{\frac{1}{shape}} , \]
+
+which now involves the log of the distance $u$ is from 1. 
+\begin{DoxyCode}
+620 \{
+621   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << scale << shape << bound);
+622   \textcolor{keywordtype}{double} exponent = 1.0 / shape;
+623   \textcolor{keywordflow}{while} (1)
+624     \{
+625       \textcolor{comment}{// Get a uniform random variable in [0,1].}
+626       \textcolor{keywordtype}{double} v = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+627       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+628         \{
+629           v = (1 - v);
+630         \}
+631 
+632       \textcolor{comment}{// Calculate the Weibull random variable.}
+633       \textcolor{keywordtype}{double} r = scale * std::pow ( -std::log (v), exponent);
+634 
+635       \textcolor{comment}{// Use this value if it's acceptable.}
+636       \textcolor{keywordflow}{if} (bound == 0 || r <= bound)
+637         \{
+638           \textcolor{keywordflow}{return} r;
+639         \}
+640     \}
+641 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(void)}{GetValue(void)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Weibull\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1WeibullRandomVariable_a2575524b816f29677d0ad6e0a57a3833}{}\label{classns3_1_1WeibullRandomVariable_a2575524b816f29677d0ad6e0a57a3833}
+
+
+Returns a random double from a Weibull distribution with the current scale, shape, and upper bound. 
+
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and
+
+\[ x = scale * {(-\log(u))}^{\frac{1}{shape}} \]
+
+is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, is calculated as
+
+\[ x' = scale * {(-\log(1 - u))}^{\frac{1}{shape}} , \]
+
+which now involves the log of the distance $u$ is from 1.
+
+Note that we have to re-\/implement this method here because the method is overloaded above for the three-\/argument variant and the c++ name resolution rules don\textquotesingle{}t work well with overloads split between parent and child classes. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+651 \{
+652   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+653   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1WeibullRandomVariable_a2575524b816f29677d0ad6e0a57a3833}{GetValue} (\hyperlink{classns3_1_1WeibullRandomVariable_a6129dc5c27fb0bce38643c21e3fbac1f}{m\_scale}, \hyperlink{classns3_1_1WeibullRandomVariable_a2bdace237fb231000449198efd0f9c01}{m\_shape}, \hyperlink{classns3_1_1WeibullRandomVariable_a5ddde1ec27e5c9c3091d5474af911cbb}{m\_bound});
+654 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}!m\+\_\+bound@{m\+\_\+bound}}
+\index{m\+\_\+bound@{m\+\_\+bound}!ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+bound}{m_bound}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Weibull\+Random\+Variable\+::m\+\_\+bound\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1WeibullRandomVariable_a5ddde1ec27e5c9c3091d5474af911cbb}{}\label{classns3_1_1WeibullRandomVariable_a5ddde1ec27e5c9c3091d5474af911cbb}
+The upper bound on values that can be returned by this R\+NG stream. \index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}!m\+\_\+scale@{m\+\_\+scale}}
+\index{m\+\_\+scale@{m\+\_\+scale}!ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+scale}{m_scale}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Weibull\+Random\+Variable\+::m\+\_\+scale\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1WeibullRandomVariable_a6129dc5c27fb0bce38643c21e3fbac1f}{}\label{classns3_1_1WeibullRandomVariable_a6129dc5c27fb0bce38643c21e3fbac1f}
+The scale parameter for the Weibull distribution returned by this R\+NG stream. \index{ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}!m\+\_\+shape@{m\+\_\+shape}}
+\index{m\+\_\+shape@{m\+\_\+shape}!ns3\+::\+Weibull\+Random\+Variable@{ns3\+::\+Weibull\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+shape}{m_shape}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Weibull\+Random\+Variable\+::m\+\_\+shape\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1WeibullRandomVariable_a2bdace237fb231000449198efd0f9c01}{}\label{classns3_1_1WeibullRandomVariable_a2bdace237fb231000449198efd0f9c01}
+The shape parameter for the Weibull distribution returned by this R\+NG stream. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

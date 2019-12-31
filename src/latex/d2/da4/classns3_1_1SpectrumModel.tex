@@ -1,0 +1,321 @@
+\hypertarget{classns3_1_1SpectrumModel}{}\section{ns3\+:\+:Spectrum\+Model Class Reference}
+\label{classns3_1_1SpectrumModel}\index{ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}}
+
+
+{\ttfamily \#include $<$spectrum-\/model.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Spectrum\+Model\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Spectrum\+Model\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1SpectrumModel_a3edd5bc340da916c0c910096ccb8f8ca}{Spectrum\+Model} (std\+::vector$<$ double $>$ center\+Freqs)
+\item 
+\hyperlink{classns3_1_1SpectrumModel_ad6c1789816bf638f4679e9d523c47f3b}{Spectrum\+Model} (\hyperlink{namespacens3_a46ac9188e5cf43bd5292f7b67451246e}{Bands} bands)
+\item 
+size\+\_\+t \hyperlink{classns3_1_1SpectrumModel_a07c4a1c2f963885dd7fef7f82b20e90b}{Get\+Num\+Bands} () const 
+\item 
+\hyperlink{namespacens3_a5bf0e89b3407bbb59c90a4d8c4cf0a18}{Spectrum\+Model\+Uid\+\_\+t} \hyperlink{classns3_1_1SpectrumModel_ae1d40eba0d8e7af10e954381b4380ac1}{Get\+Uid} () const 
+\item 
+Bands\+::const\+\_\+iterator \hyperlink{classns3_1_1SpectrumModel_a41b34bec2d882bb573849dad7237b10d}{Begin} () const 
+\item 
+Bands\+::const\+\_\+iterator \hyperlink{classns3_1_1SpectrumModel_ac1c60822fc8fd0463905ac908df1e8b4}{End} () const 
+\item 
+bool \hyperlink{classns3_1_1SpectrumModel_a7580b1e7e983b1862227e9ce37fccdab}{Is\+Orthogonal} (const \hyperlink{classns3_1_1SpectrumModel}{Spectrum\+Model} \&other) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacens3_a46ac9188e5cf43bd5292f7b67451246e}{Bands} \hyperlink{classns3_1_1SpectrumModel_afb4f2240520efa617078b88c3959c532}{m\+\_\+bands}
+\begin{DoxyCompactList}\small\item\em Actual definition of frequency bands within this \hyperlink{classns3_1_1SpectrumModel}{Spectrum\+Model}. \end{DoxyCompactList}\item 
+\hyperlink{namespacens3_a5bf0e89b3407bbb59c90a4d8c4cf0a18}{Spectrum\+Model\+Uid\+\_\+t} \hyperlink{classns3_1_1SpectrumModel_a5220fa3bb9a94a50c6f1aa11fc65b76e}{m\+\_\+uid}
+\begin{DoxyCompactList}\small\item\em unique id for a given set of frequencies \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{namespacens3_a5bf0e89b3407bbb59c90a4d8c4cf0a18}{Spectrum\+Model\+Uid\+\_\+t} \hyperlink{classns3_1_1SpectrumModel_a25cd21aedfebec21bdee631bb0cebf58}{m\+\_\+uid\+Count} = 0
+\begin{DoxyCompactList}\small\item\em counter to assign m\+\_\+uids \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classns3_1_1SpectrumModel_a0ed4389afc15bf37ddd2658842aabf29}{operator==} (const \hyperlink{classns3_1_1SpectrumModel}{Spectrum\+Model} \&lhs, const \hyperlink{classns3_1_1SpectrumModel}{Spectrum\+Model} \&rhs)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Set of frequency values implementing the domain of the functions in the Function Space defined by \hyperlink{classns3_1_1SpectrumValue}{Spectrum\+Value}. Frequency values are in Hz. It is intended that frequency values are non-\/negative, though this is not enforced. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}!Spectrum\+Model@{Spectrum\+Model}}
+\index{Spectrum\+Model@{Spectrum\+Model}!ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}}
+\subsubsection[{\texorpdfstring{Spectrum\+Model(std\+::vector$<$ double $>$ center\+Freqs)}{SpectrumModel(std::vector< double > centerFreqs)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Spectrum\+Model\+::\+Spectrum\+Model (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$}]{center\+Freqs}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SpectrumModel_a3edd5bc340da916c0c910096ccb8f8ca}{}\label{classns3_1_1SpectrumModel_a3edd5bc340da916c0c910096ccb8f8ca}
+This constructs a \hyperlink{classns3_1_1SpectrumModel}{Spectrum\+Model} based on a given set of frequencies, which is assumed to be sorted by increasing frequency. The lower (resp. upper) frequency band limit is determined as the mean value between the center frequency of the considered band and the center frequency of the adjacent lower (resp. upper) band.
+
+
+\begin{DoxyParams}{Parameters}
+{\em center\+Freqs} & the vector of center frequencies.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+42 \{
+43   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (centerFreqs.size () > 1);
+44   \hyperlink{classns3_1_1SpectrumModel_a5220fa3bb9a94a50c6f1aa11fc65b76e}{m\_uid} = ++\hyperlink{classns3_1_1SpectrumModel_a25cd21aedfebec21bdee631bb0cebf58}{m\_uidCount};
+45 
+46   \textcolor{keywordflow}{for} (std::vector<double>::const\_iterator it = centerFreqs.begin ();
+47        it != centerFreqs.end ();
+48        ++it)
+49     \{
+50       BandInfo e;
+51       e.fc = *it;
+52       \textcolor{keywordflow}{if} (it ==  centerFreqs.begin ())
+53         \{
+54           \textcolor{keywordtype}{double} delta = ((*(it + 1)) - (*it)) / 2;
+55           e.fl =  *it - delta;
+56           e.fh =  *it + delta;
+57         \}
+58       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (it == centerFreqs.end () - 1 )
+59         \{
+60           \textcolor{keywordtype}{double} delta = ((*it) - (*(it - 1))) / 2;
+61           e.fl  =  *it - delta;
+62           e.fh =  *it + delta;
+63         \}
+64       \textcolor{keywordflow}{else}
+65         \{
+66           e.fl  = ((*it) + (*(it - 1))) / 2;
+67           e.fh = ((*(it + 1)) + (*it)) / 2;
+68         \}
+69       \hyperlink{classns3_1_1SpectrumModel_afb4f2240520efa617078b88c3959c532}{m\_bands}.push\_back (e);
+70     \}
+71 \}
+\end{DoxyCode}
+\index{ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}!Spectrum\+Model@{Spectrum\+Model}}
+\index{Spectrum\+Model@{Spectrum\+Model}!ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}}
+\subsubsection[{\texorpdfstring{Spectrum\+Model(\+Bands bands)}{SpectrumModel(Bands bands)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Spectrum\+Model\+::\+Spectrum\+Model (
+\begin{DoxyParamCaption}
+\item[{{\bf Bands}}]{bands}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SpectrumModel_ad6c1789816bf638f4679e9d523c47f3b}{}\label{classns3_1_1SpectrumModel_ad6c1789816bf638f4679e9d523c47f3b}
+This construct a \hyperlink{classns3_1_1SpectrumModel}{Spectrum\+Model} based on the explicit values of center frequencies and boundaries of each subband.
+
+
+\begin{DoxyParams}{Parameters}
+{\em bands} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+74 \{
+75   \hyperlink{classns3_1_1SpectrumModel_a5220fa3bb9a94a50c6f1aa11fc65b76e}{m\_uid} = ++\hyperlink{classns3_1_1SpectrumModel_a25cd21aedfebec21bdee631bb0cebf58}{m\_uidCount};
+76   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"creating new SpectrumModel, m\_uid="} << \hyperlink{classns3_1_1SpectrumModel_a5220fa3bb9a94a50c6f1aa11fc65b76e}{m\_uid});
+77   \hyperlink{classns3_1_1SpectrumModel_afb4f2240520efa617078b88c3959c532}{m\_bands} = bands;
+78 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}!Begin@{Begin}}
+\index{Begin@{Begin}!ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}}
+\subsubsection[{\texorpdfstring{Begin() const }{Begin() const }}]{\setlength{\rightskip}{0pt plus 5cm}Bands\+::const\+\_\+iterator ns3\+::\+Spectrum\+Model\+::\+Begin (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1SpectrumModel_a41b34bec2d882bb573849dad7237b10d}{}\label{classns3_1_1SpectrumModel_a41b34bec2d882bb573849dad7237b10d}
+Const Iterator to the model Bands container start. 
+\begin{DoxyCode}
+82 \{
+83   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SpectrumModel_afb4f2240520efa617078b88c3959c532}{m\_bands}.begin ();
+84 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}!End@{End}}
+\index{End@{End}!ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}}
+\subsubsection[{\texorpdfstring{End() const }{End() const }}]{\setlength{\rightskip}{0pt plus 5cm}Bands\+::const\+\_\+iterator ns3\+::\+Spectrum\+Model\+::\+End (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1SpectrumModel_ac1c60822fc8fd0463905ac908df1e8b4}{}\label{classns3_1_1SpectrumModel_ac1c60822fc8fd0463905ac908df1e8b4}
+Const Iterator to the model Bands container end. 
+\begin{DoxyCode}
+88 \{
+89   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SpectrumModel_afb4f2240520efa617078b88c3959c532}{m\_bands}.end ();
+90 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}!Get\+Num\+Bands@{Get\+Num\+Bands}}
+\index{Get\+Num\+Bands@{Get\+Num\+Bands}!ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Num\+Bands() const }{GetNumBands() const }}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t ns3\+::\+Spectrum\+Model\+::\+Get\+Num\+Bands (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1SpectrumModel_a07c4a1c2f963885dd7fef7f82b20e90b}{}\label{classns3_1_1SpectrumModel_a07c4a1c2f963885dd7fef7f82b20e90b}
+\begin{DoxyReturn}{Returns}
+the number of frequencies in this \hyperlink{classns3_1_1SpectrumModel}{Spectrum\+Model} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+94 \{
+95   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SpectrumModel_afb4f2240520efa617078b88c3959c532}{m\_bands}.size ();
+96 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}!Get\+Uid@{Get\+Uid}}
+\index{Get\+Uid@{Get\+Uid}!ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Uid() const }{GetUid() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Spectrum\+Model\+Uid\+\_\+t} ns3\+::\+Spectrum\+Model\+::\+Get\+Uid (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1SpectrumModel_ae1d40eba0d8e7af10e954381b4380ac1}{}\label{classns3_1_1SpectrumModel_ae1d40eba0d8e7af10e954381b4380ac1}
+\begin{DoxyReturn}{Returns}
+the unique id of this \hyperlink{classns3_1_1SpectrumModel}{Spectrum\+Model} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+100 \{
+101   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1SpectrumModel_a5220fa3bb9a94a50c6f1aa11fc65b76e}{m\_uid};
+102 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}!Is\+Orthogonal@{Is\+Orthogonal}}
+\index{Is\+Orthogonal@{Is\+Orthogonal}!ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}}
+\subsubsection[{\texorpdfstring{Is\+Orthogonal(const Spectrum\+Model \&other) const }{IsOrthogonal(const SpectrumModel &other) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Spectrum\+Model\+::\+Is\+Orthogonal (
+\begin{DoxyParamCaption}
+\item[{const {\bf Spectrum\+Model} \&}]{other}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1SpectrumModel_a7580b1e7e983b1862227e9ce37fccdab}{}\label{classns3_1_1SpectrumModel_a7580b1e7e983b1862227e9ce37fccdab}
+Check if another Spectrum\+Models has bands orthogonal to our bands.
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & another \hyperlink{classns3_1_1SpectrumModel}{Spectrum\+Model} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if bands are orthogonal 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+106 \{
+107   \textcolor{keywordflow}{for} (Bands::const\_iterator myIt = \hyperlink{classns3_1_1SpectrumModel_a41b34bec2d882bb573849dad7237b10d}{Begin} ();
+108        myIt != \hyperlink{classns3_1_1SpectrumModel_ac1c60822fc8fd0463905ac908df1e8b4}{End} ();
+109        ++myIt)
+110     \{
+111       \textcolor{keywordflow}{for} (Bands::const\_iterator otherIt = other.Begin ();
+112            otherIt != other.End ();
+113            ++otherIt)
+114         \{
+115           \textcolor{keywordflow}{if} (\hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (myIt->fl, otherIt->fl) < \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (myIt->fh, otherIt->fh))
+116             \{
+117               \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+118             \}
+119         \}
+120     \}
+121   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+122 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Friends And Related Function Documentation}
+\index{ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}!operator==@{operator==}}
+\index{operator==@{operator==}!ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}}
+\subsubsection[{\texorpdfstring{operator==}{operator==}}]{\setlength{\rightskip}{0pt plus 5cm}bool operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf Spectrum\+Model} \&}]{lhs, }
+\item[{const {\bf Spectrum\+Model} \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classns3_1_1SpectrumModel_a0ed4389afc15bf37ddd2658842aabf29}{}\label{classns3_1_1SpectrumModel_a0ed4389afc15bf37ddd2658842aabf29}
+Comparison operator. Returns true if the two Spectum\+Models are identical 
+\begin{DoxyParams}{Parameters}
+{\em lhs} & left operand \\
+\hline
+{\em rhs} & right operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the two operands are identical 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+35 \{
+36   \textcolor{keywordflow}{return} (lhs.m\_uid == rhs.m\_uid);
+37 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}!m\+\_\+bands@{m\+\_\+bands}}
+\index{m\+\_\+bands@{m\+\_\+bands}!ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+bands}{m_bands}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bands} ns3\+::\+Spectrum\+Model\+::m\+\_\+bands\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SpectrumModel_afb4f2240520efa617078b88c3959c532}{}\label{classns3_1_1SpectrumModel_afb4f2240520efa617078b88c3959c532}
+
+
+Actual definition of frequency bands within this \hyperlink{classns3_1_1SpectrumModel}{Spectrum\+Model}. 
+
+\index{ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}!m\+\_\+uid@{m\+\_\+uid}}
+\index{m\+\_\+uid@{m\+\_\+uid}!ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+uid}{m_uid}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Spectrum\+Model\+Uid\+\_\+t} ns3\+::\+Spectrum\+Model\+::m\+\_\+uid\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SpectrumModel_a5220fa3bb9a94a50c6f1aa11fc65b76e}{}\label{classns3_1_1SpectrumModel_a5220fa3bb9a94a50c6f1aa11fc65b76e}
+
+
+unique id for a given set of frequencies 
+
+\index{ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}!m\+\_\+uid\+Count@{m\+\_\+uid\+Count}}
+\index{m\+\_\+uid\+Count@{m\+\_\+uid\+Count}!ns3\+::\+Spectrum\+Model@{ns3\+::\+Spectrum\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+uid\+Count}{m_uidCount}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Spectrum\+Model\+Uid\+\_\+t} ns3\+::\+Spectrum\+Model\+::m\+\_\+uid\+Count = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classns3_1_1SpectrumModel_a25cd21aedfebec21bdee631bb0cebf58}{}\label{classns3_1_1SpectrumModel_a25cd21aedfebec21bdee631bb0cebf58}
+
+
+counter to assign m\+\_\+uids 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+spectrum/model/\hyperlink{spectrum-model_8h}{spectrum-\/model.\+h}\item 
+spectrum/model/\hyperlink{spectrum-model_8cc}{spectrum-\/model.\+cc}\end{DoxyCompactItemize}

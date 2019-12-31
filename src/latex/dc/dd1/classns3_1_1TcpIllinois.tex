@@ -1,0 +1,1007 @@
+\hypertarget{classns3_1_1TcpIllinois}{}\section{ns3\+:\+:Tcp\+Illinois Class Reference}
+\label{classns3_1_1TcpIllinois}\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+
+
+An implementation of T\+CP Illinois algorithm.  
+
+
+
+
+{\ttfamily \#include $<$tcp-\/illinois.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Tcp\+Illinois\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Tcp\+Illinois\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1TcpIllinois_a25b0b11f6aa911cc5d2fc875ae188804}{Tcp\+Illinois} (void)
+\item 
+\hyperlink{classns3_1_1TcpIllinois_a731073a48ecc5a678f6e9f2d12ba2fd0}{Tcp\+Illinois} (const \hyperlink{classns3_1_1TcpIllinois}{Tcp\+Illinois} \&sock)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1TcpIllinois_a67c1cd2eacbb508e574e58c3f5249a29}{$\sim$\+Tcp\+Illinois} (void)
+\item 
+virtual std\+::string \hyperlink{classns3_1_1TcpIllinois_a4515a565bdc968d90a4f7dc160dbd3ff}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the name of the congestion control algorithm. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1TcpIllinois_a5c041aa5385217f81f97d1b730c90ca6}{Get\+Ss\+Thresh} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)
+\begin{DoxyCompactList}\small\item\em Get slow start threshold after congestion event. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} $>$ \hyperlink{classns3_1_1TcpIllinois_a42f28764801115e88e38bff513d4b893}{Fork} ()
+\begin{DoxyCompactList}\small\item\em Copy the congestion control algorithm across socket. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpIllinois_a5740754bb7f9db5557a5ae5e33ba7ffb}{Congestion\+State\+Set} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, const \hyperlink{classns3_1_1TcpSocketState_a6fc313945a33d48fd60cbffe0c787b19}{Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t} new\+State)
+\begin{DoxyCompactList}\small\item\em Reset Illinois parameters to default values upon a loss. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpIllinois_aed96b4a9fcf68ca3c290e4e7114d13c7}{Increase\+Window} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked)
+\begin{DoxyCompactList}\small\item\em Adjust cwnd following Illinois congestion avoidance algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpIllinois_aa6531d04046528431302336d56592e23}{Pkts\+Acked} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked, const \hyperlink{classns3_1_1Time}{Time} \&rtt)
+\begin{DoxyCompactList}\small\item\em Measure R\+TT for each A\+CK Keep track of min and max R\+TT. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1TcpIllinois_adc3383abbe23617f509e10203f9aaaef}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1TcpIllinois_a15c2ea39f742b9cb8ae4fe4723059837}{Recalc\+Param} (uint32\+\_\+t c\+Wnd)
+\begin{DoxyCompactList}\small\item\em Recalculate alpha and beta every R\+TT. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1TcpIllinois_a473c7333be614f3183c81048c93049b2}{Calculate\+Alpha} (double da, double dm)
+\begin{DoxyCompactList}\small\item\em Calculate additive increase factor alpha. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1TcpIllinois_a7306f1cde806901aed1f93d6c43ce9d4}{Calculate\+Beta} (double da, double dm)
+\begin{DoxyCompactList}\small\item\em Calculate multiplicative decrease factor beta. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpIllinois_a1fe8006b836cb497fe79108ab62c1c84}{Calculate\+Avg\+Delay} () const 
+\begin{DoxyCompactList}\small\item\em Calculate average queueing delay. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpIllinois_afd446c963a9d47064bfe3befd1dfa016}{Calculate\+Max\+Delay} () const 
+\begin{DoxyCompactList}\small\item\em Calculate maximum queueing delay. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1TcpIllinois_adf4b3324f0d026515758691b036483ed}{Reset} (const \hyperlink{group__network_gacb2070e4e98d2d5135c9bede58f07a03}{Sequence\+Number32} \&next\+Tx\+Sequence)
+\begin{DoxyCompactList}\small\item\em Reset Illinois parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpIllinois_ad55319050ef5775367528ab1e2a1495d}{m\+\_\+sum\+Rtt}
+\begin{DoxyCompactList}\small\item\em Sum of all R\+TT measurements during last R\+TT. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpIllinois_a60caf4d41dc12eaf51e6fa4d2bc37cf9}{m\+\_\+cnt\+Rtt}
+\begin{DoxyCompactList}\small\item\em Number of R\+TT measurements during last R\+TT. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpIllinois_a50fb2e63ddbc6291c27c6360f871ec9f}{m\+\_\+base\+Rtt}
+\begin{DoxyCompactList}\small\item\em Minimum of all R\+TT measurements. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpIllinois_a7b039403de33bd3240a29d0fed26f813}{m\+\_\+max\+Rtt}
+\begin{DoxyCompactList}\small\item\em Maximum of all R\+TT measurements. \end{DoxyCompactList}\item 
+\hyperlink{group__network_gacb2070e4e98d2d5135c9bede58f07a03}{Sequence\+Number32} \hyperlink{classns3_1_1TcpIllinois_afcee0e1f0f09abb49ddc440851500b46}{m\+\_\+end\+Seq}
+\begin{DoxyCompactList}\small\item\em Right edge of current R\+TT. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1TcpIllinois_a1cc085ed6b4561e2eee0eb33dd880da6}{m\+\_\+rtt\+Above}
+\begin{DoxyCompactList}\small\item\em True when da $>$ d1. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{classns3_1_1TcpIllinois_a6acfa8c3874438bb8105779da78d2f02}{m\+\_\+rtt\+Low}
+\begin{DoxyCompactList}\small\item\em Number of R\+T\+Ts da has stayed below d1. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpIllinois_a5762b0230b8817d99f8b52cabe27c6fc}{m\+\_\+alpha\+Min}
+\begin{DoxyCompactList}\small\item\em Minimum alpha threshold. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpIllinois_ad9a94e71f8a53c481825f777f1aa6ded}{m\+\_\+alpha\+Max}
+\begin{DoxyCompactList}\small\item\em Maximum alpha threshold. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpIllinois_a08e136c96d7a6e38606cd0885aa131d7}{m\+\_\+alpha\+Base}
+\begin{DoxyCompactList}\small\item\em Base value of alpha for standard A\+I\+MD. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpIllinois_a7c7f06e3410d0647b6a262c2cef723ba}{m\+\_\+alpha}
+\begin{DoxyCompactList}\small\item\em Additive increase factor. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpIllinois_a3c0c450a135f937b79940f82c67313d9}{m\+\_\+beta\+Min}
+\begin{DoxyCompactList}\small\item\em Minimum beta threshold. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpIllinois_a8c27408a958faaf52111b0f62b8c81a5}{m\+\_\+beta\+Max}
+\begin{DoxyCompactList}\small\item\em Maximum beta threshold. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpIllinois_a934a50369de8be5dc9377f0460d5a7e1}{m\+\_\+beta\+Base}
+\begin{DoxyCompactList}\small\item\em Base value of beta for standard A\+I\+MD. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpIllinois_a0d605879dbf76bb97647d9e993e78a59}{m\+\_\+beta}
+\begin{DoxyCompactList}\small\item\em Multiplicative decrease factor. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpIllinois_a57917764f34d9810d239423d2ad3b924}{m\+\_\+win\+Thresh}
+\begin{DoxyCompactList}\small\item\em Window threshold for adaptive sizing. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpIllinois_aa612862174116f2e03372322e7f45e51}{m\+\_\+theta}
+\begin{DoxyCompactList}\small\item\em Number of R\+T\+Ts required before setting alpha to its max. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpIllinois_a0f824c49e11b05c4db9a02046e80d850}{m\+\_\+ack\+Cnt}
+\begin{DoxyCompactList}\small\item\em Number of received A\+CK. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An implementation of T\+CP Illinois algorithm. 
+
+T\+CP Illinois is a hybrid congestion control algorithm designed for high-\/speed networks. Illinois implements a Concave-\/\+A\+I\+MD (or C-\/\+A\+I\+MD) algorithm that uses packet loss as the primary congestion signal to determine the direction of window update and queueing delay as the secondary congestion signal to determine the amount of change.
+
+The additive increase and multiplicative decrease factors (denoted as alpha and beta, respectively) are functions of the current average queueing delay da as shown in Equations (1) and (2). To improve the protocol robustness against sudden fluctuations in its delay sampling, Illinois allows the increment of alpha to alpha\+Max only if da stays below d1 for a some (theta) amount of time. \begin{DoxyVerb}                         / alphaMax          if da <= d1
+                 alpha =                                         (1)
+                         \ k1 / (k2 + da)    otherwise
+
+                        / betaMin            if da <= d2
+                 beta =   k3 + k4da          if d2 < da < d3      (2)
+                        \ betaMax            otherwise
+\end{DoxyVerb}
+
+
+where the calculations of k1, k2, k3, and k4 are shown in Equations (3), (4), (5), and (6). \begin{DoxyVerb}     k1 = (dm - d1)(alphaMin)alphaMax / (alphaMax - alphaMin)    (3)
+
+     k2 = ((dm - d1)alphaMin / (alphaMax - alphaMin)) - d1       (4)
+
+     k3 = ((alphaMin)d3 - (alphaMax)d2) / (d3 - d2)              (5)
+
+     k4 = (alphaMax - alphaMin) / (d3 - d2)                      (6)
+\end{DoxyVerb}
+
+
+with da the current average queueing delay calculated in Equation (7) where\+: Ta is the average R\+TT (sum\+Rtt / cnt\+Rtt in the implementation) and Tmin (base\+Rtt in the implementation) is the minimum R\+TT ever seen dm the maximum (average) queueing delay calculated in Equation (8) where Tmax (max\+Rtt in the implementation) is the maximum R\+TT ever seen \begin{DoxyVerb}     da = Ta - Tmin          (7)
+
+     dm = Tmax - Tmin         (8)
+\end{DoxyVerb}
+
+
+di (i = 1,2,3) are calculated in Equation (9) (0 $<$= eta\+\_\+1 $<$ 1, and 0 $<$= eta\+\_\+2 $<$= eta\+\_\+3 $<$=1) \begin{DoxyVerb}      di = (eta_i)dm            (9)
+\end{DoxyVerb}
+
+
+Illinois only executes its adaptation of alpha and beta when cwnd exceeds a threshold called win\+Thresh. Otherwise, it sets alpha and beta to the base values of 1 and 0.\+5, respectively.
+
+Following the implementation of Illinois in the Linux kernel, we use the following default parameter settings\+: \begin{DoxyVerb}  alphaMin = 0.3      (0.1 in the Illinois paper)
+  alphaMax = 10.0
+  betaMin = 0.125
+  betaMax = 0.5
+  winThresh = 15      (10 in the Illinois paper)
+  theta = 5
+  eta1 = 0.01
+  eta2 = 0.1
+  eta3 = 0.8
+\end{DoxyVerb}
+
+
+More information\+: \href{http://www.doi.org/10.1145/1190095.1190166}{\tt http\+://www.\+doi.\+org/10.\+1145/1190095.\+1190166} 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Tcp\+Illinois@{Tcp\+Illinois}}
+\index{Tcp\+Illinois@{Tcp\+Illinois}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Tcp\+Illinois(void)}{TcpIllinois(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Illinois\+::\+Tcp\+Illinois (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpIllinois_a25b0b11f6aa911cc5d2fc875ae188804}{}\label{classns3_1_1TcpIllinois_a25b0b11f6aa911cc5d2fc875ae188804}
+Create an unbound tcp socket. 
+\begin{DoxyCode}
+82   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (),
+83     \hyperlink{classns3_1_1TcpIllinois_ad55319050ef5775367528ab1e2a1495d}{m\_sumRtt} (\hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} (0)),
+84     \hyperlink{classns3_1_1TcpIllinois_a60caf4d41dc12eaf51e6fa4d2bc37cf9}{m\_cntRtt} (0),
+85     \hyperlink{classns3_1_1TcpIllinois_a50fb2e63ddbc6291c27c6360f871ec9f}{m\_baseRtt} (\hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ()),
+86     \hyperlink{classns3_1_1TcpIllinois_a7b039403de33bd3240a29d0fed26f813}{m\_maxRtt} (\hyperlink{classns3_1_1Time_a75169ee37c557c616eb79e1a15ed09b7}{Time::Min} ()),
+87     \hyperlink{classns3_1_1TcpIllinois_afcee0e1f0f09abb49ddc440851500b46}{m\_endSeq} (0),
+88     \hyperlink{classns3_1_1TcpIllinois_a1cc085ed6b4561e2eee0eb33dd880da6}{m\_rttAbove} (\textcolor{keyword}{false}),
+89     \hyperlink{classns3_1_1TcpIllinois_a6acfa8c3874438bb8105779da78d2f02}{m\_rttLow} (0),
+90     \hyperlink{classns3_1_1TcpIllinois_a5762b0230b8817d99f8b52cabe27c6fc}{m\_alphaMin} (0.3),
+91     \hyperlink{classns3_1_1TcpIllinois_ad9a94e71f8a53c481825f777f1aa6ded}{m\_alphaMax} (10.0),
+92     \hyperlink{classns3_1_1TcpIllinois_a08e136c96d7a6e38606cd0885aa131d7}{m\_alphaBase} (1.0),
+93     \hyperlink{classns3_1_1TcpIllinois_a7c7f06e3410d0647b6a262c2cef723ba}{m\_alpha} (\hyperlink{classns3_1_1TcpIllinois_ad9a94e71f8a53c481825f777f1aa6ded}{m\_alphaMax}),
+94     \hyperlink{classns3_1_1TcpIllinois_a3c0c450a135f937b79940f82c67313d9}{m\_betaMin} (0.125),
+95     \hyperlink{classns3_1_1TcpIllinois_a8c27408a958faaf52111b0f62b8c81a5}{m\_betaMax} (0.5),
+96     \hyperlink{classns3_1_1TcpIllinois_a934a50369de8be5dc9377f0460d5a7e1}{m\_betaBase} (0.5),
+97     \hyperlink{classns3_1_1TcpIllinois_a0d605879dbf76bb97647d9e993e78a59}{m\_beta} (\hyperlink{classns3_1_1TcpIllinois_a934a50369de8be5dc9377f0460d5a7e1}{m\_betaBase}),
+98     \hyperlink{classns3_1_1TcpIllinois_a57917764f34d9810d239423d2ad3b924}{m\_winThresh} (15),
+99     \hyperlink{classns3_1_1TcpIllinois_aa612862174116f2e03372322e7f45e51}{m\_theta} (5),
+100     \hyperlink{classns3_1_1TcpIllinois_a0f824c49e11b05c4db9a02046e80d850}{m\_ackCnt} (0)
+101 \{
+102   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+103 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Tcp\+Illinois@{Tcp\+Illinois}}
+\index{Tcp\+Illinois@{Tcp\+Illinois}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Tcp\+Illinois(const Tcp\+Illinois \&sock)}{TcpIllinois(const TcpIllinois &sock)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Illinois\+::\+Tcp\+Illinois (
+\begin{DoxyParamCaption}
+\item[{const {\bf Tcp\+Illinois} \&}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpIllinois_a731073a48ecc5a678f6e9f2d12ba2fd0}{}\label{classns3_1_1TcpIllinois_a731073a48ecc5a678f6e9f2d12ba2fd0}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & the object to copy \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+106   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (sock),
+107     \hyperlink{classns3_1_1TcpIllinois_ad55319050ef5775367528ab1e2a1495d}{m\_sumRtt} (sock.m\_sumRtt),
+108     \hyperlink{classns3_1_1TcpIllinois_a60caf4d41dc12eaf51e6fa4d2bc37cf9}{m\_cntRtt} (sock.m\_cntRtt),
+109     \hyperlink{classns3_1_1TcpIllinois_a50fb2e63ddbc6291c27c6360f871ec9f}{m\_baseRtt} (sock.m\_baseRtt),
+110     \hyperlink{classns3_1_1TcpIllinois_a7b039403de33bd3240a29d0fed26f813}{m\_maxRtt} (sock.m\_maxRtt),
+111     \hyperlink{classns3_1_1TcpIllinois_afcee0e1f0f09abb49ddc440851500b46}{m\_endSeq} (sock.m\_endSeq),
+112     \hyperlink{classns3_1_1TcpIllinois_a1cc085ed6b4561e2eee0eb33dd880da6}{m\_rttAbove} (sock.m\_rttAbove),
+113     \hyperlink{classns3_1_1TcpIllinois_a6acfa8c3874438bb8105779da78d2f02}{m\_rttLow} (sock.m\_rttLow),
+114     \hyperlink{classns3_1_1TcpIllinois_a5762b0230b8817d99f8b52cabe27c6fc}{m\_alphaMin} (sock.m\_alphaMin),
+115     \hyperlink{classns3_1_1TcpIllinois_ad9a94e71f8a53c481825f777f1aa6ded}{m\_alphaMax} (sock.m\_alphaMax),
+116     \hyperlink{classns3_1_1TcpIllinois_a08e136c96d7a6e38606cd0885aa131d7}{m\_alphaBase} (sock.m\_alphaBase),
+117     \hyperlink{classns3_1_1TcpIllinois_a7c7f06e3410d0647b6a262c2cef723ba}{m\_alpha} (sock.m\_alpha),
+118     \hyperlink{classns3_1_1TcpIllinois_a3c0c450a135f937b79940f82c67313d9}{m\_betaMin} (sock.m\_betaMin),
+119     \hyperlink{classns3_1_1TcpIllinois_a8c27408a958faaf52111b0f62b8c81a5}{m\_betaMax} (sock.m\_betaMax),
+120     \hyperlink{classns3_1_1TcpIllinois_a934a50369de8be5dc9377f0460d5a7e1}{m\_betaBase} (sock.m\_betaBase),
+121     \hyperlink{classns3_1_1TcpIllinois_a0d605879dbf76bb97647d9e993e78a59}{m\_beta} (sock.m\_beta),
+122     \hyperlink{classns3_1_1TcpIllinois_a57917764f34d9810d239423d2ad3b924}{m\_winThresh} (sock.m\_winThresh),
+123     \hyperlink{classns3_1_1TcpIllinois_aa612862174116f2e03372322e7f45e51}{m\_theta} (sock.m\_theta),
+124     \hyperlink{classns3_1_1TcpIllinois_a0f824c49e11b05c4db9a02046e80d850}{m\_ackCnt} (sock.m\_ackCnt)
+125 \{
+126   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+127 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!````~Tcp\+Illinois@{$\sim$\+Tcp\+Illinois}}
+\index{````~Tcp\+Illinois@{$\sim$\+Tcp\+Illinois}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{$\sim$\+Tcp\+Illinois(void)}{~TcpIllinois(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Illinois\+::$\sim$\+Tcp\+Illinois (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpIllinois_a67c1cd2eacbb508e574e58c3f5249a29}{}\label{classns3_1_1TcpIllinois_a67c1cd2eacbb508e574e58c3f5249a29}
+
+\begin{DoxyCode}
+130 \{
+131   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+132 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Calculate\+Alpha@{Calculate\+Alpha}}
+\index{Calculate\+Alpha@{Calculate\+Alpha}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Calculate\+Alpha(double da, double dm)}{CalculateAlpha(double da, double dm)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Illinois\+::\+Calculate\+Alpha (
+\begin{DoxyParamCaption}
+\item[{double}]{da, }
+\item[{double}]{dm}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a473c7333be614f3183c81048c93049b2}{}\label{classns3_1_1TcpIllinois_a473c7333be614f3183c81048c93049b2}
+
+
+Calculate additive increase factor alpha. 
+
+If average queueing delay is at minimum, then alpha is set to alpha\+Max. Otherwise, alpha is a decreasing function of average queueing delay.
+
+
+\begin{DoxyParams}{Parameters}
+{\em da} & current average queueing delay \\
+\hline
+{\em dm} & maximum average queueing delay \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+255 \{
+256   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << da << dm);
+257 
+258   \textcolor{keywordtype}{double} \hyperlink{lte__link__budget__interference_8m_ab5ca0c44c6f0a063a5219b3749db661f}{d1} = dm / 100;
+259 
+260   \textcolor{keywordflow}{if} (da <= d1)
+261     \{
+262       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"da <= d1"});
+263 
+264       \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1TcpIllinois_a1cc085ed6b4561e2eee0eb33dd880da6}{m\_rttAbove})
+265         \{ \textcolor{comment}{// In case we can't get out of this low delay zone, we use alphaMax}
+266           \hyperlink{classns3_1_1TcpIllinois_a7c7f06e3410d0647b6a262c2cef723ba}{m\_alpha} = \hyperlink{classns3_1_1TcpIllinois_ad9a94e71f8a53c481825f777f1aa6ded}{m\_alphaMax};
+267         \}
+268       \textcolor{keywordflow}{if} (++\hyperlink{classns3_1_1TcpIllinois_a6acfa8c3874438bb8105779da78d2f02}{m\_rttLow} >= \hyperlink{classns3_1_1TcpIllinois_aa612862174116f2e03372322e7f45e51}{m\_theta})
+269         \{
+270           \textcolor{comment}{/*}
+271 \textcolor{comment}{           * da needs to stay below d1 for theta times RTT amount of time}
+272 \textcolor{comment}{           * before we can increase alpha to alphaMax}
+273 \textcolor{comment}{           */}
+274           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"da stays below d1 for theta times RTT amount of time, "}
+275                        \textcolor{stringliteral}{"increase alpha to alphaMax"});
+276 
+277           \hyperlink{classns3_1_1TcpIllinois_a6acfa8c3874438bb8105779da78d2f02}{m\_rttLow} = 0;
+278           \hyperlink{classns3_1_1TcpIllinois_a1cc085ed6b4561e2eee0eb33dd880da6}{m\_rttAbove} = \textcolor{keyword}{false};
+279           \hyperlink{classns3_1_1TcpIllinois_a7c7f06e3410d0647b6a262c2cef723ba}{m\_alpha} = \hyperlink{classns3_1_1TcpIllinois_ad9a94e71f8a53c481825f777f1aa6ded}{m\_alphaMax};
+280         \}
+281     \}
+282   \textcolor{keywordflow}{else}
+283     \{
+284       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"da > d1"});
+285 
+286       \hyperlink{classns3_1_1TcpIllinois_a1cc085ed6b4561e2eee0eb33dd880da6}{m\_rttAbove} = \textcolor{keyword}{true};
+287       \textcolor{comment}{/*}
+288 \textcolor{comment}{       * alpha = k1 / (k2 + da), where}
+289 \textcolor{comment}{       * k1 = ((dm - d1) * alphaMin * alphaMax) / (alphaMax - alphaMin)}
+290 \textcolor{comment}{       * k2 = (((dm - d1) * alphaMin) / (alphaMax - alphaMin)) - d1}
+291 \textcolor{comment}{       */}
+292       dm -= \hyperlink{lte__link__budget__interference_8m_ab5ca0c44c6f0a063a5219b3749db661f}{d1};
+293       da -= \hyperlink{lte__link__budget__interference_8m_ab5ca0c44c6f0a063a5219b3749db661f}{d1};
+294       \hyperlink{classns3_1_1TcpIllinois_a7c7f06e3410d0647b6a262c2cef723ba}{m\_alpha} = (dm * \hyperlink{classns3_1_1TcpIllinois_ad9a94e71f8a53c481825f777f1aa6ded}{m\_alphaMax}) / (dm + (da * (\hyperlink{classns3_1_1TcpIllinois_ad9a94e71f8a53c481825f777f1aa6ded}{m\_alphaMax} - 
+      \hyperlink{classns3_1_1TcpIllinois_a5762b0230b8817d99f8b52cabe27c6fc}{m\_alphaMin})) / \hyperlink{classns3_1_1TcpIllinois_a5762b0230b8817d99f8b52cabe27c6fc}{m\_alphaMin});
+295     \}
+296 
+297   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Updated to alpha = "} << \hyperlink{classns3_1_1TcpIllinois_a7c7f06e3410d0647b6a262c2cef723ba}{m\_alpha});
+298 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Calculate\+Avg\+Delay@{Calculate\+Avg\+Delay}}
+\index{Calculate\+Avg\+Delay@{Calculate\+Avg\+Delay}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Calculate\+Avg\+Delay() const }{CalculateAvgDelay() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Illinois\+::\+Calculate\+Avg\+Delay (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a1fe8006b836cb497fe79108ab62c1c84}{}\label{classns3_1_1TcpIllinois_a1fe8006b836cb497fe79108ab62c1c84}
+
+
+Calculate average queueing delay. 
+
+\begin{DoxyReturn}{Returns}
+average queueing delay da 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+342 \{
+343   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+344 
+345   \textcolor{keywordflow}{return} (\hyperlink{classns3_1_1TcpIllinois_ad55319050ef5775367528ab1e2a1495d}{m\_sumRtt} / \hyperlink{classns3_1_1TcpIllinois_a60caf4d41dc12eaf51e6fa4d2bc37cf9}{m\_cntRtt} - \hyperlink{classns3_1_1TcpIllinois_a50fb2e63ddbc6291c27c6360f871ec9f}{m\_baseRtt});
+346 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Calculate\+Beta@{Calculate\+Beta}}
+\index{Calculate\+Beta@{Calculate\+Beta}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Calculate\+Beta(double da, double dm)}{CalculateBeta(double da, double dm)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Illinois\+::\+Calculate\+Beta (
+\begin{DoxyParamCaption}
+\item[{double}]{da, }
+\item[{double}]{dm}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a7306f1cde806901aed1f93d6c43ce9d4}{}\label{classns3_1_1TcpIllinois_a7306f1cde806901aed1f93d6c43ce9d4}
+
+
+Calculate multiplicative decrease factor beta. 
+
+If the current average queueing delay is $<$= 10\% of max. (average) queueing delay, beta is set to beta\+Min, which equals to 1/8 by default. If the current average queueing delay is $>$= 80\% of max. (average) queueing delay, beta is set to beta\+Max, which equals to 1/2 by default. Otherwise, beta is an increasing function of average queueing delay.
+
+
+\begin{DoxyParams}{Parameters}
+{\em da} & current average queueing delay \\
+\hline
+{\em dm} & maximum average queueing delay \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+302 \{
+303   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << da << dm);
+304 
+305   \textcolor{keywordtype}{double} \hyperlink{lte__cqi__generation_8m_a479b78c01efbe4664b402a300da492f7}{d2}, d3;
+306 
+307   d2 = dm / 10;
+308   d3 = (8 * dm) / 10;
+309 
+310   \textcolor{keywordflow}{if} (da <= d2)
+311     \{
+312       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"da <= d2"});
+313 
+314       \hyperlink{classns3_1_1TcpIllinois_a0d605879dbf76bb97647d9e993e78a59}{m\_beta} = \hyperlink{classns3_1_1TcpIllinois_a3c0c450a135f937b79940f82c67313d9}{m\_betaMin};
+315     \}
+316 
+317   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (da > d2 && da < d3)
+318     \{
+319       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"da > d2 && da < d3"});
+320 
+321       \textcolor{comment}{/*}
+322 \textcolor{comment}{       * beta = k3 + k4 * da, where}
+323 \textcolor{comment}{       * k3 = (betaMin * d3 - betaMax * d2) / (d3 - d2)}
+324 \textcolor{comment}{       * k4 = (betaMax - betaMin) / (d3 - d2)}
+325 \textcolor{comment}{       */}
+326       \hyperlink{classns3_1_1TcpIllinois_a0d605879dbf76bb97647d9e993e78a59}{m\_beta} = (\hyperlink{classns3_1_1TcpIllinois_a3c0c450a135f937b79940f82c67313d9}{m\_betaMin} * d3 - \hyperlink{classns3_1_1TcpIllinois_a8c27408a958faaf52111b0f62b8c81a5}{m\_betaMax} * d2 + (
+      \hyperlink{classns3_1_1TcpIllinois_a8c27408a958faaf52111b0f62b8c81a5}{m\_betaMax} - \hyperlink{classns3_1_1TcpIllinois_a3c0c450a135f937b79940f82c67313d9}{m\_betaMin}) * da) / (d3 - \hyperlink{lte__cqi__generation_8m_a479b78c01efbe4664b402a300da492f7}{d2});
+327 
+328     \}
+329 
+330   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (da >= d3 || d3 <= d2)
+331     \{
+332       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"da >= d3 || d3 <= d2"});
+333 
+334       \hyperlink{classns3_1_1TcpIllinois_a0d605879dbf76bb97647d9e993e78a59}{m\_beta} = \hyperlink{classns3_1_1TcpIllinois_a8c27408a958faaf52111b0f62b8c81a5}{m\_betaMax};
+335     \}
+336 
+337   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Updated to beta = "} << \hyperlink{classns3_1_1TcpIllinois_a0d605879dbf76bb97647d9e993e78a59}{m\_beta});
+338 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Calculate\+Max\+Delay@{Calculate\+Max\+Delay}}
+\index{Calculate\+Max\+Delay@{Calculate\+Max\+Delay}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Calculate\+Max\+Delay() const }{CalculateMaxDelay() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Illinois\+::\+Calculate\+Max\+Delay (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_afd446c963a9d47064bfe3befd1dfa016}{}\label{classns3_1_1TcpIllinois_afd446c963a9d47064bfe3befd1dfa016}
+
+
+Calculate maximum queueing delay. 
+
+\begin{DoxyReturn}{Returns}
+maximum average queueing delay dm 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+350 \{
+351   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+352 
+353   \textcolor{keywordflow}{return} (\hyperlink{classns3_1_1TcpIllinois_a7b039403de33bd3240a29d0fed26f813}{m\_maxRtt} - \hyperlink{classns3_1_1TcpIllinois_a50fb2e63ddbc6291c27c6360f871ec9f}{m\_baseRtt});
+354 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Congestion\+State\+Set@{Congestion\+State\+Set}}
+\index{Congestion\+State\+Set@{Congestion\+State\+Set}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Congestion\+State\+Set(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, const Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t new\+State)}{CongestionStateSet(Ptr< TcpSocketState > tcb, const TcpSocketState::TcpCongState_t newState)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Illinois\+::\+Congestion\+State\+Set (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{const {\bf Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t}}]{new\+State}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpIllinois_a5740754bb7f9db5557a5ae5e33ba7ffb}{}\label{classns3_1_1TcpIllinois_a5740754bb7f9db5557a5ae5e33ba7ffb}
+
+
+Reset Illinois parameters to default values upon a loss. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em new\+State} & new congestion state to which the T\+CP is going to switch \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpCongestionOps_a2777666dc7df24040d718ddba896928b}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+161 \{
+162   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << newState);
+163 
+164   \textcolor{keywordflow}{if} (newState == \hyperlink{classns3_1_1TcpSocketState_a6fc313945a33d48fd60cbffe0c787b19ad50c191d2648f5472641d8e144ccbf3d}{TcpSocketState::CA\_LOSS})
+165     \{
+166       \hyperlink{classns3_1_1TcpIllinois_a7c7f06e3410d0647b6a262c2cef723ba}{m\_alpha} = \hyperlink{classns3_1_1TcpIllinois_a08e136c96d7a6e38606cd0885aa131d7}{m\_alphaBase};
+167       \hyperlink{classns3_1_1TcpIllinois_a0d605879dbf76bb97647d9e993e78a59}{m\_beta} = \hyperlink{classns3_1_1TcpIllinois_a934a50369de8be5dc9377f0460d5a7e1}{m\_betaBase};
+168       \hyperlink{classns3_1_1TcpIllinois_a6acfa8c3874438bb8105779da78d2f02}{m\_rttLow} = 0;
+169       \hyperlink{classns3_1_1TcpIllinois_a1cc085ed6b4561e2eee0eb33dd880da6}{m\_rttAbove} = \textcolor{keyword}{false};
+170       \hyperlink{classns3_1_1TcpIllinois_adf4b3324f0d026515758691b036483ed}{Reset} (tcb->\hyperlink{classns3_1_1TcpSocketState_ad1f77b1cbdb9267a89ebb6f16ac76892}{m\_nextTxSequence});
+171     \}
+172 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Fork@{Fork}}
+\index{Fork@{Fork}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Fork()}{Fork()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Congestion\+Ops} $>$ ns3\+::\+Tcp\+Illinois\+::\+Fork (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpIllinois_a42f28764801115e88e38bff513d4b893}{}\label{classns3_1_1TcpIllinois_a42f28764801115e88e38bff513d4b893}
+
+
+Copy the congestion control algorithm across socket. 
+
+\begin{DoxyReturn}{Returns}
+a pointer of the copied object 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a2606d5fcd01a1eb4d5f4e6beb7a33192}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+368 \{
+369   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+370 
+371   \textcolor{keywordflow}{return} CopyObject<TcpIllinois> (\textcolor{keyword}{this});
+372 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Tcp\+Illinois\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpIllinois_a4515a565bdc968d90a4f7dc160dbd3ff}{}\label{classns3_1_1TcpIllinois_a4515a565bdc968d90a4f7dc160dbd3ff}
+
+
+Get the name of the congestion control algorithm. 
+
+\begin{DoxyReturn}{Returns}
+A string identifying the name 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a0ecf92cb36c236c70e0ecaedfff6609e}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+376 \{
+377   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+378 
+379   \textcolor{keywordflow}{return} \textcolor{stringliteral}{"TcpIllinois"};
+380 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Get\+Ss\+Thresh@{Get\+Ss\+Thresh}}
+\index{Get\+Ss\+Thresh@{Get\+Ss\+Thresh}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Get\+Ss\+Thresh(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)}{GetSsThresh(Ptr< const TcpSocketState > tcb, uint32_t bytesInFlight)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Illinois\+::\+Get\+Ss\+Thresh (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{bytes\+In\+Flight}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpIllinois_a5c041aa5385217f81f97d1b730c90ca6}{}\label{classns3_1_1TcpIllinois_a5c041aa5385217f81f97d1b730c90ca6}
+
+
+Get slow start threshold after congestion event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em bytes\+In\+Flight} & bytes in flight\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the slow start threshold value 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a1cb467aaa4960dfe10b963ed9f3d5aa2}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+242 \{
+243   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << bytesInFlight);
+244 
+245   uint32\_t segBytesInFlight = bytesInFlight / tcb->m\_segmentSize;
+246   uint32\_t ssThresh = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (2.0, (1.0 - \hyperlink{classns3_1_1TcpIllinois_a0d605879dbf76bb97647d9e993e78a59}{m\_beta}) * segBytesInFlight);
+247 
+248   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Calculated ssThresh (in segments) = "} << ssThresh);
+249 
+250   \textcolor{keywordflow}{return} ssThresh * tcb->m\_segmentSize;
+251 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Tcp\+Illinois\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpIllinois_adc3383abbe23617f509e10203f9aaaef}{}\label{classns3_1_1TcpIllinois_adc3383abbe23617f509e10203f9aaaef}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+40 \{
+41   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::TcpIllinois"})
+42     .SetParent<\hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno}> ()
+43     .AddConstructor<TcpIllinois> ()
+44     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+45     .AddAttribute (\textcolor{stringliteral}{"AlphaMin"}, \textcolor{stringliteral}{"Minimum alpha threshold"},
+46                    DoubleValue (0.3),
+47                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpIllinois_a5762b0230b8817d99f8b52cabe27c6fc}{TcpIllinois::m\_alphaMin}),
+48                    MakeDoubleChecker<double> ())
+49     .AddAttribute (\textcolor{stringliteral}{"AlphaMax"}, \textcolor{stringliteral}{"Maximum alpha threshold"},
+50                    DoubleValue (10.0),
+51                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpIllinois_ad9a94e71f8a53c481825f777f1aa6ded}{TcpIllinois::m\_alphaMax}),
+52                    MakeDoubleChecker<double> ())
+53     .AddAttribute (\textcolor{stringliteral}{"AlphaBase"}, \textcolor{stringliteral}{"Alpha base threshold"},
+54                    DoubleValue (1.0),
+55                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpIllinois_a08e136c96d7a6e38606cd0885aa131d7}{TcpIllinois::m\_alphaBase}),
+56                    MakeDoubleChecker<double> ())
+57     .AddAttribute (\textcolor{stringliteral}{"BetaMin"}, \textcolor{stringliteral}{"Minimum beta threshold"},
+58                    DoubleValue (0.125),
+59                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpIllinois_a3c0c450a135f937b79940f82c67313d9}{TcpIllinois::m\_betaMin}),
+60                    MakeDoubleChecker<double> ())
+61     .AddAttribute (\textcolor{stringliteral}{"BetaMax"}, \textcolor{stringliteral}{"Maximum beta threshold"},
+62                    DoubleValue (0.5),
+63                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpIllinois_a8c27408a958faaf52111b0f62b8c81a5}{TcpIllinois::m\_betaMax}),
+64                    MakeDoubleChecker<double> ())
+65     .AddAttribute (\textcolor{stringliteral}{"BetaBase"}, \textcolor{stringliteral}{"Beta base threshold"},
+66                    DoubleValue (0.5),
+67                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpIllinois_a934a50369de8be5dc9377f0460d5a7e1}{TcpIllinois::m\_betaBase}),
+68                    MakeDoubleChecker<double> ())
+69     .AddAttribute (\textcolor{stringliteral}{"WinThresh"}, \textcolor{stringliteral}{"Window threshold"},
+70                    UintegerValue (15),
+71                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpIllinois_a57917764f34d9810d239423d2ad3b924}{TcpIllinois::m\_winThresh}),
+72                    MakeUintegerChecker<uint32\_t> ())
+73     .AddAttribute (\textcolor{stringliteral}{"Theta"}, \textcolor{stringliteral}{"Theta threshold"},
+74                    UintegerValue (5),
+75                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpIllinois_aa612862174116f2e03372322e7f45e51}{TcpIllinois::m\_theta}),
+76                    MakeUintegerChecker<uint32\_t> ())
+77   ;
+78   \textcolor{keywordflow}{return} tid;
+79 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Increase\+Window@{Increase\+Window}}
+\index{Increase\+Window@{Increase\+Window}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Increase\+Window(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked)}{IncreaseWindow(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Illinois\+::\+Increase\+Window (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpIllinois_aed96b4a9fcf68ca3c290e4e7114d13c7}{}\label{classns3_1_1TcpIllinois_aed96b4a9fcf68ca3c290e4e7114d13c7}
+
+
+Adjust cwnd following Illinois congestion avoidance algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments A\+C\+Ked \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a11db8ae90f4cebacc15524a793b0741a}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+176 \{
+177   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << segmentsAcked);
+178 
+179   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7a30ba2b675238429c7fe2f0c8d1ce94}{m\_lastAckedSeq} >= \hyperlink{classns3_1_1TcpIllinois_afcee0e1f0f09abb49ddc440851500b46}{m\_endSeq})
+180     \{
+181       \hyperlink{classns3_1_1TcpIllinois_a15c2ea39f742b9cb8ae4fe4723059837}{RecalcParam} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd});
+182       \hyperlink{classns3_1_1TcpIllinois_adf4b3324f0d026515758691b036483ed}{Reset} (tcb->\hyperlink{classns3_1_1TcpSocketState_ad1f77b1cbdb9267a89ebb6f16ac76892}{m\_nextTxSequence});
+183     \}
+184 
+185   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} < tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh})
+186     \{
+187       \hyperlink{classns3_1_1TcpNewReno_a1cf5fd9585eb3b745727f4f5beae0706}{TcpNewReno::SlowStart} (tcb, segmentsAcked);
+188       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"In SlowStart, updated to cwnd "} << tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <<
+189                    \textcolor{stringliteral}{" ssthresh "} << tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+190     \}
+191   \textcolor{keywordflow}{else}
+192     \{
+193       uint32\_t segCwnd = tcb->\hyperlink{classns3_1_1TcpSocketState_ab6dfe309ca53fd3207dcafede75ad12d}{GetCwndInSegments} ();
+194       uint32\_t oldCwnd = segCwnd;
+195 
+196       \textcolor{keywordflow}{if} (segmentsAcked > 0)
+197         \{
+198           \hyperlink{classns3_1_1TcpIllinois_a0f824c49e11b05c4db9a02046e80d850}{m\_ackCnt} += segmentsAcked * \hyperlink{classns3_1_1TcpIllinois_a7c7f06e3410d0647b6a262c2cef723ba}{m\_alpha};
+199         \}
+200 
+201       \textcolor{keywordflow}{while} (\hyperlink{classns3_1_1TcpIllinois_a0f824c49e11b05c4db9a02046e80d850}{m\_ackCnt} >= segCwnd)
+202         \{
+203           \hyperlink{classns3_1_1TcpIllinois_a0f824c49e11b05c4db9a02046e80d850}{m\_ackCnt} -= segCwnd;
+204           segCwnd += 1;
+205         \}
+206 
+207       \textcolor{keywordflow}{if} (segCwnd != oldCwnd)
+208         \{
+209           tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} = segCwnd * tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+210           \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"In CongAvoid, updated to cwnd "} << tcb->
+      \hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <<
+211                        \textcolor{stringliteral}{" ssthresh "} << tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+212         \}
+213     \}
+214 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Pkts\+Acked@{Pkts\+Acked}}
+\index{Pkts\+Acked@{Pkts\+Acked}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Pkts\+Acked(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked, const Time \&rtt)}{PktsAcked(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked, const Time &rtt)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Illinois\+::\+Pkts\+Acked (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked, }
+\item[{const {\bf Time} \&}]{rtt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpIllinois_aa6531d04046528431302336d56592e23}{}\label{classns3_1_1TcpIllinois_aa6531d04046528431302336d56592e23}
+
+
+Measure R\+TT for each A\+CK Keep track of min and max R\+TT. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments A\+C\+Ked \\
+\hline
+{\em rtt} & last R\+TT \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpCongestionOps_a76d3ffb7b1a7ba761026e3f94c1f50fa}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+219 \{
+220   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << packetsAcked << rtt);
+221 
+222   \textcolor{keywordflow}{if} (rtt.IsZero ())
+223     \{
+224       \textcolor{keywordflow}{return};
+225     \}
+226 
+227   \textcolor{comment}{// Keep track of minimum RTT}
+228   \hyperlink{classns3_1_1TcpIllinois_a50fb2e63ddbc6291c27c6360f871ec9f}{m\_baseRtt} = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (\hyperlink{classns3_1_1TcpIllinois_a50fb2e63ddbc6291c27c6360f871ec9f}{m\_baseRtt}, rtt);
+229 
+230   \textcolor{comment}{// Keep track of maximum RTT}
+231   \hyperlink{classns3_1_1TcpIllinois_a7b039403de33bd3240a29d0fed26f813}{m\_maxRtt} = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (rtt, \hyperlink{classns3_1_1TcpIllinois_a7b039403de33bd3240a29d0fed26f813}{m\_maxRtt});
+232 
+233   ++\hyperlink{classns3_1_1TcpIllinois_a60caf4d41dc12eaf51e6fa4d2bc37cf9}{m\_cntRtt};
+234   \hyperlink{classns3_1_1TcpIllinois_ad55319050ef5775367528ab1e2a1495d}{m\_sumRtt} += rtt;
+235 
+236   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Updated baseRtt = "} << \hyperlink{classns3_1_1TcpIllinois_a50fb2e63ddbc6291c27c6360f871ec9f}{m\_baseRtt} << \textcolor{stringliteral}{" maxRtt = "} << 
+      \hyperlink{classns3_1_1TcpIllinois_a7b039403de33bd3240a29d0fed26f813}{m\_maxRtt} <<
+237                \textcolor{stringliteral}{" cntRtt = "} << \hyperlink{classns3_1_1TcpIllinois_a60caf4d41dc12eaf51e6fa4d2bc37cf9}{m\_cntRtt} << \textcolor{stringliteral}{" sumRtt = "} << \hyperlink{classns3_1_1TcpIllinois_ad55319050ef5775367528ab1e2a1495d}{m\_sumRtt});
+238 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 12
+
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Recalc\+Param@{Recalc\+Param}}
+\index{Recalc\+Param@{Recalc\+Param}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Recalc\+Param(uint32\+\_\+t c\+Wnd)}{RecalcParam(uint32_t cWnd)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Illinois\+::\+Recalc\+Param (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{c\+Wnd}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a15c2ea39f742b9cb8ae4fe4723059837}{}\label{classns3_1_1TcpIllinois_a15c2ea39f742b9cb8ae4fe4723059837}
+
+
+Recalculate alpha and beta every R\+TT. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c\+Wnd} & current Cwnd (in bytes) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+136 \{
+137   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << cWnd);
+138 
+139   \textcolor{keywordflow}{if} (cWnd < \hyperlink{classns3_1_1TcpIllinois_a57917764f34d9810d239423d2ad3b924}{m\_winThresh})
+140     \{
+141       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"cWnd < winThresh, set alpha & beta to base values"});
+142 
+143       \hyperlink{classns3_1_1TcpIllinois_a7c7f06e3410d0647b6a262c2cef723ba}{m\_alpha} = \hyperlink{classns3_1_1TcpIllinois_a08e136c96d7a6e38606cd0885aa131d7}{m\_alphaBase};
+144       \hyperlink{classns3_1_1TcpIllinois_a0d605879dbf76bb97647d9e993e78a59}{m\_beta} = \hyperlink{classns3_1_1TcpIllinois_a934a50369de8be5dc9377f0460d5a7e1}{m\_betaBase};
+145     \}
+146   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpIllinois_a60caf4d41dc12eaf51e6fa4d2bc37cf9}{m\_cntRtt} > 0)
+147     \{
+148       \textcolor{keywordtype}{double} dm = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>} (\hyperlink{classns3_1_1TcpIllinois_afd446c963a9d47064bfe3befd1dfa016}{CalculateMaxDelay} ().
+      \hyperlink{classns3_1_1Time_aba3428a8b6c4c8d9014ce44145081f34}{GetMilliSeconds} ());
+149       \textcolor{keywordtype}{double} da = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>} (\hyperlink{classns3_1_1TcpIllinois_a1fe8006b836cb497fe79108ab62c1c84}{CalculateAvgDelay} ().
+      \hyperlink{classns3_1_1Time_aba3428a8b6c4c8d9014ce44145081f34}{GetMilliSeconds} ());
+150 
+151       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Updated to dm = "} << dm << \textcolor{stringliteral}{" da = "} << da);
+152 
+153       \hyperlink{classns3_1_1TcpIllinois_a473c7333be614f3183c81048c93049b2}{CalculateAlpha} (da, dm);
+154       \hyperlink{classns3_1_1TcpIllinois_a7306f1cde806901aed1f93d6c43ce9d4}{CalculateBeta} (da, dm);
+155     \}
+156 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 13
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 14
+
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!Reset@{Reset}}
+\index{Reset@{Reset}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{Reset(const Sequence\+Number32 \&next\+Tx\+Sequence)}{Reset(const SequenceNumber32 &nextTxSequence)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Illinois\+::\+Reset (
+\begin{DoxyParamCaption}
+\item[{const {\bf Sequence\+Number32} \&}]{next\+Tx\+Sequence}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_adf4b3324f0d026515758691b036483ed}{}\label{classns3_1_1TcpIllinois_adf4b3324f0d026515758691b036483ed}
+
+
+Reset Illinois parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em next\+Tx\+Sequence} & Next sequence to transmit \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+358 \{
+359   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << nextTxSequence);
+360 
+361   \hyperlink{classns3_1_1TcpIllinois_afcee0e1f0f09abb49ddc440851500b46}{m\_endSeq} = nextTxSequence;
+362   \hyperlink{classns3_1_1TcpIllinois_a60caf4d41dc12eaf51e6fa4d2bc37cf9}{m\_cntRtt} = 0;
+363   \hyperlink{classns3_1_1TcpIllinois_ad55319050ef5775367528ab1e2a1495d}{m\_sumRtt} = \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} (0);
+364 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 15
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+ack\+Cnt@{m\+\_\+ack\+Cnt}}
+\index{m\+\_\+ack\+Cnt@{m\+\_\+ack\+Cnt}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+ack\+Cnt}{m_ackCnt}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Illinois\+::m\+\_\+ack\+Cnt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a0f824c49e11b05c4db9a02046e80d850}{}\label{classns3_1_1TcpIllinois_a0f824c49e11b05c4db9a02046e80d850}
+
+
+Number of received A\+CK. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+alpha@{m\+\_\+alpha}}
+\index{m\+\_\+alpha@{m\+\_\+alpha}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+alpha}{m_alpha}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Illinois\+::m\+\_\+alpha\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a7c7f06e3410d0647b6a262c2cef723ba}{}\label{classns3_1_1TcpIllinois_a7c7f06e3410d0647b6a262c2cef723ba}
+
+
+Additive increase factor. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+alpha\+Base@{m\+\_\+alpha\+Base}}
+\index{m\+\_\+alpha\+Base@{m\+\_\+alpha\+Base}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+alpha\+Base}{m_alphaBase}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Illinois\+::m\+\_\+alpha\+Base\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a08e136c96d7a6e38606cd0885aa131d7}{}\label{classns3_1_1TcpIllinois_a08e136c96d7a6e38606cd0885aa131d7}
+
+
+Base value of alpha for standard A\+I\+MD. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+alpha\+Max@{m\+\_\+alpha\+Max}}
+\index{m\+\_\+alpha\+Max@{m\+\_\+alpha\+Max}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+alpha\+Max}{m_alphaMax}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Illinois\+::m\+\_\+alpha\+Max\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_ad9a94e71f8a53c481825f777f1aa6ded}{}\label{classns3_1_1TcpIllinois_ad9a94e71f8a53c481825f777f1aa6ded}
+
+
+Maximum alpha threshold. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+alpha\+Min@{m\+\_\+alpha\+Min}}
+\index{m\+\_\+alpha\+Min@{m\+\_\+alpha\+Min}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+alpha\+Min}{m_alphaMin}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Illinois\+::m\+\_\+alpha\+Min\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a5762b0230b8817d99f8b52cabe27c6fc}{}\label{classns3_1_1TcpIllinois_a5762b0230b8817d99f8b52cabe27c6fc}
+
+
+Minimum alpha threshold. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+base\+Rtt@{m\+\_\+base\+Rtt}}
+\index{m\+\_\+base\+Rtt@{m\+\_\+base\+Rtt}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+base\+Rtt}{m_baseRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Illinois\+::m\+\_\+base\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a50fb2e63ddbc6291c27c6360f871ec9f}{}\label{classns3_1_1TcpIllinois_a50fb2e63ddbc6291c27c6360f871ec9f}
+
+
+Minimum of all R\+TT measurements. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+beta@{m\+\_\+beta}}
+\index{m\+\_\+beta@{m\+\_\+beta}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+beta}{m_beta}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Illinois\+::m\+\_\+beta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a0d605879dbf76bb97647d9e993e78a59}{}\label{classns3_1_1TcpIllinois_a0d605879dbf76bb97647d9e993e78a59}
+
+
+Multiplicative decrease factor. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+beta\+Base@{m\+\_\+beta\+Base}}
+\index{m\+\_\+beta\+Base@{m\+\_\+beta\+Base}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+beta\+Base}{m_betaBase}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Illinois\+::m\+\_\+beta\+Base\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a934a50369de8be5dc9377f0460d5a7e1}{}\label{classns3_1_1TcpIllinois_a934a50369de8be5dc9377f0460d5a7e1}
+
+
+Base value of beta for standard A\+I\+MD. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+beta\+Max@{m\+\_\+beta\+Max}}
+\index{m\+\_\+beta\+Max@{m\+\_\+beta\+Max}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+beta\+Max}{m_betaMax}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Illinois\+::m\+\_\+beta\+Max\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a8c27408a958faaf52111b0f62b8c81a5}{}\label{classns3_1_1TcpIllinois_a8c27408a958faaf52111b0f62b8c81a5}
+
+
+Maximum beta threshold. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+beta\+Min@{m\+\_\+beta\+Min}}
+\index{m\+\_\+beta\+Min@{m\+\_\+beta\+Min}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+beta\+Min}{m_betaMin}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Illinois\+::m\+\_\+beta\+Min\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a3c0c450a135f937b79940f82c67313d9}{}\label{classns3_1_1TcpIllinois_a3c0c450a135f937b79940f82c67313d9}
+
+
+Minimum beta threshold. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+cnt\+Rtt@{m\+\_\+cnt\+Rtt}}
+\index{m\+\_\+cnt\+Rtt@{m\+\_\+cnt\+Rtt}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+cnt\+Rtt}{m_cntRtt}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Illinois\+::m\+\_\+cnt\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a60caf4d41dc12eaf51e6fa4d2bc37cf9}{}\label{classns3_1_1TcpIllinois_a60caf4d41dc12eaf51e6fa4d2bc37cf9}
+
+
+Number of R\+TT measurements during last R\+TT. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+end\+Seq@{m\+\_\+end\+Seq}}
+\index{m\+\_\+end\+Seq@{m\+\_\+end\+Seq}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+end\+Seq}{m_endSeq}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sequence\+Number32} ns3\+::\+Tcp\+Illinois\+::m\+\_\+end\+Seq\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_afcee0e1f0f09abb49ddc440851500b46}{}\label{classns3_1_1TcpIllinois_afcee0e1f0f09abb49ddc440851500b46}
+
+
+Right edge of current R\+TT. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+max\+Rtt@{m\+\_\+max\+Rtt}}
+\index{m\+\_\+max\+Rtt@{m\+\_\+max\+Rtt}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+max\+Rtt}{m_maxRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Illinois\+::m\+\_\+max\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a7b039403de33bd3240a29d0fed26f813}{}\label{classns3_1_1TcpIllinois_a7b039403de33bd3240a29d0fed26f813}
+
+
+Maximum of all R\+TT measurements. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+rtt\+Above@{m\+\_\+rtt\+Above}}
+\index{m\+\_\+rtt\+Above@{m\+\_\+rtt\+Above}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+rtt\+Above}{m_rttAbove}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Tcp\+Illinois\+::m\+\_\+rtt\+Above\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a1cc085ed6b4561e2eee0eb33dd880da6}{}\label{classns3_1_1TcpIllinois_a1cc085ed6b4561e2eee0eb33dd880da6}
+
+
+True when da $>$ d1. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+rtt\+Low@{m\+\_\+rtt\+Low}}
+\index{m\+\_\+rtt\+Low@{m\+\_\+rtt\+Low}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+rtt\+Low}{m_rttLow}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t ns3\+::\+Tcp\+Illinois\+::m\+\_\+rtt\+Low\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a6acfa8c3874438bb8105779da78d2f02}{}\label{classns3_1_1TcpIllinois_a6acfa8c3874438bb8105779da78d2f02}
+
+
+Number of R\+T\+Ts da has stayed below d1. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+sum\+Rtt@{m\+\_\+sum\+Rtt}}
+\index{m\+\_\+sum\+Rtt@{m\+\_\+sum\+Rtt}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+sum\+Rtt}{m_sumRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Illinois\+::m\+\_\+sum\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_ad55319050ef5775367528ab1e2a1495d}{}\label{classns3_1_1TcpIllinois_ad55319050ef5775367528ab1e2a1495d}
+
+
+Sum of all R\+TT measurements during last R\+TT. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+theta@{m\+\_\+theta}}
+\index{m\+\_\+theta@{m\+\_\+theta}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+theta}{m_theta}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Illinois\+::m\+\_\+theta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_aa612862174116f2e03372322e7f45e51}{}\label{classns3_1_1TcpIllinois_aa612862174116f2e03372322e7f45e51}
+
+
+Number of R\+T\+Ts required before setting alpha to its max. 
+
+\index{ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}!m\+\_\+win\+Thresh@{m\+\_\+win\+Thresh}}
+\index{m\+\_\+win\+Thresh@{m\+\_\+win\+Thresh}!ns3\+::\+Tcp\+Illinois@{ns3\+::\+Tcp\+Illinois}}
+\subsubsection[{\texorpdfstring{m\+\_\+win\+Thresh}{m_winThresh}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Illinois\+::m\+\_\+win\+Thresh\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpIllinois_a57917764f34d9810d239423d2ad3b924}{}\label{classns3_1_1TcpIllinois_a57917764f34d9810d239423d2ad3b924}
+
+
+Window threshold for adaptive sizing. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{tcp-illinois_8h}{tcp-\/illinois.\+h}\item 
+internet/model/\hyperlink{tcp-illinois_8cc}{tcp-\/illinois.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,97 @@
+\hypertarget{classflowmon-parse-results_1_1Simulation}{}\section{flowmon-\/parse-\/results.Simulation Class Reference}
+\label{classflowmon-parse-results_1_1Simulation}\index{flowmon-\/parse-\/results.\+Simulation@{flowmon-\/parse-\/results.\+Simulation}}
+
+
+\hyperlink{classflowmon-parse-results_1_1Simulation}{Simulation}.  
+
+
+
+
+Inheritance diagram for flowmon-\/parse-\/results.Simulation\+:
+% FIG 0
+
+
+Collaboration diagram for flowmon-\/parse-\/results.Simulation\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classflowmon-parse-results_1_1Simulation_a3ad9056ca72eaed413fcfd6950541a3c}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, simulation\+\_\+el)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classflowmon-parse-results_1_1Simulation_a284732729c5e18035724c5565ebd75b7}{flows}
+\begin{DoxyCompactList}\small\item\em class variables
+
+list of flows \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classflowmon-parse-results_1_1Simulation}{Simulation}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{flowmon-\/parse-\/results\+::\+Simulation@{flowmon-\/parse-\/results\+::\+Simulation}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!flowmon-\/parse-\/results\+::\+Simulation@{flowmon-\/parse-\/results\+::\+Simulation}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+(self, simulation\+\_\+el)}{__init__(self, simulation_el)}}]{\setlength{\rightskip}{0pt plus 5cm}def flowmon-\/parse-\/results.\+Simulation.\+\_\+\+\_\+init\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{simulation\+\_\+el}
+\end{DoxyParamCaption}
+)}\hypertarget{classflowmon-parse-results_1_1Simulation_a3ad9056ca72eaed413fcfd6950541a3c}{}\label{classflowmon-parse-results_1_1Simulation_a3ad9056ca72eaed413fcfd6950541a3c}
+\begin{DoxyVerb}The initializer.
+@param self The object pointer.
+@param simulation_el The element.
+\end{DoxyVerb}
+ 
+\begin{DoxyCode}
+159     \textcolor{keyword}{def }\hyperlink{classflowmon-parse-results_1_1Simulation_a3ad9056ca72eaed413fcfd6950541a3c}{\_\_init\_\_}(self, simulation\_el):
+160         \textcolor{stringliteral}{''' The initializer.}
+161 \textcolor{stringliteral}{        @param self The object pointer.}
+162 \textcolor{stringliteral}{        @param simulation\_el The element.}
+163 \textcolor{stringliteral}{        '''}
+164         self.\hyperlink{classflowmon-parse-results_1_1Simulation_a284732729c5e18035724c5565ebd75b7}{flows} = []
+165         FlowClassifier\_el, = simulation\_el.findall(\textcolor{stringliteral}{"Ipv4FlowClassifier"})
+166         flow\_map = \{\}
+167         \textcolor{keywordflow}{for} flow\_el \textcolor{keywordflow}{in} simulation\_el.findall(\textcolor{stringliteral}{"FlowStats/Flow"}):
+168             flow = \hyperlink{classflowmon-parse-results_1_1Flow}{Flow}(flow\_el)
+169             flow\_map[flow.flowId] = flow
+170             self.flows.append(flow)
+171         \textcolor{keywordflow}{for} flow\_cls \textcolor{keywordflow}{in} FlowClassifier\_el.findall(\textcolor{stringliteral}{"Flow"}):
+172             flowId = int(flow\_cls.get(\textcolor{stringliteral}{'flowId'}))
+173             flow\_map[flowId].fiveTuple = \hyperlink{classflowmon-parse-results_1_1FiveTuple}{FiveTuple}(flow\_cls)
+174 
+175         \textcolor{keywordflow}{for} probe\_elem \textcolor{keywordflow}{in} simulation\_el.findall(\textcolor{stringliteral}{"FlowProbes/FlowProbe"}):
+176             probeId = int(probe\_elem.get(\textcolor{stringliteral}{'index'}))
+177             \textcolor{keywordflow}{for} stats \textcolor{keywordflow}{in} probe\_elem.findall(\textcolor{stringliteral}{"FlowStats"}):
+178                 flowId = int(stats.get(\textcolor{stringliteral}{'flowId'}))
+179                 s = \hyperlink{classflowmon-parse-results_1_1ProbeFlowStats}{ProbeFlowStats}()
+180                 s.packets = int(stats.get(\textcolor{stringliteral}{'packets'}))
+181                 s.bytes = \hyperlink{generate__test__data__lte__sinr_8m_a0eab6be67e93c3411f7a8b53cc297285}{long}(stats.get(\textcolor{stringliteral}{'bytes'}))
+182                 s.probeId = probeId
+183                 \textcolor{keywordflow}{if} s.packets > 0:
+184                     s.delayFromFirstProbe =  \hyperlink{namespaceflowmon-parse-results_a5612b6aed0ce819ee4f6fd3dbe251622}{parse\_time\_ns}(stats.get(\textcolor{stringliteral}{'delayFromFirstProbeSum'})
+      ) / float(s.packets)
+185                 \textcolor{keywordflow}{else}:
+186                     s.delayFromFirstProbe = 0
+187                 flow\_map[flowId].probe\_stats\_unsorted.append(s)
+188 
+189 
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{flowmon-\/parse-\/results\+::\+Simulation@{flowmon-\/parse-\/results\+::\+Simulation}!flows@{flows}}
+\index{flows@{flows}!flowmon-\/parse-\/results\+::\+Simulation@{flowmon-\/parse-\/results\+::\+Simulation}}
+\subsubsection[{\texorpdfstring{flows}{flows}}]{\setlength{\rightskip}{0pt plus 5cm}flowmon-\/parse-\/results.\+Simulation.\+flows}\hypertarget{classflowmon-parse-results_1_1Simulation_a284732729c5e18035724c5565ebd75b7}{}\label{classflowmon-parse-results_1_1Simulation_a284732729c5e18035724c5565ebd75b7}
+
+
+class variables
+
+list of flows 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+flow-\/monitor/examples/\hyperlink{flowmon-parse-results_8py}{flowmon-\/parse-\/results.\+py}\end{DoxyCompactItemize}

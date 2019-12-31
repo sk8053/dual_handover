@@ -1,0 +1,52 @@
+\hypertarget{pcap-test_8h}{}\section{network/utils/pcap-\/test.h File Reference}
+\label{pcap-test_8h}\index{network/utils/pcap-\/test.\+h@{network/utils/pcap-\/test.\+h}}
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}pcap-\/file.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/test.\+h\char`\"{}}\\*
+Include dependency graph for pcap-\/test.h\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{pcap-test_8h_a38f2c17a62d8613f78ec2dd7b638d329}{N\+S\+\_\+\+P\+C\+A\+P\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+EQ}(filename)
+\begin{DoxyCompactList}\small\item\em Test that a pair of reference/new pcap files are equal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{pcap-\/test.\+h@{pcap-\/test.\+h}!N\+S\+\_\+\+P\+C\+A\+P\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+EQ@{N\+S\+\_\+\+P\+C\+A\+P\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+EQ}}
+\index{N\+S\+\_\+\+P\+C\+A\+P\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+EQ@{N\+S\+\_\+\+P\+C\+A\+P\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+EQ}!pcap-\/test.\+h@{pcap-\/test.\+h}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+P\+C\+A\+P\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+EQ}{NS_PCAP_TEST_EXPECT_EQ}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+P\+C\+A\+P\+\_\+\+T\+E\+S\+T\+\_\+\+E\+X\+P\+E\+C\+T\+\_\+\+EQ(
+\begin{DoxyParamCaption}
+\item[{}]{filename}
+\end{DoxyParamCaption}
+)}\hypertarget{pcap-test_8h_a38f2c17a62d8613f78ec2dd7b638d329}{}\label{pcap-test_8h_a38f2c17a62d8613f78ec2dd7b638d329}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \(\backslash\)
+    std::ostringstream oss;                                             \(\backslash\)
+    oss << filename;                                                    \(\backslash\)
+    std::string expected = CreateDataDirFilename (oss.str());           \(\backslash\)
+    std::string got = CreateTempDirFilename (oss.str());                \(\backslash\)
+    uint32\_t sec(0), usec(0), packets(0);                               \(\backslash\)               \(\backslash\)
+    bool diff = PcapFile::Diff (got, expected, sec, usec, packets);     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{\(\backslash\)}
+\hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{    NS\_TEST\_EXPECT\_MSG\_EQ} (diff, \textcolor{keyword}{false},                                 \(\backslash\)
+                           \textcolor{stringliteral}{"PCAP traces "}                               \(\backslash\)
+                           << got << \textcolor{stringliteral}{" and "} << expected                \(\backslash\)
+                           << \textcolor{stringliteral}{" differ starting from packet "}           \(\backslash\)
+                           << packets << \textcolor{stringliteral}{" at "} << sec << \textcolor{stringliteral}{" s "}         \(\backslash\)
+                           << usec << \textcolor{stringliteral}{" us"});                           \(\backslash\)
+  \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})
+\end{DoxyCode}
+
+
+Test that a pair of reference/new pcap files are equal. 
+
+The filename is interpreted as a stream.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The name of the file to read in the reference/temporary directories \\
+\hline
+\end{DoxyParams}

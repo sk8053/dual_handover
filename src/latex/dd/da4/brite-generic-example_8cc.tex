@@ -1,0 +1,169 @@
+\hypertarget{brite-generic-example_8cc}{}\section{brite/examples/brite-\/generic-\/example.cc File Reference}
+\label{brite-generic-example_8cc}\index{brite/examples/brite-\/generic-\/example.\+cc@{brite/examples/brite-\/generic-\/example.\+cc}}
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/brite-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/nix-\/vector-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+Include dependency graph for brite-\/generic-\/example.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{brite-generic-example_8cc_acaaa2b61e1bcfb38d779d8381c1885aa}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Brite\+Example\char`\"{})
+\item 
+int \hyperlink{brite-generic-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{brite-\/generic-\/example.\+cc@{brite-\/generic-\/example.\+cc}!main@{main}}
+\index{main@{main}!brite-\/generic-\/example.\+cc@{brite-\/generic-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{brite-generic-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{brite-generic-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+36 \{
+37   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"UdpEchoClientApplication"}, 
+      \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+38   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"UdpEchoServerApplication"}, 
+      \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+39 
+40   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"BriteExample"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+41 
+42   \textcolor{comment}{// BRITE needs a configuration file to build its graph. By default, this}
+43   \textcolor{comment}{// example will use the TD\_ASBarabasi\_RTWaxman.conf file. There are many others}
+44   \textcolor{comment}{// which can be found in the BRITE/conf\_files directory}
+45   std::string confFile = \textcolor{stringliteral}{"src/brite/examples/conf\_files/TD\_ASBarabasi\_RTWaxman.conf"};
+46   \textcolor{keywordtype}{bool} tracing = \textcolor{keyword}{false};
+47   \textcolor{keywordtype}{bool} nix = \textcolor{keyword}{false};
+48 
+49   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+50   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"confFile"}, \textcolor{stringliteral}{"BRITE conf file"}, confFile);
+51   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"tracing"}, \textcolor{stringliteral}{"Enable or disable ascii tracing"}, tracing);
+52   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nix"}, \textcolor{stringliteral}{"Enable or disable nix-vector routing"}, nix);
+53 
+54   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc,argv);
+55 
+56   nix = \textcolor{keyword}{false};
+57 
+58   \textcolor{comment}{// Invoke the BriteTopologyHelper and pass in a BRITE}
+59   \textcolor{comment}{// configuration file and a seed file. This will use}
+60   \textcolor{comment}{// BRITE to build a graph from which we can build the ns-3 topology}
+61   \hyperlink{classns3_1_1BriteTopologyHelper}{BriteTopologyHelper} bth (confFile);
+62   bth.AssignStreams (3);
+63 
+64   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} p2p;
+65 
+66 
+67   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+68 
+69   \textcolor{keywordflow}{if} (nix)
+70     \{
+71       \hyperlink{classns3_1_1Ipv4NixVectorHelper}{Ipv4NixVectorHelper} nixRouting;
+72       stack.\hyperlink{classns3_1_1InternetStackHelper_a3e382c02df022dec79952a7eca8cd5ba}{SetRoutingHelper} (nixRouting);
+73     \}
+74 
+75   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address;
+76   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.0.0.0"}, \textcolor{stringliteral}{"255.255.255.252"});
+77 
+78   bth.BuildBriteTopology (stack);
+79   bth.AssignIpv4Addresses (address);
+80 
+81   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Number of AS created "} << bth.GetNAs ());
+82 
+83   \textcolor{comment}{//The BRITE topology generator generates a topology of routers.  Here we create}
+84   \textcolor{comment}{//two subnetworks which we attach to router leaf nodes generated by BRITE}
+85   \textcolor{comment}{//Any NS3 topology may be used to attach to the BRITE leaf nodes but here we}
+86   \textcolor{comment}{//use just one node}
+87 
+88   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} client;
+89   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} server;
+90 
+91   client.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+92   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (client);
+93 
+94   \textcolor{comment}{//install client node on last leaf node of AS 0}
+95   \textcolor{keywordtype}{int} numLeafNodesInAsZero = bth.GetNLeafNodesForAs (0);
+96   client.Add (bth.GetLeafNodeForAs (0, numLeafNodesInAsZero - 1));
+97 
+98   server.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+99   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (server);
+100 
+101   \textcolor{comment}{//install server node on last leaf node on AS 1}
+102   \textcolor{keywordtype}{int} numLeafNodesInAsOne = bth.GetNLeafNodesForAs (1);
+103   server.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (bth.GetLeafNodeForAs (1, numLeafNodesInAsOne - 1));
+104 
+105   p2p.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"5Mbps"}));
+106   p2p.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"2ms"}));
+107 
+108   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} p2pClientDevices;
+109   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} p2pServerDevices;
+110 
+111   p2pClientDevices = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (client);
+112   p2pServerDevices = p2p.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (server);
+113 
+114   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.0.0"}, \textcolor{stringliteral}{"255.255.0.0"});
+115   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} clientInterfaces;
+116   clientInterfaces = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (p2pClientDevices);
+117 
+118   address.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.2.0.0"}, \textcolor{stringliteral}{"255.255.0.0"});
+119   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} serverInterfaces;
+120   serverInterfaces = address.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (p2pServerDevices);
+121 
+122   \hyperlink{classns3_1_1UdpEchoServerHelper}{UdpEchoServerHelper} echoServer (9);
+123   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} serverApps = echoServer.Install (server.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+124   serverApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+125   serverApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5.0));
+126 
+127   \hyperlink{classns3_1_1UdpEchoClientHelper}{UdpEchoClientHelper} echoClient (serverInterfaces.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (0), 9);
+128   echoClient.\hyperlink{classns3_1_1UdpEchoClientHelper_a11228c069ad896f8ed13f4d37c13f51d}{SetAttribute} (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (1));
+129   echoClient.SetAttribute (\textcolor{stringliteral}{"Interval"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.)));
+130   echoClient.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (1024));
+131 
+132   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps = echoClient.Install (client.Get (0));
+133   clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0));
+134   clientApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5.0));
+135 
+136   \textcolor{keywordflow}{if} (!nix)
+137     \{
+138       Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+139     \}
+140 
+141   \textcolor{keywordflow}{if} (tracing)
+142     \{
+143       \hyperlink{classns3_1_1AsciiTraceHelper}{AsciiTraceHelper} ascii;
+144       p2p.\hyperlink{classns3_1_1AsciiTraceHelperForDevice_a63e57c878526c732924e14c1e52cca8b}{EnableAsciiAll} (ascii.\hyperlink{classns3_1_1AsciiTraceHelper_a44960bf2ca32835024eaedd26d1c4f94}{CreateFileStream} (\textcolor{stringliteral}{"briteLeaves.tr"}));
+145     \}
+146   \textcolor{comment}{// Run the simulator}
+147   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (6.0));
+148   Simulator::Run ();
+149   Simulator::Destroy ();
+150 
+151   \textcolor{keywordflow}{return} 0;
+152 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{brite-\/generic-\/example.\+cc@{brite-\/generic-\/example.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!brite-\/generic-\/example.\+cc@{brite-\/generic-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Brite\+Example"")}{NS_LOG_COMPONENT_DEFINE("BriteExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Brite\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{brite-generic-example_8cc_acaaa2b61e1bcfb38d779d8381c1885aa}{}\label{brite-generic-example_8cc_acaaa2b61e1bcfb38d779d8381c1885aa}

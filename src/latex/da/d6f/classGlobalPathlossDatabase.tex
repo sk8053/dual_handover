@@ -1,0 +1,113 @@
+\hypertarget{classGlobalPathlossDatabase}{}\section{Global\+Pathloss\+Database Class Reference}
+\label{classGlobalPathlossDatabase}\index{Global\+Pathloss\+Database@{Global\+Pathloss\+Database}}
+
+
+Collaboration diagram for Global\+Pathloss\+Database\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classGlobalPathlossDatabase_abbd4ad9e4abc663e21fab239a89e934f}{Update\+Pathloss} (std\+::string context, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1SpectrumPhy}{Spectrum\+Phy} $>$ tx\+Phy, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1SpectrumPhy}{Spectrum\+Phy} $>$ rx\+Phy, double loss\+Db)
+\item 
+void \hyperlink{classGlobalPathlossDatabase_acab59595a8e9daca4de05c5bee4c4d38}{Print} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ uint32\+\_\+t, std\+::map$<$ uint32\+\_\+t, double $>$ $>$ \hyperlink{classGlobalPathlossDatabase_af9b1cf5534779885450d13833315ffcf}{m\+\_\+pathloss\+Map}
+\begin{DoxyCompactList}\small\item\em Path loss map. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Store the last pathloss value for each T\+X-\/\+RX pair. This is an example of how the Pathloss\+Trace (provided by some Spectrum\+Channel implementations) work. 
+
+\subsection{Member Function Documentation}
+\index{Global\+Pathloss\+Database@{Global\+Pathloss\+Database}!Print@{Print}}
+\index{Print@{Print}!Global\+Pathloss\+Database@{Global\+Pathloss\+Database}}
+\subsubsection[{\texorpdfstring{Print()}{Print()}}]{\setlength{\rightskip}{0pt plus 5cm}void Global\+Pathloss\+Database\+::\+Print (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGlobalPathlossDatabase_acab59595a8e9daca4de05c5bee4c4d38}{}\label{classGlobalPathlossDatabase_acab59595a8e9daca4de05c5bee4c4d38}
+print the stored pathloss values to standard output 
+\begin{DoxyCode}
+108 \{
+109   \textcolor{keywordflow}{for} (std::map<uint32\_t, std::map<uint32\_t, double> >::const\_iterator txit = 
+      \hyperlink{classGlobalPathlossDatabase_af9b1cf5534779885450d13833315ffcf}{m\_pathlossMap}.begin ();
+110        txit != \hyperlink{classGlobalPathlossDatabase_af9b1cf5534779885450d13833315ffcf}{m\_pathlossMap}.end ();
+111        ++txit)
+112     \{
+113       \textcolor{keywordflow}{for} (std::map<uint32\_t, double>::const\_iterator rxit = txit->second.begin ();
+114            rxit != txit->second.end ();
+115            ++rxit)
+116         \{
+117           std::cout << txit->first << \textcolor{stringliteral}{" --> "} << rxit->first << \textcolor{stringliteral}{" : "} << rxit->second << \textcolor{stringliteral}{" dB"} << std::endl
+      ;
+118         \}
+119     \}
+120 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{Global\+Pathloss\+Database@{Global\+Pathloss\+Database}!Update\+Pathloss@{Update\+Pathloss}}
+\index{Update\+Pathloss@{Update\+Pathloss}!Global\+Pathloss\+Database@{Global\+Pathloss\+Database}}
+\subsubsection[{\texorpdfstring{Update\+Pathloss(std\+::string context, Ptr$<$ Spectrum\+Phy $>$ tx\+Phy, Ptr$<$ Spectrum\+Phy $>$ rx\+Phy, double loss\+Db)}{UpdatePathloss(std::string context, Ptr< SpectrumPhy > txPhy, Ptr< SpectrumPhy > rxPhy, double lossDb)}}]{\setlength{\rightskip}{0pt plus 5cm}void Global\+Pathloss\+Database\+::\+Update\+Pathloss (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{{\bf Ptr}$<$ {\bf Spectrum\+Phy} $>$}]{tx\+Phy, }
+\item[{{\bf Ptr}$<$ {\bf Spectrum\+Phy} $>$}]{rx\+Phy, }
+\item[{double}]{loss\+Db}
+\end{DoxyParamCaption}
+)}\hypertarget{classGlobalPathlossDatabase_abbd4ad9e4abc663e21fab239a89e934f}{}\label{classGlobalPathlossDatabase_abbd4ad9e4abc663e21fab239a89e934f}
+update the pathloss value
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & \\
+\hline
+{\em tx\+Phy} & the transmitting P\+HY \\
+\hline
+{\em rx\+Phy} & the receiving P\+HY \\
+\hline
+{\em loss\+Db} & the loss in dB \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+100 \{
+101   uint32\_t txNodeId = txPhy->\hyperlink{classns3_1_1SpectrumPhy_a807f03c6444826ee9857813eaffcc5e2}{GetMobility} ()->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Node}{Node}> ()->GetId ();
+102   uint32\_t rxNodeId = rxPhy->\hyperlink{classns3_1_1SpectrumPhy_a807f03c6444826ee9857813eaffcc5e2}{GetMobility} ()->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Node}{Node}> ()->GetId ();
+103   \hyperlink{classGlobalPathlossDatabase_af9b1cf5534779885450d13833315ffcf}{m\_pathlossMap}[txNodeId][rxNodeId] = lossDb;
+104 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Global\+Pathloss\+Database@{Global\+Pathloss\+Database}!m\+\_\+pathloss\+Map@{m\+\_\+pathloss\+Map}}
+\index{m\+\_\+pathloss\+Map@{m\+\_\+pathloss\+Map}!Global\+Pathloss\+Database@{Global\+Pathloss\+Database}}
+\subsubsection[{\texorpdfstring{m\+\_\+pathloss\+Map}{m_pathlossMap}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$uint32\+\_\+t, std\+::map$<$uint32\+\_\+t, double$>$ $>$ Global\+Pathloss\+Database\+::m\+\_\+pathloss\+Map\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGlobalPathlossDatabase_af9b1cf5534779885450d13833315ffcf}{}\label{classGlobalPathlossDatabase_af9b1cf5534779885450d13833315ffcf}
+
+
+Path loss map. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+spectrum/examples/\hyperlink{adhoc-aloha-ideal-phy-matrix-propagation-loss-model_8cc}{adhoc-\/aloha-\/ideal-\/phy-\/matrix-\/propagation-\/loss-\/model.\+cc}\end{DoxyCompactItemize}

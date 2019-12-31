@@ -1,0 +1,26 @@
+\hypertarget{group__ripng}{}\section{R\+I\+Png}
+\label{group__ripng}\index{R\+I\+Png@{R\+I\+Png}}
+Collaboration diagram for R\+I\+Png\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1RipNgRte}{ns3\+::\+Rip\+Ng\+Rte}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1RipNg}{Rip\+Ng} Routing Table Entry (R\+TE) -\/ see \{2080\}. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1RipNgHeader}{ns3\+::\+Rip\+Ng\+Header}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1RipNgHeader}{Rip\+Ng\+Header} -\/ see \{2080\}. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1RipNgRoutingTableEntry}{ns3\+::\+Rip\+Ng\+Routing\+Table\+Entry}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classns3_1_1RipNg}{Rip\+Ng} Routing Table Entry. \end{DoxyCompactList}\item 
+class \hyperlink{classns3_1_1RipNg}{ns3\+::\+Rip\+Ng}
+\begin{DoxyCompactList}\small\item\em R\+I\+Png Routing Protocol, defined in \{2080\}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The R\+I\+Png protocol (\{2080\}) is a unicast-\/only I\+Pv6 I\+GP (Interior Gateway Protocol). Its convergence time is rather long. As a consequence, it is suggested to carefully check the network topology and the route status before sending data flows.
+
+R\+I\+Png implements the Bellman-\/\+Ford algorithm (although the R\+FC does not state it). Bellman-\/\+Ford algorithm convergence time is O($\vert$\+V$\vert$$\ast$$\vert$\+E$\vert$) where $\vert$\+V$\vert$ and $\vert$\+E$\vert$ are the number of vertices (routers) and edges (links) respectively. Since unsolicited updates are exchanged every 30 seconds, the convergence might require a long time.
+
+For the R\+I\+Png protocol, the exact convergence time is shorter, thanks to the use of triggered updates, which are sent when a route changes. Even with triggered updates, the convergence is in the order of magnitude of O($\vert$\+V$\vert$$\ast$$\vert$\+E$\vert$) $\ast$ 5 seconds, which is still quite long for complex topologies.
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000062}{Todo}]\+: Add routing table compression (C\+I\+DR). The most evident result\+: without it a router will announce to be the default router {\itshape and} more R\+T\+Es, which is silly. \end{DoxyRefDesc}

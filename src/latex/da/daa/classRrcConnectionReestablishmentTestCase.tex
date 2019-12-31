@@ -1,0 +1,103 @@
+\hypertarget{classRrcConnectionReestablishmentTestCase}{}\section{Rrc\+Connection\+Reestablishment\+Test\+Case Class Reference}
+\label{classRrcConnectionReestablishmentTestCase}\index{Rrc\+Connection\+Reestablishment\+Test\+Case@{Rrc\+Connection\+Reestablishment\+Test\+Case}}
+
+
+Inheritance diagram for Rrc\+Connection\+Reestablishment\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Rrc\+Connection\+Reestablishment\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRrcConnectionReestablishmentTestCase_a83d13cf28fc227f37a5e9899ea0896c6}{Rrc\+Connection\+Reestablishment\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classRrcConnectionReestablishmentTestCase_a83b77e685792d906456e37b202274265}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Rrc\+Connection\+Reestablishment\+Test\+Case@{Rrc\+Connection\+Reestablishment\+Test\+Case}!Rrc\+Connection\+Reestablishment\+Test\+Case@{Rrc\+Connection\+Reestablishment\+Test\+Case}}
+\index{Rrc\+Connection\+Reestablishment\+Test\+Case@{Rrc\+Connection\+Reestablishment\+Test\+Case}!Rrc\+Connection\+Reestablishment\+Test\+Case@{Rrc\+Connection\+Reestablishment\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Rrc\+Connection\+Reestablishment\+Test\+Case()}{RrcConnectionReestablishmentTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Rrc\+Connection\+Reestablishment\+Test\+Case\+::\+Rrc\+Connection\+Reestablishment\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classRrcConnectionReestablishmentTestCase_a83d13cf28fc227f37a5e9899ea0896c6}{}\label{classRrcConnectionReestablishmentTestCase_a83d13cf28fc227f37a5e9899ea0896c6}
+
+\begin{DoxyCode}
+781                                                                             : 
+      \hyperlink{classRrcHeaderTestCase_a59d334d21492c281b877a73bb0ac2a03}{RrcHeaderTestCase} (\textcolor{stringliteral}{"Testing RrcConnectionReestablishmentTestCase"})
+782 \{
+783 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Rrc\+Connection\+Reestablishment\+Test\+Case@{Rrc\+Connection\+Reestablishment\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Rrc\+Connection\+Reestablishment\+Test\+Case@{Rrc\+Connection\+Reestablishment\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Rrc\+Connection\+Reestablishment\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classRrcConnectionReestablishmentTestCase_a83b77e685792d906456e37b202274265}{}\label{classRrcConnectionReestablishmentTestCase_a83b77e685792d906456e37b202274265}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classRrcHeaderTestCase_ab72ac5cd07c4359237c8e36ab16f5414}{Rrc\+Header\+Test\+Case}.
+
+
+\begin{DoxyCode}
+787 \{
+788   \hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet} = Create<Packet> ();
+789   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"============= RrcConnectionReestablishmentTestCase ==========="});
+790 
+791   \hyperlink{structns3_1_1LteRrcSap_1_1RrcConnectionReestablishment}{LteRrcSap::RrcConnectionReestablishment} msg;
+792   msg.\hyperlink{structns3_1_1LteRrcSap_1_1RrcConnectionReestablishment_acd894e6f1f5a38a2a87f5968a10802cd}{rrcTransactionIdentifier} = 2;
+793   msg.\hyperlink{structns3_1_1LteRrcSap_1_1RrcConnectionReestablishment_ac8c576ec1c5909704cced17ca5566b29}{radioResourceConfigDedicated} = 
+      \hyperlink{classRrcHeaderTestCase_a078175e25caaedb4ef308b54e76db7b4}{CreateRadioResourceConfigDedicated} ();
+794 
+795   \hyperlink{classns3_1_1RrcConnectionReestablishmentHeader}{RrcConnectionReestablishmentHeader} source;
+796   source.\hyperlink{classns3_1_1RrcConnectionReestablishmentHeader_ab0a4d827375abc6a26c970900c68c8ea}{SetMessage} (msg);
+797 
+798   \textcolor{comment}{// Log source info}
+799   TestUtils::LogPacketInfo<RrcConnectionReestablishmentHeader> (source,\textcolor{stringliteral}{"SOURCE"});
+800 
+801   \textcolor{comment}{// Add header}
+802   \hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet}->\hyperlink{classns3_1_1Packet_a465108c595a0bc592095cbcab1832ed8}{AddHeader} (source);
+803 
+804   \textcolor{comment}{// Log serialized packet contents}
+805   \hyperlink{classTestUtils_a9391dac3282094e6e57c0052d88a086f}{TestUtils::LogPacketContents} (\hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet});
+806 
+807   \textcolor{comment}{// remove header}
+808   \hyperlink{classns3_1_1RrcConnectionReestablishmentHeader}{RrcConnectionReestablishmentHeader} destination;
+809   \hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet}->\hyperlink{classns3_1_1Packet_a0961eccf975d75f902d40956c93ba63e}{RemoveHeader} (destination);
+810 
+811   \textcolor{comment}{// Log destination info}
+812   TestUtils::LogPacketInfo<RrcConnectionReestablishmentHeader> (destination,\textcolor{stringliteral}{"DESTINATION"});
+813 
+814   \textcolor{comment}{// Check that the destination and source headers contain the same values}
+815   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (source.GetRrcTransactionIdentifier (), destination.
+      GetRrcTransactionIdentifier (), \textcolor{stringliteral}{"rrcTransactionIdentifier"});
+816   \hyperlink{classRrcHeaderTestCase_ab6230c6987acd58d7482ca5e40b80875}{AssertEqualRadioResourceConfigDedicated} (source.
+      GetRadioResourceConfigDedicated (),destination.GetRadioResourceConfigDedicated ());
+817 
+818   \hyperlink{classRrcHeaderTestCase_a6f0748c0e845f797497fbda1ca781803}{packet} = 0;
+819 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lte/test/\hyperlink{test-asn1-encoding_8cc}{test-\/asn1-\/encoding.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,113 @@
+\hypertarget{classDropTailQueueTestCase}{}\section{Drop\+Tail\+Queue\+Test\+Case Class Reference}
+\label{classDropTailQueueTestCase}\index{Drop\+Tail\+Queue\+Test\+Case@{Drop\+Tail\+Queue\+Test\+Case}}
+
+
+Inheritance diagram for Drop\+Tail\+Queue\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Drop\+Tail\+Queue\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDropTailQueueTestCase_a2940d0e42f0c1f06893647ea89e1db8c}{Drop\+Tail\+Queue\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classDropTailQueueTestCase_a17d07be5a91814f89082f8d6f0c33e8d}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Drop\+Tail\+Queue\+Test\+Case@{Drop\+Tail\+Queue\+Test\+Case}!Drop\+Tail\+Queue\+Test\+Case@{Drop\+Tail\+Queue\+Test\+Case}}
+\index{Drop\+Tail\+Queue\+Test\+Case@{Drop\+Tail\+Queue\+Test\+Case}!Drop\+Tail\+Queue\+Test\+Case@{Drop\+Tail\+Queue\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Drop\+Tail\+Queue\+Test\+Case()}{DropTailQueueTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Drop\+Tail\+Queue\+Test\+Case\+::\+Drop\+Tail\+Queue\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classDropTailQueueTestCase_a2940d0e42f0c1f06893647ea89e1db8c}{}\label{classDropTailQueueTestCase_a2940d0e42f0c1f06893647ea89e1db8c}
+
+\begin{DoxyCode}
+33   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Sanity check on the drop tail queue implementation"})
+34 \{
+35 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Drop\+Tail\+Queue\+Test\+Case@{Drop\+Tail\+Queue\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Drop\+Tail\+Queue\+Test\+Case@{Drop\+Tail\+Queue\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Drop\+Tail\+Queue\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classDropTailQueueTestCase_a17d07be5a91814f89082f8d6f0c33e8d}{}\label{classDropTailQueueTestCase_a17d07be5a91814f89082f8d6f0c33e8d}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+38 \{
+39   \hyperlink{classns3_1_1Ptr}{Ptr<DropTailQueue<Packet>} > queue = CreateObject<DropTailQueue<Packet> > ();
+40   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->SetAttributeFailSafe (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (3))
+      , \textcolor{keyword}{true},
+41                          \textcolor{stringliteral}{"Verify that we can actually set the attribute"});
+42 
+43   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} p1, p2, p3, p4;
+44   p1 = Create<Packet> ();
+45   p2 = Create<Packet> ();
+46   p3 = Create<Packet> ();
+47   p4 = Create<Packet> ();
+48 
+49   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->GetNPackets (), 0, \textcolor{stringliteral}{"There should be no packets in
+       there"});
+50   queue->Enqueue (p1);
+51   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->GetNPackets (), 1, \textcolor{stringliteral}{"There should be one packet in
+       there"});
+52   queue->Enqueue (p2);
+53   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->GetNPackets (), 2, \textcolor{stringliteral}{"There should be two packets in
+       there"});
+54   queue->Enqueue (p3);
+55   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->GetNPackets (), 3, \textcolor{stringliteral}{"There should be three packets in
+       there"});
+56   queue->Enqueue (p4); \textcolor{comment}{// will be dropped}
+57   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->GetNPackets (), 3, \textcolor{stringliteral}{"There should be still three
+       packets in there"});
+58 
+59   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} packet;
+60 
+61   packet = queue->Dequeue ();
+62   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} ((packet != 0), \textcolor{keyword}{true}, \textcolor{stringliteral}{"I want to remove the first packet"});
+63   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->GetNPackets (), 2, \textcolor{stringliteral}{"There should be two packets in
+       there"});
+64   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (packet->GetUid (), p1->GetUid (), \textcolor{stringliteral}{"was this the first packet
+       ?"});
+65 
+66   packet = queue->Dequeue ();
+67   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} ((packet != 0), \textcolor{keyword}{true}, \textcolor{stringliteral}{"I want to remove the second packet"});
+68   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->GetNPackets (), 1, \textcolor{stringliteral}{"There should be one packet in
+       there"});
+69   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (packet->GetUid (), p2->GetUid (), \textcolor{stringliteral}{"Was this the second packet
+       ?"});
+70 
+71   packet = queue->Dequeue ();
+72   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} ((packet != 0), \textcolor{keyword}{true}, \textcolor{stringliteral}{"I want to remove the third packet"});
+73   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (queue->GetNPackets (), 0, \textcolor{stringliteral}{"There should be no packets in
+       there"});
+74   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (packet->GetUid (), p3->GetUid (), \textcolor{stringliteral}{"Was this the third packet
+       ?"});
+75 
+76   packet = queue->Dequeue ();
+77   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} ((packet == 0), \textcolor{keyword}{true}, \textcolor{stringliteral}{"There are really no packets in there"});
+78 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+network/test/\hyperlink{drop-tail-queue-test-suite_8cc}{drop-\/tail-\/queue-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

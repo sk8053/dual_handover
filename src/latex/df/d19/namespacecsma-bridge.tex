@@ -1,0 +1,137 @@
+\hypertarget{namespacecsma-bridge}{}\section{csma-\/bridge Namespace Reference}
+\label{namespacecsma-bridge}\index{csma-\/bridge@{csma-\/bridge}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacecsma-bridge_a25d9f9cff8393751f7263e818d74a1e2}{main} (argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{csma-\/bridge@{csma-\/bridge}!main@{main}}
+\index{main@{main}!csma-\/bridge@{csma-\/bridge}}
+\subsubsection[{\texorpdfstring{main(argv)}{main(argv)}}]{\setlength{\rightskip}{0pt plus 5cm}def csma-\/bridge.\+main (
+\begin{DoxyParamCaption}
+\item[{}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecsma-bridge_a25d9f9cff8393751f7263e818d74a1e2}{}\label{namespacecsma-bridge_a25d9f9cff8393751f7263e818d74a1e2}
+
+\begin{DoxyCode}
+39 \textcolor{keyword}{def }\hyperlink{namespacecsma-bridge_a25d9f9cff8393751f7263e818d74a1e2}{main}(argv):
+40 
+41     \textcolor{comment}{#}
+42     \textcolor{comment}{# Allow the user to override any of the defaults and the above Bind() at}
+43     \textcolor{comment}{# run-time, via command-line arguments}
+44     \textcolor{comment}{#}
+45     cmd = ns.core.CommandLine()
+46     cmd.Parse(argv)
+47 
+48     \textcolor{comment}{#}
+49     \textcolor{comment}{# Explicitly create the nodes required by the topology(shown above).}
+50     \textcolor{comment}{#}
+51     \textcolor{comment}{#print "Create nodes."}
+52     terminals = ns.network.NodeContainer()
+53     terminals.Create(4)
+54 
+55     csmaSwitch = ns.network.NodeContainer()
+56     csmaSwitch.Create(1)
+57 
+58     \textcolor{comment}{#print "Build Topology"}
+59     csma = ns.csma.CsmaHelper()
+60     csma.SetChannelAttribute(\textcolor{stringliteral}{"DataRate"}, ns.network.DataRateValue(ns.network.DataRate(5000000)))
+61     csma.SetChannelAttribute(\textcolor{stringliteral}{"Delay"}, ns.core.TimeValue(ns.core.MilliSeconds(2)))
+62 
+63     \textcolor{comment}{# Create the csma links, from each terminal to the switch}
+64 
+65     terminalDevices = ns.network.NetDeviceContainer()
+66     switchDevices = ns.network.NetDeviceContainer()
+67 
+68     \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(4):
+69         link = csma.Install(ns.network.NodeContainer(ns.network.NodeContainer(terminals.Get(i)), csmaSwitch
+      ))
+70         terminalDevices.Add(link.Get(0))
+71         switchDevices.Add(link.Get(1))
+72 
+73     \textcolor{comment}{# Create the bridge netdevice, which will do the packet switching}
+74     switchNode = csmaSwitch.Get(0)
+75     bridgeDevice = ns.bridge.BridgeNetDevice()
+76     switchNode.AddDevice(bridgeDevice)
+77 
+78     \textcolor{keywordflow}{for} portIter \textcolor{keywordflow}{in} range(switchDevices.GetN()):
+79         bridgeDevice.AddBridgePort(switchDevices.Get(portIter))
+80 
+81     \textcolor{comment}{# Add internet stack to the terminals}
+82     internet = ns.internet.InternetStackHelper()
+83     internet.Install(terminals)
+84 
+85     \textcolor{comment}{# We've got the "hardware" in place.  Now we need to add IP addresses.}
+86     \textcolor{comment}{#}
+87     \textcolor{comment}{#print "Assign IP Addresses."}
+88     ipv4 = ns.internet.Ipv4AddressHelper()
+89     ipv4.SetBase(ns.network.Ipv4Address(\textcolor{stringliteral}{"10.1.1.0"}), ns.network.Ipv4Mask(\textcolor{stringliteral}{"255.255.255.0"}))
+90     ipv4.Assign(terminalDevices)
+91 
+92     \textcolor{comment}{#}
+93     \textcolor{comment}{# Create an OnOff application to send UDP datagrams from node zero to node 1.}
+94     \textcolor{comment}{#}
+95     \textcolor{comment}{#print "Create Applications."}
+96     port = 9   \textcolor{comment}{# Discard port(RFC 863)}
+97 
+98     onoff = ns.applications.OnOffHelper(\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+99                             ns.network.Address(ns.network.InetSocketAddress(ns.network.Ipv4Address(\textcolor{stringliteral}{"
+      10.1.1.2"}), port)))
+100     onoff.SetConstantRate (ns.network.DataRate (\textcolor{stringliteral}{"500kb/s"}))
+101 
+102     app = onoff.Install(ns.network.NodeContainer(terminals.Get(0)))
+103     \textcolor{comment}{# Start the application}
+104     app.Start(ns.core.Seconds(1.0))
+105     app.Stop(ns.core.Seconds(10.0))
+106 
+107     \textcolor{comment}{# Create an optional packet sink to receive these packets}
+108     sink = ns.applications.PacketSinkHelper(\textcolor{stringliteral}{"ns3::UdpSocketFactory"},
+109                                 ns.network.Address(ns.network.InetSocketAddress(
+      ns.network.Ipv4Address.GetAny(), port)))
+110     app = sink.Install(ns.network.NodeContainer(terminals.Get(1)))
+111     app.Start(ns.core.Seconds(0.0))
+112 
+113     \textcolor{comment}{# }
+114     \textcolor{comment}{# Create a similar flow from n3 to n0, starting at time 1.1 seconds}
+115     \textcolor{comment}{#}
+116     onoff.SetAttribute(\textcolor{stringliteral}{"Remote"}, 
+117                        ns.network.AddressValue(ns.network.InetSocketAddress(ns.network.Ipv4Address(\textcolor{stringliteral}{"
+      10.1.1.1"}), port)))
+118     app = onoff.Install(ns.network.NodeContainer(terminals.Get(3)))
+119     app.Start(ns.core.Seconds(1.1))
+120     app.Stop(ns.core.Seconds(10.0))
+121 
+122     app = sink.Install(ns.network.NodeContainer(terminals.Get(0)))
+123     app.Start(ns.core.Seconds(0.0))
+124 
+125     \textcolor{comment}{#}
+126     \textcolor{comment}{# Configure tracing of all enqueue, dequeue, and NetDevice receive events.}
+127     \textcolor{comment}{# Trace output will be sent to the file "csma-bridge.tr"}
+128     \textcolor{comment}{#}
+129     \textcolor{comment}{#print "Configure Tracing."}
+130     \textcolor{comment}{#ascii = ns.network.AsciiTraceHelper();}
+131     \textcolor{comment}{#csma.EnableAsciiAll(ascii.CreateFileStream ("csma-bridge.tr"));}
+132 
+133     \textcolor{comment}{#}
+134     \textcolor{comment}{# Also configure some tcpdump traces; each interface will be traced.}
+135     \textcolor{comment}{# The output files will be named:}
+136     \textcolor{comment}{#     csma-bridge.pcap-<nodeId>-<interfaceId>}
+137     \textcolor{comment}{# and can be read by the "tcpdump -r" command(use "-tt" option to}
+138     \textcolor{comment}{# display timestamps correctly)}
+139     \textcolor{comment}{#}
+140     csma.EnablePcapAll(\textcolor{stringliteral}{"csma-bridge"}, \textcolor{keyword}{False})
+141 
+142     \textcolor{comment}{#}
+143     \textcolor{comment}{# Now, do the actual simulation.}
+144     \textcolor{comment}{#}
+145     \textcolor{comment}{#print "Run Simulation."}
+146     ns.core.Simulator.Run()
+147     ns.core.Simulator.Destroy()
+148     \textcolor{comment}{#print "Done."}
+149 
+150 
+151 
+\end{DoxyCode}

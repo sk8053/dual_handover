@@ -1,0 +1,274 @@
+\hypertarget{resources-counters_8cc}{}\section{netanim/examples/resources-\/counters.cc File Reference}
+\label{resources-counters_8cc}\index{netanim/examples/resources-\/counters.\+cc@{netanim/examples/resources-\/counters.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/netanim-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/layout-\/module.\+h\char`\"{}}\\*
+Include dependency graph for resources-\/counters.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structrgb}{rgb}
+\begin{DoxyCompactList}\small\item\em R\+GB structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{resources-counters_8cc_a7a2a3abb755d0d1a31414355520d054b}{modify} ()
+\item 
+int \hyperlink{resources-counters_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1AnimationInterface}{Animation\+Interface} $\ast$ \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{p\+Anim} = 0
+\item 
+struct \hyperlink{structrgb}{rgb} \hyperlink{resources-counters_8cc_aeede5006703c01b469f27688e8e9827d}{colors} \mbox{[}$\,$\mbox{]}
+\item 
+uint32\+\_\+t \hyperlink{resources-counters_8cc_ab20113bedfcc0176913571c8d89a8c03}{resource\+Id1}
+\item 
+uint32\+\_\+t \hyperlink{resources-counters_8cc_a292c1862c3b1b951332f9262740af32d}{resource\+Id2}
+\item 
+uint32\+\_\+t \hyperlink{resources-counters_8cc_ae202b3102afeb9d8c3fff7a4559776be}{node\+Counter\+Id\+Uint32}
+\item 
+uint32\+\_\+t \hyperlink{resources-counters_8cc_abe58489a4b6d596b028ee7d32f113e78}{node\+Counter\+Id\+Double1}
+\item 
+uint32\+\_\+t \hyperlink{resources-counters_8cc_a00c6cb208129b5c99030a6a87e2e5ed8}{node\+Counter\+Id\+Double2}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{resources-\/counters.\+cc@{resources-\/counters.\+cc}!main@{main}}
+\index{main@{main}!resources-\/counters.\+cc@{resources-\/counters.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{resources-counters_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{resources-counters_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+110 \{
+111   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::PacketSize"}, UintegerValue (512));
+112   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::DataRate"}, StringValue (\textcolor{stringliteral}{"500kb/s"}));
+113 
+114   uint32\_t    nLeftLeaf = 5;
+115   uint32\_t    nRightLeaf = 5;
+116   uint32\_t    nLeaf = 0; \textcolor{comment}{// If non-zero, number of both left and right}
+117   std::string animFile = \textcolor{stringliteral}{"resources\_demo.xml"} ;  \textcolor{comment}{// Name of file for animation output}
+118 
+119   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+120   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nLeftLeaf"}, \textcolor{stringliteral}{"Number of left side leaf nodes"}, nLeftLeaf);
+121   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nRightLeaf"},\textcolor{stringliteral}{"Number of right side leaf nodes"}, nRightLeaf);
+122   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nLeaf"},     \textcolor{stringliteral}{"Number of left and right side leaf nodes"}, nLeaf);
+123   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"animFile"},  \textcolor{stringliteral}{"File Name for Animation Output"}, animFile);
+124 
+125   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc,argv);
+126   \textcolor{keywordflow}{if} (nLeaf > 0)
+127     \{
+128       nLeftLeaf = nLeaf;
+129       nRightLeaf = nLeaf;
+130     \}
+131 
+132   \textcolor{comment}{// Create the point-to-point link helpers}
+133   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} pointToPointRouter;
+134   pointToPointRouter.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute}  (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+135   pointToPointRouter.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"1ms"}));
+136   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} pointToPointLeaf;
+137   pointToPointLeaf.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute}    (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+138   pointToPointLeaf.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute}   (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"1ms"}));
+139 
+140   \hyperlink{classns3_1_1PointToPointDumbbellHelper}{PointToPointDumbbellHelper} \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d} (nLeftLeaf, pointToPointLeaf,
+141                                 nRightLeaf, pointToPointLeaf,
+142                                 pointToPointRouter);
+143 
+144   \textcolor{comment}{// Install Stack}
+145   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+146   \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.InstallStack (stack);
+147 
+148   \textcolor{comment}{// Assign IP Addresses}
+149   \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.AssignIpv4Addresses (\hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"}),
+150                          \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} (\textcolor{stringliteral}{"10.2.1.0"}, \textcolor{stringliteral}{"255.255.255.0"}),
+151                          \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} (\textcolor{stringliteral}{"10.3.1.0"}, \textcolor{stringliteral}{"255.255.255.0"}));
+152 
+153   \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.BoundingBox (1, 1, 100, 100);
+154   \textcolor{comment}{// Install on/off app on all right side nodes}
+155   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} clientHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+156   clientHelper.SetAttribute 
+157     (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=0.|Max=1.]"}));
+158   clientHelper.SetAttribute 
+159     (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=0.|Max=1.]"}));
+160   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps;
+161 
+162   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.RightCount (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+163     \{
+164       \textcolor{comment}{// Create an on/off app sending packets to the same leaf right side}
+165       AddressValue remoteAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetLeftIpv4Address (
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), 1000));
+166       clientHelper.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+167       clientApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (clientHelper.Install (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetRight (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})));
+168     \}
+169 
+170   clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+171   clientApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (5.0));
+172 
+173   \textcolor{comment}{// Set the bounding box for animation}
+174 
+175 
+176   \textcolor{comment}{// Create the animation object and configure for specified output}
+177   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim} = \textcolor{keyword}{new} \hyperlink{classns3_1_1AnimationInterface}{AnimationInterface} (animFile); 
+178   \textcolor{comment}{// Provide the absolute path to the resource}
+179   \hyperlink{resources-counters_8cc_ab20113bedfcc0176913571c8d89a8c03}{resourceId1} = \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a86f0418d9272700c196c7843a196558b}{AddResource} (\textcolor{stringliteral}{"
+      /Users/john/ns3/netanim-3.105/ns-3-logo1.png"});
+180   \hyperlink{resources-counters_8cc_a292c1862c3b1b951332f9262740af32d}{resourceId2} = \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a86f0418d9272700c196c7843a196558b}{AddResource} (\textcolor{stringliteral}{"
+      /Users/john/ns3/netanim-3.105/ns-3-logo2.png"});
+181   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_abe3918b883455cb87fdc89ff7b69ed59}{SetBackgroundImage} (\textcolor{stringliteral}{"/Users/john/ns3/netanim-3.105/ns-3-background.png"}, 0,
+       0, 0.2, 0.2, 0.1);
+182 
+183 
+184   \textcolor{comment}{// Add a node counter}
+185   \hyperlink{resources-counters_8cc_ae202b3102afeb9d8c3fff7a4559776be}{nodeCounterIdUint32} = \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a09a8ba111fec10ad13f1d6ea6b5f71a1}{AddNodeCounter} (\textcolor{stringliteral}{"Uint32 Counter"}, 
+      AnimationInterface::UINT32\_COUNTER);
+186   \hyperlink{resources-counters_8cc_abe58489a4b6d596b028ee7d32f113e78}{nodeCounterIdDouble1} = \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a09a8ba111fec10ad13f1d6ea6b5f71a1}{AddNodeCounter} (\textcolor{stringliteral}{"Double Counter 1"}, 
+      AnimationInterface::DOUBLE\_COUNTER);
+187   \hyperlink{resources-counters_8cc_a00c6cb208129b5c99030a6a87e2e5ed8}{nodeCounterIdDouble2} = \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a09a8ba111fec10ad13f1d6ea6b5f71a1}{AddNodeCounter} (\textcolor{stringliteral}{"Double Counter 2"}, 
+      AnimationInterface::DOUBLE\_COUNTER);
+188 
+189   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.1), \hyperlink{resources-counters_8cc_a7a2a3abb755d0d1a31414355520d054b}{modify});
+190   
+191   \textcolor{comment}{// Set up the acutal simulation}
+192   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+193 
+194   Simulator::Run ();
+195   std::cout << \textcolor{stringliteral}{"Animation Trace file created:"} << animFile.c\_str ()<< std::endl;
+196   Simulator::Destroy ();
+197   \textcolor{keyword}{delete} \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim};
+198   \textcolor{keywordflow}{return} 0;
+199 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{resources-\/counters.\+cc@{resources-\/counters.\+cc}!modify@{modify}}
+\index{modify@{modify}!resources-\/counters.\+cc@{resources-\/counters.\+cc}}
+\subsubsection[{\texorpdfstring{modify()}{modify()}}]{\setlength{\rightskip}{0pt plus 5cm}void modify (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{resources-counters_8cc_a7a2a3abb755d0d1a31414355520d054b}{}\label{resources-counters_8cc_a7a2a3abb755d0d1a31414355520d054b}
+
+\begin{DoxyCode}
+53 \{
+54   std::ostringstream oss;
+55   oss << \textcolor{stringliteral}{"Update:"} << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} ();
+56   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (0, 1, oss.str ());
+57   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (0, 2, oss.str ());
+58   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (0, 3, oss.str ());
+59   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (0, 4, oss.str ());
+60   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (0, 5, oss.str ());
+61   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (0, 6, oss.str ());
+62   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (1, 7, oss.str ());
+63   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (1, 8, oss.str ());
+64   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (1, 9, oss.str ());
+65   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (1, 10, oss.str ());
+66   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (1, 11, oss.str ());
+67   
+68   \textcolor{comment}{// Every update change the node description for node 2}
+69   std::ostringstream node0Oss;
+70   node0Oss << \textcolor{stringliteral}{"-----Node:"} << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} ();
+71   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_adaad6891a737119ff48304aed442fedd}{UpdateNodeDescription} (2, node0Oss.str ());
+72   \textcolor{keyword}{static} \textcolor{keywordtype}{double} size = 2;
+73   \textcolor{keyword}{static} uint32\_t currentResourceId = \hyperlink{resources-counters_8cc_ab20113bedfcc0176913571c8d89a8c03}{resourceId1};
+74   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a95060ce2565165f5f25a00340bb9a0c1}{UpdateNodeSize} (2, size, size);
+75   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a52d452668baff3587273d6137f1a2f47}{UpdateNodeImage} (3, currentResourceId);
+76   size *= 1.1;
+77   \textcolor{keywordflow}{if} (size > 20)
+78     size = 1;
+79   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a95060ce2565165f5f25a00340bb9a0c1}{UpdateNodeSize} (3, 10, 10);
+80   \textcolor{keywordflow}{if} (currentResourceId == \hyperlink{resources-counters_8cc_ab20113bedfcc0176913571c8d89a8c03}{resourceId1})
+81     currentResourceId = \hyperlink{resources-counters_8cc_a292c1862c3b1b951332f9262740af32d}{resourceId2};
+82   \textcolor{keywordflow}{else}
+83     currentResourceId = \hyperlink{resources-counters_8cc_ab20113bedfcc0176913571c8d89a8c03}{resourceId1};    
+84 
+85   \textcolor{comment}{// Every update change the color for node 4}
+86   \textcolor{keyword}{static} uint32\_t index = 0;
+87   index++;
+88   \textcolor{keywordflow}{if} (index == 3) 
+89     index = 0;
+90   \textcolor{keyword}{struct }\hyperlink{structrgb}{rgb} color = \hyperlink{resources-counters_8cc_aeede5006703c01b469f27688e8e9827d}{colors}[index];
+91   \textcolor{keywordflow}{for} (uint32\_t nodeId = 4; nodeId < 12; ++nodeId)
+92     \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_adba07ccf6613113799782712287720cb}{UpdateNodeColor} (nodeId, color.\hyperlink{structrgb_afd9a3feaf22de2f96ba25d19494235a6}{r}, color.\hyperlink{structrgb_a644713f43fbcf5e9f070fa1843aee55f}{g}, color.
+      \hyperlink{structrgb_a5ff4e0f515919a82c3f401afa8555da4}{b}); 
+93 
+94   \textcolor{comment}{// Update Node Counter for node 0 and node 5, use some random number between 0 to 1000 for value}
+95   \hyperlink{classns3_1_1Ptr}{Ptr <UniformRandomVariable>} rv = CreateObject<UniformRandomVariable> ();
+96   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a3a4739fd963384b6e3ded75124c03e15}{UpdateNodeCounter} (\hyperlink{resources-counters_8cc_ae202b3102afeb9d8c3fff7a4559776be}{nodeCounterIdUint32}, 0, rv->
+      \hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} (0, 1000));
+97   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a3a4739fd963384b6e3ded75124c03e15}{UpdateNodeCounter} (\hyperlink{resources-counters_8cc_abe58489a4b6d596b028ee7d32f113e78}{nodeCounterIdDouble1}, 0, rv->
+      \hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} (100.0, 200.0));
+98   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a3a4739fd963384b6e3ded75124c03e15}{UpdateNodeCounter} (\hyperlink{resources-counters_8cc_a00c6cb208129b5c99030a6a87e2e5ed8}{nodeCounterIdDouble2}, 0, rv->
+      \hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} (300.0, 400.0));
+99   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a3a4739fd963384b6e3ded75124c03e15}{UpdateNodeCounter} (\hyperlink{resources-counters_8cc_ae202b3102afeb9d8c3fff7a4559776be}{nodeCounterIdUint32}, 5, rv->
+      \hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} (0, 1000));
+100   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a3a4739fd963384b6e3ded75124c03e15}{UpdateNodeCounter} (\hyperlink{resources-counters_8cc_abe58489a4b6d596b028ee7d32f113e78}{nodeCounterIdDouble1}, 5, rv->
+      \hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} (100.0, 200.0));
+101   \hyperlink{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a3a4739fd963384b6e3ded75124c03e15}{UpdateNodeCounter} (\hyperlink{resources-counters_8cc_a00c6cb208129b5c99030a6a87e2e5ed8}{nodeCounterIdDouble2}, 5, rv->
+      \hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} (300.0, 400.0));
+102 
+103   \textcolor{keywordflow}{if} (\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () < 10) \textcolor{comment}{// This is important or the simulation}
+104     \textcolor{comment}{// will run endlessly}
+105     Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.1), \hyperlink{resources-counters_8cc_a7a2a3abb755d0d1a31414355520d054b}{modify});
+106 
+107 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Variable Documentation}
+\index{resources-\/counters.\+cc@{resources-\/counters.\+cc}!colors@{colors}}
+\index{colors@{colors}!resources-\/counters.\+cc@{resources-\/counters.\+cc}}
+\subsubsection[{\texorpdfstring{colors}{colors}}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf rgb} colors\mbox{[}$\,$\mbox{]}}\hypertarget{resources-counters_8cc_aeede5006703c01b469f27688e8e9827d}{}\label{resources-counters_8cc_aeede5006703c01b469f27688e8e9827d}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+                        \{ 255, 0, 0 \}, 
+                        \{ 0, 255, 0 \}, 
+                        \{ 0, 0, 255 \}  
+                        \}
+\end{DoxyCode}
+\index{resources-\/counters.\+cc@{resources-\/counters.\+cc}!node\+Counter\+Id\+Double1@{node\+Counter\+Id\+Double1}}
+\index{node\+Counter\+Id\+Double1@{node\+Counter\+Id\+Double1}!resources-\/counters.\+cc@{resources-\/counters.\+cc}}
+\subsubsection[{\texorpdfstring{node\+Counter\+Id\+Double1}{nodeCounterIdDouble1}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t node\+Counter\+Id\+Double1}\hypertarget{resources-counters_8cc_abe58489a4b6d596b028ee7d32f113e78}{}\label{resources-counters_8cc_abe58489a4b6d596b028ee7d32f113e78}
+\index{resources-\/counters.\+cc@{resources-\/counters.\+cc}!node\+Counter\+Id\+Double2@{node\+Counter\+Id\+Double2}}
+\index{node\+Counter\+Id\+Double2@{node\+Counter\+Id\+Double2}!resources-\/counters.\+cc@{resources-\/counters.\+cc}}
+\subsubsection[{\texorpdfstring{node\+Counter\+Id\+Double2}{nodeCounterIdDouble2}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t node\+Counter\+Id\+Double2}\hypertarget{resources-counters_8cc_a00c6cb208129b5c99030a6a87e2e5ed8}{}\label{resources-counters_8cc_a00c6cb208129b5c99030a6a87e2e5ed8}
+\index{resources-\/counters.\+cc@{resources-\/counters.\+cc}!node\+Counter\+Id\+Uint32@{node\+Counter\+Id\+Uint32}}
+\index{node\+Counter\+Id\+Uint32@{node\+Counter\+Id\+Uint32}!resources-\/counters.\+cc@{resources-\/counters.\+cc}}
+\subsubsection[{\texorpdfstring{node\+Counter\+Id\+Uint32}{nodeCounterIdUint32}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t node\+Counter\+Id\+Uint32}\hypertarget{resources-counters_8cc_ae202b3102afeb9d8c3fff7a4559776be}{}\label{resources-counters_8cc_ae202b3102afeb9d8c3fff7a4559776be}
+\index{resources-\/counters.\+cc@{resources-\/counters.\+cc}!p\+Anim@{p\+Anim}}
+\index{p\+Anim@{p\+Anim}!resources-\/counters.\+cc@{resources-\/counters.\+cc}}
+\subsubsection[{\texorpdfstring{p\+Anim}{pAnim}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Animation\+Interface}$\ast$ p\+Anim = 0}\hypertarget{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{}\label{resources-counters_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}
+\index{resources-\/counters.\+cc@{resources-\/counters.\+cc}!resource\+Id1@{resource\+Id1}}
+\index{resource\+Id1@{resource\+Id1}!resources-\/counters.\+cc@{resources-\/counters.\+cc}}
+\subsubsection[{\texorpdfstring{resource\+Id1}{resourceId1}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t resource\+Id1}\hypertarget{resources-counters_8cc_ab20113bedfcc0176913571c8d89a8c03}{}\label{resources-counters_8cc_ab20113bedfcc0176913571c8d89a8c03}
+\index{resources-\/counters.\+cc@{resources-\/counters.\+cc}!resource\+Id2@{resource\+Id2}}
+\index{resource\+Id2@{resource\+Id2}!resources-\/counters.\+cc@{resources-\/counters.\+cc}}
+\subsubsection[{\texorpdfstring{resource\+Id2}{resourceId2}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t resource\+Id2}\hypertarget{resources-counters_8cc_a292c1862c3b1b951332f9262740af32d}{}\label{resources-counters_8cc_a292c1862c3b1b951332f9262740af32d}

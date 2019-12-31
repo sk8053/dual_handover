@@ -1,0 +1,424 @@
+\hypertarget{main-propagation-loss_8cc}{}\section{propagation/examples/main-\/propagation-\/loss.cc File Reference}
+\label{main-propagation-loss_8cc}\index{propagation/examples/main-\/propagation-\/loss.\+cc@{propagation/examples/main-\/propagation-\/loss.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/propagation-\/loss-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/jakes-\/propagation-\/loss-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/constant-\/position-\/mobility-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/command-\/line.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/string.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/boolean.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/double.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/pointer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/gnuplot.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/simulator.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$map$>$}\\*
+Include dependency graph for main-\/propagation-\/loss.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \hyperlink{main-propagation-loss_8cc_a721898091040fc1467f1dca3e57edd12}{dround} (double number, double precision)
+\item 
+static \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{main-propagation-loss_8cc_a4e5137292d7c72e9726190680c642e7d}{Test\+Deterministic} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1PropagationLossModel}{Propagation\+Loss\+Model} $>$ model)
+\item 
+static \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{main-propagation-loss_8cc_a2c280e21b5e273cca8f71b0f167e034f}{Test\+Probabilistic} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1PropagationLossModel}{Propagation\+Loss\+Model} $>$ model, unsigned int samples=100000)
+\item 
+static \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{main-propagation-loss_8cc_a093207d9d8a33b2bfc987434a52eeecc}{Test\+Deterministic\+By\+Time} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1PropagationLossModel}{Propagation\+Loss\+Model} $>$ model, \hyperlink{classns3_1_1Time}{Time} time\+Step=Seconds(0.\+001), \hyperlink{classns3_1_1Time}{Time} time\+Total=Seconds(1.\+0), double distance=100.\+0)
+\item 
+int \hyperlink{main-propagation-loss_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{main-\/propagation-\/loss.\+cc@{main-\/propagation-\/loss.\+cc}!dround@{dround}}
+\index{dround@{dround}!main-\/propagation-\/loss.\+cc@{main-\/propagation-\/loss.\+cc}}
+\subsubsection[{\texorpdfstring{dround(double number, double precision)}{dround(double number, double precision)}}]{\setlength{\rightskip}{0pt plus 5cm}static double dround (
+\begin{DoxyParamCaption}
+\item[{double}]{number, }
+\item[{double}]{precision}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-propagation-loss_8cc_a721898091040fc1467f1dca3e57edd12}{}\label{main-propagation-loss_8cc_a721898091040fc1467f1dca3e57edd12}
+Round a double number to the given precision. e.\+g. dround(0.\+234, 0.\+1) = 0.\+2 and dround(0.\+257, 0.\+1) = 0.\+3 
+\begin{DoxyCode}
+41 \{
+42   number /= precision;
+43   \textcolor{keywordflow}{if} (number >= 0)
+44     \{
+45       number = floor (number + 0.5);
+46     \}
+47   \textcolor{keywordflow}{else}
+48     \{
+49       number = ceil (number - 0.5);
+50     \}
+51   number *= precision;
+52   \textcolor{keywordflow}{return} number;
+53 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{main-\/propagation-\/loss.\+cc@{main-\/propagation-\/loss.\+cc}!main@{main}}
+\index{main@{main}!main-\/propagation-\/loss.\+cc@{main-\/propagation-\/loss.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{main-propagation-loss_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{main-propagation-loss_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+221 \{
+222   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+223   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+224   
+225   \hyperlink{classns3_1_1GnuplotCollection}{GnuplotCollection} gnuplots (\textcolor{stringliteral}{"main-propagation-loss.pdf"});
+226 
+227   \{
+228     \hyperlink{classns3_1_1Ptr}{Ptr<FriisPropagationLossModel>} friis = 
+      CreateObject<FriisPropagationLossModel> ();
+229 
+230     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot} = \hyperlink{main-propagation-loss_8cc_a4e5137292d7c72e9726190680c642e7d}{TestDeterministic} (friis);
+231     plot.SetTitle (\textcolor{stringliteral}{"ns3::FriisPropagationLossModel (Default Parameters)"});
+232     gnuplots.AddPlot (plot);
+233   \}
+234 
+235   \{
+236     \hyperlink{classns3_1_1Ptr}{Ptr<LogDistancePropagationLossModel>} log = 
+      CreateObject<LogDistancePropagationLossModel> ();
+237     log->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Exponent"}, DoubleValue (2.5));
+238 
+239     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} plot = \hyperlink{main-propagation-loss_8cc_a4e5137292d7c72e9726190680c642e7d}{TestDeterministic} (log);
+240     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"ns3::LogDistancePropagationLossModel (Exponent = 2.5)"});
+241     gnuplots.AddPlot (plot);
+242   \}
+243 
+244   \{
+245     \hyperlink{classns3_1_1Ptr}{Ptr<RandomPropagationLossModel>} random = 
+      CreateObject<RandomPropagationLossModel> ();
+246     \hyperlink{classns3_1_1Ptr}{Ptr<ExponentialRandomVariable>} expVar = 
+      CreateObjectWithAttributes<ExponentialRandomVariable> (\textcolor{stringliteral}{"Mean"}, DoubleValue (50.0));
+247     random->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Variable"}, \hyperlink{classns3_1_1PointerValue}{PointerValue} (expVar));
+248 
+249     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} plot = \hyperlink{main-propagation-loss_8cc_a4e5137292d7c72e9726190680c642e7d}{TestDeterministic} (random);
+250     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"ns3::RandomPropagationLossModel with Exponential Distribution"});
+251     gnuplots.AddPlot (plot);
+252   \}
+253 
+254   \{
+255     \hyperlink{classns3_1_1Ptr}{Ptr<JakesPropagationLossModel>} jakes = 
+      CreateObject<JakesPropagationLossModel> ();
+256 
+257     \textcolor{comment}{// doppler frequency shift for 5.15 GHz at 100 km/h}
+258     \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::JakesProcess::DopplerFrequencyHz"}, DoubleValue (477.9));
+259 
+260     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} plot = \hyperlink{main-propagation-loss_8cc_a093207d9d8a33b2bfc987434a52eeecc}{TestDeterministicByTime} (jakes, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.001), \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+261     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"ns3::JakesPropagationLossModel (with 477.9 Hz shift and 1 millisec resolution)"}
+      );
+262     gnuplots.AddPlot (plot);
+263   \}
+264 
+265   \{
+266     \hyperlink{classns3_1_1Ptr}{Ptr<JakesPropagationLossModel>} jakes = 
+      CreateObject<JakesPropagationLossModel> ();
+267 
+268     \textcolor{comment}{// doppler frequency shift for 5.15 GHz at 100 km/h}
+269     \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::JakesProcess::DopplerFrequencyHz"}, DoubleValue (477.9));
+270 
+271     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} plot = \hyperlink{main-propagation-loss_8cc_a093207d9d8a33b2bfc987434a52eeecc}{TestDeterministicByTime} (jakes, 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0001), \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.1));
+272     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"ns3::JakesPropagationLossModel (with 477.9 Hz shift and 0.1 millisec
+       resolution)"});
+273     gnuplots.AddPlot (plot);
+274   \}
+275 
+276   \{
+277     \hyperlink{classns3_1_1Ptr}{Ptr<ThreeLogDistancePropagationLossModel>} log3 = 
+      CreateObject<ThreeLogDistancePropagationLossModel> ();
+278 
+279     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} plot = \hyperlink{main-propagation-loss_8cc_a4e5137292d7c72e9726190680c642e7d}{TestDeterministic} (log3);
+280     plot.SetTitle (\textcolor{stringliteral}{"ns3::ThreeLogDistancePropagationLossModel (Defaults)"});
+281     gnuplots.AddPlot (plot);
+282   \}
+283 
+284   \{
+285     \hyperlink{classns3_1_1Ptr}{Ptr<ThreeLogDistancePropagationLossModel>} log3 = 
+      CreateObject<ThreeLogDistancePropagationLossModel> ();
+286     \textcolor{comment}{// more prominent example values:}
+287     log3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Exponent0"}, DoubleValue (1.0));
+288     log3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Exponent1"}, DoubleValue (3.0));
+289     log3->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Exponent2"}, DoubleValue (10.0));
+290 
+291     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} plot = \hyperlink{main-propagation-loss_8cc_a4e5137292d7c72e9726190680c642e7d}{TestDeterministic} (log3);
+292     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"ns3::ThreeLogDistancePropagationLossModel (Exponents 1.0, 3.0 and 10.0)"});
+293     gnuplots.AddPlot (plot);
+294   \}
+295 
+296   \{
+297     \hyperlink{classns3_1_1Ptr}{Ptr<NakagamiPropagationLossModel>} nak = 
+      CreateObject<NakagamiPropagationLossModel> ();
+298 
+299     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} plot = \hyperlink{main-propagation-loss_8cc_a2c280e21b5e273cca8f71b0f167e034f}{TestProbabilistic} (nak);
+300     plot.SetTitle (\textcolor{stringliteral}{"ns3::NakagamiPropagationLossModel (Default Parameters)"});
+301     gnuplots.AddPlot (plot);
+302   \}
+303 
+304   \{
+305     \hyperlink{classns3_1_1Ptr}{Ptr<ThreeLogDistancePropagationLossModel>} log3 = 
+      CreateObject<ThreeLogDistancePropagationLossModel> ();
+306 
+307     \hyperlink{classns3_1_1Ptr}{Ptr<NakagamiPropagationLossModel>} nak = 
+      CreateObject<NakagamiPropagationLossModel> ();
+308     log3->\hyperlink{classns3_1_1PropagationLossModel_ac6d627f2eb09daa057de080615ac1013}{SetNext} (nak);
+309 
+310     \hyperlink{classns3_1_1Gnuplot}{Gnuplot} plot = \hyperlink{main-propagation-loss_8cc_a2c280e21b5e273cca8f71b0f167e034f}{TestProbabilistic} (log3);
+311     plot.\hyperlink{classns3_1_1Gnuplot_ac01f15633d49f0239f8a45293a1e04f0}{SetTitle} (\textcolor{stringliteral}{"ns3::ThreeLogDistancePropagationLossModel and ns3::NakagamiPropagationLossModel
+       (Default Parameters)"});
+312     gnuplots.AddPlot (plot);
+313   \}
+314 
+315   gnuplots.GenerateOutput (std::cout);
+316 
+317   \textcolor{comment}{// produce clean valgrind}
+318   Simulator::Destroy ();
+319   \textcolor{keywordflow}{return} 0;
+320 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{main-\/propagation-\/loss.\+cc@{main-\/propagation-\/loss.\+cc}!Test\+Deterministic@{Test\+Deterministic}}
+\index{Test\+Deterministic@{Test\+Deterministic}!main-\/propagation-\/loss.\+cc@{main-\/propagation-\/loss.\+cc}}
+\subsubsection[{\texorpdfstring{Test\+Deterministic(\+Ptr$<$ Propagation\+Loss\+Model $>$ model)}{TestDeterministic(Ptr< PropagationLossModel > model)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Gnuplot} Test\+Deterministic (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Propagation\+Loss\+Model} $>$}]{model}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-propagation-loss_8cc_a4e5137292d7c72e9726190680c642e7d}{}\label{main-propagation-loss_8cc_a4e5137292d7c72e9726190680c642e7d}
+
+\begin{DoxyCode}
+57 \{
+58   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} a = 
+      CreateObject<ConstantPositionMobilityModel> ();
+59   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b} = 
+      CreateObject<ConstantPositionMobilityModel> ();
+60 
+61   \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+62 
+63   plot.AppendExtra (\textcolor{stringliteral}{"set xlabel 'Distance'"});
+64   plot.AppendExtra (\textcolor{stringliteral}{"set ylabel 'rxPower (dBm)'"});
+65   plot.AppendExtra (\textcolor{stringliteral}{"set key top right"});
+66 
+67   \textcolor{keywordtype}{double} txPowerDbm = +20; \textcolor{comment}{// dBm}
+68 
+69   \hyperlink{classns3_1_1Gnuplot2dDataset}{Gnuplot2dDataset} dataset;
+70 
+71   dataset.\hyperlink{classns3_1_1Gnuplot2dDataset_a7a3d6b6c2bd7d32a82f5715bae37c886}{SetStyle} (Gnuplot2dDataset::LINES);
+72 
+73   \{
+74     a->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));
+75 
+76     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{double} distance = 0.0; distance < 2500.0; distance += 10.0)
+77       \{
+78         b->SetPosition (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (distance, 0.0, 0.0));
+79 
+80         \textcolor{comment}{// CalcRxPower() returns dBm.}
+81         \textcolor{keywordtype}{double} rxPowerDbm = model->\hyperlink{classns3_1_1PropagationLossModel_a8b42564e9b03e2197f17aab6692c4fee}{CalcRxPower} (txPowerDbm, a, b);
+82 
+83         dataset.\hyperlink{classns3_1_1Gnuplot2dDataset_abd93f7c8fa2d1ed643c09d7fb8d5ef27}{Add} (distance, rxPowerDbm);
+84 
+85         Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+86         Simulator::Run ();
+87       \}
+88   \}
+89 
+90   std::ostringstream os;
+91   os << \textcolor{stringliteral}{"txPower "} << txPowerDbm << \textcolor{stringliteral}{"dBm"};
+92   dataset.\hyperlink{classns3_1_1GnuplotDataset_add68db1296fcadff7255633c0df96e08}{SetTitle} (os.str ());
+93 
+94   plot.AddDataset (dataset);
+95 
+96   plot.AddDataset ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"-94 dBm CSThreshold"}, \textcolor{stringliteral}{"-94.0"}) );
+97 
+98   \textcolor{keywordflow}{return} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+99 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{main-\/propagation-\/loss.\+cc@{main-\/propagation-\/loss.\+cc}!Test\+Deterministic\+By\+Time@{Test\+Deterministic\+By\+Time}}
+\index{Test\+Deterministic\+By\+Time@{Test\+Deterministic\+By\+Time}!main-\/propagation-\/loss.\+cc@{main-\/propagation-\/loss.\+cc}}
+\subsubsection[{\texorpdfstring{Test\+Deterministic\+By\+Time(\+Ptr$<$ Propagation\+Loss\+Model $>$ model, Time time\+Step=\+Seconds(0.\+001), Time time\+Total=\+Seconds(1.\+0), double distance=100.\+0)}{TestDeterministicByTime(Ptr< PropagationLossModel > model, Time timeStep=Seconds(0.001), Time timeTotal=Seconds(1.0), double distance=100.0)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Gnuplot} Test\+Deterministic\+By\+Time (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Propagation\+Loss\+Model} $>$}]{model, }
+\item[{{\bf Time}}]{time\+Step = {\ttfamily Seconds~(0.001)}, }
+\item[{{\bf Time}}]{time\+Total = {\ttfamily Seconds~(1.0)}, }
+\item[{double}]{distance = {\ttfamily 100.0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-propagation-loss_8cc_a093207d9d8a33b2bfc987434a52eeecc}{}\label{main-propagation-loss_8cc_a093207d9d8a33b2bfc987434a52eeecc}
+
+\begin{DoxyCode}
+175 \{
+176   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} a = 
+      CreateObject<ConstantPositionMobilityModel> ();
+177   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b} = 
+      CreateObject<ConstantPositionMobilityModel> ();
+178 
+179   \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+180 
+181   plot.AppendExtra (\textcolor{stringliteral}{"set xlabel 'Time (s)'"});
+182   plot.AppendExtra (\textcolor{stringliteral}{"set ylabel 'rxPower (dBm)'"});
+183   plot.AppendExtra (\textcolor{stringliteral}{"set key center right"});
+184 
+185   \textcolor{keywordtype}{double} txPowerDbm = +20; \textcolor{comment}{// dBm}
+186 
+187   \hyperlink{classns3_1_1Gnuplot2dDataset}{Gnuplot2dDataset} dataset;
+188 
+189   dataset.\hyperlink{classns3_1_1Gnuplot2dDataset_a7a3d6b6c2bd7d32a82f5715bae37c886}{SetStyle} (Gnuplot2dDataset::LINES);
+190 
+191   \{
+192     a->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));
+193     b->SetPosition (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (distance, 0.0, 0.0));
+194 
+195     \hyperlink{classns3_1_1Time}{Time} \hyperlink{namespacevisualizer_1_1core_a2a35e5d8a34af358b508dac8635754e0}{start} = \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ();
+196     \textcolor{keywordflow}{while}( \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} () < start + timeTotal )
+197       \{
+198         \textcolor{comment}{// CalcRxPower() returns dBm.}
+199         \textcolor{keywordtype}{double} rxPowerDbm = model->\hyperlink{classns3_1_1PropagationLossModel_a8b42564e9b03e2197f17aab6692c4fee}{CalcRxPower} (txPowerDbm, a, b);
+200 
+201         \hyperlink{classns3_1_1Time}{Time} elapsed = \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} () - \hyperlink{namespacevisualizer_1_1core_a2a35e5d8a34af358b508dac8635754e0}{start};
+202         dataset.\hyperlink{classns3_1_1Gnuplot2dDataset_abd93f7c8fa2d1ed643c09d7fb8d5ef27}{Add} (elapsed.\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} (), rxPowerDbm);
+203 
+204         Simulator::Stop (timeStep);
+205         Simulator::Run ();
+206       \}
+207   \}
+208 
+209   std::ostringstream os;
+210   os << \textcolor{stringliteral}{"txPower "} << txPowerDbm << \textcolor{stringliteral}{"dBm"};
+211   dataset.\hyperlink{classns3_1_1GnuplotDataset_add68db1296fcadff7255633c0df96e08}{SetTitle} (os.str ());
+212 
+213   plot.AddDataset (dataset);
+214 
+215   plot.AddDataset ( \hyperlink{classns3_1_1Gnuplot2dFunction}{Gnuplot2dFunction} (\textcolor{stringliteral}{"-94 dBm CSThreshold"}, \textcolor{stringliteral}{"-94.0"}) );
+216 
+217   \textcolor{keywordflow}{return} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+218 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{main-\/propagation-\/loss.\+cc@{main-\/propagation-\/loss.\+cc}!Test\+Probabilistic@{Test\+Probabilistic}}
+\index{Test\+Probabilistic@{Test\+Probabilistic}!main-\/propagation-\/loss.\+cc@{main-\/propagation-\/loss.\+cc}}
+\subsubsection[{\texorpdfstring{Test\+Probabilistic(\+Ptr$<$ Propagation\+Loss\+Model $>$ model, unsigned int samples=100000)}{TestProbabilistic(Ptr< PropagationLossModel > model, unsigned int samples=100000)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Gnuplot} Test\+Probabilistic (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Propagation\+Loss\+Model} $>$}]{model, }
+\item[{unsigned int}]{samples = {\ttfamily 100000}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-propagation-loss_8cc_a2c280e21b5e273cca8f71b0f167e034f}{}\label{main-propagation-loss_8cc_a2c280e21b5e273cca8f71b0f167e034f}
+
+\begin{DoxyCode}
+103 \{
+104   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} a = 
+      CreateObject<ConstantPositionMobilityModel> ();
+105   \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b} = 
+      CreateObject<ConstantPositionMobilityModel> ();
+106 
+107   \hyperlink{classns3_1_1Gnuplot}{Gnuplot} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+108 
+109   plot.AppendExtra (\textcolor{stringliteral}{"set xlabel 'Distance'"});
+110   plot.AppendExtra (\textcolor{stringliteral}{"set ylabel 'rxPower (dBm)'"});
+111   plot.AppendExtra (\textcolor{stringliteral}{"set zlabel 'Probability' offset 0,+10"});
+112   plot.AppendExtra (\textcolor{stringliteral}{"set view 50, 120, 1.0, 1.0"});
+113   plot.AppendExtra (\textcolor{stringliteral}{"set key top right"});
+114 
+115   plot.AppendExtra (\textcolor{stringliteral}{"set ticslevel 0"});
+116   plot.AppendExtra (\textcolor{stringliteral}{"set xtics offset -0.5,0"});
+117   plot.AppendExtra (\textcolor{stringliteral}{"set ytics offset 0,-0.5"});
+118   plot.AppendExtra (\textcolor{stringliteral}{"set xrange [100:]"});
+119 
+120   \textcolor{keywordtype}{double} txPowerDbm = +20; \textcolor{comment}{// dBm}
+121 
+122   \hyperlink{classns3_1_1Gnuplot3dDataset}{Gnuplot3dDataset} dataset;
+123 
+124   dataset.\hyperlink{classns3_1_1Gnuplot3dDataset_ae99331e66e6d5a39fdf407875be56f1f}{SetStyle} (\textcolor{stringliteral}{"with linespoints"});
+125   dataset.\hyperlink{classns3_1_1GnuplotDataset_a60d9bf5911e70a58ec11b35969d41fa6}{SetExtra} (\textcolor{stringliteral}{"pointtype 3 pointsize 0.5"});
+126 
+127   \textcolor{keyword}{typedef} std::map<double, unsigned int> rxPowerMapType;
+128 
+129   \textcolor{comment}{// Take given number of samples from CalcRxPower() and show probability}
+130   \textcolor{comment}{// density for discrete distances.}
+131   \{
+132     a->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));
+133 
+134     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{double} distance = 100.0; distance < 2500.0; distance += 100.0)
+135       \{
+136         b->SetPosition (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (distance, 0.0, 0.0));
+137 
+138         rxPowerMapType rxPowerMap;
+139 
+140         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} samp = 0; samp < samples; ++samp)
+141           \{
+142             \textcolor{comment}{// CalcRxPower() returns dBm.}
+143             \textcolor{keywordtype}{double} rxPowerDbm = model->\hyperlink{classns3_1_1PropagationLossModel_a8b42564e9b03e2197f17aab6692c4fee}{CalcRxPower} (txPowerDbm, a, b);
+144             rxPowerDbm = \hyperlink{main-propagation-loss_8cc_a721898091040fc1467f1dca3e57edd12}{dround} (rxPowerDbm, 1.0);
+145 
+146             rxPowerMap[ rxPowerDbm ]++;
+147 
+148             Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.01));
+149             Simulator::Run ();
+150           \}
+151 
+152         \textcolor{keywordflow}{for} (rxPowerMapType::const\_iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = rxPowerMap.begin ();
+153              \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != rxPowerMap.end (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+154           \{
+155             dataset.\hyperlink{classns3_1_1Gnuplot3dDataset_ad3a4b4baa637cfc099a488f3fcbf1975}{Add} (distance, \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->first, (\textcolor{keywordtype}{double})\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}->second / (\textcolor{keywordtype}{double})samples);
+156           \}
+157         dataset.\hyperlink{classns3_1_1Gnuplot3dDataset_a0a56512b7f6c6c75622a3981c69c07ec}{AddEmptyLine} ();
+158       \}
+159   \}
+160 
+161   std::ostringstream os;
+162   os << \textcolor{stringliteral}{"txPower "} << txPowerDbm << \textcolor{stringliteral}{"dBm"};
+163   dataset.\hyperlink{classns3_1_1GnuplotDataset_add68db1296fcadff7255633c0df96e08}{SetTitle} (os.str ());
+164 
+165   plot.AddDataset (dataset);
+166 
+167   \textcolor{keywordflow}{return} \hyperlink{lte__amc_8m_a5942306abe9f005572e4344e3cdef528}{plot};
+168 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+

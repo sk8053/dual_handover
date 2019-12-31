@@ -1,0 +1,63 @@
+\hypertarget{main-packet-tag_8cc}{}\section{network/examples/main-\/packet-\/tag.cc File Reference}
+\label{main-packet-tag_8cc}\index{network/examples/main-\/packet-\/tag.\+cc@{network/examples/main-\/packet-\/tag.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/tag.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/packet.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/uinteger.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+Include dependency graph for main-\/packet-\/tag.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classMyTag}{My\+Tag}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{main-packet-tag_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{main-\/packet-\/tag.\+cc@{main-\/packet-\/tag.\+cc}!main@{main}}
+\index{main@{main}!main-\/packet-\/tag.\+cc@{main-\/packet-\/tag.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{main-packet-tag_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{main-packet-tag_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+97 \{
+98   \textcolor{comment}{// create a tag.}
+99   \hyperlink{classMyTag}{MyTag} tag;
+100   tag.\hyperlink{classMyTag_a662c03c129cbd44b5cb29c63f518dcdd}{SetSimpleValue} (0x56);
+101 
+102   \textcolor{comment}{// store the tag in a packet.}
+103   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = Create<Packet> (100);
+104   p->\hyperlink{classns3_1_1Packet_a7400b8655852f5271c5957250d0141af}{AddPacketTag} (tag);
+105 
+106   \textcolor{comment}{// create a copy of the packet}
+107   \hyperlink{classns3_1_1Ptr}{Ptr<Packet>} aCopy = p->\hyperlink{classns3_1_1Packet_a5d5c70802a5f77fc5f0001e0cfc1898b}{Copy} ();
+108 
+109   \textcolor{comment}{// read the tag from the packet copy}
+110   \hyperlink{classMyTag}{MyTag} tagCopy;
+111   p->\hyperlink{classns3_1_1Packet_a1734de11f2ca1e78a7872461a0625168}{PeekPacketTag} (tagCopy);
+112 
+113   \textcolor{comment}{// the copy and the original are the same !}
+114   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (tagCopy.\hyperlink{classMyTag_a353be1fb83a0fa6728ab5d1924585efb}{GetSimpleValue} () == tag.
+      \hyperlink{classMyTag_a353be1fb83a0fa6728ab5d1924585efb}{GetSimpleValue} ());
+115 
+116   aCopy->\hyperlink{classns3_1_1Packet_a260fecda6a32bfc24e16a950e7d91559}{PrintPacketTags} (std::cout);
+117   std::cout << std::endl;
+118 
+119   \textcolor{keywordflow}{return} 0;
+120 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

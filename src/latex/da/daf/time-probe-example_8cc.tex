@@ -1,0 +1,252 @@
+\hypertarget{time-probe-example_8cc}{}\section{stats/examples/time-\/probe-\/example.cc File Reference}
+\label{time-probe-example_8cc}\index{stats/examples/time-\/probe-\/example.\+cc@{stats/examples/time-\/probe-\/example.\+cc}}
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/time-\/probe.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/gnuplot-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for time-\/probe-\/example.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classEmitter}{Emitter}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{time-probe-example_8cc_ac9e97608181525dacc4f242a38c30ae4}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Time\+Probe\+Example\char`\"{})
+\item 
+\hyperlink{time-probe-example_8cc_a02543ef64adac04c3ef2c7c137ee4d9f}{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED} (\hyperlink{classEmitter}{Emitter})
+\item 
+void \hyperlink{time-probe-example_8cc_ad814e60140a70993531da0fd84afe604}{Notify\+Via\+Trace\+Source} (std\+::string context, \hyperlink{classns3_1_1Time}{Time} old\+Val, \hyperlink{classns3_1_1Time}{Time} new\+Val)
+\item 
+void \hyperlink{time-probe-example_8cc_a2b89eb6cf8dc830f27ce00766bf62c68}{Notify\+Via\+Probe} (std\+::string context, double old\+Val, double new\+Val)
+\item 
+int \hyperlink{time-probe-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1GlobalValue}{ns3\+::\+Global\+Value} \hyperlink{time-probe-example_8cc_aed7570b021a1c76cbfd6d138b4278336}{g\+\_\+verbose} (\char`\"{}verbose\char`\"{},\char`\"{}Whether to enable \hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose} output\char`\"{}, ns3\+::\+Boolean\+Value(\hyperlink{lte__cqi__generation_8m_ab1bef239d413c4da139c4bac92cd657a}{false}), ns3\+::\+Make\+Boolean\+Checker())
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{time-\/probe-\/example.\+cc@{time-\/probe-\/example.\+cc}!main@{main}}
+\index{main@{main}!time-\/probe-\/example.\+cc@{time-\/probe-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{time-probe-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{time-probe-example_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+142 \{
+143   \textcolor{keywordtype}{double} stopTime = 100.0;
+144   \textcolor{keywordtype}{bool} \hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose} = \textcolor{keyword}{false};
+145 
+146   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+147   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"stopTime"}, \textcolor{stringliteral}{"Time (seconds) to terminate simulation"}, stopTime);
+148   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"verbose"}, \textcolor{stringliteral}{"Whether to enable verbose output"}, verbose);
+149   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+150   \textcolor{keywordtype}{bool} connected;
+151 
+152   \textcolor{comment}{// Set a global value, so that the callbacks can access it}
+153   \textcolor{keywordflow}{if} (verbose)
+154     \{
+155       GlobalValue::Bind (\textcolor{stringliteral}{"verbose"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+156       \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"TimeProbeExample"}, \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdba022b1237a4fd1b08d034471df3c58586}{LOG\_LEVEL\_ALL});
+157     \}
+158 
+159   \hyperlink{classns3_1_1Ptr}{Ptr<Emitter>} emitter = CreateObject<Emitter> ();
+160   Names::Add (\textcolor{stringliteral}{"/Names/Emitter"}, emitter);
+161 
+162   \textcolor{comment}{//}
+163   \textcolor{comment}{// The below shows typical functionality without a probe}
+164   \textcolor{comment}{// (connect a sink function to a trace source)}
+165   \textcolor{comment}{//}
+166   connected = emitter->\hyperlink{classns3_1_1ObjectBase_ada3a45b34bc23114a25e0ab19188276e}{TraceConnect} (\textcolor{stringliteral}{"Interval"}, \textcolor{stringliteral}{"raw trace source"}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{time-probe-example_8cc_ad814e60140a70993531da0fd84afe604}{NotifyViaTraceSource}));
+167   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (connected, \textcolor{stringliteral}{"Trace source not connected"});
+168 
+169   \textcolor{comment}{//}
+170   \textcolor{comment}{// Next, we'll show several use cases of using a Probe to access and}
+171   \textcolor{comment}{// filter the values of the underlying trace source}
+172   \textcolor{comment}{//}
+173 
+174   \textcolor{comment}{//}
+175   \textcolor{comment}{// Probe1 will be hooked directly to the Emitter trace source object}
+176   \textcolor{comment}{//}
+177 
+178   \textcolor{comment}{// probe1 will be hooked to the Emitter trace source}
+179   \hyperlink{classns3_1_1Ptr}{Ptr<TimeProbe>} probe1 = CreateObject<TimeProbe> ();
+180   \textcolor{comment}{// the probe's name can serve as its context in the tracing}
+181   probe1->\hyperlink{classns3_1_1DataCollectionObject_a9bf5a3af1190f7efadb1baae36889eaa}{SetName} (\textcolor{stringliteral}{"probe1"});
+182 
+183   \textcolor{comment}{// Connect the probe to the emitter's Interval}
+184   connected = probe1->\hyperlink{classns3_1_1TimeProbe_a01778c1013aca0788e98085fc86ab136}{ConnectByObject} (\textcolor{stringliteral}{"Interval"}, emitter);
+185   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (connected, \textcolor{stringliteral}{"Trace source not connected to probe1"});
+186 
+187   \textcolor{comment}{// The probe itself should generate output.  The context that we provide}
+188   \textcolor{comment}{// to this probe (in this case, the probe name) will help to disambiguate}
+189   \textcolor{comment}{// the source of the trace}
+190   connected = probe1->\hyperlink{classns3_1_1ObjectBase_ada3a45b34bc23114a25e0ab19188276e}{TraceConnect} (\textcolor{stringliteral}{"Output"}, probe1->\hyperlink{classns3_1_1DataCollectionObject_a2e37eac50a8ff0b7d3030ed82132afdd}{GetName} (), 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{time-probe-example_8cc_a2b89eb6cf8dc830f27ce00766bf62c68}{NotifyViaProbe}));
+191   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (connected, \textcolor{stringliteral}{"Trace source not connected to probe1 Output"});
+192 
+193   \textcolor{comment}{//}
+194   \textcolor{comment}{// Probe2 will be hooked to the Emitter trace source object by}
+195   \textcolor{comment}{// accessing it by path name in the Config database}
+196   \textcolor{comment}{//}
+197 
+198   \textcolor{comment}{// Create another similar probe; this will hook up via a Config path}
+199   \hyperlink{classns3_1_1Ptr}{Ptr<TimeProbe>} probe2 = CreateObject<TimeProbe> ();
+200   probe2->\hyperlink{classns3_1_1DataCollectionObject_a9bf5a3af1190f7efadb1baae36889eaa}{SetName} (\textcolor{stringliteral}{"probe2"});
+201 
+202   \textcolor{comment}{// Note, no return value is checked here}
+203   probe2->\hyperlink{classns3_1_1TimeProbe_a537eb677001130b775c926e2432ad84e}{ConnectByPath} (\textcolor{stringliteral}{"/Names/Emitter/Interval"});
+204 
+205   \textcolor{comment}{// The probe itself should generate output.  The context that we provide}
+206   \textcolor{comment}{// to this probe (in this case, the probe name) will help to disambiguate}
+207   \textcolor{comment}{// the source of the trace}
+208   connected = probe2->\hyperlink{classns3_1_1ObjectBase_ada3a45b34bc23114a25e0ab19188276e}{TraceConnect} (\textcolor{stringliteral}{"Output"}, \textcolor{stringliteral}{"probe2"}, \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{time-probe-example_8cc_a2b89eb6cf8dc830f27ce00766bf62c68}{NotifyViaProbe}));
+209   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (connected, \textcolor{stringliteral}{"Trace source not connected to probe2 Output"});
+210 
+211   \textcolor{comment}{//}
+212   \textcolor{comment}{// Probe3 will be called by the emitter directly through the}
+213   \textcolor{comment}{// static method SetValueByPath().}
+214   \textcolor{comment}{//}
+215   \hyperlink{classns3_1_1Ptr}{Ptr<TimeProbe>} probe3 = CreateObject<TimeProbe> ();
+216   probe3->\hyperlink{classns3_1_1DataCollectionObject_a9bf5a3af1190f7efadb1baae36889eaa}{SetName} (\textcolor{stringliteral}{"probe3"});
+217 
+218   \textcolor{comment}{// By adding to the config database, we can access it later}
+219   Names::Add (\textcolor{stringliteral}{"/Names/probe3"}, probe3);
+220 
+221   \textcolor{comment}{// The probe itself should generate output.  The context that we provide}
+222   \textcolor{comment}{// to this probe (in this case, the probe name) will help to disambiguate}
+223   \textcolor{comment}{// the source of the trace}
+224   connected = probe3->\hyperlink{classns3_1_1ObjectBase_ada3a45b34bc23114a25e0ab19188276e}{TraceConnect} (\textcolor{stringliteral}{"Output"}, \textcolor{stringliteral}{"probe3"}, \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{time-probe-example_8cc_a2b89eb6cf8dc830f27ce00766bf62c68}{NotifyViaProbe}));
+225   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (connected, \textcolor{stringliteral}{"Trace source not connected to probe3 Output"});
+226 
+227   \textcolor{comment}{// Plot the interval values}
+228   \hyperlink{classns3_1_1GnuplotHelper}{GnuplotHelper} plotHelper;
+229   plotHelper.\hyperlink{classns3_1_1GnuplotHelper_a05a9beecc9f5ece76cda792daeea6fc3}{ConfigurePlot} (\textcolor{stringliteral}{"time-probe-example"},
+230                             \textcolor{stringliteral}{"Emitter interarrivals vs. Time"},
+231                             \textcolor{stringliteral}{"Simulation time (Seconds)"},
+232                             \textcolor{stringliteral}{"Interarrival time (Seconds)"},
+233                             \textcolor{stringliteral}{"png"});
+234 
+235   \textcolor{comment}{// Helper creates a TimeProbe and hooks it to the /Names/Emitter/Interval}
+236   \textcolor{comment}{// source.  Helper also takes the Output of the TimeProbe and plots it}
+237   \textcolor{comment}{// as a dataset labeled 'Emitter Interarrival Time'}
+238   plotHelper.\hyperlink{classns3_1_1GnuplotHelper_a755eeb654e6d2c3ab3ab9674e21480f9}{PlotProbe} (\textcolor{stringliteral}{"ns3::TimeProbe"},
+239                         \textcolor{stringliteral}{"/Names/Emitter/Interval"},
+240                         \textcolor{stringliteral}{"Output"},
+241                         \textcolor{stringliteral}{"Emitter Interarrival Time"},
+242                         GnuplotAggregator::KEY\_INSIDE);
+243 
+244   \textcolor{comment}{// The Emitter object is not associated with an ns-3 node, so}
+245   \textcolor{comment}{// it won't get started automatically, so we need to do this ourselves}
+246   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0), &\hyperlink{classns3_1_1Object_af4411cb29971772fcd09203474a95078}{Emitter::Initialize}, emitter);
+247 
+248   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (stopTime));
+249   Simulator::Run ();
+250   Simulator::Destroy ();
+251 
+252   \textcolor{keywordflow}{return} 0;
+253 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{time-\/probe-\/example.\+cc@{time-\/probe-\/example.\+cc}!Notify\+Via\+Probe@{Notify\+Via\+Probe}}
+\index{Notify\+Via\+Probe@{Notify\+Via\+Probe}!time-\/probe-\/example.\+cc@{time-\/probe-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{Notify\+Via\+Probe(std\+::string context, double old\+Val, double new\+Val)}{NotifyViaProbe(std::string context, double oldVal, double newVal)}}]{\setlength{\rightskip}{0pt plus 5cm}void Notify\+Via\+Probe (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{double}]{old\+Val, }
+\item[{double}]{new\+Val}
+\end{DoxyParamCaption}
+)}\hypertarget{time-probe-example_8cc_a2b89eb6cf8dc830f27ce00766bf62c68}{}\label{time-probe-example_8cc_a2b89eb6cf8dc830f27ce00766bf62c68}
+
+\begin{DoxyCode}
+127 \{
+128   \hyperlink{classns3_1_1BooleanValue}{BooleanValue} \hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose};
+129   GlobalValue::GetValueByName (\textcolor{stringliteral}{"verbose"}, verbose);
+130   \textcolor{keywordflow}{if} (verbose.\hyperlink{classns3_1_1BooleanValue_a15d5d96abfd11676964f40859442ec12}{Get} ())
+131     \{
+132       std::cout << \textcolor{stringliteral}{"context: "} << context << \textcolor{stringliteral}{" old "} << oldVal << \textcolor{stringliteral}{" new "} << newVal << std::endl;
+133     \}
+134 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{time-\/probe-\/example.\+cc@{time-\/probe-\/example.\+cc}!Notify\+Via\+Trace\+Source@{Notify\+Via\+Trace\+Source}}
+\index{Notify\+Via\+Trace\+Source@{Notify\+Via\+Trace\+Source}!time-\/probe-\/example.\+cc@{time-\/probe-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{Notify\+Via\+Trace\+Source(std\+::string context, Time old\+Val, Time new\+Val)}{NotifyViaTraceSource(std::string context, Time oldVal, Time newVal)}}]{\setlength{\rightskip}{0pt plus 5cm}void Notify\+Via\+Trace\+Source (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{{\bf Time}}]{old\+Val, }
+\item[{{\bf Time}}]{new\+Val}
+\end{DoxyParamCaption}
+)}\hypertarget{time-probe-example_8cc_ad814e60140a70993531da0fd84afe604}{}\label{time-probe-example_8cc_ad814e60140a70993531da0fd84afe604}
+
+\begin{DoxyCode}
+115 \{
+116   \hyperlink{classns3_1_1BooleanValue}{BooleanValue} \hyperlink{openflow-switch_8cc_ab3f078684998b83967d507d0f453f454}{verbose};
+117   GlobalValue::GetValueByName (\textcolor{stringliteral}{"verbose"}, verbose);
+118   \textcolor{keywordflow}{if} (verbose.\hyperlink{classns3_1_1BooleanValue_a15d5d96abfd11676964f40859442ec12}{Get} ())
+119     \{
+120       std::cout << \textcolor{stringliteral}{"context: "} << context << \textcolor{stringliteral}{" old "} << oldVal.\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << \textcolor{stringliteral}{" new "} << newVal
+      .\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () << std::endl;
+121     \}
+122 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{time-\/probe-\/example.\+cc@{time-\/probe-\/example.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!time-\/probe-\/example.\+cc@{time-\/probe-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Time\+Probe\+Example"")}{NS_LOG_COMPONENT_DEFINE("TimeProbeExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Time\+Probe\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{time-probe-example_8cc_ac9e97608181525dacc4f242a38c30ae4}{}\label{time-probe-example_8cc_ac9e97608181525dacc4f242a38c30ae4}
+\index{time-\/probe-\/example.\+cc@{time-\/probe-\/example.\+cc}!N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED@{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED}}
+\index{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED@{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED}!time-\/probe-\/example.\+cc@{time-\/probe-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+E\+D(\+Emitter)}{NS_OBJECT_ENSURE_REGISTERED(Emitter)}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED (
+\begin{DoxyParamCaption}
+\item[{{\bf Emitter}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{time-probe-example_8cc_a02543ef64adac04c3ef2c7c137ee4d9f}{}\label{time-probe-example_8cc_a02543ef64adac04c3ef2c7c137ee4d9f}
+
+
+\subsection{Variable Documentation}
+\index{time-\/probe-\/example.\+cc@{time-\/probe-\/example.\+cc}!g\+\_\+verbose@{g\+\_\+verbose}}
+\index{g\+\_\+verbose@{g\+\_\+verbose}!time-\/probe-\/example.\+cc@{time-\/probe-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{g\+\_\+verbose}{g_verbose}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ns3\+::\+Global\+Value} g\+\_\+verbose(\char`\"{}verbose\char`\"{},\char`\"{}Whether to enable {\bf verbose} output\char`\"{}, ns3\+::\+Boolean\+Value({\bf false}), ns3\+::\+Make\+Boolean\+Checker())\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{time-probe-example_8cc_aed7570b021a1c76cbfd6d138b4278336}{}\label{time-probe-example_8cc_aed7570b021a1c76cbfd6d138b4278336}

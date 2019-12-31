@@ -1,0 +1,991 @@
+\hypertarget{classns3_1_1TcpHighSpeed}{}\section{ns3\+:\+:Tcp\+High\+Speed Class Reference}
+\label{classns3_1_1TcpHighSpeed}\index{ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}}
+
+
+An implementation of T\+CP High\+Speed.  
+
+
+
+
+{\ttfamily \#include $<$tcp-\/highspeed.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Tcp\+High\+Speed\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Tcp\+High\+Speed\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1TcpHighSpeed_a42ac971f249c1a5ea56081be385992bb}{Tcp\+High\+Speed} (void)
+\item 
+\hyperlink{classns3_1_1TcpHighSpeed_adc688f21d11e4d10bfcde1a4ff5fa604}{Tcp\+High\+Speed} (const \hyperlink{classns3_1_1TcpHighSpeed}{Tcp\+High\+Speed} \&sock)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1TcpHighSpeed_af1c599c9ae180189ff5d30833ec7d926}{$\sim$\+Tcp\+High\+Speed} (void)
+\item 
+virtual std\+::string \hyperlink{classns3_1_1TcpHighSpeed_a448ff7b3c5880d1ae8dba89b0f3d3745}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the name of the congestion control algorithm. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1TcpHighSpeed_abc432f29ca437f1a62cd17d614568842}{Get\+Ss\+Thresh} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)
+\begin{DoxyCompactList}\small\item\em Get slow start threshold following High\+Speed principles. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} $>$ \hyperlink{classns3_1_1TcpHighSpeed_a299b55baaeb60eb3a3e81f0f2a27e34f}{Fork} ()
+\begin{DoxyCompactList}\small\item\em Copy the congestion control algorithm across socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1TcpHighSpeed_a4633dec3bfdc99e8ca7070d353debd03}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \hyperlink{classns3_1_1TcpHighSpeed_a32dac394d020a4a25e4948e0f1104840}{Table\+LookupA} (uint32\+\_\+t \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w})
+\begin{DoxyCompactList}\small\item\em Lookup table for the coefficient a (from R\+FC 3649) \end{DoxyCompactList}\item 
+static double \hyperlink{classns3_1_1TcpHighSpeed_a1b4f680bd8203ed450f818dca3edb28b}{Table\+LookupB} (uint32\+\_\+t \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w})
+\begin{DoxyCompactList}\small\item\em Lookup table for the coefficient b (from R\+FC 3649) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classns3_1_1TcpHighSpeed_ab241f8400ad52cff3e2f04ed8d00983c}{Congestion\+Avoidance} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked)
+\begin{DoxyCompactList}\small\item\em Congestion avoidance of \hyperlink{classns3_1_1TcpHighSpeed}{Tcp\+High\+Speed}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpHighSpeed_aee2fcee158f034e4ec68a42a4564a2ec}{m\+\_\+ack\+Cnt}
+\begin{DoxyCompactList}\small\item\em Number of received A\+CK, corrected with the coefficient a. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An implementation of T\+CP High\+Speed. 
+
+T\+CP High\+Speed is designed for high-\/capacity channels or, in general, for T\+CP connections with large congestion windows. Conceptually, with respect to the standard T\+CP, High\+Speed makes the c\+Wnd grow faster during the probing phases and accelerates the c\+Wnd recovery from losses. This behavior is executed only when the window grows beyond a certain threshold, which allows T\+CP Highspeed to be friendly with standard T\+CP in environments with heavy congestion, without introducing new dangers of congestion collapse. At the core of T\+CP High\+Speed there are two functions, a(w) and b(w), which respectively specify the c\+Wnd growth addendum and the c\+Wnd reduction factor when given an actual c\+Wnd value w.
+
+More information\+: \href{http://dl.acm.org/citation.cfm?id=2756518}{\tt http\+://dl.\+acm.\+org/citation.\+cfm?id=2756518} 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}!Tcp\+High\+Speed@{Tcp\+High\+Speed}}
+\index{Tcp\+High\+Speed@{Tcp\+High\+Speed}!ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}}
+\subsubsection[{\texorpdfstring{Tcp\+High\+Speed(void)}{TcpHighSpeed(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+High\+Speed\+::\+Tcp\+High\+Speed (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpHighSpeed_a42ac971f249c1a5ea56081be385992bb}{}\label{classns3_1_1TcpHighSpeed_a42ac971f249c1a5ea56081be385992bb}
+Create an unbound tcp socket. 
+\begin{DoxyCode}
+41   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (),
+42   \hyperlink{classns3_1_1TcpHighSpeed_aee2fcee158f034e4ec68a42a4564a2ec}{m\_ackCnt} (0)
+43 \{
+44   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+45 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}!Tcp\+High\+Speed@{Tcp\+High\+Speed}}
+\index{Tcp\+High\+Speed@{Tcp\+High\+Speed}!ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}}
+\subsubsection[{\texorpdfstring{Tcp\+High\+Speed(const Tcp\+High\+Speed \&sock)}{TcpHighSpeed(const TcpHighSpeed &sock)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+High\+Speed\+::\+Tcp\+High\+Speed (
+\begin{DoxyParamCaption}
+\item[{const {\bf Tcp\+High\+Speed} \&}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpHighSpeed_adc688f21d11e4d10bfcde1a4ff5fa604}{}\label{classns3_1_1TcpHighSpeed_adc688f21d11e4d10bfcde1a4ff5fa604}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & the object to copy \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+48   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (sock),
+49   \hyperlink{classns3_1_1TcpHighSpeed_aee2fcee158f034e4ec68a42a4564a2ec}{m\_ackCnt} (sock.m\_ackCnt)
+50 \{
+51   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+52 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}!````~Tcp\+High\+Speed@{$\sim$\+Tcp\+High\+Speed}}
+\index{````~Tcp\+High\+Speed@{$\sim$\+Tcp\+High\+Speed}!ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}}
+\subsubsection[{\texorpdfstring{$\sim$\+Tcp\+High\+Speed(void)}{~TcpHighSpeed(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+High\+Speed\+::$\sim$\+Tcp\+High\+Speed (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpHighSpeed_af1c599c9ae180189ff5d30833ec7d926}{}\label{classns3_1_1TcpHighSpeed_af1c599c9ae180189ff5d30833ec7d926}
+
+\begin{DoxyCode}
+55 \{
+56   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+57 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}!Congestion\+Avoidance@{Congestion\+Avoidance}}
+\index{Congestion\+Avoidance@{Congestion\+Avoidance}!ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}}
+\subsubsection[{\texorpdfstring{Congestion\+Avoidance(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked)}{CongestionAvoidance(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+High\+Speed\+::\+Congestion\+Avoidance (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpHighSpeed_ab241f8400ad52cff3e2f04ed8d00983c}{}\label{classns3_1_1TcpHighSpeed_ab241f8400ad52cff3e2f04ed8d00983c}
+
+
+Congestion avoidance of \hyperlink{classns3_1_1TcpHighSpeed}{Tcp\+High\+Speed}. 
+
+As implementation choice, we increment c\+Wnd only by M\+SS, when the right number of A\+CK has been received. At this point, the important question is\+: what is the \char`\"{}right number of A\+C\+K\char`\"{} ?
+
+As you can recall from R\+FC, Highspeed works this way\+: \begin{DoxyVerb}          w = w + a(w)/w
+\end{DoxyVerb}
+
+
+Let\textquotesingle{}s start when a(w) is 1 (so it is classical New\+Reno). The formula then is the classical text-\/book version for New\+Reno\+: \begin{DoxyVerb}          w = w + 1 / w
+\end{DoxyVerb}
+
+
+So, for each segment acked, we increase the window by the quantity 1/w. Or, instead of adding the 1/w quantity for each segment acked, we can track the number of segments acked (m\+\_\+ack\+Cnt) and increment by 1 M\+SS when m\+\_\+ack\+Cnt reaches w.
+
+When a(w) $>$ 1, it means that each segment acked has a different \char`\"{}weight\char`\"{}. For instance, when it is equal to 2, we need to increase the window by the quantity 2/w. But, this means that one segment acked is equivalent (from the point of view of incrementing c\+Wnd) to two segments acked in New\+Reno (1/w + 1/w). That a coefficent is, in other word, the weight of each segment acked. More weight, less A\+CK are necessary to increment c\+Wnd, which is exactly the Highspeed principle.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments acked \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a34a5eec0649a7b485852c74c825e14ba}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+99 \{
+100   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked);
+101 
+102   uint32\_t segCwnd = tcb->\hyperlink{classns3_1_1TcpSocketState_ab6dfe309ca53fd3207dcafede75ad12d}{GetCwndInSegments} ();
+103   uint32\_t oldCwnd = segCwnd;
+104 
+105   \textcolor{keywordflow}{if} (segmentsAcked > 0)
+106     \{
+107       uint32\_t coeffA = \hyperlink{classns3_1_1TcpHighSpeed_a32dac394d020a4a25e4948e0f1104840}{TableLookupA} (segCwnd);
+108       \hyperlink{classns3_1_1TcpHighSpeed_aee2fcee158f034e4ec68a42a4564a2ec}{m\_ackCnt} += segmentsAcked * coeffA;
+109     \}
+110 
+111   \textcolor{keywordflow}{while} (\hyperlink{classns3_1_1TcpHighSpeed_aee2fcee158f034e4ec68a42a4564a2ec}{m\_ackCnt} >= segCwnd)
+112     \{
+113       \hyperlink{classns3_1_1TcpHighSpeed_aee2fcee158f034e4ec68a42a4564a2ec}{m\_ackCnt} -= segCwnd;
+114       segCwnd += 1;
+115     \}
+116 
+117   \textcolor{keywordflow}{if} (segCwnd != oldCwnd)
+118     \{
+119       tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} = segCwnd * tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+120       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"In CongAvoid, updated to cwnd "} << tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <<
+121                    \textcolor{stringliteral}{" ssthresh "} << tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+122     \}
+123 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}!Fork@{Fork}}
+\index{Fork@{Fork}!ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}}
+\subsubsection[{\texorpdfstring{Fork()}{Fork()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Congestion\+Ops} $>$ ns3\+::\+Tcp\+High\+Speed\+::\+Fork (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpHighSpeed_a299b55baaeb60eb3a3e81f0f2a27e34f}{}\label{classns3_1_1TcpHighSpeed_a299b55baaeb60eb3a3e81f0f2a27e34f}
+
+
+Copy the congestion control algorithm across socket. 
+
+\begin{DoxyReturn}{Returns}
+a pointer of the copied object 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a2606d5fcd01a1eb4d5f4e6beb7a33192}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+61 \{
+62   \textcolor{keywordflow}{return} CopyObject<TcpHighSpeed> (\textcolor{keyword}{this});
+63 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Tcp\+High\+Speed\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpHighSpeed_a448ff7b3c5880d1ae8dba89b0f3d3745}{}\label{classns3_1_1TcpHighSpeed_a448ff7b3c5880d1ae8dba89b0f3d3745}
+
+
+Get the name of the congestion control algorithm. 
+
+\begin{DoxyReturn}{Returns}
+A string identifying the name 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a0ecf92cb36c236c70e0ecaedfff6609e}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+127 \{
+128   \textcolor{keywordflow}{return} \textcolor{stringliteral}{"TcpHighSpeed"};
+129 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}!Get\+Ss\+Thresh@{Get\+Ss\+Thresh}}
+\index{Get\+Ss\+Thresh@{Get\+Ss\+Thresh}!ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}}
+\subsubsection[{\texorpdfstring{Get\+Ss\+Thresh(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)}{GetSsThresh(Ptr< const TcpSocketState > tcb, uint32_t bytesInFlight)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+High\+Speed\+::\+Get\+Ss\+Thresh (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{bytes\+In\+Flight}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpHighSpeed_abc432f29ca437f1a62cd17d614568842}{}\label{classns3_1_1TcpHighSpeed_abc432f29ca437f1a62cd17d614568842}
+
+
+Get slow start threshold following High\+Speed principles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em bytes\+In\+Flight} & Bytes in flight\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the slow start threshold value 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a1cb467aaa4960dfe10b963ed9f3d5aa2}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+142 \{
+143   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << bytesInFlight);
+144 
+145   uint32\_t segCwnd = bytesInFlight / tcb->m\_segmentSize;
+146 
+147   \textcolor{keywordtype}{double} \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b} = 1.0 - \hyperlink{classns3_1_1TcpHighSpeed_a1b4f680bd8203ed450f818dca3edb28b}{TableLookupB} (segCwnd);
+148   uint32\_t ssThresh = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (2.0, segCwnd * b);
+149 
+150   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Calculated b(w) = "} << b <<
+151                 \textcolor{stringliteral}{" resulting (in segment) ssThresh="} << ssThresh);
+152 
+153   \textcolor{keywordflow}{return} ssThresh * tcb->m\_segmentSize;
+154 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Tcp\+High\+Speed\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpHighSpeed_a4633dec3bfdc99e8ca7070d353debd03}{}\label{classns3_1_1TcpHighSpeed_a4633dec3bfdc99e8ca7070d353debd03}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+31 \{
+32   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::TcpHighSpeed"})
+33     .SetParent<\hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno}> ()
+34     .AddConstructor<TcpHighSpeed> ()
+35     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+36   ;
+37   \textcolor{keywordflow}{return} tid;
+38 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}!Table\+LookupA@{Table\+LookupA}}
+\index{Table\+LookupA@{Table\+LookupA}!ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}}
+\subsubsection[{\texorpdfstring{Table\+Lookup\+A(uint32\+\_\+t w)}{TableLookupA(uint32_t w)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+High\+Speed\+::\+Table\+LookupA (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{w}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpHighSpeed_a32dac394d020a4a25e4948e0f1104840}{}\label{classns3_1_1TcpHighSpeed_a32dac394d020a4a25e4948e0f1104840}
+
+
+Lookup table for the coefficient a (from R\+FC 3649) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & Window value (in packets)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the coefficient a 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+158 \{
+159   \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 38)
+160     \{
+161       \textcolor{keywordflow}{return} 1;
+162     \}
+163   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 118)
+164     \{
+165       \textcolor{keywordflow}{return} 2;
+166     \}
+167   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 221)
+168     \{
+169       \textcolor{keywordflow}{return} 3;
+170     \}
+171   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 347)
+172     \{
+173       \textcolor{keywordflow}{return} 4;
+174     \}
+175   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 495)
+176     \{
+177       \textcolor{keywordflow}{return} 5;
+178     \}
+179   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 663)
+180     \{
+181       \textcolor{keywordflow}{return} 6;
+182     \}
+183   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 851)
+184     \{
+185       \textcolor{keywordflow}{return} 7;
+186     \}
+187   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 1058)
+188     \{
+189       \textcolor{keywordflow}{return} 8;
+190     \}
+191   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 1284)
+192     \{
+193       \textcolor{keywordflow}{return} 9;
+194     \}
+195   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 1529)
+196     \{
+197       \textcolor{keywordflow}{return} 10;
+198     \}
+199   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 1793)
+200     \{
+201       \textcolor{keywordflow}{return} 11;
+202     \}
+203   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 2076)
+204     \{
+205       \textcolor{keywordflow}{return} 12;
+206     \}
+207   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 2378)
+208     \{
+209       \textcolor{keywordflow}{return} 13;
+210     \}
+211   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 2699)
+212     \{
+213       \textcolor{keywordflow}{return} 14;
+214     \}
+215   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 3039)
+216     \{
+217       \textcolor{keywordflow}{return} 15;
+218     \}
+219   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 3399)
+220     \{
+221       \textcolor{keywordflow}{return} 16;
+222     \}
+223   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 3778)
+224     \{
+225       \textcolor{keywordflow}{return} 17;
+226     \}
+227   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 4177)
+228     \{
+229       \textcolor{keywordflow}{return} 18;
+230     \}
+231   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 4596)
+232     \{
+233       \textcolor{keywordflow}{return} 19;
+234     \}
+235   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 5036)
+236     \{
+237       \textcolor{keywordflow}{return} 20;
+238     \}
+239   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 5497)
+240     \{
+241       \textcolor{keywordflow}{return} 21;
+242     \}
+243   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 5979)
+244     \{
+245       \textcolor{keywordflow}{return} 22;
+246     \}
+247   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 6483)
+248     \{
+249       \textcolor{keywordflow}{return} 23;
+250     \}
+251   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 7009)
+252     \{
+253       \textcolor{keywordflow}{return} 24;
+254     \}
+255   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 7558)
+256     \{
+257       \textcolor{keywordflow}{return} 25;
+258     \}
+259   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 8130)
+260     \{
+261       \textcolor{keywordflow}{return} 26;
+262     \}
+263   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 8726)
+264     \{
+265       \textcolor{keywordflow}{return} 27;
+266     \}
+267   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 9346)
+268     \{
+269       \textcolor{keywordflow}{return} 28;
+270     \}
+271   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 9991)
+272     \{
+273       \textcolor{keywordflow}{return} 29;
+274     \}
+275   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 10661)
+276     \{
+277       \textcolor{keywordflow}{return} 30;
+278     \}
+279   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 11358)
+280     \{
+281       \textcolor{keywordflow}{return} 31;
+282     \}
+283   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 12082)
+284     \{
+285       \textcolor{keywordflow}{return} 32;
+286     \}
+287   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 12834)
+288     \{
+289       \textcolor{keywordflow}{return} 33;
+290     \}
+291   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 13614)
+292     \{
+293       \textcolor{keywordflow}{return} 34;
+294     \}
+295   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 14424)
+296     \{
+297       \textcolor{keywordflow}{return} 35;
+298     \}
+299   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 15265)
+300     \{
+301       \textcolor{keywordflow}{return} 36;
+302     \}
+303   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 16137)
+304     \{
+305       \textcolor{keywordflow}{return} 37;
+306     \}
+307   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 17042)
+308     \{
+309       \textcolor{keywordflow}{return} 38;
+310     \}
+311   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 17981)
+312     \{
+313       \textcolor{keywordflow}{return} 39;
+314     \}
+315   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 18955)
+316     \{
+317       \textcolor{keywordflow}{return} 40;
+318     \}
+319   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 19965)
+320     \{
+321       \textcolor{keywordflow}{return} 41;
+322     \}
+323   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 21013)
+324     \{
+325       \textcolor{keywordflow}{return} 42;
+326     \}
+327   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 22101)
+328     \{
+329       \textcolor{keywordflow}{return} 43;
+330     \}
+331   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 23230)
+332     \{
+333       \textcolor{keywordflow}{return} 44;
+334     \}
+335   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 24402)
+336     \{
+337       \textcolor{keywordflow}{return} 45;
+338     \}
+339   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 25618)
+340     \{
+341       \textcolor{keywordflow}{return} 46;
+342     \}
+343   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 26881)
+344     \{
+345       \textcolor{keywordflow}{return} 47;
+346     \}
+347   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 28193)
+348     \{
+349       \textcolor{keywordflow}{return} 48;
+350     \}
+351   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 29557)
+352     \{
+353       \textcolor{keywordflow}{return} 49;
+354     \}
+355   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 30975)
+356     \{
+357       \textcolor{keywordflow}{return} 50;
+358     \}
+359   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 32450)
+360     \{
+361       \textcolor{keywordflow}{return} 51;
+362     \}
+363   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 33986)
+364     \{
+365       \textcolor{keywordflow}{return} 52;
+366     \}
+367   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 35586)
+368     \{
+369       \textcolor{keywordflow}{return} 53;
+370     \}
+371   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 37253)
+372     \{
+373       \textcolor{keywordflow}{return} 54;
+374     \}
+375   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 38992)
+376     \{
+377       \textcolor{keywordflow}{return} 55;
+378     \}
+379   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 40808)
+380     \{
+381       \textcolor{keywordflow}{return} 56;
+382     \}
+383   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 42707)
+384     \{
+385       \textcolor{keywordflow}{return} 57;
+386     \}
+387   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 44694)
+388     \{
+389       \textcolor{keywordflow}{return} 58;
+390     \}
+391   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 46776)
+392     \{
+393       \textcolor{keywordflow}{return} 59;
+394     \}
+395   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 48961)
+396     \{
+397       \textcolor{keywordflow}{return} 60;
+398     \}
+399   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 51258)
+400     \{
+401       \textcolor{keywordflow}{return} 61;
+402     \}
+403   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 53667)
+404     \{
+405       \textcolor{keywordflow}{return} 62;
+406     \}
+407   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 56230)
+408     \{
+409       \textcolor{keywordflow}{return} 63;
+410     \}
+411   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 58932)
+412     \{
+413       \textcolor{keywordflow}{return} 64;
+414     \}
+415   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 61799)
+416     \{
+417       \textcolor{keywordflow}{return} 65;
+418     \}
+419   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 64851)
+420     \{
+421       \textcolor{keywordflow}{return} 66;
+422     \}
+423   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 68113)
+424     \{
+425       \textcolor{keywordflow}{return} 67;
+426     \}
+427   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 71617)
+428     \{
+429       \textcolor{keywordflow}{return} 68;
+430     \}
+431   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 75401)
+432     \{
+433       \textcolor{keywordflow}{return} 69;
+434     \}
+435   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 79517)
+436     \{
+437       \textcolor{keywordflow}{return} 70;
+438     \}
+439   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 84035)
+440     \{
+441       \textcolor{keywordflow}{return} 71;
+442     \}
+443   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 89053)
+444     \{
+445       \textcolor{keywordflow}{return} 72;
+446     \}
+447   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 94717)
+448     \{
+449       \textcolor{keywordflow}{return} 73;
+450     \}
+451   \textcolor{keywordflow}{else}
+452     \{
+453       \textcolor{keywordflow}{return} 73;
+454     \}
+455 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}!Table\+LookupB@{Table\+LookupB}}
+\index{Table\+LookupB@{Table\+LookupB}!ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}}
+\subsubsection[{\texorpdfstring{Table\+Lookup\+B(uint32\+\_\+t w)}{TableLookupB(uint32_t w)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+High\+Speed\+::\+Table\+LookupB (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{w}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpHighSpeed_a1b4f680bd8203ed450f818dca3edb28b}{}\label{classns3_1_1TcpHighSpeed_a1b4f680bd8203ed450f818dca3edb28b}
+
+
+Lookup table for the coefficient b (from R\+FC 3649) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & Window value (in packets)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the coefficient b 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+459 \{
+460   \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 38)
+461     \{
+462       \textcolor{keywordflow}{return} 0.50;
+463     \}
+464   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 118)
+465     \{
+466       \textcolor{keywordflow}{return} 0.44;
+467     \}
+468   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 221)
+469     \{
+470       \textcolor{keywordflow}{return} 0.41;
+471     \}
+472   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 347)
+473     \{
+474       \textcolor{keywordflow}{return} 0.38;
+475     \}
+476   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 495)
+477     \{
+478       \textcolor{keywordflow}{return} 0.37;
+479     \}
+480   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 663)
+481     \{
+482       \textcolor{keywordflow}{return} 0.35;
+483     \}
+484   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 851)
+485     \{
+486       \textcolor{keywordflow}{return} 0.34;
+487     \}
+488   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 1058)
+489     \{
+490       \textcolor{keywordflow}{return} 0.33;
+491     \}
+492   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 1284)
+493     \{
+494       \textcolor{keywordflow}{return} 0.32;
+495     \}
+496   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 1529)
+497     \{
+498       \textcolor{keywordflow}{return} 0.31;
+499     \}
+500   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 1793)
+501     \{
+502       \textcolor{keywordflow}{return} 0.30;
+503     \}
+504   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 2076)
+505     \{
+506       \textcolor{keywordflow}{return} 0.29;
+507     \}
+508   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 2378)
+509     \{
+510       \textcolor{keywordflow}{return} 0.28;
+511     \}
+512   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 2699)
+513     \{
+514       \textcolor{keywordflow}{return} 0.28;
+515     \}
+516   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 3039)
+517     \{
+518       \textcolor{keywordflow}{return} 0.27;
+519     \}
+520   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 3399)
+521     \{
+522       \textcolor{keywordflow}{return} 0.27;
+523     \}
+524   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 3778)
+525     \{
+526       \textcolor{keywordflow}{return} 0.26;
+527     \}
+528   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 4177)
+529     \{
+530       \textcolor{keywordflow}{return} 0.26;
+531     \}
+532   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 4596)
+533     \{
+534       \textcolor{keywordflow}{return} 0.25;
+535     \}
+536   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 5036)
+537     \{
+538       \textcolor{keywordflow}{return} 0.25;
+539     \}
+540   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 5497)
+541     \{
+542       \textcolor{keywordflow}{return} 0.24;
+543     \}
+544   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 5979)
+545     \{
+546       \textcolor{keywordflow}{return} 0.24;
+547     \}
+548   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 6483)
+549     \{
+550       \textcolor{keywordflow}{return} 0.23;
+551     \}
+552   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 7009)
+553     \{
+554       \textcolor{keywordflow}{return} 0.23;
+555     \}
+556   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 7558)
+557     \{
+558       \textcolor{keywordflow}{return} 0.22;
+559     \}
+560   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 8130)
+561     \{
+562       \textcolor{keywordflow}{return} 0.22;
+563     \}
+564   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 8726)
+565     \{
+566       \textcolor{keywordflow}{return} 0.22;
+567     \}
+568   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 9346)
+569     \{
+570       \textcolor{keywordflow}{return} 0.21;
+571     \}
+572   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 9991)
+573     \{
+574       \textcolor{keywordflow}{return} 0.21;
+575     \}
+576   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 10661)
+577     \{
+578       \textcolor{keywordflow}{return} 0.21;
+579     \}
+580   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 11358)
+581     \{
+582       \textcolor{keywordflow}{return} 0.20;
+583     \}
+584   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 12082)
+585     \{
+586       \textcolor{keywordflow}{return} 0.20;
+587     \}
+588   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 12834)
+589     \{
+590       \textcolor{keywordflow}{return} 0.20;
+591     \}
+592   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 13614)
+593     \{
+594       \textcolor{keywordflow}{return} 0.19;
+595     \}
+596   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 14424)
+597     \{
+598       \textcolor{keywordflow}{return} 0.19;
+599     \}
+600   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 15265)
+601     \{
+602       \textcolor{keywordflow}{return} 0.19;
+603     \}
+604   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 16137)
+605     \{
+606       \textcolor{keywordflow}{return} 0.19;
+607     \}
+608   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 17042)
+609     \{
+610       \textcolor{keywordflow}{return} 0.18;
+611     \}
+612   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 17981)
+613     \{
+614       \textcolor{keywordflow}{return} 0.18;
+615     \}
+616   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 18955)
+617     \{
+618       \textcolor{keywordflow}{return} 0.18;
+619     \}
+620   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 19965)
+621     \{
+622       \textcolor{keywordflow}{return} 0.17;
+623     \}
+624   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 21013)
+625     \{
+626       \textcolor{keywordflow}{return} 0.17;
+627     \}
+628   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 22101)
+629     \{
+630       \textcolor{keywordflow}{return} 0.17;
+631     \}
+632   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 23230)
+633     \{
+634       \textcolor{keywordflow}{return} 0.17;
+635     \}
+636   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 24402)
+637     \{
+638       \textcolor{keywordflow}{return} 0.16;
+639     \}
+640   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 25618)
+641     \{
+642       \textcolor{keywordflow}{return} 0.16;
+643     \}
+644   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 26881)
+645     \{
+646       \textcolor{keywordflow}{return} 0.16;
+647     \}
+648   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 28193)
+649     \{
+650       \textcolor{keywordflow}{return} 0.16;
+651     \}
+652   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 29557)
+653     \{
+654       \textcolor{keywordflow}{return} 0.15;
+655     \}
+656   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 30975)
+657     \{
+658       \textcolor{keywordflow}{return} 0.15;
+659     \}
+660   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 32450)
+661     \{
+662       \textcolor{keywordflow}{return} 0.15;
+663     \}
+664   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 33986)
+665     \{
+666       \textcolor{keywordflow}{return} 0.15;
+667     \}
+668   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 35586)
+669     \{
+670       \textcolor{keywordflow}{return} 0.14;
+671     \}
+672   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 37253)
+673     \{
+674       \textcolor{keywordflow}{return} 0.14;
+675     \}
+676   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 38992)
+677     \{
+678       \textcolor{keywordflow}{return} 0.14;
+679     \}
+680   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 40808)
+681     \{
+682       \textcolor{keywordflow}{return} 0.14;
+683     \}
+684   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 42707)
+685     \{
+686       \textcolor{keywordflow}{return} 0.13;
+687     \}
+688   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 44694)
+689     \{
+690       \textcolor{keywordflow}{return} 0.13;
+691     \}
+692   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 46776)
+693     \{
+694       \textcolor{keywordflow}{return} 0.13;
+695     \}
+696   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 48961)
+697     \{
+698       \textcolor{keywordflow}{return} 0.13;
+699     \}
+700   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 51258)
+701     \{
+702       \textcolor{keywordflow}{return} 0.13;
+703     \}
+704   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 53667)
+705     \{
+706       \textcolor{keywordflow}{return} 0.12;
+707     \}
+708   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 56230)
+709     \{
+710       \textcolor{keywordflow}{return} 0.12;
+711     \}
+712   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 58932)
+713     \{
+714       \textcolor{keywordflow}{return} 0.12;
+715     \}
+716   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 61799)
+717     \{
+718       \textcolor{keywordflow}{return} 0.12;
+719     \}
+720   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 64851)
+721     \{
+722       \textcolor{keywordflow}{return} 0.11;
+723     \}
+724   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 68113)
+725     \{
+726       \textcolor{keywordflow}{return} 0.11;
+727     \}
+728   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 71617)
+729     \{
+730       \textcolor{keywordflow}{return} 0.11;
+731     \}
+732   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 75401)
+733     \{
+734       \textcolor{keywordflow}{return} 0.10;
+735     \}
+736   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 79517)
+737     \{
+738       \textcolor{keywordflow}{return} 0.10;
+739     \}
+740   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 84035)
+741     \{
+742       \textcolor{keywordflow}{return} 0.10;
+743     \}
+744   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 89053)
+745     \{
+746       \textcolor{keywordflow}{return} 0.10;
+747     \}
+748   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} <= 94717)
+749     \{
+750       \textcolor{keywordflow}{return} 0.09;
+751     \}
+752   \textcolor{keywordflow}{else}
+753     \{
+754       \textcolor{keywordflow}{return} 0.09;
+755     \}
+756 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}!m\+\_\+ack\+Cnt@{m\+\_\+ack\+Cnt}}
+\index{m\+\_\+ack\+Cnt@{m\+\_\+ack\+Cnt}!ns3\+::\+Tcp\+High\+Speed@{ns3\+::\+Tcp\+High\+Speed}}
+\subsubsection[{\texorpdfstring{m\+\_\+ack\+Cnt}{m_ackCnt}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+High\+Speed\+::m\+\_\+ack\+Cnt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpHighSpeed_aee2fcee158f034e4ec68a42a4564a2ec}{}\label{classns3_1_1TcpHighSpeed_aee2fcee158f034e4ec68a42a4564a2ec}
+
+
+Number of received A\+CK, corrected with the coefficient a. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{tcp-highspeed_8h}{tcp-\/highspeed.\+h}\item 
+internet/model/\hyperlink{tcp-highspeed_8cc}{tcp-\/highspeed.\+cc}\end{DoxyCompactItemize}

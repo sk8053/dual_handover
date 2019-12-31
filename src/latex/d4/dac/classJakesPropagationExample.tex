@@ -1,0 +1,136 @@
+\hypertarget{classJakesPropagationExample}{}\section{Jakes\+Propagation\+Example Class Reference}
+\label{classJakesPropagationExample}\index{Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}}
+
+
+Constructs a Jakes\+Propagationloss\+Model and print the loss value as a function of time into std\+::cout. Distribution and correlation statistics is compared woth a theoretical ones using R package (\href{http://www.r-project.org/}{\tt http\+://www.\+r-\/project.\+org/}). Scripts are presented within comments.  
+
+
+
+
+Collaboration diagram for Jakes\+Propagation\+Example\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classJakesPropagationExample_aecb2c5ae4d1b8545fdf9d4cf92365a0e}{Jakes\+Propagation\+Example} ()
+\item 
+\hyperlink{classJakesPropagationExample_a24c1667d0298dfa1479c0083a99a3ca1}{$\sim$\+Jakes\+Propagation\+Example} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classJakesPropagationExample_a36fd2bb995aace95f298c53ca25a7c32}{Next} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1PropagationLossModel}{Propagation\+Loss\+Model} $>$ \hyperlink{classJakesPropagationExample_adbed30307ba6922c0342f353ef17a0a0}{m\+\_\+loss}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ \hyperlink{classJakesPropagationExample_a8c004a70e0f93903b76f7b9b79a4c658}{m\+\_\+first\+Mobility}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MobilityModel}{Mobility\+Model} $>$ \hyperlink{classJakesPropagationExample_a26d691a019331ddd3bd565a6f9a93891}{m\+\_\+second\+Mobility}
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classJakesPropagationExample_acd4432bfd3c7b99ece24e22a7c1cd5f9}{m\+\_\+step}
+\item 
+\hyperlink{classns3_1_1EventId}{Event\+Id} \hyperlink{classJakesPropagationExample_a2bf90430ed26aebb9a516c651bdb856e}{m\+\_\+next\+Event}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Constructs a Jakes\+Propagationloss\+Model and print the loss value as a function of time into std\+::cout. Distribution and correlation statistics is compared woth a theoretical ones using R package (\href{http://www.r-project.org/}{\tt http\+://www.\+r-\/project.\+org/}). Scripts are presented within comments. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}!Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}}
+\index{Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}!Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}}
+\subsubsection[{\texorpdfstring{Jakes\+Propagation\+Example()}{JakesPropagationExample()}}]{\setlength{\rightskip}{0pt plus 5cm}Jakes\+Propagation\+Example\+::\+Jakes\+Propagation\+Example (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classJakesPropagationExample_aecb2c5ae4d1b8545fdf9d4cf92365a0e}{}\label{classJakesPropagationExample_aecb2c5ae4d1b8545fdf9d4cf92365a0e}
+
+\begin{DoxyCode}
+48                                                   :
+49   \hyperlink{classJakesPropagationExample_acd4432bfd3c7b99ece24e22a7c1cd5f9}{m\_step} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0002)) \textcolor{comment}{//1/5000 part of the second}
+50 \{
+51   \hyperlink{classJakesPropagationExample_adbed30307ba6922c0342f353ef17a0a0}{m\_loss} = CreateObject<JakesPropagationLossModel> ();
+52   \hyperlink{classJakesPropagationExample_a8c004a70e0f93903b76f7b9b79a4c658}{m\_firstMobility} = CreateObject<ConstantPositionMobilityModel> ();
+53   \hyperlink{classJakesPropagationExample_a26d691a019331ddd3bd565a6f9a93891}{m\_secondMobility} = CreateObject<ConstantPositionMobilityModel> ();
+54   m\_firstMobility->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (Vector (0, 0, 0));
+55   m\_secondMobility->SetPosition (Vector (10, 0, 0));
+56   \hyperlink{classJakesPropagationExample_a2bf90430ed26aebb9a516c651bdb856e}{m\_nextEvent} = Simulator::Schedule (\hyperlink{classJakesPropagationExample_acd4432bfd3c7b99ece24e22a7c1cd5f9}{m\_step}, &
+      \hyperlink{classJakesPropagationExample_a36fd2bb995aace95f298c53ca25a7c32}{JakesPropagationExample::Next}, \textcolor{keyword}{this});
+57 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}!````~Jakes\+Propagation\+Example@{$\sim$\+Jakes\+Propagation\+Example}}
+\index{````~Jakes\+Propagation\+Example@{$\sim$\+Jakes\+Propagation\+Example}!Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}}
+\subsubsection[{\texorpdfstring{$\sim$\+Jakes\+Propagation\+Example()}{~JakesPropagationExample()}}]{\setlength{\rightskip}{0pt plus 5cm}Jakes\+Propagation\+Example\+::$\sim$\+Jakes\+Propagation\+Example (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classJakesPropagationExample_a24c1667d0298dfa1479c0083a99a3ca1}{}\label{classJakesPropagationExample_a24c1667d0298dfa1479c0083a99a3ca1}
+
+\begin{DoxyCode}
+60 \{
+61 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}!Next@{Next}}
+\index{Next@{Next}!Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}}
+\subsubsection[{\texorpdfstring{Next()}{Next()}}]{\setlength{\rightskip}{0pt plus 5cm}void Jakes\+Propagation\+Example\+::\+Next (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classJakesPropagationExample_a36fd2bb995aace95f298c53ca25a7c32}{}\label{classJakesPropagationExample_a36fd2bb995aace95f298c53ca25a7c32}
+
+\begin{DoxyCode}
+64 \{
+65   \hyperlink{classJakesPropagationExample_a2bf90430ed26aebb9a516c651bdb856e}{m\_nextEvent} = Simulator::Schedule (\hyperlink{classJakesPropagationExample_acd4432bfd3c7b99ece24e22a7c1cd5f9}{m\_step}, &
+      \hyperlink{classJakesPropagationExample_a36fd2bb995aace95f298c53ca25a7c32}{JakesPropagationExample::Next}, \textcolor{keyword}{this});
+66   std::cout << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_aba3428a8b6c4c8d9014ce44145081f34}{GetMilliSeconds} () << \textcolor{stringliteral}{" "} << 
+      \hyperlink{classJakesPropagationExample_adbed30307ba6922c0342f353ef17a0a0}{m\_loss}->\hyperlink{classns3_1_1PropagationLossModel_a8b42564e9b03e2197f17aab6692c4fee}{CalcRxPower} (0, \hyperlink{classJakesPropagationExample_a8c004a70e0f93903b76f7b9b79a4c658}{m\_firstMobility}, 
+      \hyperlink{classJakesPropagationExample_a26d691a019331ddd3bd565a6f9a93891}{m\_secondMobility}) << std::endl;
+67 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}!m\+\_\+first\+Mobility@{m\+\_\+first\+Mobility}}
+\index{m\+\_\+first\+Mobility@{m\+\_\+first\+Mobility}!Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}}
+\subsubsection[{\texorpdfstring{m\+\_\+first\+Mobility}{m_firstMobility}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Mobility\+Model}$>$ Jakes\+Propagation\+Example\+::m\+\_\+first\+Mobility\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classJakesPropagationExample_a8c004a70e0f93903b76f7b9b79a4c658}{}\label{classJakesPropagationExample_a8c004a70e0f93903b76f7b9b79a4c658}
+\index{Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}!m\+\_\+loss@{m\+\_\+loss}}
+\index{m\+\_\+loss@{m\+\_\+loss}!Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}}
+\subsubsection[{\texorpdfstring{m\+\_\+loss}{m_loss}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Propagation\+Loss\+Model}$>$ Jakes\+Propagation\+Example\+::m\+\_\+loss\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classJakesPropagationExample_adbed30307ba6922c0342f353ef17a0a0}{}\label{classJakesPropagationExample_adbed30307ba6922c0342f353ef17a0a0}
+\index{Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}!m\+\_\+next\+Event@{m\+\_\+next\+Event}}
+\index{m\+\_\+next\+Event@{m\+\_\+next\+Event}!Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}}
+\subsubsection[{\texorpdfstring{m\+\_\+next\+Event}{m_nextEvent}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Event\+Id} Jakes\+Propagation\+Example\+::m\+\_\+next\+Event\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classJakesPropagationExample_a2bf90430ed26aebb9a516c651bdb856e}{}\label{classJakesPropagationExample_a2bf90430ed26aebb9a516c651bdb856e}
+\index{Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}!m\+\_\+second\+Mobility@{m\+\_\+second\+Mobility}}
+\index{m\+\_\+second\+Mobility@{m\+\_\+second\+Mobility}!Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}}
+\subsubsection[{\texorpdfstring{m\+\_\+second\+Mobility}{m_secondMobility}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Mobility\+Model}$>$ Jakes\+Propagation\+Example\+::m\+\_\+second\+Mobility\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classJakesPropagationExample_a26d691a019331ddd3bd565a6f9a93891}{}\label{classJakesPropagationExample_a26d691a019331ddd3bd565a6f9a93891}
+\index{Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}!m\+\_\+step@{m\+\_\+step}}
+\index{m\+\_\+step@{m\+\_\+step}!Jakes\+Propagation\+Example@{Jakes\+Propagation\+Example}}
+\subsubsection[{\texorpdfstring{m\+\_\+step}{m_step}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} Jakes\+Propagation\+Example\+::m\+\_\+step\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classJakesPropagationExample_acd4432bfd3c7b99ece24e22a7c1cd5f9}{}\label{classJakesPropagationExample_acd4432bfd3c7b99ece24e22a7c1cd5f9}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+propagation/examples/\hyperlink{jakes-propagation-model-example_8cc}{jakes-\/propagation-\/model-\/example.\+cc}\end{DoxyCompactItemize}

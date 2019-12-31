@@ -1,0 +1,31 @@
+\hypertarget{group__nix-vector-routing}{}\section{Nix-\/\+Vector Routing}
+\label{group__nix-vector-routing}\index{Nix-\/\+Vector Routing@{Nix-\/\+Vector Routing}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1Ipv4NixVectorRouting}{ns3\+::\+Ipv4\+Nix\+Vector\+Routing}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::map$<$ Ipv4\+Address, Ptr$<$ Nix\+Vector $>$ $>$ \hyperlink{group__nix-vector-routing_gaa552b6157fc91cb632b9007a4cef9bc7}{ns3\+::\+Nix\+Map\+\_\+t}
+\item 
+typedef std\+::map$<$ Ipv4\+Address, Ptr$<$ Ipv4\+Route $>$ $>$ \hyperlink{group__nix-vector-routing_ga0a2084e70cce2de3dcfab5da0ec63bdd}{ns3\+::\+Ipv4\+Route\+Map\+\_\+t}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hypertarget{group__nix-vector-routing_model}{}\subsection{Model}\label{group__nix-vector-routing_model}
+Nix-\/vector routing is a simulation specific routing protocol and is intended for large network topologies. The on-\/demand nature of this protocol as well as the low-\/memory footprint of the nix-\/vector provides improved performance in terms of memory usage and simulation run time when dealing with a large number of nodes.
+
+Currently, the ns-\/3 model of nix-\/vector routing supports I\+Pv4 p2p links as well as C\+S\+MA links. It does not (yet) provide support for efficient adaptation to link failures. It simply flushes all nix-\/vector routing caches. Finally, I\+Pv6 is not supported.\hypertarget{group__nix-vector-routing_impl}{}\subsection{Implementation}\label{group__nix-vector-routing_impl}
+ns-\/3 nix-\/vector-\/routing performs on-\/demand route computation using a breadth-\/first search and an efficient route-\/storage data structure known as a nix-\/vector. When a packet is generated at a node for transmission, the route is calculated, and the nix-\/vector is built. The nix-\/vector stores an index for each hop along the path, which corresponds to the neighbor-\/index. This index is used to determine which net-\/device and gateway should be used. To route a packet, the nix-\/vector must be transmitted with the packet. At each hop, the current node extracts the appropriate neighbor-\/index from the nix-\/vector and transmits the packet through the corresponding net-\/device. This continues until the packet reaches the destination. 
+
+\subsection{Typedef Documentation}
+\index{Nix-\/\+Vector Routing@{Nix-\/\+Vector Routing}!Ipv4\+Route\+Map\+\_\+t@{Ipv4\+Route\+Map\+\_\+t}}
+\index{Ipv4\+Route\+Map\+\_\+t@{Ipv4\+Route\+Map\+\_\+t}!Nix-\/\+Vector Routing@{Nix-\/\+Vector Routing}}
+\subsubsection[{\texorpdfstring{Ipv4\+Route\+Map\+\_\+t}{Ipv4RouteMap_t}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::map$<$Ipv4\+Address, Ptr$<$Ipv4\+Route$>$ $>$ {\bf ns3\+::\+Ipv4\+Route\+Map\+\_\+t}}\hypertarget{group__nix-vector-routing_ga0a2084e70cce2de3dcfab5da0ec63bdd}{}\label{group__nix-vector-routing_ga0a2084e70cce2de3dcfab5da0ec63bdd}
+Map of \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} to \hyperlink{classns3_1_1Ipv4Route}{Ipv4\+Route} \index{Nix-\/\+Vector Routing@{Nix-\/\+Vector Routing}!Nix\+Map\+\_\+t@{Nix\+Map\+\_\+t}}
+\index{Nix\+Map\+\_\+t@{Nix\+Map\+\_\+t}!Nix-\/\+Vector Routing@{Nix-\/\+Vector Routing}}
+\subsubsection[{\texorpdfstring{Nix\+Map\+\_\+t}{NixMap_t}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::map$<$Ipv4\+Address, Ptr$<$Nix\+Vector$>$ $>$ {\bf ns3\+::\+Nix\+Map\+\_\+t}}\hypertarget{group__nix-vector-routing_gaa552b6157fc91cb632b9007a4cef9bc7}{}\label{group__nix-vector-routing_gaa552b6157fc91cb632b9007a4cef9bc7}
+Map of \hyperlink{classns3_1_1Ipv4Address}{Ipv4\+Address} to \hyperlink{classns3_1_1NixVector}{Nix\+Vector} 

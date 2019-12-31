@@ -1,0 +1,708 @@
+\hypertarget{classns3_1_1TcpVegas}{}\section{ns3\+:\+:Tcp\+Vegas Class Reference}
+\label{classns3_1_1TcpVegas}\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+
+
+An implementation of T\+CP Vegas.  
+
+
+
+
+{\ttfamily \#include $<$tcp-\/vegas.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Tcp\+Vegas\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Tcp\+Vegas\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1TcpVegas_a478ef6447286c84890ac2e1d62fb297c}{Tcp\+Vegas} (void)
+\item 
+\hyperlink{classns3_1_1TcpVegas_ae43b2628fb78cd49de46c4214bcaba23}{Tcp\+Vegas} (const \hyperlink{classns3_1_1TcpVegas}{Tcp\+Vegas} \&sock)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1TcpVegas_a0e8d5c0cc41188482bb153643424c5b1}{$\sim$\+Tcp\+Vegas} (void)
+\item 
+virtual std\+::string \hyperlink{classns3_1_1TcpVegas_a476e123ec5b2cfd44f68ac4063fe3f0c}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the name of the congestion control algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpVegas_adb646411aad266d6db894b88f2baff0f}{Pkts\+Acked} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked, const \hyperlink{classns3_1_1Time}{Time} \&rtt)
+\begin{DoxyCompactList}\small\item\em Compute R\+T\+Ts needed to execute Vegas algorithm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpVegas_a0e82c50f7d326449fca838e46cbb9821}{Congestion\+State\+Set} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, const \hyperlink{classns3_1_1TcpSocketState_a6fc313945a33d48fd60cbffe0c787b19}{Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t} new\+State)
+\begin{DoxyCompactList}\small\item\em Enable/disable Vegas algorithm depending on the congestion state. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classns3_1_1TcpVegas_ae80e9ac677116dada43dacda0f98a8b6}{Increase\+Window} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked)
+\begin{DoxyCompactList}\small\item\em Adjust cwnd following Vegas linear increase/decrease algorithm. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1TcpVegas_af42952eb204ae641900b1d0ef4d39d97}{Get\+Ss\+Thresh} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)
+\begin{DoxyCompactList}\small\item\em Get slow start threshold following Vegas principle. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} $>$ \hyperlink{classns3_1_1TcpVegas_afc91e9d8fb8814b417cf817538ec808d}{Fork} ()
+\begin{DoxyCompactList}\small\item\em Copy the congestion control algorithm across socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1TcpVegas_af3bbd86cb35c0e00ab5230892a3aa3bd}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1TcpVegas_a9598876615fdef3542af10ff541e1d40}{Enable\+Vegas} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb)
+\begin{DoxyCompactList}\small\item\em Enable Vegas algorithm to start taking Vegas samples. \end{DoxyCompactList}\item 
+void \hyperlink{classns3_1_1TcpVegas_a246ed912a0fd29a246267511fb4d6c02}{Disable\+Vegas} ()
+\begin{DoxyCompactList}\small\item\em Stop taking Vegas samples. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpVegas_a50cf33c05a6dd0e6a8da11e741291de8}{m\+\_\+alpha}
+\begin{DoxyCompactList}\small\item\em Alpha threshold, lower bound of packets in network. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpVegas_a5871bf3ef55a392819a26c80f8c0a87f}{m\+\_\+beta}
+\begin{DoxyCompactList}\small\item\em Beta threshold, upper bound of packets in network. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpVegas_ae3ea97171ce6954d2b607f6bc8b9239c}{m\+\_\+gamma}
+\begin{DoxyCompactList}\small\item\em Gamma threshold, limit on increase. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpVegas_ae283bcc32d2d92002477abafd1ca5132}{m\+\_\+base\+Rtt}
+\begin{DoxyCompactList}\small\item\em Minimum of all Vegas R\+TT measurements seen during connection. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1TcpVegas_aba6a10d787820b6907313b79cc16582c}{m\+\_\+min\+Rtt}
+\begin{DoxyCompactList}\small\item\em Minimum of all R\+TT measurements within last R\+TT. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpVegas_a4149c239657ba2ea7399374ec0fd9682}{m\+\_\+cnt\+Rtt}
+\begin{DoxyCompactList}\small\item\em Number of R\+TT measurements during last R\+TT. \end{DoxyCompactList}\item 
+bool \hyperlink{classns3_1_1TcpVegas_a8207740cdef670e55f31d067baf10c06}{m\+\_\+doing\+Vegas\+Now}
+\begin{DoxyCompactList}\small\item\em If true, do Vegas for this R\+TT. \end{DoxyCompactList}\item 
+\hyperlink{group__network_gacb2070e4e98d2d5135c9bede58f07a03}{Sequence\+Number32} \hyperlink{classns3_1_1TcpVegas_affe4c208f73217f8f29380b91d287ed8}{m\+\_\+beg\+Snd\+Nxt}
+\begin{DoxyCompactList}\small\item\em Right edge during last R\+TT. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An implementation of T\+CP Vegas. 
+
+T\+CP Vegas is a pure delay-\/based congestion control algorithm implementing a proactive scheme that tries to prevent packet drops by maintaining a small backlog at the bottleneck queue.
+
+Vegas continuously measures the actual throughput a connection achieves as shown in Equation (1) and compares it with the expected throughput calculated in Equation (2). The difference between these 2 sending rates in Equation (3) reflects the amount of extra packets being queued at the bottleneck. \begin{DoxyVerb}         actual = cwnd / RTT        (1)
+         expected = cwnd / BaseRTT  (2)
+         diff = expected - actual   (3)
+\end{DoxyVerb}
+
+
+To avoid congestion, Vegas linearly increases/decreases its congestion window to ensure the diff value fall between the 2 predefined thresholds, alpha and beta. diff and another threshold, gamma, are used to determine when Vegas should change from its slow-\/start mode to linear increase/decrease mode.
+
+Following the implementation of Vegas in Linux, we use 2, 4, and 1 as the default values of alpha, beta, and gamma, respectively.
+
+More information\+: \href{http://dx.doi.org/10.1109/49.464716}{\tt http\+://dx.\+doi.\+org/10.\+1109/49.\+464716} 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!Tcp\+Vegas@{Tcp\+Vegas}}
+\index{Tcp\+Vegas@{Tcp\+Vegas}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{Tcp\+Vegas(void)}{TcpVegas(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Vegas\+::\+Tcp\+Vegas (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpVegas_a478ef6447286c84890ac2e1d62fb297c}{}\label{classns3_1_1TcpVegas_a478ef6447286c84890ac2e1d62fb297c}
+Create an unbound tcp socket. 
+\begin{DoxyCode}
+60   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (),
+61     \hyperlink{classns3_1_1TcpVegas_a50cf33c05a6dd0e6a8da11e741291de8}{m\_alpha} (2),
+62     \hyperlink{classns3_1_1TcpVegas_a5871bf3ef55a392819a26c80f8c0a87f}{m\_beta} (4),
+63     \hyperlink{classns3_1_1TcpVegas_ae3ea97171ce6954d2b607f6bc8b9239c}{m\_gamma} (1),
+64     \hyperlink{classns3_1_1TcpVegas_ae283bcc32d2d92002477abafd1ca5132}{m\_baseRtt} (\hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ()),
+65     \hyperlink{classns3_1_1TcpVegas_aba6a10d787820b6907313b79cc16582c}{m\_minRtt} (\hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ()),
+66     \hyperlink{classns3_1_1TcpVegas_a4149c239657ba2ea7399374ec0fd9682}{m\_cntRtt} (0),
+67     \hyperlink{classns3_1_1TcpVegas_a8207740cdef670e55f31d067baf10c06}{m\_doingVegasNow} (\textcolor{keyword}{true}),
+68     \hyperlink{classns3_1_1TcpVegas_affe4c208f73217f8f29380b91d287ed8}{m\_begSndNxt} (0)
+69 \{
+70   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+71 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!Tcp\+Vegas@{Tcp\+Vegas}}
+\index{Tcp\+Vegas@{Tcp\+Vegas}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{Tcp\+Vegas(const Tcp\+Vegas \&sock)}{TcpVegas(const TcpVegas &sock)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Vegas\+::\+Tcp\+Vegas (
+\begin{DoxyParamCaption}
+\item[{const {\bf Tcp\+Vegas} \&}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpVegas_ae43b2628fb78cd49de46c4214bcaba23}{}\label{classns3_1_1TcpVegas_ae43b2628fb78cd49de46c4214bcaba23}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & the object to copy \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+74   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (sock),
+75     \hyperlink{classns3_1_1TcpVegas_a50cf33c05a6dd0e6a8da11e741291de8}{m\_alpha} (sock.m\_alpha),
+76     \hyperlink{classns3_1_1TcpVegas_a5871bf3ef55a392819a26c80f8c0a87f}{m\_beta} (sock.m\_beta),
+77     \hyperlink{classns3_1_1TcpVegas_ae3ea97171ce6954d2b607f6bc8b9239c}{m\_gamma} (sock.m\_gamma),
+78     \hyperlink{classns3_1_1TcpVegas_ae283bcc32d2d92002477abafd1ca5132}{m\_baseRtt} (sock.m\_baseRtt),
+79     \hyperlink{classns3_1_1TcpVegas_aba6a10d787820b6907313b79cc16582c}{m\_minRtt} (sock.m\_minRtt),
+80     \hyperlink{classns3_1_1TcpVegas_a4149c239657ba2ea7399374ec0fd9682}{m\_cntRtt} (sock.m\_cntRtt),
+81     \hyperlink{classns3_1_1TcpVegas_a8207740cdef670e55f31d067baf10c06}{m\_doingVegasNow} (\textcolor{keyword}{true}),
+82     \hyperlink{classns3_1_1TcpVegas_affe4c208f73217f8f29380b91d287ed8}{m\_begSndNxt} (0)
+83 \{
+84   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+85 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!````~Tcp\+Vegas@{$\sim$\+Tcp\+Vegas}}
+\index{````~Tcp\+Vegas@{$\sim$\+Tcp\+Vegas}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{$\sim$\+Tcp\+Vegas(void)}{~TcpVegas(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Vegas\+::$\sim$\+Tcp\+Vegas (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVegas_a0e8d5c0cc41188482bb153643424c5b1}{}\label{classns3_1_1TcpVegas_a0e8d5c0cc41188482bb153643424c5b1}
+
+\begin{DoxyCode}
+88 \{
+89   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+90 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!Congestion\+State\+Set@{Congestion\+State\+Set}}
+\index{Congestion\+State\+Set@{Congestion\+State\+Set}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{Congestion\+State\+Set(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, const Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t new\+State)}{CongestionStateSet(Ptr< TcpSocketState > tcb, const TcpSocketState::TcpCongState_t newState)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Vegas\+::\+Congestion\+State\+Set (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{const {\bf Tcp\+Socket\+State\+::\+Tcp\+Cong\+State\+\_\+t}}]{new\+State}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVegas_a0e82c50f7d326449fca838e46cbb9821}{}\label{classns3_1_1TcpVegas_a0e82c50f7d326449fca838e46cbb9821}
+
+
+Enable/disable Vegas algorithm depending on the congestion state. 
+
+We only start a Vegas cycle when we are in normal congestion state (C\+A\+\_\+\+O\+P\+EN state).
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em new\+State} & new congestion state to which the T\+CP is going to switch \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpCongestionOps_a2777666dc7df24040d718ddba896928b}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+142 \{
+143   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << newState);
+144   \textcolor{keywordflow}{if} (newState == \hyperlink{classns3_1_1TcpSocketState_a6fc313945a33d48fd60cbffe0c787b19af2d22f02a77b603394c34d4968bad142}{TcpSocketState::CA\_OPEN})
+145     \{
+146       \hyperlink{classns3_1_1TcpVegas_a9598876615fdef3542af10ff541e1d40}{EnableVegas} (tcb);
+147     \}
+148   \textcolor{keywordflow}{else}
+149     \{
+150       \hyperlink{classns3_1_1TcpVegas_a246ed912a0fd29a246267511fb4d6c02}{DisableVegas} ();
+151     \}
+152 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!Disable\+Vegas@{Disable\+Vegas}}
+\index{Disable\+Vegas@{Disable\+Vegas}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{Disable\+Vegas()}{DisableVegas()}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Vegas\+::\+Disable\+Vegas (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVegas_a246ed912a0fd29a246267511fb4d6c02}{}\label{classns3_1_1TcpVegas_a246ed912a0fd29a246267511fb4d6c02}
+
+
+Stop taking Vegas samples. 
+
+
+\begin{DoxyCode}
+133 \{
+134   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+135 
+136   \hyperlink{classns3_1_1TcpVegas_a8207740cdef670e55f31d067baf10c06}{m\_doingVegasNow} = \textcolor{keyword}{false};
+137 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!Enable\+Vegas@{Enable\+Vegas}}
+\index{Enable\+Vegas@{Enable\+Vegas}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{Enable\+Vegas(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb)}{EnableVegas(Ptr< TcpSocketState > tcb)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Vegas\+::\+Enable\+Vegas (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVegas_a9598876615fdef3542af10ff541e1d40}{}\label{classns3_1_1TcpVegas_a9598876615fdef3542af10ff541e1d40}
+
+
+Enable Vegas algorithm to start taking Vegas samples. 
+
+Vegas algorithm is enabled in the following situations\+:
+\begin{DoxyEnumerate}
+\item at the establishment of a connection
+\item after an R\+TO
+\item after fast recovery
+\item when an idle connection is restarted
+\end{DoxyEnumerate}
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+122 \{
+123   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb);
+124 
+125   \hyperlink{classns3_1_1TcpVegas_a8207740cdef670e55f31d067baf10c06}{m\_doingVegasNow} = \textcolor{keyword}{true};
+126   \hyperlink{classns3_1_1TcpVegas_affe4c208f73217f8f29380b91d287ed8}{m\_begSndNxt} = tcb->\hyperlink{classns3_1_1TcpSocketState_ad1f77b1cbdb9267a89ebb6f16ac76892}{m\_nextTxSequence};
+127   \hyperlink{classns3_1_1TcpVegas_a4149c239657ba2ea7399374ec0fd9682}{m\_cntRtt} = 0;
+128   \hyperlink{classns3_1_1TcpVegas_aba6a10d787820b6907313b79cc16582c}{m\_minRtt} = \hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ();
+129 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!Fork@{Fork}}
+\index{Fork@{Fork}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{Fork()}{Fork()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Congestion\+Ops} $>$ ns3\+::\+Tcp\+Vegas\+::\+Fork (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVegas_afc91e9d8fb8814b417cf817538ec808d}{}\label{classns3_1_1TcpVegas_afc91e9d8fb8814b417cf817538ec808d}
+
+
+Copy the congestion control algorithm across socket. 
+
+\begin{DoxyReturn}{Returns}
+a pointer of the copied object 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a2606d5fcd01a1eb4d5f4e6beb7a33192}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+94 \{
+95   \textcolor{keywordflow}{return} CopyObject<TcpVegas> (\textcolor{keyword}{this});
+96 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Tcp\+Vegas\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVegas_a476e123ec5b2cfd44f68ac4063fe3f0c}{}\label{classns3_1_1TcpVegas_a476e123ec5b2cfd44f68ac4063fe3f0c}
+
+
+Get the name of the congestion control algorithm. 
+
+\begin{DoxyReturn}{Returns}
+A string identifying the name 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a0ecf92cb36c236c70e0ecaedfff6609e}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+283 \{
+284   \textcolor{keywordflow}{return} \textcolor{stringliteral}{"TcpVegas"};
+285 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!Get\+Ss\+Thresh@{Get\+Ss\+Thresh}}
+\index{Get\+Ss\+Thresh@{Get\+Ss\+Thresh}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{Get\+Ss\+Thresh(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)}{GetSsThresh(Ptr< const TcpSocketState > tcb, uint32_t bytesInFlight)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Vegas\+::\+Get\+Ss\+Thresh (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{bytes\+In\+Flight}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVegas_af42952eb204ae641900b1d0ef4d39d97}{}\label{classns3_1_1TcpVegas_af42952eb204ae641900b1d0ef4d39d97}
+
+
+Get slow start threshold following Vegas principle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em bytes\+In\+Flight} & bytes in flight\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the slow start threshold value 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a1cb467aaa4960dfe10b963ed9f3d5aa2}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+290 \{
+291   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << bytesInFlight);
+292   \textcolor{keywordflow}{return} \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (\hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (tcb->m\_ssThresh.Get (), tcb->m\_cWnd.Get () - tcb->
+      m\_segmentSize), 2 * tcb->m\_segmentSize);
+293 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Tcp\+Vegas\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpVegas_af3bbd86cb35c0e00ab5230892a3aa3bd}{}\label{classns3_1_1TcpVegas_af3bbd86cb35c0e00ab5230892a3aa3bd}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+38 \{
+39   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::TcpVegas"})
+40     .SetParent<\hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno}> ()
+41     .AddConstructor<TcpVegas> ()
+42     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+43     .AddAttribute (\textcolor{stringliteral}{"Alpha"}, \textcolor{stringliteral}{"Lower bound of packets in network"},
+44                    UintegerValue (2),
+45                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpVegas_a50cf33c05a6dd0e6a8da11e741291de8}{TcpVegas::m\_alpha}),
+46                    MakeUintegerChecker<uint32\_t> ())
+47     .AddAttribute (\textcolor{stringliteral}{"Beta"}, \textcolor{stringliteral}{"Upper bound of packets in network"},
+48                    UintegerValue (4),
+49                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpVegas_a5871bf3ef55a392819a26c80f8c0a87f}{TcpVegas::m\_beta}),
+50                    MakeUintegerChecker<uint32\_t> ())
+51     .AddAttribute (\textcolor{stringliteral}{"Gamma"}, \textcolor{stringliteral}{"Limit on increase"},
+52                    UintegerValue (1),
+53                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpVegas_ae3ea97171ce6954d2b607f6bc8b9239c}{TcpVegas::m\_gamma}),
+54                    MakeUintegerChecker<uint32\_t> ())
+55   ;
+56   \textcolor{keywordflow}{return} tid;
+57 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!Increase\+Window@{Increase\+Window}}
+\index{Increase\+Window@{Increase\+Window}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{Increase\+Window(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked)}{IncreaseWindow(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Vegas\+::\+Increase\+Window (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVegas_ae80e9ac677116dada43dacda0f98a8b6}{}\label{classns3_1_1TcpVegas_ae80e9ac677116dada43dacda0f98a8b6}
+
+
+Adjust cwnd following Vegas linear increase/decrease algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments A\+C\+Ked \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a11db8ae90f4cebacc15524a793b0741a}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+156 \{
+157   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked);
+158 
+159   \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1TcpVegas_a8207740cdef670e55f31d067baf10c06}{m\_doingVegasNow})
+160     \{
+161       \textcolor{comment}{// If Vegas is not on, we follow NewReno algorithm}
+162       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"Vegas is not turned on, we follow NewReno algorithm."});
+163       \hyperlink{classns3_1_1TcpNewReno_a11db8ae90f4cebacc15524a793b0741a}{TcpNewReno::IncreaseWindow} (tcb, segmentsAcked);
+164       \textcolor{keywordflow}{return};
+165     \}
+166 
+167   \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7a30ba2b675238429c7fe2f0c8d1ce94}{m\_lastAckedSeq} >= \hyperlink{classns3_1_1TcpVegas_affe4c208f73217f8f29380b91d287ed8}{m\_begSndNxt})
+168     \{ \textcolor{comment}{// A Vegas cycle has finished, we do Vegas cwnd adjustment every RTT.}
+169 
+170       \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"A Vegas cycle has finished, we adjust cwnd once per RTT."});
+171 
+172       \textcolor{comment}{// Save the current right edge for next Vegas cycle}
+173       \hyperlink{classns3_1_1TcpVegas_affe4c208f73217f8f29380b91d287ed8}{m\_begSndNxt} = tcb->\hyperlink{classns3_1_1TcpSocketState_ad1f77b1cbdb9267a89ebb6f16ac76892}{m\_nextTxSequence};
+174 
+175       \textcolor{comment}{/*}
+176 \textcolor{comment}{       * We perform Vegas calculations only if we got enough RTT samples to}
+177 \textcolor{comment}{       * insure that at least 1 of those samples wasn't from a delayed ACK.}
+178 \textcolor{comment}{       */}
+179       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpVegas_a4149c239657ba2ea7399374ec0fd9682}{m\_cntRtt} <= 2)
+180         \{  \textcolor{comment}{// We do not have enough RTT samples, so we should behave like Reno}
+181           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"We do not have enough RTT samples to do Vegas, so we behave like
+       NewReno."});
+182           \hyperlink{classns3_1_1TcpNewReno_a11db8ae90f4cebacc15524a793b0741a}{TcpNewReno::IncreaseWindow} (tcb, segmentsAcked);
+183         \}
+184       \textcolor{keywordflow}{else}
+185         \{
+186           \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"We have enough RTT samples to perform Vegas calculations"});
+187           \textcolor{comment}{/*}
+188 \textcolor{comment}{           * We have enough RTT samples to perform Vegas algorithm.}
+189 \textcolor{comment}{           * Now we need to determine if cwnd should be increased or decreased}
+190 \textcolor{comment}{           * based on the calculated difference between the expected rate and actual sending}
+191 \textcolor{comment}{           * rate and the predefined thresholds (alpha, beta, and gamma).}
+192 \textcolor{comment}{           */}
+193           uint32\_t diff;
+194           uint32\_t targetCwnd;
+195           uint32\_t segCwnd = tcb->\hyperlink{classns3_1_1TcpSocketState_ab6dfe309ca53fd3207dcafede75ad12d}{GetCwndInSegments} ();
+196 
+197           \textcolor{comment}{/*}
+198 \textcolor{comment}{           * Calculate the cwnd we should have. baseRtt is the minimum RTT}
+199 \textcolor{comment}{           * per-connection, minRtt is the minimum RTT in this window}
+200 \textcolor{comment}{           *}
+201 \textcolor{comment}{           * little trick:}
+202 \textcolor{comment}{           * desidered throughput is currentCwnd * baseRtt}
+203 \textcolor{comment}{           * target cwnd is throughput / minRtt}
+204 \textcolor{comment}{           */}
+205           \textcolor{keywordtype}{double} tmp = \hyperlink{classns3_1_1TcpVegas_ae283bcc32d2d92002477abafd1ca5132}{m\_baseRtt}.\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} () / \hyperlink{classns3_1_1TcpVegas_aba6a10d787820b6907313b79cc16582c}{m\_minRtt}.
+      \hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} ();
+206           targetCwnd = segCwnd * tmp;
+207           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Calculated targetCwnd = "} << targetCwnd);
+208           \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (segCwnd >= targetCwnd); \textcolor{comment}{// implies baseRtt <= minRtt}
+209 
+210           \textcolor{comment}{/*}
+211 \textcolor{comment}{           * Calculate the difference between the expected cWnd and}
+212 \textcolor{comment}{           * the actual cWnd}
+213 \textcolor{comment}{           */}
+214           diff = segCwnd - targetCwnd;
+215           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Calculated diff = "} << diff);
+216 
+217           \textcolor{keywordflow}{if} (diff > \hyperlink{classns3_1_1TcpVegas_ae3ea97171ce6954d2b607f6bc8b9239c}{m\_gamma} && (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} < tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh}))
+218             \{
+219               \textcolor{comment}{/*}
+220 \textcolor{comment}{               * We are going too fast. We need to slow down and change from}
+221 \textcolor{comment}{               * slow-start to linear increase/decrease mode by setting cwnd}
+222 \textcolor{comment}{               * to target cwnd. We add 1 because of the integer truncation.}
+223 \textcolor{comment}{               */}
+224               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"We are going too fast. We need to slow down and "}
+225                             \textcolor{stringliteral}{"change to linear increase/decrease mode."});
+226               segCwnd = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (segCwnd, targetCwnd + 1);
+227               tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} = segCwnd * tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+228               tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh} = \hyperlink{classns3_1_1TcpVegas_af42952eb204ae641900b1d0ef4d39d97}{GetSsThresh} (tcb, 0);
+229               \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated cwnd = "} << tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <<
+230                             \textcolor{stringliteral}{" ssthresh="} << tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+231             \}
+232           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} < tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh})
+233             \{     \textcolor{comment}{// Slow start mode}
+234               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"We are in slow start and diff < m\_gamma, so we "}
+235                             \textcolor{stringliteral}{"follow NewReno slow start"});
+236               \hyperlink{classns3_1_1TcpNewReno_a1cf5fd9585eb3b745727f4f5beae0706}{TcpNewReno::SlowStart} (tcb, segmentsAcked);
+237             \}
+238           \textcolor{keywordflow}{else}
+239             \{     \textcolor{comment}{// Linear increase/decrease mode}
+240               \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"We are in linear increase/decrease mode"});
+241               \textcolor{keywordflow}{if} (diff > \hyperlink{classns3_1_1TcpVegas_a5871bf3ef55a392819a26c80f8c0a87f}{m\_beta})
+242                 \{
+243                   \textcolor{comment}{// We are going too fast, so we slow down}
+244                   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"We are going too fast, so we slow down by decrementing cwnd"});
+245                   segCwnd--;
+246                   tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} = segCwnd * tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+247                   tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh} = \hyperlink{classns3_1_1TcpVegas_af42952eb204ae641900b1d0ef4d39d97}{GetSsThresh} (tcb, 0);
+248                   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated cwnd = "} << tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <<
+249                                 \textcolor{stringliteral}{" ssthresh="} << tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+250                 \}
+251               \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (diff < \hyperlink{classns3_1_1TcpVegas_a50cf33c05a6dd0e6a8da11e741291de8}{m\_alpha})
+252                 \{
+253                   \textcolor{comment}{// We are going too slow (having too little data in the network),}
+254                   \textcolor{comment}{// so we speed up.}
+255                   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"We are going too slow, so we speed up by incrementing cwnd"});
+256                   segCwnd++;
+257                   tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} = segCwnd * tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+258                   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated cwnd = "} << tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <<
+259                                 \textcolor{stringliteral}{" ssthresh="} << tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+260                 \}
+261               \textcolor{keywordflow}{else}
+262                 \{
+263                   \textcolor{comment}{// We are going at the right speed}
+264                   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"We are sending at the right speed"});
+265                 \}
+266             \}
+267           tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh} = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh}, 3 * tcb->
+      \hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} / 4);
+268           \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated ssThresh = "} << tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+269         \}
+270 
+271       \textcolor{comment}{// Reset cntRtt & minRtt every RTT}
+272       \hyperlink{classns3_1_1TcpVegas_a4149c239657ba2ea7399374ec0fd9682}{m\_cntRtt} = 0;
+273       \hyperlink{classns3_1_1TcpVegas_aba6a10d787820b6907313b79cc16582c}{m\_minRtt} = \hyperlink{classns3_1_1Time_ad3414eb47d40a34971d5e78db88cfc72}{Time::Max} ();
+274     \}
+275   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} < tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh})
+276     \{
+277       \hyperlink{classns3_1_1TcpNewReno_a1cf5fd9585eb3b745727f4f5beae0706}{TcpNewReno::SlowStart} (tcb, segmentsAcked);
+278     \}
+279 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!Pkts\+Acked@{Pkts\+Acked}}
+\index{Pkts\+Acked@{Pkts\+Acked}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{Pkts\+Acked(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked, const Time \&rtt)}{PktsAcked(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked, const Time &rtt)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Vegas\+::\+Pkts\+Acked (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked, }
+\item[{const {\bf Time} \&}]{rtt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpVegas_adb646411aad266d6db894b88f2baff0f}{}\label{classns3_1_1TcpVegas_adb646411aad266d6db894b88f2baff0f}
+
+
+Compute R\+T\+Ts needed to execute Vegas algorithm. 
+
+The function filters R\+TT samples from the last R\+TT to find the current smallest propagation delay + queueing delay (min\+Rtt). We take the minimum to avoid the effects of delayed A\+C\+Ks.
+
+The function also min-\/filters all R\+TT measurements seen to find the propagation delay (base\+Rtt).
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments A\+C\+Ked \\
+\hline
+{\em rtt} & last R\+TT \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpCongestionOps_a76d3ffb7b1a7ba761026e3f94c1f50fa}{ns3\+::\+Tcp\+Congestion\+Ops}.
+
+
+\begin{DoxyCode}
+101 \{
+102   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked << rtt);
+103 
+104   \textcolor{keywordflow}{if} (rtt.IsZero ())
+105     \{
+106       \textcolor{keywordflow}{return};
+107     \}
+108 
+109   \hyperlink{classns3_1_1TcpVegas_aba6a10d787820b6907313b79cc16582c}{m\_minRtt} = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (\hyperlink{classns3_1_1TcpVegas_aba6a10d787820b6907313b79cc16582c}{m\_minRtt}, rtt);
+110   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_minRtt = "} << \hyperlink{classns3_1_1TcpVegas_aba6a10d787820b6907313b79cc16582c}{m\_minRtt});
+111 
+112   \hyperlink{classns3_1_1TcpVegas_ae283bcc32d2d92002477abafd1ca5132}{m\_baseRtt} = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (\hyperlink{classns3_1_1TcpVegas_ae283bcc32d2d92002477abafd1ca5132}{m\_baseRtt}, rtt);
+113   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_baseRtt = "} << \hyperlink{classns3_1_1TcpVegas_ae283bcc32d2d92002477abafd1ca5132}{m\_baseRtt});
+114 
+115   \textcolor{comment}{// Update RTT counter}
+116   \hyperlink{classns3_1_1TcpVegas_a4149c239657ba2ea7399374ec0fd9682}{m\_cntRtt}++;
+117   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Updated m\_cntRtt = "} << \hyperlink{classns3_1_1TcpVegas_a4149c239657ba2ea7399374ec0fd9682}{m\_cntRtt});
+118 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 12
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!m\+\_\+alpha@{m\+\_\+alpha}}
+\index{m\+\_\+alpha@{m\+\_\+alpha}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{m\+\_\+alpha}{m_alpha}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Vegas\+::m\+\_\+alpha\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVegas_a50cf33c05a6dd0e6a8da11e741291de8}{}\label{classns3_1_1TcpVegas_a50cf33c05a6dd0e6a8da11e741291de8}
+
+
+Alpha threshold, lower bound of packets in network. 
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!m\+\_\+base\+Rtt@{m\+\_\+base\+Rtt}}
+\index{m\+\_\+base\+Rtt@{m\+\_\+base\+Rtt}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{m\+\_\+base\+Rtt}{m_baseRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Vegas\+::m\+\_\+base\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVegas_ae283bcc32d2d92002477abafd1ca5132}{}\label{classns3_1_1TcpVegas_ae283bcc32d2d92002477abafd1ca5132}
+
+
+Minimum of all Vegas R\+TT measurements seen during connection. 
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!m\+\_\+beg\+Snd\+Nxt@{m\+\_\+beg\+Snd\+Nxt}}
+\index{m\+\_\+beg\+Snd\+Nxt@{m\+\_\+beg\+Snd\+Nxt}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{m\+\_\+beg\+Snd\+Nxt}{m_begSndNxt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sequence\+Number32} ns3\+::\+Tcp\+Vegas\+::m\+\_\+beg\+Snd\+Nxt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVegas_affe4c208f73217f8f29380b91d287ed8}{}\label{classns3_1_1TcpVegas_affe4c208f73217f8f29380b91d287ed8}
+
+
+Right edge during last R\+TT. 
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!m\+\_\+beta@{m\+\_\+beta}}
+\index{m\+\_\+beta@{m\+\_\+beta}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{m\+\_\+beta}{m_beta}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Vegas\+::m\+\_\+beta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVegas_a5871bf3ef55a392819a26c80f8c0a87f}{}\label{classns3_1_1TcpVegas_a5871bf3ef55a392819a26c80f8c0a87f}
+
+
+Beta threshold, upper bound of packets in network. 
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!m\+\_\+cnt\+Rtt@{m\+\_\+cnt\+Rtt}}
+\index{m\+\_\+cnt\+Rtt@{m\+\_\+cnt\+Rtt}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{m\+\_\+cnt\+Rtt}{m_cntRtt}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Vegas\+::m\+\_\+cnt\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVegas_a4149c239657ba2ea7399374ec0fd9682}{}\label{classns3_1_1TcpVegas_a4149c239657ba2ea7399374ec0fd9682}
+
+
+Number of R\+TT measurements during last R\+TT. 
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!m\+\_\+doing\+Vegas\+Now@{m\+\_\+doing\+Vegas\+Now}}
+\index{m\+\_\+doing\+Vegas\+Now@{m\+\_\+doing\+Vegas\+Now}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{m\+\_\+doing\+Vegas\+Now}{m_doingVegasNow}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Tcp\+Vegas\+::m\+\_\+doing\+Vegas\+Now\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVegas_a8207740cdef670e55f31d067baf10c06}{}\label{classns3_1_1TcpVegas_a8207740cdef670e55f31d067baf10c06}
+
+
+If true, do Vegas for this R\+TT. 
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!m\+\_\+gamma@{m\+\_\+gamma}}
+\index{m\+\_\+gamma@{m\+\_\+gamma}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{m\+\_\+gamma}{m_gamma}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Vegas\+::m\+\_\+gamma\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVegas_ae3ea97171ce6954d2b607f6bc8b9239c}{}\label{classns3_1_1TcpVegas_ae3ea97171ce6954d2b607f6bc8b9239c}
+
+
+Gamma threshold, limit on increase. 
+
+\index{ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}!m\+\_\+min\+Rtt@{m\+\_\+min\+Rtt}}
+\index{m\+\_\+min\+Rtt@{m\+\_\+min\+Rtt}!ns3\+::\+Tcp\+Vegas@{ns3\+::\+Tcp\+Vegas}}
+\subsubsection[{\texorpdfstring{m\+\_\+min\+Rtt}{m_minRtt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Tcp\+Vegas\+::m\+\_\+min\+Rtt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpVegas_aba6a10d787820b6907313b79cc16582c}{}\label{classns3_1_1TcpVegas_aba6a10d787820b6907313b79cc16582c}
+
+
+Minimum of all R\+TT measurements within last R\+TT. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{tcp-vegas_8h}{tcp-\/vegas.\+h}\item 
+internet/model/\hyperlink{tcp-vegas_8cc}{tcp-\/vegas.\+cc}\end{DoxyCompactItemize}

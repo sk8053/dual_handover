@@ -1,0 +1,385 @@
+\hypertarget{classLteDownlinkPowerControlTestSuite}{}\section{Lte\+Downlink\+Power\+Control\+Test\+Suite Class Reference}
+\label{classLteDownlinkPowerControlTestSuite}\index{Lte\+Downlink\+Power\+Control\+Test\+Suite@{Lte\+Downlink\+Power\+Control\+Test\+Suite}}
+
+
+{\ttfamily \#include $<$lte-\/test-\/downlink-\/power-\/control.\+h$>$}
+
+
+
+Inheritance diagram for Lte\+Downlink\+Power\+Control\+Test\+Suite\+:
+% FIG 0
+
+
+Collaboration diagram for Lte\+Downlink\+Power\+Control\+Test\+Suite\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLteDownlinkPowerControlTestSuite_af76a41af80a3946cf72e5d9688920ac0}{Lte\+Downlink\+Power\+Control\+Test\+Suite} ()
+\item 
+double \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{Calculate\+Rb\+Tx\+Power} (double tx\+Power, uint8\+\_\+t pa)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Test 1.\+1 S\+I\+NR calculation in downlink 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Lte\+Downlink\+Power\+Control\+Test\+Suite@{Lte\+Downlink\+Power\+Control\+Test\+Suite}!Lte\+Downlink\+Power\+Control\+Test\+Suite@{Lte\+Downlink\+Power\+Control\+Test\+Suite}}
+\index{Lte\+Downlink\+Power\+Control\+Test\+Suite@{Lte\+Downlink\+Power\+Control\+Test\+Suite}!Lte\+Downlink\+Power\+Control\+Test\+Suite@{Lte\+Downlink\+Power\+Control\+Test\+Suite}}
+\subsubsection[{\texorpdfstring{Lte\+Downlink\+Power\+Control\+Test\+Suite()}{LteDownlinkPowerControlTestSuite()}}]{\setlength{\rightskip}{0pt plus 5cm}Lte\+Downlink\+Power\+Control\+Test\+Suite\+::\+Lte\+Downlink\+Power\+Control\+Test\+Suite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLteDownlinkPowerControlTestSuite_af76a41af80a3946cf72e5d9688920ac0}{}\label{classLteDownlinkPowerControlTestSuite_af76a41af80a3946cf72e5d9688920ac0}
+Test\+Suite 
+\begin{DoxyCode}
+61   : \hyperlink{classns3_1_1TestSuite_a904b0c40583b744d30908aeb94636d1a}{TestSuite} (\textcolor{stringliteral}{"lte-downlink-power-control"}, \hyperlink{classns3_1_1TestSuite_a1ebfcab34ec8161e085e8e3a1855eae0a90c5529a26ab3a5ffcc6e57040dbd82e}{SYSTEM})
+62 \{
+63 \textcolor{comment}{//  LogLevel logLevel = (LogLevel)(LOG\_PREFIX\_FUNC | LOG\_PREFIX\_TIME | LOG\_LEVEL\_DEBUG);}
+64 \textcolor{comment}{//  LogComponentEnable ("LteDownlinkPowerControlTest", logLevel);}
+65   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Creating LteDownlinkPowerControlTestSuite"});
+66 
+67   \textcolor{comment}{// Spectrum helper test}
+68   \{
+69     std::vector<int> activeRbs\_txpowdB30nrb6run1earfcn500 (4);
+70     activeRbs\_txpowdB30nrb6run1earfcn500[0] = 0;
+71     activeRbs\_txpowdB30nrb6run1earfcn500[1] = 2;
+72     activeRbs\_txpowdB30nrb6run1earfcn500[2] = 3;
+73     activeRbs\_txpowdB30nrb6run1earfcn500[3] = 5;
+74 
+75     uint16\_t \hyperlink{generate__test__data__lte__spectrum__model_8m_a584be7562abb392609629331f8c6c42c}{earfcn} = 500;
+76     uint8\_t \hyperlink{generate__test__data__lte__spectrum__model_8m_a3f7228a3941f19f282647a09dd494528}{bw} = 6;
+77     \textcolor{keywordtype}{double} powerTx = 30;
+78 
+79     std::map<int, double> powerTxMap;
+80     \textcolor{keywordtype}{double} rbTxPower = powerTx;
+81 
+82     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_6);
+83     powerTxMap.insert (std::pair<int,double>(0, rbTxPower));
+84 
+85     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_3);
+86     powerTxMap.insert (std::pair<int,double>(2, rbTxPower));
+87 
+88     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB0);
+89     powerTxMap.insert (std::pair<int,double>(3, rbTxPower));
+90 
+91     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB2);
+92     powerTxMap.insert (std::pair<int,double>(5, rbTxPower));
+93 
+94     \hyperlink{classns3_1_1SpectrumValue}{SpectrumValue} spectrumValue\_txpowdB30nrb6run1earfcn500 (
+      LteSpectrumValueHelper::GetSpectrumModel (500, 6));
+95     spectrumValue\_txpowdB30nrb6run1earfcn500[0] = 2.325820769916e-07;
+96     spectrumValue\_txpowdB30nrb6run1earfcn500[1] = 0.000000000000e+00;
+97     spectrumValue\_txpowdB30nrb6run1earfcn500[2] = 4.640622533585e-07;
+98     spectrumValue\_txpowdB30nrb6run1earfcn500[3] = 9.259259259259e-07;
+99     spectrumValue\_txpowdB30nrb6run1earfcn500[4] = 0.000000000000e+00;
+100     spectrumValue\_txpowdB30nrb6run1earfcn500[5] = 1.467493696723e-06;
+101 
+102     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlSpectrumValueTestCase}{LteDownlinkPowerControlSpectrumValueTestCase}
+       (\textcolor{stringliteral}{"txpowdB30nrb6run1earfcn500\_allRbPower"},
+103                                                                    earfcn, bw, powerTx,
+104                                                                    powerTxMap, 
+      activeRbs\_txpowdB30nrb6run1earfcn500,
+105                                                                    spectrumValue\_txpowdB30nrb6run1earfcn500
+      ), TestCase::QUICK);
+106   \}
+107   \{
+108     \textcolor{comment}{//if power for RB not present, but RB is active, use powerTx}
+109     std::vector<int> activeRbs\_txpowdB30nrb6run1earfcn500 (4);
+110     activeRbs\_txpowdB30nrb6run1earfcn500[0] = 0;
+111     activeRbs\_txpowdB30nrb6run1earfcn500[1] = 2;
+112     activeRbs\_txpowdB30nrb6run1earfcn500[2] = 3;
+113     activeRbs\_txpowdB30nrb6run1earfcn500[3] = 5;
+114 
+115     uint16\_t earfcn = 500;
+116     uint8\_t bw = 6;
+117     \textcolor{keywordtype}{double} powerTx = 30;
+118 
+119     std::map<int, double> powerTxMap;
+120     \textcolor{keywordtype}{double} rbTxPower = powerTx;
+121 
+122     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_3);
+123     powerTxMap.insert (std::pair<int,double>(2, rbTxPower));
+124 
+125     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB0);
+126     powerTxMap.insert (std::pair<int,double>(3, rbTxPower));
+127 
+128     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB2);
+129     powerTxMap.insert (std::pair<int,double>(5, rbTxPower));
+130 
+131     \hyperlink{classns3_1_1SpectrumValue}{SpectrumValue} spectrumValue\_txpowdB30nrb6run1earfcn500 (
+      LteSpectrumValueHelper::GetSpectrumModel (500, 6));
+132     spectrumValue\_txpowdB30nrb6run1earfcn500[0] = 9.259259259259e-07;
+133     spectrumValue\_txpowdB30nrb6run1earfcn500[1] = 0.000000000000e+00;
+134     spectrumValue\_txpowdB30nrb6run1earfcn500[2] = 4.640622533585e-07;
+135     spectrumValue\_txpowdB30nrb6run1earfcn500[3] = 9.259259259259e-07;
+136     spectrumValue\_txpowdB30nrb6run1earfcn500[4] = 0.000000000000e+00;
+137     spectrumValue\_txpowdB30nrb6run1earfcn500[5] = 1.467493696723e-06;
+138 
+139     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlSpectrumValueTestCase}{LteDownlinkPowerControlSpectrumValueTestCase}
+       (\textcolor{stringliteral}{"txpowdB30nrb6run1earfcn500"},
+140                                                                    earfcn, bw, powerTx,
+141                                                                    powerTxMap, 
+      activeRbs\_txpowdB30nrb6run1earfcn500,
+142                                                                    spectrumValue\_txpowdB30nrb6run1earfcn500
+      ), TestCase::QUICK);
+143   \}
+144   \{
+145     std::vector<int> activeRbs\_txpowdB30nrb25run1earfcn500 (15);
+146     activeRbs\_txpowdB30nrb25run1earfcn500[0] = 0;
+147     activeRbs\_txpowdB30nrb25run1earfcn500[1] = 1;
+148     activeRbs\_txpowdB30nrb25run1earfcn500[2] = 2;
+149     activeRbs\_txpowdB30nrb25run1earfcn500[3] = 3;
+150     activeRbs\_txpowdB30nrb25run1earfcn500[4] = 7;
+151     activeRbs\_txpowdB30nrb25run1earfcn500[5] = 8;
+152     activeRbs\_txpowdB30nrb25run1earfcn500[6] = 9;
+153     activeRbs\_txpowdB30nrb25run1earfcn500[7] = 11;
+154     activeRbs\_txpowdB30nrb25run1earfcn500[8] = 13;
+155     activeRbs\_txpowdB30nrb25run1earfcn500[9] = 14;
+156     activeRbs\_txpowdB30nrb25run1earfcn500[10] = 18;
+157     activeRbs\_txpowdB30nrb25run1earfcn500[11] = 19;
+158     activeRbs\_txpowdB30nrb25run1earfcn500[12] = 20;
+159     activeRbs\_txpowdB30nrb25run1earfcn500[13] = 21;
+160     activeRbs\_txpowdB30nrb25run1earfcn500[14] = 24;
+161 
+162     uint16\_t earfcn = 500;
+163     uint8\_t bw = 25;
+164     \textcolor{keywordtype}{double} powerTx = 30;
+165 
+166     std::map<int, double> powerTxMap;
+167     \textcolor{keywordtype}{double} rbTxPower = powerTx;
+168     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_3);
+169     powerTxMap.insert (std::pair<int,double>(0, rbTxPower));
+170     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_4dot77);
+171     powerTxMap.insert (std::pair<int,double>(1, rbTxPower));
+172     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_6);
+173     powerTxMap.insert (std::pair<int,double>(2, rbTxPower));
+174     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB1);
+175     powerTxMap.insert (std::pair<int,double>(3, rbTxPower));
+176     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB2);
+177     powerTxMap.insert (std::pair<int,double>(7, rbTxPower));
+178     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB2);
+179     powerTxMap.insert (std::pair<int,double>(8, rbTxPower));
+180     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB2);
+181     powerTxMap.insert (std::pair<int,double>(9, rbTxPower));
+182     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_1dot77);
+183     powerTxMap.insert (std::pair<int,double>(11, rbTxPower));
+184     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB2);
+185     powerTxMap.insert (std::pair<int,double>(13, rbTxPower));
+186     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_3);
+187     powerTxMap.insert (std::pair<int,double>(14, rbTxPower));
+188     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB0);
+189     powerTxMap.insert (std::pair<int,double>(18, rbTxPower));
+190     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_3);
+191     powerTxMap.insert (std::pair<int,double>(19, rbTxPower));
+192     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_3);
+193     powerTxMap.insert (std::pair<int,double>(20, rbTxPower));
+194     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_4dot77);
+195     powerTxMap.insert (std::pair<int,double>(21, rbTxPower));
+196     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB3);
+197     powerTxMap.insert (std::pair<int,double>(24, rbTxPower));
+198 
+199 
+200     \hyperlink{classns3_1_1SpectrumValue}{SpectrumValue} spectrumValue\_txpowdB30nrb25run1earfcn500 (
+      LteSpectrumValueHelper::GetSpectrumModel (500, bw));
+201     spectrumValue\_txpowdB30nrb25run1earfcn500[0] = 1.113749408060e-07;
+202     spectrumValue\_txpowdB30nrb25run1earfcn500[1] = 7.409475839182e-08;
+203     spectrumValue\_txpowdB30nrb25run1earfcn500[2] = 5.581969847799e-08;
+204     spectrumValue\_txpowdB30nrb25run1earfcn500[3] = 2.797612026209e-07;
+205     spectrumValue\_txpowdB30nrb25run1earfcn500[4] = 0.000000000000e+00;
+206     spectrumValue\_txpowdB30nrb25run1earfcn500[5] = 0.000000000000e+00;
+207     spectrumValue\_txpowdB30nrb25run1earfcn500[6] = 0.000000000000e+00;
+208     spectrumValue\_txpowdB30nrb25run1earfcn500[7] = 3.521984872135e-07;
+209     spectrumValue\_txpowdB30nrb25run1earfcn500[8] = 3.521984872135e-07;
+210     spectrumValue\_txpowdB30nrb25run1earfcn500[9] = 3.521984872135e-07;
+211     spectrumValue\_txpowdB30nrb25run1earfcn500[10] = 0.000000000000e+00;
+212     spectrumValue\_txpowdB30nrb25run1earfcn500[11] = 1.478384791559e-07;
+213     spectrumValue\_txpowdB30nrb25run1earfcn500[12] = 0.000000000000e+00;
+214     spectrumValue\_txpowdB30nrb25run1earfcn500[13] = 3.521984872135e-07;
+215     spectrumValue\_txpowdB30nrb25run1earfcn500[14] = 1.113749408060e-07;
+216     spectrumValue\_txpowdB30nrb25run1earfcn500[15] = 0.000000000000e+00;
+217     spectrumValue\_txpowdB30nrb25run1earfcn500[16] = 0.000000000000e+00;
+218     spectrumValue\_txpowdB30nrb25run1earfcn500[17] = 0.000000000000e+00;
+219     spectrumValue\_txpowdB30nrb25run1earfcn500[18] = 2.222222222222e-07;
+220     spectrumValue\_txpowdB30nrb25run1earfcn500[19] = 1.113749408060e-07;
+221     spectrumValue\_txpowdB30nrb25run1earfcn500[20] = 1.113749408060e-07;
+222     spectrumValue\_txpowdB30nrb25run1earfcn500[21] = 7.409475839182e-08;
+223     spectrumValue\_txpowdB30nrb25run1earfcn500[22] = 0.000000000000e+00;
+224     spectrumValue\_txpowdB30nrb25run1earfcn500[23] = 0.000000000000e+00;
+225     spectrumValue\_txpowdB30nrb25run1earfcn500[24] = 4.433916255486e-07;
+226 
+227     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlSpectrumValueTestCase}{LteDownlinkPowerControlSpectrumValueTestCase}
+       (\textcolor{stringliteral}{"txpowdB30nrb25run1earfcn500\_allRbPower"},
+228                                                                    earfcn, bw, powerTx,
+229                                                                    powerTxMap, 
+      activeRbs\_txpowdB30nrb25run1earfcn500,
+230                                                                    
+      spectrumValue\_txpowdB30nrb25run1earfcn500), TestCase::QUICK);
+231   \}
+232   \{
+233     \textcolor{comment}{//if power for RB not present, but RB is active, use powerTx}
+234     std::vector<int> activeRbs\_txpowdB30nrb25run1earfcn500 (15);
+235     activeRbs\_txpowdB30nrb25run1earfcn500[0] = 0;
+236     activeRbs\_txpowdB30nrb25run1earfcn500[1] = 1;
+237     activeRbs\_txpowdB30nrb25run1earfcn500[2] = 2;
+238     activeRbs\_txpowdB30nrb25run1earfcn500[3] = 3;
+239     activeRbs\_txpowdB30nrb25run1earfcn500[4] = 7;
+240     activeRbs\_txpowdB30nrb25run1earfcn500[5] = 8;
+241     activeRbs\_txpowdB30nrb25run1earfcn500[6] = 9;
+242     activeRbs\_txpowdB30nrb25run1earfcn500[7] = 11;
+243     activeRbs\_txpowdB30nrb25run1earfcn500[8] = 13;
+244     activeRbs\_txpowdB30nrb25run1earfcn500[9] = 14;
+245     activeRbs\_txpowdB30nrb25run1earfcn500[10] = 18;
+246     activeRbs\_txpowdB30nrb25run1earfcn500[11] = 19;
+247     activeRbs\_txpowdB30nrb25run1earfcn500[12] = 20;
+248     activeRbs\_txpowdB30nrb25run1earfcn500[13] = 21;
+249     activeRbs\_txpowdB30nrb25run1earfcn500[14] = 24;
+250 
+251     uint16\_t earfcn = 500;
+252     uint8\_t bw = 25;
+253     \textcolor{keywordtype}{double} powerTx = 30;
+254 
+255     std::map<int, double> powerTxMap;
+256     \textcolor{keywordtype}{double} rbTxPower = powerTx;
+257     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_3);
+258     powerTxMap.insert (std::pair<int,double>(0, rbTxPower));
+259     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_6);
+260     powerTxMap.insert (std::pair<int,double>(2, rbTxPower));
+261     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB1);
+262     powerTxMap.insert (std::pair<int,double>(3, rbTxPower));
+263     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB2);
+264     powerTxMap.insert (std::pair<int,double>(7, rbTxPower));
+265     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB2);
+266     powerTxMap.insert (std::pair<int,double>(8, rbTxPower));
+267     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB2);
+268     powerTxMap.insert (std::pair<int,double>(13, rbTxPower));
+269     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_3);
+270     powerTxMap.insert (std::pair<int,double>(14, rbTxPower));
+271     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB0);
+272     powerTxMap.insert (std::pair<int,double>(18, rbTxPower));
+273     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB\_3);
+274     powerTxMap.insert (std::pair<int,double>(19, rbTxPower));
+275     rbTxPower = \hyperlink{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{CalculateRbTxPower} (powerTx, LteRrcSap::PdschConfigDedicated::dB3);
+276     powerTxMap.insert (std::pair<int,double>(24, rbTxPower));
+277 
+278 
+279     \hyperlink{classns3_1_1SpectrumValue}{SpectrumValue} spectrumValue\_txpowdB30nrb25run1earfcn500 (
+      LteSpectrumValueHelper::GetSpectrumModel (500, bw));
+280     spectrumValue\_txpowdB30nrb25run1earfcn500[0] = 1.113749408060e-07;
+281     spectrumValue\_txpowdB30nrb25run1earfcn500[1] = 2.222222222222e-07;
+282     spectrumValue\_txpowdB30nrb25run1earfcn500[2] = 5.581969847799e-08;
+283     spectrumValue\_txpowdB30nrb25run1earfcn500[3] = 2.797612026209e-07;
+284     spectrumValue\_txpowdB30nrb25run1earfcn500[4] = 0.000000000000e+00;
+285     spectrumValue\_txpowdB30nrb25run1earfcn500[5] = 0.000000000000e+00;
+286     spectrumValue\_txpowdB30nrb25run1earfcn500[6] = 0.000000000000e+00;
+287     spectrumValue\_txpowdB30nrb25run1earfcn500[7] = 3.521984872135e-07;
+288     spectrumValue\_txpowdB30nrb25run1earfcn500[8] = 3.521984872135e-07;
+289     spectrumValue\_txpowdB30nrb25run1earfcn500[9] = 2.222222222222e-07;
+290     spectrumValue\_txpowdB30nrb25run1earfcn500[10] = 0.000000000000e+00;
+291     spectrumValue\_txpowdB30nrb25run1earfcn500[11] = 2.222222222222e-07;
+292     spectrumValue\_txpowdB30nrb25run1earfcn500[12] = 0.000000000000e+00;
+293     spectrumValue\_txpowdB30nrb25run1earfcn500[13] = 3.521984872135e-07;
+294     spectrumValue\_txpowdB30nrb25run1earfcn500[14] = 1.113749408060e-07;
+295     spectrumValue\_txpowdB30nrb25run1earfcn500[15] = 0.000000000000e+00;
+296     spectrumValue\_txpowdB30nrb25run1earfcn500[16] = 0.000000000000e+00;
+297     spectrumValue\_txpowdB30nrb25run1earfcn500[17] = 0.000000000000e+00;
+298     spectrumValue\_txpowdB30nrb25run1earfcn500[18] = 2.222222222222e-07;
+299     spectrumValue\_txpowdB30nrb25run1earfcn500[19] = 1.113749408060e-07;
+300     spectrumValue\_txpowdB30nrb25run1earfcn500[20] = 2.222222222222e-07;
+301     spectrumValue\_txpowdB30nrb25run1earfcn500[21] = 2.222222222222e-07;
+302     spectrumValue\_txpowdB30nrb25run1earfcn500[22] = 0.000000000000e+00;
+303     spectrumValue\_txpowdB30nrb25run1earfcn500[23] = 0.000000000000e+00;
+304     spectrumValue\_txpowdB30nrb25run1earfcn500[24] = 4.433916255486e-07;
+305 
+306     \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlSpectrumValueTestCase}{LteDownlinkPowerControlSpectrumValueTestCase}
+       (\textcolor{stringliteral}{"txpowdB30nrb25run1earfcn500"},
+307                                                                    earfcn, bw, powerTx,
+308                                                                    powerTxMap, 
+      activeRbs\_txpowdB30nrb25run1earfcn500,
+309                                                                    
+      spectrumValue\_txpowdB30nrb25run1earfcn500), TestCase::QUICK);
+310   \}
+311 
+312 
+313   \textcolor{comment}{// Downlink DATA and CONTROL channels power comparison}
+314   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlTestCase}{LteDownlinkPowerControlTestCase} (\textcolor{keyword}{false}, 
+      LteRrcSap::PdschConfigDedicated::dB0,
+315                                                     \textcolor{stringliteral}{"DataCtrlPowerDifference\_noChange"}), TestCase::QUICK);
+316   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlTestCase}{LteDownlinkPowerControlTestCase} (\textcolor{keyword}{true}, 
+      LteRrcSap::PdschConfigDedicated::dB\_6,
+317                                                     \textcolor{stringliteral}{"DataCtrlPowerDifference\_dB\_6"}), TestCase::QUICK);
+318   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlTestCase}{LteDownlinkPowerControlTestCase} (\textcolor{keyword}{true}, 
+      LteRrcSap::PdschConfigDedicated::dB\_4dot77,
+319                                                     \textcolor{stringliteral}{"DataCtrlPowerDifference\_dB\_4dot77"}), TestCase::QUICK);
+320   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlTestCase}{LteDownlinkPowerControlTestCase} (\textcolor{keyword}{true}, 
+      LteRrcSap::PdschConfigDedicated::dB\_3,
+321                                                     \textcolor{stringliteral}{"DataCtrlPowerDifference\_dB\_3"}), TestCase::QUICK);
+322   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlTestCase}{LteDownlinkPowerControlTestCase} (\textcolor{keyword}{true}, 
+      LteRrcSap::PdschConfigDedicated::dB\_1dot77,
+323                                                     \textcolor{stringliteral}{"DataCtrlPowerDifference\_dB\_1dot77"}), TestCase::QUICK);
+324   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlTestCase}{LteDownlinkPowerControlTestCase} (\textcolor{keyword}{true}, 
+      LteRrcSap::PdschConfigDedicated::dB0,
+325                                                     \textcolor{stringliteral}{"DataCtrlPowerDifference\_dB0"}), TestCase::QUICK);
+326   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlTestCase}{LteDownlinkPowerControlTestCase} (\textcolor{keyword}{true}, 
+      LteRrcSap::PdschConfigDedicated::dB1,
+327                                                     \textcolor{stringliteral}{"DataCtrlPowerDifference\_dB1"}), TestCase::QUICK);
+328   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlTestCase}{LteDownlinkPowerControlTestCase} (\textcolor{keyword}{true}, 
+      LteRrcSap::PdschConfigDedicated::dB2,
+329                                                     \textcolor{stringliteral}{"DataCtrlPowerDifference\_dB2"}), TestCase::QUICK);
+330   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteDownlinkPowerControlTestCase}{LteDownlinkPowerControlTestCase} (\textcolor{keyword}{true}, 
+      LteRrcSap::PdschConfigDedicated::dB3,
+331                                                     \textcolor{stringliteral}{"DataCtrlPowerDifference\_dB3"}), TestCase::QUICK);
+332 
+333 
+334   \textcolor{comment}{// RrcConnectionReconfiguration test}
+335   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} 
+      \hyperlink{classLteDownlinkPowerControlRrcConnectionReconfigurationTestCase}{LteDownlinkPowerControlRrcConnectionReconfigurationTestCase}
+       (\textcolor{keyword}{false}, \textcolor{stringliteral}{"RrcConnReconf-IdealRrc"}), TestCase::QUICK);
+336   \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} 
+      \hyperlink{classLteDownlinkPowerControlRrcConnectionReconfigurationTestCase}{LteDownlinkPowerControlRrcConnectionReconfigurationTestCase}
+       (\textcolor{keyword}{true}, \textcolor{stringliteral}{"RrcConnReconf-RealRrc"}), TestCase::QUICK);
+337 
+338 
+339 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Lte\+Downlink\+Power\+Control\+Test\+Suite@{Lte\+Downlink\+Power\+Control\+Test\+Suite}!Calculate\+Rb\+Tx\+Power@{Calculate\+Rb\+Tx\+Power}}
+\index{Calculate\+Rb\+Tx\+Power@{Calculate\+Rb\+Tx\+Power}!Lte\+Downlink\+Power\+Control\+Test\+Suite@{Lte\+Downlink\+Power\+Control\+Test\+Suite}}
+\subsubsection[{\texorpdfstring{Calculate\+Rb\+Tx\+Power(double tx\+Power, uint8\+\_\+t pa)}{CalculateRbTxPower(double txPower, uint8_t pa)}}]{\setlength{\rightskip}{0pt plus 5cm}double Lte\+Downlink\+Power\+Control\+Test\+Suite\+::\+Calculate\+Rb\+Tx\+Power (
+\begin{DoxyParamCaption}
+\item[{double}]{tx\+Power, }
+\item[{uint8\+\_\+t}]{pa}
+\end{DoxyParamCaption}
+)}\hypertarget{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}{}\label{classLteDownlinkPowerControlTestSuite_acbda226a1db61d5328141d80aca96447}
+
+\begin{DoxyCode}
+343 \{
+344   \hyperlink{structns3_1_1LteRrcSap_1_1PdschConfigDedicated}{LteRrcSap::PdschConfigDedicated} pdschConfigDedicated;
+345   pdschConfigDedicated.\hyperlink{structns3_1_1LteRrcSap_1_1PdschConfigDedicated_aa9b1574a63fb83c53649305ca95aeb31}{pa} = pa;
+346   \textcolor{keywordtype}{double} rbTxpower = txPower + LteRrcSap::ConvertPdschConfigDedicated2Double (pdschConfigDedicated);
+347 
+348   \textcolor{keywordflow}{return} rbTxpower;
+349 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lte/test/\hyperlink{lte-test-downlink-power-control_8h}{lte-\/test-\/downlink-\/power-\/control.\+h}\item 
+lte/test/\hyperlink{lte-test-downlink-power-control_8cc}{lte-\/test-\/downlink-\/power-\/control.\+cc}\end{DoxyCompactItemize}

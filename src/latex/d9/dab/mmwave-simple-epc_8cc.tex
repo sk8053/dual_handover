@@ -1,0 +1,289 @@
+\hypertarget{mmwave-simple-epc_8cc}{}\section{mmwave/examples/mmwave-\/simple-\/epc.cc File Reference}
+\label{mmwave-simple-epc_8cc}\index{mmwave/examples/mmwave-\/simple-\/epc.\+cc@{mmwave/examples/mmwave-\/simple-\/epc.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/mmwave-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/epc-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/global-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mmwave-\/point-\/to-\/point-\/epc-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for mmwave-\/simple-\/epc.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{mmwave-simple-epc_8cc_ab5b2d5577332f9a2c1d6b2d32293401e}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Epc\+First\+Example\char`\"{})
+\item 
+int \hyperlink{mmwave-simple-epc_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{mmwave-\/simple-\/epc.\+cc@{mmwave-\/simple-\/epc.\+cc}!main@{main}}
+\index{main@{main}!mmwave-\/simple-\/epc.\+cc@{mmwave-\/simple-\/epc.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{mmwave-simple-epc_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{mmwave-simple-epc_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+52 \{
+53         \textcolor{comment}{//LogComponentEnable ("LteUeRrc", LOG\_LEVEL\_ALL);}
+54         \textcolor{comment}{//LogComponentEnable ("LteEnbRrc", LOG\_LEVEL\_ALL);}
+55 \textcolor{comment}{//      LogComponentEnable("MmWavePointToPointEpcHelper",LOG\_LEVEL\_ALL);}
+56 \textcolor{comment}{//      LogComponentEnable("EpcUeNas",LOG\_LEVEL\_ALL);}
+57 \textcolor{comment}{//      LogComponentEnable ("MmWaveSpectrumPhy", LOG\_LEVEL\_LOGIC);}
+58         \textcolor{comment}{//LogComponentEnable ("MmWaveUePhy", LOG\_LEVEL\_DEBUG);}
+59         \textcolor{comment}{//LogComponentEnable ("MmWaveEnbPhy", LOG\_LEVEL\_DEBUG);}
+60 \textcolor{comment}{//      LogComponentEnable ("MmWaveUeMac", LOG\_LEVEL\_LOGIC);}
+61         \textcolor{comment}{//LogComponentEnable ("UdpClient", LOG\_LEVEL\_INFO);}
+62         \textcolor{comment}{//LogComponentEnable ("PacketSink", LOG\_LEVEL\_INFO);}
+63           \textcolor{comment}{//LogComponentEnable("PropagationLossModel",LOG\_LEVEL\_ALL);}
+64 
+65 
+66         uint16\_t numEnb = 1;
+67         uint16\_t numUe = 1;
+68         \textcolor{keywordtype}{double} simTime = 2.0;
+69         \textcolor{keywordtype}{double} interPacketInterval = 100;  \textcolor{comment}{// 500 microseconds}
+70         \textcolor{keywordtype}{double} minDistance = 10.0;  \textcolor{comment}{// eNB-UE distance in meters}
+71         \textcolor{keywordtype}{double} maxDistance = 150.0;  \textcolor{comment}{// eNB-UE distance in meters}
+72         \textcolor{keywordtype}{bool} harqEnabled = \textcolor{keyword}{true};
+73         \textcolor{keywordtype}{bool} rlcAmEnabled = \textcolor{keyword}{false};
+74         \textcolor{keywordtype}{bool} fixedTti = \textcolor{keyword}{false};
+75         \textcolor{keywordtype}{unsigned} symPerSf = 24;
+76         \textcolor{keywordtype}{double} sfPeriod = 100.0;
+77         \textcolor{keywordtype}{unsigned} \hyperlink{generate__test__data__lte__spectrum__value__txpsd_8m_a093eaf8ac95b223aafb28e4668160d1f}{run} = 0;
+78         \textcolor{keywordtype}{bool} \hyperlink{mmwave-amc-test_8cc_a204169f2af2a5f81da1189ea236307c8}{smallScale} = \textcolor{keyword}{true};
+79         \textcolor{keywordtype}{double} \hyperlink{mmwave-amc-test_8cc_a6dc6e6f3c75c509ce943163afb5dade7}{speed} = 3;
+80 
+81         \textcolor{comment}{// Command line arguments}
+82         \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+83         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"numEnb"}, \textcolor{stringliteral}{"Number of eNBs"}, numEnb);
+84         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"numUe"}, \textcolor{stringliteral}{"Number of UEs per eNB"}, numUe);
+85         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"simTime"}, \textcolor{stringliteral}{"Total duration of the simulation [s])"}, simTime);
+86         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"interPacketInterval"}, \textcolor{stringliteral}{"Inter-packet interval [us])"}, interPacketInterval);
+87         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"harq"}, \textcolor{stringliteral}{"Enable Hybrid ARQ"}, harqEnabled);
+88         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"rlcAm"}, \textcolor{stringliteral}{"Enable RLC-AM"}, rlcAmEnabled);
+89         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"symPerSf"}, \textcolor{stringliteral}{"OFDM symbols per subframe"}, symPerSf);
+90         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"sfPeriod"}, \textcolor{stringliteral}{"Subframe period = 4.16 * symPerSf"}, sfPeriod);
+91         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"fixedTti"}, \textcolor{stringliteral}{"Fixed TTI scheduler"}, fixedTti);
+92         cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue}(\textcolor{stringliteral}{"run"}, \textcolor{stringliteral}{"run for RNG (for generating different deterministic sequences for
+       different drops)"}, fixedTti);
+93         cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse}(argc, argv);
+94 
+95         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveHelper::RlcAmEnabled"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue}(rlcAmEnabled));
+96         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveHelper::HarqEnabled"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue}(harqEnabled));
+97         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveFlexTtiMacScheduler::HarqEnabled"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue}(harqEnabled));
+98         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveFlexTtiMacScheduler::CqiTimerThreshold"}, 
+      UintegerValue(1000));
+99         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveFlexTtiMaxWeightMacScheduler::HarqEnabled"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue}(harqEnabled));
+100         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveFlexTtiMaxWeightMacScheduler::FixedTti"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue}(fixedTti));
+101         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveFlexTtiMaxWeightMacScheduler::SymPerSlot"}, 
+      UintegerValue(6));
+102         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWavePhyMacCommon::ResourceBlockNum"}, UintegerValue(1)
+      );
+103         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWavePhyMacCommon::ChunkPerRB"}, UintegerValue(72));
+104         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWavePhyMacCommon::SymbolsPerSubframe"}, UintegerValue(
+      symPerSf));
+105         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWavePhyMacCommon::SubframePeriod"}, DoubleValue(
+      sfPeriod));
+106         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWavePhyMacCommon::TbDecodeLatency"}, UintegerValue(200
+      .0));
+107         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveBeamforming::LongTermUpdatePeriod"}, TimeValue (
+      \hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (100.0)));
+108         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteEnbRrc::SystemInformationPeriodicity"}, TimeValue (
+      \hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (5.0)));
+109         \textcolor{comment}{//Config::SetDefault ("ns3::MmWavePropagationLossModel::ChannelStates", StringValue ("n"));}
+110         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteRlcAm::ReportBufferStatusTimer"}, TimeValue(
+      \hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds}(100.0)));
+111         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteRlcUmLowLat::ReportBufferStatusTimer"}, TimeValue(
+      \hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds}(100.0)));
+112         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteEnbRrc::SrsPeriodicity"}, UintegerValue (320));
+113         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::LteEnbRrc::FirstSibTime"}, UintegerValue (2));
+114         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveBeamforming::SmallScaleFading"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (smallScale));
+115         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveBeamforming::FixSpeed"}, 
+      \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+116         \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::MmWaveBeamforming::UeSpeed"}, DoubleValue (speed));
+117 
+118         RngSeedManager::SetSeed (1234);
+119         RngSeedManager::SetRun (run);
+120 
+121   \hyperlink{classns3_1_1Ptr}{Ptr<MmWaveHelper>} mmwaveHelper = CreateObject<MmWaveHelper> ();
+122         mmwaveHelper->\hyperlink{classns3_1_1MmWaveHelper_ae38f5e96d749ab63dda7746f43dfbe84}{SetSchedulerType} (\textcolor{stringliteral}{"ns3::MmWaveFlexTtiMacScheduler"});
+123   \hyperlink{classns3_1_1Ptr}{Ptr<MmWavePointToPointEpcHelper>}  epcHelper = 
+      CreateObject<MmWavePointToPointEpcHelper> ();
+124   mmwaveHelper->\hyperlink{classns3_1_1MmWaveHelper_a54fc98a649a710153b479d0878558733}{SetEpcHelper} (epcHelper);
+125         mmwaveHelper->\hyperlink{classns3_1_1MmWaveHelper_af211a02952ab5f4eabe0219cf53e7e1c}{SetHarqEnabled} (harqEnabled);
+126 
+127   \hyperlink{classns3_1_1ConfigStore}{ConfigStore} inputConfig;
+128   inputConfig.\hyperlink{classns3_1_1ConfigStore_a0a6137574d7c847c3823af8b9d1bb886}{ConfigureDefaults}();
+129 
+130   \textcolor{comment}{// parse again so you can override default values from the command line}
+131   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse}(argc, argv);
+132 
+133   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} pgw = epcHelper->\hyperlink{classns3_1_1MmWavePointToPointEpcHelper_a586f072ee5b09376531ba605b3fed05f}{GetPgwNode} ();
+134 
+135    \textcolor{comment}{// Create a single RemoteHost}
+136   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} remoteHostContainer;
+137   remoteHostContainer.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+138   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} remoteHost = remoteHostContainer.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0);
+139   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+140   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (remoteHostContainer);
+141 
+142   \textcolor{comment}{// Create the Internet}
+143   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} p2ph;
+144   p2ph.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (\hyperlink{classns3_1_1DataRate}{DataRate} (\textcolor{stringliteral}{"100Gb/s"})));
+145   p2ph.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"Mtu"}, UintegerValue (1500));
+146   p2ph.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.010)));
+147   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} internetDevices = p2ph.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (pgw, remoteHost);
+148   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ipv4h;
+149   ipv4h.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"1.0.0.0"}, \textcolor{stringliteral}{"255.0.0.0"});
+150   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} internetIpIfaces = ipv4h.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (internetDevices);
+151   \textcolor{comment}{// interface 0 is localhost, 1 is the p2p device}
+152   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} remoteHostAddr = internetIpIfaces.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1);
+153 
+154   \hyperlink{classns3_1_1Ipv4StaticRoutingHelper}{Ipv4StaticRoutingHelper} ipv4RoutingHelper;
+155   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4StaticRouting>} remoteHostStaticRouting = ipv4RoutingHelper.
+      \hyperlink{classns3_1_1Ipv4StaticRoutingHelper_a731206e50d305695dac7fb2ef963a4bb}{GetStaticRouting} (remoteHost->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ());
+156   remoteHostStaticRouting->\hyperlink{classns3_1_1Ipv4StaticRouting_a8bf5eaa7ba49fe33c78c70d5560b6c39}{AddNetworkRouteTo} (\hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (\textcolor{stringliteral}{"7.0.0.0"}), 
+      \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} (\textcolor{stringliteral}{"255.0.0.0"}), 1);
+157 
+158   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNodes;
+159   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+160   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create}(numEnb);
+161   ueNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create}(numUe);
+162 
+163   \textcolor{comment}{// Install Mobility Model}
+164   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} enbPositionAlloc = 
+      CreateObject<ListPositionAllocator> ();
+165   enbPositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));
+166   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} enbmobility;
+167   enbmobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+168   enbmobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator}(enbPositionAlloc);
+169   enbmobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+170 
+171   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} uemobility;
+172   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} uePositionAlloc = 
+      CreateObject<ListPositionAllocator> ();
+173         \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} distRv = CreateObject<UniformRandomVariable> (
+      );
+174         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < numUe; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+175         \{
+176                 \textcolor{keywordtype}{double} dist = distRv->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} (minDistance, maxDistance);
+177                 uePositionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (dist, 0.0, 0.0));
+178         \}
+179         uemobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+180   uemobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator}(uePositionAlloc);
+181   uemobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes);
+182 
+183   \textcolor{comment}{// Install mmWave Devices to the nodes}
+184   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbmmWaveDevs = mmwaveHelper->InstallEnbDevice (enbNodes);
+185   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} uemmWaveDevs = mmwaveHelper->
+      \hyperlink{classns3_1_1MmWaveHelper_a9311c819d7ee539c8710c5b7e98df37a}{InstallUeDevice} (ueNodes);
+186 
+187   \textcolor{comment}{// Install the IP stack on the UEs}
+188   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (ueNodes);
+189   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} ueIpIface;
+190   ueIpIface = epcHelper->\hyperlink{classns3_1_1MmWavePointToPointEpcHelper_ad96757d4c63d33f683dce1b5d6bca3b9}{AssignUeIpv4Address} (
+      \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} (uemmWaveDevs));
+191   \textcolor{comment}{// Assign IP address to UEs, and install applications}
+192   \textcolor{keywordflow}{for} (uint32\_t u = 0; u < ueNodes.\hyperlink{classns3_1_1NodeContainer_aed647ac56d0407a7706aba02eb44b951}{GetN} (); ++u)
+193     \{
+194       \hyperlink{classns3_1_1Ptr}{Ptr<Node>} ueNode = ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (u);
+195       \textcolor{comment}{// Set the default gateway for the UE}
+196       \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4StaticRouting>} ueStaticRouting = ipv4RoutingHelper.
+      \hyperlink{classns3_1_1Ipv4StaticRoutingHelper_a731206e50d305695dac7fb2ef963a4bb}{GetStaticRouting} (ueNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ());
+197       ueStaticRouting->\hyperlink{classns3_1_1Ipv4StaticRouting_aee30fa3246c2b42f122dabdff2725331}{SetDefaultRoute} (epcHelper->
+      \hyperlink{classns3_1_1MmWavePointToPointEpcHelper_afefac14ad79ff059b052305013d2beb3}{GetUeDefaultGatewayAddress} (), 1);
+198     \}
+199 
+200   mmwaveHelper->\hyperlink{classns3_1_1MmWaveHelper_a202baea67b0af0d4fb6069de73766dc6}{AttachToClosestEnb} (uemmWaveDevs, enbmmWaveDevs);
+201 
+202 
+203   \textcolor{comment}{// Install and start applications on UEs and remote host}
+204   uint16\_t dlPort = 1234;
+205   uint16\_t ulPort = 2000;
+206   uint16\_t otherPort = 3000;
+207   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps;
+208   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} serverApps;
+209   \textcolor{keywordflow}{for} (uint32\_t u = 0; u < ueNodes.\hyperlink{classns3_1_1NodeContainer_aed647ac56d0407a7706aba02eb44b951}{GetN} (); ++u)
+210     \{
+211       ++ulPort;
+212       ++otherPort;
+213       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} dlPacketSinkHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+      \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), dlPort));
+214       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} ulPacketSinkHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+      \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), ulPort));
+215       \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} packetSinkHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, 
+      \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (Ipv4Address::GetAny (), otherPort));
+216       serverApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (dlPacketSinkHelper.Install (ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get}(u)));
+217       serverApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (ulPacketSinkHelper.Install (remoteHost));
+218       serverApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (packetSinkHelper.Install (ueNodes.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get}(u)));
+219 
+220       \hyperlink{classns3_1_1UdpClientHelper}{UdpClientHelper} dlClient (ueIpIface.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (u), dlPort);
+221       dlClient.\hyperlink{classns3_1_1UdpClientHelper_a8bbae16a28f85ab3f3b5aa4642edfeae}{SetAttribute} (\textcolor{stringliteral}{"Interval"}, TimeValue (\hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds}(
+      interPacketInterval)));
+222       dlClient.SetAttribute (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue(1000000));
+223 
+224       \hyperlink{classns3_1_1UdpClientHelper}{UdpClientHelper} ulClient (remoteHostAddr, ulPort);
+225       ulClient.SetAttribute (\textcolor{stringliteral}{"Interval"}, TimeValue (\hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds}(interPacketInterval)));
+226       ulClient.SetAttribute (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue(1000000));
+227 
+228 \textcolor{comment}{//      UdpClientHelper client (ueIpIface.GetAddress (u), otherPort);}
+229 \textcolor{comment}{//      client.SetAttribute ("Interval", TimeValue (MilliSeconds(interPacketInterval)));}
+230 \textcolor{comment}{//      client.SetAttribute ("MaxPackets", UintegerValue(1000000));}
+231 
+232       clientApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (dlClient.Install (remoteHost));
+233       \textcolor{comment}{//clientApps.Add (ulClient.Install (ueNodes.Get(u)));}
+234 \textcolor{comment}{//      if (u+1 < ueNodes.GetN ())}
+235 \textcolor{comment}{//        \{}
+236 \textcolor{comment}{//          clientApps.Add (client.Install (ueNodes.Get(u+1)));}
+237 \textcolor{comment}{//        \}}
+238 \textcolor{comment}{//      else}
+239 \textcolor{comment}{//        \{}
+240 \textcolor{comment}{//          clientApps.Add (client.Install (ueNodes.Get(0)));}
+241 \textcolor{comment}{//        \}}
+242     \}
+243   serverApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.01));
+244   clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.01));
+245   mmwaveHelper->\hyperlink{classns3_1_1MmWaveHelper_a4eae3871876b62965d612d9a56ed21bc}{EnableTraces} ();
+246   \textcolor{comment}{// Uncomment to enable PCAP tracing}
+247   p2ph.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll}(\textcolor{stringliteral}{"mmwave-epc-simple"});
+248 
+249   Simulator::Stop(\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds}(simTime));
+250   Simulator::Run();
+251 
+252   \textcolor{comment}{/*GtkConfigStore config;}
+253 \textcolor{comment}{  config.ConfigureAttributes();*/}
+254 
+255   Simulator::Destroy();
+256   \textcolor{keywordflow}{return} 0;
+257 
+258 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{mmwave-\/simple-\/epc.\+cc@{mmwave-\/simple-\/epc.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!mmwave-\/simple-\/epc.\+cc@{mmwave-\/simple-\/epc.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Epc\+First\+Example"")}{NS_LOG_COMPONENT_DEFINE("EpcFirstExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Epc\+First\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{mmwave-simple-epc_8cc_ab5b2d5577332f9a2c1d6b2d32293401e}{}\label{mmwave-simple-epc_8cc_ab5b2d5577332f9a2c1d6b2d32293401e}
+Sample simulation script for L\+T\+E+\+E\+PC. It instantiates several e\+NodeB, attaches one UE per e\+NodeB starts a flow for each UE to and from a remote host. It also starts yet another flow between each UE pair. 

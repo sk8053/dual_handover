@@ -1,0 +1,152 @@
+\hypertarget{fd-emu-onoff_8cc}{}\section{fd-\/net-\/device/examples/fd-\/emu-\/onoff.cc File Reference}
+\label{fd-emu-onoff_8cc}\index{fd-\/net-\/device/examples/fd-\/emu-\/onoff.\+cc@{fd-\/net-\/device/examples/fd-\/emu-\/onoff.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/fd-\/net-\/device-\/module.\+h\char`\"{}}\\*
+Include dependency graph for fd-\/emu-\/onoff.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{fd-emu-onoff_8cc_a87e6fa67a49a1c23c3e9621dc84e2e25}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Emu\+Fd\+Net\+Device\+Saturation\+Example\char`\"{})
+\item 
+int \hyperlink{fd-emu-onoff_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{fd-\/emu-\/onoff.\+cc@{fd-\/emu-\/onoff.\+cc}!main@{main}}
+\index{main@{main}!fd-\/emu-\/onoff.\+cc@{fd-\/emu-\/onoff.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{fd-emu-onoff_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{fd-emu-onoff_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+96 \{
+97   uint16\_t sinkPort = 8000;
+98   uint32\_t packetSize = 10000; \textcolor{comment}{// bytes}
+99   std::string dataRate(\textcolor{stringliteral}{"1000Mb/s"});
+100   \textcolor{keywordtype}{bool} serverMode = \textcolor{keyword}{false};
+101 
+102   std::string deviceName (\textcolor{stringliteral}{"eth0"});
+103   std::string client (\textcolor{stringliteral}{"10.1.1.1"});
+104   std::string server (\textcolor{stringliteral}{"10.1.1.2"});
+105   std::string netmask (\textcolor{stringliteral}{"255.255.255.0"});
+106   std::string macClient (\textcolor{stringliteral}{"00:00:00:00:00:01"});
+107   std::string macServer (\textcolor{stringliteral}{"00:00:00:00:00:02"});
+108 
+109   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+110   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"deviceName"}, \textcolor{stringliteral}{"Device name"}, deviceName);
+111   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"client"}, \textcolor{stringliteral}{"Local IP address (dotted decimal only please)"}, client);
+112   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"server"}, \textcolor{stringliteral}{"Remote IP address (dotted decimal only please)"}, server);
+113   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"localmask"}, \textcolor{stringliteral}{"Local mask address (dotted decimal only please)"}, netmask);
+114   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"serverMode"}, \textcolor{stringliteral}{"1:true, 0:false, default client"}, serverMode);
+115   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"mac-client"}, \textcolor{stringliteral}{"Mac Address for Server Client : 00:00:00:00:00:01"}, macClient);
+116   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"mac-server"}, \textcolor{stringliteral}{"Mac Address for Server Default : 00:00:00:00:00:02"}, macServer);
+117   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"data-rate"}, \textcolor{stringliteral}{"Data rate defaults to 1000Mb/s"}, dataRate);
+118   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+119 
+120   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} remoteIp;
+121   \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} localIp;
+122   Mac48AddressValue localMac;
+123   
+124   \textcolor{keywordflow}{if} (serverMode)
+125   \{
+126      remoteIp = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (client.c\_str ());
+127      localIp = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (server.c\_str ());
+128      localMac = Mac48AddressValue (macServer.c\_str ());
+129   \}
+130   \textcolor{keywordflow}{else}
+131   \{
+132      remoteIp = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (server.c\_str ());
+133      localIp = \hyperlink{classns3_1_1Ipv4Address}{Ipv4Address} (client.c\_str ());
+134      localMac =  Mac48AddressValue (macClient.c\_str ());
+135   \}
+136 
+137   \hyperlink{classns3_1_1Ipv4Mask}{Ipv4Mask} localMask (netmask.c\_str ());
+138   
+139   GlobalValue::Bind (\textcolor{stringliteral}{"SimulatorImplementationType"}, StringValue (\textcolor{stringliteral}{"ns3::RealtimeSimulatorImpl"}));
+140 
+141   GlobalValue::Bind (\textcolor{stringliteral}{"ChecksumEnabled"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+142 
+143   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Node"});
+144   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} node = CreateObject<Node> ();
+145 
+146   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Device"});
+147   \hyperlink{classns3_1_1EmuFdNetDeviceHelper}{EmuFdNetDeviceHelper} emu;
+148   emu.\hyperlink{classns3_1_1EmuFdNetDeviceHelper_aa5c26a78442e507ba969f28ffa5f748e}{SetDeviceName} (deviceName);
+149   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices = emu.\hyperlink{classns3_1_1FdNetDeviceHelper_af70d55cbb4f6411c33cacb84eb651ad5}{Install} (node);
+150   \hyperlink{classns3_1_1Ptr}{Ptr<NetDevice>} device = devices.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0);
+151   device->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Address"}, localMac);
+152 
+153   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Add Internet Stack"});
+154   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internetStackHelper;
+155   internetStackHelper.\hyperlink{classns3_1_1InternetStackHelper_a10e2a35f410d0d1c90d979542c8bfd6e}{SetIpv4StackInstall}(\textcolor{keyword}{true});
+156   internetStackHelper.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (node);
+157 
+158   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create IPv4 Interface"});
+159   \hyperlink{classns3_1_1Ptr}{Ptr<Ipv4>} ipv4 = node->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1Ipv4}{Ipv4}> ();
+160   uint32\_t \textcolor{keyword}{interface }= ipv4->AddInterface (device);
+161   \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} address = \hyperlink{classns3_1_1Ipv4InterfaceAddress}{Ipv4InterfaceAddress} (localIp, 
+      localMask);
+162   ipv4->\hyperlink{classns3_1_1Ipv4_ad203526cae6a4b86f1bb89e44d2b62f7}{AddAddress} (interface, address);
+163   ipv4->\hyperlink{classns3_1_1Ipv4_a2b5632573b67957fabe2dfea248a57a3}{SetMetric} (interface, 1);
+164   ipv4->\hyperlink{classns3_1_1Ipv4_a71b2f8acca4923aef907b50b3196bf23}{SetUp} (interface);
+165 
+166   \textcolor{keywordflow}{if}(serverMode)
+167   \{
+168     \hyperlink{classns3_1_1Address}{Address} sinkLocalAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (localIp, sinkPort));
+169     \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sinkHelper (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, sinkLocalAddress);
+170     \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} sinkApp = sinkHelper.Install (node);
+171     sinkApp.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+172     sinkApp.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (60.0));
+173     
+174     emu.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"fd-server"}, device);
+175   \}
+176   \textcolor{keywordflow}{else}
+177   \{
+178     AddressValue remoteAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (remoteIp, sinkPort));
+179     \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff (\textcolor{stringliteral}{"ns3::TcpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+180     onoff.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+181     onoff.SetAttribute (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=1]"}));
+182     onoff.SetAttribute (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::ConstantRandomVariable[Constant=0]"}));
+183     onoff.SetAttribute (\textcolor{stringliteral}{"DataRate"}, DataRateValue (dataRate));
+184     onoff.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (packetSize));
+185 
+186     \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps = onoff.Install (node);
+187     clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (4.0));
+188     clientApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (58.0));
+189 
+190     emu.\hyperlink{classns3_1_1PcapHelperForDevice_a74866def9a881aa9d5c5be1225a26722}{EnablePcap} (\textcolor{stringliteral}{"fd-client"}, device);
+191   \}
+192 
+193   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (61.0));
+194   Simulator::Run ();
+195   Simulator::Destroy ();
+196 
+197   \textcolor{keywordflow}{return} 0;
+198 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{fd-\/emu-\/onoff.\+cc@{fd-\/emu-\/onoff.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!fd-\/emu-\/onoff.\+cc@{fd-\/emu-\/onoff.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Emu\+Fd\+Net\+Device\+Saturation\+Example"")}{NS_LOG_COMPONENT_DEFINE("EmuFdNetDeviceSaturationExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Emu\+Fd\+Net\+Device\+Saturation\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{fd-emu-onoff_8cc_a87e6fa67a49a1c23c3e9621dc84e2e25}{}\label{fd-emu-onoff_8cc_a87e6fa67a49a1c23c3e9621dc84e2e25}

@@ -1,0 +1,261 @@
+\hypertarget{classTcpAdvertisedWindowTest}{}\section{Tcp\+Advertised\+Window\+Test Class Reference}
+\label{classTcpAdvertisedWindowTest}\index{Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}}
+
+
+Test the new formula for calculating T\+CP\textquotesingle{}s advertised window size.  
+
+
+
+
+Inheritance diagram for Tcp\+Advertised\+Window\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Tcp\+Advertised\+Window\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTcpAdvertisedWindowTest_ab1af145e0a8ca5b17c0d196d6c3ce5cd}{Tcp\+Advertised\+Window\+Test} (const std\+::string \&desc, uint32\+\_\+t size, uint32\+\_\+t packets, double loss\+Ratio)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classTcpAdvertisedWindowTest_a32f6b3ef9a883c098a69ed55dbf21630}{Configure\+Environment} ()
+\begin{DoxyCompactList}\small\item\em Change the configuration of the evironment. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketMsgBase}{Tcp\+Socket\+Msg\+Base} $>$ \hyperlink{classTcpAdvertisedWindowTest_a322099457f41afb575f67f795001e54a}{Create\+Receiver\+Socket} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Node}{Node} $>$ node)
+\begin{DoxyCompactList}\small\item\em Create and install the socket to install on the receiver. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1ErrorModel}{Error\+Model} $>$ \hyperlink{classTcpAdvertisedWindowTest_af3323a980175664995c2a6a70594f6ce}{Create\+Receiver\+Error\+Model} ()
+\begin{DoxyCompactList}\small\item\em Create and return the error model to install in the receiver node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classTcpAdvertisedWindowTest_ab1d7ff6c4da3cdeaa25ae3c109f4b3c5}{Invalid\+Awnd\+Cb} (uint16\+\_\+t old\+Awnd, uint16\+\_\+t new\+Awnd)
+\begin{DoxyCompactList}\small\item\em Callback called for the update of the awnd. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classTcpAdvertisedWindowTest_a15543ae7eb5ff02ef55df25327f489d4}{m\+\_\+pkt\+Size}
+\begin{DoxyCompactList}\small\item\em Packet size. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classTcpAdvertisedWindowTest_ab2bb9b1d37975c7a054af56d40f5d033}{m\+\_\+pkt\+Count}
+\begin{DoxyCompactList}\small\item\em Pkt count. \end{DoxyCompactList}\item 
+double \hyperlink{classTcpAdvertisedWindowTest_a8c9c999fd976892f003de76c56e7fff1}{m\+\_\+loss\+Ratio}
+\begin{DoxyCompactList}\small\item\em Loss ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Test the new formula for calculating T\+CP\textquotesingle{}s advertised window size. 
+
+In Tcp\+Socket\+Base, the advertised window is now calculated as
+
+m\+\_\+rx\+Buffer-\/$>$Max\+Rx\+Sequence () -\/ m\+\_\+rx\+Buffer-\/$>$Next\+Rx\+Sequence ()
+
+instead ofthe previous
+
+m\+\_\+rx\+Buffer-\/$>$Max\+Buffer\+Size ()
+
+This change was introduced with regard to situations in which the receiviing application does not read from the socket as fast as possible (see bug 2559 for details). This test ensures that no regression is introduced for other, \char`\"{}normal\char`\"{} cases.
+
+Tcp\+General\+Test ensures via Receive\+Packet () that incoming packets are quickly consumed by the application layer, simulating a fast-\/reading application. We can only reasonably compare the old and the new A\+W\+ND computation in this case. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}!Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}}
+\index{Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}!Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}}
+\subsubsection[{\texorpdfstring{Tcp\+Advertised\+Window\+Test(const std\+::string \&desc, uint32\+\_\+t size, uint32\+\_\+t packets, double loss\+Ratio)}{TcpAdvertisedWindowTest(const std::string &desc, uint32_t size, uint32_t packets, double lossRatio)}}]{\setlength{\rightskip}{0pt plus 5cm}Tcp\+Advertised\+Window\+Test\+::\+Tcp\+Advertised\+Window\+Test (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{desc, }
+\item[{uint32\+\_\+t}]{size, }
+\item[{uint32\+\_\+t}]{packets, }
+\item[{double}]{loss\+Ratio}
+\end{DoxyParamCaption}
+)}\hypertarget{classTcpAdvertisedWindowTest_ab1af145e0a8ca5b17c0d196d6c3ce5cd}{}\label{classTcpAdvertisedWindowTest_ab1af145e0a8ca5b17c0d196d6c3ce5cd}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em desc} & description \\
+\hline
+{\em size} & segment size \\
+\hline
+{\em packets} & number of packets to send \\
+\hline
+{\em loss\+Ratio} & error ratio \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+308   : \hyperlink{classns3_1_1TcpGeneralTest_aed700e733bc50b1e736cb52c0b71f3f8}{TcpGeneralTest} (desc),
+309     \hyperlink{classTcpAdvertisedWindowTest_a15543ae7eb5ff02ef55df25327f489d4}{m\_pktSize} (size),
+310     \hyperlink{classTcpAdvertisedWindowTest_ab2bb9b1d37975c7a054af56d40f5d033}{m\_pktCount} (packets),
+311     \hyperlink{classTcpAdvertisedWindowTest_a8c9c999fd976892f003de76c56e7fff1}{m\_lossRatio} (lossRatio)
+312 \{
+313 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}!Configure\+Environment@{Configure\+Environment}}
+\index{Configure\+Environment@{Configure\+Environment}!Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}}
+\subsubsection[{\texorpdfstring{Configure\+Environment()}{ConfigureEnvironment()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Advertised\+Window\+Test\+::\+Configure\+Environment (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpAdvertisedWindowTest_a32f6b3ef9a883c098a69ed55dbf21630}{}\label{classTcpAdvertisedWindowTest_a32f6b3ef9a883c098a69ed55dbf21630}
+
+
+Change the configuration of the evironment. 
+
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_abd4e42807a8d2b13dcd207131af12c3b}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+317 \{
+318   TcpGeneralTest::ConfigureEnvironment ();
+319   \hyperlink{classns3_1_1TcpGeneralTest_a256c8df5966f89ed0acfc966cd5d3898}{SetAppPktCount} (\hyperlink{classTcpAdvertisedWindowTest_ab2bb9b1d37975c7a054af56d40f5d033}{m\_pktCount});
+320   \hyperlink{classns3_1_1TcpGeneralTest_a167056795264e377b425cdac2441b263}{SetPropagationDelay} (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (50));
+321   \hyperlink{classns3_1_1TcpGeneralTest_af8d94d931bd7377ff0267a7ce1edc74d}{SetTransmitStart} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0));
+322   \hyperlink{classns3_1_1TcpGeneralTest_a3135ee655332f67b8390691beaa08161}{SetAppPktSize} (\hyperlink{classTcpAdvertisedWindowTest_a15543ae7eb5ff02ef55df25327f489d4}{m\_pktSize});
+323 
+324 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}!Create\+Receiver\+Error\+Model@{Create\+Receiver\+Error\+Model}}
+\index{Create\+Receiver\+Error\+Model@{Create\+Receiver\+Error\+Model}!Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}}
+\subsubsection[{\texorpdfstring{Create\+Receiver\+Error\+Model()}{CreateReceiverErrorModel()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Error\+Model} $>$ Tcp\+Advertised\+Window\+Test\+::\+Create\+Receiver\+Error\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpAdvertisedWindowTest_af3323a980175664995c2a6a70594f6ce}{}\label{classTcpAdvertisedWindowTest_af3323a980175664995c2a6a70594f6ce}
+
+
+Create and return the error model to install in the receiver node. 
+
+\begin{DoxyReturn}{Returns}
+receiver error model 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_a256082023d4a67738c946d66c175a6d9}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+341 \{
+342   \textcolor{keywordflow}{return} CreateObject<TcpDropRatioErrorModel> (\hyperlink{classTcpAdvertisedWindowTest_a8c9c999fd976892f003de76c56e7fff1}{m\_lossRatio});
+343 \}
+\end{DoxyCode}
+\index{Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}!Create\+Receiver\+Socket@{Create\+Receiver\+Socket}}
+\index{Create\+Receiver\+Socket@{Create\+Receiver\+Socket}!Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}}
+\subsubsection[{\texorpdfstring{Create\+Receiver\+Socket(\+Ptr$<$ Node $>$ node)}{CreateReceiverSocket(Ptr< Node > node)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Socket\+Msg\+Base} $>$ Tcp\+Advertised\+Window\+Test\+::\+Create\+Receiver\+Socket (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Node} $>$}]{node}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpAdvertisedWindowTest_a322099457f41afb575f67f795001e54a}{}\label{classTcpAdvertisedWindowTest_a322099457f41afb575f67f795001e54a}
+
+
+Create and install the socket to install on the receiver. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & receiver node pointer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the socket to be installed in the receiver 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_a5f2bfe5673d80704ec6608badf7c1c6e}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+328 \{
+329   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+330 
+331   \hyperlink{classns3_1_1Ptr}{Ptr<TcpSocketMsgBase>} sock = \hyperlink{classns3_1_1TcpGeneralTest_a6db100da714de812ebab9756f9139c9a}{CreateSocket} (node, 
+      \hyperlink{classTcpSocketAdvertisedWindowProxy_a4ed1c4bc3b31da4768b379f370055faa}{TcpSocketAdvertisedWindowProxy::GetTypeId} (), 
+      \hyperlink{classns3_1_1TcpGeneralTest_aa85b87bfde4d43e1f799f297fe689a8d}{m\_congControlTypeId});
+332   DynamicCast<TcpSocketAdvertisedWindowProxy> (sock)->SetExpectedSegmentSize (500);
+333   DynamicCast<TcpSocketAdvertisedWindowProxy> (sock)->SetInvalidAwndCb (
+334         \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{classTcpAdvertisedWindowTest_ab1d7ff6c4da3cdeaa25ae3c109f4b3c5}{TcpAdvertisedWindowTest::InvalidAwndCb}
+      , \textcolor{keyword}{this}));
+335 
+336   \textcolor{keywordflow}{return} sock;
+337 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}!Invalid\+Awnd\+Cb@{Invalid\+Awnd\+Cb}}
+\index{Invalid\+Awnd\+Cb@{Invalid\+Awnd\+Cb}!Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}}
+\subsubsection[{\texorpdfstring{Invalid\+Awnd\+Cb(uint16\+\_\+t old\+Awnd, uint16\+\_\+t new\+Awnd)}{InvalidAwndCb(uint16_t oldAwnd, uint16_t newAwnd)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+Advertised\+Window\+Test\+::\+Invalid\+Awnd\+Cb (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{old\+Awnd, }
+\item[{uint16\+\_\+t}]{new\+Awnd}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpAdvertisedWindowTest_ab1d7ff6c4da3cdeaa25ae3c109f4b3c5}{}\label{classTcpAdvertisedWindowTest_ab1d7ff6c4da3cdeaa25ae3c109f4b3c5}
+
+
+Callback called for the update of the awnd. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em old\+Awnd} & Old advertised window \\
+\hline
+{\em new\+Awnd} & new value \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+347 \{
+348   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (oldAwnd, newAwnd,
+349                          \textcolor{stringliteral}{"Old and new AWND calculations do not match."});
+350 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}!m\+\_\+loss\+Ratio@{m\+\_\+loss\+Ratio}}
+\index{m\+\_\+loss\+Ratio@{m\+\_\+loss\+Ratio}!Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+loss\+Ratio}{m_lossRatio}}]{\setlength{\rightskip}{0pt plus 5cm}double Tcp\+Advertised\+Window\+Test\+::m\+\_\+loss\+Ratio\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpAdvertisedWindowTest_a8c9c999fd976892f003de76c56e7fff1}{}\label{classTcpAdvertisedWindowTest_a8c9c999fd976892f003de76c56e7fff1}
+
+
+Loss ratio. 
+
+\index{Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}!m\+\_\+pkt\+Count@{m\+\_\+pkt\+Count}}
+\index{m\+\_\+pkt\+Count@{m\+\_\+pkt\+Count}!Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+pkt\+Count}{m_pktCount}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Tcp\+Advertised\+Window\+Test\+::m\+\_\+pkt\+Count\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpAdvertisedWindowTest_ab2bb9b1d37975c7a054af56d40f5d033}{}\label{classTcpAdvertisedWindowTest_ab2bb9b1d37975c7a054af56d40f5d033}
+
+
+Pkt count. 
+
+\index{Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}!m\+\_\+pkt\+Size@{m\+\_\+pkt\+Size}}
+\index{m\+\_\+pkt\+Size@{m\+\_\+pkt\+Size}!Tcp\+Advertised\+Window\+Test@{Tcp\+Advertised\+Window\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+pkt\+Size}{m_pktSize}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Tcp\+Advertised\+Window\+Test\+::m\+\_\+pkt\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpAdvertisedWindowTest_a15543ae7eb5ff02ef55df25327f489d4}{}\label{classTcpAdvertisedWindowTest_a15543ae7eb5ff02ef55df25327f489d4}
+
+
+Packet size. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{tcp-advertised-window-test_8cc}{tcp-\/advertised-\/window-\/test.\+cc}\end{DoxyCompactItemize}

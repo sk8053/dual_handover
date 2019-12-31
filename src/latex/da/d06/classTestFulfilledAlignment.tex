@@ -1,0 +1,93 @@
+\hypertarget{classTestFulfilledAlignment}{}\section{Test\+Fulfilled\+Alignment Class Reference}
+\label{classTestFulfilledAlignment}\index{Test\+Fulfilled\+Alignment@{Test\+Fulfilled\+Alignment}}
+
+
+I\+Pv6 extensions Test\+: Test an option already aligned.  
+
+
+
+
+Inheritance diagram for Test\+Fulfilled\+Alignment\+:
+% FIG 0
+
+
+Collaboration diagram for Test\+Fulfilled\+Alignment\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTestFulfilledAlignment_a411f4c7ff07f7d834acb09626761ec64}{Test\+Fulfilled\+Alignment} ()
+\item 
+virtual void \hyperlink{classTestFulfilledAlignment_a5dbd0147961608bca7a80c0cd08d8f81}{Do\+Run} ()
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+I\+Pv6 extensions Test\+: Test an option already aligned. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Test\+Fulfilled\+Alignment@{Test\+Fulfilled\+Alignment}!Test\+Fulfilled\+Alignment@{Test\+Fulfilled\+Alignment}}
+\index{Test\+Fulfilled\+Alignment@{Test\+Fulfilled\+Alignment}!Test\+Fulfilled\+Alignment@{Test\+Fulfilled\+Alignment}}
+\subsubsection[{\texorpdfstring{Test\+Fulfilled\+Alignment()}{TestFulfilledAlignment()}}]{\setlength{\rightskip}{0pt plus 5cm}Test\+Fulfilled\+Alignment\+::\+Test\+Fulfilled\+Alignment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classTestFulfilledAlignment_a411f4c7ff07f7d834acb09626761ec64}{}\label{classTestFulfilledAlignment_a411f4c7ff07f7d834acb09626761ec64}
+
+\begin{DoxyCode}
+231 : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"TestCorrectAlignment"}) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Fulfilled\+Alignment@{Test\+Fulfilled\+Alignment}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Test\+Fulfilled\+Alignment@{Test\+Fulfilled\+Alignment}}
+\subsubsection[{\texorpdfstring{Do\+Run()}{DoRun()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Test\+Fulfilled\+Alignment\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classTestFulfilledAlignment_a5dbd0147961608bca7a80c0cd08d8f81}{}\label{classTestFulfilledAlignment_a5dbd0147961608bca7a80c0cd08d8f81}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+234   \{
+235     \hyperlink{classns3_1_1Ipv6ExtensionDestinationHeader}{Ipv6ExtensionDestinationHeader} header;
+236     \hyperlink{classns3_1_1Ipv6OptionJumbogramHeader}{Ipv6OptionJumbogramHeader} jumboHeader; \textcolor{comment}{//has an alignment of 4n+2}
+237     header.\hyperlink{classns3_1_1OptionField_aa6a592f9fd65421ce1176ce4fa50826a}{AddOption} (jumboHeader);
+238     \hyperlink{classOptionWithAlignmentHeader}{OptionWithAlignmentHeader} optionHeader;
+239     header.\hyperlink{classns3_1_1OptionField_aa6a592f9fd65421ce1176ce4fa50826a}{AddOption} (optionHeader);
+240 
+241     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (header.\hyperlink{classns3_1_1Ipv6ExtensionDestinationHeader_a4a43146a75ea4259b984df145c573146}{GetSerializedSize} () % 8, 0, \textcolor{stringliteral}{"
+      length of extension header is not a multiple of 8"});
+242 
+243     \hyperlink{classns3_1_1Buffer}{Buffer} buf;
+244     buf.\hyperlink{classns3_1_1Buffer_a8abd8164c3671d3dadc98fc66fade7b1}{AddAtStart} (header.\hyperlink{classns3_1_1Ipv6ExtensionDestinationHeader_a4a43146a75ea4259b984df145c573146}{GetSerializedSize} ());
+245     header.\hyperlink{classns3_1_1Ipv6ExtensionDestinationHeader_a13d3b01676de81cbcdd3fcebaf2fdd6b}{Serialize} (buf.Begin ());
+246 
+247     \textcolor{keyword}{const} uint8\_t* \hyperlink{topology-example-sim_8cc_a26c65296e316af77b787dc77469bb2a4}{data} = buf.PeekData ();
+248     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (*(data+2), jumboHeader.\hyperlink{classns3_1_1Ipv6OptionHeader_a1e588558d5a1bc90a1820dc68ff14c65}{GetType} (), \textcolor{stringliteral}{"option with
+       fulfilled alignment is padded anyway"});
+249     \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (*(data+8), 
+      \hyperlink{classOptionWithAlignmentHeader_a196dd8d16dd06cbab2c11a818083f684}{OptionWithAlignmentHeader::TYPE}, \textcolor{stringliteral}{"option with fulfilled alignment is padded
+       anyway"});
+250   \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{ipv6-extension-header-test-suite_8cc}{ipv6-\/extension-\/header-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,561 @@
+\hypertarget{classns3_1_1Watchdog}{}\section{ns3\+:\+:Watchdog Class Reference}
+\label{classns3_1_1Watchdog}\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+
+
+A very simple watchdog operating in virtual time.  
+
+
+
+
+{\ttfamily \#include $<$watchdog.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Watchdog\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Watchdog_a955d9cf2f98e2d764fcba018154922c3}{Watchdog} ()
+\item 
+\hyperlink{classns3_1_1Watchdog_a94829291b00ebc60f24a76be261995a3}{$\sim$\+Watchdog} ()
+\item 
+void \hyperlink{classns3_1_1Watchdog_a979e51daa6b92c872a78857cfe54c41a}{Ping} (\hyperlink{classns3_1_1Time}{Time} \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_a7964e6aa8f61a9d28973c8267a606ad8}{delay})
+\item 
+{\footnotesize template$<$typename FN $>$ }\\void \hyperlink{classns3_1_1Watchdog_a9b61e573ae12c4604131a595fd474c3b}{Set\+Function} (FN fn)
+\item 
+{\footnotesize template$<$typename M\+E\+M\+\_\+\+P\+TR , typename O\+B\+J\+\_\+\+P\+TR $>$ }\\void \hyperlink{classns3_1_1Watchdog_a1b6feb6af549c06fd6a1cf1183827357}{Set\+Function} (M\+E\+M\+\_\+\+P\+TR mem\+Ptr, O\+B\+J\+\_\+\+P\+TR obj\+Ptr)
+\end{DoxyCompactItemize}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T1 $>$ }\\void \hyperlink{classns3_1_1Watchdog_a925bc97bcf93e6a312f45f0c03f9cbf8}{Set\+Arguments} (T1 a1)
+\item 
+{\footnotesize template$<$typename T1 , typename T2 $>$ }\\void \hyperlink{classns3_1_1Watchdog_a7667676ab20ebc972bc52858ecfc11ba}{Set\+Arguments} (T1 a1, T2 a2)
+\item 
+{\footnotesize template$<$typename T1 , typename T2 , typename T3 $>$ }\\void \hyperlink{classns3_1_1Watchdog_a137dfdff46aa0bbb9556aefe0d6c60fd}{Set\+Arguments} (T1 a1, T2 a2, T3 a3)
+\item 
+{\footnotesize template$<$typename T1 , typename T2 , typename T3 , typename T4 $>$ }\\void \hyperlink{classns3_1_1Watchdog_a444ddd6030627f41fce62c767261c4ff}{Set\+Arguments} (T1 a1, T2 a2, T3 a3, T4 a4)
+\item 
+{\footnotesize template$<$typename T1 , typename T2 , typename T3 , typename T4 , typename T5 $>$ }\\void \hyperlink{classns3_1_1Watchdog_aa27364592e9e7d8f2b4fed7db9530d1f}{Set\+Arguments} (T1 a1, T2 a2, T3 a3, T4 a4, T5 a5)
+\item 
+{\footnotesize template$<$typename T1 , typename T2 , typename T3 , typename T4 , typename T5 , typename T6 $>$ }\\void \hyperlink{classns3_1_1Watchdog_a0cfaf7d908bb9328dda48266780557bc}{Set\+Arguments} (T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6)
+\end{DoxyCompactItemize}
+
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1Watchdog_a483d1c00751c98629f3c128453b0cfb2}{Expire} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1TimerImpl}{Timer\+Impl} $\ast$ \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\+\_\+impl}
+\item 
+\hyperlink{classns3_1_1EventId}{Event\+Id} \hyperlink{classns3_1_1Watchdog_a7d8678d211f73cfc2541649ce534d2db}{m\+\_\+event}
+\item 
+\hyperlink{classns3_1_1Time}{Time} \hyperlink{classns3_1_1Watchdog_aec3be76124b68f4ff3ec9331d7f23a3f}{m\+\_\+end}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A very simple watchdog operating in virtual time. 
+
+The watchdog timer is started by calling Ping with a delay value. Once started the timer cannot be suspended, cancelled or shortened. It {\itshape can} be lengthened (delayed) by calling Ping again\+: if the new expire time (current simulation time plus the new delay) is greater than the old expire time the timer will be extended to the new expire time.
+
+Typical usage would be to periodically Ping the \hyperlink{classns3_1_1Watchdog}{Watchdog}, extending it\textquotesingle{}s execution time. If the owning process fails to Ping before the \hyperlink{classns3_1_1Watchdog}{Watchdog} expires, the registered function will be invoked.
+
+If you don\textquotesingle{}t ping the watchdog sufficiently often, it triggers its listening function.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classns3_1_1Timer}{Timer} for a more sophisticated general purpose \hyperlink{group__timer}{Virtual Time Timer and Watchdog}. 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!Watchdog@{Watchdog}}
+\index{Watchdog@{Watchdog}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{Watchdog()}{Watchdog()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Watchdog\+::\+Watchdog (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Watchdog_a955d9cf2f98e2d764fcba018154922c3}{}\label{classns3_1_1Watchdog_a955d9cf2f98e2d764fcba018154922c3}
+Constructor. 
+\begin{DoxyCode}
+35   : \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl} (0),
+36     \hyperlink{classns3_1_1Watchdog_a7d8678d211f73cfc2541649ce534d2db}{m\_event} (),
+37     \hyperlink{classns3_1_1Watchdog_aec3be76124b68f4ff3ec9331d7f23a3f}{m\_end} (\hyperlink{group__timecivil_ga17465a639c8d1464e76538afdd78a9f0}{MicroSeconds} (0))
+38 \{
+39   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+40 \}
+\end{DoxyCode}
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!````~Watchdog@{$\sim$\+Watchdog}}
+\index{````~Watchdog@{$\sim$\+Watchdog}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{$\sim$\+Watchdog()}{~Watchdog()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Watchdog\+::$\sim$\+Watchdog (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Watchdog_a94829291b00ebc60f24a76be261995a3}{}\label{classns3_1_1Watchdog_a94829291b00ebc60f24a76be261995a3}
+Destructor. 
+\begin{DoxyCode}
+43 \{
+44   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+45   \textcolor{keyword}{delete} \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl};
+46 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!Expire@{Expire}}
+\index{Expire@{Expire}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{Expire(void)}{Expire(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Watchdog\+::\+Expire (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Watchdog_a483d1c00751c98629f3c128453b0cfb2}{}\label{classns3_1_1Watchdog_a483d1c00751c98629f3c128453b0cfb2}
+Internal callback invoked when the timer expires. 
+\begin{DoxyCode}
+63 \{
+64   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+65   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Watchdog_aec3be76124b68f4ff3ec9331d7f23a3f}{m\_end} == \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} ())
+66     \{
+67       \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl}->\hyperlink{classns3_1_1TimerImpl_a1a59aeeb618723921a91a918ed2ba557}{Invoke} ();
+68     \}
+69   \textcolor{keywordflow}{else}
+70     \{
+71       \hyperlink{classns3_1_1Watchdog_a7d8678d211f73cfc2541649ce534d2db}{m\_event} = \hyperlink{classns3_1_1Simulator_a671882c894a08af4a5e91181bf1eec13}{Simulator::Schedule} (\hyperlink{classns3_1_1Watchdog_aec3be76124b68f4ff3ec9331d7f23a3f}{m\_end} - \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Now} (), &
+      \hyperlink{classns3_1_1Watchdog_a483d1c00751c98629f3c128453b0cfb2}{Watchdog::Expire}, \textcolor{keyword}{this});
+72     \}
+73 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!Ping@{Ping}}
+\index{Ping@{Ping}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{Ping(\+Time delay)}{Ping(Time delay)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Watchdog\+::\+Ping (
+\begin{DoxyParamCaption}
+\item[{{\bf Time}}]{delay}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Watchdog_a979e51daa6b92c872a78857cfe54c41a}{}\label{classns3_1_1Watchdog_a979e51daa6b92c872a78857cfe54c41a}
+Delay the timer.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em delay} & The watchdog delay\\
+\hline
+\end{DoxyParams}
+After a call to this method, the watchdog will not be triggered until the delay specified has been expired. This operation is sometimes named \char`\"{}re-\/arming\char`\"{} a watchdog in some operating systems. 
+\begin{DoxyCode}
+50 \{
+51   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a7964e6aa8f61a9d28973c8267a606ad8}{delay});
+52   \hyperlink{namespacens3_1_1TracedValueCallback_a7ffd3e7c142ffe7c8a1d2db9b8de38ec}{Time} end = \hyperlink{classns3_1_1Simulator_ac3178fa975b419f7875e7105be122800}{Simulator::Now} () + \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_a7964e6aa8f61a9d28973c8267a606ad8}{delay};
+53   \hyperlink{classns3_1_1Watchdog_aec3be76124b68f4ff3ec9331d7f23a3f}{m\_end} = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (\hyperlink{classns3_1_1Watchdog_aec3be76124b68f4ff3ec9331d7f23a3f}{m\_end}, end);
+54   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Watchdog_a7d8678d211f73cfc2541649ce534d2db}{m\_event}.\hyperlink{classns3_1_1EventId_aabf8476d1a080c199ea0c6aa9ccea372}{IsRunning} ())
+55     \{
+56       \textcolor{keywordflow}{return};
+57     \}
+58   \hyperlink{classns3_1_1Watchdog_a7d8678d211f73cfc2541649ce534d2db}{m\_event} = \hyperlink{classns3_1_1Simulator_a671882c894a08af4a5e91181bf1eec13}{Simulator::Schedule} (\hyperlink{classns3_1_1Watchdog_aec3be76124b68f4ff3ec9331d7f23a3f}{m\_end} - \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Now} (), &
+      \hyperlink{classns3_1_1Watchdog_a483d1c00751c98629f3c128453b0cfb2}{Watchdog::Expire}, \textcolor{keyword}{this});
+59 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!Set\+Arguments@{Set\+Arguments}}
+\index{Set\+Arguments@{Set\+Arguments}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{Set\+Arguments(\+T1 a1)}{SetArguments(T1 a1)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 $>$ void ns3\+::\+Watchdog\+::\+Set\+Arguments (
+\begin{DoxyParamCaption}
+\item[{T1}]{a1}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Watchdog_a925bc97bcf93e6a312f45f0c03f9cbf8}{}\label{classns3_1_1Watchdog_a925bc97bcf93e6a312f45f0c03f9cbf8}
+Set the arguments to be used when invoking the expire function. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T1} & Type of the first argument. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a1} & The first argument \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+215 \{
+216   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl} == 0)
+217     \{
+218       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"You cannot set the arguments of a Watchdog before setting its
+       function."});
+219       \textcolor{keywordflow}{return};
+220     \}
+221   \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl}->\hyperlink{classns3_1_1TimerImpl_a3d0b35e91b46e054f7f237ce16b86e9a}{SetArgs} (a1);
+222 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!Set\+Arguments@{Set\+Arguments}}
+\index{Set\+Arguments@{Set\+Arguments}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{Set\+Arguments(\+T1 a1, T2 a2)}{SetArguments(T1 a1, T2 a2)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 $>$ void ns3\+::\+Watchdog\+::\+Set\+Arguments (
+\begin{DoxyParamCaption}
+\item[{T1}]{a1, }
+\item[{T2}]{a2}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Watchdog_a7667676ab20ebc972bc52858ecfc11ba}{}\label{classns3_1_1Watchdog_a7667676ab20ebc972bc52858ecfc11ba}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T1} & Type of the first argument. \\
+\hline
+{\em T2} & Type of the second argument. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a1} & the first argument \\
+\hline
+\mbox{\tt in}  & {\em a2} & the second argument \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+226 \{
+227   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl} == 0)
+228     \{
+229       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"You cannot set the arguments of a Watchdog before setting its
+       function."});
+230       \textcolor{keywordflow}{return};
+231     \}
+232   \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl}->\hyperlink{classns3_1_1TimerImpl_a3d0b35e91b46e054f7f237ce16b86e9a}{SetArgs} (a1, a2);
+233 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!Set\+Arguments@{Set\+Arguments}}
+\index{Set\+Arguments@{Set\+Arguments}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{Set\+Arguments(\+T1 a1, T2 a2, T3 a3)}{SetArguments(T1 a1, T2 a2, T3 a3)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , typename T3 $>$ void ns3\+::\+Watchdog\+::\+Set\+Arguments (
+\begin{DoxyParamCaption}
+\item[{T1}]{a1, }
+\item[{T2}]{a2, }
+\item[{T3}]{a3}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Watchdog_a137dfdff46aa0bbb9556aefe0d6c60fd}{}\label{classns3_1_1Watchdog_a137dfdff46aa0bbb9556aefe0d6c60fd}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T1} & Type of the first argument. \\
+\hline
+{\em T2} & Type of the second argument. \\
+\hline
+{\em T3} & Type of the third argument. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a1} & the first argument \\
+\hline
+\mbox{\tt in}  & {\em a2} & the second argument \\
+\hline
+\mbox{\tt in}  & {\em a3} & the third argument \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+238 \{
+239   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl} == 0)
+240     \{
+241       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"You cannot set the arguments of a Watchdog before setting its
+       function."});
+242       \textcolor{keywordflow}{return};
+243     \}
+244   \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl}->\hyperlink{classns3_1_1TimerImpl_a3d0b35e91b46e054f7f237ce16b86e9a}{SetArgs} (a1, a2, a3);
+245 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!Set\+Arguments@{Set\+Arguments}}
+\index{Set\+Arguments@{Set\+Arguments}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{Set\+Arguments(\+T1 a1, T2 a2, T3 a3, T4 a4)}{SetArguments(T1 a1, T2 a2, T3 a3, T4 a4)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , typename T3 , typename T4 $>$ void ns3\+::\+Watchdog\+::\+Set\+Arguments (
+\begin{DoxyParamCaption}
+\item[{T1}]{a1, }
+\item[{T2}]{a2, }
+\item[{T3}]{a3, }
+\item[{T4}]{a4}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Watchdog_a444ddd6030627f41fce62c767261c4ff}{}\label{classns3_1_1Watchdog_a444ddd6030627f41fce62c767261c4ff}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T1} & Type of the first argument. \\
+\hline
+{\em T2} & Type of the second argument. \\
+\hline
+{\em T3} & Type of the third argument. \\
+\hline
+{\em T4} & Type of the fourth argument. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a1} & the first argument \\
+\hline
+\mbox{\tt in}  & {\em a2} & the second argument \\
+\hline
+\mbox{\tt in}  & {\em a3} & the third argument \\
+\hline
+\mbox{\tt in}  & {\em a4} & the fourth argument \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+250 \{
+251   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl} == 0)
+252     \{
+253       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"You cannot set the arguments of a Watchdog before setting its
+       function."});
+254       \textcolor{keywordflow}{return};
+255     \}
+256   \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl}->\hyperlink{classns3_1_1TimerImpl_a3d0b35e91b46e054f7f237ce16b86e9a}{SetArgs} (a1, a2, a3, a4);
+257 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!Set\+Arguments@{Set\+Arguments}}
+\index{Set\+Arguments@{Set\+Arguments}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{Set\+Arguments(\+T1 a1, T2 a2, T3 a3, T4 a4, T5 a5)}{SetArguments(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , typename T3 , typename T4 , typename T5 $>$ void ns3\+::\+Watchdog\+::\+Set\+Arguments (
+\begin{DoxyParamCaption}
+\item[{T1}]{a1, }
+\item[{T2}]{a2, }
+\item[{T3}]{a3, }
+\item[{T4}]{a4, }
+\item[{T5}]{a5}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Watchdog_aa27364592e9e7d8f2b4fed7db9530d1f}{}\label{classns3_1_1Watchdog_aa27364592e9e7d8f2b4fed7db9530d1f}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T1} & Type of the first argument. \\
+\hline
+{\em T2} & Type of the second argument. \\
+\hline
+{\em T3} & Type of the third argument. \\
+\hline
+{\em T4} & Type of the fourth argument. \\
+\hline
+{\em T5} & Type of the fifth argument. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a1} & the first argument \\
+\hline
+\mbox{\tt in}  & {\em a2} & the second argument \\
+\hline
+\mbox{\tt in}  & {\em a3} & the third argument \\
+\hline
+\mbox{\tt in}  & {\em a4} & the fourth argument \\
+\hline
+\mbox{\tt in}  & {\em a5} & the fifth argument \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+262 \{
+263   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl} == 0)
+264     \{
+265       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"You cannot set the arguments of a Watchdog before setting its
+       function."});
+266       \textcolor{keywordflow}{return};
+267     \}
+268   \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl}->\hyperlink{classns3_1_1TimerImpl_a3d0b35e91b46e054f7f237ce16b86e9a}{SetArgs} (a1, a2, a3, a4, a5);
+269 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!Set\+Arguments@{Set\+Arguments}}
+\index{Set\+Arguments@{Set\+Arguments}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{Set\+Arguments(\+T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6)}{SetArguments(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , typename T3 , typename T4 , typename T5 , typename T6 $>$ void ns3\+::\+Watchdog\+::\+Set\+Arguments (
+\begin{DoxyParamCaption}
+\item[{T1}]{a1, }
+\item[{T2}]{a2, }
+\item[{T3}]{a3, }
+\item[{T4}]{a4, }
+\item[{T5}]{a5, }
+\item[{T6}]{a6}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Watchdog_a0cfaf7d908bb9328dda48266780557bc}{}\label{classns3_1_1Watchdog_a0cfaf7d908bb9328dda48266780557bc}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T1} & Type of the first argument. \\
+\hline
+{\em T2} & Type of the second argument. \\
+\hline
+{\em T3} & Type of the third argument. \\
+\hline
+{\em T4} & Type of the fourth argument. \\
+\hline
+{\em T5} & Type of the fifth argument. \\
+\hline
+{\em T6} & Type of the sixth argument. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a1} & the first argument \\
+\hline
+\mbox{\tt in}  & {\em a2} & the second argument \\
+\hline
+\mbox{\tt in}  & {\em a3} & the third argument \\
+\hline
+\mbox{\tt in}  & {\em a4} & the fourth argument \\
+\hline
+\mbox{\tt in}  & {\em a5} & the fifth argument \\
+\hline
+\mbox{\tt in}  & {\em a6} & the sixth argument \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+274 \{
+275   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl} == 0)
+276     \{
+277       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"You cannot set the arguments of a Watchdog before setting its
+       function."});
+278       \textcolor{keywordflow}{return};
+279     \}
+280   \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl}->\hyperlink{classns3_1_1TimerImpl_a3d0b35e91b46e054f7f237ce16b86e9a}{SetArgs} (a1, a2, a3, a4, a5, a6);
+281 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 11
+
+
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!Set\+Function@{Set\+Function}}
+\index{Set\+Function@{Set\+Function}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{Set\+Function(\+F\+N fn)}{SetFunction(FN fn)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename FN $>$ void ns3\+::\+Watchdog\+::\+Set\+Function (
+\begin{DoxyParamCaption}
+\item[{FN}]{fn}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Watchdog_a9b61e573ae12c4604131a595fd474c3b}{}\label{classns3_1_1Watchdog_a9b61e573ae12c4604131a595fd474c3b}
+Set the function to execute when the timer expires.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em fn} & The function\\
+\hline
+\end{DoxyParams}
+Store this function in this \hyperlink{classns3_1_1Timer}{Timer} for later use by \hyperlink{classns3_1_1Timer_ac3345d696887578f518b19f359f7f94b}{Timer\+::\+Schedule}. 
+\begin{DoxyCode}
+200 \{
+201   \textcolor{keyword}{delete} \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl};
+202   \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl} = \hyperlink{group__timerimpl_ga748e39fd757c246f91d3488175ec12b5}{MakeTimerImpl} (fn);
+203 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 13
+
+
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!Set\+Function@{Set\+Function}}
+\index{Set\+Function@{Set\+Function}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{Set\+Function(\+M\+E\+M\+\_\+\+P\+T\+R mem\+Ptr, O\+B\+J\+\_\+\+P\+T\+R obj\+Ptr)}{SetFunction(MEM_PTR memPtr, OBJ_PTR objPtr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename M\+E\+M\+\_\+\+P\+TR , typename O\+B\+J\+\_\+\+P\+TR $>$ void ns3\+::\+Watchdog\+::\+Set\+Function (
+\begin{DoxyParamCaption}
+\item[{M\+E\+M\+\_\+\+P\+TR}]{mem\+Ptr, }
+\item[{O\+B\+J\+\_\+\+P\+TR}]{obj\+Ptr}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Watchdog_a1b6feb6af549c06fd6a1cf1183827357}{}\label{classns3_1_1Watchdog_a1b6feb6af549c06fd6a1cf1183827357}
+Set the function to execute when the timer expires.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em M\+E\+M\+\_\+\+P\+TR} & Class method function type. \\
+\hline
+{\em O\+B\+J\+\_\+\+P\+TR} & Class type containing the function. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mem\+Ptr} & The member function pointer \\
+\hline
+\mbox{\tt in}  & {\em obj\+Ptr} & The pointer to object\\
+\hline
+\end{DoxyParams}
+Store this function and object in this \hyperlink{classns3_1_1Timer}{Timer} for later use by \hyperlink{classns3_1_1Timer_ac3345d696887578f518b19f359f7f94b}{Timer\+::\+Schedule}. 
+\begin{DoxyCode}
+207 \{
+208   \textcolor{keyword}{delete} \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl};
+209   \hyperlink{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{m\_impl} = \hyperlink{group__timerimpl_ga748e39fd757c246f91d3488175ec12b5}{MakeTimerImpl} (memPtr, objPtr);
+210 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 14
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!m\+\_\+end@{m\+\_\+end}}
+\index{m\+\_\+end@{m\+\_\+end}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{m\+\_\+end}{m_end}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time} ns3\+::\+Watchdog\+::m\+\_\+end\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Watchdog_aec3be76124b68f4ff3ec9331d7f23a3f}{}\label{classns3_1_1Watchdog_aec3be76124b68f4ff3ec9331d7f23a3f}
+The absolute time when the timer will expire. \index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!m\+\_\+event@{m\+\_\+event}}
+\index{m\+\_\+event@{m\+\_\+event}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{m\+\_\+event}{m_event}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Event\+Id} ns3\+::\+Watchdog\+::m\+\_\+event\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Watchdog_a7d8678d211f73cfc2541649ce534d2db}{}\label{classns3_1_1Watchdog_a7d8678d211f73cfc2541649ce534d2db}
+The future event scheduled to expire the timer. \index{ns3\+::\+Watchdog@{ns3\+::\+Watchdog}!m\+\_\+impl@{m\+\_\+impl}}
+\index{m\+\_\+impl@{m\+\_\+impl}!ns3\+::\+Watchdog@{ns3\+::\+Watchdog}}
+\subsubsection[{\texorpdfstring{m\+\_\+impl}{m_impl}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Timer\+Impl}$\ast$ ns3\+::\+Watchdog\+::m\+\_\+impl\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}{}\label{classns3_1_1Watchdog_ac8ff50cdff62e1549d5a5e8973003a9a}
+The timer implementation, which contains the bound callback function and arguments. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{watchdog_8h}{watchdog.\+h}\item 
+core/model/\hyperlink{watchdog_8cc}{watchdog.\+cc}\end{DoxyCompactItemize}

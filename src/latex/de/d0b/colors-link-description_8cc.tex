@@ -1,0 +1,206 @@
+\hypertarget{colors-link-description_8cc}{}\section{netanim/examples/colors-\/link-\/description.cc File Reference}
+\label{colors-link-description_8cc}\index{netanim/examples/colors-\/link-\/description.\+cc@{netanim/examples/colors-\/link-\/description.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/netanim-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/layout-\/module.\+h\char`\"{}}\\*
+Include dependency graph for colors-\/link-\/description.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structrgb}{rgb}
+\begin{DoxyCompactList}\small\item\em R\+GB structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{colors-link-description_8cc_a7a2a3abb755d0d1a31414355520d054b}{modify} ()
+\item 
+int \hyperlink{colors-link-description_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1AnimationInterface}{Animation\+Interface} $\ast$ \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{p\+Anim} = 0
+\item 
+struct \hyperlink{structrgb}{rgb} \hyperlink{colors-link-description_8cc_aeede5006703c01b469f27688e8e9827d}{colors} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{colors-\/link-\/description.\+cc@{colors-\/link-\/description.\+cc}!main@{main}}
+\index{main@{main}!colors-\/link-\/description.\+cc@{colors-\/link-\/description.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{colors-link-description_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{colors-link-description_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+84 \{
+85   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::PacketSize"}, UintegerValue (512));
+86   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::OnOffApplication::DataRate"}, StringValue (\textcolor{stringliteral}{"500kb/s"}));
+87 
+88   uint32\_t    nLeftLeaf = 5;
+89   uint32\_t    nRightLeaf = 5;
+90   uint32\_t    nLeaf = 0; \textcolor{comment}{// If non-zero, number of both left and right}
+91   std::string animFile = \textcolor{stringliteral}{"dynamic\_linknode.xml"} ;  \textcolor{comment}{// Name of file for animation output}
+92 
+93   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+94   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nLeftLeaf"}, \textcolor{stringliteral}{"Number of left side leaf nodes"}, nLeftLeaf);
+95   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nRightLeaf"},\textcolor{stringliteral}{"Number of right side leaf nodes"}, nRightLeaf);
+96   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"nLeaf"},     \textcolor{stringliteral}{"Number of left and right side leaf nodes"}, nLeaf);
+97   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"animFile"},  \textcolor{stringliteral}{"File Name for Animation Output"}, animFile);
+98 
+99   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc,argv);
+100   \textcolor{keywordflow}{if} (nLeaf > 0)
+101     \{
+102       nLeftLeaf = nLeaf;
+103       nRightLeaf = nLeaf;
+104     \}
+105 
+106   \textcolor{comment}{// Create the point-to-point link helpers}
+107   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} pointToPointRouter;
+108   pointToPointRouter.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute}  (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+109   pointToPointRouter.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"1ms"}));
+110   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} pointToPointLeaf;
+111   pointToPointLeaf.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute}    (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"10Mbps"}));
+112   pointToPointLeaf.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute}   (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"1ms"}));
+113 
+114   \hyperlink{classns3_1_1PointToPointDumbbellHelper}{PointToPointDumbbellHelper} \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d} (nLeftLeaf, pointToPointLeaf,
+115                                 nRightLeaf, pointToPointLeaf,
+116                                 pointToPointRouter);
+117 
+118   \textcolor{comment}{// Install Stack}
+119   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+120   \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.InstallStack (stack);
+121 
+122   \textcolor{comment}{// Assign IP Addresses}
+123   \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.AssignIpv4Addresses (\hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"}),
+124                          \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} (\textcolor{stringliteral}{"10.2.1.0"}, \textcolor{stringliteral}{"255.255.255.0"}),
+125                          \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} (\textcolor{stringliteral}{"10.3.1.0"}, \textcolor{stringliteral}{"255.255.255.0"}));
+126 
+127   \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.BoundingBox (1, 1, 100, 100);
+128   \textcolor{comment}{// Install on/off app on all right side nodes}
+129   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} clientHelper (\textcolor{stringliteral}{"ns3::UdpSocketFactory"}, \hyperlink{classns3_1_1Address}{Address} ());
+130   clientHelper.SetAttribute 
+131     (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=0.|Max=1.]"}));
+132   clientHelper.SetAttribute 
+133     (\textcolor{stringliteral}{"OffTime"}, StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=0.|Max=1.]"}));
+134   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps;
+135 
+136   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.RightCount (); ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+137     \{
+138       \textcolor{comment}{// Create an on/off app sending packets to the same leaf right side}
+139       AddressValue remoteAddress (\hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetLeftIpv4Address (
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}), 1000));
+140       clientHelper.SetAttribute (\textcolor{stringliteral}{"Remote"}, remoteAddress);
+141       clientApps.\hyperlink{classns3_1_1ApplicationContainer_ad09ab1a1ad5849d518d5f4c262e38152}{Add} (clientHelper.Install (\hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d}.GetRight (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})));
+142     \}
+143 
+144   clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+145   clientApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+146 
+147   \textcolor{comment}{// Set the bounding box for animation}
+148 
+149 
+150   \textcolor{comment}{// Create the animation object and configure for specified output}
+151   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim} = \textcolor{keyword}{new} \hyperlink{classns3_1_1AnimationInterface}{AnimationInterface} (animFile);
+152   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1), \hyperlink{colors-link-description_8cc_a7a2a3abb755d0d1a31414355520d054b}{modify});
+153   
+154   \textcolor{comment}{// Set up the acutal simulation}
+155   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+156 
+157   Simulator::Run ();
+158   std::cout << \textcolor{stringliteral}{"Animation Trace file created:"} << animFile.c\_str ()<< std::endl;
+159   Simulator::Destroy ();
+160   \textcolor{keyword}{delete} \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim};
+161   \textcolor{keywordflow}{return} 0;
+162 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{colors-\/link-\/description.\+cc@{colors-\/link-\/description.\+cc}!modify@{modify}}
+\index{modify@{modify}!colors-\/link-\/description.\+cc@{colors-\/link-\/description.\+cc}}
+\subsubsection[{\texorpdfstring{modify()}{modify()}}]{\setlength{\rightskip}{0pt plus 5cm}void modify (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{colors-link-description_8cc_a7a2a3abb755d0d1a31414355520d054b}{}\label{colors-link-description_8cc_a7a2a3abb755d0d1a31414355520d054b}
+
+\begin{DoxyCode}
+47 \{
+48   std::ostringstream oss;
+49   oss << \textcolor{stringliteral}{"Update:"} << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} ();
+50   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (0, 1, oss.str ());
+51   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (0, 2, oss.str ());
+52   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (0, 3, oss.str ());
+53   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (0, 4, oss.str ());
+54   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (0, 5, oss.str ());
+55   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (0, 6, oss.str ());
+56   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (1, 7, oss.str ());
+57   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (1, 8, oss.str ());
+58   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (1, 9, oss.str ());
+59   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (1, 10, oss.str ());
+60   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_a6e85be8d6af4296c0ea3c914c06d5944}{UpdateLinkDescription} (1, 11, oss.str ());
+61   
+62   \textcolor{comment}{// Every update change the node description for node 2}
+63   std::ostringstream node0Oss;
+64   node0Oss << \textcolor{stringliteral}{"-----Node:"} << \hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().\hyperlink{classns3_1_1Time_a8f20d5c3b0902d7b4320982f340b57c8}{GetSeconds} ();
+65   \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_adaad6891a737119ff48304aed442fedd}{UpdateNodeDescription} (2, node0Oss.str ());
+66 
+67   \textcolor{comment}{// Every update change the color for node 4}
+68   \textcolor{keyword}{static} uint32\_t index = 0;
+69   index++;
+70   \textcolor{keywordflow}{if} (index == 3) 
+71     index = 0;
+72   \textcolor{keyword}{struct }\hyperlink{structrgb}{rgb} color = \hyperlink{colors-link-description_8cc_aeede5006703c01b469f27688e8e9827d}{colors}[index];
+73   \textcolor{keywordflow}{for} (uint32\_t nodeId = 4; nodeId < 12; ++nodeId)
+74     \hyperlink{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{pAnim}->\hyperlink{classns3_1_1AnimationInterface_adba07ccf6613113799782712287720cb}{UpdateNodeColor} (nodeId, color.\hyperlink{structrgb_afd9a3feaf22de2f96ba25d19494235a6}{r}, color.\hyperlink{structrgb_a644713f43fbcf5e9f070fa1843aee55f}{g}, color.
+      \hyperlink{structrgb_a5ff4e0f515919a82c3f401afa8555da4}{b}); 
+75 
+76 
+77   \textcolor{keywordflow}{if} (\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} ().GetSeconds () < 10) \textcolor{comment}{// This is important or the simulation}
+78     \textcolor{comment}{// will run endlessly}
+79     Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1), \hyperlink{colors-link-description_8cc_a7a2a3abb755d0d1a31414355520d054b}{modify});
+80 
+81 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+
+
+\subsection{Variable Documentation}
+\index{colors-\/link-\/description.\+cc@{colors-\/link-\/description.\+cc}!colors@{colors}}
+\index{colors@{colors}!colors-\/link-\/description.\+cc@{colors-\/link-\/description.\+cc}}
+\subsubsection[{\texorpdfstring{colors}{colors}}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf rgb} colors\mbox{[}$\,$\mbox{]}}\hypertarget{colors-link-description_8cc_aeede5006703c01b469f27688e8e9827d}{}\label{colors-link-description_8cc_aeede5006703c01b469f27688e8e9827d}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+                        \{ 255, 0, 0 \}, 
+                        \{ 0, 255, 0 \}, 
+                        \{ 0, 0, 255 \}  
+                        \}
+\end{DoxyCode}
+\index{colors-\/link-\/description.\+cc@{colors-\/link-\/description.\+cc}!p\+Anim@{p\+Anim}}
+\index{p\+Anim@{p\+Anim}!colors-\/link-\/description.\+cc@{colors-\/link-\/description.\+cc}}
+\subsubsection[{\texorpdfstring{p\+Anim}{pAnim}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Animation\+Interface}$\ast$ p\+Anim = 0}\hypertarget{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}{}\label{colors-link-description_8cc_a4d1b1f8e5dece91ab32ba77a17ec7978}

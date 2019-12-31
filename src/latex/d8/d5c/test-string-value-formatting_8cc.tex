@@ -1,0 +1,120 @@
+\hypertarget{test-string-value-formatting_8cc}{}\section{core/examples/test-\/string-\/value-\/formatting.cc File Reference}
+\label{test-string-value-formatting_8cc}\index{core/examples/test-\/string-\/value-\/formatting.\+cc@{core/examples/test-\/string-\/value-\/formatting.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+Include dependency graph for test-\/string-\/value-\/formatting.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classFormattingTestObject}{Formatting\+Test\+Object}
+\item 
+class \hyperlink{classFormattingTestObjectHelper}{Formatting\+Test\+Object\+Helper}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{test-string-value-formatting_8cc_abf246cf1001f0a8ed03a853b07167387}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Test\+String\+Value\+Formatting\char`\"{})
+\item 
+\hyperlink{test-string-value-formatting_8cc_ad96b77375b9fad1c58966900df1cf6b8}{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED} (\hyperlink{classFormattingTestObject}{Formatting\+Test\+Object})
+\item 
+int \hyperlink{test-string-value-formatting_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{test-\/string-\/value-\/formatting.\+cc@{test-\/string-\/value-\/formatting.\+cc}!main@{main}}
+\index{main@{main}!test-\/string-\/value-\/formatting.\+cc@{test-\/string-\/value-\/formatting.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{test-string-value-formatting_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{test-string-value-formatting_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+90 \{
+91   \textcolor{comment}{// CreateObject parsing}
+92   \hyperlink{classns3_1_1Ptr}{Ptr<FormattingTestObject>} obj = CreateObject<FormattingTestObject> ();
+93   obj->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable"}));
+94   obj->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=0.]"}));
+95   obj->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=0.|Max=1.]"}));
+96   obj->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"ns3::UniformRandomVariable[Min=50.|Max=100.]"}));
+97 
+98   \hyperlink{classns3_1_1Ptr}{Ptr<RandomVariableStream>} rvStream = obj->
+      \hyperlink{classFormattingTestObject_a28e10307ede8d8c9b118ab0d3b83739b}{GetTestVariable} ();
+99   \textcolor{comment}{// Either GetObject () or DynamicCast may be used to get subclass pointer}
+100   \hyperlink{classns3_1_1Ptr}{Ptr<UniformRandomVariable>} uniformStream = rvStream->
+      \hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1UniformRandomVariable}{UniformRandomVariable}> ();
+101   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (uniformStream);
+102 
+103   \textcolor{comment}{// Check that the last setting of Min to 50 and Max to 100 worked}
+104   DoubleValue val;
+105   uniformStream->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"Min"}, val);
+106   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (val.Get () == 50, \textcolor{stringliteral}{"Minimum not set to 50"});
+107   uniformStream->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"Max"}, val);
+108   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (val.Get () == 100, \textcolor{stringliteral}{"Maximum not set to 100"});
+109 
+110 
+111   \textcolor{comment}{// The following malformed values should result in an error exit}
+112   \textcolor{comment}{// if uncommented}
+113 
+114   \textcolor{comment}{// Attribute doesn't exist}
+115   \textcolor{comment}{//obj->SetAttribute ("OnTime", StringValue ("ns3::UniformRandomVariable[A=0.]"));}
+116   \textcolor{comment}{// Missing right bracket}
+117   \textcolor{comment}{//obj->SetAttribute ("OnTime", StringValue ("ns3::UniformRandomVariable[Min=0."));}
+118   \textcolor{comment}{// Comma delimiter fails}
+119   \textcolor{comment}{//obj->SetAttribute ("OnTime", StringValue ("ns3::UniformRandomVariable[Min=0.,Max=1.]"));}
+120   \textcolor{comment}{// Incomplete specification}
+121   \textcolor{comment}{//obj->SetAttribute ("OnTime", StringValue ("ns3::UniformRandomVariable[Min=0.|Max=]"));}
+122   \textcolor{comment}{// Incomplete specification}
+123   \textcolor{comment}{//obj->SetAttribute ("OnTime", StringValue ("ns3::UniformRandomVariable[Min=0.|Max]"));}
+124 
+125   \textcolor{comment}{// ObjectFactory parsing}
+126   \hyperlink{classFormattingTestObjectHelper}{FormattingTestObjectHelper} formattingHelper;
+127   formattingHelper.\hyperlink{classFormattingTestObjectHelper_a8d4707dad43d9743bd98d1ffc8663e65}{SetAttribute} (\textcolor{stringliteral}{"OnTime"}, StringValue (\textcolor{stringliteral}{"
+      ns3::UniformRandomVariable[Min=30.|Max=60.0]"}));
+128   \textcolor{comment}{// Attribute doesn't exist}
+129   \textcolor{comment}{//formattingHelper.SetAttribute ("OnTime", StringValue ("ns3::UniformRandomVariable[A=0.]"));}
+130   \textcolor{comment}{// Missing right bracket}
+131   \textcolor{comment}{//formattingHelper.SetAttribute ("OnTime", StringValue ("ns3::UniformRandomVariable[Min=30."));}
+132   \textcolor{comment}{// Comma delimiter fails}
+133   \textcolor{comment}{//formattingHelper.SetAttribute ("OnTime", StringValue ("ns3::UniformRandomVariable[Min=30.,Max=60.]"));}
+134   \textcolor{comment}{// Incomplete specification}
+135   \textcolor{comment}{//formattingHelper.SetAttribute ("OnTime", StringValue ("ns3::UniformRandomVariable[Min=30.|Max=]"));}
+136   \textcolor{comment}{// Incomplete specification}
+137   \textcolor{comment}{//formattingHelper.SetAttribute ("OnTime", StringValue ("ns3::UniformRandomVariable[Min=30.|Max]"));}
+138 
+139   \textcolor{comment}{// verify that creation occurs correctly}
+140   \hyperlink{classns3_1_1Ptr}{Ptr<Object>} outputObj = formattingHelper.CreateFromFactory ();
+141   \hyperlink{classns3_1_1Ptr}{Ptr<FormattingTestObject>} fto = DynamicCast<FormattingTestObject> (outputObj);
+142   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (fto, \textcolor{stringliteral}{"object creation failed"});
+143   rvStream = fto->\hyperlink{classFormattingTestObject_a28e10307ede8d8c9b118ab0d3b83739b}{GetTestVariable} ();
+144   uniformStream = rvStream->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1UniformRandomVariable}{UniformRandomVariable}> ();
+145   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (uniformStream);
+146   \textcolor{comment}{// Check that the last setting of Min to 30 and Max to 60 worked}
+147   uniformStream->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"Min"}, val);
+148   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (val.Get () == 30, \textcolor{stringliteral}{"Minimum not set to 30"});
+149   uniformStream->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"Max"}, val);
+150   \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (val.Get () == 60, \textcolor{stringliteral}{"Maximum not set to 60"});
+151 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{test-\/string-\/value-\/formatting.\+cc@{test-\/string-\/value-\/formatting.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!test-\/string-\/value-\/formatting.\+cc@{test-\/string-\/value-\/formatting.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Test\+String\+Value\+Formatting"")}{NS_LOG_COMPONENT_DEFINE("TestStringValueFormatting")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Test\+String\+Value\+Formatting\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{test-string-value-formatting_8cc_abf246cf1001f0a8ed03a853b07167387}{}\label{test-string-value-formatting_8cc_abf246cf1001f0a8ed03a853b07167387}
+\index{test-\/string-\/value-\/formatting.\+cc@{test-\/string-\/value-\/formatting.\+cc}!N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED@{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED}}
+\index{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED@{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED}!test-\/string-\/value-\/formatting.\+cc@{test-\/string-\/value-\/formatting.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+E\+D(\+Formatting\+Test\+Object)}{NS_OBJECT_ENSURE_REGISTERED(FormattingTestObject)}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+O\+B\+J\+E\+C\+T\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+ED (
+\begin{DoxyParamCaption}
+\item[{{\bf Formatting\+Test\+Object}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{test-string-value-formatting_8cc_ad96b77375b9fad1c58966900df1cf6b8}{}\label{test-string-value-formatting_8cc_ad96b77375b9fad1c58966900df1cf6b8}

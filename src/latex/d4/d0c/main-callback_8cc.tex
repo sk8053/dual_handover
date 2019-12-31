@@ -1,0 +1,129 @@
+\hypertarget{main-callback_8cc}{}\section{core/examples/main-\/callback.cc File Reference}
+\label{main-callback_8cc}\index{core/examples/main-\/callback.\+cc@{core/examples/main-\/callback.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/callback.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/assert.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+Include dependency graph for main-\/callback.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classMyCb}{My\+Cb}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \hyperlink{main-callback_8cc_a0d0f54ce19e6ffbc7b79325e2fe4d20c}{Cb\+One} (double a, double \hyperlink{lte__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b})
+\item 
+int \hyperlink{main-callback_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Example program illustrating use of callback functions and methods.
+
+See \hyperlink{group__callback}{Callbacks} 
+
+\subsection{Function Documentation}
+\index{main-\/callback.\+cc@{main-\/callback.\+cc}!Cb\+One@{Cb\+One}}
+\index{Cb\+One@{Cb\+One}!main-\/callback.\+cc@{main-\/callback.\+cc}}
+\subsubsection[{\texorpdfstring{Cb\+One(double a, double b)}{CbOne(double a, double b)}}]{\setlength{\rightskip}{0pt plus 5cm}static double Cb\+One (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{main-callback_8cc_a0d0f54ce19e6ffbc7b79325e2fe4d20c}{}\label{main-callback_8cc_a0d0f54ce19e6ffbc7b79325e2fe4d20c}
+Example Callback function.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a} & The first argument. \\
+\hline
+\mbox{\tt in}  & {\em b} & The second argument. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The first argument. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+43 \{
+44   std::cout << \textcolor{stringliteral}{"invoke cbOne a="} << a << \textcolor{stringliteral}{", b="} << \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b} << std::endl;
+45   \textcolor{keywordflow}{return} a;
+46 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{main-\/callback.\+cc@{main-\/callback.\+cc}!main@{main}}
+\index{main@{main}!main-\/callback.\+cc@{main-\/callback.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{main-callback_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{main-callback_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+65 \{
+66   \textcolor{comment}{// return type: double}
+67   \textcolor{comment}{// first arg type: double}
+68   \textcolor{comment}{// second arg type: double}
+69   \hyperlink{classns3_1_1Callback}{Callback<double, double, double>} \hyperlink{visualizer-ideas_8txt_a0a84c3fa82a58d60404416317320714e}{one};
+70   \textcolor{comment}{// build callback instance which points to cbOne function}
+71   one = \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{main-callback_8cc_a0d0f54ce19e6ffbc7b79325e2fe4d20c}{CbOne});
+72   \textcolor{comment}{// this is not a null callback}
+73   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (!one.\hyperlink{classns3_1_1Callback_aa8e27826badbf37f84763f36f70d9b54}{IsNull} ());
+74   \textcolor{comment}{// invoke cbOne function through callback instance}
+75   \textcolor{keywordtype}{double} retOne;
+76   retOne = \hyperlink{visualizer-ideas_8txt_a0a84c3fa82a58d60404416317320714e}{one} (10.0, 20.0);
+77   \textcolor{comment}{// callback returned expected value}
+78   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (retOne == 10.0);
+79 
+80   \textcolor{comment}{// return type: int}
+81   \textcolor{comment}{// first arg type: double}
+82   \hyperlink{classns3_1_1Callback}{Callback<int, double>} two;
+83   \hyperlink{classMyCb}{MyCb} cb;
+84   \textcolor{comment}{// build callback instance which points to MyCb::cbTwo}
+85   two = \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{classMyCb_a1275c65eccffdb561257927cd38c5e8f}{MyCb::CbTwo}, &cb);
+86   \textcolor{comment}{// this is not a null callback}
+87   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (!two.\hyperlink{classns3_1_1Callback_aa8e27826badbf37f84763f36f70d9b54}{IsNull} ());
+88   \textcolor{comment}{// invoke MyCb::cbTwo through callback instance}
+89   \textcolor{keywordtype}{int} retTwo;
+90   retTwo = two (10.0);
+91   \textcolor{comment}{// callback returned expected value}
+92   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (retTwo == -5);
+93 
+94   two = MakeNullCallback<int, double> ();
+95   \textcolor{comment}{// invoking a null callback is just like}
+96   \textcolor{comment}{// invoking a null function pointer:}
+97   \textcolor{comment}{// it will crash.}
+98   \textcolor{comment}{//int retTwoNull = two (20.0);}
+99   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (two.\hyperlink{classns3_1_1Callback_aa8e27826badbf37f84763f36f70d9b54}{IsNull} ());
+100 
+101 \textcolor{preprocessor}{#if 0}
+102   \textcolor{comment}{// The below type mismatch between CbOne() and callback two will fail to }
+103   \textcolor{comment}{// compile if enabled in this program.}
+104   two = \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{main-callback_8cc_a0d0f54ce19e6ffbc7b79325e2fe4d20c}{CbOne});
+105 \textcolor{preprocessor}{#endif}
+106 
+107 \textcolor{preprocessor}{#if 0}
+108   \textcolor{comment}{// This is a slightly different example, in which the code will compile}
+109   \textcolor{comment}{// but because callbacks are type-safe, will cause a fatal error at runtime }
+110   \textcolor{comment}{// (the difference here is that Assign() is called instead of operator=)}
+111   \hyperlink{classns3_1_1Callback}{Callback<void, float>} three;
+112   three.\hyperlink{classns3_1_1Callback_a246f8949a1392269d4c1a85c24b85f97}{Assign} (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{main-callback_8cc_a0d0f54ce19e6ffbc7b79325e2fe4d20c}{CbOne}));
+113 \textcolor{preprocessor}{#endif}
+114 
+115   \textcolor{keywordflow}{return} 0;
+116 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+

@@ -1,0 +1,67 @@
+\hypertarget{group__breakpoint}{}\section{Breakpoints}
+\label{group__breakpoint}\index{Breakpoints@{Breakpoints}}
+
+
+Trigger a debugger breakpoint.  
+
+
+\subsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \hyperlink{breakpoint_8cc}{breakpoint.\+cc}
+\item 
+file \hyperlink{breakpoint_8h}{breakpoint.\+h}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{group__breakpoint_ga34cfff9b3943fcc753f954a395f5d7f1}{N\+S\+\_\+\+B\+R\+E\+A\+K\+P\+O\+I\+NT}()~\hyperlink{group__breakpoint_ga1b2bb5af45b0dd545f6101aafdde0936}{ns3\+::\+Breakpoint\+Fallback} ()
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__breakpoint_ga1b2bb5af45b0dd545f6101aafdde0936}{ns3\+::\+Breakpoint\+Fallback} (void)
+\begin{DoxyCompactList}\small\item\em fallback breakpoint function \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Trigger a debugger breakpoint. 
+
+
+
+\subsection{Macro Definition Documentation}
+\index{Breakpoints@{Breakpoints}!N\+S\+\_\+\+B\+R\+E\+A\+K\+P\+O\+I\+NT@{N\+S\+\_\+\+B\+R\+E\+A\+K\+P\+O\+I\+NT}}
+\index{N\+S\+\_\+\+B\+R\+E\+A\+K\+P\+O\+I\+NT@{N\+S\+\_\+\+B\+R\+E\+A\+K\+P\+O\+I\+NT}!Breakpoints@{Breakpoints}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+B\+R\+E\+A\+K\+P\+O\+I\+NT}{NS_BREAKPOINT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+S\+\_\+\+B\+R\+E\+A\+K\+P\+O\+I\+NT(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~{\bf ns3\+::\+Breakpoint\+Fallback} ()}\hypertarget{group__breakpoint_ga34cfff9b3943fcc753f954a395f5d7f1}{}\label{group__breakpoint_ga34cfff9b3943fcc753f954a395f5d7f1}
+Inserts a breakpoint instruction (or equivalent system call) into the code for selected machines. When an N\+S\+\_\+\+A\+S\+S\+E\+RT cannot verify its condition, this macro is used. Falls back to calling Assert\+Breakpoint() for architectures where breakpoint assembly instructions are not supported. 
+
+\subsection{Function Documentation}
+\index{Breakpoints@{Breakpoints}!Breakpoint\+Fallback@{Breakpoint\+Fallback}}
+\index{Breakpoint\+Fallback@{Breakpoint\+Fallback}!Breakpoints@{Breakpoints}}
+\subsubsection[{\texorpdfstring{Breakpoint\+Fallback(void)}{BreakpointFallback(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Breakpoint\+Fallback (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{group__breakpoint_ga1b2bb5af45b0dd545f6101aafdde0936}{}\label{group__breakpoint_ga1b2bb5af45b0dd545f6101aafdde0936}
+
+
+fallback breakpoint function 
+
+This function is used by the \hyperlink{group__breakpoint_ga34cfff9b3943fcc753f954a395f5d7f1}{N\+S\+\_\+\+B\+R\+E\+A\+K\+P\+O\+I\+N\+T()} macro as a fallback for when breakpoint assembly instructions are not available. It attempts to halt program execution either by a raising S\+I\+G\+T\+R\+AP, on unix systems, or by dereferencing a null pointer.
+
+Normally you should not call this function directly. we test here to allow a debugger to change the value of the variable \textquotesingle{}a\textquotesingle{} to allow the debugger to avoid the subsequent segfault.
+\begin{DoxyCode}
+53 \{
+54   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+55 
+56   \textcolor{keywordtype}{int} *a = 0;
+62   \textcolor{keywordflow}{if} (a == 0)
+63     \{
+64       *a = 0;
+65     \}
+66 \}
+\end{DoxyCode}

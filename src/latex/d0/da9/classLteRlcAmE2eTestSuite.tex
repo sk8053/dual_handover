@@ -1,0 +1,101 @@
+\hypertarget{classLteRlcAmE2eTestSuite}{}\section{Lte\+Rlc\+Am\+E2e\+Test\+Suite Class Reference}
+\label{classLteRlcAmE2eTestSuite}\index{Lte\+Rlc\+Am\+E2e\+Test\+Suite@{Lte\+Rlc\+Am\+E2e\+Test\+Suite}}
+
+
+{\ttfamily \#include $<$lte-\/test-\/rlc-\/am-\/e2e.\+h$>$}
+
+
+
+Inheritance diagram for Lte\+Rlc\+Am\+E2e\+Test\+Suite\+:
+% FIG 0
+
+
+Collaboration diagram for Lte\+Rlc\+Am\+E2e\+Test\+Suite\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLteRlcAmE2eTestSuite_a8534d04c497e0b93466cf79adcba5112}{Lte\+Rlc\+Am\+E2e\+Test\+Suite} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Provides the test suite lte-\/rlc-\/am-\/e2e. See the testing section of the L\+TE module documentation for details. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Lte\+Rlc\+Am\+E2e\+Test\+Suite@{Lte\+Rlc\+Am\+E2e\+Test\+Suite}!Lte\+Rlc\+Am\+E2e\+Test\+Suite@{Lte\+Rlc\+Am\+E2e\+Test\+Suite}}
+\index{Lte\+Rlc\+Am\+E2e\+Test\+Suite@{Lte\+Rlc\+Am\+E2e\+Test\+Suite}!Lte\+Rlc\+Am\+E2e\+Test\+Suite@{Lte\+Rlc\+Am\+E2e\+Test\+Suite}}
+\subsubsection[{\texorpdfstring{Lte\+Rlc\+Am\+E2e\+Test\+Suite()}{LteRlcAmE2eTestSuite()}}]{\setlength{\rightskip}{0pt plus 5cm}Lte\+Rlc\+Am\+E2e\+Test\+Suite\+::\+Lte\+Rlc\+Am\+E2e\+Test\+Suite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLteRlcAmE2eTestSuite_a8534d04c497e0b93466cf79adcba5112}{}\label{classLteRlcAmE2eTestSuite_a8534d04c497e0b93466cf79adcba5112}
+
+\begin{DoxyCode}
+46   : \hyperlink{classns3_1_1TestSuite_a904b0c40583b744d30908aeb94636d1a}{TestSuite} (\textcolor{stringliteral}{"lte-rlc-am-e2e"}, \hyperlink{classns3_1_1TestSuite_a1ebfcab34ec8161e085e8e3a1855eae0a90c5529a26ab3a5ffcc6e57040dbd82e}{SYSTEM})
+47 \{
+48   \textcolor{comment}{// NS\_LOG\_INFO ("Creating LteRlcAmE2eTestSuite");}
+49 
+50   \textcolor{keywordtype}{double} losses[] = \{0.0, 0.05,  0.10, 0.15, 0.25, 0.50, 0.75, 0.90, 0.95\};
+51   uint32\_t runs[] = \{1111, 2222, 3333, 4444, 5555, 6666, 7777, 8888, 9999, 11110,
+52                      12221, 13332, 14443, 15554, 16665, 17776, 18887, 19998, 21109, 22220,
+53                      23331, 24442, 25553, 26664, 27775, 28886, 29997, 31108, 32219, 33330\};
+54 
+55   \textcolor{keywordflow}{for} ( uint32\_t \hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l} = 0 ; \hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l} < (\textcolor{keyword}{sizeof} (losses) / \textcolor{keyword}{sizeof} (\textcolor{keywordtype}{double})) ; \hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l}++ )
+56     \{
+57       \textcolor{keywordflow}{for} ( uint32\_t \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s} = 0 ; \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s} < (\textcolor{keyword}{sizeof} (runs) / \textcolor{keyword}{sizeof} (uint32\_t)) ; \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s}++ )
+58         \{
+59           \textcolor{keywordflow}{for} (uint32\_t sduArrivalType = 0; sduArrivalType <= 1; ++sduArrivalType)
+60             \{
+61               std::ostringstream \hyperlink{generate__test__data__lte__spectrum__model_8m_ab74e6bf80237ddc4109968cedc58c151}{name};
+62               name << \textcolor{stringliteral}{" losses = "} << losses[\hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l}] * 100 << \textcolor{stringliteral}{"%; run = "} << runs[\hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s}];
+63               
+64               \textcolor{keywordtype}{bool} bulkSduArrival;
+65               \textcolor{keywordflow}{switch} (sduArrivalType)
+66                 \{
+67                 \textcolor{keywordflow}{case} 0:
+68                   bulkSduArrival = \textcolor{keyword}{false};
+69                   name << \textcolor{stringliteral}{"; continuous SDU arrival"};
+70                   \textcolor{keywordflow}{break};
+71                 \textcolor{keywordflow}{case} 1:
+72                   bulkSduArrival = \textcolor{keyword}{true};
+73                   name << \textcolor{stringliteral}{"; bulk SDU arrival"};
+74                   \textcolor{keywordflow}{break};
+75                 \textcolor{keywordflow}{default}:
+76                   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"unsupported option"});
+77                   \textcolor{keywordflow}{break};
+78                 \}
+79               
+80               \hyperlink{classns3_1_1TestCase_a11f6f57c21a0d32e605d192a89550f91}{TestCase::TestDuration} testDuration;
+81               \textcolor{keywordflow}{if} (\hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l} == 1 && \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s} == 0)
+82                 \{
+83                   testDuration = TestCase::QUICK;
+84                 \}
+85               \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s} <= 4)
+86                 \{
+87                   testDuration = TestCase::EXTENSIVE;
+88                 \}
+89               \textcolor{keywordflow}{else}
+90                 \{
+91                   testDuration = TestCase::TAKES\_FOREVER;              
+92                 \}
+93               \hyperlink{classns3_1_1TestCase_a3718088e3eefd5d6454569d2e0ddd835}{AddTestCase} (\textcolor{keyword}{new} \hyperlink{classLteRlcAmE2eTestCase}{LteRlcAmE2eTestCase} (name.str (), runs[
+      \hyperlink{generate__test__data__lte__sinr_8m_ad83eeb3a142285d1243a08c6b7026df8}{s}], losses[\hyperlink{buildings__pathloss_8m_a5b54c0a045f179bcbbbc9abcb8b5cd4c}{l}], bulkSduArrival), testDuration);
+94             \}
+95         \}
+96     \}
+97 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lte/test/\hyperlink{lte-test-rlc-am-e2e_8h}{lte-\/test-\/rlc-\/am-\/e2e.\+h}\item 
+lte/test/\hyperlink{lte-test-rlc-am-e2e_8cc}{lte-\/test-\/rlc-\/am-\/e2e.\+cc}\end{DoxyCompactItemize}

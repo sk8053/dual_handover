@@ -1,0 +1,112 @@
+\hypertarget{wifi-test_8cc}{}\section{wifi/test/wifi-\/test.cc File Reference}
+\label{wifi-test_8cc}\index{wifi/test/wifi-\/test.\+cc@{wifi/test/wifi-\/test.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/yans-\/wifi-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/wifi-\/net-\/device.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/adhoc-\/wifi-\/mac.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/propagation-\/delay-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/propagation-\/loss-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/yans-\/error-\/rate-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/constant-\/position-\/mobility-\/model.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/test.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/pointer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/rng-\/seed-\/manager.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/string.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/packet-\/socket-\/server.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/packet-\/socket-\/client.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/packet-\/socket-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for wifi-\/test.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classWifiTest}{Wifi\+Test}
+\begin{DoxyCompactList}\small\item\em Wifi Test. \end{DoxyCompactList}\item 
+class \hyperlink{classQosUtilsIsOldPacketTest}{Qos\+Utils\+Is\+Old\+Packet\+Test}
+\begin{DoxyCompactList}\small\item\em Qos Utils Is Old Packet Test. \end{DoxyCompactList}\item 
+class \hyperlink{classInterferenceHelperSequenceTest}{Interference\+Helper\+Sequence\+Test}
+\item 
+class \hyperlink{classDcfImmediateAccessBroadcastTestCase}{Dcf\+Immediate\+Access\+Broadcast\+Test\+Case}
+\item 
+class \hyperlink{classBug730TestCase}{Bug730\+Test\+Case}
+\item 
+class \hyperlink{classSetChannelFrequencyTest}{Set\+Channel\+Frequency\+Test}
+\begin{DoxyCompactList}\small\item\em Set Channel Frequency Test. \end{DoxyCompactList}\item 
+class \hyperlink{classBug2222TestCase}{Bug2222\+Test\+Case}
+\item 
+class \hyperlink{classWifiTestSuite}{Wifi\+Test\+Suite}
+\begin{DoxyCompactList}\small\item\em Wifi Test Suite. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{wifi-test_8cc_a27e1dfc9840ff9d220527fa04cbd65de}{Assign\+Wifi\+Random\+Streams} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1WifiMac}{Wifi\+Mac} $>$ mac, int64\+\_\+t stream)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classWifiTestSuite}{Wifi\+Test\+Suite} \hyperlink{wifi-test_8cc_ab3719bc78f765a886d58e1307b3bc328}{g\+\_\+wifi\+Test\+Suite}
+\begin{DoxyCompactList}\small\item\em the test suite \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{wifi-\/test.\+cc@{wifi-\/test.\+cc}!Assign\+Wifi\+Random\+Streams@{Assign\+Wifi\+Random\+Streams}}
+\index{Assign\+Wifi\+Random\+Streams@{Assign\+Wifi\+Random\+Streams}!wifi-\/test.\+cc@{wifi-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{Assign\+Wifi\+Random\+Streams(\+Ptr$<$ Wifi\+Mac $>$ mac, int64\+\_\+t stream)}{AssignWifiRandomStreams(Ptr< WifiMac > mac, int64_t stream)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Assign\+Wifi\+Random\+Streams (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Wifi\+Mac} $>$}]{mac, }
+\item[{int64\+\_\+t}]{stream}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{wifi-test_8cc_a27e1dfc9840ff9d220527fa04cbd65de}{}\label{wifi-test_8cc_a27e1dfc9840ff9d220527fa04cbd65de}
+
+\begin{DoxyCode}
+47 \{
+48   int64\_t currentStream = stream;
+49   \hyperlink{classns3_1_1Ptr}{Ptr<RegularWifiMac>} rmac = DynamicCast<RegularWifiMac> (mac);
+50   \textcolor{keywordflow}{if} (rmac)
+51     \{
+52       \hyperlink{classns3_1_1PointerValue}{PointerValue} ptr;
+53       rmac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"DcaTxop"}, ptr);
+54       \hyperlink{classns3_1_1Ptr}{Ptr<DcaTxop>} dcaTxop = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1DcaTxop}{DcaTxop}> ();
+55       currentStream += dcaTxop->\hyperlink{classns3_1_1DcaTxop_a2a883932e6a255a5478c9594974dcdaa}{AssignStreams} (currentStream);
+56 
+57       rmac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"VO\_EdcaTxopN"}, ptr);
+58       \hyperlink{classns3_1_1Ptr}{Ptr<EdcaTxopN>} vo\_edcaTxopN = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1EdcaTxopN}{EdcaTxopN}> ();
+59       currentStream += vo\_edcaTxopN->\hyperlink{classns3_1_1DcaTxop_a2a883932e6a255a5478c9594974dcdaa}{AssignStreams} (currentStream);
+60 
+61       rmac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"VI\_EdcaTxopN"}, ptr);
+62       \hyperlink{classns3_1_1Ptr}{Ptr<EdcaTxopN>} vi\_edcaTxopN = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1EdcaTxopN}{EdcaTxopN}> ();
+63       currentStream += vi\_edcaTxopN->\hyperlink{classns3_1_1DcaTxop_a2a883932e6a255a5478c9594974dcdaa}{AssignStreams} (currentStream);
+64 
+65       rmac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"BE\_EdcaTxopN"}, ptr);
+66       \hyperlink{classns3_1_1Ptr}{Ptr<EdcaTxopN>} be\_edcaTxopN = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1EdcaTxopN}{EdcaTxopN}> ();
+67       currentStream += be\_edcaTxopN->\hyperlink{classns3_1_1DcaTxop_a2a883932e6a255a5478c9594974dcdaa}{AssignStreams} (currentStream);
+68 
+69       rmac->\hyperlink{classns3_1_1ObjectBase_a895d1de2f96063d0e0fd78463e7a7e30}{GetAttribute} (\textcolor{stringliteral}{"BK\_EdcaTxopN"}, ptr);
+70       \hyperlink{classns3_1_1Ptr}{Ptr<EdcaTxopN>} bk\_edcaTxopN = ptr.\hyperlink{classns3_1_1PointerValue_ae8e90fe3c0810cd6e4e1b1ba31f52a66}{Get}<\hyperlink{classns3_1_1EdcaTxopN}{EdcaTxopN}> ();
+71       bk\_edcaTxopN->\hyperlink{classns3_1_1DcaTxop_a2a883932e6a255a5478c9594974dcdaa}{AssignStreams} (currentStream);
+72     \}
+73 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Variable Documentation}
+\index{wifi-\/test.\+cc@{wifi-\/test.\+cc}!g\+\_\+wifi\+Test\+Suite@{g\+\_\+wifi\+Test\+Suite}}
+\index{g\+\_\+wifi\+Test\+Suite@{g\+\_\+wifi\+Test\+Suite}!wifi-\/test.\+cc@{wifi-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{g\+\_\+wifi\+Test\+Suite}{g_wifiTestSuite}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Wifi\+Test\+Suite} g\+\_\+wifi\+Test\+Suite\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{wifi-test_8cc_ab3719bc78f765a886d58e1307b3bc328}{}\label{wifi-test_8cc_ab3719bc78f765a886d58e1307b3bc328}
+
+
+the test suite 
+

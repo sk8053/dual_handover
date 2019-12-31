@@ -1,0 +1,152 @@
+\hypertarget{classUdp6SocketLoopbackTest}{}\section{Udp6\+Socket\+Loopback\+Test Class Reference}
+\label{classUdp6SocketLoopbackTest}\index{Udp6\+Socket\+Loopback\+Test@{Udp6\+Socket\+Loopback\+Test}}
+
+
+U\+DP Socket Loopback over I\+Pv6 Test.  
+
+
+
+
+Inheritance diagram for Udp6\+Socket\+Loopback\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Udp6\+Socket\+Loopback\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classUdp6SocketLoopbackTest_a47d174bdb09a9c4cb7c277ada753ea50}{Udp6\+Socket\+Loopback\+Test} ()
+\item 
+virtual void \hyperlink{classUdp6SocketLoopbackTest_a2f3bfecef9b06651dcba30458f1853c1}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+void \hyperlink{classUdp6SocketLoopbackTest_a5bcb3750d6e5e37f16ca0792554ad15a}{Receive\+Pkt} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Socket}{Socket} $>$ socket)
+\begin{DoxyCompactList}\small\item\em Receive a packet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{classUdp6SocketLoopbackTest_a9affdeec8230cec75b8315a0ce0def49}{m\+\_\+received\+Packet}
+\begin{DoxyCompactList}\small\item\em Received packet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+U\+DP Socket Loopback over I\+Pv6 Test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Udp6\+Socket\+Loopback\+Test@{Udp6\+Socket\+Loopback\+Test}!Udp6\+Socket\+Loopback\+Test@{Udp6\+Socket\+Loopback\+Test}}
+\index{Udp6\+Socket\+Loopback\+Test@{Udp6\+Socket\+Loopback\+Test}!Udp6\+Socket\+Loopback\+Test@{Udp6\+Socket\+Loopback\+Test}}
+\subsubsection[{\texorpdfstring{Udp6\+Socket\+Loopback\+Test()}{Udp6SocketLoopbackTest()}}]{\setlength{\rightskip}{0pt plus 5cm}Udp6\+Socket\+Loopback\+Test\+::\+Udp6\+Socket\+Loopback\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classUdp6SocketLoopbackTest_a47d174bdb09a9c4cb7c277ada753ea50}{}\label{classUdp6SocketLoopbackTest_a47d174bdb09a9c4cb7c277ada753ea50}
+
+\begin{DoxyCode}
+135   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"UDP6 loopback test"}) 
+136 \{
+137 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Udp6\+Socket\+Loopback\+Test@{Udp6\+Socket\+Loopback\+Test}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Udp6\+Socket\+Loopback\+Test@{Udp6\+Socket\+Loopback\+Test}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Udp6\+Socket\+Loopback\+Test\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classUdp6SocketLoopbackTest_a2f3bfecef9b06651dcba30458f1853c1}{}\label{classUdp6SocketLoopbackTest_a2f3bfecef9b06651dcba30458f1853c1}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+152 \{
+153   \hyperlink{classns3_1_1Ptr}{Ptr<Node>} rxNode = CreateObject<Node> ();
+154   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} internet;
+155   internet.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (rxNode);
+156 
+157   \hyperlink{classns3_1_1Ptr}{Ptr<SocketFactory>} rxSocketFactory = rxNode->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<
+      \hyperlink{classns3_1_1UdpSocketFactory}{UdpSocketFactory}> ();
+158   \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} rxSocket = rxSocketFactory->\hyperlink{classns3_1_1SocketFactory_a97351e6e7860503a4912042530449f62}{CreateSocket} ();
+159   rxSocket->\hyperlink{classns3_1_1Socket_ada93439a43de2028b5a8fc6621dad482}{Bind} (\hyperlink{classns3_1_1Inet6SocketAddress}{Inet6SocketAddress} (Ipv6Address::GetAny (), 80));
+160   rxSocket->SetRecvCallback (\hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&
+      \hyperlink{classUdp6SocketLoopbackTest_a5bcb3750d6e5e37f16ca0792554ad15a}{Udp6SocketLoopbackTest::ReceivePkt}, \textcolor{keyword}{this}));
+161 
+162   \hyperlink{classns3_1_1Ptr}{Ptr<Socket>} txSocket = rxSocketFactory->\hyperlink{classns3_1_1SocketFactory_a97351e6e7860503a4912042530449f62}{CreateSocket} ();
+163   txSocket->\hyperlink{classns3_1_1Socket_af898fce6a58e0dbba23c1c6de1d4220e}{SendTo} (Create<Packet> (246), 0, \hyperlink{classns3_1_1Inet6SocketAddress}{Inet6SocketAddress} (\textcolor{stringliteral}{"::1"}, 80));
+164   Simulator::Run ();
+165   Simulator::Destroy ();
+166   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (\hyperlink{classUdp6SocketLoopbackTest_a9affdeec8230cec75b8315a0ce0def49}{m\_receivedPacket}->
+      \hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} (), 246, \textcolor{stringliteral}{"first socket should not receive it (it is bound specifically to the second
+       interface's address"});
+167 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Udp6\+Socket\+Loopback\+Test@{Udp6\+Socket\+Loopback\+Test}!Receive\+Pkt@{Receive\+Pkt}}
+\index{Receive\+Pkt@{Receive\+Pkt}!Udp6\+Socket\+Loopback\+Test@{Udp6\+Socket\+Loopback\+Test}}
+\subsubsection[{\texorpdfstring{Receive\+Pkt(\+Ptr$<$ Socket $>$ socket)}{ReceivePkt(Ptr< Socket > socket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Udp6\+Socket\+Loopback\+Test\+::\+Receive\+Pkt (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Socket} $>$}]{socket}
+\end{DoxyParamCaption}
+)}\hypertarget{classUdp6SocketLoopbackTest_a5bcb3750d6e5e37f16ca0792554ad15a}{}\label{classUdp6SocketLoopbackTest_a5bcb3750d6e5e37f16ca0792554ad15a}
+
+
+Receive a packet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & The receiving socket. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+140 \{
+141   uint32\_t availableData;
+142   availableData = socket->\hyperlink{classns3_1_1Socket_ad35d8931e53ae0754ee864acb1cecd0e}{GetRxAvailable} ();
+143   \hyperlink{classUdp6SocketLoopbackTest_a9affdeec8230cec75b8315a0ce0def49}{m\_receivedPacket} = socket->\hyperlink{classns3_1_1Socket_a8949b1f844aae563446f2f4c5be8827a}{Recv} (
+      \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::numeric\_limits<uint32\_t>::max} (), 0);
+144   \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (availableData == \hyperlink{classUdp6SocketLoopbackTest_a9affdeec8230cec75b8315a0ce0def49}{m\_receivedPacket}->\hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} ());
+145   \textcolor{comment}{//cast availableData to void, to suppress 'availableData' set but not used}
+146   \textcolor{comment}{//compiler warning}
+147   (void) availableData;
+148 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Udp6\+Socket\+Loopback\+Test@{Udp6\+Socket\+Loopback\+Test}!m\+\_\+received\+Packet@{m\+\_\+received\+Packet}}
+\index{m\+\_\+received\+Packet@{m\+\_\+received\+Packet}!Udp6\+Socket\+Loopback\+Test@{Udp6\+Socket\+Loopback\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+received\+Packet}{m_receivedPacket}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Packet}$>$ Udp6\+Socket\+Loopback\+Test\+::m\+\_\+received\+Packet}\hypertarget{classUdp6SocketLoopbackTest_a9affdeec8230cec75b8315a0ce0def49}{}\label{classUdp6SocketLoopbackTest_a9affdeec8230cec75b8315a0ce0def49}
+
+
+Received packet. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{udp-test_8cc}{udp-\/test.\+cc}\end{DoxyCompactItemize}

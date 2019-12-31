@@ -1,0 +1,335 @@
+\hypertarget{classns3_1_1ErrorModel}{}\section{ns3\+:\+:Error\+Model Class Reference}
+\label{classns3_1_1ErrorModel}\index{ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}}
+
+
+General error model that can be used to corrupt packets.  
+
+
+
+
+{\ttfamily \#include $<$error-\/model.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Error\+Model\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Error\+Model\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1ErrorModel_a89d58fc926bb907d546844d8e6437f30}{Error\+Model} ()
+\item 
+virtual \hyperlink{classns3_1_1ErrorModel_a3629ca55411702d935a0406468229768}{$\sim$\+Error\+Model} ()
+\item 
+bool \hyperlink{classns3_1_1ErrorModel_af75222d384e342b46d0aed09d5e3a3fd}{Is\+Corrupt} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Packet}{Packet} $>$ pkt)
+\item 
+void \hyperlink{classns3_1_1ErrorModel_a6b7cbe56c27562e5ba6daf2f04bcd282}{Reset} (void)
+\item 
+void \hyperlink{classns3_1_1ErrorModel_a571d61a2fc9ce2d30df95da7e87b763c}{Enable} (void)
+\item 
+void \hyperlink{classns3_1_1ErrorModel_a55d35a3e713c31f650577e9f96cf25c0}{Disable} (void)
+\item 
+bool \hyperlink{classns3_1_1ErrorModel_a471bffecc63bfce9c4dc7b59d7038cd4}{Is\+Enabled} (void) const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1ErrorModel_a4c77d35dd93ec6a2452f0d2d4a7ee02a}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{classns3_1_1ErrorModel_a7be074c59511ef72066d17a37036a0e0}{Do\+Corrupt} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p})=0
+\item 
+virtual void \hyperlink{classns3_1_1ErrorModel_ad7974020410bb8072c5b7e2a390e3030}{Do\+Reset} (void)=0
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classns3_1_1ErrorModel_a29ca21de362215b31c727093ef547fe3}{m\+\_\+enable}
+\begin{DoxyCompactList}\small\item\em True if the error model is enabled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+General error model that can be used to corrupt packets. 
+
+This object is used to flag packets as being lost/errored or not. It is part of the \hyperlink{classns3_1_1Object}{Object} framework and can be aggregated to other \hyperlink{namespacens3}{ns3} objects and handled by the \hyperlink{classns3_1_1Ptr}{Ptr} class.
+
+The main method is \hyperlink{classns3_1_1ErrorModel_af75222d384e342b46d0aed09d5e3a3fd}{Is\+Corrupt(\+Ptr$<$\+Packet$>$ p)} which returns true if the packet is to be corrupted according to the underlying model. Depending on the error model, the packet itself may have its packet data buffer errored or not, or side information may be returned to the client in the form of a packet tag. (Note\+: No such error models that actually error the bits in a packet presently exist). The object can have state (resettable by \hyperlink{classns3_1_1ErrorModel_a6b7cbe56c27562e5ba6daf2f04bcd282}{Reset()}). The object can also be enabled and disabled via two public member functions.
+
+Typical code (simplified) to use an \hyperlink{classns3_1_1ErrorModel}{Error\+Model} may look something like this\+: 
+\begin{DoxyCode}
+Ptr<ErrorModel> rem = CreateObject<RateErrorModel> ();
+Ptr<UniformRandomVariable> uv = CreateObject<UniformRandomVariable> ();
+rem->SetRandomVariable (uv);
+rem->SetRate (0.001);
+...
+Ptr<Packet> \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p};
+\textcolor{keywordflow}{if} (rem->IsCorrupt (p))
+  \{
+    dropTrace(p);
+  \} \textcolor{keywordflow}{else} \{
+    Forward (p);
+  \}
+\end{DoxyCode}
+
+
+Four practical error models, a \hyperlink{classns3_1_1RateErrorModel}{Rate\+Error\+Model}, a \hyperlink{classns3_1_1BurstErrorModel}{Burst\+Error\+Model}, a \hyperlink{classns3_1_1ListErrorModel}{List\+Error\+Model}, and a \hyperlink{classns3_1_1ReceiveListErrorModel}{Receive\+List\+Error\+Model}, are currently implemented. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}!Error\+Model@{Error\+Model}}
+\index{Error\+Model@{Error\+Model}!ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Error\+Model()}{ErrorModel()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Error\+Model\+::\+Error\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ErrorModel_a89d58fc926bb907d546844d8e6437f30}{}\label{classns3_1_1ErrorModel_a89d58fc926bb907d546844d8e6437f30}
+
+\begin{DoxyCode}
+95                         :
+96   \hyperlink{classns3_1_1ErrorModel_a29ca21de362215b31c727093ef547fe3}{m\_enable} (\textcolor{keyword}{true}) 
+97 \{
+98   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+99 \}
+\end{DoxyCode}
+\index{ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}!````~Error\+Model@{$\sim$\+Error\+Model}}
+\index{````~Error\+Model@{$\sim$\+Error\+Model}!ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}}
+\subsubsection[{\texorpdfstring{$\sim$\+Error\+Model()}{~ErrorModel()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Error\+Model\+::$\sim$\+Error\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1ErrorModel_a3629ca55411702d935a0406468229768}{}\label{classns3_1_1ErrorModel_a3629ca55411702d935a0406468229768}
+
+\begin{DoxyCode}
+102 \{
+103   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+104 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}!Disable@{Disable}}
+\index{Disable@{Disable}!ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Disable(void)}{Disable(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Error\+Model\+::\+Disable (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ErrorModel_a55d35a3e713c31f650577e9f96cf25c0}{}\label{classns3_1_1ErrorModel_a55d35a3e713c31f650577e9f96cf25c0}
+Disable the error model 
+\begin{DoxyCode}
+133 \{
+134   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+135   \hyperlink{classns3_1_1ErrorModel_a29ca21de362215b31c727093ef547fe3}{m\_enable} = \textcolor{keyword}{false};
+136 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}!Do\+Corrupt@{Do\+Corrupt}}
+\index{Do\+Corrupt@{Do\+Corrupt}!ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Corrupt(\+Ptr$<$ Packet $>$ p)=0}{DoCorrupt(Ptr< Packet > p)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool ns3\+::\+Error\+Model\+::\+Do\+Corrupt (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Packet} $>$}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1ErrorModel_a7be074c59511ef72066d17a37036a0e0}{}\label{classns3_1_1ErrorModel_a7be074c59511ef72066d17a37036a0e0}
+Corrupt a packet according to the specified model. 
+\begin{DoxyParams}{Parameters}
+{\em p} & the packet to corrupt \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the packet is corrupted 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classns3_1_1BinaryErrorModel_aeccdb04090dba5473bb0b0e58990e1d7}{ns3\+::\+Binary\+Error\+Model}, \hyperlink{classns3_1_1ReceiveListErrorModel_abfb30cc520fd20942437e84914f35e34}{ns3\+::\+Receive\+List\+Error\+Model}, \hyperlink{classns3_1_1ListErrorModel_a2324425a02ceefea04cd88167b4f9e9c}{ns3\+::\+List\+Error\+Model}, \hyperlink{classns3_1_1BurstErrorModel_a42b33011d7c55aa034105b36f7555b6f}{ns3\+::\+Burst\+Error\+Model}, \hyperlink{classns3_1_1RateErrorModel_a149b2503d4cd475be4dc1d5b9ceb7756}{ns3\+::\+Rate\+Error\+Model}, and \hyperlink{classns3_1_1TcpGeneralErrorModel_a45cf0b37801164078eb0643dfe388468}{ns3\+::\+Tcp\+General\+Error\+Model}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}!Do\+Reset@{Do\+Reset}}
+\index{Do\+Reset@{Do\+Reset}!ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Reset(void)=0}{DoReset(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ns3\+::\+Error\+Model\+::\+Do\+Reset (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [pure virtual]}}\hypertarget{classns3_1_1ErrorModel_ad7974020410bb8072c5b7e2a390e3030}{}\label{classns3_1_1ErrorModel_ad7974020410bb8072c5b7e2a390e3030}
+Re-\/initialize any state 
+
+Implemented in \hyperlink{classns3_1_1BinaryErrorModel_a9eff16de05702e0a7c43a603b22a99f2}{ns3\+::\+Binary\+Error\+Model}, \hyperlink{classns3_1_1ReceiveListErrorModel_a49ca599ac6a25556620325dca4454b7a}{ns3\+::\+Receive\+List\+Error\+Model}, \hyperlink{classns3_1_1ListErrorModel_a6a24f9a3756ebf15f2425af0eb91a69b}{ns3\+::\+List\+Error\+Model}, \hyperlink{classns3_1_1BurstErrorModel_a374a3d2c1cba5e13ed1444349751cd0e}{ns3\+::\+Burst\+Error\+Model}, \hyperlink{classns3_1_1RateErrorModel_aacb1044ae954e1dd179645ceff15b225}{ns3\+::\+Rate\+Error\+Model}, \hyperlink{classTcpDropRatioErrorModel_af75290ccfc56d9487b2aeae4982e88e1}{Tcp\+Drop\+Ratio\+Error\+Model}, \hyperlink{classns3_1_1TcpFlagErrorModel_a1764dc165b83554424f1d5e5ddfa1bb2}{ns3\+::\+Tcp\+Flag\+Error\+Model}, and \hyperlink{classns3_1_1TcpSeqErrorModel_a640d4ac0900538db580e632e164a2d5b}{ns3\+::\+Tcp\+Seq\+Error\+Model}.
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}!Enable@{Enable}}
+\index{Enable@{Enable}!ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Enable(void)}{Enable(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Error\+Model\+::\+Enable (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ErrorModel_a571d61a2fc9ce2d30df95da7e87b763c}{}\label{classns3_1_1ErrorModel_a571d61a2fc9ce2d30df95da7e87b763c}
+Enable the error model 
+\begin{DoxyCode}
+126 \{
+127   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+128   \hyperlink{classns3_1_1ErrorModel_a29ca21de362215b31c727093ef547fe3}{m\_enable} = \textcolor{keyword}{true};
+129 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Error\+Model\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1ErrorModel_a4c77d35dd93ec6a2452f0d2d4a7ee02a}{}\label{classns3_1_1ErrorModel_a4c77d35dd93ec6a2452f0d2d4a7ee02a}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+83 \{ 
+84   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::ErrorModel"})
+85     .SetParent<\hyperlink{classns3_1_1Object_a40860402e64d8008fb42329df7097cdb}{Object}> ()
+86     .SetGroupName(\textcolor{stringliteral}{"Network"})
+87     .AddAttribute (\textcolor{stringliteral}{"IsEnabled"}, \textcolor{stringliteral}{"Whether this ErrorModel is enabled or not."},
+88                    BooleanValue (\textcolor{keyword}{true}),
+89                    MakeBooleanAccessor (&\hyperlink{classns3_1_1ErrorModel_a29ca21de362215b31c727093ef547fe3}{ErrorModel::m\_enable}),
+90                    MakeBooleanChecker ())
+91   ;
+92   \textcolor{keywordflow}{return} tid;
+93 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}!Is\+Corrupt@{Is\+Corrupt}}
+\index{Is\+Corrupt@{Is\+Corrupt}!ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Is\+Corrupt(\+Ptr$<$ Packet $>$ pkt)}{IsCorrupt(Ptr< Packet > pkt)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Error\+Model\+::\+Is\+Corrupt (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Packet} $>$}]{pkt}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ErrorModel_af75222d384e342b46d0aed09d5e3a3fd}{}\label{classns3_1_1ErrorModel_af75222d384e342b46d0aed09d5e3a3fd}
+Note\+: Depending on the error model, this function may or may not alter the contents of the packet upon returning true.
+
+\begin{DoxyReturn}{Returns}
+true if the \hyperlink{classns3_1_1Packet}{Packet} is to be considered as errored/corrupted 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em pkt} & \hyperlink{classns3_1_1Packet}{Packet} to apply error model to \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+108 \{
+109   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p});
+110   \textcolor{keywordtype}{bool} result;
+111   \textcolor{comment}{// Insert any pre-conditions here}
+112   result = \hyperlink{classns3_1_1ErrorModel_a7be074c59511ef72066d17a37036a0e0}{DoCorrupt} (\hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p});
+113   \textcolor{comment}{// Insert any post-conditions here}
+114   \textcolor{keywordflow}{return} result;
+115 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}!Is\+Enabled@{Is\+Enabled}}
+\index{Is\+Enabled@{Is\+Enabled}!ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Is\+Enabled(void) const }{IsEnabled(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Error\+Model\+::\+Is\+Enabled (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ErrorModel_a471bffecc63bfce9c4dc7b59d7038cd4}{}\label{classns3_1_1ErrorModel_a471bffecc63bfce9c4dc7b59d7038cd4}
+\begin{DoxyReturn}{Returns}
+true if error model is enabled; false otherwise 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+140 \{
+141   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+142   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ErrorModel_a29ca21de362215b31c727093ef547fe3}{m\_enable};
+143 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}!Reset@{Reset}}
+\index{Reset@{Reset}!ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Reset(void)}{Reset(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Error\+Model\+::\+Reset (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ErrorModel_a6b7cbe56c27562e5ba6daf2f04bcd282}{}\label{classns3_1_1ErrorModel_a6b7cbe56c27562e5ba6daf2f04bcd282}
+Reset any state associated with the error model 
+\begin{DoxyCode}
+119 \{
+120   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+121   \hyperlink{classns3_1_1ErrorModel_ad7974020410bb8072c5b7e2a390e3030}{DoReset} ();
+122 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}!m\+\_\+enable@{m\+\_\+enable}}
+\index{m\+\_\+enable@{m\+\_\+enable}!ns3\+::\+Error\+Model@{ns3\+::\+Error\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+enable}{m_enable}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Error\+Model\+::m\+\_\+enable\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ErrorModel_a29ca21de362215b31c727093ef547fe3}{}\label{classns3_1_1ErrorModel_a29ca21de362215b31c727093ef547fe3}
+
+
+True if the error model is enabled. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+network/utils/\hyperlink{error-model_8h}{error-\/model.\+h}\item 
+network/utils/\hyperlink{error-model_8cc}{error-\/model.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,83 @@
+\hypertarget{structns3_1_1SortProcessPtr}{}\section{ns3\+:\+:Sort\+Process\+Ptr Struct Reference}
+\label{structns3_1_1SortProcessPtr}\index{ns3\+::\+Sort\+Process\+Ptr@{ns3\+::\+Sort\+Process\+Ptr}}
+
+
+\hyperlink{structns3_1_1SortProcessPtr}{Sort\+Process\+Ptr} structure.  
+
+
+
+
+{\ttfamily \#include $<$ul-\/job.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Sort\+Process\+Ptr\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Sort\+Process\+Ptr\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{structns3_1_1SortProcessPtr_a3abba598e754f4da13d115179672176f}{operator()} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1PriorityUlJob}{Priority\+Ul\+Job} $>$ \&left, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1PriorityUlJob}{Priority\+Ul\+Job} $>$ \&right) const 
+\begin{DoxyCompactList}\small\item\em comparison operator \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{structns3_1_1SortProcessPtr}{Sort\+Process\+Ptr} structure. 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Sort\+Process\+Ptr@{ns3\+::\+Sort\+Process\+Ptr}!operator()@{operator()}}
+\index{operator()@{operator()}!ns3\+::\+Sort\+Process\+Ptr@{ns3\+::\+Sort\+Process\+Ptr}}
+\subsubsection[{\texorpdfstring{operator()(\+Ptr$<$ Priority\+Ul\+Job $>$ \&left, Ptr$<$ Priority\+Ul\+Job $>$ \&right) const }{operator()(Ptr< PriorityUlJob > &left, Ptr< PriorityUlJob > &right) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Sort\+Process\+Ptr\+::operator() (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Priority\+Ul\+Job} $>$ \&}]{left, }
+\item[{{\bf Ptr}$<$ {\bf Priority\+Ul\+Job} $>$ \&}]{right}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structns3_1_1SortProcessPtr_a3abba598e754f4da13d115179672176f}{}\label{structns3_1_1SortProcessPtr_a3abba598e754f4da13d115179672176f}
+
+
+comparison operator 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & left side input \\
+\hline
+{\em right} & right side input \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if left is logically less then right for given comparison 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+255   \{ 
+256     \textcolor{keywordflow}{if} (left->GetPriority () < right->GetPriority ())
+257       \{
+258         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+259       \}
+260     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (left->GetPriority () == right->GetPriority ())
+261       \{
+262         int32\_t leftBacklogged = left->GetUlJob ()->GetServiceFlow ()->GetRecord ()->GetBacklogged ();
+263         int32\_t rightBacklogged = left->GetUlJob ()->GetServiceFlow ()->GetRecord ()->GetBacklogged ();
+264         \textcolor{keywordflow}{if} (leftBacklogged <= rightBacklogged)
+265           \{
+266             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+267           \}
+268         \textcolor{keywordflow}{else}
+269           \{
+270             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+271           \}
+272       \}
+273     \textcolor{keywordflow}{else}
+274       \{
+275         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+276       \}
+277   \}
+\end{DoxyCode}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+wimax/model/\hyperlink{ul-job_8h}{ul-\/job.\+h}\end{DoxyCompactItemize}

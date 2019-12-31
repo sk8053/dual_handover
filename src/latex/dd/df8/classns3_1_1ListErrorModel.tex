@@ -1,0 +1,267 @@
+\hypertarget{classns3_1_1ListErrorModel}{}\section{ns3\+:\+:List\+Error\+Model Class Reference}
+\label{classns3_1_1ListErrorModel}\index{ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}}
+
+
+Provide a list of \hyperlink{classns3_1_1Packet}{Packet} uids to corrupt.  
+
+
+
+
+{\ttfamily \#include $<$error-\/model.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:List\+Error\+Model\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:List\+Error\+Model\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1ListErrorModel_a7e45ced13e96196ae489e466d0b0819b}{List\+Error\+Model} ()
+\item 
+virtual \hyperlink{classns3_1_1ListErrorModel_a3d9520725571d8465ad5568a911ab576}{$\sim$\+List\+Error\+Model} ()
+\item 
+\hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{std\+::list}$<$ uint32\+\_\+t $>$ \hyperlink{classns3_1_1ListErrorModel_ae8d5d1411670cbb844563c7a30094446}{Get\+List} (void) const 
+\item 
+void \hyperlink{classns3_1_1ListErrorModel_a4b369305572461e7122a2408c0123ac4}{Set\+List} (const \hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{std\+::list}$<$ uint32\+\_\+t $>$ \&packetlist)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1ListErrorModel_ab97f27214f9d03e076de4fb90c2d125c}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{std\+::list}$<$ uint32\+\_\+t $>$ \hyperlink{classns3_1_1ListErrorModel_adbaa9f470c317e60540f521b7b40b309}{Packet\+List}
+\begin{DoxyCompactList}\small\item\em Typedef\+: packet Uid list. \end{DoxyCompactList}\item 
+typedef \hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{std\+::list}$<$ uint32\+\_\+t $>$\+::const\+\_\+iterator \hyperlink{classns3_1_1ListErrorModel_aba4c1be8fd91c22eddb20ac122b8f8c4}{Packet\+List\+CI}
+\begin{DoxyCompactList}\small\item\em Typedef\+: packet Uid list const iterator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{classns3_1_1ListErrorModel_a2324425a02ceefea04cd88167b4f9e9c}{Do\+Corrupt} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p})
+\item 
+virtual void \hyperlink{classns3_1_1ListErrorModel_a6a24f9a3756ebf15f2425af0eb91a69b}{Do\+Reset} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1ListErrorModel_adbaa9f470c317e60540f521b7b40b309}{Packet\+List} \hyperlink{classns3_1_1ListErrorModel_aa2e31c5887a6a1fe296dbacb6a4c3142}{m\+\_\+packet\+List}
+\begin{DoxyCompactList}\small\item\em container of Uid of packets to corrupt \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Provide a list of \hyperlink{classns3_1_1Packet}{Packet} uids to corrupt. 
+
+This object is used to flag packets as being lost/errored or not. A note on performance\+: the list is assumed to be unordered, and in general, \hyperlink{classns3_1_1Packet}{Packet} uids received may be unordered. Therefore, each call to \hyperlink{classns3_1_1ErrorModel_af75222d384e342b46d0aed09d5e3a3fd}{Is\+Corrupt()} will result in a walk of the list with the present underlying implementation.
+
+Note also that if one wants to target multiple packets from looking at an (unerrored) trace file, the act of erroring a given packet may cause subsequent packet uids to change. For instance, suppose one wants to error packets 11 and 17 on a given device. It may be that erroring packet 11 will cause the subsequent uid stream to change and 17 may no longer correspond to the second packet that one wants to lose. Therefore, be advised that it might take some trial and error to select the right uids when multiple are provided.
+
+\hyperlink{classns3_1_1ErrorModel_a6b7cbe56c27562e5ba6daf2f04bcd282}{Reset()} on this model will clear the list
+
+\hyperlink{classns3_1_1ErrorModel_af75222d384e342b46d0aed09d5e3a3fd}{Is\+Corrupt()} will not modify the packet data buffer 
+
+\subsection{Member Typedef Documentation}
+\index{ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}!Packet\+List@{Packet\+List}}
+\index{Packet\+List@{Packet\+List}!ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Packet\+List}{PacketList}}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf std\+::list}$<$uint32\+\_\+t$>$ {\bf ns3\+::\+List\+Error\+Model\+::\+Packet\+List}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ListErrorModel_adbaa9f470c317e60540f521b7b40b309}{}\label{classns3_1_1ListErrorModel_adbaa9f470c317e60540f521b7b40b309}
+
+
+Typedef\+: packet Uid list. 
+
+\index{ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}!Packet\+List\+CI@{Packet\+List\+CI}}
+\index{Packet\+List\+CI@{Packet\+List\+CI}!ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Packet\+List\+CI}{PacketListCI}}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf std\+::list}$<$uint32\+\_\+t$>$\+::const\+\_\+iterator {\bf ns3\+::\+List\+Error\+Model\+::\+Packet\+List\+CI}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ListErrorModel_aba4c1be8fd91c22eddb20ac122b8f8c4}{}\label{classns3_1_1ListErrorModel_aba4c1be8fd91c22eddb20ac122b8f8c4}
+
+
+Typedef\+: packet Uid list const iterator. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}!List\+Error\+Model@{List\+Error\+Model}}
+\index{List\+Error\+Model@{List\+Error\+Model}!ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}}
+\subsubsection[{\texorpdfstring{List\+Error\+Model()}{ListErrorModel()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+List\+Error\+Model\+::\+List\+Error\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ListErrorModel_a7e45ced13e96196ae489e466d0b0819b}{}\label{classns3_1_1ListErrorModel_a7e45ced13e96196ae489e466d0b0819b}
+
+\begin{DoxyCode}
+431 \{
+432   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+433 \}
+\end{DoxyCode}
+\index{ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}!````~List\+Error\+Model@{$\sim$\+List\+Error\+Model}}
+\index{````~List\+Error\+Model@{$\sim$\+List\+Error\+Model}!ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}}
+\subsubsection[{\texorpdfstring{$\sim$\+List\+Error\+Model()}{~ListErrorModel()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+List\+Error\+Model\+::$\sim$\+List\+Error\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1ListErrorModel_a3d9520725571d8465ad5568a911ab576}{}\label{classns3_1_1ListErrorModel_a3d9520725571d8465ad5568a911ab576}
+
+\begin{DoxyCode}
+436 \{
+437   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+438 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}!Do\+Corrupt@{Do\+Corrupt}}
+\index{Do\+Corrupt@{Do\+Corrupt}!ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Corrupt(\+Ptr$<$ Packet $>$ p)}{DoCorrupt(Ptr< Packet > p)}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+List\+Error\+Model\+::\+Do\+Corrupt (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Packet} $>$}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1ListErrorModel_a2324425a02ceefea04cd88167b4f9e9c}{}\label{classns3_1_1ListErrorModel_a2324425a02ceefea04cd88167b4f9e9c}
+Corrupt a packet according to the specified model. 
+\begin{DoxyParams}{Parameters}
+{\em p} & the packet to corrupt \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the packet is corrupted 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classns3_1_1ErrorModel_a7be074c59511ef72066d17a37036a0e0}{ns3\+::\+Error\+Model}.
+
+
+\begin{DoxyCode}
+459 \{ 
+460   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << p);
+461   \textcolor{keywordflow}{if} (!\hyperlink{classns3_1_1ErrorModel_a471bffecc63bfce9c4dc7b59d7038cd4}{IsEnabled} ())
+462     \{
+463       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+464     \}
+465   uint32\_t uid = p->\hyperlink{classns3_1_1Packet_a1f212c825b50e54d94f5b9ae99592e6a}{GetUid} ();
+466   \textcolor{keywordflow}{for} (\hyperlink{classns3_1_1ListErrorModel_aba4c1be8fd91c22eddb20ac122b8f8c4}{PacketListCI} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = \hyperlink{classns3_1_1ListErrorModel_aa2e31c5887a6a1fe296dbacb6a4c3142}{m\_packetList}.begin (); 
+467        \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != \hyperlink{classns3_1_1ListErrorModel_aa2e31c5887a6a1fe296dbacb6a4c3142}{m\_packetList}.end (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+468     \{
+469       \textcolor{keywordflow}{if} (uid == *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+470         \{
+471           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+472         \}
+473     \}
+474   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+475 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}!Do\+Reset@{Do\+Reset}}
+\index{Do\+Reset@{Do\+Reset}!ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Do\+Reset(void)}{DoReset(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+List\+Error\+Model\+::\+Do\+Reset (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1ListErrorModel_a6a24f9a3756ebf15f2425af0eb91a69b}{}\label{classns3_1_1ListErrorModel_a6a24f9a3756ebf15f2425af0eb91a69b}
+Re-\/initialize any state 
+
+Implements \hyperlink{classns3_1_1ErrorModel_ad7974020410bb8072c5b7e2a390e3030}{ns3\+::\+Error\+Model}.
+
+
+\begin{DoxyCode}
+479 \{ 
+480   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+481   \hyperlink{classns3_1_1ListErrorModel_aa2e31c5887a6a1fe296dbacb6a4c3142}{m\_packetList}.clear ();
+482 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}!Get\+List@{Get\+List}}
+\index{Get\+List@{Get\+List}!ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Get\+List(void) const }{GetList(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+::list}$<$ uint32\+\_\+t $>$ ns3\+::\+List\+Error\+Model\+::\+Get\+List (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1ListErrorModel_ae8d5d1411670cbb844563c7a30094446}{}\label{classns3_1_1ListErrorModel_ae8d5d1411670cbb844563c7a30094446}
+\begin{DoxyReturn}{Returns}
+a copy of the underlying list 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+442 \{ 
+443   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+444   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1ListErrorModel_aa2e31c5887a6a1fe296dbacb6a4c3142}{m\_packetList}; 
+445 \}
+\end{DoxyCode}
+\index{ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+List\+Error\+Model\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1ListErrorModel_ab97f27214f9d03e076de4fb90c2d125c}{}\label{classns3_1_1ListErrorModel_ab97f27214f9d03e076de4fb90c2d125c}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+421 \{ 
+422   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::ListErrorModel"})
+423     .SetParent<\hyperlink{classns3_1_1ErrorModel_a89d58fc926bb907d546844d8e6437f30}{ErrorModel}> ()
+424     .SetGroupName(\textcolor{stringliteral}{"Network"})
+425     .AddConstructor<\hyperlink{classns3_1_1ListErrorModel_a7e45ced13e96196ae489e466d0b0819b}{ListErrorModel}> ()
+426   ;
+427   \textcolor{keywordflow}{return} tid;
+428 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}!Set\+List@{Set\+List}}
+\index{Set\+List@{Set\+List}!ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}}
+\subsubsection[{\texorpdfstring{Set\+List(const std\+::list$<$ uint32\+\_\+t $>$ \&packetlist)}{SetList(const std::list< uint32_t > &packetlist)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+List\+Error\+Model\+::\+Set\+List (
+\begin{DoxyParamCaption}
+\item[{const {\bf std\+::list}$<$ uint32\+\_\+t $>$ \&}]{packetlist}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1ListErrorModel_a4b369305572461e7122a2408c0123ac4}{}\label{classns3_1_1ListErrorModel_a4b369305572461e7122a2408c0123ac4}
+
+\begin{DoxyParams}{Parameters}
+{\em packetlist} & The list of packet uids to error.\\
+\hline
+\end{DoxyParams}
+This method overwrites any previously provided list. 
+\begin{DoxyCode}
+449 \{ 
+450   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << &packetlist);
+451   \hyperlink{classns3_1_1ListErrorModel_aa2e31c5887a6a1fe296dbacb6a4c3142}{m\_packetList} = packetlist;
+452 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}!m\+\_\+packet\+List@{m\+\_\+packet\+List}}
+\index{m\+\_\+packet\+List@{m\+\_\+packet\+List}!ns3\+::\+List\+Error\+Model@{ns3\+::\+List\+Error\+Model}}
+\subsubsection[{\texorpdfstring{m\+\_\+packet\+List}{m_packetList}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Packet\+List} ns3\+::\+List\+Error\+Model\+::m\+\_\+packet\+List\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1ListErrorModel_aa2e31c5887a6a1fe296dbacb6a4c3142}{}\label{classns3_1_1ListErrorModel_aa2e31c5887a6a1fe296dbacb6a4c3142}
+
+
+container of Uid of packets to corrupt 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+network/utils/\hyperlink{error-model_8h}{error-\/model.\+h}\item 
+network/utils/\hyperlink{error-model_8cc}{error-\/model.\+cc}\end{DoxyCompactItemize}

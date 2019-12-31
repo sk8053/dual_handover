@@ -1,0 +1,363 @@
+\hypertarget{classns3_1_1EventId}{}\section{ns3\+:\+:Event\+Id Class Reference}
+\label{classns3_1_1EventId}\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+
+
+An identifier for simulation events.  
+
+
+
+
+{\ttfamily \#include $<$event-\/id.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Event\+Id\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1EventId_ae553d827bf2f5dea93b403b2f4ed56ef}{Event\+Id} ()
+\item 
+\hyperlink{classns3_1_1EventId_a014007cdca4aa0731e173670cea4a1ce}{Event\+Id} (const \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1EventImpl}{Event\+Impl} $>$ \&impl, uint64\+\_\+t \hyperlink{mmwave_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts}, uint32\+\_\+t context, uint32\+\_\+t uid)
+\item 
+void \hyperlink{classns3_1_1EventId_a993ae94e48e014e1afd47edb16db7a11}{Cancel} (void)
+\item 
+bool \hyperlink{classns3_1_1EventId_a5c30c92e7c1c34b4e8505cc07ed71b02}{Is\+Expired} (void) const 
+\item 
+bool \hyperlink{classns3_1_1EventId_aabf8476d1a080c199ea0c6aa9ccea372}{Is\+Running} (void) const 
+\end{DoxyCompactItemize}
+\begin{Indent}{\bf Scheduler Helpers.}\par
+{\em These methods are normally invoked only by subclasses of the \hyperlink{classns3_1_1Scheduler}{Scheduler} base class. }\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1EventImpl}{Event\+Impl} $\ast$ \hyperlink{classns3_1_1EventId_a8d7b6bbf46c8ff5972369aff510c681b}{Peek\+Event\+Impl} (void) const 
+\item 
+uint64\+\_\+t \hyperlink{classns3_1_1EventId_abddbccdcb927ded5fe6e037c89512948}{Get\+Ts} (void) const 
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1EventId_ab0008ff74f99ade9ddada9c6b43e894c}{Get\+Context} (void) const 
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1EventId_a1ddf64b15dde2807b3262b300d5264f3}{Get\+Uid} (void) const 
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1EventImpl}{Event\+Impl} $>$ \hyperlink{classns3_1_1EventId_aedc50b4a5bc760d6b3f6842ff4f48f52}{m\+\_\+event\+Impl}
+\item 
+uint64\+\_\+t \hyperlink{classns3_1_1EventId_a56cb2ce4649140a91c0cb7bd7f30e736}{m\+\_\+ts}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1EventId_ae865f27ce48282dea263d903765ebc9a}{m\+\_\+context}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1EventId_a727974e1212742906af68bca5301db5c}{m\+\_\+uid}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classns3_1_1EventId_a51ae51b0d70dbed2b94940a6eb7061d4}{operator==} (const \hyperlink{classns3_1_1EventId}{Event\+Id} \&a, const \hyperlink{classns3_1_1EventId}{Event\+Id} \&\hyperlink{lte__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b})
+\item 
+bool \hyperlink{classns3_1_1EventId_a174b038df5fa1503d923f864f4416ba1}{operator!=} (const \hyperlink{classns3_1_1EventId}{Event\+Id} \&a, const \hyperlink{classns3_1_1EventId}{Event\+Id} \&\hyperlink{lte__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An identifier for simulation events. 
+
+Each \hyperlink{classns3_1_1EventId}{Event\+Id} identifies a unique event scheduled with one of the many \hyperlink{classns3_1_1Simulator_a671882c894a08af4a5e91181bf1eec13}{Simulator\+::\+Schedule()} methods. This \hyperlink{classns3_1_1EventId}{Event\+Id} can be used to cancel or remove events after they are scheduled with \hyperlink{classns3_1_1Simulator_a1b903a62d6117ef28f7ba3c6500689bf}{Simulator\+::\+Cancel()} or \hyperlink{classns3_1_1Simulator_ae30cacdda6cd0d5d62a8f2097b320506}{Simulator\+::\+Remove()}.
+
+The important thing to remember about this class is that every variable of this type is {\itshape always} in a valid state, even when it has not been assigned an \hyperlink{classns3_1_1EventId}{Event\+Id} coming from a \hyperlink{classns3_1_1Simulator_a671882c894a08af4a5e91181bf1eec13}{Simulator\+::\+Schedule()} method\+: calling \hyperlink{classns3_1_1Simulator_a1b903a62d6117ef28f7ba3c6500689bf}{Simulator\+::\+Cancel()}, \hyperlink{classns3_1_1EventId_aabf8476d1a080c199ea0c6aa9ccea372}{Is\+Running()}, \hyperlink{classns3_1_1EventId_a5c30c92e7c1c34b4e8505cc07ed71b02}{Is\+Expired()} or passing around instances of this object will not result in crashes or memory leaks. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!Event\+Id@{Event\+Id}}
+\index{Event\+Id@{Event\+Id}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{Event\+Id()}{EventId()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Event\+Id\+::\+Event\+Id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EventId_ae553d827bf2f5dea93b403b2f4ed56ef}{}\label{classns3_1_1EventId_ae553d827bf2f5dea93b403b2f4ed56ef}
+Default constructor. This \hyperlink{classns3_1_1EventId}{Event\+Id} does nothing. 
+\begin{DoxyCode}
+36   : \hyperlink{classns3_1_1EventId_aedc50b4a5bc760d6b3f6842ff4f48f52}{m\_eventImpl} (0),
+37     \hyperlink{classns3_1_1EventId_a56cb2ce4649140a91c0cb7bd7f30e736}{m\_ts} (0),
+38     \hyperlink{classns3_1_1EventId_ae865f27ce48282dea263d903765ebc9a}{m\_context} (0),
+39     \hyperlink{classns3_1_1EventId_a727974e1212742906af68bca5301db5c}{m\_uid} (0)
+40 \{
+41   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+42 \}
+\end{DoxyCode}
+\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!Event\+Id@{Event\+Id}}
+\index{Event\+Id@{Event\+Id}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{Event\+Id(const Ptr$<$ Event\+Impl $>$ \&impl, uint64\+\_\+t ts, uint32\+\_\+t context, uint32\+\_\+t uid)}{EventId(const Ptr< EventImpl > &impl, uint64_t ts, uint32_t context, uint32_t uid)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Event\+Id\+::\+Event\+Id (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ptr}$<$ {\bf Event\+Impl} $>$ \&}]{impl, }
+\item[{uint64\+\_\+t}]{ts, }
+\item[{uint32\+\_\+t}]{context, }
+\item[{uint32\+\_\+t}]{uid}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EventId_a014007cdca4aa0731e173670cea4a1ce}{}\label{classns3_1_1EventId_a014007cdca4aa0731e173670cea4a1ce}
+Construct a real event.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em impl} & The implementation of this event. \\
+\hline
+\mbox{\tt in}  & {\em ts} & The virtual time stamp this event should occur. \\
+\hline
+\mbox{\tt in}  & {\em context} & The execution context for this event. \\
+\hline
+\mbox{\tt in}  & {\em uid} & The unique id for this \hyperlink{classns3_1_1EventId}{Event\+Id}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+45   : \hyperlink{classns3_1_1EventId_aedc50b4a5bc760d6b3f6842ff4f48f52}{m\_eventImpl} (impl),
+46     \hyperlink{classns3_1_1EventId_a56cb2ce4649140a91c0cb7bd7f30e736}{m\_ts} (\hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts}),
+47     \hyperlink{classns3_1_1EventId_ae865f27ce48282dea263d903765ebc9a}{m\_context} (context),
+48     \hyperlink{classns3_1_1EventId_a727974e1212742906af68bca5301db5c}{m\_uid} (uid)
+49 \{
+50   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << impl << \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ada841f58d7be618bfbc76c87e7d44086}{ts} << context << uid);
+51 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!Cancel@{Cancel}}
+\index{Cancel@{Cancel}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{Cancel(void)}{Cancel(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Event\+Id\+::\+Cancel (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1EventId_a993ae94e48e014e1afd47edb16db7a11}{}\label{classns3_1_1EventId_a993ae94e48e014e1afd47edb16db7a11}
+This method is syntactic sugar for the \hyperlink{classns3_1_1Simulator_a1b903a62d6117ef28f7ba3c6500689bf}{ns3\+::\+Simulator\+::\+Cancel} method. 
+\begin{DoxyCode}
+54 \{
+55   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+56   \hyperlink{classns3_1_1Simulator_a1b903a62d6117ef28f7ba3c6500689bf}{Simulator::Cancel} (*\textcolor{keyword}{this});
+57 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!Get\+Context@{Get\+Context}}
+\index{Get\+Context@{Get\+Context}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{Get\+Context(void) const }{GetContext(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Event\+Id\+::\+Get\+Context (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1EventId_ab0008ff74f99ade9ddada9c6b43e894c}{}\label{classns3_1_1EventId_ab0008ff74f99ade9ddada9c6b43e894c}
+\begin{DoxyReturn}{Returns}
+The event context. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+84 \{
+85   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+86   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1EventId_ae865f27ce48282dea263d903765ebc9a}{m\_context};
+87 \}
+\end{DoxyCode}
+\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!Get\+Ts@{Get\+Ts}}
+\index{Get\+Ts@{Get\+Ts}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{Get\+Ts(void) const }{GetTs(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Event\+Id\+::\+Get\+Ts (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1EventId_abddbccdcb927ded5fe6e037c89512948}{}\label{classns3_1_1EventId_abddbccdcb927ded5fe6e037c89512948}
+\begin{DoxyReturn}{Returns}
+The virtual time stamp. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+78 \{
+79   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+80   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1EventId_a56cb2ce4649140a91c0cb7bd7f30e736}{m\_ts};
+81 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!Get\+Uid@{Get\+Uid}}
+\index{Get\+Uid@{Get\+Uid}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{Get\+Uid(void) const }{GetUid(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Event\+Id\+::\+Get\+Uid (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1EventId_a1ddf64b15dde2807b3262b300d5264f3}{}\label{classns3_1_1EventId_a1ddf64b15dde2807b3262b300d5264f3}
+\begin{DoxyReturn}{Returns}
+The unique id. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+90 \{
+91   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+92   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1EventId_a727974e1212742906af68bca5301db5c}{m\_uid};
+93 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!Is\+Expired@{Is\+Expired}}
+\index{Is\+Expired@{Is\+Expired}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{Is\+Expired(void) const }{IsExpired(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Event\+Id\+::\+Is\+Expired (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1EventId_a5c30c92e7c1c34b4e8505cc07ed71b02}{}\label{classns3_1_1EventId_a5c30c92e7c1c34b4e8505cc07ed71b02}
+This method is syntactic sugar for the \hyperlink{classns3_1_1Simulator_a83ac8425c319a29b64f6d3b2ffc61e9c}{ns3\+::\+Simulator\+::\+Is\+Expired} method. \begin{DoxyReturn}{Returns}
+{\ttfamily true} if the event has expired, {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+60 \{
+61   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+62   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Simulator_a83ac8425c319a29b64f6d3b2ffc61e9c}{Simulator::IsExpired} (*\textcolor{keyword}{this});
+63 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!Is\+Running@{Is\+Running}}
+\index{Is\+Running@{Is\+Running}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{Is\+Running(void) const }{IsRunning(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Event\+Id\+::\+Is\+Running (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1EventId_aabf8476d1a080c199ea0c6aa9ccea372}{}\label{classns3_1_1EventId_aabf8476d1a080c199ea0c6aa9ccea372}
+This method is syntactic sugar for !\+Is\+Expired().
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the event has not expired, {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+66 \{
+67   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+68   \textcolor{keywordflow}{return} !\hyperlink{classns3_1_1EventId_a5c30c92e7c1c34b4e8505cc07ed71b02}{IsExpired} ();
+69 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!Peek\+Event\+Impl@{Peek\+Event\+Impl}}
+\index{Peek\+Event\+Impl@{Peek\+Event\+Impl}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{Peek\+Event\+Impl(void) const }{PeekEventImpl(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Event\+Impl} $\ast$ ns3\+::\+Event\+Id\+::\+Peek\+Event\+Impl (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1EventId_a8d7b6bbf46c8ff5972369aff510c681b}{}\label{classns3_1_1EventId_a8d7b6bbf46c8ff5972369aff510c681b}
+\begin{DoxyReturn}{Returns}
+The underlying \hyperlink{classns3_1_1EventImpl}{Event\+Impl} pointer. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+72 \{
+73   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+74   \textcolor{keywordflow}{return} \hyperlink{namespacens3_af2a7557fe9afdd98d8f6f8f6e412cf5a}{PeekPointer} (\hyperlink{classns3_1_1EventId_aedc50b4a5bc760d6b3f6842ff4f48f52}{m\_eventImpl});
+75 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+
+
+\subsection{Friends And Related Function Documentation}
+\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{operator"!=}{operator!=}}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf operator!}= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Event\+Id} \&}]{a, }
+\item[{const {\bf Event\+Id} \&}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classns3_1_1EventId_a174b038df5fa1503d923f864f4416ba1}{}\label{classns3_1_1EventId_a174b038df5fa1503d923f864f4416ba1}
+Test if two \hyperlink{classns3_1_1EventId}{Event\+Id}\textquotesingle{}s are not equal. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a} & The first \hyperlink{classns3_1_1EventId}{Event\+Id}. \\
+\hline
+\mbox{\tt in}  & {\em b} & The second \hyperlink{classns3_1_1EventId}{Event\+Id}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the {\ttfamily a} and {\ttfamily b} are not the same event. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+104 \{
+105   \textcolor{keywordflow}{return} !(a == \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b});
+106 \}
+\end{DoxyCode}
+\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!operator==@{operator==}}
+\index{operator==@{operator==}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{operator==}{operator==}}]{\setlength{\rightskip}{0pt plus 5cm}bool operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf Event\+Id} \&}]{a, }
+\item[{const {\bf Event\+Id} \&}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classns3_1_1EventId_a51ae51b0d70dbed2b94940a6eb7061d4}{}\label{classns3_1_1EventId_a51ae51b0d70dbed2b94940a6eb7061d4}
+Test if two \hyperlink{classns3_1_1EventId}{Event\+Id}\textquotesingle{}s are equal. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a} & The first \hyperlink{classns3_1_1EventId}{Event\+Id}. \\
+\hline
+\mbox{\tt in}  & {\em b} & The second \hyperlink{classns3_1_1EventId}{Event\+Id}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the {\ttfamily a} and {\ttfamily b} represent the same event. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+96 \{
+97   \textcolor{keywordflow}{return} 
+98     a.m\_uid == \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b}.m\_uid && 
+99     a.m\_context == \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b}.m\_context && 
+100     a.m\_ts == \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b}.m\_ts && 
+101     a.m\_eventImpl == \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b}.m\_eventImpl;
+102 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!m\+\_\+context@{m\+\_\+context}}
+\index{m\+\_\+context@{m\+\_\+context}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{m\+\_\+context}{m_context}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Event\+Id\+::m\+\_\+context\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EventId_ae865f27ce48282dea263d903765ebc9a}{}\label{classns3_1_1EventId_ae865f27ce48282dea263d903765ebc9a}
+The context. \index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!m\+\_\+event\+Impl@{m\+\_\+event\+Impl}}
+\index{m\+\_\+event\+Impl@{m\+\_\+event\+Impl}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{m\+\_\+event\+Impl}{m_eventImpl}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Event\+Impl}$>$ ns3\+::\+Event\+Id\+::m\+\_\+event\+Impl\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EventId_aedc50b4a5bc760d6b3f6842ff4f48f52}{}\label{classns3_1_1EventId_aedc50b4a5bc760d6b3f6842ff4f48f52}
+The underlying event implementation. \index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!m\+\_\+ts@{m\+\_\+ts}}
+\index{m\+\_\+ts@{m\+\_\+ts}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{m\+\_\+ts}{m_ts}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Event\+Id\+::m\+\_\+ts\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EventId_a56cb2ce4649140a91c0cb7bd7f30e736}{}\label{classns3_1_1EventId_a56cb2ce4649140a91c0cb7bd7f30e736}
+The virtual time stamp. \index{ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}!m\+\_\+uid@{m\+\_\+uid}}
+\index{m\+\_\+uid@{m\+\_\+uid}!ns3\+::\+Event\+Id@{ns3\+::\+Event\+Id}}
+\subsubsection[{\texorpdfstring{m\+\_\+uid}{m_uid}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Event\+Id\+::m\+\_\+uid\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1EventId_a727974e1212742906af68bca5301db5c}{}\label{classns3_1_1EventId_a727974e1212742906af68bca5301db5c}
+The unique id. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{event-id_8h}{event-\/id.\+h}\item 
+core/model/\hyperlink{event-id_8cc}{event-\/id.\+cc}\end{DoxyCompactItemize}

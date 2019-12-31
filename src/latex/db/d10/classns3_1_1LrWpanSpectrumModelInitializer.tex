@@ -1,0 +1,53 @@
+\hypertarget{classns3_1_1LrWpanSpectrumModelInitializer}{}\section{ns3\+:\+:Lr\+Wpan\+Spectrum\+Model\+Initializer Class Reference}
+\label{classns3_1_1LrWpanSpectrumModelInitializer}\index{ns3\+::\+Lr\+Wpan\+Spectrum\+Model\+Initializer@{ns3\+::\+Lr\+Wpan\+Spectrum\+Model\+Initializer}}
+
+
+Helper class used to automatically initialize the Lr\+Wpan Spectrum Model objects.  
+
+
+
+
+Collaboration diagram for ns3\+:\+:Lr\+Wpan\+Spectrum\+Model\+Initializer\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1LrWpanSpectrumModelInitializer_ac2dfedce698eb932f31a8d69fa5101c1}{Lr\+Wpan\+Spectrum\+Model\+Initializer} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helper class used to automatically initialize the Lr\+Wpan Spectrum Model objects. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Lr\+Wpan\+Spectrum\+Model\+Initializer@{ns3\+::\+Lr\+Wpan\+Spectrum\+Model\+Initializer}!Lr\+Wpan\+Spectrum\+Model\+Initializer@{Lr\+Wpan\+Spectrum\+Model\+Initializer}}
+\index{Lr\+Wpan\+Spectrum\+Model\+Initializer@{Lr\+Wpan\+Spectrum\+Model\+Initializer}!ns3\+::\+Lr\+Wpan\+Spectrum\+Model\+Initializer@{ns3\+::\+Lr\+Wpan\+Spectrum\+Model\+Initializer}}
+\subsubsection[{\texorpdfstring{Lr\+Wpan\+Spectrum\+Model\+Initializer(void)}{LrWpanSpectrumModelInitializer(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Lr\+Wpan\+Spectrum\+Model\+Initializer\+::\+Lr\+Wpan\+Spectrum\+Model\+Initializer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classns3_1_1LrWpanSpectrumModelInitializer_ac2dfedce698eb932f31a8d69fa5101c1}{}\label{classns3_1_1LrWpanSpectrumModelInitializer_ac2dfedce698eb932f31a8d69fa5101c1}
+
+\begin{DoxyCode}
+40   \{
+41     \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+42 
+43     \hyperlink{namespacens3_a46ac9188e5cf43bd5292f7b67451246e}{Bands} bands;
+44     \textcolor{comment}{// 1 MHz resolution, with center frequency of 2400, 2401, ... 2483}
+45     \textcolor{comment}{// overall frequency span of 2399.5 MHz through 2483.5 MHz (83 bands)}
+46     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = -1; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 83; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+47       \{
+48         BandInfo bi;
+49         bi.fl = 2400.5e6 + \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} * 1.0e6;
+50         bi.fh = 2400.5e6 + (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} + 1) * 1.0e6;
+51         bi.fc = (bi.fl +  bi.fh) / 2;
+52         bands.push\_back (bi);
+53       \}
+54     \hyperlink{namespacens3_a42737ccd2a2a0c75325fbf6abfffda10}{g\_LrWpanSpectrumModel} = Create<SpectrumModel> (bands);
+55   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lr-\/wpan/model/\hyperlink{lr-wpan-spectrum-value-helper_8cc}{lr-\/wpan-\/spectrum-\/value-\/helper.\+cc}\end{DoxyCompactItemize}

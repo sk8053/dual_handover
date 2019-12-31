@@ -1,0 +1,143 @@
+\hypertarget{csma-raw-ip-socket_8cc}{}\section{csma/examples/csma-\/raw-\/ip-\/socket.cc File Reference}
+\label{csma-raw-ip-socket_8cc}\index{csma/examples/csma-\/raw-\/ip-\/socket.\+cc@{csma/examples/csma-\/raw-\/ip-\/socket.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$cassert$>$}\\*
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/csma-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/apps-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+Include dependency graph for csma-\/raw-\/ip-\/socket.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{csma-raw-ip-socket_8cc_aa35056e5750a17b8130cf0d457567a9f}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Csma\+Raw\+Ip\+Socket\+Example\char`\"{})
+\item 
+static void \hyperlink{csma-raw-ip-socket_8cc_ab5a3a26cb523a53ed19ba80dcbb97d11}{Sink\+Rx} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p}, const \hyperlink{classns3_1_1Address}{Address} \&ad)
+\item 
+int \hyperlink{csma-raw-ip-socket_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{csma-\/raw-\/ip-\/socket.\+cc@{csma-\/raw-\/ip-\/socket.\+cc}!main@{main}}
+\index{main@{main}!csma-\/raw-\/ip-\/socket.\+cc@{csma-\/raw-\/ip-\/socket.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{csma-raw-ip-socket_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{csma-raw-ip-socket_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+54 \{
+55 \textcolor{preprocessor}{#if 0 }
+56   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"CsmaPacketSocketExample"}, 
+      \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+57 \textcolor{preprocessor}{#endif}
+58   uint32\_t dataRate = 10;
+59   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+60   cmd.\hyperlink{classns3_1_1CommandLine_addcfb546c7ad4c8bd0965654d55beb8e}{AddValue} (\textcolor{stringliteral}{"dataRate"}, \textcolor{stringliteral}{"application dataRate (Kb/s)"}, dataRate);
+61   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+62 
+63   \textcolor{comment}{// Here, we will explicitly create four nodes.}
+64   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create nodes."});
+65   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c};
+66   c.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (4);
+67 
+68   \textcolor{comment}{// connect all our nodes to a shared channel.}
+69   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Build Topology."});
+70   \hyperlink{classns3_1_1CsmaHelper}{CsmaHelper} csma;
+71   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"DataRate"}, DataRateValue (
+      \hyperlink{classns3_1_1DataRate}{DataRate} (5000000)));
+72   csma.\hyperlink{classns3_1_1CsmaHelper_a886d900b2fe44433e0b81752dea7e7f1}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, TimeValue (\hyperlink{group__timecivil_gaf26127cf4571146b83a92ee18679c7a9}{MilliSeconds} (2)));
+73   csma.\hyperlink{classns3_1_1CsmaHelper_a741c31b2526e3570cc62c9d7d9667ca9}{SetDeviceAttribute} (\textcolor{stringliteral}{"EncapsulationMode"}, StringValue (\textcolor{stringliteral}{"Llc"}));
+74   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devs = csma.\hyperlink{classns3_1_1CsmaHelper_af79a91372595230b0817200270ab84e7}{Install} (c);
+75 
+76   \textcolor{comment}{// add an ip stack to all nodes.}
+77   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Add ip stack."});
+78   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} ipStack;
+79   ipStack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (c);
+80 
+81   \textcolor{comment}{// assign ip addresses}
+82   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Assign ip addresses."});
+83   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} ip;
+84   ip.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"192.168.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+85   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} addresses = ip.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devs);
+86 
+87   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Source"});
+88   \textcolor{comment}{// IP protocol configuration}
+89   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::Ipv4RawSocketImpl::Protocol"}, StringValue (\textcolor{stringliteral}{"2"}));
+90   \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} dst = \hyperlink{classns3_1_1InetSocketAddress}{InetSocketAddress} (addresses.
+      \hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (3));
+91   \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} onoff = \hyperlink{classns3_1_1OnOffHelper}{OnOffHelper} (\textcolor{stringliteral}{"ns3::Ipv4RawSocketFactory"}, dst);
+92   onoff.SetConstantRate (\hyperlink{classns3_1_1DataRate}{DataRate} (dataRate*1000));
+93   onoff.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (1250));
+94 
+95   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} apps = onoff.Install (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+96   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.5));
+97   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (11));
+98 
+99   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Create Sink."});
+100   \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} sink = \hyperlink{classns3_1_1PacketSinkHelper}{PacketSinkHelper} (\textcolor{stringliteral}{"ns3::Ipv4RawSocketFactory"}, 
+      dst);
+101   apps = sink.\hyperlink{classns3_1_1PacketSinkHelper_a394059adb24348dd366ce703fc39bbdd}{Install} (c.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (3));
+102   apps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+103   apps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (12.0));
+104 
+105   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Configure Tracing."});
+106   \textcolor{comment}{// first, pcap tracing in non-promiscuous mode}
+107   csma.\hyperlink{classns3_1_1PcapHelperForDevice_a4ab183a2512120200d4a0e5d8ececd49}{EnablePcapAll} (\textcolor{stringliteral}{"csma-raw-ip-socket"}, \textcolor{keyword}{false});
+108   \textcolor{comment}{// then, print what the packet sink receives.}
+109   \hyperlink{group__config_gaa2f896aa7021f95fffabc80b2ec22e08}{Config::ConnectWithoutContext} (\textcolor{stringliteral}{"
+      /NodeList/3/ApplicationList/0/$ns3::PacketSink/Rx"}, 
+110                                  \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{csma-raw-ip-socket_8cc_ab5a3a26cb523a53ed19ba80dcbb97d11}{SinkRx}));
+111 
+112   Packet::EnablePrinting ();
+113 
+114 
+115   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Run Simulation."});
+116   Simulator::Run ();
+117   Simulator::Destroy ();
+118   \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"Done."});
+119 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{csma-\/raw-\/ip-\/socket.\+cc@{csma-\/raw-\/ip-\/socket.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!csma-\/raw-\/ip-\/socket.\+cc@{csma-\/raw-\/ip-\/socket.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Csma\+Raw\+Ip\+Socket\+Example"")}{NS_LOG_COMPONENT_DEFINE("CsmaRawIpSocketExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Csma\+Raw\+Ip\+Socket\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{csma-raw-ip-socket_8cc_aa35056e5750a17b8130cf0d457567a9f}{}\label{csma-raw-ip-socket_8cc_aa35056e5750a17b8130cf0d457567a9f}
+\index{csma-\/raw-\/ip-\/socket.\+cc@{csma-\/raw-\/ip-\/socket.\+cc}!Sink\+Rx@{Sink\+Rx}}
+\index{Sink\+Rx@{Sink\+Rx}!csma-\/raw-\/ip-\/socket.\+cc@{csma-\/raw-\/ip-\/socket.\+cc}}
+\subsubsection[{\texorpdfstring{Sink\+Rx(\+Ptr$<$ const Packet $>$ p, const Address \&ad)}{SinkRx(Ptr< const Packet > p, const Address &ad)}}]{\setlength{\rightskip}{0pt plus 5cm}static void Sink\+Rx (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Packet} $>$}]{p, }
+\item[{const {\bf Address} \&}]{ad}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{csma-raw-ip-socket_8cc_ab5a3a26cb523a53ed19ba80dcbb97d11}{}\label{csma-raw-ip-socket_8cc_ab5a3a26cb523a53ed19ba80dcbb97d11}
+
+\begin{DoxyCode}
+46 \{
+47   \textcolor{comment}{// Enable the below line to see the packet contents printed out at the}
+48   \textcolor{comment}{// receive sink}
+49   \textcolor{comment}{//std::cout << Simulator::Now().GetSeconds () << " " << *p << std::endl;}
+50 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+

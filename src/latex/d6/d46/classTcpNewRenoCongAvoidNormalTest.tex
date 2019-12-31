@@ -1,0 +1,404 @@
+\hypertarget{classTcpNewRenoCongAvoidNormalTest}{}\section{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test Class Reference}
+\label{classTcpNewRenoCongAvoidNormalTest}\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+
+
+Test the behavior of R\+FC congestion avoidance.  
+
+
+
+
+Inheritance diagram for Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+:
+% FIG 0
+
+
+Collaboration diagram for Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTcpNewRenoCongAvoidNormalTest_a69753a98ad66415c4d17c67f95fe9dbe}{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test} (uint32\+\_\+t segment\+Size, uint32\+\_\+t packet\+Size, uint32\+\_\+t packets, \hyperlink{classns3_1_1TypeId}{Type\+Id} \&cong\+Control, const std\+::string \&desc)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classTcpNewRenoCongAvoidNormalTest_a136b3f397552cacae5f77c8462d7aab8}{C\+Wnd\+Trace} (uint32\+\_\+t old\+Value, uint32\+\_\+t new\+Value)
+\begin{DoxyCompactList}\small\item\em Tracks the congestion window changes. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpNewRenoCongAvoidNormalTest_abe06925f1c3a99480216ba9226d4e122}{Queue\+Drop} (\hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6ee}{Socket\+Who} who)
+\begin{DoxyCompactList}\small\item\em Drop on the queue. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpNewRenoCongAvoidNormalTest_a3d1ddc1c8551aedd88edc8c52c63695f}{Phy\+Drop} (\hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6ee}{Socket\+Who} who)
+\begin{DoxyCompactList}\small\item\em Link drop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpNewRenoCongAvoidNormalTest_a33afb3bc951667bb6d37248e7d57b36b}{Normal\+Close} (\hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6ee}{Socket\+Who} who)
+\begin{DoxyCompactList}\small\item\em Socket closed normally. \end{DoxyCompactList}\item 
+void \hyperlink{classTcpNewRenoCongAvoidNormalTest_a0190333cb3f5f5c85918907d0f680717}{Check} ()
+\begin{DoxyCompactList}\small\item\em Called each R\+TT (1.\+0 sec in the testing environment) and check that the overall increment in this R\+TT is less or equal than 1 M\+SS. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpNewRenoCongAvoidNormalTest_aec6c98b12f00b2e8cdb477651865e207}{Configure\+Environment} ()
+\begin{DoxyCompactList}\small\item\em Change the configuration of the evironment. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTcpNewRenoCongAvoidNormalTest_a87b014a34cc1f1786736719d1616421b}{Configure\+Properties} ()
+\begin{DoxyCompactList}\small\item\em Change the configuration of the socket properties. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classTcpNewRenoCongAvoidNormalTest_a14e4dce9b59a6456f26c2736a38bf0ff}{m\+\_\+segment\+Size}
+\begin{DoxyCompactList}\small\item\em Segment size. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classTcpNewRenoCongAvoidNormalTest_af4fe88e11da0557e15a7021f872d1d43}{m\+\_\+packet\+Size}
+\begin{DoxyCompactList}\small\item\em Size of the packets. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classTcpNewRenoCongAvoidNormalTest_a38dd5d011a9182374fb97d4b1c7f6f40}{m\+\_\+packets}
+\begin{DoxyCompactList}\small\item\em Number of packets. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classTcpNewRenoCongAvoidNormalTest_afa604a36a9752799d7936bdcab789d22}{m\+\_\+increment}
+\begin{DoxyCompactList}\small\item\em Congestion window increment. \end{DoxyCompactList}\item 
+\hyperlink{classns3_1_1EventId}{Event\+Id} \hyperlink{classTcpNewRenoCongAvoidNormalTest_a3f5819f49950c4480eaa3fe14b6352c9}{m\+\_\+event}
+\begin{DoxyCompactList}\small\item\em Check event. \end{DoxyCompactList}\item 
+bool \hyperlink{classTcpNewRenoCongAvoidNormalTest_a8ece8465d12b8ffe9f8353dce1c727c9}{m\+\_\+initial}
+\begin{DoxyCompactList}\small\item\em True on first run. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Test the behavior of R\+FC congestion avoidance. 
+
+From R\+FC 5681\+:~\newline
+\begin{DoxyVerb}cwnd += min (N, SMSS)                      (2)
+\end{DoxyVerb}
+
+
+During congestion avoidance, cwnd is incremented by roughly 1 full-\/ sized segment per round-\/trip time (R\+TT). Congestion avoidance continues until congestion is detected. The basic guidelines for incrementing cwnd during congestion avoidance are\+:
+
+
+\begin{DoxyItemize}
+\item M\+AY increment cwnd by S\+M\+SS bytes
+\item S\+H\+O\+U\+LD increment cwnd per equation (2) once per R\+TT
+\item M\+U\+ST N\+OT increment cwnd by more than S\+M\+SS bytes
+\end{DoxyItemize}
+
+To test this behavior and these points, a tracing callback is attached to the c\+Wnd. Each time it increases, the increment is saved. Meanwhile, a timer checks if an amount of time equals to the R\+TT has passed, and if yes, it checks that the increment has not passed the 1 M\+SS limit. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test(uint32\+\_\+t segment\+Size, uint32\+\_\+t packet\+Size, uint32\+\_\+t packets, Type\+Id \&cong\+Control, const std\+::string \&desc)}{TcpNewRenoCongAvoidNormalTest(uint32_t segmentSize, uint32_t packetSize, uint32_t packets, TypeId &congControl, const std::string &desc)}}]{\setlength{\rightskip}{0pt plus 5cm}Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::\+Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{segment\+Size, }
+\item[{uint32\+\_\+t}]{packet\+Size, }
+\item[{uint32\+\_\+t}]{packets, }
+\item[{{\bf Type\+Id} \&}]{cong\+Control, }
+\item[{const std\+::string \&}]{desc}
+\end{DoxyParamCaption}
+)}\hypertarget{classTcpNewRenoCongAvoidNormalTest_a69753a98ad66415c4d17c67f95fe9dbe}{}\label{classTcpNewRenoCongAvoidNormalTest_a69753a98ad66415c4d17c67f95fe9dbe}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em segment\+Size} & Segment size. \\
+\hline
+{\em packet\+Size} & Size of the packets. \\
+\hline
+{\em packets} & Number of packets. \\
+\hline
+{\em cong\+Control} & Type of congestion control. \\
+\hline
+{\em desc} & The test description. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+100   : \hyperlink{classns3_1_1TcpGeneralTest_aed700e733bc50b1e736cb52c0b71f3f8}{TcpGeneralTest} (desc),
+101     \hyperlink{classTcpNewRenoCongAvoidNormalTest_a14e4dce9b59a6456f26c2736a38bf0ff}{m\_segmentSize} (segmentSize),
+102     \hyperlink{classTcpNewRenoCongAvoidNormalTest_af4fe88e11da0557e15a7021f872d1d43}{m\_packetSize} (packetSize),
+103     \hyperlink{classTcpNewRenoCongAvoidNormalTest_a38dd5d011a9182374fb97d4b1c7f6f40}{m\_packets} (packets),
+104     \hyperlink{classTcpNewRenoCongAvoidNormalTest_afa604a36a9752799d7936bdcab789d22}{m\_increment} (0),
+105     \hyperlink{classTcpNewRenoCongAvoidNormalTest_a8ece8465d12b8ffe9f8353dce1c727c9}{m\_initial} (\textcolor{keyword}{true})
+106 \{
+107   \hyperlink{classns3_1_1TcpGeneralTest_aa85b87bfde4d43e1f799f297fe689a8d}{m\_congControlTypeId} = typeId;
+108 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!Check@{Check}}
+\index{Check@{Check}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{Check()}{Check()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::\+Check (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_a0190333cb3f5f5c85918907d0f680717}{}\label{classTcpNewRenoCongAvoidNormalTest_a0190333cb3f5f5c85918907d0f680717}
+
+
+Called each R\+TT (1.\+0 sec in the testing environment) and check that the overall increment in this R\+TT is less or equal than 1 M\+SS. 
+
+
+\begin{DoxyCode}
+158 \{
+159   uint32\_t segSize = \hyperlink{classns3_1_1TcpGeneralTest_aa582b6345d877750962fc34012c9e20a}{GetSegSize} (TcpGeneralTest::SENDER);
+160 
+161   \textcolor{keywordflow}{if} (\hyperlink{classTcpNewRenoCongAvoidNormalTest_afa604a36a9752799d7936bdcab789d22}{m\_increment} != 0)
+162     \{
+163       \hyperlink{group__testing_gaa657eabfc1af9c3768dfa2d575eb0549}{NS\_TEST\_ASSERT\_MSG\_LT\_OR\_EQ} (\hyperlink{classTcpNewRenoCongAvoidNormalTest_afa604a36a9752799d7936bdcab789d22}{m\_increment}, segSize,
+164                                    \textcolor{stringliteral}{"Increment exceeded segment size in one RTT"});
+165     \}
+166 
+167   \hyperlink{classTcpNewRenoCongAvoidNormalTest_afa604a36a9752799d7936bdcab789d22}{m\_increment} = 0;
+168 
+169   \hyperlink{classTcpNewRenoCongAvoidNormalTest_a3f5819f49950c4480eaa3fe14b6352c9}{m\_event} = Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0),
+170                                  &\hyperlink{classTcpNewRenoCongAvoidNormalTest_a0190333cb3f5f5c85918907d0f680717}{TcpNewRenoCongAvoidNormalTest::Check},
+       \textcolor{keyword}{this});
+171 
+172 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!Configure\+Environment@{Configure\+Environment}}
+\index{Configure\+Environment@{Configure\+Environment}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{Configure\+Environment()}{ConfigureEnvironment()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::\+Configure\+Environment (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_aec6c98b12f00b2e8cdb477651865e207}{}\label{classTcpNewRenoCongAvoidNormalTest_aec6c98b12f00b2e8cdb477651865e207}
+
+
+Change the configuration of the evironment. 
+
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_abd4e42807a8d2b13dcd207131af12c3b}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+112 \{
+113   TcpGeneralTest::ConfigureEnvironment ();
+114   \hyperlink{classns3_1_1TcpGeneralTest_a3135ee655332f67b8390691beaa08161}{SetAppPktSize} (\hyperlink{classTcpNewRenoCongAvoidNormalTest_af4fe88e11da0557e15a7021f872d1d43}{m\_packetSize});
+115   \hyperlink{classns3_1_1TcpGeneralTest_a256c8df5966f89ed0acfc966cd5d3898}{SetAppPktCount} (\hyperlink{classTcpNewRenoCongAvoidNormalTest_a38dd5d011a9182374fb97d4b1c7f6f40}{m\_packets});
+116   \hyperlink{classns3_1_1TcpGeneralTest_a892d917a99ab3ce285e7ffec4eac743f}{SetMTU} (1500);
+117 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!Configure\+Properties@{Configure\+Properties}}
+\index{Configure\+Properties@{Configure\+Properties}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{Configure\+Properties()}{ConfigureProperties()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::\+Configure\+Properties (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_a87b014a34cc1f1786736719d1616421b}{}\label{classTcpNewRenoCongAvoidNormalTest_a87b014a34cc1f1786736719d1616421b}
+
+
+Change the configuration of the socket properties. 
+
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_a48b3f15add5cb4b3a9906bd5240e64be}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+120 \{
+121   TcpGeneralTest::ConfigureProperties ();
+122   \hyperlink{classns3_1_1TcpGeneralTest_afcb6efab7790bc5b054c7323b1ae5664}{SetSegmentSize} (\hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER}, \hyperlink{classTcpNewRenoCongAvoidNormalTest_a14e4dce9b59a6456f26c2736a38bf0ff}{m\_segmentSize});
+123   \hyperlink{classns3_1_1TcpGeneralTest_ad5df8836a27fe3c7fa0719c51b2c13d5}{SetInitialSsThresh} (\hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER}, 0);
+124 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!C\+Wnd\+Trace@{C\+Wnd\+Trace}}
+\index{C\+Wnd\+Trace@{C\+Wnd\+Trace}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{C\+Wnd\+Trace(uint32\+\_\+t old\+Value, uint32\+\_\+t new\+Value)}{CWndTrace(uint32_t oldValue, uint32_t newValue)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::\+C\+Wnd\+Trace (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{old\+Value, }
+\item[{uint32\+\_\+t}]{new\+Value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_a136b3f397552cacae5f77c8462d7aab8}{}\label{classTcpNewRenoCongAvoidNormalTest_a136b3f397552cacae5f77c8462d7aab8}
+
+
+Tracks the congestion window changes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em old\+Value} & old value \\
+\hline
+{\em new\+Value} & new value \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_a2ab19c9303805ace0ab1ec2aa0d57c54}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+128 \{
+129   \textcolor{keywordflow}{if} (\hyperlink{classTcpNewRenoCongAvoidNormalTest_a8ece8465d12b8ffe9f8353dce1c727c9}{m\_initial})
+130     \{
+131       \hyperlink{classTcpNewRenoCongAvoidNormalTest_a8ece8465d12b8ffe9f8353dce1c727c9}{m\_initial} = \textcolor{keyword}{false};
+132       \textcolor{keywordflow}{return};
+133     \}
+134 
+135   \textcolor{keywordflow}{if} (!\hyperlink{classTcpNewRenoCongAvoidNormalTest_a3f5819f49950c4480eaa3fe14b6352c9}{m\_event}.\hyperlink{classns3_1_1EventId_aabf8476d1a080c199ea0c6aa9ccea372}{IsRunning} ())
+136     \{
+137       \hyperlink{classTcpNewRenoCongAvoidNormalTest_a3f5819f49950c4480eaa3fe14b6352c9}{m\_event} = Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0),
+138                                      &\hyperlink{classTcpNewRenoCongAvoidNormalTest_a0190333cb3f5f5c85918907d0f680717}{TcpNewRenoCongAvoidNormalTest::Check}
+      , \textcolor{keyword}{this});
+139     \}
+140 
+141   \hyperlink{classTcpNewRenoCongAvoidNormalTest_afa604a36a9752799d7936bdcab789d22}{m\_increment} += newValue - oldValue;
+142 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!Normal\+Close@{Normal\+Close}}
+\index{Normal\+Close@{Normal\+Close}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{Normal\+Close(\+Socket\+Who who)}{NormalClose(SocketWho who)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::\+Normal\+Close (
+\begin{DoxyParamCaption}
+\item[{{\bf Socket\+Who}}]{who}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_a33afb3bc951667bb6d37248e7d57b36b}{}\label{classTcpNewRenoCongAvoidNormalTest_a33afb3bc951667bb6d37248e7d57b36b}
+
+
+Socket closed normally. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em who} & the socket closed (S\+E\+N\+D\+ER or R\+E\+C\+E\+I\+V\+ER) \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_a38d972b53fbdb443df17121b9a6a31b3}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+176 \{
+177   \textcolor{keywordflow}{if} (who == \hyperlink{classns3_1_1TcpGeneralTest_a29338e6b7137cad650c2ff835713f6eea5400e3d6b26928cf9e67ebb026462256}{SENDER})
+178     \{
+179       \hyperlink{classTcpNewRenoCongAvoidNormalTest_a3f5819f49950c4480eaa3fe14b6352c9}{m\_event}.\hyperlink{classns3_1_1EventId_a993ae94e48e014e1afd47edb16db7a11}{Cancel} ();
+180     \}
+181 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!Phy\+Drop@{Phy\+Drop}}
+\index{Phy\+Drop@{Phy\+Drop}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{Phy\+Drop(\+Socket\+Who who)}{PhyDrop(SocketWho who)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::\+Phy\+Drop (
+\begin{DoxyParamCaption}
+\item[{{\bf Socket\+Who}}]{who}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_a3d1ddc1c8551aedd88edc8c52c63695f}{}\label{classTcpNewRenoCongAvoidNormalTest_a3d1ddc1c8551aedd88edc8c52c63695f}
+
+
+Link drop. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em who} & where the drop occurred (S\+E\+N\+D\+ER or R\+E\+C\+E\+I\+V\+ER) \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_acf4bcdc3ed9e607baa6e71a22f8b2127}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+152 \{
+153   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Drop on the phy: cannot validate congestion avoidance"});
+154 \}
+\end{DoxyCode}
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!Queue\+Drop@{Queue\+Drop}}
+\index{Queue\+Drop@{Queue\+Drop}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{Queue\+Drop(\+Socket\+Who who)}{QueueDrop(SocketWho who)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::\+Queue\+Drop (
+\begin{DoxyParamCaption}
+\item[{{\bf Socket\+Who}}]{who}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_abe06925f1c3a99480216ba9226d4e122}{}\label{classTcpNewRenoCongAvoidNormalTest_abe06925f1c3a99480216ba9226d4e122}
+
+
+Drop on the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em who} & where the drop occurred (S\+E\+N\+D\+ER or R\+E\+C\+E\+I\+V\+ER) \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpGeneralTest_a78442dd60bad29a24a82a819e7e13d2d}{ns3\+::\+Tcp\+General\+Test}.
+
+
+\begin{DoxyCode}
+146 \{
+147   \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Drop on the queue; cannot validate congestion avoidance"});
+148 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!m\+\_\+event@{m\+\_\+event}}
+\index{m\+\_\+event@{m\+\_\+event}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+event}{m_event}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Event\+Id} Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::m\+\_\+event\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_a3f5819f49950c4480eaa3fe14b6352c9}{}\label{classTcpNewRenoCongAvoidNormalTest_a3f5819f49950c4480eaa3fe14b6352c9}
+
+
+Check event. 
+
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!m\+\_\+increment@{m\+\_\+increment}}
+\index{m\+\_\+increment@{m\+\_\+increment}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+increment}{m_increment}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::m\+\_\+increment\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_afa604a36a9752799d7936bdcab789d22}{}\label{classTcpNewRenoCongAvoidNormalTest_afa604a36a9752799d7936bdcab789d22}
+
+
+Congestion window increment. 
+
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!m\+\_\+initial@{m\+\_\+initial}}
+\index{m\+\_\+initial@{m\+\_\+initial}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+initial}{m_initial}}]{\setlength{\rightskip}{0pt plus 5cm}bool Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::m\+\_\+initial\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_a8ece8465d12b8ffe9f8353dce1c727c9}{}\label{classTcpNewRenoCongAvoidNormalTest_a8ece8465d12b8ffe9f8353dce1c727c9}
+
+
+True on first run. 
+
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!m\+\_\+packets@{m\+\_\+packets}}
+\index{m\+\_\+packets@{m\+\_\+packets}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+packets}{m_packets}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::m\+\_\+packets\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_a38dd5d011a9182374fb97d4b1c7f6f40}{}\label{classTcpNewRenoCongAvoidNormalTest_a38dd5d011a9182374fb97d4b1c7f6f40}
+
+
+Number of packets. 
+
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!m\+\_\+packet\+Size@{m\+\_\+packet\+Size}}
+\index{m\+\_\+packet\+Size@{m\+\_\+packet\+Size}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+packet\+Size}{m_packetSize}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::m\+\_\+packet\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_af4fe88e11da0557e15a7021f872d1d43}{}\label{classTcpNewRenoCongAvoidNormalTest_af4fe88e11da0557e15a7021f872d1d43}
+
+
+Size of the packets. 
+
+\index{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}!m\+\_\+segment\+Size@{m\+\_\+segment\+Size}}
+\index{m\+\_\+segment\+Size@{m\+\_\+segment\+Size}!Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test@{Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test}}
+\subsubsection[{\texorpdfstring{m\+\_\+segment\+Size}{m_segmentSize}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Tcp\+New\+Reno\+Cong\+Avoid\+Normal\+Test\+::m\+\_\+segment\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTcpNewRenoCongAvoidNormalTest_a14e4dce9b59a6456f26c2736a38bf0ff}{}\label{classTcpNewRenoCongAvoidNormalTest_a14e4dce9b59a6456f26c2736a38bf0ff}
+
+
+Segment size. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{tcp-cong-avoid-test_8cc}{tcp-\/cong-\/avoid-\/test.\+cc}\end{DoxyCompactItemize}

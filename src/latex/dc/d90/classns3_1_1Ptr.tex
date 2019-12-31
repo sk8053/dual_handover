@@ -1,0 +1,490 @@
+\hypertarget{classns3_1_1Ptr}{}\section{ns3\+:\+:Ptr$<$ T $>$ Class Template Reference}
+\label{classns3_1_1Ptr}\index{ns3\+::\+Ptr$<$ T $>$@{ns3\+::\+Ptr$<$ T $>$}}
+
+
+Smart pointer class similar to {\ttfamily boost\+::intrusive\+\_\+ptr}.  
+
+
+
+
+{\ttfamily \#include $<$ptr.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Ptr$<$ T $>$\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1Ptr_1_1Tester}{Tester}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Ptr_a733d72d196e70ef62ffcb95f97ee42f6}{Ptr} ()
+\item 
+\hyperlink{classns3_1_1Ptr_a07865cd0a6aceaa840a30d4961e1bca7}{Ptr} (T $\ast$ptr)
+\item 
+\hyperlink{classns3_1_1Ptr_ad18339bad260c96e5c3c22dce380c418}{Ptr} (T $\ast$ptr, bool ref)
+\item 
+\hyperlink{classns3_1_1Ptr_aac090242e77b4586d632476ba744f965}{Ptr} (\hyperlink{classns3_1_1Ptr}{Ptr} const \&o)
+\item 
+{\footnotesize template$<$typename U $>$ }\\\hyperlink{classns3_1_1Ptr_af50beb87698e00e21288d64aac08de21}{Ptr} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ U $>$ const \&o)
+\item 
+\hyperlink{classns3_1_1Ptr_aed420da12cb2b0b79361f688e03ec341}{$\sim$\+Ptr} ()
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ T $>$ \& \hyperlink{classns3_1_1Ptr_aed68ff16639e65606926671af2b3d28a}{operator=} (\hyperlink{classns3_1_1Ptr}{Ptr} const \&o)
+\item 
+T $\ast$ \hyperlink{classns3_1_1Ptr_ada2f1b3ebae8b0ee35d6b840f01ff1b2}{operator-\/$>$} () const 
+\item 
+T $\ast$ \hyperlink{classns3_1_1Ptr_a885ace1a3aee73436bc84387cd708944}{operator-\/$>$} ()
+\item 
+const T \& \hyperlink{classns3_1_1Ptr_a859ba385548d2f407b0fbb81517109c9}{operator$\ast$} () const 
+\item 
+T \& \hyperlink{classns3_1_1Ptr_a6a7537c21af519605a284b8417314505}{operator$\ast$} ()
+\item 
+bool \hyperlink{classns3_1_1Ptr_a893727e99295ba06f6d546f27416e24a}{operator!} ()
+\item 
+\hyperlink{classns3_1_1Ptr_a34606999f733fa070d246f5d178739a1}{operator Tester $\ast$} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1Ptr_a9579b15e8c42dcdff5869d9d987562fb}{Acquire} (void) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T $\ast$ \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\+\_\+ptr}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classns3_1_1Ptr_a9eefe78c1d5aefe20553e12ea52117b6}{Ptr$<$ const T $>$}
+\item 
+{\footnotesize template$<$typename U $>$ }\\U $\ast$ \hyperlink{classns3_1_1Ptr_a27a6a8208868e66947c81f77f5bd751b}{Get\+Pointer} (const \hyperlink{classns3_1_1Ptr}{Ptr}$<$ U $>$ \&\hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p})
+\item 
+{\footnotesize template$<$typename U $>$ }\\U $\ast$ \hyperlink{classns3_1_1Ptr_a9914221293005018082da554c6059d5e}{Peek\+Pointer} (const \hyperlink{classns3_1_1Ptr}{Ptr}$<$ U $>$ \&\hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\\*
+class ns3\+::\+Ptr$<$ T $>$}
+
+Smart pointer class similar to {\ttfamily boost\+::intrusive\+\_\+ptr}. 
+
+This smart-\/pointer class assumes that the underlying type provides a pair of {\ttfamily Ref} and {\ttfamily Unref} methods which are expected to increment and decrement the internal reference count of the object instance. You can add {\ttfamily Ref} and {\ttfamily Unref} to a class simply by inheriting from \hyperlink{classns3_1_1SimpleRefCount}{ns3\+::\+Simple\+Ref\+Count}.
+
+This implementation allows you to manipulate the smart pointer as if it was a normal pointer\+: you can compare it with zero, compare it against other pointers, assign zero to it, etc.
+
+It is possible to extract the raw pointer from this smart pointer with the \hyperlink{classns3_1_1Ptr_a27a6a8208868e66947c81f77f5bd751b}{Get\+Pointer()} and \hyperlink{classns3_1_1Ptr_a9914221293005018082da554c6059d5e}{Peek\+Pointer()} methods.
+
+If you want to store a {\ttfamily new} object into a smart pointer, we recommend you to use the \hyperlink{group__ptr_ga0406dd2d929ceac05ce39d4579fa3e4b}{Create()} template functions to create the object and store it in a smart pointer to avoid memory leaks. These functions are really small convenience functions and their goal is just is save you a small bit of typing.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The underlying type. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!Ptr@{Ptr}}
+\index{Ptr@{Ptr}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{Ptr()}{Ptr()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf ns3\+::\+Ptr}$<$ T $>$\+::{\bf Ptr} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ptr_a733d72d196e70ef62ffcb95f97ee42f6}{}\label{classns3_1_1Ptr_a733d72d196e70ef62ffcb95f97ee42f6}
+Create an empty smart pointer 
+\begin{DoxyCode}
+716   : \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr} (0)
+717 \{
+718 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!Ptr@{Ptr}}
+\index{Ptr@{Ptr}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{Ptr(\+T $\ast$ptr)}{Ptr(T *ptr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf ns3\+::\+Ptr}$<$ T $>$\+::{\bf Ptr} (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{ptr}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ptr_a07865cd0a6aceaa840a30d4961e1bca7}{}\label{classns3_1_1Ptr_a07865cd0a6aceaa840a30d4961e1bca7}
+Create a smart pointer which points to the object pointed to by the input raw pointer ptr. This method creates its own reference to the pointed object. The caller is responsible for Unref()\textquotesingle{}ing its own reference, and the smart pointer will eventually do the same, so that object is deleted if no more references to it remain.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ptr} & Raw pointer to manage \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+722   : \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr} (ptr)
+723 \{
+724   \hyperlink{classns3_1_1Ptr_a9579b15e8c42dcdff5869d9d987562fb}{Acquire} ();
+725 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!Ptr@{Ptr}}
+\index{Ptr@{Ptr}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{Ptr(\+T $\ast$ptr, bool ref)}{Ptr(T *ptr, bool ref)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf ns3\+::\+Ptr}$<$ T $>$\+::{\bf Ptr} (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{ptr, }
+\item[{bool}]{ref}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ptr_ad18339bad260c96e5c3c22dce380c418}{}\label{classns3_1_1Ptr_ad18339bad260c96e5c3c22dce380c418}
+Create a smart pointer which points to the object pointed to by the input raw pointer ptr.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ptr} & Raw pointer to manage \\
+\hline
+\mbox{\tt in}  & {\em ref} & if set to true, this method calls Ref, otherwise, it does not call Ref. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+729   : \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr} (ptr)
+730 \{
+731   \textcolor{keywordflow}{if} (ref)
+732     \{
+733       \hyperlink{classns3_1_1Ptr_a9579b15e8c42dcdff5869d9d987562fb}{Acquire} ();
+734     \}
+735 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!Ptr@{Ptr}}
+\index{Ptr@{Ptr}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{Ptr(\+Ptr const \&o)}{Ptr(Ptr const &o)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf ns3\+::\+Ptr}$<$ T $>$\+::{\bf Ptr} (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ T $>$ const \&}]{o}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ptr_aac090242e77b4586d632476ba744f965}{}\label{classns3_1_1Ptr_aac090242e77b4586d632476ba744f965}
+Copy by referencing the same underlying object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em o} & The other \hyperlink{classns3_1_1Ptr}{Ptr} instance. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+739   : \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr} (\hyperlink{classns3_1_1Ptr_a9914221293005018082da554c6059d5e}{PeekPointer} (o))
+740 \{
+741   \hyperlink{classns3_1_1Ptr_a9579b15e8c42dcdff5869d9d987562fb}{Acquire} ();
+742 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!Ptr@{Ptr}}
+\index{Ptr@{Ptr}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{Ptr(\+Ptr$<$ U $>$ const \&o)}{Ptr(Ptr< U > const &o)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ template$<$typename U $>$ {\bf ns3\+::\+Ptr}$<$ T $>$\+::{\bf Ptr} (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ U $>$ const \&}]{o}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ptr_af50beb87698e00e21288d64aac08de21}{}\label{classns3_1_1Ptr_af50beb87698e00e21288d64aac08de21}
+Copy, removing {\ttfamily const} qualifier.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & The underlying type of the {\ttfamily const} object. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em o} & The \hyperlink{classns3_1_1Ptr}{Ptr} to copy. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+746   : \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr} (\hyperlink{classns3_1_1Ptr_a9914221293005018082da554c6059d5e}{PeekPointer} (o))
+747 \{
+748   \hyperlink{classns3_1_1Ptr_a9579b15e8c42dcdff5869d9d987562fb}{Acquire} ();
+749 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!````~Ptr@{$\sim$\+Ptr}}
+\index{````~Ptr@{$\sim$\+Ptr}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{$\sim$\+Ptr()}{~Ptr()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf ns3\+::\+Ptr}$<$ T $>$\+::$\sim${\bf Ptr} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ptr_aed420da12cb2b0b79361f688e03ec341}{}\label{classns3_1_1Ptr_aed420da12cb2b0b79361f688e03ec341}
+Destructor. 
+\begin{DoxyCode}
+753 \{
+754   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr} != 0) 
+755     \{
+756       \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr}->Unref ();
+757     \}
+758 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!Acquire@{Acquire}}
+\index{Acquire@{Acquire}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{Acquire(void) const }{Acquire(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void {\bf ns3\+::\+Ptr}$<$ T $>$\+::Acquire (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\hypertarget{classns3_1_1Ptr_a9579b15e8c42dcdff5869d9d987562fb}{}\label{classns3_1_1Ptr_a9579b15e8c42dcdff5869d9d987562fb}
+Mark this as a a reference by incrementing the reference count. 
+\begin{DoxyCode}
+707 \{
+708   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr} != 0)
+709     \{
+710       \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr}->Ref ();
+711     \}
+712 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!operator Tester $\ast$@{operator Tester $\ast$}}
+\index{operator Tester $\ast$@{operator Tester $\ast$}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{operator Tester $\ast$() const }{operator Tester *() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf ns3\+::\+Ptr}$<$ T $>$\+::operator {\bf Tester} $\ast$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1Ptr_a34606999f733fa070d246f5d178739a1}{}\label{classns3_1_1Ptr_a34606999f733fa070d246f5d178739a1}
+Test for non-\/\+N\+U\+LL pointer.
+
+This enables simple pointer checks like 
+\begin{DoxyCode}
+\hyperlink{classns3_1_1Ptr_a733d72d196e70ef62ffcb95f97ee42f6}{Ptr}<...> \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = ...;
+\textcolor{keywordflow}{if} (\hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p}) ...
+\end{DoxyCode}
+ This also disables deleting a \hyperlink{classns3_1_1Ptr}{Ptr} 
+\begin{DoxyCode}
+814 \{
+815   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr} == 0) 
+816     \{
+817       \textcolor{keywordflow}{return} 0;
+818     \}
+819   \textcolor{keyword}{static} Tester \hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test};
+820   \textcolor{keywordflow}{return} &\hyperlink{main-test-sync_8cc_a708a4c1a4d0c4acc4c447310dd4db27f}{test};
+821 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!operator"!@{operator"!}}
+\index{operator"!@{operator"!}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{operator"!()}{operator!()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool {\bf ns3\+::\+Ptr}$<$ T $>$\+::operator! (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ptr_a893727e99295ba06f6d546f27416e24a}{}\label{classns3_1_1Ptr_a893727e99295ba06f6d546f27416e24a}
+Test for N\+U\+LL pointer.
+
+This enables simple N\+U\+LL pointer checks like 
+\begin{DoxyCode}
+\hyperlink{classns3_1_1Ptr_a733d72d196e70ef62ffcb95f97ee42f6}{Ptr}<..> \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p} = ...;
+\textcolor{keywordflow}{if} (!\hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p}) ...
+\end{DoxyCode}
+ \begin{DoxyReturn}{Returns}
+{\ttfamily true} if the underlying pointer is N\+U\+LL. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+808 \{
+809   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr} == 0;
+810 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{operator$\ast$() const }{operator*() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ const T \& {\bf ns3\+::\+Ptr}$<$ T $>$\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1Ptr_a859ba385548d2f407b0fbb81517109c9}{}\label{classns3_1_1Ptr_a859ba385548d2f407b0fbb81517109c9}
+A {\ttfamily const} dereference. \begin{DoxyReturn}{Returns}
+A pointer to the underlying object. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+794 \{
+795   \textcolor{keywordflow}{return} *\hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr};
+796 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{operator$\ast$()}{operator*()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T \& {\bf ns3\+::\+Ptr}$<$ T $>$\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ptr_a6a7537c21af519605a284b8417314505}{}\label{classns3_1_1Ptr_a6a7537c21af519605a284b8417314505}
+A dereference. \begin{DoxyReturn}{Returns}
+A pointer to the underlying object. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+801 \{
+802   \textcolor{keywordflow}{return} *\hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr};
+803 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{operator-\/$>$() const }{operator->() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T $\ast$ {\bf ns3\+::\+Ptr}$<$ T $>$\+::operator-\/$>$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1Ptr_ada2f1b3ebae8b0ee35d6b840f01ff1b2}{}\label{classns3_1_1Ptr_ada2f1b3ebae8b0ee35d6b840f01ff1b2}
+An rvalue member access. \begin{DoxyReturn}{Returns}
+A pointer to the underlying object. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+787 \{
+788   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr};
+789 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{operator-\/$>$()}{operator->()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T $\ast$ {\bf ns3\+::\+Ptr}$<$ T $>$\+::operator-\/$>$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ptr_a885ace1a3aee73436bc84387cd708944}{}\label{classns3_1_1Ptr_a885ace1a3aee73436bc84387cd708944}
+An lvalue member access. \begin{DoxyReturn}{Returns}
+A pointer to the underlying object. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+780 \{
+781   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr};
+782 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!operator=@{operator=}}
+\index{operator=@{operator=}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{operator=(\+Ptr const \&o)}{operator=(Ptr const &o)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Ptr}$<$ T $>$ \& {\bf ns3\+::\+Ptr}$<$ T $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ T $>$ const \&}]{o}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1Ptr_aed68ff16639e65606926671af2b3d28a}{}\label{classns3_1_1Ptr_aed68ff16639e65606926671af2b3d28a}
+Assignment operator by referencing the same underlying object.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em o} & The other \hyperlink{classns3_1_1Ptr}{Ptr} instance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to self. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+763 \{
+764   \textcolor{keywordflow}{if} (&o == \textcolor{keyword}{this})
+765     \{
+766       \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+767     \}
+768   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr} != 0) 
+769     \{
+770       \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr}->Unref ();
+771     \}
+772   \hyperlink{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{m\_ptr} = o.m\_ptr;
+773   \hyperlink{classns3_1_1Ptr_a9579b15e8c42dcdff5869d9d987562fb}{Acquire} ();
+774   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+775 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Friends And Related Function Documentation}
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!Get\+Pointer@{Get\+Pointer}}
+\index{Get\+Pointer@{Get\+Pointer}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{Get\+Pointer}{GetPointer}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ template$<$typename U $>$ U$\ast$ Get\+Pointer (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ptr}$<$ U $>$ \&}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classns3_1_1Ptr_a27a6a8208868e66947c81f77f5bd751b}{}\label{classns3_1_1Ptr_a27a6a8208868e66947c81f77f5bd751b}
+Get a permanent pointer to the underlying object.
+
+The underlying refcount is incremented prior to returning to the caller so the caller is responsible for calling Unref himself.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & Smart pointer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The pointer managed by this smart pointer. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+569 \{
+570   \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p}.Acquire ();
+571   \textcolor{keywordflow}{return} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p}.m\_ptr;
+572 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!Peek\+Pointer@{Peek\+Pointer}}
+\index{Peek\+Pointer@{Peek\+Pointer}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{Peek\+Pointer}{PeekPointer}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ template$<$typename U $>$ U$\ast$ Peek\+Pointer (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ptr}$<$ U $>$ \&}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classns3_1_1Ptr_a9914221293005018082da554c6059d5e}{}\label{classns3_1_1Ptr_a9914221293005018082da554c6059d5e}
+Get a temporary pointer to the underlying object.
+
+The underlying refcount is not incremented prior to returning to the caller so the caller is not responsible for calling Unref himself.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & Smart pointer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The pointer managed by this smart pointer. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+563 \{
+564   \textcolor{keywordflow}{return} \hyperlink{lte__link__budget_8m_ac9de518908a968428863f829398a4e62}{p}.m\_ptr;
+565 \}
+\end{DoxyCode}
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!Ptr$<$ const T $>$@{Ptr$<$ const T $>$}}
+\index{Ptr$<$ const T $>$@{Ptr$<$ const T $>$}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{Ptr$<$ const T $>$}{Ptr< const T >}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ friend class {\bf Ptr}$<$ const T $>$\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classns3_1_1Ptr_a9eefe78c1d5aefe20553e12ea52117b6}{}\label{classns3_1_1Ptr_a9eefe78c1d5aefe20553e12ea52117b6}
+Interoperate with const instances. 
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Ptr@{ns3\+::\+Ptr}!m\+\_\+ptr@{m\+\_\+ptr}}
+\index{m\+\_\+ptr@{m\+\_\+ptr}!ns3\+::\+Ptr@{ns3\+::\+Ptr}}
+\subsubsection[{\texorpdfstring{m\+\_\+ptr}{m_ptr}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ T$\ast$ {\bf ns3\+::\+Ptr}$<$ T $>$\+::m\+\_\+ptr\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}{}\label{classns3_1_1Ptr_af48a617408c972186d97c7e1ac4d5652}
+The pointer. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{ptr_8h}{ptr.\+h}\end{DoxyCompactItemize}

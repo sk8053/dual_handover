@@ -1,0 +1,113 @@
+\hypertarget{tv-trans-example_8cc}{}\section{spectrum/examples/tv-\/trans-\/example.cc File Reference}
+\label{tv-trans-example_8cc}\index{spectrum/examples/tv-\/trans-\/example.\+cc@{spectrum/examples/tv-\/trans-\/example.\+cc}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/core-\/module.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/mobility-\/module.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/spectrum-\/helper.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/spectrum-\/analyzer-\/helper.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/tv-\/spectrum-\/transmitter-\/helper.\+h$>$}\\*
+Include dependency graph for tv-\/trans-\/example.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{tv-trans-example_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{tv-\/trans-\/example.\+cc@{tv-\/trans-\/example.\+cc}!main@{main}}
+\index{main@{main}!tv-\/trans-\/example.\+cc@{tv-\/trans-\/example.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{tv-trans-example_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{tv-trans-example_8cc_a3c04138a5bfe5d72780bb7e82a18e627}
+This example uses the Tv\+Spectrum\+Transmitter\+Helper class to set up two 8-\/\+V\+SB TV transmitters with adjacent channels. Each transmitter\textquotesingle{}s spectrum has a bandwidth of 6 M\+Hz. The first TV transmitter has a start frequency of 524 M\+Hz while the second has a start frequency of 530 M\+Hz. These transmitters model A\+T\+SC (North American digital TV standard) channels 23 and 24.
+
+A spectrum analyzer is used to measure the transmitted spectra from the TV transmitters. The file \char`\"{}spectrum-\/analyzer-\/tv-\/sim-\/2-\/0.\+tr\char`\"{} contains its output post simulation (and can be plotted with Gnuplot or M\+A\+T\+L\+AB). 
+\begin{DoxyCode}
+43 \{
+44   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+45   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+46   
+47   \textcolor{comment}{/* nodes and positions */}
+48   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} tvTransmitterNodes;
+49   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} spectrumAnalyzerNodes;
+50   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} allNodes;
+51   tvTransmitterNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+52   spectrumAnalyzerNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+53   allNodes.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (tvTransmitterNodes);
+54   allNodes.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (spectrumAnalyzerNodes);
+55   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+56   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} nodePositionList = 
+      CreateObject<ListPositionAllocator> ();
+57   nodePositionList->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (128000.0, 0.0, 0.0)); \textcolor{comment}{// TV Transmitter 1; 128 km away from
+       spectrum analyzer }
+58   nodePositionList->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 24000.0, 0.0)); \textcolor{comment}{// TV Transmitter 2; 24 km away from
+       spectrum analyzer}
+59   nodePositionList->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (0.0, 0.0, 0.0));  \textcolor{comment}{// Spectrum Analyzer}
+60   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (nodePositionList);
+61   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+62   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (allNodes);
+63 
+64   \textcolor{comment}{/* channel and propagation */}
+65   \hyperlink{classns3_1_1SpectrumChannelHelper}{SpectrumChannelHelper} channelHelper = SpectrumChannelHelper::Default ();
+66   channelHelper.\hyperlink{classns3_1_1SpectrumChannelHelper_a11ffe86edea8cdd30f181e41c0e3e29f}{SetChannel} (\textcolor{stringliteral}{"ns3::MultiModelSpectrumChannel"});
+67   \textcolor{comment}{// constant path loss added just to show capability to set different propagation loss models}
+68   \textcolor{comment}{// FriisSpectrumPropagationLossModel already added by default in SpectrumChannelHelper}
+69   channelHelper.\hyperlink{classns3_1_1SpectrumChannelHelper_a135e8ad3b8399671db56d112929f9611}{AddSpectrumPropagationLoss} (\textcolor{stringliteral}{"
+      ns3::ConstantSpectrumPropagationLossModel"});
+70   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumChannel>} channel = channelHelper.\hyperlink{classns3_1_1SpectrumChannelHelper_a419ea84f5046763085f94f38af319fb9}{Create} ();
+71   
+72   \textcolor{comment}{/* TV transmitter setup */}
+73   \hyperlink{classns3_1_1TvSpectrumTransmitterHelper}{TvSpectrumTransmitterHelper} tvTransHelper;
+74   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_a14d44a79d659b99a2e80916eadefbd54}{SetChannel} (channel);
+75   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_af602e03cad3ae4cabafcb127c888fb53}{SetAttribute} (\textcolor{stringliteral}{"StartFrequency"}, DoubleValue (524e6));
+76   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_af602e03cad3ae4cabafcb127c888fb53}{SetAttribute} (\textcolor{stringliteral}{"ChannelBandwidth"}, DoubleValue (6e6));
+77   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_af602e03cad3ae4cabafcb127c888fb53}{SetAttribute} (\textcolor{stringliteral}{"StartingTime"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0)));
+78   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_af602e03cad3ae4cabafcb127c888fb53}{SetAttribute} (\textcolor{stringliteral}{"TransmitDuration"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.2)));
+79   \textcolor{comment}{// 22.22 dBm/Hz from 1000 kW ERP transmit power, flat 6 MHz PSD spectrum assumed for this approximation }
+80   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_af602e03cad3ae4cabafcb127c888fb53}{SetAttribute} (\textcolor{stringliteral}{"BasePsd"}, DoubleValue (22.22)); 
+81   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_af602e03cad3ae4cabafcb127c888fb53}{SetAttribute} (\textcolor{stringliteral}{"TvType"}, \hyperlink{classns3_1_1EnumValue}{EnumValue} (TvSpectrumTransmitter::TVTYPE\_8VSB)
+      );
+82   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_af602e03cad3ae4cabafcb127c888fb53}{SetAttribute} (\textcolor{stringliteral}{"Antenna"}, StringValue (\textcolor{stringliteral}{"ns3::IsotropicAntennaModel"}));
+83   tvTransHelper.\hyperlink{classns3_1_1TvSpectrumTransmitterHelper_a671aa2a952822ecf3a74db1e7f643541}{InstallAdjacent} (tvTransmitterNodes);
+84 
+85   \textcolor{comment}{/* frequency range for spectrum analyzer */}
+86   std::vector<double> freqs;
+87   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 200; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+88     \{
+89       freqs.push\_back ((\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} + 5200) * 1e5);
+90     \}
+91   \hyperlink{classns3_1_1Ptr}{Ptr<SpectrumModel>} spectrumAnalyzerFreqModel = Create<SpectrumModel> (freqs);
+92 
+93   \textcolor{comment}{/* spectrum analyzer setup */}
+94   \hyperlink{classns3_1_1SpectrumAnalyzerHelper}{SpectrumAnalyzerHelper} spectrumAnalyzerHelper;
+95   spectrumAnalyzerHelper.\hyperlink{classns3_1_1SpectrumAnalyzerHelper_a7fb7b79c0706c9aecd427af6c4148031}{SetChannel} (channel);
+96   spectrumAnalyzerHelper.SetRxSpectrumModel (spectrumAnalyzerFreqModel);
+97   spectrumAnalyzerHelper.SetPhyAttribute (\textcolor{stringliteral}{"NoisePowerSpectralDensity"}, DoubleValue (1e-15)); \textcolor{comment}{// -120 dBm/Hz}
+98   spectrumAnalyzerHelper.EnableAsciiAll (\textcolor{stringliteral}{"spectrum-analyzer-tv-sim"});
+99   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} spectrumAnalyzerDevices = spectrumAnalyzerHelper.Install (
+      spectrumAnalyzerNodes);
+100 
+101   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.4));
+102 
+103   Simulator::Run ();
+104 
+105   Simulator::Destroy ();
+106 
+107   std::cout << \textcolor{stringliteral}{"simulation done!"} << std::endl;
+108   std::cout << \textcolor{stringliteral}{"see spectrum analyzer output file"} << std::endl;
+109 
+110   \textcolor{keywordflow}{return} 0;
+111 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

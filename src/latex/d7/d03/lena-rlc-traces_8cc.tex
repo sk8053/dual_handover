@@ -1,0 +1,106 @@
+\hypertarget{lena-rlc-traces_8cc}{}\section{lte/examples/lena-\/rlc-\/traces.cc File Reference}
+\label{lena-rlc-traces_8cc}\index{lte/examples/lena-\/rlc-\/traces.\+cc@{lte/examples/lena-\/rlc-\/traces.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/mobility-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/lte-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/config-\/store-\/module.\+h\char`\"{}}\\*
+Include dependency graph for lena-\/rlc-\/traces.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{lena-rlc-traces_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{lena-\/rlc-\/traces.\+cc@{lena-\/rlc-\/traces.\+cc}!main@{main}}
+\index{main@{main}!lena-\/rlc-\/traces.\+cc@{lena-\/rlc-\/traces.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lena-rlc-traces_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{lena-rlc-traces_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+32 \{
+33   \textcolor{comment}{// Command line arguments}
+34   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+35   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+36 
+37   \hyperlink{classns3_1_1ConfigStore}{ConfigStore} inputConfig;
+38   inputConfig.\hyperlink{classns3_1_1ConfigStore_a0a6137574d7c847c3823af8b9d1bb886}{ConfigureDefaults} ();
+39 
+40   \textcolor{comment}{// parse again so you can override default values from the command line}
+41   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+42 
+43   \hyperlink{classns3_1_1Ptr}{Ptr<LteHelper>} lteHelper = CreateObject<LteHelper> ();
+44 
+45   lteHelper->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"PathlossModel"}, StringValue (\textcolor{stringliteral}{"
+      ns3::FriisSpectrumPropagationLossModel"}));
+46   \textcolor{comment}{// Enable LTE log components}
+47   \textcolor{comment}{//lteHelper->EnableLogComponents ();}
+48 
+49   \textcolor{comment}{// Create Nodes: eNodeB and UE}
+50   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} enbNodes;
+51   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} ueNodes;
+52   enbNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+53   ueNodes.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (3);
+54 
+55   \textcolor{comment}{// Install Mobility Model}
+56   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+57   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+58   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (enbNodes);
+59   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+60   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (ueNodes);
+61 
+62   \textcolor{comment}{// Create Devices and install them in the Nodes (eNB and UE)}
+63   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} enbDevs;
+64   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} ueDevs;
+65   enbDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_a5e009ad35ef85f46b5a6099263f15a03}{InstallEnbDevice} (enbNodes);
+66   ueDevs = lteHelper->\hyperlink{classns3_1_1LteHelper_ac9cd932d7de92811cfa953c2e3b2fc9f}{InstallUeDevice} (ueNodes);
+67 
+68   \textcolor{comment}{// Attach a UE to a eNB}
+69   lteHelper->\hyperlink{classns3_1_1LteHelper_a9466743f826aa2652a87907b7f0a1c87}{Attach} (ueDevs, enbDevs.\hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+70 
+71   \textcolor{comment}{// Activate an EPS bearer}
+72   \textcolor{keyword}{enum} \hyperlink{structns3_1_1EpsBearer_aecf0c67109c5eb4ec0b07226fff5885e}{EpsBearer::Qci} q = EpsBearer::GBR\_CONV\_VOICE;
+73   \hyperlink{structns3_1_1EpsBearer}{EpsBearer} bearer (q);
+74   lteHelper->\hyperlink{classns3_1_1LteHelper_ac896e16cf162e4beeaa292d39ab1b700}{ActivateDataRadioBearer} (ueDevs, bearer);
+75 
+76   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.5));
+77 
+78   lteHelper->\hyperlink{classns3_1_1LteHelper_ad6d7edf234d29f7b8363e9ebf73fe32e}{EnablePhyTraces} ();
+79   lteHelper->\hyperlink{classns3_1_1LteHelper_affa3a12841520407d3662417fe41863d}{EnableMacTraces} ();
+80   lteHelper->\hyperlink{classns3_1_1LteHelper_abadfdd04d30b261e9b6f0846b4784928}{EnableRlcTraces} ();
+81 
+82 
+83   \textcolor{keywordtype}{double} distance\_temp [] = \{ 1000,1000,1000\};
+84   std::vector<double> userDistance;
+85   userDistance.assign (distance\_temp, distance\_temp + 3);
+86   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 3; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+87     \{
+88       \hyperlink{classns3_1_1Ptr}{Ptr<ConstantPositionMobilityModel>} mm = ueNodes.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})->\hyperlink{classns3_1_1Object_a13e18c00017096c8381eb651d5bd0783}{GetObject}<\hyperlink{classns3_1_1ConstantPositionMobilityModel}{ConstantPositionMobilityModel}> ();
+89       mm->\hyperlink{classns3_1_1MobilityModel_ac584b3d5a309709d2f13ed6ada1e7640}{SetPosition} (\hyperlink{classns3_1_1Vector3D_a7e59b47bc94c9cb1dadff68c1d0112d8}{Vector} (userDistance[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}], 0.0, 0.0));
+90     \} 
+91 
+92   Simulator::Run ();
+93 
+94   \textcolor{comment}{// Uncomment to show available paths}
+95   \textcolor{comment}{// GtkConfigStore config;}
+96   \textcolor{comment}{// config.ConfigureAttributes ();}
+97 
+98   Simulator::Destroy ();
+99 
+100   \textcolor{keywordflow}{return} 0;
+101 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+

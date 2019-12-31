@@ -1,0 +1,60 @@
+\hypertarget{rand-cart-around-geo-test_8cc}{}\section{mobility/test/rand-\/cart-\/around-\/geo-\/test.cc File Reference}
+\label{rand-cart-around-geo-test_8cc}\index{mobility/test/rand-\/cart-\/around-\/geo-\/test.\+cc@{mobility/test/rand-\/cart-\/around-\/geo-\/test.\+cc}}
+{\ttfamily \#include $<$ns3/test.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/log.\+h$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include $<$ns3/geographic-\/positions.\+h$>$}\\*
+Include dependency graph for rand-\/cart-\/around-\/geo-\/test.cc\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classRandCartAroundGeoTestCase}{Rand\+Cart\+Around\+Geo\+Test\+Case}
+\begin{DoxyCompactList}\small\item\em Rand Cart Around Geo Test Case. \end{DoxyCompactList}\item 
+class \hyperlink{classRandCartAroundGeoTestSuite}{Rand\+Cart\+Around\+Geo\+Test\+Suite}
+\begin{DoxyCompactList}\small\item\em Rand Cart Around Geo Test Suite. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{rand-cart-around-geo-test_8cc_ab8d3bbef6dc69b4c1389dff58b6b4ac6}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Rand\+Cart\+Around\+Geo\+Test\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const double \hyperlink{rand-cart-around-geo-test_8cc_a89311a98397f9d6967d2cb10d5152d77}{T\+O\+L\+E\+R\+A\+N\+CE} = 0.\+1
+\item 
+static const double \hyperlink{rand-cart-around-geo-test_8cc_a2cb7703740f4124ff50163bdc2b0d1da}{E\+A\+R\+T\+H\+\_\+\+R\+A\+D\+I\+US} = 6371e3
+\begin{DoxyCompactList}\small\item\em earth\textquotesingle{}s radius in meters if modeled as a perfect sphere \end{DoxyCompactList}\item 
+static \hyperlink{classRandCartAroundGeoTestSuite}{Rand\+Cart\+Around\+Geo\+Test\+Suite} \hyperlink{rand-cart-around-geo-test_8cc_a27b3ef727181ca7661f4d96d211c78c9}{g\+\_\+\+Rand\+Cart\+Around\+Geo\+Test\+Suite}
+\begin{DoxyCompactList}\small\item\em the test suite \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{rand-\/cart-\/around-\/geo-\/test.\+cc@{rand-\/cart-\/around-\/geo-\/test.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!rand-\/cart-\/around-\/geo-\/test.\+cc@{rand-\/cart-\/around-\/geo-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Rand\+Cart\+Around\+Geo\+Test"")}{NS_LOG_COMPONENT_DEFINE("RandCartAroundGeoTest")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Rand\+Cart\+Around\+Geo\+Test\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{rand-cart-around-geo-test_8cc_ab8d3bbef6dc69b4c1389dff58b6b4ac6}{}\label{rand-cart-around-geo-test_8cc_ab8d3bbef6dc69b4c1389dff58b6b4ac6}
+This test verifies the accuracy of the Rand\+Cartesian\+Points\+Around\+Geographic\+Point() method in the Geographic\+Positions class, which generates uniformly distributed random points (in E\+C\+EF Cartesian coordinates) within a given altitude above earth\textquotesingle{}s surface centered around a given origin point (on earth\textquotesingle{}s surface, in geographic/geodetic coordinates) within a given distance radius (using arc length of earth\textquotesingle{}s surface, not pythagorean distance). Distance radius is measured as if all generated points are on earth\textquotesingle{}s surface (with altitude = 0). Assumes earth is a perfect sphere. To verify the method, this test checks that the generated points are within the given maximum distance radius from the origin. Since this is testing the distance radius from the origin, all points generated in this test are on earth\textquotesingle{}s surface (altitude = 0), since the distance radius has been defined as if all points are on earth\textquotesingle{}s surface. The pythagorean (straight-\/line) distance between each generated point and the origin is first calculated, and then using this distance and the radius of the earth, the distance radius to the origin (arc length) is calculated. This distance radius is compared to the max distance radius to ensure that it is less than the maximum. 
+
+\subsection{Variable Documentation}
+\index{rand-\/cart-\/around-\/geo-\/test.\+cc@{rand-\/cart-\/around-\/geo-\/test.\+cc}!E\+A\+R\+T\+H\+\_\+\+R\+A\+D\+I\+US@{E\+A\+R\+T\+H\+\_\+\+R\+A\+D\+I\+US}}
+\index{E\+A\+R\+T\+H\+\_\+\+R\+A\+D\+I\+US@{E\+A\+R\+T\+H\+\_\+\+R\+A\+D\+I\+US}!rand-\/cart-\/around-\/geo-\/test.\+cc@{rand-\/cart-\/around-\/geo-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{E\+A\+R\+T\+H\+\_\+\+R\+A\+D\+I\+US}{EARTH_RADIUS}}]{\setlength{\rightskip}{0pt plus 5cm}const double E\+A\+R\+T\+H\+\_\+\+R\+A\+D\+I\+US = 6371e3\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{rand-cart-around-geo-test_8cc_a2cb7703740f4124ff50163bdc2b0d1da}{}\label{rand-cart-around-geo-test_8cc_a2cb7703740f4124ff50163bdc2b0d1da}
+
+
+earth\textquotesingle{}s radius in meters if modeled as a perfect sphere 
+
+\index{rand-\/cart-\/around-\/geo-\/test.\+cc@{rand-\/cart-\/around-\/geo-\/test.\+cc}!g\+\_\+\+Rand\+Cart\+Around\+Geo\+Test\+Suite@{g\+\_\+\+Rand\+Cart\+Around\+Geo\+Test\+Suite}}
+\index{g\+\_\+\+Rand\+Cart\+Around\+Geo\+Test\+Suite@{g\+\_\+\+Rand\+Cart\+Around\+Geo\+Test\+Suite}!rand-\/cart-\/around-\/geo-\/test.\+cc@{rand-\/cart-\/around-\/geo-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{g\+\_\+\+Rand\+Cart\+Around\+Geo\+Test\+Suite}{g_RandCartAroundGeoTestSuite}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Rand\+Cart\+Around\+Geo\+Test\+Suite} g\+\_\+\+Rand\+Cart\+Around\+Geo\+Test\+Suite\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{rand-cart-around-geo-test_8cc_a27b3ef727181ca7661f4d96d211c78c9}{}\label{rand-cart-around-geo-test_8cc_a27b3ef727181ca7661f4d96d211c78c9}
+
+
+the test suite 
+
+\index{rand-\/cart-\/around-\/geo-\/test.\+cc@{rand-\/cart-\/around-\/geo-\/test.\+cc}!T\+O\+L\+E\+R\+A\+N\+CE@{T\+O\+L\+E\+R\+A\+N\+CE}}
+\index{T\+O\+L\+E\+R\+A\+N\+CE@{T\+O\+L\+E\+R\+A\+N\+CE}!rand-\/cart-\/around-\/geo-\/test.\+cc@{rand-\/cart-\/around-\/geo-\/test.\+cc}}
+\subsubsection[{\texorpdfstring{T\+O\+L\+E\+R\+A\+N\+CE}{TOLERANCE}}]{\setlength{\rightskip}{0pt plus 5cm}const double T\+O\+L\+E\+R\+A\+N\+CE = 0.\+1}\hypertarget{rand-cart-around-geo-test_8cc_a89311a98397f9d6967d2cb10d5152d77}{}\label{rand-cart-around-geo-test_8cc_a89311a98397f9d6967d2cb10d5152d77}
+0.\+1 meter tolerance for testing, which is very small compared to the maximum distances from origin being tested 

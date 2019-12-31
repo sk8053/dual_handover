@@ -1,0 +1,241 @@
+\hypertarget{classBug730TestCase}{}\section{Bug730\+Test\+Case Class Reference}
+\label{classBug730TestCase}\index{Bug730\+Test\+Case@{Bug730\+Test\+Case}}
+
+
+Inheritance diagram for Bug730\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Bug730\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classBug730TestCase_a012d3d448fb216377389fd2ed817d348}{Bug730\+Test\+Case} ()
+\item 
+virtual \hyperlink{classBug730TestCase_a518dc58e7e0d4c323bf7ef7400168061}{$\sim$\+Bug730\+Test\+Case} ()
+\item 
+virtual void \hyperlink{classBug730TestCase_a9c8853ac24b9200f16c7993ec8df8eda}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classBug730TestCase_a8d51a4e071f00ea8d995802d1aa4cae1}{Receive} (std\+::string context, \hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1Packet}{Packet} $>$ \hyperlink{lte__link__budget__x2__handover__measures_8m_ac9de518908a968428863f829398a4e62}{p}, const \hyperlink{classns3_1_1Address}{Address} \&adr)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classBug730TestCase_adcd611e94c2c190d0195a229f0331c71}{m\+\_\+received}
+\begin{DoxyCompactList}\small\item\em received \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Make sure that when changing the fragmentation threshold during the simulation, the T\+CP transmission does not unexpectedly stop.
+
+The scenario considers a T\+CP transmission between a 802.\+11b station and a 802.\+11b access point. After the simulation has begun, the fragmentation threshold is set at a value lower than the packet size. It then checks whether the T\+CP transmission continues after the fragmentation threshold modification.
+
+See \{730\} 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Bug730\+Test\+Case@{Bug730\+Test\+Case}!Bug730\+Test\+Case@{Bug730\+Test\+Case}}
+\index{Bug730\+Test\+Case@{Bug730\+Test\+Case}!Bug730\+Test\+Case@{Bug730\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Bug730\+Test\+Case()}{Bug730TestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Bug730\+Test\+Case\+::\+Bug730\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBug730TestCase_a012d3d448fb216377389fd2ed817d348}{}\label{classBug730TestCase_a012d3d448fb216377389fd2ed817d348}
+
+\begin{DoxyCode}
+574   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Test case for Bug 730"}),
+575     \hyperlink{classBug730TestCase_adcd611e94c2c190d0195a229f0331c71}{m\_received} (0)
+576 \{
+577 \}
+\end{DoxyCode}
+\index{Bug730\+Test\+Case@{Bug730\+Test\+Case}!````~Bug730\+Test\+Case@{$\sim$\+Bug730\+Test\+Case}}
+\index{````~Bug730\+Test\+Case@{$\sim$\+Bug730\+Test\+Case}!Bug730\+Test\+Case@{Bug730\+Test\+Case}}
+\subsubsection[{\texorpdfstring{$\sim$\+Bug730\+Test\+Case()}{~Bug730TestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Bug730\+Test\+Case\+::$\sim$\+Bug730\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classBug730TestCase_a518dc58e7e0d4c323bf7ef7400168061}{}\label{classBug730TestCase_a518dc58e7e0d4c323bf7ef7400168061}
+
+\begin{DoxyCode}
+580 \{
+581 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Bug730\+Test\+Case@{Bug730\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Bug730\+Test\+Case@{Bug730\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Bug730\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classBug730TestCase_a9c8853ac24b9200f16c7993ec8df8eda}{}\label{classBug730TestCase_a9c8853ac24b9200f16c7993ec8df8eda}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+595 \{
+596   \hyperlink{classBug730TestCase_adcd611e94c2c190d0195a229f0331c71}{m\_received} = 0;
+597 
+598   \hyperlink{group__config_ga2e7882df849d8ba4aaad31c934c40c06}{Config::SetDefault} (\textcolor{stringliteral}{"ns3::WifiRemoteStationManager::FragmentationThreshold"}, 
+      StringValue (\textcolor{stringliteral}{"2304"}));
+599 
+600   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} wifiStaNode;
+601   wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+602 
+603   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} wifiApNode;
+604   wifiApNode.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+605 
+606   \hyperlink{classns3_1_1YansWifiChannelHelper}{YansWifiChannelHelper} channel = YansWifiChannelHelper::Default ();
+607   \hyperlink{classns3_1_1YansWifiPhyHelper}{YansWifiPhyHelper} phy = YansWifiPhyHelper::Default ();
+608   phy.\hyperlink{classns3_1_1YansWifiPhyHelper_ad2e9a27587dd4ff320435c93cc2676de}{SetChannel} (channel.\hyperlink{classns3_1_1YansWifiChannelHelper_a0532e292ab9452f3cf630c848708e563}{Create} ());
+609 
+610   \hyperlink{classns3_1_1WifiHelper}{WifiHelper} wifi;
+611   wifi.\hyperlink{classns3_1_1WifiHelper_aa54f3e61527ef8de318d310045bc5dfd}{SetStandard} (\hyperlink{group__wifi_gga1299834f4e1c615af3ca738033b76a49a77e1cc9f77a0bce8e2bc82cbef437b5a}{WIFI\_PHY\_STANDARD\_80211b});
+612   wifi.\hyperlink{classns3_1_1WifiHelper_a3d01b178aeb2de246ab5a3aa5638ce24}{SetRemoteStationManager} (\textcolor{stringliteral}{"ns3::ConstantRateWifiManager"},
+613                                 \textcolor{stringliteral}{"DataMode"}, StringValue (\textcolor{stringliteral}{"DsssRate1Mbps"}),
+614                                 \textcolor{stringliteral}{"ControlMode"}, StringValue (\textcolor{stringliteral}{"DsssRate1Mbps"}));
+615 
+616   \hyperlink{classns3_1_1WifiMacHelper}{WifiMacHelper} mac;
+617   \hyperlink{classns3_1_1Ssid}{Ssid} ssid = \hyperlink{classns3_1_1Ssid}{Ssid} (\textcolor{stringliteral}{"ns-3-ssid"});
+618   mac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::StaWifiMac"},
+619                \textcolor{stringliteral}{"Ssid"}, SsidValue (ssid),
+620                \textcolor{stringliteral}{"ActiveProbing"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{false}));
+621 
+622   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} staDevices;
+623   staDevices = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, mac, wifiStaNode);
+624 
+625   mac.\hyperlink{classns3_1_1WifiMacHelper_a382d8df76a1dd7007179d1963b4b6bc6}{SetType} (\textcolor{stringliteral}{"ns3::ApWifiMac"},
+626                \textcolor{stringliteral}{"Ssid"}, SsidValue (ssid),
+627                \textcolor{stringliteral}{"BeaconGeneration"}, \hyperlink{classns3_1_1BooleanValue}{BooleanValue} (\textcolor{keyword}{true}));
+628 
+629   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} apDevices;
+630   apDevices = wifi.\hyperlink{classns3_1_1WifiHelper_a451b3d33fa1497c22f06c5451f57a127}{Install} (phy, mac, wifiApNode);
+631 
+632   \hyperlink{classns3_1_1MobilityHelper}{MobilityHelper} mobility;
+633   \hyperlink{classns3_1_1Ptr}{Ptr<ListPositionAllocator>} positionAlloc = CreateObject<ListPositionAllocator> 
+      ();
+634 
+635   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (Vector (0.0, 0.0, 0.0));
+636   positionAlloc->\hyperlink{classns3_1_1ListPositionAllocator_a460e82f015ac012a73ba0ea0cccb3486}{Add} (Vector (1.0, 0.0, 0.0));
+637   mobility.\hyperlink{classns3_1_1MobilityHelper_ac59d5295076be3cc11021566713a28c5}{SetPositionAllocator} (positionAlloc);
+638 
+639   mobility.\hyperlink{classns3_1_1MobilityHelper_a030275011b6f40682e70534d30280aba}{SetMobilityModel} (\textcolor{stringliteral}{"ns3::ConstantPositionMobilityModel"});
+640   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (wifiApNode);
+641   mobility.\hyperlink{classns3_1_1MobilityHelper_a07737960ee95c0777109cf2994dd97ae}{Install} (wifiStaNode);
+642 
+643   \hyperlink{classns3_1_1Ptr}{Ptr<WifiNetDevice>} ap\_device = DynamicCast<WifiNetDevice> (apDevices.
+      \hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+644   \hyperlink{classns3_1_1Ptr}{Ptr<WifiNetDevice>} sta\_device = DynamicCast<WifiNetDevice> (staDevices.
+      \hyperlink{classns3_1_1NetDeviceContainer_a677d62594b5c9d2dea155cc5045f4d0b}{Get} (0));
+645 
+646   \hyperlink{classns3_1_1PacketSocketAddress}{PacketSocketAddress} socket;
+647   socket.\hyperlink{classns3_1_1PacketSocketAddress_ad1caa016f4d27c9d5f2c06dbfc53f8a3}{SetSingleDevice} (sta\_device->GetIfIndex ());
+648   socket.SetPhysicalAddress (ap\_device->\hyperlink{classns3_1_1WifiNetDevice_a77fc34ff26c7af715b8ad1050aeb90ea}{GetAddress} ());
+649   socket.SetProtocol (1);
+650 
+651   \textcolor{comment}{// give packet socket powers to nodes.}
+652   \hyperlink{classns3_1_1PacketSocketHelper}{PacketSocketHelper} packetSocket;
+653   packetSocket.\hyperlink{classns3_1_1PacketSocketHelper_a33f449fee7fd10411949d17feba6d33e}{Install} (wifiStaNode);
+654   packetSocket.\hyperlink{classns3_1_1PacketSocketHelper_a33f449fee7fd10411949d17feba6d33e}{Install} (wifiApNode);
+655 
+656   \hyperlink{classns3_1_1Ptr}{Ptr<PacketSocketClient>} client = CreateObject<PacketSocketClient> ();
+657   client->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (1460));
+658   client->\hyperlink{classns3_1_1PacketSocketClient_ae400727c451d429358b5c85838b901df}{SetRemote} (socket);
+659   wifiStaNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->\hyperlink{classns3_1_1Node_ab98b4fdc4aadc86366b80e8a79a53f47}{AddApplication} (client);
+660   client->\hyperlink{classns3_1_1Application_a8360a49748e30c52ffdcc7a305c3cd48}{SetStartTime} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1));
+661   client->\hyperlink{classns3_1_1Application_a732c1fdadf0be176c753a2ce6e27dff9}{SetStopTime} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (51.0));
+662 
+663   \hyperlink{classns3_1_1Ptr}{Ptr<PacketSocketServer>} server = CreateObject<PacketSocketServer> ();
+664   server->\hyperlink{classns3_1_1PacketSocketServer_a89207b49054571b480ee1d26934907d3}{SetLocal} (socket);
+665   wifiApNode.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0)->\hyperlink{classns3_1_1Node_ab98b4fdc4aadc86366b80e8a79a53f47}{AddApplication} (server);
+666   server->\hyperlink{classns3_1_1Application_a8360a49748e30c52ffdcc7a305c3cd48}{SetStartTime} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (0.0));
+667   server->\hyperlink{classns3_1_1Application_a732c1fdadf0be176c753a2ce6e27dff9}{SetStopTime} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (52.0));
+668 
+669   \hyperlink{group__config_ga4014f151241cd0939b6cb64409605736}{Config::Connect} (\textcolor{stringliteral}{"/NodeList/*/ApplicationList/0/$ns3::PacketSocketServer/Rx"}, 
+      \hyperlink{group__makecallbackmemptr_ga9376283685aa99d204048d6a4b7610a4}{MakeCallback} (&\hyperlink{classBug730TestCase_a8d51a4e071f00ea8d995802d1aa4cae1}{Bug730TestCase::Receive}, \textcolor{keyword}{this}));
+670 
+671   Simulator::Schedule (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0), \hyperlink{group__config_gadce03667ec621d64ce4aace85d9bcfd0}{Config::Set}, \textcolor{stringliteral}{"
+      /NodeList/0/DeviceList/0/RemoteStationManager/FragmentationThreshold"}, StringValue (\textcolor{stringliteral}{"800"}));
+672 
+673   Simulator::Stop (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (55));
+674   Simulator::Run ();
+675 
+676   Simulator::Destroy ();
+677 
+678   \textcolor{keywordtype}{bool} result = (\hyperlink{classBug730TestCase_adcd611e94c2c190d0195a229f0331c71}{m\_received} > 0);
+679   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (result, \textcolor{keyword}{true}, \textcolor{stringliteral}{"packet reception unexpectedly stopped after
+       adapting fragmentation threshold!"});
+680 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{Bug730\+Test\+Case@{Bug730\+Test\+Case}!Receive@{Receive}}
+\index{Receive@{Receive}!Bug730\+Test\+Case@{Bug730\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Receive(std\+::string context, Ptr$<$ const Packet $>$ p, const Address \&adr)}{Receive(std::string context, Ptr< const Packet > p, const Address &adr)}}]{\setlength{\rightskip}{0pt plus 5cm}void Bug730\+Test\+Case\+::\+Receive (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{context, }
+\item[{{\bf Ptr}$<$ const {\bf Packet} $>$}]{p, }
+\item[{const {\bf Address} \&}]{adr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classBug730TestCase_a8d51a4e071f00ea8d995802d1aa4cae1}{}\label{classBug730TestCase_a8d51a4e071f00ea8d995802d1aa4cae1}
+Receive function 
+\begin{DoxyParams}{Parameters}
+{\em context} & the context \\
+\hline
+{\em p} & the packet \\
+\hline
+{\em adr} & the address \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+585 \{
+586   \textcolor{keywordflow}{if} ((p->\hyperlink{classns3_1_1Packet_a462855c9929954d4301a4edfe55f4f1c}{GetSize} () == 1460) && (\hyperlink{group__simulator_gac3635e2e87f7ce316c89290ee1b01d0d}{Simulator::Now} () > 
+      \hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (20)))
+587     \{
+588       \hyperlink{classBug730TestCase_adcd611e94c2c190d0195a229f0331c71}{m\_received}++;
+589     \}
+590 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Bug730\+Test\+Case@{Bug730\+Test\+Case}!m\+\_\+received@{m\+\_\+received}}
+\index{m\+\_\+received@{m\+\_\+received}!Bug730\+Test\+Case@{Bug730\+Test\+Case}}
+\subsubsection[{\texorpdfstring{m\+\_\+received}{m_received}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Bug730\+Test\+Case\+::m\+\_\+received\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classBug730TestCase_adcd611e94c2c190d0195a229f0331c71}{}\label{classBug730TestCase_adcd611e94c2c190d0195a229f0331c71}
+
+
+received 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+wifi/test/\hyperlink{wifi-test_8cc}{wifi-\/test.\+cc}\end{DoxyCompactItemize}

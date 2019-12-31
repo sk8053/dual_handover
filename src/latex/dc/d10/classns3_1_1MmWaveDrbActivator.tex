@@ -1,0 +1,145 @@
+\hypertarget{classns3_1_1MmWaveDrbActivator}{}\section{ns3\+:\+:Mm\+Wave\+Drb\+Activator Class Reference}
+\label{classns3_1_1MmWaveDrbActivator}\index{ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}}
+
+
+Inheritance diagram for ns3\+:\+:Mm\+Wave\+Drb\+Activator\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Mm\+Wave\+Drb\+Activator\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1MmWaveDrbActivator_ae14af25eebc2d740c692b8ee8a9dab81}{Mm\+Wave\+Drb\+Activator} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1NetDevice}{Net\+Device} $>$ ue\+Device, \hyperlink{structns3_1_1EpsBearer}{Eps\+Bearer} bearer)
+\item 
+void \hyperlink{classns3_1_1MmWaveDrbActivator_a7c7f2d4c6cd53ffbff8f7dcaa4a585a6}{Activate\+Drb} (uint64\+\_\+t imsi, uint16\+\_\+t cell\+Id, uint16\+\_\+t rnti)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classns3_1_1MmWaveDrbActivator_a8f4fae479e87f1a4415247e112df51e8}{Activate\+Callback} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1MmWaveDrbActivator}{Mm\+Wave\+Drb\+Activator} $>$ a, std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cell\+Id, uint16\+\_\+t rnti)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classns3_1_1MmWaveDrbActivator_a2b02d9ef64fb9fc16db808a6667bab4b}{m\+\_\+active}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1NetDevice}{Net\+Device} $>$ \hyperlink{classns3_1_1MmWaveDrbActivator_a3685adbe2aad9296a29a7d1fbf42546d}{m\+\_\+ue\+Device}
+\item 
+\hyperlink{structns3_1_1EpsBearer}{Eps\+Bearer} \hyperlink{classns3_1_1MmWaveDrbActivator_a7bc0456aed6a35aa66b25514ec6ca4e6}{m\+\_\+bearer}
+\item 
+uint64\+\_\+t \hyperlink{classns3_1_1MmWaveDrbActivator_aebc672ea56bcc8c4fb28ec64e4d19ac1}{m\+\_\+imsi}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}!Mm\+Wave\+Drb\+Activator@{Mm\+Wave\+Drb\+Activator}}
+\index{Mm\+Wave\+Drb\+Activator@{Mm\+Wave\+Drb\+Activator}!ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{Mm\+Wave\+Drb\+Activator(\+Ptr$<$ Net\+Device $>$ ue\+Device, Eps\+Bearer bearer)}{MmWaveDrbActivator(Ptr< NetDevice > ueDevice, EpsBearer bearer)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Mm\+Wave\+Drb\+Activator\+::\+Mm\+Wave\+Drb\+Activator (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Net\+Device} $>$}]{ue\+Device, }
+\item[{{\bf Eps\+Bearer}}]{bearer}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1MmWaveDrbActivator_ae14af25eebc2d740c692b8ee8a9dab81}{}\label{classns3_1_1MmWaveDrbActivator_ae14af25eebc2d740c692b8ee8a9dab81}
+
+\begin{DoxyCode}
+2543   : \hyperlink{classns3_1_1MmWaveDrbActivator_a2b02d9ef64fb9fc16db808a6667bab4b}{m\_active} (\textcolor{keyword}{false}),
+2544     \hyperlink{classns3_1_1MmWaveDrbActivator_a3685adbe2aad9296a29a7d1fbf42546d}{m\_ueDevice} (ueDevice),
+2545     \hyperlink{classns3_1_1MmWaveDrbActivator_a7bc0456aed6a35aa66b25514ec6ca4e6}{m\_bearer} (bearer)
+2546 \{
+2547         \textcolor{keywordflow}{if}(\hyperlink{classns3_1_1MmWaveDrbActivator_a3685adbe2aad9296a29a7d1fbf42546d}{m\_ueDevice}->GetObject< MmWaveUeNetDevice> ())
+2548         \{       \textcolor{comment}{// mmWave}
+2549                 \hyperlink{classns3_1_1MmWaveDrbActivator_aebc672ea56bcc8c4fb28ec64e4d19ac1}{m\_imsi} = \hyperlink{classns3_1_1MmWaveDrbActivator_a3685adbe2aad9296a29a7d1fbf42546d}{m\_ueDevice}->GetObject< MmWaveUeNetDevice> ()->GetImsi ();
+2550         \}
+2551         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1MmWaveDrbActivator_a3685adbe2aad9296a29a7d1fbf42546d}{m\_ueDevice}->GetObject< McUeNetDevice> ())
+2552         \{
+2553                 \hyperlink{classns3_1_1MmWaveDrbActivator_aebc672ea56bcc8c4fb28ec64e4d19ac1}{m\_imsi} = \hyperlink{classns3_1_1MmWaveDrbActivator_a3685adbe2aad9296a29a7d1fbf42546d}{m\_ueDevice}->GetObject< McUeNetDevice> ()->GetImsi (); \textcolor{comment}{// TODO
+       support for LTE part}
+2554         \}
+2555 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}!Activate\+Callback@{Activate\+Callback}}
+\index{Activate\+Callback@{Activate\+Callback}!ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{Activate\+Callback(\+Ptr$<$ Mm\+Wave\+Drb\+Activator $>$ a, std\+::string context, uint64\+\_\+t imsi, uint16\+\_\+t cell\+Id, uint16\+\_\+t rnti)}{ActivateCallback(Ptr< MmWaveDrbActivator > a, std::string context, uint64_t imsi, uint16_t cellId, uint16_t rnti)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Mm\+Wave\+Drb\+Activator\+::\+Activate\+Callback (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Mm\+Wave\+Drb\+Activator} $>$}]{a, }
+\item[{std\+::string}]{context, }
+\item[{uint64\+\_\+t}]{imsi, }
+\item[{uint16\+\_\+t}]{cell\+Id, }
+\item[{uint16\+\_\+t}]{rnti}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MmWaveDrbActivator_a8f4fae479e87f1a4415247e112df51e8}{}\label{classns3_1_1MmWaveDrbActivator_a8f4fae479e87f1a4415247e112df51e8}
+
+\begin{DoxyCode}
+2559 \{
+2560   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (a << context << imsi << cellId << rnti);
+2561   a->ActivateDrb (imsi, cellId, rnti);
+2562 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}!Activate\+Drb@{Activate\+Drb}}
+\index{Activate\+Drb@{Activate\+Drb}!ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{Activate\+Drb(uint64\+\_\+t imsi, uint16\+\_\+t cell\+Id, uint16\+\_\+t rnti)}{ActivateDrb(uint64_t imsi, uint16_t cellId, uint16_t rnti)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Mm\+Wave\+Drb\+Activator\+::\+Activate\+Drb (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{imsi, }
+\item[{uint16\+\_\+t}]{cell\+Id, }
+\item[{uint16\+\_\+t}]{rnti}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1MmWaveDrbActivator_a7c7f2d4c6cd53ffbff8f7dcaa4a585a6}{}\label{classns3_1_1MmWaveDrbActivator_a7c7f2d4c6cd53ffbff8f7dcaa4a585a6}
+
+\begin{DoxyCode}
+2566 \{
+2567   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << imsi << cellId << rnti << \hyperlink{classns3_1_1MmWaveDrbActivator_a2b02d9ef64fb9fc16db808a6667bab4b}{m\_active});
+2568   \textcolor{keywordflow}{if} ((!\hyperlink{classns3_1_1MmWaveDrbActivator_a2b02d9ef64fb9fc16db808a6667bab4b}{m\_active}) && (imsi == \hyperlink{classns3_1_1MmWaveDrbActivator_aebc672ea56bcc8c4fb28ec64e4d19ac1}{m\_imsi}))
+2569     \{
+2570       Ptr<LteUeRrc> ueRrc = \hyperlink{classns3_1_1MmWaveDrbActivator_a3685adbe2aad9296a29a7d1fbf42546d}{m\_ueDevice}->GetObject<MmWaveUeNetDevice> ()->GetRrc ();
+2571       \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (ueRrc->GetState () == \hyperlink{classns3_1_1LteUeRrc_a241012c291e75681150c9214e11f6145a29dc4c52bd374f1b78508fb725de9999}{LteUeRrc::CONNECTED\_NORMALLY});
+2572       uint16\_t rnti = ueRrc->GetRnti ();
+2573       Ptr<MmWaveEnbNetDevice> enbLteDevice = \hyperlink{classns3_1_1MmWaveDrbActivator_a3685adbe2aad9296a29a7d1fbf42546d}{m\_ueDevice}->GetObject<MmWaveUeNetDevice> ()->
+      GetTargetEnb ();
+2574       Ptr<LteEnbRrc> enbRrc = enbLteDevice->GetObject<MmWaveEnbNetDevice> ()->GetRrc ();
+2575       \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (ueRrc->GetCellId () == enbLteDevice->GetCellId ());
+2576       Ptr<UeManager> ueManager = enbRrc->GetUeManager (rnti);
+2577       \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (ueManager->GetState () == 
+      \hyperlink{classns3_1_1UeManager_a2f4085fdd18d7125c27da44a5b8b6808a2a1020dce30f19aa9354ba34b2e7c5e0}{UeManager::CONNECTED\_NORMALLY} ||
+2578                  ueManager->GetState () == \hyperlink{classns3_1_1UeManager_a2f4085fdd18d7125c27da44a5b8b6808abd13cee86acc2cb3c04241dec919c73f}{UeManager::CONNECTION\_RECONFIGURATION}
+      );
+2579       EpcEnbS1SapUser::DataRadioBearerSetupRequestParameters params;
+2580       params.rnti = rnti;
+2581       params.bearer = \hyperlink{classns3_1_1MmWaveDrbActivator_a7bc0456aed6a35aa66b25514ec6ca4e6}{m\_bearer};
+2582       params.bearerId = 0;
+2583       params.gtpTeid = 0; \textcolor{comment}{// don't care}
+2584       enbRrc->GetS1SapUser ()->DataRadioBearerSetupRequest (params);
+2585       \hyperlink{classns3_1_1MmWaveDrbActivator_a2b02d9ef64fb9fc16db808a6667bab4b}{m\_active} = \textcolor{keyword}{true};
+2586     \}
+2587 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}!m\+\_\+active@{m\+\_\+active}}
+\index{m\+\_\+active@{m\+\_\+active}!ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{m\+\_\+active}{m_active}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Mm\+Wave\+Drb\+Activator\+::m\+\_\+active\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1MmWaveDrbActivator_a2b02d9ef64fb9fc16db808a6667bab4b}{}\label{classns3_1_1MmWaveDrbActivator_a2b02d9ef64fb9fc16db808a6667bab4b}
+\index{ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}!m\+\_\+bearer@{m\+\_\+bearer}}
+\index{m\+\_\+bearer@{m\+\_\+bearer}!ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{m\+\_\+bearer}{m_bearer}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Eps\+Bearer} ns3\+::\+Mm\+Wave\+Drb\+Activator\+::m\+\_\+bearer\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1MmWaveDrbActivator_a7bc0456aed6a35aa66b25514ec6ca4e6}{}\label{classns3_1_1MmWaveDrbActivator_a7bc0456aed6a35aa66b25514ec6ca4e6}
+\index{ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}!m\+\_\+imsi@{m\+\_\+imsi}}
+\index{m\+\_\+imsi@{m\+\_\+imsi}!ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{m\+\_\+imsi}{m_imsi}}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t ns3\+::\+Mm\+Wave\+Drb\+Activator\+::m\+\_\+imsi\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1MmWaveDrbActivator_aebc672ea56bcc8c4fb28ec64e4d19ac1}{}\label{classns3_1_1MmWaveDrbActivator_aebc672ea56bcc8c4fb28ec64e4d19ac1}
+\index{ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}!m\+\_\+ue\+Device@{m\+\_\+ue\+Device}}
+\index{m\+\_\+ue\+Device@{m\+\_\+ue\+Device}!ns3\+::\+Mm\+Wave\+Drb\+Activator@{ns3\+::\+Mm\+Wave\+Drb\+Activator}}
+\subsubsection[{\texorpdfstring{m\+\_\+ue\+Device}{m_ueDevice}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Net\+Device}$>$ ns3\+::\+Mm\+Wave\+Drb\+Activator\+::m\+\_\+ue\+Device\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1MmWaveDrbActivator_a3685adbe2aad9296a29a7d1fbf42546d}{}\label{classns3_1_1MmWaveDrbActivator_a3685adbe2aad9296a29a7d1fbf42546d}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+mmwave/helper/\hyperlink{mmwave-helper_8cc}{mmwave-\/helper.\+cc}\end{DoxyCompactItemize}

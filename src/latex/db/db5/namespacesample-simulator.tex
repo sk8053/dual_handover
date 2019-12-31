@@ -1,0 +1,90 @@
+\hypertarget{namespacesample-simulator}{}\section{sample-\/simulator Namespace Reference}
+\label{namespacesample-simulator}\index{sample-\/simulator@{sample-\/simulator}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classsample-simulator_1_1MyModel}{My\+Model}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacesample-simulator_ade35881457d87c30c3bc5108d180e622}{Example\+Function} (model)
+\item 
+def \hyperlink{namespacesample-simulator_a7294dc5f174535f39f155b138bde4cd5}{Random\+Function} (model)
+\item 
+def \hyperlink{namespacesample-simulator_a140dddfb670ce962550d23ac80cbc384}{Cancelled\+Event} ()
+\item 
+def \hyperlink{namespacesample-simulator_a6f1917308f3401cc11cbafea25428edf}{main} (dummy\+\_\+argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{sample-\/simulator@{sample-\/simulator}!Cancelled\+Event@{Cancelled\+Event}}
+\index{Cancelled\+Event@{Cancelled\+Event}!sample-\/simulator@{sample-\/simulator}}
+\subsubsection[{\texorpdfstring{Cancelled\+Event()}{CancelledEvent()}}]{\setlength{\rightskip}{0pt plus 5cm}def sample-\/simulator.\+Cancelled\+Event (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesample-simulator_a140dddfb670ce962550d23ac80cbc384}{}\label{namespacesample-simulator_a140dddfb670ce962550d23ac80cbc384}
+
+\begin{DoxyCode}
+47 \textcolor{keyword}{def }\hyperlink{namespacesample-simulator_a140dddfb670ce962550d23ac80cbc384}{CancelledEvent}():
+48     \textcolor{keywordflow}{print} \textcolor{stringliteral}{"I should never be called... "}
+49 
+\end{DoxyCode}
+\index{sample-\/simulator@{sample-\/simulator}!Example\+Function@{Example\+Function}}
+\index{Example\+Function@{Example\+Function}!sample-\/simulator@{sample-\/simulator}}
+\subsubsection[{\texorpdfstring{Example\+Function(model)}{ExampleFunction(model)}}]{\setlength{\rightskip}{0pt plus 5cm}def sample-\/simulator.\+Example\+Function (
+\begin{DoxyParamCaption}
+\item[{}]{model}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesample-simulator_ade35881457d87c30c3bc5108d180e622}{}\label{namespacesample-simulator_ade35881457d87c30c3bc5108d180e622}
+
+\begin{DoxyCode}
+40 \textcolor{keyword}{def }\hyperlink{namespacesample-simulator_ade35881457d87c30c3bc5108d180e622}{ExampleFunction}(model):
+41     \textcolor{keywordflow}{print} \textcolor{stringliteral}{"ExampleFunction received event at"}, ns.core.Simulator.Now().GetSeconds(), \textcolor{stringliteral}{"s"}
+42     model.Start()
+43 
+\end{DoxyCode}
+\index{sample-\/simulator@{sample-\/simulator}!main@{main}}
+\index{main@{main}!sample-\/simulator@{sample-\/simulator}}
+\subsubsection[{\texorpdfstring{main(dummy\+\_\+argv)}{main(dummy_argv)}}]{\setlength{\rightskip}{0pt plus 5cm}def sample-\/simulator.\+main (
+\begin{DoxyParamCaption}
+\item[{}]{dummy\+\_\+argv}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesample-simulator_a6f1917308f3401cc11cbafea25428edf}{}\label{namespacesample-simulator_a6f1917308f3401cc11cbafea25428edf}
+
+\begin{DoxyCode}
+50 \textcolor{keyword}{def }\hyperlink{namespacesample-simulator_a6f1917308f3401cc11cbafea25428edf}{main}(dummy\_argv):
+51     ns.core.CommandLine().Parse(dummy\_argv)
+52     
+53     model = \hyperlink{classsample-simulator_1_1MyModel}{MyModel}()
+54     v = ns.core.UniformRandomVariable()
+55     v.SetAttribute(\textcolor{stringliteral}{"Min"}, ns.core.DoubleValue (10))
+56     v.SetAttribute(\textcolor{stringliteral}{"Max"}, ns.core.DoubleValue (20))
+57 
+58     ns.core.Simulator.Schedule(ns.core.Seconds(10.0), ExampleFunction, model)
+59 
+60     ns.core.Simulator.Schedule(ns.core.Seconds(v.GetValue()), RandomFunction, model)
+61 
+62     id = ns.core.Simulator.Schedule(ns.core.Seconds(30.0), CancelledEvent)
+63     ns.core.Simulator.Cancel(id)
+64 
+65     ns.core.Simulator.Run()
+66 
+67     ns.core.Simulator.Destroy()
+68 
+\end{DoxyCode}
+\index{sample-\/simulator@{sample-\/simulator}!Random\+Function@{Random\+Function}}
+\index{Random\+Function@{Random\+Function}!sample-\/simulator@{sample-\/simulator}}
+\subsubsection[{\texorpdfstring{Random\+Function(model)}{RandomFunction(model)}}]{\setlength{\rightskip}{0pt plus 5cm}def sample-\/simulator.\+Random\+Function (
+\begin{DoxyParamCaption}
+\item[{}]{model}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesample-simulator_a7294dc5f174535f39f155b138bde4cd5}{}\label{namespacesample-simulator_a7294dc5f174535f39f155b138bde4cd5}
+
+\begin{DoxyCode}
+44 \textcolor{keyword}{def }\hyperlink{namespacesample-simulator_a7294dc5f174535f39f155b138bde4cd5}{RandomFunction}(model):
+45     \textcolor{keywordflow}{print} \textcolor{stringliteral}{"RandomFunction received event at"}, ns.core.Simulator.Now().GetSeconds(), \textcolor{stringliteral}{"s"}
+46 
+\end{DoxyCode}

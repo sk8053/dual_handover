@@ -1,0 +1,489 @@
+\hypertarget{classns3_1_1GammaRandomVariable}{}\section{ns3\+:\+:Gamma\+Random\+Variable Class Reference}
+\label{classns3_1_1GammaRandomVariable}\index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+
+
+The gamma distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically.  
+
+
+
+
+{\ttfamily \#include $<$random-\/variable-\/stream.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Gamma\+Random\+Variable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Gamma\+Random\+Variable\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1GammaRandomVariable_a40cf523e87325e179725e584f4a86698}{Gamma\+Random\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Creates a gamma distribution R\+NG with the default values for alpha and beta. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1GammaRandomVariable_a5cf2d9245c899a237a7f1b9d9070b3fd}{Get\+Alpha} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the alpha value for the gamma distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1GammaRandomVariable_a678fd6163bb9e2fdd1944d6f67567c0d}{Get\+Beta} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the beta value for the gamma distribution returned by this R\+NG stream. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1GammaRandomVariable_a4bc336892413eab5ba6e1a046cda8bde}{Get\+Value} (double \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha}, double beta)
+\begin{DoxyCompactList}\small\item\em Returns a random double from a gamma distribution with the specified alpha and beta. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1GammaRandomVariable_a1908ecc336f1897358292718b9db4759}{Get\+Integer} (uint32\+\_\+t \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha}, uint32\+\_\+t beta)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a gamma distribution with the specified alpha and beta. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classns3_1_1GammaRandomVariable_a65261ad340fa57dbaa5802a7bea354db}{Get\+Value} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random double from a gamma distribution with the current alpha and beta. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1GammaRandomVariable_a2a7c359ab7961fafd4785a0dfc14ab67}{Get\+Integer} (void)
+\begin{DoxyCompactList}\small\item\em Returns a random unsigned integer from a gamma distribution with the current alpha and beta. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1GammaRandomVariable_a7b748133cfc4dc1a6fcdee1906df16e5}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Register this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1GammaRandomVariable_a65f2515eaf15d4540509c9620c844c57}{Get\+Normal\+Value} (double mean, double variance, double bound)
+\begin{DoxyCompactList}\small\item\em Returns a random double from a normal distribution with the specified mean, variance, and bound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1GammaRandomVariable_a4f69114edfb9930edc95e368f9d37128}{m\+\_\+alpha}
+\item 
+double \hyperlink{classns3_1_1GammaRandomVariable_af9e209b6f30711920d0cb502e382e85a}{m\+\_\+beta}
+\item 
+bool \hyperlink{classns3_1_1GammaRandomVariable_a9824f728f2f97299387ca3990464de85}{m\+\_\+next\+Valid}
+\item 
+double \hyperlink{classns3_1_1GammaRandomVariable_a192cfe661857c7e669e19a7984fd9491}{m\+\_\+next}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The gamma distribution Random Number Generator (R\+NG) that allows stream numbers to be set deterministically. 
+
+This class supports the creation of objects that return random numbers from a fixed gamma distribution. It also supports the generation of single random numbers from various gamma distributions.
+
+The probability density function is defined over the interval \mbox{[}0, $+\infty$) as\+: $ x^{\alpha-1} \frac{e^{-\frac{x}{\beta}}}{\beta^\alpha \Gamma(\alpha)}$ where $ mean = \alpha\beta $ and $ variance = \alpha \beta^2$
+
+Here is an example of how to use this class\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{double} \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha} = 5.0;
+\textcolor{keywordtype}{double} beta = 2.0;
+
+Ptr<GammaRandomVariable> \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x} = CreateObject<GammaRandomVariable> ();
+x->SetAttribute (\textcolor{stringliteral}{"Alpha"}, DoubleValue (alpha));
+x->SetAttribute (\textcolor{stringliteral}{"Beta"}, DoubleValue (beta));
+
+\textcolor{comment}{// The expected value for the mean of the values returned by a}
+\textcolor{comment}{// gammaly distributed random variable is equal to }
+\textcolor{comment}{//}
+\textcolor{comment}{//     E[value]  =  alpha * beta  .}
+\textcolor{comment}{//}
+\textcolor{keywordtype}{double} value = x->GetValue ();
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!Gamma\+Random\+Variable@{Gamma\+Random\+Variable}}
+\index{Gamma\+Random\+Variable@{Gamma\+Random\+Variable}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Gamma\+Random\+Variable()}{GammaRandomVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Gamma\+Random\+Variable\+::\+Gamma\+Random\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1GammaRandomVariable_a40cf523e87325e179725e584f4a86698}{}\label{classns3_1_1GammaRandomVariable_a40cf523e87325e179725e584f4a86698}
+
+
+Creates a gamma distribution R\+NG with the default values for alpha and beta. 
+
+
+\begin{DoxyCode}
+923   :
+924   \hyperlink{classns3_1_1GammaRandomVariable_a9824f728f2f97299387ca3990464de85}{m\_nextValid} (\textcolor{keyword}{false})
+925 \{
+926   \textcolor{comment}{// m\_alpha and m\_beta are initialized after constructor by}
+927   \textcolor{comment}{// attributes}
+928   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+929 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!Get\+Alpha@{Get\+Alpha}}
+\index{Get\+Alpha@{Get\+Alpha}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Alpha(void) const }{GetAlpha(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Gamma\+Random\+Variable\+::\+Get\+Alpha (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1GammaRandomVariable_a5cf2d9245c899a237a7f1b9d9070b3fd}{}\label{classns3_1_1GammaRandomVariable_a5cf2d9245c899a237a7f1b9d9070b3fd}
+
+
+Returns the alpha value for the gamma distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The alpha value for the gamma distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+933 \{
+934   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+935   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1GammaRandomVariable_a4f69114edfb9930edc95e368f9d37128}{m\_alpha};
+936 \}
+\end{DoxyCode}
+\index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!Get\+Beta@{Get\+Beta}}
+\index{Get\+Beta@{Get\+Beta}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Beta(void) const }{GetBeta(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Gamma\+Random\+Variable\+::\+Get\+Beta (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classns3_1_1GammaRandomVariable_a678fd6163bb9e2fdd1944d6f67567c0d}{}\label{classns3_1_1GammaRandomVariable_a678fd6163bb9e2fdd1944d6f67567c0d}
+
+
+Returns the beta value for the gamma distribution returned by this R\+NG stream. 
+
+\begin{DoxyReturn}{Returns}
+The beta value for the gamma distribution returned by this R\+NG stream. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+939 \{
+940   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+941   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1GammaRandomVariable_af9e209b6f30711920d0cb502e382e85a}{m\_beta};
+942 \}
+\end{DoxyCode}
+\index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(uint32\+\_\+t alpha, uint32\+\_\+t beta)}{GetInteger(uint32_t alpha, uint32_t beta)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Gamma\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{alpha, }
+\item[{uint32\+\_\+t}]{beta}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1GammaRandomVariable_a1908ecc336f1897358292718b9db4759}{}\label{classns3_1_1GammaRandomVariable_a1908ecc336f1897358292718b9db4759}
+
+
+Returns a random unsigned integer from a gamma distribution with the specified alpha and beta. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em alpha} & Alpha value for the gamma distribution. \\
+\hline
+\mbox{\tt in}  & {\em beta} & Beta value for the gamma distribution. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+\begin{DoxyCode}
+1014 \{
+1015   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha} << beta);
+1016   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>} ( \hyperlink{classns3_1_1GammaRandomVariable_a65261ad340fa57dbaa5802a7bea354db}{GetValue} (\hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha}, beta));
+1017 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Integer(void)}{GetInteger(void)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Gamma\+Random\+Variable\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1GammaRandomVariable_a2a7c359ab7961fafd4785a0dfc14ab67}{}\label{classns3_1_1GammaRandomVariable_a2a7c359ab7961fafd4785a0dfc14ab67}
+
+
+Returns a random unsigned integer from a gamma distribution with the current alpha and beta. 
+
+\begin{DoxyReturn}{Returns}
+A random unsigned integer value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a66cd94e6305ce7f000f1a9ff0fcb9aef}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+1027 \{
+1028   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1029   \textcolor{keywordflow}{return} (uint32\_t)\hyperlink{classns3_1_1GammaRandomVariable_a65261ad340fa57dbaa5802a7bea354db}{GetValue} (\hyperlink{classns3_1_1GammaRandomVariable_a4f69114edfb9930edc95e368f9d37128}{m\_alpha}, \hyperlink{classns3_1_1GammaRandomVariable_af9e209b6f30711920d0cb502e382e85a}{m\_beta});
+1030 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!Get\+Normal\+Value@{Get\+Normal\+Value}}
+\index{Get\+Normal\+Value@{Get\+Normal\+Value}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Normal\+Value(double mean, double variance, double bound)}{GetNormalValue(double mean, double variance, double bound)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Gamma\+Random\+Variable\+::\+Get\+Normal\+Value (
+\begin{DoxyParamCaption}
+\item[{double}]{mean, }
+\item[{double}]{variance, }
+\item[{double}]{bound}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GammaRandomVariable_a65f2515eaf15d4540509c9620c844c57}{}\label{classns3_1_1GammaRandomVariable_a65f2515eaf15d4540509c9620c844c57}
+
+
+Returns a random double from a normal distribution with the specified mean, variance, and bound. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mean} & Mean value for the normal distribution. \\
+\hline
+\mbox{\tt in}  & {\em variance} & Variance value for the normal distribution. \\
+\hline
+\mbox{\tt in}  & {\em bound} & Bound on values returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u1$ and $u2$ are uniform variables over \mbox{[}0,1\mbox{]}, then the values that would be returned normally, $x1$ and $x2$, are calculated as follows\+:
+
+\begin{eqnarray*} v1 & = & 2 * u1 - 1 \\ v2 & = & 2 * u2 - 1 \\ w & = & v1 * v1 + v2 * v2 \\ y & = & \sqrt{\frac{-2 * \log(w)}{w}} \\ x1 & = & mean + v1 * y * \sqrt{variance} \\ x2 & = & mean + v2 * y * \sqrt{variance} . \end{eqnarray*}
+
+For the antithetic case, $(1 - u1$) and $(1 - u2$) are the distances that $u1$ and $u2$ would be from $1$. The antithetic values returned, $x1'$ and $x2'$, are calculated as follows\+:
+
+\begin{eqnarray*} v1' & = & 2 * (1 - u1) - 1 \\ v2' & = & 2 * (1 - u2) - 1 \\ w' & = & v1' * v1' + v2' * v2' \\ y' & = & \sqrt{\frac{-2 * \log(w')}{w'}} \\ x1' & = & mean + v1' * y' * \sqrt{variance} \\ x2' & = & mean + v2' * y' * \sqrt{variance} , \end{eqnarray*}
+
+which now involves the distances $u1$ and $u2$ are from 1. 
+\begin{DoxyCode}
+1034 \{
+1035   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << mean << variance << bound);
+1036   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1GammaRandomVariable_a9824f728f2f97299387ca3990464de85}{m\_nextValid})
+1037     \{ \textcolor{comment}{// use previously generated}
+1038       \hyperlink{classns3_1_1GammaRandomVariable_a9824f728f2f97299387ca3990464de85}{m\_nextValid} = \textcolor{keyword}{false};
+1039       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1GammaRandomVariable_a192cfe661857c7e669e19a7984fd9491}{m\_next};
+1040     \}
+1041   \textcolor{keywordflow}{while} (1)
+1042     \{ \textcolor{comment}{// See Simulation Modeling and Analysis p. 466 (Averill Law)}
+1043       \textcolor{comment}{// for algorithm; basically a Box-Muller transform:}
+1044       \textcolor{comment}{// http://en.wikipedia.org/wiki/Box-Muller\_transform}
+1045       \textcolor{keywordtype}{double} u1 = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+1046       \textcolor{keywordtype}{double} u2 = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+1047       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+1048         \{
+1049           u1 = (1 - u1);
+1050           u2 = (1 - u2);
+1051         \}
+1052       \textcolor{keywordtype}{double} v1 = 2 * u1 - 1;
+1053       \textcolor{keywordtype}{double} v2 = 2 * u2 - 1;
+1054       \textcolor{keywordtype}{double} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} = v1 * v1 + v2 * v2;
+1055       \textcolor{keywordflow}{if} (w <= 1.0)
+1056         \{ \textcolor{comment}{// Got good pair}
+1057           \textcolor{keywordtype}{double} y = std::sqrt ((-2 * std::log (w)) / w);
+1058           \hyperlink{classns3_1_1GammaRandomVariable_a192cfe661857c7e669e19a7984fd9491}{m\_next} = mean + v2 * y * std::sqrt (variance);
+1059           \textcolor{comment}{// if next is in bounds, it is valid}
+1060           \hyperlink{classns3_1_1GammaRandomVariable_a9824f728f2f97299387ca3990464de85}{m\_nextValid} = std::fabs (\hyperlink{classns3_1_1GammaRandomVariable_a192cfe661857c7e669e19a7984fd9491}{m\_next} - mean) <= bound;
+1061           \textcolor{keywordtype}{double} x1 = mean + v1 * y * std::sqrt (variance);
+1062           \textcolor{comment}{// if x1 is in bounds, return it}
+1063           \textcolor{keywordflow}{if} (std::fabs (x1 - mean) <= bound)
+1064             \{
+1065               \textcolor{keywordflow}{return} x1;
+1066             \}
+1067           \textcolor{comment}{// otherwise try and return m\_next if it is valid}
+1068           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1GammaRandomVariable_a9824f728f2f97299387ca3990464de85}{m\_nextValid})
+1069             \{
+1070               \hyperlink{classns3_1_1GammaRandomVariable_a9824f728f2f97299387ca3990464de85}{m\_nextValid} = \textcolor{keyword}{false};
+1071               \textcolor{keywordflow}{return} \hyperlink{classns3_1_1GammaRandomVariable_a192cfe661857c7e669e19a7984fd9491}{m\_next};
+1072             \}
+1073           \textcolor{comment}{// otherwise, just run this loop again}
+1074         \}
+1075     \}
+1076 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Gamma\+Random\+Variable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1GammaRandomVariable_a7b748133cfc4dc1a6fcdee1906df16e5}{}\label{classns3_1_1GammaRandomVariable_a7b748133cfc4dc1a6fcdee1906df16e5}
+
+
+Register this type. 
+
+\begin{DoxyReturn}{Returns}
+The object \hyperlink{classns3_1_1TypeId}{Type\+Id}. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+906 \{
+907   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::GammaRandomVariable"})
+908     .SetParent<\hyperlink{classns3_1_1RandomVariableStream_ab6dd72fd15a0043b678ff56ac326b233}{RandomVariableStream}>()
+909     .SetGroupName (\textcolor{stringliteral}{"Core"})
+910     .AddConstructor<\hyperlink{classns3_1_1GammaRandomVariable_a40cf523e87325e179725e584f4a86698}{GammaRandomVariable}> ()
+911     .AddAttribute(\textcolor{stringliteral}{"Alpha"}, \textcolor{stringliteral}{"The alpha value for the gamma distribution returned by this RNG stream."},
+912                   DoubleValue(1.0),
+913                   MakeDoubleAccessor(&\hyperlink{classns3_1_1GammaRandomVariable_a4f69114edfb9930edc95e368f9d37128}{GammaRandomVariable::m\_alpha}),
+914                   MakeDoubleChecker<double>())
+915     .AddAttribute(\textcolor{stringliteral}{"Beta"}, \textcolor{stringliteral}{"The beta value for the gamma distribution returned by this RNG stream."},
+916                   DoubleValue(1.0),
+917                   MakeDoubleAccessor(&\hyperlink{classns3_1_1GammaRandomVariable_af9e209b6f30711920d0cb502e382e85a}{GammaRandomVariable::m\_beta}),
+918                   MakeDoubleChecker<double>())
+919     ;
+920   \textcolor{keywordflow}{return} tid;
+921 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(double alpha, double beta)}{GetValue(double alpha, double beta)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Gamma\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{double}]{alpha, }
+\item[{double}]{beta}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1GammaRandomVariable_a4bc336892413eab5ba6e1a046cda8bde}{}\label{classns3_1_1GammaRandomVariable_a4bc336892413eab5ba6e1a046cda8bde}
+
+
+Returns a random double from a gamma distribution with the specified alpha and beta. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em alpha} & Alpha value for the gamma distribution. \\
+\hline
+\mbox{\tt in}  & {\em beta} & Beta value for the gamma distribution. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1. 
+\begin{DoxyCode}
+962 \{
+963   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha} << beta);
+964   \textcolor{keywordflow}{if} (\hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha} < 1)
+965     \{
+966       \textcolor{keywordtype}{double} u = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+967       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+968         \{
+969           u = (1 - u);
+970         \}
+971       \textcolor{keywordflow}{return} \hyperlink{classns3_1_1GammaRandomVariable_a65261ad340fa57dbaa5802a7bea354db}{GetValue} (1.0 + \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha}, beta) * std::pow (u, 1.0 / 
+      \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha});
+972     \}
+973 
+974   \textcolor{keywordtype}{double} \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x}, v, u;
+975   \textcolor{keywordtype}{double} \hyperlink{buildings__pathloss_8m_a9f9b934daed17a4d3613b6886ff4cf4b}{d} = \hyperlink{lte__uplink__power__control_8m_a62197192f0fbf4e0675eb37be1c4c175}{alpha} - 1.0 / 3.0;
+976   \textcolor{keywordtype}{double} \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_ae0323a9039add2978bf5b49550572c7c}{c} = (1.0 / 3.0) / std::sqrt (d);
+977 
+978   \textcolor{keywordflow}{while} (1)
+979     \{
+980       \textcolor{keywordflow}{do}
+981         \{
+982           \textcolor{comment}{// Get a value from a normal distribution that has mean}
+983           \textcolor{comment}{// zero, variance 1, and no bound.}
+984           \textcolor{keywordtype}{double} mean = 0.0;
+985           \textcolor{keywordtype}{double} variance = 1.0;
+986           \textcolor{keywordtype}{double} bound = \hyperlink{classns3_1_1NormalRandomVariable_a813486b91a0d043421a54e47f112b343}{NormalRandomVariable::INFINITE\_VALUE};
+987           x = \hyperlink{classns3_1_1GammaRandomVariable_a65f2515eaf15d4540509c9620c844c57}{GetNormalValue} (mean, variance, bound);
+988 
+989           v = 1.0 + c * \hyperlink{lte__link__budget__x2__handover__measures_8m_a9336ebf25087d91c818ee6e9ec29f8c1}{x};
+990         \}
+991       \textcolor{keywordflow}{while} (v <= 0);
+992 
+993       v = v * v * v;
+994       u = \hyperlink{classns3_1_1RandomVariableStream_ac5aa8d691c061bcc88a909dc9b479222}{Peek} ()->\hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{RandU01} ();
+995       \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1RandomVariableStream_a7bf5175d624b14bd023f8c4f78bc5fd7}{IsAntithetic} ())
+996         \{
+997           u = (1 - u);
+998         \}
+999       \textcolor{keywordflow}{if} (u < 1 - 0.0331 * x * x * x * x)
+1000         \{
+1001           \textcolor{keywordflow}{break};
+1002         \}
+1003       \textcolor{keywordflow}{if} (std::log (u) < 0.5 * x * x + d * (1 - v + std::log (v)))
+1004         \{
+1005           \textcolor{keywordflow}{break};
+1006         \}
+1007     \}
+1008 
+1009   \textcolor{keywordflow}{return} beta * d * v;
+1010 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{Get\+Value(void)}{GetValue(void)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Gamma\+Random\+Variable\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1GammaRandomVariable_a65261ad340fa57dbaa5802a7bea354db}{}\label{classns3_1_1GammaRandomVariable_a65261ad340fa57dbaa5802a7bea354db}
+
+
+Returns a random double from a gamma distribution with the current alpha and beta. 
+
+\begin{DoxyReturn}{Returns}
+A floating point random value.
+\end{DoxyReturn}
+Note that antithetic values are being generated if m\+\_\+is\+Antithetic is equal to true. If $u$ is a uniform variable over \mbox{[}0,1\mbox{]} and $x$ is a value that would be returned normally, then $(1 - u$) is the distance that $u$ would be from $1$. The value returned in the antithetic case, $x'$, uses (1-\/u), which is the distance $u$ is from the 1.
+
+Note that we have to re-\/implement this method here because the method is overloaded above for the two-\/argument variant and the c++ name resolution rules don\textquotesingle{}t work well with overloads split between parent and child classes. 
+
+Implements \hyperlink{classns3_1_1RandomVariableStream_a4fa5944dc4cb11544e661ed23072b36c}{ns3\+::\+Random\+Variable\+Stream}.
+
+
+\begin{DoxyCode}
+1021 \{
+1022   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+1023   \textcolor{keywordflow}{return} \hyperlink{classns3_1_1GammaRandomVariable_a65261ad340fa57dbaa5802a7bea354db}{GetValue} (\hyperlink{classns3_1_1GammaRandomVariable_a4f69114edfb9930edc95e368f9d37128}{m\_alpha}, \hyperlink{classns3_1_1GammaRandomVariable_af9e209b6f30711920d0cb502e382e85a}{m\_beta});
+1024 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!m\+\_\+alpha@{m\+\_\+alpha}}
+\index{m\+\_\+alpha@{m\+\_\+alpha}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+alpha}{m_alpha}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Gamma\+Random\+Variable\+::m\+\_\+alpha\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GammaRandomVariable_a4f69114edfb9930edc95e368f9d37128}{}\label{classns3_1_1GammaRandomVariable_a4f69114edfb9930edc95e368f9d37128}
+The alpha value for the gamma distribution returned by this R\+NG stream. \index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!m\+\_\+beta@{m\+\_\+beta}}
+\index{m\+\_\+beta@{m\+\_\+beta}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+beta}{m_beta}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Gamma\+Random\+Variable\+::m\+\_\+beta\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GammaRandomVariable_af9e209b6f30711920d0cb502e382e85a}{}\label{classns3_1_1GammaRandomVariable_af9e209b6f30711920d0cb502e382e85a}
+The beta value for the gamma distribution returned by this R\+NG stream. \index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!m\+\_\+next@{m\+\_\+next}}
+\index{m\+\_\+next@{m\+\_\+next}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+next}{m_next}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Gamma\+Random\+Variable\+::m\+\_\+next\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GammaRandomVariable_a192cfe661857c7e669e19a7984fd9491}{}\label{classns3_1_1GammaRandomVariable_a192cfe661857c7e669e19a7984fd9491}
+The algorithm produces two normal values at a time. \index{ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}!m\+\_\+next\+Valid@{m\+\_\+next\+Valid}}
+\index{m\+\_\+next\+Valid@{m\+\_\+next\+Valid}!ns3\+::\+Gamma\+Random\+Variable@{ns3\+::\+Gamma\+Random\+Variable}}
+\subsubsection[{\texorpdfstring{m\+\_\+next\+Valid}{m_nextValid}}]{\setlength{\rightskip}{0pt plus 5cm}bool ns3\+::\+Gamma\+Random\+Variable\+::m\+\_\+next\+Valid\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1GammaRandomVariable_a9824f728f2f97299387ca3990464de85}{}\label{classns3_1_1GammaRandomVariable_a9824f728f2f97299387ca3990464de85}
+True if the next normal value is valid. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{random-variable-stream_8h}{random-\/variable-\/stream.\+h}\item 
+core/model/\hyperlink{random-variable-stream_8cc}{random-\/variable-\/stream.\+cc}\end{DoxyCompactItemize}

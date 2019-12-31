@@ -1,0 +1,242 @@
+\hypertarget{classAggregateObjectTestCase}{}\section{Aggregate\+Object\+Test\+Case Class Reference}
+\label{classAggregateObjectTestCase}\index{Aggregate\+Object\+Test\+Case@{Aggregate\+Object\+Test\+Case}}
+
+
+Inheritance diagram for Aggregate\+Object\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Aggregate\+Object\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classAggregateObjectTestCase_a3be2afa882fcc0a5543bcfb4e617b8a3}{Aggregate\+Object\+Test\+Case} ()
+\item 
+virtual \hyperlink{classAggregateObjectTestCase_af5a5d0517000200f29e17c2c17a3b58a}{$\sim$\+Aggregate\+Object\+Test\+Case} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classAggregateObjectTestCase_a0078f116c79d82795c9102ed86cf4fd7}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Aggregate\+Object\+Test\+Case@{Aggregate\+Object\+Test\+Case}!Aggregate\+Object\+Test\+Case@{Aggregate\+Object\+Test\+Case}}
+\index{Aggregate\+Object\+Test\+Case@{Aggregate\+Object\+Test\+Case}!Aggregate\+Object\+Test\+Case@{Aggregate\+Object\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Aggregate\+Object\+Test\+Case()}{AggregateObjectTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Aggregate\+Object\+Test\+Case\+::\+Aggregate\+Object\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classAggregateObjectTestCase_a3be2afa882fcc0a5543bcfb4e617b8a3}{}\label{classAggregateObjectTestCase_a3be2afa882fcc0a5543bcfb4e617b8a3}
+
+\begin{DoxyCode}
+205   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Check Object aggregation functionality"})
+206 \{
+207 \}
+\end{DoxyCode}
+\index{Aggregate\+Object\+Test\+Case@{Aggregate\+Object\+Test\+Case}!````~Aggregate\+Object\+Test\+Case@{$\sim$\+Aggregate\+Object\+Test\+Case}}
+\index{````~Aggregate\+Object\+Test\+Case@{$\sim$\+Aggregate\+Object\+Test\+Case}!Aggregate\+Object\+Test\+Case@{Aggregate\+Object\+Test\+Case}}
+\subsubsection[{\texorpdfstring{$\sim$\+Aggregate\+Object\+Test\+Case()}{~AggregateObjectTestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Aggregate\+Object\+Test\+Case\+::$\sim$\+Aggregate\+Object\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classAggregateObjectTestCase_af5a5d0517000200f29e17c2c17a3b58a}{}\label{classAggregateObjectTestCase_af5a5d0517000200f29e17c2c17a3b58a}
+
+\begin{DoxyCode}
+210 \{
+211 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Aggregate\+Object\+Test\+Case@{Aggregate\+Object\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Aggregate\+Object\+Test\+Case@{Aggregate\+Object\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Aggregate\+Object\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classAggregateObjectTestCase_a0078f116c79d82795c9102ed86cf4fd7}{}\label{classAggregateObjectTestCase_a0078f116c79d82795c9102ed86cf4fd7}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+215 \{
+216   \hyperlink{classns3_1_1Ptr}{Ptr<BaseA>} baseA = CreateObject<BaseA> ();
+217   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseA, 0, \textcolor{stringliteral}{"Unable to CreateObject<BaseA>"});
+218 
+219   \hyperlink{classns3_1_1Ptr}{Ptr<BaseB>} baseB = CreateObject<BaseB> ();
+220   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseB, 0, \textcolor{stringliteral}{"Unable to CreateObject<BaseB>"});
+221 
+222   \hyperlink{classns3_1_1Ptr}{Ptr<BaseB>} baseBCopy = baseB;
+223   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseBCopy, 0, \textcolor{stringliteral}{"Unable to copy BaseB"});
+224 
+225   \textcolor{comment}{//}
+226   \textcolor{comment}{// Make an aggregation of a BaseA object and a BaseB object.}
+227   \textcolor{comment}{//}
+228   baseA->AggregateObject (baseB);
+229 
+230   \textcolor{comment}{//}
+231   \textcolor{comment}{// We should be able to ask the aggregation (through baseA) for the BaseA part}
+232   \textcolor{comment}{// of the aggregation.}
+233   \textcolor{comment}{//}
+234   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseA->GetObject<BaseA> (), 0, \textcolor{stringliteral}{"Cannot GetObject (through
+       baseA) for BaseA Object"});
+235 
+236   \textcolor{comment}{//}
+237   \textcolor{comment}{// There is no DerivedA in this picture, so we should not be able to GetObject}
+238   \textcolor{comment}{// for that type.}
+239   \textcolor{comment}{//}
+240   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (baseA->GetObject<DerivedA> (), 0, \textcolor{stringliteral}{"Unexpectedly found a
+       DerivedA through baseA"});
+241 
+242   \textcolor{comment}{//}
+243   \textcolor{comment}{// We should be able to ask the aggregation (through baseA) for the BaseB part}
+244   \textcolor{comment}{//}
+245   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseA->GetObject<BaseB> (), 0, \textcolor{stringliteral}{"Cannot GetObject (through
+       baseA) for BaseB Object"});
+246 
+247   \textcolor{comment}{//}
+248   \textcolor{comment}{// There is no DerivedB in this picture, so we should not be able to GetObject}
+249   \textcolor{comment}{// for that type.}
+250   \textcolor{comment}{//}
+251   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (baseA->GetObject<DerivedB> (), 0, \textcolor{stringliteral}{"Unexpectedly found a
+       DerivedB through baseA"});
+252 
+253   \textcolor{comment}{//}
+254   \textcolor{comment}{// We should be able to ask the aggregation (through baseA) for the BaseB part}
+255   \textcolor{comment}{//}
+256   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseB->GetObject<BaseB> (), 0, \textcolor{stringliteral}{"Cannot GetObject (through
+       baseB) for BaseB Object"});
+257 
+258   \textcolor{comment}{//}
+259   \textcolor{comment}{// There is no DerivedB in this picture, so we should not be able to GetObject}
+260   \textcolor{comment}{// for that type.}
+261   \textcolor{comment}{//}
+262   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (baseB->GetObject<DerivedB> (), 0, \textcolor{stringliteral}{"Unexpectedly found a
+       DerivedB through baseB"});
+263 
+264   \textcolor{comment}{//}
+265   \textcolor{comment}{// We should be able to ask the aggregation (through baseB) for the BaseA part}
+266   \textcolor{comment}{// of the aggregation.}
+267   \textcolor{comment}{//}
+268   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseB->GetObject<BaseA> (), 0, \textcolor{stringliteral}{"Cannot GetObject (through
+       baseB) for BaseA Object"});
+269 
+270   \textcolor{comment}{//}
+271   \textcolor{comment}{// There is no DerivedA in this picture, so we should not be able to GetObject}
+272   \textcolor{comment}{// for that type.}
+273   \textcolor{comment}{//}
+274   \hyperlink{group__testing_ga2a9d78cffb3db8e867c35fff0b698cf5}{NS\_TEST\_ASSERT\_MSG\_EQ} (baseB->GetObject<DerivedA> (), 0, \textcolor{stringliteral}{"Unexpectedly found a
+       DerivedA through baseB"});
+275 
+276   \textcolor{comment}{//}
+277   \textcolor{comment}{// baseBCopy is a copy of the original Ptr to the Object BaseB.  Even though}
+278   \textcolor{comment}{// we didn't use baseBCopy directly in the aggregations, the object to which}
+279   \textcolor{comment}{// it points was used, therefore, we should be able to use baseBCopy as if}
+280   \textcolor{comment}{// it were baseB and get a BaseA out of the aggregation.}
+281   \textcolor{comment}{//}
+282   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseBCopy->GetObject<BaseA> (), 0, \textcolor{stringliteral}{"Cannot GetObject (through
+       baseBCopy) for a BaseA Object"});
+283 
+284   \textcolor{comment}{//}
+285   \textcolor{comment}{// Now, change the underlying type of the objects to be the derived types.}
+286   \textcolor{comment}{//}
+287   baseA = CreateObject<DerivedA> ();
+288   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseA, 0, \textcolor{stringliteral}{"Unable to CreateObject<DerivedA> with implicit
+       cast to BaseA"});
+289 
+290   baseB = CreateObject<DerivedB> ();
+291   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseB, 0, \textcolor{stringliteral}{"Unable to CreateObject<DerivedB> with implicit
+       cast to BaseB"});
+292 
+293   \textcolor{comment}{//}
+294   \textcolor{comment}{// Create an aggregation of two objects, both of the derived types; and leave}
+295   \textcolor{comment}{// an unaggregated copy of one lying around.}
+296   \textcolor{comment}{//}
+297   baseBCopy = baseB;
+298   baseA->AggregateObject (baseB);
+299 
+300   \textcolor{comment}{//}
+301   \textcolor{comment}{// We should be able to ask the aggregation (through baseA) for the DerivedB part}
+302   \textcolor{comment}{//}
+303   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseA->GetObject<DerivedB> (), 0, \textcolor{stringliteral}{"Cannot GetObject (through
+       baseA) for DerivedB Object"});
+304 
+305   \textcolor{comment}{//}
+306   \textcolor{comment}{// Since the DerivedB is also a BaseB, we should be able to ask the aggregation }
+307   \textcolor{comment}{// (through baseA) for the BaseB part}
+308   \textcolor{comment}{//}
+309   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseA->GetObject<BaseB> (), 0, \textcolor{stringliteral}{"Cannot GetObject (through
+       baseA) for BaseB Object"});
+310 
+311   \textcolor{comment}{//}
+312   \textcolor{comment}{// We should be able to ask the aggregation (through baseB) for the DerivedA part}
+313   \textcolor{comment}{//}
+314   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseB->GetObject<DerivedA> (), 0, \textcolor{stringliteral}{"Cannot GetObject (through
+       baseB) for DerivedA Object"});
+315 
+316   \textcolor{comment}{//}
+317   \textcolor{comment}{// Since the DerivedA is also a BaseA, we should be able to ask the aggregation }
+318   \textcolor{comment}{// (through baseB) for the BaseA part}
+319   \textcolor{comment}{//}
+320   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseB->GetObject<BaseA> (), 0, \textcolor{stringliteral}{"Cannot GetObject (through
+       baseB) for BaseA Object"});
+321 
+322   \textcolor{comment}{//}
+323   \textcolor{comment}{// baseBCopy is a copy of the original Ptr to the Object BaseB.  Even though}
+324   \textcolor{comment}{// we didn't use baseBCopy directly in the aggregations, the object to which}
+325   \textcolor{comment}{// it points was used, therefore, we should be able to use baseBCopy as if}
+326   \textcolor{comment}{// it were baseB (same underlying Object) and get a BaseA and a DerivedA out }
+327   \textcolor{comment}{// of the aggregation through baseBCopy.}
+328   \textcolor{comment}{//}
+329   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseBCopy->GetObject<BaseA> (), 0, \textcolor{stringliteral}{"Cannot GetObject (through
+       baseBCopy) for a BaseA Object"});
+330   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseBCopy->GetObject<DerivedA> (), 0, \textcolor{stringliteral}{"Cannot GetObject
+       (through baseBCopy) for a BaseA Object"});
+331 
+332   \textcolor{comment}{//}
+333   \textcolor{comment}{// Since the Ptr<BaseB> is actually a DerivedB, we should be able to ask the }
+334   \textcolor{comment}{// aggregation (through baseB) for the DerivedB part}
+335   \textcolor{comment}{//}
+336   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseB->GetObject<DerivedB> (), 0, \textcolor{stringliteral}{"Cannot GetObject (through
+       baseB) for DerivedB Object"});
+337 
+338   \textcolor{comment}{//}
+339   \textcolor{comment}{// Since the DerivedB was cast to a BaseB, we should be able to ask the }
+340   \textcolor{comment}{// aggregation (through baseB) for the BaseB part}
+341   \textcolor{comment}{//}
+342   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseB->GetObject<BaseB> (), 0, \textcolor{stringliteral}{"Cannot GetObject (through
+       baseB) for BaseB Object"});
+343 
+344   \textcolor{comment}{//}
+345   \textcolor{comment}{// Make sure reference counting works in the aggregate.  Create two Objects}
+346   \textcolor{comment}{// and aggregate them, then release one of them.  The aggregation should}
+347   \textcolor{comment}{// keep a reference to both and the Object we released should still be there.}
+348   \textcolor{comment}{//}
+349   baseA = CreateObject<BaseA> ();
+350   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseA, 0, \textcolor{stringliteral}{"Unable to CreateObject<BaseA>"});
+351 
+352   baseB = CreateObject<BaseB> ();
+353   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseB, 0, \textcolor{stringliteral}{"Unable to CreateObject<BaseA>"});
+354 
+355   baseA->AggregateObject (baseB);
+356   baseA = 0;
+357 
+358   baseA = baseB->GetObject<BaseA> ();
+359   \hyperlink{group__testing_ga73d66fb0050a5111453fd144e767b91a}{NS\_TEST\_ASSERT\_MSG\_NE} (baseA, 0, \textcolor{stringliteral}{"Unable to GetObject on released object"});
+360 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/test/\hyperlink{object-test-suite_8cc}{object-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

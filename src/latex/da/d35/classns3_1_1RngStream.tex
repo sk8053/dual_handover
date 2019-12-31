@@ -1,0 +1,202 @@
+\hypertarget{classns3_1_1RngStream}{}\section{ns3\+:\+:Rng\+Stream Class Reference}
+\label{classns3_1_1RngStream}\index{ns3\+::\+Rng\+Stream@{ns3\+::\+Rng\+Stream}}
+
+
+Combined Multiple-\/\+Recursive Generator M\+R\+G32k3a.  
+
+
+
+
+{\ttfamily \#include $<$rng-\/stream.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Rng\+Stream\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1RngStream_a243980aebbb585fac06b360813b0c808}{Rng\+Stream} (uint32\+\_\+t seed, uint64\+\_\+t stream, uint64\+\_\+t substream)
+\item 
+\hyperlink{classns3_1_1RngStream_a12711b2dea119cdfeb5398a6b6b16bf2}{Rng\+Stream} (const \hyperlink{classns3_1_1RngStream}{Rng\+Stream} \&r)
+\item 
+double \hyperlink{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{Rand\+U01} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classns3_1_1RngStream_a6ec2451aa49df691a30bc4ca527b2355}{Advance\+Nth\+By} (uint64\+\_\+t nth, int by, double state\mbox{[}6\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classns3_1_1RngStream_a598f63b0d43cf513170b25b70d9e23f1}{m\+\_\+current\+State} \mbox{[}6\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Combined Multiple-\/\+Recursive Generator M\+R\+G32k3a. 
+
+This class is the combined multiple-\/recursive random number generator called M\+R\+G32k3a. The ns3\+::\+Random\+Variable\+Base class holds a static instance of this class. The details of this class are explained in\+: \href{http://www.iro.umontreal.ca/~lecuyer/myftp/papers/streams00.pdf}{\tt http\+://www.\+iro.\+umontreal.\+ca/$\sim$lecuyer/myftp/papers/streams00.\+pdf} 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Rng\+Stream@{ns3\+::\+Rng\+Stream}!Rng\+Stream@{Rng\+Stream}}
+\index{Rng\+Stream@{Rng\+Stream}!ns3\+::\+Rng\+Stream@{ns3\+::\+Rng\+Stream}}
+\subsubsection[{\texorpdfstring{Rng\+Stream(uint32\+\_\+t seed, uint64\+\_\+t stream, uint64\+\_\+t substream)}{RngStream(uint32_t seed, uint64_t stream, uint64_t substream)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Rng\+Stream\+::\+Rng\+Stream (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{seed, }
+\item[{uint64\+\_\+t}]{stream, }
+\item[{uint64\+\_\+t}]{substream}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1RngStream_a243980aebbb585fac06b360813b0c808}{}\label{classns3_1_1RngStream_a243980aebbb585fac06b360813b0c808}
+Construct from explicit seed, stream and substream values.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em seed} & The starting seed. \\
+\hline
+\mbox{\tt in}  & {\em stream} & The stream number. \\
+\hline
+\mbox{\tt in}  & {\em substream} & The sub-\/stream number. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+370 \{
+371   \textcolor{keywordflow}{if} (seedNumber >= m1 || seedNumber >= m2 || seedNumber == 0)
+372     \{
+373       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"invalid Seed "} << seedNumber);
+374     \}
+375   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 6; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+376     \{
+377       \hyperlink{classns3_1_1RngStream_a598f63b0d43cf513170b25b70d9e23f1}{m\_currentState}[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = seedNumber;
+378     \}
+379   \hyperlink{classns3_1_1RngStream_a6ec2451aa49df691a30bc4ca527b2355}{AdvanceNthBy} (stream, 127, \hyperlink{classns3_1_1RngStream_a598f63b0d43cf513170b25b70d9e23f1}{m\_currentState});
+380   \hyperlink{classns3_1_1RngStream_a6ec2451aa49df691a30bc4ca527b2355}{AdvanceNthBy} (substream, 76, \hyperlink{classns3_1_1RngStream_a598f63b0d43cf513170b25b70d9e23f1}{m\_currentState});
+381 \}
+\end{DoxyCode}
+\index{ns3\+::\+Rng\+Stream@{ns3\+::\+Rng\+Stream}!Rng\+Stream@{Rng\+Stream}}
+\index{Rng\+Stream@{Rng\+Stream}!ns3\+::\+Rng\+Stream@{ns3\+::\+Rng\+Stream}}
+\subsubsection[{\texorpdfstring{Rng\+Stream(const Rng\+Stream \&r)}{RngStream(const RngStream &r)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Rng\+Stream\+::\+Rng\+Stream (
+\begin{DoxyParamCaption}
+\item[{const {\bf Rng\+Stream} \&}]{r}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1RngStream_a12711b2dea119cdfeb5398a6b6b16bf2}{}\label{classns3_1_1RngStream_a12711b2dea119cdfeb5398a6b6b16bf2}
+Copy constructor.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em r} & The \hyperlink{classns3_1_1RngStream}{Rng\+Stream} to copy. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+384 \{
+385   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 6; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+386     \{
+387       \hyperlink{classns3_1_1RngStream_a598f63b0d43cf513170b25b70d9e23f1}{m\_currentState}[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}] = r.m\_currentState[\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}];
+388     \}
+389 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Rng\+Stream@{ns3\+::\+Rng\+Stream}!Advance\+Nth\+By@{Advance\+Nth\+By}}
+\index{Advance\+Nth\+By@{Advance\+Nth\+By}!ns3\+::\+Rng\+Stream@{ns3\+::\+Rng\+Stream}}
+\subsubsection[{\texorpdfstring{Advance\+Nth\+By(uint64\+\_\+t nth, int by, double state[6])}{AdvanceNthBy(uint64_t nth, int by, double state[6])}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Rng\+Stream\+::\+Advance\+Nth\+By (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{nth, }
+\item[{int}]{by, }
+\item[{double}]{state\mbox{[}6\mbox{]}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RngStream_a6ec2451aa49df691a30bc4ca527b2355}{}\label{classns3_1_1RngStream_a6ec2451aa49df691a30bc4ca527b2355}
+Advance {\ttfamily state} of the R\+NG by leaps and bounds.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em nth} & The stream or substream index. \\
+\hline
+\mbox{\tt in}  & {\em by} & The log2 base of {\ttfamily nth}. \\
+\hline
+\mbox{\tt in}  & {\em state} & The state vector to advance. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+393 \{
+394   Matrix matrix1,matrix2;
+395   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < 64; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+396     \{
+397       \textcolor{keywordtype}{int} nbit = 63 - \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+398       \textcolor{keywordtype}{int} bit = (nth >> nbit) & 0x1;
+399       \textcolor{keywordflow}{if} (bit)
+400         \{
+401           PowerOfTwoMatrix(by + nbit, matrix1, matrix2);
+402           MatVecModM (matrix1, state, state, m1);
+403           MatVecModM (matrix2, &state[3], &state[3], m2);
+404         \}
+405     \}
+406 \}
+\end{DoxyCode}
+\index{ns3\+::\+Rng\+Stream@{ns3\+::\+Rng\+Stream}!Rand\+U01@{Rand\+U01}}
+\index{Rand\+U01@{Rand\+U01}!ns3\+::\+Rng\+Stream@{ns3\+::\+Rng\+Stream}}
+\subsubsection[{\texorpdfstring{Rand\+U01(void)}{RandU01(void)}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Rng\+Stream\+::\+Rand\+U01 (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}{}\label{classns3_1_1RngStream_a46be36426b8bc712e9de468b63558c22}
+Generate the next random number for this stream. Uniformly distributed between 0 and 1.
+
+\begin{DoxyReturn}{Returns}
+The next random. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+339 \{
+340   int32\_t k;
+341   \textcolor{keywordtype}{double} p1, p2, u;
+342 
+343   \textcolor{comment}{/* Component 1 */}
+344   p1 = a12 * \hyperlink{classns3_1_1RngStream_a598f63b0d43cf513170b25b70d9e23f1}{m\_currentState}[1] - a13n * \hyperlink{classns3_1_1RngStream_a598f63b0d43cf513170b25b70d9e23f1}{m\_currentState}[0];
+345   k = \textcolor{keyword}{static\_cast<}int32\_t\textcolor{keyword}{>} (p1 / m1);
+346   p1 -= k * m1;
+347   \textcolor{keywordflow}{if} (p1 < 0.0)
+348     \{
+349       p1 += m1;
+350     \}
+351   m\_currentState[0] = m\_currentState[1]; m\_currentState[1] = m\_currentState[2]; m\_currentState[2] = p1;
+352 
+353   \textcolor{comment}{/* Component 2 */}
+354   p2 = a21 * m\_currentState[5] - a23n * m\_currentState[3];
+355   k = \textcolor{keyword}{static\_cast<}int32\_t\textcolor{keyword}{>} (p2 / m2);
+356   p2 -= k * m2;
+357   \textcolor{keywordflow}{if} (p2 < 0.0)
+358     \{
+359       p2 += m2;
+360     \}
+361   m\_currentState[3] = m\_currentState[4]; m\_currentState[4] = m\_currentState[5]; m\_currentState[5] = p2;
+362 
+363   \textcolor{comment}{/* Combination */}
+364   u = ((p1 > p2) ? (p1 - p2) * norm : (p1 - p2 + m1) * norm);
+365 
+366   \textcolor{keywordflow}{return} u;
+367 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Rng\+Stream@{ns3\+::\+Rng\+Stream}!m\+\_\+current\+State@{m\+\_\+current\+State}}
+\index{m\+\_\+current\+State@{m\+\_\+current\+State}!ns3\+::\+Rng\+Stream@{ns3\+::\+Rng\+Stream}}
+\subsubsection[{\texorpdfstring{m\+\_\+current\+State}{m_currentState}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Rng\+Stream\+::m\+\_\+current\+State\mbox{[}6\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1RngStream_a598f63b0d43cf513170b25b70d9e23f1}{}\label{classns3_1_1RngStream_a598f63b0d43cf513170b25b70d9e23f1}
+The R\+NG state vector. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{rng-stream_8h}{rng-\/stream.\+h}\item 
+core/model/\hyperlink{rng-stream_8cc}{rng-\/stream.\+cc}\end{DoxyCompactItemize}

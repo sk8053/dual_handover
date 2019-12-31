@@ -1,0 +1,132 @@
+\hypertarget{classAddressAllocator6TestCase}{}\section{Address\+Allocator6\+Test\+Case Class Reference}
+\label{classAddressAllocator6TestCase}\index{Address\+Allocator6\+Test\+Case@{Address\+Allocator6\+Test\+Case}}
+
+
+I\+Pv6 address allocator Test.  
+
+
+
+
+Inheritance diagram for Address\+Allocator6\+Test\+Case\+:
+% FIG 0
+
+
+Collaboration diagram for Address\+Allocator6\+Test\+Case\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classAddressAllocator6TestCase_a585e8c7d56bb54de26a30c4e94d7fdeb}{Address\+Allocator6\+Test\+Case} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classAddressAllocator6TestCase_a6011adcf3bcf07b43ed60ae253a83345}{Do\+Run} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to actually run this Test\+Case. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classAddressAllocator6TestCase_a793c68d6b71b136720a9449eb1be3356}{Do\+Teardown} (void)
+\begin{DoxyCompactList}\small\item\em Implementation to do any local setup required for this Test\+Case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+I\+Pv6 address allocator Test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Address\+Allocator6\+Test\+Case@{Address\+Allocator6\+Test\+Case}!Address\+Allocator6\+Test\+Case@{Address\+Allocator6\+Test\+Case}}
+\index{Address\+Allocator6\+Test\+Case@{Address\+Allocator6\+Test\+Case}!Address\+Allocator6\+Test\+Case@{Address\+Allocator6\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Address\+Allocator6\+Test\+Case()}{AddressAllocator6TestCase()}}]{\setlength{\rightskip}{0pt plus 5cm}Address\+Allocator6\+Test\+Case\+::\+Address\+Allocator6\+Test\+Case (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classAddressAllocator6TestCase_a585e8c7d56bb54de26a30c4e94d7fdeb}{}\label{classAddressAllocator6TestCase_a585e8c7d56bb54de26a30c4e94d7fdeb}
+
+\begin{DoxyCode}
+93   : \hyperlink{classns3_1_1TestCase_a3b0b91a96aac1933e8d146e019b9e207}{TestCase} (\textcolor{stringliteral}{"Sanity check on allocation of addresses"})
+94 \{
+95 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Address\+Allocator6\+Test\+Case@{Address\+Allocator6\+Test\+Case}!Do\+Run@{Do\+Run}}
+\index{Do\+Run@{Do\+Run}!Address\+Allocator6\+Test\+Case@{Address\+Allocator6\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Run(void)}{DoRun(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Address\+Allocator6\+Test\+Case\+::\+Do\+Run (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classAddressAllocator6TestCase_a6011adcf3bcf07b43ed60ae253a83345}{}\label{classAddressAllocator6TestCase_a6011adcf3bcf07b43ed60ae253a83345}
+
+
+Implementation to actually run this Test\+Case. 
+
+Subclasses should override this method to conduct their tests. 
+
+Implements \hyperlink{classns3_1_1TestCase_a8ff74680cf017ed42011e4be51917a24}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+99 \{
+100   \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} address;
+101 
+102   Ipv6AddressGenerator::Init (\hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"2001::0"}), \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (64));
+103   address = Ipv6AddressGenerator::GetNetwork (\hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (64));
+104   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"2001::0"}), \textcolor{stringliteral}{"address should
+       equal the initialized address for given prefix"});
+105   Ipv6AddressGenerator::NextNetwork (\hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (64));
+106   address = Ipv6AddressGenerator::GetNetwork (\hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (64));
+107   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"2001:0:0:1::0"}), \textcolor{stringliteral}{"address
+       should equal the initialized address for given prefix"});
+108   address = Ipv6AddressGenerator::GetAddress (\hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (64));
+109   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"2001:0:0:1::1"}), \textcolor{stringliteral}{"address
+       should equal the initialized address for given prefix"});
+110   address = Ipv6AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (64));
+111   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"2001:0:0:1::1"}), \textcolor{stringliteral}{"address
+       should equal the initialized address for given prefix"});
+112   address = Ipv6AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (64));
+113   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"2001:0:0:1::2"}), \textcolor{stringliteral}{"address
+       should equal the initialized address for given prefix"});
+114 
+115   Ipv6AddressGenerator::Init (\hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"1::"}), \hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (\textcolor{stringliteral}{"FFFF::"}),
+116                               \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"::3"}));
+117   address = Ipv6AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (16));
+118   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"1::3"}), \textcolor{stringliteral}{"address should
+       equal initialized address for given prefix"});
+119   address = Ipv6AddressGenerator::NextAddress (\hyperlink{classns3_1_1Ipv6Prefix}{Ipv6Prefix} (16));
+120   \hyperlink{group__testing_ga7304ba46a28d8cf08dfdfd6499cf7068}{NS\_TEST\_EXPECT\_MSG\_EQ} (address, \hyperlink{classns3_1_1Ipv6Address}{Ipv6Address} (\textcolor{stringliteral}{"1::4"}), \textcolor{stringliteral}{"address should
+       equal next address"});
+121 
+122 \}
+\end{DoxyCode}
+\index{Address\+Allocator6\+Test\+Case@{Address\+Allocator6\+Test\+Case}!Do\+Teardown@{Do\+Teardown}}
+\index{Do\+Teardown@{Do\+Teardown}!Address\+Allocator6\+Test\+Case@{Address\+Allocator6\+Test\+Case}}
+\subsubsection[{\texorpdfstring{Do\+Teardown(void)}{DoTeardown(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void Address\+Allocator6\+Test\+Case\+::\+Do\+Teardown (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\hypertarget{classAddressAllocator6TestCase_a793c68d6b71b136720a9449eb1be3356}{}\label{classAddressAllocator6TestCase_a793c68d6b71b136720a9449eb1be3356}
+
+
+Implementation to do any local setup required for this Test\+Case. 
+
+Subclasses should override this method to perform any costly per-\/test teardown 
+
+Reimplemented from \hyperlink{classns3_1_1TestCase_a8917f1604e28d312a8086f76291e3c46}{ns3\+::\+Test\+Case}.
+
+
+\begin{DoxyCode}
+126 \{
+127   \hyperlink{group__config_ga2c1b65724f42f8c72276d7e7ad6df6db}{Ipv6AddressGenerator::Reset} ();
+128   Simulator::Destroy ();
+129 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+internet/test/\hyperlink{ipv6-address-generator-test-suite_8cc}{ipv6-\/address-\/generator-\/test-\/suite.\+cc}\end{DoxyCompactItemize}

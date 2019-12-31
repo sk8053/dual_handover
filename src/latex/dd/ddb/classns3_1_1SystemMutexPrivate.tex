@@ -1,0 +1,141 @@
+\hypertarget{classns3_1_1SystemMutexPrivate}{}\section{ns3\+:\+:System\+Mutex\+Private Class Reference}
+\label{classns3_1_1SystemMutexPrivate}\index{ns3\+::\+System\+Mutex\+Private@{ns3\+::\+System\+Mutex\+Private}}
+
+
+Collaboration diagram for ns3\+:\+:System\+Mutex\+Private\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1SystemMutexPrivate_a81f2bbb935ece47c9e86fc7742984a0f}{System\+Mutex\+Private} ()
+\item 
+\hyperlink{classns3_1_1SystemMutexPrivate_ad926e50e7892f6bafd609110c7bec08f}{$\sim$\+System\+Mutex\+Private} ()
+\item 
+void \hyperlink{classns3_1_1SystemMutexPrivate_a683dab8c78c48119cfab8168296f4942}{Lock} (void)
+\item 
+void \hyperlink{classns3_1_1SystemMutexPrivate_a1c3cca1467f9fbd050d044cd85fa9716}{Unlock} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+pthread\+\_\+mutex\+\_\+t \hyperlink{classns3_1_1SystemMutexPrivate_a254d1aeb046eb02f444802e2ba97644a}{m\+\_\+mutex}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+System-\/dependent implementation of \hyperlink{classns3_1_1SystemMutex}{System\+Mutex}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+System\+Mutex\+Private@{ns3\+::\+System\+Mutex\+Private}!System\+Mutex\+Private@{System\+Mutex\+Private}}
+\index{System\+Mutex\+Private@{System\+Mutex\+Private}!ns3\+::\+System\+Mutex\+Private@{ns3\+::\+System\+Mutex\+Private}}
+\subsubsection[{\texorpdfstring{System\+Mutex\+Private()}{SystemMutexPrivate()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+System\+Mutex\+Private\+::\+System\+Mutex\+Private (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemMutexPrivate_a81f2bbb935ece47c9e86fc7742984a0f}{}\label{classns3_1_1SystemMutexPrivate_a81f2bbb935ece47c9e86fc7742984a0f}
+
+\begin{DoxyCode}
+53 \{
+54   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+55 
+56   pthread\_mutexattr\_t attr;
+57   pthread\_mutexattr\_init (&attr);
+58 \textcolor{comment}{//}
+59 \textcolor{comment}{// Make this an error checking mutex.  This will check to see if the current}
+60 \textcolor{comment}{// thread already owns the mutex before trying to lock it.  Instead of }
+61 \textcolor{comment}{// deadlocking it returns an error.  It will also check to make sure a thread}
+62 \textcolor{comment}{// has previously called pthread\_mutex\_lock when it calls pthread\_mutex\_unlock.}
+63 \textcolor{comment}{//}
+64 \textcolor{comment}{// Linux and OS X (at least) have, of course chosen different names for the }
+65 \textcolor{comment}{// error checking flags just to make life difficult.}
+66 \textcolor{comment}{//}
+67 \textcolor{preprocessor}{#if defined (PTHREAD\_MUTEX\_ERRORCHECK\_NP)}
+68   pthread\_mutexattr\_settype (&attr, PTHREAD\_MUTEX\_ERRORCHECK\_NP);
+69 \textcolor{preprocessor}{#else}
+70   pthread\_mutexattr\_settype (&attr, PTHREAD\_MUTEX\_ERRORCHECK);
+71 \textcolor{preprocessor}{#endif}
+72   pthread\_mutex\_init (&\hyperlink{classns3_1_1SystemMutexPrivate_a254d1aeb046eb02f444802e2ba97644a}{m\_mutex}, &attr);
+73 \}
+\end{DoxyCode}
+\index{ns3\+::\+System\+Mutex\+Private@{ns3\+::\+System\+Mutex\+Private}!````~System\+Mutex\+Private@{$\sim$\+System\+Mutex\+Private}}
+\index{````~System\+Mutex\+Private@{$\sim$\+System\+Mutex\+Private}!ns3\+::\+System\+Mutex\+Private@{ns3\+::\+System\+Mutex\+Private}}
+\subsubsection[{\texorpdfstring{$\sim$\+System\+Mutex\+Private()}{~SystemMutexPrivate()}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+System\+Mutex\+Private\+::$\sim$\+System\+Mutex\+Private (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemMutexPrivate_ad926e50e7892f6bafd609110c7bec08f}{}\label{classns3_1_1SystemMutexPrivate_ad926e50e7892f6bafd609110c7bec08f}
+
+\begin{DoxyCode}
+76 \{
+77   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+78   pthread\_mutex\_destroy (&\hyperlink{classns3_1_1SystemMutexPrivate_a254d1aeb046eb02f444802e2ba97644a}{m\_mutex});
+79 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+System\+Mutex\+Private@{ns3\+::\+System\+Mutex\+Private}!Lock@{Lock}}
+\index{Lock@{Lock}!ns3\+::\+System\+Mutex\+Private@{ns3\+::\+System\+Mutex\+Private}}
+\subsubsection[{\texorpdfstring{Lock(void)}{Lock(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Mutex\+Private\+::\+Lock (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemMutexPrivate_a683dab8c78c48119cfab8168296f4942}{}\label{classns3_1_1SystemMutexPrivate_a683dab8c78c48119cfab8168296f4942}
+Acquire ownership of the mutex. 
+\begin{DoxyCode}
+83 \{
+84   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+85 
+86   \textcolor{keywordtype}{int} rc = pthread\_mutex\_lock (&\hyperlink{classns3_1_1SystemMutexPrivate_a254d1aeb046eb02f444802e2ba97644a}{m\_mutex});
+87   \textcolor{keywordflow}{if} (rc != 0) 
+88     \{
+89       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"SystemMutexPrivate::Lock()"}
+90                       \textcolor{stringliteral}{"pthread\_mutex\_lock failed: "} << rc << \textcolor{stringliteral}{" = \(\backslash\)""} <<
+91                       std::strerror (rc) << \textcolor{stringliteral}{"\(\backslash\)""});
+92     \}
+93 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{ns3\+::\+System\+Mutex\+Private@{ns3\+::\+System\+Mutex\+Private}!Unlock@{Unlock}}
+\index{Unlock@{Unlock}!ns3\+::\+System\+Mutex\+Private@{ns3\+::\+System\+Mutex\+Private}}
+\subsubsection[{\texorpdfstring{Unlock(void)}{Unlock(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Mutex\+Private\+::\+Unlock (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1SystemMutexPrivate_a1c3cca1467f9fbd050d044cd85fa9716}{}\label{classns3_1_1SystemMutexPrivate_a1c3cca1467f9fbd050d044cd85fa9716}
+Release ownership of the mutex. 
+\begin{DoxyCode}
+97 \{
+98   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+99 
+100   \textcolor{keywordtype}{int} rc = pthread\_mutex\_unlock (&\hyperlink{classns3_1_1SystemMutexPrivate_a254d1aeb046eb02f444802e2ba97644a}{m\_mutex});
+101   \textcolor{keywordflow}{if} (rc != 0)
+102     \{
+103       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"SystemMutexPrivate::Unlock()"}
+104                       \textcolor{stringliteral}{"pthread\_mutex\_unlock failed: "} << rc << \textcolor{stringliteral}{" = \(\backslash\)""} <<
+105                       std::strerror (rc) << \textcolor{stringliteral}{"\(\backslash\)""});
+106     \}
+107 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+System\+Mutex\+Private@{ns3\+::\+System\+Mutex\+Private}!m\+\_\+mutex@{m\+\_\+mutex}}
+\index{m\+\_\+mutex@{m\+\_\+mutex}!ns3\+::\+System\+Mutex\+Private@{ns3\+::\+System\+Mutex\+Private}}
+\subsubsection[{\texorpdfstring{m\+\_\+mutex}{m_mutex}}]{\setlength{\rightskip}{0pt plus 5cm}pthread\+\_\+mutex\+\_\+t ns3\+::\+System\+Mutex\+Private\+::m\+\_\+mutex\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1SystemMutexPrivate_a254d1aeb046eb02f444802e2ba97644a}{}\label{classns3_1_1SystemMutexPrivate_a254d1aeb046eb02f444802e2ba97644a}
+The mutex. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/model/\hyperlink{unix-system-mutex_8cc}{unix-\/system-\/mutex.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,358 @@
+\hypertarget{classns3_1_1TcpScalable}{}\section{ns3\+:\+:Tcp\+Scalable Class Reference}
+\label{classns3_1_1TcpScalable}\index{ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}}
+
+
+An implementation of T\+CP Scalable.  
+
+
+
+
+{\ttfamily \#include $<$tcp-\/scalable.\+h$>$}
+
+
+
+Inheritance diagram for ns3\+:\+:Tcp\+Scalable\+:
+% FIG 0
+
+
+Collaboration diagram for ns3\+:\+:Tcp\+Scalable\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1TcpScalable_a619561b4fc0be650d9d5562f1df7c918}{Tcp\+Scalable} (void)
+\item 
+\hyperlink{classns3_1_1TcpScalable_a40ba49aebb854ffd698718f945513b6c}{Tcp\+Scalable} (const \hyperlink{classns3_1_1TcpScalable}{Tcp\+Scalable} \&sock)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1TcpScalable_ad0ecd62b585b96a1ff65a9bc79c10f9a}{$\sim$\+Tcp\+Scalable} (void)
+\item 
+virtual std\+::string \hyperlink{classns3_1_1TcpScalable_a9284076eee672a0448d83ec0317d8c88}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the name of the congestion control algorithm. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \hyperlink{classns3_1_1TcpScalable_afc28d1793481db0978085efc5b2c243e}{Get\+Ss\+Thresh} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ const \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)
+\begin{DoxyCompactList}\small\item\em Get slow start threshold following Scalable principle (Equation 2) \end{DoxyCompactList}\item 
+virtual \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpCongestionOps}{Tcp\+Congestion\+Ops} $>$ \hyperlink{classns3_1_1TcpScalable_a492457204d44b5cd3089aa913c78c1d2}{Fork} ()
+\begin{DoxyCompactList}\small\item\em Copy the congestion control algorithm across socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1TypeId}{Type\+Id} \hyperlink{classns3_1_1TcpScalable_a19eebe885cb42a287e38cdd49156e296}{Get\+Type\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Get the type ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classns3_1_1TcpScalable_aa0c22097e0628f16f321d79addc58976}{Congestion\+Avoidance} (\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1TcpSocketState}{Tcp\+Socket\+State} $>$ tcb, uint32\+\_\+t segments\+Acked)
+\begin{DoxyCompactList}\small\item\em Congestion avoidance of \hyperlink{classns3_1_1TcpScalable}{Tcp\+Scalable} (Equation 1) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpScalable_a61ab84bfbbec1ed78ca9c7b60d9aaa5a}{m\+\_\+ack\+Cnt}
+\begin{DoxyCompactList}\small\item\em Number of received A\+CK. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{classns3_1_1TcpScalable_a850f65ce80a8d0293fe0a3d84b74e69c}{m\+\_\+ai\+Factor}
+\begin{DoxyCompactList}\small\item\em Additive increase factor. \end{DoxyCompactList}\item 
+double \hyperlink{classns3_1_1TcpScalable_a96c1fea146c632394e7d3150c92ad7b6}{m\+\_\+md\+Factor}
+\begin{DoxyCompactList}\small\item\em Multiplicative decrease factor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An implementation of T\+CP Scalable. 
+
+Scalable improves T\+CP performance to better utilize the available bandwidth of a highspeed wide area network by altering New\+Reno congestion window adjustment algorithm.
+
+When congestion has not been detected, for each A\+CK received in an R\+TT, Scalable increases its cwnd per\+: \begin{DoxyVerb}    cwnd = cwnd + 0.01                  (1)
+\end{DoxyVerb}
+
+
+Following Linux implementation of Scalable, we use 50 instead of 100 to account for delayed A\+CK.
+
+On the first detection of congestion in a given R\+TT, cwnd is reduced based on the following equation\+: \begin{DoxyVerb}    cwnd = cwnd - ceil(0.125 * cwnd)       (2)
+\end{DoxyVerb}
+
+
+More information\+: \href{http://doi.acm.org/10.1145/956981.956989}{\tt http\+://doi.\+acm.\+org/10.\+1145/956981.\+956989} 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}!Tcp\+Scalable@{Tcp\+Scalable}}
+\index{Tcp\+Scalable@{Tcp\+Scalable}!ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}}
+\subsubsection[{\texorpdfstring{Tcp\+Scalable(void)}{TcpScalable(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Scalable\+::\+Tcp\+Scalable (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpScalable_a619561b4fc0be650d9d5562f1df7c918}{}\label{classns3_1_1TcpScalable_a619561b4fc0be650d9d5562f1df7c918}
+Create an unbound tcp socket. 
+\begin{DoxyCode}
+59   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (),
+60     \hyperlink{classns3_1_1TcpScalable_a61ab84bfbbec1ed78ca9c7b60d9aaa5a}{m\_ackCnt} (0),
+61     \hyperlink{classns3_1_1TcpScalable_a850f65ce80a8d0293fe0a3d84b74e69c}{m\_aiFactor} (50),
+62     \hyperlink{classns3_1_1TcpScalable_a96c1fea146c632394e7d3150c92ad7b6}{m\_mdFactor} (0.125)
+63 \{
+64   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+65 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}!Tcp\+Scalable@{Tcp\+Scalable}}
+\index{Tcp\+Scalable@{Tcp\+Scalable}!ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}}
+\subsubsection[{\texorpdfstring{Tcp\+Scalable(const Tcp\+Scalable \&sock)}{TcpScalable(const TcpScalable &sock)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Scalable\+::\+Tcp\+Scalable (
+\begin{DoxyParamCaption}
+\item[{const {\bf Tcp\+Scalable} \&}]{sock}
+\end{DoxyParamCaption}
+)}\hypertarget{classns3_1_1TcpScalable_a40ba49aebb854ffd698718f945513b6c}{}\label{classns3_1_1TcpScalable_a40ba49aebb854ffd698718f945513b6c}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & the object to copy \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+68   : \hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno} (sock),
+69     \hyperlink{classns3_1_1TcpScalable_a61ab84bfbbec1ed78ca9c7b60d9aaa5a}{m\_ackCnt} (sock.m\_ackCnt),
+70     \hyperlink{classns3_1_1TcpScalable_a850f65ce80a8d0293fe0a3d84b74e69c}{m\_aiFactor} (sock.m\_aiFactor),
+71     \hyperlink{classns3_1_1TcpScalable_a96c1fea146c632394e7d3150c92ad7b6}{m\_mdFactor} (sock.m\_mdFactor)
+72 \{
+73   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+74 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}!````~Tcp\+Scalable@{$\sim$\+Tcp\+Scalable}}
+\index{````~Tcp\+Scalable@{$\sim$\+Tcp\+Scalable}!ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}}
+\subsubsection[{\texorpdfstring{$\sim$\+Tcp\+Scalable(void)}{~TcpScalable(void)}}]{\setlength{\rightskip}{0pt plus 5cm}ns3\+::\+Tcp\+Scalable\+::$\sim$\+Tcp\+Scalable (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpScalable_ad0ecd62b585b96a1ff65a9bc79c10f9a}{}\label{classns3_1_1TcpScalable_ad0ecd62b585b96a1ff65a9bc79c10f9a}
+
+\begin{DoxyCode}
+77 \{
+78   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this});
+79 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}!Congestion\+Avoidance@{Congestion\+Avoidance}}
+\index{Congestion\+Avoidance@{Congestion\+Avoidance}!ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}}
+\subsubsection[{\texorpdfstring{Congestion\+Avoidance(\+Ptr$<$ Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t segments\+Acked)}{CongestionAvoidance(Ptr< TcpSocketState > tcb, uint32_t segmentsAcked)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+Tcp\+Scalable\+::\+Congestion\+Avoidance (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{segments\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpScalable_aa0c22097e0628f16f321d79addc58976}{}\label{classns3_1_1TcpScalable_aa0c22097e0628f16f321d79addc58976}
+
+
+Congestion avoidance of \hyperlink{classns3_1_1TcpScalable}{Tcp\+Scalable} (Equation 1) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em segments\+Acked} & count of segments acked \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a34a5eec0649a7b485852c74c825e14ba}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+90 \{
+91   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << segmentsAcked);
+92 
+93   uint32\_t segCwnd = tcb->\hyperlink{classns3_1_1TcpSocketState_ab6dfe309ca53fd3207dcafede75ad12d}{GetCwndInSegments} ();
+94   uint32\_t oldCwnd = segCwnd;
+95   uint32\_t \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w} = \hyperlink{80211b_8c_ac6afabdc09a49a433ee19d8a9486056d}{std::min} (segCwnd, \hyperlink{classns3_1_1TcpScalable_a850f65ce80a8d0293fe0a3d84b74e69c}{m\_aiFactor});
+96 
+97   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpScalable_a61ab84bfbbec1ed78ca9c7b60d9aaa5a}{m\_ackCnt} >= w)
+98     \{
+99       \hyperlink{classns3_1_1TcpScalable_a61ab84bfbbec1ed78ca9c7b60d9aaa5a}{m\_ackCnt} = 0;
+100       segCwnd++;
+101     \}
+102 
+103   \hyperlink{classns3_1_1TcpScalable_a61ab84bfbbec1ed78ca9c7b60d9aaa5a}{m\_ackCnt} += segmentsAcked;
+104   \textcolor{keywordflow}{if} (\hyperlink{classns3_1_1TcpScalable_a61ab84bfbbec1ed78ca9c7b60d9aaa5a}{m\_ackCnt} >= w)
+105     \{
+106       uint32\_t delta = \hyperlink{classns3_1_1TcpScalable_a61ab84bfbbec1ed78ca9c7b60d9aaa5a}{m\_ackCnt} / \hyperlink{lte_2model_2fading-traces_2fading__trace__generator_8m_afd61ec66f9d7b807eece6eb12c781844}{w};
+107       \hyperlink{classns3_1_1TcpScalable_a61ab84bfbbec1ed78ca9c7b60d9aaa5a}{m\_ackCnt} = 0;
+108       segCwnd += delta;
+109     \}
+110 
+111   \textcolor{keywordflow}{if} (segCwnd != oldCwnd)
+112     \{
+113       tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} = segCwnd * tcb->\hyperlink{classns3_1_1TcpSocketState_a079872f7b0099ef5f3cab4ff47bd2edd}{m\_segmentSize};
+114       \hyperlink{group__logging_gafbd73ee2cf9f26b319f49086d8e860fb}{NS\_LOG\_INFO} (\textcolor{stringliteral}{"In CongAvoid, updated to cwnd "} << tcb->\hyperlink{classns3_1_1TcpSocketState_a7cd3d2156a483c1db436097477a0fd7f}{m\_cWnd} <<
+115                    \textcolor{stringliteral}{" ssthresh "} << tcb->\hyperlink{classns3_1_1TcpSocketState_aec003b6dba9d269bfb1036c7652ffbd6}{m\_ssThresh});
+116     \}
+117 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}!Fork@{Fork}}
+\index{Fork@{Fork}!ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}}
+\subsubsection[{\texorpdfstring{Fork()}{Fork()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Tcp\+Congestion\+Ops} $>$ ns3\+::\+Tcp\+Scalable\+::\+Fork (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpScalable_a492457204d44b5cd3089aa913c78c1d2}{}\label{classns3_1_1TcpScalable_a492457204d44b5cd3089aa913c78c1d2}
+
+
+Copy the congestion control algorithm across socket. 
+
+\begin{DoxyReturn}{Returns}
+a pointer of the copied object 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a2606d5fcd01a1eb4d5f4e6beb7a33192}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+83 \{
+84   \textcolor{keywordflow}{return} CopyObject<TcpScalable> (\textcolor{keyword}{this});
+85 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+Tcp\+Scalable\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpScalable_a9284076eee672a0448d83ec0317d8c88}{}\label{classns3_1_1TcpScalable_a9284076eee672a0448d83ec0317d8c88}
+
+
+Get the name of the congestion control algorithm. 
+
+\begin{DoxyReturn}{Returns}
+A string identifying the name 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a0ecf92cb36c236c70e0ecaedfff6609e}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+121 \{
+122   \textcolor{keywordflow}{return} \textcolor{stringliteral}{"TcpScalable"};
+123 \}
+\end{DoxyCode}
+\index{ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}!Get\+Ss\+Thresh@{Get\+Ss\+Thresh}}
+\index{Get\+Ss\+Thresh@{Get\+Ss\+Thresh}!ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}}
+\subsubsection[{\texorpdfstring{Get\+Ss\+Thresh(\+Ptr$<$ const Tcp\+Socket\+State $>$ tcb, uint32\+\_\+t bytes\+In\+Flight)}{GetSsThresh(Ptr< const TcpSocketState > tcb, uint32_t bytesInFlight)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Scalable\+::\+Get\+Ss\+Thresh (
+\begin{DoxyParamCaption}
+\item[{{\bf Ptr}$<$ const {\bf Tcp\+Socket\+State} $>$}]{tcb, }
+\item[{uint32\+\_\+t}]{bytes\+In\+Flight}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classns3_1_1TcpScalable_afc28d1793481db0978085efc5b2c243e}{}\label{classns3_1_1TcpScalable_afc28d1793481db0978085efc5b2c243e}
+
+
+Get slow start threshold following Scalable principle (Equation 2) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tcb} & internal congestion state \\
+\hline
+{\em bytes\+In\+Flight} & bytes in flight\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the slow start threshold value 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classns3_1_1TcpNewReno_a1cb467aaa4960dfe10b963ed9f3d5aa2}{ns3\+::\+Tcp\+New\+Reno}.
+
+
+\begin{DoxyCode}
+128 \{
+129   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (\textcolor{keyword}{this} << tcb << bytesInFlight);
+130 
+131   uint32\_t segCwnd = bytesInFlight / tcb->m\_segmentSize;
+132 
+133   \textcolor{keywordtype}{double} \hyperlink{buildings__pathloss_8m_a21ad0bd836b90d08f4cf640b4c298e7c}{b} = 1.0 - \hyperlink{classns3_1_1TcpScalable_a96c1fea146c632394e7d3150c92ad7b6}{m\_mdFactor};
+134   uint32\_t ssThresh = \hyperlink{80211b_8c_affe776513b24d84b39af8ab0930fef7f}{std::max} (2.0, segCwnd * b);
+135 
+136   \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\textcolor{stringliteral}{"Calculated b(w) = "} << b <<
+137                 \textcolor{stringliteral}{" resulting (in segment) ssThresh="} << ssThresh);
+138 
+139   \textcolor{keywordflow}{return} ssThresh * tcb->m\_segmentSize;
+140 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}!Get\+Type\+Id@{Get\+Type\+Id}}
+\index{Get\+Type\+Id@{Get\+Type\+Id}!ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}}
+\subsubsection[{\texorpdfstring{Get\+Type\+Id(void)}{GetTypeId(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Id} ns3\+::\+Tcp\+Scalable\+::\+Get\+Type\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1TcpScalable_a19eebe885cb42a287e38cdd49156e296}{}\label{classns3_1_1TcpScalable_a19eebe885cb42a287e38cdd49156e296}
+
+
+Get the type ID. 
+
+\begin{DoxyReturn}{Returns}
+the object \hyperlink{classns3_1_1TypeId}{Type\+Id} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+41 \{
+42   \textcolor{keyword}{static} TypeId tid = TypeId (\textcolor{stringliteral}{"ns3::TcpScalable"})
+43     .SetParent<\hyperlink{classns3_1_1TcpNewReno_a81686cb1590be6d7c754029fc8d7cf4e}{TcpNewReno}> ()
+44     .AddConstructor<TcpScalable> ()
+45     .SetGroupName (\textcolor{stringliteral}{"Internet"})
+46     .AddAttribute (\textcolor{stringliteral}{"AIFactor"}, \textcolor{stringliteral}{"Additive Increase Factor"},
+47                    UintegerValue (50),
+48                    MakeUintegerAccessor (&\hyperlink{classns3_1_1TcpScalable_a850f65ce80a8d0293fe0a3d84b74e69c}{TcpScalable::m\_aiFactor}),
+49                    MakeUintegerChecker<uint32\_t> ())
+50     .AddAttribute (\textcolor{stringliteral}{"MDFactor"}, \textcolor{stringliteral}{"Multiplicative Decrease Factor"},
+51                    DoubleValue (0.125),
+52                    MakeDoubleAccessor (&\hyperlink{classns3_1_1TcpScalable_a96c1fea146c632394e7d3150c92ad7b6}{TcpScalable::m\_mdFactor}),
+53                    MakeDoubleChecker<double> ())
+54   ;
+55   \textcolor{keywordflow}{return} tid;
+56 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+\subsection{Member Data Documentation}
+\index{ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}!m\+\_\+ack\+Cnt@{m\+\_\+ack\+Cnt}}
+\index{m\+\_\+ack\+Cnt@{m\+\_\+ack\+Cnt}!ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}}
+\subsubsection[{\texorpdfstring{m\+\_\+ack\+Cnt}{m_ackCnt}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Scalable\+::m\+\_\+ack\+Cnt\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpScalable_a61ab84bfbbec1ed78ca9c7b60d9aaa5a}{}\label{classns3_1_1TcpScalable_a61ab84bfbbec1ed78ca9c7b60d9aaa5a}
+
+
+Number of received A\+CK. 
+
+\index{ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}!m\+\_\+ai\+Factor@{m\+\_\+ai\+Factor}}
+\index{m\+\_\+ai\+Factor@{m\+\_\+ai\+Factor}!ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}}
+\subsubsection[{\texorpdfstring{m\+\_\+ai\+Factor}{m_aiFactor}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t ns3\+::\+Tcp\+Scalable\+::m\+\_\+ai\+Factor\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpScalable_a850f65ce80a8d0293fe0a3d84b74e69c}{}\label{classns3_1_1TcpScalable_a850f65ce80a8d0293fe0a3d84b74e69c}
+
+
+Additive increase factor. 
+
+\index{ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}!m\+\_\+md\+Factor@{m\+\_\+md\+Factor}}
+\index{m\+\_\+md\+Factor@{m\+\_\+md\+Factor}!ns3\+::\+Tcp\+Scalable@{ns3\+::\+Tcp\+Scalable}}
+\subsubsection[{\texorpdfstring{m\+\_\+md\+Factor}{m_mdFactor}}]{\setlength{\rightskip}{0pt plus 5cm}double ns3\+::\+Tcp\+Scalable\+::m\+\_\+md\+Factor\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classns3_1_1TcpScalable_a96c1fea146c632394e7d3150c92ad7b6}{}\label{classns3_1_1TcpScalable_a96c1fea146c632394e7d3150c92ad7b6}
+
+
+Multiplicative decrease factor. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+internet/model/\hyperlink{tcp-scalable_8h}{tcp-\/scalable.\+h}\item 
+internet/model/\hyperlink{tcp-scalable_8cc}{tcp-\/scalable.\+cc}\end{DoxyCompactItemize}

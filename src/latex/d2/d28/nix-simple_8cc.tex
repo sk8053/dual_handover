@@ -1,0 +1,124 @@
+\hypertarget{nix-simple_8cc}{}\section{nix-\/vector-\/routing/examples/nix-\/simple.cc File Reference}
+\label{nix-simple_8cc}\index{nix-\/vector-\/routing/examples/nix-\/simple.\+cc@{nix-\/vector-\/routing/examples/nix-\/simple.\+cc}}
+{\ttfamily \#include \char`\"{}ns3/core-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/network-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/internet-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/point-\/to-\/point-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/applications-\/module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/static-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/list-\/routing-\/helper.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ns3/ipv4-\/nix-\/vector-\/helper.\+h\char`\"{}}\\*
+Include dependency graph for nix-\/simple.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{nix-simple_8cc_a22505cd0e26624d70118a51982ffeccc}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Nix\+Simple\+Example\char`\"{})
+\item 
+int \hyperlink{nix-simple_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{nix-\/simple.\+cc@{nix-\/simple.\+cc}!main@{main}}
+\index{main@{main}!nix-\/simple.\+cc@{nix-\/simple.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{nix-simple_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{nix-simple_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+47 \{
+48   \hyperlink{classns3_1_1CommandLine}{CommandLine} cmd;
+49   cmd.\hyperlink{classns3_1_1CommandLine_a5c10b85b3207e5ecb48d907966923156}{Parse} (argc, argv);
+50   
+51   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"UdpEchoClientApplication"}, 
+      \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+52   \hyperlink{namespacens3_adc4ef4f00bb2f5f4edae67fc3bc27f20}{LogComponentEnable} (\textcolor{stringliteral}{"UdpEchoServerApplication"}, 
+      \hyperlink{namespacens3_aa6464a4d69551a9cc968e17a65f39bdbae36aedc880de94fd5a5b53bb9fe65628}{LOG\_LEVEL\_INFO});
+53 
+54   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} nodes12;
+55   nodes12.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (2);
+56 
+57   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} nodes23;
+58   nodes23.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes12.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+59   nodes23.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+60 
+61   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} nodes34;
+62   nodes34.\hyperlink{classns3_1_1NodeContainer_aa60b3a0e70f2fb324e16ffcf8bf31fcb}{Add} (nodes23.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+63   nodes34.\hyperlink{classns3_1_1NodeContainer_a787f059e2813e8b951cc6914d11dfe69}{Create} (1);
+64 
+65   \hyperlink{classns3_1_1PointToPointHelper}{PointToPointHelper} pointToPoint;
+66   pointToPoint.\hyperlink{classns3_1_1PointToPointHelper_a4577f5ab8c387e5528af2e0fbab1152e}{SetDeviceAttribute} (\textcolor{stringliteral}{"DataRate"}, StringValue (\textcolor{stringliteral}{"5Mbps"}));
+67   pointToPoint.\hyperlink{classns3_1_1PointToPointHelper_a6b5317fd17fb61e5a53f8d66a90b63b9}{SetChannelAttribute} (\textcolor{stringliteral}{"Delay"}, StringValue (\textcolor{stringliteral}{"2ms"}));
+68 
+69   \hyperlink{classns3_1_1NodeContainer}{NodeContainer} allNodes = \hyperlink{classns3_1_1NodeContainer}{NodeContainer} (nodes12, nodes23.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1), nodes34.\hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+70 
+71   \textcolor{comment}{// NixHelper to install nix-vector routing}
+72   \textcolor{comment}{// on all nodes}
+73   \hyperlink{classns3_1_1Ipv4NixVectorHelper}{Ipv4NixVectorHelper} nixRouting;
+74   \hyperlink{classns3_1_1InternetStackHelper}{InternetStackHelper} stack;
+75   stack.\hyperlink{classns3_1_1InternetStackHelper_a3e382c02df022dec79952a7eca8cd5ba}{SetRoutingHelper} (nixRouting); \textcolor{comment}{// has effect on the next Install ()}
+76   stack.\hyperlink{classns3_1_1InternetStackHelper_a6645b412f31283d2d9bc3d8a95cebbc0}{Install} (allNodes);
+77 
+78   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices12;
+79   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices23;
+80   \hyperlink{classns3_1_1NetDeviceContainer}{NetDeviceContainer} devices34;
+81   devices12 = pointToPoint.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nodes12);
+82   devices23 = pointToPoint.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nodes23);
+83   devices34 = pointToPoint.\hyperlink{classns3_1_1PointToPointHelper_ab9162fea3e88722666fed1106df1f9ec}{Install} (nodes34);
+84 
+85   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address1;
+86   address1.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.1.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+87   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address2;
+88   address2.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.2.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+89   \hyperlink{classns3_1_1Ipv4AddressHelper}{Ipv4AddressHelper} address3;
+90   address3.\hyperlink{classns3_1_1Ipv4AddressHelper_acf7b16dd25bac67e00f5e25f90a9a035}{SetBase} (\textcolor{stringliteral}{"10.1.3.0"}, \textcolor{stringliteral}{"255.255.255.0"});
+91 
+92   address1.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devices12);
+93   address2.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devices23);
+94   \hyperlink{classns3_1_1Ipv4InterfaceContainer}{Ipv4InterfaceContainer} interfaces = address3.\hyperlink{classns3_1_1Ipv4AddressHelper_af8e7f4a1a7e74c00014a1eac445a27af}{Assign} (devices34);
+95 
+96   \hyperlink{classns3_1_1UdpEchoServerHelper}{UdpEchoServerHelper} echoServer (9);
+97 
+98   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} serverApps = echoServer.Install (nodes34.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (1));
+99   serverApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.0));
+100   serverApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+101 
+102   \hyperlink{classns3_1_1UdpEchoClientHelper}{UdpEchoClientHelper} echoClient (interfaces.\hyperlink{classns3_1_1Ipv4InterfaceContainer_ae63208dcd222be986822937ee4aa828c}{GetAddress} (1), 9);
+103   echoClient.\hyperlink{classns3_1_1UdpEchoClientHelper_a11228c069ad896f8ed13f4d37c13f51d}{SetAttribute} (\textcolor{stringliteral}{"MaxPackets"}, UintegerValue (1));
+104   echoClient.SetAttribute (\textcolor{stringliteral}{"Interval"}, TimeValue (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (1.)));
+105   echoClient.SetAttribute (\textcolor{stringliteral}{"PacketSize"}, UintegerValue (1024));
+106 
+107   \hyperlink{classns3_1_1ApplicationContainer}{ApplicationContainer} clientApps = echoClient.Install (nodes12.
+      \hyperlink{classns3_1_1NodeContainer_a9ed96e2ecc22e0f5a3d4842eb9bf90bf}{Get} (0));
+108   clientApps.\hyperlink{classns3_1_1ApplicationContainer_a8eff87926507020bbe3e1390358a54a7}{Start} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (2.0));
+109   clientApps.\hyperlink{classns3_1_1ApplicationContainer_adfc52f9aa4020c8714679b00bbb9ddb3}{Stop} (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (10.0));
+110 
+111   \textcolor{comment}{// Trace routing tables}
+112   \hyperlink{classns3_1_1Ptr}{Ptr<OutputStreamWrapper>} routingStream = Create<OutputStreamWrapper> (\textcolor{stringliteral}{"
+      nix-simple.routes"}, std::ios::out);
+113   nixRouting.PrintRoutingTableAllAt (\hyperlink{group__timecivil_ga33c34b816f8ff6628e33d5c8e9713b9e}{Seconds} (8), routingStream);
+114 
+115   Simulator::Run ();
+116   Simulator::Destroy ();
+117   \textcolor{keywordflow}{return} 0;
+118 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{nix-\/simple.\+cc@{nix-\/simple.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!nix-\/simple.\+cc@{nix-\/simple.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Nix\+Simple\+Example"")}{NS_LOG_COMPONENT_DEFINE("NixSimpleExample")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Nix\+Simple\+Example\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{nix-simple_8cc_a22505cd0e26624d70118a51982ffeccc}{}\label{nix-simple_8cc_a22505cd0e26624d70118a51982ffeccc}

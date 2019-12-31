@@ -1,0 +1,229 @@
+\hypertarget{classFemtocellBlockAllocator}{}\section{Femtocell\+Block\+Allocator Class Reference}
+\label{classFemtocellBlockAllocator}\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+
+
+Collaboration diagram for Femtocell\+Block\+Allocator\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFemtocellBlockAllocator_a6258c3cdb7be54a9500e8f74967ca7b5}{Femtocell\+Block\+Allocator} (\hyperlink{classns3_1_1Box}{Box} area, uint32\+\_\+t n\+ApartmentsX, uint32\+\_\+t n\+Floors)
+\item 
+void \hyperlink{classFemtocellBlockAllocator_a2171808c3f563b2b18858fa15efc5c5e}{Create} (uint32\+\_\+t \hyperlink{lte__link__budget__x2__handover__measures_8m_abdb05bc5a064cf642a06c83b3392f148}{n})
+\item 
+void \hyperlink{classFemtocellBlockAllocator_ac3f3dd07dae696b6991e9d483e4fffe5}{Create} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classFemtocellBlockAllocator_a563ae74d02aff413fff3cbf8ef44f54f}{Overlaps\+With\+Any\+Previous} (\hyperlink{classns3_1_1Box}{Box})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classns3_1_1Box}{Box} \hyperlink{classFemtocellBlockAllocator_a61d8cddd4c64b4ee0bd8ade94e7c2e1f}{m\+\_\+area}
+\item 
+uint32\+\_\+t \hyperlink{classFemtocellBlockAllocator_a4c70ae4a834b60d201123be0d027a534}{m\+\_\+n\+ApartmentsX}
+\item 
+uint32\+\_\+t \hyperlink{classFemtocellBlockAllocator_a9dd7df19009bb18d49a34361830c9fe4}{m\+\_\+n\+Floors}
+\item 
+\hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{std\+::list}$<$ \hyperlink{classns3_1_1Box}{Box} $>$ \hyperlink{classFemtocellBlockAllocator_a072952eb05ffe7ce2bdf6dc34e46a8ee}{m\+\_\+previous\+Blocks}
+\item 
+double \hyperlink{classFemtocellBlockAllocator_aba9a3a8b4a9bbf55c0aa5c1175d1a3d8}{m\+\_\+x\+Size}
+\item 
+double \hyperlink{classFemtocellBlockAllocator_ae8981a521b14d95bfdc150a3b970b5f1}{m\+\_\+y\+Size}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1UniformRandomVariable}{Uniform\+Random\+Variable} $>$ \hyperlink{classFemtocellBlockAllocator_a38fd2fec2f758efb7c4ca3156cc3ce56}{m\+\_\+x\+Min\+Var}
+\item 
+\hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1UniformRandomVariable}{Uniform\+Random\+Variable} $>$ \hyperlink{classFemtocellBlockAllocator_a4427bd24572e6271bd8db991a4a4670b}{m\+\_\+y\+Min\+Var}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\subsubsection[{\texorpdfstring{Femtocell\+Block\+Allocator(\+Box area, uint32\+\_\+t n\+Apartments\+X, uint32\+\_\+t n\+Floors)}{FemtocellBlockAllocator(Box area, uint32_t nApartmentsX, uint32_t nFloors)}}]{\setlength{\rightskip}{0pt plus 5cm}Femtocell\+Block\+Allocator\+::\+Femtocell\+Block\+Allocator (
+\begin{DoxyParamCaption}
+\item[{{\bf Box}}]{area, }
+\item[{uint32\+\_\+t}]{n\+ApartmentsX, }
+\item[{uint32\+\_\+t}]{n\+Floors}
+\end{DoxyParamCaption}
+)}\hypertarget{classFemtocellBlockAllocator_a6258c3cdb7be54a9500e8f74967ca7b5}{}\label{classFemtocellBlockAllocator_a6258c3cdb7be54a9500e8f74967ca7b5}
+
+\begin{DoxyCode}
+71   : \hyperlink{classFemtocellBlockAllocator_a61d8cddd4c64b4ee0bd8ade94e7c2e1f}{m\_area} (area),
+72     \hyperlink{classFemtocellBlockAllocator_a4c70ae4a834b60d201123be0d027a534}{m\_nApartmentsX} (nApartmentsX),
+73     \hyperlink{classFemtocellBlockAllocator_a9dd7df19009bb18d49a34361830c9fe4}{m\_nFloors} (nFloors),
+74     \hyperlink{classFemtocellBlockAllocator_aba9a3a8b4a9bbf55c0aa5c1175d1a3d8}{m\_xSize} (nApartmentsX*10 + 20),
+75     \hyperlink{classFemtocellBlockAllocator_ae8981a521b14d95bfdc150a3b970b5f1}{m\_ySize} (70)
+76 \{
+77   \hyperlink{classFemtocellBlockAllocator_a38fd2fec2f758efb7c4ca3156cc3ce56}{m\_xMinVar} = CreateObject<UniformRandomVariable> ();
+78   \hyperlink{classFemtocellBlockAllocator_a38fd2fec2f758efb7c4ca3156cc3ce56}{m\_xMinVar}->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (area.\hyperlink{classns3_1_1Box_a1fd6a43d53258323331d34da600ff1c5}{xMin}));
+79   \hyperlink{classFemtocellBlockAllocator_a38fd2fec2f758efb7c4ca3156cc3ce56}{m\_xMinVar}->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (area.\hyperlink{classns3_1_1Box_a50021049c756e770329145b25d9533a2}{xMax} - 
+      \hyperlink{classFemtocellBlockAllocator_aba9a3a8b4a9bbf55c0aa5c1175d1a3d8}{m\_xSize}));
+80   \hyperlink{classFemtocellBlockAllocator_a4427bd24572e6271bd8db991a4a4670b}{m\_yMinVar} = CreateObject<UniformRandomVariable> ();
+81   \hyperlink{classFemtocellBlockAllocator_a4427bd24572e6271bd8db991a4a4670b}{m\_yMinVar}->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Min"}, DoubleValue (area.\hyperlink{classns3_1_1Box_a3865ed092f941186823539c9979002f8}{yMin}));
+82   \hyperlink{classFemtocellBlockAllocator_a4427bd24572e6271bd8db991a4a4670b}{m\_yMinVar}->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Max"}, DoubleValue (area.\hyperlink{classns3_1_1Box_a001fd430a14b19efe925c818a332e392}{yMax} - 
+      \hyperlink{classFemtocellBlockAllocator_ae8981a521b14d95bfdc150a3b970b5f1}{m\_ySize}));
+83 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!Create@{Create}}
+\index{Create@{Create}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\subsubsection[{\texorpdfstring{Create(uint32\+\_\+t n)}{Create(uint32_t n)}}]{\setlength{\rightskip}{0pt plus 5cm}void Femtocell\+Block\+Allocator\+::\+Create (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{n}
+\end{DoxyParamCaption}
+)}\hypertarget{classFemtocellBlockAllocator_a2171808c3f563b2b18858fa15efc5c5e}{}\label{classFemtocellBlockAllocator_a2171808c3f563b2b18858fa15efc5c5e}
+
+\begin{DoxyCode}
+87 \{
+88   \textcolor{keywordflow}{for} (uint32\_t \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = 0; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} < \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n}; ++\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+89     \{
+90       \hyperlink{classFemtocellBlockAllocator_ac3f3dd07dae696b6991e9d483e4fffe5}{Create} ();
+91     \}
+92 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!Create@{Create}}
+\index{Create@{Create}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\subsubsection[{\texorpdfstring{Create()}{Create()}}]{\setlength{\rightskip}{0pt plus 5cm}void Femtocell\+Block\+Allocator\+::\+Create (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classFemtocellBlockAllocator_ac3f3dd07dae696b6991e9d483e4fffe5}{}\label{classFemtocellBlockAllocator_ac3f3dd07dae696b6991e9d483e4fffe5}
+
+\begin{DoxyCode}
+96 \{
+97   \hyperlink{classns3_1_1Box}{Box} box;
+98   uint32\_t attempt = 0;
+99   \textcolor{keywordflow}{do} 
+100     \{
+101       \hyperlink{assert_8h_aff5ece9066c74e681e74999856f08539}{NS\_ASSERT\_MSG} (attempt < 100, \textcolor{stringliteral}{"Too many failed attemtps to position apartment block. Too
+       many blocks? Too small area?"});
+102       box.\hyperlink{classns3_1_1Box_a1fd6a43d53258323331d34da600ff1c5}{xMin} = \hyperlink{classFemtocellBlockAllocator_a38fd2fec2f758efb7c4ca3156cc3ce56}{m\_xMinVar}->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ();
+103       box.\hyperlink{classns3_1_1Box_a50021049c756e770329145b25d9533a2}{xMax} = box.\hyperlink{classns3_1_1Box_a1fd6a43d53258323331d34da600ff1c5}{xMin} + \hyperlink{classFemtocellBlockAllocator_aba9a3a8b4a9bbf55c0aa5c1175d1a3d8}{m\_xSize};
+104       box.\hyperlink{classns3_1_1Box_a3865ed092f941186823539c9979002f8}{yMin} = \hyperlink{classFemtocellBlockAllocator_a4427bd24572e6271bd8db991a4a4670b}{m\_yMinVar}->\hyperlink{classns3_1_1UniformRandomVariable_a03822d8c86ac51e9aa83bbc73041386b}{GetValue} ();
+105       box.\hyperlink{classns3_1_1Box_a001fd430a14b19efe925c818a332e392}{yMax} = box.\hyperlink{classns3_1_1Box_a3865ed092f941186823539c9979002f8}{yMin} + \hyperlink{classFemtocellBlockAllocator_ae8981a521b14d95bfdc150a3b970b5f1}{m\_ySize};
+106       ++attempt;
+107     \}
+108   \textcolor{keywordflow}{while} (\hyperlink{classFemtocellBlockAllocator_a563ae74d02aff413fff3cbf8ef44f54f}{OverlapsWithAnyPrevious} (box));
+109 
+110   \hyperlink{group__logging_ga88acd260151caf2db9c0fc84997f45ce}{NS\_LOG\_LOGIC} (\textcolor{stringliteral}{"allocated non overlapping block "} << box);
+111   \hyperlink{classFemtocellBlockAllocator_a072952eb05ffe7ce2bdf6dc34e46a8ee}{m\_previousBlocks}.push\_back (box);
+112   \hyperlink{classns3_1_1Ptr}{Ptr<GridBuildingAllocator>}  gridBuildingAllocator;
+113   gridBuildingAllocator = CreateObject<GridBuildingAllocator> ();
+114   gridBuildingAllocator->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"GridWidth"}, UintegerValue (1));
+115   gridBuildingAllocator->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"LengthX"}, DoubleValue (10*
+      \hyperlink{classFemtocellBlockAllocator_a4c70ae4a834b60d201123be0d027a534}{m\_nApartmentsX})); 
+116   gridBuildingAllocator->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"LengthY"}, DoubleValue (10*2));
+117   gridBuildingAllocator->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"DeltaX"}, DoubleValue (10));
+118   gridBuildingAllocator->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"DeltaY"}, DoubleValue (10));
+119   gridBuildingAllocator->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"Height"}, DoubleValue (3*
+      \hyperlink{classFemtocellBlockAllocator_a9dd7df19009bb18d49a34361830c9fe4}{m\_nFloors}));
+120   gridBuildingAllocator->\hyperlink{classns3_1_1GridBuildingAllocator_a179f91b69a9c669ee0c5d0c2d304bf1f}{SetBuildingAttribute} (\textcolor{stringliteral}{"NRoomsX"}, UintegerValue (
+      \hyperlink{classFemtocellBlockAllocator_a4c70ae4a834b60d201123be0d027a534}{m\_nApartmentsX}));
+121   gridBuildingAllocator->\hyperlink{classns3_1_1GridBuildingAllocator_a179f91b69a9c669ee0c5d0c2d304bf1f}{SetBuildingAttribute} (\textcolor{stringliteral}{"NRoomsY"}, UintegerValue (2));
+122   gridBuildingAllocator->\hyperlink{classns3_1_1GridBuildingAllocator_a179f91b69a9c669ee0c5d0c2d304bf1f}{SetBuildingAttribute} (\textcolor{stringliteral}{"NFloors"}, UintegerValue (
+      \hyperlink{classFemtocellBlockAllocator_a9dd7df19009bb18d49a34361830c9fe4}{m\_nFloors}));
+123   gridBuildingAllocator->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"MinX"}, DoubleValue (box.\hyperlink{classns3_1_1Box_a1fd6a43d53258323331d34da600ff1c5}{xMin} + 10));
+124   gridBuildingAllocator->\hyperlink{classns3_1_1ObjectBase_ac60245d3ea4123bbc9b1d391f1f6592f}{SetAttribute} (\textcolor{stringliteral}{"MinY"}, DoubleValue (box.\hyperlink{classns3_1_1Box_a3865ed092f941186823539c9979002f8}{yMin} + 10));
+125   gridBuildingAllocator->\hyperlink{classns3_1_1GridBuildingAllocator_a83fa0127117f8e23a42ad7ab5b42e7cc}{Create} (2);
+126 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!Overlaps\+With\+Any\+Previous@{Overlaps\+With\+Any\+Previous}}
+\index{Overlaps\+With\+Any\+Previous@{Overlaps\+With\+Any\+Previous}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\subsubsection[{\texorpdfstring{Overlaps\+With\+Any\+Previous(\+Box)}{OverlapsWithAnyPrevious(Box)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Femtocell\+Block\+Allocator\+::\+Overlaps\+With\+Any\+Previous (
+\begin{DoxyParamCaption}
+\item[{{\bf Box}}]{box}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFemtocellBlockAllocator_a563ae74d02aff413fff3cbf8ef44f54f}{}\label{classFemtocellBlockAllocator_a563ae74d02aff413fff3cbf8ef44f54f}
+
+\begin{DoxyCode}
+130 \{
+131   \textcolor{keywordflow}{for} (std::list<Box>::iterator it = \hyperlink{classFemtocellBlockAllocator_a072952eb05ffe7ce2bdf6dc34e46a8ee}{m\_previousBlocks}.begin (); it != 
+      \hyperlink{classFemtocellBlockAllocator_a072952eb05ffe7ce2bdf6dc34e46a8ee}{m\_previousBlocks}.end (); ++it)
+132     \{
+133       \textcolor{keywordflow}{if} (\hyperlink{lena-dual-stripe_8cc_a1afb216dd9cb3e096360a211c59259dd}{AreOverlapping} (*it, box))
+134         \{
+135           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+136         \}
+137     \}
+138   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+139 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 7
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!m\+\_\+area@{m\+\_\+area}}
+\index{m\+\_\+area@{m\+\_\+area}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\subsubsection[{\texorpdfstring{m\+\_\+area}{m_area}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Box} Femtocell\+Block\+Allocator\+::m\+\_\+area\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFemtocellBlockAllocator_a61d8cddd4c64b4ee0bd8ade94e7c2e1f}{}\label{classFemtocellBlockAllocator_a61d8cddd4c64b4ee0bd8ade94e7c2e1f}
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!m\+\_\+n\+ApartmentsX@{m\+\_\+n\+ApartmentsX}}
+\index{m\+\_\+n\+ApartmentsX@{m\+\_\+n\+ApartmentsX}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\subsubsection[{\texorpdfstring{m\+\_\+n\+ApartmentsX}{m_nApartmentsX}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Femtocell\+Block\+Allocator\+::m\+\_\+n\+ApartmentsX\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFemtocellBlockAllocator_a4c70ae4a834b60d201123be0d027a534}{}\label{classFemtocellBlockAllocator_a4c70ae4a834b60d201123be0d027a534}
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!m\+\_\+n\+Floors@{m\+\_\+n\+Floors}}
+\index{m\+\_\+n\+Floors@{m\+\_\+n\+Floors}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\subsubsection[{\texorpdfstring{m\+\_\+n\+Floors}{m_nFloors}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Femtocell\+Block\+Allocator\+::m\+\_\+n\+Floors\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFemtocellBlockAllocator_a9dd7df19009bb18d49a34361830c9fe4}{}\label{classFemtocellBlockAllocator_a9dd7df19009bb18d49a34361830c9fe4}
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!m\+\_\+previous\+Blocks@{m\+\_\+previous\+Blocks}}
+\index{m\+\_\+previous\+Blocks@{m\+\_\+previous\+Blocks}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\subsubsection[{\texorpdfstring{m\+\_\+previous\+Blocks}{m_previousBlocks}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+::list}$<${\bf Box}$>$ Femtocell\+Block\+Allocator\+::m\+\_\+previous\+Blocks\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFemtocellBlockAllocator_a072952eb05ffe7ce2bdf6dc34e46a8ee}{}\label{classFemtocellBlockAllocator_a072952eb05ffe7ce2bdf6dc34e46a8ee}
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!m\+\_\+x\+Min\+Var@{m\+\_\+x\+Min\+Var}}
+\index{m\+\_\+x\+Min\+Var@{m\+\_\+x\+Min\+Var}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\subsubsection[{\texorpdfstring{m\+\_\+x\+Min\+Var}{m_xMinVar}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Uniform\+Random\+Variable}$>$ Femtocell\+Block\+Allocator\+::m\+\_\+x\+Min\+Var\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFemtocellBlockAllocator_a38fd2fec2f758efb7c4ca3156cc3ce56}{}\label{classFemtocellBlockAllocator_a38fd2fec2f758efb7c4ca3156cc3ce56}
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!m\+\_\+x\+Size@{m\+\_\+x\+Size}}
+\index{m\+\_\+x\+Size@{m\+\_\+x\+Size}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\subsubsection[{\texorpdfstring{m\+\_\+x\+Size}{m_xSize}}]{\setlength{\rightskip}{0pt plus 5cm}double Femtocell\+Block\+Allocator\+::m\+\_\+x\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFemtocellBlockAllocator_aba9a3a8b4a9bbf55c0aa5c1175d1a3d8}{}\label{classFemtocellBlockAllocator_aba9a3a8b4a9bbf55c0aa5c1175d1a3d8}
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!m\+\_\+y\+Min\+Var@{m\+\_\+y\+Min\+Var}}
+\index{m\+\_\+y\+Min\+Var@{m\+\_\+y\+Min\+Var}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\subsubsection[{\texorpdfstring{m\+\_\+y\+Min\+Var}{m_yMinVar}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<${\bf Uniform\+Random\+Variable}$>$ Femtocell\+Block\+Allocator\+::m\+\_\+y\+Min\+Var\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFemtocellBlockAllocator_a4427bd24572e6271bd8db991a4a4670b}{}\label{classFemtocellBlockAllocator_a4427bd24572e6271bd8db991a4a4670b}
+\index{Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}!m\+\_\+y\+Size@{m\+\_\+y\+Size}}
+\index{m\+\_\+y\+Size@{m\+\_\+y\+Size}!Femtocell\+Block\+Allocator@{Femtocell\+Block\+Allocator}}
+\subsubsection[{\texorpdfstring{m\+\_\+y\+Size}{m_ySize}}]{\setlength{\rightskip}{0pt plus 5cm}double Femtocell\+Block\+Allocator\+::m\+\_\+y\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFemtocellBlockAllocator_ae8981a521b14d95bfdc150a3b970b5f1}{}\label{classFemtocellBlockAllocator_ae8981a521b14d95bfdc150a3b970b5f1}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lte/examples/\hyperlink{lena-dual-stripe_8cc}{lena-\/dual-\/stripe.\+cc}\end{DoxyCompactItemize}

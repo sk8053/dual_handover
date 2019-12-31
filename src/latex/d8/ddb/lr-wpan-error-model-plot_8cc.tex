@@ -1,0 +1,92 @@
+\hypertarget{lr-wpan-error-model-plot_8cc}{}\section{lr-\/wpan/examples/lr-\/wpan-\/error-\/model-\/plot.cc File Reference}
+\label{lr-wpan-error-model-plot_8cc}\index{lr-\/wpan/examples/lr-\/wpan-\/error-\/model-\/plot.\+cc@{lr-\/wpan/examples/lr-\/wpan-\/error-\/model-\/plot.\+cc}}
+{\ttfamily \#include $<$ns3/packet.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/uinteger.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/simulator.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/nstime.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/log.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/abort.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/command-\/line.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/gnuplot.\+h$>$}\\*
+{\ttfamily \#include $<$ns3/lr-\/wpan-\/error-\/model.\+h$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+Include dependency graph for lr-\/wpan-\/error-\/model-\/plot.cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{lr-wpan-error-model-plot_8cc_a40c12e7e6774e373228673df2889b2f2}{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE} (\char`\"{}Lr\+Wpan\+Error\+Model\+Plot\char`\"{})
+\item 
+int \hyperlink{lr-wpan-error-model-plot_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{lr-\/wpan-\/error-\/model-\/plot.\+cc@{lr-\/wpan-\/error-\/model-\/plot.\+cc}!main@{main}}
+\index{main@{main}!lr-\/wpan-\/error-\/model-\/plot.\+cc@{lr-\/wpan-\/error-\/model-\/plot.\+cc}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lr-wpan-error-model-plot_8cc_a0ddf1224851353fc92bfbff6f499fa97}{}\label{lr-wpan-error-model-plot_8cc_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+44 \{
+45   std::ofstream berfile (\textcolor{stringliteral}{"802.15.4-ber.plt"});
+46   \hyperlink{classns3_1_1Ptr}{Ptr<LrWpanErrorModel>}  lrWpanError = CreateObject<LrWpanErrorModel> ();
+47 
+48   \textcolor{keywordtype}{double} \hyperlink{mmwave-amc-test2_8cc_ac504dff76b24ab9f15536c51aec9fbbb}{increment} = 0.1;
+49   \textcolor{keywordtype}{double} minSnr = -10;  \textcolor{comment}{//dB}
+50   \textcolor{keywordtype}{double} maxSnr = 5;
+51 
+52   \hyperlink{classns3_1_1Gnuplot}{Gnuplot} berplot = \hyperlink{classns3_1_1Gnuplot}{Gnuplot} (\textcolor{stringliteral}{"802.15.4-ber.eps"});
+53   \hyperlink{classns3_1_1Gnuplot2dDataset}{Gnuplot2dDataset} berdataset (\textcolor{stringliteral}{"802.15.4"});
+54 
+55   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{double} \hyperlink{lte__amc_8m_a7543c5e4e80c828b652e0c63e4a6de70}{snr} = minSnr; \hyperlink{lte__amc_8m_a7543c5e4e80c828b652e0c63e4a6de70}{snr} <= maxSnr; \hyperlink{lte__amc_8m_a7543c5e4e80c828b652e0c63e4a6de70}{snr} += \hyperlink{mmwave-amc-test2_8cc_ac504dff76b24ab9f15536c51aec9fbbb}{increment})
+56     \{
+57       \textcolor{keywordtype}{double} \hyperlink{lte__cqi__generation_8m_a197619a3539acfc577325d6e41b6ce95}{ber} = 1.0 - lrWpanError->\hyperlink{classns3_1_1LrWpanErrorModel_a6a17b1622b7fc3582b9608b94782384b}{GetChunkSuccessRate} (pow (10.0,
+      \hyperlink{lte__amc_8m_a7543c5e4e80c828b652e0c63e4a6de70}{snr} / 10.0), 1);
+58       \hyperlink{group__logging_ga413f1886406d49f59a6a0a89b77b4d0a}{NS\_LOG\_DEBUG} (\hyperlink{lte__amc_8m_a7543c5e4e80c828b652e0c63e4a6de70}{snr} << \textcolor{stringliteral}{"(dB) "} << ber << \textcolor{stringliteral}{" (BER)"});
+59       berdataset.Add (\hyperlink{lte__amc_8m_a7543c5e4e80c828b652e0c63e4a6de70}{snr}, ber);
+60     \}
+61 
+62   berplot.\hyperlink{classns3_1_1Gnuplot_a306ec724a327cf9ab699700f31fca0a1}{AddDataset} (berdataset);
+63 
+64   berplot.\hyperlink{classns3_1_1Gnuplot_a50cfef476972d6abace3dc6a6f72e7ec}{SetTerminal} (\textcolor{stringliteral}{"postscript eps color enh \(\backslash\)"Times-BoldItalic\(\backslash\)""});
+65   berplot.\hyperlink{classns3_1_1Gnuplot_a409069caf3227b213bdbb6bc303058b1}{SetLegend} (\textcolor{stringliteral}{"SNR (dB)"}, \textcolor{stringliteral}{"Bit Error Rate (BER)"});
+66   berplot.\hyperlink{classns3_1_1Gnuplot_ab87336c31937b7083fda6a966488bb4c}{SetExtra}  (\textcolor{stringliteral}{"set xrange [-10:15]\(\backslash\)n\(\backslash\)}
+67 \textcolor{stringliteral}{set yrange [1e-9:1]\(\backslash\)n\(\backslash\)}
+68 \textcolor{stringliteral}{set log y\(\backslash\)n\(\backslash\)}
+69 \textcolor{stringliteral}{set grid\(\backslash\)n\(\backslash\)}
+70 \textcolor{stringliteral}{set style line 1 linewidth 5\(\backslash\)n\(\backslash\)}
+71 \textcolor{stringliteral}{set style line 2 linewidth 5\(\backslash\)n\(\backslash\)}
+72 \textcolor{stringliteral}{set style line 3 linewidth 5\(\backslash\)n\(\backslash\)}
+73 \textcolor{stringliteral}{set style line 4 linewidth 5\(\backslash\)n\(\backslash\)}
+74 \textcolor{stringliteral}{set style line 5 linewidth 5\(\backslash\)n\(\backslash\)}
+75 \textcolor{stringliteral}{set style line 6 linewidth 5\(\backslash\)n\(\backslash\)}
+76 \textcolor{stringliteral}{set style line 7 linewidth 5\(\backslash\)n\(\backslash\)}
+77 \textcolor{stringliteral}{set style line 8 linewidth 5\(\backslash\)n\(\backslash\)}
+78 \textcolor{stringliteral}{set style increment user"});
+79   berplot.\hyperlink{classns3_1_1Gnuplot_a6cd487453f61e2405cc7cc9c80dc0cf2}{GenerateOutput} (berfile);
+80   berfile.close ();
+81 
+82   \textcolor{keywordflow}{return} 0;
+83 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\index{lr-\/wpan-\/error-\/model-\/plot.\+cc@{lr-\/wpan-\/error-\/model-\/plot.\+cc}!N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}}
+\index{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE@{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE}!lr-\/wpan-\/error-\/model-\/plot.\+cc@{lr-\/wpan-\/error-\/model-\/plot.\+cc}}
+\subsubsection[{\texorpdfstring{N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+N\+E(""Lr\+Wpan\+Error\+Model\+Plot"")}{NS_LOG_COMPONENT_DEFINE("LrWpanErrorModelPlot")}}]{\setlength{\rightskip}{0pt plus 5cm}N\+S\+\_\+\+L\+O\+G\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+D\+E\+F\+I\+NE (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}Lr\+Wpan\+Error\+Model\+Plot\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{lr-wpan-error-model-plot_8cc_a40c12e7e6774e373228673df2889b2f2}{}\label{lr-wpan-error-model-plot_8cc_a40c12e7e6774e373228673df2889b2f2}

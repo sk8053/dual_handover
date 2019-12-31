@@ -1,0 +1,151 @@
+\hypertarget{classns3_1_1MicrowaveOvenSpectrumValueHelper}{}\section{ns3\+:\+:Microwave\+Oven\+Spectrum\+Value\+Helper Class Reference}
+\label{classns3_1_1MicrowaveOvenSpectrumValueHelper}\index{ns3\+::\+Microwave\+Oven\+Spectrum\+Value\+Helper@{ns3\+::\+Microwave\+Oven\+Spectrum\+Value\+Helper}}
+
+
+{\ttfamily \#include $<$microwave-\/oven-\/spectrum-\/value-\/helper.\+h$>$}
+
+
+
+Collaboration diagram for ns3\+:\+:Microwave\+Oven\+Spectrum\+Value\+Helper\+:
+% FIG 0
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1SpectrumValue}{Spectrum\+Value} $>$ \hyperlink{classns3_1_1MicrowaveOvenSpectrumValueHelper_a5cba522060597c3e7855e72cea0de4b3}{Create\+Power\+Spectral\+Density\+Mwo1} ()
+\item 
+static \hyperlink{classns3_1_1Ptr}{Ptr}$<$ \hyperlink{classns3_1_1SpectrumValue}{Spectrum\+Value} $>$ \hyperlink{classns3_1_1MicrowaveOvenSpectrumValueHelper_a9debacfad323aa91cc8802bd244329df}{Create\+Power\+Spectral\+Density\+Mwo2} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class provides methods for the creation of \hyperlink{classns3_1_1SpectrumValue}{Spectrum\+Value} instances that mimic the Power Spectral Density of commercial microwave ovens based on the measurements reported in the following paper\+: Tanim M. Taher, Matthew J. Misurac, Joseph L. Lo\+Cicero, and Donald R. Ucci, \char`\"{}\+M\+I\+C\+R\+O\+W\+A\+V\+E O\+V\+E\+N S\+I\+G\+N\+A\+L M\+O\+D\+E\+L\+I\+N\+G\char`\"{}, in Proc. of I\+E\+EE W\+C\+NC, 2008 
+
+\subsection{Member Function Documentation}
+\index{ns3\+::\+Microwave\+Oven\+Spectrum\+Value\+Helper@{ns3\+::\+Microwave\+Oven\+Spectrum\+Value\+Helper}!Create\+Power\+Spectral\+Density\+Mwo1@{Create\+Power\+Spectral\+Density\+Mwo1}}
+\index{Create\+Power\+Spectral\+Density\+Mwo1@{Create\+Power\+Spectral\+Density\+Mwo1}!ns3\+::\+Microwave\+Oven\+Spectrum\+Value\+Helper@{ns3\+::\+Microwave\+Oven\+Spectrum\+Value\+Helper}}
+\subsubsection[{\texorpdfstring{Create\+Power\+Spectral\+Density\+Mwo1()}{CreatePowerSpectralDensityMwo1()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Spectrum\+Value} $>$ ns3\+::\+Microwave\+Oven\+Spectrum\+Value\+Helper\+::\+Create\+Power\+Spectral\+Density\+Mwo1 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MicrowaveOvenSpectrumValueHelper_a5cba522060597c3e7855e72cea0de4b3}{}\label{classns3_1_1MicrowaveOvenSpectrumValueHelper_a5cba522060597c3e7855e72cea0de4b3}
+\begin{DoxyReturn}{Returns}
+the Power Spectral Density of Micro Wave Oven \#1 in the cited paper 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+89 \{
+90   Ptr<SpectrumValue> psd = Create <SpectrumValue> (
+      \hyperlink{namespacens3_a6b509b98b71ad13653641d61a3df30c6}{g\_MicrowaveOvenSpectrumModel6Mhz});
+91 
+92   \textcolor{comment}{// values from this paper:}
+93   \textcolor{comment}{// Tanim M. Taher, Matthew J. Misurac, Joseph L. LoCicero, and Donald R. Ucci,}
+94   \textcolor{comment}{// "MICROWAVE OVEN SIGNAL MODELING", in Proc. of IEEE WCNC, 2008,}
+95   \textcolor{comment}{// see Figure 3, "Experimental PSD of MWO #1"}
+96   \textcolor{comment}{// the figure has a resolution of 12 MHz per division; we use a}
+97   \textcolor{comment}{// SpectrumModel with a per-subband bandwidth of 6MHz, so we have}
+98   \textcolor{comment}{// two samples per division. The values used here are an approximation}
+99   \textcolor{comment}{// of what appears in the figure.}
+100 
+101   (*psd)[0] = -67.5;
+102   (*psd)[1] = -67.5;
+103   (*psd)[2] = -67.5;
+104   (*psd)[3] = -67.5;
+105   (*psd)[4] = -67.5;
+106   (*psd)[5] = -66;
+107   (*psd)[6] = -64;
+108   (*psd)[7] = -63;
+109   (*psd)[8] = -62.5;
+110   (*psd)[9] = -63;
+111   (*psd)[10] = -62.5;
+112   (*psd)[11] = -62.5;
+113   (*psd)[12] = -58;
+114   (*psd)[13] = -53.5;
+115   (*psd)[14] = -44;
+116   (*psd)[15] = -38;
+117   (*psd)[16] = -45;
+118   (*psd)[17] = -65;
+119   (*psd)[18] = -67.5;
+120   (*psd)[19] = -67.5;
+121 
+122   \textcolor{comment}{// convert to W/Hz}
+123   (*psd) = \hyperlink{namespacens3_a3133a629dbd335c8151508cc8b1046f5}{Pow} (10.0, ((*psd) - 30) / 10.0);
+124 
+125   \textcolor{keywordflow}{return} psd;
+126 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+\index{ns3\+::\+Microwave\+Oven\+Spectrum\+Value\+Helper@{ns3\+::\+Microwave\+Oven\+Spectrum\+Value\+Helper}!Create\+Power\+Spectral\+Density\+Mwo2@{Create\+Power\+Spectral\+Density\+Mwo2}}
+\index{Create\+Power\+Spectral\+Density\+Mwo2@{Create\+Power\+Spectral\+Density\+Mwo2}!ns3\+::\+Microwave\+Oven\+Spectrum\+Value\+Helper@{ns3\+::\+Microwave\+Oven\+Spectrum\+Value\+Helper}}
+\subsubsection[{\texorpdfstring{Create\+Power\+Spectral\+Density\+Mwo2()}{CreatePowerSpectralDensityMwo2()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ptr}$<$ {\bf Spectrum\+Value} $>$ ns3\+::\+Microwave\+Oven\+Spectrum\+Value\+Helper\+::\+Create\+Power\+Spectral\+Density\+Mwo2 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classns3_1_1MicrowaveOvenSpectrumValueHelper_a9debacfad323aa91cc8802bd244329df}{}\label{classns3_1_1MicrowaveOvenSpectrumValueHelper_a9debacfad323aa91cc8802bd244329df}
+\begin{DoxyReturn}{Returns}
+the Power Spectral Density of Micro Wave Oven \#2 in the cited paper 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+132 \{
+133   \textcolor{comment}{// values from this paper:}
+134   \textcolor{comment}{// Tanim M. Taher, Matthew J. Misurac, Joseph L. LoCicero, and Donald R. Ucci,}
+135   \textcolor{comment}{// "MICROWAVE OVEN SIGNAL MODELING", in Proc. of IEEE WCNC, 2008,}
+136   \textcolor{comment}{// see Figure 9, "Experimental PSD of actual MWO #2"}
+137   \textcolor{comment}{// the figure has a resolution of 10 MHz per division; we use a}
+138   \textcolor{comment}{// SpectrumModel with a per-subband bandwidth of 5MHz, so we have}
+139   \textcolor{comment}{// two samples per division. The values used here are an approximation}
+140   \textcolor{comment}{// of what appears in the figure.}
+141 
+142   Ptr<SpectrumValue> psd = Create <SpectrumValue> (
+      \hyperlink{namespacens3_ace6768337a854314ae7b25dde4253776}{g\_MicrowaveOvenSpectrumModel5Mhz});
+143 
+144   (*psd)[0] = -68;
+145   (*psd)[1] = -68;
+146   (*psd)[2] = -68;
+147   (*psd)[3] = -68;
+148   (*psd)[4] = -65;
+149   (*psd)[5] = -62;
+150   (*psd)[6] = -56;
+151   (*psd)[7] = -55;
+152   (*psd)[8] = -47;
+153   (*psd)[9] = -40;
+154   (*psd)[10] = -37;
+155   (*psd)[11] = -33;
+156   (*psd)[12] = -45;
+157   (*psd)[13] = -67;
+158   (*psd)[14] = -68;
+159   (*psd)[15] = -68;
+160   (*psd)[16] = -68;
+161   (*psd)[17] = -68;
+162   (*psd)[18] = -68;
+163   (*psd)[19] = -68;
+164 
+165   \textcolor{comment}{// convert to W/Hz}
+166   (*psd) = \hyperlink{namespacens3_a3133a629dbd335c8151508cc8b1046f5}{Pow} (10.0, ((*psd) - 30) / 10.0);
+167 
+168   \textcolor{keywordflow}{return} psd;
+169 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+spectrum/model/\hyperlink{microwave-oven-spectrum-value-helper_8h}{microwave-\/oven-\/spectrum-\/value-\/helper.\+h}\item 
+spectrum/model/\hyperlink{microwave-oven-spectrum-value-helper_8cc}{microwave-\/oven-\/spectrum-\/value-\/helper.\+cc}\end{DoxyCompactItemize}

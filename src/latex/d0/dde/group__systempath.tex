@@ -1,0 +1,516 @@
+\hypertarget{group__systempath}{}\section{Host Filesystem}
+\label{group__systempath}\index{Host Filesystem@{Host Filesystem}}
+
+
+Encapsulate O\+S-\/specific functions to manipulate file and directory paths.  
+
+
+Collaboration diagram for Host Filesystem\+:
+% FIG 0
+\subsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \hyperlink{system-path_8cc}{system-\/path.\+cc}
+\item 
+file \hyperlink{system-path_8h}{system-\/path.\+h}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacens3_1_1SystemPath}{ns3\+::\+System\+Path}
+\begin{DoxyCompactList}\small\item\em Namespace for various file and directory path functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{group__systempath_ga657599fb7660fc6ebe4b6aaea0021176}{ns3\+::\+System\+Path\+::\+Dirname} (std\+::string path)
+\begin{DoxyCompactList}\small\item\em Get the directory path for a file. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__systempath_gad52e6f153465b40487da3a2a9ee5f5d6}{ns3\+::\+System\+Path\+::\+Find\+Self\+Directory} (void)
+\item 
+std\+::string \hyperlink{group__systempath_gaaa5a530cee42c8eda7e4f4523ef7e1cd}{ns3\+::\+System\+Path\+::\+Append} (std\+::string left, std\+::string right)
+\item 
+\hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{std\+::list}$<$ std\+::string $>$ \hyperlink{group__systempath_ga523072e05da63b63113d1bea840edf1a}{ns3\+::\+System\+Path\+::\+Split} (std\+::string path)
+\item 
+std\+::string \hyperlink{group__systempath_gab3212957e6b4f873ece3c6b8ed746d72}{ns3\+::\+System\+Path\+::\+Join} (\hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{std\+::list}$<$ std\+::string $>$\+::const\+\_\+iterator begin, \hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{std\+::list}$<$ std\+::string $>$\+::const\+\_\+iterator end)
+\item 
+\hyperlink{openflow-interface_8h_afd9bcfa176617760671b67580f536fa7}{std\+::list}$<$ std\+::string $>$ \hyperlink{group__systempath_ga152a348bccf02d8373607b0239587b87}{ns3\+::\+System\+Path\+::\+Read\+Files} (std\+::string path)
+\item 
+std\+::string \hyperlink{group__systempath_ga271d7de64c9f6454db57fe21bc51c5d0}{ns3\+::\+System\+Path\+::\+Make\+Temporary\+Directory\+Name} (void)
+\item 
+void \hyperlink{group__systempath_ga9529f7530ba5d513c8811acc15743d24}{ns3\+::\+System\+Path\+::\+Make\+Directories} (std\+::string path)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Encapsulate O\+S-\/specific functions to manipulate file and directory paths. 
+
+The functions provided here are used mostly to implement the ns-\/3 test framework. 
+
+\subsection{Function Documentation}
+\index{Host Filesystem@{Host Filesystem}!Append@{Append}}
+\index{Append@{Append}!Host Filesystem@{Host Filesystem}}
+\subsubsection[{\texorpdfstring{Append(std\+::string left, std\+::string right)}{Append(std::string left, std::string right)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+System\+Path\+::\+Append (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{left, }
+\item[{std\+::string}]{right}
+\end{DoxyParamCaption}
+)}\hypertarget{group__systempath_gaaa5a530cee42c8eda7e4f4523ef7e1cd}{}\label{group__systempath_gaaa5a530cee42c8eda7e4f4523ef7e1cd}
+Join two file system path elements.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em left} & A path element \\
+\hline
+\mbox{\tt in}  & {\em right} & A path element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A concatenation of the two input paths 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+188 \{
+189   \textcolor{comment}{// removing trailing separators from 'left'}
+190   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (left << right);
+191   \textcolor{keywordflow}{while} (\textcolor{keyword}{true})
+192     \{
+193       std::string::size\_type lastSep = left.rfind (\hyperlink{system-path_8cc_ae6764c655849cd2f06e112ac5222a99c}{SYSTEM\_PATH\_SEP});
+194       \textcolor{keywordflow}{if} (lastSep != left.size () - 1)
+195         \{
+196           \textcolor{keywordflow}{break};
+197         \}
+198       left = left.substr (0, left.size () - 1);
+199     \} 
+200   std::string retval = left + \hyperlink{system-path_8cc_ae6764c655849cd2f06e112ac5222a99c}{SYSTEM\_PATH\_SEP} + right;
+201   \textcolor{keywordflow}{return} retval;
+202 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 1
+
+
+\index{Host Filesystem@{Host Filesystem}!Dirname@{Dirname}}
+\index{Dirname@{Dirname}!Host Filesystem@{Host Filesystem}}
+\subsubsection[{\texorpdfstring{Dirname(std\+::string path)}{Dirname(std::string path)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+System\+Path\+::\+Dirname (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path}
+\end{DoxyParamCaption}
+)}\hypertarget{group__systempath_ga657599fb7660fc6ebe4b6aaea0021176}{}\label{group__systempath_ga657599fb7660fc6ebe4b6aaea0021176}
+
+
+Get the directory path for a file. 
+
+This is an internal function (by virtue of not being declared in a {\ttfamily }.h file); the public A\+PI is \hyperlink{group__systempath_gad52e6f153465b40487da3a2a9ee5f5d6}{Find\+Self\+Directory()}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & The full path to a file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The full path to the containing directory. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+89 \{
+90   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (path);
+91   std::list<std::string> elements = \hyperlink{group__systempath_ga523072e05da63b63113d1bea840edf1a}{Split} (path);
+92   std::list<std::string>::const\_iterator last = elements.end();
+93   last--;
+94   \textcolor{keywordflow}{return} \hyperlink{group__systempath_gab3212957e6b4f873ece3c6b8ed746d72}{Join} (elements.begin (), last);
+95 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+\index{Host Filesystem@{Host Filesystem}!Find\+Self\+Directory@{Find\+Self\+Directory}}
+\index{Find\+Self\+Directory@{Find\+Self\+Directory}!Host Filesystem@{Host Filesystem}}
+\subsubsection[{\texorpdfstring{Find\+Self\+Directory(void)}{FindSelfDirectory(void)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+System\+Path\+::\+Find\+Self\+Directory (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{group__systempath_gad52e6f153465b40487da3a2a9ee5f5d6}{}\label{group__systempath_gad52e6f153465b40487da3a2a9ee5f5d6}
+Get the file system path to the current executable.
+
+\begin{DoxyReturn}{Returns}
+The directory in which the currently-\/executing binary is located 
+\end{DoxyReturn}
+This function returns the path to the running \$\+P\+R\+E\+F\+IX. Mac OS X\+: \+\_\+\+N\+S\+Get\+Executable\+Path() (man 3 dyld) Linux\+: readlink /proc/self/exe Solaris\+: getexecname() Free\+B\+SD\+: sysctl C\+T\+L\+\_\+\+K\+E\+RN K\+E\+R\+N\+\_\+\+P\+R\+OC K\+E\+R\+N\+\_\+\+P\+R\+O\+C\+\_\+\+P\+A\+T\+H\+N\+A\+ME -\/1 B\+SD with procfs\+: readlink /proc/curproc/file Windows\+: Get\+Module\+File\+Name() with h\+Module = N\+U\+LL
+\begin{DoxyCode}
+98 \{
+108   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+109   std::string filename;
+110 \textcolor{preprocessor}{#if defined(\_\_linux\_\_)}
+111   \{
+112     ssize\_t size = 1024;
+113     \textcolor{keywordtype}{char} *buffer = (\textcolor{keywordtype}{char}*)malloc (size);
+114     memset (buffer, 0, size);
+115     \textcolor{keywordtype}{int} status;
+116     \textcolor{keywordflow}{while} (\textcolor{keyword}{true})
+117       \{
+118         status = readlink(\textcolor{stringliteral}{"/proc/self/exe"}, buffer, size);
+119         \textcolor{keywordflow}{if} (status != 1 || (status == -1 && errno != ENAMETOOLONG))
+120           \{
+121             \textcolor{keywordflow}{break};
+122           \}
+123         size *= 2;
+124         free (buffer);
+125         buffer = (\textcolor{keywordtype}{char}*)malloc (size);
+126         memset (buffer, 0, size);
+127       \}
+128     \textcolor{keywordflow}{if} (status == -1)
+129       \{
+130         \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Oops, could not find self directory."});
+131       \}
+132     filename = buffer;
+133     free (buffer);
+134   \}
+135 \textcolor{preprocessor}{#elif defined (\_\_win32\_\_)}
+136   \{
+139     DWORD size = 1024;
+140     LPTSTR lpFilename = (LPTSTR) malloc (\textcolor{keyword}{sizeof}(TCHAR) * size);
+141     DWORD status = GetModuleFilename (0, lpFilename, size);
+142     \textcolor{keywordflow}{while} (status == size)
+143       \{
+144         size = size * 2;
+145         free (lpFilename);
+146         lpFilename = (LPTSTR) malloc (\textcolor{keyword}{sizeof}(TCHAR) * size);
+147         status = GetModuleFilename (0, lpFilename, size);
+148       \}
+149     \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (status != 0);
+150     filename = lpFilename;
+151     free (lpFilename);
+152   \}
+153 \textcolor{preprocessor}{#elif defined (\_\_APPLE\_\_)}
+154   \{
+155     uint32\_t bufsize = 1024;
+156     \textcolor{keywordtype}{char} *buffer = (\textcolor{keywordtype}{char} *) malloc (bufsize);
+157     \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (buffer != 0);
+158     \textcolor{keywordtype}{int} status = \_NSGetExecutablePath (buffer, &bufsize);
+159     \textcolor{keywordflow}{if} (status == -1)
+160       \{
+161         free (buffer);
+162         buffer = (\textcolor{keywordtype}{char} *) malloc (bufsize);
+163         status = \_NSGetExecutablePath (buffer, &bufsize);
+164       \}
+165     \hyperlink{assert_8h_a6dccdb0de9b252f60088ce281c49d052}{NS\_ASSERT} (status == 0);
+166     filename = buffer;
+167     free (buffer);
+168   \} 
+169 \textcolor{preprocessor}{#elif defined (\_\_FreeBSD\_\_)}
+170   \{
+171     \textcolor{keywordtype}{int}     mib[4];
+172     \textcolor{keywordtype}{size\_t}  bufSize = 1024;
+173     \textcolor{keywordtype}{char}   *buf = (\textcolor{keywordtype}{char} *) malloc(bufSize);
+174 
+175     mib[0] = CTL\_KERN;
+176     mib[1] = KERN\_PROC;
+177     mib[2] = KERN\_PROC\_PATHNAME;
+178     mib[3] = -1;
+179 
+180     sysctl(mib, 4, buf, &bufSize, NULL, 0);
+181     filename = buf;
+182   \}
+183 \textcolor{preprocessor}{#endif}
+184     \textcolor{keywordflow}{return} \hyperlink{group__systempath_ga657599fb7660fc6ebe4b6aaea0021176}{Dirname} (filename);
+185 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 5
+
+
+\index{Host Filesystem@{Host Filesystem}!Join@{Join}}
+\index{Join@{Join}!Host Filesystem@{Host Filesystem}}
+\subsubsection[{\texorpdfstring{Join(std\+::list$<$ std\+::string $>$\+::const\+\_\+iterator begin, std\+::list$<$ std\+::string $>$\+::const\+\_\+iterator end)}{Join(std::list< std::string >::const_iterator begin, std::list< std::string >::const_iterator end)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+System\+Path\+::\+Join (
+\begin{DoxyParamCaption}
+\item[{{\bf std\+::list}$<$ std\+::string $>$\+::const\+\_\+iterator}]{begin, }
+\item[{{\bf std\+::list}$<$ std\+::string $>$\+::const\+\_\+iterator}]{end}
+\end{DoxyParamCaption}
+)}\hypertarget{group__systempath_gab3212957e6b4f873ece3c6b8ed746d72}{}\label{group__systempath_gab3212957e6b4f873ece3c6b8ed746d72}
+Join a list of file system path directories into a single file system path.
+
+This is the inverse of Split.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em begin} & Iterator to first element to join \\
+\hline
+\mbox{\tt in}  & {\em end} & Iterator to last element to join \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A path that is a concatenation of all the input elements. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+224 \{
+225   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (&begin << &end);
+226   std::string retval = \textcolor{stringliteral}{""};
+227   \textcolor{keywordflow}{for} (std::list<std::string>::const\_iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = begin; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != end; \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i}++)
+228     \{
+229       \textcolor{keywordflow}{if} (\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} == begin)
+230         \{
+231           retval = *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+232         \}
+233       \textcolor{keywordflow}{else}
+234         \{
+235           retval = retval + \hyperlink{system-path_8cc_ae6764c655849cd2f06e112ac5222a99c}{SYSTEM\_PATH\_SEP} + *\hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i};
+236         \}
+237     \}
+238   \textcolor{keywordflow}{return} retval;
+239 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\index{Host Filesystem@{Host Filesystem}!Make\+Directories@{Make\+Directories}}
+\index{Make\+Directories@{Make\+Directories}!Host Filesystem@{Host Filesystem}}
+\subsubsection[{\texorpdfstring{Make\+Directories(std\+::string path)}{MakeDirectories(std::string path)}}]{\setlength{\rightskip}{0pt plus 5cm}void ns3\+::\+System\+Path\+::\+Make\+Directories (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path}
+\end{DoxyParamCaption}
+)}\hypertarget{group__systempath_ga9529f7530ba5d513c8811acc15743d24}{}\label{group__systempath_ga9529f7530ba5d513c8811acc15743d24}
+Create all the directories leading to path.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & A path to a directory \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+328 \{
+329   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (path);
+330 
+331   \textcolor{comment}{// Make sure all directories on the path exist}
+332   std::list<std::string> elements = \hyperlink{group__systempath_ga523072e05da63b63113d1bea840edf1a}{Split} (path);
+333   \textcolor{keywordflow}{for} (std::list<std::string>::const\_iterator \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} = elements.begin (); \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i} != elements.end (); ++
+      \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i})
+334     \{
+335       std::string tmp = \hyperlink{group__systempath_gab3212957e6b4f873ece3c6b8ed746d72}{Join} (elements.begin (), \hyperlink{bernuolliDistribution_8m_a6f6ccfcf58b31cb6412107d9d5281426}{i});
+336 \textcolor{preprocessor}{#if defined(HAVE\_MKDIR\_H)}
+337       \textcolor{keywordflow}{if} (mkdir (tmp.c\_str (), S\_IRWXU))
+338         \{
+339           \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"failed creating directory "} << tmp);
+340         \}
+341 \textcolor{preprocessor}{#endif}
+342     \}
+343 
+344   \textcolor{comment}{// Make the final directory.  Is this redundant with last iteration above?}
+345 \textcolor{preprocessor}{#if defined(HAVE\_MKDIR\_H)}
+346   \textcolor{keywordflow}{if} (mkdir (path.c\_str (), S\_IRWXU))
+347     \{
+348       \hyperlink{group__logging_ga0261a8db1d4ac5f79417d117634fd455}{NS\_LOG\_ERROR} (\textcolor{stringliteral}{"failed creating directory "} << path);
+349     \}
+350 \textcolor{preprocessor}{#endif}
+351 
+352 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+% FIG 7
+
+
+
+
+Here is the caller graph for this function\+:
+% FIG 8
+
+
+\index{Host Filesystem@{Host Filesystem}!Make\+Temporary\+Directory\+Name@{Make\+Temporary\+Directory\+Name}}
+\index{Make\+Temporary\+Directory\+Name@{Make\+Temporary\+Directory\+Name}!Host Filesystem@{Host Filesystem}}
+\subsubsection[{\texorpdfstring{Make\+Temporary\+Directory\+Name(void)}{MakeTemporaryDirectoryName(void)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ns3\+::\+System\+Path\+::\+Make\+Temporary\+Directory\+Name (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{group__systempath_ga271d7de64c9f6454db57fe21bc51c5d0}{}\label{group__systempath_ga271d7de64c9f6454db57fe21bc51c5d0}
+Get the name of a temporary directory.
+
+The returned path identifies a directory which does not exist yet. Call \hyperlink{group__systempath_ga9529f7530ba5d513c8811acc15743d24}{ns3\+::\+System\+Path\+::\+Make\+Directories} to create it. Yes, there is a well-\/known security race in this A\+PI but we don\textquotesingle{}t care in ns-\/3.
+
+\begin{DoxyReturn}{Returns}
+A path which identifies a temporary directory. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+281 \{
+282   \hyperlink{log-macros-disabled_8h_a8f7e4afc291c9d29a65c18ac1f79197b}{NS\_LOG\_FUNCTION\_NOARGS} ();
+283   \textcolor{keywordtype}{char} *path = NULL;
+284 
+285   path = getenv (\textcolor{stringliteral}{"TMP"});
+286   \textcolor{keywordflow}{if} (path == NULL)
+287     \{
+288       path = getenv (\textcolor{stringliteral}{"TEMP"});
+289       \textcolor{keywordflow}{if} (path == NULL)
+290         \{
+291           path = \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{char} *\textcolor{keyword}{>} (\textcolor{stringliteral}{"/tmp"});
+292         \}
+293     \}
+294 
+295   \textcolor{comment}{//}
+296   \textcolor{comment}{// Just in case the user wants to go back and find the output, we give}
+297   \textcolor{comment}{// a hint as to which dir we created by including a time hint.}
+298   \textcolor{comment}{//}
+299   time\_t now = time (NULL);
+300   \textcolor{keyword}{struct }tm *tm\_now = localtime (&now);
+301   \textcolor{comment}{//}
+302   \textcolor{comment}{// But we also randomize the name in case there are multiple users doing}
+303   \textcolor{comment}{// this at the same time}
+304   \textcolor{comment}{//}
+305   srand (time (0));
+306   \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n} = rand ();
+307 
+308   \textcolor{comment}{//}
+309   \textcolor{comment}{// The final path to the directory is going to look something like}
+310   \textcolor{comment}{// }
+311   \textcolor{comment}{//   /tmp/ns3-14.30.29.32767}
+312   \textcolor{comment}{//}
+313   \textcolor{comment}{// The first segment comes from one of the temporary directory env }
+314   \textcolor{comment}{// variables or /tmp if not found.  The directory name starts with an}
+315   \textcolor{comment}{// identifier telling folks who is making all of the temp directories}
+316   \textcolor{comment}{// and then the local time (in this case 14.30.29 -- which is 2:30 and}
+317   \textcolor{comment}{// 29 seconds PM).}
+318   \textcolor{comment}{//}
+319   std::ostringstream oss;
+320   oss << path << \hyperlink{system-path_8cc_ae6764c655849cd2f06e112ac5222a99c}{SYSTEM\_PATH\_SEP} << \textcolor{stringliteral}{"ns-3."} << tm\_now->tm\_hour << \textcolor{stringliteral}{"."}
+321       << tm\_now->tm\_min << \textcolor{stringliteral}{"."} << tm\_now->tm\_sec << \textcolor{stringliteral}{"."} << \hyperlink{namespacesample-rng-plot_aeb5ee5c431e338ef39b7ac5431242e1d}{n};
+322 
+323   \textcolor{keywordflow}{return} oss.str ();
+324 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\index{Host Filesystem@{Host Filesystem}!Read\+Files@{Read\+Files}}
+\index{Read\+Files@{Read\+Files}!Host Filesystem@{Host Filesystem}}
+\subsubsection[{\texorpdfstring{Read\+Files(std\+::string path)}{ReadFiles(std::string path)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+::list}$<$ std\+::string $>$ ns3\+::\+System\+Path\+::\+Read\+Files (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path}
+\end{DoxyParamCaption}
+)}\hypertarget{group__systempath_ga152a348bccf02d8373607b0239587b87}{}\label{group__systempath_ga152a348bccf02d8373607b0239587b87}
+Get the list of files located in a file system directory.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & A path which identifies a directory \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of the filenames which are located in the input directory 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+242 \{
+243   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (path);
+244   std::list<std::string> files;
+245 \textcolor{preprocessor}{#if defined HAVE\_OPENDIR}
+246   DIR *dp = opendir (path.c\_str ());
+247   \textcolor{keywordflow}{if} (dp == NULL)
+248     \{
+249       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Could not open directory="} << path);
+250     \}
+251   \textcolor{keyword}{struct }dirent *de = readdir (dp);
+252   \textcolor{keywordflow}{while} (de != 0)
+253     \{
+254       files.push\_back (de->d\_name);
+255       de = readdir (dp);
+256     \}
+257   closedir (dp);
+258 \textcolor{preprocessor}{#elif defined (HAVE\_FIND\_FIRST\_FILE)}
+259   HANDLE hFind;
+261   WIN32\_FIND\_DATA fileData;
+262   
+263   hFind = FindFirstFile (path.c\_str (), &FindFileData);
+264   \textcolor{keywordflow}{if} (hFind == INVALID\_HANDLE\_VALUE)
+265     \{
+266       \hyperlink{group__fatal_ga5131d5e3f75d7d4cbfd706ac456fdc85}{NS\_FATAL\_ERROR} (\textcolor{stringliteral}{"Could not open directory="} << path);
+267     \}
+268   \textcolor{keywordflow}{do}
+269     \{
+270       files.push\_back (fileData.cFileName);
+271     \} \textcolor{keywordflow}{while} (FindNextFile (hFind, &fileData));
+272   FindClose(hFind);
+273 \textcolor{preprocessor}{#else}
+274 \textcolor{preprocessor}{#error "No support for reading a directory on this platform"}
+275 \textcolor{preprocessor}{#endif}
+276   \textcolor{keywordflow}{return} files;
+277 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 10
+
+
+\index{Host Filesystem@{Host Filesystem}!Split@{Split}}
+\index{Split@{Split}!Host Filesystem@{Host Filesystem}}
+\subsubsection[{\texorpdfstring{Split(std\+::string path)}{Split(std::string path)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+::list}$<$ std\+::string $>$ ns3\+::\+System\+Path\+::\+Split (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path}
+\end{DoxyParamCaption}
+)}\hypertarget{group__systempath_ga523072e05da63b63113d1bea840edf1a}{}\label{group__systempath_ga523072e05da63b63113d1bea840edf1a}
+Split a file system path into directories according to the local path separator.
+
+This is the inverse of Join.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & A path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of path elements that can be joined together again with the Join function. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__systempath_gab3212957e6b4f873ece3c6b8ed746d72}{ns3\+::\+System\+Path\+::\+Join} 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+205 \{
+206   \hyperlink{log-macros-disabled_8h_a90b90d5bad1f39cb1b64923ea94c0761}{NS\_LOG\_FUNCTION} (path);
+207   std::list<std::string> retval;
+208   std::string::size\_type current = 0, next = 0;
+209   next = path.find (\hyperlink{system-path_8cc_ae6764c655849cd2f06e112ac5222a99c}{SYSTEM\_PATH\_SEP}, current);
+210   \textcolor{keywordflow}{while} (next != std::string::npos)
+211     \{
+212       std::string item = path.substr (current, next - current);
+213       retval.push\_back (item);
+214       current = next + 1;
+215       next = path.find (\hyperlink{system-path_8cc_ae6764c655849cd2f06e112ac5222a99c}{SYSTEM\_PATH\_SEP}, current);
+216     \}
+217   std::string item = path.substr (current, next - current);
+218   retval.push\_back (item);
+219   \textcolor{keywordflow}{return} retval;
+220 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+% FIG 11
+
+
