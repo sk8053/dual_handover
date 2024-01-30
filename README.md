@@ -1,6 +1,23 @@
-This is ns-3 code for implementing dual-connection based handover scheme in ultra-dense millimeter wave networks. The paper pertaining to this ns-3 code is "A Dual-Connection based Handover Scheme for Ultra-Dense Millimeter-Wave Cellular Networks", which is published in Globecomm 2019.
+#  Dual-Connection based Handover Scheme for Ultra-Dense Millimeter-Wave Cellular Networks
 
-https://ieeexplore.ieee.org/document/9013764/metrics#metrics
+Mobile users in an ultra-dense millimeter-wave cellular network experience handover events more frequently than in conventional networks, which results in increased service
+interruption time and performance degradation due to blockages.
+Multi-connectivity has been proposed to resolve this, and it also
+extends the coverage of millimeter-wave communications. In this
+paper, we propose a dual-connection based handover scheme for
+mobile UEs in an environment where they are connected simultaneously with two millimeter-wave cells to overcome frequent
+handover problems. This scheme allows a mobile UE to choose
+its serving link between the two mmWave connections according
+to the measured SINRs and then the corresponding base stations
+may forward duplicate packets to the UE. We compare our dualconnection based scheme with a conventional single-connection
+based scheme through ns-3 simulation. The simulation results
+show that the proposed scheme significantly reduces handover
+rate and delay. Therefore, we argue that the dual-connection
+based scheme helps mobile users achieve performance goals they
+require in ultra-dense cellular environments
+
+* Seongjoon Kang, Siyoung Choi, Goodsol Lee, and Saewoong Bahk, https://arxiv.org/pdf/2107.04526.pdf
+* This paper is published in IEEE Globecomm 2019
 
 To confirm some results, put the bellow commands
 ./waf --run "scratch/mc-downlink -buildingTopology=building_topology.txt -nPacket=7142"
