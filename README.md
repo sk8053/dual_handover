@@ -17,7 +17,7 @@ based scheme helps mobile users achieve performance goals they
 require in ultra-dense cellular environments
 
 * Seongjoon Kang, Siyoung Choi, Goodsol Lee, and Saewoong Bahk, https://arxiv.org/pdf/2107.04526.pdf
-* This paper is published in IEEE Globecomm 2019
+* This paper is published in [IEEE Globecomm 2019](https://globecom2019.ieee-globecom.org/index.html)
 
 To confirm some results, put the bellow commands
 ./waf --run "scratch/mc-downlink -buildingTopology=building_topology.txt -nPacket=7142"
